@@ -1,3 +1,11 @@
+# [1.0.29](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-24)
+
+* **Instagram:** 起動不能の原因だった難読化内部メソッドへの直接書換え、描画前ブロック、無期限監視を撤去し、描画後のイベント駆動ワンショット方式でポップアップ抑止を再収録しました。
+
+# [1.0.28](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-24)
+
+* **Instagram:** v1.0.27の内部コード書換えによる起動不能を回避するため、Instagramパッチを配布対象から一時隔離しました。既にパッチ済みのアプリは元の未改変版へ戻してください。
+
 # [1.0.27](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-23)
 
 * **Instagram:** アカウント設定完了ポップアップの表示可否リクエスト停止、生成前のNUX抑止、仮想UIの描画前ガードと継続監視を統合しました。
