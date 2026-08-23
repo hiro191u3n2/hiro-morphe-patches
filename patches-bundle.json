@@ -1,7 +1,7 @@
 {
-  "created_at": "2026-08-13T21:46:00",
-  "description": "【収録MPPバージョン】\n- Trip.com：v1.4.0（対応アプリ 8.54.2／投稿履歴・下部サポート欄の非表示を強化）\n- TikTok：v3.2.0（対応アプリ 46.2.3）\n- Yahoo!乗換案内：v1.1.5\n- Amazonショッピング：v1.0.3\n- Hanull Reader：v1.0.0\n\nAndroid版用 classes.dex 収録。",
-  "download_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.1.mpp",
+  "created_at": "2026-08-23T13:08:00",
+  "description": "【収録MPPバージョン】\n- Instagram：v1.1.0（対応アプリ 439.0.0.37.89／このポップアップ専用の表示可否リクエストを停止し、アカウント初期設定NUXの生成条件をアプリ側の中央設定判定で先に無効化。さらに通常View、RenderCore、Litho/Bloksの仮想アクセシビリティ階層を対象に、『アカウントの設定を完了』の固有タイトル、案内文2種、『次へ』、『後で』が同じウィンドウ内に揃った場合だけ、描画前に『後で』を実行。別ウィンドウを継続監視し、後から再表示される場合も再抑止。投稿・ストーリーズ・リール・DM・その他のダイアログには触れない）\n- Trip.com：v1.10.4（対応アプリ 8.54.2／起動用通信保護拡張を1,089クラス・2,139,856 bytesから1クラス・6,100 bytesへ最小化。React全子要素に対する重複post・反射処理とマイプランの未使用計測を削減。AIボタン、広告・おすすめ・追跡通信・下部コンテンツの非表示を維持し、予約・ログイン・決済・地図・通知も維持）\n- TikTok：v3.6.0（対応アプリ 46.2.3／シークバーとドラッグ中の動画プレビュー、CapCut・エフェクト誘導、場所・施設・予約、再投稿、怪しい通信、左下文字の非表示を維持。起動拡張は必要な3クラスへ最小化）\n- Yahoo!乗換案内：v1.1.7（検索結果下部のYDN広告と『検索結果に関するご指摘』を文字・枠・余白ごと非表示）\n- Amazonショッピング：v1.0.4（スポンサー商品非表示と拡張衝突による起動不能の修正を維持）\n- Hanull Reader：v1.0.0\n\n【Instagram三重抑止】\nInstagram 439.0.0.37.89の実APKを照合し、このポップアップ専用の表示可否リクエストを停止する直撃処理、サーバー配信の初期設定NUXを生成前に止める設定判定、RenderCore/Litho/Bloksが公開するアクセシビリティ情報を使った描画前ガードを併用。通常TextViewだけを見ていた旧版の取りこぼし、約2秒で終了していた別ウィンドウ監視、同じViewを再利用した際の再試行停止を修正。\n\n【起動・Manager読み込み高速化】\nAndroid Managerがclasses.dexから読み込む実装に合わせ、JVM用重複クラスとビルド用メタデータ・埋め込みソースを除外。共有拡張がMPP位置を特定するために必要な1クラスは保持。統合MPPは446,755 bytesに収め、Manifestとclasses.dexは先頭のまま、Amazon・Trip.com・TikTok・Instagramの全拡張、Trip.com置換データ、全パッチ機能とPatcher 1.8.0互換性を維持。\n\n【配信のスムーズ化】\n通常取得はMPP全体をサーバーで読み切る前にストリームを開始。HEAD確認では本体を読み込まず、分割取得は206応答を直接中継し、非対応環境だけ従来方式へ自動で戻します。v1.0.25の既存5アプリ機能を維持したまま、Instagram抑止だけを強化しています。\n\nAndroid版用 classes.dex 収録。Morphe 1.26.0-dev.8内蔵のPatcher 1.8.0に対応。",
+  "download_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.27.mpp",
   "signature_download_url": "",
-  "version": "1.0.1"
+  "version": "1.0.27"
 }
