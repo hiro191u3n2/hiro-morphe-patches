@@ -1,3 +1,7 @@
+# [1.0.41](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
+
+* **Instagram:** 「この投稿に興味がありますか？」がflatなRenderCore／Litho／Bloks provider treeに表示され、カード自身のACTION_DISMISSだけでは閉じられない構造へ対応しました。仮想UIのhost treeを有限範囲でたどり、タイトルと「興味なし」「興味あり」が同じ局所カードにそろったことを再確認してから、カード自身または外側1段の検証済みclose wrapperだけを閉じます。「興味なし」「興味あり」は判定専用で絶対に操作せず、有限長のイベント再試行により通常投稿・キャプション・ストーリーズ・リール・DMと起動速度、従来の設定完了ウィンドウ抑止、他5アプリの実行データを維持します。
+
 # [1.0.40](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
 
 * **Instagram:** 記事内の「この投稿に興味がありますか？」カードを、タイトル・「興味なし」・「興味あり」が同じ局所領域にそろった場合だけ描画前に閉じるよう対応しました。推薦フィードバックは選択せず、カード自身のACTION_DISMISSまたは同じカード内の正確な「閉じる」だけを実行します。Android 16、通常View、RenderCore、Litho／Bloks、別Window、遅延表示・スクロール後の再表示へ対応し、通常投稿・キャプション・ストーリーズ・リール・DM、従来の「アカウントの設定を完了」抑止、Trip.comを含む他5アプリの実行データを維持します。
