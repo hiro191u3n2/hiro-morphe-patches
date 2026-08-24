@@ -1,3 +1,7 @@
+# [1.0.40](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
+
+* **Instagram:** 記事内の「この投稿に興味がありますか？」カードを、タイトル・「興味なし」・「興味あり」が同じ局所領域にそろった場合だけ描画前に閉じるよう対応しました。推薦フィードバックは選択せず、カード自身のACTION_DISMISSまたは同じカード内の正確な「閉じる」だけを実行します。Android 16、通常View、RenderCore、Litho／Bloks、別Window、遅延表示・スクロール後の再表示へ対応し、通常投稿・キャプション・ストーリーズ・リール・DM、従来の「アカウントの設定を完了」抑止、Trip.comを含む他5アプリの実行データを維持します。
+
 # [1.0.39](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-24)
 
 * **Instagram:** GitHub更新表示対応ソースからv1.0.38で再パッチした端末へ更新通知を発生させる確認版です。Instagramの実行コード、拡張DEX、Android用classes.dex、Trip.comを含む他5アプリの全実行データはv1.0.38と同一で、「アカウントの設定を完了」の描画前同期抑止をそのまま維持します。
