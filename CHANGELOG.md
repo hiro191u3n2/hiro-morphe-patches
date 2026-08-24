@@ -1,3 +1,7 @@
+# [1.0.31](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-24)
+
+* **Trip.com:** GitHub更新表示対応ソースへの移行確認用に統合版をv1.0.31へ更新しました。Trip.comの実行コード・拡張DEX・置換データはv1.0.30と同一です。
+
 # [1.0.30](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-24)
 
 * **Trip.com:** 起動時にも実行されていたReact共通クラスの全View追加・全テキスト更新・スクロール設定フックと未使用拡張DEX登録を撤去しました。AIボタン、広告・おすすめ・追跡通信、航空券・ホテル個別画面の下部非表示は維持し、航空券＋ホテル画面の動的下部カットは起動速度優先で停止します。
