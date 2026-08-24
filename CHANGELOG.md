@@ -1,3 +1,7 @@
+# [1.0.42](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
+
+* **Instagram:** v1.0.41のflatなRenderCore／Litho／Bloks provider tree対応を維持しながら、タイトル・両回答・閉じる候補を同じ接続rootと同じ局所領域に限定するconnected-root locality safetyを追加しました。host anchor、未接続の照合結果、別Window／別treeの候補は操作対象にせず、同じカード内で検証できるACTION_DISMISSまたは正確な「閉じる」だけを実行します。「興味なし」「興味あり」は引き続き判定専用で絶対に操作せず、通常投稿・キャプション・ストーリーズ・リール・DMと起動速度、従来の設定完了ウィンドウ抑止、他5アプリの実行データを維持します。
+
 # [1.0.41](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
 
 * **Instagram:** 「この投稿に興味がありますか？」がflatなRenderCore／Litho／Bloks provider treeに表示され、カード自身のACTION_DISMISSだけでは閉じられない構造へ対応しました。仮想UIのhost treeを有限範囲でたどり、タイトルと「興味なし」「興味あり」が同じ局所カードにそろったことを再確認してから、カード自身または外側1段の検証済みclose wrapperだけを閉じます。「興味なし」「興味あり」は判定専用で絶対に操作せず、有限長のイベント再試行により通常投稿・キャプション・ストーリーズ・リール・DMと起動速度、従来の設定完了ウィンドウ抑止、他5アプリの実行データを維持します。
