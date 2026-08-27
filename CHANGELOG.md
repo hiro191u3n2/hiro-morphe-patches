@@ -1,3 +1,7 @@
+# [1.0.43](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-27)
+
+* **Trip.com:** 航空券＋ホテル画面の境界を古い「料金割引情報」見出しから、現在の青い「検索」ボタンを含むフォーム直後へ変更しました。広告カード・予約履歴・以降を枠・高さ・余白ごと非表示にし、単一wrapper構造とReactによる遅延追加・再表示も対象画面の次のlayout内で再抑止します。起動を遅くしていた全ReactRootView共通フック、最大24,000 View走査、約6秒の再試行タイマー、対象外rootの常駐listenerは完全撤去。CRN URLを確認して航空券＋ホテル／従来の列車専用ルートだけを監視するため、ホームと起動経路のView走査・timer・layout監視はゼロです。広告・AI・おすすめ・追跡遮断、航空券・ホテル個別画面、MyPlan、Instagramを含む他5アプリの改造は維持します。
+
 # [1.0.42](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-25)
 
 * **Instagram:** v1.0.41のflatなRenderCore／Litho／Bloks provider tree対応を維持しながら、タイトル・両回答・閉じる候補を同じ接続rootと同じ局所領域に限定するconnected-root locality safetyを追加しました。host anchor、未接続の照合結果、別Window／別treeの候補は操作対象にせず、同じカード内で検証できるACTION_DISMISSまたは正確な「閉じる」だけを実行します。「興味なし」「興味あり」は引き続き判定専用で絶対に操作せず、通常投稿・キャプション・ストーリーズ・リール・DMと起動速度、従来の設定完了ウィンドウ抑止、他5アプリの実行データを維持します。
