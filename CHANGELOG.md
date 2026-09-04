@@ -1,3 +1,7 @@
+# [1.0.44](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-09-04)
+
+* **LINE:** LINE 26.14.0（jp.naver.line.android／APKM）へ、AndroidManifestのversionCodeだけを2147483647に固定するGoogle Play更新無効化パッチを追加しました。Google Playの配布上限2100000000を超えるため、Play版からの上書き更新を防ぎます。パッケージ名・versionName・アプリコード・トーク・通知・権限は変更せず、実行時フックや常駐処理も追加しません。Instagram、Trip.com、TikTok、Yahoo!乗換案内、Amazonショッピング、Hanull Readerの既存改造は維持します。
+
 # [1.0.43](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-08-27)
 
 * **Trip.com:** 航空券＋ホテル画面の境界を古い「料金割引情報」見出しから、現在の青い「検索」ボタンを含むフォーム直後へ変更しました。広告カード・予約履歴・以降を枠・高さ・余白ごと非表示にし、単一wrapper構造とReactによる遅延追加・再表示も対象画面の次のlayout内で再抑止します。起動を遅くしていた全ReactRootView共通フック、最大24,000 View走査、約6秒の再試行タイマー、対象外rootの常駐listenerは完全撤去。CRN URLを確認して航空券＋ホテル／従来の列車専用ルートだけを監視するため、ホームと起動経路のView走査・timer・layout監視はゼロです。広告・AI・おすすめ・追跡遮断、航空券・ホテル個別画面、MyPlan、Instagramを含む他5アプリの改造は維持します。
