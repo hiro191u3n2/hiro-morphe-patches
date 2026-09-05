@@ -1,3 +1,7 @@
+# [1.0.45](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-09-05)
+
+* **LINE:** LINE 26.14.0向け「Google PlayからのLINE更新を無効化」を現行の統合MPPから撤去しました。LINEのパッチ項目・互換情報・実行クラスは収録せず、統合版を従来の6アプリ構成へ戻しています。Instagram、Trip.com、TikTok、Yahoo!乗換案内、Amazonショッピング、Hanull Readerの既存改造は変更していません。
+
 # [1.0.44](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-09-04)
 
 * **LINE:** LINE 26.14.0（jp.naver.line.android／APKM）へ、AndroidManifestのversionCodeだけを2147483647に固定するGoogle Play更新無効化パッチを追加しました。Google Playの配布上限2100000000を超えるため、Play版からの上書き更新を防ぎます。パッケージ名・versionName・アプリコード・トーク・通知・権限は変更せず、実行時フックや常駐処理も追加しません。Instagram、Trip.com、TikTok、Yahoo!乗換案内、Amazonショッピング、Hanull Readerの既存改造は維持します。
