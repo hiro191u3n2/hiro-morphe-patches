@@ -1,3 +1,9 @@
+# [1.0.46](https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.46.mpp) (2026-09-05)
+
+* **X:** 12.19.1-release.0の「タイムラインをカスタマイズ」で、保存済みカテゴリ選択を消す起動時・時間経過時の呼出し2か所だけを修正。「適用」、手動リセット、地域フィルタ、Pikoの改造は維持。常駐処理や実行時の追加クラスはありません。1項目以上がオンの組合せを保持します。全項目オフはX本体が全項目オンと同じ値で保存するため未対応です。
+
+XはPiko 3.10.0-dev.4適用済み12.19.1 APKへの追加パッチとして検証。既存6アプリの150パッチクラスと8実行リソースは変更なし。LINE更新無効化は引き続き非収録です。
+
 # [1.0.45](https://github.com/hiro191u3n2/hiro-morphe-patches/commits/main) (2026-09-05)
 
 * **LINE:** LINE 26.14.0向け「Google PlayからのLINE更新を無効化」を現行の統合MPPから撤去しました。LINEのパッチ項目・互換情報・実行クラスは収録せず、統合版を従来の6アプリ構成へ戻しています。Instagram、Trip.com、TikTok、Yahoo!乗換案内、Amazonショッピング、Hanull Readerの既存改造は変更していません。
