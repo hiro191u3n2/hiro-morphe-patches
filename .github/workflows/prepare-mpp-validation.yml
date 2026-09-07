@@ -1,0 +1,36 @@
+name: Prepare MPP validation tools
+on:
+  push:
+    branches: [codex/tiktok-stories-validation-1.0.50]
+    paths: [.github/workflows/prepare-mpp-validation.yml]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Download and verify the pinned Android compiler
+        run: |
+          mkdir -p validation-tools
+          curl --fail --location --retry 2 --max-time 120 -o validation-tools/r8-8.0.40.jar https://dl.google.com/dl/android/maven2/com/android/tools/r8/8.0.40/r8-8.0.40.jar
+          echo 'ab1379835c7d3e5f21f80347c3c81e2f762e0b9b02748ae5232c3afa14adf702  validation-tools/r8-8.0.40.jar' | sha256sum --check
+          java -cp validation-tools/r8-8.0.40.jar com.android.tools.r8.D8 --version
+      - name: Resolve the existing Site lockfile into a reusable cache
+        working-directory: build-support
+        run: |
+          npm ci --ignore-scripts --cache ../validation-tools/npm-cache --no-audit --no-fund
+          sha256sum package-lock.json | cut -d' ' -f1 > ../validation-tools/npm-cache/.sites-lockfile-sha256
+          tar -czf ../validation-tools/npm-cache.tar.gz -C ../validation-tools npm-cache
+          rm -rf ../validation-tools/npm-cache
+      - uses: actions/upload-artifact@v4
+        with:
+          name: mpp-validation-tools
+          path: validation-tools/
+          retention-days: 3
