@@ -1,0 +1,29 @@
+name: Prepare Trip validation tools
+on:
+  push:
+    branches: [codex/trip-lower-validation-1.0.51]
+    paths: [.github/workflows/prepare-trip-validation.yml]
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch official pinned Morphe Desktop and prepare Java runtime
+        shell: bash
+        run: |
+          mkdir tools
+          curl --fail --location --retry 3 --max-time 120 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.15.0/morphe-desktop-1.15.0-all.jar -o tools/morphe-desktop-1.15.0-all.jar
+          echo '727e3744aa5c0006474590de6f4041bd55edc59f3d6cb9b596e95f7116384506  tools/morphe-desktop-1.15.0-all.jar' | sha256sum --check
+          jlink --add-modules java.se,jdk.crypto.ec,jdk.zipfs,jdk.unsupported --strip-debug --no-man-pages --no-header-files --output jre21
+          tar -czf tools/jre21.tar.gz jre21
+          sha256sum tools/* > tools/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: trip-validation-tools
+          path: tools/
+          retention-days: 3
