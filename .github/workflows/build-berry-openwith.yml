@@ -1,0 +1,77 @@
+name: Build Berry open-with MPP
+on:
+  push:
+    branches: [build/berry-openwith-manager-1.0.57]
+    paths:
+      - berry-openwith/**
+      - .github/workflows/build-berry-openwith.yml
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare Morphe patch project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/MorpheApp/morphe-patches-template.git project
+          rm -rf project/.git
+          rm -rf project/patches/src/main/kotlin/*
+          rm -rf project/extensions/extension/src/main/java/*
+          mkdir -p project/patches/src/main/kotlin/app/hiro/berry/openwith
+          mkdir -p project/extensions/extension/src/main/java/hiro/berry/openwith
+          cp berry-openwith/src/OpenWithManagerPatch.kt project/patches/src/main/kotlin/app/hiro/berry/openwith/
+          cp berry-openwith/extension/OpenWithManager.java project/extensions/extension/src/main/java/hiro/berry/openwith/
+          cat > project/extensions/extension/build.gradle.kts <<'EOF'
+          extension {
+              name = "extensions/berry_openwith_manager.mpe"
+          }
+          android {
+              namespace = "hiro.berry.openwith"
+          }
+          EOF
+          cat > project/patches/build.gradle.kts <<'EOF'
+          group = "app.hiro.berry.openwith"
+          patches {
+              about {
+                  name = "ひろ Berry Browser パッチ"
+                  description = "Berry Browser 3.83.74 の「他のブラウザで開く」候補を長押しで管理"
+                  source = "https://github.com/hiro191u3n2/hiro-morphe-patches"
+                  author = "ひろ"
+                  contact = "na"
+                  website = "na"
+                  license = "GPLv3"
+              }
+          }
+          EOF
+          printf '\nversion = 1.0.0\n' >> project/gradle.properties
+      - name: Build MPP
+        working-directory: project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          ./gradlew :patches:buildAndroid --no-daemon --stacktrace
+          find patches/build -maxdepth 4 -type f -print
+          find extensions/extension/build -maxdepth 5 -type f -print || true
+          MPP="$(find patches/build -type f -name '*.mpp' | head -n1)"
+          test -n "$MPP"
+          cp "$MPP" ../Berry_OpenWith_Manager_v1.0.0.mpp
+          unzip -t ../Berry_OpenWith_Manager_v1.0.0.mpp
+          unzip -l ../Berry_OpenWith_Manager_v1.0.0.mpp
+          sha256sum ../Berry_OpenWith_Manager_v1.0.0.mpp > ../Berry_OpenWith_Manager_v1.0.0.sha256
+      - uses: actions/upload-artifact@v4
+        with:
+          name: berry-openwith-mpp
+          path: |
+            Berry_OpenWith_Manager_v1.0.0.mpp
+            Berry_OpenWith_Manager_v1.0.0.sha256
+          retention-days: 3
