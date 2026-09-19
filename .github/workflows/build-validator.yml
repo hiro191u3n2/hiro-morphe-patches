@@ -1,0 +1,129 @@
+name: Build local Morphe validator
+on:
+  push:
+    branches: [build/berry-openwith-manager-1.0.57]
+    paths: [.github/workflows/build-validator.yml]
+permissions:
+  contents: read
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Create validator project
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          mkdir -p validator/src/main/kotlin
+          cat > settings.gradle.kts <<'EOF'
+          pluginManagement {
+              repositories {
+                  gradlePluginPortal()
+                  google()
+                  maven {
+                      url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+                      credentials {
+                          username = System.getenv("GITHUB_ACTOR")
+                          password = System.getenv("GITHUB_TOKEN")
+                      }
+                  }
+              }
+          }
+          dependencyResolutionManagement {
+              repositories {
+                  mavenCentral()
+                  google()
+                  maven {
+                      url = uri("https://maven.pkg.github.com/MorpheApp/registry")
+                      credentials {
+                          username = System.getenv("GITHUB_ACTOR")
+                          password = System.getenv("GITHUB_TOKEN")
+                      }
+                  }
+              }
+          }
+          rootProject.name = "morphe-validator"
+          include(":validator")
+          EOF
+          cat > build.gradle.kts <<'EOF'
+          plugins {
+              kotlin("jvm") version "2.2.20" apply false
+          }
+          EOF
+          cat > validator/build.gradle.kts <<'EOF'
+          plugins {
+              kotlin("jvm")
+              application
+          }
+          dependencies {
+              implementation("app.morphe:morphe-patcher:1.13.0")
+          }
+          application {
+              mainClass.set("MainKt")
+          }
+          kotlin {
+              jvmToolchain(21)
+          }
+          EOF
+          cat > validator/src/main/kotlin/Main.kt <<'EOF'
+          import app.morphe.patcher.Patcher
+          import app.morphe.patcher.PatcherConfig
+          import app.morphe.patcher.patch.loadPatchesFromJar
+          import kotlinx.coroutines.flow.collect
+          import kotlinx.coroutines.runBlocking
+          import java.io.File
+
+          fun main(args: Array<String>) {
+              require(args.size >= 2) { "usage: validator <base.apk> <patches.mpp>" }
+              val apk = File(args[0])
+              val mpp = File(args[1])
+              require(apk.isFile) { "APK missing: $apk" }
+              require(mpp.isFile) { "MPP missing: $mpp" }
+
+              val patches = loadPatchesFromJar(setOf(mpp))
+              var failed = false
+              val result = Patcher(PatcherConfig(apkFile = apk)).use { patcher ->
+                  println("PACKAGE=" + patcher.context.packageMetadata.packageName)
+                  println("VERSION_NAME=" + patcher.context.packageMetadata.versionName)
+                  println("VERSION_CODE=" + patcher.context.packageMetadata.versionCode)
+                  patcher += patches
+                  runBlocking {
+                      patcher().collect { pr ->
+                          if (pr.exception != null) {
+                              failed = true
+                              System.err.println("PATCH_FAIL=" + pr.patch + "\n" + pr.exception!!.stackTraceToString())
+                          } else {
+                              println("PATCH_OK=" + pr.patch)
+                          }
+                      }
+                  }
+                  patcher.get()
+              }
+              println("DEX_FILES=" + result.dexFiles.size)
+              result.dexFiles.forEachIndexed { i, bytes -> println("DEX_" + i + "_SIZE=" + bytes.size) }
+              if (failed) error("At least one patch failed")
+              println("VALIDATION_OK")
+          }
+          EOF
+          cp -r /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/21* /tmp/noop 2>/dev/null || true
+      - name: Add Gradle wrapper and build distribution
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/MorpheApp/morphe-patches-template.git template
+          cp template/gradlew template/gradlew.bat .
+          cp -r template/gradle .
+          chmod +x gradlew
+          ./gradlew :validator:installDist --no-daemon --stacktrace
+      - uses: actions/upload-artifact@v4
+        with:
+          name: morphe-validator
+          path: validator/build/install/validator/
+          retention-days: 3
