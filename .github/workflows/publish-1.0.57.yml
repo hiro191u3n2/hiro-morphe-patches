@@ -1,0 +1,98 @@
+name: Publish Morphe v1.0.57
+on:
+  push:
+    branches: [build/berry-openwith-manager-1.0.57]
+    paths: [.github/release-trigger-1.0.57]
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build Berry candidate-manager MPP
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euxo pipefail
+          git clone --depth 1 https://github.com/MorpheApp/morphe-patches-template.git project
+          rm -rf project/.git project/patches/src/main/kotlin/* project/extensions/extension/src/main/java/*
+          mkdir -p project/patches/src/main/kotlin/app/hiro/berry/openwith
+          mkdir -p project/extensions/extension/src/main/java/hiro/berry/openwith
+          cp berry-openwith/src/OpenWithManagerPatch.kt project/patches/src/main/kotlin/app/hiro/berry/openwith/
+          cp berry-openwith/extension/OpenWithManager.java project/extensions/extension/src/main/java/hiro/berry/openwith/
+          cat > project/extensions/extension/build.gradle.kts <<'EOF'
+          extension { name = "extensions/berry_openwith_manager.mpe" }
+          android { namespace = "hiro.berry.openwith" }
+          EOF
+          cat > project/patches/build.gradle.kts <<'EOF'
+          group = "app.hiro.berry.openwith"
+          patches {
+              about {
+                  name = "ひろ Berry Browser パッチ"
+                  description = "Berry Browser 3.83.74 の「他のブラウザで開く」候補を長押しで管理"
+                  source = "https://github.com/hiro191u3n2/hiro-morphe-patches"
+                  author = "ひろ"
+                  contact = "na"
+                  website = "na"
+                  license = "GPLv3"
+              }
+          }
+          EOF
+          printf '\nversion = 1.0.0\n' >> project/gradle.properties
+          (cd project && ./gradlew :patches:buildAndroid --no-daemon)
+          find project/patches/build -type f -name '*.mpp' -print -quit | xargs -I{} cp {} Berry_OpenWith_Manager_v1.0.0.mpp
+          unzip -t Berry_OpenWith_Manager_v1.0.0.mpp
+      - name: Merge with published v1.0.56
+        run: |
+          set -euxo pipefail
+          curl --fail --location --retry 3 --max-time 180 \
+            -o Hiro_Morphe_Patches_v1.0.56.mpp \
+            https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.56.mpp
+          rm -rf merge current_new
+          mkdir -p merge current_new
+          unzip -q Hiro_Morphe_Patches_v1.0.56.mpp -d merge
+          unzip -q Berry_OpenWith_Manager_v1.0.0.mpp -d current_new
+          mkdir -p merge/app/hiro/berry/openwith merge/META-INF merge/extensions
+          cp current_new/app/hiro/berry/openwith/*.class merge/app/hiro/berry/openwith/
+          cp current_new/META-INF/app.hiro.berry.openwith_patches.kotlin_module merge/META-INF/
+          cp current_new/extensions/berry_openwith_manager.mpe merge/extensions/
+          cp current_new/classes.dex merge/classes2.dex
+          cat > merge/META-INF/MANIFEST.MF <<'EOF'
+          Manifest-Version: 1.0
+          Name: ひろ Morphe 統合パッチ
+          Description: Berry Browser 3.83.74の「他のブラウザで開く」候補を長押しで管理。既存v1.0.56の全パッチを維持。
+          Version: 1.0.57
+          Timestamp: 2026-09-19T02:45:00
+          Source: remote
+          Author: ひろ
+          Contact: na
+          Website: na
+          License: GPLv3
+          Patcher-Version: 1.13.0
+
+          EOF
+          (cd merge && zip -q -r ../Hiro_Morphe_Patches_v1.0.57.mpp .)
+          unzip -t Hiro_Morphe_Patches_v1.0.57.mpp
+          test "$(unzip -Z1 Hiro_Morphe_Patches_v1.0.57.mpp | grep -c '^classes[0-9]*\.dex$')" -eq 2
+          unzip -Z1 Hiro_Morphe_Patches_v1.0.57.mpp | grep -qx 'extensions/berry_foreground_tabs.mpe'
+          unzip -Z1 Hiro_Morphe_Patches_v1.0.57.mpp | grep -qx 'extensions/berry_openwith_manager.mpe'
+          unzip -Z1 Hiro_Morphe_Patches_v1.0.57.mpp | grep -qx 'app/hiro/berry/openwith/OpenWithManagerPatchKt.class'
+          sha256sum Hiro_Morphe_Patches_v1.0.57.mpp > Hiro_Morphe_Patches_v1.0.57.sha256
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euxo pipefail
+          gh release create v1.0.57 \
+            Hiro_Morphe_Patches_v1.0.57.mpp \
+            Hiro_Morphe_Patches_v1.0.57.sha256 \
+            --repo "${GITHUB_REPOSITORY}" \
+            --target main \
+            --title "Hiro Morphe Patches v1.0.57" \
+            --notes "Berry Browser 3.83.74: 「他のブラウザで開く」の候補を長押しで非表示・復元できる管理機能を追加。既存v1.0.56のBerry高速化パッチおよび他アプリの既存パッチを維持。"
