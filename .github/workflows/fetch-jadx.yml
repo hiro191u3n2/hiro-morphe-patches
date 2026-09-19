@@ -1,0 +1,23 @@
+name: Fetch JADX
+on:
+  push:
+    branches: [build/berry-openwith-manager-1.0.57]
+    paths: [.github/workflows/fetch-jadx.yml]
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch JADX 1.5.6
+        run: |
+          set -euxo pipefail
+          curl --fail --location --retry 3 --max-time 180 \
+            -o jadx-1.5.6.zip \
+            https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip
+          echo '545ea2be9c242511bc145755cf4bda2485ade42966e096f8b4d3da2a230e8974  jadx-1.5.6.zip' | sha256sum --check
+      - uses: actions/upload-artifact@v4
+        with:
+          name: jadx-1.5.6
+          path: jadx-1.5.6.zip
+          retention-days: 3
