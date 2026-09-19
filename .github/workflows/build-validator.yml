@@ -107,7 +107,7 @@ jobs:
                   patcher.get()
               }
               println("DEX_FILES=" + result.dexFiles.size)
-              result.dexFiles.forEachIndexed { i, bytes -> println("DEX_" + i + "_SIZE=" + bytes.size) }
+              result.dexFiles.forEachIndexed { i, dex -> println("DEX_" + i + "_NAME=" + dex.name) }
               if (failed) error("At least one patch failed")
               println("VALIDATION_OK")
           }
