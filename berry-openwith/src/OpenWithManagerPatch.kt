@@ -32,9 +32,6 @@ val berryOpenWithManagerPatch = bytecodePatch(
                 packageMetadata.versionCode == "383740") {
             "Berry 3.83.74 (383740) の元APKSを選択してください"
         }
-        require(classDefByOrNull("Lhiro/berry/openwith/OpenWithManager;") == null) {
-            "既に「他のブラウザで開く」候補管理が導入されています"
-        }
 
         val predicate = requireMethod("Lg;", "k", "Ljava/lang/Object;", listOf("Ljava/lang/Object;"))
         val longClick = requireMethod("Le4;", "onLongClick", "Z", listOf("Landroid/view/View;"))
