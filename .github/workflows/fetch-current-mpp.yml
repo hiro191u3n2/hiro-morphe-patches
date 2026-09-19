@@ -1,0 +1,27 @@
+name: Fetch current MPP
+on:
+  push:
+    branches: [build/berry-openwith-manager-1.0.57]
+    paths: [.github/workflows/fetch-current-mpp.yml]
+permissions:
+  contents: read
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch published v1.0.56
+        run: |
+          set -euxo pipefail
+          curl --fail --location --retry 3 --max-time 180 \
+            -o Hiro_Morphe_Patches_v1.0.56.mpp \
+            https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.56.mpp
+          file Hiro_Morphe_Patches_v1.0.56.mpp
+          unzip -t Hiro_Morphe_Patches_v1.0.56.mpp
+          sha256sum Hiro_Morphe_Patches_v1.0.56.mpp > SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: current-mpp-1.0.56
+          path: |
+            Hiro_Morphe_Patches_v1.0.56.mpp
+            SHA256SUMS.txt
+          retention-days: 3
