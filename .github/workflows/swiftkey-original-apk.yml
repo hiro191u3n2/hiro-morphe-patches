@@ -1,0 +1,38 @@
+name: Verify original SwiftKey APK
+on:
+  push:
+    branches: [swiftkey-line-long-enter-20260921]
+    paths: ['.github/workflows/swiftkey-original-apk.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Get package metadata and verify APK hash
+        run: |
+          mkdir original
+          python3 - <<'PY'
+          import urllib.request,json,hashlib,pathlib
+          endpoint='https://ws75.aptoide.com/api/7/app/get/package_name=com.touchtype.swiftkey.beta'
+          try:
+            metadata=json.load(urllib.request.urlopen(endpoint,timeout=60))
+            data=metadata['nodes']['meta']['data']
+            file=data['file']
+            print('Package version:',file.get('vername'),file.get('vercode'))
+            apk=urllib.request.urlopen(file['path'],timeout=90).read()
+            actual=hashlib.sha256(apk).hexdigest()
+            assert actual=='7cdeb70875c6b0a12516bd6995fbda83ff639d297a4ec08a3a4a9b77b2d0afd5',actual
+            pathlib.Path('original/swiftkey_beta_9.13.16.4.apk').write_bytes(apk)
+            pathlib.Path('original/verification.json').write_text(json.dumps({'sha256':actual,'bytes':len(apk)},indent=2))
+          except Exception as e:
+            print(type(e).__name__,str(e))
+            raise
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swiftkey-original-verified
+          path: original/
+          retention-days: 3
+          compression-level: 0
