@@ -1,0 +1,30 @@
+name: SwiftKey LINE Enter build
+on:
+  push:
+    branches: [work/swiftkey-line-enter-1.6.3]
+    paths: ['.github/workflows/swiftkey-line-enter-build.yml', 'swiftkey-line-enter/**']
+permissions:
+  contents: read
+jobs:
+  toolchain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Obtain public Android and Morphe build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          curl --fail --location --retry 2 'https://repo.maven.apache.org/maven2/org/benf/cfr/0.152/cfr-0.152.jar' -o tools/cfr.jar
+          curl --fail --location --retry 2 'https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar' -o tools/r8.jar
+          curl --fail --location --retry 2 'https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar' -o tools/apktool.jar
+          curl --fail --location --retry 2 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar' -o tools/morphe.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" tools/android.jar
+          (cd tools && sha256sum *.jar > SHA256SUMS)
+          # No account credentials or app input data are exported.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swiftkey-public-build-tools
+          path: tools/
+          retention-days: 1
+          compression-level: 0
