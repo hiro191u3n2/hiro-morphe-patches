@@ -1,0 +1,60 @@
+name: SwiftKey LINE Enter build prerequisites
+on:
+  push:
+    branches: [swiftkey-line-long-enter-20260921]
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Prepare pinned patch build inputs
+        shell: bash
+        run: |
+          mkdir -p build-inputs
+          python3 - <<'PY'
+          import concurrent.futures,hashlib,json,pathlib,urllib.request,re,os
+          root=pathlib.Path('build-inputs')
+          files=[
+            ('morphe-desktop-1.13.0-all.jar','https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar','5e820f15d064a79991ea71c0a44fa24243c7cc924975b3cef653e6b14c01fc25'),
+            ('morphe-desktop-1.15.1-all.jar','https://github.com/MorpheApp/morphe-desktop/releases/download/v1.15.1/morphe-desktop-1.15.1-all.jar','6ae9954cd4e22e61055cf9ef6b0bbd25556d2092f354031828f824dc0f7364e1'),
+            ('r8-8.0.40.jar','https://dl.google.com/dl/android/maven2/com/android/tools/r8/8.0.40/r8-8.0.40.jar','ab1379835c7d3e5f21f80347c3c81e2f762e0b9b02748ae5232c3afa14adf702'),
+            ('r8-8.7.18.jar','https://dl.google.com/dl/android/maven2/com/android/tools/r8/8.7.18/r8-8.7.18.jar','badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa'),
+          ]
+          def fetch(item):
+            name,url,wanted=item
+            data=urllib.request.urlopen(url,timeout=120).read()
+            actual=hashlib.sha256(data).hexdigest()
+            assert actual==wanted,(name,actual)
+            (root/name).write_bytes(data)
+            return dict(name=name,sha256=actual,size=len(data),source=url)
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+            reports=list(pool.map(fetch,files))
+          android=pathlib.Path(os.environ['ANDROID_HOME'])/'platforms/android-35/android.jar'
+          data=android.read_bytes()
+          (root/'android-35.jar').write_bytes(data)
+          reports.append(dict(name='android-35.jar',sha256=hashlib.sha256(data).hexdigest(),size=len(data)))
+          try:
+            html=urllib.request.urlopen('https://swiftkey-beta.en.aptoide.com/app',timeout=60).read().decode()
+            state=json.loads(re.search(r'<script id="__NEXT_DATA__"[^>]*>(.*?)</script>',html,re.S).group(1))
+            app=state['props']['pageProps']['app']
+            data=urllib.request.urlopen(app['file']['path'],timeout=120).read()
+            sha=hashlib.sha256(data).hexdigest()
+            assert sha=='7cdeb70875c6b0a12516bd6995fbda83ff639d297a4ec08a3a4a9b77b2d0afd5',sha
+            (root/'swiftkey_beta_9.13.16.4.apk').write_bytes(data)
+            reports.append(dict(name='swiftkey_beta_9.13.16.4.apk',sha256=sha,size=len(data)))
+          except Exception as e:
+            reports.append(dict(apk_error=str(e)))
+          (root/'verification.json').write_text(json.dumps(reports,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swiftkey-pinned-build-inputs
+          path: build-inputs/
+          retention-days: 3
+          compression-level: 0
