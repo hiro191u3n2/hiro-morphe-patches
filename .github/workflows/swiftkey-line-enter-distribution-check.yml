@@ -1,0 +1,27 @@
+name: SwiftKey distribution check
+on:
+  push:
+    branches: [work/swiftkey-line-enter-1.6.3]
+    paths: ['.github/workflows/swiftkey-line-enter-distribution-check.yml']
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Read existing public distribution
+        shell: bash
+        run: |
+          mkdir -p distribution
+          base='https://hiro-morphe-patches.otoha10.chatgpt.site'
+          for file in index.html patches-bundle.json SwiftKeyBeta_v2_SamsungEmoji_v1.6.2.mpp Hiro_Morphe_Patches_v1.0.63.mpp; do
+            curl --location --fail --max-time 35 --connect-timeout 10 "$base/$file" -o "distribution/$file" 2>"distribution/$file.log" && echo "$file OK" >> distribution/status.txt || { echo "$file FAILED" >> distribution/status.txt; rm -f "distribution/$file"; }
+          done
+          cat distribution/status.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swiftkey-existing-distribution
+          path: distribution/
+          retention-days: 1
+          compression-level: 0
