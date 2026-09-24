@@ -1,3 +1,8 @@
+## [1.0.67](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-09-24)
+
+* **BrightnessClick:** 単独MPP v1.0.2。アプリのversionNameを1.5へ戻し、末尾のS26表記が正式版1.5より古い版と判定される原因を修正。改造版番号はファイル名・アプリ内のバージョン情報に保持します。
+* **明るさタッチ:** versionCode9で前の配布APKから更新可能。0%の最小明るさ、Galaxy互換性・権限案内は維持。元の1.5（6）専用guardで再適用を拒否。端末のマーク表示は未確認です。
+
 ## [1.0.66](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-09-24)
 
 * **BrightnessClick:** 0%を10%に引き上げる元アプリの下限処理を修正し、0%では画面を消灯しない最小明るさを指定します。単独MPPはv1.0.1です。
