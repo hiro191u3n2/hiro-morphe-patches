@@ -1,3 +1,10 @@
+## [1.0.66](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-09-24)
+
+* **BrightnessClick:** 0%を10%に引き上げる元アプリの下限処理を修正し、0%では画面を消灯しない最小明るさを指定します。単独MPPはv1.0.1です。
+* **明るさタッチ:** 同じBrightnessClickの更新です。設定画面のプレビューと明るさ切替の両方で0%を受け付け、上限100%も保護します。
+
+元の1.5（6）へ「Galaxy S26 Ultra対応と明るさ変更権限の修正」を適用します。Galaxy互換性・権限案内と既存10アプリの改造を保持。実DEX計算とMPP適用を検証し、端末のスライダー表示と実機操作は未確認です。
+
 ## [1.0.65](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-09-24)
 
 * **BrightnessClick:** 1.5（6）をGalaxy S26 Ultraで使うための互換性修正を追加。古い対象SDKによるインストール制限に対応し、初回の明るさ変更権限を案内します。単独MPPはv1.0.0です。
