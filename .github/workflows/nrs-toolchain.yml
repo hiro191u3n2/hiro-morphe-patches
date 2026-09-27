@@ -1,96 +1,32 @@
-name: Publish ULike 3:4 layout fix
+name: Verify ULike public source
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/nrs-toolchain.yml'
 permissions:
-  contents: write
+  contents: read
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - name: Rebuild reviewed MPPs from published baseline
+      - name: Check usual Manager source
         shell: bash
-        env:
-          LAYOUT_B64: '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'
         run: |
           set -euo pipefail
-          mkdir -p w/d8 out
-          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp -o w/old-single.mpp
-          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp -o w/old-integrated.mpp
-          echo 'f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19  w/old-single.mpp' | sha256sum -c -
-          echo '37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04  w/old-integrated.mpp' | sha256sum -c -
-          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o w/r8.jar
-          printf '%s' "$LAYOUT_B64" | base64 -d > w/layout.dex
-          unzip -p w/old-single.mpp ulike/methods.dex > w/old-methods.dex
-          unzip -p w/old-single.mpp ulike/methods.tsv > w/old-methods.tsv
-          java -Xmx2g -cp w/r8.jar com.android.tools.r8.D8 --min-api 26 --output w/d8 w/old-methods.dex w/layout.dex
-
+          mkdir -p check
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json -o check/site-patches-bundle.json
           python3 - <<'PY'
-          from pathlib import Path
-          import zipfile,re,json,hashlib
-          root=Path('w'); out=Path('out')
-          method='Li/o/a/m/j/f;->n(Landroid/widget/RelativeLayout$LayoutParams;)V'
-          row=method+'\te7a9f720f2f47ece6b245eb32a8a8df3c7041691d57f11a54946fe7cf2b9c796\tf39f1a1f957f3b497ff25e71c85a6bb8b1737e46766732d521efc08c51f046fb'
-          rows=[x for x in (root/'old-methods.tsv').read_text().splitlines() if x]
-          assert not any(x.startswith(method+'\t') for x in rows)
-          rows.append(row)
-          tsv=('\n'.join(sorted(rows))+'\n').encode()
-          dex=(root/'d8/classes.dex').read_bytes()
-          desc='ULike 5.6.2（740）の3:4表示崩れを修正。3:4時だけプレビュー外の操作領域を黒背景にし、白いシャッター・ツールUIを見える状態にします。24.5MP・HEIF専用保存・高画質化・質感美肌・通信遮断を維持。'
-          stamp='2026-09-27T17:56:00'
-          def repack(src,dst,version):
-              with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst,'w') as zout:
-                  for info in zin.infolist():
-                      data=zin.read(info.filename)
-                      if info.filename=='META-INF/MANIFEST.MF':
-                          s=data.decode()
-                          s,n=re.subn(r'(?m)^Version: [^\r\n]*','Version: '+version,s); assert n==1
-                          s,n=re.subn(r'(?m)^Timestamp: [^\r\n]*','Timestamp: '+stamp,s); assert n==1
-                          s,n=re.subn(r'(?m)^Description: [^\r\n]*','Description: '+desc,s); assert n==1
-                          data=s.encode()
-                      elif info.filename=='ulike/methods.dex': data=dex
-                      elif info.filename=='ulike/methods.tsv': data=tsv
-                      zout.writestr(info,data)
-              with zipfile.ZipFile(dst) as z:
-                  assert z.testzip() is None
-                  assert z.read('ulike/methods.dex')==dex
-                  assert z.read('ulike/methods.tsv')==tsv
-          repack(root/'old-single.mpp',out/'ULike_HQ_Texture_Offline_v1.4.0.mpp','1.4.0')
-          repack(root/'old-integrated.mpp',out/'Hiro_Morphe_Patches_v1.0.77.mpp','1.0.77')
-          expected={
-            'ULike_HQ_Texture_Offline_v1.4.0.mpp':'c356522193435f57b49dadbbfb927344dafb618ecb9742e5b6b96a9790ad6d57',
-            'Hiro_Morphe_Patches_v1.0.77.mpp':'a38e81cfe2b54712e4de2d36fd046f008a5e48a508989125a422129fce1b6f46'}
-          for n,h in expected.items():
-              actual=hashlib.sha256((out/n).read_bytes()).hexdigest(); assert actual==h,(n,actual)
-          qa={
-            'standalone_version':'1.4.0','integrated_version':'1.0.77','target':'ULike 5.6.2 (740)',
-            'fix':'3:4 camera deck background black only when ratio constant == 1',
-            'semantic_diff_count_vs_v1_3_0':1,'changed_method':method,
-            'standalone_sha256':expected['ULike_HQ_Texture_Offline_v1.4.0.mpp'],
-            'integrated_sha256':expected['Hiro_Morphe_Patches_v1.0.77.mpp'],
-            'physical_device_tested':False}
-          (out/'QA_v1.4.0.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          import json
+          p='check/site-patches-bundle.json'
+          j=json.load(open(p))
+          out={'version':j.get('version'),'download_url':j.get('download_url'),'created_at':j.get('created_at')}
+          open('check/site-status.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False))
           PY
-
-          sha256sum out/*
-      - name: Publish GitHub release assets
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          TAG=ulike-v1.4.0
-          cat > out/RELEASE_NOTES.md <<'EOF'
-          ULike 5.6.2 (740) cumulative patch v1.4.0.
-          Fixes the 3:4 camera UI by using a black non-preview camera deck only for the 3:4 ratio, keeping white shutter/tool controls visible.
-          Preserves v1.3.0 24.5MP (5712x4284 / 4284x5712), HEIF-only DCIM/Camera saving, HQ/texture-beauty and offline/privacy changes.
-          Static validation: v1.3.0 -> v1.4.0 semantic method delta is exactly one method. Morphe 1.13.0 and 1.16.0 standalone outputs are semantically identical. Physical-device UI/capture testing is not performed here.
-          EOF
-          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
-            gh release upload "$TAG" --repo "${{ github.repository }}" --clobber out/ULike_HQ_Texture_Offline_v1.4.0.mpp out/Hiro_Morphe_Patches_v1.0.77.mpp out/QA_v1.4.0.json
-          else
-            gh release create "$TAG" --repo "${{ github.repository }}" --title "ULike v1.4.0 / Hiro Morphe v1.0.77" --notes-file out/RELEASE_NOTES.md out/ULike_HQ_Texture_Offline_v1.4.0.mpp out/Hiro_Morphe_Patches_v1.0.77.mpp out/QA_v1.4.0.json
-          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-site-check
+          path: check/*
+          retention-days: 1
