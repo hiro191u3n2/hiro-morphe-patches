@@ -1,0 +1,162 @@
+{
+  "version": "1.3.0",
+  "integrated_version": "1.0.76",
+  "published": true,
+  "request": "Additional setting for 5712 x 4284 (24.5MP), HEIF-only photos under /storage/emulated/0/DCIM/Camera",
+  "completed_at": "2026-09-27T13:11:09.091Z",
+  "source": {
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "checkout_path": "/workspace/scratch/877939c263ae/site",
+    "commit_sha": "7ea87d62fc69b56cc850c7e4e8c0c42e58257c43",
+    "archive": "/workspace/scratch/877939c263ae/release-v1.3.0/site-release.tar.gz"
+  },
+  "saved_version": {
+    "id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_2a06c434290c8191bef6b4bb12c2acea",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_number": 91,
+    "source": {
+      "commit_sha": "7ea87d62fc69b56cc850c7e4e8c0c42e58257c43"
+    },
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000336882068f8f03e1b483a6d9",
+      "content_hash": "sha256:8c9d20e6901747c34d19084c5a7d5800962b0806e0dc108d447e4e5593890287",
+      "size_bytes": 262195200,
+      "file_count": 187
+    },
+    "screenshot_url": null,
+    "deployment_id": null
+  },
+  "deployment": {
+    "id": "appgdep_6ab9157120988191b267add68b9ae0b6",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "title": "ひろ Morphe パッチソース",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_2a06c434290c8191bef6b4bb12c2acea",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6a7d274188d0819185634a62fa2fc8a0",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-09-27T13:09:32.496157+00:00"
+  },
+  "features": {
+    "fixed245_default": false,
+    "landscape": [
+      5712,
+      4284
+    ],
+    "portrait": [
+      4284,
+      5712
+    ],
+    "format": "HEIF .heic image/heic",
+    "destination": "/storage/emulated/0/DCIM/Camera",
+    "jpeg_fallback": false,
+    "aspect_policy": "4:3 center crop; smaller input interpolated",
+    "hdr": "SDR; Ultra HDR gainmap not preserved"
+  },
+  "validation": {
+    "pass": true,
+    "checked_at": "2026-09-27T13:02:43.225862+00:00",
+    "standalone_version": "1.3.0",
+    "integrated_version": "1.0.76",
+    "target_apk_sha256": "23bfde7cacae7eb94e5f9345a953dcb766021aabf277358146c84a1dcde99d68",
+    "artifacts": [
+      {
+        "file": "ULike_HQ_Texture_Offline_v1.3.0.mpp",
+        "bytes": 496411,
+        "sha256": "f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19"
+      },
+      {
+        "file": "Hiro_Morphe_Patches_v1.0.76.mpp",
+        "bytes": 17028496,
+        "sha256": "37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04"
+      }
+    ],
+    "gates": {
+      "cli": {
+        "pass": true,
+        "report": "build-v1.3.0/mpp/validation/CLI_GATES.json",
+        "sha256": "c25fdb462fdb189fb3e5ab83d7789c8eb3c9ef037307b356e861058f3f2bf685"
+      },
+      "manifest": {
+        "pass": true,
+        "report": "build-v1.3.0/mpp/validation/MANIFEST_GATES.json",
+        "sha256": "6bff0718d7f4806a4650bbe684f2da7387f2072ee6e57e61ef186662f0ab3fdb"
+      },
+      "metadata": {
+        "pass": true,
+        "report": "build-v1.3.0/mpp/method-metadata-final.json",
+        "sha256": "353a6aad4057f0af8be904a6687518636a0165ffaf57b87689e3eb2a3dcdcefa"
+      },
+      "cumulative": {
+        "pass": true,
+        "report": "build-v1.3.0/mpp/release/CUMULATIVE_GATES.json",
+        "sha256": "a620eed27b8cf18b7f894b73be93d86719dff560a28f551044c5e9379c97ec89"
+      }
+    },
+    "site_mpp_validator_pass": true,
+    "independent_site_review": {
+      "content_and_versions_pass": true,
+      "delta_worker_pairs": 23,
+      "prior_routes_preserved": true
+    },
+    "unrelated_patch_classes_preserved": 216,
+    "physical_device_tested": false,
+    "signing_performed": false,
+    "limitations": [
+      "24.5MP is encoded output; a smaller source is interpolated; 4:3 center crop when needed",
+      "HEIF SDR only; Ultra HDR gainmap not preserved",
+      "Physical camera/codec/MediaStore/UI and thermal behavior unverified",
+      "A provider refusing rollback deletion can leave its own newly-created row; no pre-existing media is deleted"
+    ]
+  },
+  "source_bundle": {
+    "file": "ULike_HQ_Texture_Offline_v1.3.0_sources_and_QA.zip",
+    "bytes": 724443,
+    "sha256": "1858b9e81d5abbf1e7967508985533925ab087c9e33050daefbff165b1ced0bb"
+  },
+  "site_build": {
+    "worker_tests": 26,
+    "passed": 26,
+    "compact_bytes": 262030448,
+    "old_mpp_urls_and_bytes_preserved": true
+  },
+  "public_downloads": {
+    "pass": true,
+    "checked_at": "2026-09-27T13:10:43.351465+00:00",
+    "downloads": [
+      {
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp",
+        "status": 200,
+        "bytes": 496411,
+        "sha256": "f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19",
+        "matches_reviewed_mpp": true
+      },
+      {
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp",
+        "status": 200,
+        "bytes": 17028496,
+        "sha256": "37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04",
+        "matches_reviewed_mpp": true,
+        "prefix_range": {
+          "status": 206,
+          "bytes": 4096,
+          "content_range": "bytes 0-4095/17028496",
+          "matches": true
+        }
+      }
+    ]
+  },
+  "update_channels": {
+    "verified": true,
+    "changelog_commit": "bf2a9064bcbf5db81bdff98531296b67c977bcbb",
+    "descriptor_commit": "a416f1867b5ed97128fd33f394645a865b599517",
+    "evidence": "OK dev/CHANGELOG.md: 6a2e838b1c87d7d887aa890111f5635264e2cdef3395d49ce2dbd799b1f2bded\nOK main/patches-bundle.json: 46f2f6955eaef1a803049eddcc4431bdd4afb3051bbffb8f240dc47390384779\nOK main/CHANGELOG.md: 6a2e838b1c87d7d887aa890111f5635264e2cdef3395d49ce2dbd799b1f2bded\nOK dev/patches-bundle.json: 46f2f6955eaef1a803049eddcc4431bdd4afb3051bbffb8f240dc47390384779\nOK both Manager channels point to v1.0.76; MPP SHA-256 37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04\n",
+    "device_update_badge_observed": false
+  },
+  "installation": "Update Manager source, then apply to unmodified ULike 5.6.2 (740) matching split APK set. No new signed APKS produced.",
+  "physical_device_tested": false
+}
