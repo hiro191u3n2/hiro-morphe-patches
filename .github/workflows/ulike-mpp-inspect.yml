@@ -1,4 +1,4 @@
-name: ULike MPP inspect
+name: Verify ULike v1.4.2 public source
 
 on:
   push:
@@ -9,36 +9,24 @@ permissions:
   contents: read
 
 jobs:
-  inspect:
+  verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - name: Download current ULike MPP
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Verify fixed Manager source and released MPP
+        shell: bash
         run: |
-          gh release download ulike-v1.4.1 --pattern 'ULike_HQ_Texture_Offline_v1.4.1.mpp' --dir /tmp
-      - name: Inspect format
-        run: |
-          set -euxo pipefail
-          f=/tmp/ULike_HQ_Texture_Offline_v1.4.1.mpp
-          ls -lh "$f"
-          file "$f" || true
-          sha256sum "$f"
-          xxd -l 96 "$f" || true
+          set -euo pipefail
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json -o /tmp/site.json
           python3 - <<'PY'
-          import zipfile, pathlib, json, tarfile
-          p=pathlib.Path('/tmp/ULike_HQ_Texture_Offline_v1.4.1.mpp')
-          print('ZIP', zipfile.is_zipfile(p))
-          if zipfile.is_zipfile(p):
-              with zipfile.ZipFile(p) as z:
-                  for i in z.infolist():
-                      print('ENTRY', i.filename, i.file_size, hex(i.CRC))
-                  for i in z.infolist():
-                      if i.file_size <= 200000 and any(i.filename.lower().endswith(x) for x in ('.json','.txt','.xml','.yaml','.yml','.md','.smali','.js','.py')):
-                          print('\n---', i.filename, '---')
-                          b=z.read(i)
-                          try: print(b.decode('utf-8')[:50000])
-                          except Exception: print(b[:512].hex())
-          print('TAR', tarfile.is_tarfile(p))
+          import json
+          j=json.load(open('/tmp/site.json'))
+          print(json.dumps({
+            'site_version':j.get('version'),
+            'site_download_url':j.get('download_url'),
+            'site_created_at':j.get('created_at')
+          }, ensure_ascii=False))
+          assert j.get('version') == '1.0.79'
+          assert 'Hiro_Morphe_Patches_v1.0.79.mpp' in (j.get('download_url') or '')
           PY
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.2/Hiro_Morphe_Patches_v1.0.79.mpp -o /tmp/Hiro_Morphe_Patches_v1.0.79.mpp
+          echo 'da186447c1f5aed171a389b4cf4853797ddfdee370bd3eff062e2f08dc86f64c  /tmp/Hiro_Morphe_Patches_v1.0.79.mpp' | sha256sum -c -
