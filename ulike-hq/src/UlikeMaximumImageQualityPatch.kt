@@ -141,15 +141,15 @@ val ulikeMaximumImageQualityPatch = bytecodePatch(
                 returnType = "Z",
                 parameters = emptyList()
             )
-            val setUseMaxWidth = findMethodCall(
+            val maxWidthCalls = findMethodCalls(
                 definingClass = "Lcom/ss/android/vesdk/VECameraSettings\$Builder;",
                 name = "setUseMaxWidthTakePicture",
                 returnType = "Lcom/ss/android/vesdk/VECameraSettings\$Builder;",
                 parameters = listOf("Z"),
                 startIndex = featureFlag
             )
-            require(setUseMaxWidth > featureFlag) {
-                "setUseMaxWidthTakePictureの呼出し位置が想定と異なります"
+            require(maxWidthCalls.size == 2 && maxWidthCalls.all { it > featureFlag }) {
+                "setUseMaxWidthTakePictureの2分岐が想定と異なります"
             }
 
             forceMoveResult(booleanValue + 1, 1)
@@ -233,3 +233,16 @@ private fun BytecodePatchContext.requireMethod(
     }
     return matches[0]
 }
+
+private fun MutableMethod.findMethodCalls(
+    definingClass: String,
+    name: String,
+    returnType: String,
+    parameters: List<String>,
+    startIndex: Int = 0
+): List<Int> = implementation!!.instructions.withIndex()
+    .filter { (index, instruction) ->
+        index >= startIndex &&
+            instruction.methodReferenceMatches(definingClass, name, returnType, parameters)
+    }
+    .map { it.index }
