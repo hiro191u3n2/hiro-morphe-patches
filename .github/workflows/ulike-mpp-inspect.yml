@@ -1,0 +1,44 @@
+name: ULike MPP inspect
+
+on:
+  push:
+    paths:
+      - '.github/workflows/ulike-mpp-inspect.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download current ULike MPP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download ulike-v1.4.1 --pattern 'ULike_HQ_Texture_Offline_v1.4.1.mpp' --dir /tmp
+      - name: Inspect format
+        run: |
+          set -euxo pipefail
+          f=/tmp/ULike_HQ_Texture_Offline_v1.4.1.mpp
+          ls -lh "$f"
+          file "$f" || true
+          sha256sum "$f"
+          xxd -l 96 "$f" || true
+          python3 - <<'PY'
+          import zipfile, pathlib, json, tarfile
+          p=pathlib.Path('/tmp/ULike_HQ_Texture_Offline_v1.4.1.mpp')
+          print('ZIP', zipfile.is_zipfile(p))
+          if zipfile.is_zipfile(p):
+              with zipfile.ZipFile(p) as z:
+                  for i in z.infolist():
+                      print('ENTRY', i.filename, i.file_size, hex(i.CRC))
+                  for i in z.infolist():
+                      if i.file_size <= 200000 and any(i.filename.lower().endswith(x) for x in ('.json','.txt','.xml','.yaml','.yml','.md','.smali','.js','.py')):
+                          print('\n---', i.filename, '---')
+                          b=z.read(i)
+                          try: print(b.decode('utf-8')[:50000])
+                          except Exception: print(b[:512].hex())
+          print('TAR', tarfile.is_tarfile(p))
+          PY
