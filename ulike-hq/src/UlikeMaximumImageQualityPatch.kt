@@ -148,8 +148,8 @@ val ulikeMaximumImageQualityPatch = bytecodePatch(
                 parameters = listOf("Z"),
                 startIndex = featureFlag
             )
-            require(maxWidthCalls.size == 2 && maxWidthCalls.all { it > featureFlag }) {
-                "setUseMaxWidthTakePictureの2分岐が想定と異なります"
+            require(maxWidthCalls.size >= 2 && maxWidthCalls.all { it > featureFlag }) {
+                "setUseMaxWidthTakePictureの分岐が想定と異なります"
             }
 
             forceMoveResult(booleanValue + 1, 1)
