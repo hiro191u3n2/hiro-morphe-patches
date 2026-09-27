@@ -78,5 +78,51 @@
     "native mesh density increase",
     "confirmed duplicate denoising elimination",
     "complete post-effect Ultra HDR preservation"
-  ]
+  ],
+  "download_route_fix": {
+    "reported_error": "メタデータがありません",
+    "cause": "The v1.0.75 compressed MPP was staged as a delta but its runtime historicalDeltaBases mapping was missing, so the download returned HTTP 404.",
+    "before_http_status": 404,
+    "fixed_at": "2026-09-27T12:17:57.416151+00:00",
+    "site_source_commit": "1bdc0917136156f58c44ea3cd1400dce3b0e08e5",
+    "site_version": 90,
+    "site_version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_8485f0a9a3088191b133a3226e12069a",
+    "site_deployment_id": "appgdep_6ab9093a59f48191a055a6cc225b1f54",
+    "publication_status": "succeeded",
+    "release_url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "live_verification": {
+      "verified_at": "2026-09-27T12:17:57.416151+00:00",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.75.mpp",
+      "full_download": {
+        "status": 200,
+        "bytes": 17020597,
+        "sha256": "e235ef49e1ac187a30a034e1eb94d7261c4e207d3b16d8eb3e8ec72855b6a256",
+        "content_type": "application/octet-stream"
+      },
+      "range_download": {
+        "status": 206,
+        "bytes": 8,
+        "hex": "504b030414000000",
+        "content_range": "bytes 0-7/17020597"
+      },
+      "passed": true
+    },
+    "compiled_worker_tests": {
+      "passed": 24,
+      "failed": 0,
+      "scope": "All 21 staged delta routes plus metadata download, prefix range and resumed range; dist/client assets only."
+    },
+    "manager_channel_validation": {
+      "main": "1.0.75",
+      "dev": "1.0.75",
+      "passed": true,
+      "descriptor_sha256": "79a91e093b43b50bdbe5b790dc82021b52b1cc5bcbaa6f54ea432ea692e9b25c",
+      "changelog_sha256": "92087370dab862c5e978762855d3a2d8ddece390ca7564622648e32cb486eb8f"
+    },
+    "mpp_bytes_changed": false,
+    "apks_bytes_changed": false,
+    "app_or_mpp_version_changed": false,
+    "physical_device_ui_tested": false,
+    "retry_in_manager": "ソース → 対象ソースのカード → アップデート（↻）"
+  }
 }
