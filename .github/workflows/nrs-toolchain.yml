@@ -1,33 +1,105 @@
-name: NewRadioSupporter analysis toolchain
+name: Publish ULike v1.4.2 3:4 preview offset
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/nrs-toolchain.yml'
 permissions:
-  contents: read
+  contents: write
 jobs:
-  tools:
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Collect public Android build and analysis tools
+      - name: Rebuild reviewed cumulative MPPs
         shell: bash
+        env:
+          PAYLOAD_B64: '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RgABRwABSQABSgABTAACTEkAAkxKAAJMTAAtTGFuZHJvaWQvYW5pbWF0aW9uL0FuaW1hdG9yJEFuaW1hdG9yTGlzdGVuZXI7ACtMYW5kcm9pZC9hbmltYXRpb24vQW5pbWF0b3JMaXN0ZW5lckFkYXB0ZXI7ADhMYW5kcm9pZC9hbmltYXRpb24vVmFsdWVBbmltYXRvciRBbmltYXRvclVwZGF0ZUxpc3RlbmVyOwAhTGFuZHJvaWQvYW5pbWF0aW9uL1ZhbHVlQW5pbWF0b3I7ABlMYW5kcm9pZC9ncmFwaGljcy9DYW52YXM7ABhMYW5kcm9pZC9ncmFwaGljcy9QYWludDsAGExhbmRyb2lkL2dyYXBoaWNzL1JlY3RGOwATTGFuZHJvaWQvdmlldy9WaWV3OwA0TGNvbS9ieXRlZGFuY2UvY29yZWNhbWVyYS91aS92aWV3L0NhbWVyYVNoYWRlVmlldyRhOwA0TGNvbS9ieXRlZGFuY2UvY29yZWNhbWVyYS91aS92aWV3L0NhbWVyYVNoYWRlVmlldyRiOwA0TGNvbS9ieXRlZGFuY2UvY29yZWNhbWVyYS91aS92aWV3L0NhbWVyYVNoYWRlVmlldyRmOwA0TGNvbS9ieXRlZGFuY2UvY29yZWNhbWVyYS91aS92aWV3L0NhbWVyYVNoYWRlVmlldyRnOwAyTGNvbS9ieXRlZGFuY2UvY29yZWNhbWVyYS91aS92aWV3L0NhbWVyYVNoYWRlVmlldzsAJUxjb20vc3MvYW5kcm9pZC92ZXNkay9WRVByZXZpZXdSYWRpbzsACUxpL2YvbC9mOwALTGkvZi9sL3cvbTsAC0xpL2YvbC93L3o7AApMaS9mL24wL2I7ABBMamF2YS9sYW5nL0VudW07ABJMamF2YS9sYW5nL09iamVjdDsAEkxqYXZhL2xhbmcvU3RyaW5nOwAZTGphdmEvbGFuZy9TdHJpbmdCdWlsZGVyOwAKTG8vZzAvZC9sOwAjTG9yZy9qZXRicmFpbnMvYW5ub3RhdGlvbnMvTm90TnVsbDsAAVAAAVEAAVIACVJBRElPXzNfNAABUwABVAABVQABVgACVkkAAlZMAARWTElJAAtWTElJSUlJSUlJWgADVkxMAAFaAAJaTAAFWkxaWloAA1paTAACW0YAAltJAAFhAAthZGRM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'
         run: |
           set -euo pipefail
-          mkdir -p tools
-          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
-          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
-          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
-          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe.jar
-          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  tools/morphe.jar' | sha256sum -c -
-          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          JAR=$(find "$SDK/platforms" -name android.jar | sort -V | tail -1)
-          test -n "$JAR"
-          cp "$JAR" tools/android.jar
-          (cd tools && sha256sum *.jar *.zip > SHA256SUMS)
-      - uses: actions/upload-artifact@v4
-        with:
-          name: nrs-analysis-tools
-          path: tools/*
-          retention-days: 3
+          mkdir -p w/d8 out
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp -o w/old-single.mpp
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp -o w/old-integrated.mpp
+          echo 'f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19  w/old-single.mpp' | sha256sum -c -
+          echo '37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04  w/old-integrated.mpp' | sha256sum -c -
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o w/r8.jar
+          printf '%s' "$PAYLOAD_B64" | base64 -d > w/camera-shade-v142.dex
+          echo 'b88b0755973dcc423f9cf99ead546b3e8a2a402aee8042e819c7b46ba9e76fe4  w/camera-shade-v142.dex' | sha256sum -c -
+          unzip -p w/old-single.mpp ulike/methods.dex > w/old-methods.dex
+          unzip -p w/old-single.mpp ulike/methods.tsv > w/old-methods.tsv
+          java -Xmx2g -cp w/r8.jar com.android.tools.r8.D8 --min-api 26 --output w/d8 w/old-methods.dex w/camera-shade-v142.dex
+          echo '49354e03fc83a3acca57d16a8c2ddb6d04acd7c9013b5e1b206dbff27febabc1  w/d8/classes.dex' | sha256sum -c -
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re,hashlib,json
+          w=Path('w'); out=Path('out')
+          rows=[x for x in (w/'old-methods.tsv').read_text().splitlines() if x]
+          add=[
+            'Lcom/bytedance/corecamera/ui/view/CameraShadeView;->onDraw(Landroid/graphics/Canvas;)V\te90751eb232900faf9363f61e7bf3d009823dfdedcea45fff6e8c110ecb6e714\t80ef3fb34a915a3c3eaf1042efb93799b1cfaca4db4689731889a6a5aa518252',
+            'Lcom/bytedance/corecamera/ui/view/CameraShadeView;->m(Lcom/ss/android/vesdk/VEPreviewRadio;ZZZ)Z\td87880e91fff35a12ecaf781cfc2f28f982ba2fa1f626c7011ad545ad9852769\t92308e27d995499b1fe93bde3216d78492b312b7bcfd60be5ceb56abd002b95a'
+          ]
+          for row in add:
+              key=row.split('\t')[0]+'\t'
+              assert not any(x.startswith(key) for x in rows)
+              rows.append(row)
+          tsv=('\n'.join(sorted(rows))+'\n').encode()
+          dex=(w/'d8/classes.dex').read_bytes()
+          desc='ULike 5.6.2（740）の3:4映像をULike標準cameraTopMargin 64dpぶん下へ平行移動し、上部アイコンと映像の重なりを回避。3:4下部の黒い操作デッキ修正も維持。1:1・9:16、24.5MP・HEIF専用保存・高画質・質感美肌・通信遮断は変更しません。'
+          stamp='2026-09-28T04:25:00'
+          def repack(src,dst,version):
+              with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst,'w') as zout:
+                  for info in zin.infolist():
+                      data=zin.read(info.filename)
+                      if info.filename=='META-INF/MANIFEST.MF':
+                          s=data.decode()
+                          s,n=re.subn(r'(?m)^Version: [^\r\n]*','Version: '+version,s); assert n==1
+                          s,n=re.subn(r'(?m)^Timestamp: [^\r\n]*','Timestamp: '+stamp,s); assert n==1
+                          s,n=re.subn(r'(?m)^Description: [^\r\n]*','Description: '+desc,s); assert n==1
+                          data=s.encode()
+                      elif info.filename=='ulike/methods.dex': data=dex
+                      elif info.filename=='ulike/methods.tsv': data=tsv
+                      zout.writestr(info,data)
+              with zipfile.ZipFile(dst) as z:
+                  assert z.testzip() is None
+                  assert z.read('ulike/methods.dex')==dex
+                  assert z.read('ulike/methods.tsv')==tsv
+          repack(w/'old-single.mpp',out/'ULike_HQ_Texture_Offline_v1.4.2.mpp','1.4.2')
+          repack(w/'old-integrated.mpp',out/'Hiro_Morphe_Patches_v1.0.79.mpp','1.0.79')
+          expected={
+            'ULike_HQ_Texture_Offline_v1.4.2.mpp':'69510de7d1ad645db8c4a90a58244d07f1c83cd4a5b0a37156d7af4c919f0097',
+            'Hiro_Morphe_Patches_v1.0.79.mpp':'da186447c1f5aed171a389b4cf4853797ddfdee370bd3eff062e2f08dc86f64c'}
+          for n,h in expected.items():
+              actual=hashlib.sha256((out/n).read_bytes()).hexdigest(); assert actual==h,(n,actual)
+          qa={
+            'standalone_version':'1.4.2','integrated_version':'1.0.79',
+            'target':'ULike 5.6.2 (740)',
+            'fix':'RADIO_3_4 uses ULike CameraUIUtils.cameraTopMargin=64dp instead of zero; preview keeps 4:3 height and moves down as a whole',
+            'preserves_v1_4_1_black_lower_deck':True,
+            'validated_before_release':{
+              'morphe_1_13_full':True,'morphe_1_16_strip_fast':True,
+              'method_count':212407,'semantic_diff_between_engines':0,
+              'semantic_diff_vs_v1_4_1':1,'semantic_diff_vs_v1_3_0':2,
+              'non_dex_diff_vs_v1_4_1':0,'repatch_rejected':True},
+            'physical_device_tested':False,
+            'artifacts':{n:{'sha256':h,'bytes':(out/n).stat().st_size} for n,h in expected.items()}}
+          (out/'QA_v1.4.2.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          (out/'README_v1.4.2.md').write_text(
+            '# ULike v1.4.2 — 3:4 preview vertical offset\n\n'
+            'For 3:4 only, the top camera margin is changed from 0 to ULike\'s own 64dp cameraTopMargin. '
+            'The 4:3 preview height is unchanged, so the whole camera image moves down and the lower black deck becomes shorter by the same amount. '
+            'The v1.4.1 black lower deck remains. 1:1 and 9:16 are untouched.\n')
+          PY
+          sha256sum out/*
+      - name: Publish GitHub release assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG=ulike-v1.4.2
+          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release upload "$TAG" --repo "${{ github.repository }}" --clobber               out/ULike_HQ_Texture_Offline_v1.4.2.mpp               out/Hiro_Morphe_Patches_v1.0.79.mpp               out/QA_v1.4.2.json               out/README_v1.4.2.md
+          else
+            gh release create "$TAG" --repo "${{ github.repository }}" --target main               --title "ULike v1.4.2 / Hiro Morphe v1.0.79"               --notes-file out/README_v1.4.2.md               out/ULike_HQ_Texture_Offline_v1.4.2.mpp               out/Hiro_Morphe_Patches_v1.0.79.mpp               out/QA_v1.4.2.json               out/README_v1.4.2.md
+          fi
