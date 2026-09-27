@@ -1,0 +1,55 @@
+{
+  "version": "1.4.1",
+  "integrated_version": "1.0.78",
+  "published": true,
+  "supersedes": {
+    "version": "1.4.0",
+    "reason": "v1.4.0 targeted the Assist preview rather than the main camera and did not fix the reported 3:4 screen."
+  },
+  "completed_at": "2026-09-28T04:07:43+09:00",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version_name": "5.6.2",
+    "version_code": 740
+  },
+  "fix": {
+    "scope": "main camera CameraShadeView",
+    "ratio": "RADIO_3_4 only",
+    "behavior": "Draw the lower non-preview shade black for 3:4, then restore the original Paint color. 1:1 and 9:16 stay stock.",
+    "changed_method": "Lcom/bytedance/corecamera/ui/view/CameraShadeView;->onDraw(Landroid/graphics/Canvas;)V",
+    "stock_method_hash": "e90751eb232900faf9363f61e7bf3d009823dfdedcea45fff6e8c110ecb6e714",
+    "patched_method_hash": "80ef3fb34a915a3c3eaf1042efb93799b1cfaca4db4689731889a6a5aa518252"
+  },
+  "validation": {
+    "morphe_1_13_full_apply": true,
+    "morphe_1_16_strip_fast_apply": true,
+    "semantic_method_count": 212407,
+    "semantic_diff_vs_v1_3_0": 1,
+    "semantic_diff_between_engines": 0,
+    "repatch_rejected": true,
+    "integrated_entry_count": 35,
+    "integrated_unchanged_entries_vs_v1_0_76": 32,
+    "physical_device_tested": false
+  },
+  "preserved": [
+    "24.5MP save toggle",
+    "HEIF-only DCIM/Camera save",
+    "HQ processing",
+    "texture-preserving beauty",
+    "original/settings preservation",
+    "offline/privacy/network blocking"
+  ],
+  "artifacts": {
+    "standalone": {
+      "url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.1/ULike_HQ_Texture_Offline_v1.4.1.mpp",
+      "bytes": 496654,
+      "sha256": "c09bc1a33c4faa2bab24595b9718938657ed479fa1e3b71465011c3eb4a08f42"
+    },
+    "integrated": {
+      "url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.1/Hiro_Morphe_Patches_v1.0.78.mpp",
+      "bytes": 17028632,
+      "sha256": "c1fc04a11b690c776b8763c57715d6a50e898a251e289b0b383756ff56ce10b4"
+    },
+    "github_release": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.4.1"
+  }
+}
