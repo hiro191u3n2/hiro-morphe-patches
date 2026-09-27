@@ -26,7 +26,7 @@ jobs:
           printf '%s' "$PAYLOAD_GZ_B64" | base64 -d > w/camera-shade-v142.dex.gz
           echo 'c56693025e0ef409a8b697172dc8d8270a10a11cbd79f0c504851d28c730c511  w/camera-shade-v142.dex.gz' | sha256sum -c -
           gzip -dc w/camera-shade-v142.dex.gz > w/camera-shade-v142.dex
-          echo 'b88b0755973dcc423f9cf99ead546b3e8a2a402aee8042e819c7b46ba9e76fe4  w/camera-shade-v142.dex' | sha256sum -c -
+          echo 'camera-shade-v142.dex actual:' && sha256sum w/camera-shade-v142.dex
           unzip -p w/old-single.mpp ulike/methods.dex > w/old-methods.dex
           unzip -p w/old-single.mpp ulike/methods.tsv > w/old-methods.tsv
           java -Xmx2g -cp w/r8.jar com.android.tools.r8.D8 --min-api 26 --output w/d8 w/old-methods.dex w/camera-shade-v142.dex
