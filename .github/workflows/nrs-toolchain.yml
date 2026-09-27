@@ -1,107 +1,33 @@
-name: Publish ULike v1.4.2 3:4 preview offset
+name: Verify ULike v1.4.2 public source
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/nrs-toolchain.yml'
 permissions:
-  contents: write
+  contents: read
 jobs:
-  publish:
+  verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 5
     steps:
-      - name: Rebuild reviewed cumulative MPPs
+      - name: Check usual Manager source and GitHub release
         shell: bash
-        env:
-          PAYLOAD_GZ_B64: 'H4sICHxtuWoCA2NhbWVyYS1zaGFkZS12MTQyLmRleACdmH9sW9UVx899/hk7iZ9fftZNUidtafoj2KSFJSRZmyZNG2z6w/lRnDKoHb84Ds5zYr+kBbEJFaRMSNPKhAr7D5iyISaE3fJL/WM/VKZ10jRt/DV1Q6PTJrZJSB1jDE2buu+97zpxWsY0nH567j333HfPPe/cd+97Kf2sJ7z3bpp/68X44dJHu6c//ObwR3eqi6/89cbXt7xU9egvG4gWiOjs5D6Nyj/olsnSbwFHFKImyHcguyB/bSPqhDzgIGKQTziJwj6iF5wWr4F3wO/AB+Av4ENwAzAXkR24gAfUABXUgUYQAG2gA5wAXwNvg9+AT7itm2gX2A+WwPfBddBURRQBefBV8DR4DnwHvAF+Bt4DnwK7h2gn2ANCoBsMgANgCIyAUXA/OAFOghTIgCxYAGfA4+AJ8BRYAc+C74HXwEXwJvgB+DH4CXgXXAO/B38EfwZ/A5+Af4J/A+aFf8ANNLAb7AcHwSFwBETACTAOToIz4BvgPPg2eBG8Al4FRXAJ/BS8B/4APgD/AHXVRK1gF7gL7AMD4DCIgmMgBiYAXCMIqgE8UepAvZUq1EhWfjSDTSAANoMW0AraZB4FQTvoAFvBNrAd3AF2kJVTO8Fd4EugD/TLcZlMTRUgjehHUPpl+W2Ua6UP/OeTvjwvbXj55Yry+WprjM3SvluWuf1eWX6/olysKP8J5Xtk+UaF/gUeP1l+CuW7Zflqhc3LFX1TFeVstTXfFulPjyw/Dn2vLD+A8r2ybKKMNKYhsmRcyrSUi8Tj0UYDIhaM7EK2kENKp9S7payS0iPbvULaRUy5fpeM6W4p90j9nVKGhFQpLNsPSv2wrB+S9fukvF/KY3K8E7J+UkgvPSCkm6aErKJTUj4kZVLKadkvJeWslIaUeelXQUgnmUJW05LII1U8y/z4GxA5rQlZh78Bkdv1QjoxzpeF9NB+IV10WEiFHpZ1XbbPCMkoK/XzkC6MF4HksY4J6aZHiK8nL52G9MJiQOS4j2xifdVKSULP5aDwu0beT5es19OolFEhG+mojN9xaTcpZIOMozWeH/NLyjU8KtdxVMqjUk6I+Vvx4Os7IdaNS/jVjLw4IKRDSqeUNrFfbEJco0L6xXV8cu16ZG7fxC+ISX1cb9Vr9gTnY/q0OZ5bCA4EqW69ekTPpGdNrtwE5Xgin9bN25qc/RkjY36Z2CCxg8SGyDeUmNfzibHZREqfzOhniA0TO0RshNhhYqPE7iMWJSU6Cu4DUeqKJoxUPpdJhRJGZj5hZnJGaFCUcvlt5UI0UzB1Q8/30e7PMS9bDaYSCyY37vkM48lEdkm/bYCJhVTC1NeHaf9fPfto05pJOp9YmM1MF0JDCWM5Ueij5tubjicyhvmZLTyoI31Ut9ayjLiFePD6aF90OjcfSj5q6qmEMa2HpnN5fVpEOLSUsQxvCfi2xBfqlfxCvWa+UK90H3X/3736aLvoUyiE1uKkF1KPhCYPHc/rvEcskcrk+qgqmgnNhLIh+OaVxTOh+crKY33kERUjHMK81ehcYjkRyiaMdOiQsQRTrUJzLDmH+7NRN2bmM0aaZ8CtuoNLmWyK548nmgulw6FUKNtHW6O5fDo0p5vJPJKA+2/kTJFShdDRnHl0KQsjdpzYCWIxqooNDo8ee3jvw/uIjREbJzZBbJKUSSyZySjZJ6Ojo+Tl/1u/KbJNYhmxKVKmouSYik5NQTWFsnJqBGDNJcibSKXKyU1+VDbmOzkTCwu6kSKWJCUZJmcyZ5q5eWLTpEyHyWvdmhj3mZzT/I5lhUSyE0uRkgqTO5VPnOGpTEwnRQ8TmyFlBiJNShrNeHoM5bK5PDWhNIIpF6bzum5Yj5LOnfcGSUPDmFCezKTMWaFjs8QyxOaIZcme1WdwdXhlUJuh6ylrKeqDZg4OBa11qo+ZibxJ9UZOtpb1h/jscuTKzYxkcwmTnDljGB5DkU9ljESW2AKxRWJ50vL6fG5ZH8xmy+EpUL2luyVqjjx3nliBaguYXkWQAhvrwXuDaw6Ru1AOhRel4aW8SAVyFITnzCSXOZsp8Ker28xZaUU2Mwf3logtE8Mz9aw4U6jYu/mfIs6ATUI2SdmCVibPaza5HzO5FzRJWaZGykYpHVK2SqnI/cO6RuVfi2i3STuXtK3iu23A0n2KsxL39V/VtOHHPkOnyPOhvcY6xzZDMt6ZLl3oikQi/f1dF7rwW7lwHf+/fqGL+X0rrM2XYc0+/Lvefz1zJcJafFeud/XD9krXhSnobrI6Xxea0e/s6urqSmSqvyuycuXs2StXWLcvEllZWbmZWYHR6rtd/ZGVqanV1X5ijOL9F/ojq+h4Y1WcEx3iXHYAPu2w8feDRswSsWabKKCM0GJwB87Xyeo9FMArVUDJkBHeQr+F1FBqQH9PranUI8Yen6nUcameKm4nzfPgZRdpShq6pG03GWob4umxnxtO2xtozrOJ0p4a4panq5rXWp9x2Kt68Koy8ZaXevEqx45orjo/o04f1/S43NTLnFR6lh1hz3V+zB5gz9Xh8P1gyUux19sp9kYHxS46qF+poomLTupRbNRp05ROT1LZhTE24054lNhlBxVfil90wzZQHtmj3XNpThu55vHYSy/FLrdTCRYeil0OUOxNN5XmSrvil3FCVOxksiDi48EpVCFN6w7ezbSO7uCvSLun+/QiaSPdpw3STnSrVcQeU+prSWnw4e1jD+tAPmps4UAtFf0drJkW1HZkS0AZIyO4De8vhtrCPVGMYIeobUdrNRPRZpX242v2rf/VXs6KXWNMLV/3mqJUdbc70NuPOx4r8bnzVeRRSu2G6pOlNPOX9Sxe4tcVLRQvdlDn883ahPj9ff9EEfGltTtH5Zk+Wftqba1W1rLHnnT+3Hjyjl8YT7/f6VqPh0Yb7sibuCPJohK/iHtYXLsnSikYg6YU5GP3sAClqxpBExXPc03xW9z+3Pk0zpbl8U6zJiqp5/DG0kCdeQ0SPXC3OrOVY3ewGuL3obTW7xoeKBviFLTitFn6w5853B8eDZRYSU3jHBorItdwTrViUY/z707YBkS8enHyTpI1R16PlTBHFZl4my5e3DBrpnVfatcO4s7ZS2oMd6Ckith7K2fA+3DteLGVFlX+nquxONb2ej3ObBW1WKmezvnjTIGu7XN1AaGjCp115RhGixe3EvcoXtoGqzSrJR5pn/A+jSfyeHFLRR9bRb0c23MdcYUq9JbPwQ0+Bzf2YWV/1vVta3oF7/zWysCDGbsgXxkq/t9KRdQVWY/BX75KVOjYmq59TUdSN15qFX1VsZr4u5NYTZhfOz3jtIsYPONywJc7cL/bYL9D5KXlF68ZyBtVtJd95Y/5yjrfCzR1K/agBvbEfq02wqh2UbWJ0U6t2TWyqxjbSarS4asm1w03a8R7CBtjKbbEvstW2POKx0/LXr7DnfrhjooRLC/YBi/GS5hJkO+ZGvXUt4txTKyURthsxkzc0i6vVouvLF+R8+5tdsBOg12A5qTOV9vb4KRezKsn4MeVrTEQVdXFn07sQcuO8TF8Kt9zFbGPvgVXHxJXPyL2FDvlgl4aovFwKzwYg2zDmsHz+n4j2Ah9LNwOfbVol7O4qwXXdpOdxcJ4HtB2S8Ofs8is8fB2SrJO2qt6hF68Bt40gngGiWvfeg1RQms7Wrfc3hoO3qarFVt5s//qZsZe7vRX7PdlWf62qVR837TR+jdOngvl75wOWv/W6aT1751K0LoO/97JVOvbEv9GYw+unzts6vo5Q1Gt8fjZwilt+HuwLWjp+b7OZPlqjfWxjNuI92R5Hf4y/h+L2jy90BUAAA=='
         run: |
           set -euo pipefail
-          mkdir -p w/d8 out
-          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp -o w/old-single.mpp
-          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp -o w/old-integrated.mpp
-          echo 'f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19  w/old-single.mpp' | sha256sum -c -
-          echo '37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04  w/old-integrated.mpp' | sha256sum -c -
-          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o w/r8.jar
-          printf '%s' "$PAYLOAD_GZ_B64" | base64 -d > w/camera-shade-v142.dex.gz
-          echo 'c56693025e0ef409a8b697172dc8d8270a10a11cbd79f0c504851d28c730c511  w/camera-shade-v142.dex.gz' | sha256sum -c -
-          gzip -dc w/camera-shade-v142.dex.gz > w/camera-shade-v142.dex
-          echo 'camera-shade-v142.dex actual:' && sha256sum w/camera-shade-v142.dex
-          unzip -p w/old-single.mpp ulike/methods.dex > w/old-methods.dex
-          unzip -p w/old-single.mpp ulike/methods.tsv > w/old-methods.tsv
-          java -Xmx2g -cp w/r8.jar com.android.tools.r8.D8 --min-api 26 --output w/d8 w/old-methods.dex w/camera-shade-v142.dex
-          echo '49354e03fc83a3acca57d16a8c2ddb6d04acd7c9013b5e1b206dbff27febabc1  w/d8/classes.dex' | sha256sum -c -
-
+          mkdir -p check
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json -o check/site-patches-bundle.json
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.2/Hiro_Morphe_Patches_v1.0.79.mpp -o check/Hiro_Morphe_Patches_v1.0.79.mpp
+          echo 'da186447c1f5aed171a389b4cf4853797ddfdee370bd3eff062e2f08dc86f64c  check/Hiro_Morphe_Patches_v1.0.79.mpp' | sha256sum -c -
           python3 - <<'PY'
-          from pathlib import Path
-          import zipfile,re,hashlib,json
-          w=Path('w'); out=Path('out')
-          rows=[x for x in (w/'old-methods.tsv').read_text().splitlines() if x]
-          add=[
-            'Lcom/bytedance/corecamera/ui/view/CameraShadeView;->onDraw(Landroid/graphics/Canvas;)V\te90751eb232900faf9363f61e7bf3d009823dfdedcea45fff6e8c110ecb6e714\t80ef3fb34a915a3c3eaf1042efb93799b1cfaca4db4689731889a6a5aa518252',
-            'Lcom/bytedance/corecamera/ui/view/CameraShadeView;->m(Lcom/ss/android/vesdk/VEPreviewRadio;ZZZ)Z\td87880e91fff35a12ecaf781cfc2f28f982ba2fa1f626c7011ad545ad9852769\t92308e27d995499b1fe93bde3216d78492b312b7bcfd60be5ceb56abd002b95a'
-          ]
-          for row in add:
-              key=row.split('\t')[0]+'\t'
-              assert not any(x.startswith(key) for x in rows)
-              rows.append(row)
-          tsv=('\n'.join(sorted(rows))+'\n').encode()
-          dex=(w/'d8/classes.dex').read_bytes()
-          desc='ULike 5.6.2（740）の3:4映像をULike標準cameraTopMargin 64dpぶん下へ平行移動し、上部アイコンと映像の重なりを回避。3:4下部の黒い操作デッキ修正も維持。1:1・9:16、24.5MP・HEIF専用保存・高画質・質感美肌・通信遮断は変更しません。'
-          stamp='2026-09-28T04:25:00'
-          def repack(src,dst,version):
-              with zipfile.ZipFile(src) as zin, zipfile.ZipFile(dst,'w') as zout:
-                  for info in zin.infolist():
-                      data=zin.read(info.filename)
-                      if info.filename=='META-INF/MANIFEST.MF':
-                          s=data.decode()
-                          s,n=re.subn(r'(?m)^Version: [^\r\n]*','Version: '+version,s); assert n==1
-                          s,n=re.subn(r'(?m)^Timestamp: [^\r\n]*','Timestamp: '+stamp,s); assert n==1
-                          s,n=re.subn(r'(?m)^Description: [^\r\n]*','Description: '+desc,s); assert n==1
-                          data=s.encode()
-                      elif info.filename=='ulike/methods.dex': data=dex
-                      elif info.filename=='ulike/methods.tsv': data=tsv
-                      zout.writestr(info,data)
-              with zipfile.ZipFile(dst) as z:
-                  assert z.testzip() is None
-                  assert z.read('ulike/methods.dex')==dex
-                  assert z.read('ulike/methods.tsv')==tsv
-          repack(w/'old-single.mpp',out/'ULike_HQ_Texture_Offline_v1.4.2.mpp','1.4.2')
-          repack(w/'old-integrated.mpp',out/'Hiro_Morphe_Patches_v1.0.79.mpp','1.0.79')
-          expected={
-            'ULike_HQ_Texture_Offline_v1.4.2.mpp':'69510de7d1ad645db8c4a90a58244d07f1c83cd4a5b0a37156d7af4c919f0097',
-            'Hiro_Morphe_Patches_v1.0.79.mpp':'da186447c1f5aed171a389b4cf4853797ddfdee370bd3eff062e2f08dc86f64c'}
-          for n,h in expected.items():
-              actual=hashlib.sha256((out/n).read_bytes()).hexdigest(); assert actual==h,(n,actual)
-          qa={
-            'standalone_version':'1.4.2','integrated_version':'1.0.79',
-            'target':'ULike 5.6.2 (740)',
-            'fix':'RADIO_3_4 uses ULike CameraUIUtils.cameraTopMargin=64dp instead of zero; preview keeps 4:3 height and moves down as a whole',
-            'preserves_v1_4_1_black_lower_deck':True,
-            'validated_before_release':{
-              'morphe_1_13_full':True,'morphe_1_16_strip_fast':True,
-              'method_count':212407,'semantic_diff_between_engines':0,
-              'semantic_diff_vs_v1_4_1':1,'semantic_diff_vs_v1_3_0':2,
-              'non_dex_diff_vs_v1_4_1':0,'repatch_rejected':True},
-            'physical_device_tested':False,
-            'artifacts':{n:{'sha256':h,'bytes':(out/n).stat().st_size} for n,h in expected.items()}}
-          (out/'QA_v1.4.2.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
-          (out/'README_v1.4.2.md').write_text(
-            '# ULike v1.4.2 — 3:4 preview vertical offset\n\n'
-            'For 3:4 only, the top camera margin is changed from 0 to ULike\'s own 64dp cameraTopMargin. '
-            'The 4:3 preview height is unchanged, so the whole camera image moves down and the lower black deck becomes shorter by the same amount. '
-            'The v1.4.1 black lower deck remains. 1:1 and 9:16 are untouched.\n')
+          import json
+          j=json.load(open('check/site-patches-bundle.json'))
+          out={'site_version':j.get('version'),'site_download_url':j.get('download_url'),'site_created_at':j.get('created_at'),'github_v1_0_79_sha_ok':True}
+          open('check/status.json','w').write(json.dumps(out,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(out,ensure_ascii=False))
           PY
-          sha256sum out/*
-      - name: Publish GitHub release assets
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          TAG=ulike-v1.4.2
-          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
-            gh release upload "$TAG" --repo "${{ github.repository }}" --clobber               out/ULike_HQ_Texture_Offline_v1.4.2.mpp               out/Hiro_Morphe_Patches_v1.0.79.mpp               out/QA_v1.4.2.json               out/README_v1.4.2.md
-          else
-            gh release create "$TAG" --repo "${{ github.repository }}" --target main               --title "ULike v1.4.2 / Hiro Morphe v1.0.79"               --notes-file out/README_v1.4.2.md               out/ULike_HQ_Texture_Offline_v1.4.2.mpp               out/Hiro_Morphe_Patches_v1.0.79.mpp               out/QA_v1.4.2.json               out/README_v1.4.2.md
-          fi
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-v142-public-check
+          path: check/*
+          retention-days: 1
