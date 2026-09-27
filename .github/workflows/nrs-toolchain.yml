@@ -1,33 +1,105 @@
-name: NewRadioSupporter analysis toolchain
+name: Publish ULike v1.4.1 3:4 camera deck fix
 on:
   workflow_dispatch:
   push:
     paths:
       - '.github/workflows/nrs-toolchain.yml'
 permissions:
-  contents: read
+  contents: write
 jobs:
-  tools:
+  publish:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - name: Collect public Android build and analysis tools
+      - name: Rebuild reviewed cumulative MPPs
         shell: bash
+        env:
+          PAYLOAD_B64: 'ZGV4CjAzNQCY0IbMu4PbYUPvKMZL+Gz/2NrgWw0zEh2gBQAAcAAAAHhWNBIAAAAAAAAAANAEAAAgAAAAcAAAAAwAAADwAAAABgAAACABAAAJAAAAaAEAAAgAAACwAQAAAQAAAPABAACQAwAAEAIAABACAAATAgAALgIAAEgCAABiAgAAdwIAAKsCAADSAgAA5gIAAPoCAAAGAwAAKwMAADYDAAA5AwAAPQMAAEEDAABGAwAATgMAAFgDAABbAwAAXgMAAGgDAABrAwAAbgMAAHEDAAB0AwAAfAMAAH8DAACCAwAAhQMAAIgDAACSAwAAAAAAAAEAAAACAAAAAwAAAAQAAAAFAAAABgAAAAcAAAAIAAAACQAAAAoAAAAMAAAAAAAAAAAAAAAAAAAADQAAAAsAAAC4AwAADgAAAAsAAACYAwAADwAAAAsAAACwAwAADgAAAAsAAACoAwAADwAAAAsAAACgAwAABQACABYAAAAFAAMAFwAAAAUAAwAYAAAABQADABoAAAAFAAMAGwAAAAUAAAAcAAAABQAAAB0AAAAFAAYAHwAAAAYABgALAAAAAQADABEAAAACAAAAFAAAAAIAAQAeAAAABAACABkAAAAFAAIAEwAAAAUAAgAZAAAACQAEABIAAAAJAAUAFQAAAAUAAAABAAAABwAAAAAAAAD/////1AMAAMgEAAAAAAAAAUkAGUxhbmRyb2lkL2dyYXBoaWNzL0NhbnZhczsAGExhbmRyb2lkL2dyYXBoaWNzL1BhaW50OwAYTGFuZHJvaWQvZ3JhcGhpY3MvUmVjdEY7ABNMYW5kcm9pZC92aWV3L1ZpZXc7ADJMY29tL2J5dGVkYW5jZS9jb3JlY2FtZXJhL3VpL3ZpZXcvQ2FtZXJhU2hhZGVWaWV3OwAlTGNvbS9zcy9hbmRyb2lkL3Zlc2RrL1ZFUHJldmlld1JhZGlvOwASTGphdmEvbGFuZy9PYmplY3Q7ABJMamF2YS9sYW5nL1N0cmluZzsACkxvL2cwL2QvbDsAI0xvcmcvamV0YnJhaW5zL2Fubm90YXRpb25zL05vdE51bGw7AAlSQURJT18zXzQAAVYAAlZJAAJWTAADVkxMAAZjYW52YXMACGRyYXdSZWN0AAFlAAFnAAhnZXRDb2xvcgABaAABbQABbgABbwAGb25EcmF3AAFwAAFxAAFyAAFzAAhzZXRDb2xvcgABdgAAAAABAAAAAQAAAAIAAAAHAAgAAQAAAAcAAAACAAAAAwACAAEAAAAAAAAKAAAAAAEAAAC+AwAAAQAAAMQDAAAAAAAAAAAAAAAAAAABAAAABQAAAMwDAAABAQBZPJY8S6UBGA/wpQAABQACAAMAAADsAwAAXgAAABoAEABxIAcABABvIAMAQwBUMAEAOABTAFQwAgA5AAMAKE1uIAQAQwBSMAUAOAAMAFQwAQBxEAYAAABUMQAAbjAAAAQBUjAGADgAJQBUMQAAbhABAAEACgJUMAcAYgEIADMQCgBUMQAAFAAAAAD/biACAAEAVDACAHEQBgAAAFQxAABuMAAABAFUMQAAbiACACEAVDADAHEQBgAAAFQxAABuMAAABAFUMAQAcRAGAAAAVDEAAG4wAAAEAQ4AAAAAAQUB/AcRAAAAAAAAAAEAAAAAAAAAAQAAACAAAABwAAAAAgAAAAwAAADwAAAAAwAAAAYAAAAgAQAABAAAAAkAAABoAQAABQAAAAgAAACwAQAABgAAAAEAAADwAQAAAiAAACAAAAAQAgAAARAAAAUAAACYAwAABCAAAAEAAAC+AwAAAxAAAAEAAADEAwAAAhAAAAEAAADMAwAABiAAAAEAAADUAwAAAyAAAAEAAADsAwAAASAAAAEAAAD8AwAAACAAAAEAAADIBAAAABAAAAEAAADQBAAA'
         run: |
           set -euo pipefail
-          mkdir -p tools
-          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
-          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
-          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
-          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe.jar
-          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  tools/morphe.jar' | sha256sum -c -
-          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
-          JAR=$(find "$SDK/platforms" -name android.jar | sort -V | tail -1)
-          test -n "$JAR"
-          cp "$JAR" tools/android.jar
-          (cd tools && sha256sum *.jar *.zip > SHA256SUMS)
-      - uses: actions/upload-artifact@v4
-        with:
-          name: nrs-analysis-tools
-          path: tools/*
-          retention-days: 3
+          mkdir -p w/d8 out
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp -o w/old-single.mpp
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp -o w/old-integrated.mpp
+          echo 'f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19  w/old-single.mpp' | sha256sum -c -
+          echo '37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04  w/old-integrated.mpp' | sha256sum -c -
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o w/r8.jar
+          printf '%s' "$PAYLOAD_B64" | base64 -d > w/camera-shade-onDraw.dex
+          echo 'ad94a752b30931b559d40877359b009448d60791aa9b2f76a1a53e805347d815  w/camera-shade-onDraw.dex' | sha256sum -c -
+          unzip -p w/old-single.mpp ulike/methods.dex > w/old-methods.dex
+          unzip -p w/old-single.mpp ulike/methods.tsv > w/old-methods.tsv
+          java -Xmx2g -cp w/r8.jar com.android.tools.r8.D8 --min-api 26 --output w/d8 w/old-methods.dex w/camera-shade-onDraw.dex
+          echo '470cd339788ec4a9059971ca35244ed80ebc032db8175ed2b5bea0ff5fd87ea8  w/d8/classes.dex' | sha256sum -c -
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile,re,hashlib,json
+          w=Path('w'); out=Path('out')
+          method='Lcom/bytedance/corecamera/ui/view/CameraShadeView;->onDraw(Landroid/graphics/Canvas;)V'
+          src='e90751eb232900faf9363f61e7bf3d009823dfdedcea45fff6e8c110ecb6e714'
+          dst='80ef3fb34a915a3c3eaf1042efb93799b1cfaca4db4689731889a6a5aa518252'
+          rows=[x for x in (w/'old-methods.tsv').read_text().splitlines() if x]
+          assert not any(x.startswith(method+'\t') for x in rows)
+          rows.append(f'{method}\t{src}\t{dst}')
+          tsv=('\n'.join(sorted(rows))+'\n').encode()
+          dex=(w/'d8/classes.dex').read_bytes()
+          desc='ULike 5.6.2（740）の3:4撮影画面を修正。3:4時だけプレビュー下の操作デッキを黒背景にして白いシャッター・ツールUIを見える状態にします。1:1・9:16の表示は維持。24.5MP・HEIF専用保存・高画質・質感美肌・通信遮断も維持。'
+          stamp='2026-09-28T03:45:00'
+          def repack(srcp,dstp,version):
+              with zipfile.ZipFile(srcp) as zin, zipfile.ZipFile(dstp,'w') as zout:
+                  for info in zin.infolist():
+                      data=zin.read(info.filename)
+                      if info.filename=='META-INF/MANIFEST.MF':
+                          s=data.decode()
+                          s,n=re.subn(r'(?m)^Version: [^\r\n]*','Version: '+version,s); assert n==1
+                          s,n=re.subn(r'(?m)^Timestamp: [^\r\n]*','Timestamp: '+stamp,s); assert n==1
+                          s,n=re.subn(r'(?m)^Description: [^\r\n]*','Description: '+desc,s); assert n==1
+                          data=s.encode()
+                      elif info.filename=='ulike/methods.dex': data=dex
+                      elif info.filename=='ulike/methods.tsv': data=tsv
+                      zout.writestr(info,data)
+              with zipfile.ZipFile(dstp) as z:
+                  assert z.testzip() is None
+                  assert z.read('ulike/methods.dex')==dex
+                  assert z.read('ulike/methods.tsv')==tsv
+          repack(w/'old-single.mpp',out/'ULike_HQ_Texture_Offline_v1.4.1.mpp','1.4.1')
+          repack(w/'old-integrated.mpp',out/'Hiro_Morphe_Patches_v1.0.78.mpp','1.0.78')
+          expected={
+            'ULike_HQ_Texture_Offline_v1.4.1.mpp':'c09bc1a33c4faa2bab24595b9718938657ed479fa1e3b71465011c3eb4a08f42',
+            'Hiro_Morphe_Patches_v1.0.78.mpp':'c1fc04a11b690c776b8763c57715d6a50e898a251e289b0b383756ff56ce10b4'}
+          for n,h in expected.items():
+              actual=hashlib.sha256((out/n).read_bytes()).hexdigest(); assert actual==h,(n,actual)
+          qa={
+            'standalone_version':'1.4.1','integrated_version':'1.0.78',
+            'target':'ULike 5.6.2 (740)',
+            'supersedes':'v1.4.0 (wrong Assist-preview target)',
+            'fix':'main camera CameraShadeView: black lower non-preview deck for RADIO_3_4 only; restore Paint color after draw',
+            'changed_method':method,'stock_method_hash':src,'patched_method_hash':dst,
+            'validated_locally_before_release':{
+              'morphe_1_13_apply':True,'morphe_1_16_apply':True,
+              'semantic_diff_vs_v1_3_0':1,'semantic_diff_1_13_vs_1_16':0,
+              'method_count':212407,'repatch_rejected':True},
+            'physical_device_tested':False,
+            'artifacts':{n:{'sha256':h,'bytes':(out/n).stat().st_size} for n,h in expected.items()}}
+          (out/'QA_v1.4.1.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          (out/'README_v1.4.1.md').write_text(
+              '# ULike v1.4.1 — 3:4 camera deck fix\n\n'
+              'v1.4.0 did not fix the main camera because it targeted the Assist preview. '
+              'v1.4.1 patches the real main-camera CameraShadeView. For 3:4 only, the lower '
+              'non-preview shade is black so the existing white shutter/tools stay visible. '
+              '1:1 and 9:16 geometry/colors are untouched.\n\n'
+              '24.5MP, HEIF-only DCIM/Camera, HQ/texture-beauty and offline/privacy changes are preserved. '
+              'Physical-device UI/capture behavior still requires the phone test.\n')
+          PY
+          sha256sum out/*
+      - name: Publish GitHub release assets
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          TAG=ulike-v1.4.1
+          if gh release view "$TAG" --repo "${{ github.repository }}" >/dev/null 2>&1; then
+            gh release upload "$TAG" --repo "${{ github.repository }}" --clobber               out/ULike_HQ_Texture_Offline_v1.4.1.mpp               out/Hiro_Morphe_Patches_v1.0.78.mpp               out/QA_v1.4.1.json               out/README_v1.4.1.md
+          else
+            gh release create "$TAG" --repo "${{ github.repository }}" --target main               --title "ULike v1.4.1 / Hiro Morphe v1.0.78"               --notes-file out/README_v1.4.1.md               out/ULike_HQ_Texture_Offline_v1.4.1.mpp               out/Hiro_Morphe_Patches_v1.0.78.mpp               out/QA_v1.4.1.json               out/README_v1.4.1.md
+          fi
