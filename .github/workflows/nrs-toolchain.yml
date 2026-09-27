@@ -15,7 +15,7 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p tools
+          mkdir -p tools recover
           curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
           curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
           curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
@@ -26,8 +26,17 @@ jobs:
           test -n "$JAR"
           cp "$JAR" tools/android.jar
           (cd tools && sha256sum *.jar *.zip > SHA256SUMS)
+
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0.mpp -o recover/ULike_HQ_Texture_Offline_v1.3.0.mpp
+          echo 'f3b79aea40381883bab22783c66f471d8ca4f08c712ef9e641fbbad702fcda19  recover/ULike_HQ_Texture_Offline_v1.3.0.mpp' | sha256sum -c -
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.76.mpp -o recover/Hiro_Morphe_Patches_v1.0.76.mpp
+          echo '37d0f2e2e666c76d3de475533af2f9e8890ff425ed22383796798fa4a0ef7e04  recover/Hiro_Morphe_Patches_v1.0.76.mpp' | sha256sum -c -
+          curl -fL --retry 3 https://hiro-morphe-patches.otoha10.chatgpt.site/ULike_HQ_Texture_Offline_v1.3.0_sources_and_QA.zip -o recover/ULike_HQ_Texture_Offline_v1.3.0_sources_and_QA.zip
+          echo '1858b9e81d5abbf1e7967508985533925ab087c9e33050daefbff165b1ced0bb  recover/ULike_HQ_Texture_Offline_v1.3.0_sources_and_QA.zip' | sha256sum -c -
       - uses: actions/upload-artifact@v4
         with:
-          name: nrs-analysis-tools
-          path: tools/*
+          name: ulike-recovery-tools
+          path: |
+            tools/*
+            recover/*
           retention-days: 3
