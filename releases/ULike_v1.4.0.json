@@ -1,0 +1,53 @@
+{
+  "version": "1.4.0",
+  "integrated_version": "1.0.77",
+  "published": true,
+  "request": "Fix broken 3:4 camera presentation and publish automatically",
+  "completed_at": "2026-09-28T03:04:55+09:00",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version_name": "5.6.2",
+    "version_code": 740
+  },
+  "fix": {
+    "ratio": "3:4",
+    "behavior": "Keep the 3:4 preview geometry; render the non-preview camera deck black only when the internal ratio constant is 1, so white shutter/tool controls remain visible.",
+    "changed_method": "Li/o/a/m/j/f;->n(Landroid/widget/RelativeLayout$LayoutParams;)V",
+    "semantic_method_delta_vs_v1_3_0": 1,
+    "stock_method_hash": "e7a9f720f2f47ece6b245eb32a8a8df3c7041691d57f11a54946fe7cf2b9c796",
+    "patched_method_hash": "f39f1a1f957f3b497ff25e71c85a6bb8b1737e46766732d521efc08c51f046fb"
+  },
+  "preserved": [
+    "24.5MP toggle: 5712x4284 landscape / 4284x5712 portrait",
+    "HEIF-only main save to DCIM/Camera",
+    "HQ processing and texture-preserving beauty changes",
+    "original/settings preservation",
+    "offline/privacy/network blocking changes"
+  ],
+  "validation": {
+    "standalone_apply_morphe_1_13_0": true,
+    "standalone_apply_morphe_1_16_0": true,
+    "output_method_count": 212407,
+    "semantic_diff_between_morphe_outputs": 0,
+    "semantic_diff_vs_v1_3_0": 1,
+    "non_dex_apk_entry_diff_vs_v1_3_0": 0,
+    "repatch_guard_rejects_already_modified_input": true,
+    "integrated_container_entries_preserved": 32,
+    "integrated_container_entry_count": 35,
+    "physical_device_tested": false
+  },
+  "artifacts": {
+    "standalone": {
+      "url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.0/ULike_HQ_Texture_Offline_v1.4.0.mpp",
+      "bytes": 496706,
+      "sha256": "c356522193435f57b49dadbbfb927344dafb618ecb9742e5b6b96a9790ad6d57"
+    },
+    "integrated": {
+      "url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.0/Hiro_Morphe_Patches_v1.0.77.mpp",
+      "bytes": 17028688,
+      "sha256": "a38e81cfe2b54712e4de2d36fd046f008a5e48a508989125a422129fce1b6f46"
+    },
+    "github_release": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.4.0"
+  },
+  "limitation": "Physical-device UI and capture behavior have not been verified."
+}
