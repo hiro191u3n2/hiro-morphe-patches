@@ -1,0 +1,226 @@
+{
+  "release": "ULike 1.5.3 / Hiro Morphe 1.0.87",
+  "created_at_utc": "2026-09-28T09:49:27.423963+00:00",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version_name": "5.6.2",
+    "version_code": 740,
+    "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293"
+  },
+  "changes": {
+    "native_methods_added": 4,
+    "details": [
+      "F: skip recommended-default overwrite only when scene_15 exists, restore cached g, retain native epilogue and fast-return",
+      "I/e/O: synchronous preference commits for choice/name/cancellation/mode; no claim of recovery on failed writes"
+    ],
+    "no_new_network_or_permissions": true
+  },
+  "preservation": {
+    "runtime_dex_sha256": "fcbaa154105668ca617ae4990ec8648b08ecacbf310e69f3898dd70d07cffc3a",
+    "runtime_identical_to_v1_5_2": true,
+    "old_replacement_methods_unchanged": 61,
+    "non_ulike_patch_methods_unchanged": 1028,
+    "assets_identical": true
+  },
+  "tests": {
+    "emitted_dex_stub_interpreter_assertions": 1510,
+    "same_test_on_both_rebuilt_apks": true,
+    "original_restart_overwrite_reproduced": true,
+    "native_dependency_stubs_not_ART": true,
+    "retained_and_new_methods_verified_per_apk": 352,
+    "duplicate_classes": false,
+    "morphe": [
+      {
+        "version": "1.13.0",
+        "report": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "高画質撮影・質感美肌・素材通信を復旧"
+            }
+          ],
+          "failedPatches": []
+        },
+        "unsigned_rebuilt_apk_sha256": "dc0f577e9c2aa24cddbaa3b76ed9cb505b8cdf3e13959f7b45143bf7ea1aef3d"
+      },
+      {
+        "version": "1.16.0",
+        "report": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "高画質撮影・質感美肌・素材通信を復旧"
+            }
+          ],
+          "failedPatches": []
+        },
+        "unsigned_rebuilt_apk_sha256": "4b048aebf042c1fad16a12dbabe9877b7c098088a1e3d1e0c8887e7a2fd831d2"
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.5.3.mpp",
+      "bytes": 510331,
+      "sha256": "0573c7181ee85613181a2bd9803138f039caaf971b45bc111eac8f51156d6387",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "9b58fc65fd4dd7d58e44f126966a6ee6a900a8a19b5853d82f26b0a1db38641b",
+        "classes.dex": "01f098adc70e59bcf342017b68f58c263072ba56488849b8556e33b3cc45e4ae",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "370779e853efc7be35810d85c903ef641f2eb9684d410bb77958dfb252aa84f1",
+        "ulike/methods.dex": "cdea17de8ed5bfff2fe89f4935ae609e9e9ed7ddaed94256ca57598a1017331a",
+        "ulike/methods.tsv": "d4e5b24767db4252d20ff8a69f5664eba740f834ef4b41eb5d5071bb791c9136"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/runtime.dex"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.87.mpp",
+      "bytes": 17042543,
+      "sha256": "1d45250549611415cb9cebe31aa51428b92ad56285cbe1b25c15f02346119efe",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "5b618280b4ecea2639565076cbb814877b4ed6d209a9743b79d78baa4ec704aa",
+        "classes.dex": "6492080a128d863c0188932ffafc5181fc046d315fc07294819e6de695e86287",
+        "ulike/methods.dex": "cdea17de8ed5bfff2fe89f4935ae609e9e9ed7ddaed94256ca57598a1017331a",
+        "ulike/methods.tsv": "d4e5b24767db4252d20ff8a69f5664eba740f834ef4b41eb5d5071bb791c9136"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/runtime.dex"
+      ]
+    }
+  ],
+  "limitations": [
+    "No physical-device or Android ART verification; no live camera/style restoration/HEIF save confirmation",
+    "Smartphone Manager integrated-MPP application untested; pre-existing desktop standalone shared-extension dependency retained",
+    "Native resource-load failure and crash recovery can still cancel a style; unavailable assets or subscription authorization not bypassed",
+    "Synchronous small preference writes may add I/O latency, unmeasured on device; storage I/O failure is not made durable",
+    "Does not recover a historical choice already overwritten by old versions; choose it once after updating",
+    "Legacy chatgpt.site source not updated"
+  ],
+  "publication": {
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.5.3",
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/bf78cf3d3642ed48b3101bb419cea1de1e8f4900/downloads/Hiro_Morphe_Patches_v1.0.87.mpp",
+    "bundle_sha256": "1d45250549611415cb9cebe31aa51428b92ad56285cbe1b25c15f02346119efe",
+    "raw_commit": "bf78cf3d3642ed48b3101bb419cea1de1e8f4900",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "547ce912b7f259ce72b9cfcf5cb1b903d43aa26d"
+      },
+      {
+        "branch": "dev",
+        "commit": "db75c57db155a5b9bf0866e48952e4ebbae58fca"
+      }
+    ],
+    "changelog_updates": [
+      {
+        "branch": "main",
+        "commit": "2e5dbc6cb72fdd6e3c7ce62117e6d4948cd34b37"
+      },
+      {
+        "branch": "dev",
+        "commit": "5f381827f3c6d3373e3c9c60220e6769281c490b"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4260635/17042543",
+          "requested_start": 0,
+          "requested_end": 4260635
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4260636-8521271/17042543",
+          "requested_start": 4260636,
+          "requested_end": 8521271
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8521272-12781907/17042543",
+          "requested_start": 8521272,
+          "requested_end": 12781907
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12781908-17042542/17042543",
+          "requested_start": 12781908,
+          "requested_end": 17042542
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17042542/17042543",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "usual_chatgpt_site_updated": false
+  },
+  "release_notes": "【統合MPP v1.0.87：ULike v1.5.3 スタイル選択を再起動後も保持】\n保存済みのシーン別スタイルがある場合、起動時の既定スタイルによる上書きを停止し、選択表示用の状態も復元します。別のスタイルへの選び直し、スタイルなしへの解除は反映します。追加設定・固定操作は不要。旧版ですでに戻った選択は最初に選び直してください。\n選択ID・表示名、解除、選択モードを同期保存。default/origin/raw_cameraは元のシーン別キーを使用し、初回未選択時の既定値は維持。データ消去・アンインストールでは記憶は失われます。素材未取得・破損・配信終了・利用権限・クラッシュ復旧など元アプリの安全制御は変更しません。\nv1.5.2の端の顔補正・微小クロップ、24.5MP、HEIF専用DCIM/Camera保存、高画質・美肌・原本保管、3:4位置と黒背景、素材通信の処理を維持。runtime.dexと素材は完全同一、既存61置換メソッドと他アプリ1028メソッドを保持。通信・権限の追加なし。\n単独MPPは元ULike 5.6.2（740）へMorphe Desktop 1.13/1.16で適用・再構築成功。生成DEXの限定インタープリター検査1510項目、両再構築APK352メソッドの照合を通過。Android依存はテスト用代替実装です。実機起動・スタイル復元・撮影・HEIF保存、スマホManagerでの統合MPP適用は未検証。\n未改造APKへ新版を再パッチしてインストール。旧ULikeパッチと重ねないでください。配布元はGitHub main/dev、旧chatgpt.siteは未更新です。\n\n"
+}
