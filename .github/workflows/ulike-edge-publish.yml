@@ -1,0 +1,89 @@
+name: Build and publish ULike edge-face correction 1.5.0
+on:
+  workflow_dispatch:
+  push:
+    branches: ['work/ulike-edge-face-1.5.0']
+    paths: ['.github/workflows/ulike-edge-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-edge-v150-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify and extract complete source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools build dist
+          python3 - <<'PY'
+          import base64,hashlib,tarfile,io
+          from pathlib import Path
+          files=sorted(Path('releases/ulike-v1.5.0').glob('source.b64.*'))
+          assert len(files)==4
+          data=base64.b64decode(''.join(p.read_text().strip() for p in files),validate=True)
+          assert hashlib.sha256(data).hexdigest()=='337e5122c34298255e878820b0c9c462c55834a7ef7ea91c259cd96d603ce996'
+          with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as t:t.extractall('source',filter='data')
+          PY
+      - name: Fetch exact predecessor patches and pinned build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.5/ULike_HQ_Texture_Online_v1.4.5.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0fc712cf9d10097344117ea8fa2346ff923d20cd/downloads/Hiro_Morphe_Patches_v1.0.83.mpp -o input/integrated.mpp
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          JAR=$(find "$SDK/platforms" -name android.jar | sort -V | tail -1)
+          test -n "$JAR"
+          cp "$JAR" tools/android.jar
+          grep -E '  (android.jar|asm.jar|morphe-1.13.jar|r8.jar)$' source/tool-SHA256SUMS > tools/SHA256SUMS
+          (cd tools && sha256sum -c SHA256SUMS)
+      - name: Build MPPs and run geometry and preservation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Require locally tested bytes and package source with QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,zipfile
+          from pathlib import Path
+          qa=json.loads(Path('source/LOCAL_QA.json').read_text())
+          for item in qa['artifacts']:
+              p=Path('dist')/item['file']
+              assert p.stat().st_size==item['bytes']
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],'Not locally-tested bytes: '+p.name
+          Path('dist/QA_ULike_v1.5.0.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          with zipfile.ZipFile('dist/ULike_v1.5.0_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED,strict_timestamps=False) as z:
+              for p in sorted(Path('source').rglob('*')):
+                  if p.is_file():z.write(p,str(p.relative_to('source')))
+              z.write('.github/workflows/ulike-edge-publish.yml','build-and-publish.yml')
+          PY
+      - name: Publish release, verify download, update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-edge-v150-publication
+          path: dist/*
+          retention-days: 7
