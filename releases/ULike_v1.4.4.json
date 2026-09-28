@@ -1,0 +1,54 @@
+{
+  "release": "ULike v1.4.4 / Hiro Morphe v1.0.81",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version": "5.6.2",
+    "version_code": 740
+  },
+  "tested_on": "2026-09-28",
+  "test_environment": "Local Linux Java 21; user-supplied original base APK; Morphe desktop 1.13.0 and 1.16.0",
+  "standalone_patch_apply_and_rebuild": {
+    "1.13.0": true,
+    "1.16.0": true
+  },
+  "old_v1_4_3_vs_new_v1_4_4_same_cli_1_16": {
+    "changed_entries": [
+      "AndroidManifest.xml"
+    ],
+    "added": [],
+    "removed": [],
+    "dex_identical": true
+  },
+  "manifest_comparison": {
+    "added_permissions": [
+      "android.permission.INTERNET"
+    ],
+    "other_semantic_manifest_changes": false,
+    "access_network_state_present": true,
+    "privacy_components_and_metadata_unchanged": true
+  },
+  "integrated_other_app_method_keys_and_hashes_unchanged": true,
+  "integrated_classes": 223,
+  "ulike_patch_classes_replaced": 7,
+  "other_216_classes_method_keys_and_hashes_identical": true,
+  "non_ULike_resources_byte_identical": true,
+  "preserved_privacy": "Existing app-code hooks, disabled components and privacy metadata. Not a destination allowlist or a guarantee against all tracking traffic.",
+  "integrated_desktop_direct_load": "Existing Android-oriented bundle layout is not desktop-loadable. Standalone desktop tested; integrated DEX and resources audited.",
+  "physical_device_tested": false,
+  "filter_catalog_download_apply_tested": false,
+  "network_capture_tested": false,
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.4.4.mpp",
+      "bytes": 498330,
+      "sha256": "c8c7a705054b5f2850e090c330381c733708434d76923de79f7c262e3834bd2f"
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.81.mpp",
+      "bytes": 17030708,
+      "sha256": "690c5b7903b50c8ab2fe143704c8973e78365b4463e550e3b7a8347fbe78006d"
+    }
+  ],
+  "description": "【統合MPP v1.0.81：ULikeのフィルター・素材通信を復旧】\nULike用MPPはv1.4.4です。素材取得を妨げていたINTERNET権限の削除を廃止し、フィルター・スタイル等のオンライン素材取得を許可します。既存の解析ログ・プッシュ・端末情報収集抑止は維持します。完全オフラインではなく、通信先の許可リスト方式ではありません。\n24.5MP切替、HEIF専用DCIM/Camera保存、高画質・質感美肌、原本保管、3:4の64dp下移動と上下黒背景を維持します。\n未改造ULike 5.6.2（740）へ「高画質撮影・質感美肌・素材通信を復旧」を単独で適用してください。旧パッチは重ねないでください。単独MPPはMorphe 1.13.0／1.16.0で適用・再構築済み。旧版と新版の再構築APKはINTERNET権限以外に意味上の変更がありません。実機での素材取得・適用、通信観測は未確認です。\n\n",
+  "download_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.4/Hiro_Morphe_Patches_v1.0.81.mpp"
+}
