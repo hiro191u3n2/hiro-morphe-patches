@@ -1,0 +1,53 @@
+name: Finish ULike bootstrap v1.4.5 publication
+on:
+  push:
+    branches: ['work/ulike-bootstrap-1.4.5']
+    paths: ['.github/workflows/ulike-bootstrap-retry.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: ulike-bootstrap-v145-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Execute existing verified build recipe with portable source timestamps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m venv /tmp/ulike-yaml
+          /tmp/ulike-yaml/bin/pip -q install PyYAML==6.0.2
+          /tmp/ulike-yaml/bin/python - <<'PY'
+          import subprocess,yaml
+          from pathlib import Path
+          recipe=Path('.github/workflows/ulike-bootstrap-145.yml')
+          text=recipe.read_text()
+          old="with zipfile.ZipFile('dist/ULike_v1.4.5_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED) as z:"
+          new="with zipfile.ZipFile('dist/ULike_v1.4.5_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED,strict_timestamps=False) as z:"
+          assert text.count(old)==1
+          text=text.replace(old,new)
+          recipe.write_text(text)
+          # The source archive includes the corrected recipe, not the failing version.
+          steps=yaml.safe_load(text)['jobs']['publish']['steps']
+          for step in steps:
+              if 'run' not in step:continue
+              print('Executing: '+step['name'],flush=True)
+              subprocess.run(['bash','-e','-o','pipefail'],input=step['run'],text=True,check=True)
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-v145-published-final
+          path: dist/*
+          retention-days: 7
