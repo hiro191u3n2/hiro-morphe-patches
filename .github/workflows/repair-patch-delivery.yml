@@ -1,0 +1,35 @@
+name: Repair patch delivery v1.0.82
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/repair-patch-delivery.yml'
+      - 'tools/repair_patch_delivery.py'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-patch-delivery-repair
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Build byte-preserving bundle and verify public delivery before source switch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 tools/repair_patch_delivery.py
+      - name: Retain package and verification report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: patch-delivery-v1.0.82
+          path: |
+            downloads/Hiro_Morphe_Patches_v1.0.82.mpp
+            releases/delivery-v1.0.82-qa.json
+          if-no-files-found: warn
+          retention-days: 7
