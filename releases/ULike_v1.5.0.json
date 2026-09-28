@@ -1,0 +1,223 @@
+{
+  "version": "1.5.0",
+  "bundle_version": "1.0.84",
+  "device_tested": false,
+  "live_preview_supported": false,
+  "video_supported": false,
+  "scope": "Common final still-bitmap HEIF save path, after orientation and 24.5MP normalization; includes supported album edit/export paths. Re-saving corrected images can apply twice; set Off.",
+  "algorithm": "Uncalibrated local radial compression around near-frontal detected faces; not a calibrated optical correction nor full SIGGRAPH 2019 algorithm.",
+  "default": "standard",
+  "levels": [
+    "off",
+    "weak",
+    "standard",
+    "strong"
+  ],
+  "networking_added": false,
+  "permissions_added": false,
+  "geometry": {
+    "assertions": 188116,
+    "random_valid_meshes": 139,
+    "foldover_checks": "all four triangle orientations in each quadrilateral, minimum signed area 0.15 of original",
+    "border_vertices": "fixed",
+    "scale_example": "synthetic isolated face at x=85%, y=50%, standard: radial local scale 0.8939467592592609, NOT measured photography"
+  },
+  "runtime": {
+    "previous_methods": 243,
+    "changed_existing_methods": [
+      "SaveQuality2.init",
+      "SaveQuality2.install",
+      "SaveQuality2.saveFinal"
+    ],
+    "added_classes": 6,
+    "added_methods": 28,
+    "result_methods": 271,
+    "all_other_runtime_methods_retained": true
+  },
+  "local_standalone_builds": {
+    "113": {
+      "packageName": "com.gorgeous.liteinternational",
+      "packageVersion": "5.6.2",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "failedPatches": []
+    },
+    "116": {
+      "packageName": "com.gorgeous.liteinternational",
+      "packageVersion": "5.6.2",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "failedPatches": []
+    }
+  },
+  "final_apk": {
+    "unique_classes": 33180,
+    "methods": 212435,
+    "verified_payload_and_runtime_methods": 332,
+    "duplicate_classes": 0,
+    "android_runtime_verified": false
+  },
+  "integrated_limitation": "Desktop standalone loader reproduces predecessor missing app.morphe.patches.shared.misc.extension.ExtensionHook. Phone Manager application not verified.",
+  "fallback": "No face, invalid geometry, insufficient Java heap, OOM, linkage/runtime exceptions return unchanged input to existing HEIF saver. HEIF encoder failures are not fixed.",
+  "remaining_device_validation": [
+    "launch and settings",
+    "near-frontal detection at each edge",
+    "background shape and correction quality",
+    "24.5MP headroom and native memory",
+    "HEIF output at 0/90/180/270 orientation",
+    "no effect when Off",
+    "preview/video unchanged",
+    "repeat-save double correction"
+  ],
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.5.0.mpp",
+      "bytes": 504858,
+      "sha256": "e216097f118c65f5b8389fcf39b5a0da30232d550202989d78da751a90029698",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "d12ae134ff51fc6afaf0fceea38bf134ce536de1d5d75cd8df9f9c0560a29cbd",
+        "classes.dex": "0ca534987ae5db59bfb32e3134031d99bf5695fab7bfc044733937d5b4a1ab50",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "4fa380526b50f6f98b35ec4b055a62e3b484fd04511c6828dd8ab02e65adf375",
+        "ulike/runtime.dex": "d3a5d650913eb2d429810867ca3575a58eba5ceacb1e165a514cbb2820b8818d"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.84.mpp",
+      "bytes": 17037194,
+      "sha256": "d16d5b1955b406c69f275bf020b865157ed454c29b7a41ab581dbe726f226a54",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "c227e259896e0f0b72e7931d9cea9c4a47ac43c853e8eae55c38f6c97e2c0e1e",
+        "classes.dex": "24e2c37f926847a18c518b6b9b2aee579d93090abb7049321849f0f4572620b2",
+        "ulike/runtime.dex": "d3a5d650913eb2d429810867ca3575a58eba5ceacb1e165a514cbb2820b8818d"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    }
+  ],
+  "publication": {
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.5.0",
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/a79c6f0092ec862f6ef3ae0ced4c89907ab09427/downloads/Hiro_Morphe_Patches_v1.0.84.mpp",
+    "bundle_sha256": "d16d5b1955b406c69f275bf020b865157ed454c29b7a41ab581dbe726f226a54",
+    "raw_commit": "a79c6f0092ec862f6ef3ae0ced4c89907ab09427",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "3f91ca87b3e36883857e2e5343b13aa6d550e412"
+      },
+      {
+        "branch": "dev",
+        "commit": "9e55fb58efa597422e993743d6a70326ad2469f0"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4259298/17037194",
+          "requested_start": 0,
+          "requested_end": 4259298
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4259299-8518597/17037194",
+          "requested_start": 4259299,
+          "requested_end": 8518597
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8518598-12777896/17037194",
+          "requested_start": 8518598,
+          "requested_end": 12777896
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12777897-17037193/17037194",
+          "requested_start": 12777897,
+          "requested_end": 17037193
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17037193/17037194",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "usual_chatgpt_site_updated": false
+  },
+  "release_notes": "【統合MPP v1.0.84：ULike 端の顔の伸び補正（保存写真のみ・実験版）】\nULike用MPPはv1.5.0です。「設定 → 追加設定：端の顔補正」でオフ/弱/標準/強を選べます。初期値は標準。端末内で正面に近い顔を検出し、画面端の顔の放射方向の伸びを局所補正します。顔未検出・メモリ不足は無補正で保存。「直近の補正結果」で確認できます。背景も多少変形します。\n撮影中のプレビュー・動画は対象外です。既に補正済み写真の再編集・再保存時はオフにしてください。機種別レンズの厳密補正ではなく実験版で、実機での顔検出・効果・動作・HEIF保存完了は未検証です。\nv1.4.5の素材通信・初期化復旧、24.5MP切替、HEIF専用DCIM/Camera保存、高画質、美肌、原本保管、3:4位置・黒背景は維持。新しい通信・権限は追加しません。\n単独MPPは元ULike 5.6.2（740）へMorphe Desktop 1.13/1.16で適用・再構築済み。幾何テスト188116項目を通過。ソース更新後、未改造APKへ再パッチして再インストールしてください。旧パッチと重ねないでください。統合MPPのDesktop単独ロードは前版同様ExtensionHook共有依存が必要です。配布はGitHub main/dev、旧chatgpt.site配信元は未更新です。\n\n"
+}
