@@ -1,0 +1,155 @@
+{
+  "version": "1.4.5",
+  "bundle_version": "1.0.83",
+  "device_tested": false,
+  "traffic_capture": false,
+  "original": "ULike 5.6.2 (740) original APKS",
+  "local_standalone_builds": [
+    "Morphe Desktop 1.13.0: PATCHING/REBUILDING success, FULL, unsigned",
+    "Morphe Desktop 1.16.0: PATCHING/REBUILDING success, FULL, unsigned"
+  ],
+  "apk_comparison": {
+    "classes": 33174,
+    "methods": 212407,
+    "changed_methods": [
+      "Lcom/ss/android/common/applog/AppLog$ActionReaper;->run()V",
+      "Lcom/ss/android/common/applog/AppLog;->enqueue(Lcom/ss/android/common/applog/AppLog$ActionQueueItem;)V"
+    ],
+    "identical_non_dex_non_signature_entries": 4070
+  },
+  "contracts_verified": 61,
+  "host_compiled_dex_guard_test_cases": 22,
+  "integrated_comparison": {
+    "classes": 223,
+    "methods": 1058,
+    "only_changed_method": "ULike patch class initializer description",
+    "unchanged_archive_entries": 31
+  },
+  "integrated_build_limitation": "Standalone Desktop loading fails with the same pre-existing missing ExtensionHook dependency as v1.0.82. Phone Manager application untested.",
+  "diagnosis": "The old no-op ActionReaper prevented setupLogReaper from starting device registration/header initialization. Effect config consumes device ID; settings initialization is skipped for an empty ID. Candidate cause; not established from device logs.",
+  "privacy": "Bootstrap/config registration traffic and associated device/app information permitted. Event/log queue, LogReaper, AppsFlyer and push suppression retained. Not an all-tracking block or domain allowlist.",
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.4.5.mpp",
+      "bytes": 499291,
+      "sha256": "4ae51aff7dbdf2b07d92d43dea235b41c6b9129b4e76ee8a9f20146b045fb7a1",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "97a9df75fc96a5b01eb7ff50c965846c42503ace2e5a2ba421506fa450ba735a",
+        "classes.dex": "9115b6fceb62587f1d71b7b06c9018232a9f18b338903a9f6e2f2dbb20bc0848",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "013ec1b4acf4c98493ecdea30bd982a9b7f5bed7c553b33b113c5485a930be54",
+        "ulike/methods.dex": "8b7fd1c0825d0c88a8d80011f47ea0c2ffad99b724cc90dc6cb02b3e781db833",
+        "ulike/methods.tsv": "9b01ef655e836fcebfa11710e1356c0b2b039799bff0496e3af3f9d01c76d130"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/runtime.dex"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.83.mpp",
+      "bytes": 17031681,
+      "sha256": "cb00cb889d2d1d322fe6d2f65ec09f9244a37e20027682233712360646fc68ff",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "89af11e61fcc4fad52d2e2462c9a0574df9852874907073424525af5dcfd4881",
+        "classes.dex": "44e5353cf04b7eb1640c4fcd1144cd0664c0b882686dedf4ce966cd4b20425ab",
+        "ulike/methods.dex": "8b7fd1c0825d0c88a8d80011f47ea0c2ffad99b724cc90dc6cb02b3e781db833",
+        "ulike/methods.tsv": "9b01ef655e836fcebfa11710e1356c0b2b039799bff0496e3af3f9d01c76d130"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/runtime.dex"
+      ]
+    }
+  ],
+  "publication": {
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0fc712cf9d10097344117ea8fa2346ff923d20cd/downloads/Hiro_Morphe_Patches_v1.0.83.mpp",
+    "bundle_sha256": "cb00cb889d2d1d322fe6d2f65ec09f9244a37e20027682233712360646fc68ff",
+    "raw_commit": "0fc712cf9d10097344117ea8fa2346ff923d20cd",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "9eadcf88847da9aebc70e83e4f4e017524acd9b8"
+      },
+      {
+        "branch": "dev",
+        "commit": "16a2ca1696bd7699936fef23fae8abe94d3fe3dc"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4257920/17031681",
+          "requested_start": 0,
+          "requested_end": 4257920
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4257921-8515841/17031681",
+          "requested_start": 4257921,
+          "requested_end": 8515841
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8515842-12773762/17031681",
+          "requested_start": 8515842,
+          "requested_end": 12773762
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12773763-17031680/17031681",
+          "requested_start": 12773763,
+          "requested_end": 17031680
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17031680/17031681",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "usual_chatgpt_site_updated": false
+  },
+  "release_notes": "【統合MPP v1.0.83：ULike端末登録・設定初期化の停止を修正】\nULike用MPPはv1.4.5です。旧パッチが止めていた初期化スレッドを復旧し、端末登録・設定用の8種類の処理だけを受付けます。操作履歴の送信、プッシュ、AppsFlyer等の停止は維持します。端末登録・設定取得の通信と付随する端末/アプリ情報の送信は許可されます。\n24.5MP、HEIF専用保存、高画質処理、3:4位置と黒背景は変更しません。ソース更新後、未改造ULike 5.6.2（740）へパッチを適用し、生成したULikeをインストールしてください。ソース更新だけではアプリは変わりません。\n単独MPPはMorphe Desktop 1.13/1.16で元APKS適用・再構築を確認。実機の素材取得・通信観測は未確認です。統合MPPは前版と同じ共有依存を必要とします。配布はコミット固定Raw URLとし、全体・4分割・11MiBからの再開相当取得を検証しました。旧chatgpt.site配信元は更新していません。\n\n"
+}
