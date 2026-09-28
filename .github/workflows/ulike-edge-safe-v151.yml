@@ -1,0 +1,88 @@
+name: Build and publish ULike edge safety 1.5.1
+on:
+  push:
+    branches: ['work/ulike-edge-safe-1.5.1']
+    paths: ['.github/workflows/ulike-edge-safe-v151.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-edge-v151-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify complete reviewed source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools build dist
+          python3 - <<'PY'
+          import base64,hashlib,tarfile,io
+          from pathlib import Path
+          files=sorted(Path('releases/ulike-v1.5.1').glob('source.b64.*'))
+          assert len(files)==5
+          data=base64.b64decode(''.join(p.read_text().strip() for p in files),validate=True)
+          assert hashlib.sha256(data).hexdigest()=='58a5c68a2474d71c92fbf578aac6d8939c465cc0e8e56b7f7fdc2bc36dde21d1'
+          with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as t:t.extractall('source',filter='data')
+          PY
+      - name: Fetch exact predecessor MPPs and pinned build dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.0/ULike_HQ_Texture_Online_v1.5.0.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.0/Hiro_Morphe_Patches_v1.0.84.mpp -o input/integrated.mpp
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          JAR=$(find "$SDK/platforms" -name android.jar | sort -V | tail -1)
+          test -n "$JAR"
+          cp "$JAR" tools/android.jar
+          grep -E '  (android.jar|asm.jar|morphe-1.13.jar|r8.jar)$' source/tool-SHA256SUMS > tools/SHA256SUMS
+          (cd tools && sha256sum -c SHA256SUMS)
+      - name: Build MPPs and run geometry and preservation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Require exact locally tested bytes and package source with QA
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,hashlib,zipfile
+          from pathlib import Path
+          qa=json.loads(Path('source/LOCAL_QA.json').read_text())
+          for item in qa['artifacts']:
+              p=Path('dist')/item['file']
+              assert p.stat().st_size==item['bytes']
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==item['sha256'],'Not locally-tested bytes: '+p.name
+          Path('dist/QA_ULike_v1.5.1.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          with zipfile.ZipFile('dist/ULike_v1.5.1_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED,strict_timestamps=False) as z:
+              for p in sorted(Path('source').rglob('*')):
+                  if p.is_file():z.write(p,str(p.relative_to('source')))
+              z.write('.github/workflows/ulike-edge-safe-v151.yml','build-and-publish.yml')
+          PY
+      - name: Publish exact release, verify downloads, update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-edge-v151-publication
+          path: dist/*
+          retention-days: 7
