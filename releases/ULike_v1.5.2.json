@@ -1,0 +1,253 @@
+{
+  "version": "1.5.2",
+  "bundle_version": "1.0.86",
+  "base_versions": {
+    "ulike": "1.5.1",
+    "bundle": "1.0.85"
+  },
+  "package": "com.gorgeous.liteinternational",
+  "target_version": "5.6.2 (740)",
+  "changes": [
+    "frame-anchored axis correction; horizontal/vertical blend at corners",
+    "bounded inward compensation instead of a narrow jaw/neck rebound rim",
+    "optional default-on 2% edge-strip avoidance crop, at most 4% for opposite edges; not artifact detection or missing-pixel reconstruction"
+  ],
+  "scope": "Final upright bitmap on existing HEIF save path only. Preview/video unchanged. Switch Off before re-saving already-corrected images.",
+  "geometry": {
+    "assertions": 146834,
+    "random_cases": 220,
+    "valid_meshes": 215,
+    "intentional_skips": 5,
+    "max_global_stretch": 1.12,
+    "max_estimated_neck_stretch": 1.045,
+    "min_global_stretch": 0.78,
+    "all_four_triangles_tested": true,
+    "frame_normal_planes_fixed": true,
+    "frame_tangential_slide_allowed": true,
+    "synthetic_bottom_face_vertical_scale": {
+      "old": 0.9821624755859375,
+      "new": 0.8739013671875,
+      "new_neck_max": 1.0,
+      "appliedScale": 0.8,
+      "real_photo_measurement": false,
+      "uniform_crop_zoom_excluded": true
+    }
+  },
+  "crop": {
+    "default_enabled": true,
+    "independently_disableable": true,
+    "trigger": "estimated accepted face overlaps outer 2% strip",
+    "single_edge_total_fraction_per_dimension": 0.02,
+    "opposite_edges_max_fraction_per_dimension": 0.04,
+    "preserves_output_dimensions": true,
+    "preserves_aspect_ratio": true,
+    "narrows_field_of_view": true,
+    "does_not_detect_streaks": true,
+    "cannot_fix_post_hook_encoding_artifacts": true
+  },
+  "runtime": {
+    "unchanged_non_edge_methods": 243,
+    "old_helper_classes": 7,
+    "old_helper_methods": 36,
+    "new_helper_classes": 8,
+    "new_helper_methods": 44,
+    "runtime_methods": 287,
+    "unchanged_other_app_patch_methods": 1028
+  },
+  "local_standalone_builds": {
+    "113": {
+      "packageName": "com.gorgeous.liteinternational",
+      "packageVersion": "5.6.2",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "failedPatches": []
+    },
+    "116": {
+      "packageName": "com.gorgeous.liteinternational",
+      "packageVersion": "5.6.2",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "failedPatches": []
+    }
+  },
+  "final_apk": {
+    "unique_classes": 33182,
+    "duplicate_classes": 0,
+    "methods": 212451,
+    "verified_runtime_payload_methods": 348,
+    "android_runtime_verified": false
+  },
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "networking_added": false,
+  "permissions_added": false,
+  "no_original_apk_or_photo_in_release": true,
+  "known_limitations": [
+    "No device camera/detection/HEIF/performance/visual-quality verification",
+    "Face bounds are eye-distance estimates, not segmentation or lens calibration",
+    "Background and face position can change",
+    "Microcrop intentionally narrows field of view; not reconstruction",
+    "Submitted-photo root cause not established; post-hook encoder artifacts may remain",
+    "Prior integrated Desktop ExtensionHook dependency unchanged; phone Manager integrated application not verified"
+  ],
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.5.2.mpp",
+      "bytes": 508852,
+      "sha256": "aa6556b3a9c68b7fbfce3e26257ae78dc999b5b863a15ce8f958bb335f548f8e",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "a1523c38e4d2c78d716b7311ed544838dc34ebd3c93298dd3c1e2f747bc8b65d",
+        "classes.dex": "cc140105b39ec996c3bf091d83c65ce8ee9e2d5b7510ed6bdf44c6423f461792",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "589b34d77d0e598792645fac3a6707508c4734fb2dac61d04aa70a3c35646cdf",
+        "ulike/runtime.dex": "fcbaa154105668ca617ae4990ec8648b08ecacbf310e69f3898dd70d07cffc3a"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.86.mpp",
+      "bytes": 17041027,
+      "sha256": "babf510ee18b7c116b69b076d246e6dba41497d2ae77b5505683ec9bae30b4aa",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "195761ab38f5e3ce72d851a19e3e4b1e98798719c19528604a1983922632ced5",
+        "classes.dex": "6d79ff2269549cc1d8d865689f427a768f77968fd6a51292f52be7fe5eb83c8b",
+        "ulike/runtime.dex": "fcbaa154105668ca617ae4990ec8648b08ecacbf310e69f3898dd70d07cffc3a"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    }
+  ],
+  "publication": {
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.5.2",
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/7cce18f2b99e09073f15ff87ab94e31a021bbe89/downloads/Hiro_Morphe_Patches_v1.0.86.mpp",
+    "bundle_sha256": "babf510ee18b7c116b69b076d246e6dba41497d2ae77b5505683ec9bae30b4aa",
+    "raw_commit": "7cce18f2b99e09073f15ff87ab94e31a021bbe89",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "c0c3bd211f4f725493ca8ac6f4e298441bc650fd"
+      },
+      {
+        "branch": "dev",
+        "commit": "2b19989cb2cea9452dbfa5d001b47de6dd840938"
+      }
+    ],
+    "changelog_updates": [
+      {
+        "branch": "main",
+        "commit": "ed5cb98c29eb0bdfcb01383284305f46b9219103"
+      },
+      {
+        "branch": "dev",
+        "commit": "0b0585ffc4a93fd4bdcce722ab6b97d29c187393"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4260256/17041027",
+          "requested_start": 0,
+          "requested_end": 4260256
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4260257-8520513/17041027",
+          "requested_start": 4260257,
+          "requested_end": 8520513
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8520514-12780770/17041027",
+          "requested_start": 8520514,
+          "requested_end": 12780770
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12780771-17041026/17041027",
+          "requested_start": 12780771,
+          "requested_end": 17041026
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17041026/17041027",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "usual_chatgpt_site_updated": false
+  },
+  "release_notes": "【統合MPP v1.0.86：ULike v1.5.2 端の顔の伸びを再改修】\n画面端を基準に上下・左右・四隅の方向別補正を行い、あご・首の下端に伸びが戻らないよう内側へ広くつなぐ方式に変更。見切れ・伸び率の安全制御を維持します。\n追加設定の「端の縦筋保護（微小クロップ）」は初期値ON、OFFも可能。推定した顔が外周2%に触れる場合、その側を2%除外します。通常は縦横各2%、反対側にも顔がある場合は最大4%。保存サイズと縦横比は維持しますが画角は少し狭くなります。縦筋の自動検出や失われた画素の復元ではありません。\n保存写真のみ、プレビュー・動画は対象外。オフ/弱/標準/強、以前の強さを保持。「設定 → 追加設定：端の顔補正」で設定・直近結果を確認できます。再保存時の重複適用に注意してください。\n24.5MP切替・HEIF専用DCIM/Camera保存・高画質・美肌・原本保管・3:4位置と黒背景・素材通信の既存処理を維持。通信や権限の追加なし。\nMorphe Desktop 1.13/1.16で元ULike 5.6.2（740）への適用・再構築に成功。幾何テスト146834項目、215安全メッシュ、再構築APK348メソッドの照合を通過。実機での顔検出・見た目・HEIF保存完了は未確認です。\n未改造APKへ新版を再パッチしてインストール。旧ULikeパッチとは重ねないでください。配布元はGitHub main/dev、旧chatgpt.siteは未更新です。\n\n"
+}
