@@ -1,32 +1,140 @@
-name: ULike filter network fix toolchain
+name: Publish ULike filter network fix 1.4.4
 on:
   workflow_dispatch:
   push:
     branches: ['work/ulike-filter-network-1.4.4']
     paths: ['.github/workflows/nrs-toolchain.yml']
 permissions:
-  contents: read
+  contents: write
+concurrency:
+  group: ulike-filter-network-144-release
+  cancel-in-progress: false
 jobs:
-  tools:
+  publish:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
     steps:
-      - name: Collect public build tools
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Rebuild version-pinned patch from published predecessor
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p tools
-          curl -fL --retry 2 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
-          curl -fL --retry 2 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
-          curl -fL --retry 2 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
-          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  tools/morphe-1.16.jar' | sha256sum -c -
-          curl -fL --retry 2 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
-          curl -fL --retry 2 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
-          curl -fL --retry 2 https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar -o tools/asm-tree.jar
-          curl -fL --retry 2 https://repo.maven.apache.org/maven2/org/benf/cfr/0.152/cfr-0.152.jar -o tools/cfr.jar
-          (cd tools && sha256sum *.jar > SHA256SUMS)
+          mkdir -p tools input oldpatch build/patch/app/hiro/ulike/patches build/dex dist
+          BASE=https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.3
+          curl -fL --retry 3 "$BASE/ULike_HQ_Texture_Offline_v1.4.3.mpp" -o input/ulike.mpp
+          curl -fL --retry 3 "$BASE/Hiro_Morphe_Patches_v1.0.80.mpp" -o input/integrated.mpp
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.7.1/asm-tree-9.7.1.jar -o tools/asm-tree.jar
+          python3 - <<'PY'
+          import zipfile,hashlib
+          from pathlib import Path
+          for name,h in [('ulike','1eea22b0f8f75b3c1d7e1f98e32e96643c69133276100b2f821e5b8945d44c2e'),('integrated','daf77cd1b88e30f03a315016da0c441d493fdf3436ee70df310be380f74bc3f7')]:
+              assert hashlib.sha256(Path('input/'+name+'.mpp').read_bytes()).hexdigest()==h
+          with zipfile.ZipFile('input/ulike.mpp') as z:
+              for n in ['app/hiro/ulike/patches/MethodContract.class','app/hiro/ulike/patches/UlikeHqMaxPatch.class']:
+                  p=Path('oldpatch')/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(z.read(n))
+          with zipfile.ZipFile('input/integrated.mpp') as z:Path('build/integrated-old.dex').write_bytes(z.read('classes.dex'))
+          PY
+          SRC=releases/ulike-v1.4.4
+          javac -cp tools/asm.jar:tools/asm-tree.jar -d build "$SRC/RestoreNetworkPermission.java"
+          java -cp build:tools/asm.jar:tools/asm-tree.jar RestoreNetworkPermission oldpatch/app/hiro/ulike/patches/UlikeHqMaxPatch.class build/patch/app/hiro/ulike/patches/UlikeHqMaxPatch.class
+          cp oldpatch/app/hiro/ulike/patches/MethodContract.class build/patch/app/hiro/ulike/patches/
+          jar cf build/patch-classes.jar -C build/patch .
+          java -cp tools/r8.jar com.android.tools.r8.D8 --min-api 26 --lib "$JAVA_HOME" --classpath tools/morphe-1.13.jar --output build/dex build/patch-classes.jar
+          javac -cp tools/morphe-1.13.jar -d build "$SRC/MergePatchDex.java"
+          java -cp build:tools/morphe-1.13.jar MergePatchDex build/integrated-old.dex build/dex/classes.dex build/integrated-new.dex
+          python3 "$SRC/package_mpp.py" --old-standalone input/ulike.mpp --old-integrated input/integrated.mpp --build build --output dist
+      - name: Require exact correspondence to locally tested MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo 'c8c7a705054b5f2850e090c330381c733708434d76923de79f7c262e3834bd2f  dist/ULike_HQ_Texture_Online_v1.4.4.mpp' | sha256sum -c -
+          echo '690c5b7903b50c8ab2fe143704c8973e78365b4463e550e3b7a8347fbe78006d  dist/Hiro_Morphe_Patches_v1.0.81.mpp' | sha256sum -c -
+          cp releases/ulike-v1.4.4/QA.json dist/QA_ULike_v1.4.4.json
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          notes='''# ULike v1.4.4 / Hiro Morphe v1.0.81
+
+          フィルター・スタイル等の素材通信を妨げていたINTERNET権限の削除を廃止します。既存の解析・プッシュ・端末情報収集抑止は維持します。完全オフライン版ではなく、通信先を素材サーバーだけに限定する許可リスト方式でもありません。
+
+          24.5MP切替、HEIF専用DCIM/Camera保存、高画質・質感美肌、原本と設定の保管、3:4の64dp下移動と上下黒背景を維持します。
+
+          未改造ULike 5.6.2（740）の分割APK一式へ「高画質撮影・質感美肌・素材通信を復旧」を適用してください。旧ULikeパッチとは重ねて選択しないでください。
+
+          単独MPPはMorphe desktop 1.13.0と1.16.0で元APKへの適用・再構築を確認。1.16.0で旧版と新版の再構築APKを比較し、AndroidManifest.xml以外はすべて同一です。マニフェストの意味上の差はINTERNET権限の有無だけです。統合MPPは他アプリのコード・資源保持を検証しました。
+
+          実機での素材一覧・ダウンロード・適用、通信観測、端末上の更新表示は未確認です。
+          '''
+          Path('dist/README_ULike_v1.4.4.md').write_text(notes,encoding='utf-8')
+          with zipfile.ZipFile('dist/ULike_v1.4.4_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(Path('releases/ulike-v1.4.4').glob('*')):z.write(p,p.name)
+              z.write('.github/workflows/nrs-toolchain.yml','build-and-publish.yml')
+          PY
+      - name: Publish verified MPP release
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release create ulike-v1.4.4 --target "$GITHUB_SHA" --title 'ULike v1.4.4 / Hiro Morphe v1.0.81' --notes-file dist/README_ULike_v1.4.4.md dist/*.mpp dist/QA_ULike_v1.4.4.json dist/README_ULike_v1.4.4.md dist/ULike_v1.4.4_sources_and_QA.zip
+      - name: Update main and dev Manager manifests after release upload
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,json,subprocess,datetime
+          from pathlib import Path
+          repo='hiro191u3n2/hiro-morphe-patches'
+          def api(path,payload=None):
+              cmd=['gh','api',path]
+              if payload is not None:cmd+=['-X','PUT','--input','-']
+              return json.loads(subprocess.run(cmd,input=None if payload is None else json.dumps(payload),text=True,capture_output=True,check=True).stdout)
+          notes='【統合MPP v1.0.81：ULikeのフィルター・素材通信を復旧】\nULike用MPPはv1.4.4です。素材取得を妨げていたINTERNET権限の削除を廃止し、フィルター・スタイル等のオンライン素材取得を許可します。既存の解析ログ・プッシュ・端末情報収集抑止は維持します。完全オフラインではなく、通信先の許可リスト方式ではありません。\n24.5MP切替、HEIF専用DCIM/Camera保存、高画質・質感美肌、原本保管、3:4の64dp下移動と上下黒背景を維持します。\n未改造ULike 5.6.2（740）へ「高画質撮影・質感美肌・素材通信を復旧」を単独で適用してください。旧パッチは重ねないでください。単独MPPはMorphe 1.13.0／1.16.0で適用・再構築済み。旧版と新版の再構築APKはINTERNET権限以外に意味上の変更がありません。実機での素材取得・適用、通信観測は未確認です。\n\n'
+          url='https://github.com/'+repo+'/releases/download/ulike-v1.4.4/Hiro_Morphe_Patches_v1.0.81.mpp'
+          changes=[]
+          for branch in ['main','dev']:
+              endpoint='repos/'+repo+'/contents/patches-bundle.json'
+              item=api(endpoint+'?ref='+branch)
+              data=json.loads(base64.b64decode(item['content']))
+              if data.get('version') not in ['1.0.80','1.0.81']:raise RuntimeError('Concurrent update on '+branch+': '+str(data.get('version')))
+              if data.get('version')=='1.0.81':
+                  assert data.get('download_url')==url
+              else:
+                  data.update(version='1.0.81',download_url=url,created_at=datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).replace(tzinfo=None,microsecond=0).isoformat(),description=notes+data.get('description',''))
+                  body=base64.b64encode((json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode()).decode()
+                  result=api(endpoint,{'message':'release: ULike network fix v1.4.4 / bundle v1.0.81','content':body,'sha':item['sha'],'branch':branch})
+                  changes.append({'branch':branch,'commit':result['commit']['sha']})
+          record=json.loads(Path('dist/QA_ULike_v1.4.4.json').read_text());record['description']=notes;record['download_url']=url
+          result=api('repos/'+repo+'/contents/releases/ULike_v1.4.4.json',{'message':'docs: ULike v1.4.4 release and verification record','content':base64.b64encode((json.dumps(record,ensure_ascii=False,indent=2)+'\n').encode()).decode(),'branch':'main'})
+          changes.append({'release_record_commit':result['commit']['sha']})
+          Path('dist/publication.json').write_text(json.dumps(changes,indent=2)+'\n')
+          print(json.dumps(changes))
+          PY
+      - name: Verify usual public Manager source
+        shell: bash
+        run: |
+          curl -fL --max-time 30 --retry 2 https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json -o /tmp/ulike-site-current.json || true
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          try:
+              j=json.loads(Path('/tmp/ulike-site-current.json').read_text())
+              result={'version':j.get('version'),'download_url':j.get('download_url'),'updated':j.get('version')=='1.0.81'}
+          except Exception as e:result={'updated':False,'error':str(e)}
+          Path('dist/usual-source-status.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(result))
+          PY
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: ulike-filter-network-build-tools
-          path: tools/*
+          name: ulike-v144-published
+          path: dist/*
           retention-days: 3
