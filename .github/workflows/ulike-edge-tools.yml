@@ -1,0 +1,33 @@
+name: ULike edge correction analysis tools
+on:
+  push:
+    branches: ['work/ulike-edge-face-1.5.0']
+    paths: ['.github/workflows/ulike-edge-tools.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Collect pinned public build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          JAR=$(find "$SDK/platforms" -name android.jar | sort -V | tail -1)
+          test -n "$JAR"
+          cp "$JAR" tools/android.jar
+          (cd tools && sha256sum *.jar > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-edge-analysis-tools
+          path: tools/*
+          retention-days: 3
