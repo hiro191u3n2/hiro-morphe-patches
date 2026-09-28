@@ -1,0 +1,124 @@
+name: Build and publish ULike bootstrap fix 1.4.5
+on:
+  workflow_dispatch:
+  push:
+    branches: ['work/ulike-bootstrap-1.4.5']
+    paths: ['.github/workflows/ulike-bootstrap-145.yml']
+permissions:
+  contents: write
+concurrency:
+  group: ulike-bootstrap-v145-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Build from verified predecessor and reviewed method sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input old_patch tools build/newpatch/app/hiro/ulike/patches build/newdex dist
+          echo 'af5e82aa6841382195badadb376b5f643e8e9c989b6d1f6f28c49fd3eed38ae3  releases/ulike-v1.4.5/build-source.tar.xz' | sha256sum -c -
+          tar -xJf releases/ulike-v1.4.5/build-source.tar.xz -C source
+          cp releases/ulike-v1.4.5/README.md source/README.md
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.4.4/ULike_HQ_Texture_Online_v1.4.4.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/a5869f8dc420b983f8ece39cf970314e6810e108/downloads/Hiro_Morphe_Patches_v1.0.82.mpp -o input/integrated.mpp
+          echo 'c8c7a705054b5f2850e090c330381c733708434d76923de79f7c262e3834bd2f  input/ulike.mpp' | sha256sum -c -
+          echo 'ea03dbad63e1833213e1b272c9e78a0826207d16245667b1e3620bfe51c1f831  input/integrated.mpp' | sha256sum -c -
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          python3 - <<'PY'
+          import zipfile
+          from pathlib import Path
+          with zipfile.ZipFile('input/ulike.mpp') as z:z.extractall('old_patch')
+          with zipfile.ZipFile('input/integrated.mpp') as z:Path('build/integrated-old.dex').write_bytes(z.read('classes.dex'))
+          PY
+          javac -cp tools/morphe-1.13.jar:old_patch -d build source/BuildPayload.java source/MergePatchDex.java
+          java -cp build:tools/morphe-1.13.jar:old_patch BuildPayload old_patch source build
+          javac -cp tools/asm.jar -d build source/UpdatePatchStrings.java
+          java -cp build:tools/asm.jar UpdatePatchStrings old_patch/app/hiro/ulike/patches/UlikeHqMaxPatch.class build/newpatch/app/hiro/ulike/patches/UlikeHqMaxPatch.class
+          cp old_patch/app/hiro/ulike/patches/MethodContract.class build/newpatch/app/hiro/ulike/patches/
+          jar cf build/patch-classes.jar -C build/newpatch .
+          java -cp tools/r8.jar com.android.tools.r8.D8 --min-api 26 --lib "$JAVA_HOME" --classpath tools/morphe-1.13.jar --output build/newdex build/patch-classes.jar
+          java -cp build:tools/morphe-1.13.jar MergePatchDex build/integrated-old.dex build/newdex/classes.dex build/integrated-new.dex
+          python3 source/package_mpp.py --old-standalone input/ulike.mpp --old-integrated input/integrated.mpp
+      - name: Require byte-for-byte match with locally tested artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '4ae51aff7dbdf2b07d92d43dea235b41c6b9129b4e76ee8a9f20146b045fb7a1  dist/ULike_HQ_Texture_Online_v1.4.5.mpp' | sha256sum -c -
+          echo 'cb00cb889d2d1d322fe6d2f65ec09f9244a37e20027682233712360646fc68ff  dist/Hiro_Morphe_Patches_v1.0.83.mpp' | sha256sum -c -
+          python3 - <<'PY'
+          import json,zipfile
+          from pathlib import Path
+          qa={'version':'1.4.5','bundle_version':'1.0.83','device_tested':False,'traffic_capture':False,'original':'ULike 5.6.2 (740) original APKS','local_standalone_builds':['Morphe Desktop 1.13.0: PATCHING/REBUILDING success, FULL, unsigned','Morphe Desktop 1.16.0: PATCHING/REBUILDING success, FULL, unsigned'],'apk_comparison':{'classes':33174,'methods':212407,'changed_methods':['Lcom/ss/android/common/applog/AppLog$ActionReaper;->run()V','Lcom/ss/android/common/applog/AppLog;->enqueue(Lcom/ss/android/common/applog/AppLog$ActionQueueItem;)V'],'identical_non_dex_non_signature_entries':4070},'contracts_verified':61,'host_compiled_dex_guard_test_cases':22,'integrated_comparison':{'classes':223,'methods':1058,'only_changed_method':'ULike patch class initializer description','unchanged_archive_entries':31},'integrated_build_limitation':'Standalone Desktop loading fails with the same pre-existing missing ExtensionHook dependency as v1.0.82. Phone Manager application untested.','diagnosis':'The old no-op ActionReaper prevented setupLogReaper from starting device registration/header initialization. Effect config consumes device ID; settings initialization is skipped for an empty ID. Candidate cause; not established from device logs.','privacy':'Bootstrap/config registration traffic and associated device/app information permitted. Event/log queue, LogReaper, AppsFlyer and push suppression retained. Not an all-tracking block or domain allowlist.','artifacts':json.loads(Path('dist/build-artifacts.json').read_text())}
+          Path('dist/QA_ULike_v1.4.5.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          with zipfile.ZipFile('dist/ULike_v1.4.5_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(Path('source').rglob('*')):
+                  if p.is_file():z.write(p,str(p.relative_to('source')))
+              z.write('dist/QA_ULike_v1.4.5.json','QA.json')
+              z.write('.github/workflows/ulike-bootstrap-145.yml','build-and-publish.yml')
+          PY
+      - name: Publish pinned delivery, verify transfers, then update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,datetime,hashlib,json,os,subprocess,urllib.request,concurrent.futures
+          from pathlib import Path
+          repo='hiro191u3n2/hiro-morphe-patches'
+          def api(path,data=None):
+              args=['gh','api',path]
+              if data is not None:args+=['-X','PUT','--input','-']
+              return json.loads(subprocess.run(args,input=None if data is None else json.dumps(data),text=True,capture_output=True,check=True).stdout)
+          def fetch(url,start=None,end=None):
+              headers={'User-Agent':'ULike-build-QA','Accept-Encoding':'identity'}
+              if start is not None:headers['Range']=f'bytes={start}-'+('' if end is None else str(end))
+              with urllib.request.urlopen(urllib.request.Request(url,headers=headers),timeout=90) as r:
+                  b=r.read();status=r.status;ran=r.headers.get('Content-Range')
+              if start is not None:
+                  if status==206:assert ran and ran.startswith(f'bytes {start}-')
+                  elif status==200:b=b[start:] if end is None else b[start:end+1]
+                  else:raise RuntimeError(status)
+              return b,{'status':status,'content_range':ran,'requested_start':start,'requested_end':end}
+          bundle=Path('dist/Hiro_Morphe_Patches_v1.0.83.mpp');raw=bundle.read_bytes();expected=hashlib.sha256(raw).hexdigest()
+          endpoint=f'repos/{repo}/contents/downloads/{bundle.name}'
+          item=api(endpoint,{'message':'release: tested ULike bootstrap fix 1.4.5 / bundle 1.0.83','content':base64.b64encode(raw).decode(),'branch':os.environ['GITHUB_REF_NAME']})
+          commit=item['commit']['sha'];url=f'https://raw.githubusercontent.com/{repo}/{commit}/downloads/{bundle.name}'
+          full,fullmeta=fetch(url);assert hashlib.sha256(full).hexdigest()==expected
+          step=(len(raw)+3)//4
+          with concurrent.futures.ThreadPoolExecutor(max_workers=4) as ex:
+              jobs=[ex.submit(fetch,url,i,min(i+step,len(raw))-1) for i in range(0,len(raw),step)]
+              chunks=[j.result() for j in jobs]
+          assert hashlib.sha256(b''.join(b for b,m in chunks)).hexdigest()==expected
+          resume,resumemeta=fetch(url,11*1024*1024);assert resume==raw[11*1024*1024:]
+          subprocess.run(['gh','release','create','ulike-v1.4.5','--target',os.environ['GITHUB_SHA'],'--title','ULike v1.4.5 / Hiro Morphe v1.0.83','--notes-file','source/README.md',str(bundle),'dist/ULike_HQ_Texture_Online_v1.4.5.mpp','dist/ULike_v1.4.5_sources_and_QA.zip','dist/QA_ULike_v1.4.5.json'],check=True)
+          notes='【統合MPP v1.0.83：ULike端末登録・設定初期化の停止を修正】\nULike用MPPはv1.4.5です。旧パッチが止めていた初期化スレッドを復旧し、端末登録・設定用の8種類の処理だけを受付けます。操作履歴の送信、プッシュ、AppsFlyer等の停止は維持します。端末登録・設定取得の通信と付随する端末/アプリ情報の送信は許可されます。\n24.5MP、HEIF専用保存、高画質処理、3:4位置と黒背景は変更しません。ソース更新後、未改造ULike 5.6.2（740）へパッチを適用し、生成したULikeをインストールしてください。ソース更新だけではアプリは変わりません。\n単独MPPはMorphe Desktop 1.13/1.16で元APKS適用・再構築を確認。実機の素材取得・通信観測は未確認です。統合MPPは前版と同じ共有依存を必要とします。配布はコミット固定Raw URLとし、全体・4分割・11MiBからの再開相当取得を検証しました。旧chatgpt.site配信元は更新していません。\n\n'
+          updates=[]
+          for branch in ['main','dev']:
+              endpoint=f'repos/{repo}/contents/patches-bundle.json';item=api(endpoint+'?ref='+branch);data=json.loads(base64.b64decode(item['content']))
+              if data.get('version')!='1.0.82':raise RuntimeError('Concurrent update: '+branch+' '+str(data.get('version')))
+              data.update(version='1.0.83',download_url=url,created_at=datetime.datetime.now(datetime.timezone.utc).replace(tzinfo=None,microsecond=0).isoformat(),description=notes+data.get('description',''))
+              body=base64.b64encode((json.dumps(data,ensure_ascii=False,indent=2)+'\n').encode()).decode()
+              change=api(endpoint,{'message':'release: ULike bootstrap fix v1.4.5 / bundle v1.0.83','content':body,'sha':item['sha'],'branch':branch});updates.append({'branch':branch,'commit':change['commit']['sha']})
+          result=json.loads(Path('dist/QA_ULike_v1.4.5.json').read_text());result['publication']={'download_url':url,'bundle_sha256':expected,'raw_commit':commit,'manifest_updates':updates,'download_validation':{'full':fullmeta,'chunks':[m for b,m in chunks],'resume':resumemeta},'usual_chatgpt_site_updated':False};result['release_notes']=notes
+          report=(json.dumps(result,ensure_ascii=False,indent=2)+'\n').encode();Path('dist/publication.json').write_bytes(report)
+          api(f'repos/{repo}/contents/releases/ULike_v1.4.5.json',{'message':'docs: ULike v1.4.5 verification and device-test limits','content':base64.b64encode(report).decode(),'branch':'main'})
+          print(json.dumps(result['publication'],ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-v145-published
+          path: dist/*
+          retention-days: 7
