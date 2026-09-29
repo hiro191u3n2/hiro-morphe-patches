@@ -1,0 +1,67 @@
+name: ULike quality build tools
+on:
+  push:
+    branches: ['work/ulike-quality-v160']
+    paths: ['.github/workflows/ulike-quality-tools.yml']
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify pinned tools
+        run: |
+          set -euo pipefail
+          mkdir -p jars parts
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o jars/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o jars/morphe-1.16.jar
+          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o jars/apktool.jar
+          echo '5e820f15d064a79991ea71c0a44fa24243c7cc924975b3cef653e6b14c01fc25  jars/morphe-1.13.jar' | sha256sum -c -
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  jars/morphe-1.16.jar' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile
+          report={}
+          for path in sorted(Path('jars').glob('*.jar')):
+              data=path.read_bytes()
+              report[path.name]={'sha256':hashlib.sha256(data).hexdigest(),'bytes':len(data)}
+              for index,start in enumerate(range(0,len(data),24*1024*1024)):
+                  (Path('parts')/(path.name+'.part%02d'%index)).write_bytes(data[start:start+24*1024*1024])
+          Path('parts/SHA256SUMS.json').write_text(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-morphe113-a
+          path: parts/morphe-1.13.jar.part00
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-morphe113-b
+          path: parts/morphe-1.13.jar.part0[1-9]
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-morphe116-a
+          path: parts/morphe-1.16.jar.part00
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-morphe116-b
+          path: parts/morphe-1.16.jar.part0[1-9]
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-apktool
+          path: parts/apktool.jar.part*
+          compression-level: 0
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-tools-checksums
+          path: parts/SHA256SUMS.json
+          retention-days: 3
