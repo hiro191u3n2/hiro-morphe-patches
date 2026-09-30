@@ -1,0 +1,245 @@
+{
+  "version": "1.5.7",
+  "bundle_version": "1.0.91",
+  "previous_version": "1.5.6",
+  "previous_bundle_version": "1.0.90",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version_name": "5.6.2",
+    "version_code": 740,
+    "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293"
+  },
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.5.7.mpp",
+      "bytes": 554348,
+      "sha256": "537f4aa69058d8f65481d9556e2cb36be76f42235e44acf45c39859f9b0e8a7a",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "6ad49b71eb02c89de4c33748154f45cb22bc43f6672febf780b5e6642c2fb1a3",
+        "classes.dex": "41852763533c39a727575f5d801068d4e1ecb42c45341799fe4eb468aca91cb6",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "ecfb69f75954f412e4885de45ca439679a74e18918abeb58686341821b1e5c97",
+        "ulike/runtime.dex": "bd9b6f3fab58364f8cac910e200c6c7b9e4ec3f70aa4e4e9d2c41efd1de9f276"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.91.mpp",
+      "bytes": 17086507,
+      "sha256": "5615e67dfca1da9ccad4b6625f433588d005755e9aedca63bf6d3d205c26c46f",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "b56586a83021af4053ee73b05d765d7c362a5718ac2e9c5233c364da568c2479",
+        "classes.dex": "64b20239527746af11350ad3ba3affce47ae0df3b82c686216af647ce143f155",
+        "ulike/runtime.dex": "bd9b6f3fab58364f8cac910e200c6c7b9e4ec3f70aa4e4e9d2c41efd1de9f276"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    }
+  ],
+  "implementation": {
+    "tap": "Bounded latest-wins queue, still/frame/native readiness polling; original tryRestartCamera permits native states0/3. One automatic retry after a started session failure then previous-lens recovery. Recording rejects requests; pause/front cancels queue.",
+    "labels": "White labels ABOVE circles; white even selected/disabled; selected bold, pending underline; 58x48dp clickable columns in original184x62dp black-band footprint.",
+    "retained": "327 non-optical runtime methods/classes,111 application replacement methods,1028 other-app patch methods unchanged."
+  },
+  "local_verification": {
+    "morphe_versions": [
+      "1.13.0",
+      "1.16.0"
+    ],
+    "runs": {
+      "1.13": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "1.16": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      }
+    },
+    "emitted_method_contracts_per_apk": 586,
+    "geometry_assertions": 30029,
+    "jvm_api_standin_assertions": 88,
+    "ui_source_assertions": 10,
+    "real_device_tested": false,
+    "emulator_tested": false,
+    "android_ui_rendering_tested": false,
+    "heif_save_completion_tested": false,
+    "integrated_mpp_on_phone_manager_tested": false
+  },
+  "limitations": [
+    "Experimental; actual Galaxy one-tap lens switching, layout, touch events, recording and photo/HEIF completion are not tested.",
+    "Queued tap does not guarantee unavailable cameras can be opened.",
+    "One physical result stream can be usable but unverified if optional metadata is absent.",
+    "Original lens restore can also fail; reported instead of infinite reopen."
+  ],
+  "release_notes": "【統合MPP v1.0.91：ULike v1.5.7 望遠の1タップ要求保持・白い倍率文字】\n撮影直後・静止画要求中・プレビュー準備待ちでタップ要求を捨てず、切替可能になったら実行します。元アプリのtryRestartCameraが許可する状態0/3まで待機し、一時拒否で1×へリセットしません。切替中に別倍率を押した場合は最後の倍率を予約し、進行中の切替後に実行します。録画中の新規切替要求は受け付けず、バックグラウンド・前面切替では予約を取り消します。無期限の再試行はしません。\n要求中と実際の使用レンズを分離。切替先の結果が届くまで選択確定にしません。切替失敗時は一度だけ自動再試行し、失敗が続くと直前のレンズへ復帰を試みます。元レンズ自体の再開に失敗した場合は未確認・失敗表示で停止します。物理レンズの結果情報がない場合は従来どおり未確認表示です。一回のタップでの要求保持を実装していますが、端末側で拒否されるレンズが必ず起動するという保証ではありません。\n丸ボタンの上に1×・3×・5×を白文字で表示。選択中も黒文字にせず、選択中を太字、予約中を下線で区別します。各列58×48dpの範囲で、文字・丸・周囲のいずれからも操作できます。スクロール等の親ビューによるタッチ取り上げを抑止。黒帯内の184×62dp配置は維持し、前面・余白不足・他操作との重なりでは従来どおり非表示です。\n以前のノイズ低減・くっきり補正、スタイル保持、端の顔補正、24.5MP、HEIF保存、3:4位置と黒背景、素材通信の処理を保持。327非望遠runtimeメソッド・111アプリ置換メソッド・他アプリ1028メソッドを維持。通信・権限・常駐サービスの追加なし。\n単独MPPを元ULike 5.6.2（740）へMorphe Desktop 1.13/1.16で適用・再構築成功。両APK586メソッド照合を通過。純Java幾何テスト30029項目、API代替実装の経路/予約/失敗/ライフサイクル88項目、UIソース条件10項目を確認しました。端末実機の起動・1タップ切替・描画/タッチ判定・撮影・HEIF保存完了・スマホManager統合MPP適用は未検証です。\n未改造ULike 5.6.2（740）へ新版を適用して生成アプリをインストールしてください。旧ULikeパッチとは重ねないでください。GitHub main/dev配信を更新。旧chatgpt.siteは更新しません。\n\n",
+  "publication": {
+    "status": "published_and_download_verified",
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.5.7",
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0b0e2b562b1c5d86062d9ac99567f5fff03d3ead/downloads/Hiro_Morphe_Patches_v1.0.91.mpp",
+    "bundle_sha256": "5615e67dfca1da9ccad4b6625f433588d005755e9aedca63bf6d3d205c26c46f",
+    "raw_commit": "0b0e2b562b1c5d86062d9ac99567f5fff03d3ead",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "6d5533caf68baede232212d38cfeae6951e0e5b7"
+      },
+      {
+        "branch": "dev",
+        "commit": "645e85ff9f5354315b8fb0503982ec42a853b520"
+      }
+    ],
+    "changelog_updates": [
+      {
+        "branch": "main",
+        "commit": "00dbfab010640abfed7cf1e629f1d5ec99dd8887"
+      },
+      {
+        "branch": "dev",
+        "commit": "0349d5f577706e091b7550ea4da6221eaff79f65"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4271626/17086507",
+          "requested_start": 0,
+          "requested_end": 4271626
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4271627-8543253/17086507",
+          "requested_start": 4271627,
+          "requested_end": 8543253
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8543254-12814880/17086507",
+          "requested_start": 8543254,
+          "requested_end": 12814880
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12814881-17086506/17086507",
+          "requested_start": 12814881,
+          "requested_end": 17086506
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17086506/17086507",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "release_asset_download_validation": [
+      {
+        "file": "ULike_HQ_Texture_Online_v1.5.7.mpp",
+        "bytes": 554348,
+        "sha256": "537f4aa69058d8f65481d9556e2cb36be76f42235e44acf45c39859f9b0e8a7a",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      {
+        "file": "Hiro_Morphe_Patches_v1.0.91.mpp",
+        "bytes": 17086507,
+        "sha256": "5615e67dfca1da9ccad4b6625f433588d005755e9aedca63bf6d3d205c26c46f",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      {
+        "file": "ULike_v1.5.7_sources_and_QA.zip",
+        "bytes": 105392,
+        "sha256": "b8f483d988ff2479397d8e16c52dcbae8220dba43d58a2e4799440992a4b872e",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      }
+    ],
+    "usual_chatgpt_site_updated": false
+  }
+}
