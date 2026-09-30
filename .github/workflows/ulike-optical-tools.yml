@@ -1,0 +1,31 @@
+name: ULike optical patch toolchain
+on:
+  push:
+    branches: ['work/ulike-optical-v156']
+    paths: ['.github/workflows/ulike-optical-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch and verify public build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir tools
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          cp "${ANDROID_HOME}/platforms/android-35/android.jar" tools/android.jar
+          cd tools
+          printf '%s\n' '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b  android.jar' '8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281  asm.jar' '5e820f15d064a79991ea71c0a44fa24243c7cc924975b3cef653e6b14c01fc25  morphe-1.13.jar' '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  morphe-1.16.jar' '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  r8.jar' > SHA256SUMS
+          sha256sum -c SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-optical-pinned-tools
+          path: tools/*
+          compression-level: 0
+          retention-days: 1
