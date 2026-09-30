@@ -1,0 +1,37 @@
+name: ULike v1.5.4 toolchain
+on:
+  push:
+    branches: ['work/ulike-detail-v154']
+    paths: ['.github/workflows/ulike-detail-v154-tools.yml']
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Fetch fixed build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          cd tools
+          echo '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  r8.jar' | sha256sum -c -
+          echo '5e820f15d064a79991ea71c0a44fa24243c7cc924975b3cef653e6b14c01fc25  morphe-1.13.jar' | sha256sum -c -
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  morphe-1.16.jar' | sha256sum -c -
+          echo '8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281  asm.jar' | sha256sum -c -
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          JAR="$SDK/platforms/android-35/android.jar"
+          test -f "$JAR"
+          cp "$JAR" android.jar
+          sha256sum *.jar > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-v154-toolchain
+          path: tools/*
+          retention-days: 3
+          compression-level: 0
