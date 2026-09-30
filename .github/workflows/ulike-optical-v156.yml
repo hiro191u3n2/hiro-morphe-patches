@@ -1,0 +1,102 @@
+name: Build and publish ULike optical lenses 1.5.6
+on:
+  push:
+    branches: ['work/ulike-optical-v156']
+    paths: ['.github/workflows/ulike-optical-v156.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-optical-v156-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify and unpack reviewed source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools build dist
+          python3 - <<'PY'
+          import base64,hashlib,io,tarfile
+          from pathlib import Path
+          parts=sorted(Path('releases/ulike-v1.5.6').glob('source.b64.*'))
+          assert len(parts)==6
+          expected=['c4c80fad76c0825dcacb8d9ac00f20118edffe34','0b06e6fb6b493bc411fb2c679346bc7d0a2fa2db','b425abcaf6bc57e44f2eb16904f52fe87a608b68','4d96eb86205f444463c79b664530286d75dd150f','4fe147509ebd612dc1ae0f6503898ac4692241a0','758b66632cba73dcae6dcefe41534e0e150b0ff1']
+          for p,h in zip(parts,expected):
+              b=p.read_bytes()
+              assert hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()==h,p
+          data=base64.b64decode(''.join(p.read_text().strip() for p in parts),validate=True)
+          assert hashlib.sha256(data).hexdigest()=='d0d2e2b5ba922508065363fd30d467b35fcce296de7239f8f9f337774daed8de','Reviewed source checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as archive:
+              archive.extractall('source',filter='data')
+          PY
+      - name: Fetch pinned tools and predecessor patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          test -f "$SDK/platforms/android-35/android.jar"
+          cp "$SDK/platforms/android-35/android.jar" tools/android.jar
+          cp source/tool-SHA256SUMS tools/SHA256SUMS
+          (cd tools && sha256sum -c SHA256SUMS)
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.5/ULike_HQ_Texture_Online_v1.5.5.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.5/Hiro_Morphe_Patches_v1.0.89.mpp -o input/integrated.mpp
+      - name: Build and test both MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Require exact locally applied bytes and package sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,zipfile
+          from pathlib import Path
+          root=Path('source');dist=Path('dist')
+          qa=json.loads((root/'LOCAL_QA.json').read_text())
+          for artifact in qa['artifacts']:
+              p=dist/artifact['file']
+              assert p.stat().st_size==artifact['bytes'],p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==artifact['sha256'],p
+          (dist/'QA_ULike_v1.5.6.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          sourcezip=dist/'ULike_v1.5.6_sources_and_QA.zip'
+          with zipfile.ZipFile(sourcezip,'w') as z:
+              def add(name,body):
+                  info=zipfile.ZipInfo(name,(2026,9,30,9,30,0));info.compress_type=zipfile.ZIP_DEFLATED
+                  z.writestr(info,body,compresslevel=9)
+              for p in sorted(root.rglob('*')):
+                  if p.is_file():add(p.relative_to(root).as_posix(),p.read_bytes())
+              for p in sorted(dist.glob('*.txt')):add('ci-test-results/'+p.name,p.read_bytes())
+              add('build-and-publish.yml',Path('.github/workflows/ulike-optical-v156.yml').read_bytes())
+          with zipfile.ZipFile(sourcezip) as z:assert z.testzip() is None
+          print('PASS both MPPs exactly match the locally applied/rebuilt bytes')
+          print('source zip',sourcezip.stat().st_size,hashlib.sha256(sourcezip.read_bytes()).hexdigest())
+          PY
+      - name: Publish and verify delivery before updating main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-optical-v156-publication
+          path: dist/*
+          retention-days: 7
