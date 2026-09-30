@@ -1,0 +1,122 @@
+name: Publish verified ULike style export fix and camera diagnostics 1.6.4
+on:
+  push:
+    branches: ['work/ulike-style-export-v164']
+    paths: ['.github/workflows/ulike-style-export-v164.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify and unpack reviewed sources and tested payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input dist
+          python3 - <<'PY'
+          import base64, hashlib, io, re, tarfile
+          from pathlib import Path, PurePosixPath
+          expected = '5ab50f5b6d0be00f7546bc6b714231b6eceb1917346c7df4dc7376915f5a701f'
+          assert re.fullmatch(r'[0-9a-f]{64}', expected), 'Reviewed source SHA256 has not been set'
+          parts = sorted(Path('releases/ulike-v1.6.4').glob('source.b64.*'))
+          assert len(parts) == int('9'), 'Unexpected source part count'
+          encoded = ''.join(part.read_text() for part in parts)
+          data = base64.b64decode(''.join(encoded.split()), validate=True)
+          assert hashlib.sha256(data).hexdigest() == expected, 'Reviewed source archive checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(data), mode='r:xz') as archive:
+              seen = set()
+              for member in archive.getmembers():
+                  path = PurePosixPath(member.name)
+                  assert not path.is_absolute() and '..' not in path.parts, member.name
+                  assert member.isfile() or member.isdir(), 'Links/devices are not allowed'
+                  assert str(path) not in seen, 'Duplicate archive path'
+                  seen.add(str(path))
+                  assert path.suffix.lower() not in {'.apk', '.apks', '.apkm', '.aab', '.so', '.p12', '.jks', '.keystore'}, 'Original apps and signing keys must not be published'
+              archive.extractall('source', filter='data')
+          required = [
+              'integration/repack_only.py', 'integration/package_mpp.py',
+              'release_payload/payload-manifest.json', 'release.json', 'expected-artifacts.json',
+              'release_pipeline/publish.py', 'release_pipeline/LOCAL_QA.json',
+              'release_pipeline/README.md', 'release_pipeline/RELEASE_NOTES.txt',
+          ]
+          for name in required:
+              assert (Path('source') / name).is_file(), 'Missing reviewed input: ' + name
+          print('Reviewed source and locally tested payload verified; no original APK is required.')
+          PY
+      - name: Fetch and verify exact predecessor patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release download ulike-v1.6.3 --pattern ULike_HQ_Texture_Online_v1.6.3.mpp --dir input
+          gh release download ulike-v1.6.3 --pattern Hiro_Morphe_Patches_v1.0.96.mpp --dir input
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'ULike_HQ_Texture_Online_v1.6.3.mpp': 'c4f140b11a621e0bed621d8c6bda74b47132ba44e740ca9a3063ede58dc6b6e3',
+              'Hiro_Morphe_Patches_v1.0.96.mpp': '4386fd043f25f4fd48aa208a541d9a7bd01f99c7c786b40f4970ea61e6b5f14d',
+          }
+          for name, digest in expected.items():
+              assert hashlib.sha256((Path('input') / name).read_bytes()).hexdigest() == digest, name
+          PY
+      - name: Deterministically reproduce the locally tested MPP bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/integration/repack_only.py \
+            --old-standalone input/ULike_HQ_Texture_Online_v1.6.3.mpp \
+            --old-integrated input/Hiro_Morphe_Patches_v1.0.96.mpp \
+            --payload-dir source/release_payload \
+            --payload-manifest source/release_payload/payload-manifest.json \
+            --release source/release.json \
+            --expected source/expected-artifacts.json \
+            --output dist
+      - name: Require local QA checksums and package source records
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, json, zipfile
+          from pathlib import Path
+          qa = json.loads(Path('source/release_pipeline/LOCAL_QA.json').read_text())
+          required = {'ULike_HQ_Texture_Online_v1.6.4.mpp', 'Hiro_Morphe_Patches_v1.0.97.mpp'}
+          artifacts = qa['artifacts']
+          assert {row['file'] for row in artifacts} == required and len(artifacts) == 2, 'Unexpected locally tested artifact set'
+          for row in artifacts:
+              path = Path('dist') / row['file']
+              assert path.stat().st_size == row['bytes'], path
+              assert hashlib.sha256(path.read_bytes()).hexdigest() == row['sha256'], 'Not locally tested bytes: ' + str(path)
+          Path('dist/QA_ULike_v1.6.4.json').write_bytes(Path('source/release_pipeline/LOCAL_QA.json').read_bytes())
+          with zipfile.ZipFile('dist/ULike_v1.6.4_sources_and_QA.zip', 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
+              for path in sorted(Path('source').rglob('*')):
+                  if path.is_file() and '__pycache__' not in path.parts and path.suffix != '.pyc':
+                      info = zipfile.ZipInfo(str(path.relative_to('source')), (2026, 10, 1, 3, 0, 0))
+                      info.compress_type = zipfile.ZIP_DEFLATED
+                      info.external_attr = 0o100644 << 16
+                      archive.writestr(info, path.read_bytes())
+          print('Both MPPs exactly reproduce local QA bytes; source and validation records packaged.')
+          PY
+      - name: Publish and verify delivery before CAS source updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/publish.py --qa source/release_pipeline/LOCAL_QA.json --dist dist --notes source/release_pipeline/RELEASE_NOTES.txt --release-body source/release_pipeline/README.md --summary source/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-01
+      - name: Retain release artifacts and verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-style-export-v164-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
