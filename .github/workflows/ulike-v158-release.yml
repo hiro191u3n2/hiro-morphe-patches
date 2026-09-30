@@ -1,0 +1,100 @@
+name: Build verify and publish ULike v1.5.8 retry
+on:
+  push:
+    branches: ['work/ulike-detail-v158']
+    paths: ['.github/workflows/ulike-v158-release.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-v158-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reconstruct and verify all reviewed source hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools build dist
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.5/ULike_v1.5.5_sources_and_QA.zip -o input/source155.zip
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.7/ULike_v1.5.7_sources_and_QA.zip -o input/source157.zip
+          python3 releases/ulike-v1.5.8/prepare_source.py
+          cp .github/workflows/ulike-v158-release.yml source/build-and-publish.yml
+      - name: Fetch and verify pinned tools and predecessor MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          cp "$SDK/platforms/android-35/android.jar" tools/android.jar
+          (cd tools && sha256sum -c ../source/tool-SHA256SUMS)
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.7/ULike_HQ_Texture_Online_v1.5.7.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.7/Hiro_Morphe_Patches_v1.0.91.mpp -o input/integrated.mpp
+      - name: Build both patches and run pixel settings and preservation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Require exact locally verified MPP bytes and package audit sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,os,zipfile
+          from pathlib import Path
+          root=Path('source');dist=Path('dist')
+          qa=json.loads((root/'LOCAL_QA.json').read_text())
+          for artifact in qa['artifacts']:
+              p=dist/artifact['file']
+              assert p.stat().st_size==artifact['bytes'],p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==artifact['sha256'],p
+          qa['artifacts']=json.loads((dist/'build-artifacts.json').read_text())
+          qa['publication_rebuild']={
+              'status':'passed_exact_local_mpp_byte_match',
+              'source_hashes_verified':18,
+              'actions_run_url':f"https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['GITHUB_RUN_ID']}",
+              'test_outputs':{p.name:p.read_text() for p in sorted(dist.glob('*.txt'))},
+              'device_test_performed':False,
+              'original_apk_rebuild_repeated_in_ci':False
+          }
+          report=json.dumps(qa,ensure_ascii=False,indent=2)+'\n'
+          (root/'LOCAL_QA.json').write_text(report)
+          (dist/'QA_ULike_v1.5.8.json').write_text(report)
+          target=dist/'ULike_v1.5.8_sources_and_QA.zip'
+          with zipfile.ZipFile(target,'w',zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              def add(name,body):
+                  info=zipfile.ZipInfo(name,(2026,9,30,0,0,0));info.compress_type=zipfile.ZIP_DEFLATED
+                  z.writestr(info,body,compresslevel=9)
+              for p in sorted(root.rglob('*')):
+                  if p.is_file():add(p.relative_to(root).as_posix(),p.read_bytes())
+              for p in sorted(dist.glob('*.txt')):add('ci-test-results/'+p.name,p.read_bytes())
+          with zipfile.ZipFile(target) as z:
+              assert len(z.namelist())==len(set(z.namelist())) and z.testzip() is None
+          print('PASS: both MPPs are byte-for-byte identical to the previously locally verified v1.5.8/v1.0.92 files')
+          PY
+      - name: Publish verify downloads and then update main and dev manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-v158-publication-retry
+          path: dist/*
+          retention-days: 7
