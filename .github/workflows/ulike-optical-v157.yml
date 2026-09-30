@@ -1,0 +1,122 @@
+name: Build and publish ULike one-tap lenses 1.5.7
+on:
+  push:
+    branches: ['work/ulike-optical-v157']
+    paths: ['.github/workflows/ulike-optical-v157.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-optical-v157-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify predecessor and apply reviewed source delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools build dist delta
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.6/ULike_v1.5.6_sources_and_QA.zip -o input/source156.zip
+          python3 - <<'PY'
+          import base64,hashlib,io,tarfile,zipfile
+          from pathlib import Path
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          b=Path('input/source156.zip').read_bytes()
+          assert sha(b)=='dacfadf595ec47fa88ed2e43964182e1b5d812f130de2744ec4a581fff59cbe7'
+          with zipfile.ZipFile(io.BytesIO(b)) as z:
+              assert z.testzip() is None
+              for n in z.namelist():
+                  assert not Path(n).is_absolute() and '..' not in Path(n).parts,n
+              z.extractall('source')
+          parts=sorted(Path('releases/ulike-v1.5.7').glob('update.b64.*'))
+          assert [p.name for p in parts]==['update.b64.00','update.b64.01','update.b64.02']
+          data=base64.b64decode(''.join(p.read_text().strip() for p in parts),validate=True)
+          assert sha(data)=='e03fde2324dbaaf7f7de1d74726ec7f5f70ff8537c3965ad131f8a0cd20fac66','Source delta checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as archive:
+              archive.extractall('delta',filter='data')
+          PY
+          patch --batch -p1 -d source -i "$PWD/delta/update.patch"
+          cp -a delta/overlay/. source/
+          rm -rf source/test-results source/ci-test-results
+          cp -a delta/reports source/test-results
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          expected=json.loads(Path('delta/delta-manifest.json').read_text())
+          for name,digest in expected.items():
+              p=Path('source')/name
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==digest,name
+          print('PASS all final source delta hashes')
+          PY
+          cp .github/workflows/ulike-optical-v157.yml source/build-and-publish.yml
+      - name: Fetch pinned tools and predecessor MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          test -f "$SDK/platforms/android-35/android.jar"
+          cp "$SDK/platforms/android-35/android.jar" tools/android.jar
+          cp source/tool-SHA256SUMS tools/SHA256SUMS
+          (cd tools && sha256sum -c SHA256SUMS)
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.6/ULike_HQ_Texture_Online_v1.5.6.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.6/Hiro_Morphe_Patches_v1.0.90.mpp -o input/integrated.mpp
+      - name: Build and test both MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Require exact locally applied bytes and package sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,zipfile
+          from pathlib import Path
+          root=Path('source');dist=Path('dist')
+          qa=json.loads((root/'LOCAL_QA.json').read_text())
+          for artifact in qa['artifacts']:
+              p=dist/artifact['file']
+              assert p.stat().st_size==artifact['bytes'],p
+              assert hashlib.sha256(p.read_bytes()).hexdigest()==artifact['sha256'],p
+          (dist/'QA_ULike_v1.5.7.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          sourcezip=dist/'ULike_v1.5.7_sources_and_QA.zip'
+          with zipfile.ZipFile(sourcezip,'w') as z:
+              def add(name,body):
+                  info=zipfile.ZipInfo(name,(2026,9,30,10,45,0));info.compress_type=zipfile.ZIP_DEFLATED
+                  z.writestr(info,body,compresslevel=9)
+              for p in sorted(root.rglob('*')):
+                  if p.is_file():add(p.relative_to(root).as_posix(),p.read_bytes())
+              for p in sorted(dist.glob('*.txt')):add('ci-test-results/'+p.name,p.read_bytes())
+          with zipfile.ZipFile(sourcezip) as z:
+              assert len(z.namelist())==len(set(z.namelist()))
+              assert z.testzip() is None
+          print('PASS both MPPs exactly match locally applied/rebuilt bytes')
+          print('source zip',sourcezip.stat().st_size,hashlib.sha256(sourcezip.read_bytes()).hexdigest())
+          PY
+      - name: Publish and verify downloads before updating main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-optical-v157-publication
+          path: dist/*
+          retention-days: 7
