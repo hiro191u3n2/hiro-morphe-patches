@@ -1,0 +1,282 @@
+{
+  "version": "1.5.5",
+  "bundle_version": "1.0.89",
+  "date": "2026-09-30",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version": "5.6.2",
+    "version_code": 740,
+    "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293"
+  },
+  "options": {
+    "category": "追加設定：ノイズ低減・くっきり補正",
+    "independent_switches": [
+      "ノイズ低減（保存写真）",
+      "くっきり補正（保存写真）"
+    ],
+    "levels": [
+      "弱",
+      "標準",
+      "強"
+    ],
+    "default_enabled": [
+      false,
+      false
+    ],
+    "default_levels": [
+      "標準",
+      "標準"
+    ],
+    "persist_on_off_and_levels": true,
+    "both_off_no_pixel_processing": true
+  },
+  "scope": {
+    "saved_photos": true,
+    "preview": false,
+    "video": false,
+    "original_archive": false,
+    "format": "8bit sRGB only, RGB_565 input also supported",
+    "wide_gamut_and_gainmap_at_hook": "skip additional processing; no promise of end-to-end HDR preservation",
+    "downscale_for_processing": false,
+    "new_jpeg_encoding": false,
+    "new_permissions_or_networking_or_services": false
+  },
+  "preservation": {
+    "old_runtime_methods_unchanged": 284,
+    "existing_entrypoints_modified": 3,
+    "old_edge_algorithm_body_retained_under_renamed_method": true,
+    "old_app_replacement_methods_unchanged": 65,
+    "non_ulike_patch_methods_unchanged": 1028
+  },
+  "tests": {
+    "numerical_assertions": 134937,
+    "android_standin_control_flow_assertions": 45,
+    "full_resolution_standin_pixels": [
+      5712,
+      4284
+    ],
+    "original_apks_patch_and_rebuild": {
+      "morphe_1.13.0": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "morphe_1.16.0": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      }
+    },
+    "emitted_apk_verified_method_contracts_each": 392,
+    "duplicate_apk_classes": false,
+    "galaxy_real_device_tested": false,
+    "android_art_runtime_tested": false,
+    "real_photo_quality_tested": false,
+    "real_heif_save_completion_tested": false,
+    "smartphone_manager_integrated_apply_tested": false
+  },
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.5.5.mpp",
+      "bytes": 516849,
+      "sha256": "0c01df45eb62517f598a139dedeb390138ae3451af4e30709eb77f59130afe1d",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "536cbb522187d2d57e080ad3090d6731b95b98add56a882e2dd3a7cd91f3d994",
+        "classes.dex": "9421f56c32698ee03281b252409528b6da0c1fe476d926109d37073eea1fc5f5",
+        "app/hiro/ulike/patches/UlikeHqMaxPatch.class": "3b5efc9ea166c10de5177c48bd58dc4061ff5cc9e88af25377a1ecbbf1509dd5",
+        "ulike/runtime.dex": "a86b02f5ff65adf5685ca7290208e1d543de5d025af97432b61e5de694cf6f0a"
+      },
+      "retained_entries": [
+        "app/hiro/ulike/patches/MethodContract.class",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.89.mpp",
+      "bytes": 17049022,
+      "sha256": "e6f23ac7561ee24715e4b53f18fc591ec24b9d2e932bf95c741c683d4864a380",
+      "changed_entries": {
+        "META-INF/MANIFEST.MF": "e280fd2353cbba06912d88e89e0dd790b2d540274e38012fa328f74033a09fcd",
+        "classes.dex": "5d84c1bfa0a6ac38c637eee5a725f23af9702fb496e5272e40cc0c970c4cfc1f",
+        "ulike/runtime.dex": "a86b02f5ff65adf5685ca7290208e1d543de5d025af97432b61e5de694cf6f0a"
+      },
+      "retained_entries": [
+        "app/morphe/patches/shared/misc/extension/SharedExtensionPatchKt.class",
+        "app.hiro.amazonfilter.SponsoredFilterProvider",
+        "extensions/extension.mpe",
+        "extensions/instagram_account_setup_guard.mpe",
+        "extensions/search_landing_guard.mpe",
+        "extensions/shared.mpe",
+        "extensions/tiktok.mpe",
+        "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z",
+        "extensions/uber_eats_promotion_filter.mpe",
+        "extensions/swiftkey_japanese.mpe",
+        "swiftkey/emoji_LICENSE.txt",
+        "swiftkey/emoji_ja.tsv",
+        "swiftkey/words_LICENSE.txt",
+        "swiftkey/words_ja.tsv",
+        "extensions/berry_foreground_tabs.mpe",
+        "extensions/berry_browser_visibility.mpe",
+        "swiftkey/katakana_en.tsv",
+        "swiftkey/katakana_en_NOTICE.txt",
+        "swiftkey/glide_ja.bin",
+        "swiftkey/glide_ja_NOTICE.txt",
+        "brightnessclick/main.dex",
+        "brightnessclick/permission.mpe",
+        "brightnessclick/original-methods.properties",
+        "brightnessclick/replacement.dex",
+        "extensions/berry_onehand_zoom.mpe",
+        "ulike/assets/0000.bin",
+        "ulike/assets/0001.bin",
+        "ulike/assets/0002.bin",
+        "ulike/assets.tsv",
+        "ulike/heifwriter-NOTICE.txt",
+        "ulike/methods.dex",
+        "ulike/methods.tsv"
+      ]
+    }
+  ],
+  "publication": {
+    "status": "published_and_download_verified",
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.5.5",
+    "download_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/75cc221aa1f6d58155f141a867d3d000300cc96a/downloads/Hiro_Morphe_Patches_v1.0.89.mpp",
+    "bundle_sha256": "e6f23ac7561ee24715e4b53f18fc591ec24b9d2e932bf95c741c683d4864a380",
+    "raw_commit": "75cc221aa1f6d58155f141a867d3d000300cc96a",
+    "manifest_updates": [
+      {
+        "branch": "main",
+        "commit": "62e2707475474b3234176968bdb989d6883ef7bb"
+      },
+      {
+        "branch": "dev",
+        "commit": "7a0ccb37955833b02ebba0ce2ec7a0e0b0074e07"
+      }
+    ],
+    "changelog_updates": [
+      {
+        "branch": "main",
+        "commit": "1ce6bbd53420826aee0785ad0f96d3c7e1d399bc"
+      },
+      {
+        "branch": "dev",
+        "commit": "d2d1cd5144ad69cb36e32c627d4f71cbf1b0b2da"
+      }
+    ],
+    "download_validation": {
+      "full": {
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      "chunks": [
+        {
+          "status": 206,
+          "content_range": "bytes 0-4262255/17049022",
+          "requested_start": 0,
+          "requested_end": 4262255
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 4262256-8524511/17049022",
+          "requested_start": 4262256,
+          "requested_end": 8524511
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 8524512-12786767/17049022",
+          "requested_start": 8524512,
+          "requested_end": 12786767
+        },
+        {
+          "status": 206,
+          "content_range": "bytes 12786768-17049021/17049022",
+          "requested_start": 12786768,
+          "requested_end": 17049021
+        }
+      ],
+      "resume": {
+        "status": 206,
+        "content_range": "bytes 11534336-17049021/17049022",
+        "requested_start": 11534336,
+        "requested_end": null
+      }
+    },
+    "release_asset_download_validation": [
+      {
+        "file": "ULike_HQ_Texture_Online_v1.5.5.mpp",
+        "bytes": 516849,
+        "sha256": "0c01df45eb62517f598a139dedeb390138ae3451af4e30709eb77f59130afe1d",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      {
+        "file": "Hiro_Morphe_Patches_v1.0.89.mpp",
+        "bytes": 17049022,
+        "sha256": "e6f23ac7561ee24715e4b53f18fc591ec24b9d2e932bf95c741c683d4864a380",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      },
+      {
+        "file": "ULike_v1.5.5_sources_and_QA.zip",
+        "bytes": 45336,
+        "sha256": "6c4a1f84d253cb5badefaeece081a979021702d8ca4b174ad75a495873e9104d",
+        "status": 200,
+        "content_range": null,
+        "requested_start": null,
+        "requested_end": null
+      }
+    ],
+    "usual_chatgpt_site_updated": false
+  },
+  "limits": [
+    "Save-only; not preview/video.",
+    "Single-image postprocessing, not RAW or multi-frame denoise.",
+    "High-resolution saving needs more time and memory; device latency unmeasured.",
+    "Repeated edit/save can reapply the processing.",
+    "JVM Android stand-in tests are not Android/ART or real-device tests.",
+    "Integrated MPP inherits existing shared-extension dependencies."
+  ],
+  "replaces_prior_noise_stage": "The independently published v1.5.4 / v1.0.88 initially-on noise/detail stage is replaced, not chained. New independent switches default OFF.",
+  "release_notes": "【統合MPP v1.0.89：ULike v1.5.5 ノイズ低減・くっきり補正を個別オプション化】\nv1.5.4の初期オン設定を今回の独立スイッチへ切替え、新項目は初回両方オフです。\n設定→追加設定：ノイズ低減・くっきり補正。各機能を個別にオン／オフでき、強さは弱／標準／強。初期値は両方オフ、強さは標準。オン／オフと強さを同期保存し再起動後も保持します。オフにしても強さは記憶します。\n保存写真にノイズ低減→くっきり補正の順で適用。元画像をガイドに色のざらつきを抑え、輪郭調整は平坦部・孤立ノイズ・白縁を強めにくい制限付き。処理のための縮小や追加JPEG圧縮はなく、24.5MPを含め入力の保存サイズを維持します。両方オフは追加の画素処理なし。\n保存写真のみ。プレビュー・動画・既存の原本保管は対象外。8bit sRGBを対象とし、フック時の広色域/HDR/未対応形式、メモリ不足、同時処理などでは今回の追加処理だけを見送ります。保存時間とメモリ使用量は増えます。完全なノイズ除去やピンぼけ復元ではありません。再編集・再保存の重複処理に注意。\nv1.5.3のスタイル記憶、端の顔補正・微小クロップ、24.5MP・HEIF専用DCIM/Camera保存、高画質、原本保管、3:4位置と黒背景、素材通信を維持。既存284runtimeメソッド・65置換メソッド・他アプリ1028メソッドを保持。旧端の顔アルゴリズムは名前のみ変更し保持。通信・権限・常駐サービスの追加なし。\n単独MPPは元ULike 5.6.2（740）へMorphe Desktop 1.13/1.16で対象1パッチを適用・再構築成功、両APK392メソッド照合を通過。数値テスト134937項目、Android代替実装による設定・失敗処理45項目と5712×4284処理を確認。実機の起動・設定画面・見た目・HEIF保存完了・保存時間、スマホManagerでの統合MPP適用は未検証。\n未改造APKへ新版を再パッチしてインストール後、追加設定をオンにしてください。旧ULikeパッチと重ねないでください。配布元はGitHub main/dev、旧chatgpt.siteは未更新です。\n\n"
+}
