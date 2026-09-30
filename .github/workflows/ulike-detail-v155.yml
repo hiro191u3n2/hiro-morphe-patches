@@ -1,0 +1,126 @@
+name: Build and publish ULike optional detail 1.5.5
+on:
+  push:
+    branches: ['work/ulike-detail-v154']
+    paths: ['.github/workflows/ulike-detail-v155.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-detail-v155-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify and unpack reviewed source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools build dist
+          python3 - <<'PY'
+          import base64,hashlib,io,tarfile
+          from pathlib import Path
+          parts=sorted(Path('releases/ulike-v1.5.5').glob('source.b64.*'))
+          assert len(parts)==6
+          expected=['1faa27b09e9d1c96d125350bd73c24894065455a','082f68b57cc0f2fa9f166c7d26bcd3b7bf8136ce','30a1e58049de6f949883460710ef9b25873525a2','82578cda84e12085a6c0871123592a97500e8a5e','941da12d71de4ba49233176afcc98fde2e97e715','f14611e9a7a8d76892559e4eec44327f86d98658']
+          for p,h in zip(parts,expected):
+              b=p.read_bytes()
+              assert hashlib.sha1(b'blob '+str(len(b)).encode()+b'\0'+b).hexdigest()==h,p
+          data=base64.b64decode(''.join(p.read_text().strip() for p in parts),validate=True)
+          assert hashlib.sha256(data).hexdigest()=='7cc7ee096ebcc72b4754331b6bcc2ed3e40a028efcf596bbd42363aa4cd66802','Reviewed source checksum mismatch'
+          with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as archive:
+              archive.extractall('source',filter='data')
+          PY
+      - name: Fetch pinned tools and predecessor patches
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.13.0/morphe-desktop-1.13.0-all.jar -o tools/morphe-1.13.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          test -f "$SDK/platforms/android-35/android.jar"
+          cp "$SDK/platforms/android-35/android.jar" tools/android.jar
+          cp source/tool-SHA256SUMS tools/SHA256SUMS
+          (cd tools && sha256sum -c SHA256SUMS)
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.3/ULike_HQ_Texture_Online_v1.5.3.mpp -o input/ulike.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.3/Hiro_Morphe_Patches_v1.0.87.mpp -o input/integrated.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.4/ULike_HQ_Texture_Online_v1.5.4.mpp -o input/prior154.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.5.4/Hiro_Morphe_Patches_v1.0.88.mpp -o input/prior088.mpp
+      - name: Build and test both MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash source/build.sh input/ulike.mpp input/integrated.mpp tools build dist
+      - name: Check the independently published predecessor was preserved outside noise processing
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,zipfile
+          from pathlib import Path
+          assert hashlib.sha256(Path('input/prior154.mpp').read_bytes()).hexdigest()=='2c2873525fb76cf869e446d664fbc97bfedcdfe02197da8dd2dde460efa9bf3a'
+          assert hashlib.sha256(Path('input/prior088.mpp').read_bytes()).hexdigest()=='37388cedb8c6e22145458bea3be8a41d8ae8b1f7b67b5027658fbb23b4a60163'
+          qa=json.loads(Path('source/LOCAL_QA.json').read_text())
+          for prior,artifact in zip(['input/prior154.mpp','input/prior088.mpp'],qa['artifacts']):
+              with zipfile.ZipFile(prior) as old,zipfile.ZipFile(Path('dist')/artifact['file']) as new:
+                  assert set(old.namelist())==set(new.namelist())
+                  for name in artifact['retained_entries']:
+                      assert old.read(name)==new.read(name),name
+          with zipfile.ZipFile('input/prior088.mpp') as old:
+              Path('build/prior088.dex').write_bytes(old.read('classes.dex'))
+          PY
+          java -cp build:tools/morphe-1.13.jar:build/old MergePatchDex build/prior088.dex build/newdex/classes.dex build/verify088.dex | tee dist/prior088-preservation.txt
+          cmp build/verify088.dex build/integrated-new.dex
+      - name: Require exact locally tested bytes and package sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,json,zipfile
+          from pathlib import Path
+          qa=json.loads(Path('source/LOCAL_QA.json').read_text())
+          for artifact in qa['artifacts']:
+              path=Path('dist')/artifact['file']
+              assert path.stat().st_size==artifact['bytes'],path
+              assert hashlib.sha256(path.read_bytes()).hexdigest()==artifact['sha256'],path
+          Path('dist/QA_ULike_v1.5.5.json').write_text(json.dumps(qa,ensure_ascii=False,indent=2)+'\n')
+          with zipfile.ZipFile('dist/ULike_v1.5.5_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED,compresslevel=9) as archive:
+              for path in sorted(Path('source').rglob('*')):
+                  if path.is_file():
+                      info=zipfile.ZipInfo(str(path.relative_to('source')),(2026,9,30,6,40,0))
+                      info.compress_type=zipfile.ZIP_DEFLATED
+                      archive.writestr(info,path.read_bytes())
+              for path in sorted(Path('dist').glob('*.txt')):
+                  info=zipfile.ZipInfo('ci-test-results/'+path.name,(2026,9,30,6,40,0))
+                  info.compress_type=zipfile.ZIP_DEFLATED
+                  archive.writestr(info,path.read_bytes())
+              info=zipfile.ZipInfo('build-and-publish.yml',(2026,9,30,6,40,0))
+              info.compress_type=zipfile.ZIP_DEFLATED
+              archive.writestr(info,Path('.github/workflows/ulike-detail-v155.yml').read_bytes())
+          print('Both MPPs match locally applied and rebuilt test artifacts exactly.')
+          PY
+      - name: Publish and verify downloads before source updates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/publish.py
+      - name: Retain publication artifacts and verification reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-detail-v155-publication
+          path: dist/*
+          retention-days: 7
