@@ -42,6 +42,18 @@ jobs:
           with tarfile.open(fileobj=io.BytesIO(data),mode='r:xz') as archive:
               archive.extractall('source',filter='data')
           PY
+      - name: Retry only temporary GitHub API validation timeouts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('source/publish.py')
+          old='    result = subprocess.run(args, input=None if data is None else json.dumps(data),\n                            text=True, capture_output=True)\n    if result.returncode:\n        raise RuntimeError(result.stderr)\n    return json.loads(result.stdout)'
+          new="    for attempt in range(5):\n        result = subprocess.run(args, input=None if data is None else json.dumps(data),\n                                text=True, capture_output=True)\n        if not result.returncode:\n            return json.loads(result.stdout)\n        transient = any(message in result.stderr for message in (\n            'Timed out validating rule, please try again',\n            '(HTTP 429)', '(HTTP 500)', '(HTTP 502)', '(HTTP 503)', '(HTTP 504)'))\n        if not transient or attempt == 4:\n            raise RuntimeError(result.stderr)\n        print('Retrying temporary GitHub API failure:', result.stderr.strip(), flush=True)\n        time.sleep(3 * (attempt + 1))"
+          text=p.read_text()
+          assert text.count(old)==1
+          p.write_text(text.replace(old,new))
+          PY
       - name: Fetch pinned tools and predecessor patches
         shell: bash
         run: |
