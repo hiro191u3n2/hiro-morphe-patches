@@ -1,0 +1,40 @@
+name: ULike noise detail build tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-noise-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Fetch pinned R8, ASM and Android API
+        run: |
+          set -eu
+          mkdir tools
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.7.1/asm-9.7.1.jar -o tools/asm.jar
+          cp "$(find "${ANDROID_HOME}/platforms" -name android.jar | sort -V | tail -1)" tools/android.jar
+          cd tools
+          echo '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  r8.jar' | sha256sum -c -
+          echo '8cadd43ac5eb6d09de05faecca38b917a040bb9139c7edeb4cc81c740b713281  asm.jar' | sha256sum -c -
+          sha256sum *.jar > SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-noise-r8
+          path: tools/r8.jar
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-noise-android
+          path: tools/android.jar
+          retention-days: 3
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-noise-asm-checksums
+          path: |
+            tools/asm.jar
+            tools/SHA256SUMS
+          retention-days: 3
