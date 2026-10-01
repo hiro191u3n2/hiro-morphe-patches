@@ -1,0 +1,76 @@
+name: Verify and publish ULike startup hotfix 1.7.1
+on:
+  push:
+    branches: ['work/ulike-startup-v171']
+    paths: ['.github/workflows/ulike-startup-v171.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain exact predecessor and reviewed toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.7.0 --pattern ULike_v1.7.0_sources_and_QA.zip --pattern ULike_HQ_Texture_Online_v1.7.0.mpp --pattern Hiro_Morphe_Patches_v1.0.103.mpp --dir input
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11160707412/zip > input/toolchain.zip
+          echo 'c9184fe6af171d294614d169695398f4f861030806dd37732872f90e2917bba0  input/toolchain.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('input/toolchain.zip') as z:
+              for name in ['morphe-1.16.jar', 'r8-8.3.37.jar', 'asm-9.8.jar', 'android.jar']:
+                  Path('tools', name).write_bytes(z.read('tools/' + name))
+          PY
+      - name: Reproduce exact locally tested hotfix bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          S=releases/ulike-v1.7.1/reviewed
+          echo "740512eb9eb86bc490d1a5a1e4f9e68bb635ad531937a8a2702b499f1ef17e71  $S/repair171.py" | sha256sum -c -
+          echo "107bfc79340cff576f7f537ef7e17c50aa095bc10674e266c3eef4e3e69f9bc2  $S/finalize171.py" | sha256sum -c -
+          echo "f3e6ceb6fa9c52c8f259e1db0e936462d733c4cfc570e64034b857f7f0e99d18  $S/reviewed171.json" | sha256sum -c -
+          python3 "$S/repair171.py" --source input/ULike_v1.7.0_sources_and_QA.zip --out source171
+          python3 source171/build170.py --input input --tools tools --dist dist --bootstrap
+          python3 "$S/finalize171.py" --source source171 --dist dist --reviewed "$S/reviewed171.json"
+          echo '3f7d2100f8a6e86e5a717baf6df50f6ad15bb36466d2c98f4a39c7a2b5381344  dist/ULike_v1.7.1_sources_and_QA.zip' | sha256sum -c -
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source171/release_pipeline/publish170.py --qa source171/release_pipeline/LOCAL_QA.json --dist dist --notes source171/release_pipeline/RELEASE_NOTES.txt --release-body source171/release_pipeline/README.md --summary source171/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified MPPs and main-dev Manager metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source171/release_pipeline/publish170.py --qa source171/release_pipeline/LOCAL_QA.json --dist dist --notes source171/release_pipeline/RELEASE_NOTES.txt --release-body source171/release_pipeline/README.md --summary source171/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show fail-closed publication state
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain downloadable artifacts and verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-startup-v171-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
