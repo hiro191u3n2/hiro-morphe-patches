@@ -1,0 +1,36 @@
+name: Verify and publish reviewed ULike lens AF repair 1.6.6
+on:
+  push:
+    branches: ['work/ulike-lens-focus-v166']
+    paths: ['.github/workflows/ulike-lens-focus-v166.yml']
+permissions:
+  contents: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - name: Inspect pinned predecessor release machinery without publishing
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input
+          gh release download ulike-v1.6.5 --pattern ULike_v1.6.5_sources_and_QA.zip --dir input
+          echo '25c15a650020f61ca8f44767c7d3511de84d32128ce85e509c8f0d898c406a10  input/ULike_v1.6.5_sources_and_QA.zip' | sha256sum -c -
+          python3 - <<'PY'
+          import zipfile
+          with zipfile.ZipFile('input/ULike_v1.6.5_sources_and_QA.zip') as z:
+              names=z.namelist()
+              print('BASELINE INVENTORY')
+              print('\n'.join(n for n in names if n.startswith(('integration/','release_pipeline/')) or '/' not in n))
+              for n in ['integration/repack_only.py','release_pipeline/publish.py','UpdatePatchStrings.java']:
+                  matches=[x for x in names if x==n or x.endswith('/'+n)]
+                  for x in matches:
+                      print('\nBEGIN_INSPECT '+x+'\n'+z.read(x).decode()+'\nEND_INSPECT '+x)
+          PY
