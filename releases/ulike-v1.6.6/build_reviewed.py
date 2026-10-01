@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Reproduce only the already-reviewed 1.6.6 bytes. Fail closed on every mismatch."""
-import base64, hashlib, io, json, shutil, subprocess, tarfile, zipfile
+import base64, hashlib, io, json, os, shutil, subprocess, tarfile, zipfile
 from pathlib import Path, PurePosixPath
 
 ROOT=Path.cwd()
@@ -67,10 +67,10 @@ def main():
      p=BUILD/folder/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(z.read(n))
  with zipfile.ZipFile(integrated) as z: (BUILD/'old-integrated.dex').write_bytes(z.read('classes.dex'))
  run('bash',SOURCE/'test.sh')
- toolcp=str(ROOT/'tools/morphe.jar')+':'+str(ROOT/'tools/asm.jar')
+ toolcp=os.pathsep.join(map(str,[ROOT/'tools/morphe.jar',ROOT/'tools/asm.jar',BUILD/'oldpatch']))
  classes=BUILD/'toolclasses';classes.mkdir(exist_ok=True)
  run('javac','-cp',toolcp,'-d',classes,BASE/'integration/MergePayloads.java',BASE/'integration/UpdatePatchStrings.java',SOURCE/'AssembleReviewed166.java')
- cp=str(classes)+':'+toolcp
+ cp=str(classes)+os.pathsep+toolcp
  run('java','-cp',cp,'AssembleReviewed166',BUILD/'old-methods.dex',BUILD/'old-runtime.dex',SOURCE/'inputs/methods-delta.dex',SOURCE/'inputs/helpers.dex',BUILD/'methods.tsv',BUILD)
  release=json.loads((SOURCE/'release.json').read_text())
  (BUILD/'description.txt').write_text(release['patch_description']+'\n')
@@ -79,13 +79,14 @@ def main():
  expected=json.loads((SOURCE/'expected-payloads.json').read_text())
  assert sha((BUILD/'newpatch'/loader).read_bytes())==expected['newpatch/'+loader]
  class_files=sorted((BUILD/'newpatch').rglob('*.class'))
- # D8 build mode is selected solely by matching the immutable, previously tested hash.
- # No alternate generated payload can be published.
+ assert len(class_files)==3,'Unexpected loader class inventory'
+ run('jar','cf',BUILD/'patch-classes.jar','-C',BUILD/'newpatch','.')
+ # Use the published predecessor D8 recipe; accept only the immutable tested hash.
  for mode in [[],['--release'],['--debug']]:
   out=BUILD/'newdex'
   if out.exists(): shutil.rmtree(out)
   out.mkdir()
-  run('java','-cp',ROOT/'tools/r8.jar','com.android.tools.r8.D8',*mode,'--min-api','26','--output',out,*class_files)
+  run('java','-cp',ROOT/'tools/r8.jar','com.android.tools.r8.D8',*mode,'--min-api','26','--lib',os.environ['JAVA_HOME'],'--classpath',ROOT/'tools/morphe.jar','--output',out,BUILD/'patch-classes.jar')
   if sha((out/'classes.dex').read_bytes())==expected['newdex/classes.dex']: break
  else: raise AssertionError('No D8 mode reproduces the reviewed loader')
  run('java','-cp',cp,'MergePayloads','loaders',BUILD/'old-integrated.dex',BUILD/'newdex/classes.dex',BUILD/'integrated-new.dex')
