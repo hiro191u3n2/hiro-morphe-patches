@@ -1,0 +1,142 @@
+{
+  "version": "1.7.1",
+  "bundle_version": "1.0.104",
+  "previous_app_version": "1.7.0",
+  "previous_bundle_version": "1.0.103",
+  "target": {
+    "package": "com.gorgeous.liteinternational",
+    "version_name": "5.6.2",
+    "version_code": 740,
+    "abi": "arm64-v8a"
+  },
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.7.1.mpp",
+      "bytes": 673252,
+      "sha256": "e30a28b043bfa57e2d8604013a417bdc40da069ef1efa84cddfcb5d4e3f98f3c"
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.104.mpp",
+      "bytes": 17219060,
+      "sha256": "d7eb15c7b2ee5505f86a70110775a3d2d201cc1d1f799badaaa09925b778b7f6"
+    }
+  ],
+  "identified_defect": {
+    "description": "Three cross-class invokes target private OpticalZoom.fail in v1.7.0 (choose, createSession, State.onConfigureFailed). Previous member-existence verification did not enforce access visibility. Hotfix changes only fail visibility to package-private and contains camera routing exceptions.",
+    "confirmed_in_distributed_dex": true,
+    "confirmed_as_actual_device_crash_cause": false,
+    "device_crash_log_available": false,
+    "private_access_violations_before": 3,
+    "private_access_violations_after": 0
+  },
+  "implementation": {
+    "visibility": "One private static helper changed to package-private static; no other OpticalZoom method changed.",
+    "error_path": "Request/session runtime, linkage, reflective failures become CameraAccessException with original cause; existing CameraAccessException object preserved. Recovery notification RuntimeException/LinkageError cannot block configure-failed callback. Failed/closed sessions clear configured flag.",
+    "preserved": "Manual main-wide 1x, AF-ultrawide macro, 3x and 5x selectors and distance auto-switch OFF logic; UI placement; beauty/HEIF/save optimization; original application method payload/assets/native hook; all non-ULike patches.",
+    "unsupported_lenses": "No forced nonpublic IDs and no claim of successful pinning when output/session unsupported."
+  },
+  "host_tests": {
+    "manual_router_and_camera2_assertions": 596,
+    "focus_recovery_regression_assertions": 65,
+    "manual_AF_regression_assertions": 101,
+    "total": 762,
+    "mocked_not_android_ART": true
+  },
+  "bytecode_audit": {
+    "unchanged_runtime_methods": 1230,
+    "changed_runtime_methods": 7,
+    "new_runtime_methods": 3,
+    "total_runtime_methods": 1240,
+    "private_access_after_apk_build": 0,
+    "resolved_changed_helper_references": 79,
+    "non_ulike_loader_classes_unchanged": 216,
+    "non_ulike_loader_methods_unchanged": 1028,
+    "unrelated_application_method_payload_assets_unchanged": true
+  },
+  "applied_builds": {
+    "standalone": {
+      "patch_report": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "rebuilt_contracts": 1404,
+      "unique_classes": 33341,
+      "total_methods": 213404,
+      "bytecode_mode": "FULL",
+      "signed": false
+    },
+    "integrated": {
+      "patch_report": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "rebuilt_contracts": 1404,
+      "unique_classes": 33341,
+      "total_methods": 213404,
+      "bytecode_mode": "FULL",
+      "signed": false
+    }
+  },
+  "apk_content_validation": {
+    "standalone_integrated_entry_bytes_equal": true,
+    "entry_manifest_sha256": "b862735a0249cda4b873bc868bc31c40533cf8cd6ff9e73d5a9dfc47050794ac",
+    "arm64_libraries": 58,
+    "standalone_apk_sha256": "4ed9fd7e028029a134a2118f2af18ae46bc27a07df97d82980322871c04e73db",
+    "integrated_apk_sha256": "348b533e5299b3980295c938f921300699a60d414ceeac1487ebd8ee53ebfb59"
+  },
+  "local_applied_evidence": {
+    "STANDALONE_CLI.json": "{\n  \"packageName\": \"com.gorgeous.liteinternational\",\n  \"packageVersion\": \"5.6.2\",\n  \"patchingSteps\": [\n    {\n      \"step\": \"PATCHING\",\n      \"success\": true\n    },\n    {\n      \"step\": \"REBUILDING\",\n      \"success\": true\n    }\n  ],\n  \"appliedPatches\": [\n    {\n      \"name\": \"高画質撮影・質感美肌・素材通信を復旧\"\n    }\n  ],\n  \"failedPatches\": []\n}\n",
+    "STANDALONE_APPLIED.txt": "PASS final APK: 33341 unique classes / 213404 methods. 1404 runtime/payload contracts exactly retained, including all correction hooks and helper methods.\n",
+    "INTEGRATED_CLI.json": "{\n  \"packageName\": \"com.gorgeous.liteinternational\",\n  \"packageVersion\": \"5.6.2\",\n  \"patchingSteps\": [\n    {\n      \"step\": \"PATCHING\",\n      \"success\": true\n    },\n    {\n      \"step\": \"REBUILDING\",\n      \"success\": true\n    }\n  ],\n  \"appliedPatches\": [\n    {\n      \"name\": \"高画質撮影・質感美肌・素材通信を復旧\"\n    }\n  ],\n  \"failedPatches\": []\n}\n",
+    "INTEGRATED_APPLIED.txt": "PASS final APK: 33341 unique classes / 213404 methods. 1404 runtime/payload contracts exactly retained, including all correction hooks and helper methods.\n",
+    "APPLIED_ACCESS.txt": "PRIVATE_ACCESS_VIOLATIONS=0\n"
+  },
+  "device_validation": {
+    "performed": false,
+    "not_verified": [
+      "Galaxy application launch after hotfix",
+      "actual main/ultrawide/tele lens switching",
+      "Galaxy HAL session acceptance",
+      "capture/HEIF save completion",
+      "Manager Android update badge UI"
+    ]
+  },
+  "limitations": [
+    "No device crash log; the identified linkage defect is real but may not be the only cause of the reported launch failure.",
+    "PC tests are mocked Camera2 and static DEX/APK audits, not ART execution or Galaxy tests.",
+    "The original APK/APKS, photos, credentials and signing keys are not published."
+  ]
+}
