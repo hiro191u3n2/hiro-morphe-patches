@@ -61,7 +61,7 @@ def main():
             'OwnedShot sensor crop is private with a defensive-copy accessor; shutter date is frozen once at Choice creation.',
             'NativeBindings neural list is copied with bounded iteration; every observed SDK face ID must match exactly once.',
             'Plan expected feature identifiers are bounded, copied and immutable; complete resolved graph settings are copied.',
-            'Work.close attempts pair, transaction, owned analysis input and plan even if an earlier close throws Error, retaining suppressed failures.',
+            'Work.close attempts pair, transaction, unconsumed rendered diagnostic, owned analysis input and plan even if an earlier close throws Error, retaining suppressed failures.',
             'ProcessingSequence rejects overlapping ownership, cancels only the exact accepted shot, runs cleanup with a pending interrupt cleared, and lets a successful committed URI win late cancellation.'
         ],
         'reviewed_dataflow':[
@@ -76,9 +76,9 @@ def main():
         'limitations':[
             'This review does not execute the full coordinator on Android or exercise actual Camera2, native composer, SDK/ORT, MediaCodec, MediaStore or application UI.',
             'CandidateGate169 remains hard false; no processor, native plan provider or full binding provider is installed.',
-            'Our diagnostic bridge imposes a conservative <=4194304-pixel guard and currently rejects 4080x3060 before preview interruption. This guard is not an established native SDK/sensor limit; a reviewed full-resolution ownership route and device calibration remain unresolved.',
+            'The coordinator now requires explicit AnalysisCapacity and uses native-grid streaming ownership. The 4080x3060 candidate is a host allocation policy; actual full-size native capture, memory/GL capacity, masks and geometry remain unverified on Android.',
             'Native face order, geometry/calibration, complete replay, restore barrier and all-mode lens execution still need actual implementations/evidence.',
-            'If MediaStore publication occurs but the underlying PhotoTransaction confirming inspect fails before returning a URI, commit status is not confirmed; cleanup preserves visible rows but this review does not promise successful URI delivery for that unresolved provider-failure window.',
+            'Unconfirmed MediaStore publication has a typed error and separate terminal app callback/message, with an in-flight save authority and confirmed core receipt salvage. This host sequence review does not execute Android handler or recovery behavior; see the separate publication outcome tests and core uncertainty review.',
             'An Error raised by final post-commit cleanup is propagated after owner release; the already committed photo is not removed.',
             'Automatic-save route only; original Bitmap editor, bursts and full mode support remain unsupported.'
         ],

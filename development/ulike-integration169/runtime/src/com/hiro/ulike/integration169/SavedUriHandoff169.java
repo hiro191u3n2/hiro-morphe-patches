@@ -25,12 +25,20 @@ public final class SavedUriHandoff169 {
     private static final ArrayList<WeakReference<Object>> RETIRED=new ArrayList<>();
     /** Runs on main when that Handler accepts work; if it is unavailable, runs on the calling
      * worker with an explicit UI-unavailable failure so a committed URI is never lost. */
-    public interface Completion { void finished(Uri committedPhoto,Exception uiFailure); }
+    public interface Completion {
+        void finished(Uri committedPhoto,Exception uiFailure);
+        /** Separate from finished: candidateUri must never be treated as a committed photograph.
+         * The handoff also posts an explicit user-visible message; no implicit retry is allowed.
+         * Implementations may offer a read-only recovery check with PhotoTransaction.reconcile. */
+        default void publicationUncertain(PublicationOutcome169.UnconfirmedPhoto photo,Exception failure) {
+            android.util.Log.e("ULike169","Photo publication is unconfirmed; transaction="+photo.transactionId,failure);
+        }
+    }
     public static final class Token {
         final Object bitmapCallback,takeCallback,scene,controller,bridge,autoSave,identity;
         final long epoch,startedMs;
         boolean dimensions,terminal,saving;
-        volatile Uri committed;
+        final PublicationOutcome169 publication=new PublicationOutcome169();
         Token(Object callback,Object take,Object scene,Object controller,Object bridge,Object autoSave,Object identity,long epoch){
             bitmapCallback=callback;takeCallback=take;this.scene=scene;this.controller=controller;this.bridge=bridge;this.autoSave=autoSave;this.identity=identity;this.epoch=epoch;startedMs=SystemClock.elapsedRealtime();
         }
@@ -65,20 +73,36 @@ public final class SavedUriHandoff169 {
         if(shot==null || transaction==null || completion==null)throw new NullPointerException();
         if(Looper.myLooper()==Looper.getMainLooper())throw new IllegalStateException("Photo encoding cannot run on UI thread");
         final Token token=shot.handoff;
+        final PublicationOutcome169.SaveAttempt attempt;
         synchronized(SavedUriHandoff169.class){
             if(token==null || ACTIVE.get(token.takeCallback)!=token || token.identity!=shot.shotIdentity || token.epoch!=shot.shotEpoch || token.terminal || token.saving || !token.dimensions)throw new IllegalStateException("No exact live capture handoff");
             if(transaction.staging.identity.exactSource!=shot.pixels || processedPair.identity!=transaction.staging.identity)throw new IllegalArgumentException("Transaction belongs to another captured image");
-            token.saving=true;
+            attempt=token.publication.beginSave();token.saving=true;
         }
         final Uri uri;
         try {
-            uri=transaction.savePair(processedPair,limits,codec);token.committed=uri;
-            PendingPhotoStore.Entry stored=new MediaStorePhotos(AppHook169.app).inspect(uri.toString(),transaction.staging.plan);
-            if(stored==null || !stored.owned || !stored.matching || stored.pending || stored.bytes<1)throw new IOException("Returned URI is not the committed owned transaction");
-        } catch(Exception failure) {
-            if(token.committed!=null){retire(token);postCommittedFailure(token,failure,completion);}
-            else fail(token,"save",failure);
+            uri=transaction.savePair(processedPair,limits,codec);
+            // The core sets this only after verifying exact URI, ownership, bytes and visible
+            // status. Read it before any Android URI conversion that could itself fail.
+            String receipt=transaction.staging.confirmedPublishedUri();
+            if(receipt==null)throw new IOException("No confirmed publication receipt returned");
+            token.publication.committed(attempt,receipt);
+            if(!receipt.equals(uri.toString()))throw new IOException("Returned URI differs from the confirmed transaction");
+        } catch(PhotoTransaction.PublicationUncertainException failure) {
+            PublicationOutcome169.UnconfirmedPhoto unconfirmed=new PublicationOutcome169.UnconfirmedPhoto(
+                failure.transactionId,failure.candidateUri,failure.expectedBytes,failure.identitySha256);
+            token.publication.uncertain(attempt,unconfirmed);retire(token);
+            postUncertain(token,unconfirmed,failure,completion);
             throw failure;
+        } catch(Exception failure) {
+            try{reportSaveFailure(token,attempt,transaction,failure,completion);}
+            catch(Exception|Error reporting){if(reporting!=failure)failure.addSuppressed(reporting);}
+            throw failure;
+        } catch(Error error) {
+            Exception failure=new IOException("Photo save worker terminated",error);
+            try{reportSaveFailure(token,attempt,transaction,failure,completion);}
+            catch(Exception|Error reporting){if(reporting!=error)error.addSuppressed(reporting);}
+            throw error;
         }
         retire(token);
         final int width=transaction.staging.identity.frame.width,height=transaction.staging.identity.frame.height;
@@ -97,6 +121,15 @@ public final class SavedUriHandoff169 {
             completion.finished(uri,failure);
         }))completion.finished(uri,new IOException("Photo is committed but UI handler is unavailable; UI cleanup not executed"));
         return uri;
+    }
+    private static void reportSaveFailure(Token token,PublicationOutcome169.SaveAttempt attempt,
+            AndroidPhotoTransaction transaction,Exception failure,Completion completion){
+        String receipt=transaction.staging.confirmedPublishedUri();
+        if(receipt!=null){
+            if(token.publication.snapshot().kind==PublicationOutcome169.Kind.PUBLISHING)
+                token.publication.committed(attempt,receipt);
+            retire(token);postCommittedFailure(token,failure,completion);
+        }else failSave(token,attempt,"save",failure);
     }
     private static void cleanupSuccess(Token t,int width,int height)throws Exception {
         Exception error=null;
@@ -118,7 +151,17 @@ public final class SavedUriHandoff169 {
     }
     static void fail(Token token,String stage,Exception failure) {
         if(token==null)return;
-        synchronized(SavedUriHandoff169.class){if(token.terminal || token.committed!=null)return;retire(token);}
+        synchronized(SavedUriHandoff169.class){if(token.terminal || !token.publication.failBeforePublication())return;retire(token);}
+        postImageError(token,stage,failure);
+    }
+    private static void failSave(Token token,PublicationOutcome169.SaveAttempt attempt,String stage,Exception failure){
+        synchronized(SavedUriHandoff169.class){
+            if(token.terminal)return;
+            token.publication.failedSave(attempt);retire(token);
+        }
+        postImageError(token,stage,failure);
+    }
+    private static void postImageError(Token token,String stage,Exception failure){
         new Handler(Looper.getMainLooper()).post(()->{
             try {call(token.bitmapCallback,"onImageError",new Class<?>[]{int.class,int.class},-1,-1);}
             catch(Exception callback){failure.addSuppressed(callback);android.util.Log.e("ULike169","Original capture failure cleanup failed at "+stage,failure);}
@@ -126,8 +169,34 @@ public final class SavedUriHandoff169 {
     }
     private static void postCommittedFailure(Token token,Exception failure,Completion completion){
         if(!new Handler(Looper.getMainLooper()).post(()->{
-            Exception combined=attempt(failure,()->cleanupUiWithoutSuccess(token));completion.finished(token.committed,combined);
-        })){failure.addSuppressed(new IOException("UI handler unavailable; UI cleanup not executed"));completion.finished(token.committed,failure);}
+            Exception combined=attempt(failure,()->cleanupUiWithoutSuccess(token));completion.finished(Uri.parse(token.publication.snapshot().committedUri),combined);
+        })){failure.addSuppressed(new IOException("UI handler unavailable; UI cleanup not executed"));completion.finished(Uri.parse(token.publication.snapshot().committedUri),failure);}
+    }
+    private static void postUncertain(Token token,PublicationOutcome169.UnconfirmedPhoto photo,
+            PhotoTransaction.PublicationUncertainException failure,Completion completion){
+        // No saved listener, last-photo assignment, media scan, or onImageError is emitted.
+        // The transaction journal retains the same URI so a later check cannot insert a duplicate.
+        try{
+            if(new Handler(Looper.getMainLooper()).post(()->{
+                try{
+                    attempt(failure,()->cleanupUiWithoutSuccess(token));
+                    attempt(failure,()->android.widget.Toast.makeText(AppHook169.app,
+                        "保存結果を確認できません。保存済みの可能性があります。ギャラリーを確認してください。",
+                        android.widget.Toast.LENGTH_LONG).show());
+                }catch(Error uiError){
+                    failure.addSuppressed(uiError);throw uiError;
+                }finally{deliverUncertainty(completion,photo,failure);}
+            }))return;
+            failure.addSuppressed(new IOException("Publication is unconfirmed and the UI handler is unavailable; UI cleanup/message not executed"));
+        }catch(RuntimeException|Error dispatch){if(dispatch!=failure)failure.addSuppressed(dispatch);}
+        deliverUncertainty(completion,photo,failure);
+    }
+    private static void deliverUncertainty(Completion completion,PublicationOutcome169.UnconfirmedPhoto photo,Exception failure){
+        try{completion.publicationUncertain(photo,failure);}
+        catch(Exception|Error callback){
+            if(callback!=failure)failure.addSuppressed(callback);
+            android.util.Log.e("ULike169","Unconfirmed publication callback failed; recovery journal remains available",failure);
+        }
     }
     /** Restore camera/shutter controls without asserting successful photo inspection or firing save-success listeners. */
     private static void cleanupUiWithoutSuccess(Token t)throws Exception {
@@ -143,7 +212,7 @@ public final class SavedUriHandoff169 {
     }
     private static synchronized void retire(Token token){if(ACTIVE.get(token.takeCallback)==token)ACTIVE.remove(token.takeCallback);token.terminal=true;RETIRED.removeIf(r->r.get()==null);RETIRED.add(new WeakReference<>(token.takeCallback));}
     private interface Action {void run()throws Exception;}
-    private static Exception attempt(Exception before,Action action){try{action.run();}catch(Exception failure){if(before==null)return failure;before.addSuppressed(failure);}return before;}
+    private static Exception attempt(Exception before,Action action){try{action.run();}catch(Exception failure){if(before==null)return failure;if(before!=failure)before.addSuppressed(failure);}return before;}
     private static void exact(Object value,String name){if(value==null || !value.getClass().getName().equals(name))throw new IllegalArgumentException("Unreviewed callback class: "+name);}
     private static Object call(Object target,String name)throws Exception{return call(target,name,new Class<?>[0]);}
     private static Object call(Object target,String name,Class<?>[] signature,Object...args)throws Exception{return invoke(target.getClass().getMethod(name,signature),target,args);}

@@ -89,3 +89,55 @@ layouts, actual script syntax, mocked one-shot late-update behavior, defensive
 parsing and Lua-to-Java roundtrip, plus SDK36 compilation and D8 min26. Host
 fixtures do not establish device rendering, visual equivalence, full-resolution
 coordinate calibration or all-lens/all-mode app integration.
+
+
+## Current native topology diagnostic (D1)
+
+The opt-in `--observe-draw` private instrumenter now adds a second original
+observer after the G1 wrapper. It copies the current position attribute,
+`TEXCOORD0` UVs, all bounded submesh descriptors and each submesh's current
+`indicesCount` prefix from its selected 16- or 32-bit index vector. Unused
+backing indices are not mistaken for draw indices. It also reads the material
+slot count of the native generated `makeupEntity` renderer; it does not
+substitute the authored component entity's renderer when that generated entity
+is absent. Native initialization assigns `templateMesh` to this generated
+renderer, and a later native path updates its material list. These assignments
+are pinned instruction evidence, not a claim about which face occupies a slot.
+
+D1 has its own message ID `0x554c4401` and `NativeDrawObservation.Collector`.
+Records are BEGIN, MESH, contiguous VTX chunks, ordered SUB records with
+contiguous IDX chunks, and END. All scalar data is copied before transport
+callbacks. The parser checks owner identity, nonce, complete sequence, finite
+float32 values, UV/position counts, index extents, declared storage counts,
+component/submesh order, full ends and cross-feature face-count agreement.
+Errors poison the collector. Limits are 8,192 vertices per component, 32,768
+vertices and 262,144 exported indices per feature, 64 submeshes per component,
+65,536 backing indices per submesh and 24 MiB of total incoming text. Missing
+CPU buffers, out-of-range indices and absent generated-renderer components
+produce ERROR; the observer never changes `clearAfterUpload` or engine mode.
+A missing generated entity is recorded with material count `-1`, not interpreted
+as proof that a face is inactive.
+
+`Frame.requireSamePositions(G1Frame)` checks the same owner/nonce and exact
+component, face-eligibility and position snapshots across G1/D1. Because G1's
+transport happens before D1's snapshot, this rejects an observed intervening
+position change. It does not prove that the SDK algorithm result belongs to the
+submitted photo or that the final GPU draw uses these unchanged buffers.
+UV values are current native values, not enlarged authored UVs. Primitive
+codes are retained as observed; non-triangle primitives are not converted.
+Material-to-submesh mapping, active face IDs, final matrices, material state and
+whole-pipeline order remain unproven. All production-verification flags remain
+false, and D1 is not installed in the app candidate.
+
+`LEGACY_OPACITY_EVIDENCE.json` separately pins Purity's supplied legacy shader
+and controller. Its output alpha depends on material alpha, intensity and the
+interpolated `attOpacity` attribute. The slider controller supplies only one of
+those factors. The new Amazing-mesh observer does not expose that legacy
+attribute. A read-only native opacity array or a verified same-still diagnostic
+render is still required; using the slider as a substitute would be incorrect.
+
+Author validation includes six actual privately instrumented scripts, Lua
+reentrant-buffer mutation tests, missing/invalid native field rejection,
+32-bit and zero-count index streams, defensive Java parsing, G1/D1 cross-checks,
+SDK36 compilation and D8. The existing independent-review report describes its
+explicit older G1 source pins until a new review is generated.

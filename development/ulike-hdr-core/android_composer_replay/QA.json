@@ -1,21 +1,26 @@
 {
   "schema": "ulike-composer-replay-qa-1",
   "host_checks": "PASS 1137 composer replay checks",
+  "native_boundary_checks": "PASS 568 native composer boundary/owned argument checks; live barriers unavailable",
   "actual_export_checks": "PASS 2 actual export replay rejections",
   "sdk36_compile": true,
   "d8_min_api": 26,
-  "dex_bytes": 27880,
+  "dex_bytes": 38108,
   "source_sha256": {
     "src/com/hiro/ulike/composer/ComposerCommand.java": "5ec13c5aa12697505221da85bb686c0d0153e927e03bec2fa845121e7058a05c",
     "src/com/hiro/ulike/composer/ComposerJournal.java": "ea3e708835d1b7e5c1541b9583b2476a2c251ce6214ecc49051fdb8c0529bc98",
     "src/com/hiro/ulike/composer/ExactResourceMap.java": "970553556b0d4778cf9653c7238bb46c3768840284152d960a9d802408f10eab",
+    "src/com/hiro/ulike/composer/NativeComposerBoundary.java": "36dabc60cb3505b30ab708436e0e8e21da464618b35362a51238fced91d1e303",
+    "src/com/hiro/ulike/composer/NativeComposerHooks.java": "5b1a221ddffa16768cf494488c6846b070de08b2a6a92c9aceb685e2fb8c259a",
+    "src/com/hiro/ulike/composer/ObservedComposerArguments.java": "aa1b08b2e5898c6d5dbb7c3b6ff45be174b46b3d2caa826d885a6134b0723062",
     "src/com/hiro/ulike/composer/RecordInvokerCommands.java": "1906c792b666205e17d73c2037800c56d3c71247a79f2802932883f45b695bfd",
     "src/com/hiro/ulike/composer/ReplayPlan.java": "9d2690176ba2bb2c82682eacecaeb539edf823821438ed962c938ce84ac63a72",
     "src/com/hiro/ulike/composer/V164ReplayAudit.java": "b2b6b0c959fce2efca3d1ea8215146e428745e3c87d4cda16c8b8304add58b01",
     "test/com/hiro/ulike/composer/ComposerReplayTest.java": "29059099b72e5e30fa79cf4a6d21780911f44d9cf7cc14a370b292db917999e7",
+    "test/com/hiro/ulike/composer/NativeComposerBoundaryTest.java": "bd159a67f3650b01a687599675539ccc76fdcec325530a739cc9ba64c85b08b6",
     "test/com/ss/android/medialib/RecordInvoker.java": "47921f58afb69a0989a61fa4d073db36df370352ab51a24841abfa17b2e80f58",
-    "test/com/ss/android/vesdk/VEEffectParams.java": "bcd1017084788e1ec780594f8481a057b5ba2f7672a4a6b7ef7a78e8691a08f6",
-    "verify.py": "ea4909f46a5cec2d8111c6c7ed1c81390cdecb73445fad7334707262e15bba63"
+    "test/com/ss/android/vesdk/VEEffectParams.java": "ed43fb493a04453b5e97b3a61ef9d719e6692d20251d437c073d1d6ab306b7b4",
+    "verify.py": "7685322601836a92a93f6fdcd74df9d5531374510f9991ba9eb82809ea69b17b"
   },
   "tools_sha256": {
     "android_sdk36": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
@@ -48,11 +53,24 @@
     },
     "public_fields": {
       "TYPE": "I",
+      "boolArrayValue": "Ljava/util/ArrayList;",
+      "boolValueOne": "Z",
+      "boolValueThree": "Z",
+      "boolValueTwo": "Z",
+      "floatArrayValue": "Ljava/util/ArrayList;",
+      "floatValueOne": "F",
+      "floatValueThree": "F",
+      "floatValueTwo": "F",
+      "intArrayValue": "Ljava/util/ArrayList;",
       "intValueOne": "I",
+      "intValueThree": "I",
       "intValueTwo": "I",
       "stringArrayOne": "Ljava/util/ArrayList;",
       "stringArrayThree": "Ljava/util/ArrayList;",
-      "stringArrayTwo": "Ljava/util/ArrayList;"
+      "stringArrayTwo": "Ljava/util/ArrayList;",
+      "stringValueOne": "Ljava/lang/String;",
+      "stringValueThree": "Ljava/lang/String;",
+      "stringValueTwo": "Ljava/lang/String;"
     },
     "public_mutable_static_constants": {
       "EFFECT_TYPE_APPEND_COMPOSER_WITH_TAG": 2,

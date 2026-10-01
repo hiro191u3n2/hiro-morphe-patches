@@ -7,7 +7,11 @@ public final class PixelOrientationEvidence {
             "mirror_after0", "mirror_after90", "mirror_after180", "mirror_after270"};
     /** NaN means dimensions cannot match; other values are mean absolute RGB8 error. */
     public static double[] measure(int[] source, int sw, int sh, int[] result, int rw, int rh) {
-        check(source,sw,sh); check(result,rw,rh);
+        return measure(source,sw,sh,result,rw,rh,AnalysisCapacity.legacyDiagnostic());
+    }
+    public static double[] measure(int[] source,int sw,int sh,int[] result,int rw,int rh,AnalysisCapacity capacity) {
+        if(capacity==null || !capacity.comparePhotographicOrientation)throw new IllegalArgumentException("Explicit photographic orientation policy required");
+        check(source,sw,sh,capacity);check(result,rw,rh,capacity);
         double[] error = new double[8];
         for (int transform=0;transform<8;transform++) {
             int rotation=transform%4;
@@ -30,8 +34,9 @@ public final class PixelOrientationEvidence {
         }
         return error;
     }
-    private static void check(int[] pixels,int w,int h) {
-        if (pixels==null || w<1 || h<1 || (long)w*h>4194304 || (long)w*h!=pixels.length)
+    private static void check(int[] pixels,int w,int h,AnalysisCapacity capacity) {
+        capacity.requireDiagnostic(w,h);
+        if (pixels==null || (long)w*h!=pixels.length)
             throw new IllegalArgumentException("Invalid bounded pixel array");
     }
 }

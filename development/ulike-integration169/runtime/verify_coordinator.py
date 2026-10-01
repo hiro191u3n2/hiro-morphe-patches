@@ -44,10 +44,10 @@ def main():
         tests = sorted((HERE / "test").glob("*.java"))
         host_sources = [CORE / "android_style_binding/src/com/hiro/ulike/binding/ShotStyleSettings.java"]
         host_sources += [HERE / "src/com/hiro/ulike/integration169" / name for name in
-                         ("CapturedSettings169.java", "ProcessingSequence169.java")]
+                         ("CapturedSettings169.java", "ProcessingSequence169.java", "PublicationOutcome169.java")]
         run([JDK / "javac", "--release", "8", "-d", root / "host", *host_sources, *tests])
         host = {}
-        for cls in ("com.hiro.ulike.integration169.ProcessingSequence169Test", "com.hiro.ulike.binding.CapturedSettings169Test"):
+        for cls in ("com.hiro.ulike.integration169.ProcessingSequence169Test", "com.hiro.ulike.binding.CapturedSettings169Test", "com.hiro.ulike.integration169.PublicationOutcome169Test"):
             host[cls] = run([JDK / "java", "-cp", root / "host", cls])
         sources = production_sources()
         before = {str(path.relative_to(WORK)): sha(path) for path in sources}
@@ -76,12 +76,14 @@ def main():
             "native_calibrated_plan_provider_implemented": False,
             "native_full_style_binding_provider_implemented": False,
             "native_replay_and_restore_barriers_complete": False,
-            "publication_exception_commit_status": "May be unknown if publication succeeded but confirming inspection failed; a thrown save exception does not prove unsaved",
-            "full_resolution_4080x3060_analysis": "Rejected before preview pause by our conservative 4194304-pixel diagnostic guard; not a proven intrinsic vendor SDK limit; no resize",
+            "publication_exception_commit_status": "Typed uncertainty has a separate terminal UI/callback route; in-flight save authority suppresses external unsaved failures; confirmed core receipt survives later Android URI conversion failure",
+            "full_resolution_4080x3060_analysis": "Explicit AnalysisCapacity native-size candidate and Streaming ownership are connected; no resize or int[P] input staging, diagnostic consumed/closed before neural/HDR processing; device memory/geometry unverified",
             "excluded_unconnected_app_modules": ["native_geometry_contract (standalone diagnostic parser, no application provider connection)"],
             "host_scope": ["ordered stages", "failure at every stage", "exception and linkage error cleanup",
                            "post-commit cleanup distinction", "exact identity cancellation", "20 concurrent admission/cancel races",
-                           "interrupt preservation", "canonical actual request snapshot serialization"],
+                           "interrupt preservation", "canonical actual request snapshot serialization",
+                           "publication save authority and 100 terminal outcome races",
+                           "blocked save suppresses 200 external failure attempts across eventual commit/uncertainty"],
             "not_tested_by_this_report": ["Android camera/native SDK/ORT/MediaCodec/MediaStore execution", "visual native style parity", "all lenses/modes"],
             "source_sha256": before,
             "test_sha256": {str(p.relative_to(APP)): sha(p) for p in tests + [Path(__file__)]},

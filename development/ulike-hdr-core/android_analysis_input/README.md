@@ -29,17 +29,44 @@ certify native coordinates, mesh routing, chroma siting, mask precision, rendere
 ordering or original style equivalence. Setup still requires a complete replay
 of the captured composer state; no guessed setup or license bypass is provided.
 
-The current diagnostic bridge imposes a conservative guard of 4,194,304 pixels.
-This is our code's present bound, not an established native SDK or sensor limit.
-This module retains that guard and rejects a 4080×3060 frame before allocating
-analysis pixels. It does not silently make a smaller proxy or claim that native
-12.5MP processing is complete. Raising or replacing this limit requires a
-reviewed memory/lifecycle path and real-device calibration, not a larger UI
-resolution setting. No Android device was run by the host verification.
+The copying `prepare`/`Owned` API retains its legacy 4,194,304-pixel guard.
+That is application policy, not an established native SDK or sensor limit.
+The new `prepareStreaming(..., AnalysisCapacity.nativeSize4080x3060Candidate())`
+preflights the actual input grid and a known-payload policy before native startup.
+It streams every captured-rendition pixel directly into one Bitmap, computes the
+same ULSP digest, and moves that Bitmap through `StockStillAnalysis.runOwned`
+and `StockStillFaceProbe.runOwned` without downstream Bitmap copies. Its
+`Streaming.descriptor()` becomes available after successful row transfer.
+No full photographic int[P] orientation raster is allocated on this route;
+orientation calibration remains explicit and unresolved.
 
-`verify.py` compiles against SDK36, creates DEX, checks ownership/failure paths
-with actual immutable HdrFrame/SdrRendition objects, and independently computes
-all 3,072 fixture pixels and both hashes in Python. Tests include settings
-mutation, metadata/pixel changes, interrupted transfer, failed begin/row/finish,
-cleanup failure, reentrant use, repeated use, exact allocation bounds and the
-actual reported 4080×3060 input rejection. All fixture pixels are synthetic.
+`OwnedBitmapSubmission`/`SubmissionOwnership` enforce one transfer and one native
+submission. Closing an outer owner after transfer cannot recycle native input.
+Only a successful native stop/unregister/uninit sequence releases that Bitmap;
+failed cleanup retains it, callbacks and lease in process quarantine and blocks
+another probe. A callback image is copied at most once after exact grid and
+submission checks. Duplicate/early callbacks fail before a second copy.
+
+`RenderedDiagnostic.consume` lets the binding validate the sole owned int[P]
+array directly into `DiagnosticSkinMask`'s byte[P], then wipes/releases the
+integer array on success or failure. Its borrowed array must not escape the
+consumer. Native-size `.pixels()` deliberately rejects, preventing an accidental
+second full ARGB clone; `close()` discards unused diagnostics. This is still an
+8-bit sampled diagnostic, potentially from a lower-resolution native mask.
+
+The explicit candidate accepts 4080×3060 and its transposition, at most
+12,484,800 pixels with either side at most 4080. Its calculated known callback
+payload is 15P + one row = 187,288,320 bytes, covering P010, one Bitmap, one SDK
+callback and one owned diagnostic. Baseline app, native/GPU/model memory,
+allocator behavior, Bitmap stride and extra callback activity are additional;
+this is not a total-heap admission guarantee or device capability claim.
+A 5712×4284 raster remains rejected, and no interpolation manufactures detail.
+
+`verify.py` compiles against SDK36 and creates DEX. It independently compares
+all 3,072 nonuniform fixture pixels and hashes in Python, then streams all
+12,484,800 pixels of a second fixture under a 64MiB **host** Java heap and
+independently verifies both full-grid digests. This latter test covers P010 and
+row rendering only, not Android Bitmap/native/model memory. Separate host checks
+exercise transfer/release/quarantine, failure/cancellation/alias handling,
+diagnostic consumption, and full-grid callback geometry. No Android device was
+run and native geometry, completion order and actual capacity remain unverified.

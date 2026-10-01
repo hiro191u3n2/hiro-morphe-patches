@@ -28,6 +28,9 @@ APIS={
 }
 CONSTANTS={'EFFECT_TYPE_SET_COMPOSER_WITH_TAG':0,'EFFECT_TYPE_APPEND_COMPOSER_WITH_TAG':2,'EFFECT_TYPE_RELOAD_COMPOSER_WITH_TAG':1,'EFFECT_TYPE_REPLACE_COMPOSER_WITH_TAG':3}
 FIELDS={'TYPE':'I','intValueOne':'I','intValueTwo':'I','stringArrayOne':'Ljava/util/ArrayList;','stringArrayTwo':'Ljava/util/ArrayList;','stringArrayThree':'Ljava/util/ArrayList;'}
+FIELDS.update({'boolArrayValue':'Ljava/util/ArrayList;','boolValueOne':'Z','boolValueTwo':'Z','boolValueThree':'Z',
+ 'floatArrayValue':'Ljava/util/ArrayList;','floatValueOne':'F','floatValueTwo':'F','floatValueThree':'F',
+ 'intArrayValue':'Ljava/util/ArrayList;','intValueThree':'I','stringValueOne':'Ljava/lang/String;','stringValueTwo':'Ljava/lang/String;','stringValueThree':'Ljava/lang/String;'})
 ARCHIVES={'natural':('ULike_Natural_blush_1790815043265.zip','5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0'),'purity':('ULike_Purity2_1790815028634.zip','cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117')}
 def stock(dex_root):
  from loguru import logger
@@ -93,12 +96,12 @@ def main():
   temp=pathlib.Path(tmp);host=temp/'host';host.mkdir();android=temp/'android';android.mkdir();dex=temp/'dex';dex.mkdir()
   evidence,fixture=archives(args.upload,temp)
   run([jdk/'javac','-d',host,*production,*tests,fixture])
-  host_result=run([jdk/'java','-cp',host,'com.hiro.ulike.composer.ComposerReplayTest']);exports_result=run([jdk/'java','-cp',host,'com.hiro.ulike.composer.ActualExports'])
+  host_result=run([jdk/'java','-cp',host,'com.hiro.ulike.composer.ComposerReplayTest']);boundary_result=run([jdk/'java','-cp',host,'com.hiro.ulike.composer.NativeComposerBoundaryTest']);exports_result=run([jdk/'java','-cp',host,'com.hiro.ulike.composer.ActualExports'])
   run([jdk/'javac','-source','8','-target','8','-bootclasspath',sdk,'-d',android,*production])
   run([jdk/'java','-cp',r8,'com.android.tools.r8.D8','--min-api','26','--lib',sdk,'--output',dex,*sorted(android.rglob('*.class'))])
-  report={'schema':'ulike-composer-replay-qa-1','host_checks':host_result,'actual_export_checks':exports_result,'sdk36_compile':True,'d8_min_api':26,'dex_bytes':(dex/'classes.dex').stat().st_size,
+  report={'schema':'ulike-composer-replay-qa-1','host_checks':host_result,'native_boundary_checks':boundary_result,'actual_export_checks':exports_result,'sdk36_compile':True,'d8_min_api':26,'dex_bytes':(dex/'classes.dex').stat().st_size,
    'source_sha256':{str(p.relative_to(ROOT)):sha(p) for p in production+tests+[ROOT/'verify.py']},'tools_sha256':{'android_sdk36':sha(sdk),'r8':sha(r8)},
    'dependency_source_sha256':{'../android_face_backend/verify_stock_contract.py':sha(ROOT.parent/'android_face_backend/verify_stock_contract.py')},'actual_stock_contract':stock(args.dex_root),'actual_uploaded_exports':evidence,'live_hook_coverage_installed':False,'source_native_queue_barrier_implemented':False,'target_native_queue_barrier_implemented':False,'device_sdk_replay_tested':False,'full_style_replay_available':False,
    'scope':'Exact API transcript capture/guard/replay logic with ordinary SDK command adapter; only synthetic host Preconditions and barrier receipts are used in tests.'}
-  (ROOT/'QA.json').write_text(json.dumps(report,indent=2)+'\n');print(host_result);print(exports_result);print('PASS SDK36 + D8; exact stock signatures and tag field routes')
+  (ROOT/'QA.json').write_text(json.dumps(report,indent=2)+'\n');print(host_result);print(boundary_result);print(exports_result);print('PASS SDK36 + D8; exact stock signatures and tag field routes')
 if __name__=='__main__':main()

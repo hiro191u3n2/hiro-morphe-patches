@@ -1,0 +1,98 @@
+{
+  "status": "PASS_INDEPENDENT_D1_TOPOLOGY_DIAGNOSTIC_REVIEW",
+  "parser": {
+    "checks": 331393,
+    "vertices": 32768,
+    "indices": 262144,
+    "native_execution": false
+  },
+  "lua_mock": {
+    "mock_cases": 21,
+    "max_vertices": 32768,
+    "max_requested_indices": 262144,
+    "max_packets": 3082,
+    "native_execution": false,
+    "checks": [
+      "all scalar snapshotting precedes first external message",
+      "both attribute widths",
+      "index prefix excludes unused storage",
+      "generated renderer absence never substitutes authored renderer",
+      "previous late hook runs first and on subsequent calls"
+    ]
+  },
+  "actual_pinned_script_scope": {
+    "loaded_actual_private_scripts": 6,
+    "selected_scripts": [
+      {
+        "style": "natural",
+        "feature": "AmazingFeature1",
+        "original_script_sha256": "2744310a943847735bba3a1c807dcc59cb71ed800d1870a6ba1c227432369df4",
+        "patched_script_sha256": "a49606e8188de94aa0af87bd0508e7715989b77050e363d29fa13232f2636faf"
+      },
+      {
+        "style": "purity",
+        "feature": "AmazingFeature1",
+        "original_script_sha256": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "patched_script_sha256": "2358b229badda8220eef5e48e653e8914b862a754bfcf363877912e8d187b7ee"
+      },
+      {
+        "style": "purity",
+        "feature": "AmazingFeature3",
+        "original_script_sha256": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "patched_script_sha256": "2e6e684e34839c435aa9ef15b1ac574a9a4cf07e35f981d42f73e909216772dc"
+      },
+      {
+        "style": "purity",
+        "feature": "AmazingFeature5",
+        "original_script_sha256": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "patched_script_sha256": "0e4f8fe46d2058bffb0f9d4402e900d1a1e4d613d5341b1fe1c9ee47ba7b262c"
+      },
+      {
+        "style": "purity",
+        "feature": "AmazingFeature6",
+        "original_script_sha256": "72e71f471eb030784cb78c2538a32bedb8c40067b674230aa7abadf2c012a4be",
+        "patched_script_sha256": "0a1dd2c80b92e09fbb3419bf36bb9270dce379dcff3009bdb9a1860e81ff25f6"
+      },
+      {
+        "style": "purity",
+        "feature": "AmazingFeature7",
+        "original_script_sha256": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "patched_script_sha256": "17587dc1a00caff3c6194b7913caf0a5fc01eaca0ae81139d518ea6c9e035c5b"
+      }
+    ],
+    "unexpected_d1_targets": 0,
+    "default_draw_observer_disabled": true,
+    "script_load_only": true,
+    "native_script_execution": false
+  },
+  "native_static": {
+    "effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+    "independent_instruction_checks": 24,
+    "independent_string_checks": 4,
+    "scope": "Exact bounded accessor/getter and generated-renderer static slices, not execution, frame attribution, or final GPU state.",
+    "native_addresses_invoked": false
+  },
+  "reviewed_file_sha256": {
+    "native_geometry_contract/src/com/hiro/ulike/geometry/NativeDrawObservation.java": "7d1a38edbb7e6187cc89b5efd2267fe23408d29b809d85391efe7fbc85de1e8f",
+    "native_geometry_contract/src/com/hiro/ulike/geometry/NativeMeshObservation.java": "781b4d33a5dbd13a080579d604affdbd582c349fcb4dbcb56c69e67d064e551d",
+    "native_geometry_contract/draw_geometry.lua.in": "de4533e34989b13e1fcf1b9ab8b23eb04662bf27e0d047a7551117b3bfdd33b0",
+    "native_geometry_contract/late_geometry.lua.in": "dcddfe98dc71db4762812b4a5099a91af930400658fb8508ed259408a49a4da0",
+    "native_geometry_contract/instrument_geometry.py": "4e42528efa1f7ee6cfca19eef2f04c0662cc789ddebbdd5cd0783e7a44424b8d",
+    "native_geometry_contract/verify_native.py": "5a090e980f8badcf70387552e9735a647cc2b04365c8c20c482f84994957e46e",
+    "android_style_binding/instrument_style.py": "a5621e63153dc16986132bf298b95128c133f106b46a2b1217eac8f72c39513a",
+    "android_style_binding/SCRIPT_OBSERVER_PINS.json": "a0da442474bb1563590b7c2988661bb5cfe1c7d22ad422f3aaae48435187e994",
+    "native_geometry_contract/review_draw/DrawReview.java": "1a20a44ffd131767d4b5da8a090fbbd4ccb5434354be0eca202b951225423de5",
+    "native_geometry_contract/review_draw/verify.py": "7f1335677d34f3d527ab707cca3954eacacf981e8479b7c868d0d00ebc15a7aa"
+  },
+  "blocking_findings": [],
+  "limitations": [
+    "D1 captures CPU vertex/UV/topology snapshots, not final GPU draw state or matrices.",
+    "Declared face IDs and generated-renderer material counts do not establish active face routing or submesh/material mapping.",
+    "G1/D1 equality tests confirm snapshots match; they do not establish source-frame attribution or callback timing.",
+    "Purity2 legacy attOpacity is not observed by D1.",
+    "Real phone/native callback execution, production binding and complete beauty engine remain unverified."
+  ],
+  "android_device_execution": false,
+  "actual_native_callbacks": false,
+  "production_geometry_verified": false
+}

@@ -37,3 +37,36 @@ Only original `.java`, `.py`, `.sh`, this README and JSON reports belong to the
 source checkpoint. Generated reference TSV files, `*.private.*`, `*.class`,
 `private_build` and original decompiler output are local investigation material, not source
 deliverables. No original APK or native library is included.
+
+## Additional composer observation transform
+
+`validate_composer.sh` builds a separate private
+`composer-observation-partial.dex` using
+`PrepareComposerObservation171.java`, then independently reconstructs all 13
+original methods using `VerifyComposerObservation171.java`. Ten original native
+composer writers have exactly one direct DEX caller each, all inside the hooked
+wrappers. The verification covers the whole original multidex for those exact
+writers; it does not cover reflection, internal native writers or other effect
+APIs. The core `NativeComposerHooks` entry points are compile-time disabled, and
+this delta is excluded from both MPPs.
+
+The 13-method delta overlaps the three methods of the older lifetime-only delta.
+They are alternatives and must not be blindly combined. Existing recorder
+admission, constructor and worker-family coverage remains incomplete. Generic
+composer argument defaults and full-array counts are checked conservatively;
+unsupported requests invalidate the journal. Initialization arguments and native
+handle observation do not establish asynchronous native initialization or final
+render completion. Actual app initialization listeners enqueue more composer
+work, so a normal listener return cannot close the restoration barrier.
+
+`QA_COMPOSER_OBSERVATION.json` contains only authored-source hashes, method
+identifiers, hashes and bounded findings. Private deltas, complete call TSVs,
+original APKs and original method bodies remain excluded from source delivery.
+
+`verify_restore_barrier.py` additionally pins the original native-init callback
+method's raw code hash. Its only normal return follows an unconditional
+`mIsRenderReady=true` store, including the negative-status branch. The Boolean
+therefore cannot establish successful native initialization. The bounded
+`RESTORATION_BARRIER_FINDINGS.json` also references the three already verified
+app asynchronous restoration edges. Run with the existing caller-owned
+`models168/python_deps`; it does not execute native code or device callbacks.

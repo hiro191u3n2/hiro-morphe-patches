@@ -13,13 +13,17 @@ def main():
  env=os.environ.copy();env['ORT_DISABLE_TELEMETRY']='1';env['PYTHONPATH']=str(WORK/'models168/python_deps')+os.pathsep+str(WORK/'models168/emulation_deps')
  logs={}
  effect=WORK/'models168/inputs/stock/split_config.arm64_v8a/lib/arm64-v8a/libeffect.so'
+ logs['legacy_opacity']=run(['python3',ROOT/'verify_legacy_opacity.py','--purity',a.purity,'--output',ROOT/'LEGACY_OPACITY_EVIDENCE.json'],env)
  logs['native_evidence']=run(['python3',ROOT/'verify_native.py','--effect',effect,'--output',ROOT/'EVIDENCE.json'],env)
  with tempfile.TemporaryDirectory(prefix='ulike-geometry-qa-') as t:
   tmp=Path(t);packets=tmp/'packets.txt';classes=tmp/'classes';classes.mkdir()
+  draw_packets=tmp/'draw_packets.txt'
+  logs['draw_lua']=run(['python3',ROOT/'test/test_draw_observer.py',a.natural,a.purity,draw_packets],env)
   logs['lua']=run(['python3',ROOT/'test/test_observer.py',a.natural,a.purity,packets],env)
   files=list((ROOT/'src').rglob('*.java'))+list((ROOT/'test').rglob('*.java'))+[CORE/'android_style_binding/src/com/hiro/ulike/binding/AuthoredMesh.java']
   logs['javac']=run([a.jdk_bin/'javac','--release','8','-d',classes,*files],env)
   logs['parser']=run([a.jdk_bin/'java','-Xmx64m','-cp',classes,'com.hiro.ulike.geometry.ObservationContracts',packets],env)
+  logs['draw_parser']=run([a.jdk_bin/'java','-Xmx64m','-cp',classes,'com.hiro.ulike.geometry.DrawContracts',draw_packets],env)
   logs['pinned_mesh_layouts']=run([a.jdk_bin/'java','-Xmx64m','-cp',classes,'com.hiro.ulike.geometry.PinnedMeshContracts',a.natural,a.purity],env)
   android=WORK/'models168/tools/android.jar';dex=tmp/'dex';dex.mkdir();androidClasses=tmp/'android';androidClasses.mkdir()
   logs['android_compile']=run([a.jdk_bin/'javac','-source','8','-target','8','-bootclasspath',android,'-d',androidClasses,*list((ROOT/'src').rglob('*.java'))],env)

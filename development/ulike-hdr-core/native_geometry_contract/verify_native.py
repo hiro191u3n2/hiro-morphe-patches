@@ -25,6 +25,25 @@ ANCHORS={
 0x48f074:('ldrb','w1, [x8, #0x279]'),0x48f14c:('bl','#0x677470'),0x677478:('ldr','x0, [x0, #0x130]'),0x677488:('ldr','x8, [x0]'),0x67748c:('ldr','x1, [x8, #0x88]'),0x677498:('mov','x0, xzr')}
 STRINGS={0x1210abc:'templateMesh',0x122e28d:'makeupEntity',0x117cf3b:'FaceMakeupV2System',0x126bf6c:'onLateUpdate',0x125bd71:'getAttributeData',0x125b982:'TEXCOORD7',0x1188789:'getUseAmazing',0x1183a32:'getAMGScene'}
 RELOCATIONS={0x18ddfc8:0x845684,0x18e0928:0x8627e8,0x19810a8:0x1188789,0x19810b0:0x48f008,0x19810b8:0x1183a32,0x19810c0:0x48f0e0}
+
+# Current topology accessors and generated renderer assignment; never a face-ID inference.
+ANCHORS.update({
+0xa3eff0:('add','x1, x1, #0x93c'),0xa3eff4:('mov','w2, #6'),
+0xa405e0:('add','x0, x0, #0xbae'),0xa405e4:('add','x1, x1, #0xe58'),
+0xa41e58:('b','#0xe6a2f4'),0xe6a2f4:('add','x0, x0, #0xd8'),
+0xa410a8:('add','x0, x0, #0xd47'),0xa410f4:('add','x8, x8, #0x3fc'),
+0xa43404:('tbnz','w1, #0x1f, #0xa43440'),0xa43408:('ldr','x8, [x0, #0xd8]'),0xa4341c:('cmp','w9, w1'),0xa43420:('b.le','#0xa43440'),
+0xa3f988:('add','x2, x2, #0xb1a'),0xa3f934:('add','x8, x8, #0xe50'),0xa3fe70:('add','x0, x19, #0x60'),
+0xa3fa04:('add','x2, x2, #0xb24'),0xa3f9b0:('add','x8, x8, #0xfc4'),0xa3ffe4:('add','x0, x19, #0x68'),
+0xa3fa18:('add','x0, x0, #0xb2e'),0xa3fa1c:('add','x1, x1, #0xd8'),
+0xa400f8:('add','x8, x19, #0x150'),0xa400fc:('ldr','w0, [x8]'),
+0xa3faa0:('add','x2, x2, #0xb3b'),0xa3fa60:('add','x8, x8, #0x204'),0xa40204:('b','#0xf170b0'),0xf170b0:('ldr','w0, [x0, #0x70]'),
+0xa3fe30:('ldrb','w0, [x0, #0x14b]'),
+0x861b5c:('str','x0, [x19, #0xe8]'),0x861b60:('bl','#0x593cd8'),0x861b64:('add','x20, x19, #0xf0'),
+0x861b74:('ldr','x0, [x19, #0xf0]'),0x861b80:('ldr','x1, [x19, #0x90]'),0x861b84:('ldr','x8, [x8, #0xe0]'),0x861b88:('blr','x8'),
+0x862bf0:('ldr','x22, [x19, #0xf0]'),0x862bfc:('ldrb','w24, [x22, #0xd0]'),0x862c08:('mov','x0, x22'),0x862c0c:('bl','#0xac1964')})
+STRINGS.update({0x125b93c:'TEXCOORD0',0x125bbae:'submeshes',0x125bd47:'getSubMesh',0x125bb1a:'indices16',0x125bb24:'indices32',0x125bb2e:'indicesCount',0x125bb3b:'primitive'})
+
 def sha(b):return hashlib.sha256(b).hexdigest()
 def verify(path):
  from elftools.elf.elffile import ELFFile
@@ -48,7 +67,7 @@ def verify(path):
   if rel.get(a)!=v:raise ValueError('vtable/registration mismatch')
  if b[offset(0x13278bc):offset(0x13278bc)+4]!=bytes.fromhex('00611a3c'):raise ValueError('attribute width branch table')
  return {'status':'PASS_PINNED_STATIC_GEOMETRY_PATH','effect_sha256':EFFECT,'instruction_checks':len(ANCHORS),'string_checks':len(STRINGS),'relocation_checks':len(RELOCATIONS),
-  'facts':{'effect_component_template_mesh_getter_offset':'0x90','native_same_field_updated':True,'scene_system_updates_precede_lua_late_update_event':'0x44e','getter':'Mesh.getAttributeData(semantic, start, count)','position_attribute_for_selected_2d_meshes':'TEXCOORD7=13/two floats except Purity eyelash POSITION=0/three floats','count_bound':'positive count clamped to min(mesh vertex count minus start, count); observer always uses start=0','face_routing':'component update may compact active faces; faceIds is declared eligibility, not verified final draw range','legacy_v2_getAMGScene':'registered; may return null, do not force setUseAmazing'},
+  'facts':{'effect_component_template_mesh_getter_offset':'0x90','native_same_field_updated':True,'scene_system_updates_precede_lua_late_update_event':'0x44e','getter':'Mesh.getAttributeData(semantic, start, count)','position_attribute_for_selected_2d_meshes':'TEXCOORD7=13/two floats except Purity eyelash POSITION=0/three floats','count_bound':'positive count clamped to min(mesh vertex count minus start, count); observer always uses start=0','face_routing':'component update may compact active faces; faceIds is declared eligibility, not verified final draw range','legacy_v2_getAMGScene':'registered; may return null, do not force setUseAmazing','native_draw_snapshot':'TEXCOORD0=6; Mesh.submeshes; bounded getSubMesh; indicesCount prefix of selected indices16/indices32; generated makeupEntity renderer receives templateMesh but final face/material mapping remains unproven'},
   'not_proven':{'picture_callback_after_late_update':False,'same_still_algorithm_attribution':False,'all_active_face_ranges':False,'no_future_mesh_overwrite':False,'exact_render_matrices_uvs_and_draw_state':False,'legacy_v2_per_vertex_opacity':False,'android_device_execution':False}}
 if __name__=='__main__':
  p=argparse.ArgumentParser(description=__doc__);p.add_argument('--effect',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args();out=verify(a.effect);out['verifier_sha256']=sha(Path(__file__).read_bytes());a.output.write_text(json.dumps(out,indent=2)+'\n');print(out['status'],out['instruction_checks'])

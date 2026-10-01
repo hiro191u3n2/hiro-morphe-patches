@@ -23,7 +23,7 @@ public final class TransactionTest {
     interface Throwing {void run()throws Exception;}
     private static void reject(Throwing operation,String label)throws Exception{try{operation.run();throw new AssertionError("accepted "+label);}catch(IOException|IllegalArgumentException|IllegalStateException expected){checks++;}}
     static final class Store implements PendingPhotoStore {
-        final Path root;String fault;
+        final Path root;String fault;boolean publicationAttempted;int publicationCalls;
         Store(Path root,String fault)throws IOException{this.root=root;this.fault=fault;Files.createDirectories(root);}
         private Path meta(String id){return root.resolve(id+".meta");}
         private Path image(String id){return root.resolve(id+".heic");}
@@ -34,6 +34,7 @@ public final class TransactionTest {
             }
         }
         public String insertPending(Plan plan)throws IOException{
+            publicationAttempted=false;
             Files.createFile(image(plan.transactionId));record(plan,true,true);
             if("crash_insert".equals(fault))Runtime.getRuntime().halt(88);
             return "test://"+plan.transactionId;
@@ -50,15 +51,22 @@ public final class TransactionTest {
             if("cancel_write".equals(fault))Thread.currentThread().interrupt();
         }
         public void publish(String uri,Plan plan)throws IOException{
-            Entry before=inspect(uri,plan);if(before==null || !before.pending || !before.owned || !before.matching)throw new IOException("not owned pending");record(plan,false,true);
+            Entry before=inspect(uri,plan);if(before==null || !before.pending || !before.owned || !before.matching)throw new IOException("not owned pending");
+            publicationAttempted=true;publicationCalls++;
+            if("pending_unknown".equals(fault))throw new IOException("publish failed before update; confirming query will also fail");
+            record(plan,false,true);
             if("crash_publish".equals(fault))Runtime.getRuntime().halt(88);
             if("publish_throw".equals(fault))throw new IOException("provider error after committed update");
         }
         public Entry inspect(String uri,Plan plan)throws IOException{
+            if(publicationAttempted && ("inspect_after_publish_io".equals(fault) || "pending_unknown".equals(fault)))throw new IOException("confirming query unavailable");
+            if(publicationAttempted && "inspect_after_publish_runtime".equals(fault))throw new SecurityException("confirming query access lost");
             String id=id(uri);if(!Files.exists(meta(id)))return null;
             try(DataInputStream in=new DataInputStream(Files.newInputStream(meta(id)))){
                 String storedId=in.readUTF(),identity=in.readUTF();long date=in.readLong();boolean pending=in.readBoolean(),owned=in.readBoolean();
-                return new Entry(uri,owned,storedId.equals(plan.transactionId)&&identity.equals(plan.identitySha256)&&date==plan.dateTakenMs,pending,Files.size(image(id)));
+                String observed=publicationAttempted && "inspect_after_publish_wrong_uri".equals(fault)?uri+"-different":uri;
+                long bytes=Files.size(image(id));if(publicationAttempted && "inspect_after_publish_wrong_bytes".equals(fault))bytes++;
+                return new Entry(observed,owned,storedId.equals(plan.transactionId)&&identity.equals(plan.identitySha256)&&date==plan.dateTakenMs,pending,bytes);
             }
         }
         public List<Entry> find(Plan plan)throws IOException{
@@ -158,8 +166,30 @@ public final class TransactionTest {
             check(!store.inspect(published,tx.plan).pending,"provider error after commit reconciled by actual row");
         }
         store.fault="";check(store.photos()==2 && store.pending()==0,"unique names preserve previous photo");
+        int visible=2;
+        for(String fault:new String[]{"inspect_after_publish_io","inspect_after_publish_runtime","inspect_after_publish_wrong_uri","inspect_after_publish_wrong_bytes","pending_unknown"}){
+            store.fault=fault;PhotoTransaction.PublicationUncertainException uncertain=null;int calls=store.publicationCalls;
+            try(PhotoTransaction tx=PhotoTransaction.begin(root,identity(),store,16*1024*1024)){
+                try{tx.savePair(pair(tx),new GainmapSave.QualityLimits(.2,.4,.08),PhotoTestCodecFactory.open(codec,fault));throw new AssertionError("unknown publication returned success");}
+                catch(PhotoTransaction.PublicationUncertainException failure){
+                    uncertain=failure;check(failure.candidateUri.equals("test://"+tx.plan.transactionId),"uncertain exact candidate URI");
+                    check(failure.transactionId.equals(tx.plan.transactionId) && failure.identitySha256.equals(tx.plan.identitySha256) && failure.expectedBytes>0,"uncertain exact identity and expected bytes");
+                    reject(()->PhotoTransaction.reconcile(store,failure),"cannot reconcile while confirmation remains ambiguous");
+                    reject(()->tx.createPair(8),"no restaging or re-publication of attempted transaction");
+                }
+            }
+            check(uncertain!=null && store.publicationCalls==calls+1,"exactly one provider publication attempt");
+            check(transactions(root)==1,"unknown outcome retains its durable journal after close");
+            boolean pending=fault.equals("pending_unknown");if(!pending)visible++;
+            check(store.photos()==visible+(pending?1:0) && store.pending()==(pending?1:0),"uncertain close cannot remove candidate or completed photograph");
+            store.fault="";
+            check(PhotoTransaction.reconcile(store,uncertain)==(pending?PhotoTransaction.PublicationState.PENDING:PhotoTransaction.PublicationState.PUBLISHED),"later exact read-only reconciliation");
+            check(store.publicationCalls==calls+1,"reconciliation never republishes");
+            check(PhotoTransaction.recover(root,store)==1 && transactions(root)==0,"startup recovers PUBLISHING journal");
+            check(store.photos()==visible && store.pending()==0,"recovery preserves every visible photograph and deletes only exact pending row");
+        }
         Path uninitialized=Files.createDirectory(root.resolve("tx-00000000-0000-0000-0000-000000000000"));Files.write(uninitialized.resolve("lock"),new byte[0]);Files.write(uninitialized.resolve("journal.new"),new byte[]{1,2});
         check(PhotoTransaction.recover(root,store)==1 && !Files.exists(uninitialized),"restart clears uninitialized private transaction");
-        System.out.println("{\"checks\":"+checks+",\"successful_photo_files\":2,\"max_geometry_tile_workspace\":"+maxGeometryWorkspace+",\"published_first_uri\":\""+success+"\",\"android_media_store_executed\":false}");
+        System.out.println("{\"checks\":"+checks+",\"successful_photo_files\":"+visible+",\"uncertain_publication_cases\":5,\"max_geometry_tile_workspace\":"+maxGeometryWorkspace+",\"published_first_uri\":\""+success+"\",\"android_media_store_executed\":false}");
     }
 }

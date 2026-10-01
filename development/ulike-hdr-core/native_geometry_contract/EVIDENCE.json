@@ -1,8 +1,8 @@
 {
   "status": "PASS_PINNED_STATIC_GEOMETRY_PATH",
   "effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
-  "instruction_checks": 66,
-  "string_checks": 8,
+  "instruction_checks": 103,
+  "string_checks": 15,
   "relocation_checks": 6,
   "facts": {
     "effect_component_template_mesh_getter_offset": "0x90",
@@ -12,7 +12,8 @@
     "position_attribute_for_selected_2d_meshes": "TEXCOORD7=13/two floats except Purity eyelash POSITION=0/three floats",
     "count_bound": "positive count clamped to min(mesh vertex count minus start, count); observer always uses start=0",
     "face_routing": "component update may compact active faces; faceIds is declared eligibility, not verified final draw range",
-    "legacy_v2_getAMGScene": "registered; may return null, do not force setUseAmazing"
+    "legacy_v2_getAMGScene": "registered; may return null, do not force setUseAmazing",
+    "native_draw_snapshot": "TEXCOORD0=6; Mesh.submeshes; bounded getSubMesh; indicesCount prefix of selected indices16/indices32; generated makeupEntity renderer receives templateMesh but final face/material mapping remains unproven"
   },
   "not_proven": {
     "picture_callback_after_late_update": false,
@@ -23,5 +24,5 @@
     "legacy_v2_per_vertex_opacity": false,
     "android_device_execution": false
   },
-  "verifier_sha256": "3829e4067145227a51371332793ba8d3bf3b9913a7c705a9854ceff6ff5879cc"
+  "verifier_sha256": "5a090e980f8badcf70387552e9735a647cc2b04365c8c20c482f84994957e46e"
 }

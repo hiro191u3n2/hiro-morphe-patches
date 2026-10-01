@@ -280,7 +280,17 @@ public final class CameraBridge169 {
         // Owned pixels are now independent of ImageReader/CameraDevice. Processor must obtain
         // its real exclusive SDK lease before still analysis, and publish only processed pairs.
         final Processor current=processor;
-        try{new Thread(()->{try{if(current==null)throw new IllegalStateException("processor removed");current.process(shot);}catch(Exception e){SavedUriHandoff169.fail(shot.handoff,"process",e);android.util.Log.e("ULike169","Save processor failed",e);}finally{AppHook169.consumed(processingChoice);}},"ULikeSave169").start();}
+        try{new Thread(()->{
+            try{if(current==null)throw new IllegalStateException("processor removed");current.process(shot);}
+            catch(Exception e){SavedUriHandoff169.fail(shot.handoff,"process",e);android.util.Log.e("ULike169","Save processor failed",e);}
+            catch(Error error){
+                // Close the owned UI handoff before preserving the fatal worker error. The
+                // terminal publication latch suppresses false failure after commit/uncertainty.
+                SavedUriHandoff169.fail(shot.handoff,"process",new IllegalStateException("Save processor terminated",error));
+                throw error;
+            }
+            finally{AppHook169.consumed(processingChoice);}
+        },"ULikeSave169").start();}
         catch(RuntimeException | Error failure){AppHook169.consumed(processingChoice);SavedUriHandoff169.fail(shot.handoff,"worker",new IllegalStateException("Cannot start save worker",failure));throw failure;}
     }
     private static Object opticalRoute(CameraDevice device)throws Exception {

@@ -5,6 +5,8 @@ import android.graphics.Bitmap;
 import android.graphics.ColorSpace;
 import android.os.Build;
 import com.hiro.ulike.hdr.faceprobe.ProbeLedger;
+import com.hiro.ulike.hdr.faceprobe.AnalysisCapacity;
+import com.hiro.ulike.hdr.faceprobe.OwnedBitmapSubmission;
 import com.hiro.ulike.hdr.faceprobe.StockStillFaceProbe;
 import java.io.File;
 import java.io.FileInputStream;
@@ -59,19 +61,32 @@ public final class StockStillAnalysis {
                 (Build.VERSION.SDK_INT>=34 && encodedSdrProxy.hasGainmap()))throw new IllegalArgumentException("Explicit sRGB proxy without gain map required");
         Bitmap owned=encodedSdrProxy.copy(Bitmap.Config.ARGB_8888,false);
         if(owned==null)throw new IllegalStateException("Cannot own proxy");
+        OwnedBitmapSubmission moved=null;
+        try { moved=OwnedBitmapSubmission.adopt(owned,AnalysisCapacity.legacyDiagnostic());
+            return runOwned(lease,moved,newWorkspace,timeoutMillis,request,setup);
+        } finally { if(moved==null)owned.recycle();else moved.close(); }
+    }
+    /** Same private Bitmap is digested and moved to the probe. Only that probe joins/recycles it. */
+    public static Outcome runOwned(StockStillFaceProbe.IdleSdkLease lease,OwnedBitmapSubmission input,
+            File newWorkspace,long timeoutMillis,Request request,EffectSetup setup)throws Exception {
+        if(lease==null || input==null || request==null)throw new NullPointerException();
+        if(setup==null && !request.features.isEmpty())throw new IllegalArgumentException("Script features require an actual effect setup");
+        if(setup!=null)verifyEffectLibrary(lease.context());
+        input.capacity.requireTransferredPayload(input.width,input.height);
         StillMessageCollector collector=new StillMessageCollector(request.nonce,request.features);
-        Observer observer=new Observer(lease,request,setup,collector);
+        Observer observer=new Observer(lease,request,setup,collector,input.capacity);
+        boolean delivered=false;
         try {
-            String proxySha=digest(owned);
-            ProbeLedger.Snapshot nativeEvidence=StockStillFaceProbe.run(lease,owned,newWorkspace,timeoutMillis,observer);
+            String proxySha=digest(input.borrowBeforeTransfer());
+            ProbeLedger.Snapshot nativeEvidence=StockStillFaceProbe.runOwned(lease,input,newWorkspace,timeoutMillis,observer);
             StillMessageCollector.Snapshot messages=collector.finish();
-            return new Outcome(request,proxySha,nativeEvidence,observer.snapshot(),messages,observer.imageSnapshot());
+            Outcome result=new Outcome(request,proxySha,nativeEvidence,observer.snapshot(),messages,observer.imageSnapshot());
+            delivered=true;return result;
         } finally {
-            // Called only after the underlying probe's native joins / quarantine.
-            // Its private Bitmap copy is retained there if teardown was unsafe.
-            collector.fail("Run ended");
-            observer.close();
-            owned.recycle();
+            collector.fail("Run ended");observer.close();
+            if(!delivered && observer.imageSnapshot()!=null)observer.imageSnapshot().close();
+            // No Bitmap recycle here: unsafe native joins retain the transferred Bitmap in quarantine.
+            input.close();
         }
     }
     private static final class Observer implements StockStillFaceProbe.RawObserver {
@@ -79,12 +94,13 @@ public final class StockStillAnalysis {
         private final Request request;
         private final EffectSetup setup;
         private final StillMessageCollector collector;
+        private final AnalysisCapacity capacity;
         private boolean closed,submitted;
         private SdkFaceSnapshot snapshot;
         private RenderedDiagnostic image;
         private Object messageListener;
-        Observer(StockStillFaceProbe.IdleSdkLease lease,Request request,EffectSetup setup,StillMessageCollector collector) {
-            this.lease=lease;this.request=request;this.setup=setup;this.collector=collector;
+        Observer(StockStillFaceProbe.IdleSdkLease lease,Request request,EffectSetup setup,StillMessageCollector collector,AnalysisCapacity capacity) {
+            this.lease=lease;this.request=request;this.setup=setup;this.collector=collector;this.capacity=capacity;
         }
         @Override public void beforeSubmit(Object recorder) throws Exception {
             ClassLoader loader=lease.context().getClassLoader();
@@ -115,7 +131,7 @@ public final class StockStillAnalysis {
         @Override public boolean observesImage() { return request.captureRenderedDiagnostic; }
         @Override public synchronized void image(int[] ownedPixels,int width,int height) {
             if(closed || !submitted || image!=null)throw new IllegalStateException("Unexpected repeated diagnostic image");
-            image=new RenderedDiagnostic(request.nonce,width,height,ownedPixels);
+            image=new RenderedDiagnostic(request.nonce,width,height,ownedPixels,capacity);
         }
         @Override public void awaitAdditional(long timeoutMillis) throws Exception { collector.awaitComplete(timeoutMillis); }
         synchronized RenderedDiagnostic imageSnapshot() { return image; }
@@ -147,20 +163,51 @@ public final class StockStillAnalysis {
         int w=bitmap.getWidth(),h=bitmap.getHeight();
         updateInt(digest,w);updateInt(digest,h);
         int[] row=new int[w];
-        for(int y=0;y<h;y++) { bitmap.getPixels(row,0,w,0,y,w,1);for(int pixel:row)updateInt(digest,pixel); }
-        StringBuilder out=new StringBuilder(64);for(byte b:digest.digest())out.append(String.format(java.util.Locale.ROOT,"%02x",b&255));return out.toString();
+        try {
+            for(int y=0;y<h;y++) {
+                if(Thread.currentThread().isInterrupted())throw new InterruptedException("Analysis digest cancelled");
+                bitmap.getPixels(row,0,w,0,y,w,1);for(int pixel:row)updateInt(digest,pixel);
+            }
+            StringBuilder out=new StringBuilder(64);for(byte b:digest.digest())out.append(String.format(java.util.Locale.ROOT,"%02x",b&255));return out.toString();
+        } finally { java.util.Arrays.fill(row,0); }
     }
     private static void updateInt(MessageDigest d,int value) { d.update((byte)(value>>>24));d.update((byte)(value>>>16));d.update((byte)(value>>>8));d.update((byte)value); }
     /** Raw packed SDK render pixels. Channel packing, transfer and mask-grid
      * alignment are observations to calibrate, not silently assumed contracts. */
-    public static final class RenderedDiagnostic {
+    public interface DiagnosticConsumer<T> {
+        /** Borrowed owned array is wiped after return/throw. Do not retain it or return an alias. */
+        T consume(int[] borrowedPixels,int width,int height)throws Exception;
+    }
+    public static final class RenderedDiagnostic implements AutoCloseable {
         public final int nonce,width,height;
-        private final int[] pixels;
-        private RenderedDiagnostic(int nonce,int width,int height,int[] ownedPixels) {
-            if(width<1 || height<1 || (long)width*height>4194304 || ownedPixels==null || ownedPixels.length!=(long)width*height)throw new IllegalArgumentException("Diagnostic grid");
+        private int[] pixels;
+        private boolean consuming;
+        private RenderedDiagnostic(int nonce,int width,int height,int[] ownedPixels,AnalysisCapacity capacity) {
+            capacity.requireDiagnostic(width,height);
+            if(ownedPixels==null || ownedPixels.length!=(long)width*height)throw new IllegalArgumentException("Diagnostic grid");
             this.nonce=nonce;this.width=width;this.height=height;pixels=ownedPixels;
         }
-        public int[] pixels() { return pixels.clone(); }
+        /** Legacy small-image snapshot. Native-size candidates must use consuming conversion. */
+        public synchronized int[] pixels() {
+            if(pixels==null || consuming)throw new IllegalStateException("Diagnostic already consumed");
+            if(pixels.length>AnalysisCapacity.LEGACY_MAX_PIXELS)throw new IllegalStateException("Native-size diagnostic requires consuming conversion");
+            return pixels.clone();
+        }
+        public synchronized <T> T consume(DiagnosticConsumer<T> consumer)throws Exception {
+            if(consumer==null)throw new NullPointerException("consumer");
+            if(pixels==null || consuming)throw new IllegalStateException("Diagnostic already consumed");
+            consuming=true;
+            try {
+                if(Thread.currentThread().isInterrupted())throw new InterruptedException("Diagnostic conversion cancelled");
+                T value=consumer.consume(pixels,width,height);
+                if(value==pixels)throw new IllegalArgumentException("Borrowed diagnostic alias cannot escape");
+                return value;
+            } finally { java.util.Arrays.fill(pixels,0);pixels=null;consuming=false; }
+        }
+        @Override public synchronized void close() {
+            if(consuming)throw new IllegalStateException("Reentrant close during diagnostic conversion");
+            if(pixels!=null){java.util.Arrays.fill(pixels,0);pixels=null;}
+        }
     }
     public static final class Outcome {
         public final Request request;

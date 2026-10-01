@@ -69,18 +69,32 @@ public final class StockStillFaceProbe {
 
     public static ProbeLedger.Snapshot run(IdleSdkLease lease, Bitmap encodedSdrProxy,
                                            File newWorkspace, long callbackTimeoutMillis, RawObserver observer) throws Exception {
-        if (observer == null) throw new NullPointerException("observer");
-        if (lease == null || encodedSdrProxy == null || newWorkspace == null) throw new NullPointerException();
-        if (Looper.myLooper() == Looper.getMainLooper()) throw new IllegalStateException("Run off the UI thread");
-        if (callbackTimeoutMillis < 1 || callbackTimeoutMillis > 30000) throw new IllegalArgumentException("Deadline");
-        if (encodedSdrProxy.getConfig() != Bitmap.Config.ARGB_8888 || encodedSdrProxy.isRecycled())
-            throw new IllegalArgumentException("Supply an explicit analysis-only encoded SDR ARGB_8888 proxy");
-        if (!ColorSpace.get(ColorSpace.Named.SRGB).equals(encodedSdrProxy.getColorSpace()) ||
-                (Build.VERSION.SDK_INT >= 34 && encodedSdrProxy.hasGainmap()))
-            throw new IllegalArgumentException("Probe accepts an sRGB analysis proxy without a gain map");
-        final int width = encodedSdrProxy.getWidth(), height = encodedSdrProxy.getHeight();
-        final ProbeLedger ledger = new ProbeLedger(width, height);
-        final AtomicBoolean submitted = new AtomicBoolean();
+        if(encodedSdrProxy==null)throw new NullPointerException("proxy");
+        AnalysisCapacity capacity=AnalysisCapacity.legacyDiagnostic();
+        capacity.requireGrid(encodedSdrProxy.getWidth(),encodedSdrProxy.getHeight());
+        if(encodedSdrProxy.isRecycled() || encodedSdrProxy.getConfig()!=Bitmap.Config.ARGB_8888 ||
+                !ColorSpace.get(ColorSpace.Named.SRGB).equals(encodedSdrProxy.getColorSpace()) ||
+                (Build.VERSION.SDK_INT>=34 && encodedSdrProxy.hasGainmap()))throw new IllegalArgumentException("Explicit sRGB proxy required");
+        Bitmap copy=encodedSdrProxy.copy(Bitmap.Config.ARGB_8888,false);
+        if(copy==null)throw new IllegalStateException("Cannot own input Bitmap");
+        OwnedBitmapSubmission moved=null;
+        try { moved=OwnedBitmapSubmission.adopt(copy,capacity);return runOwned(lease,moved,newWorkspace,callbackTimeoutMillis,observer); }
+        finally { if(moved==null)copy.recycle();else moved.close(); }
+    }
+
+    /** Consumes a private Bitmap through an exclusive claim; never copies its pixels for orientation
+     * unless the explicit capacity policy requests that separate photographic diagnostic. */
+    public static ProbeLedger.Snapshot runOwned(IdleSdkLease lease,OwnedBitmapSubmission submission,
+            File newWorkspace,long callbackTimeoutMillis,RawObserver observer)throws Exception {
+        if(observer==null || lease==null || submission==null || newWorkspace==null)throw new NullPointerException();
+        if(Looper.myLooper()==Looper.getMainLooper())throw new IllegalStateException("Run off the UI thread");
+        if(callbackTimeoutMillis<1 || callbackTimeoutMillis>30000)throw new IllegalArgumentException("Deadline");
+        final AnalysisCapacity capacity=submission.capacity;
+        final int width=submission.width,height=submission.height;
+        capacity.requireTransferredPayload(width,height);
+        submission.borrowBeforeTransfer(); // Reject reuse before acquiring/initializing anything native.
+        final ProbeLedger ledger=new ProbeLedger(width,height,capacity);
+        final AtomicBoolean submitted=new AtomicBoolean(),imageSeen=new AtomicBoolean(),callbacksActive=new AtomicBoolean(true);
         synchronized (SERIAL) {
             if (quarantined != null) throw new IllegalStateException("Previous native teardown failed; do not reuse process");
             lease.requireInitializedAndNoOtherRecorder();
@@ -100,14 +114,20 @@ public final class StockStillFaceProbe {
             String models = (String)call(env, "getDetectModelsDir", new Class<?>[0]);
             if (models == null || models.isEmpty()) throw new IllegalStateException("Normal SDK model directory unavailable");
 
-            final Bitmap owned = encodedSdrProxy.copy(Bitmap.Config.ARGB_8888, false);
-            if (owned == null) throw new IllegalStateException("Cannot own the input bitmap");
-            final int[] originalPixels = new int[width * height];
-            owned.getPixels(originalPixels, 0, width, 0, 0, width, height);
-            Object recorder = null;
+            // Transfer occurs only after read-only preflight. Any failure thereafter is protected by joins/finally.
+            final int[][] originalPixels=new int[1][];
+            final Object[] quarantineSlots=new Object[8];
             List<Object> callbackRefs = new ArrayList<>();
+            final SubmissionOwnership.Claim<Bitmap> claim=submission.transferToProbe();
+            final Bitmap owned=claim.resource();
+            Object recorder = null;
             boolean initializedAttempt = false, startedAttempt = false, registeredAttempt = false, teardown = true;
             try {
+                if(Thread.currentThread().isInterrupted())throw new InterruptedException("Analysis cancelled before initialization");
+                if(capacity.comparePhotographicOrientation) {
+                    originalPixels[0]=new int[width*height];
+                    owned.getPixels(originalPixels[0],0,width,0,0,width,height);
+                }
                 Class<?> recorderType = Class.forName("com.ss.android.medialib.RecordInvoker", true, loader);
                 recorder = recorderType.getConstructor().newInstance();
                 Class<?> initType = Class.forName("com.ss.android.medialib.listener.NativeInitListener", false, loader);
@@ -134,30 +154,30 @@ public final class StockStillFaceProbe {
                 lease.requireInitializedAndNoOtherRecorder();
                 Class<?> faceType = Class.forName("com.ss.android.medialib.RecordInvoker$FaceResultCallback", false, loader);
                 Object face = callback(loader, faceType, (name, values) -> {
-                    if (!name.equals("onResult")) return;
+                    if (!name.equals("onResult") || !callbacksActive.get()) return;
                     try {
                         copyFaces(values[1], ledger);
                         if (submitted.get()) observer.face(values[0], values[1]);
                     }
-                    catch (Exception e) { ledger.fail("Face callback rejected: " + e.getClass().getSimpleName()); }
+                    catch (Exception | Error e) { ledger.fail("Face callback rejected: " + e.getClass().getSimpleName()); }
                 });
                 callbackRefs.add(face); registeredAttempt = true;
                 call(recorder, "registerFaceResultCallback", new Class<?>[]{boolean.class,faceType}, true, face);
                 Class<?> pictureType = Class.forName("com.ss.android.medialib.RecordInvoker$OnPictureCallbackV2", false, loader);
                 Object picture = callback(loader, pictureType, (name, values) -> {
                     if (name.equals("onImage")) {
-                        int[] pixels = (int[])values[0];
                         try {
-                            ledger.orientationEvidence(PixelOrientationEvidence.measure(originalPixels,width,height,
-                                    pixels,(Integer)values[1],(Integer)values[2]));
-                        } catch (RuntimeException e) { ledger.fail("Invalid render pixels"); }
-                        ledger.rendered((Integer)values[1], (Integer)values[2], pixels == null ? -1 : pixels.length);
-                        try {
-                            if (observer.observesImage()) {
-                                if (!submitted.get()) throw new IllegalArgumentException("Diagnostic image before submission");
-                                observer.image(OwnedRenderPixels.copy(pixels,(Integer)values[1],(Integer)values[2],width,height), width, height);
-                            }
-                        } catch (Exception e) { ledger.fail("Diagnostic image observer rejected: " + e.getClass().getSimpleName()); }
+                            if(!callbacksActive.get())return;
+                            if(!submitted.get() || !imageSeen.compareAndSet(false,true))throw new IllegalArgumentException("Early/repeated image callback");
+                            int[] pixels=(int[])values[0];int rw=(Integer)values[1],rh=(Integer)values[2];
+                            capacity.requireDiagnostic(rw,rh);
+                            if(rw!=width || rh!=height || pixels==null || pixels.length!=(long)width*height)
+                                throw new IllegalArgumentException("Unexpected callback grid");
+                            if(originalPixels[0]!=null)ledger.orientationEvidence(PixelOrientationEvidence.measure(
+                                originalPixels[0],width,height,pixels,rw,rh,capacity));
+                            if(observer.observesImage())observer.image(OwnedRenderPixels.copy(pixels,rw,rh,width,height,capacity),width,height);
+                            ledger.rendered(rw,rh,pixels.length); // Completion only after synchronous ownership conversion.
+                        } catch(Exception|Error e) { ledger.fail("Diagnostic callback rejected: "+e.getClass().getSimpleName()); }
                     } else if (name.equals("onResult")) ledger.status((Integer)values[0], (Integer)values[1]);
                 });
                 callbackRefs.add(picture);
@@ -165,8 +185,10 @@ public final class StockStillFaceProbe {
                 Object imageFrame = frameType.getConstructor(Bitmap.class, int.class).newInstance(owned, 2);
                 observer.beforeSubmit(recorder);
                 lease.requireInitializedAndNoOtherRecorder();
+                if(Thread.currentThread().isInterrupted())throw new InterruptedException("Analysis cancelled before submission");
                 ledger.submit();
                 observer.submitted();
+                claim.submitted();
                 submitted.set(true);
                 requireZero(call(recorder, "renderPicture", new Class<?>[]{frameType,int.class,int.class,pictureType},
                         imageFrame, width, height, picture), "renderPicture");
@@ -175,13 +197,24 @@ public final class StockStillFaceProbe {
                 ledger.fail("Probe failed: " + e.getClass().getSimpleName());
                 if (e instanceof InterruptedException) Thread.currentThread().interrupt();
             } finally {
+                // Late callbacks after timeout/closure must not allocate another full diagnostic.
+                // Already in-flight callbacks still require the real joins below; this flag is no join receipt.
+                callbacksActive.set(false);
                 // Never call stop/unregister from the face callback worker itself:
                 // both can join that worker. Keep bitmap/callbacks alive until join.
                 if (recorder != null && startedAttempt) teardown &= cleanup(recorder, "stopPlay", ledger, true);
                 if (recorder != null && registeredAttempt) teardown &= cleanup(recorder, "unRegisterFaceResultCallback", ledger, false);
                 if (recorder != null && initializedAttempt) teardown &= cleanup(recorder, "uninitBeautyPlay", ledger, true);
-                if (teardown) owned.recycle();
-                else quarantined = new Object[]{recorder, owned, callbackRefs, lease};
+                if(teardown) {
+                    try { claim.joined(true); }
+                    catch(RuntimeException|Error failure) { teardown=false;ledger.fail("Bitmap release failed"); }
+                    if(teardown && originalPixels[0]!=null)java.util.Arrays.fill(originalPixels[0],0);
+                } else claim.joined(false);
+                if(!teardown) {
+                    quarantineSlots[0]=recorder;quarantineSlots[1]=submission;quarantineSlots[2]=claim;quarantineSlots[3]=owned;
+                    quarantineSlots[4]=originalPixels;quarantineSlots[5]=callbackRefs;quarantineSlots[6]=lease;quarantineSlots[7]=observer;
+                    quarantined=quarantineSlots;
+                }
             }
             return ledger.finish(teardown);
         }
@@ -226,7 +259,7 @@ public final class StockStillFaceProbe {
             Object value = call(receiver, name, new Class<?>[0]);
             if (result) requireZero(value, name);
             return true;
-        } catch (Exception | LinkageError e) { ledger.fail("Teardown failed: " + name); return false; }
+        } catch (Exception | Error e) { ledger.fail("Teardown failed: " + name); return false; }
     }
     private static StockSdkIdentity verifyInstalledLibrary(Context context) throws Exception {
         File extracted = new File(context.getApplicationInfo().nativeLibraryDir, "libttvesdk.so");

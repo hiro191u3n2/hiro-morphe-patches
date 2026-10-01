@@ -2,6 +2,7 @@ package com.hiro.ulike.hdr.analysisinput;
 
 import com.hiro.ulike.hdr.color.SdrRendition;
 import com.hiro.ulike.hdr.input.HdrFrame;
+import com.hiro.ulike.hdr.faceprobe.AnalysisCapacity;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -18,6 +19,7 @@ import java.util.Arrays;
  */
 public final class AnalysisInput {
     private AnalysisInput() {}
+    /** Historical name; this is our legacy diagnostic policy, not a measured SDK limit. */
     public static final int SDK_MAX_PIXELS = 4194304;
     public static final class Budget {
         public final int maxPixels;
@@ -70,7 +72,7 @@ public final class AnalysisInput {
                 }
                 interrupted();target.complete();return new Submission(descriptor);
             } catch(Exception|Error failure) {
-                if(begun)try{target.abort();}catch(Exception|Error cleanup){failure.addSuppressed(cleanup);}
+                if(begun)try{target.abort();}catch(Exception|Error cleanup){if(cleanup!=failure)failure.addSuppressed(cleanup);}
                 throw failure;
             } finally {
                 if(row!=null)Arrays.fill(row,0);Arrays.fill(pixels,0);pixels=null;transferring=false;
@@ -105,6 +107,69 @@ public final class AnalysisInput {
             Descriptor descriptor=new Descriptor(frame,nonce,source,settings,hex(proxy.digest()),geometryId,policy);
             succeeded=true;return new Owned(descriptor,argb);
         } finally {if(!succeeded)Arrays.fill(argb,0);}
+    }
+    /** One-shot row renderer. Holds the immutable P010 source, never an int[width*height] raster.
+     * Its proxy descriptor becomes available only after successful transfer of every row.
+     */
+    public static final class Streaming implements AutoCloseable {
+        public final int width,height;
+        public final AnalysisCapacity capacity;
+        private SdrRendition rendition;
+        private final HdrFrame frame;
+        private final String geometry,settings,source,policy;
+        private final int nonce;
+        private Descriptor descriptor;
+        private boolean transferring,consumed;
+        private Streaming(SdrRendition rendition,String geometry,String settings,String source,String policy,int nonce,AnalysisCapacity capacity) {
+            this.rendition=rendition;frame=rendition.hdrSource().frameIdentity();width=frame.width;height=frame.height;this.geometry=geometry;
+            this.settings=settings;this.source=source;this.policy=policy;this.nonce=nonce;this.capacity=capacity;
+        }
+        public synchronized boolean available(){return !consumed && !transferring;}
+        public synchronized Descriptor descriptor(){
+            if(descriptor==null)throw new IllegalStateException("Proxy digest is established only after successful row transfer");return descriptor;
+        }
+        public synchronized Submission transfer(RowTarget target)throws Exception {
+            if(target==null)throw new NullPointerException("target");
+            if(consumed || transferring)throw new IllegalStateException("Streaming analysis already consumed");
+            transferring=true;int[] row=null;boolean begun=false;
+            try {
+                interrupted();row=new int[width];
+                MessageDigest proxy=digest();proxy.update(new byte[]{'U','L','S','P',1});putInt(proxy,width);putInt(proxy,height);
+                begun=true;target.begin(width,height);
+                for(int y=0;y<height;y++) {
+                    interrupted();
+                    for(int x=0;x<width;x++) {
+                        int rgb=rendition.rgb8(frame,x,y);require((rgb&0xff000000)==0,"RGB24 renderer required");
+                        row[x]=0xff000000|rgb;putInt(proxy,row[x]);
+                    }
+                    target.row(y,row);
+                }
+                interrupted();
+                Descriptor complete=new Descriptor(frame,nonce,source,settings,hex(proxy.digest()),geometry,policy);
+                target.complete();descriptor=complete;return new Submission(complete);
+            } catch(Exception|Error failure) {
+                if(begun)try{target.abort();}catch(Exception|Error cleanup){if(cleanup!=failure)failure.addSuppressed(cleanup);}
+                throw failure;
+            } finally {
+                if(row!=null)Arrays.fill(row,0);rendition=null;consumed=true;transferring=false;
+            }
+        }
+        @Override public synchronized void close(){
+            if(transferring)throw new IllegalStateException("Reentrant close during streaming transfer");
+            rendition=null;consumed=true;
+        }
+    }
+    /** Preflights the actual raster before SDK pause/start; no resize, Bitmap, or full RGB array here. */
+    public static Streaming prepareStreaming(SdrRendition rendition,String geometryId,byte[] exactApplicationSettings,int nonce,AnalysisCapacity capacity)throws IOException {
+        if(rendition==null || capacity==null)throw new NullPointerException("rendition/capacity");
+        require(!capacity.comparePhotographicOrientation,"Streaming candidate requires separate explicit orientation calibration");
+        require(nonce>0,"positive request nonce required");id(geometryId);
+        require(exactApplicationSettings!=null && exactApplicationSettings.length>0 && exactApplicationSettings.length<=1048576,"exact bounded settings bytes required");
+        HdrFrame frame=rendition.hdrSource().frameIdentity();capacity.requireTransferredPayload(frame.width,frame.height);
+        require(rendition.frameIdentity()==frame && rendition.width()==frame.width && rendition.height()==frame.height,"exact same-size captured rendition required");
+        String policy=rendition.policyName();require(policy!=null && policy.length()>0 && policy.length()<=512,"bounded render policy required");
+        String settings=hex(digest().digest(exactApplicationSettings.clone()));
+        interrupted();return new Streaming(rendition,geometryId,settings,sourceDigest(frame),policy,nonce,capacity);
     }
     /** Streaming canonical digest of metadata and every immutable owned 10-bit sample. */
     public static String sourceDigest(HdrFrame frame) throws IOException {

@@ -111,7 +111,7 @@ def main():
             'P010 callback matching and saved-URI active paths are source reviewed; real Camera2, MediaStore UI, Samsung native inference, lens/focus speed and visual quality require device validation.',
             'Automatic-save handoff is the only implemented UI route; Bitmap editor and burst HDR modes are explicitly unsupported.',
             'A concrete coordinator now exists, but no trusted complete native plan/binding/restoration providers are installed; its separate source/sequence review is PROCESSOR_INDEPENDENT_REVIEW.json.',
-            'If underlying MediaStore publication succeeds but its confirming ownership read fails before savePair returns, commit is unknown. A thrown save exception does not establish that the photo is unsaved; recovery preserves visible rows.',
+            'If publication cannot be confirmed, a typed uncertainty route retains its journal and reports a candidate separately from success or unsaved failure. This artifact review does not execute Android handler/MediaStore recovery; host publication authority tests and the core independent uncertainty review cover separate contracts.',
             'High-resolution P010 alone does not establish sensor-native24.5MP input, chroma siting, or end-to-end stock appearance equivalence.'
         ]}
     args.report.write_text(json.dumps(report,indent=2)+'\n')

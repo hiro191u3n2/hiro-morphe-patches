@@ -22,12 +22,39 @@ import java.util.UUID;
 
 /** One photo, private staging then MediaStore pending-write/publish. Never overwrites an existing photo. */
 public final class PhotoTransaction implements AutoCloseable {
+    /** Publication was attempted but its outcome could not be verified. This is neither
+     * a save-success receipt nor proof that nothing was saved. Never automatically retry. */
+    public static final class PublicationUncertainException extends IOException {
+        public final String candidateUri,transactionId,identitySha256;
+        public final long expectedBytes;
+        private final PendingPhotoStore.Plan plan;
+        private PublicationUncertainException(String uri,PendingPhotoStore.Plan plan,long bytes,Throwable cause){
+            super("Photo publication outcome is unconfirmed; preserve the photo and reconcile transaction "+plan.transactionId,cause);
+            candidateUri=uri;transactionId=plan.transactionId;identitySha256=plan.identitySha256;
+            expectedBytes=bytes;this.plan=plan;
+        }
+    }
+    public enum PublicationState { PUBLISHED, PENDING }
+    /** Read-only reconciliation of the exact uncertain item; never inserts, publishes,
+     * deletes, or treats a pending/candidate URI as a successful save. */
+    public static PublicationState reconcile(PendingPhotoStore store,PublicationUncertainException uncertain)throws IOException{
+        if(store==null || uncertain==null)throw new NullPointerException();
+        PendingPhotoStore.Entry entry;
+        try{entry=store.inspect(uncertain.candidateUri,uncertain.plan);}
+        catch(IOException|RuntimeException|Error failure){throw new PublicationUncertainException(uncertain.candidateUri,uncertain.plan,uncertain.expectedBytes,failure);}
+        if(!exactEntry(entry,uncertain.candidateUri,uncertain.expectedBytes))
+            throw new PublicationUncertainException(uncertain.candidateUri,uncertain.plan,uncertain.expectedBytes,new IOException("Photo identity or byte count could not be reconciled"));
+        return entry.pending?PublicationState.PENDING:PublicationState.PUBLISHED;
+    }
+    private static boolean exactEntry(PendingPhotoStore.Entry entry,String uri,long bytes){
+        return entry!=null && uri.equals(entry.uri) && entry.owned && entry.matching && entry.bytes==bytes;
+    }
     private static final Object MANAGER_MONITOR=new Object();
     public final PhotoIdentity identity;public final PendingPhotoStore.Plan plan;
     private final PendingPhotoStore store;private final Path root,directory;private final long diskBudget;
     private final RandomAccessFile lockFile;private final FileLock lock;
     private final List<AutoCloseable> resources=new ArrayList<>();
-    private long reserved;private int files;private String uri="",phase="NEW";private boolean committed,closed;
+    private long reserved;private int files;private String uri="",phase="NEW";private boolean committed,closed,saveStarted,publicationAttempted,publicationUncertain;
     private PhotoTransaction(Path root,PhotoIdentity identity,PendingPhotoStore store,long diskBudget)throws IOException{
         if(identity==null || store==null || diskBudget<1 || diskBudget>8L*1024*1024*1024)throw new IllegalArgumentException("photo transaction contract");
         if(!Files.isDirectory(root,LinkOption.NOFOLLOW_LINKS) || Files.isSymbolicLink(root))throw new IOException("private transaction root must be a real directory");
@@ -46,7 +73,10 @@ public final class PhotoTransaction implements AutoCloseable {
             return new PhotoTransaction(privateRoot,identity,store,diskBudget);
         }}
     }
-    private void active()throws IOException{if(closed || committed)throw new IOException("photo transaction closed/committed");if(Thread.currentThread().isInterrupted())throw new IOException("photo transaction cancelled");}
+    private void active()throws IOException{if(closed || committed || publicationAttempted)throw new IOException("photo transaction closed/committed/publication attempted");if(Thread.currentThread().isInterrupted())throw new IOException("photo transaction cancelled");}
+    /** The core save receipt survives later URI conversion/UI/close failures. Never returns
+     * a pending or uncertain candidate and remains readable after close. */
+    public synchronized String confirmedPublishedUri(){return committed?uri:null;}
     public synchronized StoredRgb.Writer createRgb(StoredRgb.Precision precision,StoredRgb.Domain domain,double headroom)throws IOException{
         return createRgbFor(identity,precision,domain,headroom);
     }
@@ -74,19 +104,32 @@ public final class PhotoTransaction implements AutoCloseable {
     }
     public synchronized String savePair(GainmapMath.Image processedSdr,GainmapMath.Image processedHdr,double headroom,
             GainmapSave.QualityLimits limits,GainmapSave.Codec codec)throws IOException{
-        active();if(!identity.frame.equals(processedSdr.frame) || !identity.frame.equals(processedHdr.frame))throw new IllegalArgumentException("processed pair identity/dimensions changed");
+        active();if(saveStarted)throw new IOException("photo transaction save already attempted");
+        if(!identity.frame.equals(processedSdr.frame) || !identity.frame.equals(processedHdr.frame))throw new IllegalArgumentException("processed pair identity/dimensions changed");
+        saveStarted=true; // A pre-publication failure also cannot insert this UUID a second time.
         GainmapSave.Result complete=GainmapSave.prepare(processedSdr,processedHdr,headroom,limits,codec,directory);
         active();phase="INSERTING";journal(); // durable planned name closes insert-before-URI-journal crash gap.
         uri=store.insertPending(plan);if(uri==null || uri.isEmpty() || uri.length()>2048)throw new IOException("no pending MediaStore URI");
         phase="INSERTED";journal();
         store.writeAndSync(uri,plan,complete.file.fileBytes,complete.file::writeTo);
         active();PendingPhotoStore.Entry entry=store.inspect(uri,plan);
-        if(entry==null || !entry.owned || !entry.matching || !entry.pending || entry.bytes!=complete.file.fileBytes)throw new IOException("pending photo byte/ownership validation failed");
-        IOException publicationFailure=null;try{store.publish(uri,plan);}catch(IOException failure){publicationFailure=failure;}
-        try{entry=store.inspect(uri,plan);}catch(IOException failure){if(publicationFailure!=null)failure.addSuppressed(publicationFailure);throw failure;}
-        if(entry==null || !entry.owned || !entry.matching || entry.pending || entry.bytes!=complete.file.fileBytes){IOException failure=new IOException("photo publication not confirmed");if(publicationFailure!=null)failure.addSuppressed(publicationFailure);throw failure;}
+        if(!exactEntry(entry,uri,complete.file.fileBytes) || !entry.pending)throw new IOException("pending photo byte/ownership validation failed");
+        // A durable PUBLISHING record precedes the fallible provider call. Until an exact
+        // outcome is observed, close must retain this journal even if publication throws.
+        phase="PUBLISHING";journal();active();publicationAttempted=true;publicationUncertain=true;
+        Throwable publicationFailure=null;try{store.publish(uri,plan);}catch(IOException|RuntimeException|Error failure){publicationFailure=failure;}
+        try{entry=store.inspect(uri,plan);}catch(IOException|RuntimeException|Error failure){
+            PublicationUncertainException uncertain=new PublicationUncertainException(uri,plan,complete.file.fileBytes,failure);
+            if(publicationFailure!=null && publicationFailure!=failure)uncertain.addSuppressed(publicationFailure);throw uncertain;
+        }
+        if(!exactEntry(entry,uri,complete.file.fileBytes)){
+            PublicationUncertainException uncertain=new PublicationUncertainException(uri,plan,complete.file.fileBytes,new IOException("Photo identity or bytes changed during publication"));
+            if(publicationFailure!=null)uncertain.addSuppressed(publicationFailure);throw uncertain;
+        }
+        publicationUncertain=false;
+        if(entry.pending){IOException failure=new IOException("Photo is confirmed still pending; publication did not complete");if(publicationFailure!=null)failure.addSuppressed(publicationFailure);throw failure;}
         // Commit linearization is IS_PENDING becoming zero. Cancellation after this point must not remove the photo.
-        // The on-disk INSERTED journal is sufficient for recovery: a confirmed visible row is
+        // The on-disk PUBLISHING journal is sufficient for recovery: a confirmed visible row is
         // preserved. Avoid a fallible journal write after the public commit linearization.
         committed=true;phase="PUBLISHED";return uri;
     }
@@ -106,7 +149,7 @@ public final class PhotoTransaction implements AutoCloseable {
         if(in.readInt()!=0x554c5458 || in.readInt()!=1)throw new IOException("unknown journal version");
         String id=in.readUTF(),identity=in.readUTF();long date=in.readLong();String phase=in.readUTF(),uri=in.readUTF();
         if(in.available()!=0 || !directory.getFileName().toString().equals("tx-"+id)
-                || !(phase.equals("NEW") || phase.equals("INSERTING") || phase.equals("INSERTED") || phase.equals("PUBLISHED")) || uri.length()>2048)
+                || !(phase.equals("NEW") || phase.equals("INSERTING") || phase.equals("INSERTED") || phase.equals("PUBLISHING") || phase.equals("PUBLISHED")) || uri.length()>2048)
             throw new IOException("invalid journal identity/state");
         try{return new PendingPhotoStore.Plan(id,identity,date);}catch(IllegalArgumentException e){throw new IOException("journal plan",e);}
     }
@@ -147,7 +190,10 @@ public final class PhotoTransaction implements AutoCloseable {
         if(closed)return;boolean interrupted=Thread.interrupted();try{closed=true;IOException first=null;
         for(int i=resources.size()-1;i>=0;i--)try{resources.get(i).close();}catch(Exception e){if(first==null)first=e instanceof IOException?(IOException)e:new IOException(e);else first.addSuppressed(e);}
         synchronized(MANAGER_MONITOR){try(RandomAccessFile manager=new RandomAccessFile(root.resolve("manager.lock").toFile(),"rw");FileLock held=manager.getChannel().lock()){
-            boolean cleanup=committed;try{if(!committed)cleanupPending(store,plan);cleanup=true;}catch(IOException e){if(first==null)first=e;else first.addSuppressed(e);}
+            boolean cleanup=false;
+            // Do not erase the evidence or mutate any media while the publication outcome
+            // remains unknown. Startup recovery independently queries the exact UUID plan.
+            if(!publicationUncertain)try{if(!committed)cleanupPending(store,plan);cleanup=true;}catch(IOException e){if(first==null)first=e;else first.addSuppressed(e);}
             try{lock.release();lockFile.close();}catch(IOException e){if(first==null)first=e;else first.addSuppressed(e);}
             if(cleanup)try{deleteDirectory(directory);}catch(IOException e){if(first==null)first=e;else first.addSuppressed(e);}
         }catch(IOException e){if(first==null)first=e;else first.addSuppressed(e);try{if(lock.isValid())lock.release();lockFile.close();}catch(IOException release){first.addSuppressed(release);}}}

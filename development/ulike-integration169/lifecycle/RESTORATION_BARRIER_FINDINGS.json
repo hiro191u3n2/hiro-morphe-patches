@@ -1,0 +1,40 @@
+{
+  "schema": "ulike-restoration-barrier-findings-171-v1",
+  "verifier_sha256": "ade7059bb330acae9d96f178dee9dca74f1b7d269b99b7ba2149f71919dcae40",
+  "classes3_dex_sha256": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0",
+  "method": "Lcom/ss/android/medialib/RecordInvoker;->onNativeCallback_Init(I)V",
+  "method_raw_code_sha256": "47a96995b8a1989df8abe9d659e9bf92a9388986e0fdf777a7ebfa82dfcf2f37",
+  "independently_checked_anchors": 5,
+  "normal_return_code_unit_offsets": [
+    64
+  ],
+  "status_negative_path_joins_common_listener_dispatch_at": 48,
+  "ready_true_store_before_only_normal_return": 62,
+  "constant_true_register_defined_at": 2,
+  "normal_return_sets_ready_true_for_negative_status": true,
+  "meaning": "mIsRenderReady or native-init listener presence cannot prove successful initialization or native composer/render restoration.",
+  "async_restore_inventory_sha256": "6ff231646519d36d8b32d4724fd7344074570f99fb9c23ef7440f8f04c88708f",
+  "app_async_restore_edges": [
+    {
+      "caller": "Lcom/bytedance/corecamera/camera/basic/PureCameraFragment$d;->e()V",
+      "code_unit_offset": 9,
+      "target": "Li/f/l/n/q/t;->a(Ljava/lang/Runnable;)V",
+      "source_method_sha256": "85159c849fcd95a878ce81d8a797c017e0716b5a1341358a88cbb2edb8822266"
+    },
+    {
+      "caller": "Li/o/a/b1/a/g/y$d;->e()V",
+      "code_unit_offset": 31,
+      "target": "Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z",
+      "source_method_sha256": "88914716128e0ff6627e31b7b2d1a507e39a4e03a048e70fce6de1880c910085"
+    },
+    {
+      "caller": "Li/o/a/b1/a/g/y$d;->e()V",
+      "code_unit_offset": 47,
+      "target": "Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z",
+      "source_method_sha256": "88914716128e0ff6627e31b7b2d1a507e39a4e03a048e70fce6de1880c910085"
+    }
+  ],
+  "barrier_implemented": false,
+  "device_execution": false,
+  "scope": "Pinned static normal-return behavior only; original listener exceptions and all native queues are not modeled."
+}

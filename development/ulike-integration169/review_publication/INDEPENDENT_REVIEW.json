@@ -1,0 +1,37 @@
+{
+  "status": "PASS_INDEPENDENT_PUBLICATION_ATTEMPT_OWNERSHIP_REVIEW",
+  "host": {
+    "checks": 829,
+    "blocked_completion_outcomes": 3,
+    "external_failures_during_save": 384,
+    "admission_races": 100,
+    "android_provider_execution": false
+  },
+  "reviewed_file_sha256": {
+    "runtime/src/com/hiro/ulike/integration169/PublicationOutcome169.java": "3eee616f78da5c998e907709aab8009067e0110b0b9f1bfa8686aaee058fb28a",
+    "runtime/src/com/hiro/ulike/integration169/SavedUriHandoff169.java": "9676c054320399a0f6a3d4e1ffe1a388ae5fdd8fd124fe6ab95d44080aebaf5a",
+    "runtime/src/com/hiro/ulike/integration169/CameraBridge169.java": "45ca1234a87a55e82387ccd32f4a88ee8e0685e48b40fea4910633efb3929869",
+    "../hdr_rebuild167/core/android_photo_transaction/src/main/java/com/hiro/ulike/hdr/photo/PhotoTransaction.java": "8ebdc6a7a8865c9e96d90a70168986042a35b3faaaf94d428834f6ec11cfe74f",
+    "review_publication/PublicationReview.java": "bb40b8c9f7977b14b042e68922a5c0c474e9637835ce54c047314d6e00b1a95d",
+    "review_publication/verify.py": "84355d576b125866c019748f9d86eb7005a46b9effc23134fde2901ee930eef7"
+  },
+  "fixed_finding": {
+    "previous_race": "Concurrent fail() could mark unsaved while the provider save was in flight, causing eventual committed/uncertain resolution to fail as already terminal.",
+    "observed_fix": "beginSave transitions to PUBLISHING and gives one opaque SaveAttempt; external failure cannot resolve it, and only that same claim can record the save result."
+  },
+  "manual_source_review": [
+    "SavedUriHandoff acquires the SaveAttempt inside the same synchronized token check used to set saving, before transaction.savePair.",
+    "External failBeforePublication has no transition from PUBLISHING, COMMITTED or PUBLICATION_UNCERTAIN.",
+    "Committed and uncertain result handlers resolve with the local same SaveAttempt; foreign and terminal claims are rejected.",
+    "Core transaction marks publication uncertain before provider publish, re-inspects exact identity and bytes, and retains a recovery journal if publication cannot be confirmed.",
+    "Core confirmedPublishedUri becomes non-null only after an exact visible committed row is observed. Exception/Error handling consults that receipt before reporting unsaved.",
+    "Uncertain path does not call image-error, save-success, last-photo assignment or automatic insert retry; real Android callbacks are not run in this review."
+  ],
+  "blocking_findings": [],
+  "actual_android_provider_execution": false,
+  "actual_ui_callbacks_executed": false,
+  "limitations": [
+    "The deterministic blocked operation is the real Java latch with a host synchronization gate, not a mocked result claimed as MediaStore evidence.",
+    "Provider cancellation, recovery and callback behavior still require actual Android testing."
+  ]
+}

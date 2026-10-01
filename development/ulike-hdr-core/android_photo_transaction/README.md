@@ -73,10 +73,21 @@ The final publisher uses an app-private persistent journal and an exclusive tran
 4. Set `IS_PENDING=0` for that exact owned pending row and confirm it. Only then return its
    URI. The random filename does not overwrite an existing photo.
 
+Immediately before step 4, the transaction persists `PUBLISHING`. Once the provider call has
+been attempted, the same transaction cannot stage or save again. If the confirming read
+throws, reports another URI/owner/identity, or disagrees with the verified byte count,
+`PublicationUncertainException` carries the **unconfirmed** candidate URI, transaction ID,
+identity digest and expected bytes. This outcome must not trigger a save-success callback,
+an ordinary unsaved-photo error, or an automatic retry. Closing an uncertain transaction
+retains its journal and all media. `PhotoTransaction.reconcile(store, exception)` performs
+only an exact read: it returns `PUBLISHED` or `PENDING` when that can be verified and otherwise
+keeps reporting uncertainty. It never republishes or deletes a candidate. Reconciliation
+does not turn a still-pending item into a successful save.
+
 Startup recovery handles the process-crash gap between insert and recording the returned URI
 by finding the exact planned UUID filename/path owned by this package. It removes only owned,
 matching, still-pending rows. Already-visible completed photos are preserved even if the last
-journal still says INSERTED. Active locks are skipped. Corrupt journals are retained and
+journal still says INSERTED or PUBLISHING. Active locks are skipped. Corrupt journals are retained and
 reported after independent valid transactions have been recovered; their media is not guessed
 or deleted. Internal cleanup validates contents first and deletes the journal last. This is
 process-restart recovery, not a claim of power-failure-proof durability on every filesystem.
@@ -84,7 +95,10 @@ process-restart recovery, not a claim of power-failure-proof durability on every
 The production Android backend is compiled against SDK 36 and D8. Host tests exercise real
 row files, the actual Main10 encoder/container path, completed HEIF decoding with libheif,
 injected I/O/cancellation failures, and separate JVM processes killed after insert, after
-write, and after publication. The persistent host gallery models MediaStore's pending state;
+write, and after publication. Five additional cases exercise confirming-query I/O/access
+failures, changed URI/byte count and an unconfirmed still-pending item. They verify one
+publication attempt, preserved media/journals, read-only reconciliation and later recovery.
+The persistent host gallery models MediaStore's pending state;
 it is explicitly not an Android MediaProvider execution. Device/gallery execution, app UI
 completion callback integration, native ULike style binding completeness, and EXIF retention
 remain separate checks.

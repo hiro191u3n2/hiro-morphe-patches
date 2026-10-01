@@ -123,13 +123,20 @@ every rendering pass has that resolution.
   input with one-use buffer ownership, canonical source/settings/pixel digests,
   and a concrete normal-SDK submission adapter. The adapter checks the native
   bridge's owned input digest before exposing bound observations. Native
-  coordinate calibration remains separate. The inherited 4MP analysis cap
-  explicitly rejects 4080×3060; it does not reduce the captured photograph.
+  coordinate calibration remains separate. The legacy copying entry retains
+  its 4MP limit. A separate 4080×3060 candidate streams into one transferred
+  Bitmap, removes downstream Bitmap copies and full source orientation arrays,
+  and consumes the owned diagnostic without another full ARGB clone. Failed
+  native joins quarantine input ownership. This is a code allocation policy,
+  not proof of device capacity, actual native-size segmentation or calibration.
 * `android_composer_replay`: an exact ordered successful-command journal and
   bounded replay contract, preserving tags, float bits, mode and resource
   mapping. Replay requires real lifecycle coverage and a correlated native
   setup barrier. The incomplete v164 exports are rejected rather than filled
-  with defaults; no complete live capture of this journal is installed.
+  with defaults. Pinned disabled entry/result/exception hooks now observe
+  initialization, native-handle identity and copied mutation arguments. They
+  do not prove whole-SDK mutation coverage, exact native-consumed mutable bytes,
+  or queued native setup/restoration completion; no complete live replay is installed.
 * `android_style_binding`: frozen selected-style settings, pinned authored
   mesh/UV/topology parsing, and observations of actual post-setter uniforms and
   the Purity 1427-vertex mesh/MVP. The private Lua instrumenter appends original
@@ -138,15 +145,20 @@ every rendering pass has that resolution.
   unavailable native 2D raster geometry or same-shot segmentation pixels.
   The private skin-mask diagnostic uses the original active mask sampler and
   exports mask/UV channels through the normal owned render callback. It keeps
-  the analysis grid (at most 4,194,304 pixels), validates declared channel and
-  orientation conventions, and does not enlarge it into a proven native-size
-  mask. `native_readback_contract` records the exact static API/type evidence
+  the selected exact analysis grid, validates declared channel and orientation
+  conventions, and does not enlarge a smaller mask into proven native-size
+  segmentation. The lower-copy candidate permits a 4080×3060 callback grid;
+  actual native mask precision and device calibration remain unverified.
+  `native_readback_contract` records the exact static API/type evidence
   and an independent diagnostic review; actual device calibration is absent.
 * `native_geometry_contract`: pinned native instruction/type evidence for
   reading selected 2D makeup meshes after system updates through a private
   late-update diagnostic. Five selected mesh layouts use position semantic 13
   with two float components; the eyelash layout uses semantic 0 with three.
   The observer checks the exact pinned layout instead of guessing an accessor.
+  An opt-in second observer also copies current UVs, submesh index prefixes,
+  primitive/count fields and generated-renderer material count. It does not
+  infer face routing from fixed vertex blocks or material ordinals.
   Copied values and parser ownership remain observations: active face ranges,
   final draw transforms, V2 opacity and actual device attribution are unproved.
   This unconnected diagnostic is excluded from the private app payload.
@@ -216,6 +228,10 @@ every rendering pass has that resolution.
   quality gate is rejected before publication. FP64 source and rotated pair
   staging at 4080×3060 can require approximately 1.14 GiB of temporary disk space
   before codec/container scratch; this is not an Android heap allocation.
+  Publication attempts are single-use. An unconfirmed provider outcome carries
+  a typed recovery identity, retains its journal/media and permits read-only
+  reconciliation. It cannot be relabeled as a failed unsaved photo or retried
+  automatically. A confirmed core receipt survives later URI/UI failures.
 * `android_runtime_package`: actual Morphe resource helper for the pinned
   official arm64 ONNX Runtime dependencies and notices, with conflict guards,
   staged-file rollback and a manifest startup-provider prohibition. It does

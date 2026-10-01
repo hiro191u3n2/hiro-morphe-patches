@@ -2,7 +2,7 @@
 
 This checkpoint adds an **original implementation**, not copied SDK source. It preserves the exact ordered composer API requests that a future verified hook layer observes. It does not make the existing v164 export replayable, enable a new camera path, or claim native/visual/device equivalence.
 
-The live observation and native queue barrier providers are **not installed or implemented**. `ReplayPlan.UNAVAILABLE` rejects authorization. The concrete `RecordInvokerCommands` adapter is deliberately not a `ReplayTarget`: ordinary setter access alone cannot prove native setup completion.
+The native request observation backend and a private disabled hook transform now exist. They are **not installed**. All-state coverage and native queue barrier providers remain **unimplemented**. `ReplayPlan.UNAVAILABLE` rejects authorization. The concrete `RecordInvokerCommands` adapter is deliberately not a `ReplayTarget`: ordinary setter access alone cannot prove native setup completion.
 
 ## What was found in the actual supplied files
 
@@ -43,3 +43,43 @@ PYTHONPATH=ulike_work/models168/python_deps python3 ulike_work/hdr_rebuild167/co
 `QA.json` binds all production/test sources and the exact stock DEX files. It records adversarial host protocol/dispatch tests, checks both actual export histories, validates 15 public SDK methods and ten public fields/constants, verifies four actual tagged dispatch routes, and compiles production sources against SDK36 and D8 API26. Test-only preconditions and barrier receipts are explicitly synthetic. No actual Android replay, hardware test or camera enable occurs.
 
 Neither caller-owned styles, model files, SDK code, nor archive private paths are copied into this module's QA output.
+
+## Native request observation checkpoint 171
+
+`NativeComposerBoundary` now receives original method entry, real return and
+exception events. It binds an observed terminal initialization request to the
+exact receiver and native handle; the input fingerprint includes all ten native
+initialization wrapper arguments. Commands are owned before native execution.
+Handle changes during a call or before a snapshot, overlap, malformed arguments,
+reinitialization, failed native mutations and teardown permanently invalidate the
+observed transcript. Native-init notification and queue completion are still
+separate, unproved events; the initialization fingerprint is a **request**
+fingerprint, not proof of identical SDK/environment state.
+
+`ObservedComposerArguments` preserves each supported generic tagged variant and
+checks all 19 public instance fields of the pinned `VEEffectParams`. Other fields
+must match the independently checked constructor state (zero primitives, empty
+strings and empty lists). Nondefault generic fields, unsupported opcodes and
+counts that differ from full array lengths are rejected, rather than omitted or
+replayed with guessed values. Concurrent caller mutation and native-internal
+state are outside the current observation proof.
+
+`NativeComposerHooks` is compiled with a private `ENABLED=false`, without an
+enable setter or installer. Its entry points are used only by the separate
+`PrepareComposerObservation171` private delta. That delta covers ten composer
+wrappers, both terminal init profiles (the scan profile is rejected), and native
+teardown. It reconstructs all 13 original method hashes after stripping the
+hooks, including 26 normal exits and 15 exception cleanup regions. All direct
+original DEX calls to the ten native composer writers originate in those ten
+wrappers. This bounded static finding is not reflection/native-internal/all-state
+coverage. The delta overlaps three methods of the older lifetime-only delta;
+those are alternative private transforms, not two deltas that may be blindly
+merged into a patch bundle.
+
+The actual app native-init listener schedules more work through an app task
+scheduler, `Handler.post` and `Handler.postDelayed`. Neither returning from that
+listener, setter success, nor posting another UI task proves the original style
+was restored on the native render queue. `ReplayPlan.UNAVAILABLE` remains the
+production default, no `PlanProvider` is supplied, and no complete restoration
+receipt is synthesized. Live integration still requires a verified, shot-bound
+native setup/render acknowledgement and full relevant mutation coverage.

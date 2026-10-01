@@ -1,0 +1,103 @@
+-- Original Hiro read-only native topology diagnostic. This does not authorize HDR rendering.
+local __hd_nonce=@NONCE@
+local __hd_feature="@FEATURE@"
+local __hd_done=false
+local __hd_seq=0
+local __hd_previous=EffectFaceMakeupSystemScript.onLateUpdate
+local function __hd_int(v,lo,hi)
+    if type(v)~="number" or v~=math.floor(v) or v<lo or v>hi then error("integer budget") end
+    return v
+end
+local function __hd_num(v)
+    if type(v)~="number" or v~=v or v==math.huge or v==-math.huge then error("nonfinite attribute") end
+    return string.format("%.17g",v)
+end
+local function __hd_emit(kind,component,payload)
+    if #payload>7000 then error("packet budget") end
+    __hd_seq=__hd_seq+1
+    Amaz.MessageCenter.sendMessage(1431061505,__hd_nonce,__hd_seq,"D1|"..__hd_feature.."|"..kind.."|"..component.."|"..payload)
+end
+function EffectFaceMakeupSystemScript:onLateUpdate(sys,deltaTime)
+    if __hd_previous then __hd_previous(self,sys,deltaTime) end
+    if __hd_done then return end
+    __hd_done=true
+    local ok=pcall(function()
+        local result=Amaz.Algorithm.getAEAlgorithmResult()
+        if result==nil then error("algorithm result unavailable") end
+        local faces=__hd_int(result:getFaceCount(),0,10)
+        local components=__hd_int(#self.comps,0,32)
+        local snapshots={}; local vertexBudget=0;local indexBudget=0
+        -- Take owned scalar snapshots before the first externally observable callback.
+        for ci=1,components do
+            local comp=self.comps[ci]
+            local mesh=comp.templateMesh
+            if mesh==nil then error("mesh unavailable") end
+            local pos=mesh:getAttributeData(Amaz.VertexAttribType.@ATTRIBUTE@,0,8193)
+            local uv=mesh:getAttributeData(Amaz.VertexAttribType.TEXCOORD0,0,8193)
+            local scalars=__hd_int(pos:size(),@COMPONENTS@,8192*@COMPONENTS@)
+            if scalars % @COMPONENTS@~=0 then error("position width") end
+            local count=math.floor(scalars/@COMPONENTS@)
+            if uv:size()~=count*2 then error("UV grid mismatch") end
+            vertexBudget=vertexBudget+count
+            if vertexBudget>32768 then error("vertex budget") end
+            local name=comp.entity.name
+            if type(name)~="string" or #name<1 or #name>128 then error("entity name") end
+            name=(name:gsub(".",function(c)return string.format("%02x",string.byte(c))end))
+            local ids={};local list=comp.faceIds
+            for i=0,__hd_int(list:size(),0,32)-1 do ids[#ids+1]=tostring(__hd_int(list:get(i),0,255)) end
+            local verts={}
+            for i=0,count-1 do
+                for axis=0,@COMPONENTS@-1 do verts[#verts+1]=__hd_num(pos:get(i*@COMPONENTS@+axis)) end
+                verts[#verts+1]=__hd_num(uv:get(i*2));verts[#verts+1]=__hd_num(uv:get(i*2+1))
+            end
+            local materialCount=-1
+            -- Native onInit stores its generated entity at makeupEntity and assigns templateMesh to its Renderer.
+            -- Do not substitute comp.entity's authored renderer when the generated entity is missing.
+            local entity=comp.makeupEntity
+            if entity~=nil then
+                local renderer=entity:getComponent("Renderer")
+                if renderer==nil then error("generated renderer unavailable") end
+                materialCount=__hd_int(renderer.sharedMaterials:size(),0,64)
+            end
+            local subCount=__hd_int(mesh.submeshes:size(),0,64);local subs={}
+            for si=0,subCount-1 do
+                local sub=mesh:getSubMesh(si)
+                if sub==nil then error("submesh unavailable") end
+                local wide=sub.useIndices32
+                if type(wide)~="boolean" then error("index width unavailable") end
+                local storage=wide and sub.indices32 or sub.indices16
+                local stored=__hd_int(storage:size(),0,65536)
+                local drawn=__hd_int(sub.indicesCount,0,stored)
+                local primitive=__hd_int(sub.primitive,0,255)
+                indexBudget=indexBudget+drawn
+                if indexBudget>262144 then error("index budget") end
+                local indices={}
+                for i=0,drawn-1 do indices[#indices+1]=tostring(__hd_int(storage:get(i),0,count-1)) end
+                subs[#subs+1]={wide=wide and 1 or 0,primitive=primitive,count=drawn,stored=stored,indices=indices}
+            end
+            snapshots[ci]={name=name,ids=table.concat(ids,":"),count=count,verts=verts,materials=materialCount,subs=subs}
+        end
+        if result:getFaceCount()~=faces or #self.comps~=components then error("changed frame") end
+        __hd_emit("BEGIN",-1,faces..","..components)
+        for ci=1,components do
+            local s=snapshots[ci]
+            __hd_emit("MESH",ci-1,s.name..","..s.count..","..#s.subs..","..s.materials..","..s.ids)
+            for first=0,s.count-1,32 do
+                local count=math.min(32,s.count-first);local values={}
+                for j=first*(@COMPONENTS@+2)+1,(first+count)*(@COMPONENTS@+2) do values[#values+1]=s.verts[j] end
+                __hd_emit("VTX",ci-1,first..","..count..";"..table.concat(values,","))
+            end
+            for si=1,#s.subs do
+                local sub=s.subs[si]
+                __hd_emit("SUB",ci-1,(si-1)..","..sub.wide..","..sub.primitive..","..sub.count..","..sub.stored)
+                for first=0,sub.count-1,128 do
+                    local count=math.min(128,sub.count-first);local values={}
+                    for j=first+1,first+count do values[#values+1]=sub.indices[j] end
+                    __hd_emit("IDX",ci-1,(si-1)..","..first..","..count..";"..table.concat(values,","))
+                end
+            end
+        end
+        __hd_emit("END",-1,tostring(__hd_seq))
+    end)
+    if not ok then __hd_emit("ERROR",-1,"draw_state_unavailable") end
+end

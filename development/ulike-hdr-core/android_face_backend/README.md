@@ -81,3 +81,14 @@ python verify_stock_contract.py /private/stock/base /private/libttvesdk.so
 
 Dependencies are androguard, pyelftools and capstone. All original binaries,
 model material and full decompiled classes remain caller-owned and undistributed.
+
+The explicit `runOwned` candidate consumes `OwnedBitmapSubmission` under
+`AnalysisCapacity.nativeSize4080x3060Candidate()`. It avoids Bitmap.copy and the
+full photographic orientation int[P]; `renderOrientationRgbMae()` is empty,
+not an inferred identity transform. The old unowned `run` overload retains the
+4MP copying/orientation policy. Ownership transitions are CREATED → TRANSFERRED
+→ SUBMITTED → CLOSED or QUARANTINED; pre-submission teardown may close a
+TRANSFERRED resource. Outer close cannot free moved/quarantined storage. Callback
+copying happens only once after submission and exact grid validation. New tests
+are reproduced by `android_analysis_input/verify.py`; phone allocation/native
+join behavior is not proven by those host tests.

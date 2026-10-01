@@ -1,7 +1,8 @@
 # 4080×3060 analysis: bounded ownership route
 
-**Design and static evidence only; this route is not implemented or enabled.**
-The current 4,194,304-pixel ceiling is our diagnostic guard. It is not an
+**The bounded streaming ownership candidate is now implemented and host-tested;
+it is not enabled or device-validated.**
+The legacy 4,194,304-pixel ceiling is our diagnostic guard. It is not an
 established limitation of the original SDK, camera or sensor. The source-bound
 inventory and reproducible byte calculations are in `CAPACITY_EVIDENCE.json`.
 
@@ -12,7 +13,7 @@ validate this new isolated-recorder/observer path. Their reported downstream
 unavailable. Neither observation proves the actual GL texture limit. No
 unscaled 5712×4284 input was established; this proposal targets 4080×3060.
 
-| Boundary | Current behavior | Classification |
+| Legacy boundary before the streaming candidate | Original behavior | Classification |
 | --- | --- | --- |
 | `AnalysisInput.SDK_MAX_PIXELS`, `Budget`, `prepare` | Reject above 4,194,304 pixels before allocation | Our policy; the constant's name does not establish an SDK capability |
 | `StockStillAnalysis.run` and `RenderedDiagnostic` | Repeat the same input/output guard | Our policy |
@@ -35,14 +36,16 @@ or an execution test.
 Let **P = 12,484,800 pixels**. Each packed ARGB raster is 49,939,200 bytes
 (47.63 MiB); the owned P010 short planes occupy 37,454,400 bytes (35.72 MiB).
 
-The current path creates an analysis integer raster, a Bitmap from its rows,
+The earlier copying path created an analysis integer raster, a Bitmap from its rows,
 another Bitmap in `StockStillAnalysis`, and a third in `StockStillFaceProbe`.
-The probe retains a full integer source raster for orientation comparisons.
-The SDK then supplies a full integer callback, which is cloned for diagnostics.
+That path retained a full integer source raster for orientation comparisons.
+The SDK supplied a full integer callback, cloned for diagnostics. The new
+candidate eliminates the two downstream Bitmap copies and photographic raster;
+the SDK callback and one owned diagnostic remain.
 
 | Known payload at callback | Bytes | MiB |
 | --- | ---: | ---: |
-| Current: P010 + three Bitmaps + orientation raster + callback + owned callback | 337,089,600 | 321.47 |
+| Earlier: P010 + three Bitmaps + orientation raster + callback + owned callback | 337,089,600 | 321.47 |
 | Same, if the earlier consumed integer raster has not yet been collected | 387,028,800 | 369.10 |
 | Proposed: P010 + one moved Bitmap + callback + owned callback | 187,272,000 | 178.60 |
 | Proposed: P010 + one moved Bitmap + callback + owned byte mask | 149,817,600 | 142.88 |
@@ -54,31 +57,40 @@ Later, `RenderedDiagnostic.pixels()` also clones the retained callback before
 `DiagnosticSkinMask.validate` allocates a byte mask. That later copy must be
 addressed separately.
 
-## Next specific patch
+## Implemented ownership patch
 
-1. Introduce an exclusive Bitmap submission envelope with states
-   `CREATED → TRANSFERRED → SUBMITTED → CLOSED | QUARANTINED`. Render immutable
+1. Added an exclusive Bitmap submission envelope with states
+   `CREATED → TRANSFERRED → SUBMITTED → CLOSED | QUARANTINED`. It renders immutable
    `SdrRendition` rows directly into its one Bitmap while computing the existing
-   exact proxy digest. Keep frame/settings/nonce/grid provenance unchanged.
-2. Add ownership-transfer overloads through the analysis and probe layers,
+   exact proxy digest. Frame/settings/nonce/grid provenance is unchanged.
+2. Added ownership-transfer overloads through the analysis and probe layers,
    eliminating both subsequent Bitmap copies. Retain the copying API for
    callers without exclusive ownership. **Only the probe may recycle a moved
    Bitmap after verified native joins.** Outer `finally` blocks must not recycle
    transferred storage; failed teardown must retain it in quarantine and prevent
    subsequent native work.
-3. Make full source-image orientation comparison a separate diagnostic mode.
+3. Full source-image orientation comparison remains a separate legacy diagnostic mode.
    The mask path can validate its explicit complete UV ramps and callback
    interpretation without retaining another full photographic raster. Never
    infer or silently correct native geometry from this change.
-4. Keep the unavoidable current SDK integer callback borrowed. Convert it
-   synchronously into a preallocated owned byte mask while validating
-   alpha/channels/UV, or initially keep one owned integer callback with a
-   consuming conversion API. No SDK array may escape its callback lifetime.
-5. Thread one explicit grid/memory/callback budget through every guard. Preserve
-   the default 4MP diagnostic policy. A separate 4080×3060 candidate must pass
-   source/digest, duplicate/stale callback, cancellation and failed-join
-   quarantine tests before device calibration and measured capacity checks.
+4. The unavoidable current SDK integer callback remains borrowed. A single
+   owned integer copy has a consuming conversion API; native-size `.pixels()`
+   rejects another full clone. A binding can call `DiagnosticSkinMask.validate`
+   inside `consume` to produce byte[P] directly. The borrowed owned array is wiped
+   on success/failure; no SDK array escapes its callback lifetime.
+5. An explicit `AnalysisCapacity` policy is threaded through input, probe,
+   ledger, callback and diagnostic guards. The legacy 4MP policy is unchanged.
+   A separate 4080×3060 candidate passes full-grid row/digest tests and host
+   ownership/callback/cancel/quarantine checks. Independent Python verifies both
+   digests after an actual 12.5MP stream under a 64MiB host heap. This excludes
+   Android Bitmap/native/model allocations; device calibration and measured
+   total-capacity checks remain required.
 
 Full-grid diagnostic sampling is still 8-bit and can sample a lower-resolution
 native segmentation texture. It must not be presented as native 12.5MP
 segmentation, exact mask readback, completed HDR integration, or device support.
+
+The current callback payload formula includes an additional 4×width-byte row:
+187,288,320 bytes for the proposed owned-ARGB route. A consuming mask conversion
+can temporarily hold the owned ARGB and byte mask together, after the native
+Bitmap/worker teardown; total process peak still needs device measurement.

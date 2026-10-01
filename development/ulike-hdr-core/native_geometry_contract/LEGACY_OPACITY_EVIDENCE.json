@@ -1,0 +1,34 @@
+{
+  "status": "PASS_PINNED_LEGACY_ALPHA_DEPENDENCIES",
+  "archive_sha256": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117",
+  "private_asset_sha256": {
+    "makeup/blusher.vert": "6e243b450bf20d0070a891b53d34d20c5f2cec862c7dcdff4204dd5831b543b7",
+    "makeup/blusher.frag": "2fc5e67fab8ae3de9992379493686623e27676b6fbab4c8db8b4d6720d4bf3f2",
+    "FaceMakeupModule.lua": "414e3ef606ff8c822ba7ce0a7ee6b0881ae2cbeb75f28daa5e75848151959c76"
+  },
+  "facts": {
+    "per_vertex_input": "attOpacity",
+    "raster_interpolant": "varOpacity",
+    "alpha_factors": [
+      "material texture alpha",
+      "intensity uniform",
+      "interpolated per-vertex opacity"
+    ],
+    "controller_updates": "intensity from slider times authored opacity; does not replace the independent per-vertex opacity input"
+  },
+  "remaining_evidence_required": [
+    "actual per-vertex attOpacity values for the same still and selected native filter",
+    "actual native vertex/index routing and final uMVPMatrix/uSTMatrix",
+    "frame-correlated native draw order and completion"
+  ],
+  "limits": [
+    "D1 observes selected Amazing mesh components, not legacy FaceMakeupV2 CPU/GPU buffers",
+    "getAMGScene can return null; no forced engine switching or opaque pointer cast is implemented",
+    "shader alpha dependence alone cannot reconstruct the native opacity array",
+    "no original shader/model/library is distributed"
+  ],
+  "per_vertex_opacity_observed": false,
+  "production_binding_verified": false,
+  "device_execution": false,
+  "verifier_sha256": "239cf4bb5c2e0717c0de70bf871c72fd96d248708136c387c703e5884def8cb5"
+}

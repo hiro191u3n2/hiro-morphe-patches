@@ -9,6 +9,7 @@ import com.hiro.ulike.hdr.analysisinput.AndroidAnalysisInput;
 import com.hiro.ulike.hdr.beauty.HdrAppearance;
 import com.hiro.ulike.hdr.beauty.HdrBeautyProcessor;
 import com.hiro.ulike.hdr.color.SdrRendition;
+import com.hiro.ulike.hdr.faceprobe.AnalysisCapacity;
 import com.hiro.ulike.hdr.gainmap.GainmapSave;
 import com.hiro.ulike.hdr.photo.AndroidPhotoTransaction;
 import com.hiro.ulike.hdr.photo.GeometryPairWriter;
@@ -46,7 +47,9 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
     public interface PlanProvider { Plan prepare(CameraBridge169.OwnedShot shot)throws Exception; }
     /** Must bind actual observed native geometry, shader samplers, full makeup graph and draw
      * order to this exact analysis. Detector order/preview geometry are not acceptable substitutes.
-     * Returning a result is a trusted adapter contract; this coordinator cannot manufacture proof. */
+     * Before return, consume required diagnostic pixels into owned immutable mask/binding data.
+     * The coordinator closes the diagnostic on return/failure; retaining it or borrowed arrays is
+     * invalid. Returning a result is a trusted adapter contract, not manufactured native proof. */
     public interface NativeBindingProvider {
         NativeBindings resolve(CameraBridge169.OwnedShot shot,AndroidAnalysisInput.BoundOutcome analysis,
                                SdrRendition rendition,byte[] exactSettings,PhotoGeometry geometry)throws Exception;
@@ -88,6 +91,7 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
     public static final class Plan implements AutoCloseable {
         final CameraBridge169.OwnedShot shot;
         final SdrRendition rendition;
+        final AnalysisCapacity analysisCapacity;
         final PhotoGeometry geometry;
         final PinnedModel.CompiledModel model;
         final PinnedAssets.NeuralMask mask;
@@ -103,13 +107,13 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
         final long nativeTimeoutMillis,diskBudgetBytes;
         final AutoCloseable resourceOwner;
         private boolean closed;
-        public Plan(CameraBridge169.OwnedShot shot,SdrRendition rendition,PhotoGeometry geometry,
+        public Plan(CameraBridge169.OwnedShot shot,SdrRendition rendition,AnalysisCapacity analysisCapacity,PhotoGeometry geometry,
                 PinnedModel.CompiledModel model,PinnedAssets.NeuralMask mask,HdrAppearance.Policy hdrPolicy,
                 byte[] verifiedCompleteReplayTranscript,Set<String> expectedFeatures,StockStillAnalysis.EffectSetup setup,
                 PausedStockPreview.RestoreVerification restoration,NativeBindingProvider binding,
                 GainmapSave.Codec codec,GainmapSave.QualityLimits quality,SavedUriHandoff169.Completion completion,
                 long nativeTimeoutMillis,long diskBudgetBytes,AutoCloseable resourceOwner)throws Exception {
-            require(shot!=null && rendition!=null && geometry!=null && model!=null && mask!=null && hdrPolicy!=null
+            require(shot!=null && rendition!=null && analysisCapacity!=null && geometry!=null && model!=null && mask!=null && hdrPolicy!=null
                 && expectedFeatures!=null && !expectedFeatures.isEmpty() && setup!=null && restoration!=null && binding!=null
                 && codec!=null && quality!=null && completion!=null && resourceOwner!=null,"Complete explicit processing plan required");
             require(nativeTimeoutMillis>=1 && nativeTimeoutMillis<=30000 && diskBudgetBytes>0 && diskBudgetBytes<=8L*1024*1024*1024,"Bounded native deadline and disk budget required");
@@ -118,7 +122,7 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
             PinnedModel.Style expected=ShotStyleSettings.NATURAL.equals(shot.style.styleId)?PinnedModel.Style.NATURAL_BLUSH:
                 ShotStyleSettings.PURITY.equals(shot.style.styleId)?PinnedModel.Style.PURITY2:null;
             require(expected!=null && model.style==expected && mask.style==expected,"Pinned model/mask differ from selected style");
-            this.shot=shot;this.rendition=rendition;this.geometry=geometry;this.model=model;this.mask=mask;this.hdrPolicy=hdrPolicy;
+            this.shot=shot;this.rendition=rendition;this.analysisCapacity=analysisCapacity;this.geometry=geometry;this.model=model;this.mask=mask;this.hdrPolicy=hdrPolicy;
             this.settings=CapturedSettings169.encode(shot.style,verifiedCompleteReplayTranscript);
             LinkedHashSet<String> features=new LinkedHashSet<>();int visited=0;
             for(String feature:expectedFeatures){require(++visited<=64 && feature!=null && feature.matches("[A-Za-z0-9_.-]{1,64}") && features.add(feature),"Invalid/duplicate/unbounded native feature list");}
@@ -144,7 +148,7 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
     }
     private final class Work implements ProcessingSequence169.Work {
         final CameraBridge169.OwnedShot shot;
-        Plan plan;AnalysisInput.Owned input;AndroidAnalysisInput.BoundOutcome analysis;
+        Plan plan;AnalysisInput.Streaming input;AndroidAnalysisInput.BoundOutcome analysis;
         NativeBindings nativeBindings;HdrBeautyProcessor.Snapshot hdr;
         AndroidPhotoTransaction transaction;GeometryPairWriter pair;
         Work(CameraBridge169.OwnedShot shot){this.shot=shot;}
@@ -152,10 +156,12 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
             ShotStyleSettings.requireCurrent(shot.style);
             plan=plans.prepare(shot);require(plan!=null && plan.shot==shot && !plan.closed,"No exact owned native plan");
             ShotStyleSettings.requireCurrent(shot.style);
-            // The current diagnostic bridge imposes a conservative <=4MP guard; this
-            // is not a proven intrinsic vendor SDK limit. A 4080x3060 still fails here
-            // before preview interruption, inference, RGB staging or MediaStore insertion.
-            input=AnalysisInput.prepare(plan.rendition,plan.geometry.id(),plan.settings,StockStillAnalysis.newNonce(),AnalysisInput.Budget.currentSdk());
+            // Preflight the exact native grid and explicit allocation policy before preview
+            // interruption. Rows are later written to one transferred Bitmap without an
+            // int[P] staging raster or downstream Bitmap copies. The 4080x3060 candidate
+            // capacity is a code budget, not a measured device/GL/native-memory guarantee.
+            input=AnalysisInput.prepareStreaming(plan.rendition,plan.geometry.id(),plan.settings,
+                StockStillAnalysis.newNonce(),plan.analysisCapacity);
         }
         @Override public void analyse()throws Exception {
             Object backend=AppHook169.publicField(shot.recorder,"b");
@@ -167,7 +173,13 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
             // original preview/composer restoration verification. Failure stops here.
         }
         @Override public void bind()throws Exception {
-            nativeBindings=plan.binding.resolve(shot,analysis,plan.rendition,plan.settings.clone(),plan.geometry);
+            try{
+                nativeBindings=plan.binding.resolve(shot,analysis,plan.rendition,plan.settings.clone(),plan.geometry);
+            }finally{
+                // SDK teardown already joined. Release the full-resolution ARGB diagnostic
+                // before model layers, HDR staging and codecs retain further image data.
+                if(analysis.observations.renderedDiagnostic!=null)analysis.observations.renderedDiagnostic.close();
+            }
             require(nativeBindings!=null && nativeBindings.analysis==analysis,"Native bindings belong to another analysis");
             String captureId=captureId(shot);
             byte[] resolvedSettings=resolvedSettings(plan.settings,nativeBindings);
@@ -200,7 +212,7 @@ public final class CaptureProcessor169 implements CameraBridge169.Processor {
             return saved.toString();
         }
         @Override public void close()throws Exception {
-            ProcessingSequence169.closeOwned(pair,transaction,input,plan);
+            ProcessingSequence169.closeOwned(pair,transaction,analysis==null?null:analysis.observations.renderedDiagnostic,input,plan);
         }
     }
     private static String captureId(CameraBridge169.OwnedShot shot){

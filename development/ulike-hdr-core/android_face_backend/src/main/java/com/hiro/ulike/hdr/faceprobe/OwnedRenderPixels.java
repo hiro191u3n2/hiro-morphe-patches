@@ -4,7 +4,11 @@ package com.hiro.ulike.hdr.faceprobe;
 public final class OwnedRenderPixels {
     private OwnedRenderPixels() {}
     public static int[] copy(int[] sdkPixels,int width,int height,int expectedWidth,int expectedHeight) {
-        if(width<1 || height<1 || width!=expectedWidth || height!=expectedHeight || (long)width*height>4194304 ||
+        return copy(sdkPixels,width,height,expectedWidth,expectedHeight,AnalysisCapacity.legacyDiagnostic());
+    }
+    public static int[] copy(int[] sdkPixels,int width,int height,int expectedWidth,int expectedHeight,AnalysisCapacity capacity) {
+        if(capacity==null)throw new NullPointerException("capacity");capacity.requireDiagnostic(width,height);
+        if(width!=expectedWidth || height!=expectedHeight ||
                 sdkPixels==null || sdkPixels.length!=(long)width*height)throw new IllegalArgumentException("Invalid diagnostic pixel grid");
         return sdkPixels.clone();
     }

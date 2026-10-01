@@ -54,6 +54,7 @@ def main():
         tests=sorted((root/'src/test/java').rglob('*.java'))+[core/'android_gainmap_save/src/test/java/com/hiro/ulike/hdr/gainmap/GainmapSaveTest.java',core/'android_hdr_beauty/test/com/hiro/ulike/hdr/input/HdrBeautyIntegration.java']
         run([args.jdk_bin/'javac','--release','11','-cp',os.pathsep.join(map(str,(classes,args.ort_classes))),'-d',classes,*tests])
         happy=work/'happy';java=json.loads(run([args.jdk_bin/'java','-cp',classes,'com.hiro.ulike.hdr.photo.TransactionTest',happy]));report['java_checks']=java['checks'];report['geometry_tile_workspace_tested']=java['max_geometry_tile_workspace']
+        report['uncertain_publication_cases']=java['uncertain_publication_cases']
         galleries=[happy/'gallery']
         for fault in ('crash_insert','crash_write','crash_publish'):
             case=work/fault
@@ -113,7 +114,8 @@ def main():
                       'No claim of completed native ULike appearance bindings, photo EXIF preservation, 24.5MP native input, or zero-cost phone memory/storage.',
                       'Integer rotation/mirror/crop is physically applied to both stored renditions, without resizing; camera/app must supply the true planned geometry.',
                       'Actual-model tests use synthetic P010 input, actual pinned inference/masks, and explicitly synthetic resolved remaining-style bindings.',
-                      'Main10 4:2:0 chroma conversion can exceed the unchanged quality gate; such images are refused before MediaStore insertion.']
+                      'Main10 4:2:0 chroma conversion can exceed the unchanged quality gate; such images are refused before MediaStore insertion.',
+                      'Unconfirmed provider publication throws PublicationUncertainException and retains its journal/media; it is neither a confirmed save nor proof of no saved photograph. No automatic retry is performed.']
     report['test_sha256']={str(p.relative_to(root)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((root/'src/test/java').rglob('*.java'))}
     report['test_dependency_sha256']={str(p.relative_to(core)):hashlib.sha256(p.read_bytes()).hexdigest() for p in tests if root not in p.parents}
     report['verifier_sha256']=hashlib.sha256(Path(__file__).read_bytes()).hexdigest()

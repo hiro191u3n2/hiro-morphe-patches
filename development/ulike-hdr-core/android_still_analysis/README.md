@@ -118,3 +118,15 @@ The source-bound restoration inventory identifies why the native-init listener
 is insufficient: `PureCameraFragment$d.e` enqueues a runnable, and the app's
 `y$d.e` callback enqueues additional Handler work. Completion of the actual
 composer replay and a subsequent relevant render remains unproved.
+
+`runOwned` now accepts the same private `OwnedBitmapSubmission` used by the
+native-size row-streaming input. It hashes that Bitmap by rows and moves it into
+the probe, with no downstream Bitmap copy. Only the probe may release a moved
+Bitmap after native joins; outer close leaves quarantine intact. Explicit
+`AnalysisCapacity` policies cover every diagnostic guard. `RenderedDiagnostic`
+is AutoCloseable and has a one-shot `consume(DiagnosticConsumer<T>)` method;
+the owned raw int array is borrowed only during conversion, then wiped on all
+exits. Native-size `.pixels()` refuses an extra full raster copy. A binding can
+convert directly to the existing byte mask validator. This removes the 4MP
+application guard for the explicit 4080×3060 candidate, not the unresolved device
+capacity, native geometry or all-mode integration requirements.

@@ -51,6 +51,29 @@ def independent(work):
     assert result['sourceSha256']==hashlib.sha256(data).hexdigest(),'canonical HDR digest mismatch'
     assert result['proxySha256']==hashlib.sha256(b'ULSP\1'+struct.pack('>ii',w,h)+raw).hexdigest(),'native bridge digest mismatch'
     return {'independent_argb_pixels':len(expected),'source_sha256':result['sourceSha256'],'proxy_sha256':result['proxySha256']}
+def independent_stream(work):
+    result=json.loads((work/'stream-native.json').read_text());w,h=4080,3060;count=w*h
+    def txt(value):
+        if value is None:return struct.pack('>i',-1)
+        raw=value.encode();return struct.pack('>i',len(raw))+raw
+    src=hashlib.sha256(b'ULHF\1'+struct.pack('>ii',w,h)+txt('BT2020_NCL_HLG_LIMITED')+
+        struct.pack('>qqq',777,18,17)+txt('0')+txt(None)+txt('5')+struct.pack('>?q?i',True,10000000,True,206))
+    chunk=struct.pack('>H',512)*4096
+    for i,n in enumerate((count,count//4,count//4)):
+        src.update(struct.pack('>ii',i,n))
+        for _ in range(n//4096):src.update(chunk)
+        src.update(chunk[:2*(n%4096)])
+    a=.17883277;b=1-4*a;c=.5-a*math.log(4*a);signal=(512-64)/876
+    light=signal*signal/3 if signal<=.5 else (math.exp((signal-c)/a)+b)/12
+    mapped=3*light/(1+3*light);encoded=12.92*mapped if mapped<=.0031308 else 1.055*mapped**(1/2.4)-.055
+    code=math.floor(encoded*255+.5);argb=0xff000000|code<<16|code<<8|code
+    proxy=hashlib.sha256(b'ULSP\1'+struct.pack('>ii',w,h));row=struct.pack('>I',argb)*w
+    for _ in range(h):proxy.update(row)
+    assert result['argb']==argb and result['width']==w and result['height']==h
+    assert result['sourceSha256']==src.hexdigest() and result['proxySha256']==proxy.hexdigest()
+    assert result['host_max_heap']<=64*1024*1024
+    return {'full_grid_pixels':count,'full_grid_source_sha256':src.hexdigest(),'full_grid_proxy_sha256':proxy.hexdigest(),
+            'stream_host_heap_limit_bytes':result['host_max_heap'],'independent_full_grid_digest':True}
 def main():
     p=argparse.ArgumentParser()
     for name in ('jdk','android-jar','ort-classes','r8','report'):p.add_argument('--'+name,type=Path,required=True)
@@ -67,11 +90,16 @@ def main():
         run([a.jdk/'javac','--release','8','-cp',os.pathsep.join(map(str,(classes,a.ort_classes))),'-d',classes,*tests])
         output=run([a.jdk/'java','-Xmx128m','-cp',os.pathsep.join(map(str,(classes,a.ort_classes))),'com.hiro.ulike.hdr.input.AnalysisInputTest',work]);print(output)
         oracle=independent(work)
+        stream_output=run([a.jdk/'java','-Xmx64m','-cp',os.pathsep.join(map(str,(classes,a.ort_classes))),'com.hiro.ulike.hdr.input.StreamingInputTest',work]);print(stream_output)
+        stream_oracle=independent_stream(work)
+        ownership_output=run([a.jdk/'java','-Xmx80m','-cp',os.pathsep.join(map(str,(classes,a.ort_classes))),'com.hiro.ulike.hdr.input.SubmissionOwnershipTest']);print(ownership_output)
     assert pins=={str(f.relative_to(CORE)):sha(f) for f in sources},'source changed during verification'
     report={'status':'PASS_HOST_OWNED_SAME_CAPTURE_INPUT_AND_SDK36_D8','host_checks':int(re.search(r'PASS (\d+)',output).group(1)),**oracle,
             'source_sha256':pins,'test_sha256':{str(f.relative_to(ROOT)):sha(f) for f in tests},'verifier_sha256':sha(Path(__file__)),
-            'actual_android_bitmap_or_native_execution':False,'native_geometry_calibrated':False,'maximum_analysis_pixels':4194304,
-            'native_4080x3060_explicitly_rejected_without_resize':True,'no_hdr_photo_quantization':True,
+            'actual_android_bitmap_or_native_execution':False,'native_geometry_calibrated':False,'legacy_maximum_analysis_pixels':4194304,
+            'candidate_maximum_analysis_pixels':12484800,'candidate_known_payload_bytes':187288320,'native_4080x3060_streamed_without_resize':True,
+            'stream_host_checks':int(re.search(r'PASS (\d+)',stream_output).group(1)),
+            'ownership_host_checks':int(re.search(r'PASS (\d+)',ownership_output).group(1)),**stream_oracle,'no_hdr_photo_quantization':True,
             'tool_sha256':{str(f.name):sha(f) for f in (a.android_jar,a.ort_classes,a.r8,a.jdk/'javac')}}
     a.report.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'status':report['status'],'host_checks':report['host_checks'],**oracle}))
 if __name__=='__main__':main()

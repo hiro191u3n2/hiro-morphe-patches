@@ -18,9 +18,11 @@ public final class ProbeLedger {
     private StockSdkIdentity sdkIdentity;
 
     public ProbeLedger(int width, int height) {
-        if (width < 1 || height < 1 || (long)width * height > 4194304)
-            throw new IllegalArgumentException("Bounded analysis image required");
-        this.width = width; this.height = height;
+        this(width,height,AnalysisCapacity.legacyDiagnostic());
+    }
+    public ProbeLedger(int width,int height,AnalysisCapacity capacity) {
+        if(capacity==null)throw new NullPointerException("capacity");capacity.requireGrid(width,height);
+        this.width=width;this.height=height;
     }
     private void event(String event) {
         if (events.size() < 64) events.add(event);
