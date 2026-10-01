@@ -1,0 +1,33 @@
+{
+  "reviewer": "/root/heif_quality_check/gainmap_math_review",
+  "scope": "standalone CPU gainmap math; no Android/JNI/HEIF/app validation",
+  "result": "PASS_AFTER_FIXES",
+  "findings_fixed": [
+    {
+      "issue": "adjacent very large headroom values rounded to equal logs and caused 0/0",
+      "fix": "endpoint checks before stable log1p interpolation",
+      "regression_test": true
+    },
+    {
+      "issue": "extreme gamma silently collapsed interior normalized values to zero or one",
+      "fix": "explicit reject of FP64 endpoint collapse in encoding/decoding",
+      "regression_test": true
+    }
+  ],
+  "additional_review": "No additional material defect found within the component scope.",
+  "contract_checks": [
+    "MapView frame matching",
+    "two-pass immutable buffers",
+    "caller-declared IDs are not source proof",
+    "row sink is not transactional",
+    "negative reconstruction needs downstream policy"
+  ],
+  "independent_test_checks": 86351,
+  "asan": "PASS with detect_leaks=0",
+  "ubsan": "PASS",
+  "leak_sanitizer": "NOT_VERIFIED: managed host /proc task access failure",
+  "code_sha256": {
+    "gainmap.cpp": "979e8fb72d098f088a1406e7025ef977b1fe03f865afd9ae93d912c84e144cf9",
+    "test_gainmap.cpp": "6668ca663358e5f83a5121cc5f93ef05f10f4e72b251636dee000d0db65bf747"
+  }
+}

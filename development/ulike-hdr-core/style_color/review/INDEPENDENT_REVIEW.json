@@ -1,0 +1,103 @@
+{
+  "status": "PASS_WITH_EXPLICIT_SCOPE_LIMITS",
+  "reviewer": "/root/native_beauty_audit/style_asset_search",
+  "reviewed_at_utc": "2026-10-01T00:50:57.690221+00:00",
+  "scope": "Independent read-only equation fidelity, public guard contracts, local ZIP test CLI; no app/HDR engine integration or publication approval.",
+  "source_pins": {
+    "style_color.hpp": "14649ff9e10cdbe17cad1df5b0dc85d4e9582c2a98f20f6d6c381d50eeccc90e",
+    "style_color.cpp": "96b0e67c0ed4bfe7006bbbb6e2f88bc5af23a0fd3b4cec6f407f1220935ffff7",
+    "test_style_color.cpp": "bd0e8ef02cc094cc7cb873a3e61a1cb4c34a10872561059abeae8f8d429c7d90",
+    "probe.cpp": "b222e96e17ec5c3debc1fcce908b3bc5f9c1ddbc0e0070f9f78001d3f7d68d17",
+    "test_actual_assets.py": "30eaa88413025c3decf7230d1fcdf15d435b34ea900c4ba34a0a94fc6efa5e44",
+    "test.sh": "d14f1864fb284285fe3cd158a5f6920812a1a16ba63246b6365d9d2e626f74a0",
+    "QA_ACTUAL_ASSETS.json": "a52c12e6ab53cb0e3e3951d6b08f1eacda0065e1c95dc3f9fb6f3461d8b1c5fb"
+  },
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "issue": "Equal invalid Primaries enumeration values could pass the first candidate validation.",
+      "resolution": "Known primaries whitelist now rejects invalid values; regression assertion independently executed.",
+      "status": "RESOLVED"
+    }
+  ],
+  "equation_review": [
+    {
+      "component": "skin_background_lut",
+      "reference": "natural/materials/016/AmazingFeature2/xshader/skinseg.frag",
+      "lines": [
+        14,
+        15,
+        17,
+        20,
+        21,
+        23,
+        25,
+        26,
+        28,
+        29,
+        31,
+        33
+      ],
+      "result": "PASS: floor blue*63 only, 8x8 tile selection, fixed 512 coordinate offsets, background/skin mix by supplied mask alpha, final uniAlpha mix and preserved input alpha. No accidental adjacent-blue interpolation.",
+      "domain": "For accepted finite RGBA in [0,1], the shader input clamp is the identity. Out-of-domain values are rejected, not silently clipped. Caller supplies already spatially matched mask alpha after vertical-coordinate inversion."
+    },
+    {
+      "component": "purity_final_lut",
+      "reference": "purity/materials/016/AmazingFeature9/xshader/pass0.frag",
+      "lines": [
+        11,
+        12,
+        15,
+        16,
+        19,
+        20,
+        23,
+        24,
+        27,
+        28,
+        30,
+        31,
+        32,
+        33
+      ],
+      "result": "PASS: floor/ceil blue*63 lookup, fract interpolation, original fixed 512 coordinate offsets despite actual 1024 atlas, final uniAlpha mix and preserved input alpha."
+    },
+    {
+      "component": "Texture::sample",
+      "result": "PASS: normalized nearest or bilinear texel-center sampling with clamp-to-edge. Orientation and sampler are explicit caller contracts; original runtime values are not asserted."
+    }
+  ],
+  "guard_review": {
+    "accepted": "Matching explicit known primaries with either encoded sRGB or gamma 2.2, full range, finite unit RGBA/alpha/mask, supported explicit sampler and valid square 8x8 atlas geometry.",
+    "rejected": "Linear, HLG, PQ, unknown transfer/primaries/range/sampler, differing encodings, limited range, non-finite or out-of-range color/alpha/mask, invalid dimensions/count/shape and non-finite UV.",
+    "note": "Full-range BT.2020 primaries with an explicitly supplied supported SDR transfer are not treated as HDR merely because of the primaries. No transfer conversion is performed."
+  },
+  "independent_execution": {
+    "cxx17_build": "PASS: -Wall -Wextra -Werror -pedantic -O2",
+    "provided_numeric_and_contract_assertions": 16421,
+    "actual_lut_cases": 2438,
+    "actual_lut_scalar_comparisons": 19504,
+    "actual_lut_max_absolute_error": 2.220446049250313e-16,
+    "independent_additional_guard_assertions": 37,
+    "additional_guard_coverage": "All 12 known primaries/SDR-transfer/sampler combinations; invalid enum values, authored limited range, input alpha and mask NaN/infinity/out-of-range, invalid UV/sampler, texel alpha, overflow/oversized dimensions and invalid atlas shapes.",
+    "zip_cli_positive": "PASS with both caller-local ZIPs, pinned archive and asset hashes checked.",
+    "zip_cli_negative": [
+      "Missing positional arguments rejected with exit 2.",
+      "Swapped archives rejected with exit 1 before temporary private fixture creation."
+    ],
+    "production_source_edits_by_reviewer": false,
+    "test_harness_note": "Temporary independent guard harness compiled and ran locally, then was deleted; an initial harness-only misleading-indentation warning was corrected before its successful run."
+  },
+  "private_asset_handling": {
+    "assets_in_public_component": false,
+    "zip_member_access": "Named in-memory reads, no archive extraction by the test.",
+    "temporary_fixture_lifecycle": "TemporaryDirectory owns decoded RGBA fixtures and removes them after probe execution, including failure cleanup.",
+    "report_contains_private_settings_or_absolute_device_paths": false
+  },
+  "limitations": [
+    "This is pointwise algebra equivalence under the stated caller contract, not bit-identical GPU execution: GLSL lowp/highp quantization and original GPU sampling/decode were not measured.",
+    "Source PNG row orientation, original texture sampler and actual authored encoding remain caller-supplied assumptions, explicitly recorded by tests.",
+    "Tests do not prove these selected materials were active in a particular capture or that observed global intensity maps directly to uniAlpha.",
+    "No skin segmentation, face tracking, mesh deformation, native inference, full style reconstruction, HDR preservation, Android integration or on-device execution is established by this component."
+  ]
+}

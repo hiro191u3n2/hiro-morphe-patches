@@ -1,0 +1,29 @@
+name: Compile ULike HDR input components against Android 36 (no release)
+on:
+  push:
+    branches: ['work/ulike-hdr-core-20261001']
+    paths:
+      - 'development/ulike-hdr-core/hdr_input/**'
+      - '.github/workflows/ulike-hdr-core.yml'
+permissions:
+  contents: read
+jobs:
+  android-api-compilation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Compile input adapter using the real Android API 36 stubs
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk_root="${ANDROID_HOME:?Android SDK is required}"
+          android_jar="$sdk_root/platforms/android-36/android.jar"
+          if [ ! -f "$android_jar" ]; then
+            "$sdk_root/cmdline-tools/latest/bin/sdkmanager" 'platforms;android-36'
+          fi
+          test -s "$android_jar"
+          ANDROID_JAR="$android_jar" bash development/ulike-hdr-core/hdr_input/test.sh
+          printf '%s\n' 'Compilation is not a camera capture, native beauty test, or HEIF save test.'

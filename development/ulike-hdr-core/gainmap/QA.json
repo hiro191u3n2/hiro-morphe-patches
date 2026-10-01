@@ -1,0 +1,66 @@
+{
+  "status": "HOST_VERIFIED_SOURCE_ONLY_COMPONENT",
+  "component": "processed linear HDR/SDR RGB gainmap math",
+  "checks": 86351,
+  "compiler": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04) 13.3.0",
+  "commands": [
+    {
+      "command": "make check",
+      "result": "PASS"
+    },
+    {
+      "command": "make sanitize",
+      "result": "ENVIRONMENT_FAILURE: LeakSanitizer cannot open /proc task information"
+    },
+    {
+      "command": "ASAN_OPTIONS=detect_leaks=0 make sanitize",
+      "result": "PASS AddressSanitizer and UndefinedBehaviorSanitizer"
+    }
+  ],
+  "quantization_fixture": {
+    "10bit": {
+      "observed_levels": 1024,
+      "max_abs_HDR_error": 0.00859802,
+      "HDR_RMSE": 0.00120032
+    },
+    "16bit": {
+      "observed_levels": 4096,
+      "max_abs_HDR_error": 0.000116288,
+      "HDR_RMSE": 1.85797e-05
+    },
+    "scope": "synthetic per-channel gain ramp; SDR reference-white=1, not device/photo quality"
+  },
+  "edited_pair_fixture": {
+    "stale_map_max_abs_error": 6.28846,
+    "regenerated_map_abs_tolerance": 5e-14,
+    "changes": [
+      "geometry shift",
+      "channel gain",
+      "local exposure"
+    ],
+    "stale_metadata_rejected": true
+  },
+  "precision": [
+    "FP32 and FP64 image/map views",
+    "FP64 calculations",
+    "10-bit or 16-bit optional quantization; never 8-bit"
+  ],
+  "memory": "one FP64 RGB row per operation; source/destination owned by caller",
+  "not_implemented": [
+    "P010/HLG camera capture",
+    "HLG/PQ decode and tone mapping",
+    "ULike style/beauty engine integration",
+    "JNI/Android build",
+    "HEVC encoder",
+    "HEIF gainmap container",
+    "ISO binary metadata serialization",
+    "device/real-photo validation"
+  ],
+  "source_sha256": {
+    "gainmap.hpp": "dfcea027ef33bcb0daabd45254b9e1dde6f4186c86e2168083bca9adab6c1e24",
+    "gainmap.cpp": "979e8fb72d098f088a1406e7025ef977b1fe03f865afd9ae93d912c84e144cf9",
+    "test_gainmap.cpp": "6668ca663358e5f83a5121cc5f93ef05f10f4e72b251636dee000d0db65bf747",
+    "Makefile": "c104387320a1e57caf2bd320a9affbbf5920152d35e7135cdf5a896e9779336f",
+    "README.md": "d9a57fdb419912220db155666af43d16add115fd3426bf7434517d0a6de06321"
+  }
+}

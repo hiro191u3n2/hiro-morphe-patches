@@ -1,0 +1,102 @@
+{
+  "schema_version": 1,
+  "reviewed_at_utc": "2026-10-01T00:55:32.742342+00:00",
+  "reviewer": "independent composer_thread_check agent; not the production source author",
+  "status": "PASS_WITH_EXPLICIT_SCOPE",
+  "scope": {
+    "production_source_review": true,
+    "host_tests_executed": true,
+    "real_android_sdk_compile_executed_by_this_reviewer": false,
+    "android_framework_hal_execution": false,
+    "sm_s948q_api36_frame_observed": false,
+    "apk_mpp_integration_or_publication": false,
+    "production_sources_modified_by_reviewer": false
+  },
+  "production_sources": [
+    {
+      "path": "src/android/java/com/hiro/ulike/hdr/input/android/AndroidP010FrameReader.java",
+      "sha256": "8185e04a0382dd00931fdf1a832626cf406cb343a3bf1ac75bdf69e7dcdbff41"
+    },
+    {
+      "path": "src/main/java/com/hiro/ulike/hdr/input/CaptureMatch.java",
+      "sha256": "df1110d3211766ddb179b4067624d8549f549b31db1ead5fbe03f6281beb4435"
+    },
+    {
+      "path": "src/main/java/com/hiro/ulike/hdr/input/HdrFrame.java",
+      "sha256": "63fbd7c93cc899b2f046a30ea5064bb741ed08c0f6b3edbbe3a0074e7d957ada"
+    },
+    {
+      "path": "src/main/java/com/hiro/ulike/hdr/input/InputRejected.java",
+      "sha256": "e79123ebc1be85f2e1fed73c491864ccdda1dbf87e9430963f0b12c3406a0abf"
+    },
+    {
+      "path": "src/main/java/com/hiro/ulike/hdr/input/P010FrameReader.java",
+      "sha256": "d2ccd836bd2c719d468d43b1d70ff25758728e93cd1804db55f4defe462f43db"
+    }
+  ],
+  "supporting_files": [
+    {
+      "path": "README.md",
+      "sha256": "ea4b3132aff5aee434f55e190e8f1e47b87b91dcad0a4c2e73c68de0fac00c41"
+    },
+    {
+      "path": "test.sh",
+      "sha256": "f0ec90bcdc145b0081f621d3af883587a43a141dd9de6fe3f41d42f052fa15ca"
+    },
+    {
+      "path": "src/test/java/com/hiro/ulike/hdr/input/P010FrameReaderTest.java",
+      "sha256": "375af1b8acad0b836ff03dd766e82c5e71224cd63603faca13e1a5bb439e254f"
+    },
+    {
+      "path": "src/test-android/java/com/hiro/ulike/hdr/input/android/AndroidP010FrameReaderTest.java",
+      "sha256": "1817cc2dcd8f6a5e5505de48f6266183f824dee9d7a22df950e26c74ad4173f1"
+    }
+  ],
+  "host_validation": {
+    "command": "env -u ANDROID_JAR bash test.sh",
+    "cwd": "/workspace/scratch/76e84154ce1d/ulike_work/hdr_rebuild167/core/hdr_input",
+    "exit_code": 0,
+    "output": [
+      "P010FrameReaderTest PASS (73 assertions)",
+      "AndroidP010FrameReaderTest PASS (18 assertions; host doubles only)",
+      "Android SDK compile NOT RUN: ANDROID_JAR unset; host doubles are not SDK validation"
+    ]
+  },
+  "resolved_findings": [
+    {
+      "id": "P010_CHROMA_PHYSICAL_ROW_MINIMUM",
+      "previous_issue": "For a 4x4 image, chroma rowStride 6 satisfied the individual component sample span but cannot contain a complete 8-byte interleaved CbCr physical row.",
+      "resolution": "validate requires rowStride >= planeWidth * expectedPixelStride. Last-buffer bound separately retains (planeWidth - 1) * expectedPixelStride + 2, so missing final-row padding remains supported.",
+      "test": "planeValidation partialPair chroma rowStride=6 must reject STRIDE",
+      "status": "RESOLVED_AND_HOST_TESTED"
+    }
+  ],
+  "unresolved_concrete_blockers": [],
+  "verified_by_source_review": [
+    "Positive even Request dimensions and exact input dimensions precede allocation. long pixel/address calculations and Java array-size limits protect the later int indexing; 3 bytes per full-resolution pixel is the total short-array payload.",
+    "Plane buffers are readonly cursor snapshots. Explicit two-byte little-endian assembly does not depend on ByteBuffer byte order; nonzero low six bits are rejected; all 10-bit codes 0..1023 including LIMITED headroom are copied without clipping.",
+    "Three logical Y/Cb/Cr planes are handled independently with Y stride 2 and Cb/Cr stride 4; no additional Cr byte offset is applied. Only full-frame crop is supported.",
+    "Core compares exact owner/session/reader/request/callback/shot/camera/physical identities before and after copying; source and submitted result are checked, actual request must match, timestamps must match exactly under SENSOR_START_OF_EXPOSURE.",
+    "For physical output, adapter selects the named physical result before reading SENSOR_TIMESTAMP/exposure/sensitivity. Logical active physical ID is recorded separately rather than used as an implicit physical binding.",
+    "Core copies into fresh private short arrays and exposes readonly ShortBuffer views; HdrFrame has no Image or plane-buffer aliases.",
+    "copyBorrowed has no close call. copyAndClose has one try-with-resources ownership boundary and does not manually close a second time. Host tests cover success/rejection close counts and suppression of a throwing close during rejection.",
+    "README explicitly states inactive-source scope, HLG-only/full-frame subset, caller-provided provenance, serialized lifecycle and commit obligation, payload-only memory cap, no silent fallback, and no phone validation.",
+    "Adapter rejects extra/unrecognized dataspace bits rather than silently discarding bits through standard/transfer/range masks; the added extra-bit case rejects COLOR in the host suite."
+  ],
+  "limitations": [
+    "No claim about actual SM-S948Q P010/HLG10 frame delivery, desired stream combinations, native resolution, camera ISP precision or scene dynamic range.",
+    "Source provenance tokens and timestamp convention must be established by the future session/callback owner. Android Image offers no public original reader/request identity; the adapter cannot independently prove these external claims.",
+    "Concurrent Image close/memory mutation and session/use races are excluded by the documented exclusive/serialized caller contract. Before/after snapshots alone cannot make arbitrary concurrent native buffer access safe.",
+    "maxAllocationBytes caps sample-array payload only, not VM headers, source Image, other live frames or future processing memory; Java allocation failure remains an error.",
+    "Host Android doubles validate application branching, not real Android API signatures, framework behavior, device HAL or runtime. Real API36 SDK compile is delegated to the parent and is not asserted here.",
+    "No beauty renderer, HLG/BT2020 conversion, encoder, camera-session integration, final image validation or production activation is covered."
+  ],
+  "primary_contract_urls": [
+    "https://developer.android.com/reference/android/media/Image#getFormat()",
+    "https://developer.android.com/reference/android/media/Image.Plane#getBuffer()",
+    "https://developer.android.com/reference/android/hardware/DataSpace",
+    "https://developer.android.com/reference/android/hardware/camera2/params/OutputConfiguration#setTimestampBase(int)",
+    "https://developer.android.com/reference/android/hardware/camera2/params/OutputConfiguration#setReadoutTimestampEnabled(boolean)",
+    "https://android.googlesource.com/platform/frameworks/base/+/master/media/jni/android_media_Utils.cpp"
+  ]
+}

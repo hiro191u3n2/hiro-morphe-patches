@@ -1,0 +1,65 @@
+{
+  "component": "HDR P010 input boundary",
+  "status": "source-only, inactive",
+  "package": "com.hiro.ulike.hdr.input",
+  "created_utc": "2026-10-01T00:55:02.886958+00:00",
+  "host_validation": {
+    "command": "bash test.sh",
+    "java_runtime": "OpenJDK 17.0.20",
+    "compiler": "java -m jdk.compiler/com.sun.tools.javac.Main --release 8 -Xlint:all",
+    "core_assertions": 73,
+    "adapter_host_double_assertions": 18,
+    "outcome": "PASS"
+  },
+  "real_android_sdk_compile": {
+    "status": "NOT_RUN_LOCALLY",
+    "reason": "ANDROID_JAR unset; parent CI will compile with API 36",
+    "stub_validation_is_sdk_validation": false
+  },
+  "android_device_capture_validation": "NOT_RUN",
+  "changes_to_apk_mpp_native_libraries_or_camera_session": false,
+  "copy_contract": {
+    "format": 54,
+    "logical_planes": [
+      "Y",
+      "Cb",
+      "Cr"
+    ],
+    "output_sample_storage": "readonly short buffers; positive unsigned10 values 0..1023",
+    "crop": "full frame only",
+    "color": "BT2020 non-constant-luminance + HLG; explicit FULL or LIMITED range",
+    "allocation": "required caller limit of total sample-array payload = width*height*3; VM overhead and source/other frame memory excluded"
+  },
+  "ownership_contract": "identity-checked owner/session/reader/request/callback/shot; exact SENSOR_TIMESTAMP from selected logical/physical result; lifecycle serialization/commit check belongs to caller; owned Image closed once, borrowed Image not closed",
+  "known_limits": [
+    "No actual P010 frame or stream combination validated on SM-S948Q",
+    "No camera/session/capture hookup",
+    "No EOTF/gamut conversion/JNI, beauty or encoding",
+    "No native 24.5MP claim",
+    "No model weights or complete vendor-style reproduction",
+    "Host Android doubles do not validate HAL/framework implementations"
+  ],
+  "sha256": {
+    "README.md": "ea4b3132aff5aee434f55e190e8f1e47b87b91dcad0a4c2e73c68de0fac00c41",
+    "src/android/java/com/hiro/ulike/hdr/input/android/AndroidP010FrameReader.java": "8185e04a0382dd00931fdf1a832626cf406cb343a3bf1ac75bdf69e7dcdbff41",
+    "src/main/java/com/hiro/ulike/hdr/input/CaptureMatch.java": "df1110d3211766ddb179b4067624d8549f549b31db1ead5fbe03f6281beb4435",
+    "src/main/java/com/hiro/ulike/hdr/input/HdrFrame.java": "63fbd7c93cc899b2f046a30ea5064bb741ed08c0f6b3edbbe3a0074e7d957ada",
+    "src/main/java/com/hiro/ulike/hdr/input/InputRejected.java": "e79123ebc1be85f2e1fed73c491864ccdda1dbf87e9430963f0b12c3406a0abf",
+    "src/main/java/com/hiro/ulike/hdr/input/P010FrameReader.java": "d2ccd836bd2c719d468d43b1d70ff25758728e93cd1804db55f4defe462f43db",
+    "src/test/java/com/hiro/ulike/hdr/input/P010FrameReaderTest.java": "375af1b8acad0b836ff03dd766e82c5e71224cd63603faca13e1a5bb439e254f",
+    "src/test-android/java/com/hiro/ulike/hdr/input/android/AndroidP010FrameReaderTest.java": "1817cc2dcd8f6a5e5505de48f6266183f824dee9d7a22df950e26c74ad4173f1",
+    "src/test-stubs/java/android/graphics/Rect.java": "95f88e9dd2ffbfe05169d4190b67f2c2e9f79d11df044340f8456b58fbcc0634",
+    "src/test-stubs/java/android/hardware/DataSpace.java": "c0662cdce8fb37ce0926db60d58403c8b8b5c5d01ba4eeb1e6626b9a78260d7b",
+    "src/test-stubs/java/android/hardware/camera2/CaptureRequest.java": "33b633d3c7bc57f2760308899c3fbc1c94384e02327388374b422420bb83122d",
+    "src/test-stubs/java/android/hardware/camera2/CaptureResult.java": "86c35db26c5dca6db41af07da3ee413ccb06481f23789d7cd9d4673faef6d963",
+    "src/test-stubs/java/android/hardware/camera2/TotalCaptureResult.java": "bffa757eae4f3fa9101048ab0f021d34cb19f1750da53684a448637c8a330ca7",
+    "src/test-stubs/java/android/media/Image.java": "41072a656ca32f9a541bbedde507711209fc708552448167bd31f681e837f44d",
+    "src/test-stubs/java/android/os/Build.java": "52f99e2ef8d88eae190a19d0c9bba81abfff502c5f5f5b88ffa0e484b0e645b4",
+    "test.sh": "f0ec90bcdc145b0081f621d3af883587a43a141dd9de6fe3f41d42f052fa15ca"
+  },
+  "independent_review": {
+    "path": "review/INDEPENDENT_REVIEW.json",
+    "sha256": "a74aeb900992a9eb706bce3eb1972f92511773d14781e20712d90bcb77ce326b",
+    "outcome": "PASS for source and host boundary scope"
+  }
+}

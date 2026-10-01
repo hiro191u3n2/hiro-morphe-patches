@@ -1,0 +1,522 @@
+{
+  "schema": "ulike-style-audit-1",
+  "styles": [
+    {
+      "archive": "ULike_Natural_blush_1790815043265.zip",
+      "archive_sha256": "5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0",
+      "schema": "ulike-style-materials-164",
+      "style_id": "7306041792770609665",
+      "style_label": "Natural_blush",
+      "verified_material_files": 299,
+      "verified_material_bytes": 4619450,
+      "selected_style_files": 45,
+      "resource_roots": 17,
+      "limits_reached": false,
+      "observer_unchanged_during_copy": true,
+      "all_dependencies_resolved_by_exporter": false,
+      "selected_native_use_confirmed": false,
+      "selected_style_parameter_api_events": [
+        {
+          "sequence": 315,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 316
+        },
+        {
+          "sequence": 317,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 318
+        },
+        {
+          "sequence": 323,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 324
+        },
+        {
+          "sequence": 327,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 328
+        }
+      ],
+      "parameter_success_is_native_execution_proof": false,
+      "selected_graph_declared": [
+        {
+          "path": "AmazingFeature0/",
+          "type": "AmazingFeature",
+          "zorder": 901
+        },
+        {
+          "path": "AmazingFeature1/",
+          "type": "AmazingFeature",
+          "zorder": 2002
+        },
+        {
+          "path": "AmazingFeature2/",
+          "type": "AmazingFeature",
+          "zorder": 8003
+        }
+      ],
+      "algorithm_nodes_declared": [
+        {
+          "name": "face_0",
+          "type": "face"
+        },
+        {
+          "name": "blit",
+          "type": "texture_blit"
+        },
+        {
+          "name": "StyleTransferPostProcess",
+          "type": "nh_style_transfer_post_process"
+        },
+        {
+          "name": "Inference",
+          "type": "nh_inference"
+        },
+        {
+          "name": "ToTensor",
+          "type": "nh_convert_to_tensor"
+        },
+        {
+          "name": "ImageTransform",
+          "type": "nh_image_transform"
+        },
+        {
+          "name": "FaceAlign",
+          "type": "nh_face_align"
+        },
+        {
+          "name": "expression_detect_0",
+          "type": "expression_detect"
+        },
+        {
+          "name": "skin_seg_0",
+          "type": "skin_seg"
+        }
+      ],
+      "algorithm_branch_size_declared": {
+        "width": 360,
+        "height": 640
+      },
+      "branch_size_is_saved_image_size_proof": false,
+      "named_model_calls": [
+        {
+          "node": "Inference",
+          "type": "nh_inference",
+          "key": "model_name",
+          "value": "tt_baoman"
+        },
+        {
+          "node": "FaceAlign",
+          "type": "nh_face_align",
+          "key": "model_name",
+          "value": "tt_baoman"
+        }
+      ],
+      "declared_model_names": [
+        "tt_baoman",
+        "tt_face",
+        "tt_face_attribute_age",
+        "tt_face_attribute_exp",
+        "tt_face_extra",
+        "tt_skin_seg"
+      ],
+      "model_filename_matches": {
+        "tt_baoman": [],
+        "tt_face": [],
+        "tt_face_attribute_age": [],
+        "tt_face_attribute_exp": [],
+        "tt_face_extra": [],
+        "tt_skin_seg": []
+      },
+      "model_dependency_resolution": "unresolved; names/configuration are not model weights",
+      "file_suffix_counts": {
+        ".config": 8,
+        ".event": 1,
+        ".frag": 21,
+        ".fsh": 12,
+        ".glsl": 29,
+        ".json": 55,
+        ".lua": 27,
+        ".material": 14,
+        ".mesh": 11,
+        ".meta": 9,
+        ".png": 38,
+        ".rt": 11,
+        ".scene": 7,
+        ".txt": 10,
+        ".vert": 21,
+        ".vsh": 11,
+        ".xshader": 14
+      },
+      "observer_completeness": {
+        "native_execution_confirmed": false,
+        "native_queue_barrier_performed": false,
+        "ordered_api_model_complete": false,
+        "pending_api_calls": 0,
+        "overlapping_api_calls": false,
+        "dropped_events": 0,
+        "malformed_or_bounded_arguments": false,
+        "all_parameter_keys_enumerated": false,
+        "external_textures_messages_animation_tracking_captured": false,
+        "resource_export_import_roundtrip_tested": false
+      },
+      "full_style_reproduction_verified": false,
+      "hdr_runtime_integration_verified": false
+    },
+    {
+      "archive": "ULike_Purity2_1790815028634.zip",
+      "archive_sha256": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117",
+      "schema": "ulike-style-materials-164",
+      "style_id": "7307549491547083266",
+      "style_label": "Purity2",
+      "verified_material_files": 397,
+      "verified_material_bytes": 5930658,
+      "selected_style_files": 143,
+      "resource_roots": 17,
+      "limits_reached": false,
+      "observer_unchanged_during_copy": true,
+      "all_dependencies_resolved_by_exporter": false,
+      "selected_native_use_confirmed": false,
+      "selected_style_parameter_api_events": [
+        {
+          "sequence": 71,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 72
+        },
+        {
+          "sequence": 73,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 74
+        },
+        {
+          "sequence": 79,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 80
+        },
+        {
+          "sequence": 83,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 84
+        },
+        {
+          "sequence": 151,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 152
+        },
+        {
+          "sequence": 153,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 154
+        },
+        {
+          "sequence": 159,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 160
+        },
+        {
+          "sequence": 163,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 164
+        },
+        {
+          "sequence": 173,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 174
+        },
+        {
+          "sequence": 177,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 178
+        },
+        {
+          "sequence": 181,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 182
+        },
+        {
+          "sequence": 185,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 186
+        },
+        {
+          "sequence": 189,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 190
+        },
+        {
+          "sequence": 193,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 194
+        },
+        {
+          "sequence": 197,
+          "keys": [
+            "Internal_Makeup"
+          ],
+          "values_float": [
+            "0.7"
+          ],
+          "return_code": 0,
+          "completion_sequence": 198
+        },
+        {
+          "sequence": 201,
+          "keys": [
+            "Internal_Filter"
+          ],
+          "values_float": [
+            "0.69"
+          ],
+          "return_code": 0,
+          "completion_sequence": 202
+        }
+      ],
+      "parameter_success_is_native_execution_proof": false,
+      "selected_graph_declared": [
+        {
+          "path": "AmazingFeature0/",
+          "type": "AmazingFeature",
+          "zorder": 901
+        },
+        {
+          "path": "AmazingFeature1/",
+          "type": "AmazingFeature",
+          "zorder": 2002
+        },
+        {
+          "path": "FaceMakeupV2_byExport2/",
+          "type": "FaceMakeupV2",
+          "zorder": 2003
+        },
+        {
+          "path": "AmazingFeature3/",
+          "type": "AmazingFeature",
+          "zorder": 2004
+        },
+        {
+          "path": "3dmakeup4/",
+          "type": "AmazingFeature",
+          "zorder": 2005
+        },
+        {
+          "path": "AmazingFeature5/",
+          "type": "AmazingFeature",
+          "zorder": 2006
+        },
+        {
+          "path": "AmazingFeature6/",
+          "type": "AmazingFeature",
+          "zorder": 2007
+        },
+        {
+          "path": "AmazingFeature7/",
+          "type": "AmazingFeature",
+          "zorder": 2008
+        },
+        {
+          "path": "AmazingFeature8/",
+          "type": "AmazingFeature",
+          "zorder": 8009
+        },
+        {
+          "path": "AmazingFeature9/",
+          "type": "AmazingFeature",
+          "zorder": 8010
+        }
+      ],
+      "algorithm_nodes_declared": [
+        {
+          "name": "idream_0",
+          "type": "idream"
+        },
+        {
+          "name": "face_0",
+          "type": "face"
+        },
+        {
+          "name": "blit_0",
+          "type": "texture_blit"
+        },
+        {
+          "name": "expression_detect_0",
+          "type": "expression_detect"
+        },
+        {
+          "name": "skin_seg_0",
+          "type": "skin_seg"
+        }
+      ],
+      "algorithm_branch_size_declared": {
+        "width": 360,
+        "height": 640
+      },
+      "branch_size_is_saved_image_size_proof": false,
+      "named_model_calls": [
+        {
+          "node": "idream_0",
+          "type": "idream",
+          "key": "idream_model_key",
+          "value": "idream/tt_goodlike"
+        }
+      ],
+      "declared_model_names": [
+        "tt_face",
+        "tt_face_attribute_age",
+        "tt_face_attribute_exp",
+        "tt_face_extra",
+        "tt_goodlike",
+        "tt_skin_seg"
+      ],
+      "model_filename_matches": {
+        "tt_face": [],
+        "tt_face_attribute_age": [],
+        "tt_face_attribute_exp": [],
+        "tt_face_extra": [],
+        "tt_goodlike": [],
+        "tt_skin_seg": []
+      },
+      "model_dependency_resolution": "unresolved; names/configuration are not model weights",
+      "file_suffix_counts": {
+        ".config": 14,
+        ".event": 1,
+        ".frag": 30,
+        ".fsh": 12,
+        ".glsl": 29,
+        ".json": 63,
+        ".lua": 39,
+        ".material": 22,
+        ".mesh": 17,
+        ".meta": 18,
+        ".png": 48,
+        ".rt": 17,
+        ".scene": 13,
+        ".txt": 11,
+        ".vert": 30,
+        ".vsh": 11,
+        ".xshader": 22
+      },
+      "observer_completeness": {
+        "native_execution_confirmed": false,
+        "native_queue_barrier_performed": false,
+        "ordered_api_model_complete": false,
+        "pending_api_calls": 0,
+        "overlapping_api_calls": false,
+        "dropped_events": 0,
+        "malformed_or_bounded_arguments": false,
+        "all_parameter_keys_enumerated": false,
+        "external_textures_messages_animation_tracking_captured": false,
+        "resource_export_import_roundtrip_tested": false
+      },
+      "full_style_reproduction_verified": false,
+      "hdr_runtime_integration_verified": false
+    }
+  ]
+}
