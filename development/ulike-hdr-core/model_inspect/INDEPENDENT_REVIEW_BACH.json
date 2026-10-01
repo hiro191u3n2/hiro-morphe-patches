@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "reviewer": "/root/native_beauty_audit/style_asset_search",
+  "time_utc": "2026-10-01T01:34:06.408345+00:00",
+  "source_sha256": "3cfbf76560fd6fb14eecc36c2c2d5ef3b38ddd0f3310a7012f12311bd5a1a1d7",
+  "review_scope": "Independent metadata parser boundary/typing/ZIP handling review; no model inference or graph reconstruction validation.",
+  "blocking_findings": [],
+  "resolved_findings": [
+    {
+      "issue": "Initial auto detection preferred legacy when offset16 equaled total size, even when Bach size-at-offset0 also matched.",
+      "resolution": "Now returns kind=ambiguous/status=not_decoded/candidate_kinds and CLI exit 2; explicit kind remains required to interpret ambiguous inputs.",
+      "verification": "Independent crafted file validates explicitly as Bach, is ambiguous in auto, and exits 2 via CLI."
+    }
+  ],
+  "independent_assertions": 3509,
+  "whole_prefix_truncations_rejected": 2469,
+  "random_mutations_checked": 1000,
+  "coverage": [
+    "Bach total/group/info sizes and counts, bounded NUL names, payload overflow, trailing bytes",
+    "Native XOR8 group payload checksum with enabled/disabled flag distinction",
+    "Type0 bounded ASCII parameter text, signed int32 and float32 exact sizes; unknown/noncanonical/nonfinite/Unicode values remain opaque",
+    "Expected SHA-256 mismatch and uppercase digest input",
+    "Legacy and BM header-only contracts without tensor/weight claims",
+    "ZIP exact named read, missing/duplicate/directory/encrypted member rejection, tampered stored payload CRC rejection",
+    "CLI machine-readable rejection/unknown/ambiguous statuses and exit codes",
+    "1000 deterministic byte-mutation trials: bounded parse or FormatError, never leaked IndexError/struct.error/nonfinite JSON",
+    "Both actual downloaded model files classified without copying or modifying payloads"
+  ],
+  "native_cross_check": [
+    {
+      "addresses": [
+        "0xc27fc4",
+        "0xc2803c",
+        "0xc28058",
+        "0xc28060"
+      ],
+      "checked": "file size at0, groupCount at36, size table at40, first group offset40+4*count"
+    },
+    {
+      "addresses": [
+        "0xc28100",
+        "0xc28110",
+        "0xc28130"
+      ],
+      "checked": "checksum enable file[4], XOR from group+292 to group end, stored byte group+256"
+    },
+    {
+      "addresses": [
+        "0xc28140",
+        "0xc28164",
+        "0xc281e8",
+        "0xc281fc",
+        "0xc28200"
+      ],
+      "checked": "292 group header, parameter table before entries, 296 parameter header, payloadLen at292 and payload at296"
+    },
+    {
+      "note": "Inspector intentionally enforces stronger span/count/name limits than native strcmp/memcpy. Passing inspection establishes this metadata layout only."
+    }
+  ],
+  "actual_model_results": [
+    {
+      "name": "tt_baoman",
+      "bytes": 972989,
+      "sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "kind": "bach_packed_buffer"
+    },
+    {
+      "name": "tt_goodlike",
+      "bytes": 1015321,
+      "sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "kind": "legacy_model_header_candidate"
+    }
+  ],
+  "limitations": [
+    "Legacy tt_goodlike remains header-identified with opaque payload; no decryption or inference claim.",
+    "Bach graph/data payloads remain hashed opaque buffers; scalar metadata is not tensor dtype or network precision proof.",
+    "Bach zero-parameter group is describable metadata; native group lookup returns no usable group for that case, and inspector makes no usability claim.",
+    "ZIP member decompression and standalone reads are capped at128 MiB; this is not a general adversarial ZIP-library audit."
+  ],
+  "production_edits_by_reviewer": false,
+  "model_payloads_published_or_copied": false,
+  "evidence_pins": {
+    "model_inspector.py": "3cfbf76560fd6fb14eecc36c2c2d5ef3b38ddd0f3310a7012f12311bd5a1a1d7",
+    "independent_test.py": "01d48f8d6559f90bd3a573143ca7dac58d4a0f92272c16f654b6c70570c30fca",
+    "INDEPENDENT_TEST_RESULTS.json": "75cd4b5fb240dfe045f64b2169147d509102bce1f487f518e8690d45a7c13405",
+    "PACKED_GROUP_FORMAT.json": "f192bd777ab49c355afbcc00977c6acd7f5a2af1f8b2d31f332e636c18bdc39e",
+    "packed_model_parser.asm": "7abc963d1785409b649f2e80070c6b97979e4315c50f69bdcf7f22189276a8d3"
+  },
+  "scope_note": "Independent review of earlier source revision: Bach + legacy/BM header recognition only. New legacy envelope parser is covered by current host tests and 39 builtin fixtures, not this independent review."
+}

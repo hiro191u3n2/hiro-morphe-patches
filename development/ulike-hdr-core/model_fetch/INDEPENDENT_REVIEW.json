@@ -1,0 +1,77 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "heif_quality_check (independent sub-agent)",
+  "date": "2026-10-01",
+  "scope": "Read-only acquisition-script/report review plus size/MD5/SHA-256 comparison of four existing model files. No network request or model inference performed by reviewer.",
+  "source_sha256": {
+    "fetch_target_models.py": "1a5f360d3db00a31d97487f63ba5f144e467a92774e37384a38c742809e474b4",
+    "README.md": "9c0808a47b7ce5830d7fe45f9f779f833e73d49a10cfb6c3f9b9801b6a162024",
+    "QA_ACQUISITION.json": "64929be5e6e253eb9263e0ba9d12cc2e6b659dbcd9a27379b6cc350ae9310cd7"
+  },
+  "reviewed_files": [
+    "fetch_target_models.py",
+    "README.md",
+    "QA_ACQUISITION.json"
+  ],
+  "local_model_identity": {
+    "directories": [
+      "ulike_work/models168/public_model_probe",
+      "ulike_work/models168/reproduced_models"
+    ],
+    "files_checked": 4,
+    "all_size_md5_sha256_pins_match": true,
+    "models": [
+      {
+        "name": "tt_baoman",
+        "version": "1.0",
+        "bytes": 972989,
+        "md5": "c9c4a3cbd789c561472cf83e9786a199",
+        "sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0"
+      },
+      {
+        "name": "tt_goodlike",
+        "version": "1.0",
+        "bytes": 1015321,
+        "md5": "f4bf8f7116ecceb69f91fddab19e9345",
+        "sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad"
+      }
+    ],
+    "metadata_consistency": "Both saved metadata responses name version 1.0 and URI equal to the corresponding MD5. Reproduced acquisition reports and QA_ACQUISITION.json match the same pins."
+  },
+  "code_inspection": {
+    "unknown_version_content_refusal": "Server name/version/URI must match explicit pins; final body length, MD5 and SHA-256 are checked before writing. Existing target bytes are checked with a bounded read and are not silently replaced.",
+    "root_path_guard": "CLI resolves destination and script path; rejects the entire nearest ancestor checkout containing .git. Without a checkout it rejects script.parents[2], the documented core/model_fetch distribution source root. Guards run before download calls.",
+    "https_and_redirects": "HTTPS required; custom NoRedirect handler prevents following redirects. CDN URL requires an allowlisted host, exact pinned path, no credentials/query/fragment, and absent or 443 port.",
+    "bounded_reads": "Metadata capped at 1 MiB; model download and existing-model validation bounded by pinned bytes plus one.",
+    "credentials_no_export": "No application key, cookie, account token or unique device identifier is read or supplied by the script. Reports contain model hashes, version, public CDN URL and fixed SDK/device-type query only.",
+    "report_truthfulness": "Reports explicitly keep device_cache_version_confirmed and standalone_inference_verified false; README distinguishes acquired bytes from phone cache identity, inference and HDR/style output."
+  },
+  "findings_resolved": [
+    "Original root guard covered only core/, allowing source-root siblings. Owner changed it to complete checkout/root guard; reviewed fix.",
+    "Initial URL validation did not prevent urllib redirects to another host/scheme. Owner added HTTPS requirement and NoRedirect handler; reviewed fix."
+  ],
+  "remaining_limits": {
+    "independent_network_run": false,
+    "notes": [
+      "Owner supplied successful live acquisition records; this review verifies saved bodies and reads hardened code without repeating network requests.",
+      "The owner completed a final live run of the hardened script. This reviewer separately checked the resulting local files and metadata, without making network requests.",
+      "Version 1.0 acquisition does not establish which version is cached on the phone; metadata matched_sdk_version is 0.0.0 for requested SDK 14.5.0.",
+      "Weight acquisition does not prove standalone inference, model tensor/operator interpretation, HDR semantics, or Natural blush/Purity2 equivalence.",
+      "The output-path guard is enforced by the documented command-line entry point. Direct Python callers of download() must independently choose an output directory outside the source checkout.",
+      "No model binaries are copied, redistributed or modified by this review."
+    ]
+  },
+  "post_review_owner_final_run": {
+    "status": "PASS",
+    "owner_report": "Final hardened NoRedirect script downloaded both pinned models successfully over HTTPS.",
+    "script_sha256_matches_reviewed_source": true,
+    "qa_additions_checked": [
+      "fetch_script_sha256",
+      "final_hardened_actual_network_run",
+      "final_network_output_location"
+    ],
+    "final_local_files_size_md5_sha256_match": true,
+    "final_acquisition_metadata_equals_qa_and_prior_private_copy": true,
+    "independent_reviewer_network_requests": 0
+  }
+}

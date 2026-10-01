@@ -1,0 +1,271 @@
+{
+  "status": "PASS_LOCAL_BYTES_METADATA_ONLY",
+  "models": {
+    "tt_baoman": {
+      "kind": "bach_packed_buffer",
+      "status": "metadata_structure_verified",
+      "groups": [
+        {
+          "name": "inference_model",
+          "offset": 48,
+          "bytes": 971129,
+          "checksum": {
+            "algorithm": "xor8",
+            "enabled": false,
+            "stored": 149
+          },
+          "parameters": [
+            {
+              "key": "forward_type",
+              "offset": 348,
+              "bytes": 300,
+              "type_id": 1,
+              "payload": {
+                "offset": 644,
+                "bytes": 4,
+                "sha256": "fb5e512425fc9449316ec95969ebe71e2d576dbab833d61e2a5b9330fd70ee02",
+                "encoding": "int32_le",
+                "value": 4
+              }
+            },
+            {
+              "key": "model_name",
+              "offset": 648,
+              "bytes": 970529,
+              "type_id": 3,
+              "payload": {
+                "offset": 944,
+                "bytes": 970233,
+                "sha256": "e83459a1a9cede004b5488237494331289406073ea375694dd0da5bbbbaf0c35",
+                "encoding": "opaque_unknown_type_or_noncanonical_size"
+              }
+            }
+          ]
+        },
+        {
+          "name": "face_align",
+          "offset": 971177,
+          "bytes": 1812,
+          "checksum": {
+            "algorithm": "xor8",
+            "enabled": false,
+            "stored": 222
+          },
+          "parameters": [
+            {
+              "key": "target_width",
+              "offset": 971489,
+              "bytes": 300,
+              "type_id": 1,
+              "payload": {
+                "offset": 971785,
+                "bytes": 4,
+                "sha256": "bf5e8ffa51a9e748985800c1d3d7f1a2a6ae7435136593ca8d9637e3f87c699c",
+                "encoding": "int32_le",
+                "value": 256
+              }
+            },
+            {
+              "key": "target_height",
+              "offset": 971789,
+              "bytes": 300,
+              "type_id": 1,
+              "payload": {
+                "offset": 972085,
+                "bytes": 4,
+                "sha256": "bf5e8ffa51a9e748985800c1d3d7f1a2a6ae7435136593ca8d9637e3f87c699c",
+                "encoding": "int32_le",
+                "value": 256
+              }
+            },
+            {
+              "key": "crop_margin",
+              "offset": 972089,
+              "bytes": 300,
+              "type_id": 2,
+              "payload": {
+                "offset": 972385,
+                "bytes": 4,
+                "sha256": "e0fb2d87992a9fc79e7729163ad2aea5efbf14806711292c8c46e873bac1a253",
+                "encoding": "float32_le",
+                "value": 0.4000000059604645
+              }
+            },
+            {
+              "key": "crop_offset_x",
+              "offset": 972389,
+              "bytes": 300,
+              "type_id": 2,
+              "payload": {
+                "offset": 972685,
+                "bytes": 4,
+                "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+                "encoding": "float32_le",
+                "value": 0.0
+              }
+            },
+            {
+              "key": "crop_offset_y",
+              "offset": 972689,
+              "bytes": 300,
+              "type_id": 2,
+              "payload": {
+                "offset": 972985,
+                "bytes": 4,
+                "sha256": "a5d4cd5b9cc4aba67ebe403c68466c378868947703d75704381d0c90e2615d1e",
+                "encoding": "float32_le",
+                "value": 15.0
+              }
+            }
+          ]
+        }
+      ],
+      "tensor_graph_decoded": false,
+      "native_model_execution_verified": false,
+      "limitation": "Metadata layout only; not proof of usable weights or inference/HDR behavior.",
+      "bytes": 972989,
+      "sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "embedded_model_header": {
+        "kind": "bm_00_02_container",
+        "status": "header_identified_payload_opaque",
+        "opaque_offset": 8,
+        "opaque_bytes": 970225,
+        "limitation": "Only magic and observed total-byte field checked; contents and checksum semantics unparsed.",
+        "bytes": 970233,
+        "sha256": "e83459a1a9cede004b5488237494331289406073ea375694dd0da5bbbbaf0c35"
+      }
+    },
+    "tt_goodlike": {
+      "kind": "legacy_model_envelope",
+      "status": "metadata_structure_verified_payload_opaque",
+      "version": "v3",
+      "name_candidate": "tt_goodlike_v1.0",
+      "name_offset": 24,
+      "name_bytes": 16,
+      "groups": [
+        {
+          "name": "v0",
+          "offset": 44,
+          "bytes": 1012214,
+          "opaque_auxiliary": {
+            "offset": 54,
+            "bytes": 36,
+            "sha256": "f74b83cd67330fcd2e7ae807b9bc69063b7efeaa9796b102384a5d1d0d93e7f4"
+          },
+          "opaque_encoded_payload": {
+            "offset": 98,
+            "bytes": 12132,
+            "sha256": "7545aa15fe0e47ab7838f99d0def8b2e49eb39d1e6c4230a42de09927163614c"
+          },
+          "opaque_tail_payload": {
+            "offset": 12238,
+            "bytes": 1000020,
+            "sha256": "e649ff216a85f63763b91d85eb6cbdae416be15326cd106a9353c9a59a8575ae"
+          },
+          "tail_tag_u32_uninterpreted": 284424245,
+          "decoded_payload_checksum": {
+            "stored_u32": 1848397920,
+            "verified": false,
+            "reason": "Native checksum applies after decoding; this inspector does not decode."
+          }
+        },
+        {
+          "name": "face_point",
+          "offset": 1012258,
+          "bytes": 2954,
+          "opaque_auxiliary": {
+            "offset": 1012276,
+            "bytes": 36,
+            "sha256": "f74b83cd67330fcd2e7ae807b9bc69063b7efeaa9796b102384a5d1d0d93e7f4"
+          },
+          "opaque_encoded_payload": {
+            "offset": 1012320,
+            "bytes": 2036,
+            "sha256": "e7d885bbf35652f1f236dab59402ed88526e87a60a3960d66163dc2e8064ccfd"
+          },
+          "opaque_tail_payload": {
+            "offset": 1014364,
+            "bytes": 848,
+            "sha256": "3c68979e89af5a444cc3902a8f232b29e9285a024ad696a1dc4ee0268ef54f12"
+          },
+          "tail_tag_u32_uninterpreted": 3050903607,
+          "decoded_payload_checksum": {
+            "stored_u32": 3417716014,
+            "verified": false,
+            "reason": "Native checksum applies after decoding; this inspector does not decode."
+          }
+        }
+      ],
+      "parameters": [
+        {
+          "key": "CropMarginv0",
+          "type_id": 2,
+          "payload": {
+            "offset": 1015232,
+            "bytes": 4,
+            "sha256": "5d96a77c55b4ac1eea2d77815396c4349292b85e3b07beaca6aff933e7ef8752",
+            "encoding": "float32_le",
+            "value": 0.20000000298023224
+          }
+        },
+        {
+          "key": "CropHeightv0",
+          "type_id": 1,
+          "payload": {
+            "offset": 1015256,
+            "bytes": 4,
+            "sha256": "bf5e8ffa51a9e748985800c1d3d7f1a2a6ae7435136593ca8d9637e3f87c699c",
+            "encoding": "int32_le",
+            "value": 256
+          }
+        },
+        {
+          "key": "CropOffsetXv0",
+          "type_id": 1,
+          "payload": {
+            "offset": 1015277,
+            "bytes": 4,
+            "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "encoding": "int32_le",
+            "value": 0
+          }
+        },
+        {
+          "key": "CropOffsetYv0",
+          "type_id": 1,
+          "payload": {
+            "offset": 1015298,
+            "bytes": 4,
+            "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "encoding": "int32_le",
+            "value": 0
+          }
+        },
+        {
+          "key": "CropWidthv0",
+          "type_id": 1,
+          "payload": {
+            "offset": 1015317,
+            "bytes": 4,
+            "sha256": "bf5e8ffa51a9e748985800c1d3d7f1a2a6ae7435136593ca8d9637e3f87c699c",
+            "encoding": "int32_le",
+            "value": 256
+          }
+        }
+      ],
+      "decoded_payload_checksums_verified": false,
+      "tensor_graph_decoded": false,
+      "native_model_execution_verified": false,
+      "limitation": "Outer lengths and plaintext metadata only; no decryption, decoded-payload checksum verification, tensor or weight parsing.",
+      "bytes": 1015321,
+      "sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad"
+    }
+  },
+  "device_model_identity_verified": false,
+  "inference_executed": false,
+  "limits": [
+    "No model weights or raw binary are included in this report.",
+    "Face alignment dimensions describe a face crop, not the whole saved photo.",
+    "Type3 payload and legacy encoded/tail payloads remain opaque; tensor graph and HDR behavior unverified."
+  ]
+}

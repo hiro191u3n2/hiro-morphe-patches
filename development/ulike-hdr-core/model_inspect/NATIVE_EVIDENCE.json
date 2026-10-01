@@ -1,0 +1,107 @@
+{
+  "scope": "Native Bach buffer layout checked against downloaded tt_baoman bytes. No graph or weights conversion.",
+  "effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "native_validator": "0xc27f94",
+  "native_group_lookup": "0xc28000",
+  "header": {
+    "fileSize": {
+      "offset": 0,
+      "type": "u32",
+      "validation": "equals input byte size"
+    },
+    "checksum_enabled": {
+      "offset": 4,
+      "type": "u8"
+    },
+    "groupCount": {
+      "offset": 36,
+      "type": "u32"
+    },
+    "groupSizeArray": {
+      "offset": 40,
+      "type": "u32[groupCount]"
+    }
+  },
+  "group": {
+    "start": "40 + 4*groupCount + sum(previousGroupSizes)",
+    "headerBytes": 292,
+    "groupName": {
+      "offset": 0,
+      "type": "NUL terminated string; native strcmp does not establish safer explicit maximum"
+    },
+    "checksum": {
+      "offset": 256,
+      "type": "u8",
+      "algorithm": "if file[4] nonzero: XOR bytes[groupStart+292:groupStart+groupSize]"
+    },
+    "infoCount": {
+      "offset": 288,
+      "type": "u32"
+    },
+    "infoSizeArray": {
+      "offset": 292,
+      "type": "u32[infoCount]"
+    }
+  },
+  "info": {
+    "start": "groupStart + 292 + 4*infoCount + sum(previous 296-byte headers plus payloadLen)",
+    "headerBytes": 296,
+    "keyName": {
+      "offset": 0,
+      "type": "string field; exact bounded max not established"
+    },
+    "type": {
+      "offset": 288,
+      "type": "u32",
+      "observed_settings_dispatch": {
+        "0": "string",
+        "1": "int32",
+        "2": "float32",
+        "3": "opaque buffer in actual model; no tensor interpretation"
+      }
+    },
+    "payloadLen": {
+      "offset": 292,
+      "type": "u32"
+    },
+    "payloadOffset": 296
+  },
+  "safe_inspector_requirements": [
+    "Distinguish this buffer format from legacy raw model wrapper with size at offset16 and the BM00 02 container",
+    "Validate every offset/size/count and exact end-of-buffer before access, independently of weaker native checks",
+    "Do not infer tensor dtype, network graph, model backend or HDR correctness from this metadata format",
+    "Do not silently assign this format to target files before obtaining and checking actual model bytes"
+  ],
+  "actual_model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+  "local_evidence_not_redistributed": [
+    "disasm/packed_model_parser.asm"
+  ],
+  "legacy_envelope": {
+    "native_parser": "0xe3dddc",
+    "version_check": "0xe3dec8-0xe3df20: header[i]+header[i+8] modulo256 gives v2 or v3, compared against registered version names",
+    "header": [
+      "16-byte folded version",
+      "u32 totalBytes",
+      "length-prefixed model name",
+      "u32 groupCount"
+    ],
+    "group": [
+      "length-prefixed group name",
+      "length-prefixed opaque auxiliary",
+      "u32 checksum of decoded payload (not checked here)",
+      "length-prefixed encoded payload",
+      "u32 uninterpreted tag",
+      "length-prefixed opaque tail payload"
+    ],
+    "v3_trailer": [
+      "u32 floatParamCount + (length-prefixed name,float32)*N",
+      "u32 intParamCount + (length-prefixed name,int32)*N"
+    ],
+    "decoder_calls": [
+      "0xe3e0dc",
+      "0xe3e174"
+    ],
+    "checksum_status": "Not checked: native verifies decoded payload, while this tool only inspects envelope.",
+    "evidence": "Local-only legacy_parser.asm; actual goodlike and 39 builtin .model envelopes verified."
+  }
+}

@@ -2,9 +2,8 @@
 
 This directory contains new processing components and an audit of the two style
 exports supplied on 2026-10-01. It is **not** a completed replacement beauty engine,
-an APK/MPP, or a working HDR camera-to-HEIF pipeline. No Manager release metadata
-is changed by this work. The installable baseline remains ULike patch 1.6.4 in
-integrated bundle 1.0.97.
+an APK/MPP, or a working HDR camera-to-HEIF pipeline. The separate model-export patch is for recording and comparing phone model
+files; it does not integrate these processing components into the camera.
 
 ## Material acquisition
 
@@ -20,9 +19,13 @@ CRC was verified against the export manifest.
 The remaining files include shared beauty resources. The selected style is
 resolved by its manifest path, not assumed from a fixed archive directory.
 The archives contain shader, Lua, texture, mesh and configuration data. Model
-identifiers are present; their corresponding model weights and inference
-implementation are not resolved by these exports. Neither a config file nor an
-identifier is a model implementation.
+identifiers are present, but those archives do not contain the two main model
+files. On 2026-10-01 we subsequently acquired both actual models through the
+app's normal metadata/CDN route, without supplied authentication. See
+`model_fetch` for exact hashes, sizes and a reproducible downloader, and
+`model_inspect` for the inspected container metadata. The native ByteNN call
+chain for Natural and Espresso path for Purity have also been identified;
+inference has not been replayed independently.
 
 The manifests also explicitly do not confirm native execution of every node,
 all final parameter values, queue synchronization or a replay round trip. The
@@ -43,8 +46,20 @@ every rendering pass has that resolution.
   Natural blush or Purity2 style.
 * `gainmap`: C++ generation and reconstruction of a gainmap from an already
   processed HDR/SDR pair. It does not reuse the unedited image's gainmap. Encoding
-  a HEIF container, Android MediaCodec/JNI integration and phone decoding are
-  outside the implemented component.
+  a HEIF container is now implemented separately in `heif_save`; Android
+  MediaCodec/JNI integration and phone decoding remain outside these components.
+* `model_fetch`: pinned acquisition of the actual `tt_baoman` and `tt_goodlike`
+  model files. Both CDN bodies match the metadata MD5 and recorded SHA-256.
+* `model_inspect`: bounded container inspection without executing model data.
+  Natural blush has a 256×256 face-alignment setting and an embedded ByteNN
+  payload. Purity2 also has a 256×256 face-crop setting in its legacy container.
+  Inner graph/weight data remain opaque; neither inspector is a running
+  inference engine.
+* `heif_save`: host writer for a 10-bit RGB SDR base, 10-bit RGB gainmap, ISO
+  binary metadata and HEIF `tmap` references. Both coded images round-trip through
+  independent libheif/libde265 decoding with 1024 levels. It uses HEVC Range
+  Extensions 4:4:4, not a claim of Android Main10 compatibility or automatic
+  HDR display. See its QA report for numerical reconstruction error.
 * `tools/audit_style_exports.py`: validates source archives without executing
   their scripts. `qa/material_audit.json` records the observed input evidence.
 
@@ -52,9 +67,11 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
 
 ## Remaining requirements for the requested complete replacement
 
-1. Obtain and understand the required neural models and native operators,
-   including face alignment, facial geometry, skin segmentation and the style's
-   generated face output. Model filenames alone are insufficient.
+1. Complete the tensor/operator interpretation of the acquired models and
+   reproduce their inference outputs, face alignment, facial geometry and skin
+   segmentation. Confirm the acquired models match the phone's actual cached
+   versions. Model acquisition is complete for the two main downloaded files;
+   an independent, high-precision beauty engine is not complete.
 2. Establish the active execution graph, color interpretation, sampler behavior,
    final style parameters and reference results on identical input images.
 3. Implement high-precision processing for those operations and a defined HDR
@@ -73,7 +90,9 @@ legacy JPEG mode, or proves stock-camera-equivalent quality.
 
 Host tests exercise the new numerical and data-boundary components. They are not
 evidence of a running Android pipeline, successful device capture, accurate
-reproduction of the complete styles, or a valid final HDR HEIF file. Uploaded
+reproduction of the complete styles, or an interoperable final Android HDR
+photo. `heif_save` does produce and independently decode real host HEIF files;
+existing viewer application of `tmap` and Android display remain unverified. Uploaded
 style assets are not redistributed in this source directory.
 
 The Android input adapter also compiled successfully against the real Android

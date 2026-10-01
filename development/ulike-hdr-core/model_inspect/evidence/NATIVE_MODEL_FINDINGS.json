@@ -1,0 +1,154 @@
+{
+  "status": "PASS_STATIC_CALL_CHAIN",
+  "library_sha256": {
+    "libeffect.so": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+    "libbytenn.so": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+    "libnewep.so": "6e7cefaed537ba572615b5fc2a7f19d60158ecbe9f763c70a8a24fd7896187c3"
+  },
+  "factory_symbol": "_ZN6BYTENN13EngineFactory6CreateEv",
+  "bytenn_vtable_slots": {
+    "0x18": {
+      "name": "_ZN6BYTENN16ByteNNEngineImpl8SetInputERKNSt6__ndk16vectorINS_6TensorENS1_9allocatorIS3_EEEE",
+      "address": "0x21e40",
+      "bytes": 644
+    },
+    "0x28": {
+      "name": "_ZN6BYTENN16ByteNNEngineImpl9InferenceEv",
+      "address": "0x21c1c",
+      "bytes": 548
+    },
+    "0x40": {
+      "name": "_ZN6BYTENN16ByteNNEngineImpl9GetOutputEPNSt6__ndk16vectorINS_6TensorENS1_9allocatorIS3_EEEE",
+      "address": "0x22e3c",
+      "bytes": 164
+    },
+    "0x58": {
+      "name": "_ZN6BYTENN16ByteNNEngineImpl14GetForwardTypeEv",
+      "address": "0x22eec",
+      "bytes": 136
+    },
+    "0x60": {
+      "name": "_ZN6BYTENN16ByteNNEngineImpl4InitERKNS_9ConfigExtE",
+      "address": "0x239a8",
+      "bytes": 4032
+    }
+  },
+  "instruction_evidence": {
+    "factory_helper": [
+      {
+        "address": "0xe7d158",
+        "instruction": "add x8, sp, #0x18"
+      },
+      {
+        "address": "0xe7d15c",
+        "instruction": "b #0x349c90"
+      }
+    ],
+    "init_configext": [
+      {
+        "address": "0xcb4b04",
+        "instruction": "ldr x8, [x8, #0x60]"
+      },
+      {
+        "address": "0xcb4b08",
+        "instruction": "blr x8"
+      }
+    ],
+    "set_input": [
+      {
+        "address": "0xcb50cc",
+        "instruction": "bl #0xe443dc"
+      }
+    ],
+    "inference": [
+      {
+        "address": "0xcb50d8",
+        "instruction": "bl #0xe47a70"
+      }
+    ],
+    "get_output": [
+      {
+        "address": "0xcb50f0",
+        "instruction": "bl #0xe4d1b4"
+      }
+    ],
+    "set_input_dispatch": [
+      {
+        "address": "0xe443dc",
+        "instruction": "ldr x8, [x0]"
+      },
+      {
+        "address": "0xe443e0",
+        "instruction": "ldr x8, [x8, #0x18]"
+      },
+      {
+        "address": "0xe443e4",
+        "instruction": "br x8"
+      }
+    ],
+    "inference_dispatch": [
+      {
+        "address": "0xe47a70",
+        "instruction": "ldr x8, [x0]"
+      },
+      {
+        "address": "0xe47a74",
+        "instruction": "ldr x8, [x8, #0x28]"
+      },
+      {
+        "address": "0xe47a78",
+        "instruction": "br x8"
+      }
+    ],
+    "get_output_dispatch": [
+      {
+        "address": "0xe4d1b4",
+        "instruction": "ldr x8, [x0]"
+      },
+      {
+        "address": "0xe4d1b8",
+        "instruction": "ldr x8, [x8, #0x40]"
+      },
+      {
+        "address": "0xe4d1bc",
+        "instruction": "br x8"
+      }
+    ],
+    "nh_model_load_dispatch": [
+      {
+        "address": "0xe5633c",
+        "instruction": "strb wzr, [sp, #0x70]"
+      },
+      {
+        "address": "0xe56340",
+        "instruction": "str w8, [sp, #0x74]"
+      },
+      {
+        "address": "0xe56344",
+        "instruction": "b #0xc2a5b8"
+      }
+    ],
+    "idream_model_load_dispatch": [
+      {
+        "address": "0xe50a04",
+        "instruction": "mov x0, x19"
+      },
+      {
+        "address": "0xe50a08",
+        "instruction": "b #0xc2a5b8"
+      }
+    ]
+  },
+  "conclusions": [
+    "Natural's nh_inference implementation has a concrete ByteNN create/init/input/inference/output path; not merely an exported name or immediate stub.",
+    "Natural NH and Purity IDream model initialization reach the same Bach model loader at 0xc2a5b8.",
+    "BachResourceMapper::mapResource at 0xc351b0 opens and mmaps a resolved file; a model name alone is not model content.",
+    "IDream constructs a model descriptor from stringParam idream_model_key. The observed constructor segment has no basename conversion before entering the common loader."
+  ],
+  "unverified": [
+    "No runtime confirmation of tt_baoman/tt_goodlike selected model version, resolved path, payload hash, or loaded graph.",
+    "The target model weights have not been identified from the copied built-in assets; this is not proof of absence from device download caches.",
+    "Tensor dtype/layout, ConfigExt ABI, model-group schema, pre/postprocessing, and color/HDR behavior are not established sufficiently for an independent engine.",
+    "No model execution, Android device test, authentication bypass, or production modification was performed."
+  ]
+}

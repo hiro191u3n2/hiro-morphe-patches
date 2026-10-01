@@ -1,0 +1,36 @@
+{
+  "status": "PASS",
+  "checks": 40,
+  "scope": "host 10-bit HEVC items + minimal HEIF/tmap writer",
+  "fixtures": {
+    "full_10bit_levels": {
+      "max_hdr_abs_error": 8.881784197001252e-16,
+      "hdr_rmse": 3.2780400408127686e-17,
+      "base_unique_codes": 1024,
+      "map_unique_codes": 1024,
+      "libheif": "1.23.2",
+      "file_bytes": 23605,
+      "sha256": "7749407923421be4aa432c23f2652ebdce0bcf9ec36fd4db33afb27a5deb8736"
+    },
+    "post_processing": {
+      "max_hdr_abs_error": 0.009418208849565346,
+      "hdr_rmse": 0.0010515219270247863,
+      "base_unique_codes": 1024,
+      "map_unique_codes": 1008,
+      "libheif": "1.23.2",
+      "file_bytes": 25761,
+      "sha256": "34ff0fa2864df510ba388d299d6db6c7d598591cc35eeea27c7f016339e0cba0"
+    }
+  },
+  "stale_map_max_hdr_error": 6.581339164747572,
+  "independent_decode": "libheif/libde265 both coded items",
+  "gainmap_math": "linked ../gainmap C++17, FP64 arithmetic, quantized RGB10 map",
+  "automatic_tmap_decoder_or_hdr_display_verified": false,
+  "android_or_camera_integration_verified": false,
+  "full_iso_conformance_certified": false,
+  "jpeg_stages": 0,
+  "base_bits": 10,
+  "map_bits": 10,
+  "command": "make test",
+  "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers"
+}

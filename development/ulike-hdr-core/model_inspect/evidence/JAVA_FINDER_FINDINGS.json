@@ -1,0 +1,218 @@
+{
+  "status": "CONFIRMED_JAVA_FINDER_CACHE_AND_METADATA_CONTRACTS",
+  "reviewer": "/root/native_beauty_audit/style_asset_search",
+  "time_utc": "2026-10-01T01:30:02.358142+00:00",
+  "scope": "Read-only local APK/DEX investigation. No API request made by this reviewer; parent GET/download observations independently checked against saved local evidence.",
+  "dex_pins": {
+    "classes.dex": "4fb5923b8cf7c28f393ba91dca6a9d4be91f69a8d2a4ae067670987e642b0f83",
+    "classes2.dex": "9c71360debb8d11fed8403bfca3b0247198d99218bd02d129d7205aa39df6933",
+    "classes3.dex": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0",
+    "classes4.dex": "2ffe409e7b98e36cd2f3d84fe9a7c7146c1e84a3b084961fe089c044229c5392"
+  },
+  "entrypoints": [
+    {
+      "class": "com.bytedance.corecamera.camera.basic.sub.VEResourceFinderInit",
+      "method": "a(Landroid/content/Context;)V",
+      "proof": "disasm/com_bytedance_corecamera_camera_basic_sub_VEResourceFinderInit.txt @0x18-0x22",
+      "behavior": "Installs ResourceFinder wrapper with VESDK.setEffectResourceFinder. Its createNativeResourceFinder initializes AssetResourceFinder then returns downloadable finder native handle."
+    },
+    {
+      "class": "com.bytedance.effect.network.ServerDataManager",
+      "method": "f(Li/f/q/g/b;Li/s/a/y/b/c;)V",
+      "proof": "disasm/com_bytedance_effect_network_ServerDataManager.txt @0x7a-0xa0,0x10a-0x122",
+      "behavior": "Builds downloadable model config with Context.getFilesDir()/effectmodel, two-thread executor, AssetManager, normal app host/config; then installs another ResourceFinder wrapper."
+    },
+    {
+      "class": "i.s.a.y.b.b",
+      "method": "c()Li/s/a/y/b/b; -> f()Lcom/ss/android/ugc/effectmanager/DownloadableModelSupportResourceFinder;",
+      "proof": "disasm/i_s_a_y_b_b.txt",
+      "behavior": "c throws if not initialized; h()Z checks initialization. f->e->d may lazily allocate Java wrapper only."
+    },
+    {
+      "class": "com.ss.android.ugc.effectmanager.DownloadableModelSupportResourceFinder",
+      "method": "findResourceUri(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "access": "public instance",
+      "proof": "disasm/com_ss_android_ugc_effectmanager_DownloadableModelSupportResourceFinder.txt @0x0-0x18",
+      "behavior": "AlgorithmManager h().i() then realFindResourceUri(0, firstString, nameStr)."
+    },
+    {
+      "class": "com.ss.ugc.effectplatform.algorithm.AlgorithmModelResourceFinder",
+      "method": "findResourceUri(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "access": "public static final",
+      "proof": "disasm/com_ss_ugc_effectplatform_algorithm_AlgorithmModelResourceFinder.txt; companion a @0x2c-0x44",
+      "behavior": "Native callback entry delegates to companion and same realFindResourceUri. No long/native handle argument in this String-return callback."
+    },
+    {
+      "class": "i.s.d.a.j.d",
+      "method": "realFindResourceUri(ILjava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "access": "public final instance",
+      "proof": "disasm/i_s_d_a_j_d.txt",
+      "behavior": "Last String is nameStr; middle String is unused in this implementation. Synchronous cache/built-in lookup, metadata comparison, then success listener. Caller thread retained."
+    }
+  ],
+  "no_lazy_initialization_local_probe": {
+    "algorithm_manager_field": "public static Li/s/d/a/j/e;->h:Li/s/d/a/j/e;",
+    "existing_finder_field": "public Li/s/d/a/j/e;->c:Lcom/ss/ugc/effectplatform/algorithm/AlgorithmModelResourceFinder;",
+    "lookup": "public inherited Li/s/d/a/j/d;->findResourceUri(Ljava/lang/String;)Ljava/lang/String;",
+    "conditions": "Read fields and skip when null. Do not call i(), getNativeResourceFinder(), createNativeResourceFinder(), initializer, model downloader or realFindResourceUri merely to export.",
+    "important_limit": "Even single-argument lookup can open/read DiskLruCache, update journal and, on initial open of a corrupt journal, remove/recreate cache. Passive observation of real returns is the cleanest evidence of active lookup; a deliberate local probe is not proof of active inference."
+  },
+  "lookup_contract": {
+    "canonical_model_key": "i.s.d.a.y.n.c(String): keep suffix after last slash; truncate before _v[0-9] when valid, otherwise before .model/_model/.dat, else remaining basename.",
+    "examples": {
+      "idream/tt_goodlike": "tt_goodlike",
+      "tt_baoman": "tt_baoman"
+    },
+    "order": "AlgorithmModelCache.o(normalizedName) first; otherwise isExactBuiltInResource(originalNameStr) and getBuiltInResourceUrl(originalNameStr).",
+    "disk_result": "file:// plus cache file path, through i.s.d.a.y.w.a URL normalization helper.",
+    "asset_result": "asset://model/<optional original namespace>/<matching actual model filename>; normalized basename matching allows versioned built-in filenames.",
+    "sentinels": [
+      "asset://not_found",
+      "asset://md5_error",
+      "asset://not_initialized"
+    ],
+    "raw_name_requirement": "Preserve original native nameStr separately from normalized basename. Parent native audit sees idream/tt_goodlike passed unchanged through the observed JNI forwarding; Java cache normalization alone does not prove every actual native request name."
+  },
+  "critical_side_effect": {
+    "realFindResourceUri_can_schedule_network": true,
+    "proof": "checkModelMd5 calls i.s.d.a.x.p.d(...,false,mask=2) and g(...,false,mask=4); Kotlin defaults make scheduling flags true. p.c(type,true) enqueues model-list task on cache miss; p.f(type,name,true) enqueues per-model metadata task on miss.",
+    "supporting_files": [
+      "disasm/i_s_d_a_j_d.txt",
+      "i.s.d.a.x.p.java"
+    ],
+    "other_side_effects": "Success/not-found event listeners and telemetry; cache journal reads/initialization; no new native handle required for Java lookup."
+  },
+  "cache_contract": {
+    "root": "Context.getFilesDir()/effectmodel",
+    "cache_class": "i.s.d.a.m.b (AlgorithmModelCache), underlying i.s.d.a.m.c / i.s.d.a.m.g.a (DiskLruCache)",
+    "key_before_sanitization": "<name>_v<version>_size<type>_md5<file_url.uri>.model",
+    "sanitization": "i.s.d.a.m.g.a$a.d replaces characters outside [a-z0-9_-] with underscore.",
+    "payload_location": "i.s.d.a.m.g.a$c.a(0) returns cacheDir/key without .0 suffix; nonzero value indexes have dot-index suffix. Payload often ends in _model, not .model.",
+    "size_warning": "The filename _size component comes from ModelInfo.getType(), not byte length.",
+    "local_metadata": "i.s.d.a.m.b.o(normalizedName) -> i.s.d.a.t.f: b() filePath, c() filename-derived expected MD5, d() name, e() type-like size token, f() version.",
+    "server_metadata": "com.ss.ugc.effectplatform.model.algorithm.ModelInfo: getTotalSize()J, getVersion(), getType(), getFile_url(); ExtendedUrlModel.getUri() expected digest, getUrl_list() and getZip_url_list().",
+    "download_commit": "m/b.r(ModelType,ModelInfo,InputStream) dispatches m/c.writeInputStreamToDisk or writeInputStreamAsZipToDisk, computes/compares MD5 before editor commit. Returned/cache path must be observed; do not invent a path from model name only.",
+    "export_receipt": "Compute actual byte length, SHA-256 and MD5 from copied payload; record expected MD5 separately and do not substitute type for byte length."
+  },
+  "metadata_get_contract": {
+    "host": "https://i18n-ulike-api3.faceucam.com",
+    "model_endpoint": "/model/api/model",
+    "model_generator": "i.s.d.a.x.u.b.e()",
+    "model_specific_params": [
+      "sdk_version",
+      "device_type",
+      "device_platform=android",
+      "status",
+      "name",
+      "busi_id only when >0",
+      "big_version only when nonblank"
+    ],
+    "list_endpoint": "/model/api/arithmetics",
+    "list_generator": "i.s.d.a.x.l.e()",
+    "list_specific_params": [
+      "sdk_version",
+      "device_type",
+      "status",
+      "busi_id only when >0",
+      "tag from model/effect_local_config.json if parseable"
+    ],
+    "common_generator": "i.s.d.a.y.i.a(config,false,true); called via default-mask wrapper b(...,false,false,4,null)",
+    "common_nonempty_params": [
+      "access_key",
+      "device_id",
+      "device_type",
+      "device_platform",
+      "region",
+      "sdk_version",
+      "app_version",
+      "channel",
+      "aid",
+      "app_language",
+      "gpu"
+    ],
+    "other_common_params": [
+      "config extra params excluding lx and ly",
+      "filter_type when >0",
+      "device_info JSON",
+      "platform_ab_params",
+      "platform_sdk_version when available",
+      "config.u provider extra map"
+    ],
+    "device_info_fields": [
+      "platform=1",
+      "gl_version when parseable",
+      "gl_vendor",
+      "gl_renderer",
+      "gl_extension",
+      "memory_total_size when >0",
+      "cpu_vendor",
+      "os_version"
+    ],
+    "request_adapter": "TTNetEffectNetworkImpl adds os_version query for GET URLs containing &app_version=, then EffectNetworkAPI.doGet(@AddCommonParam=false, maxLength=INT_MAX, relativePath, @QueryMap encode=true).",
+    "normal_values": {
+      "sdk_version": "14.5.0",
+      "status": 1,
+      "status_reason": "Enum TEST ordinal 0 / ONLINE ordinal 1; test preference switches to TEST.",
+      "aid": "1372",
+      "metadata_names": [
+        "tt_baoman",
+        "tt_goodlike"
+      ]
+    },
+    "credentials": "Static SDK access_key constants exist in APK initialization paths, values deliberately omitted. No key was required for the parent observed successful metadata requests.",
+    "auth_scope": "EffectNetworkAPI has no explicit Authorization/header argument. Shared TTNet adds BaseSsInterceptor, ClientKeyManager, optional URL/header transforms and RequestVertifyInterceptor. Their existence means the entire app networking cannot be described as unauthenticated even though these particular ordinary GETs succeeded without authentication."
+  },
+  "bundled_metadata": {
+    "asset_model_json_manifests_found": false,
+    "note": "Recovered base/assets/model has model payloads but no model/resources.json or model/effect_local_config.json file in the observed asset inventory. The DEX supports these optional files. Supplied selected material configs identify main model names without proving a packaged download URL/MD5 for them."
+  },
+  "assigned_model_names": {
+    "direct_call_search": "All classes*.dex containing the target descriptor were disassembled and invoke references inspected. Only ModelnamesAssigner own public wrappers invoke its native methods; no direct Java external caller found.",
+    "file": "MODEL_ASSIGNER_CALLS.json",
+    "limit": "Does not exclude reflection or native-internal remapping."
+  },
+  "parent_download_observations": [
+    {
+      "name": "tt_baoman",
+      "authentication_supplied": false,
+      "http_status": 200,
+      "response_status_code": 0,
+      "version": "1.0",
+      "type": 1,
+      "bytes": 972989,
+      "md5": "c9c4a3cbd789c561472cf83e9786a199",
+      "md5_matches_response_uri": true,
+      "sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "claim_scope": "This parent request succeeded without supplied authentication; local model hash independently verified by reviewer."
+    },
+    {
+      "name": "tt_goodlike",
+      "authentication_supplied": false,
+      "http_status": 200,
+      "response_status_code": 0,
+      "version": "1.0",
+      "type": 0,
+      "bytes": 1015321,
+      "md5": "f4bf8f7116ecceb69f91fddab19e9345",
+      "md5_matches_response_uri": true,
+      "sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "claim_scope": "This parent request succeeded without supplied authentication; local model hash independently verified by reviewer."
+    }
+  ],
+  "limits": [
+    "No on-device model lookup/inference run in this review.",
+    "Downloaded current model version may differ from a device existing cached version; passive exporter hashes are still needed.",
+    "Model availability does not establish input tensor, output tensor, model interpreter or high-precision beauty compatibility.",
+    "Raw disassembly/decompiled files are local-only evidence and may contain APK static SDK constants; do not publish the whole audit directory."
+  ],
+  "production_edits": false,
+  "network_requests_by_reviewer": false,
+  "publication": false,
+  "evidence_pins": {
+    "i.s.d.a.x.u.b.java": "6d4ddc0cd45cbf068eb8db6525b1fdbc631c8d79dd1fbc27e906a78cc525898c",
+    "i.s.d.a.x.l.java": "31e64613afe24ade45e9e7597f8adae15d9ae75189b84c1afe3f3175aeb9c1db",
+    "i.s.d.a.y.i.java": "a12143dc9c7670bb1e1009cd191eb4942a4665679cb261df2b8116ab65d2ab5a",
+    "i.s.d.a.x.p.java": "c675222c4cd7ef7bc4ee6046d0cb9a21492e1aec6c0cd220ca8101bc99014717",
+    "MODEL_ASSIGNER_CALLS.json": "0a39bf94e2cddd4887d02821e0634254d20dad4e339c1652264114cac537154c"
+  }
+}

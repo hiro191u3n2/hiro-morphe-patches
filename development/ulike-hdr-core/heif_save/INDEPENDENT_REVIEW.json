@@ -1,0 +1,90 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "gainmap_math_review (independent sub-agent)",
+  "scope": "Restricted host RGB10 SDR base + RGB10 gainmap HEVC/HEIF writer; not Android integration or automatic HDR rendering",
+  "source_sha256": {
+    "heif_save/heif_boxes.py": "11a8addb5c5a6fc31d84b574705c2b86cde51a3a8da6d1215444918f557e2dc5",
+    "heif_save/heif_save.py": "06bf4621cd2cd2ef96377ae80eca1f93fbe46d6af782756d44d8bdd1523a0a60",
+    "heif_save/gainmap_bridge.cpp": "2dcfebd5b5a77e00b18c6bf897c634688495259310afe7bc4a2d72a9e1517f48",
+    "heif_save/verify_file.py": "0868eed332f463461b79805be30415ab485806b70fc9651bb142960c5d6f2188",
+    "heif_save/test_heif_save.py": "783c84e3c5c5a4dc75b3c2a0cecb8ab06ea6126c7d112f3e1b0e6cf10e97118d",
+    "heif_save/README.md": "3e61bc09dbcd8a5e09ad34e612dca07ae26eec237291642d751f70244bb73c37",
+    "heif_save/Makefile": "5e0a74b31afbc12fbaa8f32ab52e4ae036bef805c3f7309c756d8beaccf4f124",
+    "gainmap/gainmap.cpp": "979e8fb72d098f088a1406e7025ef977b1fe03f865afd9ae93d912c84e144cf9",
+    "gainmap/gainmap.hpp": "dfcea027ef33bcb0daabd45254b9e1dde6f4186c86e2168083bca9adab6c1e24"
+  },
+  "inspection": {
+    "iso_serializer": "Separate rational version 0; flags 0xC0; leading ToneMapImage version byte; signed gain/offset numerators; post-rounding semantic checks reviewed",
+    "container": "heix/mif1/tmap, hvc1 base and hidden gainmap, hvcC arrays and length prefixes, tmap references and altr order inspected",
+    "color_contract": "BT.2020 primaries, SDR sRGB transfer, numeric map linear transfer, identity GBR full range; mandatory ffprobe VUI validation",
+    "input_synchronization": "Caller must synchronize input pair; private copies revalidated; two-array snapshot is not atomic",
+    "prior_findings_resolved": [
+      "Headroom can round to identical rational values",
+      "Positive gamma can round to zero",
+      "Illegal SPS sublayer value can overflow hvcC field",
+      "Color VUI not originally validated",
+      "Copy-time synchronization contract clarified and snapshots revalidated"
+    ]
+  },
+  "independent_execution": {
+    "method": "Copied source to temporary isolated directory; fresh C++17 bridge build; ran make test without modifying project test outputs",
+    "test_checks": 40,
+    "result": "PASS",
+    "libheif": "1.23.2",
+    "full_10bit_levels": {
+      "max_hdr_abs_error": 8.881784197001252e-16,
+      "hdr_rmse": 3.2780400408127686e-17,
+      "base_unique_codes": 1024,
+      "map_unique_codes": 1024,
+      "libheif": "1.23.2",
+      "file_bytes": 23605,
+      "sha256": "7749407923421be4aa432c23f2652ebdce0bcf9ec36fd4db33afb27a5deb8736"
+    },
+    "post_processing": {
+      "max_hdr_abs_error": 0.009418208849565346,
+      "hdr_rmse": 0.0010515219270247863,
+      "base_unique_codes": 1024,
+      "map_unique_codes": 1008,
+      "libheif": "1.23.2",
+      "file_bytes": 25761,
+      "sha256": "34ff0fa2864df510ba388d299d6db6c7d598591cc35eeea27c7f016339e0cba0"
+    },
+    "stale_map_max_hdr_error": 6.581339164747572,
+    "additional_fixtures": [
+      {
+        "name": "odd dimensions and SPS conformance crop",
+        "dimensions": [
+          35,
+          29
+        ],
+        "max_hdr_abs_error": 0.007760220914468263,
+        "passed": true
+      },
+      {
+        "name": "all-black constant gain",
+        "dimensions": [
+          16,
+          16
+        ],
+        "max_hdr_abs_error": 0.0,
+        "passed": true
+      }
+    ],
+    "code_roundtrip": "Both coded items independently decoded by libheif/libde265 with exact expected RGB10 codes",
+    "metadata_reconstruction": "Separate restricted ISO metadata reader applies gainmap to independently decoded samples"
+  },
+  "remaining_limits": {
+    "automatic_tmap_viewer_verified": false,
+    "full_iso_conformance_certified": false,
+    "android_or_camera_integration_verified": false,
+    "device_hdr_display_verified": false,
+    "natural_blush_or_purity2_style_verified": false,
+    "notes": [
+      "Installed libheif decodes coded items but does not automatically render tmap HDR",
+      "Lossless HEVC preserves quantized RGB10 codes, not original floating-point samples",
+      "Gainmap quantization and rational serialization have error; synthetic fixtures do not establish real-photo appearance",
+      "RExt 4:4:4 decoder compatibility differs from common Main10 4:2:0",
+      "Full-frame host copies and CPU encoding have no phone speed or memory guarantee"
+    ]
+  }
+}
