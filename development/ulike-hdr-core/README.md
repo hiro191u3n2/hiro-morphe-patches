@@ -75,3 +75,9 @@ Host tests exercise the new numerical and data-boundary components. They are not
 evidence of a running Android pipeline, successful device capture, accurate
 reproduction of the complete styles, or a valid final HDR HEIF file. Uploaded
 style assets are not redistributed in this source directory.
+
+The Android input adapter also compiled successfully against the real Android
+API 36 SDK in [CI run 36798738616](https://github.com/hiro191u3n2/hiro-morphe-patches/actions/runs/36798738616).
+That run verified source commit `b10a4d7c18cfb95505ec5975cec4c55f51727719`.
+Its 73 core and 18 adapter-double assertions passed; compiling with the SDK does
+not execute a phone camera or an Android framework implementation.
