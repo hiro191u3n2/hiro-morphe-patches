@@ -4,33 +4,68 @@ on:
     branches: ['work/ulike-lens-focus-v166']
     paths: ['.github/workflows/ulike-lens-focus-v166.yml']
 permissions:
-  contents: read
+  contents: write
 concurrency:
   group: hiro-morphe-patch-release
   cancel-in-progress: false
 jobs:
-  prepare:
+  release:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 15
     env:
       GH_TOKEN: ${{ github.token }}
       GH_REPO: hiro191u3n2/hiro-morphe-patches
     steps:
-      - name: Inspect pinned predecessor release machinery without publishing
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch pinned predecessor artifacts and build tools
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p input
+          mkdir -p input tools dist
           gh release download ulike-v1.6.5 --pattern ULike_v1.6.5_sources_and_QA.zip --dir input
-          echo '25c15a650020f61ca8f44767c7d3511de84d32128ce85e509c8f0d898c406a10  input/ULike_v1.6.5_sources_and_QA.zip' | sha256sum -c -
-          python3 - <<'PY'
-          import zipfile
-          with zipfile.ZipFile('input/ULike_v1.6.5_sources_and_QA.zip') as z:
-              names=z.namelist()
-              print('BASELINE INVENTORY')
-              print('\n'.join(n for n in names if n.startswith(('integration/','release_pipeline/')) or '/' not in n))
-              for n in ['integration/repack_only.py','release_pipeline/publish.py','UpdatePatchStrings.java']:
-                  matches=[x for x in names if x==n or x.endswith('/'+n)]
-                  for x in matches:
-                      print('\nBEGIN_INSPECT '+x+'\n'+z.read(x).decode()+'\nEND_INSPECT '+x)
-          PY
+          gh release download ulike-v1.6.5 --pattern ULike_HQ_Texture_Online_v1.6.5.mpp --dir input
+          gh release download ulike-v1.6.5 --pattern Hiro_Morphe_Patches_v1.0.98.mpp --dir input
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe.jar
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.8/asm-9.8.jar -o tools/asm.jar
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  tools/morphe.jar' | sha256sum -c -
+          echo '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  tools/r8.jar' | sha256sum -c -
+          echo '876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051  tools/asm.jar' | sha256sum -c -
+      - name: Reproduce exactly the previously tested MPP bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike-v1.6.6/build_reviewed.py
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source166/release_pipeline/publish166.py --qa source166/release_pipeline/LOCAL_QA.json --dist dist --notes source166/release_pipeline/RELEASE_NOTES.txt --release-body source166/release_pipeline/README.md --summary source166/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-01 --preflight-only
+      - name: Publish verified artifacts and CAS-update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source166/release_pipeline/publish166.py --qa source166/release_pipeline/LOCAL_QA.json --dist dist --notes source166/release_pipeline/RELEASE_NOTES.txt --release-body source166/release_pipeline/README.md --summary source166/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-01
+      - name: Show build recipe diagnostics on failure
+        if: failure()
+        shell: bash
+        run: |
+          for f in baseline165/integration/MergePayloads.java baseline165/integration/build.sh; do
+            if test -f "$f"; then echo "BEGIN_DIAGNOSTIC $f"; cat "$f"; echo "END_DIAGNOSTIC $f"; fi
+          done
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain publication artifacts and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-lens-focus-v166-publication
+          path: |
+            dist/*
+          if-no-files-found: warn
+          retention-days: 7
