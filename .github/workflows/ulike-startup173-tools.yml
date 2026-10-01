@@ -1,0 +1,29 @@
+name: ULike startup173 analysis tooling
+on:
+  push:
+    branches: ['work/ulike-startup-af-v173']
+    paths: ['.github/workflows/ulike-startup173-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tooling:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Download compiler and inspection tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8-8.3.37.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.8/asm-9.8.jar -o tools/asm-9.8.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          cp "$SDK/platforms/android-36/android.jar" tools/android.jar
+          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
+          (cd tools && sha256sum *.jar jadx.zip > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-startup173-tools
+          path: tools/*
+          retention-days: 2
