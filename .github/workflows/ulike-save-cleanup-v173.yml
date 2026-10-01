@@ -1,0 +1,108 @@
+name: Verify and publish ULike save cleanup 1.7.3
+on:
+  push:
+    branches: ['work/ulike-save-cleanup-v173']
+    paths: ['.github/workflows/ulike-save-cleanup-v173.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore exact reviewed source and new local evidence, preserving concurrent changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,io,json,lzma,re,subprocess,tarfile
+          from pathlib import Path,PurePosixPath
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          parts=[]
+          for i in range(3):
+              endpoint='repos/hiro191u3n2/hiro-morphe-patches/contents/releases/ulike-v1.7.2/source.b64.%03d?ref=88fd0318465081630fc4e27dc081195c9337c785'%i
+              reply=json.loads(subprocess.check_output(['gh','api',endpoint]))
+              assert reply['encoding']=='base64'
+              parts.append(base64.b64decode(reply['content']).decode())
+          base=base64.b64decode(''.join(''.join(p.split()) for p in parts),validate=True)
+          assert len(base)==33120 and sha(base)=='1802f4eba33430d45ec5b8541d7643ef254162b661f338b7aae35f400d5d0bdc'
+          patch=base64.b64decode(''.join(Path('releases/ulike-v1.7.3/rebase.b64').read_text().split()),validate=True)
+          assert len(patch)==7972 and sha(patch)=='7a1a51de6a419efd56d09cc67cbe3e83b6dbd635d356d34153b8a5e6205de482'
+          data=json.loads(lzma.decompress(patch))
+          assert data['schema']=='ulike-cleanup-rebase173-source-only-v1' and data['base_tar_sha256']==sha(base)
+          files={}
+          with tarfile.open(fileobj=io.BytesIO(base),mode='r:xz') as archive:
+              for member in archive.getmembers():
+                  p=PurePosixPath(member.name)
+                  assert member.isfile() and not p.is_absolute() and '..' not in p.parts and member.name not in files
+                  assert p.suffix.lower() in {'.java','.py','.sh','.json','.txt','.md','.tsv'}
+                  files[member.name]=archive.extractfile(member).read().decode()
+          assert len(files)==49
+          substitutions=data['replacements'];pattern=re.compile('|'.join(map(re.escape,substitutions)))
+          files={n:pattern.sub(lambda m:substitutions[m.group()],text) for n,text in files.items()}
+          assert set(data['overrides'])<=set(files)
+          files.update(data['overrides'])
+          assert sha(files['SOURCE_FILES.json'].encode())==data['source_manifest_sha256']
+          manifest=json.loads(files['SOURCE_FILES.json'])
+          assert set(manifest)|{'SOURCE_FILES.json'}==set(files)
+          for n,h in manifest.items():assert sha(files[n].encode())==h,n
+          for n,text in files.items():
+              target=Path('src')/n;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text,encoding='utf-8')
+          Path('expected-source173.sha256').write_text(data['expected_source_zip_sha256']+'  dist/ULike_v1.7.3_sources_and_QA.zip\n')
+          print('PASS all 49 reviewed source and freshly rerun local evidence files restored exactly')
+          PY
+      - name: Fetch pinned current baseline and verified build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.7.2 --pattern ULike_HQ_Texture_Online_v1.7.2.mpp --dir input
+          gh release download ulike-v1.7.2 --pattern Hiro_Morphe_Patches_v1.0.105.mpp --dir input
+          gh run download 36859837629 --name ulike-lens-focus-analysis-tools --dir toolchain
+          cp toolchain/tools/morphe-1.16.jar toolchain/tools/r8-8.3.37.jar toolchain/tools/asm-9.8.jar toolchain/tools/android.jar tools/
+      - name: Reproduce exactly both newly tested MPP files and source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/build172.py --input input --tools tools --dist dist | tee dist/build173.txt
+          python3 src/finalize172.py --dist dist
+          sha256sum -c expected-source173.sha256
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish172.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and CAS-update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish172.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show checkpoint on failure
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain exact files and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-save-cleanup-v173-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
