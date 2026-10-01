@@ -1,0 +1,111 @@
+name: Verify and publish ULike exact-pixel save optimization 1.6.8
+on:
+  push:
+    branches: ['work/ulike-save-fast-v168']
+    paths: ['.github/workflows/ulike-save-fast-v168.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain pinned predecessor and the locally verified toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist source168
+          gh release download ulike-v1.6.7 --pattern ULike_v1.6.7_sources_and_QA.zip --dir input
+          gh release download ulike-v1.6.7 --pattern ULike_HQ_Texture_Online_v1.6.7.mpp --dir input
+          gh release download ulike-v1.6.7 --pattern Hiro_Morphe_Patches_v1.0.100.mpp --dir input
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11160707412/zip > input/toolchain.zip
+          echo 'c9184fe6af171d294614d169695398f4f861030806dd37732872f90e2917bba0  input/toolchain.zip' | sha256sum -c -
+          echo '4142c603b97107ce705e52380be950726d680a8ef607c634eba9cf134307fef7  input/ULike_v1.6.7_sources_and_QA.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('input/toolchain.zip') as z:
+              for name in ['morphe-1.16.jar','r8-8.3.37.jar','asm-9.8.jar','android.jar']:
+                  Path('tools',name).write_bytes(z.read('tools/'+name))
+          PY
+      - name: Restore immutable reviewed source delta and unchanged predecessor files
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,io,json,tarfile,zipfile
+          from pathlib import Path,PurePosixPath
+          root=Path('source168')
+          parts=sorted(Path('releases/ulike-v1.6.8').glob('source.b64.*'))
+          assert [p.name for p in parts]==[f'source.b64.{i:03}' for i in range(3)]
+          raw=base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts),validate=True)
+          assert hashlib.sha256(raw).hexdigest()=='a28490d9b3e80cebabb6123c9b0e762440cfe1669af4752a02f7798d551d749f','Reviewed delta mismatch'
+          with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as t:
+              seen=set()
+              for m in t.getmembers():
+                  p=PurePosixPath(m.name)
+                  assert m.isfile() and not p.is_absolute() and '..' not in p.parts and m.name not in seen,m.name
+                  assert p.suffix.lower() not in {'.apk','.apks','.aab','.so','.jks','.keystore','.p12'},m.name
+                  seen.add(m.name)
+              assert len(seen)==30
+              t.extractall(root,filter='data')
+          inherited=['MergePayloads.java','UpdatePatchStrings.java','VerifyApplied.java','VerifyHelperReferences.java','qa/HOST_FAST167_TESTS.txt','qa/HOST_TESTS.txt','qa/integrated-cli.json','qa/standalone-cli.json','release_pipeline/manager_metadata.py','release_pipeline/publish.py']
+          with zipfile.ZipFile('input/ULike_v1.6.7_sources_and_QA.zip') as z:
+              for name in inherited:
+                  p=root/name
+                  assert not p.exists(),name
+                  p.parent.mkdir(parents=True,exist_ok=True)
+                  p.write_bytes(z.read(name))
+          source=json.loads((root/'SOURCE_FILES.json').read_text())
+          assert len(source)==39
+          for name,digest in source.items():
+              p=PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts,name
+              assert hashlib.sha256((root/name).read_bytes()).hexdigest()==digest,name
+          print('PASS restored all 40 hash-bound source and QA files')
+          PY
+      - name: Repeat pixel and I/O tests and reproduce exactly the locally applied MPP bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source168/build_reviewed.py --input input --tools tools --dist dist
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source168/release_pipeline/publish168.py --qa source168/release_pipeline/LOCAL_QA.json --dist dist --notes source168/release_pipeline/RELEASE_NOTES.txt --release-body source168/release_pipeline/README.md --summary source168/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and CAS-update Manager main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source168/release_pipeline/publish168.py --qa source168/release_pipeline/LOCAL_QA.json --dist dist --notes source168/release_pipeline/RELEASE_NOTES.txt --release-body source168/release_pipeline/README.md --summary source168/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show fail-closed state on failure
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+          if test -d source168/ci-build; then find source168/ci-build -name '*.dex' -exec sha256sum {} +; fi
+      - name: Retain patch artifacts and publication verification only
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-save-fast-v168-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
