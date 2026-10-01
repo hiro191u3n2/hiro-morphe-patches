@@ -1,0 +1,125 @@
+{
+  "schema": 1,
+  "reviewer": "native_bridge_symbols",
+  "reviewed_at_utc": "2026-10-01T01:46:56.293256+00:00",
+  "verdict": "PASS_SCOPED_LEGACY_METADATA_REVIEW",
+  "blocking_findings": [],
+  "scope": "Independent read-only review of newly added legacy v2/v3 envelope metadata parsing. Existing Bach implementation/review was not redone. No code/native/model edits, decoding, inference, model conversion, or publication.",
+  "reviewed_files": [
+    {
+      "path": "core/model_inspect/model_inspector.py",
+      "sha256": "296c6d3d8e852d0feed22c535ffbdc9d818b0a76a8cd7941b34d20708c12bf97"
+    },
+    {
+      "path": "core/model_inspect/test_model_inspector.py",
+      "sha256": "e04d53cc2bc1d9a511346692d3399b440f51d13db8aa31b9282ef1b19ea0bf26"
+    },
+    {
+      "path": "core/model_inspect/README.md",
+      "sha256": "1b7b528215286620403c8a59fdb92e4d91c59ea725f6b82d24de208507f74471"
+    },
+    {
+      "path": "core/model_inspect/NATIVE_EVIDENCE.json",
+      "sha256": "3d40303e7e763279fc5e1d3adaf2a5b04349a142578dd19b2a4cb377f3a42106"
+    },
+    {
+      "path": "core/model_inspect/QA_REAL_MODELS.json",
+      "sha256": "6738eac2fec84fdf55921b3c1c55f932c9996af0ba37789de253238cc3e87397"
+    },
+    {
+      "path": "core/model_inspect/QA_BUILTIN_ENVELOPES.json",
+      "sha256": "49bd9b368b05892c8f7983effb0f1914d7d15cffabe27df0f2beca50098418f4"
+    },
+    {
+      "path": "model_audit168/disasm/legacy_parser.asm",
+      "sha256": "52b841bffd956a7a584392e7175605c398bb6e2406b4e36fae781cbcaa84b88c"
+    },
+    {
+      "path": "model_audit168/disasm/legacy_model_util.asm",
+      "sha256": "f2b3b80ec46caa42baf0b9cf1d5c948e8235d93a449562f69104d486b5c01fa3"
+    },
+    {
+      "path": "model_audit168/BUILTIN_MODEL_INVENTORY.json",
+      "sha256": "e130bd357f2688d087817a02891266936f3051d6b64464096d2d4763bbc56ae9"
+    }
+  ],
+  "native_pin_verified": {
+    "libeffect.so": {
+      "bytes": 26892656,
+      "sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e"
+    }
+  },
+  "native_cross_checks": [
+    {
+      "claim": "16-byte folded version",
+      "evidence": "0xe3dec8..0xe3dee4 adds corresponding first/second 8-byte halves; 0xe3defc..0xe3df20 constructs/version-looks-up folded string. Inspector recognizes exact v2/v3 NUL-padded result and otherwise reports header-only candidate."
+    },
+    {
+      "claim": "declared length, model name, group count",
+      "evidence": "0xe3df2c..0xe3df98 reads totalBytes and compares with actual stream length, reads signed name length and signed group count; negative values branch to rejection. Inspector additionally caps printable model name to 1..255 and group count to MAX_ENTRIES."
+    },
+    {
+      "claim": "group field order",
+      "evidence": "0xe3e000 group name; 0xe3e098 auxiliary length and data; 0xe3e130 checksum word; 0xe3e138 encoded length; 0xe3e224 tail tag; 0xe3e22c tail length/data. Inspector consumes these fields in order with containing-span checks."
+    },
+    {
+      "claim": "decoded checksum is not envelope checksum",
+      "evidence": "Native decoder calls at 0xe3e0dc and 0xe3e174 precede checksum loop at 0xe3e1f0..0xe3e220. Inspector neither performs those calls nor interprets opaque payloads and explicitly sets per-group verified=false and decoded_payload_checksums_verified=false."
+    },
+    {
+      "claim": "v3 trailer sequence",
+      "evidence": "0xe3e3d8 reads first parameter count, first map body uses name+4-byte value at 0xe3e404..0xe3e438; second count at 0xe3e448 and second map entries at 0xe3e468..0xe3e4a0. Inspector handles float then int metadata and consumes exactly EOF."
+    }
+  ],
+  "boundary_and_claim_review": [
+    "Every word/blob/name goes through span before slicing/unpacking; payload lengths are capped below signed-negative range and file size is bounded at 128 MiB.",
+    "Names are nonempty printable ASCII with stricter inspector caps; these caps define supported metadata inputs and are not claims about universal native limits.",
+    "High-bit/signed-negative counts fail MAX_ENTRIES checks, and group+float+int counts are aggregated using Python unbounded integers.",
+    "Zero groups and zero opaque blobs are structurally allowed without claiming model execution or validity.",
+    "Every recognized v2/v3 parse must end exactly at file length; unsupported folded versions remain header-only candidates with explicit opaque/no-decoding limitation.",
+    "Conflicting Bach/legacy length heuristics yield ambiguous/not_decoded; explicit legacy parses only when chosen independently. BM strong-magic path remains its pre-existing opaque header-only classifier.",
+    "Nonfinite float payloads have no numeric value and remain opaque; JSON serializes with allow_nan=false. Signed int32 metadata is decoded as signed.",
+    "Mutated encoded/auxiliary/tail payloads can remain structurally accepted, as intended; hashes change and decoded checksums remain unverified. Stored checksum/tag are not treated as decoded information.",
+    "CLI exit zero includes header-only recognition by documented contract; status must be inspected. Unknown/ambiguous exit2 and malformed identified input exit1 were exercised.",
+    "README/QA do not claim tensor/weight decoding, inference, active-device identity, HDR correctness, or full-image dimensions from face crop metadata."
+  ],
+  "test_results": {
+    "independent_legacy_assertions": 473,
+    "independent_result_file": "INDEPENDENT_TEST_RESULTS.json",
+    "independent_result_sha256": "aef6f76ed03298c228ac00c770cf604e4cfae1941bb1ef5cd3212191811323d3",
+    "existing_legacy_unittests_run": [
+      "test_legacy_header_only",
+      "test_legacy_v2_v3_metadata",
+      "test_legacy_envelope_field_corruption"
+    ],
+    "existing_legacy_unittests_result": "PASS (3 tests)",
+    "goodlike": {
+      "sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "result": "Full inspect result exactly equals existing QA_REAL_MODELS.models.tt_goodlike"
+    },
+    "builtin_envelopes": {
+      "count": 39,
+      "result": "All exact input sizes/SHA pins match inventory and QA_BUILTIN_ENVELOPES; each parsed as legacy_model_envelope with decoded checksum flag false"
+    },
+    "checks": [
+      "repaired-declared-size prefix truncations",
+      "exact EOF and excess tail bytes",
+      "signed/high-bit/oversized length and count fields",
+      "aggregate counts",
+      "empty and maximum-bound names",
+      "zero counts/opaque spans",
+      "nonfinite float and signed int32",
+      "opaque-byte and stored-checksum mutation semantics",
+      "trusted SHA mismatch",
+      "conflicting format heuristics",
+      "unknown folded-version header-only status",
+      "CLI JSON and exit statuses"
+    ]
+  },
+  "limits": [
+    "Outer-envelope and plaintext metadata verification only; malformed encoded payloads may pass because native decoders/checksums are deliberately not run.",
+    "No claim of target-device model identity, functioning inference, parameter applicability, beauty output equivalence or HDR/high-quality reconstruction.",
+    "No Android or native execution was performed.",
+    "Review results bind to the listed inspector hash; production source was not modified."
+  ]
+}

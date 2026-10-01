@@ -1,0 +1,293 @@
+{
+  "status": "PASS_LEGACY_ONLY_REVIEW_TESTS",
+  "assertions": 473,
+  "checks": [
+    "repaired-prefix truncation, EOF and signed/count bounds v2",
+    "repaired-prefix truncation, EOF and signed/count bounds v3",
+    "zero groups/blobs, model 1..255 and parameter/group 1..4096 printable ASCII limits",
+    "aggregate count cap and signed int/nonfinite float representation",
+    "opaque mutation hashes change without false decoded-checksum or inference validation",
+    "conflicting Bach/legacy headers require explicit format; unknown folded version stays header-only",
+    "hash-bound goodlike full metadata matches QA_REAL_MODELS; all 39 builtin envelopes match QA sizes/hashes",
+    "CLI success/header-only=0, unknown/ambiguous=2, malformed=1 with parseable JSON"
+  ],
+  "reviewed_inspector_sha256": "296c6d3d8e852d0feed22c535ffbdc9d818b0a76a8cd7941b34d20708c12bf97",
+  "goodlike_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+  "builtin_count": 39,
+  "builtin_metadata_only": [
+    {
+      "name": "tt_skeleton_v7.0.model",
+      "sha256": "dc5fcb6aa7f22860c494f1ea9efb59130bcd876ce5e731c209cd85ca640d1472",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_det_v11.0.model",
+      "sha256": "5181d5aab37b5e6ce6b38d94bed2d253b095423d31589a8a1d6438af7b30355a",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_seg_v2.0.model",
+      "sha256": "35a30b19e884bb9adb1742241a5b1159a07d754a6e1851168ad4047c19bf0ef0",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_kp_v6.0.model",
+      "sha256": "9e956310aa62c88df4612288fd1778b250b4068e438fa701a88ad302d49a6732",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_ring_v1.1.model",
+      "sha256": "74fcf245d91fe4edf558fc655973d5768a5b1ccbe9949e5f7a246ef816f2b9ac",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_gesture_v11.0.model",
+      "sha256": "f1ff50889393a68ec5b83e5e34488fb4d5c3b20a5ac18d775cb41dff8c14bb09",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_kp3d_v2.0.model",
+      "sha256": "609bd5bfdd532591f6b404e000ee5aaaaaad071f04e6f6b5b6fa587502a671f3",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hand_box_reg_v12.0.model",
+      "sha256": "e33b47c08d96b11ac7ea77c2b076da9814eb2ca8125d735c857842731d2cac92",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hdrnet_effect_v4.0.model",
+      "sha256": "300217b1f77f416388813711fd5f2fb04809483c0360a9918470f80d77cadc17",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hdrnet_tone_v4.0.model",
+      "sha256": "1b4dc0847d232e843b337c4cf251774c5a882597b6b6fb82ec1a20b59975ad75",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hdrnet_v7.0.model",
+      "sha256": "119bc5737ffa3f03ea1aeeb4508f496e2e5203f0cf2ff8cefed333f95dda07e5",
+      "version": "v2",
+      "groups": 4,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hdrnet_tonepic_v3.0.model",
+      "sha256": "a4e7e4b219833b43498765994007124e9f9f7d65e3839d0b3c4a932ccac19d2e",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_extra_v14.0.model",
+      "sha256": "cb3271ce78a35fcc0412bff8a376879ed9199e6e69f2911f698f8ea37e6ba0d2",
+      "version": "v3",
+      "groups": 3,
+      "parameters": 3
+    },
+    {
+      "name": "tt_face_extra_fast_v14.0.model",
+      "sha256": "e172e7c7b2b72a27d11675671e36ad8d278eb9e25c6eccebeb06dd6d7f41fac5",
+      "version": "v3",
+      "groups": 2,
+      "parameters": 3
+    },
+    {
+      "name": "tt_face_v11.1.model",
+      "sha256": "c4b081d04f6829f7cd5849abca0941891f1a7f2cb250efd7f0e42fece5426610",
+      "version": "v3",
+      "groups": 11,
+      "parameters": 20
+    },
+    {
+      "name": "tt_facebeautify_v2.0.model",
+      "sha256": "93b044f1c89d4c494e09d942718e11c1262ac5420c25c3ce1c1c6b4d35f345c9",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_hair_v11.0.model",
+      "sha256": "018bcb4f59942aa25629b40dccd7f9941f5f8f606d8ebadb25771e56c9c67e45",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_skyseg_v7.0.model",
+      "sha256": "78b0ab8fa06429560f3005770f536141f0e9e03197b6d4a9a8de997adb073ef9",
+      "version": "v3",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_beauty_v5.0.model",
+      "sha256": "439bf7c5aa03a82af0445f3020e3decde73a4bc0613f77093d51c418637c3ee7",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_attribute_exp_v1.0.model",
+      "sha256": "24912bd55308fd2e87d7e3bee6fb5c2819726a16c174eea98fafdcb577afe9fe",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_beauty_attr6_v2.0.model",
+      "sha256": "414af835465470cf618405d352bc01dae2a65e8cb54bc2fb162c609dd1618eb2",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_attribute_extra_v3.0.model",
+      "sha256": "159674b9daed983a717620f53051fad316135d1e0730be16dd897cc013211795",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_attribute_age_v2.0.model",
+      "sha256": "d216c4bdc93239e418d83b734d617380dc8cf8db744f38e158f6f4e41cfbdca2",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_attribute_v8.0.model",
+      "sha256": "c656ca985b56d8012428305bda95f8d70d1c5e8262b3b2d9527b3072af9081ba",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_clothes_seg_v3.0.model",
+      "sha256": "1942f02faedbb97f1f1d7aac5ac8a1583ab21e8517d40050eb188aa108ceb050",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_joints_v5.0.model",
+      "sha256": "8152fc1cd1bffa20ff976f362c4f928ffe5e7b3753a9ae1821111cc8f3af3781",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_headseg_v6.0.model",
+      "sha256": "f023f36432498aa23c059fe5ddfaf6b936332ef379819ba58fd646d3ad635fb4",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_facegan_class_v4.0.model",
+      "sha256": "589e1a2cb17b8e0defae9fd3a7274669f04e927537a35b5e86ccbe9f97e920ea",
+      "version": "v3",
+      "groups": 3,
+      "parameters": 0
+    },
+    {
+      "name": "tt_face_new_landmark_v2.0.model",
+      "sha256": "9ade13c6e36acb90fa6f4c44970be96a43e3121c3d8be6239403cb263ac38bd7",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_faceverify_v7.0.model",
+      "sha256": "49607a3043fcf2907366530a5a0864f4e753a2fa40b574406cbeca87b3a560ad",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_bigbrother_v6.0.model",
+      "sha256": "f13c7c2907f74c1ac74fc94347d6ac449c37e977cbeadf70977f5205feafd0d8",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_mugdet_v4.0.model",
+      "sha256": "7c44f5787c5b46513356e87d4c1c592f5acc1b004c555e51a190ea623092f84f",
+      "version": "v2",
+      "groups": 2,
+      "parameters": 0
+    },
+    {
+      "name": "tt_action_detection_v5.0.model",
+      "sha256": "df59c2098ee61d9c600b1123303d9f74d796b0ca701978b8143bcd38169ef0b0",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_skin_seg_fast_v5.0.model",
+      "sha256": "09e16e296ca2c82d64129912c75788e09b66d3b33587d40b18841e6f6a4457db",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_skin_seg_v5.0.model",
+      "sha256": "dcfc109297b1db0605fcd3bc4e13b5ec7e0ca5a0107557f70ef97a8a3d8ded0b",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_skin_seg_video_seg_fp16_v1.0.model",
+      "sha256": "ff6915e1a71ffd19fdc42307773a3098b27382626ef09bbae4bbda2c77944574",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_skin_seg_video_seg_mkl_v1.0.model",
+      "sha256": "f7d524b59d9a1d5fb295f972f73c22a1c9f99525be2a2e5e9e3e20fda301f698",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_facepartbeauty_v2.0.model",
+      "sha256": "1c790c503bc36daedc3580f73d8a1b593332cc4f3fbc8cec57dd36570b80424d",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    },
+    {
+      "name": "tt_matting_v15.0.model",
+      "sha256": "99d906057972c82ac24c3558ae114d5dee000b7abc1b8b38de9bb22d8a7bf9ee",
+      "version": "v2",
+      "groups": 1,
+      "parameters": 0
+    }
+  ],
+  "no_inference_or_decoding_executed": true
+}

@@ -1,7 +1,6 @@
 {
-  "status": "tested_development_components_only",
+  "status": "tested_development_components_with_two_actual_model_replays",
   "complete_requested_beauty_hdr_pipeline": false,
-  "tested_source_commit": "b10a4d7c18cfb95505ec5975cec4c55f51727719",
   "source_repository": "hiro191u3n2/hiro-morphe-patches",
   "source_branch": "work/ulike-hdr-core-20261001",
   "material_validation": {
@@ -53,10 +52,15 @@
   },
   "publication": {
     "source_and_tests_saved": true,
-    "new_mpp_or_apk_released": false,
-    "manager_metadata_changed": false,
-    "installable_baseline_ulike_patch": "1.6.4",
-    "installable_baseline_integrated_bundle": "1.0.97",
+    "model_export_mpp_released": true,
+    "beauty_hdr_replacement_mpp_released": false,
+    "manager_metadata_changed": true,
+    "installable_baseline_ulike_patch": "1.6.5",
+    "installable_baseline_integrated_bundle": "1.0.98",
+    "release_scope": "model observation/export/hash comparison only; new numerical processing components are not integrated into the installed app",
+    "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.6.5",
+    "verified_publication_report": "qa/PUBLICATION_V165_VERIFIED.json",
+    "release_artifacts_and_manager_immutable_download_verified": true,
     "style_textures_or_models_redistributed": false
   },
   "model_acquisition": {
@@ -80,7 +84,8 @@
         },
         "matched_sdk_version": "0.0.0",
         "device_cache_version_confirmed": false,
-        "standalone_inference_verified": false
+        "standalone_inference_verified": true,
+        "standalone_inference_scope": "host actual-weight tensor replay; not original native engine or device execution"
       },
       {
         "model_name": "tt_goodlike",
@@ -99,7 +104,8 @@
         },
         "matched_sdk_version": "0.0.0",
         "device_cache_version_confirmed": false,
-        "standalone_inference_verified": false
+        "standalone_inference_verified": true,
+        "standalone_inference_scope": "host actual-weight tensor replay; not original native engine or device execution"
       }
     ],
     "phone_cache_hash_comparison": false,
@@ -145,5 +151,60 @@
     "command": "make test",
     "ffmpeg": "ffmpeg version 6.1.1-3ubuntu5 Copyright (c) 2000-2023 the FFmpeg developers",
     "independent_review": "heif_save/INDEPENDENT_REVIEW.json"
+  },
+  "prior_android_input_ci_source_commit": "b10a4d7c18cfb95505ec5975cec4c55f51727719",
+  "model_tensor_replay": {
+    "scope": "actual pinned weights, prepared tensors, host FP32 ONNX vs independent FP64 raw-layout reference",
+    "models": [
+      {
+        "model_name": "tt_baoman",
+        "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+        "compute_operators": 97,
+        "fp32_parameters": 239900,
+        "fixtures": 3,
+        "layer_values_compared": 17267712,
+        "final_max_absolute_error_vs_fp64": 6.754997246881736e-05
+      },
+      {
+        "model_name": "tt_goodlike",
+        "model_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+        "compute_operators": 96,
+        "fp32_parameters": 250004,
+        "fixtures": 3,
+        "layer_values_compared": 23542272,
+        "final_max_absolute_error_vs_fp64": 2.9213848876774584e-05
+      }
+    ],
+    "independent_review": "model_replay/INDEPENDENT_REVIEW.json",
+    "native_approximate_tanh_intentionally_replaced": true,
+    "native_full_model_numerical_parity": false,
+    "model_graph_weight_and_vendor_library_redistribution": false,
+    "android_integration": false,
+    "complete_style_reproduction": false,
+    "hdr_preservation": false
+  },
+  "model_graph_inspection_reports": [
+    "model_inspect/QA_BAOMAN_GRAPH.json",
+    "model_inspect/QA_GOODLIKE_GRAPH.json",
+    "model_inspect/QA_GOODLIKE_FACE_TEMPLATE.json"
+  ],
+  "prepared_face_component": {
+    "scope": "each model-specific normalization, real FP32 model, continuous FP64 output conversion, actual shader blend on prepared SDR face samples",
+    "models": [
+      "tt_baoman",
+      "tt_goodlike"
+    ],
+    "qa_reports": [
+      "beauty_contract/QA_REAL_FACE.json",
+      "beauty_contract/QA_REAL_FACE_PURITY.json"
+    ],
+    "independent_review": "beauty_contract/INDEPENDENT_REVIEW.json",
+    "uint8_image_intermediates": 0,
+    "full_photo_sampling": false,
+    "face_detection": false,
+    "remaining_style_passes": false,
+    "native_pixel_parity": false,
+    "hdr_preservation": false,
+    "android_integration": false
   }
 }

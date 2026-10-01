@@ -1,0 +1,93 @@
+{
+  "status": "PASS_STATIC_SHARED_ENGINE_CONTRACT",
+  "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+  "instruction_and_relocation_checks": [
+    {
+      "address": "0x3bcc0",
+      "import": "_ZN6BYTENN16ByteNNEngineImplC1Ev"
+    },
+    {
+      "address": "0x3be10",
+      "import": "_ZN6BYTENN16ByteNNEngineImpl15InitForEspressoERNS_6ConfigE"
+    },
+    {
+      "address": "0x3bdbc",
+      "instruction": "str wzr, [x21, #8]!"
+    },
+    {
+      "address": "0x2550c",
+      "instruction": "ldr w9, [x8], #0x80"
+    },
+    {
+      "address": "0x25510",
+      "instruction": "str w9, [x20, #0x40]!"
+    },
+    {
+      "address": "0x256d8",
+      "instruction": "bl #0x2af74"
+    },
+    {
+      "address": "0x23ef8",
+      "instruction": "bl #0x2af74"
+    },
+    {
+      "address": "0x2b448",
+      "instruction": "bl #0x3d320"
+    },
+    {
+      "address": "0x25738",
+      "instruction": "ldr x8, [x8]"
+    },
+    {
+      "address": "0x2573c",
+      "instruction": "blr x8"
+    },
+    {
+      "address": "0x3e718",
+      "instruction": "bl #0x4b030"
+    },
+    {
+      "address": "0x4b080",
+      "instruction": "bl #0x4f2a8"
+    },
+    {
+      "address": "0x4f3c0",
+      "instruction": "bl #0x4f4c4"
+    },
+    {
+      "address": "0x3e8c8",
+      "instruction": "bl #0x4b0e0"
+    },
+    {
+      "address": "0x4b1b0",
+      "instruction": "bl #0x4f4c4"
+    },
+    {
+      "address": "0x3c104",
+      "import": "_ZN6BYTENN16ByteNNEngineImpl10GetNetworkEv"
+    },
+    {
+      "address": "0x3c11c",
+      "instruction": "ldr x8, [x8, #0x10]"
+    },
+    {
+      "address": "0x3c120",
+      "instruction": "blr x8"
+    }
+  ],
+  "relocations": {
+    "GOT_0x231d60": "_ZTVN6BYTENN10LabNetWorkE",
+    "LabNetWork_init_slot_0x229278": "0x3e3f4"
+  },
+  "conclusions": [
+    "Espresso::Thrustor is a compatibility wrapper implemented by the same pinned libbytenn library. It constructs ByteNNEngineImpl and delegates CreateNet to InitForEspresso(Config&).",
+    "CreateNet sets Config forward type to zero. InitForEspresso copies it and uses the same network factory as ByteNN Init(ConfigExt). Factory zero path selects LabNetWork at 0x3d320; ELF relocation proves its initializer is 0x3e3f4.",
+    "The legacy graph/weight route 0x3e718 -> 0x4b030 -> 0x4f2a8 -> 0x4f4c4 converges on the same graph build routine as BM route 0x3e8c8 -> 0x4b0e0 -> 0x4f4c4.",
+    "Purity therefore uses the previously audited shared graph/operator and FP32 weight contracts: Conv OHWI, DW HWC, per-layer optional bias, flag-gated ReLU; same square-kernel limit applies.",
+    "Inference delegates to ByteNN GetNetwork and its execution slot; this is not merely matching exported names."
+  ],
+  "limitations": [
+    "Static link and parser proof only; no full native model output parity is claimed.",
+    "No private keys, decoded graph text, weights, or native library bytes are published."
+  ]
+}

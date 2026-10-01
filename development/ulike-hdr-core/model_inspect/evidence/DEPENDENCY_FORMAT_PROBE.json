@@ -1,0 +1,154 @@
+{
+  "status": "BOUNDED_DEPENDENCY_FORMAT_PROBE",
+  "source": "Original APK bundled models; same single pinned ordinary IDream loader material tested, no key guessing",
+  "models": [
+    {
+      "name": "tt_face_v11.1.model",
+      "sha256": "c4b081d04f6829f7cd5849abca0941891f1a7f2cb250efd7f0e42fece5426610",
+      "bytes": 888558,
+      "groups": [
+        {
+          "name": "detect",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 4689,
+          "candidate_ascii_fraction": 0.38451695457453616
+        },
+        {
+          "name": "image_detect",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 6639,
+          "candidate_ascii_fraction": 0.3860521162825727
+        },
+        {
+          "name": "slowimage_detect",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 6652,
+          "candidate_ascii_fraction": 0.3845460012026458
+        },
+        {
+          "name": "base_det",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 4786,
+          "candidate_ascii_fraction": 0.3917676556623485
+        },
+        {
+          "name": "base",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 6829,
+          "candidate_ascii_fraction": 0.3917118172499634
+        },
+        {
+          "name": "base_partface",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 5003,
+          "candidate_ascii_fraction": 0.37677393563861683
+        },
+        {
+          "name": "pout",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 664,
+          "candidate_ascii_fraction": 0.4006024096385542
+        },
+        {
+          "name": "eyecls",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 667,
+          "candidate_ascii_fraction": 0.383808095952024
+        },
+        {
+          "name": "mean",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 1,
+          "candidate_ascii_fraction": 0.0
+        },
+        {
+          "name": "detect_config",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 2340,
+          "candidate_ascii_fraction": 0.3841880341880342
+        },
+        {
+          "name": "base_config",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 1801,
+          "candidate_ascii_fraction": 0.3914491948917268
+        }
+      ]
+    },
+    {
+      "name": "tt_face_extra_v14.0.model",
+      "sha256": "cb3271ce78a35fcc0412bff8a376879ed9199e6e69f2911f698f8ea37e6ba0d2",
+      "bytes": 575554,
+      "groups": [
+        {
+          "name": "extra",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 11223,
+          "candidate_ascii_fraction": 0.3722712287267219
+        },
+        {
+          "name": "iris",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 3545,
+          "candidate_ascii_fraction": 0.37207334273624826
+        },
+        {
+          "name": "extra_config",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 1531,
+          "candidate_ascii_fraction": 0.40169823644676683
+        }
+      ]
+    },
+    {
+      "name": "tt_face_attribute_age_v2.0.model",
+      "sha256": "d216c4bdc93239e418d83b734d617380dc8cf8db744f38e158f6f4e41cfbdca2",
+      "bytes": 158986,
+      "groups": [
+        {
+          "name": "agenet",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 14349,
+          "candidate_ascii_fraction": 0.38929542128371314
+        }
+      ]
+    },
+    {
+      "name": "tt_face_attribute_exp_v1.0.model",
+      "sha256": "24912bd55308fd2e87d7e3bee6fb5c2819726a16c174eea98fafdcb577afe9fe",
+      "bytes": 362214,
+      "groups": [
+        {
+          "name": "expnet",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 11008,
+          "candidate_ascii_fraction": 0.38253997093023256
+        }
+      ]
+    },
+    {
+      "name": "tt_skin_seg_v5.0.model",
+      "sha256": "dcfc109297b1db0605fcd3bc4e13b5ec7e0ca5a0107557f70ef97a8a3d8ded0b",
+      "bytes": 260961,
+      "groups": [
+        {
+          "name": "SkinSeg",
+          "decoded_checksum_verified": false,
+          "candidate_plaintext_bytes": 2,
+          "candidate_ascii_fraction": 0.0
+        }
+      ]
+    }
+  ],
+  "not_implemented": [
+    "Model-specific input normalization, output interpretation, anchors/NMS, landmarks topology, segmentation masks and scheduling",
+    "Operators beyond two target style networks",
+    "Full beauty composition and HDR handling"
+  ],
+  "limits": [
+    "Matching decoded checksum proves ordinary encoded-group contents, not inference execution or app-selected model version.",
+    "No graphs, keys, weights or original library bytes included.",
+    "None of these dependency groups passed checksum under the one observed IDream loader material; this is not a claim of unsupported hardware, missing model files, or impossibility of recovering their own normal loader contracts."
+  ],
+  "conclusion": "Current two-model decoder cannot validate/decode the other feature groups; their feature-specific ordinary loaders and model pre/post-processing are not yet implemented. All five required dependency files exist. This is not a finding of technical impossibility."
+}

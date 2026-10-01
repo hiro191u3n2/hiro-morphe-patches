@@ -1,0 +1,235 @@
+{
+  "status": "PASS_STATIC_BOUNDARIES_WITH_EXPLICIT_GAPS",
+  "library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "assets": [
+    {
+      "style": "natural_blush",
+      "member": "materials/016/algorithmConfig.json",
+      "sha256": "b9ff698b8a769243fe96f732631c7b33b80fc2b59258cbd176a77c571565a039"
+    },
+    {
+      "style": "natural_blush",
+      "member": "materials/016/AmazingFeature0/xshader/noface.frag",
+      "sha256": "100bfb1cd6854cde39bf6bd00deb779a51fc4ec5bb66d7e94efd9206cd3cc900"
+    },
+    {
+      "style": "natural_blush",
+      "member": "materials/016/AmazingFeature0/xshader/noface.vert",
+      "sha256": "fb00185576d2d16e985bdb585cda544fc1b21c51424d268a8f77227a34bdc1de"
+    },
+    {
+      "style": "natural_blush",
+      "member": "materials/016/AmazingFeature0/lua/global.lua",
+      "sha256": "37a9707405fc8452e354bd359cd21a8a8df62a687cc5b839b19be56c79dca8af"
+    },
+    {
+      "style": "purity2",
+      "member": "materials/016/AmazingFeature0/xshader/gan.frag",
+      "sha256": "67b2a0fba4ae91c19bf4ebd8162511610a9564b8d0d91fe5f8da8fe00445365b"
+    },
+    {
+      "style": "purity2",
+      "member": "materials/016/AmazingFeature0/xshader/gan.vert",
+      "sha256": "0bf3ff5c1b2ac11ff7055459f8ee06e1438f83f869787ab448bbccf715aab5b1"
+    },
+    {
+      "style": "purity2",
+      "member": "materials/016/AmazingFeature0/lua/LaughGanScript.lua",
+      "sha256": "e40999fd1a8828f8073830adaa6c5074363ad2a76099f18c5ffc5f7405722b82"
+    }
+  ],
+  "instruction_evidence": [
+    {
+      "address": "0xcb9274",
+      "bytes": "e85fa852",
+      "instruction": "mov w8, #0x42ff0000"
+    },
+    {
+      "address": "0xcb9284",
+      "bytes": "000d040e",
+      "instruction": "dup v0.2s, w8"
+    },
+    {
+      "address": "0xcb9288",
+      "bytes": "1f0000b9",
+      "instruction": "str wzr, [x0]"
+    },
+    {
+      "address": "0xcb92a0",
+      "bytes": "004000fc",
+      "instruction": "stur d0, [x0, #4]"
+    },
+    {
+      "address": "0xcb9b00",
+      "bytes": "200140bd",
+      "instruction": "ldr s0, [x9]"
+    },
+    {
+      "address": "0xcb9b04",
+      "bytes": "410140bd",
+      "instruction": "ldr s1, [x10]"
+    },
+    {
+      "address": "0xcb9b10",
+      "bytes": "020140b9",
+      "instruction": "ldr w2, [x8]"
+    },
+    {
+      "address": "0xcb9b14",
+      "bytes": "de4e0694",
+      "instruction": "bl #0xe4d68c"
+    },
+    {
+      "address": "0xcb9b18",
+      "bytes": "add40a94",
+      "instruction": "bl #0xf6edcc"
+    },
+    {
+      "address": "0xe4d68c",
+      "bytes": "00c0221e",
+      "instruction": "fcvt d0, s0"
+    },
+    {
+      "address": "0xe4d690",
+      "bytes": "21c0221e",
+      "instruction": "fcvt d1, s1"
+    },
+    {
+      "address": "0xcba8c8",
+      "bytes": "6208031f",
+      "instruction": "fmadd s2, s3, s3, s2"
+    },
+    {
+      "address": "0xcba8cc",
+      "bytes": "8000031f",
+      "instruction": "fmadd s0, s4, s3, s0"
+    },
+    {
+      "address": "0xcba8d0",
+      "bytes": "a184041f",
+      "instruction": "fmsub s1, s5, s4, s1"
+    },
+    {
+      "address": "0xcba8d4",
+      "bytes": "c000051f",
+      "instruction": "fmadd s0, s6, s5, s0"
+    },
+    {
+      "address": "0xcba8d8",
+      "bytes": "c104031f",
+      "instruction": "fmadd s1, s6, s3, s1"
+    },
+    {
+      "address": "0xcba8dc",
+      "bytes": "a208051f",
+      "instruction": "fmadd s2, s5, s5, s2"
+    },
+    {
+      "address": "0xe5cdd8",
+      "bytes": "0018221e",
+      "instruction": "fdiv s0, s0, s2"
+    },
+    {
+      "address": "0xe5cddc",
+      "bytes": "2118221e",
+      "instruction": "fdiv s1, s1, s2"
+    },
+    {
+      "address": "0xcafc30",
+      "bytes": "80e644bd",
+      "instruction": "ldr s0, [x20, #0x4e4]"
+    },
+    {
+      "address": "0xcafc50",
+      "bytes": "5d2f0794",
+      "instruction": "bl #0xe7b9c4"
+    },
+    {
+      "address": "0xe7b9c4",
+      "bytes": "4118211e",
+      "instruction": "fdiv s1, s2, s1"
+    },
+    {
+      "address": "0xe7b9cc",
+      "bytes": "e1830a91",
+      "instruction": "add x1, sp, #0x2a0"
+    },
+    {
+      "address": "0xe7b9d0",
+      "bytes": "e4fbf817",
+      "instruction": "b #0xcba960"
+    },
+    {
+      "address": "0xe5cfb4",
+      "bytes": "80ea44bd",
+      "instruction": "ldr s0, [x20, #0x4e8]"
+    },
+    {
+      "address": "0xe5cfb8",
+      "bytes": "81ee44bd",
+      "instruction": "ldr s1, [x20, #0x4ec]"
+    },
+    {
+      "address": "0xe5cfc4",
+      "bytes": "c076f917",
+      "instruction": "b #0xcbaac4"
+    },
+    {
+      "address": "0xcb0af0",
+      "bytes": "28e504b9",
+      "instruction": "str w8, [x9, #0x4e4]"
+    },
+    {
+      "address": "0xcb0b2c",
+      "bytes": "28e904b9",
+      "instruction": "str w8, [x9, #0x4e8]"
+    },
+    {
+      "address": "0xcb0b68",
+      "bytes": "28ed04b9",
+      "instruction": "str w8, [x9, #0x4ec]"
+    }
+  ],
+  "natural": {
+    "prepared_input_code_scale": 0.007799999788403511,
+    "prepared_input_offset": -1,
+    "cvt_color_code": 1,
+    "cvt_color_native_dispatch": "0xcb3994 through 0xe4a8dc to 0x100d0d8",
+    "post_scale": 127.5,
+    "post_offset": 127.5,
+    "original_post_depth_code": 0,
+    "neural_shader_weight": "min(external_mask_red, generated_alpha) * intensity",
+    "crop_type": 1,
+    "similarity": "0xcba7a8",
+    "margin_scale": "0xcba960",
+    "pixel_offset": "0xcbaac4",
+    "template_copy": "0xcbd234..0xcbd458",
+    "template_file_offset": "0x116d7a0",
+    "template_bytes": 848,
+    "template_points": 106,
+    "template_sha256": "3c68979e89af5a444cc3902a8f232b29e9285a024ad696a1dc4ee0268ef54f12"
+  },
+  "purity": {
+    "prepared_input_no_extra_branch": "0xca0998..0xca09bc and 0xe43fb8",
+    "prepared_input_equation": "float32(code - 127.5) * float32(1 / 127.5)",
+    "original_output_byte_conversion": "0xca0b74..0xca0c54",
+    "neural_shader_weight": "external_mask_red * generated_alpha * intensity",
+    "observed_lua_mask_value": 2,
+    "face_point_is_template": true,
+    "face_point_template_matches_natural_native_bytes": true
+  },
+  "unresolved": {
+    "source_colour": "FaceAlign constructs CV_8UC4 from runtime image buffer at 0xcae934..0xcae984. cvt_color code1 requested at 0xcb3994 reaches generic colour converter; code1/channel preservation is being traced, but current prepared-face API starts after conversion. No camera RGB primaries/transfer/range is asserted.",
+    "capture_backend": "texture blit selects native buffer vs GL fallback at 0xc36bc0..0xc36ce8, with runtime virtual renderer readback at 0xc37068 and 0xc36fac. Actual active route was not captured.",
+    "warp": "NH alignment calls 0xcba644 with affine_mode at state+0x568, warp_flags at+0x56c and border_type at+0x570. Generic affine implementation at0xfe6174 and runtime loaded settings require more verification before exact sampler claim.",
+    "native_dynamic_state": "Landmark order/coordinate origin, pose/smash-mode adjustments, active face selection and texture upload orientation require continued native tracing and actual-frame boundary comparison.",
+    "full_style": "No face/skin/attribute runtime, mesh/makeup/LUT execution order or HDR appearance transform integrated here."
+  },
+  "scope": {
+    "real_prepared_model_component_executed": true,
+    "full_style_complete": false,
+    "native_pixel_parity": false,
+    "hdr_preserved": false,
+    "android_integrated": false
+  }
+}

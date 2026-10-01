@@ -1,0 +1,31 @@
+{
+  "status": "PASS_REAL_PREPARED_FACE_COMPONENT",
+  "style": "natural_blush",
+  "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+  "bytenn_library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+  "effect_library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "input": "synthetic fractional SDR code samples, explicitly prepared crop",
+  "tensor_shape": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "raw_tanh_min": -1.0000001192092896,
+  "raw_tanh_max": 0.9999745488166809,
+  "output_precision": "FP64 post/composite after FP32 model; no uint8 intermediate",
+  "output_sha256": "5761083d9f37fe2b8ee6abf6093fbe50b24850581ca98030d19f9d851af7808a",
+  "zero_mask_exact_preservation_samples": 32768,
+  "independent_composite_sample_checks": 4,
+  "additional_natural_crop_check": {
+    "template_sha256": "3c68979e89af5a444cc3902a8f232b29e9285a024ad696a1dc4ee0268ef54f12",
+    "template_points": 106,
+    "matrix_max_error": 2.842170943040401e-14,
+    "not_part_of_prepared_face_inference": true
+  },
+  "complete_style": false,
+  "face_detector_tested": false,
+  "hdr_preserved": false,
+  "native_pixel_parity": false,
+  "android_integrated": false
+}

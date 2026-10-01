@@ -23,9 +23,11 @@ identifiers are present, but those archives do not contain the two main model
 files. On 2026-10-01 we subsequently acquired both actual models through the
 app's normal metadata/CDN route, without supplied authentication. See
 `model_fetch` for exact hashes, sizes and a reproducible downloader, and
-`model_inspect` for the inspected container metadata. The native ByteNN call
-chain for Natural and Espresso path for Purity have also been identified;
-inference has not been replayed independently.
+`model_inspect` for the inspected containers and decoded graph metadata. The
+native ByteNN path for Natural and Espresso wrapper for Purity both lead to the
+audited ByteNN core. Both models now run with their actual weights in the host
+FP32 implementation in `model_replay`. Its numerical checks compare against an
+independent FP64 reference, not full execution of the original Android engine.
 
 The manifests also explicitly do not confirm native execution of every node,
 all final parameter values, queue synchronization or a replay round trip. The
@@ -50,11 +52,22 @@ every rendering pass has that resolution.
   MediaCodec/JNI integration and phone decoding remain outside these components.
 * `model_fetch`: pinned acquisition of the actual `tt_baoman` and `tt_goodlike`
   model files. Both CDN bodies match the metadata MD5 and recorded SHA-256.
-* `model_inspect`: bounded container inspection without executing model data.
-  Natural blush has a 256×256 face-alignment setting and an embedded ByteNN
-  payload. Purity2 also has a 256×256 face-crop setting in its legacy container.
-  Inner graph/weight data remain opaque; neither inspector is a running
-  inference engine.
+* `model_inspect`: bounded container inspection and exact-hash loaders for both
+  acquired graphs and FP32 weight streams. The normal loaders read format data
+  from caller-supplied, hash-verified libraries. No model, recovered full graph,
+  weight array, vendor library or decoder key is included in the source.
+* `model_replay`: independent FP32 execution of Natural's 97 operators and
+  239,900 parameters, and Purity's 96 operators and 250,004 parameters. Both
+  accept prepared 256×256 three-channel tensors and return four-channel tensors.
+  Every layer is compared against a separate FP64 implementation using the raw
+  weight layouts. Standard mathematical Tanh replaces the native approximation;
+  this is deliberately not a bit-exact copy of the native numerical output.
+* `beauty_contract`: the observed per-style normalization, continuous output
+  conversion and distinct neural-image blend equations, connected to both real
+  models for prepared face crops. These paths contain no uint8 image intermediate.
+  Corresponding landmarks and sampled masks are external inputs. This component
+  operates in an explicitly declared SDR domain and does not turn an SDR-trained
+  model into an HDR beauty engine.
 * `heif_save`: host writer for a 10-bit RGB SDR base, 10-bit RGB gainmap, ISO
   binary metadata and HEIF `tmap` references. Both coded images round-trip through
   independent libheif/libde265 decoding with 1024 levels. It uses HEVC Range
@@ -67,11 +80,13 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
 
 ## Remaining requirements for the requested complete replacement
 
-1. Complete the tensor/operator interpretation of the acquired models and
-   reproduce their inference outputs, face alignment, facial geometry and skin
-   segmentation. Confirm the acquired models match the phone's actual cached
-   versions. Model acquisition is complete for the two main downloaded files;
-   an independent, high-precision beauty engine is not complete.
+1. Complete face detection, landmark/mesh interpretation, skin segmentation,
+   image sampling and the remaining style passes. The relevant bundled dependency
+   models exist, but their feature-specific loaders and postprocessing are not
+   implemented by these two model replays. Confirm the downloaded model hashes
+   against the phone's actual cache and compare identical-image reference results.
+   The two main model bodies and host tensor inference are implemented; the full
+   high-precision beauty engine is not complete.
 2. Establish the active execution graph, color interpretation, sampler behavior,
    final style parameters and reference results on identical input images.
 3. Implement high-precision processing for those operations and a defined HDR
@@ -94,6 +109,12 @@ reproduction of the complete styles, or an interoperable final Android HDR
 photo. `heif_save` does produce and independently decode real host HEIF files;
 existing viewer application of `tmap` and Android display remain unverified. Uploaded
 style assets are not redistributed in this source directory.
+
+The separate [ULike v1.6.5 / integrated bundle v1.0.98 release](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.6.5)
+adds model observation and export on the phone. Both published MPP files and the
+Manager's immutable download were verified against the built artifacts. It does
+not install these new inference, beauty or HDR components; see
+`qa/PUBLICATION_V165_VERIFIED.json` for the release-specific verification.
 
 The Android input adapter also compiled successfully against the real Android
 API 36 SDK in [CI run 36798738616](https://github.com/hiro191u3n2/hiro-morphe-patches/actions/runs/36798738616).

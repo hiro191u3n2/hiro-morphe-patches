@@ -1,0 +1,220 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "/root/replay_review",
+  "reviewed_at_utc": "2026-10-01T02:17:39.594825+00:00",
+  "scope": "Independent source, pinned input, static native contract, synthetic operator and actual-weight host tensor replay review for Natural blush and Purity2. This is not complete Android beauty or HDR pipeline acceptance.",
+  "unit_test_methods_passed": {
+    "model_replay": 11,
+    "bm_graph_metadata": 3,
+    "legacy_graph_metadata": 7,
+    "legacy_face_template": 4,
+    "total": 25
+  },
+  "independent_additional_checks": {
+    "natural_pin_npy_and_source_checks": {
+      "status": "PASS",
+      "assertions": [
+        "actual pinned Natural model/library/graph load",
+        "one-byte model mutation rejected",
+        "one-byte library mutation rejected",
+        "different Purity model rejected",
+        "NPY v1 exact input preserved",
+        "NPY v2 exact input preserved",
+        "NPY trailing byte rejected",
+        "NPY truncated payload rejected",
+        "NPY oversize bytes rejected",
+        "NPY nonfinite rejected",
+        "NPY big endian rejected",
+        "NPY fortran order rejected",
+        "NPY wrong dtype rejected",
+        "NPY object rejected",
+        "huge NPY shape rejected before array creation",
+        "all 20 Conv/DW native instruction assertions match pinned library",
+        "saved real-model QA source hashes match current Python files"
+      ],
+      "assertion_count": 17,
+      "native_instruction_assertions_checked": 20
+    },
+    "purity_decoder_checks": {
+      "status": "PASS",
+      "checks": [
+        "actual pinned Purity graph+weights+native checksum",
+        "reject changed model",
+        "reject changed effect loader",
+        "reject changed bytenn inference",
+        "Natural model rejected by Purity decoder",
+        "reject truncated encrypted segment",
+        "reject unaligned encrypted segment",
+        "reject oversized encrypted segment",
+        "reject badlength encrypted segment"
+      ],
+      "count": 9,
+      "model_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "loader_library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+      "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+      "graph_sha256": "0a5c6692f3361a0c5247c95065e446ca8245db7aa632f26ef227253f06254a26",
+      "weight_values_sha256": "98ac5b9c28d57d02831e2bcb771e2732f2eb6be77285a6dde875b7b4c636cda0"
+    },
+    "natural_cli_checks": {
+      "status": "PASS",
+      "exact_zero_fixture_output": true,
+      "output_exclusive_creation": true,
+      "existing_output_unchanged_after_rejection": true,
+      "native_parity_verified": false,
+      "complete_style_replication": false,
+      "camera_to_hdr_save_pipeline": false
+    },
+    "purity_cli_and_analytic_bound_checks": {
+      "status": "PASS",
+      "checks": [
+        "missing Purity loader library CLI rejected",
+        "Purity CLI actual zero fixture matches QA tensor SHA",
+        "Purity exclusive output rejects overwrite and preserves bytes",
+        "Convolution analytical error-bound hand calculation matches",
+        "DepthwiseSeparableConvolution analytical error-bound hand calculation matches"
+      ],
+      "count": 5
+    },
+    "shared_engine_static_checks": {
+      "status": "PASS",
+      "instruction_and_import_checks": 18,
+      "relocation_checks": 2,
+      "scope": "independent instruction/import/relocation match of static shared ByteNN graph-builder evidence; no complete engine execution"
+    },
+    "native_evidence_scripts_reject_python_optimized_mode": true
+  },
+  "actual_weight_host_replay": [
+    {
+      "model_name": "tt_baoman",
+      "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "graph_sha256": "40e9f7491cc3be27fa63e5aef589bd9359b934403a092b75f2f2e5f3ef0e41a9",
+      "weight_values_sha256": "ba99e1be002e46c1f6109fa88bb6f732058c0501d3834ef700acdfda4e47d4b3",
+      "weight_count": 239900,
+      "compute_layers": 97,
+      "fixture_count": 3,
+      "all_layer_values_compared_per_fixture": [
+        5755904,
+        5755904,
+        5755904
+      ],
+      "final_output_max_absolute_error_vs_fp64": 6.754997246881736e-05,
+      "maximum_intermediate_absolute_error": 0.002324105257528686,
+      "isolated_operator_max_absolute_error": 4.947734680627036e-05,
+      "maximum_conv_roundoff_envelope_fraction": 0.1685693237331901,
+      "all_saved_final_tensor_hashes_match": true,
+      "deterministic_repeat_and_final_only_output_verified": true
+    },
+    {
+      "model_name": "tt_goodlike",
+      "model_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "graph_sha256": "0a5c6692f3361a0c5247c95065e446ca8245db7aa632f26ef227253f06254a26",
+      "weight_values_sha256": "98ac5b9c28d57d02831e2bcb771e2732f2eb6be77285a6dde875b7b4c636cda0",
+      "weight_count": 250004,
+      "compute_layers": 96,
+      "fixture_count": 3,
+      "all_layer_values_compared_per_fixture": [
+        7847424,
+        7847424,
+        7847424
+      ],
+      "final_output_max_absolute_error_vs_fp64": 2.9213848876774584e-05,
+      "maximum_intermediate_absolute_error": 0.0004193892829000845,
+      "isolated_operator_max_absolute_error": 5.95509037566444e-05,
+      "maximum_conv_roundoff_envelope_fraction": 0.14747660038905389,
+      "all_saved_final_tensor_hashes_match": true,
+      "deterministic_repeat_and_final_only_output_verified": true
+    }
+  ],
+  "native_contract_review": {
+    "conv_dw_instruction_assertions_independently_matched": 20,
+    "shared_engine_calls_instructions_independently_matched": 18,
+    "shared_engine_elf_relocations_independently_matched": 2,
+    "upsampling_half_pixel_and_clamp_instructions_read": true,
+    "eltwise_add_relu_and_concat_copy_instructions_read": true,
+    "tanh_frecpe_instructions_independently_read": true,
+    "original_arm64_kernel_emulation_rerun": {
+      "eltwise_add_relu_cases": 18,
+      "concat_cases": 4,
+      "all_add_concat_cases_bit_exact": true,
+      "tanh_samples": 4096,
+      "tanh_range": [
+        -8,
+        8
+      ],
+      "tanh_max_absolute_difference_from_fp64": 0.005390355037902528,
+      "saved_native_kernel_report_exactly_reproduced": true
+    },
+    "interpretation": "Purity Espresso Thrustor constructs ByteNNEngineImpl, selects the shared factory and converges on the same graph-builder as the BM path. This supports reuse of the audited bounded operator and raw weight contracts; matching graph syntax alone was not used."
+  },
+  "purity_alignment_template": {
+    "actual_pinned_template_loaded": true,
+    "point_count": 106,
+    "coordinates_per_point": 2,
+    "csv_fp32_and_binary_values_bit_exact": true,
+    "native_checksum_verified": true,
+    "coordinates_published": false,
+    "crop_warp_execution_parity_verified": false
+  },
+  "numeric_tolerance_review": {
+    "original_purity_fixed_tolerance_failure_retained_as_finding": "An isolated Conv had max absolute error about 5.955e-5 and scaled error about 3.153e-5, exceeding the earlier Natural-only fixed 2e-5 scaled gate. No native layout mismatch was established.",
+    "resolution": "Conv/DW checks now use a per-value standard FP32 dot-product roundoff budget gamma_(2K+2)*(sum(abs(x*w))+abs(bias)), with u=2^-24, and a 2e-6*(1+abs(reference)) numerical floor. The bound follows kernel length and operand magnitudes, not a fitted observed error threshold. Other operators use the tighter 2e-6 scaled gate. Final full-graph max error must remain <=1e-4.",
+    "independent_hand_calculation_checks": 2,
+    "scope": "Observed host arithmetic checks only. A conservative analytical budget is not a proof of native optimized kernel or whole-engine numerical parity. Raw NHWC/OHWI/HWC NumPy reference does not execute converted ONNX, but shares the audited parsed plan."
+  },
+  "resolved_review_findings": [
+    "NPY input now validates header shape, dtype, order and exact payload bytes before array construction; huge declared shape is rejected before np.frombuffer.",
+    "Native kernel evidence utility now parses and emulates the same bounded, hash-pinned in-memory library snapshot instead of reopening a path after pinning.",
+    "Assertion-based native evidence utilities reject python -O rather than publishing unvalidated PASS results.",
+    "Purity reports now retain both loader/effect library SHA pins in addition to the inference library pin."
+  ],
+  "publication_review": {
+    "reviewed_source_only": true,
+    "no_original_model_full_graph_weight_array_onnx_vendor_library_or_private_decode_material_in_reviewed_files": true,
+    "vendor_inputs_and_decoded_data_used_only_locally": true,
+    "exclude_generated_python_cache_directories": true,
+    "note": "This review covers the exact files listed below. Do not publish the raw model_audit directory or caller-generated ONNX/tensors."
+  },
+  "limitations": [
+    "Standard ONNX Tanh deliberately replaces the native approximate exponential/FRECPE implementation; original native outputs are not asserted to match within host-reference tolerances.",
+    "Complete original engines were not executed. Isolated original ARM64 kernels and static linkage evidence do not establish full-graph native parity or selected device optimization paths.",
+    "Inputs are prepared synthetic NCHW FP32 model tensors. Channel normalization, face detection/alignment execution, output channel semantics/compositing, remaining style stages and photographic quality are outside this module.",
+    "The stored 106-point Purity template is validated, but no complete crop/warp runtime parity is established.",
+    "FP32 inference does not prove HDR model support, 10-bit camera input, gain-map correctness through beauty, JPEG removal, Android app integration or phone output quality.",
+    "No active-device model-version identity or real camera-to-save verification was available. Host timing is not phone performance.",
+    "The review does not authorize redistribution of the original vendor model or libraries; source-only publication is the reviewed deliverable."
+  ],
+  "native_full_model_parity_verified": false,
+  "complete_style_equivalence_verified": false,
+  "android_integration_verified": false,
+  "hdr_end_to_end_verified": false,
+  "reviewed_file_sha256": {
+    "model_inspect/bm_graph_metadata.py": "8eedf539f798012c2d23ff1152a25413e44495dfdb4dfb3abd4627b232a5f9cb",
+    "model_inspect/evidence/SHARED_ENGINE_PROOF.json": "a01ced5229357eb8fcc4b76c156882c8c252bc4140a5932f079d3bda8fda014f",
+    "model_inspect/evidence/verify_shared_engine.py": "74b8179c08ac11422b2feccb3e8c3990ea2e445fb7d355495686689a03a310ea",
+    "model_inspect/legacy_face_template.py": "55d0f723b4d28941249bc411f438f106af7e8023aebdd5b41525b9115f0b4b08",
+    "model_inspect/legacy_graph_metadata.py": "506162993aed2f56ac0b41f05c341afe0cfbc96474b40a24419a75337d56c886",
+    "model_inspect/model_inspector.py": "296c6d3d8e852d0feed22c535ffbdc9d818b0a76a8cd7941b34d20708c12bf97",
+    "model_inspect/test_bm_graph_metadata.py": "b2e4f824452a6bd95d2f1fbf4968f5bc70477b59c9498d7502a5c7432cbe89fb",
+    "model_inspect/test_legacy_face_template.py": "4424ec30ec39be574c011c9f566052f5d9aab05966d047c97fc8955d90260ec3",
+    "model_inspect/test_legacy_graph_metadata.py": "3c1910a11db9e942c751938e9a24a61b5f89d5c3a1740cc0950bc834da81633c",
+    "model_replay/QA_PURITY_MODEL.json": "10ccf80deab5e16f38d6b8cbafc269b62f3805c003bb47cc90d0dd6f092b2153",
+    "model_replay/QA_REAL_MODEL.json": "829ddffca915774627831392e5a4e71992a6a91bea07967fb807df6602b6c5fd",
+    "model_replay/README.md": "76afc98ab75b8f18edd733eb86745d9123ee1bdc75a6a3c50c28fdb3f5ab557a",
+    "model_replay/baoman_replay.py": "929a9099e60e50551abdf36f8e82e9b7414e7b39b0d321e7d52522d87fe8ffba",
+    "model_replay/evidence/CONV_LAYOUT_FINDINGS.json": "f02f14afdd84610028580b83c449882d896f2160d3a9ad59e454684091db12a9",
+    "model_replay/evidence/NATIVE_SEMANTICS.json": "37832f27ccd9b4fdebc8f13f734aa395c3e983df53e6bd5a3e614713465bffef",
+    "model_replay/evidence/PURITY_SHARED_ENGINE_PROOF.json": "a01ced5229357eb8fcc4b76c156882c8c252bc4140a5932f079d3bda8fda014f",
+    "model_replay/evidence/QA_NATIVE_KERNELS.json": "d886f0f0992b281f4473b1a67907ae554aa3897df58c4ac4a80dcc3fb57d0652",
+    "model_replay/evidence/native_operator_replay.py": "dd6b4568da48db8366f937a4d58a7f107522fc90bf98a888290654a98e1b22ec",
+    "model_replay/graph_schema.py": "c2a5e2616573b4e7365dadd401636447c4422283dc14841109cbb800428e9aee",
+    "model_replay/operator_reference.py": "67c861060f5acc30ba9cd50d0639290e761c3a79ba2fbba8b43e7476c1b7411d",
+    "model_replay/purity_replay.py": "06a962e6d97eb3905ba5e39d0410fc687be6a2693df3f6d966f19acb3f640b58",
+    "model_replay/reference_nhwc.py": "4e8bd3ae5c8677d624a0ab12181cb963213274362804770bf3745b698641deee",
+    "model_replay/replay_tensor.py": "ec9882752b86a8c28a3db1e8bb5cbeff04447fa5ad3f2c5889eff452e7df1ffb",
+    "model_replay/test_graph_schema.py": "6303f6323dc84d7e3f032b31e1b99144cae459bb42642c279d06c68cff70aa10",
+    "model_replay/test_operator_contracts.py": "947bfc2bc91bdf73e3568435203653401a2a535ee178dde64d5172d9488966f2",
+    "model_replay/test_replay.py": "c21c3c8d7fabc855b226e95b4196fe0f6d6e75eb800eb12f46418c4bf34f5b55",
+    "model_replay/verify_purity_model.py": "d3a4d8b80ecb8997089c0a40a8a68fe9587158463032e8a8a15c51ba2341ebee",
+    "model_replay/verify_real_model.py": "501e2b7b1a862a0abd0034240a433fe443137ca4ffc46c8ffd1d41bb3eb9c8f6"
+  }
+}

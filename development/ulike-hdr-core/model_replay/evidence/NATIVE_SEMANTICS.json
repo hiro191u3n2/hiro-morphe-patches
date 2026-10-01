@@ -1,0 +1,232 @@
+{
+  "status": "PASS_BOUNDED_NATIVE_OPERATOR_CONTRACT",
+  "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+  "scope": "ByteNN FP32 operators in pinned Natural model; static instruction audit plus synthetic ARM64 kernel emulation. Not full-engine or device equivalence.",
+  "tensor_layout": {
+    "internal_dimensions": {
+      "0x24": "batch",
+      "0x28": "height",
+      "0x2c": "width",
+      "0x30": "channels",
+      "0x34": "element_count",
+      "0x3c": "dtype, 4 for float32",
+      "0x78": "data pointer"
+    },
+    "storage": "NHWC contiguous, channels fastest",
+    "proof": "Tensor initializer0x5805c stores four extents and multiplies element_count. Concat copies per-pixel channel spans; synthetic non-square and batch-two input verifies extent order."
+  },
+  "concat": {
+    "operation": "concatenate channels in graph input order; ONNX NCHW axis1",
+    "output_shape": "(N,H,W,sum(C_i))",
+    "graph_scope": "Observed Natural Concat nodes are all arity2",
+    "proof": [
+      "0x795dc..0x79614 sums tensor+0x30, preserves first three extents, initializes output",
+      "0x79b30..0x79b60 dispatches dtype4 to0x79a68",
+      "0x79a68 schedules floatworker0x79ea0 through vtable0x22b2f0",
+      "0x7a2cc..0x7a2ec memcpy C0 floats then C1 floats for same pixel",
+      "0x7a304..0x7a308 increments source pointers by each channel-byte count"
+    ]
+  },
+  "eltwise": {
+    "operation": "float32 elementwise addition, then max(sum,0) iff final graph flag is nonzero",
+    "broadcast": "No broadcast claimed; pinned graph uses equal shapes",
+    "proof": [
+      "0x6ea14..0x6ea24 final numeric token normalized to boolean at layer+0x108",
+      "0xe0c3c dtype4 branch",
+      "0xe0c8c..0xe0c98 vector fadd then gated fmax0xe0ca0..ac",
+      "0xe0d38..0xe0d54 scalar add then same gated zero-clamp"
+    ]
+  },
+  "upsampling": {
+    "operation": "2x bilinear spatial resize with half_pixel coordinates and clamp edges",
+    "coordinate": "src = dst * 0.5 - 0.25; floor index; fraction zero at clamped edges",
+    "proof": [
+      "0x70360/0x70364 doubles height/width",
+      "0x70474/0x70478 set -0.25/0.5",
+      "0x70480..0x704b8 compute first axis indices/weights, clamp negatives and last edge",
+      "0x704e8..0x7052c same for second axis"
+    ],
+    "limit": "Static coordinate proof; kernel emulation here does not test full resize implementation."
+  },
+  "tanh": {
+    "mathematical_operation": "tanh(x) = 2/(1+exp(-2*x))-1",
+    "native_vector_numerics": "Approximate exponential polynomial followed by unrefined FRECPE reciprocal estimate. Not bitwise same as high-precision ONNX Tanh.",
+    "native_scalar_tail": "expf call then scalar divide and subtract",
+    "proof": [
+      "factory Tanh stringmatch0x59c0c ->0x5c79c ->ctor0x604d0",
+      "dtype4 branch0x88b7c..80 ->0x890cc ->parallel worker0x89254",
+      "0x89320..0x89430 approximate exp(-2*x)",
+      "0x8943c frecpe;0x89440 -1+2*reciprocal; repeated0x89464..6c",
+      "0x8912c..0x89144 scalar expf(-2*x), +1,2/div,-1"
+    ]
+  },
+  "kernel_replay": {
+    "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+    "scope": "original ARM64 kernel emulation on synthetic input; no complete original-engine execution",
+    "eltwise": [
+      {
+        "elements": 1,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 1,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 3,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 3,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 8,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 8,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 16,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 16,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 17,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 17,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 31,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 31,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 32,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 32,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 64,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 64,
+        "relu": true,
+        "bit_exact": true
+      },
+      {
+        "elements": 257,
+        "relu": false,
+        "bit_exact": true
+      },
+      {
+        "elements": 257,
+        "relu": true,
+        "bit_exact": true
+      }
+    ],
+    "concat": [
+      {
+        "nhwc": [
+          1,
+          3,
+          5,
+          5
+        ],
+        "source_channels": [
+          2,
+          3
+        ],
+        "bit_exact": true
+      },
+      {
+        "nhwc": [
+          1,
+          2,
+          3,
+          25
+        ],
+        "source_channels": [
+          8,
+          17
+        ],
+        "bit_exact": true
+      },
+      {
+        "nhwc": [
+          2,
+          4,
+          5,
+          24
+        ],
+        "source_channels": [
+          16,
+          8
+        ],
+        "bit_exact": true
+      },
+      {
+        "nhwc": [
+          1,
+          1,
+          1,
+          2
+        ],
+        "source_channels": [
+          1,
+          1
+        ],
+        "bit_exact": true
+      }
+    ],
+    "tanh": {
+      "samples": 4096,
+      "range": [
+        -8,
+        8
+      ],
+      "native_implementation": "polynomial exp + ARM64 FRECPE reciprocal estimate, scalar expf tail",
+      "high_precision_max_absolute_difference": 0.005390355037902528,
+      "high_precision_rmse": 0.0021960781607476268,
+      "native_min": -0.9999997615814209,
+      "native_max": 0.9999997615814209,
+      "not_bit_equal_to_standard_tanh": true
+    },
+    "status": "PASS_SYNTHETIC_NATIVE_KERNEL_REPLAY"
+  },
+  "limitations": [
+    "The emulated external memcpy is a byte copy; scalar expf uses Python libm then float32 rounding, not Android libm. NEON polynomial/FRECPE kernel instructions themselves are emulated.",
+    "Synthetic kernel tests validate local data layout and operator interpretation; do not establish native full-graph engine parity, selected optimization paths, active device identity, face preprocessing, style composition, HDR support or complete application integration.",
+    "ONNX high precision Tanh intentionally differs from original approximate Tanh; report a mathematical reconstruction/high precision replacement, never exact original inference parity."
+  ]
+}

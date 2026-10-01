@@ -1,0 +1,145 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "independent release_verify165 agent",
+  "reviewed_at_utc": "2026-10-01T02:18:18.469194+00:00",
+  "scope": "Prepared SDR face sample boundaries and both actual pinned host-model wrappers: normalization, NCHW conversion, continuous output mapping, pre-sampled mask compositing, and Natural similarity/margin/offset matrix. No original Android engine execution or whole-style/HDR pipeline claim.",
+  "source_sha256": {
+    "test_contracts.py": "eabfab1f1d1d4a849d987668a7c1864b7d7bbc580b62a3f5056183e5a7667e15",
+    "QA_REAL_FACE_PURITY.json": "ddde1e9d698ba881c2df916e620d5cb502e40ea6fce4ff05f7ec0ecf0f2515b4",
+    "QA_REAL_FACE.json": "d0f8917fcada5140a74f2af59200043795e85e777a17fbb3ddf83aa1e271c5b8",
+    "contracts.py": "90dde091226322f399dcc925d834238d686712d8983ce0eb6252385df268a8e9",
+    "verify_real_face.py": "66e3899b7e5fb5130b2c541308c15ea51bc8af267f2a2a4b930a4fcc48b83dec",
+    "prepared_face.py": "6acd8f004e073506cbe1b98d605fb38aa405503338ebcf3970896641445974ba",
+    "README.md": "dd547ac1531f098362a814935fa5abce1e1bf3ec5e6f3bdc21445309161be9e6",
+    "EVIDENCE.json": "c91ab45723004387ccbb2a17aef2cb978e74d1d9ff609924ad23c97f57d2569a",
+    "extract_natural_template.py": "a23802f0a9447e0e62b93ece98fb288c0207ab6e8ead5e8ac443a8067791f5bf"
+  },
+  "dependent_runtime_snapshot_sha256": {
+    "model_replay/baoman_replay.py": "929a9099e60e50551abdf36f8e82e9b7414e7b39b0d321e7d52522d87fe8ffba",
+    "model_replay/purity_replay.py": "06a962e6d97eb3905ba5e39d0410fc687be6a2693df3f6d966f19acb3f640b58",
+    "model_replay/graph_schema.py": "c2a5e2616573b4e7365dadd401636447c4422283dc14841109cbb800428e9aee",
+    "model_replay/operator_reference.py": "67c861060f5acc30ba9cd50d0639290e761c3a79ba2fbba8b43e7476c1b7411d",
+    "model_inspect/bm_graph_metadata.py": "8eedf539f798012c2d23ff1152a25413e44495dfdb4dfb3abd4627b232a5f9cb",
+    "model_inspect/legacy_graph_metadata.py": "506162993aed2f56ac0b41f05c341afe0cfbc96474b40a24419a75337d56c886"
+  },
+  "existing_tests": {
+    "cases": 7,
+    "result": "PASS"
+  },
+  "independent_functional_assertions": 128,
+  "independent_functional_categories": {
+    "tensor_layout": 2,
+    "natural_literal_endpoints": 1,
+    "natural_midpoint_not_zero": 1,
+    "purity_endpoints": 1,
+    "spatial_channel_mapping": 4,
+    "input_not_mutated": 1,
+    "sub_byte_fraction_preserved": 1,
+    "non_sdr_rejected": 10,
+    "invalid_codes_rejected": 10,
+    "invalid_layout_type_rejected": 8,
+    "post_layout": 1,
+    "post_known_values": 1,
+    "post_no_uint8_quantization": 1,
+    "tanh_one_ulp_tolerated": 2,
+    "tanh_two_ulp_rejected": 2,
+    "shader_scalar_reference": 6,
+    "shader_opaque_alpha": 6,
+    "zero_mask_rgb_preserved": 2,
+    "style_mask_equations_distinguished": 1,
+    "blend_shape_strength_rejected": 5,
+    "known_similarity_transform": 3,
+    "singular_shape_fit_rejected": 4,
+    "crop_direction_margin_offset_order": 3,
+    "invalid_margin_rejected": 4,
+    "native_template_library_pin": 1,
+    "native_template_layout": 1,
+    "native_template_exact_span": 1,
+    "wrong_template_library_rejected": 1,
+    "wrapper_validates_before_model": 1,
+    "actual_wrapper_tensor": 1,
+    "actual_wrapper_model": 1,
+    "actual_wrapper_output": 1,
+    "actual_wrapper_mask_alpha": 1,
+    "actual_wrapper_scope_flags": 1,
+    "actual_wrapper_independent_sample_math": 4,
+    "wrong_model_rejected": 1,
+    "purity_actual_wrapper_tensor": 1,
+    "purity_actual_wrapper_model": 1,
+    "purity_actual_wrapper_output": 1,
+    "purity_actual_wrapper_mask_alpha": 1,
+    "purity_actual_wrapper_scope_flags": 1,
+    "purity_actual_wrapper_independent_sample_math": 4,
+    "purity_wrong_model_rejected": 1,
+    "private_asset_equation_evidence": 3,
+    "actual_normalization_evidence": 1,
+    "prepared_channel_scope_evidence": 1,
+    "no_original_binary_in_source": 9,
+    "no_native_template_copy": 9
+  },
+  "independent_native_boundary_assertions": 11,
+  "evidence_records_rechecked": {
+    "private_asset_hashes": 7,
+    "native_instruction_bytes_and_disassembly": 30
+  },
+  "real_model_wrapper_results": {
+    "natural": {
+      "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "raw_tanh_min": -1.0000001192092896,
+      "raw_tanh_max": 0.9999576210975647,
+      "composite_sha256": "0d92a5c5bc8d6dff0844c5c20e233a9356c585df5eb4dec89057962fd82135a4"
+    },
+    "purity": {
+      "model_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "raw_tanh_min": -1.0000001192092896,
+      "raw_tanh_max": 0.996330201625824,
+      "composite_sha256": "5542fe93f55aa7f51ca7cddbe864f6c99d66afea459b82b18d96a75cafd20fef"
+    }
+  },
+  "review_fixes_verified": [
+    {
+      "issue": "Strict Tanh interval rejected actual FP32 inference at -1.0000001192092896.",
+      "resolution": "Exactly one outward float32 ULP is allowed and clipped; two ULP excursions are rejected. Verified on both actual wrappers and explicit positive/negative regression cases."
+    },
+    {
+      "issue": "Finite margin1e308 overflowed denominator and returned singular zero-scale crop matrix.",
+      "resolution": "Nonfinite denominator/nonpositive scale rejected; adversarial margin test passes."
+    },
+    {
+      "issue": "Purity QA included Natural106-point crop metrics without clear separation.",
+      "resolution": "Both QA files now mark additional_natural_crop_check.not_part_of_prepared_face_inference=true."
+    }
+  ],
+  "precision_and_layout_findings": [
+    "Natural literal0.0078 coefficient intentionally retained; its normalized255 endpoint is approximately0.989, not1.",
+    "Purity no-extra normalization retains subtract127.5 then float32 reciprocal multiplication order.",
+    "Input channels and spatial indexing retained into NCHW; fractional samples remain distinguishable.",
+    "Output mapping/composite retain continuous FP64 values after FP32 model and force output alpha1 as both actual fragment shaders do.",
+    "Natural min(mask,alpha) and Purity mask*alpha produce distinct verified results.",
+    "Known analytical source-to-template transforms establish similarity direction and margin/offset order; crop matrix tolerance1e-12 covers measured FP64 summation roundoff."
+  ],
+  "publication_scan": {
+    "direct_files": 9,
+    "vendor_models_libraries_or_onnx_present": false,
+    "native_template_payload_present": false,
+    "full_private_assets_or_full_model_graphs_present": false,
+    "scope": "Frozen beauty_contract source directory only; __pycache__ excluded."
+  },
+  "local_test_evidence_sha256": {
+    "independent_review.py": "ef38a0b4276d638ac6eea2b240d3b1cc35d0b83cf5ff5bfdbf4932f5fb4a44d9",
+    "INDEPENDENT_TEST_RESULTS.json": "6dc434f0c88fa4cc97e9370f507fdc1d1f45a303492d71d2af50b5e1f5a83979",
+    "INDEPENDENT_NATIVE_SPOTCHECK.json": "5934835888499c08482c56b95615fa88b919e7302ad6bc22bb03943ab6332e57"
+  },
+  "limitations": [
+    "Inputs are synthetic, already prepared SDR face samples. No camera colour conversion, source primaries, HDR transform, face detection, selected-face identity or skin-mask generation is verified.",
+    "No image warp/resampling implementation is included; callers must supply samples at the correct corresponding shader coordinates. Matrix algebra alone does not reproduce native pose/smash adjustments or texture sampling.",
+    "Full makeup/geometry/LUT pass ordering and full Natural blush/Purity2 visual equivalence remain unverified.",
+    "Original native inference/byte-rounding/GPU behavior was not executed; tensor/operator parity is a separate model_replay review scope.",
+    "Purity legacy decoder and face_point template parsing are dependencies, not newly audited here.",
+    "No Android integration, phone performance,10-bit camera-to-save pipeline, HEIF gainmap or HDR preservation claim."
+  ],
+  "original_engine_executed": false,
+  "complete_style": false,
+  "hdr_preserved": false,
+  "android_integrated": false
+}

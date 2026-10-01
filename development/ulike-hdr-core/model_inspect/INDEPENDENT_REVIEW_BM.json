@@ -1,0 +1,93 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "independent release_verify165 agent",
+  "reviewed_at_utc": "2026-10-01T02:07:47.085193+00:00",
+  "scope": "bm_graph_metadata.py pinned BM-v2 decoder, compact metadata CLI, normalized caller API and its three synthetic tests. Existing outer inspector is a dependency; full legacy or inference engine was not re-reviewed.",
+  "reviewed_source_sha256": {
+    "bm_graph_metadata.py": "8eedf539f798012c2d23ff1152a25413e44495dfdb4dfb3abd4627b232a5f9cb",
+    "test_bm_graph_metadata.py": "b2e4f824452a6bd95d2f1fbf4968f5bc70477b59c9498d7502a5c7432cbe89fb",
+    "model_inspector.py": "296c6d3d8e852d0feed22c535ffbdc9d818b0a76a8cd7941b34d20708c12bf97"
+  },
+  "input_sha256": {
+    "tt_baoman.model": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+    "libbytenn.so": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853"
+  },
+  "existing_tests": {
+    "test_cases": 3,
+    "result": "PASS"
+  },
+  "independent_assertions": 786,
+  "independent_test_categories": {
+    "prefix_truncation": 74,
+    "unsupported_magic": 4,
+    "header_mutation": 95,
+    "invalid_table": 5,
+    "text_rejection": 6,
+    "trailing_bytes": 2,
+    "independent_roundtrip": 180,
+    "roundtrip_metadata": 360,
+    "actual_input_pins": 2,
+    "actual_graph": 2,
+    "actual_weights": 1,
+    "actual_lengths": 1,
+    "actual_weight_span": 1,
+    "actual_summary": 1,
+    "normalized_api": 4,
+    "pin_rejection": 10,
+    "actual_cli": 1,
+    "cli_no_full_graph_weights": 1,
+    "cli_missing_file": 2,
+    "no_bundled_original_binary": 14,
+    "no_original_payload_copy": 14
+  },
+  "native_spotcheck_assertions": 6,
+  "graph_observation": {
+    "graph_sha256": "40e9f7491cc3be27fa63e5aef589bd9359b934403a092b75f2f2e5f3ef0e41a9",
+    "graph_bytes": 10585,
+    "weight_values_sha256": "ba99e1be002e46c1f6109fa88bb6f732058c0501d3834ef700acdfda4e47d4b3",
+    "weight_bytes": 959600,
+    "operator_counts": {
+      "DataV2": 1,
+      "Convolution": 32,
+      "DepthwiseSeparableConvolution": 30,
+      "Concat": 14,
+      "Eltwise": 14,
+      "UpSampling": 6,
+      "Tanh": 1
+    }
+  },
+  "native_decode_spotcheck": {
+    "method": "Direct Capstone disassembly and ELF VA/file-offset mapping of the pinned libbytenn.so",
+    "ranges": [
+      "0x44e8c\u20130x44ea8",
+      "0x44eb8\u20130x44ec0",
+      "0x44edc\u20130x44ef4"
+    ],
+    "result": "XOR with salt indexed i&7, then table lookup",
+    "table_virtual_address_equals_file_offset": true,
+    "table_offset": "0x1c5d31"
+  },
+  "findings": [
+    "Whole model, native library and decoded graph are SHA-256 pinned before caller API returns graph or weights.",
+    "Contiguous BM-v2 segment placement, graph bounds, permutation shape, terminator and ASCII constraints fail closed in tested mutations.",
+    "Exact real-model summary matches QA_BAOMAN_GRAPH.json; normalized API changes only literal row suffixes and terminal NUL.",
+    "Original model/library, full graph, raw weight values and actual substitution table are absent from the reviewed source directory snapshot.",
+    "CLI emits compact metadata only; original graph and weight bytes remain in memory in the explicit local caller API."
+  ],
+  "publication_scan": {
+    "files": 14,
+    "scope": "Files then present beneath core/model_inspect excluding __pycache__; does not attest other directories or later edits.",
+    "raw_graph_table_weights_or_model_binary_detected": false
+  },
+  "local_test_evidence_sha256": {
+    "review.py": "60ca7c103b3b822057e170aad6412da6ad5b5b7ca25488d95e5b2620ae26e052",
+    "TEST_RESULTS.json": "0ffb201f0e7ba9c57f99bc90dba77c717c8c96d441233a78e6f7de31e6c5432f",
+    "NATIVE_SPOTCHECK.json": "5b14e76cfe36c81f91bc5e0d8e180f6dc31249996f8e8156f5aa2133eaf8251d"
+  },
+  "limitations": [
+    "No native inference execution or numerical-equivalence claim.",
+    "No independent verification of convolution tensor layout or activation semantics.",
+    "No active-device model identity, style equivalence, HDR, Android integration, or complete beauty-pipeline verification.",
+    "Native aggregate checksum is not reproduced; whole-file and graph pins plus shared marker are verified."
+  ]
+}

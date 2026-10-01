@@ -1,0 +1,185 @@
+{
+  "status": "PASS_REAL_WEIGHT_HOST_TENSOR_REPLAY",
+  "model_name": "tt_baoman",
+  "style_name": "Natural blush",
+  "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+  "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+  "graph_sha256": "40e9f7491cc3be27fa63e5aef589bd9359b934403a092b75f2f2e5f3ef0e41a9",
+  "weight_values_sha256": "ba99e1be002e46c1f6109fa88bb6f732058c0501d3834ef700acdfda4e47d4b3",
+  "weight_count": 239900,
+  "native_graph_operator_count": 97,
+  "native_operator_counts": {
+    "Convolution": 32,
+    "DepthwiseSeparableConvolution": 30,
+    "Concat": 14,
+    "Eltwise": 14,
+    "UpSampling": 6,
+    "Tanh": 1
+  },
+  "input_shape_nchw": [
+    1,
+    3,
+    256,
+    256
+  ],
+  "output_shape_nchw": [
+    1,
+    4,
+    256,
+    256
+  ],
+  "input_output_channels_semantics": "not interpreted by tensor replay",
+  "onnx_version": "1.23.1",
+  "onnxruntime_version": "1.30.0",
+  "numpy_version": "2.5.3",
+  "onnx_opset": 18,
+  "execution_provider": "CPUExecutionProvider",
+  "onnx_optimization": "ORT_DISABLE_ALL",
+  "independent_reference": "NumPy FP64 NHWC with raw OHWI/HWC weights",
+  "tolerance": {
+    "whole_graph_all_layers": "abs_error <= 0.001 + 0.001 * abs(FP64_reference)",
+    "isolated_operators_same_fp32_inputs": "non-conv: abs_error <= 0.000002*(1+abs(reference)); Conv/DW: max of that floor and gamma_(2K+2)*(sum(abs(x*w))+abs(bias)), u=2^-24, gamma_n=n*u/(1-n*u)",
+    "final_output": "max abs_error <= 0.0001"
+  },
+  "fixtures": [
+    {
+      "fixture": "zero",
+      "layers_compared": 97,
+      "values_compared": 5755904,
+      "maximum_layer_absolute_error": {
+        "index": 88,
+        "kind": "Convolution",
+        "max_abs_error": 0.002324105257528686,
+        "max_tolerance_fraction": 0.9353011642322377,
+        "elements": 131072
+      },
+      "max_tolerance_fraction": 0.9353011642322377,
+      "final_max_abs_error": 6.754997246881736e-05,
+      "isolated_operator_max_absolute_error": {
+        "index": 88,
+        "kind": "Convolution",
+        "max_abs_error": 4.947734680627036e-05,
+        "max_scaled_error": 1.1211183919177317e-05,
+        "max_roundoff_envelope_fraction": 0.07027527380222738,
+        "max_tolerance_fraction": 0.07027527380222738
+      },
+      "isolated_operator_max_tolerance_fraction": 0.1293026567657238,
+      "isolated_operator_max_scaled_error": 1.554066719731154e-05,
+      "isolated_conv_max_roundoff_envelope_fraction": 0.15431956401060504,
+      "final_shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "final_dtype": "float32",
+      "final_min": -1.0000001192092896,
+      "final_max": 0.9997736215591431,
+      "final_sha256": "ab1f65072df8aac63750c348e658169eb1e5efaed0d2a17ee519e111a65fe272",
+      "deterministic_repeat": true,
+      "final_only_matches_debug_outputs": true,
+      "host_inference_seconds_observed": 0.028429476000383147
+    },
+    {
+      "fixture": "signed_ramps",
+      "layers_compared": 97,
+      "values_compared": 5755904,
+      "maximum_layer_absolute_error": {
+        "index": 88,
+        "kind": "Convolution",
+        "max_abs_error": 0.00014418738541621678,
+        "max_tolerance_fraction": 0.051969658668923634,
+        "elements": 131072
+      },
+      "max_tolerance_fraction": 0.09663521911868495,
+      "final_max_abs_error": 1.0502532582057356e-05,
+      "isolated_operator_max_absolute_error": {
+        "index": 66,
+        "kind": "Convolution",
+        "max_abs_error": 4.942125212892279e-05,
+        "max_scaled_error": 8.240224727490249e-06,
+        "max_roundoff_envelope_fraction": 0.01772904328441395,
+        "max_tolerance_fraction": 0.01772904328441395
+      },
+      "isolated_operator_max_tolerance_fraction": 0.19240120042956974,
+      "isolated_operator_max_scaled_error": 1.714074144694302e-05,
+      "isolated_conv_max_roundoff_envelope_fraction": 0.1569726487522845,
+      "final_shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "final_dtype": "float32",
+      "final_min": -1.0000001192092896,
+      "final_max": 0.999467670917511,
+      "final_sha256": "4c29ea404fb74afd77b9d883edf5f8296da306f724191b929bee5d908da78631",
+      "deterministic_repeat": true,
+      "final_only_matches_debug_outputs": true,
+      "host_inference_seconds_observed": 0.013982803000544664
+    },
+    {
+      "fixture": "seeded_signed_random",
+      "layers_compared": 97,
+      "values_compared": 5755904,
+      "maximum_layer_absolute_error": {
+        "index": 12,
+        "kind": "DepthwiseSeparableConvolution",
+        "max_abs_error": 9.71794757731459e-05,
+        "max_tolerance_fraction": 0.04918706759733629,
+        "elements": 65536
+      },
+      "max_tolerance_fraction": 0.04918706759733629,
+      "final_max_abs_error": 8.844499987017973e-06,
+      "isolated_operator_max_absolute_error": {
+        "index": 88,
+        "kind": "Convolution",
+        "max_abs_error": 3.653419003057934e-05,
+        "max_scaled_error": 1.3589230822804519e-05,
+        "max_roundoff_envelope_fraction": 0.07065372987251979,
+        "max_tolerance_fraction": 0.06840016577508512
+      },
+      "isolated_operator_max_tolerance_fraction": 0.13387344850514055,
+      "isolated_operator_max_scaled_error": 1.3589230822804519e-05,
+      "isolated_conv_max_roundoff_envelope_fraction": 0.1685693237331901,
+      "final_shape": [
+        1,
+        4,
+        256,
+        256
+      ],
+      "final_dtype": "float32",
+      "final_min": -1.0000001192092896,
+      "final_max": 0.9999695420265198,
+      "final_sha256": "de3511ddbb4a2955586fbc5e4b4a56382ff9426cb4e5c7f506db4891c03eca21",
+      "deterministic_repeat": true,
+      "final_only_matches_debug_outputs": true,
+      "host_inference_seconds_observed": 0.012601651000295533
+    }
+  ],
+  "source_sha256": {
+    "baoman_replay.py": "929a9099e60e50551abdf36f8e82e9b7414e7b39b0d321e7d52522d87fe8ffba",
+    "graph_schema.py": "c2a5e2616573b4e7365dadd401636447c4422283dc14841109cbb800428e9aee",
+    "operator_reference.py": "67c861060f5acc30ba9cd50d0639290e761c3a79ba2fbba8b43e7476c1b7411d",
+    "purity_replay.py": "06a962e6d97eb3905ba5e39d0410fc687be6a2693df3f6d966f19acb3f640b58",
+    "reference_nhwc.py": "4e8bd3ae5c8677d624a0ab12181cb963213274362804770bf3745b698641deee",
+    "replay_tensor.py": "ec9882752b86a8c28a3db1e8bb5cbeff04447fa5ad3f2c5889eff452e7df1ffb",
+    "test_graph_schema.py": "6303f6323dc84d7e3f032b31e1b99144cae459bb42642c279d06c68cff70aa10",
+    "test_operator_contracts.py": "947bfc2bc91bdf73e3568435203653401a2a535ee178dde64d5172d9488966f2",
+    "test_replay.py": "c21c3c8d7fabc855b226e95b4196fe0f6d6e75eb800eb12f46418c4bf34f5b55",
+    "verify_purity_model.py": "d3a4d8b80ecb8997089c0a40a8a68fe9587158463032e8a8a15c51ba2341ebee",
+    "verify_real_model.py": "501e2b7b1a862a0abd0034240a433fe443137ca4ffc46c8ffd1d41bb3eb9c8f6"
+  },
+  "native_numerical_parity_verified": false,
+  "android_integration": false,
+  "complete_style_equivalence": false,
+  "hdr_preservation_verified": false,
+  "limitations": [
+    "Static native semantics plus independent host arithmetic checks; original Android engine was not executed.",
+    "Native vector Tanh uses approximate exp and unrefined FRECPE reciprocal. Standard mathematical ONNX Tanh deliberately replaces that approximation; native output need not agree bitwise or within host-reference tolerances.",
+    "Inputs are synthetic model tensors; face crop, alignment, normalization and output compositing are not reproduced here.",
+    "FP32 model replay does not prove HDR training/support or HDR-safe beauty processing.",
+    "Only this report's named/hash-pinned model is covered; no unobserved active-device model version is assumed.",
+    "Observed host execution times are not phone focus, lens-switch, capture or save benchmarks."
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "status": "PASS_STATIC_CONV_DW_CONTRACT",
+  "time_utc": "2026-10-01T01:49:35.274896+00:00",
+  "reviewer": "/root/native_beauty_audit/style_asset_search",
+  "library_sha256": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+  "graph_sha256": "40e9f7491cc3be27fa63e5aef589bd9359b934403a092b75f2f2e5f3ef0e41a9",
+  "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+  "scope": "Read-only native static proof for the supplied graph FP32 Conv/DW parameter storage, weight layout, bias order and fused activation. No native execution or full inference comparison.",
+  "parameter_map": [
+    {
+      "field": 2,
+      "param_offset": "0x2c",
+      "meaning": "outChannels",
+      "evidence": "Conv 0xd3b74 and DW 0xd4fb4 store at layer+0xd4; DW also copies same value to layer+0xe4 (groups); Conv sets groups=1 at0xd3b68."
+    },
+    {
+      "field": 9,
+      "param_offset": "0x30",
+      "engine_offset": "0xec",
+      "meaning": "bias-present flag",
+      "evidence": "Parser stores0xd3bdc/0xd5020; common bias reader0x106960–0x106964 skips supplied bias and zero fills when flag=0."
+    },
+    {
+      "field": 10,
+      "param_offset": "0x34",
+      "engine_offset": "0xf0",
+      "meaning": "fused ReLU flag (0 identity, nonzero max(sum+bias,0))",
+      "evidence": "Parser stores0xd3be8/0xd502c. Conv0x104cf0→0x104d04→0x104f30 passes through stack to0x11edf0, which gates fmax at0x11f0a4. DW0x11bb9c→std::function wrapper0x11bc28→thunk0x11c304→scalar0x11a620–0x11a628."
+    }
+  ],
+  "weight_layout": {
+    "conv": {
+      "storage": "[groups, outChannels/groups, kernelSpatial, inChannels/groups], channels contiguous; groups=1 -> OHWI for this square-kernel graph",
+      "formula": "src_index = (((group * Og + o) * (K0*K1) + k) * Ig + i)",
+      "proof": "Generic FP32 factory0xec348–0xec388 -> ctor0x10b9c4 -> vtable0x2305d0 slot+0x48=0x104860. Load0x104930 returns raw weights; slot+0x68 is identity0x104858. 0x104a24–0x104a80 supplies groups,Og,K0*K1,Ig,tile,src,dst to0x106e14; inner 0x106e7c reads one float, next oc advances K0*K1*Ig floats, next i advances1, next k advancesIg. No OIHW-to-OHWI transpose precedes that pack.",
+      "onnx_conversion": "raw.reshape(O, KH, KW, I).transpose(0,3,1,2)"
+    },
+    "depthwise": {
+      "storage": "[kernelSpatial, channels], channels contiguous; HWC for this square-kernel graph",
+      "formula": "src_index = k * channels + c",
+      "proof": "FP32 DW factory0xec1e4–0xec218 -> ctor0x11a128 -> vtable0x230b70 slot+0x48=0x11a168. 0x11a1fc–0x11a218 countsK0*K1*C, 0x11a258–0x11a264 copies raw floats unchanged. Scalar kernel0x11a58c–0x11a590 sets weightbase+k*C*4, 0x11a5c8 loads consecutive channels, and 0x11a5e8 advances next spatial weight byC*4.",
+      "onnx_conversion": "raw.reshape(KH, KW, C).transpose(2,0,1)[:,None,:,:], group=C"
+    },
+    "spatial_axis_limit": "The supplied graph has only square kernels, equal strides and symmetric padding. Static index proof is [O,K0,K1,I] / [K0,K1,C]. A universal naming claim for asymmetric non-square K0/K1 is outside this bounded audit; no such case exists in this pinned graph."
+  },
+  "serialization": {
+    "order": "All weights of one Conv/DW layer, then outChannels bias values when field9!=0, then next weighted layer. Not interleaved per output channel.",
+    "weight_element_count": "K0*K1*inChannels*outChannels/groups; DW groups=outChannels=inChannels -> K0*K1*C",
+    "bias_element_count": "outChannels when field9!=0",
+    "evidence": [
+      "0x106968–0x106998 computes weight count and source byte length via0x10153c",
+      "0x1069a0–0x1069b8 sets bias source=weight_start+weight_bytes; raw bias memcpy0x106a4c–0x106a60",
+      "0x106be0–0x106c68 computes next-layer consumed bytes as weight byte length plus optional bias byte length",
+      "Plain FP32 size branch0x100e30 returns count*dtype_width, here width4"
+    ],
+    "graph_aggregate_crosscheck": {
+      "weighted_node_kind_counts": {
+        "Convolution": 32,
+        "DepthwiseSeparableConvolution": 30
+      },
+      "all_bias_flags_one": true,
+      "activation_values": [
+        0,
+        1
+      ],
+      "all_square_kernels": true
+    }
+  },
+  "instruction_assertions": [
+    {
+      "address": "0xd3bdc",
+      "instruction": "str w0, [x22, #0x30]"
+    },
+    {
+      "address": "0xd3be8",
+      "instruction": "str w0, [x22, #0x34]"
+    },
+    {
+      "address": "0xd5020",
+      "instruction": "str w0, [x22, #0x30]"
+    },
+    {
+      "address": "0xd502c",
+      "instruction": "str w0, [x22, #0x34]"
+    },
+    {
+      "address": "0x104a80",
+      "instruction": "bl #0x106e14"
+    },
+    {
+      "address": "0x106e7c",
+      "instruction": "ldr w22, [x21]"
+    },
+    {
+      "address": "0x106e88",
+      "instruction": "add x21, x21, x11"
+    },
+    {
+      "address": "0x106ea0",
+      "instruction": "add x19, x19, #4"
+    },
+    {
+      "address": "0x11a264",
+      "instruction": "bl #0x1ec00"
+    },
+    {
+      "address": "0x11a5c8",
+      "instruction": "ldr s1, [x17], #4"
+    },
+    {
+      "address": "0x11a5e8",
+      "instruction": "add x12, x12, x23"
+    },
+    {
+      "address": "0x106964",
+      "instruction": "cbz w9, #0x106a3c"
+    },
+    {
+      "address": "0x1069ac",
+      "instruction": "add x2, x21, w0, sxtw"
+    },
+    {
+      "address": "0x106c40",
+      "instruction": "cbz w8, #0x106c6c"
+    },
+    {
+      "address": "0x104cf0",
+      "instruction": "ldr w0, [x0, #0xf0]"
+    },
+    {
+      "address": "0x104f30",
+      "instruction": "str w14, [sp, #0x10]"
+    },
+    {
+      "address": "0x11edf0",
+      "instruction": "ldr w14, [sp, #0x40]"
+    },
+    {
+      "address": "0x11f0a4",
+      "instruction": "cbz w14, #0x11f0d8"
+    },
+    {
+      "address": "0x11f0a8",
+      "instruction": "fmax v20.4s, v20.4s, v16.4s"
+    },
+    {
+      "address": "0x11a624",
+      "instruction": "ccmp w2, #0, #4, lt"
+    }
+  ],
+  "limitations": [
+    "No weight/model payloads or full graph included in this report; original model and LOCAL_ONLY graph remain private local inputs.",
+    "Static native layout proof does not establish bitwise agreement between ONNX CPU and ByteNN vectorized FMA/Winograd paths.",
+    "FP32 model parameters and FP32 host execution do not prove image HDR preservation, Android integration, correct face preprocessing/postprocessing, or completed full style replication.",
+    "Optimized Conv/DW engine selection varies by shape; this audit uses concrete generic FP32 pack and scalar DW code as decisive raw-storage contracts, without claiming every optimized numerical rounding path has been reproduced."
+  ]
+}
