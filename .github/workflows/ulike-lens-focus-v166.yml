@@ -2,7 +2,7 @@ name: Verify and publish reviewed ULike lens AF repair 1.6.6
 on:
   push:
     branches: ['work/ulike-lens-focus-v166']
-    paths: ['.github/workflows/ulike-lens-focus-v166.yml']
+    paths: ['.github/workflows/ulike-lens-focus-v166.yml', 'releases/ulike-v1.6.6/build_reviewed.py']
 permissions:
   contents: write
 concurrency:
@@ -52,20 +52,17 @@ jobs:
         run: |
           set -euo pipefail
           python3 source166/release_pipeline/publish166.py --qa source166/release_pipeline/LOCAL_QA.json --dist dist --notes source166/release_pipeline/RELEASE_NOTES.txt --release-body source166/release_pipeline/README.md --summary source166/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-01
-      - name: Show build recipe diagnostics on failure
+      - name: Show publication state and generated hashes on failure
         if: failure()
         shell: bash
         run: |
-          for f in baseline165/integration/MergePayloads.java baseline165/integration/build.sh; do
-            if test -f "$f"; then echo "BEGIN_DIAGNOSTIC $f"; cat "$f"; echo "END_DIAGNOSTIC $f"; fi
-          done
+          find build166 -type f \( -name '*.dex' -o -name '*.tsv' -o -name '*.class' \) -exec sha256sum {} + || true
           if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
       - name: Retain publication artifacts and verification records
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: ulike-lens-focus-v166-publication
-          path: |
-            dist/*
+          path: dist/*
           if-no-files-found: warn
           retention-days: 7
