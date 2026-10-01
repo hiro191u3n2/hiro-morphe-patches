@@ -1,0 +1,223 @@
+{
+  "status": "PASS_STATIC_PURITY_AFFINE_CONTRACT",
+  "library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "source_sha256": "5aab5305395076f68452013479fe0c9ef65773937e27798bd1465b146a128051",
+  "instruction_checks": [
+    {
+      "address": "0xc9ef44",
+      "instruction": "adrp x1, #0x1294000"
+    },
+    {
+      "address": "0xc9ef48",
+      "instruction": "add x1, x1, #0xe35"
+    },
+    {
+      "address": "0xc9f004",
+      "instruction": "cmp x25, #0x350"
+    },
+    {
+      "address": "0xc9f00c",
+      "instruction": "ldr x8, [x24, x25]"
+    },
+    {
+      "address": "0xc9f018",
+      "instruction": "bl #0xcb1c74"
+    },
+    {
+      "address": "0xca0170",
+      "instruction": "ldr x21, [sp, #0x6b90]"
+    },
+    {
+      "address": "0xca02a8",
+      "instruction": "ldp x1, x2, [x26, #0xd0]"
+    },
+    {
+      "address": "0xca01cc",
+      "instruction": "ldr s8, [x26, #0x110]"
+    },
+    {
+      "address": "0xca01c8",
+      "instruction": "ldr w21, [x26, #0x114]"
+    },
+    {
+      "address": "0xca01c0",
+      "instruction": "ldr w8, [x26, #0x118]"
+    },
+    {
+      "address": "0xca01d4",
+      "instruction": "ldr w8, [x26, #0x11c]"
+    },
+    {
+      "address": "0xca01e4",
+      "instruction": "ldr w8, [x26, #0x120]"
+    },
+    {
+      "address": "0xca0314",
+      "instruction": "bl #0xe4a12c"
+    },
+    {
+      "address": "0xca0320",
+      "instruction": "bl #0xe771dc"
+    },
+    {
+      "address": "0xca0324",
+      "instruction": "fneg s2, s1"
+    },
+    {
+      "address": "0xca0350",
+      "instruction": "str s0, [x28, #0x1c0]"
+    },
+    {
+      "address": "0xca0354",
+      "instruction": "str s0, [x28, #0x1d0]"
+    },
+    {
+      "address": "0xca03d0",
+      "instruction": "fmadd s13, s8, s10, s9"
+    },
+    {
+      "address": "0xca044c",
+      "instruction": "fdiv s1, s12, s13"
+    },
+    {
+      "address": "0xca0464",
+      "instruction": "str s1, [x28, #0x1d8]"
+    },
+    {
+      "address": "0xca0468",
+      "instruction": "fmul s1, s1, s8"
+    },
+    {
+      "address": "0xca0470",
+      "instruction": "str s1, [x28, #0x1e0]"
+    },
+    {
+      "address": "0xca0474",
+      "instruction": "fdiv s1, s11, s3"
+    },
+    {
+      "address": "0xca0498",
+      "instruction": "str s1, [x28, #0x1e8]"
+    },
+    {
+      "address": "0xca049c",
+      "instruction": "str s0, [x28, #0x1ec]"
+    },
+    {
+      "address": "0xca04ac",
+      "instruction": "bl #0xe639f4"
+    },
+    {
+      "address": "0xe639fc",
+      "instruction": "add x1, sp, #6, lsl #12"
+    },
+    {
+      "address": "0xe63a04",
+      "instruction": "add x0, x0, #0xea8"
+    },
+    {
+      "address": "0xe63a08",
+      "instruction": "add x1, x1, #0xf08"
+    },
+    {
+      "address": "0xe63a0c",
+      "instruction": "b #0xf539d4"
+    },
+    {
+      "address": "0xf52fa0",
+      "instruction": "adrp x1, #0x19f9000"
+    },
+    {
+      "address": "0xf52fa4",
+      "instruction": "add x1, x1, #0x690"
+    },
+    {
+      "address": "0x393ba0",
+      "instruction": "add x8, x8, #0x66c"
+    },
+    {
+      "address": "0x393bd4",
+      "instruction": "add x9, x9, #0xce0"
+    },
+    {
+      "address": "0x393bd8",
+      "instruction": "stur x9, [x8, #0x24]"
+    },
+    {
+      "address": "0xca05bc",
+      "instruction": "str s8, [x28, #0x1e0]"
+    },
+    {
+      "address": "0xca05c4",
+      "instruction": "str s1, [x24, #0x14]"
+    },
+    {
+      "address": "0xca05d4",
+      "instruction": "bl #0xe639f4"
+    },
+    {
+      "address": "0xca06b8",
+      "instruction": "mov w4, #1"
+    },
+    {
+      "address": "0xca06bc",
+      "instruction": "bl #0xe4c578"
+    },
+    {
+      "address": "0xe4c578",
+      "instruction": "mov w5, wzr"
+    },
+    {
+      "address": "0xe4c57c",
+      "instruction": "b #0xfe6174"
+    }
+  ],
+  "template": {
+    "group": "face_point",
+    "points": 106,
+    "stored_at_state_offset": "0xd0",
+    "read_key_address": "0x1294e35",
+    "load_loop": "0xc9f004..0xc9f01c",
+    "bytes": 848
+  },
+  "parameters": {
+    "margin": "state+0x110, model CropMarginv0=float32(0.2)",
+    "width": "state+0x114, model CropWidthv0=256",
+    "height": "state+0x118, model CropHeightv0=256",
+    "offset_x": "state+0x11c, model CropOffsetXv0=0",
+    "offset_y": "state+0x120, model CropOffsetYv0=0"
+  },
+  "source_selection": "0xca0170 uses the first source face-point pointer assembled at stack+0x6b90, then copies exactly the template vector length into an input vector at stack+0x88. Coordinate origin and live detector ordering require caller-side validation.",
+  "similarity": {
+    "source": "runtime face landmarks copied at 0xca0184..0xca01b0",
+    "target": "model template state+0xd0",
+    "direction": "source -> normalized model template",
+    "matrix": "T = [[a,-b,tx],[b,a,ty],[0,0,1]]",
+    "math": "Center both sets; D=sum(sx^2+sy^2); a=sum(sx*dx+sy*dy)/D; b=sum(sx*dy-sy*dx)/D; t=target_mean-linear*source_mean.",
+    "evidence": "0xca01ec..0xca0370, centered arithmetic helper 0xe4a12c, divisors 0xe771dc. Native bounded arithmetic separately executes successfully on six synthetic 106-point cases."
+  },
+  "crop_matrix": {
+    "order": "M = O @ S @ T",
+    "general_scaling": "k=1+2*m; sx=W/k; vertical_margin=((H/W)*k-1)/2; sy=H/(1+2*vertical_margin); S=[[sx,0,sx*m],[0,sy,sy*vertical_margin],[0,0,1]]; O=[[1,0,offset_x],[0,1,offset_y],[0,0,1]].",
+    "pinned_square_case": "W=H=256,m=float32(0.2),offsets=0, so sx=sy=256/(1+2*m) and translations=sx*m.",
+    "matrix_operation_proof": "0xca04ac and0xca05d4 supply left matrix S/O and right previous transform to0xf539d4. It builds flags=0 MatOp_GEMM using global object0x19f9690. Initializer0x393bd8 sets its vtable0x1965ce0; ELF RTTI names MatOp_GEMM; slot+0x18=0xf553d8 calls GEMM0xf95f64 with operandA thenB.",
+    "precision": "Original scalar construction is float32 with fused arithmetic; a float64 implementation preserves the mathematical contract without claiming byte identity."
+  },
+  "warp_call": {
+    "entry": "0xfe6174",
+    "caller": "0xca0690..0xca06bc through0xe4c578",
+    "input": "source image Mat stack+0x6ca0",
+    "output": "state+0x128",
+    "matrix": "M at stack+0x6c40",
+    "size": "W,H at state+0x114/+0x118",
+    "flags": 1,
+    "border_mode": 0,
+    "inverse_map_bit_set": false,
+    "note": "The parent generic warp audit owns sampling, internal inversion and borders; this report proves the call arguments and constructed forward direction."
+  },
+  "limits": [
+    "Native arithmetic test is scoped to centered similarity math only; no complete crop/warp pixel parity claimed.",
+    "Live detector coordinates, pose handling, source colour/orientation, image readback and downstream full-style ordering remain outside this proof.",
+    "No original model, coordinate table, keys or library bytes are embedded."
+  ]
+}

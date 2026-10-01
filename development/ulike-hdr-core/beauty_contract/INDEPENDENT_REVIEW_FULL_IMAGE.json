@@ -1,0 +1,147 @@
+{
+  "status": "PASS_INDEPENDENT_FULLIMAGE_REVIEW_WITH_SCOPE_LIMITS",
+  "reviewer": "root independent of fullimage author",
+  "reviewed_at_utc": "2026-10-01T02:54:38.610187+00:00",
+  "source_sha256": {
+    "CHANNEL_MAPPING_EVIDENCE.json": "b3e1a0d2bb03f1e8014d6237317478565d072023de84883298492321e1d8d083",
+    "QA_FULL_IMAGE.json": "0ebb6c81fe7315d2b9f1b28a7cdfa9dfa17698e48a27e68056251c2fc6773ecb",
+    "README_FULL_IMAGE.md": "e77914cbc0c84e7062021c328a0f0b88c92c3685be8f174d88493d7bd823e97f",
+    "WARP_EVIDENCE.json": "2750e40fb37686e68d63f1287b68da50fa28a85f5ecab1a960bfa7ca3a08eaae",
+    "evidence/PURITY_AFFINE_EVIDENCE.json": "928d01dd06e931fe857ab6c473e73328ee6acc345f00e21b35421786044b3e8e",
+    "evidence/QA_NATIVE_PURITY_SIMILARITY.json": "935bf85d8c2f72725d077decc285b13234945d87f74984ffa8ac152aa8d782be",
+    "evidence/verify_purity_affine.py": "ade19ac117b08285ce081b3dc51888f12f7a1bb75d93ea5063f2e722d5a14679",
+    "evidence/verify_purity_static_affine.py": "5aab5305395076f68452013479fe0c9ef65773937e27798bd1465b146a128051",
+    "fullimage_component.py": "fafd194353edef56bfeb2405979c4077cc070c271c917a10f8bb8c688f065dee",
+    "style_mask.py": "2b6df11c9da63eaeb620d028624b8bc519738d8f67295da7ad165f98c682d9a7",
+    "test_fullimage.py": "a355e7b49707b40ec765376455a5f3837c4de8dda6db37091ccd18015b816321",
+    "test_style_mask.py": "2c5eabb9c2ccdf062c869b2d2893c0d3ef466ee1521c5a91bbffb56b97641240",
+    "verify_fullimage.py": "e8cd75695861f1e31440a1b9728e16002da071020d7d8b01418da50cb1ad76bf",
+    "verify_warp_native.py": "6c469f1ccff69cf3164ed54e96b8d620c9a2de9f7cdeb3518b4c1dc5d935aeb7"
+  },
+  "author_tests": {
+    "fullimage": 12,
+    "mask_guards": 2,
+    "result": "PASS"
+  },
+  "independent_analytic_review": {
+    "status": "PASS_INDEPENDENT_FULLIMAGE_MATH_AND_GUARDS",
+    "assertions": 350,
+    "max_abs_error_vs_independent_scalar": 2.220446049250313e-16,
+    "frozen_original_files_verified": 9,
+    "synthetic_inputs": true,
+    "actual_masks_verified": 2,
+    "android_execution": false,
+    "hdr_pipeline": false
+  },
+  "actual_models_and_masks": {
+    "independent_rerun": "PASS",
+    "runtime_process_optout": "ORT_DISABLE_TELEMETRY=1 before interpreter/ORT startup; event API additionally disabled",
+    "tool_completion_exit_code": 0,
+    "models": 2,
+    "model_crop_width_height": [
+      256,
+      256
+    ],
+    "synthetic_full_image_width_height": [
+      512,
+      384
+    ],
+    "output_hashes": [
+      "83b56c59ef1869d7c697c739db5f87bd4834301db01c849750a25c7a4653ff46",
+      "2860967b25e4643a1625030439e3536b616bc0a5312705f55be5281da562fe6e"
+    ],
+    "large_host_projections": [
+      {
+        "style": "natural_blush",
+        "shape": [
+          3060,
+          4080,
+          3
+        ],
+        "status": "PASS_FULL_HOST_PROJECTION",
+        "allocated_output_bytes": 299635200,
+        "outside_pixels_exactly_unchanged": 12419264,
+        "changed_inside_pixels": 63107,
+        "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+        "native_camera_capture": false,
+        "android_memory_test": false
+      },
+      {
+        "style": "natural_blush",
+        "shape": [
+          4284,
+          5712,
+          3
+        ],
+        "status": "PASS_FULL_HOST_PROJECTION",
+        "allocated_output_bytes": 587284992,
+        "outside_pixels_exactly_unchanged": 24404672,
+        "changed_inside_pixels": 63107,
+        "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+        "native_camera_capture": false,
+        "android_memory_test": false
+      },
+      {
+        "style": "purity2",
+        "shape": [
+          3060,
+          4080,
+          3
+        ],
+        "status": "PASS_FULL_HOST_PROJECTION",
+        "allocated_output_bytes": 299635200,
+        "outside_pixels_exactly_unchanged": 12419264,
+        "changed_inside_pixels": 64921,
+        "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+        "native_camera_capture": false,
+        "android_memory_test": false
+      },
+      {
+        "style": "purity2",
+        "shape": [
+          4284,
+          5712,
+          3
+        ],
+        "status": "PASS_FULL_HOST_PROJECTION",
+        "allocated_output_bytes": 587284992,
+        "outside_pixels_exactly_unchanged": 24404672,
+        "changed_inside_pixels": 64921,
+        "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+        "native_camera_capture": false,
+        "android_memory_test": false
+      }
+    ],
+    "author_QA_reproduced_exactly": true,
+    "external_network_monitoring": false
+  },
+  "native_evidence": {
+    "channel_instruction_checks": 26,
+    "channel_data_tables": 3,
+    "warp_instruction_checks": 26,
+    "warp_coordinate_cases": 64,
+    "warp_border_cases": 36,
+    "purity_static_instruction_checks": 42,
+    "purity_similarity_cases": 6,
+    "max_purity_matrix_error": 3.586776100572564e-07
+  },
+  "original_nine_frozen_files_unchanged": true,
+  "resolved_findings": [
+    "Shape budgets checked before scanning lazy arrays or allocating outputs",
+    "Zero-weight/outside samples preserved bit-for-bit after FP64 conversion",
+    "Verification refuses Python -O",
+    "Documented pre-initialization ORT telemetry opt-out required"
+  ],
+  "limits": [
+    "This is a supplied-landmark, explicitly oriented-mask, SDR neural component, not face detection or complete styles.",
+    "Synthetic input images and synthetic geometry; no visual likeness claim.",
+    "FP32 models retain 256x256 receptive input and output; full-size projection does not create full-size model detail.",
+    "12.5/24.5MP full allocations ran on host; no phone memory, sensor input or speed claim.",
+    "New continuous bilinear sampler and declared half-pixel coverage intentionally do not claim native GPU pixel equivalence.",
+    "No Android app hookup, camera-to-save HDR, complete makeup/LUT passes or device verification."
+  ],
+  "publication_scan": {
+    "new_reviewed_text_files": 14,
+    "original_model_weights_libraries_or_masks_embedded": false
+  }
+}

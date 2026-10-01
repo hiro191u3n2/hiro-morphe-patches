@@ -1,0 +1,94 @@
+{
+  "status": "PASS_ANDROID_SDK36_COMPILE_AND_HOST_JAVA_TENSOR_RUNTIME",
+  "source_sha256": {
+    "src/hiro/ulike/model/AndroidTensorEngine.java": "e6f73673f57dba5bc8257e2653ab95c12f6f5a1c5f9c724cd918d3e771fd4f15",
+    "src/hiro/ulike/model/GraphOnnx.java": "a0cec1f9dcde10322872dcd0647e5fbc626a8823106786bc4106eabf74b63aa7",
+    "src/hiro/ulike/model/OrtTensorEngine.java": "8398b72f3a619bd957c1e60275a667a047f01942be87bb167c164fe78b7658be",
+    "src/hiro/ulike/model/PinnedModel.java": "a1a38ad2b5095a530bc52e05ff15e5057281800269dd8ea131f5b35040803399",
+    "test/hiro/ulike/model/EmitModel.java": "c7b775d6f665d6d78af043cf41fe79857a2cf7332136358981a7dab94d859404",
+    "test/hiro/ulike/model/RunTensor.java": "a5fa6b804662d8cea74c5606074a86441c516664f0c747340e559dca3f1eb57b",
+    "verify_runtime.py": "fd1b8478adf182e52fec5c96db2d2317a69f5ed75727cdde5a62b674bec9037a",
+    "AndroidManifest.xml": "708f3fb2470ef3b44708048bba49e57725d4f7613d3a963a447553f6f1b7451e"
+  },
+  "dependencies_sha256": {
+    "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "onnxruntime-android-1.30.0-classes.jar": "65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0",
+    "onnxruntime-1.30.0.jar": "57d8cedf6f0c8fd6d50ed65c17bf9939f55a4512f4a1f3e732023d258f262ac6",
+    "r8-8.3.37.jar": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199"
+  },
+  "onnxruntime_python": "1.30.0",
+  "numpy": "2.5.3",
+  "android_device_execution": false,
+  "app_hook_integration": false,
+  "complete_style_equivalence": false,
+  "hdr_preservation": false,
+  "telemetry_explicitly_disabled_python_and_java": true,
+  "ort_disable_telemetry_process_flag_before_initialization": true,
+  "fixtures": [
+    {
+      "style": "NATURAL_BLUSH",
+      "missing_telemetry_flag_rejection": "PASS rejected missing telemetry flag before runtime creation",
+      "host_wrapper_assertions": "PASS NATURAL_BLUSH wrapper assertions=15",
+      "results": [
+        {
+          "fixture": "zero",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "ab1f65072df8aac63750c348e658169eb1e5efaed0d2a17ee519e111a65fe272"
+        },
+        {
+          "fixture": "signed_ramps",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "4c29ea404fb74afd77b9d883edf5f8296da306f724191b929bee5d908da78631"
+        },
+        {
+          "fixture": "seeded_signed_random",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "de3511ddbb4a2955586fbc5e4b4a56382ff9426cb4e5c7f506db4891c03eca21"
+        }
+      ]
+    },
+    {
+      "style": "PURITY2",
+      "missing_telemetry_flag_rejection": "PASS rejected missing telemetry flag before runtime creation",
+      "host_wrapper_assertions": "PASS PURITY2 wrapper assertions=15",
+      "results": [
+        {
+          "fixture": "zero",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "3f7a8fc5fb9f2b195d34d1f3c132d76735a9b3a3f96ad9aed0968d6ab4c505b6"
+        },
+        {
+          "fixture": "signed_ramps",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "60a588ba5eae7e8b6e6a508500863ffd336612cbbf0267578d78016746a99ee8"
+        },
+        {
+          "fixture": "seeded_signed_random",
+          "values": 262144,
+          "maximum_absolute_error": 0.0,
+          "bit_exact": true,
+          "output_sha256": "b1e62725f81b9539740ac41279f4bb8ab9cf980156de5bb05bf84791081fb026"
+        }
+      ]
+    }
+  ],
+  "d8_min_api": 26,
+  "d8_sdk36_compile": true,
+  "dex_bytes": 27248,
+  "limitations": [
+    "Java compiler and wrapper compile against Android SDK 36 and ORT Android 1.30.0; execution uses separate host Java ORT 1.30.0 CPU binaries.",
+    "No Android device, JNI loading, app integration, capture timing, face alignment, RGB/HDR conversion, output-channel interpretation or compositing is validated here.",
+    "Model tensors match the frozen Python reconstruction; original vendor end-to-end numerical equivalence is not claimed.",
+    "Native approximate Tanh was intentionally replaced by standard ONNX Tanh; this follows the independently documented model_replay scope."
+  ]
+}

@@ -1,0 +1,325 @@
+{
+  "status": "PASS_PINNED_WARP_COORDINATE_BORDER_SLICES",
+  "library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "instruction_checks": [
+    {
+      "address": "0xcadf24",
+      "instruction": "ldr d0, [x9, #0xcc0]"
+    },
+    {
+      "address": "0xcadf50",
+      "instruction": "str d0, [x20, #0x568]"
+    },
+    {
+      "address": "0xcadf54",
+      "instruction": "str wzr, [x20, #0x570]"
+    },
+    {
+      "address": "0x97d0e8",
+      "instruction": "movi v0.2d, #0000000000000000"
+    },
+    {
+      "address": "0x97d0ec",
+      "instruction": "stp q0, q0, [x19]"
+    },
+    {
+      "address": "0xcba750",
+      "instruction": "ldp w4, w5, [x21, #0xb4]"
+    },
+    {
+      "address": "0xcba758",
+      "instruction": "bl #0xfe6174"
+    },
+    {
+      "address": "0xfe6280",
+      "instruction": "and w9, w21, #7"
+    },
+    {
+      "address": "0xfe6308",
+      "instruction": "tbnz w21, #4, #0xfe6364"
+    },
+    {
+      "address": "0xfe5f58",
+      "instruction": "mov x10, #0x4090000000000000"
+    },
+    {
+      "address": "0xfe5f68",
+      "instruction": "scvtf d1, w9"
+    },
+    {
+      "address": "0xfe5f78",
+      "instruction": "frintx d0, d0"
+    },
+    {
+      "address": "0xfe8028",
+      "instruction": "add w15, w8, w22"
+    },
+    {
+      "address": "0xfe8044",
+      "instruction": "fmadd d0, d0, d4, d1"
+    },
+    {
+      "address": "0xfe8058",
+      "instruction": "frintx d0, d0"
+    },
+    {
+      "address": "0xfe8068",
+      "instruction": "add w15, w26, w15"
+    },
+    {
+      "address": "0xfe8160",
+      "instruction": "asr w5, w3, #0xa"
+    },
+    {
+      "address": "0xfe816c",
+      "instruction": "bfxil w6, w3, #5, #5"
+    },
+    {
+      "address": "0xfe5b10",
+      "instruction": "mov w9, #0x3d000000"
+    },
+    {
+      "address": "0xfe5b2c",
+      "instruction": "fsub s2, s0, s1"
+    },
+    {
+      "address": "0xfe5c4c",
+      "instruction": "fmul s1, s1, s0"
+    },
+    {
+      "address": "0xf5cf70",
+      "instruction": "mov w0, #-1"
+    },
+    {
+      "address": "0xfe1150",
+      "instruction": "ldrb w8, [sp, #0x108]"
+    },
+    {
+      "address": "0xfe1184",
+      "instruction": "ldrb w9, [sp, #0x108]"
+    },
+    {
+      "address": "0xfe11ac",
+      "instruction": "ldrb w10, [sp, #0x108]"
+    },
+    {
+      "address": "0xfe11d0",
+      "instruction": "ldrb w11, [sp, #0x108]"
+    }
+  ],
+  "constructor_defaults": {
+    "affine_mode": 0,
+    "warp_flags": 1,
+    "border_type": 0,
+    "border_scalar": [
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "provided_asset_override_check": {
+    "source": "Companion beauty contract audit of both selected materials/016 Lua, JSON and shader assets; source hashes in EVIDENCE.json",
+    "affine_mode_warp_flags_border_type_mentions": 0,
+    "actual_runtime_property_state_verified": false
+  },
+  "coordinate_cases": 64,
+  "border_cases": 36,
+  "border_results": [
+    {
+      "length": 1,
+      "index": -100,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": -2,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": -1,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": 0,
+      "result": 0
+    },
+    {
+      "length": 1,
+      "index": 1,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": 0,
+      "result": 0
+    },
+    {
+      "length": 1,
+      "index": 1,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": 2,
+      "result": -1
+    },
+    {
+      "length": 1,
+      "index": 100,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": -100,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": -2,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": -1,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": 0,
+      "result": 0
+    },
+    {
+      "length": 2,
+      "index": 1,
+      "result": 1
+    },
+    {
+      "length": 2,
+      "index": 1,
+      "result": 1
+    },
+    {
+      "length": 2,
+      "index": 2,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": 3,
+      "result": -1
+    },
+    {
+      "length": 2,
+      "index": 100,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": -100,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": -2,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": -1,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": 0,
+      "result": 0
+    },
+    {
+      "length": 5,
+      "index": 1,
+      "result": 1
+    },
+    {
+      "length": 5,
+      "index": 4,
+      "result": 4
+    },
+    {
+      "length": 5,
+      "index": 5,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": 6,
+      "result": -1
+    },
+    {
+      "length": 5,
+      "index": 100,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": -100,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": -2,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": -1,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": 0,
+      "result": 0
+    },
+    {
+      "length": 17,
+      "index": 1,
+      "result": 1
+    },
+    {
+      "length": 17,
+      "index": 16,
+      "result": 16
+    },
+    {
+      "length": 17,
+      "index": 17,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": 18,
+      "result": -1
+    },
+    {
+      "length": 17,
+      "index": 100,
+      "result": -1
+    }
+  ],
+  "coordinate_formula": {
+    "inverse_matrix": "I = inverse(source_to_crop)",
+    "Ax": "round_even(1024*I00*x)",
+    "Ay": "round_even(1024*I10*x)",
+    "X0": "round_even(1024*(I01*y+I02))+16",
+    "Y0": "round_even(1024*(I11*y+I12))+16",
+    "integer_xy": "((Ax+X0)>>10,(Ay+Y0)>>10), saturating int16 storage",
+    "fraction_xy": "((((Ax+X0)>>5)&31)/32,(((Ay+Y0)>>5)&31)/32)"
+  },
+  "limits": [
+    "Only specified original ARM64 coordinate slices and constant-border indexing executed. No complete native warp, Android, face detector or GPU shader executed.",
+    "Synthetic coordinates remain inside int16 range; native saturation is shown statically and is outside these numerical cases.",
+    "CPU crop uses integer destination pixel centers and quantized 1/32 fractions. Continuous high-precision bilinear sampling is an intentional replacement, not bitwise original-image parity.",
+    "GPU projection NDC/UV half-pixel conventions are separate and not established by this crop proof."
+  ]
+}

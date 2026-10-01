@@ -1,0 +1,58 @@
+{
+  "checked_utc_date": "2026-10-01",
+  "android_apis": [
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaCodecInfo.CodecCapabilities#COLOR_FormatYUVP010",
+      "finding": "COLOR_FormatYUVP010 is 10-bit 4:2:0 semiplanar, little-endian 16-bit words with 10 MSB data, intended for Image input."
+    },
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaCodec#getInputImage(int)",
+      "finding": "Returns writable raw input Image. Calling getInputImage invalidates previously returned ByteBuffer/Image views for that index. Adapter records capacity before acquiring Image."
+    },
+    {
+      "url": "https://developer.android.com/reference/android/graphics/ImageFormat#YCBCR_P010",
+      "finding": "P010 format is 54; low six bits of each 16-bit little-endian word are zero."
+    },
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaCodecInfo#isHardwareAccelerated()",
+      "finding": "Hardware acceleration is a manufacturer-supplied attribute, not a tested correctness or fidelity guarantee."
+    },
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaFormat",
+      "finding": "Encoder config explicitly sets BT2020, HLG, full/limited range, HEVC profile and P010 color format."
+    }
+  ],
+  "hevc_syntax": {
+    "url": "https://www.itu.int/rec/T-REC-H.265-202601-I/en",
+    "sections": ["7.3.2.2 sequence parameter set syntax", "E.2.1 VUI syntax"],
+    "implementation_scope": "Bounded single-layer Main10 contract inspection through VUI colour description, not a full decoder or ISO certification."
+  },
+  "androidx_heifwriter": {
+    "version": "1.2.0-beta01",
+    "url": "https://dl.google.com/dl/android/maven2/androidx/heifwriter/heifwriter/1.2.0-beta01/heifwriter-1.2.0-beta01-sources.jar",
+    "source_jar_sha256": "5212f3f9901707514ed0b88c6529ac79e4214ac23719471d5d3da5d8dcbb8f84",
+    "source_member": "androidx/heifwriter/HeifEncoder.java",
+    "member_sha256": "e192e224982d3af19c4e3e9cb43b91bae529383cdbc40323ddf262f4060d2f6b",
+    "finding": "HeifEncoder constructor and finishSettingUpEncoder both pass useBitDepth10=false. AVIF options do not establish HEIF 10-bit support."
+  },
+  "libultrahdr": [
+    {
+      "version": "v2.0.2",
+      "commit": "e5f5a022fe96fc4dc2ee35c19f733a50df807abe",
+      "url": "https://codeload.github.com/google/libultrahdr/tar.gz/e5f5a022fe96fc4dc2ee35c19f733a50df807abe",
+      "archive_sha256": "5a7b6347a4a32c6936b81392cd6394250649380202f86c8214042aa645cc385c",
+      "source_member": "lib/src/heifultrahdr.cpp",
+      "member_sha256": "748182b1c74a82847598bf5429d7a485f97a044fd4ff113cb685490ae5c72e88",
+      "finding": "fill_img_plane allocates bitDepth=8 and copies width bytes per row for HEIF base/gainmap plane calls."
+    },
+    {
+      "version": "main snapshot",
+      "commit": "66821e0a261aa3a06c0e7c889f52eced52850be1",
+      "url": "https://codeload.github.com/google/libultrahdr/tar.gz/66821e0a261aa3a06c0e7c889f52eced52850be1",
+      "archive_sha256": "b8979c597df7ef13d9b0ffb18f04fb2fe5c29ea6e57b5bcec81a1e0cb64862c8",
+      "source_member": "lib/src/heifultrahdr.cpp",
+      "member_sha256": "14ae8ef7e807ee4a31a04b759bdc4e85c10fdd2275a292f777f75994765411c2",
+      "finding": "The inspected main snapshot retains 8-bit fill_img_plane; no claim about future commits."
+    }
+  ]
+}

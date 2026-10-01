@@ -1,5 +1,5 @@
 {
-  "status": "tested_development_components_with_two_actual_model_replays",
+  "status": "tested_development_components_with_real_models_and_fullimage_projection",
   "complete_requested_beauty_hdr_pipeline": false,
   "source_repository": "hiro191u3n2/hiro-morphe-patches",
   "source_branch": "work/ulike-hdr-core-20261001",
@@ -206,5 +206,74 @@
     "native_pixel_parity": false,
     "hdr_preservation": false,
     "android_integration": false
+  },
+  "fullimage_component": {
+    "scope": "supplied-landmark SDR neural component with actual models and SHA-pinned masks",
+    "report": "beauty_contract/QA_FULL_IMAGE.json",
+    "independent_review": "beauty_contract/INDEPENDENT_REVIEW_FULL_IMAGE.json",
+    "independent_math_assertions": 350,
+    "max_abs_scalar_reference_error": 2.220446049250313e-16,
+    "actual_models": 2,
+    "model_input_width_height": [
+      256,
+      256
+    ],
+    "tested_host_projection_width_height": [
+      [
+        4080,
+        3060
+      ],
+      [
+        5712,
+        4284
+      ]
+    ],
+    "preserves_input_dimensions": true,
+    "native_high_resolution_camera_input_verified": false,
+    "native_gpu_pixel_parity": false,
+    "full_style_complete": false,
+    "face_detection": false,
+    "hdr_preservation": false,
+    "android_integration": false,
+    "runtime_startup_telemetry_optout_required": "ORT_DISABLE_TELEMETRY=1"
+  },
+  "standalone_android_capture": {
+    "scope": "one-output API34+ P010/HLG10/BT2020_HLG source with timestamp/provenance ownership",
+    "author_host_assertions": 45,
+    "independent_host_assertions": 1132,
+    "sdk36_compile": "PASS",
+    "report": "android_capture/QA_CAPTURE.json",
+    "independent_review": "android_capture/INDEPENDENT_REVIEW.json",
+    "device_execution": false,
+    "ulike_integration": false,
+    "preview_3a_all_modes_or_speed_improvements": false
+  },
+  "android_tensor_runtime": {
+    "scope": "caller-owned pinned models to Java ONNX/FP32 tensor execution",
+    "report": "android_model_runtime/QA_RUNTIME.json",
+    "independent_review": "android_model_runtime/INDEPENDENT_REVIEW.json",
+    "sdk36_compile": "PASS",
+    "d8_min_api": 26,
+    "host_java_matches_python_fixtures": 6,
+    "independent_tensor_values_compared": 40809984,
+    "independent_guard_checks": 61,
+    "startup_telemetry_optout": true,
+    "android_device_execution": false,
+    "app_integration": false,
+    "whole_image_processing": false,
+    "hdr_safe_model_claimed": false
+  },
+  "android_encoder_boundary": {
+    "scope": "MediaCodec P010/Main10 wrapper plus strict HEVC SPS/VUI inspection",
+    "report": "android_encoder/QA_ANDROID_ENCODER.json",
+    "independent_review": "android_encoder/review/INDEPENDENT_REVIEW.json",
+    "sdk36_compile": "PASS",
+    "author_checks": 2392,
+    "independent_checks": 3425,
+    "actual_host_main10_fixtures_decoded": true,
+    "device_encoder_execution": false,
+    "all_modes_or_stock_encoder_equivalence": false,
+    "ulike_setting_added": false,
+    "heif_or_gainmap_in_this_module": false
   }
 }

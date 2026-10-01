@@ -1,0 +1,45 @@
+{
+  "status": "PASS_HOST_AND_REAL_SDK_COMPILE_ONLY",
+  "date_utc": "2026-10-01",
+  "host_assertions": 45,
+  "host_coverage": [
+    "both image/result arrival orders",
+    "request object identity",
+    "exact sensor timestamp matching",
+    "duplicate Image closes both owners",
+    "duplicate/invalid result abort",
+    "late callback rejected",
+    "cancel/close idempotence",
+    "close exception clears ownership",
+    "native dimension and allocation budget guard",
+    "HLG profile constraints",
+    "explicit display rotation bounds"
+  ],
+  "android_sdk_compile": {
+    "api": 36,
+    "android_jar_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "java": 21,
+    "status": "PASS",
+    "executed_on_android": false
+  },
+  "source_sha256": {
+    "README.md": "cafa893b0e1f797ea711d077c0050e5042357fe1331f9c13419d9911a909b73e",
+    "STOCK_BOUNDARY_AUDIT.json": "ed76179cf4e8f93d5acd8ff16423a0eee0386d7a761b9eb3ef0e92733d492fa7",
+    "src/android/java/com/hiro/ulike/hdr/capture/android/HlgStillSource.java": "4bdf8414cd2dbf6e043e9fc794e0c7fad766594183d05198cf9490b6858f5f1a",
+    "src/main/java/com/hiro/ulike/hdr/capture/CapturePolicy.java": "a7d682dd2b168efe598a11c89c6d0f9aace4dbd6210960113adda0d05c5908ca",
+    "src/main/java/com/hiro/ulike/hdr/capture/StillJoin.java": "adf4929109861956c96bf7f685c8dbf6e99c9f695c2511161ce9abf9be799a13",
+    "src/test/java/com/hiro/ulike/hdr/capture/CaptureBoundaryTest.java": "a3d249246ef1981edc9d88ee4e25116149ff0e3d4d56df7b36551ff1afe96a8f",
+    "test.sh": "6d29449adfb08392d90b662ed77abde57992afdd6f3aa9a9723bfd966bc1d8a3"
+  },
+  "not_verified": [
+    "HAL session support on SM-S948Q",
+    "simultaneous preview output",
+    "actual P010 Image delivery and dataspace",
+    "actual sensor/physical crop and orientation metadata",
+    "device memory budget and latency",
+    "all lens/mode behavior",
+    "integration into ULike",
+    "beauty inference/face analysis/HDR encoding/gainmap after capture"
+  ],
+  "integrated_into_release": false
+}

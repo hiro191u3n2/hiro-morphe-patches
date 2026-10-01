@@ -1,0 +1,86 @@
+{
+  "status": "PASS",
+  "android_device_executed": false,
+  "heif_mux_or_gainmap_implemented": false,
+  "sdk_jar_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/encoder/AndroidMain10Encoder.java": "81047e91f23b2706e3cba783f0af7884475ec26cb930c5d42de1e8a58144ff2a",
+    "src/main/java/com/hiro/ulike/hdr/encoder/EncoderChoice.java": "a091776de8b6547062566eb11251add16833cdd442da32e8cdfbbf9e7f22ad74",
+    "src/main/java/com/hiro/ulike/hdr/encoder/HevcProof.java": "b58692181eade676535fe4fd5d3ef35b1424f4a5caa7b4b376a133a4ed263942",
+    "src/main/java/com/hiro/ulike/hdr/encoder/P010Frame.java": "93a27ad4826dcee50a82b6625a4c6fd51653c961f714a067e606a79dfd257664"
+  },
+  "fixtures": {
+    "hlg_limited": {
+      "sha256": "c5421ce7464c32dfa69f7ec15bbfe9f5b7c4aee08f0ab571079cca335ae0aacf",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "expected_hlg_accept": true
+    },
+    "hlg_full": {
+      "sha256": "e3f0d4ad3d27fba964946c2469320171dda85ff5b55f850dae581808fdc99c94",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "expected_hlg_accept": true
+    },
+    "sdr8": {
+      "sha256": "db2d5f70d80e21434305b92729f7b3ecc9c32c918ee82d38eb4bbec2c37b3805",
+      "ffprobe": {
+        "profile": "Main",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "expected_hlg_accept": false
+    },
+    "pq10": {
+      "sha256": "367687973c1a81f601fa8d8c8e40bd61aa7efd6b9c4cd0ba7278e71610fc93e5",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "smpte2084",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "expected_hlg_accept": false
+    }
+  },
+  "android_sdk_compile": "PASS",
+  "java_checks": {
+    "checks": 2392,
+    "status": "PASS",
+    "android_device_executed": false
+  },
+  "limits": [
+    "No Android MediaCodec enumeration, configure, input, output or hardware execution was performed.",
+    "SPS/VUI contract parsing is not a complete HEVC decoder or a precision/fidelity proof.",
+    "No HEIF mux, gainmap, processed RGB-to-HLG conversion, app hook or UI preference was added.",
+    "HEVC VBR is lossy. Hardware designation is a manufacturer report."
+  ]
+}

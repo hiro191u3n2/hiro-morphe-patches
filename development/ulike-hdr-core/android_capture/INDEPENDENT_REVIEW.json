@@ -1,0 +1,39 @@
+{
+  "status": "PASS_INDEPENDENT_CAPTURE_SOURCE_REVIEW",
+  "scope": "Standalone serialized single-output API34+ P010/HLG capture source, not ULike integration or phone execution",
+  "reviewer": "root",
+  "source_sha256": {
+    "README.md": "cafa893b0e1f797ea711d077c0050e5042357fe1331f9c13419d9911a909b73e",
+    "STOCK_BOUNDARY_AUDIT.json": "ed76179cf4e8f93d5acd8ff16423a0eee0386d7a761b9eb3ef0e92733d492fa7",
+    "src/android/java/com/hiro/ulike/hdr/capture/android/HlgStillSource.java": "4bdf8414cd2dbf6e043e9fc794e0c7fad766594183d05198cf9490b6858f5f1a",
+    "src/main/java/com/hiro/ulike/hdr/capture/CapturePolicy.java": "a7d682dd2b168efe598a11c89c6d0f9aace4dbd6210960113adda0d05c5908ca",
+    "src/main/java/com/hiro/ulike/hdr/capture/StillJoin.java": "adf4929109861956c96bf7f685c8dbf6e99c9f695c2511161ce9abf9be799a13",
+    "src/test/java/com/hiro/ulike/hdr/capture/CaptureBoundaryTest.java": "a3d249246ef1981edc9d88ee4e25116149ff0e3d4d56df7b36551ff1afe96a8f",
+    "test.sh": "6d29449adfb08392d90b662ed77abde57992afdd6f3aa9a9723bfd966bc1d8a3"
+  },
+  "author_host_assertions_passed": 45,
+  "independent_ownership_payload_assertions": 1132,
+  "independent_test_sha256": "6c1e033394c6c2d2f3349097118c527aa6126cf5a80eaf9e63e273184912d857",
+  "real_sdk36_compile": "PASS",
+  "android_jar_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+  "static_review": [
+    "Single-output source requires exclusive borrowed camera ownership and documents replacing previous session",
+    "Physical route membership plus capabilities, exact-size budget and exact session support are checked",
+    "Output sensor timestamps and no readout timestamp request are explicit; submitted request object and actual sensor timestamps must match",
+    "All public lifecycle and callbacks serialize on the selected Handler",
+    "Pair closes Image after copying owned P010 samples; failure/cancel/timeout closes retained ownership",
+    "Actual color/range and image crop verified by hdr_input; no JPEG/NV21 fallback",
+    "Applied no-rotation/mirror separated from intended display rotation in immutable provenance",
+    "Cleanup individually attempts listener removal, session close and reader close, preserving cleanup exceptions as suppressed; final changed source recompiled successfully"
+  ],
+  "limits": [
+    "Android framework was compiled against SDK36, not executed on a device",
+    "No 3A convergence, preview, focus-speed optimization, all-mode support, lens-switch timing or ULike hook",
+    "Timeout cancels software pairing; it does not prove hardware abortion or bounded HAL call latency",
+    "Late prior Images can cause a current shot rejection, but cannot pass unequal sensor timestamp validation",
+    "Stock bytecode observations in STOCK_BOUNDARY_AUDIT are author evidence, not independently re-disassembled in this review",
+    "Native sensor resolution and image color behavior need actual capture evidence"
+  ],
+  "device_execution": false,
+  "full_pipeline_complete": false
+}

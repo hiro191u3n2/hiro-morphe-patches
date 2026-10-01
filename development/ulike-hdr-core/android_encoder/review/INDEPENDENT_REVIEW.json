@@ -1,0 +1,46 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "android_capture_continue",
+  "date_utc": "2026-10-01",
+  "reviewed_source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/encoder/AndroidMain10Encoder.java": "81047e91f23b2706e3cba783f0af7884475ec26cb930c5d42de1e8a58144ff2a",
+    "src/main/java/com/hiro/ulike/hdr/encoder/EncoderChoice.java": "a091776de8b6547062566eb11251add16833cdd442da32e8cdfbbf9e7f22ad74",
+    "src/main/java/com/hiro/ulike/hdr/encoder/HevcProof.java": "b58692181eade676535fe4fd5d3ef35b1424f4a5caa7b4b376a133a4ed263942",
+    "src/main/java/com/hiro/ulike/hdr/encoder/P010Frame.java": "93a27ad4826dcee50a82b6625a4c6fd51653c961f714a067e606a79dfd257664"
+  },
+  "author_suite_rerun": {
+    "status": "PASS",
+    "checks": 2392,
+    "real_sdk_api": 36
+  },
+  "additional_independent_checks": 3425,
+  "additional_coverage": [
+    "Distinct nonzero Y/Cb/Cr samples on 2x2,4x4,34x6,64x32 layouts",
+    "Separate and shared plane views with nonzero position and padded row stride",
+    "All sample values preserved with no source/ByteBuffer position mutation",
+    "Overlapping chroma row and mismatched row stride reject before any write",
+    "66x34 actual x265 Main10 HLG stream parses cropped dimensions through SPS conformance window",
+    "Independent ffprobe and FFmpeg decode confirm 66x34 HLG Main10 host fixture"
+  ],
+  "resolved_findings": [
+    {
+      "severity": "high",
+      "issue": "Chroma rowStride=4*chromaWidth-2 allowed aliased Cb/Cr rows to overlap",
+      "resolution": "Author now requires physical chroma row width and equal Cb/Cr strides before writes; author regression and independent rejection tests pass."
+    }
+  ],
+  "static_review": [
+    "Input ByteBuffer discarded after saving capacity before getInputImage invalidates it",
+    "MediaCodec input Image closed in finally; output buffers released in finally; codec released on failure",
+    "Dequeue loop checks interrupt and 30 second deadline",
+    "Output color fields and bounded Main10 SPS/VUI/header contract verified before returning bytes",
+    "No unadvertised P010/Main10, SDR/8-bit or precision fallback"
+  ],
+  "limits": [
+    "MediaCodec configure/start/stop/release native calls are not independently time-bounded.",
+    "SPS parser does not validate complete coded slices, PPS/VPS reference linkage, all trailing extensions, or decode fidelity.",
+    "No Android device or codec execution; no actual hardware performance, sample precision, or Samsung stock encoder comparison.",
+    "No Android HEIF/gainmap/app integration included in reviewed encoder module."
+  ],
+  "fixture_sha256": "4a76f58bd6bada1e8fdcdcdf79fce6010e72ce2e85166eebe55185cc3ad65c4c"
+}

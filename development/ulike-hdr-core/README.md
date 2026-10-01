@@ -68,6 +68,27 @@ every rendering pass has that resolution.
   Corresponding landmarks and sampled masks are external inputs. This component
   operates in an explicitly declared SDR domain and does not turn an SDR-trained
   model into an HDR beauty engine.
+  Its later `fullimage_component.py` adds model-specific 106-point alignment,
+  continuous crop sampling and masked projection into an unchanged-size image.
+  Both real models and actual supplied masks have passed synthetic full-image
+  tests. The model crop remains 256×256; projection into 12.5/24.5 MP host images
+  does not establish native camera resolution or model detail at that size.
+  Geometry and mask orientation are still explicit caller inputs.
+* `android_capture`: standalone API 34+ Camera2 P010/HLG10 source, with explicit
+  BT.2020 HLG color, sensor timestamp pairing, physical route validation and
+  owned image samples. It compiled against API 36, but has no ULike hook, preview,
+  3A convergence controller or actual phone capture verification.
+* `android_model_runtime`: Java versions of the pinned model loaders, strict
+  graph parser and ONNX generator, with an ORT Android FP32 tensor wrapper.
+  SDK 36 compilation and D8 conversion pass. Host Java results match the Python
+  reconstruction for both models; independent comparison covers 40,809,984
+  intermediate values. Android JNI/device execution and app integration are
+  separate remaining steps. The runtime requires startup telemetry opt-out.
+* `android_encoder`: Android MediaCodec P010 input and HEVC Main10 selection,
+  with named/hardware codec preferences and SPS/VUI validation of actual coded
+  bit depth, HLG, color/range and dimensions. SDK 36 compilation, layout guards
+  and host HEVC fixtures pass. This is not proof of a phone codec or final HEIF
+  output, and the preference is not yet exposed in ULike's settings.
 * `heif_save`: host writer for a 10-bit RGB SDR base, 10-bit RGB gainmap, ISO
   binary metadata and HEIF `tmap` references. Both coded images round-trip through
   independent libheif/libde265 decoding with 1024 levels. It uses HEVC Range
@@ -81,7 +102,10 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
 ## Remaining requirements for the requested complete replacement
 
 1. Complete face detection, landmark/mesh interpretation, skin segmentation,
-   image sampling and the remaining style passes. The relevant bundled dependency
+   native coordinate/orientation correspondence and the remaining style passes.
+   Continuous sampling is implemented for externally supplied geometry, with a
+   declared replacement projection convention rather than native GPU parity.
+   The relevant bundled dependency
    models exist, but their feature-specific loaders and postprocessing are not
    implemented by these two model replays. Confirm the downloaded model hashes
    against the phone's actual cache and compare identical-image reference results.
@@ -92,7 +116,7 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
 3. Implement high-precision processing for those operations and a defined HDR
    extension of effects authored for SDR. The original 8-bit SDK output cannot
    be relabeled as true 10-bit HDR.
-4. Integrate Camera2 P010/HLG sessions, color conversion, processing, memory
+4. Integrate the standalone Camera2 P010/HLG source, color conversion, processing, memory
    ownership, lens switching and capture completion with the existing app.
 5. Integrate and validate a JPEG-free 10-bit HEIF writer and gainmap metadata,
    then verify decoding and display on the actual phone.

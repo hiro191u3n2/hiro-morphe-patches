@@ -1,0 +1,51 @@
+{
+  "status": "PASS_BOUNDED_NATIVE_PURITY_SIMILARITY",
+  "library_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "source_sha256": "ade19ac117b08285ce081b3dc51888f12f7a1bb75d93ea5063f2e722d5a14679",
+  "emulator": "unicorn 2.1.4",
+  "native_entry": "0xca02f8",
+  "native_stop_before": "0xca0370",
+  "helpers": [
+    "0xe5222c",
+    "0xe4a12c",
+    "0xe771dc"
+  ],
+  "cases": [
+    {
+      "case": 0,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 2.0805238087895361e-10
+    },
+    {
+      "case": 1,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 3.061977673635141e-07
+    },
+    {
+      "case": 2,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 2.3748778443799523e-07
+    },
+    {
+      "case": 3,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 3.5149991861604946e-07
+    },
+    {
+      "case": 4,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 3.586776100572564e-07
+    },
+    {
+      "case": 5,
+      "points": 106,
+      "max_abs_matrix_error_vs_float64": 1.7943102337270034e-08
+    }
+  ],
+  "max_abs_matrix_error": 3.586776100572564e-07,
+  "contract": "The executed block consumes centered source and target arrays plus supplied means, and builds a source-to-target similarity matrix [a,-b,tx;b,a,ty].",
+  "limits": [
+    "Only this arithmetic block runs; inputs are synthetic already-centered corresponding points.",
+    "Face selection, mean accumulation, crop sampling, matrix multiplication, full model inference and HDR are not validated by this bounded test."
+  ]
+}

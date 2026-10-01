@@ -1,0 +1,155 @@
+{
+  "status": "PASS_BOTH_REAL_MODELS_SUPPLIED_LANDMARK_COMPONENT",
+  "source": "synthetic full-size SDR image with supplied synthetic106geometry and pinned real stylemask",
+  "geometry": "verified style-specific similarity/margin/offset matrix",
+  "sampler": "continuous integer-lattice HQ; original CPU1/32fractions not reproduced",
+  "projection": "explicit new integer-lattice convention; original GPU halfpixel parity unverified",
+  "template_bytes_identical": true,
+  "results": [
+    {
+      "style": "natural_blush",
+      "status": "PASS_REAL_MODEL_FULL_SIZE_SDR_COMPONENT",
+      "image_shape": [
+        384,
+        512,
+        3
+      ],
+      "output_precision": "float64",
+      "model_sha256": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+      "mask_asset_sha256": "e438c9ec4336a387a0bba52982b4259fb9bff3cde60b7695b6efbc6451ef45c1",
+      "mask_orientation": "explicit PNG-first-row to crop-upper-row; native upload parity unverified",
+      "generated_crop_sha256": "f8b924c5770196a15694bf6f0c658f3d47f0c22f0ee1a18aac30cc41bc437d3e",
+      "output_sha256": "83b56c59ef1869d7c697c739db5f87bd4834301db01c849750a25c7a4653ff46",
+      "outside_crop_samples_exactly_unchanged": 141528,
+      "changed_inside_samples": 53411,
+      "source_to_crop": [
+        [
+          1.0875816921436363,
+          0.0836601301648951,
+          -136.3660113210685
+        ],
+        [
+          -0.0836601301648951,
+          1.0875816921436363,
+          -22.647057726492307
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_pixel_parity": false,
+      "complete_style": false,
+      "hdr_preserved": false
+    },
+    {
+      "style": "purity2",
+      "status": "PASS_REAL_MODEL_FULL_SIZE_SDR_COMPONENT",
+      "image_shape": [
+        384,
+        512,
+        3
+      ],
+      "output_precision": "float64",
+      "model_sha256": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+      "mask_asset_sha256": "e0d9a8ccce809ec53f3691b495f65fa59eda516844c0f8a77f9be80cfd035067",
+      "mask_orientation": "explicit PNG-first-row to crop-upper-row; native upload parity unverified",
+      "generated_crop_sha256": "544b46add804708e7139d9c234d744d6cb626de36e4415289b6531fff76f0076",
+      "output_sha256": "2860967b25e4643a1625030439e3536b616bc0a5312705f55be5281da562fe6e",
+      "outside_crop_samples_exactly_unchanged": 163288,
+      "changed_inside_samples": 33008,
+      "source_to_crop": [
+        [
+          1.3983193217777834,
+          0.10756302475213719,
+          -211.8991582167535
+        ],
+        [
+          -0.10756302475213719,
+          1.3983193217777834,
+          -84.97478900923164
+        ],
+        [
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "native_pixel_parity": false,
+      "complete_style": false,
+      "hdr_preserved": false
+    }
+  ],
+  "large_raster_results": [
+    {
+      "style": "natural_blush",
+      "shape": [
+        3060,
+        4080,
+        3
+      ],
+      "status": "PASS_FULL_HOST_PROJECTION",
+      "allocated_output_bytes": 299635200,
+      "outside_pixels_exactly_unchanged": 12419264,
+      "changed_inside_pixels": 63107,
+      "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+      "native_camera_capture": false,
+      "android_memory_test": false
+    },
+    {
+      "style": "natural_blush",
+      "shape": [
+        4284,
+        5712,
+        3
+      ],
+      "status": "PASS_FULL_HOST_PROJECTION",
+      "allocated_output_bytes": 587284992,
+      "outside_pixels_exactly_unchanged": 24404672,
+      "changed_inside_pixels": 63107,
+      "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+      "native_camera_capture": false,
+      "android_memory_test": false
+    },
+    {
+      "style": "purity2",
+      "shape": [
+        3060,
+        4080,
+        3
+      ],
+      "status": "PASS_FULL_HOST_PROJECTION",
+      "allocated_output_bytes": 299635200,
+      "outside_pixels_exactly_unchanged": 12419264,
+      "changed_inside_pixels": 64921,
+      "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+      "native_camera_capture": false,
+      "android_memory_test": false
+    },
+    {
+      "style": "purity2",
+      "shape": [
+        4284,
+        5712,
+        3
+      ],
+      "status": "PASS_FULL_HOST_PROJECTION",
+      "allocated_output_bytes": 587284992,
+      "outside_pixels_exactly_unchanged": 24404672,
+      "changed_inside_pixels": 64921,
+      "input": "broadcast synthetic RGB values; actual model generated crop and pinned style mask",
+      "native_camera_capture": false,
+      "android_memory_test": false
+    }
+  ],
+  "host_budget": {
+    "max_pixels": 25000000,
+    "max_output_bytes": 600000000,
+    "max_sample_points": 262144,
+    "total_process_memory_limited": false
+  },
+  "android_integrated": false,
+  "full_style_complete": false,
+  "hdr_preserved": false
+}

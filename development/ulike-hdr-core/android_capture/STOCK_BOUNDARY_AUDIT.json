@@ -1,0 +1,31 @@
+{
+  "status": "PASS_STATIC_STOCK_BOUNDARY_AUDIT",
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "classes3_dex_sha256": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0",
+  "methods": [
+    {
+      "signature": "Li/s/a/w/d0/a;->J0()V",
+      "code_offset": 4378244,
+      "instruction_count": 40
+    },
+    {
+      "signature": "Li/s/a/w/d0/a;->Q0(Landroid/media/Image; Landroid/hardware/camera2/TotalCaptureResult;)V",
+      "code_offset": 4378652,
+      "instruction_count": 107
+    },
+    {
+      "signature": "Li/s/a/w/d0/a;->s(Ljava/util/List; Landroid/hardware/camera2/CameraCaptureSession$StateCallback; Landroid/os/Handler;)V",
+      "code_offset": 4377416,
+      "instruction_count": 82
+    }
+  ],
+  "findings": [
+    "s(List,StateCallback,Handler) constructs OutputConfigurations and SessionConfiguration on its API28+ branch; also retains a legacy surface-list createCaptureSession branch.",
+    "J0() creates a request, adds the still ImageReader surface and submits through the camera wrapper.",
+    "Q0(Image,TotalCaptureResult) distinguishes JPEG format 256 and format 35. Its format35 branch allocates width*height*3/2 bytes and converts to PIXEL_FORMAT_NV21 before onPictureTaken.",
+    "A P010 source must take ownership before this Q0 conversion route; relabeling P010 as YUV420 or passing it to the old NV21 consumer would not preserve 10 bits."
+  ],
+  "changes_to_stock_apk": false,
+  "complete_disassembly_published": false,
+  "installed_v165_reaudit": false
+}

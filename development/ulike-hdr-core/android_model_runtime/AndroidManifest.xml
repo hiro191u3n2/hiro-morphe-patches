@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merge into the application's higher-priority manifest when using ORT Android 1.30.0.
+     The runtime wrapper disables ORT session telemetry; this additionally prevents
+     the AAR's ContentProvider from creating its HTTP telemetry client at app startup.
+     This fragment intentionally leaves the application's other permissions intact. -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools">
+    <application>
+        <provider android:name="ai.onnxruntime.TelemetryInitializer"
+                  tools:node="remove" />
+    </application>
+</manifest>
