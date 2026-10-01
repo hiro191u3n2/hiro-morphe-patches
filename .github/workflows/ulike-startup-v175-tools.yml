@@ -1,0 +1,29 @@
+name: ULike startup 1.7.5 analysis tools
+on:
+  push:
+    branches: ['work/ulike-startup-af-v173']
+    paths: ['.github/workflows/ulike-startup-v175-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Fetch pinned compiler and analysis tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8-8.3.37.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.8/asm-9.8.jar -o tools/asm-9.8.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          cp "$SDK/platforms/android-36/android.jar" tools/android.jar
+          cd tools
+          printf '%s\n' '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  r8-8.3.37.jar' '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  morphe-1.16.jar' '876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051  asm-9.8.jar' 'd9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a  android.jar' | sha256sum -c -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-v175-pinned-tools
+          path: tools/*
+          retention-days: 3
