@@ -1,0 +1,170 @@
+{
+  "status": "PASS_INDEPENDENT_GAINMAP_SAVE_REVIEW",
+  "sdk36_compile": true,
+  "d8_min_api": 33,
+  "compile_contract": "javac --release 8 -cp actual SDK36 android.jar, then D8 --lib actual SDK36 android.jar; not SDK jar alone as javac bootclasspath",
+  "android_device_execution": false,
+  "automatic_tmap_display": false,
+  "full_hdr_beauty_pipeline": false,
+  "independent_adversarial_review": {
+    "independent_checks": 1568,
+    "original_sdr_mutation_rejected": true,
+    "actually_wrong_encoded_map_rejected": true
+  },
+  "author_java_checks_rerun": 1063,
+  "files": {
+    "black": {
+      "file_sha256": "d57d531817ecae9e6e1bc53e79647463bb1c54cd82ead03782fc001530a163e3",
+      "official_iso_payload_sha256": "99e0846bda8babcba65be093ac3604affc97a4f8ee0912858bd282348f07899a",
+      "official_iso_metadata_equal": true,
+      "actual_native_plane_depths": [
+        10,
+        10
+      ],
+      "independent_decoder": "1.23.2",
+      "unique_base_rgb_codes": 1,
+      "unique_map_rgb_codes": 1,
+      "independently_decoded_reconstruction_metrics": {
+        "max_sdr_error": 0.0,
+        "max_hdr_error": 0.0,
+        "hdr_rmse": 0.0,
+        "samples": 9216
+      }
+    },
+    "changed_base": {
+      "file_sha256": "e767c9c3936de7324b52f5d3db1511e651ef17939115eecb5d2ae9191d06d87a",
+      "official_iso_payload_sha256": "2b883f18d161d5caeafc715a13df21df0115e3c9ab64d796a0300b56a4081f0a",
+      "official_iso_metadata_equal": true,
+      "actual_native_plane_depths": [
+        10,
+        10
+      ],
+      "independent_decoder": "1.23.2",
+      "unique_base_rgb_codes": 406,
+      "unique_map_rgb_codes": 927,
+      "independently_decoded_reconstruction_metrics": {
+        "max_sdr_error": 0.052473180813141895,
+        "max_hdr_error": 0.0051626571070779725,
+        "hdr_rmse": 0.0011270761448080179,
+        "samples": 9216
+      }
+    },
+    "edited_color": {
+      "file_sha256": "51f8a4a3c3cdc1f8c72afb6df4b87dd3a3636a9d704f39c11e42c995940c2af0",
+      "official_iso_payload_sha256": "3d7b11a4a2a469d8da0f388cf309b30087725693d682a6188f7773a2fe7c4ccc",
+      "official_iso_metadata_equal": true,
+      "actual_native_plane_depths": [
+        10,
+        10
+      ],
+      "independent_decoder": "1.23.2",
+      "unique_base_rgb_codes": 670,
+      "unique_map_rgb_codes": 947,
+      "independently_decoded_reconstruction_metrics": {
+        "max_sdr_error": 0.002320377037154875,
+        "max_hdr_error": 0.007444867824945245,
+        "hdr_rmse": 0.0013306864790646566,
+        "samples": 9216
+      }
+    },
+    "independent": {
+      "file_sha256": "e034d8caa5aa93a6d93c3aa18ad39c4ebca842343957b6db384fe319f5a042e5",
+      "official_iso_payload_sha256": "0e2adcfdf82f0b2b03af72a8617f4333ab540a11f1da3b9555435f14021173c7",
+      "official_iso_metadata_equal": true,
+      "actual_native_plane_depths": [
+        10,
+        10
+      ],
+      "independent_decoder": "1.23.2",
+      "unique_base_rgb_codes": 94,
+      "unique_map_rgb_codes": 241
+    },
+    "smooth": {
+      "file_sha256": "f8f80217c19acac977271ecfb92093da44d9b5e525b37ced97cdc21b76178fdb",
+      "official_iso_payload_sha256": "d8d50183ff4dbf951f0e59d4815313fdc156b814b8a16388e56e8dda2dfad339",
+      "official_iso_metadata_equal": true,
+      "actual_native_plane_depths": [
+        10,
+        10
+      ],
+      "independent_decoder": "1.23.2",
+      "unique_base_rgb_codes": 406,
+      "unique_map_rgb_codes": 933,
+      "independently_decoded_reconstruction_metrics": {
+        "max_sdr_error": 0.0007693589036315007,
+        "max_hdr_error": 0.004783064005008608,
+        "hdr_rmse": 0.0010057169411012634,
+        "samples": 9216
+      }
+    }
+  },
+  "reviewed_file_sha256": {
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/AndroidGainmapCodec.java": "5775745eab934eba86a9db8508a80356c6f6fa4d909f6d4664b0446f125fe07b",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/GainmapContainer.java": "5a5c998d234c55139fdec8e4e3a14ccba0a03b80c9bf2ed53cadd622975267b8",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/GainmapHevcProof.java": "687f6adcc8c9baa4e211d8ca63504c77c4f32e78df4dcb6f4d53b04e207b4852",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/GainmapMath.java": "af2d05a01db33080663d9e79dc8d169771d31827d815ea266c9fa7fd97299406",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/GainmapSave.java": "e28ebf65e37ec78457fa4fcf447e6762260060080af32248eee49b22c620b042",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/IsoMetadata.java": "1c67a9ec6811ee7a4bb9e453b63d73a49af6fbcebd6bc6a61f2fcbcfed4bdb4e",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/ParameterSets.java": "f06782f8c4055c1a754f4bb7e81c879bb47cca8b0e1446057c3ca565695307d8",
+    "android_gainmap_save/src/main/java/com/hiro/ulike/hdr/gainmap/Yuv42010.java": "9cc9d38ff58aad4ddb34538e88fa4aa2fe24a5d668b39aecc8ed229ca1f4497c",
+    "android_gainmap_codec/src/main/java/com/hiro/ulike/hdr/gainmapcodec/CodecSelection.java": "7b1d9c1c443566b47fa5fc93dc1b676e0e611e70d0eeaca054a3d4b027224138",
+    "android_gainmap_codec/src/main/java/com/hiro/ulike/hdr/gainmapcodec/ColorP010.java": "b752e8440012140acad79dc0a4503dc55e8fbe60880fd4d7f2b89aa8c8a0387b",
+    "android_gainmap_codec/src/main/java/com/hiro/ulike/hdr/gainmapcodec/Main10Codec.java": "49cc9f53261ca69c4b72a3f274773cc62f289455c0ddf26a19c8fd99d8a17b12",
+    "android_gainmap_codec/src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleHevcProof.java": "4cc8d4c59eee57ca62145e048861715ed75ddc4031baa2782f972d52adf8c62f",
+    "android_gainmap_codec/src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleParameterSets.java": "0b18c4b07c072d2c7789e25a61104be3f010ee4f1bbdb41b1ca5dca51270f8ec",
+    "android_gainmap_save/src/test/java/com/hiro/ulike/hdr/gainmap/GainmapSaveTest.java": "9ad7901c8cd4fad0a6458b170d4591d7c6dbf0043a46502c5ad84313f05d3b6d",
+    "android_gainmap_save/README.md": "27fed01177fabcff27833c1738534097ba1d00d55467b5196666976c20d28d03",
+    "android_gainmap_save/OFFICIAL_SOURCES.json": "b82141ab197051a2dc194e0361d466b65feb8555a4b0bd6441445454da8f9a76",
+    "android_gainmap_save/inspect_file.py": "8525005912288a103ebdd7f950967bd2e7422c2316173d42a2835063aff94519",
+    "android_gainmap_save/verify.py": "7d94e8124861765fb8de5d4c7de747b48686e53754ab5f33fd578cd5f2564707",
+    "android_gainmap_save/review/GainmapReview.java": "262f73142badd753c1f4d1fbd432ad79999e9c682647cb581128f932d840605d",
+    "android_gainmap_save/review/metadata_reference.cpp": "bd33d457797bdad68919a760a95a163ae2de1a724143f1e53fea931ce2680140",
+    "android_gainmap_save/review/verify_review.py": "b691869d2001956f5e3d685b3919809a6c723244d2a6252e67d117461b5c28e0"
+  },
+  "official_metadata_parser": {
+    "url": "https://github.com/google/libultrahdr/blob/v2.0.2/lib/src/gainmapmetadata.cpp",
+    "source_sha256": "917878bd76baaab94215992759b00146a6e422a854cac9463ee4956dd3fcfa9f",
+    "unchanged_official_source_compiled": true,
+    "header_sha256": "d0a359fd99f546f0b1e16c32bff7c8f1ea9ebd8ede14570e4f5e87ec2f9c650d",
+    "build_only_jpeg_headers": {
+      "url": "https://android.googlesource.com/platform/external/libjpeg-turbo/+/refs/heads/main/",
+      "sha256": {
+        "jconfig.h": "4970b0d896830b5bd72e969690488ce2f7fdd6cd021d7ff74241cb5195056fbd",
+        "jerror.h": "cac7d2a363027412fcc06a993623135fb644c70c250a1f8fc5bf0741255212e4",
+        "jmorecfg.h": "fce3a180e48bb49a5f8f5965a840b34774e7f194a8b3ba9159c7d5d39b347835",
+        "jpeglib.h": "1ea81459ea1b63e662c1546adf6d6882f5e14760b0e05d4fc77f7739a2c2d182"
+      },
+      "jpeg_codec_linked_or_called": false
+    },
+    "validation": "Exact final HEIF item3 metadata parsed by official decoder; all rational values compared"
+  },
+  "resolved_findings": [
+    {
+      "issue": "Original processed SDR not bound before initial encode",
+      "fix": "Original SDR/HDR digest before any encode; final exact-bit comparison added",
+      "independent_regression": "1ULP source mutation after actual SDR encode rejects even within quality bounds"
+    }
+  ],
+  "additional_guards": [
+    "Actual Main10 all1023 wrong numerical map rejected after actual decode",
+    "Source capture/geometry/processing/dimensions mismatch",
+    "Negative/nonfinite/out-of-contract luminance rejection",
+    "Independent gain quantization plus serialized rational rounding error bound",
+    "Original output unchanged on quality failure and temporary files removed",
+    "Owned metadata/digest copies; changed base/HDR input detected; interruption"
+  ],
+  "limitations": [
+    "Fixed display-linear BT2020/203nit-white input is an explicit caller contract, not inferred from captured P010.",
+    "Caller must supply same post-edit HDR/SDR; IDs are assertions; a digest cannot prove artistic or geometric correspondence.",
+    "Sources must remain immutable throughout; arbitrary transient concurrent mutations are outside contract.",
+    "Main10 420 numerical maps are lossy; quality limits cover the explicitly declared nearest-chroma decoder.",
+    "Codec execution remains host x265/FFmpeg; Android MediaCodec and gallery tmap behavior not measured."
+  ],
+  "tool_sha256": {
+    "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "r8-8.3.37.jar": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199",
+    "javac": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+    "java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d"
+  },
+  "command": "python review/verify_review.py --jdk-bin <JDKbin> --android-jar <SDK36android.jar> --r8 <r8-8.3.37.jar> --libultrahdr-source <officialv2.0.2> --jpeg-include <officialAOSPheaders> --report INDEPENDENT_REVIEW.json"
+}

@@ -1,0 +1,368 @@
+{
+  "schema": "ulike-style-pipeline-1",
+  "archives": {
+    "natural": "5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0",
+    "purity": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117"
+  },
+  "passes": [
+    {
+      "pass": "NATURAL_BLUSHER",
+      "authored_uniforms": {
+        "intensity": 0.7860759496688843,
+        "opacity": 1.0,
+        "inputColor": 1.0,
+        "colorR": 0.9490196108818054,
+        "colorG": 0.4627451002597809,
+        "colorB": 0.43921568989753723
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": false,
+      "source_sha256": {
+        "materials/016/AmazingFeature1/xshader/mask_faceuv22995.frag": "21383d6d4700e0de70bb9671f41abacbcf9c4012c531ec379ca46a9a9ac09b84",
+        "materials/016/AmazingFeature1/material/mask_faceuv22995_MATERIAL.material": "c8d35bce1b8122575faa5756ec1312e80100ca251b97b5b697bb7c47de593ecd",
+        "materials/016/AmazingFeature1/image/blusher/blusher000.png": "96e0155e5510c972ec3408bee132a9de657434471adffd5d07e68492b8acc30e",
+        "materials/016/AmazingFeature1/lua/EffectFaceMakeupSystemScript.lua": "2744310a943847735bba3a1c807dcc59cb71ed800d1870a6ba1c227432369df4",
+        "materials/016/AmazingFeature1/main.scene": "cb8f353fda451e4ff9c976023b4f26e8076c41899ec938ff1552cfb3183ba093"
+      }
+    },
+    {
+      "pass": "PURITY_LIPS",
+      "authored_uniforms": {
+        "intensity": 0.5563380122184753,
+        "opacity": 1.0,
+        "inputColor": 1.0,
+        "colorR": 0.9176470637321472,
+        "colorG": 0.5333333611488342,
+        "colorB": 0.5333333611488342
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature1/xshader/lips_keypoint_faceu2996.frag": "6219a8de9943cfbbdb587ee80371522e4f584b796f1bbb4b9ac3ac74da65c185",
+        "materials/016/AmazingFeature1/material/lips_keypoint_faceu2996_MATERIAL.material": "e8da71c8e90cd65484d3d10552180f273491f7d30249ebb3e61d254a5dfb53e8",
+        "materials/016/AmazingFeature1/image/lips2/lips0000.png": "4076382dad4c317090371c76533649d8b0c1fd26cea4346f83a25340ff7472d2",
+        "materials/016/AmazingFeature1/image/lips2/lips0001.png": "c11b664d1c343d835693def63e952997c60a5f54107adfd743ae9155154c03b2",
+        "materials/016/AmazingFeature1/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature1/main.scene": "f38a1c11293cb92ab7441d4be283860e4949ce801bce8da858c77fed9e3b3a8f"
+      }
+    },
+    {
+      "pass": "PURITY_BLUSHER",
+      "authored_uniforms": {
+        "intensity": 0.898592
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": false,
+      "source_sha256": {
+        "materials/016/FaceMakeupV2_byExport2/makeup/blusher.frag": "2fc5e67fab8ae3de9992379493686623e27676b6fbab4c8db8b4d6720d4bf3f2",
+        "materials/016/FaceMakeupV2_byExport2/makeup.json": "be1376abe0e9d7b010f62723b6a1a04b7da578d6d41bb12dc52e5a75d0bab01e",
+        "materials/016/FaceMakeupV2_byExport2/blusher/blusher000.png": "884a451fd67da4939cec26413b10235d15f798b7a5c169f45601f12236a9866a",
+        "materials/016/FaceMakeupV2_byExport2/FaceMakeupModule.lua": "414e3ef606ff8c822ba7ce0a7ee6b0881ae2cbeb75f28daa5e75848151959c76"
+      }
+    },
+    {
+      "pass": "PURITY_FACIAL",
+      "authored_uniforms": {
+        "intensity": 0.6000000238418579,
+        "opacity": 1.0
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": false,
+      "source_sha256": {
+        "materials/016/AmazingFeature3/xshader/mask_faceuv22994.frag": "57495adeee8c409c2d6d8f254a24a51c78d088a24d576a6cb11b7c85f83273b5",
+        "materials/016/AmazingFeature3/material/mask_faceuv22994_MATERIAL.material": "2c8872178543fe68f405b213c7384f0c7ac3be19f2259390397789280ab99dda",
+        "materials/016/AmazingFeature3/image/facialfeatures/facialSeq_000.png": "1809e0fb23f20e4f9a431c4d86b677bdc5e1d9bced56ca06418f07e6e29b724e",
+        "materials/016/AmazingFeature3/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature3/main.scene": "4937b57a1793ce1333dc2c21a03f4c05cfc848b227ac16e0b85a1753aebf8f18"
+      }
+    },
+    {
+      "pass": "PURITY_3D",
+      "authored_uniforms": {
+        "intensity": 0.6070422530174255
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": false,
+      "source_sha256": {
+        "materials/016/3dmakeup4/xshader/makeup.frag": "669fca0f0617af0851255bd1d44a2346e6a2c573b90d1c1411a5db6d75bffa5a",
+        "materials/016/3dmakeup4/material/face.material": "9c838f43f351e0bc0dcfb11da7f63367481b41615f472aa826f0f39dde3637af",
+        "materials/016/3dmakeup4/image/makeup3d_open.png": "f91dbf4cc446b0db5d3af7eb6a314f0d706c087543357751011e2a04f48a5f47",
+        "materials/016/3dmakeup4/lua/Face3DSystem.lua": "f3eb6e2ffeaaebe9e88bdb711e4bee3d4abac3ec02254113150696c9d78e017d",
+        "materials/016/3dmakeup4/main.scene": "01bbfdd85fe12a176aec24c8e50f32514197dfbedea4122f9ff16c9e9eaf2e9c"
+      }
+    },
+    {
+      "pass": "PURITY_EYE_MULTIPLY",
+      "authored_uniforms": {
+        "intensity": 0.4000000059604645,
+        "opacity": 1.0
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature5/xshader/eye_part_faceu2987.frag": "71986ff85a30dec5c06acdad0051d8fe47a0024472d24fab1994df8b97ba3b33",
+        "materials/016/AmazingFeature5/material/eye_part_faceu2987_MATERIAL.material": "8c1cd6d9d84095f84b6b2bece6e4a91d072fab7b6f9f837b3b7972a7325c8b63",
+        "materials/016/AmazingFeature5/image/eye/eye000.png": "5b61215e10abcab2be4e30992d2d7ca7fa9e174ff9b4e5fca95781dd8de67d93",
+        "materials/016/AmazingFeature5/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature5/main.scene": "800cf2f37717263e2a89dd07b86ddacf641ed959b0c02625e7c263dd47bb38e9"
+      }
+    },
+    {
+      "pass": "PURITY_EYE_SCREEN",
+      "authored_uniforms": {
+        "intensity": 0.4000000059604645,
+        "opacity": 1.0
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature5/xshader/eye_part_faceu2988.frag": "f945c5fc57a811ead4e5fddc45143ac16dcc487dc63b124d07aec1cec971ca14",
+        "materials/016/AmazingFeature5/material/eye_part_faceu2988_MATERIAL.material": "0733eee53eb3c7bbcc3c27f5ed019ba52da9706076c6e9cfbe22b17a5aa15930",
+        "materials/016/AmazingFeature5/image/eye_srceen/eye000.png": "a7167b508af469b867b2e34bdb886376766c3f0891640cab6af86c893359cb54",
+        "materials/016/AmazingFeature5/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature5/main.scene": "800cf2f37717263e2a89dd07b86ddacf641ed959b0c02625e7c263dd47bb38e9"
+      }
+    },
+    {
+      "pass": "PURITY_EYELASH",
+      "authored_uniforms": {
+        "intensity": 0.6000000238418579,
+        "opacity": 1.0,
+        "inputColor": 1.0,
+        "colorR": 0.42352941632270813,
+        "colorG": 0.23529411852359772,
+        "colorB": 0.11764705926179886
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature6/xshader/jiemao_faceu_e3ffcd1e800b950f0e616295904d1451.frag": "477c84b102d25688e858185427ebe3feeb8bd0b04132fa3a681b2bae4f833a37",
+        "materials/016/AmazingFeature6/material/jiemaoFaceU_msqo_1669694037.material": "32b21766fb32a4b99a45062e81ddfad65a39f56439e46d3c02d95b5025c2d3f1",
+        "materials/016/AmazingFeature6/image/eyelash.png": "365fe0fb851e12ddf00d5ae8328444d5a51da090a880d04b7f64d1fe5472065a",
+        "materials/016/AmazingFeature6/lua/EffectFaceMakeupSystemScript.lua": "72e71f471eb030784cb78c2538a32bedb8c40067b674230aa7abadf2c012a4be",
+        "materials/016/AmazingFeature6/main.scene": "815743c6ac9d33271d6f4aa2128b2524462d218afa0d6b99cc732ddf678ba4a8"
+      }
+    },
+    {
+      "pass": "PURITY_SHADOW_MULTIPLY",
+      "authored_uniforms": {
+        "intensity": 0.45352113246917725,
+        "opacity": 1.0
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature7/xshader/eye_part_faceu2991.frag": "53c79af7a2715486c84c7e54bf750c6cd85a09ddee2f05be3237dc76e9ff7ffe",
+        "materials/016/AmazingFeature7/material/eye_part_faceu2991_MATERIAL.material": "0d1381c57c05f5acb4890c69d9ab0ed2f95f9ebc6f3c727fa433595cbd99c5c4",
+        "materials/016/AmazingFeature7/image/eye/eye000.png": "c13df1aee09767a2bd76cebf06086bf7f22ab6e159f36dd509923de6cc4c90ef",
+        "materials/016/AmazingFeature7/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature7/main.scene": "e72160a3c3780ede8480d6352d202b90994a919226f7d6ee885bcab10c58fa8b"
+      }
+    },
+    {
+      "pass": "PURITY_SHADOW_SCREEN",
+      "authored_uniforms": {
+        "intensity": 0.45352113246917725,
+        "opacity": 1.0
+      },
+      "authored_uniforms_are_runtime_values": false,
+      "segmentation_required": true,
+      "source_sha256": {
+        "materials/016/AmazingFeature7/xshader/eye_part_faceu2992.frag": "e66b431bbfeb3e34f597f6580db19003d25c24565a17844a4ce3c8c67fadcfd6",
+        "materials/016/AmazingFeature7/material/eye_part_faceu2992_MATERIAL.material": "8f8ea4cc3917d34b4bea0f33ee8bdb8639b93cabe7008e3843da06fccf563bae",
+        "materials/016/AmazingFeature7/image/eye_screen/eye000.png": "7426c4a830267456ebff3b7086fddbf5c750a75bed0e51bb1ed688725af77ead",
+        "materials/016/AmazingFeature7/lua/EffectFaceMakeupSystemScript.lua": "caef5ae79e2cb94304beb2a22eed450b882b8724bfb3625b4d70554655475d4b",
+        "materials/016/AmazingFeature7/main.scene": "e72160a3c3780ede8480d6352d202b90994a919226f7d6ee885bcab10c58fa8b"
+      }
+    }
+  ],
+  "lut_assets": {
+    "natural": {
+      "authored_uniforms": {
+        "uniAlpha": 0.20759493112564087
+      },
+      "source_sha256": {
+        "materials/016/AmazingFeature2/image/filter_bg.png": "3b6693011b425c4d124aa4b1de71e18d71b509257b305c18e8bb48837d704a40",
+        "materials/016/AmazingFeature2/image/filter_skin.png": "38d2730d4033c4dba337f57d8b8905b782f942645f0da646e83ad5082a39b78b",
+        "materials/016/AmazingFeature2/material/SkinSeg.material": "9a3eac77c30d656d3223ba61158f398d6ca4606ea89f7c834ffd9091ac697134",
+        "materials/016/AmazingFeature2/ComposerUpdate.lua": "8dd28466018ef89e2e73f514e00131787afda8bc184c961c03feef8b96f83136",
+        "materials/016/AmazingFeature2/xshader/skinseg.frag": "9168eb81e4b3245952514803ded08f215a994d06cb31403ad83d020e1346574b"
+      }
+    },
+    "purity": {
+      "authored_uniforms": {
+        "uniAlpha": 0.3816901445388794
+      },
+      "source_sha256": {
+        "materials/016/AmazingFeature8/image/filter_bg.png": "3b6693011b425c4d124aa4b1de71e18d71b509257b305c18e8bb48837d704a40",
+        "materials/016/AmazingFeature8/image/filter_skin.png": "38d2730d4033c4dba337f57d8b8905b782f942645f0da646e83ad5082a39b78b",
+        "materials/016/AmazingFeature8/material/SkinSeg.material": "c092df1d96053d9a4a4e1bcc8baf763aca5944ebe4bf233a234b8033de01f1b0",
+        "materials/016/AmazingFeature8/ComposerUpdate.lua": "8dd28466018ef89e2e73f514e00131787afda8bc184c961c03feef8b96f83136",
+        "materials/016/AmazingFeature8/xshader/skinseg.frag": "9168eb81e4b3245952514803ded08f215a994d06cb31403ad83d020e1346574b"
+      }
+    },
+    "purity_final": {
+      "authored_uniforms": {
+        "uniAlpha": 0.3915492594242096
+      },
+      "source_sha256": {
+        "materials/016/AmazingFeature9/image/filter.png": "ad920ba45ce41a189f8203fb66a33f9ed9a4dec14e050a565509b1c236f3c6b7",
+        "materials/016/AmazingFeature9/material/pass0.material": "4264dc98143307ced8bd4c20f289ae562811f1dc286d86320ecfb9f8a726aac2",
+        "materials/016/AmazingFeature9/ComposerUpdate.lua": "8dd28466018ef89e2e73f514e00131787afda8bc184c961c03feef8b96f83136",
+        "materials/016/AmazingFeature9/xshader/pass0.frag": "89203357634dbd103fca5d8e0c6fe2e2ed7e544f10c57e540be775fcbe41eb96"
+      }
+    }
+  },
+  "published_vendor_assets": false,
+  "runtime_uniforms_confirmed": false,
+  "full_style_reproduction_verified": false,
+  "hdr_domain_supported": false,
+  "android_device_verified": false,
+  "fixture_policy": "source image rows, decoded byte samples without ICC, explicitly straight-to-premultiplied before bilinear sampling",
+  "purity_final_lut_content_format": "JPEG/JFIF (despite .png extension); existing authored LUT losses cannot be reversed",
+  "source_over_policy": "ONE / ONE_MINUS_SRC_ALPHA replacement for premultiplied fragments; original GPU state not executed",
+  "same_z_order": "caller must provide resolved order between paired eye renderers",
+  "declared_graph_order": {
+    "natural": [
+      {
+        "path": "AmazingFeature0/",
+        "zorder": 901
+      },
+      {
+        "path": "AmazingFeature1/",
+        "zorder": 2002
+      },
+      {
+        "path": "AmazingFeature2/",
+        "zorder": 8003
+      }
+    ],
+    "purity": [
+      {
+        "path": "AmazingFeature0/",
+        "zorder": 901
+      },
+      {
+        "path": "AmazingFeature1/",
+        "zorder": 2002
+      },
+      {
+        "path": "FaceMakeupV2_byExport2/",
+        "zorder": 2003
+      },
+      {
+        "path": "AmazingFeature3/",
+        "zorder": 2004
+      },
+      {
+        "path": "3dmakeup4/",
+        "zorder": 2005
+      },
+      {
+        "path": "AmazingFeature5/",
+        "zorder": 2006
+      },
+      {
+        "path": "AmazingFeature6/",
+        "zorder": 2007
+      },
+      {
+        "path": "AmazingFeature7/",
+        "zorder": 2008
+      },
+      {
+        "path": "AmazingFeature8/",
+        "zorder": 8009
+      },
+      {
+        "path": "AmazingFeature9/",
+        "zorder": 8010
+      }
+    ]
+  },
+  "graph_config_sha256": {
+    "natural": "c5d2330c98c2adf223dcca9a548893dccf65e9099d68aa5c91e6d95c70c54f64",
+    "purity": "8d9c10808ee3cbaca236884a095c7278120fb1eb7919799ddb762985d625f2c4"
+  },
+  "actual_asset_results": [
+    {
+      "fixture": "NATURAL_BLUSHER:image/blusher/blusher000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_LIPS:image/lips2/lips0000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_LIPS:image/lips2/lips0001.png",
+      "pixels": 1024,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "fixture": "PURITY_BLUSHER:blusher/blusher000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_FACIAL:image/facialfeatures/facialSeq_000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_3D:image/makeup3d_open.png",
+      "pixels": 1024,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "fixture": "PURITY_EYE_MULTIPLY:image/eye/eye000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_EYE_SCREEN:image/eye_srceen/eye000.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_EYELASH:image/eyelash.png",
+      "pixels": 1024,
+      "max_abs_error": 1.1102230246251565e-16
+    },
+    {
+      "fixture": "PURITY_SHADOW_MULTIPLY:image/eye/eye000.png",
+      "pixels": 1024,
+      "max_abs_error": 2.220446049250313e-16
+    },
+    {
+      "fixture": "PURITY_SHADOW_SCREEN:image/eye_screen/eye000.png",
+      "pixels": 1024,
+      "max_abs_error": 0.0
+    },
+    {
+      "fixture": "natural:skin_lut",
+      "pixels": 1024,
+      "max_abs_error": 0.0
+    },
+    {
+      "fixture": "purity:skin_lut",
+      "pixels": 1024,
+      "max_abs_error": 0.0
+    },
+    {
+      "fixture": "purity:final_lut",
+      "pixels": 1024,
+      "max_abs_error": 0.0
+    }
+  ],
+  "scalar_comparisons": 43008,
+  "status": "PASS",
+  "max_abs_error": 2.220446049250313e-16,
+  "implementation_sha256": {
+    "src/main/java/com/hiro/ulike/style/SampledMakeupPipeline.java": "dcba25653758bf80fb0b67e9917407e4e05555da32a60982535f8896ea025c86",
+    "src/main/java/com/hiro/ulike/style/StyleLutPipeline.java": "c904ad20f12a4673b226fde547acd5ed6801aa58a48651a1e20ca7e4d906e813",
+    "src/test/java/com/hiro/ulike/style/FixtureProbe.java": "1a0a554ba61760483c14eb1f381e7ee1429f6475ac81d581abf3985bb3b8caf2",
+    "src/test/java/com/hiro/ulike/style/PipelineTest.java": "7a75b13934ebe6d54542d2e00ba0795dd49c7dff5137d342f5badc5547a12052"
+  }
+}

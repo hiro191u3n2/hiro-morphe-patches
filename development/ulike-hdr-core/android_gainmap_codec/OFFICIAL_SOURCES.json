@@ -1,0 +1,18 @@
+{
+  "checked_at": "2026-10-01",
+  "sources": [
+    {
+      "url": "https://android.googlesource.com/platform/frameworks/av/+/master/media/module/foundation/ColorUtils.cpp",
+      "fact": "Android SDR_VIDEO public value 3 maps to internal SMPTE170M; ISO transfer mapping uses 1 as main with aliases 6,14,15. Linear public value 1 maps to ISO transfer 8. BT2020 primaries and nonconstant matrix are ISO9."
+    },
+    {
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/71032c8d6788/media/java/android/media/MediaFormat.java",
+      "fact": "COLOR_TRANSFER_SDR_VIDEO=3 represents the SMPTE170M transfer characteristic used by BT601/BT709/BT2020, whereas COLOR_TRANSFER_LINEAR=1 is linear."
+    },
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaCodec",
+      "fact": "getInputImage/getOutputImage expose Image plane buffers; output Image is read-only and only valid while the associated output buffer is owned by the caller."
+    }
+  ],
+  "device_execution": false
+}

@@ -1,0 +1,19 @@
+{
+  "checked_date": "2026-10-01",
+  "sources": [
+    {
+      "url": "https://developer.android.com/reference/android/media/MediaFormat",
+      "used_for": "COLOR_TRANSFER_SDR_VIDEO is SMPTE170M; COLOR_TRANSFER_LINEAR is numerical linear. Android enum values differ from ISO transfer identifiers."
+    },
+    {
+      "url": "https://android.googlesource.com/platform/frameworks/av/+/master/media/module/foundation/ColorUtils.cpp",
+      "used_for": "SDR-video internal transfer maps principally to ISO transfer 1; linear maps to ISO 8. Actual SPS is still checked; constants are not output proof."
+    }
+  ],
+  "inherited_verified_math_and_layout": [
+    "../gainmap/gainmap.cpp",
+    "../heif_save/heif_boxes.py",
+    "../android_heif/src/main/java/com/hiro/ulike/hdr/heif/Main10Heif.java"
+  ],
+  "new_explicit_policy": "Main10 4:2:0 numerical RGB gainmap with measured decoded reconstruction error, rather than the earlier host RExt444 path."
+}

@@ -27,8 +27,11 @@ performed here.
 
 LUT texels must be normalized RGBA in [0,1]. Texture row zero is the row sampled
 near `v=0`. The caller controls decode orientation, ICC/gamma handling, and the
-original engine's sampler choice. The tests use untransformed PNG byte values,
-source row order, and linear clamp-to-edge. That contract is not proof of the
+original engine's sampler choice. The tests use decoded asset sample values,
+source row order, and linear clamp-to-edge. The Purity final LUT named
+`filter.png` is actually JPEG/JFIF; its existing authored compression cannot be
+undone. This does not introduce JPEG compression of the photograph. That
+contract is not proof of the
 original runtime's decode/upload behavior.
 
 `skin_background_lut` requires the matching pixel's mask alpha after the source
@@ -45,7 +48,7 @@ specified color/appearance transform and validation, not removal of this guard.
 ## Reproduce validation
 
 Requirements: C++17 compiler, Python 3, NumPy, SciPy, and Pillow. Supply the two
-original local ZIPs; no LUT PNGs or private manifests are distributed here.
+original local ZIPs; no LUT images or private manifests are distributed here.
 
 ```sh
 bash test.sh /path/ULike_Natural_blush_1790815043265.zip \

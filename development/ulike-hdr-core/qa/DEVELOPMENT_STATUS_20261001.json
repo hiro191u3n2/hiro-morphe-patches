@@ -1,0 +1,42 @@
+{
+  "stage": "verified development components and host integration; not a completed installable HDR beauty patch",
+  "models": {
+    "tt_baoman": "actual pinned model body loaded and executed; Android Java wrapper plus host numerical verification",
+    "tt_goodlike": "actual pinned model body loaded and executed; Android Java wrapper plus host numerical verification",
+    "model_resolution": "256x256; projection preserves photo size but does not create full-photo neural detail",
+    "original_native_bit_exact": false
+  },
+  "implemented_this_checkpoint": [
+    "Owned P010 HLG to scene-linear BT.2020 view with explicit chroma siting and no HDR clipping",
+    "Explicit continuous-float SDR rendition connected to both real neural models and same-size transactional photo rows",
+    "Raw pinned neural mask/template loading and Android crop/inference/compositing",
+    "Natural one / Purity nine sampled makeup operations and LUT stages with explicit same-frame source bindings",
+    "Transactional neural-row to makeup/LUT adapter with bounded tiles and rollback",
+    "Stock SDK same-still face callback diagnostic; requires app lifecycle integration and real coordinate calibration",
+    "Role-aware Main10 P010 encoding and actual coded-data decoding for SDR base and numerical gainmap",
+    "Processed-pair gainmap generation from actual decoded base, decoded-map reconstruction gate and ISO tmap HEIF saving"
+  ],
+  "host_integration": {
+    "p010_to_both_real_neural_models": true,
+    "complete_camera_to_processed_hdr_photo": false,
+    "actual_android_camera_or_codec_execution": false,
+    "complete_style_visual_equivalence": false,
+    "original_sdr_style_hdr_extension": false
+  },
+  "remaining": [
+    "Actual same-still SDK106 coordinate contract and normal face-backend initialization on the phone",
+    "Same-still mesh/segmentation generation, resolved runtime settings and active rendering-graph source/order correspondence",
+    "A defined and verified HDR appearance implementation producing a matching fully edited HDR/SDR pair; untouched HDR plus beautified SDR is invalid",
+    "ULike camera/session/preview/lifecycle hooks, memory ownership, app-wide face-probe exclusion and complete save integration",
+    "Phone Main10 role support, actual HEIF/gainmap decoding and HDR display",
+    "Verification of every requested lens/mode and replacement of remaining legacy JPEG photo paths",
+    "Installable MPP build and full original-APK patch application after these connections are implemented"
+  ],
+  "resolution_limit": "Supplied phone diagnostics expose at most 4080x3060 on the relevant public route. No unscaled 5712x4284 input is claimed or manufactured.",
+  "current_installable_baseline": {
+    "ulike": "1.6.5",
+    "integrated_bundle": "1.0.98",
+    "scope": "model observation/export; does not install these new HDR/beauty components"
+  },
+  "publication_kind": "source development branch; no claim of a completed MPP release"
+}

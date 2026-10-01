@@ -1,0 +1,28 @@
+{
+  "status": "PASS_INDEPENDENT_SOURCE_REVIEW_AND_RERUN",
+  "reviewer": "root (not author)",
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/PixelOrientationEvidence.java": "f00135eb754bea09dd0eceb790942c66eca021a76229a929830b341b8bc7d9be",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "ec0021135657e55e4185d39eb2abfb8447373f5dc3d5cbe5e80505d725937cc9",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "97948cdbc24c5a9f45e54210aea36681d33b1efdcf4376efbb49ee3da597fe89"
+  },
+  "author_host_suite_independently_rerun": "66 checks, actual SDK36 compilation passed",
+  "author_stock_contract_independently_rerun": {
+    "public_sdk_signatures_checked": 27,
+    "native_instructions_checked": 30,
+    "library_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095"
+  },
+  "review_fix": "Lease originally required zero active recorders again after starting the owned probe. Renamed/clarified requireInitializedAndNoOtherRecorder excludes only this owned recorder while retaining app-wide exclusivity.",
+  "manual_review": [
+    "Callback deadline and native teardown are separate; no forced cancellation claim",
+    "Input pixel ownership and asynchronous result copies; bounded images",
+    "Actual initialization status required rather than stock ready flag",
+    "No production Detector implementation or guessed landmark orientation",
+    "Teardown failure quarantines references and refuses reuse"
+  ],
+  "native_execution": false,
+  "production_detector": false,
+  "app_lifecycle_lease_or_ui_hook": false,
+  "landmark_coordinates_verified": false,
+  "scope": "Static instructions are bounded pinned evidence, not a dynamically executed native call graph. SDK probe remains diagnostic only."
+}

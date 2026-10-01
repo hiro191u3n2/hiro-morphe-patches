@@ -13,6 +13,10 @@ SOURCE_DIRS = (
     'android_capture/src/main/java', 'android_capture/src/android/java',
     'android_encoder/src/main/java', 'android_model_runtime/src',
     'face_analysis/src/main/java', 'android_heif/src/main/java',
+    'android_beauty_image/src', 'android_hdr_color/src/main/java',
+    'android_face_backend/src/main/java', 'style_pipeline/src/main/java',
+    'style_pipeline/integration/src',
+    'android_gainmap_codec/src/main/java', 'android_gainmap_save/src/main/java',
 )
 
 

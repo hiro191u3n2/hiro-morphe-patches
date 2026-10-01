@@ -1,0 +1,134 @@
+{
+  "status": "PASS",
+  "android_device_executed": false,
+  "actual_phone_codec_selected": false,
+  "sdk_jar_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/CodecSelection.java": "7b1d9c1c443566b47fa5fc93dc1b676e0e611e70d0eeaca054a3d4b027224138",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/ColorP010.java": "b752e8440012140acad79dc0a4503dc55e8fbe60880fd4d7f2b89aa8c8a0387b",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/Main10Codec.java": "49cc9f53261ca69c4b72a3f274773cc62f289455c0ddf26a19c8fd99d8a17b12",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleHevcProof.java": "4cc8d4c59eee57ca62145e048861715ed75ddc4031baa2782f972d52adf8c62f",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleParameterSets.java": "0b18c4b07c072d2c7789e25a61104be3f010ee4f1bbdb41b1ca5dca51270f8ec"
+  },
+  "fixtures": {
+    "base": {
+      "sha256": "90d57729fb5dd218aaee79e2c89f27a338df2c2611935a5ad3da82e788f31cd9",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": true
+    },
+    "gainmap": {
+      "sha256": "8b6997c45ccdd84324f4e1d41c1e0b93d08c8ccdf4b9cb6689199fb6ebfa93ab",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "linear",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": true
+    },
+    "hlg": {
+      "sha256": "e3f0d4ad3d27fba964946c2469320171dda85ff5b55f850dae581808fdc99c94",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": false
+    },
+    "sdr8": {
+      "sha256": "33cd6967cf3aa74337996c6458d45bb33977ff9bd4abf230bbb033bb292b114c",
+      "ffprobe": {
+        "profile": "Main",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuvj420p",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": false
+    },
+    "limited": {
+      "sha256": "b5644bae5ed8d49681404845a260d945ea89a9332b8e4284ca8cf3fd23172ec6",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": false
+    },
+    "smpte170m": {
+      "sha256": "f537d7b14ecff3c3a5f0d1ae72e7ed1cd22fa02960ed90d919293c91755d0aa2",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "smpte170m",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": false
+    },
+    "bt709matrix": {
+      "sha256": "5c1182e0549c39ba00e249ee10c8ff26e0521621b4ccf56d7be397ba089c2cc9",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt709",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_host_decode": "PASS",
+      "accepted_in_correct_role": false
+    }
+  },
+  "sdk36_compile": "PASS",
+  "java_tests": {
+    "checks": 1594,
+    "status": "PASS",
+    "android_device_executed": false
+  },
+  "limits": [
+    "Actual Android encoder/decoder availability, configure and P010 execution unverified.",
+    "No HEIF mux in this low-level module; downstream gainmap save owns the container and RGB/YUV conversion.",
+    "SPS/VUI and parameter-set validation is restricted to still single-layer/no-sublayer/no-HRD/no-extension streams; it is not entropy decode.",
+    "Codec calls configure/start/stop are synchronous platform calls without a hard interruption guarantee; dequeue/copy loops have deadlines and interruption checks.",
+    "VBR HEVC remains lossy; this module proves role and bit depth, not fidelity.",
+    "Imported capture provenance is caller supplied; content digest binds bytes to actual decoder input only."
+  ]
+}

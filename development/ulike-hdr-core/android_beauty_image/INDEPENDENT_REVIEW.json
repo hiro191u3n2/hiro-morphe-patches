@@ -1,0 +1,27 @@
+{
+  "status": "PASS_INDEPENDENT_SOURCE_REVIEW_AND_P010_REAL_MODEL_INTEGRATION",
+  "reviewer": "root (not author of android_beauty_image)",
+  "source_sha256": {
+    "src/hiro/ulike/beauty/BeautyImageEngine.java": "04f381d43abf3e33dcd5c08227b1316a96de0d502ef29871f973852df9d85902",
+    "src/hiro/ulike/beauty/PinnedAssets.java": "f1fc61763e03b8fcd87d9a863ad5ff9cd6caa87ae78a98cd7b20e3e9246a2f76"
+  },
+  "reviewed_author_numerics": "Both actual models and masks, five synthetic affine/landmark fixtures per style against previously independently verified Python component, final FP32 rounding bound. Author source pins match current files.",
+  "independently_executed": "qa/QA_STILL_NEURAL_INTEGRATION.json: P010 owned frame -> continuous SDR pixels -> both actual pinned models -> same-size float rows; source HDR sample hash unchanged; source identity changed before commit rejects and aborts; closed engine rejects.",
+  "integration_report_sha256": "af1a8de1dd7778bd496bb222ff2ee29efb02682fe22c9619eee3e425b6bb8c2e",
+  "manual_review": [
+    "pinned mask/member/template library hashes and bounded raw PNG sample decoding",
+    "mandatory model domain/mask style, crop and dimension/allocation guards",
+    "borrowed row extent, zero-weight copy, checked output domain",
+    "private transaction staging and abort on begin/write/commit failures; caller sink must implement atomic commit",
+    "no full-photo model allocation or hidden byte-photo path"
+  ],
+  "android_device_execution": false,
+  "complete_style": false,
+  "hdr_beauty_output": false,
+  "limits": [
+    "Original GPU mask orientation/sampler/native-pixel parity remain explicit unproven contracts",
+    "Supplied landmarks/affine must match same still; this component cannot verify arbitrary caller assertions",
+    "ORT and caller storage are excluded from module array budget",
+    "Host integration uses synthetic geometry and a declared replacement tone mapper"
+  ]
+}

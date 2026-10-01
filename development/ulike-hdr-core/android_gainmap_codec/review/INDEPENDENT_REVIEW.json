@@ -1,0 +1,97 @@
+{
+  "status": "PASS_INDEPENDENT_HOST_AND_STATIC_REVIEW",
+  "reviewed_file_sha256": {
+    "OFFICIAL_SOURCES.json": "268f9aeae004b786547cead40587fea7b5410535ea0d447ccc4648bba22cb490",
+    "QA_ANDROID_GAINMAP_CODEC.json": "504006dd6434d49e70f07f147993421f6061029aa165383d9f268782300057aa",
+    "README.md": "96d723e64b902132d9ddaa350dfae7ea23500508fd7e6f4e5e3b51ad25fb0d83",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/CodecSelection.java": "7b1d9c1c443566b47fa5fc93dc1b676e0e611e70d0eeaca054a3d4b027224138",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/ColorP010.java": "b752e8440012140acad79dc0a4503dc55e8fbe60880fd4d7f2b89aa8c8a0387b",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/Main10Codec.java": "49cc9f53261ca69c4b72a3f274773cc62f289455c0ddf26a19c8fd99d8a17b12",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleHevcProof.java": "4cc8d4c59eee57ca62145e048861715ed75ddc4031baa2782f972d52adf8c62f",
+    "src/main/java/com/hiro/ulike/hdr/gainmapcodec/RoleParameterSets.java": "0b18c4b07c072d2c7789e25a61104be3f010ee4f1bbdb41b1ca5dca51270f8ec",
+    "src/test/java/com/hiro/ulike/hdr/gainmapcodec/CodecBoundaryTest.java": "a0dee7b8a736b3989654195b2d05bf4d45c31555c9103d70744c9218f59e2a93",
+    "verify.py": "da6fc509509edbb98ee63a7e29d41d57cd83ae6f0f0572e2a5e70a6c4ec085ab"
+  },
+  "independent_probe_source_sha256": "91ef1e669c3be166bf992007e09565873e784462d1ec574d7aad86ea180d6ae7",
+  "author_suite_independent_rerun": {
+    "checks": 1594,
+    "sdk36_compile": "PASS",
+    "fixtures": 7
+  },
+  "additional_independent_assertions": 48,
+  "additional_real_hevc_fixtures": {
+    "base": {
+      "sha256": "42576299543cbc522631fc083084ff1606140d736e23d916db5ab11d8f21ed23",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 96,
+        "height": 64,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "bt709",
+        "color_primaries": "bt2020"
+      },
+      "independent_ffmpeg_decode": "PASS"
+    },
+    "map": {
+      "sha256": "f000d88d4d2a9ca57314d3d4da939642cf4b4300350035c65615ce3e07b7dcbc",
+      "ffprobe": {
+        "profile": "Main 10",
+        "width": 96,
+        "height": 64,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "linear",
+        "color_primaries": "bt2020"
+      },
+      "independent_ffmpeg_decode": "PASS"
+    }
+  },
+  "verified_by_code_review": [
+    "Owned immutable Encoded byte array is cloned at construction and copyout; exact SHA identifies original coded source consumed by decoder; Annex-B prefix normalization and CSD split are explicitly documented.",
+    "Role contract requires actual SPS Main10/profile2, 4:2:0, both depths10, primaries9, matrix9, full range, transfer1 for base or8 for numerical map. Hardware/role/P010 advertised selection cannot substitute 8bit.",
+    "Actual decoder output must be P010 Image with crop/dimensions/color/PTS checks; copies complete before Image and output slot release; it never returns pre-encode source pixels.",
+    "Decode crop adds even crop origin relative to each plane current buffer position; row/pixel stride and last-sample bounds are validated, including corrected long cropY arithmetic.",
+    "Input/output Image ownership, output slot release and codec stop/release use finally/try-with-resources; cleanup errors are retained rather than swallowed.",
+    "Dequeue loops and copy entry/rows observe interruption; elapsed deadline checked in codec loop and after copy. Synchronous platform calls and finite copy work can overrun a wall-clock deadline; no hard cancellation claim.",
+    "AOSP MediaCodec MediaImage exposes 3 P010 plane views with chroma offsets2 and stride4; applies x/y plane origin and offsets cropRect consistently. Module does not add hidden offsets."
+  ],
+  "resolved_findings": [
+    {
+      "issue": "cropY+height intermediate int overflow before long subtraction",
+      "fix": "((long)y+height-1) in Plane.validate",
+      "regression": "Extreme cropY rejected as IllegalArgumentException before allocation/access in author suite and independent probe"
+    }
+  ],
+  "independent_probe_coverage": [
+    "Manually packed padded P010 with current-buffer origins and tight final-row bounds, even cropped Y/Cb/Cr scalar expected values",
+    "Extreme X/Y crops, odd crop, invalid row/pixel stride, short limit, readonly output and validation-before-write",
+    "Copy cancellation and immutable imported bitstream hash/byte ownership",
+    "Two new96x64 x265 Main10 role fixtures checked by ffprobe and actual ffmpeg decode",
+    "Cross-role rejection, repeated-IDR stream, malformed AUD and SEI, VPS/SPS reference mismatch, temporal layer, advertised8bit and wrong-role codec rejection"
+  ],
+  "primary_source_checks": [
+    {
+      "url": "https://developer.android.com/reference/android/graphics/ImageFormat#YCBCR_P010",
+      "fact": "16-bit little-endian packed values with low6bits zero; physical semiplanar420"
+    },
+    {
+      "url": "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/media/java/android/media/MediaCodec.java",
+      "download_sha256": "c050d29a2ad4c2238899f01c267f34e76fbef20d6499c3c3f9984d52b580b890",
+      "fact": "MediaImage P010 3plane views and origin/crop adjustments read directly"
+    }
+  ],
+  "limits": [
+    "No actual Android MediaCodec has executed. Phone encoder/decoder P010/Main10/color capabilities and lifetimes remain device validation requirements.",
+    "SPS/parameter proof is a bounded parser, not HEVC entropy validation; actual MediaCodec decode remains necessary.",
+    "This module does not convert RGB, create HEIF/gainmap metadata, integrate the ULike recorder or certify complete style/HDR preservation.",
+    "32MP per-frame and64MiB compressed bounds do not establish total phone heap feasibility.",
+    "Imported capture/processing IDs are assertions; digest binds coded bytes, not external capture truth.",
+    "HEVC4:2:0 VBR is lossy; 10bit does not mean lossless or exact1024values through compression."
+  ],
+  "android_device_executed": false,
+  "full_pipeline_complete": false,
+  "unresolved_code_findings": []
+}

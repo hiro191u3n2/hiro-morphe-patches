@@ -1,0 +1,127 @@
+{
+  "status": "PASS_ANDROID_SDK36_COMPILE_HOST_JAVA_FULL_IMAGE_COMPONENT",
+  "android_device_execution": false,
+  "hdr_preserved": false,
+  "complete_style": false,
+  "native_pixel_parity": false,
+  "caller_same_frame_landmarks_required": true,
+  "input_and_output_dimensions": [
+    512,
+    384
+  ],
+  "model_dimensions": [
+    256,
+    256
+  ],
+  "telemetry_opt_out_before_runtime": true,
+  "cases": [
+    {
+      "style": "natural_blush",
+      "host_guards": "PASS NATURAL_BLUSH 15 cases; actual model, mask, template; zero-weight bits and transaction rollback",
+      "raw_mask_and_template_bit_exact": true,
+      "landmark_matrix_max_abs": 2.7755575615628914e-17,
+      "comparisons": [
+        {
+          "fixture": "affine",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9801699330533893e-08,
+          "output_sha256": "4266e828b96cf10359d0ec9ad8ba035b6fa96891e9cac4fbf19839d06a852f8b"
+        },
+        {
+          "fixture": "rotated",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9801148881958284e-08,
+          "output_sha256": "5ea87a0860ebd1bbd476bdef69812ac27793e2d084898171ccfcca5da3ab646a"
+        },
+        {
+          "fixture": "reflected",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9802151746416428e-08,
+          "output_sha256": "2f0a4f4cd080000dc384e33657bb569ec1aa75ca1b3960410aa39189605cdea0"
+        },
+        {
+          "fixture": "border",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9801177414690017e-08,
+          "output_sha256": "8a3cac6494272ebc9264f99df5d0502565698b033668523f785b46f25f3cd471"
+        },
+        {
+          "fixture": "landmarks",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9801973888687883e-08,
+          "output_sha256": "7c56b51b5f6b9b873a8b18ad60df3399a84be45cb13353d5170261c98cc7df8d"
+        }
+      ]
+    },
+    {
+      "style": "purity2",
+      "host_guards": "PASS PURITY2 15 cases; actual model, mask, template; zero-weight bits and transaction rollback",
+      "raw_mask_and_template_bit_exact": true,
+      "landmark_matrix_max_abs": 1.2434497875801753e-14,
+      "comparisons": [
+        {
+          "fixture": "affine",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9801563772302586e-08,
+          "output_sha256": "99ce4001832edd1b21d8c49242d2ce84623cae2ea6434967ec2e859007da027b"
+        },
+        {
+          "fixture": "rotated",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.980204372171613e-08,
+          "output_sha256": "dadad86cb0061448e6d4bb34a3d77b2e1e0ec8fb3c4c8aba335d775ad097f37c"
+        },
+        {
+          "fixture": "reflected",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.980182955969468e-08,
+          "output_sha256": "709c70f0196de25b14a58b3cf89aa20e9e83cc47a629ff6519a988a5dcac4733"
+        },
+        {
+          "fixture": "border",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9800865886109307e-08,
+          "output_sha256": "ba70b572b22014b8fb882a3efac8d965fe2e3d074b8fb0d39b5fb1fc9ef8f680"
+        },
+        {
+          "fixture": "landmarks",
+          "sample_values": 589824,
+          "maximum_absolute_error": 2.9802000089951264e-08,
+          "output_sha256": "a8855bf54f8ceea60efaf6e81804a7343146fafbb882eb2b2fde8aad50eaaedf"
+        }
+      ]
+    }
+  ],
+  "sdk36_compile_and_d8_min26": true,
+  "source_sha256": {
+    "src/hiro/ulike/beauty/BeautyImageEngine.java": "04f381d43abf3e33dcd5c08227b1316a96de0d502ef29871f973852df9d85902",
+    "src/hiro/ulike/beauty/PinnedAssets.java": "f1fc61763e03b8fcd87d9a863ad5ff9cd6caa87ae78a98cd7b20e3e9246a2f76",
+    "test/hiro/ulike/beauty/RunImage.java": "7565298572152885a09d7a64660d1ce5e16edceee9f6cd16a420eccb424972c5",
+    "verify_image.py": "38aff918ab683d693bc45e9c1385972ebf2912587f3d479eb0da09b7c7d36499"
+  },
+  "runtime_source_sha256": {
+    "src/hiro/ulike/model/AndroidTensorEngine.java": "e6f73673f57dba5bc8257e2653ab95c12f6f5a1c5f9c724cd918d3e771fd4f15",
+    "src/hiro/ulike/model/GraphOnnx.java": "a0cec1f9dcde10322872dcd0647e5fbc626a8823106786bc4106eabf74b63aa7",
+    "src/hiro/ulike/model/OrtTensorEngine.java": "8398b72f3a619bd957c1e60275a667a047f01942be87bb167c164fe78b7658be",
+    "src/hiro/ulike/model/PinnedModel.java": "a1a38ad2b5095a530bc52e05ff15e5057281800269dd8ea131f5b35040803399"
+  },
+  "dependency_sha256": {
+    "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "onnxruntime-android-1.30.0-classes.jar": "65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0",
+    "onnxruntime-1.30.0.jar": "57d8cedf6f0c8fd6d50ed65c17bf9939f55a4512f4a1f3e732023d258f262ac6",
+    "r8-8.3.37.jar": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199"
+  },
+  "workspace": {
+    "max_pixels": 25000000,
+    "maximum_dimension": 16384,
+    "default_tile_rows": 8,
+    "module_java_array_budget_bytes": 8388608,
+    "full_photo_array_allocated_by_component": false,
+    "excluded": [
+      "caller-owned source and transactional sink storage",
+      "compiled model loading and graph buffers",
+      "ORT direct input and native activation allocations",
+      "JVM object overhead"
+    ]
+  }
+}

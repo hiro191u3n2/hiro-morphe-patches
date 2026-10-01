@@ -1,0 +1,52 @@
+{
+  "status": "PASS_STATIC_STOCK_API_AND_LIFECYCLE_CONTRACT",
+  "public_sdk_signatures_checked": 27,
+  "native_instructions_checked": 30,
+  "library_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+  "dex_sha256": {
+    "classes.dex": "4fb5923b8cf7c28f393ba91dca6a9d4be91f69a8d2a4ae067670987e642b0f83",
+    "classes2.dex": "9c71360debb8d11fed8403bfca3b0247198d99218bd02d129d7205aa39df6933",
+    "classes3.dex": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0",
+    "classes4.dex": "2ffe409e7b98e36cd2f3d84fe9a7c7146c1e84a3b084961fe089c044229c5392"
+  },
+  "sdk_methods": {
+    "Lcom/ss/android/medialib/RecordInvoker$FaceResultCallback;->onResult(Lcom/ss/android/medialib/model/FaceAttributeInfo;Lcom/ss/android/medialib/model/FaceDetectInfo;)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker$OnPictureCallbackV2;->onImage([III)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker$OnPictureCallbackV2;->onResult(II)V": "classes3.dex",
+    "Lcom/ss/android/medialib/camera/ImageFrame;-><init>(Landroid/graphics/Bitmap;I)V": "classes3.dex",
+    "Lcom/ss/android/medialib/listener/NativeInitListener;->onNativeInitCallBack(I)V": "classes3.dex",
+    "Lcom/ss/android/medialib/listener/NativeInitListener;->onNativeInitHardEncoderRetCallback(II)V": "classes3.dex",
+    "Lcom/ss/android/medialib/model/FaceDetect;->getPoints()[Landroid/graphics/PointF;": "classes3.dex",
+    "Lcom/ss/android/medialib/model/FaceDetect;->getScore()F": "classes3.dex",
+    "Lcom/ss/android/medialib/model/FaceDetectInfo;->getInfo()[Lcom/ss/android/medialib/model/FaceDetect;": "classes3.dex",
+    "Lcom/ss/android/vesdk/runtime/VEEnv;->getDetectModelsDir()Ljava/lang/String;": "classes3.dex",
+    "Lcom/ss/android/vesdk/runtime/VERuntime;->getInstance()Lcom/ss/android/vesdk/runtime/VERuntime;": "classes3.dex",
+    "Lcom/ss/android/vesdk/runtime/VERuntime;->getContext()Landroid/content/Context;": "classes3.dex",
+    "Lcom/ss/android/vesdk/runtime/VERuntime;->getEnv()Lcom/ss/android/vesdk/runtime/VEEnv;": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;-><init>()V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->forceFirstFrameHasEffect(Z)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlay(IILjava/lang/String;IILjava/lang/String;I)I": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->initFaceDetectExtParam(IZZ)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->registerFaceResultCallback(ZLcom/ss/android/medialib/RecordInvoker$FaceResultCallback;)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->renderPicture(Lcom/ss/android/medialib/camera/ImageFrame;IILcom/ss/android/medialib/RecordInvoker$OnPictureCallbackV2;)I": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->setCaptureRenderWidth(II)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->setDetectionMode(Z)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->setEffectBuildChainType(I)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->setNativeInitListener2(Lcom/ss/android/medialib/listener/NativeInitListener;)V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->startPlay(IILjava/lang/String;II)I": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->stopPlay()I": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->unRegisterFaceResultCallback()V": "classes3.dex",
+    "Lcom/ss/android/medialib/RecordInvoker;->uninitBeautyPlay()I": "classes3.dex"
+  },
+  "findings": [
+    "Explicit RecordInvoker.startPlay(width,height,device,0,0) writes zero rotation/mirror fields consumed by still processor.",
+    "Unregister disables callback worker then pthread_join; stopPlay also joins render thread and callback worker.",
+    "The high-level null-view wrapper supplies -1 geometry/rotation/mirror; the probe does not use that wrapper.",
+    "Stock onNativeCallback_Init sets mIsRenderReady true even after negative callback; new ledger checks actual status instead.",
+    "Stock uninit clears static listeners; app-wide idle lease is a mandatory integration precondition, not supplied here."
+  ],
+  "native_executed": false,
+  "landmark_coordinate_contract_verified": false,
+  "runtime_backend_selection_verified": false,
+  "normal_license_and_model_initialization_verified_on_device": false
+}

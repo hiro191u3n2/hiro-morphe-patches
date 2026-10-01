@@ -87,10 +87,41 @@ every rendering pass has that resolution.
 * `face_analysis`: exact-hash inspection of all 11 groups in the stock
   `tt_face_v11.1` model, plus an immutable same-still analysis image/result
   boundary and verified rotation/mirror coordinate mapping. It has no callable
-  detector backend or HDR-to-analysis renderer. The old offline Java callback's
+  production detector backend. The HDR-to-analysis renderer is now provided by
+  `android_hdr_color`; the stock callback probe is separate. The old offline Java callback's
   expected native registrations are absent from the shipped libraries; a
   separate recorder still-to-face callback route has static evidence, with
   initialization, coordinate domain and shutdown still requiring verification.
+* `android_hdr_color`: same-size, read-only conversion of the owned P010 frame
+  to FP64 scene-linear BT.2020, preserving negative and superwhite values.
+  Chroma siting is mandatory caller evidence. A separately declared exposure /
+  Reinhard / sRGB rendition supplies continuous float pixels to the SDR model
+  and RGB8 only to its analysis proxy. The HDR source remains unchanged; this
+  does not create a processed HDR beauty image or reproduce the stock tone mapper.
+* `android_beauty_image`: Android Java crop, actual pinned-model inference and
+  continuous full-photo composite for both neural passes. Its same-size float
+  rows match the independently verified host implementation to final FP32
+  rounding. No full-photo float allocation or RGB8 photo intermediate is made
+  inside the component. Same-still geometry and mask orientation are explicit
+  external contracts. Synthetic P010-to-model integration now passes for both
+  models; the output is still an SDR neural component, not a complete HDR style.
+* `android_face_backend`: callable stock-SDK single-still diagnostic with an
+  owned analysis bitmap, explicit rotation/mirror, initialization-status checks,
+  copied raw SDK106 points and worker teardown. It requires normal SDK setup
+  and an app-wide exclusive lifecycle lease, neither supplied by this module.
+  It is not a production detector or an installed diagnostic UI. Native calls
+  and point-coordinate correspondence still require device verification.
+* `style_pipeline`: Java double-precision versions of Natural's one and Purity's
+  nine named makeup passes, plus the skin/background and final LUT operations.
+  The API requires already sampled, same-frame textures, masks, geometry and
+  resolved uniforms. Separate shader input images are explicit where the
+  original pass does not necessarily read the current destination. Numerical
+  shader/asset verification does not establish the original active graph order,
+  model-generated segmentation or a complete appearance match. The transactional
+  adapter connects real neural float rows to these stages in bounded tiles;
+  both real models have passed synthetic makeup-binding integration tests.
+  Purity's final
+  LUT is JPEG/JFIF despite its `.png` name; no photo JPEG stage is introduced.
 * `android_encoder`: Android MediaCodec P010 input and HEVC Main10 selection,
   with named/hardware codec preferences and SPS/VUI validation of actual coded
   bit depth, HLG, color/range and dimensions. SDK 36 compilation, layout guards
@@ -109,6 +140,19 @@ every rendering pass has that resolution.
   independent libheif/libde265 decoding with 1024 levels. It uses HEVC Range
   Extensions 4:4:4, not a claim of Android Main10 compatibility or automatic
   HDR display. See its QA report for numerical reconstruction error.
+* `android_gainmap_codec`: Android MediaCodec Main10 encoder and P010 decoder
+  with separately verified SDR-base and linear numerical-map color roles.
+  Decoded samples are bound to the exact encoded source. Actual coded SPS/VUI
+  and parameter-set linkage are checked, with no 8-bit or HLG-labelled-map
+  fallback. SDK compilation and real host HEVC fixtures do not prove a phone
+  supports either role.
+* `android_gainmap_save`: Java processed-pair save path using Main10 4:2:0 for
+  both a 10-bit SDR base and numerical gainmap, then ISO `tmap` HEIF packaging.
+  It computes the map from the actually decoded encoded base and validates HDR
+  reconstruction with the decoded map and serialized metadata before atomic
+  saving. Independent libheif decoding checks real generated files. The
+  complete edited HDR/SDR pair is still an external input; this cannot turn an
+  untouched HDR original plus beautified SDR into a correct edited HDR image.
 * `tools/audit_style_exports.py`: validates source archives without executing
   their scripts. `qa/material_audit.json` records the observed input evidence.
 
@@ -117,7 +161,9 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
 ## Remaining requirements for the requested complete replacement
 
 1. Complete face detection, landmark/mesh interpretation, skin segmentation,
-   native coordinate/orientation correspondence and the remaining style passes.
+   native coordinate/orientation correspondence and actual style-stage wiring.
+   The sampled makeup/LUT operations now have Java implementations; their
+  geometry, segmentation and resolved runtime settings are still external.
    Continuous sampling is implemented for externally supplied geometry, with a
    declared replacement projection convention rather than native GPU parity.
    The relevant bundled dependency
@@ -134,9 +180,9 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
    be relabeled as true 10-bit HDR.
 4. Integrate the standalone Camera2 P010/HLG source, color conversion, processing, memory
    ownership, lens switching and capture completion with the existing app.
-5. Integrate the Java Main10 HEIF writer with capture/processing and the
-   processed-pair gainmap implementation. The host `tmap` writer and Android
-   direct-HLG writer are separate paths today. Verify phone encoding, decoding
+5. Supply the completed processed HDR/SDR pair to the new Java Main10 gainmap
+   save path and integrate it with the actual app capture/save lifecycle.
+   Verify phone encoding, decoding
    and display, including all requested lens/mode combinations.
 
 The user's current Camera2 diagnostic exposes at most 4080×3060 for the relevant

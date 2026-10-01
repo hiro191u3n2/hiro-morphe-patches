@@ -1,0 +1,71 @@
+{
+  "status": "PASS_INDEPENDENT_COLOR_CONVERSION_SDK36_D8_HOST",
+  "android_device_execution": false,
+  "native_camera_color_parity": false,
+  "complete_hdr_beauty": false,
+  "master_domain": "relative scene-linear BT2020, explicit sign-reflected negative extension",
+  "sdr_policy": "explicit scene-luminance Reinhard and sRGB gamut clip; no OOTF, not native ULike",
+  "synthetic_fixtures": 10,
+  "fixture_sha256": "de3171ad13b9dd5b4dc3d718ae0eea543d17eace8a1f4904f066c92c234dec15",
+  "host_review": {
+    "checks": 95032,
+    "comparisons": 86987,
+    "fractional_sdr_values": 31875,
+    "maximum_absolute_error": 2.9789504751853713e-08
+  },
+  "sdk36_compile": true,
+  "d8_min26": true,
+  "host_java_heap_max_bytes": 134217728,
+  "reviewed_file_sha256": {
+    "android_beauty_image/src/hiro/ulike/beauty/BeautyImageEngine.java": "04f381d43abf3e33dcd5c08227b1316a96de0d502ef29871f973852df9d85902",
+    "android_beauty_image/src/hiro/ulike/beauty/PinnedAssets.java": "f1fc61763e03b8fcd87d9a863ad5ff9cd6caa87ae78a98cd7b20e3e9246a2f76",
+    "android_hdr_color/src/main/java/com/hiro/ulike/hdr/color/P010SceneSource.java": "d55a60bf96bb0596ca8ff4a93f997079cf51c108966f30f3d114a66d81ccb02e",
+    "android_hdr_color/src/main/java/com/hiro/ulike/hdr/color/SdrRendition.java": "35003a891374b9d72f015a6667cb3bbee4f052cd7c6190832db0bd41c5458015",
+    "android_model_runtime/src/hiro/ulike/model/AndroidTensorEngine.java": "e6f73673f57dba5bc8257e2653ab95c12f6f5a1c5f9c724cd918d3e771fd4f15",
+    "android_model_runtime/src/hiro/ulike/model/GraphOnnx.java": "a0cec1f9dcde10322872dcd0647e5fbc626a8823106786bc4106eabf74b63aa7",
+    "android_model_runtime/src/hiro/ulike/model/OrtTensorEngine.java": "8398b72f3a619bd957c1e60275a667a047f01942be87bb167c164fe78b7658be",
+    "android_model_runtime/src/hiro/ulike/model/PinnedModel.java": "a1a38ad2b5095a530bc52e05ff15e5057281800269dd8ea131f5b35040803399",
+    "face_analysis/src/main/java/com/hiro/ulike/hdr/face/StillFaceAnalysis.java": "2847a634f2bfc431667de5e2659135be8bae65ad4b880ea0cb0bf7d7f1f47522",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/CaptureMatch.java": "df1110d3211766ddb179b4067624d8549f549b31db1ead5fbe03f6281beb4435",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/HdrFrame.java": "63fbd7c93cc899b2f046a30ea5064bb741ed08c0f6b3edbbe3a0074e7d957ada",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/InputRejected.java": "e79123ebc1be85f2e1fed73c491864ccdda1dbf87e9430963f0b12c3406a0abf",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/P010FrameReader.java": "d2ccd836bd2c719d468d43b1d70ff25758728e93cd1804db55f4defe462f43db",
+    "android_hdr_color/review/ColorReview.java": "54eb8f39dbf32151d543eef1de87b7464b30df44642c63ed3effc5dbe52bfeef",
+    "android_hdr_color/review/verify_review.py": "4a19de244b9356369a81ef695e71e3842cd8e955f884d259101c4e0fd805abb4"
+  },
+  "tool_sha256": {
+    "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "onnxruntime-android-1.30.0-classes.jar": "65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0",
+    "r8-8.3.37.jar": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199",
+    "javac": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb",
+    "java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d"
+  },
+  "coverage": [
+    "All1024 greys in full and limited ranges, full neutral512, limited64/940 anchors",
+    "Subblack, superwhite, chromaticnegative and >1 values retained in HDR",
+    "Independent 55-digit Decimal HLG reference and rational NCL/chroma equations",
+    "Allfour independent X/Y sitings, border extension, partial/padded rows",
+    "Invalid bounds reject before destination mutation, foreign-frame RGB8 rejection",
+    "Four exposure settings, fractional floatSDR separate from RGB8proxy",
+    "HDR planes unchanged after all conversions; borrowed input recycled before processing"
+  ],
+  "primary_sources": [
+    {
+      "url": "https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.2100-3-202502-I!!PDF-E.pdf",
+      "use": "Tables5,6,9: inverse OETF,NCL,full/limited quantization; note5h: preserve headroom"
+    },
+    {
+      "url": "https://www.w3.org/TR/css-color-4/#color-conversion-code",
+      "use": "Exact rational matrices BT2020->XYZ D65 and XYZ->linear sRGB; sRGB encoding"
+    },
+    {
+      "url": "https://docs.vulkan.org/spec/latest/chapters/textures.html#textures-chroma-reconstruction-explicit",
+      "use": "Cosited/midpoint explicit bilinear chroma positions"
+    },
+    {
+      "url": "https://developer.android.com/reference/android/graphics/ImageFormat#YCBCR_P010",
+      "use": "P010 sample layout does not establish measured siting"
+    }
+  ],
+  "reproduction": "python review/verify_review.py --jdk <JDKbin> --android-jar <SDK36android.jar> --ort-android-classes <ORT1.30.0classes.jar> --r8 <r8-8.3.37.jar> --report INDEPENDENT_REVIEW.json"
+}
