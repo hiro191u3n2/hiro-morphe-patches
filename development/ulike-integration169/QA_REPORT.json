@@ -7,10 +7,10 @@
   "gate_enabled": false,
   "processor_installed": false,
   "sdk_lease_admission_hooks_installed": false,
-  "production_java_sources": 73,
-  "final_runtime_methods": 3258,
+  "production_java_sources": 86,
+  "final_runtime_methods": 3475,
   "final_application_payload_methods": 160,
-  "exact_applied_method_contracts": 3418,
+  "exact_applied_method_contracts": 3635,
   "original_application_methods_preserved": 154,
   "original_runtime_methods_preserved": 1065,
   "original_runtime_hooks": 8,
@@ -31,48 +31,35 @@
   "all_lenses_modes_complete": false,
   "source_closure_unchanged_after_compilation": true,
   "unresolved": [
-    "Full-resolution calibrated same-shot segmentation masks",
-    "Native 2D face geometry and full style graph/uniform binding",
+    "Conservative 4194304-pixel diagnostic guard blocks native-size 4080x3060 analysis; not a proven vendor SDK limit",
+    "Calibrated native 2D geometry, segmentation and complete style graph/uniform binding",
+    "Actual native neural face ordering and full style binding for zero/multiple faces",
     "Global SDK lifecycle coverage and original composer restoration barrier",
-    "Multi-face neural beauty",
-    "Full application Processor installation",
+    "Trusted complete replay/capture plan and native binding providers; application Processor not installed",
     "Non-automatic-save Bitmap editor HDR URI route",
     "Burst/reprocess/all-mode integration",
+    "Possible unknown commit status if MediaStore publication succeeds but confirming inspection throws",
     "Physical-device P010 capture, ORT, Main10 codec, HEIF/gain-map viewer, all lenses/modes"
   ],
   "tooling_observation": {
     "initial_manifest_workspace_helper_error": "fixed before successful apply",
     "transient_sibling_resource_errors": "two later tool runs failed on .libttvesdk.so.random6; isolated /tmp retry with unchanged MPP succeeded",
-    "failure_suppression": false
+    "failure_suppression": false,
+    "current_build_stability": "Initial new build discarded after three source files changed during compilation; final rebuild manifest matches all 86 production sources.",
+    "current_application": "Both final immutable MPP snapshots applied successfully in isolated /tmp workspaces; all exact checks passed."
   },
   "artifacts": {
-    "qa_inputs/standalone-current.mpp": {
-      "sha256": "ab6a994d248f04d3a8f63d05ccee07e43c83ad12de980b27b3670ef36432a198",
-      "bytes": 13368923
+    "qa_inputs/coordinator-current/standalone.mpp": {
+      "sha256": "99318148e24bf13048966efc049013381dd37a67274a3d1e7c9cb4bd2df837d0",
+      "bytes": 13391304
     },
-    "qa_inputs/integrated-current.mpp": {
-      "sha256": "48be4ed2547c5200fd8da0e00dcae55391592c66db444318da917e38b2ac7139",
-      "bytes": 29914478
-    },
-    "qa_apply/standalone-isolated-patched.apk": {
-      "sha256": "c1c807357b717a003837b2585de0ddbd6042afd0265c9b28a65d64dfad2beadb",
-      "bytes": 162353534
-    },
-    "qa_apply/integrated-current-patched.apk": {
-      "sha256": "7f34fa2c4d0f6b0214700c46baa60b16d1f906b7ccf699a4b8466735f59ec11f",
-      "bytes": 162353534
-    },
-    "qa_apply/standalone-isolated-result.json": {
-      "sha256": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
-      "bytes": 267
-    },
-    "qa_apply/integrated-current-result.json": {
-      "sha256": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
-      "bytes": 267
+    "qa_inputs/coordinator-current/integrated.mpp": {
+      "sha256": "455b98f46e4d0e6acfa07bbb14f9468b677e6ea36401d1e0042ec8d8dc6ef848",
+      "bytes": 29936859
     },
     "build/runtime.dex": {
-      "sha256": "95019a4e2e17ed2e4ee00e2bd26081f7855dc3d3e42ef87d16ecc5777bc8af75",
-      "bytes": 821348
+      "sha256": "8b5abeedd48515c5e03c6b2e87b930777ed8b7cb44400dc104d682e3150a4c84",
+      "bytes": 870056
     },
     "build/methods.dex": {
       "sha256": "b01e590f456004f692942c9d6ceb0859f96a545c76a79243517bd3289216f327",
@@ -87,17 +74,71 @@
       "bytes": 2988
     },
     "audit/source-compilation-sha256.tsv": {
-      "sha256": "06befb26c656e6ba85340a2620b66f40781a58e94e4db00cb616cbdc02bbde4a",
-      "bytes": 11900
+      "sha256": "aa20afad6ed7d8e40fe0a428eadb25b5f441c203174fb955b465dea5b50da912",
+      "bytes": 14038
+    },
+    "QA_COORDINATOR.json": {
+      "sha256": "f0f2406af00ec1ebcdf5b41e825873af94c11ece43a6dc16dc90b699db78d63a",
+      "bytes": 17374
+    },
+    "PROCESSOR_INDEPENDENT_REVIEW.json": {
+      "sha256": "4aed91a65bb91e50243e62e06c05fd2d9ff02afc89b509c29703cfa4db452428",
+      "bytes": 19630
+    },
+    "qa_apply/coordinator-current/morphe-1.16-standalone-patched.apk": {
+      "sha256": "d89ca07e51b37e344fe1868081a5d087297a5f0b286ad850528850a317c0ae98",
+      "bytes": 162369781
+    },
+    "qa_apply/coordinator-current/morphe-1.16-standalone-result.json": {
+      "sha256": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+      "bytes": 267
+    },
+    "qa_apply/coordinator-current/morphe-1.16-standalone-dex-verification.txt": {
+      "sha256": "27b20d9b5832123ba2c8243afea208485d1d682a97f73df0361534fc9505eb15",
+      "bytes": 155
+    },
+    "qa_apply/coordinator-current/morphe-1.16-standalone-resource-verification.json": {
+      "sha256": "a2a83bbbaaef3b9b13572fcd58bafbd24af78a728c482d4c6fb50c7c5962720a",
+      "bytes": 2174
+    },
+    "qa_apply/coordinator-current/morphe-1.16-integrated-patched.apk": {
+      "sha256": "3fe65f53299fc8d9a993c17f8620e44f609e444d5c2e2c7eef3efc354b323e6f",
+      "bytes": 162369781
+    },
+    "qa_apply/coordinator-current/morphe-1.16-integrated-result.json": {
+      "sha256": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+      "bytes": 267
+    },
+    "qa_apply/coordinator-current/morphe-1.16-integrated-dex-verification.txt": {
+      "sha256": "27b20d9b5832123ba2c8243afea208485d1d682a97f73df0361534fc9505eb15",
+      "bytes": 155
+    },
+    "qa_apply/coordinator-current/morphe-1.16-integrated-resource-verification.json": {
+      "sha256": "7d1804245355fedc8f797fa7fc64e25acedc1e171b02b5a46035eb463621c7d6",
+      "bytes": 2174
     }
   },
   "independent_review": {
     "status": "PASS_DISABLED_CHECKPOINT",
     "host_guard_checks": 33,
     "report": "INDEPENDENT_REVIEW.json",
-    "sha256": "f164d66b8e9c30fa6a53e7f7aa5f65daeeadaea3c82c15a74a27c6d2f87e1aff",
+    "sha256": "5cf2092b4cbe511efab2fb64fd558dbb532513dba23a7e60425587db3a10fcc0",
     "original_runtime_classes_preserved": 182,
+    "original_runtime_methods_preserved": 1065,
     "optical_zoom_classes_preserved": 21,
     "actual_android_execution": false
-  }
+  },
+  "concrete_coordinator_implemented": true,
+  "coordinator_host_checks": 425,
+  "calibrated_native_providers_implemented": false,
+  "excluded_unconnected_modules": [
+    "native_geometry_contract"
+  ],
+  "coordinator_independent_review": {
+    "status": "PASS_DECLARED_COORDINATOR_SOURCE_AND_HOST_STATE_SETTINGS_REVIEW",
+    "report": "PROCESSOR_INDEPENDENT_REVIEW.json",
+    "sha256": "4aed91a65bb91e50243e62e06c05fd2d9ff02afc89b509c29703cfa4db452428",
+    "android_device_execution": false
+  },
+  "same_capture_analysis_pixel_binding_implemented": true
 }

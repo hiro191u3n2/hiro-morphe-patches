@@ -26,6 +26,9 @@ for folder in ('runtime/classes','runtime/dex','vendor_dex'):
 sources=[]
 for p in core.rglob('*.java'):
  if 'src' not in p.parts or any(x in p.parts for x in ('test','tests','review','android_runtime_package','qa')) or any(x.startswith('test-') for x in p.parts):continue
+ # Standalone native mesh diagnostic is not connected by any app provider yet.
+ # Keep its independently evolving investigation outside this exact app payload.
+ if 'native_geometry_contract' in p.parts:continue
  sources.append(p.resolve())
 sources+=list((r/'runtime/src').rglob('*.java'))
 (r/'runtime/sources.txt').write_text('\n'.join(map(str,sorted(sources)))+'\n')

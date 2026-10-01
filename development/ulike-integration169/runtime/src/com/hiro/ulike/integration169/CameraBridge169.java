@@ -48,11 +48,12 @@ public final class CameraBridge169 {
         public final SavedUriHandoff169.Token handoff;
         public final com.hiro.ulike.binding.ShotStyleSettings.Snapshot style;
         public final Object recorder,bitmapCallback,shotIdentity;
-        public final long shotEpoch;
+        public final long shotEpoch,dateTakenMs;
         public final int sensorOrientation,lensFacing;
-        public final Rect sensorCrop;
+        private final Rect sensorCrop;
+        public Rect sensorCrop(){return new Rect(sensorCrop);}
         private OwnedShot(HdrFrame f,AppHook169.Choice c,int orientation,int facing,Rect crop) {
-            pixels=f;handoff=c.handoff;style=c.settings;recorder=c.recorder;bitmapCallback=c.bitmapCallback;shotIdentity=c.identity;shotEpoch=c.epoch;
+            pixels=f;handoff=c.handoff;style=c.settings;recorder=c.recorder;bitmapCallback=c.bitmapCallback;shotIdentity=c.identity;shotEpoch=c.epoch;dateTakenMs=c.dateTakenMs;
             sensorOrientation=orientation;lensFacing=facing;sensorCrop=new Rect(crop);
         }
     }

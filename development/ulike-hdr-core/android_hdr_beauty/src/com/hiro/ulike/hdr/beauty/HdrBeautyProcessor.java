@@ -25,22 +25,67 @@ public final class HdrBeautyProcessor {
         void abort()throws Exception;
     }
     public enum GraphPolicy { DECLARED_OUTER_ORDER_WITH_RESOLVED_SUBORDER_AND_HDR_SOURCE_BINDINGS }
+    public static final int MAX_NEURAL_FACES=16;
+    /** Conservative retained primitive arrays per immutable prepared layer, including an unshared mask.
+     * This excludes ORT, the source frame, upstream preparation scratch and JVM object overhead.
+     */
+    public static final long RETAINED_NEURAL_ARRAY_BYTES_PER_FACE=2200000L;
+    /** Immutable caller-observed complete face order for the exact still and application settings.
+     * This module cannot discover or verify native draw order. A detector's array order alone
+     * is not evidence of shader order. An empty observation must explicitly report zero faces.
+     */
+    public static final class ObservedNeuralOrder {
+        private final SdrRendition rendition;
+        private final List<String> faceIds;
+        private final String captureId,geometryId,applicationSettingsSha256;
+        public final Style style;
+        public final String evidence,sha256;
+        private ObservedNeuralOrder(SdrRendition rendition,Style style,String captureId,String geometryId,
+                byte[] applicationSettings,List<String> faceIds,String evidence){
+            require(rendition!=null && style!=null && faceIds!=null,"exact rendition/style and complete observed order required");
+            id(captureId);id(geometryId);id(evidence);settings(applicationSettings);
+            require(faceIds.size()<=MAX_NEURAL_FACES,"observed neural face count exceeds hard bound");
+            this.rendition=rendition;this.style=style;this.captureId=captureId;this.geometryId=geometryId;
+            this.applicationSettingsSha256=sha(applicationSettings.clone());this.evidence=evidence;
+            ArrayList<String> owned=boundedFaces(faceIds);Set<String> seen=new HashSet<>();
+            StringBuilder canonical=new StringBuilder("ulike-observed-neural-order-v1\n");
+            field(canonical,style.name());field(canonical,captureId);field(canonical,geometryId);
+            field(canonical,this.applicationSettingsSha256);field(canonical,evidence);
+            canonical.append(owned.size()).append('\n');
+            for(String faceId:owned){id(faceId);require(seen.add(faceId),"duplicate observed face ID");field(canonical,faceId);}
+            this.faceIds=Collections.unmodifiableList(owned);this.sha256=sha(canonical.toString().getBytes(StandardCharsets.UTF_8));
+        }
+        public static ObservedNeuralOrder capture(SdrRendition rendition,Style style,String captureId,String geometryId,
+                byte[] exactAppSettingsSnapshot,List<String> completeOrderedFaceIds,String nativeOrderEvidence){
+            return new ObservedNeuralOrder(rendition,style,captureId,geometryId,exactAppSettingsSnapshot,completeOrderedFaceIds,nativeOrderEvidence);
+        }
+        public List<String> faceIds(){return faceIds;}
+    }
+    public static final class NeuralFace {
+        public final String faceId;
+        public final PreparedNeuralLayer layer;
+        public NeuralFace(String faceId,PreparedNeuralLayer layer){id(faceId);require(layer!=null,"prepared face layer required");this.faceId=faceId;this.layer=layer;}
+    }
     public static final class Snapshot {
         public final Object frameIdentity;
         public final int width,height;
         public final String captureId,geometryId,settingsSha256;
         public final Style style;
         public final HdrAppearance.Policy policy;
+        public final int neuralFaceCount;
+        public final boolean explicitObservedNeuralOrder;
+        public final String neuralOrderSha256;
         private final SdrRendition rendition;
-        private final PreparedNeuralLayer neural;
+        private final List<NeuralFace> neuralFaces;
         private final byte[] canonical;
         private Snapshot(SdrRendition rendition,PreparedNeuralLayer layer,HdrAppearance.Policy policy,
                          String capture,String geometry,byte[] applicationSettings,GraphPolicy graphPolicy){
             require(rendition!=null && layer!=null && policy!=null && graphPolicy==GraphPolicy.DECLARED_OUTER_ORDER_WITH_RESOLVED_SUBORDER_AND_HDR_SOURCE_BINDINGS,"explicit rendition/layer/HDR graph policy required");
             require(layer.preparedFrom(rendition) && layer.frameIdentity==rendition.frameIdentity()
                     && layer.width==rendition.width() && layer.height==rendition.height(),"layer was not prepared from this exact captured SDR rendition");
-            id(capture);id(geometry);require(applicationSettings!=null && applicationSettings.length>0 && applicationSettings.length<=1024*1024,"bounded exact application settings required");
-            this.rendition=rendition;this.neural=layer;this.policy=policy;this.frameIdentity=layer.frameIdentity;
+            id(capture);id(geometry);settings(applicationSettings);
+            this.rendition=rendition;this.neuralFaces=Collections.singletonList(new NeuralFace("legacy-single-face",layer));this.policy=policy;this.frameIdentity=layer.frameIdentity;
+            this.neuralFaceCount=1;this.explicitObservedNeuralOrder=false;this.neuralOrderSha256=null;
             this.width=layer.width;this.height=layer.height;this.captureId=capture;this.geometryId=geometry;
             this.style=Style.valueOf(layer.style.name());
             String text="ulike-hdr-appearance-settings-v1\npolicy="+HdrAppearance.POLICY
@@ -50,10 +95,48 @@ public final class HdrBeautyProcessor {
                 +"\napplication-settings-sha256="+sha(applicationSettings.clone())+"\n";
             canonical=text.getBytes(StandardCharsets.UTF_8);settingsSha256=sha(canonical);
         }
+        private Snapshot(SdrRendition rendition,ObservedNeuralOrder order,List<NeuralFace> faces,HdrAppearance.Policy policy,
+                         String capture,String geometry,byte[] applicationSettings,GraphPolicy graphPolicy){
+            require(rendition!=null && order!=null && faces!=null && policy!=null && graphPolicy==GraphPolicy.DECLARED_OUTER_ORDER_WITH_RESOLVED_SUBORDER_AND_HDR_SOURCE_BINDINGS,"explicit observed face order and HDR graph required");
+            id(capture);id(geometry);settings(applicationSettings);String applicationSha=sha(applicationSettings.clone());
+            require(order.rendition==rendition && order.captureId.equals(capture) && order.geometryId.equals(geometry)
+                    && order.applicationSettingsSha256.equals(applicationSha),"face observation belongs to another still/settings/geometry");
+            require(faces.size()<=MAX_NEURAL_FACES,"prepared face count exceeds hard bound");
+            ArrayList<NeuralFace> owned=boundedFaces(faces);
+            require(owned.size()==order.faceIds.size(),"every observed face requires exactly one prepared layer");
+            Set<PreparedNeuralLayer> seen=Collections.newSetFromMap(new IdentityHashMap<PreparedNeuralLayer,Boolean>());
+            StringBuilder text=new StringBuilder("ulike-hdr-appearance-settings-v2-ordered-faces\n");
+            field(text,HdrAppearance.POLICY);field(text,order.sha256);field(text,order.style.name());field(text,capture);field(text,geometry);
+            for(int i=0;i<owned.size();i++){
+                NeuralFace face=owned.get(i);require(face!=null && order.faceIds.get(i).equals(face.faceId),"prepared face order differs from complete observed order");
+                PreparedNeuralLayer layer=face.layer;
+                require(seen.add(layer),"same prepared layer reused for multiple face IDs");
+                require(layer.preparedFrom(rendition) && layer.frameIdentity==rendition.frameIdentity()
+                        && layer.width==rendition.width() && layer.height==rendition.height()
+                        && layer.style.name().equals(order.style.name()),"foreign rendition/raster/style in neural face layers");
+                field(text,face.faceId);field(text,layer.processingSha256);
+            }
+            field(text,rendition.policyName());field(text,graphPolicy.name());field(text,applicationSha);
+            text.append("sdr-white-nits=203\nhlg-reference-nits=1000\nhlg-system-gamma=1.2\ngenerated-peak=")
+                .append(Double.toHexString(policy.generatedPeakNits)).append("\nstorage-peak=").append(Double.toHexString(policy.storagePeakNits)).append('\n');
+            this.rendition=rendition;this.neuralFaces=Collections.unmodifiableList(owned);this.policy=policy;this.frameIdentity=rendition.frameIdentity();
+            this.width=rendition.width();this.height=rendition.height();this.captureId=capture;this.geometryId=geometry;this.style=order.style;
+            this.neuralFaceCount=owned.size();this.explicitObservedNeuralOrder=true;this.neuralOrderSha256=order.sha256;
+            canonical=text.toString().getBytes(StandardCharsets.UTF_8);settingsSha256=sha(canonical);
+        }
         public static Snapshot create(SdrRendition rendition,PreparedNeuralLayer layer,HdrAppearance.Policy policy,
                 String captureId,String geometryId,byte[] exactAppSettingsSnapshot,GraphPolicy graphPolicy){
             return new Snapshot(rendition,layer,policy,captureId,geometryId,exactAppSettingsSnapshot,graphPolicy);
         }
+        /** Faces are composed source-over in the supplied observed order. All are prepared from
+         * the same original rendition, never implicitly from a previously edited face result.
+         * Zero faces still requires a complete BindingProvider for the remaining style graph.
+         */
+        public static Snapshot createOrderedFaces(SdrRendition rendition,ObservedNeuralOrder order,List<NeuralFace> completeOrderedLayers,
+                HdrAppearance.Policy policy,String captureId,String geometryId,byte[] exactAppSettingsSnapshot,GraphPolicy graphPolicy){
+            return new Snapshot(rendition,order,completeOrderedLayers,policy,captureId,geometryId,exactAppSettingsSnapshot,graphPolicy);
+        }
+        public List<NeuralFace> neuralFaces(){return neuralFaces;}
         public byte[] settingsSnapshotBytes(){return canonical.clone();}
     }
     /** Exact external HDR shader source for Purity video/u_basic bindings. Never inferred from SDR. */
@@ -90,9 +173,16 @@ public final class HdrBeautyProcessor {
     public static final class Budget {
         public final int tileRows,maxTilePixels;
         public final long maxImagePixels,maxModuleArrayAllocationBytesPerTile;
+        public final int maxNeuralFaces;
+        public final long maxRetainedNeuralArrayBytes,maxNeuralSampleCount;
         public Budget(int tileRows,int maxTilePixels,long maxImagePixels,long maxArrayBytes){
+            this(tileRows,maxTilePixels,maxImagePixels,maxArrayBytes,MAX_NEURAL_FACES,MAX_NEURAL_FACES*RETAINED_NEURAL_ARRAY_BYTES_PER_FACE,400000000L);
+        }
+        public Budget(int tileRows,int maxTilePixels,long maxImagePixels,long maxArrayBytes,int maxNeuralFaces,long maxRetainedNeuralArrayBytes,long maxNeuralSampleCount){
             require(tileRows>=1 && tileRows<=64 && maxTilePixels>0 && maxTilePixels<=262144 && maxImagePixels>0 && maxArrayBytes>0,"bounded HDR tile policy required");
+            require(maxNeuralFaces>=0 && maxNeuralFaces<=MAX_NEURAL_FACES && maxRetainedNeuralArrayBytes>=0 && maxNeuralSampleCount>=0,"bounded neural face/work policy required");
             this.tileRows=tileRows;this.maxTilePixels=maxTilePixels;this.maxImagePixels=maxImagePixels;this.maxModuleArrayAllocationBytesPerTile=maxArrayBytes;
+            this.maxNeuralFaces=maxNeuralFaces;this.maxRetainedNeuralArrayBytes=maxRetainedNeuralArrayBytes;this.maxNeuralSampleCount=maxNeuralSampleCount;
         }
         public static Budget standard(){return new Budget(4,262144,25000000,32L*1024*1024);}
     }
@@ -105,14 +195,29 @@ public final class HdrBeautyProcessor {
     private static final class Counts {long sourceGamut,sourceBlack,generatedCap,workingGamut,changed;}
     private static void require(boolean b,String message){if(!b)throw new IllegalArgumentException(message);}
     private static void id(String s){require(s!=null && !s.trim().isEmpty() && s.length()<=256 && s.indexOf('\n')<0 && s.indexOf('\r')<0,"bounded explicit identity required");}
+    private static void settings(byte[] bytes){require(bytes!=null && bytes.length>0 && bytes.length<=1024*1024,"bounded exact application settings required");}
+    private static <T> ArrayList<T> boundedFaces(List<T> input){ArrayList<T> result=new ArrayList<>(MAX_NEURAL_FACES);for(T value:input){require(result.size()<MAX_NEURAL_FACES,"face list exceeds hard bound during copy");result.add(value);}return result;}
+    private static void field(StringBuilder target,String value){target.append(value.length()).append(':').append(value).append('\n');}
     private static String sha(byte[] b){try{byte[] d=MessageDigest.getInstance("SHA-256").digest(b);StringBuilder s=new StringBuilder();for(byte v:d)s.append(Character.forDigit((v&255)>>>4,16)).append(Character.forDigit(v&15,16));return s.toString();}catch(NoSuchAlgorithmException e){throw new AssertionError(e);}}
     private static boolean same(FrameTile a,FrameTile b){return a!=null && b!=null && a.captureId.equals(b.captureId) && a.sensorTimestampNs==b.sensorTimestampNs && a.imageWidth==b.imageWidth && a.imageHeight==b.imageHeight && a.x==b.x && a.y==b.y && a.width==b.width && a.height==b.height;}
     private static long tileAllocationBound(Style style,int pixels){return 65536L+(style==Style.NATURAL_BLUSH?256L:1024L)*pixels;}
-
+    private static void rasterAndFaces(Style style,int w,int h,int faceCount,Budget budget){
+        require(w>=1 && h>=1 && w<=16384 && h<=16384 && (long)w*h<=budget.maxImagePixels && w<=budget.maxTilePixels,"HDR raster budget");
+        require(faceCount<=budget.maxNeuralFaces && faceCount*RETAINED_NEURAL_ARRAY_BYTES_PER_FACE<=budget.maxRetainedNeuralArrayBytes
+                && (long)w*h*faceCount<=budget.maxNeuralSampleCount,"neural face retention/work budget");
+        require(tileAllocationBound(style,w)<=budget.maxModuleArrayAllocationBytesPerTile,"one HDR row exceeds allocation budget");
+    }
+    /** Check before preparing any neural layers, to reject an unaffordable observed count early.
+     * Inference must also enforce BeautyImageEngine's separate preparation/workspace budget.
+     * render repeats these limits before beginning private staging.
+     */
+    public static void preflightNeuralOrder(ObservedNeuralOrder order,Budget budget){
+        require(order!=null && budget!=null,"observed order and budget required");
+        rasterAndFaces(order.style,order.rendition.width(),order.rendition.height(),order.faceIds.size(),budget);
+    }
     public static Result render(Snapshot snapshot,BindingProvider bindings,PairSink sink,Budget budget)throws Exception {
         require(snapshot!=null && bindings!=null && sink!=null && budget!=null,"snapshot, bindings, private pair sink and budget required");
-        int w=snapshot.width,h=snapshot.height;require(w>=1 && h>=1 && w<=16384 && h<=16384 && (long)w*h<=budget.maxImagePixels && w<=budget.maxTilePixels,"HDR raster budget");
-        require(tileAllocationBound(snapshot.style,w)<=budget.maxModuleArrayAllocationBytesPerTile,"one HDR row exceeds allocation budget");
+        int w=snapshot.width,h=snapshot.height;rasterAndFaces(snapshot.style,w,h,snapshot.neuralFaceCount,budget);
         int rows=Math.min(h,Math.min(budget.tileRows,budget.maxTilePixels/w));
         while(tileAllocationBound(snapshot.style,w*rows)>budget.maxModuleArrayAllocationBytesPerTile)rows--;
         P010SceneSource captured=snapshot.rendition.hdrSource();require(captured.frameIdentity()==snapshot.frameIdentity,"captured source changed");
@@ -129,9 +234,12 @@ public final class HdrBeautyProcessor {
                     int off=(row*w+x)*3;captured.readPixel(x,start+row,scene);
                     int flags=HdrAppearance.sceneToDisplay(scene[0],scene[1],scene[2],snapshot.policy,display);
                     if((flags&1)!=0)counts.sourceGamut++;if((flags&2)!=0)counts.sourceBlack++;
-                    snapshot.neural.sampleAt(x,start+row,layer);double weight=layer[3];
-                    if(weight>0){if(HdrAppearance.generatedPatch(layer[0],layer[1],layer[2],snapshot.rendition.exposureScale,snapshot.policy,patch))counts.generatedCap++;
-                        for(int c=0;c<3;c++)display[c]=weight==1?patch[c]:display[c]*(1-weight)+patch[c]*weight;}
+                    for(int faceIndex=0;faceIndex<snapshot.neuralFaceCount;faceIndex++){
+                        NeuralFace face=snapshot.neuralFaces.get(faceIndex);
+                        face.layer.sampleAt(x,start+row,layer);double weight=layer[3];
+                        if(weight>0){if(HdrAppearance.generatedPatch(layer[0],layer[1],layer[2],snapshot.rendition.exposureScale,snapshot.policy,patch))counts.generatedCap++;
+                            for(int c=0;c<3;c++)display[c]=weight==1?patch[c]:display[c]*(1-weight)+patch[c]*weight;}
+                    }
                     HdrAppearance.checkedDisplay(display[0],display[1],display[2],snapshot.policy.headroom());
                     System.arraycopy(display,0,current,off,3);
                 }

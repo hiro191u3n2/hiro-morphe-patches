@@ -1,0 +1,50 @@
+{
+  "schema": "ulike-partial-lifetime-qa-1",
+  "status": "PASS_SCOPED_HOST_AND_EXACT_STOCK_DEX_RECONSTRUCTION",
+  "host_checks": {
+    "still_analysis": 45,
+    "admission": 29,
+    "native_lifetime_boundary": 14
+  },
+  "sdk36_compile": true,
+  "original_apk_class_inventory": 33134,
+  "actual_partial_transform_methods": 3,
+  "actual_normal_exits": 6,
+  "actual_exception_cleanup_regions": 5,
+  "exact_original_method_hash_reconstruction_after_serialization": true,
+  "partial_transform_installed": false,
+  "full_admission_installed": false,
+  "runtime_enable_api_exists": false,
+  "app_restore_barrier_implemented": false,
+  "art_device_tested": false,
+  "partial_dex_sha256": "59e7eeb89b10956118476cd493c7447cb57a79b8541d890700938acd209b30e7",
+  "source_sha256": {
+    "Inventory169.java": "30655301e04624066ee1277296a86bf03780f3c92ed993de054939b1921b99c8",
+    "PrepareNativeLifetime169.java": "11d33bb6146a58731772481a2f3927ab3ff611904cf1c4ff78fd5eb0d4a09829",
+    "VerifyNativeLifetime169.java": "fd71047980416fd425cb015fb4cf4b4c6561d8320252a03a8f0b503bc3fc1994",
+    "verify_inventory.py": "96e958e2978670b0e0e54ef1034ac55731361972454179bb781db27f494c5cb2",
+    "validate.sh": "5ef6697c8608ddc4ae972dd3322039efdae909c3dd7cbb5191fb265812596b9d",
+    "README.md": "7f749f77d76f3be652570c516caec82e99e7e16d1378afcf2e64ed538c565fb8"
+  },
+  "core_source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/NativeLifetimeBoundary.java": "03845d652c0b3a860bee2216451d88a39e2fda32ecc5f97e5511707744f52770",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/NativeLifetimeHooks.java": "0a2ecea77c94f471323b8e7c68079bd33f6f4485815a44dd2951e9d8c2676558",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/PausedStockPreview.java": "9d444689d4d0d758cb34ac0891aa5f796bc90ded128774326165fed26210c138",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/RecorderAdmission.java": "2084629b69a6af97b9cc25a6fedc56990c12cdce1f48e4753769e69bda863a14",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/SdkFaceSnapshot.java": "e8872a8cf8b749ca39842489dfe034eed16c258f577370c857df14a0a3ab760a",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/StillMessageCollector.java": "8d343e8a86d870d08380c5017ef73794dba02e88a297548ccf289ce8987d976f",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java": "37036d2d574759a304e7e5800f600fcc9dd3971e877a1046176c08eb85834527"
+  },
+  "limits": [
+    "Only static original-APK DEX references were inventoried; no reflection or native dynamic-coverage proof",
+    "Whole constructors/backend worker/lifecycle guard coverage remains missing",
+    "The exact native-init app path contains asynchronous work; no composer restoration/render receipt implemented",
+    "Disabled partial transform remains outside both current private MPP candidates"
+  ],
+  "independent_review": {
+    "report": "core/android_still_analysis/review_lifetime/INDEPENDENT_REVIEW.json",
+    "sha256": "66040d2973f47feb199e4339e5d9dcebd9bbb64753b12d03a74346bf302c3c02",
+    "host_checks": 48,
+    "emitted_dex_structural_checks": 66
+  }
+}

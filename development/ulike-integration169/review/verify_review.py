@@ -18,6 +18,7 @@ import zipfile
 HERE=Path(__file__).resolve().parent
 MODULE=HERE.parent
 ANDROID='{http://schemas.android.com/apk/res/android}'
+os.environ['ORT_DISABLE_TELEMETRY']='1'
 
 def sha(path):
     h=hashlib.sha256()
@@ -68,9 +69,12 @@ def main():
     input_pins={kind:{name:sha(path) for name,path in case.items()} for kind,case in cases.items()}
     with tempfile.TemporaryDirectory(prefix='ulike-candidate169-independent-') as directory:
         work=Path(directory);classes=work/'classes';classes.mkdir()
-        android_cp=os.pathsep.join(map(str,[tools/'android.jar',MODULE/'runtime/helpers.jar']))
+        ort_classes=tools/'onnxruntime-android-1.30.0-classes.jar'
+        if sha(ort_classes)!='65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0':
+            raise ValueError('wrong pinned ORT compile dependency')
+        android_cp=os.pathsep.join(map(str,[tools/'android.jar',MODULE/'runtime/helpers.jar',ort_classes]))
         run([jdk/'javac','--release','8','-cp',android_cp,'-d',classes,*runtime_sources,HERE/'OpticalZoom.java',HERE/'DisabledBridgeReview.java'])
-        host=json.loads(run([jdk/'java','-cp',os.pathsep.join(map(str,[classes,tools/'android.jar',MODULE/'runtime/helpers.jar'])),
+        host=json.loads(run([jdk/'java','-cp',os.pathsep.join(map(str,[classes,tools/'android.jar',MODULE/'runtime/helpers.jar',ort_classes])),
                             'com.hiro.ulike.integration169.DisabledBridgeReview']))
         dex_cp=os.pathsep.join(map(str,[build/'java',tools/'morphe-1.16.jar',build/'old']))
         run([jdk/'javac','-cp',dex_cp,'-d',classes,HERE/'ArtifactReview169.java'])
@@ -89,7 +93,7 @@ def main():
     if input_pins!={kind:{name:sha(path) for name,path in case.items()} for kind,case in cases.items()}:raise RuntimeError('Reviewed APK/MPP/result changed')
     report={'status':'PASS_DISABLED_CANDIDATE_REVIEW','host_guard_tests':host,'runtime_preservation':dex,'apk_cases':output,
         'reviewed_file_sha256':before,'artifact_sha256':input_pins,'input_apks_sha256':sha(args.apks),
-        'tool_sha256':{name:sha(tools/name) for name in ('android.jar','apktool.jar','morphe-1.16.jar')},
+        'tool_sha256':{name:sha(tools/name) for name in ('android.jar','apktool.jar','morphe-1.16.jar','onnxruntime-android-1.30.0-classes.jar')},
         'jdk_sha256':{name:sha(jdk/name) for name in ('java','javac')},
         'resolved_review_findings':[
             'Queued stale capture failures and sequence aborts check the exact currently submitted request/session before cleanup.',
@@ -106,6 +110,8 @@ def main():
             'The test-only OpticalZoom recorder verifies delegate routing on a host; it is not packaged, and it is not Android Camera2 execution.',
             'P010 callback matching and saved-URI active paths are source reviewed; real Camera2, MediaStore UI, Samsung native inference, lens/focus speed and visual quality require device validation.',
             'Automatic-save handoff is the only implemented UI route; Bitmap editor and burst HDR modes are explicitly unsupported.',
+            'A concrete coordinator now exists, but no trusted complete native plan/binding/restoration providers are installed; its separate source/sequence review is PROCESSOR_INDEPENDENT_REVIEW.json.',
+            'If underlying MediaStore publication succeeds but its confirming ownership read fails before savePair returns, commit is unknown. A thrown save exception does not establish that the photo is unsaved; recovery preserves visible rows.',
             'High-resolution P010 alone does not establish sensor-native24.5MP input, chroma siting, or end-to-end stock appearance equivalence.'
         ]}
     args.report.write_text(json.dumps(report,indent=2)+'\n')

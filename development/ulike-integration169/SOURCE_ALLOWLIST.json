@@ -2,41 +2,52 @@
   "original_source_only": true,
   "exclude": [
     "audit/private",
-    "runtime_payload",
-    "private_dist",
     "build",
-    "runtime/classes",
-    "runtime/dex",
+    "lifecycle/private_build",
+    "private_dist",
     "qa_apply",
     "qa_inputs",
-    "vendor_dex",
-    "tool_baseline"
+    "runtime/classes",
+    "runtime/dex",
+    "runtime_payload",
+    "tool_baseline",
+    "vendor_dex"
   ],
   "files": [
     {
       "path": "INDEPENDENT_REVIEW.json",
-      "sha256": "f164d66b8e9c30fa6a53e7f7aa5f65daeeadaea3c82c15a74a27c6d2f87e1aff",
-      "bytes": 13503
+      "sha256": "5cf2092b4cbe511efab2fb64fd558dbb532513dba23a7e60425587db3a10fcc0",
+      "bytes": 14482
+    },
+    {
+      "path": "PROCESSOR_INDEPENDENT_REVIEW.json",
+      "sha256": "4aed91a65bb91e50243e62e06c05fd2d9ff02afc89b509c29703cfa4db452428",
+      "bytes": 19630
+    },
+    {
+      "path": "QA_COORDINATOR.json",
+      "sha256": "f0f2406af00ec1ebcdf5b41e825873af94c11ece43a6dc16dc90b699db78d63a",
+      "bytes": 17374
     },
     {
       "path": "QA_REPORT.json",
-      "sha256": "7d3904c257c3d0f3559b0e4da3208df7ecc9ac90009075372c75759aeab348d8",
-      "bytes": 4109
+      "sha256": "59c230f511f6864418afc2f0bab7a9c1ee6408614ec8d46ffa61c0f58d77e266",
+      "bytes": 6529
     },
     {
       "path": "README.md",
-      "sha256": "541161de6b30d83ca44e63693a7661da3b8ad4ce9132c54dda61125e0f2fe625",
-      "bytes": 3817
+      "sha256": "1d4133af4a4b4dba3fc5462bcba9386532e36a30f4c4b0997fe3e5e079a3fad8",
+      "bytes": 7043
     },
     {
       "path": "assemble_candidate.sh",
-      "sha256": "1c1b23e6dc46d24706cf5674bae36a0ae69277e4ad3513e668918e89b4aeff07",
-      "bytes": 4445
+      "sha256": "a9b5b864c8536a57adc433320428753719f659597268046f7f3f69e4e0ab7112",
+      "bytes": 4656
     },
     {
       "path": "audit/source-compilation-sha256.tsv",
-      "sha256": "06befb26c656e6ba85340a2620b66f40781a58e94e4db00cb616cbdc02bbde4a",
-      "bytes": 11900
+      "sha256": "aa20afad6ed7d8e40fe0a428eadb25b5f441c203174fb955b465dea5b50da912",
+      "bytes": 14038
     },
     {
       "path": "audit/ui-contracts.tsv",
@@ -99,6 +110,51 @@
       "bytes": 6521
     },
     {
+      "path": "lifecycle/INVENTORY.json",
+      "sha256": "6ff231646519d36d8b32d4724fd7344074570f99fb9c23ef7440f8f04c88708f",
+      "bytes": 5287
+    },
+    {
+      "path": "lifecycle/Inventory169.java",
+      "sha256": "30655301e04624066ee1277296a86bf03780f3c92ed993de054939b1921b99c8",
+      "bytes": 3935
+    },
+    {
+      "path": "lifecycle/PrepareNativeLifetime169.java",
+      "sha256": "11d33bb6146a58731772481a2f3927ab3ff611904cf1c4ff78fd5eb0d4a09829",
+      "bytes": 5518
+    },
+    {
+      "path": "lifecycle/QA.json",
+      "sha256": "cba9777474033aa642a0d3b1b02021ca17ba7b973a9ea96e6c4c6a794baec1b4",
+      "bytes": 3075
+    },
+    {
+      "path": "lifecycle/README.md",
+      "sha256": "7f749f77d76f3be652570c516caec82e99e7e16d1378afcf2e64ed538c565fb8",
+      "bytes": 2519
+    },
+    {
+      "path": "lifecycle/SOURCE_ALLOWLIST.json",
+      "sha256": "b79f721212a4e84ecc4cab24884af30456b3f46fdcbf22a9dd884af92f869094",
+      "bytes": 1405
+    },
+    {
+      "path": "lifecycle/VerifyNativeLifetime169.java",
+      "sha256": "fd71047980416fd425cb015fb4cf4b4c6561d8320252a03a8f0b503bc3fc1994",
+      "bytes": 4187
+    },
+    {
+      "path": "lifecycle/validate.sh",
+      "sha256": "5ef6697c8608ddc4ae972dd3322039efdae909c3dd7cbb5191fb265812596b9d",
+      "bytes": 1086
+    },
+    {
+      "path": "lifecycle/verify_inventory.py",
+      "sha256": "96e958e2978670b0e0e54ef1034ac55731361972454179bb781db27f494c5cb2",
+      "bytes": 4918
+    },
+    {
       "path": "review/ArtifactReview169.java",
       "sha256": "eefbba3ef3a4c7be78f943cb8ca324e0d4f3bb0bc343779ab5b44dcd6a2c188b",
       "bytes": 3459
@@ -115,18 +171,33 @@
     },
     {
       "path": "review/verify_review.py",
-      "sha256": "4d9a32206b45ae78b89a2d527ac79cb51d5797ae83efa879a3b193ccaedebc71",
-      "bytes": 8664
+      "sha256": "8c46c22fe5d2fc9bc86debf46d39442dd65cf492e6cca19d46b24509a68a12cc",
+      "bytes": 9454
+    },
+    {
+      "path": "review_processor/CapturedSettingsReview.java",
+      "sha256": "c76e489470b68d16ec3c1014b2a7c91b8c79241359dc00dcb83a5b4e07fcf51b",
+      "bytes": 4717
+    },
+    {
+      "path": "review_processor/SequenceReview.java",
+      "sha256": "47b89b71cbde1ee50d27e676b59229cda13615a8eff187eb61e172846c46654a",
+      "bytes": 6818
+    },
+    {
+      "path": "review_processor/verify_processor_review.py",
+      "sha256": "a86382f03659e28c0b96f4d55f5f11eb7b5013a4fdc7193a1299941f691991df",
+      "bytes": 7125
     },
     {
       "path": "runtime/src/com/hiro/ulike/integration169/AppHook169.java",
-      "sha256": "5aa550977993867a7010ac3e304e40b4fff703572e394ee9142213569c97e3dc",
-      "bytes": 6548
+      "sha256": "7657a3633c765bf560250002ea0b86cad009da71641a0fc1aa0c933b86dc53cd",
+      "bytes": 6599
     },
     {
       "path": "runtime/src/com/hiro/ulike/integration169/CameraBridge169.java",
-      "sha256": "1d2395a0ae2d287d454b4aeb912988da39f3fa9980fc3bbf6f04b7f79c13332f",
-      "bytes": 26507
+      "sha256": "db0534078e92f889abe25afe7154524e06411f7af1c5780b3b18afc80a91f903",
+      "bytes": 26609
     },
     {
       "path": "runtime/src/com/hiro/ulike/integration169/CandidateGate169.java",
@@ -134,9 +205,39 @@
       "bytes": 554
     },
     {
+      "path": "runtime/src/com/hiro/ulike/integration169/CaptureProcessor169.java",
+      "sha256": "d4d3721afbbb8490699d02e0afc96404f9d117d2a5ad6a015196cb57b9029271",
+      "bytes": 17021
+    },
+    {
+      "path": "runtime/src/com/hiro/ulike/integration169/CapturedSettings169.java",
+      "sha256": "0e0cedc90e038cbd0da96496507fea3f586aaf711b0ab9b350586cc909aa07ee",
+      "bytes": 2472
+    },
+    {
+      "path": "runtime/src/com/hiro/ulike/integration169/ProcessingSequence169.java",
+      "sha256": "b93d8e49308ac22b4888f2e1f04f625280337f248103787201b4d6edf816f0a8",
+      "bytes": 3785
+    },
+    {
       "path": "runtime/src/com/hiro/ulike/integration169/SavedUriHandoff169.java",
       "sha256": "4df58cacb5081844c60b6f85a994eda389bfde14013165e714f659cf8dd60b9f",
       "bytes": 12657
+    },
+    {
+      "path": "runtime/test/CapturedSettings169Test.java",
+      "sha256": "7a22a4e90b01b5ff0c1e1500e0d40fe847227d914f36b5d9af5063547d96789b",
+      "bytes": 3715
+    },
+    {
+      "path": "runtime/test/ProcessingSequence169Test.java",
+      "sha256": "949686546ddefa063ac935d1fbb2d0043a1f863105ca4aceaaa8ac552162fbec",
+      "bytes": 7157
+    },
+    {
+      "path": "runtime/verify_coordinator.py",
+      "sha256": "1c932a968446f484ae7a5cb6ceef218471c42d2badc70d5579924f14260dc9c1",
+      "bytes": 5480
     },
     {
       "path": "tools/PrepareHooks169.java",

@@ -22,6 +22,10 @@ public final class RecorderAdmission {
     }
     private static void healthy() { if(!installed || broken)throw new IllegalStateException("Recorder admission unavailable/quarantined"); }
     private static Ticket ticket(int operation,Object owner) { Ticket t=new Ticket(operation,owner);pending.put(t,Boolean.TRUE);return t; }
+    private static void noPendingNativeOperation(Object owner) {
+        for(Ticket t:pending.keySet())if((t.operation==3 || t.operation==4) && t.owner==owner)
+            throw new IllegalStateException("Overlapping native recorder operation");
+    }
     private static void consume(Ticket ticket,int expected) {
         if(ticket==null || ticket.operation!=expected || pending.remove(ticket)==null) { broken=true;throw new IllegalStateException("Missing/repeated SDK operation completion"); }
     }
@@ -38,12 +42,15 @@ public final class RecorderAdmission {
     public static synchronized void destroyed(Ticket ticket) { consume(ticket,2);recorders.remove(ticket.owner); }
     public static synchronized Ticket beforeNativeInit(Object invoker) {
         healthy();if(invoker==null)throw new IllegalArgumentException("Missing invoker");
+        noPendingNativeOperation(invoker);
+        // Both original init wrappers call nativeCreate before assigning mHandler.
+        // A second init would otherwise overwrite a still-live native handle.
+        if(natives.containsKey(invoker))throw new IllegalStateException("Native recorder already initialized");
         if(session!=null) {
             if(session.phase==Phase.ANALYSIS && Thread.currentThread()==session.caller && session.privateInvoker==null && invoker!=session.originalNative)session.privateInvoker=invoker;
             boolean original=session.phase==Phase.RESTORE && invoker==session.originalNative;
             boolean own=session.phase==Phase.ANALYSIS && invoker==session.privateInvoker && Thread.currentThread()==session.caller;
             if(!original && !own)throw new IllegalStateException("Unrelated native recorder initialization");
-            if(natives.containsKey(invoker))throw new IllegalStateException("Native recorder already initialized");
         }
         return ticket(3,invoker);
     }
@@ -55,6 +62,7 @@ public final class RecorderAdmission {
     }
     public static synchronized Ticket beforeNativeUninit(Object invoker) {
         healthy();if(!natives.containsKey(invoker))throw new IllegalStateException("Unobserved native recorder");
+        noPendingNativeOperation(invoker);
         if(session!=null) {
             boolean original=session.phase==Phase.STOP && invoker==session.originalNative;
             boolean own=session.phase==Phase.ANALYSIS && invoker==session.privateInvoker;

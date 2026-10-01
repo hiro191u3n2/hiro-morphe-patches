@@ -1,0 +1,93 @@
+{
+  "status": "PASS_INDEPENDENT_NATIVE_GEOMETRY_DIAGNOSTIC_REVIEW",
+  "native_static": {
+    "effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+    "independent_instruction_checks": 40,
+    "width2_table_target": "0xa43854",
+    "width3_table_target": "0xa43738",
+    "late_update_timing": "Scene system loop precedes conditional 0x44e dispatch, not proof of a picture callback or same-still attribution",
+    "count_scope": "only nonnegative vertexCount with observer start=0 and positive count=8193",
+    "native_addresses_invoked": false
+  },
+  "selected_authored_shader_bindings": [
+    {
+      "style": "natural",
+      "path": "AmazingFeature1/xshader/mask_faceuv22995_xshader_xshader.xshader",
+      "sha256": "affe7468afe4208dad45e1c08066eea53dfe40f54c0c4442bf724b5dad6002a1",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature1/xshader/lips_keypoint_faceu2996_xshader_xshader.xshader",
+      "sha256": "a86616760ffaea5fbeb697560d782e85baf0c53761fe8ce040158c76b987a68a",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature3/xshader/mask_faceuv22994_xshader_xshader.xshader",
+      "sha256": "9daed9992764c96c336248d4940539f2cde8e67329ff7c25871627e30aedf9f3",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature5/xshader/eye_part_faceu2987_xshader_xshader.xshader",
+      "sha256": "fc8641bedfcf10fff824bf436477e641f9a9f69f5110c939902914008bf7baf8",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature5/xshader/eye_part_faceu2988_xshader_xshader.xshader",
+      "sha256": "39eef916ef11ad805a6ee77a86ee540c1f0c62a40f35f57ef5fb4b3b6c043cc1",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature6/xshader/jiemaoFaceU_msqo_1669694037.xshader",
+      "sha256": "f1b5f5ed9b1d9c4c48bbf91d65fb7aa75b3f50828e7971542a3c000cf93961e6",
+      "position_semantic": 0
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature7/xshader/eye_part_faceu2991_xshader_xshader.xshader",
+      "sha256": "4da7c16bf981668a188c3f79ba2b391557a5ae1d312b2593ce317abf76e23b6d",
+      "position_semantic": 13
+    },
+    {
+      "style": "purity",
+      "path": "AmazingFeature7/xshader/eye_part_faceu2992_xshader_xshader.xshader",
+      "sha256": "081be79aab253817fd712330cdae41aa91effd33e877b4a79ffd133dac65c966",
+      "position_semantic": 13
+    }
+  ],
+  "lua_observer_mocks": {
+    "mock_cases": 13,
+    "max_vertices_copied": 32768,
+    "max_packets": 518,
+    "width_three_eyelash_verified_in_mock": true,
+    "native_execution": false
+  },
+  "parser": {
+    "checks": 66641,
+    "native_execution": false
+  },
+  "reviewed_file_sha256": {
+    "native_geometry_contract/late_geometry.lua.in": "dcddfe98dc71db4762812b4a5099a91af930400658fb8508ed259408a49a4da0",
+    "native_geometry_contract/instrument_geometry.py": "737b83c64312e1db2cddea196a1936b0dc0e103e3d4e4106309fef908753b3b6",
+    "native_geometry_contract/verify_native.py": "3829e4067145227a51371332793ba8d3bf3b9913a7c705a9854ceff6ff5879cc",
+    "native_geometry_contract/src/com/hiro/ulike/geometry/NativeMeshObservation.java": "781b4d33a5dbd13a080579d604affdbd582c349fcb4dbcb56c69e67d064e551d",
+    "native_geometry_contract/review/ParserReview.java": "e6efda41e864495902059d27df0849efdc4b5fd023de74dbe08d811f16a83b61",
+    "native_geometry_contract/review/verify.py": "d64fd510396f7714f2f72c25d7234a5a193b57207f187879cafa826aa5c1a7a3",
+    "android_style_binding/ASSET_PINS.json": "4d21087f4e28d76803d02a09b31913fa3f99b2ece02a12c4c7cb66a60a6ca403"
+  },
+  "blocking_findings": [],
+  "scope": [
+    "Lua userdata alias ordinal is object-key identity only, never a native pointer or verified shared GPU buffer.",
+    "Declared eligible face IDs are not final compacted active face/submesh routing.",
+    "Template mesh samples do not prove final render projection, UV, draw order, source-still attribution, or no later overwrite.",
+    "Normal SDK script appendix remains diagnostic-only; no native address invoked or production geometry enabled."
+  ],
+  "android_device_execution": false,
+  "actual_native_callback_delivery": false,
+  "per_face_routing_verified": false,
+  "production_geometry_verified": false
+}

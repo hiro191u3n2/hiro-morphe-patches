@@ -1,0 +1,55 @@
+{
+  "schema": "ulike-composer-observation-requirements-1",
+  "installed_in_candidate": false,
+  "enabled_on_device": false,
+  "live_preconditions_implemented": false,
+  "native_setup_barrier_implemented": false,
+  "native_source_barrier_implemented": false,
+  "initialization": "Observe one native initialization before side effects, bind exact SDK/configuration fingerprint, observe real normal return and asynchronous native init callback, retain recorder identity/handler/lifetime; setter success is never a barrier.",
+  "composer_methods": [
+    "RecordInvoker.setComposerMode(int,int)",
+    "RecordInvoker.setComposerResourcePath(String)",
+    "RecordInvoker.setComposerNodes(String[],int)",
+    "RecordInvoker.appendComposerNodes(String[],int)",
+    "RecordInvoker.removeComposerNodes(String[],int)",
+    "RecordInvoker.reloadComposerNodes(String[],int)",
+    "RecordInvoker.replaceComposerNodes(String[],int,String[],int)",
+    "RecordInvoker.updateComposerNode(String,String,float)",
+    "RecordInvoker.updateMultiComposerNodes(int,String[],String[],float[])",
+    "RecordInvoker.setVEEffectParams(VEEffectParams): preserve exact four tagged call variants; all other variants invalidate until separately captured"
+  ],
+  "required_entry_exit_behavior": [
+    "Deep copy each original argument before side effects, including count, method variant, tags, raw paths, keys and float bits; a malformed/unsupported copy must invalidate rather than silently skip.",
+    "Record each actual successful completion in serialized order; any pending/overlapping call, throwable, nonzero result, dropped event or bound exhaustion invalidates the lifetime's snapshot.",
+    "Hook the effective lower-layer writer once; nested high-level wrappers must not double-count one native operation.",
+    "Instrument or reject direct generic native writers and all state-changing calls outside the observed surface; a high-level wrapper inventory alone is not coverage.",
+    "Native teardown, reinitialization, handlers changing, lifecycle changes or failed restoration invalidate old source/shot evidence."
+  ],
+  "additional_state_not_captured_by_v164": [
+    "Original native initialization and default resource/environment state",
+    "Messages including generic effect events and attached data",
+    "External render cache textures and their exact content/lifetime",
+    "Noncomposer VEEffectParams variants and direct filter/sticker/beauty paths",
+    "Tracking/animation/gesture-dependent mutable state",
+    "Direct backend/native writes bypassing VERecorder wrappers",
+    "Every historical removed/reloaded resource needed for ordered full replay"
+  ],
+  "target_barrier_receipt": [
+    "exact owned target identity",
+    "exact shot identity and epoch",
+    "unguessable positive per-execution nonce",
+    "canonical source settings SHA-256",
+    "mapped ordered command SHA-256",
+    "actual native queue acknowledgement after all setup operations"
+  ],
+  "prohibited_shortcuts": [
+    "Promote v164 ordered_api_model_complete or zero return into native completion",
+    "Assume null resource path or absent mode means default/empty",
+    "Replay only the selected Natural blush/Purity2 directory",
+    "Drop failed events assuming native transactional rollback",
+    "Convert replace/reload into a guessed current flat node order",
+    "Flatten tagged operations into plain setComposerNodes",
+    "Treat a handler, sleep, UI post, unrelated frame or one feature message as a whole graph setup barrier",
+    "Mutate the original preview recorder to attempt replay"
+  ]
+}

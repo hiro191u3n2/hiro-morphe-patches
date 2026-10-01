@@ -17,13 +17,13 @@ public final class AppHook169 {
     private static final Map<Object,Choice> CHOICES=new IdentityHashMap<>();
     static final class Choice {
         final Object recorder,backend,identity;
-        final long epoch;
+        final long epoch,dateTakenMs;
         final ShotStyleSettings.Snapshot settings;
         Object request,bitmapCallback;
         SavedUriHandoff169.Token handoff;
         Runnable timeout;boolean expired,processing;
         Choice(Object recorder,Object backend,Object identity,long epoch,ShotStyleSettings.Snapshot settings) {
-            this.recorder=recorder;this.backend=backend;this.identity=identity;this.epoch=epoch;this.settings=settings;
+            this.recorder=recorder;this.backend=backend;this.identity=identity;this.epoch=epoch;this.settings=settings;dateTakenMs=System.currentTimeMillis();
         }
     }
     public static synchronized void init(Context context) {

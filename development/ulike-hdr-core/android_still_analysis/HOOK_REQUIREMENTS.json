@@ -41,5 +41,26 @@
     "No enable until all original SDK entry/exit callpaths are instrumented and verified",
     "Restoration must observe original normal native-init callback success and actual app composer-state restoration",
     "No phone pause/restart/render teardown run has occurred"
+  ],
+  "partial_transform": {
+    "scope": "Three exact RecordInvoker methods only; not installed in MPP",
+    "helper": "NativeLifetimeHooks",
+    "compile_time_enabled": false,
+    "normal_exits": 6,
+    "exception_cleanup_regions": 5,
+    "original_method_hash_reconstruction": true,
+    "constructor_or_backend_entry_hooks_installed": false,
+    "inventory_location": "complete_integration169/lifecycle/INVENTORY.json"
+  },
+  "constructor_delegation": {
+    "total_overloads": 8,
+    "delegating_overloads": 6,
+    "terminal_overloads": 2,
+    "hook_requirement": "Guard the two terminal constructors before backend allocation and prove every delegated path, avoiding duplicate object registration as a coverage shortcut."
+  },
+  "restoration_findings": [
+    "PureCameraFragment$d.e enqueues Li/f/l/n/q/i via IThreadExecutor.a",
+    "Li/o/a/b1/a/g/y$d.e enqueues additional Handler.post and postDelayed work",
+    "No source-bound completion receipt for actual composer replay and relevant subsequent render has been established"
   ]
 }

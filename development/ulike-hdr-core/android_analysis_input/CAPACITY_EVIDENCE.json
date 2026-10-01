@@ -1,0 +1,223 @@
+{
+  "status": "READ_ONLY_FULL_RESOLUTION_ROUTE_FEASIBILITY_NOT_IMPLEMENTED",
+  "input_dimensions": [
+    4080,
+    3060
+  ],
+  "input_pixels": 12484800,
+  "guard_pixels": 4194304,
+  "guard_is_native_sdk_limit": false,
+  "native_max_dimension_established": false,
+  "native_full_resolution_execution_verified": false,
+  "device_execution": false,
+  "source_sha256": {
+    "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AnalysisInput.java": "eee4e9f2c59938f0e9cd0809d0ff3065a527ac10f494831f18f56493a28b4b96",
+    "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AndroidAnalysisInput.java": "a6765f8600298b2387da49cbcbf6700e05e7255c9b34866287b9a8b6892c2d88",
+    "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java": "37036d2d574759a304e7e5800f600fcc9dd3971e877a1046176c08eb85834527",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "c795dbcb2302e0eaba84dc299915e5ff86f67df7a34d6fbbdfb73cff7a428957",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "6b7c5783717e0aee9082f373e42bed0edfa63aabbbe99fbdf9e2640230b79572",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java": "540fab7b041fd8e9a19f33e40ed0825ba5d0dc79e4e8ccb6d2cf26a00ad16e31",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/PixelOrientationEvidence.java": "f00135eb754bea09dd0eceb790942c66eca021a76229a929830b341b8bc7d9be",
+    "android_style_binding/src/com/hiro/ulike/binding/DiagnosticSkinMask.java": "1bac0bd549f777854d056deffcf537c63da2d12233fb137e22864ad766582c1f"
+  },
+  "guard_sites": [
+    {
+      "path": "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AnalysisInput.java",
+      "line": 21,
+      "code": "public static final int SDK_MAX_PIXELS = 4194304;",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AnalysisInput.java",
+      "line": 26,
+      "code": "require(maxPixels>0 && maxPixels<=SDK_MAX_PIXELS && maxOwnedArrayBytes>0,\"explicit bounded analysis policy required\");",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AnalysisInput.java",
+      "line": 89,
+      "code": "require(pixels>0 && pixels<=budget.maxPixels,\"Same-size analysis exceeds native backend bound; resizing is not performed\");",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java",
+      "line": 57,
+      "code": "(long)encodedSdrProxy.getWidth()*encodedSdrProxy.getHeight()>4194304)throw new IllegalArgumentException(\"Bounded explicit analysis proxy required\");",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java",
+      "line": 160,
+      "code": "if(width<1 || height<1 || (long)width*height>4194304 || ownedPixels==null || ownedPixels.length!=(long)width*height)throw new IllegalArgumentException(\"Diagnostic grid\");",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java",
+      "line": 21,
+      "code": "if (width < 1 || height < 1 || (long)width * height > 4194304)",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java",
+      "line": 7,
+      "code": "if(width<1 || height<1 || width!=expectedWidth || height!=expectedHeight || (long)width*height>4194304 ||",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    },
+    {
+      "path": "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/PixelOrientationEvidence.java",
+      "line": 34,
+      "code": "if (pixels==null || w<1 || h<1 || (long)w*h>4194304 || (long)w*h!=pixels.length)",
+      "classification": "application_diagnostic_guard_not_proven_native_limit"
+    }
+  ],
+  "additional_consumer": "CaptureProcessor169.Work.validate calls AnalysisInput.Budget.currentSdk before interrupting preview; this retains our existing diagnostic guard.",
+  "nonblocking_related_guard": {
+    "class": "DiagnosticSkinMask.validate",
+    "max_pixels": 25000000,
+    "accepts_12484800_by_dimension_only": true,
+    "native_mask_resolution_or_sampler_precision_proven": false
+  },
+  "current_known_allocation_path": [
+    {
+      "stage": "AnalysisInput.prepare",
+      "payload": "one int[P], plus a later int[width] row",
+      "ownership": "owned raster consumed and zeroed by transfer; GC timing is not immediate"
+    },
+    {
+      "stage": "AndroidAnalysisInput.run",
+      "payload": "Bitmap #1 from row transfer",
+      "ownership": "retained until StockStillAnalysis returns"
+    },
+    {
+      "stage": "StockStillAnalysis.run",
+      "payload": "Bitmap #2 via copy; int[width] digest row",
+      "ownership": "retained until inner probe returns or quarantines its separate copy"
+    },
+    {
+      "stage": "StockStillFaceProbe.run",
+      "payload": "Bitmap #3 via copy + originalPixels int[P]",
+      "ownership": "native submission Bitmap retained until verified teardown; failed teardown retains recorder, Bitmap, callback closures and lease in quarantine"
+    },
+    {
+      "stage": "native picture callback",
+      "payload": "JNI int[P], plus OwnedRenderPixels.clone int[P] when diagnostic enabled",
+      "ownership": "callback array borrowed; clone retained by RenderedDiagnostic"
+    },
+    {
+      "stage": "RenderedDiagnostic.pixels -> DiagnosticSkinMask.validate",
+      "payload": "another int[P] clone plus byte[P] mask",
+      "ownership": "later phase; existing full diagnostic remains held by Outcome until unreachable; not added to simultaneous callback estimate"
+    }
+  ],
+  "payload_calculations": [
+    {
+      "name": "immutable_owned_P010_short_planes",
+      "bytes_per_input_pixel": 3,
+      "bytes": 37454400,
+      "MiB": 35.71929931640625
+    },
+    {
+      "name": "one_ARGB8888_raster",
+      "bytes_per_input_pixel": 4,
+      "bytes": 49939200,
+      "MiB": 47.625732421875
+    },
+    {
+      "name": "current_known_live_payload_at_callback",
+      "bytes_per_input_pixel": 27,
+      "bytes": 337089600,
+      "MiB": 321.47369384765625
+    },
+    {
+      "name": "current_plus_unreclaimed_prepare_array",
+      "bytes_per_input_pixel": 31,
+      "bytes": 387028800,
+      "MiB": 369.09942626953125
+    },
+    {
+      "name": "proposed_move_only_bitmap_and_owned_ARGB_callback",
+      "bytes_per_input_pixel": 15,
+      "bytes": 187272000,
+      "MiB": 178.59649658203125
+    },
+    {
+      "name": "proposed_move_only_bitmap_and_owned_byte_mask",
+      "bytes_per_input_pixel": 12,
+      "bytes": 149817600,
+      "MiB": 142.877197265625
+    }
+  ],
+  "current_callback_formula": "3P owned P010 + 12P three Bitmaps + 4P originalPixels + 4P SDK callback + 4P owned callback = 27P",
+  "proposed_ARGB_formula": "3P owned P010 + 4P single moved Bitmap + 4P SDK callback + 4P owned callback = 15P",
+  "proposed_mask_formula": "3P owned P010 + 4P single moved Bitmap + 4P SDK callback + 1P owned diagnostic mask = 12P",
+  "allocation_limits": [
+    "Calculated known payloads only: not measured peak Java heap, RSS, GPU memory or device viability.",
+    "Bitmap backing may be native-managed; stride/padding can exceed width*height*4.",
+    "Excluded: SDK input/output buffers, readback/GPU textures, native allocator overhead, Java objects, model graph/weights/runtime, app baseline, callback/preview pools and delayed garbage collection.",
+    "The supplied 512MiB Java maximum alone cannot guarantee a safe route; retain explicit budgets and measure the real phone."
+  ],
+  "native_static_evidence": {
+    "library_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+    "stock_version": "ULike5.6.2(740) arm64",
+    "java_method": "RecordInvoker.renderPicture(ImageFrame,int,int,OnPictureCallbackV2): Bitmap input -> nativeRenderPicture3(handler, bitmap, suppliedWidth, suppliedHeight, callback, null)",
+    "native_entry": "nativeRenderPicture3 at0x40bd30; dispatches common0x40b278 at0x40bdfc",
+    "instruction_anchors": [
+      {
+        "address": "0x40bdc0",
+        "instruction": "mul w10, w8, w9",
+        "meaning": "input Bitmap dimensions multiplied"
+      },
+      {
+        "address": "0x40bdc4",
+        "instruction": "lsl w10, w10, #2",
+        "meaning": "RGBA byte count width*height*4"
+      },
+      {
+        "address": "0x40b44c",
+        "instruction": "ldp w20, w19, [x21, #0x20]",
+        "meaning": "read callback dimensions"
+      },
+      {
+        "address": "0x40b450",
+        "instruction": "cmp w19, #1",
+        "meaning": "callback dimension lower bound, not an established upper bound"
+      },
+      {
+        "address": "0x40b468",
+        "instruction": "mul w23, w19, w20",
+        "meaning": "callback element count width*height"
+      },
+      {
+        "address": "0x40b470",
+        "instruction": "bl #0x595d7c",
+        "meaning": "JNI NewIntArray via outline"
+      },
+      {
+        "address": "0x595d7c",
+        "instruction": "ldr x8, [x8, #0x598]",
+        "meaning": "JNI table NewIntArray offset, independently checked using local jni.h offsetof"
+      },
+      {
+        "address": "0x59c4c4",
+        "instruction": "ldr x8, [x8, #0x698]",
+        "meaning": "JNI table SetIntArrayRegion offset, independently checked using local jni.h offsetof"
+      }
+    ],
+    "jni_header_sha256": "99e64ebbe749e6df284f852f11b3c73f6ea97baf15120428f40f887fe0616e61",
+    "inspected_bound_scope": "No4MPupperbound occurs in these inspected Bitmap/callback slices. This is not a complete native-program absence proof or actual GL/SDK capacity test."
+  },
+  "user_log_scope": [
+    "User reported legacy Natural blush and Purity2 receiving4080x3060 and completing3060x4080 beauty output; that is evidence for their earlier app route, not proof that this newly isolated recorder/calibration path works.",
+    "User reported downstream drawing limit4096 and GL limit0/unavailable.4080 and3060 are each below4096;4096must not be relabeled as verified GL_MAX_TEXTURE_SIZE.",
+    "No5712x4284unscaled public input candidate was supplied; this proposal targets existing4080x3060 only."
+  ],
+  "proposed_next_patch": [
+    "Add a move-only owned Bitmap submission envelope carrying exact source/settings/proxy digests, nonce and dimensions. Stream SdrRendition rows directly into its one Bitmap; avoid an intermediate full int raster.",
+    "Add ownership-transfer overloads through AndroidAnalysisInput/StockStillAnalysis/StockStillFaceProbe. Keep the original copying API for callers without exclusive ownership. Only probe closes moved Bitmap after proven joins; on teardown failure quarantine it and prohibit reuse.",
+    "Replace the always-full originalPixels orientation buffer in the new route with explicitly selected diagnostic calibration. Validate supplied UV ramps on the complete callback without guessing orientation. Preserve legacy orientation diagnostics as a separate mode.",
+    "First allow one owned full callback with consuming conversion, or reduce callback immediately into preallocated owned byte mask while verifying channels/alpha/UV. Never retain borrowed SDK callback arrays.",
+    "Thread one explicit analysis budget across allguard sites, with per-dimension, pixel, retained-payload and callback budgets. Preserve the default4MPdiagnostic policy; the opt-in4080x3060candidate stays disabled until real calibration, exact callback dimensions and measured capacity pass.",
+    "Test duplicate/stale callbacks, caller mutation, exception/cancellation and failed joins; require quarantine retaining moved storage. Test4080x3060 row/digest/ownership with bounded synthetic stand-ins before any phone activation."
+  ],
+  "native_mask_caution": "Full-grid diagnostic sampling remains8bit and may sample an internally lower-resolution SegMask texture. It does not prove native12.5MPsegmentation or high-precision native mask readback."
+}

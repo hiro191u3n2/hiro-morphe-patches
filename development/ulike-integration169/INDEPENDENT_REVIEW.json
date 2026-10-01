@@ -15,12 +15,12 @@
   },
   "apk_cases": {
     "standalone": {
-      "dex_payload_verification": "PASS final APK: 33708 unique classes / 215422 methods. 3418 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "dex_payload_verification": "PASS final APK: 33752 unique classes / 215639 methods. 3635 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
       "resource_contract": {
         "result": "PASS",
         "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
-        "mpp_sha256": "ab6a994d248f04d3a8f63d05ccee07e43c83ad12de980b27b3670ef36432a198",
-        "apk_sha256": "c1c807357b717a003837b2585de0ddbd6042afd0265c9b28a65d64dfad2beadb",
+        "mpp_sha256": "99318148e24bf13048966efc049013381dd37a67274a3d1e7c9cb4bd2df837d0",
+        "apk_sha256": "d89ca07e51b37e344fe1868081a5d087297a5f0b286ad850528850a317c0ae98",
         "runtime_additions": {
           "lib/arm64-v8a/libonnxruntime.so": "df5d25c72a868dca773597c71e2000756d43fe4d70ade516d3693c54e12e0ada",
           "lib/arm64-v8a/libonnxruntime4j_jni.so": "0695257178815f8c58c1719ba07d6d5d91a2b339634328cca2a0a98aa7ff2952",
@@ -84,12 +84,12 @@
       }
     },
     "integrated": {
-      "dex_payload_verification": "PASS final APK: 33708 unique classes / 215422 methods. 3418 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "dex_payload_verification": "PASS final APK: 33752 unique classes / 215639 methods. 3635 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
       "resource_contract": {
         "result": "PASS",
         "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
-        "mpp_sha256": "48be4ed2547c5200fd8da0e00dcae55391592c66db444318da917e38b2ac7139",
-        "apk_sha256": "7f34fa2c4d0f6b0214700c46baa60b16d1f906b7ccf699a4b8466735f59ec11f",
+        "mpp_sha256": "455b98f46e4d0e6acfa07bbb14f9468b677e6ea36401d1e0042ec8d8dc6ef848",
+        "apk_sha256": "3fe65f53299fc8d9a993c17f8620e44f609e444d5c2e2c7eef3efc354b323e6f",
         "runtime_additions": {
           "lib/arm64-v8a/libonnxruntime.so": "df5d25c72a868dca773597c71e2000756d43fe4d70ade516d3693c54e12e0ada",
           "lib/arm64-v8a/libonnxruntime4j_jni.so": "0695257178815f8c58c1719ba07d6d5d91a2b339634328cca2a0a98aa7ff2952",
@@ -154,14 +154,17 @@
     }
   },
   "reviewed_file_sha256": {
-    "runtime/src/com/hiro/ulike/integration169/AppHook169.java": "5aa550977993867a7010ac3e304e40b4fff703572e394ee9142213569c97e3dc",
-    "runtime/src/com/hiro/ulike/integration169/CameraBridge169.java": "1d2395a0ae2d287d454b4aeb912988da39f3fa9980fc3bbf6f04b7f79c13332f",
+    "runtime/src/com/hiro/ulike/integration169/AppHook169.java": "7657a3633c765bf560250002ea0b86cad009da71641a0fc1aa0c933b86dc53cd",
+    "runtime/src/com/hiro/ulike/integration169/CameraBridge169.java": "db0534078e92f889abe25afe7154524e06411f7af1c5780b3b18afc80a91f903",
     "runtime/src/com/hiro/ulike/integration169/CandidateGate169.java": "c96835534710ffadc67b7063e45db18af8b28c1558dd989ab7369ecc7f1bd9c4",
+    "runtime/src/com/hiro/ulike/integration169/CaptureProcessor169.java": "d4d3721afbbb8490699d02e0afc96404f9d117d2a5ad6a015196cb57b9029271",
+    "runtime/src/com/hiro/ulike/integration169/CapturedSettings169.java": "0e0cedc90e038cbd0da96496507fea3f586aaf711b0ab9b350586cc909aa07ee",
+    "runtime/src/com/hiro/ulike/integration169/ProcessingSequence169.java": "b93d8e49308ac22b4888f2e1f04f625280337f248103787201b4d6edf816f0a8",
     "runtime/src/com/hiro/ulike/integration169/SavedUriHandoff169.java": "4df58cacb5081844c60b6f85a994eda389bfde14013165e714f659cf8dd60b9f",
     "review/DisabledBridgeReview.java": "edf120f13f78897d4abb997ba8c9fc5bcb950b764c0a31126fbc9474d1a23fc3",
     "review/OpticalZoom.java": "4b10a4c35baec18d89f8cb82db1065b3adb96759f2bb5378863a4c781044e34c",
     "review/ArtifactReview169.java": "eefbba3ef3a4c7be78f943cb8ca324e0d4f3bb0bc343779ab5b44dcd6a2c188b",
-    "review/verify_review.py": "4d9a32206b45ae78b89a2d527ac79cb51d5797ae83efa879a3b193ccaedebc71",
+    "review/verify_review.py": "8c46c22fe5d2fc9bc86debf46d39442dd65cf492e6cca19d46b24509a68a12cc",
     "integration/ComposeRuntimeOverrides.java": "c2f603ead2ee408ca30b0edde9c523bf10d2f08347414615699382800626969a",
     "integration/MergePayloads.java": "2a90ff984bc51181f7bca3796f41b95c7eae88401326b74737df19499d8426f8",
     "integration/NativeNv21EffectFlag.java": "27d2caf980c21788655580c32367eb941980f2ed42a2257a99080390ef091833",
@@ -178,10 +181,10 @@
     "tools/RuntimeClasses169.java": "e6abddd7469b5dff8e6e4c6ab63790a7d700fe0823ccc8467b07c6f0f40138a8",
     "tools/VerifyHooks169.java": "c64e7ba748e10a56703b30214b3d4dbac01a2437cd6ecc48bc22191c55f64940",
     "tools/VerifyUiBindings169.java": "469f5dfe91b4135e16df8fb58db0db9dd0f06338d60d37121c1e0596817c4f52",
-    "build/runtime.dex": "95019a4e2e17ed2e4ee00e2bd26081f7855dc3d3e42ef87d16ecc5777bc8af75",
+    "build/runtime.dex": "8b5abeedd48515c5e03c6b2e87b930777ed8b7cb44400dc104d682e3150a4c84",
     "build/old/ulike/runtime.dex": "0c559c317c26d1306da989003c9a343c59ba53615e96ee533ebfb7c30f6dea0e",
     "build/methods.tsv": "982edbbe285d59a1e0e05d530bfa4c211b37068f78a80892f51968883a88d84b",
-    "runtime/helpers.jar": "3d23cd304dd78e26509cb7baa4fce383a15f20a203a9a131c0dd09030ec76c14",
+    "runtime/helpers.jar": "01f271e23860702148bfeb79fb3780d876b41a1f2688e9b24ed6fb50c30d907d",
     "deltas/runtime-contracts.tsv": "624b04455174c545c09a543674cc1d20a1ca1acde6b32dce2e3a7c907c704b2a",
     "deltas/method-contracts.tsv": "91750b6fd66ef67e60da88d2f88c69b541069f62c5ecb109587d2dec0ce289bd",
     "integration/verify_applied_resources.py": "7b1b8d4e803e842e67dd04abf006a9429fd4b8a659c71ca0a9a87ee8c9468d20",
@@ -190,13 +193,13 @@
   },
   "artifact_sha256": {
     "standalone": {
-      "apk": "c1c807357b717a003837b2585de0ddbd6042afd0265c9b28a65d64dfad2beadb",
-      "mpp": "ab6a994d248f04d3a8f63d05ccee07e43c83ad12de980b27b3670ef36432a198",
+      "apk": "d89ca07e51b37e344fe1868081a5d087297a5f0b286ad850528850a317c0ae98",
+      "mpp": "99318148e24bf13048966efc049013381dd37a67274a3d1e7c9cb4bd2df837d0",
       "result": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb"
     },
     "integrated": {
-      "apk": "7f34fa2c4d0f6b0214700c46baa60b16d1f906b7ccf699a4b8466735f59ec11f",
-      "mpp": "48be4ed2547c5200fd8da0e00dcae55391592c66db444318da917e38b2ac7139",
+      "apk": "3fe65f53299fc8d9a993c17f8620e44f609e444d5c2e2c7eef3efc354b323e6f",
+      "mpp": "455b98f46e4d0e6acfa07bbb14f9468b677e6ea36401d1e0042ec8d8dc6ef848",
       "result": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb"
     }
   },
@@ -204,7 +207,8 @@
   "tool_sha256": {
     "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
     "apktool.jar": "56d59c524fc764263ba8d345754d8daf55b1887818b15cd3b594f555d249e2db",
-    "morphe-1.16.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c"
+    "morphe-1.16.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "onnxruntime-android-1.30.0-classes.jar": "65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0"
   },
   "jdk_sha256": {
     "java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
@@ -225,6 +229,8 @@
     "The test-only OpticalZoom recorder verifies delegate routing on a host; it is not packaged, and it is not Android Camera2 execution.",
     "P010 callback matching and saved-URI active paths are source reviewed; real Camera2, MediaStore UI, Samsung native inference, lens/focus speed and visual quality require device validation.",
     "Automatic-save handoff is the only implemented UI route; Bitmap editor and burst HDR modes are explicitly unsupported.",
+    "A concrete coordinator now exists, but no trusted complete native plan/binding/restoration providers are installed; its separate source/sequence review is PROCESSOR_INDEPENDENT_REVIEW.json.",
+    "If underlying MediaStore publication succeeds but its confirming ownership read fails before savePair returns, commit is unknown. A thrown save exception does not establish that the photo is unsaved; recovery preserves visible rows.",
     "High-resolution P010 alone does not establish sensor-native24.5MP input, chroma siting, or end-to-end stock appearance equivalence."
   ]
 }

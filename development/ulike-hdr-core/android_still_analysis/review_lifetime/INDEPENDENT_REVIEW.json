@@ -1,0 +1,55 @@
+{
+  "schema": "ulike-native-lifetime-independent-review-1",
+  "scope": "Original source review + isolated host ledger tests + reserialized private three-method delta inspection; no application install, coverage enable, ART or phone execution.",
+  "host_checks": "PASS independent native lifetime review 48 checks; no device execution",
+  "disabled_hooks_have_no_static_calls": true,
+  "private_generation": "PASS generated 3 disabled native lifetime hooks; app admission coverage=false; installed=false",
+  "exact_original_reconstruction": "PASS exact reconstruction of 3 stock methods; normal exits=6, exception cleanup regions=5; not ART/device tested",
+  "independent_dex_checks": "PASS independent native DEX review 66 structural checks, 3 methods/6 returns; no ART execution",
+  "stock_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+  "private_delta_sha256": "59e7eeb89b10956118476cd493c7447cb57a79b8541d890700938acd209b30e7",
+  "source_sha256": {
+    "hdr_rebuild167/core/android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/RecorderAdmission.java": "2084629b69a6af97b9cc25a6fedc56990c12cdce1f48e4753769e69bda863a14",
+    "hdr_rebuild167/core/android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/NativeLifetimeBoundary.java": "03845d652c0b3a860bee2216451d88a39e2fda32ecc5f97e5511707744f52770",
+    "hdr_rebuild167/core/android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/NativeLifetimeHooks.java": "0a2ecea77c94f471323b8e7c68079bd33f6f4485815a44dd2951e9d8c2676558",
+    "complete_integration169/integration/MergePayloads.java": "2a90ff984bc51181f7bca3796f41b95c7eae88401326b74737df19499d8426f8",
+    "complete_integration169/lifecycle/PrepareNativeLifetime169.java": "11d33bb6146a58731772481a2f3927ab3ff611904cf1c4ff78fd5eb0d4a09829",
+    "complete_integration169/lifecycle/VerifyNativeLifetime169.java": "fd71047980416fd425cb015fb4cf4b4c6561d8320252a03a8f0b503bc3fc1994",
+    "hdr_rebuild167/core/android_still_analysis/review_lifetime/IndependentNativeDexReview.java": "76018fc41d67bf3ded13a27b6cd631a179ed5bd4a1a8acfe6b0b1b9742f27755",
+    "hdr_rebuild167/core/android_still_analysis/review_lifetime/NativeLifetimeReview.java": "3662862aea5d97c9c2d3212e439a09a2455366764eab477b1f6d199f3b1057d6",
+    "hdr_rebuild167/core/android_still_analysis/review_lifetime/verify.py": "a55a056431cc5cd5de9e996e498a6f5909d148ce3c93ed6214ac0fcc606b56c6"
+  },
+  "helper_binary_sha256": {
+    "MethodContract.class": "80812b9cce38ba7ac7e451077255739a01d1b97c349e655d44b855a708e0ebc7"
+  },
+  "findings_fixed": [
+    {
+      "issue": "Runtime Errors during completion could remove TLS bookkeeping without quarantining pending native state.",
+      "resolution": "NativeLifetimeBoundary catches RuntimeException|Error, quarantines ticket before pop."
+    },
+    {
+      "issue": "Exceptional cleanup implicitly allocated an empty ThreadLocal deque, which could mask an original allocation Error; mismatched/missing cleanup was not quarantined.",
+      "resolution": "No initialValue allocation; allocation occurs before admission ticket at entry. Exceptional cleanup reads nullable TLS, quarantines before matching cleanup, and injected wrapper guards Throwable to preserve the original exception."
+    }
+  ],
+  "verified_cases": [
+    "disabled hooks do not install admission or allocate TLS",
+    "nested separate invokers preserve tickets",
+    "same-invoker overlap and double init rejected before native work",
+    "Java handler cleared before actual native uninit does not release ledger early",
+    "failed native init with nonzero allocated handle retained until actual teardown",
+    "successful init with zero handle quarantined",
+    "native/getter exceptions and mismatched exceptional callbacks quarantine",
+    "cross-thread return cannot consume another thread ticket",
+    "all six original return sites retain exact status register",
+    "entry and exceptional handler excluded from added catch",
+    "v0 original throwable identity is retained and rethrown",
+    "all three original methods reconstruct exact original MethodContract SHA after removing only declared hooks"
+  ],
+  "full_constructor_backend_worker_coverage": false,
+  "actual_composer_restore_barrier": false,
+  "hooks_installed": false,
+  "hooks_enabled": false,
+  "device_tested": false,
+  "blocking_findings_within_reviewed_disabled_scope": []
+}

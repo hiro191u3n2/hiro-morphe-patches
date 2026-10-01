@@ -1,0 +1,99 @@
+{
+  "schema": "ulike-stock-recorder-lifecycle-inventory-1",
+  "scope": "Static original ULike v5.6.2(740) multidex references. Not dynamic/native/reflection coverage.",
+  "stock_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+  "dex_class_count": 33134,
+  "references": 316,
+  "lifecycle_definition_count": 162,
+  "reference_categories": {
+    "backend_lifecycle": 91,
+    "composer_or_init": 171,
+    "handle_write": 3,
+    "native_lifecycle": 30,
+    "recorder_lifecycle": 21
+  },
+  "native_create_calls": [
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlay(IILjava/lang/String;IILjava/lang/String;IZZZ)I",
+      "code_unit_offset": 2,
+      "source_method_sha256": "8dc53066a33d64e75cd562ebbaae682d5831f482d020a5f011a8f898a897c95e"
+    },
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlayOnlyPreview(Lcom/ss/android/medialib/qr/ScanSettings;)I",
+      "code_unit_offset": 0,
+      "source_method_sha256": "5e562ce39fb84c59a47f769ed8ae74b50f34d6ec704e6f79a59e1405d846b1a5"
+    }
+  ],
+  "native_uninit_calls": [
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->uninitBeautyPlay()I",
+      "code_unit_offset": 58,
+      "source_method_sha256": "f938253b35f0f7439b60a02df35fd42f006b7bb41117e5269b8e86102411229f"
+    }
+  ],
+  "handle_writes": [
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlay(IILjava/lang/String;IILjava/lang/String;IZZZ)I",
+      "code_unit_offset": 6,
+      "source_method_sha256": "8dc53066a33d64e75cd562ebbaae682d5831f482d020a5f011a8f898a897c95e"
+    },
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlayOnlyPreview(Lcom/ss/android/medialib/qr/ScanSettings;)I",
+      "code_unit_offset": 4,
+      "source_method_sha256": "5e562ce39fb84c59a47f769ed8ae74b50f34d6ec704e6f79a59e1405d846b1a5"
+    },
+    {
+      "caller": "Lcom/ss/android/medialib/RecordInvoker;->uninitBeautyPlay()I",
+      "code_unit_offset": 39,
+      "source_method_sha256": "f938253b35f0f7439b60a02df35fd42f006b7bb41117e5269b8e86102411229f"
+    }
+  ],
+  "constructor_count": 8,
+  "delegating_constructor_count": 6,
+  "terminal_constructors": [
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Lcom/ss/android/vesdk/runtime/VERecorderResManager;Landroid/content/Context;Lcom/ss/android/vesdk/render/VERenderView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/content/Context;Lcom/ss/android/vesdk/render/VERenderView;)V"
+  ],
+  "factory_constructs_only": "Lcom/ss/android/vesdk/TECameraVideoRecorder;",
+  "other_backend_definition": "Lcom/ss/android/vesdk/TEPubRecorder; exists, but no direct constructor invocation from another original DEX method was observed",
+  "native_init_restoration_is_not_synchronous": true,
+  "asynchronous_restore_edges": [
+    {
+      "caller": "Lcom/bytedance/corecamera/camera/basic/PureCameraFragment$d;->e()V",
+      "code_unit_offset": 9,
+      "target": "Li/f/l/n/q/t;->a(Ljava/lang/Runnable;)V",
+      "source_method_sha256": "85159c849fcd95a878ce81d8a797c017e0716b5a1341358a88cbb2edb8822266"
+    },
+    {
+      "caller": "Li/o/a/b1/a/g/y$d;->e()V",
+      "code_unit_offset": 31,
+      "target": "Landroid/os/Handler;->postDelayed(Ljava/lang/Runnable;J)Z",
+      "source_method_sha256": "88914716128e0ff6627e31b7b2d1a507e39a4e03a048e70fce6de1880c910085"
+    },
+    {
+      "caller": "Li/o/a/b1/a/g/y$d;->e()V",
+      "code_unit_offset": 47,
+      "target": "Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z",
+      "source_method_sha256": "88914716128e0ff6627e31b7b2d1a507e39a4e03a048e70fce6de1880c910085"
+    }
+  ],
+  "actual_composer_restore_barrier_implemented": false,
+  "partial_native_hook_methods": 3,
+  "partial_hooks_installed": false,
+  "admission_enabled": false,
+  "device_execution": false,
+  "remaining_required_hooks": [
+    "VERecorder two terminal constructors before backend allocation, successful completion and exceptional exit; prove six delegates preserve one registration",
+    "VERecorder.onDestroy plus start/stop preview, init, pause/resume and surface entry families",
+    "TECameraVideoRecorder direct/async worker lifecycle entries, releaseInteralRecorder, startRecordPreview, stopRecordPreview and surface callbacks, including permitted internal stop/restart delegation",
+    "RecordInvoker direct startPlay/stopPlay/onPause/onDestroy/changeSurface and outstanding calls with previously captured native handle",
+    "The asynchronous PureCameraFragment and y$d native-init/application tasks; actual composer reapplication completion plus render ordering is still unproved, and Handler enqueue returns are insufficient",
+    "All-state composer transcript and independently observed restoration receipt for selected camera/style before releasing exclusive analysis lease"
+  ],
+  "private_generated_inventory_sha256": {
+    "stock-references.tsv": "94c28197a2e073fa95bb222367a6356d858452894a59c4edbcbb78133fed007f",
+    "stock-references.tsv.definitions": "94ab8865b1493ac6c536e2609b32b4ba08dd1d990dcdb4317fa3cecaf7413a59",
+    "stock-references.tsv.backends": "215f558cf6456dcd1df6edbc9b0b3ae77548f56777984e5eaf5b6cb17c22fef5",
+    "stock-references.tsv.restoration": "e14041051044a374b1b2629da58527e349df182957e16f9b68485f7c31a68044"
+  }
+}

@@ -119,6 +119,17 @@ every rendering pass has that resolution.
   It does not collect demographic or emotional attribute scores. Normal SDK
   setup, exclusive recorder ownership, coordinate calibration and actual skin
   mask readback remain prerequisites; this is not a completed detector binding.
+* `android_analysis_input`: actual no-resize captured-rendition RGB8 analysis
+  input with one-use buffer ownership, canonical source/settings/pixel digests,
+  and a concrete normal-SDK submission adapter. The adapter checks the native
+  bridge's owned input digest before exposing bound observations. Native
+  coordinate calibration remains separate. The inherited 4MP analysis cap
+  explicitly rejects 4080×3060; it does not reduce the captured photograph.
+* `android_composer_replay`: an exact ordered successful-command journal and
+  bounded replay contract, preserving tags, float bits, mode and resource
+  mapping. Replay requires real lifecycle coverage and a correlated native
+  setup barrier. The incomplete v164 exports are rejected rather than filled
+  with defaults; no complete live capture of this journal is installed.
 * `android_style_binding`: frozen selected-style settings, pinned authored
   mesh/UV/topology parsing, and observations of actual post-setter uniforms and
   the Purity 1427-vertex mesh/MVP. The private Lua instrumenter appends original
@@ -131,6 +142,14 @@ every rendering pass has that resolution.
   orientation conventions, and does not enlarge it into a proven native-size
   mask. `native_readback_contract` records the exact static API/type evidence
   and an independent diagnostic review; actual device calibration is absent.
+* `native_geometry_contract`: pinned native instruction/type evidence for
+  reading selected 2D makeup meshes after system updates through a private
+  late-update diagnostic. Five selected mesh layouts use position semantic 13
+  with two float components; the eyelash layout uses semantic 0 with three.
+  The observer checks the exact pinned layout instead of guessing an accessor.
+  Copied values and parser ownership remain observations: active face ranges,
+  final draw transforms, V2 opacity and actual device attribution are unproved.
+  This unconnected diagnostic is excluded from the private app payload.
 * `android_hdr_beauty`: a declared HDR appearance replacement using actual
   generated neural colors and their explicit blend weights, followed by the
   verified sampled makeup/LUT equations with a defined HDR extension. It
@@ -140,8 +159,11 @@ every rendering pass has that resolution.
   OOTF and explicit generated-patch peak policy are recorded. Actual-model host
   integration and independent mathematical tests pass; same-shot production
   geometry/masks, visual fidelity and native HDR equivalence remain unverified.
-  Its current entry point requires exactly one prepared neural face layer;
-  complete zero-face and multi-face behavior is not implemented.
+  Its ordered entry point now accepts zero through sixteen prepared neural face
+  layers, with immutable same-source settings and an explicit complete observed
+  order. Zero faces still requires all makeup/LUT bindings; detector order is
+  not silently treated as native draw order. Native multi-face appearance still
+  requires calibrated bindings and device comparison.
 * `style_pipeline`: Java double-precision versions of Natural's one and Purity's
   nine named makeup passes, plus the skin/background and final LUT operations.
   The API requires already sampled, same-frame textures, masks, geometry and

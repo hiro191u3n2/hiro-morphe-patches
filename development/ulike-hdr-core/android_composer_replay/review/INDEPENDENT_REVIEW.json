@@ -1,0 +1,66 @@
+{
+  "schema": "ulike-composer-replay-independent-review-1",
+  "status": "PASS_SCOPED_HOST_PROTOCOL_AND_SOURCE_REVIEW",
+  "reviewer": "recorder_lifecycle_continue",
+  "independent_checks": 5163,
+  "independent_test": "ComposerReplayIndependentTest.java",
+  "independence": "Reviewer did not author production journal/replay/command adapter. Two defects were reported; production author fixed them before final independent test. Synthetic host Preconditions/receipts are not native proof.",
+  "findings_fixed": [
+    {
+      "issue": "Distinct unpaired UTF-16 surrogate strings silently collide under default UTF-8 replacement in canonical settings bytes",
+      "fix": "Reject every unmatched high/low surrogate before request serialization",
+      "independent_regression": "All 2048 surrogate code units rejected separately in paths and keys; 1052 valid supplementary code points accepted"
+    },
+    {
+      "issue": "Abort rethrowing the same Throwable instance masks original failure via self-suppression IllegalArgumentException",
+      "fix": "Skip addSuppressed when cleanup is the same Throwable",
+      "independent_regression": "Same shared Error thrown by apply/abort propagates by object identity; abort occurs once"
+    }
+  ],
+  "independently_exercised": [
+    "Immutable command/snapshot/canonical byte ownership",
+    "Pending mutation blocks snapshot across actual host threads",
+    "Source mutation on another thread during a synthetically matching target barrier invalidates replay and aborts touched target",
+    "Unavailable production authorization rejects replay",
+    "Malformed UTF-16 exact identity rejection and valid supplementary character preservation",
+    "Same-instance primary/cleanup exception preservation"
+  ],
+  "source_readthrough": [
+    "Sticky invalid journal state on mutation failure, overlap, unrecorded mutation, bounds, teardown and protocol completion mismatch",
+    "Single/batch updates, raw float bits, node/tag/replacement order and exact resource suffix preservation",
+    "Preflight all historical resources before native command application; original source identity cannot be owned replay target",
+    "Target/shot/epoch/nonce/settings/mapped-transcript receipt matching plus source recheck at final barrier",
+    "RecordInvokerCommands remains distinct from ReplayTarget; no fake live barrier/coverage implementation",
+    "Mutable tagged-operation constants checked before ordinary public SDK dispatch"
+  ],
+  "author_report_reviewed": {
+    "path": "../QA.json",
+    "sha256": "a82661ce2e00f1472245c75590ebef8231c093c7cd471ae4e726414e9f9bfd8f",
+    "host_checks": 1137,
+    "actual_export_rejections": 2,
+    "sdk36_and_d8_reported": true,
+    "independent_rerun_of_entire_author_verifier": false
+  },
+  "source_sha256": {
+    "../src/com/hiro/ulike/composer/ComposerCommand.java": "5ec13c5aa12697505221da85bb686c0d0153e927e03bec2fa845121e7058a05c",
+    "../src/com/hiro/ulike/composer/ComposerJournal.java": "ea3e708835d1b7e5c1541b9583b2476a2c251ce6214ecc49051fdb8c0529bc98",
+    "../src/com/hiro/ulike/composer/ExactResourceMap.java": "970553556b0d4778cf9653c7238bb46c3768840284152d960a9d802408f10eab",
+    "../src/com/hiro/ulike/composer/RecordInvokerCommands.java": "1906c792b666205e17d73c2037800c56d3c71247a79f2802932883f45b695bfd",
+    "../src/com/hiro/ulike/composer/ReplayPlan.java": "9d2690176ba2bb2c82682eacecaeb539edf823821438ed962c938ce84ac63a72",
+    "../src/com/hiro/ulike/composer/V164ReplayAudit.java": "b2b6b0c959fce2efca3d1ea8215146e428745e3c87d4cda16c8b8304add58b01"
+  },
+  "test_sha256": {
+    "ComposerReplayIndependentTest.java": "754b2a660344a34caf9e7dc3a1ada84ec9c337ba8c997c8998d7f355200c6571"
+  },
+  "production_enable_performed": false,
+  "actual_sdk_replay_performed": false,
+  "actual_composer_barrier_implemented": false,
+  "device_verification": false,
+  "remaining_blockers": [
+    "Complete app-wide composer observation is not installed",
+    "Exact observed native initialization configuration and native setup completion receipts need live implementation",
+    "All state-changing native/message/texture/tracking paths must be covered or reject",
+    "Paused original recorder restoration requires proved compositor/render completion; native-init callback and setter return are insufficient",
+    "Actual selected-style resources/settings/native graphics equivalence and all-mode phone testing remain outside host protocol proof"
+  ]
+}

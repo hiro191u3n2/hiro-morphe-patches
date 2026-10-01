@@ -19,6 +19,8 @@ SOURCE_DIRS = (
     'android_gainmap_codec/src/main/java', 'android_gainmap_save/src/main/java',
     'android_hdr_beauty/src', 'android_photo_transaction/src/main/java',
     'android_still_analysis/src/main/java', 'android_style_binding/src',
+    'android_analysis_input/src/main/java', 'android_composer_replay/src',
+    'native_geometry_contract/src',
 )
 
 

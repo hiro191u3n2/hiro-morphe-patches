@@ -1,0 +1,74 @@
+-- Original Hiro diagnostic appendix. Never enables a production geometry binding.
+local __hg_nonce = @NONCE@
+local __hg_feature = "@FEATURE@"
+local __hg_done = false
+local __hg_sequence = 0
+local __hg_original_late = EffectFaceMakeupSystemScript.onLateUpdate
+local function __hg_int(v, lo, hi)
+    if type(v) ~= "number" or v ~= math.floor(v) or v < lo or v > hi then error("integer contract") end
+    return v
+end
+local function __hg_number(v)
+    if type(v) ~= "number" or v ~= v or v == math.huge or v == -math.huge then error("nonfinite mesh") end
+    return string.format("%.17g", v)
+end
+local function __hg_hex(s)
+    if type(s) ~= "string" or #s < 1 or #s > 128 then error("name budget") end
+    return (s:gsub(".",function(c)return string.format("%02x",string.byte(c)) end))
+end
+local function __hg_emit(kind, component, payload)
+    if #payload > 7000 then error("packet budget") end
+    __hg_sequence = __hg_sequence + 1
+    Amaz.MessageCenter.sendMessage(1431062273,__hg_nonce,__hg_sequence,
+        "G1|"..__hg_feature.."|"..kind.."|"..tostring(component).."|"..payload)
+end
+function EffectFaceMakeupSystemScript:onLateUpdate(sys, deltaTime)
+    if __hg_original_late then __hg_original_late(self,sys,deltaTime) end
+    if __hg_done then return end
+    __hg_done = true
+    local ok = pcall(function()
+        local result=Amaz.Algorithm.getAEAlgorithmResult()
+        if result == nil then error("no algorithm result") end
+        local faces=__hg_int(result:getFaceCount(),0,10)
+        local n=__hg_int(#self.comps,0,32)
+        local snapshots={};local meshObjects={};local nextMesh=0;local total=0
+        -- Copy every value before sending any callback; do not retain SDK vectors.
+        for index=1,n do
+            local comp=self.comps[index]
+            local mesh=comp.templateMesh
+            if mesh == nil then error("missing native template mesh") end
+            local vertices=mesh:getAttributeData(Amaz.VertexAttribType.@ATTRIBUTE@,0,8193)
+            local scalarCount=__hg_int(vertices:size(),@COMPONENTS@,8192*@COMPONENTS@)
+            if scalarCount % @COMPONENTS@ ~= 0 then error("position width") end
+            local count=math.floor(scalarCount/@COMPONENTS@)
+            total=total+count
+            if total > 32768 then error("feature vertex budget") end
+            local slot=meshObjects[mesh]
+            if slot == nil then slot=nextMesh;nextMesh=nextMesh+1;meshObjects[mesh]=slot end
+            local ids={};local faceIds=comp.faceIds
+            local idCount=__hg_int(faceIds:size(),0,32)
+            for i=0,idCount-1 do ids[#ids+1]=tostring(__hg_int(faceIds:get(i),0,255)) end
+            local positions={}
+            for i=0,count-1 do
+                for axis=0,@COMPONENTS@-1 do
+                    positions[#positions+1]=__hg_number(vertices:get(i*@COMPONENTS@+axis))
+                end
+            end
+            snapshots[index]={name=__hg_hex(comp.entity.name),slot=slot,count=count,
+                ids=table.concat(ids,":"),positions=positions}
+        end
+        if result:getFaceCount() ~= faces or #self.comps ~= n then error("changed frame") end
+        __hg_emit("BEGIN",-1,tostring(faces)..","..tostring(n))
+        for index=1,n do
+            local s=snapshots[index]
+            __hg_emit("MESH",index-1,s.name..","..s.slot..","..s.count..","..s.ids)
+            for first=0,s.count-1,64 do
+                local amount=math.min(64,s.count-first);local values={}
+                for j=first*@COMPONENTS@+1,(first+amount)*@COMPONENTS@ do values[#values+1]=s.positions[j] end
+                __hg_emit("POS",index-1,first..","..amount..";"..table.concat(values,","))
+            end
+        end
+        __hg_emit("END",-1,tostring(__hg_sequence))
+    end)
+    if not ok then __hg_emit("ERROR",-1,"geometry_unavailable") end
+end

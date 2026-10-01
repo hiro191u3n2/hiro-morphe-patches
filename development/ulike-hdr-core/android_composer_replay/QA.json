@@ -1,0 +1,149 @@
+{
+  "schema": "ulike-composer-replay-qa-1",
+  "host_checks": "PASS 1137 composer replay checks",
+  "actual_export_checks": "PASS 2 actual export replay rejections",
+  "sdk36_compile": true,
+  "d8_min_api": 26,
+  "dex_bytes": 27880,
+  "source_sha256": {
+    "src/com/hiro/ulike/composer/ComposerCommand.java": "5ec13c5aa12697505221da85bb686c0d0153e927e03bec2fa845121e7058a05c",
+    "src/com/hiro/ulike/composer/ComposerJournal.java": "ea3e708835d1b7e5c1541b9583b2476a2c251ce6214ecc49051fdb8c0529bc98",
+    "src/com/hiro/ulike/composer/ExactResourceMap.java": "970553556b0d4778cf9653c7238bb46c3768840284152d960a9d802408f10eab",
+    "src/com/hiro/ulike/composer/RecordInvokerCommands.java": "1906c792b666205e17d73c2037800c56d3c71247a79f2802932883f45b695bfd",
+    "src/com/hiro/ulike/composer/ReplayPlan.java": "9d2690176ba2bb2c82682eacecaeb539edf823821438ed962c938ce84ac63a72",
+    "src/com/hiro/ulike/composer/V164ReplayAudit.java": "b2b6b0c959fce2efca3d1ea8215146e428745e3c87d4cda16c8b8304add58b01",
+    "test/com/hiro/ulike/composer/ComposerReplayTest.java": "29059099b72e5e30fa79cf4a6d21780911f44d9cf7cc14a370b292db917999e7",
+    "test/com/ss/android/medialib/RecordInvoker.java": "47921f58afb69a0989a61fa4d073db36df370352ab51a24841abfa17b2e80f58",
+    "test/com/ss/android/vesdk/VEEffectParams.java": "bcd1017084788e1ec780594f8481a057b5ba2f7672a4a6b7ef7a78e8691a08f6",
+    "verify.py": "ea4909f46a5cec2d8111c6c7ed1c81390cdecb73445fad7334707262e15bba63"
+  },
+  "tools_sha256": {
+    "android_sdk36": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "r8": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199"
+  },
+  "dependency_source_sha256": {
+    "../android_face_backend/verify_stock_contract.py": "651ccf254718b5088b6a7ed8b36d933a8447ce9c1300bec1be8bbf444b268e69"
+  },
+  "actual_stock_contract": {
+    "dex_sha256": {
+      "classes.dex": "4fb5923b8cf7c28f393ba91dca6a9d4be91f69a8d2a4ae067670987e642b0f83",
+      "classes3.dex": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0"
+    },
+    "public_method_code_sha256": {
+      "Lcom/ss/android/vesdk/VEEffectParams;-><init>()V": "8cdbfc6211f78d201a4e8bfdf404699b66b20184b39695c4e3c0f8d981f081c3",
+      "Lcom/ss/android/vesdk/VERecorder;->appendComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I": "cd26d397243b9e5c45e8271bc709cc1bed912c599bd1109a9ddcafd2f88b2e94",
+      "Lcom/ss/android/vesdk/VERecorder;->reloadComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I": "b7de389bcf19960d0929b6f9fac01c07777c3472541fb0ccae4ecaa81a79b599",
+      "Lcom/ss/android/vesdk/VERecorder;->replaceComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;I[Ljava/lang/String;)I": "4cfaea6223a13aa1c4aa9ac61eb6f8c51036804e35da018e872727f83f926ffd",
+      "Lcom/ss/android/vesdk/VERecorder;->setComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I": "6e56833308f308986e7b4080d4923f02bc02ae1a8fa2e497c833dcf1201aedcb",
+      "Lcom/ss/android/medialib/RecordInvoker;->appendComposerNodes([Ljava/lang/String;I)I": "43a7a9b26d1be115358dc08e6ca56f312ace1fee7f90d87f3dc83ea4c3207ee3",
+      "Lcom/ss/android/medialib/RecordInvoker;->reloadComposerNodes([Ljava/lang/String;I)I": "08576c45e7a737438ca2597a265399674db7d2ea663eb51ac24edf4d71c7ef14",
+      "Lcom/ss/android/medialib/RecordInvoker;->removeComposerNodes([Ljava/lang/String;I)I": "2b3262b40427dd4228dca812c722879d9cca72a96d64d43764e812882ce5c2d5",
+      "Lcom/ss/android/medialib/RecordInvoker;->replaceComposerNodes([Ljava/lang/String;I[Ljava/lang/String;I)I": "5e8f1f718a621c268855d4323dad7fe86aa7a2db508cc724d99067144bb72589",
+      "Lcom/ss/android/medialib/RecordInvoker;->setComposerMode(II)I": "3862ef20fd433a9eb707a15e9bc2702647881cd484eb85c63916a4cc5cb3974f",
+      "Lcom/ss/android/medialib/RecordInvoker;->setComposerNodes([Ljava/lang/String;I)I": "2ca8493e95be4b1c54551689c4aaa15d659aaa8fabbb4842f19030e948e5e054",
+      "Lcom/ss/android/medialib/RecordInvoker;->setComposerResourcePath(Ljava/lang/String;)I": "7b2bfbd53623bcbf45683a3c6fee262ebdee766a6a11e49365ffe5d612aadc9f",
+      "Lcom/ss/android/medialib/RecordInvoker;->setVEEffectParams(Lcom/ss/android/vesdk/VEEffectParams;)I": "511c1b96095fcf3ec74c1322d33e0d84436c32c775d4dc5d0c1ae26f7b82db0f",
+      "Lcom/ss/android/medialib/RecordInvoker;->updateComposerNode(Ljava/lang/String;Ljava/lang/String;F)I": "cd45aef8f47fe56a9a56030a4a9cbe9c9b0befb89a407ebacfde254d2abc6413",
+      "Lcom/ss/android/medialib/RecordInvoker;->updateMultiComposerNodes(I[Ljava/lang/String;[Ljava/lang/String;[F)I": "3f06015328e617f866f38f6859b77c7655bc5adbdc1065788c936604ca24f2e9"
+    },
+    "public_fields": {
+      "TYPE": "I",
+      "intValueOne": "I",
+      "intValueTwo": "I",
+      "stringArrayOne": "Ljava/util/ArrayList;",
+      "stringArrayThree": "Ljava/util/ArrayList;",
+      "stringArrayTwo": "Ljava/util/ArrayList;"
+    },
+    "public_mutable_static_constants": {
+      "EFFECT_TYPE_APPEND_COMPOSER_WITH_TAG": 2,
+      "EFFECT_TYPE_RELOAD_COMPOSER_WITH_TAG": 1,
+      "EFFECT_TYPE_REPLACE_COMPOSER_WITH_TAG": 3,
+      "EFFECT_TYPE_SET_COMPOSER_WITH_TAG": 0
+    },
+    "tagged_routes": {
+      "appendComposerNodesWithTag": {
+        "public_generic_params_route": true,
+        "tag_arrays_distinct": true,
+        "opcode_constant": 2
+      },
+      "reloadComposerNodesWithTag": {
+        "public_generic_params_route": true,
+        "tag_arrays_distinct": true,
+        "opcode_constant": 1
+      },
+      "replaceComposerNodesWithTag": {
+        "public_generic_params_route": true,
+        "tag_arrays_distinct": true,
+        "opcode_constant": 3
+      },
+      "setComposerNodesWithTag": {
+        "public_generic_params_route": true,
+        "tag_arrays_distinct": true,
+        "opcode_constant": 0
+      }
+    }
+  },
+  "actual_uploaded_exports": {
+    "natural": {
+      "archive_sha256": "5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0",
+      "manifest_sha256": "90092ec09aebfcf1e1d96f4039495c88deec906459a1b181d7b28fe099fd1b90",
+      "events": 165,
+      "return_codes": {
+        "0": 161,
+        "-105": 4
+      },
+      "operations": {
+        "mode": 55,
+        "append": 48,
+        "remove": 7,
+        "replace": 3,
+        "update": 52
+      },
+      "single_count_update_events": 52,
+      "legacy_requested_node_count": 187,
+      "filtered_latest_update_count": 2,
+      "mode": [
+        1,
+        0
+      ],
+      "composer_resource_path_observed": false,
+      "ordered_api_model_complete": false,
+      "native_queue_barrier_performed": false,
+      "whole_init_baseline_observed": false,
+      "replay_authorized": false
+    },
+    "purity": {
+      "archive_sha256": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117",
+      "manifest_sha256": "2b7862f306ef88dd944fd5b52a9d3756788b43d1210811f0cd1fd43477ac5324",
+      "events": 102,
+      "return_codes": {
+        "0": 102
+      },
+      "operations": {
+        "mode": 36,
+        "append": 32,
+        "remove": 4,
+        "replace": 2,
+        "update": 28
+      },
+      "single_count_update_events": 28,
+      "legacy_requested_node_count": 132,
+      "filtered_latest_update_count": 2,
+      "mode": [
+        1,
+        0
+      ],
+      "composer_resource_path_observed": false,
+      "ordered_api_model_complete": false,
+      "native_queue_barrier_performed": false,
+      "whole_init_baseline_observed": false,
+      "replay_authorized": false
+    }
+  },
+  "live_hook_coverage_installed": false,
+  "source_native_queue_barrier_implemented": false,
+  "target_native_queue_barrier_implemented": false,
+  "device_sdk_replay_tested": false,
+  "full_style_replay_available": false,
+  "scope": "Exact API transcript capture/guard/replay logic with ordinary SDK command adapter; only synthetic host Preconditions and barrier receipts are used in tests."
+}

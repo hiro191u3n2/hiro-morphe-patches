@@ -53,11 +53,11 @@ Important remaining boundaries:
   actual face coordinates have not been executed or calibrated. Both
   `productionGeometryVerified` and `declaredHdrSourceBindingVerified` remain
   false even when callbacks are complete. Callback success is not calibration.
-- There is no verified CPU skin-mask readback yet. The actual selected styles
-  sample alpha from `share://skinsegmask.texture` at `(photoUV.x, 1-photoUV.y)`.
-  `getSkinSegInfo`, `SegMaskInfo.getTexture` and texture read APIs exist in native
-  registration, but a name alone does not prove texture type, ownership,
-  readback signature or alignment. Generic foreground matting is not substituted.
+- `android_style_binding` now provides an opt-in diagnostic shader export through
+  the normal CPU image callback. It samples the selected styles' actual skin
+  mask with their UV convention. It remains an 8-bit diagnostic analysis grid,
+  not calibrated full-resolution segmentation. Native `SegMaskInfo.getTexture`
+  returns a BRC texture; it is not cast to an unrelated Amaz render texture.
 - `enableFaceExtInfo(int)` writes a global SDK flag. This module does not change
   an unknown global value or assume it can restore it. Therefore extra arrays
   are copied only when the SDK actually provides them. A caller may replay a
@@ -83,7 +83,7 @@ image. Channel packing, transfer and mask-grid calibration are still unverified.
 `PausedStockPreview` additionally implements the concrete normal-SDK
 stop-preview, release-native-recorder, run-analysis, restart-preview sequence.
 It reads the original backend's actual `g1` surface and checks actual status and
-handle at each boundary. `RecorderAdmission` has 25 host state/ownership tests.
+handle at each boundary. `RecorderAdmission` has 29 host state/ownership tests.
 This helper is **not enabled or installed in the candidate**: all constructor,
 allocation, teardown, application and direct-backend lifecycle paths must first
 receive verified global admission hooks. `HOOK_REQUIREMENTS.json` records the
@@ -97,3 +97,24 @@ barrier after restart. A successful `startPreviewAsync` result alone does not
 prove that the old style was restored. An unknown/failed release or teardown
 quarantines admission instead of allowing two native recorders to overlap. No
 real phone pause/restoration or all-mode lease safety has been certified.
+
+The original APK's 33,134 classes have now been scanned for concrete lifecycle
+references in `complete_integration169/lifecycle`. There are two Java calls to
+`RecordInvoker.nativeCreate`, three writes to its `mHandler`, and one call to
+`nativeUninitBeautyPlay`. Eight VERecorder constructors delegate to two terminal
+constructors. These are static DEX facts, not dynamic/native/reflection coverage.
+
+`NativeLifetimeBoundary` adds per-call entry/return/failure bookkeeping with
+14 host checks. It rejects overlapping native init/uninit and a second init
+that would overwrite a live handle. A zero Java handle is not a teardown receipt:
+the SDK clears `mHandler` before native teardown returns. The disabled partial
+DEX transforms cover the two actual init wrappers and the teardown wrapper,
+including all six normal returns and original monitor-cleanup rethrows. Removing
+only those declared hooks reconstructs all three original method hashes exactly.
+`NativeLifetimeHooks` is compile-time false, has no enable API, and neither the
+three transforms nor app-wide admission are installed in the candidate.
+
+The source-bound restoration inventory identifies why the native-init listener
+is insufficient: `PureCameraFragment$d.e` enqueues a runnable, and the app's
+`y$d.e` callback enqueues additional Handler work. Completion of the actual
+composer replay and a subsequent relevant render remains unproved.
