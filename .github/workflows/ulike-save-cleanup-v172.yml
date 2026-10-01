@@ -1,0 +1,89 @@
+name: Verify and publish ULike save cleanup 1.7.2
+on:
+  push:
+    branches: ['work/ulike-save-cleanup-v172']
+    paths: ['.github/workflows/ulike-save-cleanup-v172.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Decode hash-pinned source-only review archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,io,tarfile
+          from pathlib import Path,PurePosixPath
+          parts=sorted(Path('releases/ulike-v1.7.2').glob('source.b64.*'))
+          assert [p.name for p in parts]==['source.b64.000','source.b64.001','source.b64.002']
+          raw=base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts),validate=True)
+          assert len(raw)==33120 and hashlib.sha256(raw).hexdigest()=='1802f4eba33430d45ec5b8541d7643ef254162b661f338b7aae35f400d5d0bdc','Reviewed source bytes differ'
+          Path('src').mkdir()
+          with tarfile.open(fileobj=io.BytesIO(raw),mode='r:xz') as archive:
+              seen=set()
+              for member in archive.getmembers():
+                  p=PurePosixPath(member.name)
+                  assert member.isfile() and not p.is_absolute() and '..' not in p.parts and member.name not in seen
+                  assert p.suffix.lower() in {'.java','.py','.sh','.json','.txt','.md','.tsv'}
+                  seen.add(member.name)
+              assert len(seen)==49
+              archive.extractall('src',filter='data')
+          print('PASS reviewed source archive SHA-256 and source-only inventory')
+          PY
+      - name: Fetch pinned predecessor MPPs and previously verified public build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.7.1 --pattern ULike_HQ_Texture_Online_v1.7.1.mpp --dir input
+          gh release download ulike-v1.7.1 --pattern Hiro_Morphe_Patches_v1.0.104.mpp --dir input
+          gh run download 36859837629 --name ulike-lens-focus-analysis-tools --dir toolchain
+          cp toolchain/tools/morphe-1.16.jar toolchain/tools/r8-8.3.37.jar toolchain/tools/asm-9.8.jar toolchain/tools/android.jar tools/
+      - name: Rebuild both MPPs and require exact locally tested hashes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/build172.py --input input --tools tools --dist dist | tee dist/build172.txt
+          python3 src/finalize172.py --dist dist
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish172.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and update main and dev without overwriting concurrent work
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish172.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show publication checkpoint on failure
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain exact artifacts and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-save-cleanup-v172-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
