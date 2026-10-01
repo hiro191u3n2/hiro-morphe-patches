@@ -1,0 +1,70 @@
+name: Verify and publish ULike manual lenses 1.7.0
+on:
+  push:
+    branches: ['work/ulike-manual-lenses-v170']
+    paths: ['.github/workflows/ulike-manual-lenses-v170.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain exact published predecessor and reviewed toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.6.9 --pattern ULike_v1.6.9_sources_and_QA.zip --pattern ULike_HQ_Texture_Online_v1.6.9.mpp --pattern Hiro_Morphe_Patches_v1.0.102.mpp --dir input
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11160707412/zip > input/toolchain.zip
+          echo 'c9184fe6af171d294614d169695398f4f861030806dd37732872f90e2917bba0  input/toolchain.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('input/toolchain.zip') as z:
+              for name in ['morphe-1.16.jar', 'r8-8.3.37.jar', 'asm-9.8.jar', 'android.jar']:
+                  Path('tools', name).write_bytes(z.read('tools/' + name))
+          PY
+      - name: Restore reviewed sources and reproduce exact locally APKS-tested MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike-v1.7.0/restore_reviewed.py
+          python3 source170/build170.py --input input --tools tools --dist dist
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source170/release_pipeline/publish170.py --qa source170/release_pipeline/LOCAL_QA.json --dist dist --notes source170/release_pipeline/RELEASE_NOTES.txt --release-body source170/release_pipeline/README.md --summary source170/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified MPPs and main-dev Manager metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source170/release_pipeline/publish170.py --qa source170/release_pipeline/LOCAL_QA.json --dist dist --notes source170/release_pipeline/RELEASE_NOTES.txt --release-body source170/release_pipeline/README.md --summary source170/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show fail-closed publication state
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain downloadable artifacts and verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-manual-lenses-v170-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
