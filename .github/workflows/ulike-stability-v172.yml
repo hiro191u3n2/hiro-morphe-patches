@@ -1,0 +1,76 @@
+name: Verify and publish ULike stability repair 1.7.2
+on:
+  push:
+    branches: ['work/ulike-stability-v172']
+    paths: ['.github/workflows/ulike-stability-v172.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain hash-pinned predecessor and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist172
+          gh release download ulike-v1.7.1 --pattern ULike_v1.7.1_sources_and_QA.zip --pattern ULike_HQ_Texture_Online_v1.7.1.mpp --pattern Hiro_Morphe_Patches_v1.0.104.mpp --dir input
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11160707412/zip > input/toolchain.zip
+          echo 'c9184fe6af171d294614d169695398f4f861030806dd37732872f90e2917bba0  input/toolchain.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('input/toolchain.zip') as z:
+              for name in ['morphe-1.16.jar', 'r8-8.3.37.jar', 'asm-9.8.jar', 'android.jar']:
+                  Path('tools', name).write_bytes(z.read('tools/' + name))
+          PY
+      - name: Reproduce exact locally audited MPP bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          S=releases/ulike-v1.7.2/reviewed
+          echo "8a44f4aa58c7c53eb51882492cdc4a8401780f51ee67c5523c0c87afcbd4b169  $S/restore172.py" | sha256sum -c -
+          python3 "$S/restore172.py" --source input/ULike_v1.7.1_sources_and_QA.zip --payload "$S" --out source172
+          python3 source172/build170.py --input input --tools tools --dist dist172 --bootstrap
+          python3 source172/finalize172.py --source source172 --dist dist172 --reviewed source172/reviewed172.json
+          echo '445ccf7474cfdef33b51d5fd7af1ae01deb8a828f32058fb91289a97bfa8b8ee  dist172/ULike_v1.7.2_sources_and_QA.zip' | sha256sum -c -
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source172/release_pipeline/publish170.py --qa source172/release_pipeline/LOCAL_QA.json --dist dist172 --notes source172/release_pipeline/RELEASE_NOTES.txt --release-body source172/release_pipeline/RELEASE_NOTES.txt --summary source172/release_pipeline/CHANGELOG_SUMMARY.txt --upload-branch work/ulike-stability-v172 --target-commit "$GITHUB_SHA" --release-date 2026-10-02 --preflight-only
+      - name: Publish verified MPPs and main-dev Manager metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source172/release_pipeline/publish170.py --qa source172/release_pipeline/LOCAL_QA.json --dist dist172 --notes source172/release_pipeline/RELEASE_NOTES.txt --release-body source172/release_pipeline/RELEASE_NOTES.txt --summary source172/release_pipeline/CHANGELOG_SUMMARY.txt --upload-branch work/ulike-stability-v172 --target-commit "$GITHUB_SHA" --release-date 2026-10-02
+      - name: Show fail-closed publication state
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist172/publication-state.json; then cat dist172/publication-state.json; fi
+      - name: Retain downloadable artifacts and verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-stability-v172-publication
+          path: |
+            dist172/*
+            releases/ulike-v1.7.2/reviewed/*
+          if-no-files-found: warn
+          retention-days: 7
