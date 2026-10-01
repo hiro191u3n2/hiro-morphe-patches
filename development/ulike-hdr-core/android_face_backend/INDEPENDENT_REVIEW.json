@@ -1,12 +1,14 @@
 {
   "status": "PASS_INDEPENDENT_SOURCE_REVIEW_AND_RERUN",
-  "reviewer": "root (not author)",
+  "reviewer": "root integration review; StockSdkIdentity/identity ledger additions authored by root and independently reviewed separately",
   "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java": "540fab7b041fd8e9a19f33e40ed0825ba5d0dc79e4e8ccb6d2cf26a00ad16e31",
     "src/main/java/com/hiro/ulike/hdr/faceprobe/PixelOrientationEvidence.java": "f00135eb754bea09dd0eceb790942c66eca021a76229a929830b341b8bc7d9be",
-    "src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "ec0021135657e55e4185d39eb2abfb8447373f5dc3d5cbe5e80505d725937cc9",
-    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "97948cdbc24c5a9f45e54210aea36681d33b1efdcf4376efbb49ee3da597fe89"
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "6b7c5783717e0aee9082f373e42bed0edfa63aabbbe99fbdf9e2640230b79572",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockSdkIdentity.java": "a3289f2f8d660aabbc0e86b47d3cf08771116adb3413576dbfeaf6706d060b4f",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "c795dbcb2302e0eaba84dc299915e5ff86f67df7a34d6fbbdfb73cff7a428957"
   },
-  "author_host_suite_independently_rerun": "66 checks, actual SDK36 compilation passed",
+  "author_host_suite_independently_rerun": "66 ledger +11 owned-render-pixel checks and actual SDK36 compilation; callback execution itself remains untested",
   "author_stock_contract_independently_rerun": {
     "public_sdk_signatures_checked": 27,
     "native_instructions_checked": 30,
@@ -18,11 +20,15 @@
     "Input pixel ownership and asynchronous result copies; bounded images",
     "Actual initialization status required rather than stock ready flag",
     "No production Detector implementation or guessed landmark orientation",
-    "Teardown failure quarantines references and refuses reuse"
+    "Teardown failure quarantines references and refuses reuse",
+    "Observer setup/submission/copied-face/additional-message hooks preserve shared serial lease and original teardown/quarantine",
+    "Optional rendered image is grid/length checked and copied before delivery; observer query and callback exceptions reach the ledger",
+    "Image and face observation do not prove native coordinates, color transfer, mask precision or source-proxy calibration"
   ],
   "native_execution": false,
   "production_detector": false,
   "app_lifecycle_lease_or_ui_hook": false,
   "landmark_coordinates_verified": false,
-  "scope": "Static instructions are bounded pinned evidence, not a dynamically executed native call graph. SDK probe remains diagnostic only."
+  "scope": "Static instructions are bounded pinned evidence, not a dynamically executed native call graph. SDK probe remains diagnostic only.",
+  "identity_independent_review": "review/IDENTITY_INDEPENDENT_REVIEW.json (separate reviewer; actual stock/released library variants and 9 cases)"
 }

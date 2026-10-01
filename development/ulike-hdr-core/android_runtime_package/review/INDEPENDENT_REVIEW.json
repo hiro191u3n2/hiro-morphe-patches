@@ -1,0 +1,33 @@
+{
+  "status": "PASS_SCOPED_INDEPENDENT_REVIEW_AFTER_MANIFEST_FIX",
+  "reviewer": "still_face_backend",
+  "source_sha256": {
+    "src/app/hiro/ulike/patches/IntegrationPayload169.java": "57b5620e55bc5fabf44ce98a02f32a5859be4777d9d2267086054af7349f23fd",
+    "test/app/hiro/ulike/patches/IntegrationPayload169Test.java": "5333ea3576fbc5e2448cf4e733a86943213b15f652e4be858197481948520aa8",
+    "prepare.py": "decea1e1aa1f19bd32027c5711a8bb7f2d52e35d20558f21f27166c07cb23db3",
+    "verify.py": "cfb2d4fe0a6ef7936ef7483c2d4a3a37444164b2e2031ed995a69969b55db2ea",
+    "review/IntegrationPayloadIndependentTest.java": "4eff49c68cf54744a09a743d5c9687b43ff897f75b712d75ef1e588b4ac032ee"
+  },
+  "author_tests_independently_rerun": 43,
+  "pinned_payload_independently_prepared": {
+    "files": 6,
+    "bytes": 33457343,
+    "classes_jar_bytes": 141135
+  },
+  "additional_executed_checks": [
+    "JDK namespace-unaware DOM modify/serialize/reparse preserves exactly one true extractNativeLibs attribute",
+    "JDK namespace-aware DOM modify/serialize/reparse preserves exactly one true extractNativeLibs attribute",
+    "Actual Morphe1.16 Document(File) modify/close/reparse preserves true extractNativeLibs"
+  ],
+  "resolved_finding": {
+    "issue": "setAttributeNS alone on namespace-unaware existing false attribute did not persist true on serialization; actual Morphe Document reproduced defect",
+    "fix": "Remove qualified and namespace attributes before setting one namespaced true attribute",
+    "verified": true
+  },
+  "additional_root_fix_reviewed": "Canonical root is now actual context.get(AndroidManifest.xml,false).parent rather than unrelated/nonexistent getFileWorkspace; inspected real Morphe getFile bytecode mapping manifest and other-resource roots. Full real ResourcePatchContext apply remains a separate app-integration test.",
+  "real_morphe_document_executed": true,
+  "real_resource_patch_context_executed_in_this_review": false,
+  "apk_installed": false,
+  "native_runtime_executed": false,
+  "unresolved_findings": []
+}

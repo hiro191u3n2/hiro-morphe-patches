@@ -1,0 +1,24 @@
+{
+  "status": "PASS_STOCK_AND_PUBLISHED_NATIVE_VARIANT",
+  "results": [
+    "PASS StockSdkIdentity 9 checks; original and published NV21 variant; no native execution",
+    "PASS ProbeLedger assertions=66; synthetic callbacks only; native execution=false"
+  ],
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java": "540fab7b041fd8e9a19f33e40ed0825ba5d0dc79e4e8ccb6d2cf26a00ad16e31",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/PixelOrientationEvidence.java": "f00135eb754bea09dd0eceb790942c66eca021a76229a929830b341b8bc7d9be",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "6b7c5783717e0aee9082f373e42bed0edfa63aabbbe99fbdf9e2640230b79572",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockSdkIdentity.java": "a3289f2f8d660aabbc0e86b47d3cf08771116adb3413576dbfeaf6706d060b4f",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "c795dbcb2302e0eaba84dc299915e5ff86f67df7a34d6fbbdfb73cff7a428957",
+    "src/test/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixelsTest.java": "b9f78c494cd58234527870042b6e5c0ea8c85e044bca82e96b1207b5a384d444",
+    "src/test/java/com/hiro/ulike/hdr/faceprobe/ProbeLedgerTest.java": "0f73e3aad57b7c38c7f30f7664cfb32c39ce5ffc5fbf5c70905d0859243d66dc",
+    "src/test/java/com/hiro/ulike/hdr/faceprobe/StockSdkIdentityTest.java": "4394ef5a4c5acebc00ef2d7c3fe78eb73d54640c934ab21519d2b4117c4a0326"
+  },
+  "native_executed": false,
+  "device_execution": false,
+  "scope": "Accept exact published four-byte NV21 variant only after streaming normalization hashes to exact original library. Other changes rejected.",
+  "observer_extension": "One owned still; synchronous eager-copy hook, no-op old API, shared join/cleanup; SDK36 compile and host ledger checks repeated.",
+  "owned_diagnostic_pixel_checks": 11,
+  "probe_ledger_checks": 66,
+  "source_scope": "Identity checks9, ledger66, ownedimage11, SDK36compile; observer/image hooks share original teardown"
+}

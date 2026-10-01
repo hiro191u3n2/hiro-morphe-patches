@@ -1,0 +1,73 @@
+{
+  "status": "PASS_PINNED_READ_ONLY_NATIVE_AND_MATERIAL_EVIDENCE",
+  "effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "instruction_checks": 25,
+  "registration_relocations": 7,
+  "registration_strings": 10,
+  "assets": {
+    "natural": {
+      "archive_sha256": "5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0",
+      "ordered_effect_features": [
+        "AmazingFeature0",
+        "AmazingFeature1",
+        "AmazingFeature2"
+      ],
+      "original_file_sha256": {
+        "config.json": "c5d2330c98c2adf223dcca9a548893dccf65e9099d68aa5c91e6d95c70c54f64",
+        "AmazingFeature2/xshader/skinseg.frag": "9168eb81e4b3245952514803ded08f215a994d06cb31403ad83d020e1346574b",
+        "AmazingFeature2/xshader/skinseg.vert": "f7f225af3695fa06b2158d365858590aea878896385a8b3f3d87d6638660939a",
+        "AmazingFeature2/material/SkinSeg.material": "9a3eac77c30d656d3223ba61158f398d6ca4606ea89f7c834ffd9091ac697134",
+        "AmazingFeature2/main.scene": "8e0d7a4e25158a502c5a8c90d5c5e429dcf6cf238a0ac0e251da95d2b06a5c0e"
+      }
+    },
+    "purity": {
+      "archive_sha256": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117",
+      "ordered_effect_features": [
+        "AmazingFeature0",
+        "AmazingFeature1",
+        "FaceMakeupV2_byExport2",
+        "AmazingFeature3",
+        "3dmakeup4",
+        "AmazingFeature5",
+        "AmazingFeature6",
+        "AmazingFeature7",
+        "AmazingFeature8",
+        "AmazingFeature9"
+      ],
+      "original_file_sha256": {
+        "config.json": "8d9c10808ee3cbaca236884a095c7278120fb1eb7919799ddb762985d625f2c4",
+        "AmazingFeature8/xshader/skinseg.frag": "9168eb81e4b3245952514803ded08f215a994d06cb31403ad83d020e1346574b",
+        "AmazingFeature8/xshader/skinseg.vert": "f7f225af3695fa06b2158d365858590aea878896385a8b3f3d87d6638660939a",
+        "AmazingFeature8/material/SkinSeg.material": "c092df1d96053d9a4a4e1bcc8baf763aca5944ebe4bf233a234b8033de01f1b0",
+        "AmazingFeature8/main.scene": "a13a2d9f0d1156c144d6c84ae39d127704d2567f4447fe6329ca25614ba00899",
+        "AmazingFeature9/xshader/pass0.frag": "89203357634dbd103fca5d8e0c6fe2e2ed7e544f10c57e540be775fcbe41eb96",
+        "AmazingFeature9/xshader/pass0.vert": "b9cb9a031d1e19b6067283c686c60650c613da9051bfe03d75e34749e31351fe",
+        "AmazingFeature9/material/pass0.material": "4264dc98143307ced8bd4c20f289ae562811f1dc286d86320ecfb9f8a726aac2"
+      }
+    }
+  },
+  "established": {
+    "bef_segmask_getTexture_returns": "BRC::Texture userdata, not AmazingEngine::RenderTexture",
+    "brc_exposed_methods": [
+      "addUVFrame",
+      "getWidth",
+      "getHeight"
+    ],
+    "amazing_rendertexture_getPixels_native_read": "width*height*4-byte buffer; unsigned-short coordinate pairs; four 8-bit channels divided by 255 (channel layout not independently calibrated)",
+    "mesh_getVertexArray_registration_exists": true,
+    "late_update_and_end_frame_named_dispatch_exist": true,
+    "diagnostic_final_shader_sampling_route_supported_by_pinned_graph": true
+  },
+  "not_established": {
+    "safe_BRC_to_Amazing_texture_bridge": false,
+    "direct_native_skin_mask_cpu_readback_executed": false,
+    "lua_late_update_after_final_2d_makeup_geometry": false,
+    "mesh_accessor_returns_final_per_face_positions_and_uvs": false,
+    "renderpicture_mask_orientation_and_channel_transfer_calibrated": false,
+    "mask_matches_full_capture_resolution": false,
+    "all_faces_and_empty_scene_geometry_supported": false,
+    "android_device_execution": false
+  },
+  "policy": "No guessed ABI or raw address invocation. Native addresses identify read-only instruction evidence only.",
+  "verifier_sha256": "a179b65ce5e4ad33d5941244fbd10ebb85c623f94c372c6a4f72a4c32a92d9f6"
+}

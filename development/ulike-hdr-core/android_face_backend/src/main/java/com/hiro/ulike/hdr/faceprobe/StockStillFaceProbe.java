@@ -12,11 +12,11 @@ import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Callable stock-SDK diagnostic, deliberately NOT StillFaceAnalysis.Detector.
@@ -25,7 +25,6 @@ import java.util.zip.ZipFile;
  * Coordinates and normal SDK initialization still require device validation.
  */
 public final class StockStillFaceProbe {
-    private static final String LIB_SHA = "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095";
     private static final Object SERIAL = new Object();
     private static Object[] quarantined;
     private StockStillFaceProbe() {}
@@ -44,8 +43,33 @@ public final class StockStillFaceProbe {
         void requireInitializedAndNoOtherRecorder() throws Exception;
     }
 
+    /**
+     * Optional synchronous observation hook for one owned still. The recorder is
+     * already initialized under the exclusive lease. beforeSubmit may configure
+     * normal effects / a message listener; it MUST NOT start/stop another recorder,
+     * change licensing, submit frames, or retain the recorder beyond this run.
+     * face runs on an SDK worker: copy values before returning, never retain SDK
+     * objects or join/stop that worker. awaitAdditional runs on the caller worker
+     * and may await bounded MessageCenter delivery; no render/preview cache is used.
+     */
+    public interface RawObserver {
+        default void beforeSubmit(Object ownedInitializedRecorder) throws Exception {}
+        default void submitted() throws Exception {}
+        default boolean observesImage() { return false; }
+        /** Receives an owned clone, never the SDK callback buffer. */
+        default void image(int[] ownedPixels, int width, int height) throws Exception {}
+        default void face(Object attributeInfo, Object faceDetectInfo) throws Exception {}
+        default void awaitAdditional(long timeoutMillis) throws Exception {}
+    }
+
     public static ProbeLedger.Snapshot run(IdleSdkLease lease, Bitmap encodedSdrProxy,
                                            File newWorkspace, long callbackTimeoutMillis) throws Exception {
+        return run(lease, encodedSdrProxy, newWorkspace, callbackTimeoutMillis, new RawObserver() {});
+    }
+
+    public static ProbeLedger.Snapshot run(IdleSdkLease lease, Bitmap encodedSdrProxy,
+                                           File newWorkspace, long callbackTimeoutMillis, RawObserver observer) throws Exception {
+        if (observer == null) throw new NullPointerException("observer");
         if (lease == null || encodedSdrProxy == null || newWorkspace == null) throw new NullPointerException();
         if (Looper.myLooper() == Looper.getMainLooper()) throw new IllegalStateException("Run off the UI thread");
         if (callbackTimeoutMillis < 1 || callbackTimeoutMillis > 30000) throw new IllegalArgumentException("Deadline");
@@ -56,12 +80,13 @@ public final class StockStillFaceProbe {
             throw new IllegalArgumentException("Probe accepts an sRGB analysis proxy without a gain map");
         final int width = encodedSdrProxy.getWidth(), height = encodedSdrProxy.getHeight();
         final ProbeLedger ledger = new ProbeLedger(width, height);
+        final AtomicBoolean submitted = new AtomicBoolean();
         synchronized (SERIAL) {
             if (quarantined != null) throw new IllegalStateException("Previous native teardown failed; do not reuse process");
             lease.requireInitializedAndNoOtherRecorder();
             Context context = lease.context();
             if (context == null) throw new IllegalArgumentException("Missing app context");
-            verifyInstalledLibrary(context);
+            ledger.verifiedSdk(verifyInstalledLibrary(context));
             File cache = context.getCacheDir().getCanonicalFile();
             if (!newWorkspace.getCanonicalPath().startsWith(cache.getPath() + File.separator))
                 throw new IllegalArgumentException("Workspace must be inside this app's cache directory");
@@ -110,7 +135,10 @@ public final class StockStillFaceProbe {
                 Class<?> faceType = Class.forName("com.ss.android.medialib.RecordInvoker$FaceResultCallback", false, loader);
                 Object face = callback(loader, faceType, (name, values) -> {
                     if (!name.equals("onResult")) return;
-                    try { copyFaces(values[1], ledger); }
+                    try {
+                        copyFaces(values[1], ledger);
+                        if (submitted.get()) observer.face(values[0], values[1]);
+                    }
                     catch (Exception e) { ledger.fail("Face callback rejected: " + e.getClass().getSimpleName()); }
                 });
                 callbackRefs.add(face); registeredAttempt = true;
@@ -124,15 +152,25 @@ public final class StockStillFaceProbe {
                                     pixels,(Integer)values[1],(Integer)values[2]));
                         } catch (RuntimeException e) { ledger.fail("Invalid render pixels"); }
                         ledger.rendered((Integer)values[1], (Integer)values[2], pixels == null ? -1 : pixels.length);
+                        try {
+                            if (observer.observesImage()) {
+                                if (!submitted.get()) throw new IllegalArgumentException("Diagnostic image before submission");
+                                observer.image(OwnedRenderPixels.copy(pixels,(Integer)values[1],(Integer)values[2],width,height), width, height);
+                            }
+                        } catch (Exception e) { ledger.fail("Diagnostic image observer rejected: " + e.getClass().getSimpleName()); }
                     } else if (name.equals("onResult")) ledger.status((Integer)values[0], (Integer)values[1]);
                 });
                 callbackRefs.add(picture);
                 Class<?> frameType = Class.forName("com.ss.android.medialib.camera.ImageFrame", false, loader);
                 Object imageFrame = frameType.getConstructor(Bitmap.class, int.class).newInstance(owned, 2);
+                observer.beforeSubmit(recorder);
+                lease.requireInitializedAndNoOtherRecorder();
                 ledger.submit();
+                observer.submitted();
+                submitted.set(true);
                 requireZero(call(recorder, "renderPicture", new Class<?>[]{frameType,int.class,int.class,pictureType},
                         imageFrame, width, height, picture), "renderPicture");
-                ledger.await(false, callbackTimeoutMillis);
+                if (ledger.await(false, callbackTimeoutMillis)) observer.awaitAdditional(callbackTimeoutMillis);
             } catch (Exception | LinkageError e) {
                 ledger.fail("Probe failed: " + e.getClass().getSimpleName());
                 if (e instanceof InterruptedException) Thread.currentThread().interrupt();
@@ -190,28 +228,18 @@ public final class StockStillFaceProbe {
             return true;
         } catch (Exception | LinkageError e) { ledger.fail("Teardown failed: " + name); return false; }
     }
-    private static void verifyInstalledLibrary(Context context) throws Exception {
+    private static StockSdkIdentity verifyInstalledLibrary(Context context) throws Exception {
         File extracted = new File(context.getApplicationInfo().nativeLibraryDir, "libttvesdk.so");
         if (extracted.isFile()) {
-            try (InputStream in = new FileInputStream(extracted)) { requireDigest(in); }
-            return;
+            try (InputStream in = new FileInputStream(extracted)) { return StockSdkIdentity.verify(in); }
         }
         String[] splits = context.getApplicationInfo().splitSourceDirs;
         List<String> apks = new ArrayList<>(); apks.add(context.getApplicationInfo().sourceDir);
         if (splits != null) for (String path : splits) apks.add(path);
         for (String path : apks) try (ZipFile zip = new ZipFile(path)) {
             ZipEntry entry = zip.getEntry("lib/arm64-v8a/libttvesdk.so");
-            if (entry != null) { try (InputStream in = zip.getInputStream(entry)) { requireDigest(in); } return; }
+            if (entry != null) { try (InputStream in = zip.getInputStream(entry)) { return StockSdkIdentity.verify(in); } }
         }
         throw new IllegalStateException("Pinned installed arm64 SDK library was not found");
-    }
-    private static void requireDigest(InputStream in) throws Exception {
-        MessageDigest md = MessageDigest.getInstance("SHA-256"); byte[] buffer = new byte[65536]; long total = 0;
-        for (int n; (n = in.read(buffer)) != -1;) {
-            total += n; if (total > 67108864) throw new IllegalArgumentException("Oversized SDK library");
-            md.update(buffer, 0, n);
-        }
-        StringBuilder hex = new StringBuilder(); for (byte b : md.digest()) hex.append(String.format("%02x", b & 255));
-        if (!LIB_SHA.equals(hex.toString())) throw new IllegalArgumentException("Unsupported SDK library");
     }
 }

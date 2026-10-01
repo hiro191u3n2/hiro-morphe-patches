@@ -1,0 +1,230 @@
+{
+  "status": "PASS_DISABLED_CANDIDATE_REVIEW",
+  "host_guard_tests": {
+    "checks": 33,
+    "sdk36_signature_compile": true,
+    "actual_android_execution": false,
+    "enabled_path_tested": false
+  },
+  "runtime_preservation": {
+    "unchanged_old_classes": 182,
+    "unchanged_old_methods": 1065,
+    "exact_changed_runtime_methods": 8,
+    "unchanged_optical_classes": 21,
+    "compiled_gate_hard_false": true
+  },
+  "apk_cases": {
+    "standalone": {
+      "dex_payload_verification": "PASS final APK: 33708 unique classes / 215422 methods. 3418 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "resource_contract": {
+        "result": "PASS",
+        "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+        "mpp_sha256": "ab6a994d248f04d3a8f63d05ccee07e43c83ad12de980b27b3670ef36432a198",
+        "apk_sha256": "c1c807357b717a003837b2585de0ddbd6042afd0265c9b28a65d64dfad2beadb",
+        "runtime_additions": {
+          "lib/arm64-v8a/libonnxruntime.so": "df5d25c72a868dca773597c71e2000756d43fe4d70ade516d3693c54e12e0ada",
+          "lib/arm64-v8a/libonnxruntime4j_jni.so": "0695257178815f8c58c1719ba07d6d5d91a2b339634328cca2a0a98aa7ff2952",
+          "assets/ulike169/onnxruntime-LICENSE.txt": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+          "assets/ulike169/onnxruntime-ThirdPartyNotices.txt": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+          "assets/ulike169/onnxruntime-Privacy.md": "9703b86132bbe407a7138f9a45689e6996a8ab0ac670529d3699ce753f67538e",
+          "assets/ulike169/onnxruntime-LICENSE-1DS.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        "native_contract": "nv21-effect-flag",
+        "native_libraries_total": 58,
+        "native_libraries_preserved": 57,
+        "native_changes": [
+          {
+            "entry": "lib/arm64-v8a/libttvesdk.so",
+            "before_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+            "after_sha256": "eac57bcaa613860c7ca03ea516c4370520f9775cdfe700688d74e223bd59c2bb",
+            "file_offset": 4241508,
+            "file_offset_hex": "0x40b864",
+            "before_hex": "26008052",
+            "after_hex": "a6e34039",
+            "instruction_bytes": 4,
+            "library_bytes": 9789624,
+            "all_other_bytes_unchanged": true
+          }
+        ],
+        "contracted_assets": [
+          "assets/81001.zip",
+          "assets/81002.zip",
+          "assets/90000.zip"
+        ],
+        "unrelated_assets_preserved": 214,
+        "patching_result": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "\u9ad8\u753b\u8cea\u64ae\u5f71\u30fb\u8cea\u611f\u7f8e\u808c\u30fb\u7d20\u6750\u901a\u4fe1\u3092\u5fa9\u65e7"
+            }
+          ],
+          "failedPatches": []
+        }
+      },
+      "manifest": {
+        "binary_manifest_sha256": "2bcb9ad918f111a3bc8ae2c39e05845090e74056a9c58644b3b0389a4c8a0afc",
+        "fresh_apktool_decode": true,
+        "package": "com.gorgeous.liteinternational",
+        "application": "com.light.beauty.data.FuApplication",
+        "extractNativeLibs": true,
+        "onnx_startup_provider_present": false,
+        "provider_count": 12
+      }
+    },
+    "integrated": {
+      "dex_payload_verification": "PASS final APK: 33708 unique classes / 215422 methods. 3418 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "resource_contract": {
+        "result": "PASS",
+        "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+        "mpp_sha256": "48be4ed2547c5200fd8da0e00dcae55391592c66db444318da917e38b2ac7139",
+        "apk_sha256": "7f34fa2c4d0f6b0214700c46baa60b16d1f906b7ccf699a4b8466735f59ec11f",
+        "runtime_additions": {
+          "lib/arm64-v8a/libonnxruntime.so": "df5d25c72a868dca773597c71e2000756d43fe4d70ade516d3693c54e12e0ada",
+          "lib/arm64-v8a/libonnxruntime4j_jni.so": "0695257178815f8c58c1719ba07d6d5d91a2b339634328cca2a0a98aa7ff2952",
+          "assets/ulike169/onnxruntime-LICENSE.txt": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+          "assets/ulike169/onnxruntime-ThirdPartyNotices.txt": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+          "assets/ulike169/onnxruntime-Privacy.md": "9703b86132bbe407a7138f9a45689e6996a8ab0ac670529d3699ce753f67538e",
+          "assets/ulike169/onnxruntime-LICENSE-1DS.txt": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        },
+        "native_contract": "nv21-effect-flag",
+        "native_libraries_total": 58,
+        "native_libraries_preserved": 57,
+        "native_changes": [
+          {
+            "entry": "lib/arm64-v8a/libttvesdk.so",
+            "before_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+            "after_sha256": "eac57bcaa613860c7ca03ea516c4370520f9775cdfe700688d74e223bd59c2bb",
+            "file_offset": 4241508,
+            "file_offset_hex": "0x40b864",
+            "before_hex": "26008052",
+            "after_hex": "a6e34039",
+            "instruction_bytes": 4,
+            "library_bytes": 9789624,
+            "all_other_bytes_unchanged": true
+          }
+        ],
+        "contracted_assets": [
+          "assets/81001.zip",
+          "assets/81002.zip",
+          "assets/90000.zip"
+        ],
+        "unrelated_assets_preserved": 214,
+        "patching_result": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "\u9ad8\u753b\u8cea\u64ae\u5f71\u30fb\u8cea\u611f\u7f8e\u808c\u30fb\u7d20\u6750\u901a\u4fe1\u3092\u5fa9\u65e7"
+            }
+          ],
+          "failedPatches": []
+        }
+      },
+      "manifest": {
+        "binary_manifest_sha256": "2bcb9ad918f111a3bc8ae2c39e05845090e74056a9c58644b3b0389a4c8a0afc",
+        "fresh_apktool_decode": true,
+        "package": "com.gorgeous.liteinternational",
+        "application": "com.light.beauty.data.FuApplication",
+        "extractNativeLibs": true,
+        "onnx_startup_provider_present": false,
+        "provider_count": 12
+      }
+    }
+  },
+  "reviewed_file_sha256": {
+    "runtime/src/com/hiro/ulike/integration169/AppHook169.java": "5aa550977993867a7010ac3e304e40b4fff703572e394ee9142213569c97e3dc",
+    "runtime/src/com/hiro/ulike/integration169/CameraBridge169.java": "1d2395a0ae2d287d454b4aeb912988da39f3fa9980fc3bbf6f04b7f79c13332f",
+    "runtime/src/com/hiro/ulike/integration169/CandidateGate169.java": "c96835534710ffadc67b7063e45db18af8b28c1558dd989ab7369ecc7f1bd9c4",
+    "runtime/src/com/hiro/ulike/integration169/SavedUriHandoff169.java": "4df58cacb5081844c60b6f85a994eda389bfde14013165e714f659cf8dd60b9f",
+    "review/DisabledBridgeReview.java": "edf120f13f78897d4abb997ba8c9fc5bcb950b764c0a31126fbc9474d1a23fc3",
+    "review/OpticalZoom.java": "4b10a4c35baec18d89f8cb82db1065b3adb96759f2bb5378863a4c781044e34c",
+    "review/ArtifactReview169.java": "eefbba3ef3a4c7be78f943cb8ca324e0d4f3bb0bc343779ab5b44dcd6a2c188b",
+    "review/verify_review.py": "4d9a32206b45ae78b89a2d527ac79cb51d5797ae83efa879a3b193ccaedebc71",
+    "integration/ComposeRuntimeOverrides.java": "c2f603ead2ee408ca30b0edde9c523bf10d2f08347414615699382800626969a",
+    "integration/MergePayloads.java": "2a90ff984bc51181f7bca3796f41b95c7eae88401326b74737df19499d8426f8",
+    "integration/NativeNv21EffectFlag.java": "27d2caf980c21788655580c32367eb941980f2ed42a2257a99080390ef091833",
+    "integration/UpdatePatchStrings.java": "ef2d3ba517e66b11a209a1600513b9ba1a233c9cd72593afe92e089085a83fd2",
+    "integration/VerifyApplied.java": "88c1718756db89e2f3d9640b876889cd00aa8916970678f22cd94fd0a46be6ad",
+    "integration/VerifyHelperReferences.java": "4d05f7bbb85048ef877fe27793db537cb8816fd031917fdd793e1e913a4750e9",
+    "integration/VerifyPrevious162.java": "dfae3589646553ede307cde45dcdbdfb372f4ccdc839ac2c69b62f520800ed55",
+    "tools/Callbacks169.java": "87c2fb2a98a27777fdf5df61798ef88ff0603d394aee34b7268b0a7cd7155911",
+    "tools/Count169.java": "6551d9a6e6342c9cf9faa38463ad90e3eed71de18d831dae126136a95c0cc0da",
+    "tools/Inspect169.java": "26aa5d164ef6eb27fcf4185d22e1590bd62baa347988401f0d91a80bac7b9310",
+    "tools/InspectStock169.java": "7b61daf3c45bb8194781f0c6ca508f1c93c2a7cd627a465fabc4737286545bf1",
+    "tools/InspectSubmit169.java": "2f22ca14de6e57743c5cfbda96cc993d233d3696d997d672d444d0dfaa0e6f7d",
+    "tools/PrepareHooks169.java": "3e10416afe829ceb66facaba269f8e51fece989d0d3673161ade5eb8818171af",
+    "tools/RuntimeClasses169.java": "e6abddd7469b5dff8e6e4c6ab63790a7d700fe0823ccc8467b07c6f0f40138a8",
+    "tools/VerifyHooks169.java": "c64e7ba748e10a56703b30214b3d4dbac01a2437cd6ecc48bc22191c55f64940",
+    "tools/VerifyUiBindings169.java": "469f5dfe91b4135e16df8fb58db0db9dd0f06338d60d37121c1e0596817c4f52",
+    "build/runtime.dex": "95019a4e2e17ed2e4ee00e2bd26081f7855dc3d3e42ef87d16ecc5777bc8af75",
+    "build/old/ulike/runtime.dex": "0c559c317c26d1306da989003c9a343c59ba53615e96ee533ebfb7c30f6dea0e",
+    "build/methods.tsv": "982edbbe285d59a1e0e05d530bfa4c211b37068f78a80892f51968883a88d84b",
+    "runtime/helpers.jar": "3d23cd304dd78e26509cb7baa4fce383a15f20a203a9a131c0dd09030ec76c14",
+    "deltas/runtime-contracts.tsv": "624b04455174c545c09a543674cc1d20a1ca1acde6b32dce2e3a7c907c704b2a",
+    "deltas/method-contracts.tsv": "91750b6fd66ef67e60da88d2f88c69b541069f62c5ecb109587d2dec0ce289bd",
+    "integration/verify_applied_resources.py": "7b1b8d4e803e842e67dd04abf006a9429fd4b8a659c71ca0a9a87ee8c9468d20",
+    "build/java/MergePayloads.class": "f6070970b02b7273bb9a9d1efb507b0f53328924843f385064d4ca8278262013",
+    "build/java/VerifyApplied.class": "4521e7e5e1016e9d7dea01df7cbc5c6b2ae3195b4d5203921965182fd7b570eb"
+  },
+  "artifact_sha256": {
+    "standalone": {
+      "apk": "c1c807357b717a003837b2585de0ddbd6042afd0265c9b28a65d64dfad2beadb",
+      "mpp": "ab6a994d248f04d3a8f63d05ccee07e43c83ad12de980b27b3670ef36432a198",
+      "result": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb"
+    },
+    "integrated": {
+      "apk": "7f34fa2c4d0f6b0214700c46baa60b16d1f906b7ccf699a4b8466735f59ec11f",
+      "mpp": "48be4ed2547c5200fd8da0e00dcae55391592c66db444318da917e38b2ac7139",
+      "result": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb"
+    }
+  },
+  "input_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "tool_sha256": {
+    "android.jar": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "apktool.jar": "56d59c524fc764263ba8d345754d8daf55b1887818b15cd3b594f555d249e2db",
+    "morphe-1.16.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c"
+  },
+  "jdk_sha256": {
+    "java": "2a207f5e7d075afa01d97f8048389a64432a44c4a5af0f5e77d6e286ec5f401d",
+    "javac": "55859b80e7a9c4c4736be19ad3addeb35112ca6d17a30c4e0e116afc0a499bdb"
+  },
+  "resolved_review_findings": [
+    "Queued stale capture failures and sequence aborts check the exact currently submitted request/session before cleanup.",
+    "Rejected builders, requests, sessions and unsupported bursts remove their owned pending state; local reader allocation has failure cleanup.",
+    "A single photo choice remains owned through worker completion, preventing an unbounded queue of owned full-resolution frames.",
+    "Expired pre-copy choices are marked before cancellation; exact-choice cancellation uses safe monitor ordering and cannot consume a newer choice.",
+    "Mutable OpticalZoom route failure is checked after delegated request building.",
+    "After a photo has committed, inspection/UI failure retains the URI and attempts non-success shutter cleanup; no ordinary image-error callback is generated.",
+    "Resource validation now permits exactly the two pinned ORT native additions and four notices while checking all previous native/asset contracts."
+  ],
+  "limits": [
+    "CandidateGate169 is hard false in actual DEX; no application Processor is installed. This is not a functional full-HDR capture release.",
+    "Global native recorder admission helpers are bundled but unhooked and uninstalled; complete native bypass coverage and restoration barrier are not proven.",
+    "The test-only OpticalZoom recorder verifies delegate routing on a host; it is not packaged, and it is not Android Camera2 execution.",
+    "P010 callback matching and saved-URI active paths are source reviewed; real Camera2, MediaStore UI, Samsung native inference, lens/focus speed and visual quality require device validation.",
+    "Automatic-save handoff is the only implemented UI route; Bitmap editor and burst HDR modes are explicitly unsupported.",
+    "High-resolution P010 alone does not establish sensor-native24.5MP input, chroma siting, or end-to-end stock appearance equivalence."
+  ]
+}

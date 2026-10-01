@@ -1,0 +1,28 @@
+{
+  "status": "PASS_SCOPED_SOURCE_AND_LUA_REVIEW",
+  "reviewer": "still_face_backend",
+  "source_sha256": {
+    "src/com/hiro/ulike/binding/ShotStyleSettings.java": "01248584d9d801a01e8da0a459fe9b2095e36554cec5b4731a0ea7f3eff7cc6b",
+    "src/com/hiro/ulike/binding/AuthoredMesh.java": "ab04511797102ea6501cdd679b97e8625f83a4e3166efd054fd77c236b6ec811",
+    "src/com/hiro/ulike/binding/ObservedStyleFrame.java": "2ecc3219a5127f57928854529c7724cd08589f1e026d669e0cbbb41202703dce",
+    "instrument_style.py": "a5621e63153dc16986132bf298b95128c133f106b46a2b1217eac8f72c39513a"
+  },
+  "independently_executed": {
+    "lua54_mock_cases": 50,
+    "actual_selected_scripts_syntax": 12
+  },
+  "reviewed": [
+    "Settings snapshots preserve actual requested floats and reject pending/overlapping/malformed histories; complete-graph and native-execution status remain explicit",
+    "Mesh parser checks owned input hash and bounds; no authored positions are exposed as live face geometry",
+    "Observation parser requires complete selected feature set, exact nonce, bounded contiguous1427 vertices plus MVP, finite decimal values; no106remapping",
+    "Lua wrappers observe actual original post-setFaceUniform intensity and per-feature one-update exports; no face demographic attributes retained",
+    "AuthoredMesh owned input clone before hash/parse inspected after independent peer identified TOCTOU",
+    "Python installer reads one bounded immutable archive snapshot and hashes/extracts those exact bytes; path-reopen TOCTOU removed"
+  ],
+  "scope_exclusions": [
+    "PinnedPngTexture, Purity3dBinding, StyleObserverInstaller and skin-mask installer/decoder are assigned separate reviews",
+    "No native Lua delivery, actual on-phone geometry, skin mask, full binding or original GPU parity claimed"
+  ],
+  "device_executed": false,
+  "findings": []
+}

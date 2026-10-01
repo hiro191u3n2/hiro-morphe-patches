@@ -111,6 +111,37 @@ every rendering pass has that resolution.
   and an app-wide exclusive lifecycle lease, neither supplied by this module.
   It is not a production detector or an installed diagnostic UI. Native calls
   and point-coordinate correspondence still require device verification.
+  It recognizes both the exact stock SDK library and the released four-byte
+  NV21 variant; other modified binaries are rejected. Its shared observer
+  retains normal lifecycle cleanup and allows synchronous copied face values.
+* `android_still_analysis`: eager copies of the same submitted still's raw
+  SDK106 and named extra face points, plus bounded nonce-bound script messages.
+  It does not collect demographic or emotional attribute scores. Normal SDK
+  setup, exclusive recorder ownership, coordinate calibration and actual skin
+  mask readback remain prerequisites; this is not a completed detector binding.
+* `android_style_binding`: frozen selected-style settings, pinned authored
+  mesh/UV/topology parsing, and observations of actual post-setter uniforms and
+  the Purity 1427-vertex mesh/MVP. The private Lua instrumenter appends original
+  observation code to hash-checked caller-supplied scripts. Host parser and
+  message mocks are not device execution. Authored topology does not replace
+  unavailable native 2D raster geometry or same-shot segmentation pixels.
+  The private skin-mask diagnostic uses the original active mask sampler and
+  exports mask/UV channels through the normal owned render callback. It keeps
+  the analysis grid (at most 4,194,304 pixels), validates declared channel and
+  orientation conventions, and does not enlarge it into a proven native-size
+  mask. `native_readback_contract` records the exact static API/type evidence
+  and an independent diagnostic review; actual device calibration is absent.
+* `android_hdr_beauty`: a declared HDR appearance replacement using actual
+  generated neural colors and their explicit blend weights, followed by the
+  verified sampled makeup/LUT equations with a defined HDR extension. It
+  generates processed display-linear BT.2020 HDR and derives the SDR base from
+  that result. It does not restore old captured detail under opaque retouching
+  or reuse the original gainmap. A 203-nit SDR reference white, reference HLG
+  OOTF and explicit generated-patch peak policy are recorded. Actual-model host
+  integration and independent mathematical tests pass; same-shot production
+  geometry/masks, visual fidelity and native HDR equivalence remain unverified.
+  Its current entry point requires exactly one prepared neural face layer;
+  complete zero-face and multi-face behavior is not implemented.
 * `style_pipeline`: Java double-precision versions of Natural's one and Purity's
   nine named makeup passes, plus the skin/background and final LUT operations.
   The API requires already sampled, same-frame textures, masks, geometry and
@@ -153,6 +184,21 @@ every rendering pass has that resolution.
   saving. Independent libheif decoding checks real generated files. The
   complete edited HDR/SDR pair is still an external input; this cannot turn an
   untouched HDR original plus beautified SDR into a correct edited HDR image.
+* `android_photo_transaction`: file-backed floating-point staging of the
+  processed pair, integer-only rotation/mirror/crop, and an Android MediaStore
+  pending-write/publish adapter with recovery of owned pending rows. A sealed
+  beauty result is private staging, not gallery publication. Host fault tests
+  cannot prove real MediaStore behavior, app save completion or phone decoding.
+  Both real models now pass a smooth synthetic P010-to-final-HEIF host test with
+  HDR highlights, while a sharp fixture exceeding the unchanged reconstruction
+  quality gate is rejected before publication. FP64 source and rotated pair
+  staging at 4080×3060 can require approximately 1.14 GiB of temporary disk space
+  before codec/container scratch; this is not an Android heap allocation.
+* `android_runtime_package`: actual Morphe resource helper for the pinned
+  official arm64 ONNX Runtime dependencies and notices, with conflict guards,
+  staged-file rollback and a manifest startup-provider prohibition. It does
+  not merge the AAR manifest or load the runtime. Application DEX merging,
+  native installation and Android execution require separate integration tests.
 * `tools/audit_style_exports.py`: validates source archives without executing
   their scripts. `qa/material_audit.json` records the observed input evidence.
 
@@ -175,13 +221,14 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
    high-precision beauty engine is not complete.
 2. Establish the active execution graph, color interpretation, sampler behavior,
    final style parameters and reference results on identical input images.
-3. Implement high-precision processing for those operations and a defined HDR
-   extension of effects authored for SDR. The original 8-bit SDK output cannot
-   be relabeled as true 10-bit HDR.
+3. Bind and validate the implemented high-precision operations and declared HDR
+   appearance extension against same-input phone results. Its generated HDR
+   replacement is not native HDR reconstruction of an SDR-trained model. The
+   original 8-bit SDK output cannot be relabeled as true 10-bit HDR.
 4. Integrate the standalone Camera2 P010/HLG source, color conversion, processing, memory
    ownership, lens switching and capture completion with the existing app.
-5. Supply the completed processed HDR/SDR pair to the new Java Main10 gainmap
-   save path and integrate it with the actual app capture/save lifecycle.
+5. Integrate processed-pair staging and the Java Main10 gainmap save path with
+   the actual app capture/save lifecycle and successful saved-URI notification.
    Verify phone encoding, decoding
    and display, including all requested lens/mode combinations.
 

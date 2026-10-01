@@ -1,0 +1,68 @@
+{
+  "schema": "ulike-runtime-package-qa-v1",
+  "status": "host_pass",
+  "checks": 43,
+  "source_sha256": "57b5620e55bc5fabf44ce98a02f32a5859be4777d9d2267086054af7349f23fd",
+  "test_sha256": "5333ea3576fbc5e2448cf4e733a86943213b15f652e4be858197481948520aa8",
+  "prepare_sha256": "decea1e1aa1f19bd32027c5711a8bb7f2d52e35d20558f21f27166c07cb23db3",
+  "verify_sha256": "cfb2d4fe0a6ef7936ef7483c2d4a3a37444164b2e2031ed995a69969b55db2ea",
+  "morphe_jar_sha256": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+  "resources": [
+    {
+      "target": "lib/arm64-v8a/libonnxruntime.so",
+      "sha256": "df5d25c72a868dca773597c71e2000756d43fe4d70ade516d3693c54e12e0ada",
+      "bytes": 32990480,
+      "elf": {
+        "machine": "AARCH64",
+        "pt_load_count": 3,
+        "pt_load_alignment": [
+          16384,
+          16384,
+          16384
+        ]
+      }
+    },
+    {
+      "target": "lib/arm64-v8a/libonnxruntime4j_jni.so",
+      "sha256": "0695257178815f8c58c1719ba07d6d5d91a2b339634328cca2a0a98aa7ff2952",
+      "bytes": 111648,
+      "elf": {
+        "machine": "AARCH64",
+        "pt_load_count": 2,
+        "pt_load_alignment": [
+          16384,
+          16384
+        ]
+      }
+    },
+    {
+      "target": "assets/ulike169/onnxruntime-LICENSE.txt",
+      "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+      "bytes": 1073
+    },
+    {
+      "target": "assets/ulike169/onnxruntime-ThirdPartyNotices.txt",
+      "sha256": "143764b952fdb1a7c69ce653bfba74a7744d6a8a573bfb73e235fba356c83de3",
+      "bytes": 338088
+    },
+    {
+      "target": "assets/ulike169/onnxruntime-Privacy.md",
+      "sha256": "9703b86132bbe407a7138f9a45689e6996a8ab0ac670529d3699ce753f67538e",
+      "bytes": 4696
+    },
+    {
+      "target": "assets/ulike169/onnxruntime-LICENSE-1DS.txt",
+      "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+      "bytes": 11358
+    }
+  ],
+  "android_runtime_executed": false,
+  "real_morphe_resource_context_executed": false,
+  "apk_install_tested": false,
+  "telemetry_provider_merged": false,
+  "limits": [
+    "Resource workspace tests use real bytes and file IO, not an Android device.",
+    "Actual patch application and final APK manifest/native packaging require separate integration validation.",
+    "ELF page alignment alone does not establish APK installation or runtime compatibility."
+  ]
+}

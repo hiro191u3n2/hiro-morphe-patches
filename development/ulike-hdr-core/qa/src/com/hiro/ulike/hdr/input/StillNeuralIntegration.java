@@ -80,12 +80,12 @@ public final class StillNeuralIntegration {
                 check(hash(original).equals(before),"HDR sample codes unchanged by SDR model processing");
                 // Simulate a caller changing frame identity after transaction begins.
                 final Object other=new Object();
+                final Sink failed=new Sink(source,true);
                 BeautyImageEngine.SourceRgbFloat unstable=new BeautyImageEngine.SourceRgbFloat(){
-                    int identities;public int width(){return source.width();}public int height(){return source.height();}
-                    public Object frameIdentity(){return identities++==0?original:other;}
+                    public int width(){return source.width();}public int height(){return source.height();}
+                    public Object frameIdentity(){return failed.id==null?original:other;}
                     public void readPixel(int x,int y,float[] dst){source.readPixel(x,y,dst);}
                 };
-                Sink failed=new Sink(source,true);
                 try{engine.processWithTransform(unstable,transform,mask,.7,BeautyImageEngine.SDR_DOMAIN,BeautyImageEngine.Budget.standard(),failed);throw new AssertionError("changed frame accepted");}
                 catch(IllegalArgumentException expected){check(failed.aborts==1&&!failed.committed,"changed frame rollback");}
                 engine.close();

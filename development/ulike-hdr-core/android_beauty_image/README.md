@@ -71,9 +71,9 @@ Dimensions, pixel count, domain, mask style, transform and prospective module
 array size are checked before reading source pixels. The default policy permits
 at most 25,000,000 pixels, dimension 16,384, eight rows per tile, and an 8 MiB
 module Java array budget. The bound includes input tensor, raw model output,
-FP64 generated crop, mask, tile, and 16 KiB small-array allowance:
+FP64 generated crop plus its defensive layer copy, mask, tile, and 16 KiB small-array allowance:
 
-`3*65536*4 + 4*65536*4 + 4*65536*8 + width*tileRows*3*4 + 320*320 + 16384`.
+`3*65536*4 + 4*65536*4 + 8*65536*8 + width*tileRows*3*4 + 320*320 + 16384`.
 
 It excludes caller source/sink storage, library/model compilation buffers, ORT
 direct/native activation memory, Java object headers and allocator overhead.
@@ -99,3 +99,22 @@ or degenerate geometry. These are synthetic samples, not facial appearance tests
 
 No Android device execution, app hook integration, native GPU pixel parity,
 complete Natural/Purity style equivalence or HDR preservation is claimed.
+
+## Explicit generated layer for HDR appearance policies
+
+`BeautyImageEngine.prepareLayer` runs the exact same pinned inference and
+projection math as the SDR photo method. Its immutable `PreparedNeuralLayer`
+returns projected encoded SDR generated RGB and the actual model-alpha/mask/
+intensity weight, before compositing with source pixels. Both paths share this
+implementation; no separate model graph or guessed alpha is used. The layer
+retains exact source-object and frame identity, defensively owns generated/matrix
+buffers, rejects invalid raster coordinates, and remains valid after the engine
+closes. `preparedFrom(source)` supports a typed HDR pipeline's requirement that
+its layer was prepared from that exact SDR-rendition object. The layer itself is
+still SDR-authored data and does not claim HDR appearance or preservation.
+
+The shared-path regression compares all ten old full-photo fixtures against the
+frozen Python component, and checks reconstructing each style's affine image
+from the exposed layer yields the same output float bits. Source identity,
+defensive matrix access, coordinate rejection and post-engine-close lifetime
+are additionally exercised.

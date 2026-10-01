@@ -106,3 +106,7 @@ See the separate independent review for additional validation.
 DEX using the caller's existing toolchain. Android execution, actual camera
 integration, frame geometry, full-style equivalence and HDR integration remain
 unverified/unimplemented dependencies; a successful build is not device proof.
+
+## Shared fragment view for declared HDR extensions
+
+`SampledMakeupPipeline.borrowLayer` validates the same SDR tile/pass contract and provides synchronous `sample(pixel,double[4])` full-strength fragment RGB plus its actual outer weight. The arrays remain borrowed and must not mutate while the view is used. Existing `apply` consumes that same view and retains its exact SDR blend arithmetic. Purity 3D keeps its internal alpha/intensity in the fragment and uses geometry coverage as the outer weight, including zero-intensity source replacement. The view makes no HDR claim itself. `QA_SHARED_LAYER_REGRESSION.json` records the refactor author's rerun of prior independent literal shader/LUT fixtures and actual supplied-asset cases; the new HDR implementation has separate independent review.

@@ -1,0 +1,45 @@
+{
+  "schema": "ulike-recorder-admission-hook-requirements-1",
+  "installed_in_candidate": false,
+  "enabled_on_device": false,
+  "contract": "ulike-v562-recorder-admission-1",
+  "default_disabled_required": true,
+  "mid_process_enable_allowed": false,
+  "construction": [
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Lcom/ss/android/vesdk/runtime/VERecorderResManager;Landroid/content/Context;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Lcom/ss/android/vesdk/runtime/VERecorderResManager;Landroid/content/Context;Lcom/ss/android/vesdk/render/VERenderView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/app/Activity;Landroid/view/SurfaceView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/app/Activity;Landroid/view/TextureView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/content/Context;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/content/Context;Landroid/view/SurfaceView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/content/Context;Landroid/view/TextureView;)V",
+    "Lcom/ss/android/vesdk/VERecorder;-><init>(Ljava/lang/String;Landroid/content/Context;Lcom/ss/android/vesdk/render/VERenderView;)V"
+  ],
+  "destroy": [
+    "Lcom/ss/android/vesdk/VERecorder;->onDestroy()V"
+  ],
+  "native_allocation": [
+    "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlay(IILjava/lang/String;IILjava/lang/String;IZZZ)I",
+    "Lcom/ss/android/medialib/RecordInvoker;->initBeautyPlayOnlyPreview(Lcom/ss/android/medialib/qr/ScanSettings;)I"
+  ],
+  "native_teardown": [
+    "Lcom/ss/android/medialib/RecordInvoker;->uninitBeautyPlay()I"
+  ],
+  "additional_lifecycle_guard_coverage_required": [
+    "VERecorder start/stop preview overloads, onPause/onResume/onDestroy and surface changes",
+    "Direct backend and RecordInvoker lifecycle call paths outside those wrappers; coverage currently unproved"
+  ],
+  "entry_exit_contract": {
+    "constructor": "beforeConstruction() before any backend allocation; constructed(ticket,this) on every normal exit; failed(ticket) on exceptional exit",
+    "destroy": "beforeDestroy(this); destroyed(ticket) after normal completion; failed(ticket) after error",
+    "native_init": "beforeNativeInit(this); nativeInitialized(ticket,getHandler(),returnStatus) on every normal exit; failed(ticket) after error",
+    "native_uninit": "beforeNativeUninit(this); nativeUninitialized(ticket,returnStatus) after actual native teardown return; failed(ticket) after error",
+    "application_lifecycle": "beforeApplicationLifecycle(VERecorder,operation) before side effects; direct backend bypass paths additionally need proved admission coverage"
+  },
+  "blocking_conditions": [
+    "No hook coverage receipt merely from a monitor or installed(String) call",
+    "No enable until all original SDK entry/exit callpaths are instrumented and verified",
+    "Restoration must observe original normal native-init callback success and actual app composer-state restoration",
+    "No phone pause/restart/render teardown run has occurred"
+  ]
+}

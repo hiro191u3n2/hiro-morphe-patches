@@ -17,6 +17,8 @@ SOURCE_DIRS = (
     'android_face_backend/src/main/java', 'style_pipeline/src/main/java',
     'style_pipeline/integration/src',
     'android_gainmap_codec/src/main/java', 'android_gainmap_save/src/main/java',
+    'android_hdr_beauty/src', 'android_photo_transaction/src/main/java',
+    'android_still_analysis/src/main/java', 'android_style_binding/src',
 )
 
 

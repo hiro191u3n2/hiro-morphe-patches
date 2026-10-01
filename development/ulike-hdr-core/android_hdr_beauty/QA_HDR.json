@@ -1,0 +1,71 @@
+{
+  "status": "PASS_SDK36_D8_HOST_ACTUAL_MODEL_HDR_APPEARANCE",
+  "cases": [
+    {
+      "style": "NATURAL_BLUSH",
+      "checks": 1180345,
+      "actual_neural_edited_pixels": 87398,
+      "unmodified_neural_region_pixels": 109210,
+      "hdr_headroom_channels": 164918,
+      "post_style_changed_channels": 589824,
+      "status": "PASS"
+    },
+    {
+      "style": "PURITY2",
+      "checks": 1180345,
+      "actual_neural_edited_pixels": 87198,
+      "unmodified_neural_region_pixels": 109410,
+      "hdr_headroom_channels": 168249,
+      "post_style_changed_channels": 589824,
+      "status": "PASS"
+    }
+  ],
+  "source_sha256": {
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/CaptureMatch.java": "df1110d3211766ddb179b4067624d8549f549b31db1ead5fbe03f6281beb4435",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/HdrFrame.java": "63fbd7c93cc899b2f046a30ea5064bb741ed08c0f6b3edbbe3a0074e7d957ada",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/InputRejected.java": "e79123ebc1be85f2e1fed73c491864ccdda1dbf87e9430963f0b12c3406a0abf",
+    "hdr_input/src/main/java/com/hiro/ulike/hdr/input/P010FrameReader.java": "d2ccd836bd2c719d468d43b1d70ff25758728e93cd1804db55f4defe462f43db",
+    "android_model_runtime/src/hiro/ulike/model/AndroidTensorEngine.java": "e6f73673f57dba5bc8257e2653ab95c12f6f5a1c5f9c724cd918d3e771fd4f15",
+    "android_model_runtime/src/hiro/ulike/model/GraphOnnx.java": "a0cec1f9dcde10322872dcd0647e5fbc626a8823106786bc4106eabf74b63aa7",
+    "android_model_runtime/src/hiro/ulike/model/OrtTensorEngine.java": "8398b72f3a619bd957c1e60275a667a047f01942be87bb167c164fe78b7658be",
+    "android_model_runtime/src/hiro/ulike/model/PinnedModel.java": "a1a38ad2b5095a530bc52e05ff15e5057281800269dd8ea131f5b35040803399",
+    "android_beauty_image/src/hiro/ulike/beauty/BeautyImageEngine.java": "88ff018945fffa317aaab7bba911e5e83597d2dbb77a27d88d5530fe17238fd0",
+    "android_beauty_image/src/hiro/ulike/beauty/PinnedAssets.java": "f1fc61763e03b8fcd87d9a863ad5ff9cd6caa87ae78a98cd7b20e3e9246a2f76",
+    "android_beauty_image/src/hiro/ulike/beauty/PreparedNeuralLayer.java": "a944271b92d08e79d1ecde19f7203643f0205a7731bb8bcb94ea0e7783db9382",
+    "android_hdr_color/src/main/java/com/hiro/ulike/hdr/color/P010SceneSource.java": "d55a60bf96bb0596ca8ff4a93f997079cf51c108966f30f3d114a66d81ccb02e",
+    "android_hdr_color/src/main/java/com/hiro/ulike/hdr/color/SdrRendition.java": "35003a891374b9d72f015a6667cb3bbee4f052cd7c6190832db0bd41c5458015",
+    "face_analysis/src/main/java/com/hiro/ulike/hdr/face/StillFaceAnalysis.java": "2847a634f2bfc431667de5e2659135be8bae65ad4b880ea0cb0bf7d7f1f47522",
+    "style_pipeline/src/main/java/com/hiro/ulike/style/SampledMakeupPipeline.java": "c309a7eb8a6bcee91fb70a043bdc7bc55b9370cd57cb1235929910707f5d79ad",
+    "style_pipeline/src/main/java/com/hiro/ulike/style/StyleLutPipeline.java": "c904ad20f12a4673b226fde547acd5ed6801aa58a48651a1e20ca7e4d906e813",
+    "android_hdr_beauty/src/com/hiro/ulike/hdr/beauty/HdrAppearance.java": "63387281505ddbb9655b67f04bf702cddebdd81d5f26006e03184c7e79661c73",
+    "android_hdr_beauty/src/com/hiro/ulike/hdr/beauty/HdrBeautyProcessor.java": "ce096135d99dea40912bd97236d3b342f716ddbd31630b6f5f90de4c6b4a9f80"
+  },
+  "test_sha256": {
+    "test/com/hiro/ulike/hdr/input/HdrBeautyIntegration.java": "cf500fddb1e9ee5723f5043bf7b8b8a48eae6aba6f66d01fa3e9f091f18d10cf"
+  },
+  "script_sha256": "91006c59bf82379e06530f2f3441b38ad7ff99eec43244ffd70c81d23a1ea965",
+  "sdk36_compile_d8_min33": true,
+  "input_output_dimensions": [
+    512,
+    384
+  ],
+  "model_crop_dimensions": [
+    256,
+    256
+  ],
+  "actual_models_and_masks": true,
+  "synthetic_p010_and_explicit_synthetic_style_bindings": true,
+  "whole_captured_hdr_information_preserved": false,
+  "native_hdr_style_equivalent": false,
+  "android_device_execution": false,
+  "published_photo": false,
+  "telemetry_opt_out_before_runtime": true,
+  "input_sha256": {
+    "baoman": "e64f0772bb857e4d990789237c1007b62fb86020a7edcfb0c3a61a7bedc6e2c0",
+    "goodlike": "0d60ea7e684f32628daac031cb37fd32c50bf898aa3fb62bcbc25673b5725cad",
+    "bytenn": "cedda347b55c03de82cc22b7f003777f40750d4f341494a29587d7b821ad7853",
+    "effect": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+    "natural_zip": "5b50343dcedc7e9aadd218626e621ad683cd67372d225024f118b47f493546f0",
+    "purity_zip": "cd5da20fefe1f9bd594e4e0d055d6320392fa54fb5df9d34b8f159c791c5b117"
+  }
+}

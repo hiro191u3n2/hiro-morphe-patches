@@ -1,0 +1,54 @@
+{
+  "status": "PASS_SHARED_FRAGMENT_REFACTOR_REGRESSION",
+  "execution": "refactor author reran previously independent fixtures; new code independent review is separate",
+  "shared_leaf_sha256": "c309a7eb8a6bcee91fb70a043bdc7bc55b9370cd57cb1235929910707f5d79ad",
+  "previous_independent_fixtures": {
+    "status": "PASS",
+    "independent_assertions": 40643,
+    "maximum_absolute_error": 3.3306690738754696e-16,
+    "literal_shader_cases": 12000,
+    "lut_pixel_cases": 768
+  },
+  "author_contracts_rerun": {
+    "contract_checks": 220,
+    "status": "PASS"
+  },
+  "actual_asset_rerun": {
+    "scalar_comparisons": 43008,
+    "max_abs_error": 2.220446049250313e-16,
+    "fixtures": 14
+  },
+  "asset_hash_comparisons": 64,
+  "new_api": "borrowLayer returns exact full-strength SDR fragment and actual outer weight; apply shares arithmetic",
+  "hdr_native_equivalence": false,
+  "unchanged_adapter_previous_independent_cases_rerun": {
+    "status": "PASS",
+    "independent_assertions": 302,
+    "frame_width": 7,
+    "frame_height": 10,
+    "rows_split": [
+      3,
+      3,
+      2,
+      2
+    ],
+    "input_output_float_bits_analytically_verified": 210
+  },
+  "actual_neural_adapter_rerun": {
+    "status": "PASS",
+    "analytic_fp32_output_bits_compared": 1179648,
+    "report_sha256": "9e2ef2ad7b13ca75d2d461c42a40256c69c3dc0aceac2c9415181e218b4dcd29"
+  },
+  "compiled_dependency_sha256": {
+    "android_model_runtime/src/hiro/ulike/model/AndroidTensorEngine.java": "e6f73673f57dba5bc8257e2653ab95c12f6f5a1c5f9c724cd918d3e771fd4f15",
+    "android_model_runtime/src/hiro/ulike/model/GraphOnnx.java": "a0cec1f9dcde10322872dcd0647e5fbc626a8823106786bc4106eabf74b63aa7",
+    "android_model_runtime/src/hiro/ulike/model/OrtTensorEngine.java": "8398b72f3a619bd957c1e60275a667a047f01942be87bb167c164fe78b7658be",
+    "android_model_runtime/src/hiro/ulike/model/PinnedModel.java": "a1a38ad2b5095a530bc52e05ff15e5057281800269dd8ea131f5b35040803399",
+    "android_beauty_image/src/hiro/ulike/beauty/BeautyImageEngine.java": "88ff018945fffa317aaab7bba911e5e83597d2dbb77a27d88d5530fe17238fd0",
+    "android_beauty_image/src/hiro/ulike/beauty/PinnedAssets.java": "f1fc61763e03b8fcd87d9a863ad5ff9cd6caa87ae78a98cd7b20e3e9246a2f76",
+    "android_beauty_image/src/hiro/ulike/beauty/PreparedNeuralLayer.java": "a944271b92d08e79d1ecde19f7203643f0205a7731bb8bcb94ea0e7783db9382",
+    "style_pipeline/src/main/java/com/hiro/ulike/style/SampledMakeupPipeline.java": "c309a7eb8a6bcee91fb70a043bdc7bc55b9370cd57cb1235929910707f5d79ad",
+    "style_pipeline/src/main/java/com/hiro/ulike/style/StyleLutPipeline.java": "c904ad20f12a4673b226fde547acd5ed6801aa58a48651a1e20ca7e4d906e813",
+    "style_pipeline/integration/src/com/hiro/ulike/style/integration/PostNeuralStyleSink.java": "c0c9370061ca66d7fe034a04eb7c66306b42f79e90c469e544d972e297ebd5f9"
+  }
+}

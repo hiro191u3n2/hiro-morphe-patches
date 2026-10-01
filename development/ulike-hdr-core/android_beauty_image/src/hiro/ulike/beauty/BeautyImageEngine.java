@@ -74,9 +74,31 @@ public final class BeautyImageEngine implements AutoCloseable {
         // raw output, FP64 generated crop, mask, template/matrix, pixel scratch and tile).
         // Does NOT include caller source/sink storage, model compilation, direct input,
         // JVM headers, ORT graph/activation/native allocations or allocator overhead.
-        long workspace=3L*N*4+4L*N*4+4L*N*8+(long)w*rows*3*4+320L*320+16384;
+        long workspace=3L*N*4+4L*N*4+8L*N*8+(long)w*rows*3*4+320L*320+16384;
         require(workspace<=budget.maxJavaWorkspaceBytes,"Java array workspace budget");
-        double[] m=affine(sourceToCrop),inverse=invert(m);float[] pixel=new float[3];
+        double[] m=affine(sourceToCrop);float[] pixel=new float[3];
+        PreparedNeuralLayer layer=inferLayer(source,m,mask,intensity,w,h,id);
+        double[] projected=new double[4];
+        float[] tile=new float[w*rows*3];boolean begun=false;
+        try {
+            begun=true;sink.begin(w,h,id);
+            for(int start=0;start<h;start+=rows){int count=Math.min(rows,h-start);
+                for(int row=0;row<count;row++)for(int x=0;x<w;x++){
+                    int y=start+row,off=(row*w+x)*3;read(source,x,y,pixel);
+                    tile[off]=pixel[0];tile[off+1]=pixel[1];tile[off+2]=pixel[2];
+                    layer.sampleAt(x,y,projected);double weight=projected[3];
+                    if(weight>0)for(int c=0;c<3;c++)tile[off+c]=(float)((double)pixel[c]*(1-weight)+projected[c]*weight);
+                }
+                sink.writeRows(start,count,tile);
+            }
+            require(source.width()==w && source.height()==h && source.frameIdentity()==id,"source identity/dimensions changed");
+            sink.commit();begun=false;
+        } catch(Exception|Error failure){if(begun)try{sink.abort();}catch(Exception|Error abort){failure.addSuppressed(abort);}throw failure;}
+        return new Result(w,h,id,workspace,style);
+    }
+    private PreparedNeuralLayer inferLayer(SourceRgbFloat source,double[] m,PinnedAssets.NeuralMask mask,
+                            double intensity,int w,int h,Object id)throws Exception {
+        double[] inverse=invert(m);float[] pixel=new float[3];
         float[] tensor=new float[3*N];double[] rgb=new double[3];
         for(int y=0;y<SIDE;y++)for(int x=0;x<SIDE;x++){
             double sx=inverse[0]*x+inverse[1]*y+inverse[2],sy=inverse[3]*x+inverse[4]*y+inverse[5];
@@ -85,26 +107,28 @@ public final class BeautyImageEngine implements AutoCloseable {
         }
         float[] raw=engine.run(tensor);double[] generated=new double[4*N];float edge=Math.nextUp(1.0f);
         for(int c=0;c<4;c++)for(int i=0;i<N;i++){float v=raw[c*N+i];require(Float.isFinite(v) && v>=-edge && v<=edge,"Tanh output bounds");generated[i*4+c]=(clamp(v,-1,1)+1)*.5;}
-        float[] tile=new float[w*rows*3];boolean begun=false;
-        try {
-            begun=true;sink.begin(w,h,id);
-            for(int start=0;start<h;start+=rows){int count=Math.min(rows,h-start);
-                for(int row=0;row<count;row++)for(int x=0;x<w;x++){
-                    int y=start+row,off=(row*w+x)*3;read(source,x,y,pixel);
-                    tile[off]=pixel[0];tile[off+1]=pixel[1];tile[off+2]=pixel[2];
-                    double cx=m[0]*x+m[1]*y+m[2],cy=m[3]*x+m[4]*y+m[5];finite(cx,"project x");finite(cy,"project y");
-                    if(cx<-.5 || cx>=255.5 || cy<-.5 || cy>=255.5 || intensity==0)continue;
-                    double mr=sampleMask(mask,(cx+.5)*1.25-.5,(cy+.5)*1.25-.5);
-                    double alpha=sampleGenerated(generated,cx,cy,3);
-                    double weight=(style==PinnedModel.Style.NATURAL_BLUSH?Math.min(mr,alpha):mr*alpha)*intensity;
-                    if(weight>0)for(int c=0;c<3;c++)tile[off+c]=(float)((double)pixel[c]*(1-weight)+sampleGenerated(generated,cx,cy,c)*weight);
-                }
-                sink.writeRows(start,count,tile);
-            }
-            require(source.width()==w && source.height()==h && source.frameIdentity()==id,"source identity/dimensions changed");
-            sink.commit();begun=false;
-        } catch(Exception|Error failure){if(begun)try{sink.abort();}catch(Exception|Error abort){failure.addSuppressed(abort);}throw failure;}
-        return new Result(w,h,id,workspace,style);
+        require(source.width()==w && source.height()==h && source.frameIdentity()==id,"source changed during model inference");
+        return new PreparedNeuralLayer(style,w,h,id,source,generated,m,mask,intensity);
+    }
+    /** Same audited inference, exposed before SDR compositing for a separately declared HDR policy.
+     * The returned layer owns its buffers and remains usable after this engine is closed.
+     */
+    public synchronized PreparedNeuralLayer prepareLayer(SourceRgbFloat source,double[] sourceToCrop,
+                         PinnedAssets.NeuralMask mask,double intensity,String domain,Budget budget)throws Exception {
+        if(closed)throw new IllegalStateException("closed");
+        require(source!=null && mask!=null && mask.style==style && budget!=null,"required source/style mask/budget");
+        require(SDR_DOMAIN.equals(domain),"explicit encoded SDR model domain required");unit(intensity,"intensity");
+        int w=source.width(),h=source.height();Object id=source.frameIdentity();
+        require(w>0 && h>0 && w<=budget.maxDimension && h<=budget.maxDimension && (long)w*h<=budget.maxPixels && id!=null,"source dimensions/provenance budget");
+        long workspace=3L*N*4+4L*N*4+8L*N*8+(long)w*Math.min(h,budget.tileRows)*3*4+320L*320+16384;
+        require(workspace<=budget.maxJavaWorkspaceBytes,"Java array workspace budget");
+        return inferLayer(source,affine(sourceToCrop),mask,intensity,w,h,id);
+    }
+    public synchronized PreparedNeuralLayer prepareLayer(SourceRgbFloat source,double[] landmarks106,
+                         PinnedAssets.FaceTemplate template,PinnedAssets.NeuralMask mask,double intensity,
+                         String domain,Budget budget)throws Exception {
+        require(template!=null,"pinned template required");
+        return prepareLayer(source,cropMatrix(style,landmarks106,template.copy()),mask,intensity,domain,budget);
     }
     private static void read(SourceRgbFloat src,int x,int y,float[] dst)throws Exception{
         // NaN poison catches a source failing to write all channels.
@@ -114,8 +138,6 @@ public final class BeautyImageEngine implements AutoCloseable {
         finite(x,"crop x");finite(y,"crop y");x=clamp(x,-2,w+1);y=clamp(y,-2,h+1);int ix=(int)Math.floor(x),iy=(int)Math.floor(y);double fx=x-ix,fy=y-iy;out[0]=out[1]=out[2]=0;
         for(int dy=0;dy<2;dy++)for(int dx=0;dx<2;dx++){int xx=ix+dx,yy=iy+dy;double weight=(dx==0?1-fx:fx)*(dy==0?1-fy:fy);if(xx<0 || xx>=w || yy<0 || yy>=h)continue;read(source,xx,yy,pixel);for(int c=0;c<3;c++)out[c]+=pixel[c]*weight;}
     }
-    private static double sampleGenerated(double[] data,double x,double y,int c){x=clamp(x,0,255);y=clamp(y,0,255);int ix=(int)Math.floor(x),iy=(int)Math.floor(y);double fx=x-ix,fy=y-iy,out=0;for(int dy=0;dy<2;dy++)for(int dx=0;dx<2;dx++)out+=data[(Math.min(iy+dy,255)*256+Math.min(ix+dx,255))*4+c]*(dx==0?1-fx:fx)*(dy==0?1-fy:fy);return clamp(out,0,1);}
-    private static double sampleMask(PinnedAssets.NeuralMask mask,double x,double y){x=clamp(x,0,319);y=clamp(y,0,319);int ix=(int)Math.floor(x),iy=(int)Math.floor(y);double fx=x-ix,fy=y-iy,out=0;for(int dy=0;dy<2;dy++)for(int dx=0;dx<2;dx++)out+=mask.at(Math.min(ix+dx,319),Math.min(iy+dy,319))*(dx==0?1-fx:fx)*(dy==0?1-fy:fy);return clamp(out,0,1);}
     private static double clamp(double x,double lo,double hi){return Math.max(lo,Math.min(hi,x));}
     static double[] affine(double[] value){require(value!=null && value.length==9,"3x3 affine matrix required");double[] m=value.clone();for(double v:m)finite(v,"finite affine");require(m[6]==0 && m[7]==0 && m[8]==1,"affine last row");double scale=Math.max(Math.max(Math.abs(m[0]),Math.abs(m[1])),Math.max(Math.abs(m[3]),Math.abs(m[4])));require(scale>0,"singular affine");double a=m[0]/scale,b=m[1]/scale,c=m[3]/scale,d=m[4]/scale,det=a*d-b*c;double norm=a*a+b*b+c*c+d*d;double maxEig=(norm+Math.sqrt(Math.max(0,norm*norm-4*det*det)))*.5;require(det!=0 && maxEig/Math.abs(det)<=1e12,"ill-conditioned affine");return m;}
     private static double[] invert(double[] m){double scale=Math.max(Math.max(Math.abs(m[0]),Math.abs(m[1])),Math.max(Math.abs(m[3]),Math.abs(m[4])));double a=m[0]/scale,b=m[1]/scale,c=m[3]/scale,d=m[4]/scale,det=a*d-b*c;double[] inv={d/det/scale,-b/det/scale,0,-c/det/scale,a/det/scale,0,0,0,1};inv[2]=-(inv[0]*m[2]+inv[1]*m[5]);inv[5]=-(inv[3]*m[2]+inv[4]*m[5]);for(double v:inv)finite(v,"inverse affine");return inv;}

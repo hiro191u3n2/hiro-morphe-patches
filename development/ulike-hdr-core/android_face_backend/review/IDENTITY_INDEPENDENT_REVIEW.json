@@ -1,0 +1,21 @@
+{
+  "status": "PASS_INDEPENDENT_NATIVE_IDENTITY_REVIEW",
+  "reviewer": "still_face_backend",
+  "implementation_author": "root",
+  "scope": "StockSdkIdentity and ProbeLedger identity fields/methods only; excludes observer and still-analysis code authored by reviewer",
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/StockSdkIdentity.java": "a3289f2f8d660aabbc0e86b47d3cf08771116adb3413576dbfeaf6706d060b4f",
+    "src/main/java/com/hiro/ulike/hdr/faceprobe/ProbeLedger.java": "6b7c5783717e0aee9082f373e42bed0edfa63aabbbe99fbdf9e2640230b79572",
+    "src/test/java/com/hiro/ulike/hdr/faceprobe/StockSdkIdentityTest.java": "4394ef5a4c5acebc00ef2d7c3fe78eb73d54640c934ab21519d2b4117c4a0326"
+  },
+  "actual_stock_library_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+  "executed": "StockSdkIdentityTest 9 checks PASS against actual stock binary, exact generated published four-byte variant and negative corruptions",
+  "reviewed": [
+    "Whole-stream actual and normalized SHA256 are both required",
+    "Known four-byte pre/post instruction bytes are checked, no other variant accepted",
+    "Read boundaries and zero-length progress preserve exact hash behavior",
+    "Verified immutable identity copied into snapshot; hash acceptance does not certify geometry"
+  ],
+  "native_executed": false,
+  "findings": []
+}

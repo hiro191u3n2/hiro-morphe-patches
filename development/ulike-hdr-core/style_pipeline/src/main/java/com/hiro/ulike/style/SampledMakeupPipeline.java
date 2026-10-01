@@ -139,58 +139,78 @@ public final class SampledMakeupPipeline {
         return s<0.5 ? 2*b*s+b*b*(1-2*s) : Math.sqrt(b)*(2*s-1)+2*b*(1-s);
     }
 
-    /** One makeup pass on opaque RGB. Premultiplied-output blusher/facial
-     * fragments are composited using explicit ONE/ONE_MINUS_SRC_ALPHA policy.
-     * That policy is part of this replacement, not a claim of GPU bit parity.
+    /** Borrowed synchronous view of full-strength fragment RGB and its exact
+     * outer composition weight. All arrays must remain immutable until use ends.
+     * This view permits a declared linear-light HDR extension without guessing
+     * weight from an already-composited SDR result. It does not make SDR shaders
+     * HDR-native. Zero-weight fragments return zero RGB, which is not sampled.
      */
-    public static double[] apply(Domain domain, FrameTile tile, double[] photo, ResolvedPass p) {
-        if(domain!=Domain.ENCODED_SDR_FULL_RANGE || tile==null)
-            throw new IllegalArgumentException("explicit encoded SDR still tile required");
-        unitArray(photo,tile.pixels()*3); validate(tile,p);
-        double[] out=photo.clone();
-        for(int i=0;i<tile.pixels();i++) {
+    public static final class BorrowedLayer {
+        private final FrameTile tile;
+        private final double[] photo;
+        private final ResolvedPass p;
+        private BorrowedLayer(FrameTile tile,double[] photo,ResolvedPass p) {
+            this.tile=tile;this.photo=photo;this.p=p;
+        }
+        public int pixels(){return tile.pixels();}
+        public void sample(int i,double[] effectAndWeight) {
+            if(i<0 || i>=tile.pixels() || effectAndWeight==null || effectAndWeight.length<4)
+                throw new IllegalArgumentException("fragment sample coordinates/buffer");
+            for(int c=0;c<4;c++)effectAndWeight[c]=0;
             double a=p.rgba[i*4+3];
             if(p.pass==Pass.PURITY_3D) {
-                // This is a full opaque fragment, not a premultiplied decal.
-                // Even zero intensity writes its explicit u_basic source;
-                // only geometry coverage determines whether destination stays.
-                double cov=p.coverage[i]; if(cov==0) continue;
+                // The full opaque fragment retains its internal alpha/intensity.
+                // Its outer weight is geometry coverage, even at intensity zero.
+                double cov=p.coverage[i];if(cov==0)return;
                 double alpha=a*p.intensity;
                 for(int c=0;c<3;c++) {
                     double base=p.shaderBaseRgb[3*i+c];
-                    double straight=a>0 ? p.rgba[4*i+c]/a : 0;
-                    double frag=base*(1-alpha)+base*straight*alpha;
-                    out[3*i+c]=photo[3*i+c]*(1-cov)+frag*cov;
+                    double straight=a>0?p.rgba[4*i+c]/a:0;
+                    effectAndWeight[c]=base*(1-alpha)+base*straight*alpha;
                 }
-                continue;
+                effectAndWeight[3]=cov;return;
             }
             double w=p.coverage[i]*p.intensity;
-            // Lash declares opacity but never reads it; 3D has no such uniform.
-            if(p.pass.kind!=Kind.EYELASH && p.pass!=Pass.PURITY_3D) w*=p.opacity;
-            if(w==0) continue;
+            if(p.pass.kind!=Kind.EYELASH && p.pass!=Pass.PURITY_3D)w*=p.opacity;
+            if(w==0)return;
             if(p.pass.kind==Kind.FACIAL_SOFT_LIGHT) {
                 double red=clamp(p.rgba[i*4]/a);
                 w*=clamp((Math.abs(red-0.5)-2.0/255.0)*32.0);
-            } else w*=a;
+            }else w*=a;
             if(p.pass.seg!=Seg.NONE) {
-                // USE_SEG lips/eyes discard almost-transparent samples;
-                // eyelashes do not contain that discard.
-                if(p.pass.seg==Seg.OUTSIDE_ONE && a<0.001) continue;
-                double seg=p.segmentationInside[i] ? p.segmentation[i]
-                    : (p.pass.seg==Seg.OUTSIDE_ONE ? 1.0 : 0.0);
+                if(p.pass.seg==Seg.OUTSIDE_ONE && a<0.001)return;
+                double seg=p.segmentationInside[i]?p.segmentation[i]
+                    :(p.pass.seg==Seg.OUTSIDE_ONE?1.0:0.0);
                 w*=seg;
             }
-            if(w==0) continue; // preserve unchanged samples, including signed zero
+            if(w==0)return;
             for(int c=0;c<3;c++) {
                 double b=photo[i*3+c];
-                double shaderBase=p.shaderBaseRgb==null ? b : p.shaderBaseRgb[i*3+c];
-                double s=p.colorOverride==null ? clamp(p.rgba[i*4+c]/a) : p.colorOverride[c];
-                double effect;
-                if(p.pass.kind==Kind.SCREEN) effect=1-(1-b)*(1-s);
-                else if(p.pass.kind==Kind.FACIAL_SOFT_LIGHT) effect=softLight(b,s);
-                else effect=shaderBase*s;
-                out[i*3+c]=b*(1-w)+effect*w;
+                double shaderBase=p.shaderBaseRgb==null?b:p.shaderBaseRgb[i*3+c];
+                double color=p.colorOverride==null?clamp(p.rgba[i*4+c]/a):p.colorOverride[c];
+                if(p.pass.kind==Kind.SCREEN)effectAndWeight[c]=1-(1-b)*(1-color);
+                else if(p.pass.kind==Kind.FACIAL_SOFT_LIGHT)effectAndWeight[c]=softLight(b,color);
+                else effectAndWeight[c]=shaderBase*color;
             }
+            effectAndWeight[3]=w;
+        }
+    }
+    public static BorrowedLayer borrowLayer(Domain domain,FrameTile tile,double[] photo,ResolvedPass p) {
+        if(domain!=Domain.ENCODED_SDR_FULL_RANGE || tile==null)
+            throw new IllegalArgumentException("explicit encoded SDR still tile required");
+        unitArray(photo,tile.pixels()*3);validate(tile,p);
+        return new BorrowedLayer(tile,photo,p);
+    }
+
+    /** One makeup pass on opaque RGB. The fragment equations and exact SDR
+     * composition arithmetic are shared with the borrowed layer API.
+     */
+    public static double[] apply(Domain domain,FrameTile tile,double[] photo,ResolvedPass p) {
+        BorrowedLayer layer=borrowLayer(domain,tile,photo,p);
+        double[] out=photo.clone(),fragment=new double[4];
+        for(int i=0;i<tile.pixels();i++) {
+            layer.sample(i,fragment);double w=fragment[3];if(w==0)continue;
+            for(int c=0;c<3;c++)out[i*3+c]=photo[i*3+c]*(1-w)+fragment[c]*w;
         }
         return out;
     }

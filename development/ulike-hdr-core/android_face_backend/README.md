@@ -19,7 +19,7 @@ vendor API class files. It does not call private native methods directly.
 `StockStillFaceProbe.run` performs real SDK calls when invoked inside the app:
 
 1. Require the app's already initialized, normally licensed SDK and an app-wide
-   exclusive idle lease. Verify the installed arm64 `libttvesdk.so` hash.
+   exclusive idle lease. Verify the installed arm64 `libttvesdk.so` against exactly two known variants: stock `67f1b97b…` and released NV21 patch `eac57bca…`. The latter must also hash to the stock library after normalizing only its known four-byte instruction; all other changes fail.
 2. Own a separate, bounded sRGB ARGB8888 bitmap supplied explicitly for analysis.
    No HDR photograph is converted implicitly or replaced. No camera is attached.
 3. Create a new recorder, set image-mode face detection, start with explicit
@@ -40,7 +40,9 @@ recorder normally and hold its actual lifecycle lock for the whole probe. The
 local `SERIAL` lock alone cannot coordinate other SDK users. No license,
 resource-finder, or authorization state is modified or bypassed.
 
-The result is copied diagnostic data, including raw landmarks, callback order,
+The overload accepting `RawObserver` lets `android_still_analysis` configure ordinary effects on this owned recorder, mark the one submission, eagerly copy additional SDK callback fields and await bounded script messages. Existing callers use no-op hooks. Observer failures use the same failure ledger and native join cleanup. The lease is checked again after effect setup.
+
+The result is copied diagnostic data, including the installed library identity, raw landmarks, callback order,
 and mean RGB errors for all eight exact rotations/reflections of the submitted
 pixel grid. Dimension-incompatible comparisons are NaN. These image comparisons
 help reveal rendering orientation; they do **not** prove that landmark coordinates

@@ -1,0 +1,40 @@
+# Processed HDR beauty and matching SDR base
+
+This Android-compatible Java component produces **edited display-linear BT.2020 HDR and a matching SDR base** from the exact owned P010 HLG still, actual pinned neural model output, and explicitly resolved makeup/LUT bindings. It streams full-width FP64 row tiles to a private transaction. It contains no JPEG photo path or photo-sized integer buffer, and performs no full-raster resizing. The two models still operate on their original 256×256 face crops; projecting their generated output onto a larger photograph does not make the model itself higher resolution.
+
+The current `Snapshot` accepts exactly one prepared neural face layer. Complete zero-face and multi-face style modes are unsupported: no fabricated empty landmarks or skipped additional faces are treated as success. A future layer-list/absent-layer contract needs actual same-shot face selection and render order.
+
+The implementation is a declared HDR appearance replacement for SDR-authored models and shaders. It is not evidence that the original ULike styles were HDR-native, that every original highlight/detail survives a generated face patch, or that the result matches the proprietary Android pipeline. Camera/device execution and native same-shot geometry bindings remain separate requirements.
+
+## Actual processing
+
+1. `Snapshot.create` requires a `PreparedNeuralLayer` produced from the **same object** `SdrRendition`. It binds the captured `HdrFrame`, input dimensions, exact model/style, generated layer fingerprint, proxy exposure/chroma policy, explicit application settings digest, and caller-declared geometry ID. The neural layer owns its generated data and survives closure of ORT.
+2. The immutable captured scene-linear BT.2020 source is converted to display light with a declared reference HLG display: 1000 nits, system gamma 1.2, black level zero. Working units are 203-nit SDR white. This conversion is an OOTF, not a claim that inverse-HLG scene values already represented nits. Nonpositive luminance maps to display black; negative channels at positive luminance undergo an explicit luminance-preserving desaturation. Counts are returned, and captured P010 codes remain unchanged.
+3. Actual generated encoded-sRGB patch colors are expanded independently using the **global input-proxy exposure**, new-patch inverse Reinhard, and the same HLG display mapping. The expansion is bounded at the explicit generated peak (default 1000 nits). It does not invert the clipped captured proxy, reuse old pixel gains, or restore pre-edit detail. At full opacity, the generated patch replaces captured appearance in that location. At zero weight, captured display HDR is unchanged. Near-white generated colors encounter the declared peak plateau; this is a cap, not highlight recovery.
+4. Each later makeup/LUT stage uses **current already-processed HDR**. A nonnegative sRGB working gamut is obtained by explicit luminance-preserving desaturation, then normalized by a per-pixel scale at least one. For the two external-source Purity shaders, current and explicitly bound HDR shader source use one common scale. The shared verified SDR leaf supplies full-strength fragment RGB and exact outer blend weight. The expanded full fragment is composed in linear HDR with that weight. Consequently an arbitrarily small effect does not abruptly discard a whole wide-gamut pixel. This linear-light HDR blending is a declared replacement and differs from encoded-SDR interpolation.
+5. An unchanged fragment from a same-source shader keeps the exact current HDR pixel. An unchanged fragment from an explicitly bound external shader keeps that source's exact HDR pixel before the outer blend. Equality of normalized current and external colors is never treated as proof that their HDR colors are equal. Purity 3D at zero intensity can therefore still write its explicitly bound HDR source within geometry coverage.
+6. The final SDR base is derived **from the final processed HDR**: divide each RGB triple by `max(1,max(R,G,B))`. This keeps SDR-range light unchanged and compresses highlight luminance while preserving chromaticity. A downstream gainmap must be newly computed from this exact processed pair.
+
+The source display and final pair must remain within the explicitly configured storage headroom (default 10000 nits / 203). Values outside it fail the transaction; they are not silently clipped. Generated patch peak and storage peak are distinct settings.
+
+## Binding and transaction contract
+
+`BindingProvider.resolve(snapshot,tile)` must return every makeup pass for that style in the declared order, all sampled premultiplied overlays, geometry/segmentation coverage, runtime uniforms and LUTs for the exact still, timestamp, geometry and settings. Shader upload/sampler/row conventions must be resolved externally. Purity blusher coverage includes any interpolated per-vertex opacity as documented by `style_pipeline/GEOMETRY_BINDING_NOTES.json`.
+
+Purity blusher and 3D require an `HdrBase`: exact frame token, exact tile, geometry ID, explicit binding evidence and display-linear BT.2020 samples. SDR-only shader sources are rejected. Binding evidence names a caller-established source; this module does not discover original native render-graph routing. Borrowed provider arrays must remain immutable during the synchronous tile call.
+
+`PairSink.begin` receives exact frame, size, settings SHA-256, geometry and headroom. `writeRows` receives both processed arrays with matching dimensions/order. `commit` seals **private staging only**. On any failure after begin—including provider, pixel, write or commit failure—`abort` is called; cleanup errors are suppressed under the original failure. No gallery entry or partially saved photograph is published here. `android_photo_transaction` supplies a file-backed implementation and later final-save orchestration.
+
+This engine processes the native input raster. A geometry ID alone does not perform rotation, mirroring or crop. A downstream `PhotoGeometry` must perform the same explicit integer transform on both pair images if an oriented/cropped output is needed. No enlargement can turn the reported 4080×3060 source into native 5712×4284 detail.
+
+## Memory bound
+
+No full-photo RGB array is allocated by this module. Rows are limited to 1–64, each tile to 262144 pixels, the raster to the caller's pixel budget, and dimensions to 16384. Before sink begin or pixel reads, the module reduces rows until its conservative **array allocation volume per tile** fits the configured limit. The bound is 65536 + 256 bytes/pixel for Natural, or 65536 + 1024 bytes/pixel for Purity. These account for all current/output/working/fragment/LUT arrays allocated across the stage chain, not merely simultaneous live arrays. Standard policy is 4 rows, 25 million raster pixels and 32 MiB allocation volume per tile.
+
+The bound excludes existing P010 storage, prepared neural/model/runtime storage, caller-owned textures/geometry/segmentation/base arrays, downstream staging and JVM object overhead. It is not a total process-heap or native-memory guarantee. The prepared neural layer has its own separately enforced workspace budget.
+
+## Verification
+
+`verify_hdr.py` compiles the production dependency closure against Android SDK 36 and D8, then runs **both actual pinned models and actual neural masks** on synthetic 512×384 P010 input with explicitly synthetic full style bindings. It checks exact actual neural-to-HDR composition across every output component, SDR derivation from that edited HDR, nonzero HDR headroom, actual subsequent style changes, row-tile invariance, settings/source ownership, and transaction rollback. `QA_HDR.json` pins the source and reports the executed scope. Models/libraries/masks are supplied as local inputs and are never included in this module.
+
+Independent numerical and adversarial review lives under `review/`; its report states its own scope. Neither host execution nor SDK compilation substitutes for a real device photograph, actual same-shot geometry, native style parity or a released Android application.

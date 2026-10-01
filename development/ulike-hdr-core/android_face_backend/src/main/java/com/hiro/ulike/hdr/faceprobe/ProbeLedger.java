@@ -15,6 +15,7 @@ public final class ProbeLedger {
     private float[][] points;
     private float[] scores;
     private double[] orientationError;
+    private StockSdkIdentity sdkIdentity;
 
     public ProbeLedger(int width, int height) {
         if (width < 1 || height < 1 || (long)width * height > 4194304)
@@ -25,6 +26,12 @@ public final class ProbeLedger {
         if (events.size() < 64) events.add(event);
         else if (failure == null) failure = "Too many callbacks";
         notifyAll();
+    }
+    public synchronized void verifiedSdk(StockSdkIdentity identity) {
+        if (closed || submitted || initCode != null || sdkIdentity != null || identity == null)
+            throw new IllegalStateException("SDK identity must be recorded once before initialization");
+        sdkIdentity = identity;
+        event("sdk=" + identity.variant + ":" + identity.installedSha256);
     }
     public synchronized void initialized(int code) {
         if (closed) return;
@@ -99,23 +106,26 @@ public final class ProbeLedger {
         if (!teardownReturned) fail("Native teardown did not complete");
         if (!render || points == null || faceCallbacks != 1) fail("Incomplete still observations");
         closed = true; notifyAll();
-        return new Snapshot(width, height, failure, events, points, scores, earlyFaceCallbacks, orientationError);
+        return new Snapshot(width, height, failure, events, points, scores, earlyFaceCallbacks, orientationError, sdkIdentity);
     }
     public static final class Snapshot {
         public final int width, height, earlyFaceCallbacks;
         public final String failure;
         public final boolean callbacksObserved;
+        public final String sdkLibrarySha256, sdkLibraryVariant;
         /** Always false: even successful native callbacks do not prove geometry. */
         public final boolean sourceCoordinateContractVerified = false;
         private final List<String> events;
         private final float[][] points;
         private final float[] scores;
         private final double[] orientationError;
-        private Snapshot(int w, int h, String error, List<String> log, float[][] xy, float[] score, int early, double[] orientation) {
+        private Snapshot(int w, int h, String error, List<String> log, float[][] xy, float[] score, int early, double[] orientation, StockSdkIdentity sdk) {
             width = w; height = h; failure = error; callbacksObserved = error == null;
             events = new ArrayList<>(log); points = copy(xy); scores = score == null ? new float[0] : score.clone();
             earlyFaceCallbacks = early;
             orientationError = orientation == null ? new double[0] : orientation.clone();
+            sdkLibrarySha256 = sdk == null ? null : sdk.installedSha256;
+            sdkLibraryVariant = sdk == null ? null : sdk.variant;
         }
         public List<String> events() { return new ArrayList<>(events); }
         public float[][] rawPoints() { return copy(points); }
