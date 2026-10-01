@@ -3,6 +3,9 @@
 
 No Android device, mock MediaCodec implementation, original APK, or model is used.
 """
+if not __debug__:
+    raise RuntimeError("Validation requires assertions; run without -O or -OO")
+
 import argparse
 import array
 import hashlib

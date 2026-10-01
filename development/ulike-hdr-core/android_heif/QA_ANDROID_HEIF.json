@@ -1,0 +1,211 @@
+{
+  "status": "PASS",
+  "android_device_executed": false,
+  "gainmap_implemented": false,
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/heif/Main10Heif.java": "707e3118bd43a921b8ba7d169df34061135a5e8d18d968c6d29b016e796c9221",
+    "src/main/java/com/hiro/ulike/hdr/heif/ParameterSets.java": "49665c133d56112a14e669ea95daa712c66e6baf3ad430b68332ddf4c544585c"
+  },
+  "dependency_sha256": {
+    "AndroidMain10Encoder.java": "81047e91f23b2706e3cba783f0af7884475ec26cb930c5d42de1e8a58144ff2a",
+    "EncoderChoice.java": "a091776de8b6547062566eb11251add16833cdd442da32e8cdfbbf9e7f22ad74",
+    "HevcProof.java": "b58692181eade676535fe4fd5d3ef35b1424f4a5caa7b4b376a133a4ed263942",
+    "P010Frame.java": "93a27ad4826dcee50a82b6625a4c6fd51653c961f714a067e606a79dfd257664"
+  },
+  "sdk_sha256": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+  "files": {
+    "hlg_limited": {
+      "bytes": 2878,
+      "sha256": "2c2772fcaf131d23581aaf346b20b08a7c4b49f07df461ae71d9563c3e0a489c",
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "hvcC_depths": [
+        10,
+        10
+      ],
+      "jpeg_items": 0,
+      "gainmap_items": 0,
+      "clap": null,
+      "libheif": "1.23.2",
+      "native_yuv10_match": "EXACT",
+      "decoded_shapes": [
+        [
+          32,
+          64
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          16,
+          32
+        ]
+      ],
+      "decoded_samples_compared": 3072
+    },
+    "hlg_full": {
+      "bytes": 2878,
+      "sha256": "b4735ce2930ce91ac365fd14854fdf1e6a3cae312516bd8c7d9f7ae87d6b5fbe",
+      "nclx": [
+        9,
+        18,
+        9,
+        true
+      ],
+      "hvcC_depths": [
+        10,
+        10
+      ],
+      "jpeg_items": 0,
+      "gainmap_items": 0,
+      "clap": null,
+      "libheif": "1.23.2",
+      "native_yuv10_match": "EXACT",
+      "decoded_shapes": [
+        [
+          32,
+          64
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          16,
+          32
+        ]
+      ],
+      "decoded_samples_compared": 3072
+    },
+    "hlg_padded": {
+      "bytes": 2901,
+      "sha256": "ad231f2b352a9832957f4daa03b1c900234b8c0a4d1d9578fc89713ff0664676",
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "hvcC_depths": [
+        10,
+        10
+      ],
+      "jpeg_items": 0,
+      "gainmap_items": 0,
+      "clap": null,
+      "libheif": "1.23.2",
+      "native_yuv10_match": "EXACT",
+      "decoded_shapes": [
+        [
+          34,
+          66
+        ],
+        [
+          17,
+          33
+        ],
+        [
+          17,
+          33
+        ]
+      ],
+      "decoded_samples_compared": 3366
+    },
+    "hlg_odd_crop": {
+      "bytes": 2942,
+      "sha256": "962aa24bf95740eddd8a3af95ded6dd7ae78912a20dbadf5333bbb2629a98177",
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "hvcC_depths": [
+        10,
+        10
+      ],
+      "jpeg_items": 0,
+      "gainmap_items": 0,
+      "clap": [
+        0,
+        0,
+        65,
+        33
+      ],
+      "libheif": "1.23.2",
+      "native_yuv10_match": "EXACT",
+      "decoded_shapes": [
+        [
+          33,
+          65
+        ],
+        [
+          17,
+          33
+        ],
+        [
+          17,
+          33
+        ]
+      ],
+      "decoded_samples_compared": 3267
+    },
+    "hlg_offset_crop": {
+      "bytes": 2942,
+      "sha256": "43b58745c062200466495dd73cc02b3094dcf405e46001e6a831ec4851acdb23",
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "hvcC_depths": [
+        10,
+        10
+      ],
+      "jpeg_items": 0,
+      "gainmap_items": 0,
+      "clap": [
+        2,
+        2,
+        63,
+        31
+      ],
+      "libheif": "1.23.2",
+      "native_yuv10_match": "EXACT",
+      "decoded_shapes": [
+        [
+          31,
+          63
+        ],
+        [
+          16,
+          32
+        ],
+        [
+          16,
+          32
+        ]
+      ],
+      "decoded_samples_compared": 2977
+    }
+  },
+  "sdk36_compile": "PASS",
+  "java_checks": {
+    "status": "PASS",
+    "checks": 51,
+    "android_device_executed": false
+  },
+  "independent_checks": 223,
+  "limits": [
+    "No Android device executed.",
+    "No gainmap/tmap is present; this is direct HLG10 HEIF.",
+    "No phone HDR display/viewer test, exposure/EXIF metadata preservation or complete HEVC conformance proof.",
+    "HEVC encoding is lossy; exact comparison proves mux preservation relative to already encoded HEVC."
+  ]
+}

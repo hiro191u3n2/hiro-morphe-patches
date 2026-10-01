@@ -275,5 +275,46 @@
     "all_modes_or_stock_encoder_equivalence": false,
     "ulike_setting_added": false,
     "heif_or_gainmap_in_this_module": false
+  },
+  "face_analysis_boundary": {
+    "scope": "exact 11-group face model decoding plus immutable same-still RGB8 analysis proxy/106-landmark ownership and coordinate mapping",
+    "inspection_report": "face_analysis/QA_FACE_MODEL.json",
+    "independent_review": "face_analysis/review/INDEPENDENT_REVIEW.json",
+    "model_groups_decoded_and_checked": 11,
+    "author_java_checks": 69,
+    "independent_geometry_ownership_checks": 197,
+    "independent_negative_native_probe_checks": 19,
+    "actual_detector_inference": false,
+    "hdr_to_analysis_renderer": false,
+    "stock_recorder_callback_chain": "conditional static evidence; initialization and coordinate domain unresolved",
+    "android_backend_integration": false,
+    "hdr_photograph_replaced_with_proxy": false
+  },
+  "android_heif_mux": {
+    "scope": "direct HLG10 single-frame HEIF from already encoded HEVC; no gainmap",
+    "author_report": "android_heif/QA_ANDROID_HEIF.json",
+    "independent_review": "android_heif/INDEPENDENT_REVIEW.json",
+    "actual_host_files": 5,
+    "native_10bit_decoded_samples_compared": 15754,
+    "sample_comparison": "EXACT relative to source encoded HEVC and crop",
+    "sdk36_compile": "PASS",
+    "author_java_checks": 51,
+    "author_independent_box_decode_checks": 223,
+    "jpeg_items": 0,
+    "gainmap_items": 0,
+    "android_encoder_or_viewer_execution": false,
+    "ulike_integration": false,
+    "exif_preservation": false,
+    "crop_origin_even_required": true,
+    "independent_review_status": "PASS_INDEPENDENT_HEIF_REVIEW_WITH_SCOPE_LIMITS"
+  },
+  "combined_android_compile": {
+    "report": "qa/QA_COMBINED_ANDROID.json",
+    "verifier": "tools/compile_android_components.py",
+    "sdk36_compile": "PASS",
+    "d8_min_api": 26,
+    "production_java_sources": 19,
+    "app_manifest_jni_packaging": false,
+    "runtime_execution": false
   }
 }

@@ -84,11 +84,26 @@ every rendering pass has that resolution.
   reconstruction for both models; independent comparison covers 40,809,984
   intermediate values. Android JNI/device execution and app integration are
   separate remaining steps. The runtime requires startup telemetry opt-out.
+* `face_analysis`: exact-hash inspection of all 11 groups in the stock
+  `tt_face_v11.1` model, plus an immutable same-still analysis image/result
+  boundary and verified rotation/mirror coordinate mapping. It has no callable
+  detector backend or HDR-to-analysis renderer. The old offline Java callback's
+  expected native registrations are absent from the shipped libraries; a
+  separate recorder still-to-face callback route has static evidence, with
+  initialization, coordinate domain and shutdown still requiring verification.
 * `android_encoder`: Android MediaCodec P010 input and HEVC Main10 selection,
   with named/hardware codec preferences and SPS/VUI validation of actual coded
   bit depth, HLG, color/range and dimensions. SDK 36 compilation, layout guards
   and host HEVC fixtures pass. This is not proof of a phone codec or final HEIF
   output, and the preference is not yet exposed in ULike's settings.
+* `android_heif`: Java HEIF mux for a validated, single-frame Main10 HLG HEVC
+  bitstream. It writes 10-bit properties, BT.2020/HLG/range metadata, parameter
+  sets and clean-aperture crops, with bounded syntax checks and atomic file
+  replacement. Crop origins must be even; odd display dimensions are supported.
+  Five generated files round-trip through libheif/libde265 with
+  exact native 10-bit samples relative to the already coded HEVC. This does not
+  undo lossy encoding. It has no gainmap, Android gallery integration, EXIF
+  preservation or phone HDR display verification.
 * `heif_save`: host writer for a 10-bit RGB SDR base, 10-bit RGB gainmap, ISO
   binary metadata and HEIF `tmap` references. Both coded images round-trip through
   independent libheif/libde265 decoding with 1024 levels. It uses HEVC Range
@@ -106,8 +121,9 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
    Continuous sampling is implemented for externally supplied geometry, with a
    declared replacement projection convention rather than native GPU parity.
    The relevant bundled dependency
-   models exist, but their feature-specific loaders and postprocessing are not
-   implemented by these two model replays. Confirm the downloaded model hashes
+   models exist. Face model group decoding is now implemented separately, but
+   its quantized inference and pre/postprocessing, and other feature-specific
+   loaders remain unfinished. Confirm the downloaded model hashes
    against the phone's actual cache and compare identical-image reference results.
    The two main model bodies and host tensor inference are implemented; the full
    high-precision beauty engine is not complete.
@@ -118,8 +134,10 @@ See the component READMEs for exact contracts, unsupported inputs and tests.
    be relabeled as true 10-bit HDR.
 4. Integrate the standalone Camera2 P010/HLG source, color conversion, processing, memory
    ownership, lens switching and capture completion with the existing app.
-5. Integrate and validate a JPEG-free 10-bit HEIF writer and gainmap metadata,
-   then verify decoding and display on the actual phone.
+5. Integrate the Java Main10 HEIF writer with capture/processing and the
+   processed-pair gainmap implementation. The host `tmap` writer and Android
+   direct-HLG writer are separate paths today. Verify phone encoding, decoding
+   and display, including all requested lens/mode combinations.
 
 The user's current Camera2 diagnostic exposes at most 4080×3060 for the relevant
 route. None of this code claims an unscaled 5712×4284 sensor input, removes every
@@ -133,6 +151,12 @@ reproduction of the complete styles, or an interoperable final Android HDR
 photo. `heif_save` does produce and independently decode real host HEIF files;
 existing viewer application of `tmap` and Android display remain unverified. Uploaded
 style assets are not redistributed in this source directory.
+
+The staged Java production sources also compile **together** against Android
+SDK 36 and the official ORT Android classes, and pass D8 at minimum API 26.
+`tools/compile_android_components.py` reproduces this check;
+`qa/QA_COMBINED_ANDROID.json` pins the exact source files. This is not an ULike
+application build, manifest/JNI packaging test or executable camera pipeline.
 
 The separate [ULike v1.6.5 / integrated bundle v1.0.98 release](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.6.5)
 adds model observation and export on the phone. Both published MPP files and the

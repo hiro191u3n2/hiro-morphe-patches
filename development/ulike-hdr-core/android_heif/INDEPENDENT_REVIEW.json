@@ -1,0 +1,285 @@
+{
+  "status": "PASS_INDEPENDENT_HEIF_REVIEW_WITH_SCOPE_LIMITS",
+  "source_sha256": {
+    "android_heif/src/main/java/com/hiro/ulike/hdr/heif/Main10Heif.java": "707e3118bd43a921b8ba7d169df34061135a5e8d18d968c6d29b016e796c9221",
+    "android_heif/src/main/java/com/hiro/ulike/hdr/heif/ParameterSets.java": "49665c133d56112a14e669ea95daa712c66e6baf3ad430b68332ddf4c544585c",
+    "android_encoder/src/main/java/com/hiro/ulike/hdr/encoder/AndroidMain10Encoder.java": "81047e91f23b2706e3cba783f0af7884475ec26cb930c5d42de1e8a58144ff2a",
+    "android_encoder/src/main/java/com/hiro/ulike/hdr/encoder/EncoderChoice.java": "a091776de8b6547062566eb11251add16833cdd442da32e8cdfbbf9e7f22ad74",
+    "android_encoder/src/main/java/com/hiro/ulike/hdr/encoder/HevcProof.java": "b58692181eade676535fe4fd5d3ef35b1424f4a5caa7b4b376a133a4ed263942",
+    "android_encoder/src/main/java/com/hiro/ulike/hdr/encoder/P010Frame.java": "93a27ad4826dcee50a82b6625a4c6fd51653c961f714a067e606a79dfd257664"
+  },
+  "sdk36_compile": "PASS",
+  "compile_mode": "javac --release 8 with real Android SDK36 on classpath; JDK8 standard-library bootstrap",
+  "libheif_sha256": "0729736eef28819b93cf233ff625ee96ae915216a46105f48bf3799ca76e0a70",
+  "actual_decodes": [
+    {
+      "fixture": "limited",
+      "container_dimensions": [
+        64,
+        32
+      ],
+      "display_dimensions": [
+        64,
+        32
+      ],
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "libheif": "1.23.2",
+      "all_plane_bits": 10,
+      "all_plane_max_abs_errors": [
+        0,
+        0,
+        0
+      ],
+      "native_nclx_passthrough": true,
+      "ffprobe_recovered_bitstream": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "atomic_and_ownership_checks": "PASS"
+    },
+    {
+      "fixture": "full",
+      "container_dimensions": [
+        64,
+        32
+      ],
+      "display_dimensions": [
+        64,
+        32
+      ],
+      "nclx": [
+        9,
+        18,
+        9,
+        true
+      ],
+      "libheif": "1.23.2",
+      "all_plane_bits": 10,
+      "all_plane_max_abs_errors": [
+        0,
+        0,
+        0
+      ],
+      "native_nclx_passthrough": true,
+      "ffprobe_recovered_bitstream": {
+        "profile": "Main 10",
+        "width": 64,
+        "height": 32,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "pc",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "atomic_and_ownership_checks": "PASS"
+    },
+    {
+      "fixture": "padded",
+      "container_dimensions": [
+        66,
+        34
+      ],
+      "display_dimensions": [
+        66,
+        34
+      ],
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "libheif": "1.23.2",
+      "all_plane_bits": 10,
+      "all_plane_max_abs_errors": [
+        0,
+        0,
+        0
+      ],
+      "native_nclx_passthrough": true,
+      "ffprobe_recovered_bitstream": {
+        "profile": "Main 10",
+        "width": 66,
+        "height": 34,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "atomic_and_ownership_checks": "PASS"
+    },
+    {
+      "fixture": "odd",
+      "container_dimensions": [
+        66,
+        34
+      ],
+      "display_dimensions": [
+        65,
+        33
+      ],
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "libheif": "1.23.2",
+      "all_plane_bits": 10,
+      "all_plane_max_abs_errors": [
+        0,
+        0,
+        0
+      ],
+      "native_nclx_passthrough": true,
+      "ffprobe_recovered_bitstream": {
+        "profile": "Main 10",
+        "width": 66,
+        "height": 34,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "atomic_and_ownership_checks": "PASS"
+    },
+    {
+      "fixture": "offset",
+      "container_dimensions": [
+        66,
+        34
+      ],
+      "display_dimensions": [
+        63,
+        31
+      ],
+      "nclx": [
+        9,
+        18,
+        9,
+        false
+      ],
+      "libheif": "1.23.2",
+      "all_plane_bits": 10,
+      "all_plane_max_abs_errors": [
+        0,
+        0,
+        0
+      ],
+      "native_nclx_passthrough": true,
+      "ffprobe_recovered_bitstream": {
+        "profile": "Main 10",
+        "width": 66,
+        "height": 34,
+        "pix_fmt": "yuv420p10le",
+        "color_range": "tv",
+        "color_space": "bt2020nc",
+        "color_transfer": "arib-std-b67",
+        "color_primaries": "bt2020"
+      },
+      "atomic_and_ownership_checks": "PASS"
+    }
+  ],
+  "malformed_stream_rejections": [
+    "non-annexb-prefix",
+    "truncated-vps",
+    "truncated-pps",
+    "mismatched-vps-id",
+    "mismatched-sps-vps-reference",
+    "mismatched-sps-id",
+    "mismatched-pps-id",
+    "mismatched-pps-sps-reference",
+    "mismatched-slice-pps-reference",
+    "truncated-idr",
+    "bad-epb-32",
+    "bad-epb-33",
+    "bad-epb-34",
+    "bad-epb-39",
+    "unsupported-layer",
+    "zero-temporal-id",
+    "forbidden-header-bit",
+    "second-picture",
+    "missing-sps",
+    "too-many-nals",
+    "oversized-parameter"
+  ],
+  "hostile_extent_rejections": 20,
+  "odd_origin_crop_rejections": [
+    [
+      1,
+      0,
+      65,
+      33
+    ],
+    [
+      0,
+      1,
+      65,
+      33
+    ],
+    [
+      1,
+      1,
+      65,
+      33
+    ],
+    [
+      1,
+      1,
+      64,
+      32
+    ]
+  ],
+  "limits": [
+    "Fixtures use host x265, not Android MediaCodec output.",
+    "Native code equality compares libheif HEIF decode with FFmpeg HEVC decode; lossy encoding is not lossless source preservation.",
+    "No phone decoder/gallery behavior, HDR display or gainmap preservation tested.",
+    "HEVC gate is bounded metadata/reference validation, not a complete CABAC decoder.",
+    "Atomic replacement was exercised on this host filesystem; directory durability across sudden power loss is not claimed."
+  ],
+  "execution_result": {
+    "tool": "exec_command / write_stdin",
+    "session_id": 94795,
+    "completion_chunk": "e4f24e",
+    "exit_code": 0
+  },
+  "review_harness_sha256": {
+    "review/HeifReviewBridge.java": "abfc1df971c64d6da30dda528e37a1709b0bba34b35100daaa9aa71ab8b16b5a",
+    "review/verify_independent.py": "5b8ed4b65526cd443cd3ce52dcd5c7d0d615f1851ebdd820594309e37890a30b"
+  },
+  "fixture_scope": "Fresh independently generated x265 Main10 streams with separate non-neutral spatial patterns in Y, Cb and Cr; not stale neutral-chroma fixture files.",
+  "decoder_api_source": {
+    "url": "https://github.com/strukturag/libheif/tree/v1.23.2/libheif/api/libheif",
+    "heif_decoding_h_sha256": "ca54f2ed3eec88ca8412b2b40ccf735449e68e8f111db50b238cd084ef0cd87a",
+    "heif_color_h_sha256": "060f3cf89acfa2279f5a713f337fd40b9233ae7b8426046148d793dbfd589e68",
+    "heif_image_h_sha256": "0239fee8187ee8c74402f1a9c682e4eaa7ba77a7a540f96485d9f004ac0904a6"
+  },
+  "resolved_findings": [
+    {
+      "finding": "Frozen encoder SPS inspection alone did not validate parameter ID references or all non-VCL RBSP byte syntax",
+      "resolution": "New HEIF-local ParameterSets gate validates restricted VPS/PPS, all RBSP byte patterns and VPS/SPS/PPS/slice links; 21 independent hostile streams rejected without altering frozen encoder"
+    },
+    {
+      "finding": "Odd crop origin (1,1,65,33) changed native libheif output from YCbCr420 to YCbCr444, violating this module's restricted native420 crop-identity contract",
+      "observed_before_fix": {
+        "libheif_colorspace": 0,
+        "libheif_chroma": 3,
+        "input_chroma": 1
+      },
+      "resolution": "Final Crop constructor explicitly rejects odd left/top; four independent odd-origin combinations rejected; odd dimensions with even origins retain exact 10-bit native code identity"
+    }
+  ]
+}

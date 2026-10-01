@@ -1,0 +1,60 @@
+{
+  "status": "PASS_WITH_SCOPE_LIMITS",
+  "reviewer": "android_capture_continue",
+  "date_utc": "2026-10-01",
+  "reviewed_source_sha256": {
+    "FACE_MODEL_PINS.json": "c412be5c2b719b147abd276daf79ecb3465032fdfde4848aad52ce0cdef14d4c",
+    "QA_FACE_MODEL.json": "d2b3bc8be2e9891312fe901780b0b4b7189f746837c073ced659ea68c7d616b2",
+    "QA_OFFLINE_API_AVAILABILITY.json": "f7273fb668c6d4011accdf69a0360fab94d6e6ebc3d6afb94e56cd72864d52db",
+    "README.md": "a89c10c09bbee265b9c9ba8367e075c355dc63f0b63ec342ab05aa00c594e749",
+    "face_model.py": "b6dc3085d9ca451f267542a4f11d64a7e957f28bccbd0938003798414cbea053",
+    "src/main/java/com/hiro/ulike/hdr/face/StillFaceAnalysis.java": "2847a634f2bfc431667de5e2659135be8bae65ad4b880ea0cb0bf7d7f1f47522",
+    "src/test/java/com/hiro/ulike/hdr/input/StillFaceAnalysisTest.java": "fbba13316b940a54a974d988768789f33fc0c109e906f401795f3b63184af67a",
+    "test.sh": "fed1485015e9143340fda59b093755afffc7eef669d7e3fa5abe86f456cc9ed7"
+  },
+  "static_native_route_note_excluded_from_independent_proof": [
+    "STILL_FACE_ROUTE_FINDINGS.json"
+  ],
+  "source_pins_match": true,
+  "author_host_suite_rerun": {
+    "checks": 69,
+    "status": "PASS"
+  },
+  "additional_geometry_ownership_assertions": 197,
+  "actual_model": {
+    "groups": 11,
+    "native_graph_checksums": "PASS",
+    "graph_and_weight_pins": "PASS",
+    "model_sha256": "c4b081d04f6829f7cd5849abca0941891f1a7f2cb250efd7f0e42fece5426610",
+    "libeffect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+    "matches_author_metadata": true
+  },
+  "additional_probe_assertions": 19,
+  "offline_availability": {
+    "libraries_rescanned": 58,
+    "absence_and_positive_controls_match": true,
+    "runtime_execution": false
+  },
+  "resolved_findings": [
+    {
+      "severity": "medium",
+      "issue": "Duplicate Java test with same package/class in face/ and input/ broke test.sh",
+      "resolution": "Author removed obsolete face/ copy; exact documented test.sh now passes."
+    }
+  ],
+  "reviewed_behavior": [
+    "All eight rotation/mirror combinations invert to source coordinates, including fractional landmarks and nonuniform floor-rounded proxy dimensions.",
+    "Owned immutable analysis pixels, cloned face coordinates and exact HdrFrame source identity are enforced.",
+    "Invalid rotation/bound/policy/RGB24/face counts/score/nonfinite coordinates reject.",
+    "Float coordinate overflow after inverse mapping rejects.",
+    "Backend error identity propagates; no cached-preview or empty fallback substitutes for errors.",
+    "Unknown/truncated/mutated model or library rejects by exact pin."
+  ],
+  "limits": [
+    "No detector backend or HDR-to-analysis color renderer supplied or executed.",
+    "No measured landmark quality, preprocessing parity, weight layout or quantization proof.",
+    "Native Java registration string absence is static evidence, not a device runtime impossibility proof.",
+    "New recorder still callback route findings were read for scope but not independently reconstructed in this review.",
+    "No Android device or ULike integration execution."
+  ]
+}

@@ -1,0 +1,155 @@
+{
+  "status": "STATIC_STILL_INPUT_AND_106_FACE_CALLBACK_CHAIN_IDENTIFIED_RUNTIME_AND_COORDINATE_CONTRACT_UNVERIFIED",
+  "stock_version": "ULike 5.6.2 (740) arm64",
+  "library_sha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+  "java_route": [
+    {
+      "api": "VERecorder(String directory, Context context)",
+      "evidence": "VERecorder.java:3134 delegates to null VERenderView constructor"
+    },
+    {
+      "api": "init(ICameraCapture=null, VEVideoEncodeSettings, VEAudioEncodeSettings, VEPreviewSettings)",
+      "evidence": "VERecorder.java:3233/3251 -> TECameraVideoRecorder.init nullable camera; assigns null camera settings and invokes initInternalRecorder"
+    },
+    {
+      "api": "startPreviewAsync(Surface=null, VECallListener)",
+      "evidence": "TECameraVideoRecorder.java:3945 -> startRecordPreview -> MediaRecordPresenter.startPlay(int,int) -> RecordInvoker.nativeStartPlay2; no camera source submitted by this route; actual null-view dimensions -1 and native acceptance unverified"
+    },
+    {
+      "api": "initFaceDetectExtParam(VEFaceDetectExtParam)",
+      "evidence": "TECameraVideoRecorder.java:2075 delegates interval,imageMode,useFastModel separately"
+    },
+    {
+      "api": "regFaceInfoCallback(VERecorder.VEFaceInfoCallback)",
+      "evidence": "TECameraVideoRecorder.java:2609 -> RecordInvoker.registerFaceResultCallback(true, callback)"
+    },
+    {
+      "api": "renderFrame(Bitmap input, width, height, false, VEFrameRenderCallback)",
+      "evidence": "TECameraVideoRecorder.java:5040 constructs ImageFrame(bitmap,2); explicit supplied dimensions; MediaRecordPresenter.renderPicture -> RecordInvoker.nativeRenderPicture3"
+    },
+    {
+      "api": "VEFrameRenderCallback.onState(int) / onResult(Bitmap)",
+      "evidence": "Picture completion independent of face callback; onResult null is failure; no frame ID in face callback"
+    },
+    {
+      "api": "VEFaceInfoCallback.onResult(VEFaceAttributeInfo, VEFaceDetectInfo)",
+      "evidence": "VEFaceDetectInfo.covert retains native points; take deep copy; array length must be 106, finite coordinates; callbacks independent async worker"
+    }
+  ],
+  "native_chain": [
+    [
+      "0x44433c..0x444348",
+      "constructor materializes0x91f0e8 and stores it into object vptr"
+    ],
+    [
+      "0x40bd30",
+      "nativeRenderPicture3 JNI registered at0x922dc8; supplied Bitmap input; RGBA w*h*4"
+    ],
+    [
+      "0x40bdfc",
+      "calls common0x40b278"
+    ],
+    [
+      "0x40b3a4",
+      "common calls recorder scheduler0x42b844"
+    ],
+    [
+      "0x42b89c",
+      "stores submitted buffer at recorder+0xf18; pending flag+0xf20; effects flag+0xf21"
+    ],
+    [
+      "0x41d6f4",
+      "renderloop pending-still branch calls0x420200 at0x41d704"
+    ],
+    [
+      "0x4206b0",
+      "loads same effect object recorder+0x8d0;0x4206c8 reaches0x4436cc via outline5bb1b8"
+    ],
+    [
+      "0x443ab4",
+      "calls0x445da8 ->0x445db4 ->0x445dd8"
+    ],
+    [
+      "0x44603c",
+      "virtual process at vptr+0x78; TEEffectRenderWithQueue vptr0x91f0e8 resolves20cf50"
+    ],
+    [
+      "0x20d0f8",
+      "virtual process at vptr+0x90 via5b4510 resolves444e30"
+    ],
+    [
+      "0x444f78",
+      "calls20d330"
+    ],
+    [
+      "0x20d624",
+      "bef_effect_algorithm_multi_texture_with_params for supplied texture"
+    ],
+    [
+      "0x20d734",
+      "after texture processing invokes virtual+0x68 via59e250 ->4448b8"
+    ],
+    [
+      "0x444910",
+      "calls20b6ec -> bef_effect_get_face_detect_result"
+    ],
+    [
+      "0x444970",
+      "dispatches registered face callback via3e7d04 if callback enabled"
+    ],
+    [
+      "0x40bf4c",
+      "nativeRegisterFaceResultCallback JNI installs callback;42bbe8 ->same recorder+0x8d0 ->443f0c"
+    ],
+    [
+      "0x42bf84",
+      "face callback worker pthread created; receives copied native face structs"
+    ],
+    [
+      "0x40c1cc",
+      "JNI face callback marshaler"
+    ],
+    [
+      "0x40c4dc",
+      "allocates float visibility array length0x6a (106)"
+    ],
+    [
+      "0x40c53c",
+      "allocates PointF array length0x6a (106)"
+    ],
+    [
+      "0x40c58c",
+      "loops exactly106 entries; native floats copied without coordinate scaling in marshaler"
+    ]
+  ],
+  "vtable_scope": "Chain verified for stock TEEffectRenderWithQueue table0x91f0e8 (type name0x7153d7). Constructor installs this table around0x444330. Concrete running instance/backend and configuration must be checked on-device; no runtime proof.",
+  "identity_rules": [
+    "Never reuse active preview recorder or latest preview face callback.",
+    "A new private recorder per still request with exactly one submitted image and no camera attachment can bound possible image identity; callback payload itself has no timestamp or request token.",
+    "Register before submitting; permit callbacks from only this private instance; retain exactly one request-owned immutable analysis input.",
+    "Require both successful still render and valid face callback; callback is asynchronous and may arrive before or after render completion.",
+    "Timeout, absent callback, wrong geometry/point count, non-finite values, model initialization error, license initialization error must fail closed.",
+    "Do not interpret empty face callback received during initialization as successful analysis of submitted frame."
+  ],
+  "not_proven": [
+    "Camera-free nativeStartPlay2 accepts public null-view (-1,-1) dimensions and performs ready transition on the user device.",
+    "Runtime factory/configuration selects TEEffectRenderWithQueue backend.",
+    "Face callback is emitted for submitted still on actual device under normal model/license initialization.",
+    "Landmark coordinate domain, rotation, mirror, crop and any internal resize map exactly back to submitted image dimensions.",
+    "No face callback leak from mutable global state/shared effect configuration between recorder instances.",
+    "Completion/teardown joins face worker and avoids use-after-release on timeout."
+  ],
+  "implementation_decision": "No production Detector adapter added: final geometry and lifecycle ownership barriers remain unverified. Explicitly labeled device probe could evaluate this native path; fake latest-preview or guessed coordinate adaptation prohibited.",
+  "optional_veimage_api": {
+    "status": "NATIVE_BACKEND_NOT_FOUND_IN_58_LIBRARIES",
+    "details": "Java TEImageALGCallbackInterface constructor calls nativeCheckHas(), absent across58 stock arm64libs together with nativeRegisterFaceInfoUpload and native class name. VEJavaCalls.newInstance catches constructor reflection exceptions and returns null. High-level VEImage regFaceInfoCallback then silently no-ops when wrapper absent. Java declarations alone do not establish available backend."
+  },
+  "raw_audit_files_are_local_only": true,
+  "coordinate_cautions": [
+    "JNI face callback40c5a4/40c5c4 copies upstream floats directly to PointF fields; no local normalization/rotation correction.",
+    "Native stillprocessor4206b0..4206c8 uses recorder rotation+0x594 and mirror+0x360, plus explicit destination dimensions, before rendering effect texture.",
+    "TECameraVideoRecorder.setDeviceRotation(int) onlyupdates base recorder and attachedcamera; camera-null path does not directly update native effect rotation.",
+    "TECameraVideoRecorder.setPreviewRotation(int) -> MediaRecordPresenter.setPreviewRotation(int) onlystores mOrientaion; renderPicture route does not consume this field directly.",
+    "Do not map landmarks to source pixels by assuming unit scale or applying guessed rotate/mirror."
+  ]
+}
