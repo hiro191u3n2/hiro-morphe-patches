@@ -1,0 +1,73 @@
+name: Verify and publish ULike fast lens return 1.6.7
+on:
+  push:
+    branches: ['work/ulike-fast-return-v167']
+    paths: ['.github/workflows/ulike-fast-return-v167.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain pinned predecessor and exact SDK used for local verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.6.6 --pattern ULike_v1.6.6_sources_and_QA.zip --dir input
+          gh release download ulike-v1.6.6 --pattern ULike_HQ_Texture_Online_v1.6.6.mpp --dir input
+          gh release download ulike-v1.6.6 --pattern Hiro_Morphe_Patches_v1.0.99.mpp --dir input
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11160707412/zip > input/toolchain.zip
+          echo 'c9184fe6af171d294614d169695398f4f861030806dd37732872f90e2917bba0  input/toolchain.zip' | sha256sum -c -
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile
+          with zipfile.ZipFile('input/toolchain.zip') as z:
+              for name in ['morphe-1.16.jar','r8-8.3.37.jar','asm-9.8.jar','android.jar']:
+                  Path('tools',name).write_bytes(z.read('tools/'+name))
+          PY
+      - name: Restore hash-bound sources and repeat host and exact-byte checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike-v1.6.7/restore_reviewed.py
+          python3 source167/build_reviewed.py
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source167/release_pipeline/publish167.py --qa source167/release_pipeline/LOCAL_QA.json --dist dist --notes source167/release_pipeline/RELEASE_NOTES.txt --release-body source167/release_pipeline/README.md --summary source167/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and update main and dev without forced writes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source167/release_pipeline/publish167.py --qa source167/release_pipeline/LOCAL_QA.json --dist dist --notes source167/release_pipeline/RELEASE_NOTES.txt --release-body source167/release_pipeline/README.md --summary source167/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show fail-closed publication state
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+          if test -d source167/ci-build; then find source167/ci-build -name '*.dex' -exec sha256sum {} +; fi
+      - name: Retain downloadable artifacts and publication verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-fast-return-v167-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
