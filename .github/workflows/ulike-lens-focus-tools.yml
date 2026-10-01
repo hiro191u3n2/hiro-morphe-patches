@@ -1,0 +1,38 @@
+name: ULike lens autofocus repair toolchain
+on:
+  push:
+    branches: [work/ulike-lens-focus-v166]
+    paths: [.github/workflows/ulike-lens-focus-tools.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Collect pinned public build tools and published source baselines
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p tools sources
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8-8.3.37.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.8/asm-9.8.jar -o tools/asm-9.8.jar
+          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  tools/morphe-1.16.jar' | sha256sum -c -
+          echo '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199  tools/r8-8.3.37.jar' | sha256sum -c -
+          echo '876eab6a83daecad5ca67eb9fcabb063c97b5aeb8cf1fca7a989ecde17522051  tools/asm-9.8.jar' | sha256sum -c -
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          cp "$SDK/platforms/android-36/android.jar" tools/android.jar
+          gh release download ulike-v1.6.3 -R hiro191u3n2/hiro-morphe-patches --pattern '*sources*' --dir sources
+          (cd tools && sha256sum *.jar *.zip > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike-lens-focus-analysis-tools
+          path: |
+            tools/*
+            sources/*
+          retention-days: 3
