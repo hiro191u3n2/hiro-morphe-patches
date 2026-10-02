@@ -1,0 +1,83 @@
+name: ULike v1.7.8 preview repair release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-preview178-release.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-ulike-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify reviewed precursor and latest-base repair sources
+        run: |
+          set -euo pipefail
+          sha256sum -c <<'SUMS'
+          772f43479a62ada4c914838a3fe24fcfe2010567b27a2daa56a470952d9e94e0  releases/ulike-v1.7.7/Preview177.java
+          20a4de8899628c4675d62b8b5cdb839c51e2bfc3d430de3acaa2e40390ba84b3  releases/ulike-v1.7.7/Transform177.java
+          cbcab67be9570b218f70b84f49653c936c24662a3af08b601ef534d454698153  releases/ulike-v1.7.7/Preview177Test.java
+          f5ca823c00fb09739b5bf999c5dd59e0106887b5ab8292b19b569bc83aafc240  releases/ulike-v1.7.7/LOCAL_QA.json
+          939568d179055781485cdfd39a2305ad9adc8f51d7cfffcdb0ba41f16548809f  releases/ulike-v1.7.7/reproduce177.py
+          534733715727f0cbc5b5cc1beb82eb3e124b661856bc8342c16e13f76353a9f5  releases/ulike-v1.7.8/LOCAL_QA.json
+          346a6fffc85f8526fbd100acfa98901de4b12c20af8fcf1136917e39e582f8f3  releases/ulike-v1.7.8/rebase178.py
+          SUMS
+      - name: Obtain exact previously verified toolchain
+        run: |
+          set -euo pipefail
+          mkdir toolchain178
+          gh run download 36946580808 --repo hiro191u3n2/hiro-morphe-patches --name ulike-preview177-tools --dir toolchain178
+          cd toolchain178
+          sha256sum -c SHA256SUMS
+      - name: Obtain actual live chroma predecessor and pinned build sources
+        run: |
+          set -euo pipefail
+          mkdir input source dist
+          base=https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download
+          curl -fL --retry 3 "$base/ulike-v1.7.7/ULike_HQ_Texture_Online_v1.7.7.mpp" -o input/ULike_HQ_Texture_Online_v1.7.7.mpp
+          curl -fL --retry 3 "$base/ulike-v1.7.7/Hiro_Morphe_Patches_v1.0.110.mpp" -o input/Hiro_Morphe_Patches_v1.0.110.mpp
+          curl -fL --retry 3 "$base/ulike-v1.7.6/ULike_v1.7.6_sources_and_QA.zip" -o input/ULike_v1.7.6_sources_and_QA.zip
+          (cd input && sha256sum -c <<'SUMS'
+          d0a04a4a3cc0f95064d41073b886f69c9bfd2581ea681390cd25095e705ef368  ULike_HQ_Texture_Online_v1.7.7.mpp
+          3e5f885f6e807cfbc6c76e27fc82ef55a3241264bf9c0cb6ced5e92236b329c8  Hiro_Morphe_Patches_v1.0.110.mpp
+          10c75af3510eca37ac5bf45aff43987ddc5644ac70ea0bcf7f206d4f93dbe44b  ULike_v1.7.6_sources_and_QA.zip
+          SUMS
+          )
+          unzip -q input/ULike_v1.7.6_sources_and_QA.zip -d source
+      - name: Reproduce latest-base repairs and run host regression tests
+        run: |
+          set -euo pipefail
+          python releases/ulike-v1.7.8/rebase178.py prepare source releases/ulike-v1.7.7
+          python source/build178.py --input input --tools toolchain178 --dist dist --bootstrap
+          python releases/ulike-v1.7.8/rebase178.py finish source dist
+      - name: Publish only exact locally APK-rebuilt bytes and update Manager
+        run: |
+          set -euo pipefail
+          python source/release_pipeline/publish178.py \
+            --qa source/release_pipeline/LOCAL_QA.json \
+            --dist dist \
+            --notes source/release_pipeline/RELEASE_NOTES.txt \
+            --release-body source/CHANGES178.md \
+            --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt \
+            --upload-branch main \
+            --target-commit "$GITHUB_SHA" \
+            --release-date 2026-10-02
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-preview178-release
+          path: |
+            dist/
+            source/qa170/
+          retention-days: 7
