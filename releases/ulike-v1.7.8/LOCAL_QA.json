@@ -1,0 +1,56 @@
+{
+  "version": "1.7.8",
+  "bundle_version": "1.0.111",
+  "previous_bundle_version": "1.0.110",
+  "result": "HOST_REGRESSION_AND_LOCAL_APK_REBUILD_PASS",
+  "android_device_tested": false,
+  "device_black_preview_cause_proven": false,
+  "device_cold_start_ms": null,
+  "host_assertions": 1060,
+  "new_host_assertions": 130,
+  "runtime_methods_retained": 1275,
+  "runtime_methods_changed": 4,
+  "runtime_methods_added": 10,
+  "local_applied_contracts_each": 1453,
+  "private_access_violations": 0,
+  "artifacts": [
+    {
+      "file": "ULike_HQ_Texture_Online_v1.7.8.mpp",
+      "bytes": 675747,
+      "sha256": "d21b2e160dcbf006d28c643235161ecd5a6459ea56dea455adeceb3edc558119"
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.111.mpp",
+      "bytes": 17221566,
+      "sha256": "86a994fba73c20d55f059f7b36d7cb3eefed3469bb2ecd268b5cd2fb777924d0"
+    }
+  ],
+  "findings": [
+    "Both prior OpticalZoom.outputSizes overloads could mark the entire fixed-camera route failed during capability enumeration; common() did the same for absent intersections and returned logical-only sizes. A query is not proof that an actual output session failed.",
+    "The camera readiness host was registered only after optional lens-row geometry/overlap checks. When the row cannot render, recovery waits for a host that was never registered."
+  ],
+  "fixes": [
+    "Map physical output queries to a nonfatal, exact size intersection. Unsupported optional formats return an empty size list, not unverified logical sizes. Actual fixed session validation and failure handling remain unchanged.",
+    "Register the live preview host at UI attach, before optional lens-row layout checks. Existing shown/window-focus, foreground, recording and still-capture guards remain."
+  ],
+  "unchanged": [
+    "all 164 application method payloads, assets, native modifications and other-app patches",
+    "main-wide 1x, macro, 3x/5x identity and output binding",
+    "no distance-driven lens switching; normal AF",
+    "beauty, HEIF, requested resolution, saved-image correction and save-speed work",
+    "camera state/retry limits and active-session checks",
+    "Entire prior v1.7.7 chroma mitigation runtime, default-on option, save pipeline and other-app payloads retained; based on published d0a04a4a/3e5f885f artifacts, not unpublished preview candidate."
+  ],
+  "limits": [
+    "Host Camera2 doubles are not Android ART or Samsung camera HAL execution.",
+    "No device logs were available; the defects were confirmed in code, not demonstrated to be the only cause of the submitted screenshot.",
+    "No claim that black preview is fully resolved on Galaxy or that launch time improved by a measured amount."
+  ],
+  "local_applied_evidence": {
+    "VERIFY_SINGLE178.txt": "PASS final APK: 33352 unique classes / 213453 methods. 1453 runtime/payload contracts exactly retained, including all correction hooks and helper methods.\n",
+    "VERIFY_INTEGRATED178.txt": "PASS final APK: 33352 unique classes / 213453 methods. 1453 runtime/payload contracts exactly retained, including all correction hooks and helper methods.\n",
+    "APK_CONTENT178.txt": "PASS single/integrated APK: all 3999 entries content-identical. Unsigned host-rebuilt APK; NOT device-executed.\n",
+    "APPLY_SINGLE178.json": "{\"packageName\":\"com.gorgeous.liteinternational\",\"packageVersion\":\"5.6.2\",\"patchingSteps\":[{\"step\":\"PATCHING\",\"success\":true},{\"step\":\"REBUILDING\",\"success\":true}],\"appliedPatches\":[{\"name\":\"高画質撮影・質感美肌・素材通信を復旧\"}],\"failedPatches\":[]}",
+    "APPLY_INTEGRATED178.json": "{\"packageName\":\"com.gorgeous.liteinternational\",\"packageVersion\":\"5.6.2\",\"patchingSteps\":[{\"step\":\"PATCHING\",\"success\":true},{\"step\":\"REBUILDING\",\"success\":true}],\"appliedPatches\":[{\"name\":\"高画質撮影・質感美肌・素材通信を復旧\"}],\"failedPatches\":[]}"
+  }
+}
