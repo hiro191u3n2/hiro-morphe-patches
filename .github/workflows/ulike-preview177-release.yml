@@ -35,9 +35,9 @@ jobs:
       - name: Obtain exact previously verified toolchain
         run: |
           set -euo pipefail
-          mkdir tools
-          gh run download 36946580808 --repo hiro191u3n2/hiro-morphe-patches --name ulike-preview177-tools --dir tools
-          cd tools
+          mkdir toolchain177
+          gh run download 36946580808 --repo hiro191u3n2/hiro-morphe-patches --name ulike-preview177-tools --dir toolchain177
+          cd toolchain177
           sha256sum -c SHA256SUMS
       - name: Obtain pinned predecessor patches and sources
         run: |
@@ -58,7 +58,7 @@ jobs:
         run: |
           set -euo pipefail
           python releases/ulike-v1.7.7/reproduce177.py prepare source
-          python source/build177.py --input input --tools tools --dist dist --bootstrap
+          python source/build177.py --input input --tools toolchain177 --dist dist --bootstrap
           python releases/ulike-v1.7.7/reproduce177.py finish source dist
       - name: Publish only exact locally APK-tested bytes and update Manager
         run: |
