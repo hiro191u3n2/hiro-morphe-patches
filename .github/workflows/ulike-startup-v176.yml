@@ -1,0 +1,95 @@
+name: Verify and publish ULike main-first startup 1.7.6
+on:
+  push:
+    branches: ['work/ulike-startup-af-v173']
+    paths: ['.github/workflows/ulike-startup-v176.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed source delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools dist
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.7.4/ULike_v1.7.4_sources_and_QA.zip -o predecessor-source.zip
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,zipfile
+          from pathlib import Path,PurePosixPath
+          raw=Path('predecessor-source.zip').read_bytes()
+          assert hashlib.sha256(raw).hexdigest()=='f1bfc4f203c47dc175be1ff80192583c770cd0ca38e2f4462d78e83fd3b31cff'
+          with zipfile.ZipFile('predecessor-source.zip') as z:
+              for name in z.namelist():
+                  p=PurePosixPath(name)
+                  assert not p.is_absolute() and '..' not in p.parts
+                  assert ((z.getinfo(name).external_attr >> 16) & 0o170000) != 0o120000
+              z.extractall('source')
+          parts=sorted(Path('releases/ulike-startup-v176').glob('source-delta.part*.b64'))
+          assert len(parts)==4
+          delta=base64.b64decode(''.join(p.read_text().strip() for p in parts),validate=True)
+          assert hashlib.sha256(delta).hexdigest()=='c6800ba8940e2360c3a570487a0cc0c42e9129c0fac3037754c0ee7f6094c680'
+          obj=json.loads(lzma.decompress(delta))
+          for name,text in obj['new_files'].items():
+              p=PurePosixPath(name)
+              assert not p.is_absolute() and '..' not in p.parts
+              out=Path('source')/name
+              out.parent.mkdir(parents=True,exist_ok=True)
+              out.write_text(text,encoding='utf-8')
+          Path('delta.patch').write_text(obj['patch'],encoding='utf-8')
+          PY
+          patch --batch --fuzz=0 -p1 -d source < delta.patch
+      - name: Fetch pinned tools and published save-speed predecessor
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar -o tools/r8-8.3.37.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o tools/morphe-1.16.jar
+          curl -fL --retry 3 https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.8/asm-9.8.jar -o tools/asm-9.8.jar
+          SDK="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          cp "$SDK/platforms/android-36/android.jar" tools/android.jar
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.7.5/ULike_HQ_Texture_Online_v1.7.5.mpp -o input/ULike_HQ_Texture_Online_v1.7.5.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.7.5/Hiro_Morphe_Patches_v1.0.108.mpp -o input/Hiro_Morphe_Patches_v1.0.108.mpp
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.7.4/ULike_HQ_Texture_Online_v1.7.4.mpp -o input/ULike_HQ_Texture_Online_v1.7.4.mpp
+      - name: Verify unchanged lens baseline and reproduce tested MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/build170.py --input input --tools tools --dist dist
+      - name: Require exact locally applied bytes and source archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/finalize176.py --source source --dist dist --reviewed source/release_pipeline/LOCAL_QA.json
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          assert hashlib.sha256(Path('dist/ULike_v1.7.6_sources_and_QA.zip').read_bytes()).hexdigest()=='10c75af3510eca37ac5bf45aff43987ddc5644ac70ea0bcf7f206d4f93dbe44b'
+          PY
+      - name: Publish verified assets and advance Manager metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/publish176.py --qa source/release_pipeline/LOCAL_QA.json --dist dist --notes source/release_pipeline/RELEASE_NOTES.txt --release-body source/release_pipeline/README.md --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt --upload-branch work/ulike-startup-af-v173 --target-commit "$GITHUB_SHA" --release-date 2026-10-02
+      - name: Retain publication verification
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-startup-v176-publication
+          path: dist/*
+          retention-days: 7
