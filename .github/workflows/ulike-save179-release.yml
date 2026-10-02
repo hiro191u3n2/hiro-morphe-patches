@@ -1,0 +1,85 @@
+name: ULike v1.7.9 save/UI release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-save179-release.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-ulike-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: \${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Obtain exact previously verified toolchain
+        run: |
+          set -euo pipefail
+          mkdir tools
+          gh run download 36946580808 --repo hiro191u3n2/hiro-morphe-patches --name ulike-preview177-tools --dir tools
+          cd tools
+          sha256sum -c SHA256SUMS
+      - name: Obtain published v1.7.8 base
+        run: |
+          set -euo pipefail
+          mkdir input source dist
+          base=https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.7.8
+          curl -fL --retry 3 "$base/ULike_HQ_Texture_Online_v1.7.8.mpp" -o input/ULike_HQ_Texture_Online_v1.7.8.mpp
+          curl -fL --retry 3 "$base/Hiro_Morphe_Patches_v1.0.111.mpp" -o input/Hiro_Morphe_Patches_v1.0.111.mpp
+          curl -fL --retry 3 "$base/ULike_v1.7.8_sources_and_QA.zip" -o input/ULike_v1.7.8_sources_and_QA.zip
+          (cd input && sha256sum -c <<'SUMS'
+          d21b2e160dcbf006d28c643235161ecd5a6459ea56dea455adeceb3edc558119  ULike_HQ_Texture_Online_v1.7.8.mpp
+          86a994fba73c20d55f059f7b36d7cb3eefed3469bb2ecd268b5cd2fb777924d0  Hiro_Morphe_Patches_v1.0.111.mpp
+          84edc82469813462ef928ddfd3a0504d1d51e334d2298a3d18deeb45baf696be  ULike_v1.7.8_sources_and_QA.zip
+          SUMS
+          )
+          unzip -q input/ULike_v1.7.8_sources_and_QA.zip -d source
+      - name: Prepare v1.7.9 sources
+        run: |
+          set -euo pipefail
+          python releases/ulike-v1.7.9/release179.py prepare source
+      - name: Rebuild patch and run host/DEX regression
+        run: |
+          set -euo pipefail
+          python source/build179.py --input input --tools tools --dist dist --bootstrap
+          grep -q 'PRIVATE_ACCESS_VIOLATIONS=0' source/qa170/ACCESS_AFTER.txt
+          grep -q '1483 total payload/runtime methods' source/qa170/HELPER_REFERENCES.txt
+          grep -q 'PASS v1.7.9' source/ci-build170/runtime-audit179.txt
+          sha256sum -c <<'SUMS'
+          57741387e20e592621b4d31d47fd981c5587044b9e255bda2d587b5e8b5f12a8  dist/ULike_HQ_Texture_Online_v1.7.9.mpp
+          fac7d9e92cc0d03fc5c57bf121d9fbf1ef5a3bd8cc5fa197ef2534dbd355e5c0  dist/Hiro_Morphe_Patches_v1.0.112.mpp
+          SUMS
+      - name: Bind QA and source archive
+        run: |
+          set -euo pipefail
+          python releases/ulike-v1.7.9/release179.py finish source dist
+      - name: Publish exact rebuilt bytes and update Manager metadata
+        run: |
+          set -euo pipefail
+          python source/release_pipeline/publish179.py \
+            --qa source/release_pipeline/LOCAL_QA.json \
+            --dist dist \
+            --notes source/release_pipeline/RELEASE_NOTES.txt \
+            --release-body source/CHANGES179.md \
+            --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt \
+            --upload-branch main \
+            --target-commit "$GITHUB_SHA" \
+            --release-date 2026-10-02
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-save179-release
+          path: |
+            dist/
+            source/qa170/
+            source/ci-build170/runtime-audit179.txt
+          retention-days: 7
