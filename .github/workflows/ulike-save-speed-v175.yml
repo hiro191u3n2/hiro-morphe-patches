@@ -1,0 +1,117 @@
+name: Verify and publish ULike save speed 1.7.5
+on:
+  push:
+    branches: ['work/ulike-save-speed-v175']
+    paths: ['.github/workflows/ulike-save-speed-v175.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore hash-pinned source-only review and local evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,subprocess,zipfile
+          from pathlib import Path,PurePosixPath
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          parts=sorted(Path('releases/ulike-v1.7.5').glob('source.b64.*'))
+          assert [p.name for p in parts]==['source.b64.000','source.b64.001']
+          raw=base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts),validate=True)
+          assert len(raw)==18036 and sha(raw)=='594c2dc483cf5a2301530338e47f4332d03bf28274b74e9d7abdf89e380fa411','Reviewed source recipe differs'
+          data=json.loads(lzma.decompress(raw))
+          assert data['schema']=='ulike-save-speed175-text-delta-v1'
+          Path('bases').mkdir()
+          bases={}
+          for base in data['bases']:
+              subprocess.run(['gh','release','download','ulike-v'+base['version'],'--pattern',base['filename'],'--dir','bases'],check=True)
+              p=Path('bases')/base['filename']
+              assert sha(p.read_bytes())==base['sha256'],base['filename']
+              z=zipfile.ZipFile(p)
+              assert len(z.namelist())==len(set(z.namelist())) and z.testzip() is None
+              bases[base['version']]=z
+          def read_base(ref):
+              assert isinstance(ref,list) and len(ref)==2
+              return bases[ref[0]].read(ref[1]).decode('utf-8')
+          groups=[set(data[k]) for k in ['copy','files','patches']]
+          assert not (groups[0]&groups[1] or groups[0]&groups[2] or groups[1]&groups[2])
+          files={n:read_base(ref) for n,ref in data['copy'].items()}
+          files.update(data['files'])
+          for n,patch in data['patches'].items():
+              old=read_base(patch['base']);fragments=[]
+              for part in patch['parts']:
+                  if isinstance(part,list):
+                      assert len(part)==2 and all(type(v) is int for v in part) and 0<=part[0]<=part[1]<=len(old)
+                      fragments.append(old[part[0]:part[1]])
+                  else:
+                      assert isinstance(part,str);fragments.append(part)
+              files[n]=''.join(fragments)
+          assert len(files)==52
+          assert sha(files['SOURCE_FILES.json'].encode())==data['manifest_sha256']=='bf7801b78ac1c25071f26c92d7ff981931c4dcadd697ccd100bf76b828affc75'
+          manifest=json.loads(files['SOURCE_FILES.json'])
+          assert set(manifest)|{'SOURCE_FILES.json'}==set(files)
+          for n,h in manifest.items():assert sha(files[n].encode())==h,n
+          for n,text in files.items():
+              p=PurePosixPath(n)
+              assert not p.is_absolute() and '..' not in p.parts and p.suffix.lower() in {'.java','.py','.sh','.json','.txt','.md','.tsv'}
+              target=Path('src')/n;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text,encoding='utf-8')
+          print('PASS all 52 reviewed source/evidence files restored exactly; no original app or photographs')
+          PY
+      - name: Fetch current pinned baseline and verified build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p input tools dist
+          gh release download ulike-v1.7.4 --pattern ULike_HQ_Texture_Online_v1.7.4.mpp --dir input
+          gh release download ulike-v1.7.4 --pattern Hiro_Morphe_Patches_v1.0.107.mpp --dir input
+          gh run download 36859837629 --name ulike-lens-focus-analysis-tools --dir toolchain
+          cp toolchain/tools/morphe-1.16.jar toolchain/tools/r8-8.3.37.jar toolchain/tools/asm-9.8.jar toolchain/tools/android.jar tools/
+      - name: Reproduce exactly both locally applied MPPs and rerun pixel and I/O tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/build174.py --input input --tools tools --dist dist | tee dist/build175.txt
+          python3 src/finalize175.py --dist dist
+          echo 'b4d098db971156e8ace47c463908bbeb8a8674b3b9feb15102c7d4d36fc80150  dist/ULike_v1.7.5_sources_and_QA.zip' | sha256sum -c -
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish175.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and CAS-update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish175.py --qa src/release_pipeline/LOCAL_QA.json --dist dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show checkpoint on failure
+        if: failure()
+        shell: bash
+        run: |
+          if test -f dist/publication-state.json; then cat dist/publication-state.json; fi
+      - name: Retain exact files and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-save-speed-v175-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 7
