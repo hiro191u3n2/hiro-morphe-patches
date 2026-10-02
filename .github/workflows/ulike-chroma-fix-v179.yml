@@ -1,0 +1,103 @@
+name: Verify and publish ULike chroma residual repair 1.7.9
+on:
+  push:
+    branches: ['work/ulike-chroma-fix-v179']
+    paths: ['.github/workflows/ulike-chroma-fix-v179.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore hash-pinned source-only repair and previously run local evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,subprocess,zipfile
+          from pathlib import Path,PurePosixPath
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          parts=sorted(Path('releases/ulike-v1.7.9').glob('source.b64.*'))
+          assert [p.name for p in parts]==['source.b64.000','source.b64.001']
+          raw=base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts),validate=True)
+          assert len(raw)==17932 and sha(raw)=='10fcbfe7d16f7cafa05fcbec7b3a247dfcdc9bddd604e9402514824ff8609165','Reviewed source recipe differs'
+          data=json.loads(lzma.decompress(raw))
+          assert data['schema']=='ulike-chroma179-reviewed-source-v1'
+          base=data['base']
+          assert base=={'version':'1.7.7','filename':'ULike_v1.7.7_sources_and_QA.zip','sha256':'a7a13bc6b83639aa580f7e1fd31c0f6bc019b51c86d8d22e4d9b7dec6c5ff65f'}
+          Path('bases').mkdir()
+          subprocess.run(['gh','release','download','ulike-v1.7.7','--pattern',base['filename'],'--dir','bases'],check=True)
+          p=Path('bases')/base['filename'];assert sha(p.read_bytes())==base['sha256']
+          with zipfile.ZipFile(p) as z:
+              assert len(z.namelist())==len(set(z.namelist())) and z.testzip() is None
+              files={n:z.read(source).decode('utf-8') for n,source in data['copy'].items()}
+          assert not set(files)&set(data['files'])
+          files.update(data['files'])
+          assert len(files)==51
+          assert sha(files['SOURCE_FILES.json'].encode())==data['manifest_sha256']=='a83571de3b7a4276bdbfd65dd9ccb1862ed9b472bfbea13403a1b456cf359c34'
+          manifest=json.loads(files['SOURCE_FILES.json'])
+          assert set(manifest)|{'SOURCE_FILES.json'}==set(files)
+          for n,h in manifest.items():assert sha(files[n].encode())==h,n
+          for n,text in files.items():
+              p=PurePosixPath(n)
+              assert not p.is_absolute() and '..' not in p.parts and p.suffix.lower() in {'.java','.py','.sh','.json','.txt','.md','.tsv'}
+              target=Path('src')/n;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text,encoding='utf-8')
+          print('PASS all 51 reviewed source/evidence files restored exactly; no original app, photos, or signing keys')
+          PY
+      - name: Fetch pinned current baseline and verified build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p src/input src/tools src/dist
+          gh release download ulike-v1.7.8 --pattern ULike_HQ_Texture_Online_v1.7.8.mpp --dir src/input
+          gh release download ulike-v1.7.8 --pattern Hiro_Morphe_Patches_v1.0.111.mpp --dir src/input
+          gh run download 36859837629 --name ulike-lens-focus-analysis-tools --dir toolchain
+          cp toolchain/tools/morphe-1.16.jar toolchain/tools/r8-8.3.37.jar toolchain/tools/asm-9.8.jar toolchain/tools/android.jar src/tools/
+      - name: Reproduce exactly both locally applied MPPs and rerun chroma regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/build179.py | tee src/dist/build179.txt
+          bash src/test179.sh | tee src/dist/host-tests179.txt
+          python3 src/finalize179.py
+          echo '5ba613dde698207cd1f96bb811cb83ff85ba731b479e102e2dceac9fb817b13a  src/dist/ULike_v1.7.9_sources_and_QA.zip' | sha256sum -c -
+      - name: Read-only publication preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish179.py --qa src/release_pipeline/LOCAL_QA.json --dist src/dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02 --preflight-only
+      - name: Publish verified files and CAS-update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 src/release_pipeline/publish179.py --qa src/release_pipeline/LOCAL_QA.json --dist src/dist --notes src/release_pipeline/RELEASE_NOTES.txt --release-body src/release_pipeline/README.md --summary src/release_pipeline/CHANGELOG_SUMMARY.txt --release-date 2026-10-02
+      - name: Show checkpoint on failure
+        if: failure()
+        shell: bash
+        run: |
+          if test -f src/dist/publication-state.json; then cat src/dist/publication-state.json; fi
+      - name: Retain exact artifacts and verification records
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-chroma-fix-v179-publication
+          path: src/dist/*
+          if-no-files-found: warn
+          retention-days: 7
