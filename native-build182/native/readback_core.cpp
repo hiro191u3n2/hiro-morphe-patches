@@ -2,6 +2,7 @@
 #include <math.h>
 #include <string.h>
 #include <stdint.h>
+#include <limits.h>
 
 namespace hiro_readback {
 namespace {
@@ -13,15 +14,15 @@ constexpr unsigned NORMALIZED=0x886a, BUFFER_BINDING=0x889f, POINTER=0x8645;
 constexpr unsigned INTEGER=0x88fd, DIVISOR=0x88fe, UTYPE=0x8a37, USIZE=0x8a38;
 struct Restore {
     const GL& gl; int original;
-    explicit Restore(const GL& g):gl(g),original(0){gl.integer(COPY_READ,&original);}
-    ~Restore(){gl.bindBuffer(COPY_READ,static_cast<unsigned>(original));}
+    explicit Restore(const GL& g):gl(g),original(-1){gl.integer(COPY_READ,&original);}
+    ~Restore(){if(original>=0)gl.bindBuffer(COPY_READ,static_cast<unsigned>(original));}
 };
 Status read(const GL& gl,unsigned buffer,uint64_t offset,uint64_t length,
             void (*consume)(const unsigned char*,void*),void* context){
     if(!buffer || !length || length>8u*1024u*1024u ||
        offset>static_cast<uint64_t>(PTRDIFF_MAX))return BUFFER_BOUNDS;
     gl.bindBuffer(COPY_READ,buffer);
-    int size=0,mapped=0;gl.bufferInteger(COPY_READ,BUFFER_SIZE,&size);
+    int size=-1,mapped=-1;gl.bufferInteger(COPY_READ,BUFFER_SIZE,&size);
     gl.bufferInteger(COPY_READ,MAPPED,&mapped);
     if(mapped)return BUFFER_MAPPED;
     if(size<0 || offset>static_cast<unsigned>(size) || length>static_cast<unsigned>(size)-offset)return BUFFER_BOUNDS;
@@ -44,16 +45,16 @@ void copyAttribute(const unsigned char* data,void* arg){
         memcpy(c.output+i*c.components+j,data+static_cast<size_t>(i)*c.stride+j*4,4);
 }
 Status attribute(const GL& gl,int location,unsigned components,Draw& d,float* output,unsigned& buffer){
-    int enabled=0,size=0,stride=0,type=0,normalized=0,integer=0,divisor=0,binding=0;
+    int enabled=-1,size=-1,stride=-1,type=-1,normalized=-1,integer=-1,divisor=-1,binding=-1;
     gl.attribInteger(location,ENABLED,&enabled);gl.attribInteger(location,SIZE,&size);
     gl.attribInteger(location,STRIDE,&stride);gl.attribInteger(location,TYPE,&type);
     gl.attribInteger(location,NORMALIZED,&normalized);gl.attribInteger(location,INTEGER,&integer);
     gl.attribInteger(location,DIVISOR,&divisor);gl.attribInteger(location,BUFFER_BINDING,&binding);
-    if(!enabled || size!=static_cast<int>(components) || type!=static_cast<int>(FLOAT) ||
+    if(enabled!=1 || size!=static_cast<int>(components) || type!=static_cast<int>(FLOAT) ||
        normalized || integer || divisor || binding<=0 || stride<0)return ATTRIBUTE_LAYOUT;
     if(stride==0)stride=static_cast<int>(components*4);
     if(stride<static_cast<int>(components*4) || stride>65536)return ATTRIBUTE_LAYOUT;
-    void* pointer=nullptr;gl.attribPointer(location,POINTER,&pointer);
+    void* pointer=reinterpret_cast<void*>(UINTPTR_MAX);gl.attribPointer(location,POINTER,&pointer);
     uint64_t base=reinterpret_cast<uintptr_t>(pointer);
     uint64_t delta=static_cast<uint64_t>(d.firstVertex)*static_cast<unsigned>(stride);
     if(base>UINT64_MAX-delta)return BUFFER_BOUNDS;
@@ -66,10 +67,11 @@ Status attribute(const GL& gl,int location,unsigned components,Draw& d,float* ou
 }
 Status uniform(const GL& gl,unsigned program,const char* name,unsigned expected,float* target,unsigned length){
     unsigned index=~0u;gl.uniformIndices(program,1,&name,&index);if(index==~0u)return UNIFORM_LAYOUT;
-    int type=0,size=0;gl.uniformProperties(program,1,&index,UTYPE,&type);
+    int type=-1,size=-1;gl.uniformProperties(program,1,&index,UTYPE,&type);
     gl.uniformProperties(program,1,&index,USIZE,&size);
     if(type!=static_cast<int>(expected)||size!=1)return UNIFORM_LAYOUT;
     int location=gl.uniformLocation(program,name);if(location<0)return UNIFORM_LAYOUT;
+    for(unsigned i=0;i<length;i++)target[i]=NAN;
     gl.uniformFloats(program,location,target);
     for(unsigned i=0;i<length;i++)if(!isfinite(target[i]))return NONFINITE;
     return OK;
@@ -85,7 +87,8 @@ Status capture(const GL& gl,unsigned mode,int count,unsigned type,const void* in
     int ebo=0;gl.integer(ELEMENT_BINDING,&ebo);if(ebo<=0)return INDEX_LAYOUT;
     d.program=program;d.mode=mode;d.count=count;d.indexType=type;d.indexBuffer=ebo;
     d.indexOffset=reinterpret_cast<uintptr_t>(indices);
-    Restore restore(gl);IndexCopy copy{&d,bytes};
+    Restore restore(gl);if(restore.original<0)return QUERY_FAILED;
+    IndexCopy copy{&d,bytes};
     Status s=read(gl,d.indexBuffer,d.indexOffset,static_cast<uint64_t>(count)*bytes,copyIndices,&copy);
     if(s!=OK)return s;
     unsigned minimum=~0u,maximum=0;
@@ -98,11 +101,14 @@ Status capture(const GL& gl,unsigned mode,int count,unsigned type,const void* in
     if((s=uniform(gl,d.program,"uMVPMatrix",MAT4,d.mvp,16))!=OK)return s;
     if((s=uniform(gl,d.program,"uSTMatrix",MAT4,d.st,16))!=OK)return s;
     if((s=uniform(gl,d.program,"intensity",FLOAT,&d.intensity,1))!=OK)return s;
+    for(unsigned i=0;i<4;i++)d.viewport[i]=INT_MIN;
     gl.integer(VIEWPORT,d.viewport);
+    for(unsigned i=0;i<4;i++)if(d.viewport[i]==INT_MIN)return QUERY_FAILED;
+    if(d.viewport[2]<0||d.viewport[3]<0)return QUERY_FAILED;
     return OK;
 }
 const char* statusName(Status s){
-    const char* names[]={"ok","not_matched","no_program","index_layout","attribute_layout","buffer_bounds","buffer_already_mapped","map_failed","unmap_failed","uniform_layout","nonfinite","budget"};
-    return s>=OK&&s<=BUDGET?names[s]:"unknown";
+    const char* names[]={"ok","not_matched","no_program","index_layout","attribute_layout","buffer_bounds","buffer_already_mapped","map_failed","unmap_failed","uniform_layout","nonfinite","budget","query_failed"};
+    return s>=OK&&s<=QUERY_FAILED?names[s]:"unknown";
 }
 }

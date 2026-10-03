@@ -8,7 +8,7 @@ namespace hiro_readback {
 constexpr unsigned MAX_VERTICES = 8192, MAX_INDICES = 65536;
 enum Status { OK=0, NOT_MATCHED=1, NO_PROGRAM=2, INDEX_LAYOUT=3,
     ATTRIBUTE_LAYOUT=4, BUFFER_BOUNDS=5, BUFFER_MAPPED=6, MAP_FAILED=7,
-    UNMAP_FAILED=8, UNIFORM_LAYOUT=9, NONFINITE=10, BUDGET=11 };
+    UNMAP_FAILED=8, UNIFORM_LAYOUT=9, NONFINITE=10, BUDGET=11, QUERY_FAILED=12 };
 struct GL {
     void (*integer)(unsigned,int*);
     int (*attribLocation)(unsigned,const char*);

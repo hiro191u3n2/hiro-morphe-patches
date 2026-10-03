@@ -32,3 +32,5 @@ jobs:
           bash native-build182/build_android.sh "$ANDROID_SDK_ROOT/ndk/27.2.12479018" /tmp/libhiro_draw_readback-repeat.so
           cmp /tmp/libhiro_draw_readback.so /tmp/libhiro_draw_readback-repeat.so
           python3 native-build182/commit_output.py
+
+# Final reviewed source: reject GL query no-write observations.
