@@ -41,7 +41,8 @@ jobs:
            names=[n for n in z.namelist() if n.endswith('/android.jar')];assert len(names)==1
            (tools/'android.jar').write_bytes(z.read(names[0]))
           android_sha=hashlib.sha256((tools/'android.jar').read_bytes()).hexdigest()
-          assert android_sha=='d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a',android_sha
+          # Official platform35_r02 differs from the unavailable previous SDK jar.
+          assert android_sha=='4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',android_sha
           file_hashes={str(p.relative_to(root)):{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in root.rglob('*') if p.is_file()}
           (root/'TOOL_RESTORATION187_QA.json').write_text(json.dumps({'result':'PASS_PINNED_PUBLIC_TOOL_AND_BASELINE_RECOVERY','jdk_archive_checksum_verified':True,'downloads':receipts,'files':file_hashes},indent=2)+'\n')
           transfer=Path('transfer187');transfer.mkdir();archive=Path('tools187.tar.gz')
