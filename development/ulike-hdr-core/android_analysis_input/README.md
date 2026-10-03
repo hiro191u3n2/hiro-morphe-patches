@@ -70,3 +70,17 @@ row rendering only, not Android Bitmap/native/model memory. Separate host checks
 exercise transfer/release/quarantine, failure/cancellation/alias handling,
 diagnostic consumption, and full-grid callback geometry. No Android device was
 run and native geometry, completion order and actual capacity remain unverified.
+
+Ownership cleanup correction (2026-10-03): `BoundOutcome` and the lower
+`Outcome` are now closeable. If the preview/composer restoration fails after
+a completed analysis, `PausedStockPreview` closes its undelivered outcome,
+wiping the full diagnostic raster. A restoration `Error` is handled with the
+same cleanup guarantees as an exception; original failure identity is preserved
+if cleanup also fails. The legacy input adapter now closes a diagnostic rejected
+by its provenance checks as well. Both adapters mark an outcome delivered only
+after its wrapper allocation succeeds. Native input quarantine rules are unchanged.
+
+The SDK callback also now wipes a newly owned raster if its observer rejects
+ownership, without modifying the borrowed SDK array. This fixes failure-path
+retention of a potentially 49,939,200-byte diagnostic; it does not turn
+full-resolution host checks into phone memory or native coordinate validation.

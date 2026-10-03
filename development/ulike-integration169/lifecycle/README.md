@@ -70,3 +70,18 @@ therefore cannot establish successful native initialization. The bounded
 `RESTORATION_BARRIER_FINDINGS.json` also references the three already verified
 app asynchronous restoration edges. Run with the existing caller-owned
 `models168/python_deps`; it does not execute native code or device callbacks.
+# Native initialization callback observer (checkpoint 182)
+
+`PrepareNativeInitCallback182.java` produces a separate, disabled private method
+delta for `RecordInvoker.onNativeCallback_Init(int)`. It observes the actual
+callback entry before application listeners run and reconstructs the complete
+original method when stripped. `validate_init_callback.sh` accepts the stock APK,
+baseline MPP, tool directory and private build directory; only
+`NATIVE_INIT_CALLBACK_EVIDENCE.json` is copied out as publishable evidence.
+
+The core callback receipt correlates receiver, native handle, initialization
+request, terminal return and one nonnegative callback status. It does not confirm
+completion of listeners, queued style setup, rendering or preview restoration.
+Because the callback carries no generation ID, reinitializing the same Java
+receiver remains ineligible until a native teardown and callback drain can be
+proved. Neither this delta nor the older composer/lifetime deltas are installed.

@@ -13,11 +13,13 @@ import java.util.Set;
  */
 public final class AndroidAnalysisInput {
     private AndroidAnalysisInput(){}
-    public static final class BoundOutcome {
+    public static final class BoundOutcome implements AutoCloseable {
         public final AnalysisInput.Descriptor input;
         public final StockStillAnalysis.Outcome observations;
         public final boolean submittedPixelsMatchCapturedRendition=true,nativeGeometryCalibrated=false;
         private BoundOutcome(AnalysisInput.Descriptor input,StockStillAnalysis.Outcome observations){this.input=input;this.observations=observations;}
+        /** Release the owned diagnostic if restoration or a later binding rejects this result. */
+        @Override public void close(){observations.close();}
     }
     public static BoundOutcome run(AnalysisInput.Owned input,StockStillFaceProbe.IdleSdkLease lease,
             File newWorkspace,long timeoutMillis,Set<String> expectedFeatures,boolean captureDiagnostic,
@@ -27,6 +29,7 @@ public final class AndroidAnalysisInput {
         StockStillAnalysis.Request request=new StockStillAnalysis.Request(descriptor.nonce,descriptor.sensorTimestampNs,
             descriptor.sourceSha256,descriptor.settingsSha256,expectedFeatures,captureDiagnostic);
         final Bitmap[] raster=new Bitmap[1];
+        StockStillAnalysis.Outcome result=null;boolean delivered=false;
         try {
             AnalysisInput.Submission submitted=input.transfer(new AnalysisInput.RowTarget(){
                 @Override public void begin(int w,int h){raster[0]=Bitmap.createBitmap(w,h,Bitmap.Config.ARGB_8888,false,ColorSpace.get(ColorSpace.Named.SRGB));}
@@ -35,7 +38,7 @@ public final class AndroidAnalysisInput {
                 @Override public void abort(){if(raster[0]!=null)raster[0].recycle();}
             });
             if(submitted.descriptor!=descriptor)throw new IllegalStateException("Analysis transfer identity changed");
-            StockStillAnalysis.Outcome result=StockStillAnalysis.run(lease,raster[0],newWorkspace,timeoutMillis,request,setup);
+            result=StockStillAnalysis.run(lease,raster[0],newWorkspace,timeoutMillis,request,setup);
             if(result==null || result.request!=request || !result.observationsComplete ||
                     !descriptor.proxySha256.equals(result.submittedProxySha256) || result.nativeEvidence==null ||
                     result.nativeEvidence.width!=descriptor.width || result.nativeEvidence.height!=descriptor.height ||
@@ -45,8 +48,11 @@ public final class AndroidAnalysisInput {
             if(captureDiagnostic && (result.renderedDiagnostic==null || result.renderedDiagnostic.nonce!=descriptor.nonce ||
                     result.renderedDiagnostic.width!=descriptor.width || result.renderedDiagnostic.height!=descriptor.height))
                 throw new IllegalStateException("Diagnostic raster belongs to a different submission/grid");
-            return new BoundOutcome(descriptor,result);
-        } finally {if(raster[0]!=null && !raster[0].isRecycled())raster[0].recycle();}
+            BoundOutcome bound=new BoundOutcome(descriptor,result);delivered=true;return bound;
+        } finally {
+            if(!delivered && result!=null)result.close();
+            if(raster[0]!=null && !raster[0].isRecycled())raster[0].recycle();
+        }
     }
     /** Native-size candidate: one Bitmap, moved through both lower layers, with no source int[P]. */
     public static BoundOutcome run(AnalysisInput.Streaming input,StockStillFaceProbe.IdleSdkLease lease,
@@ -76,9 +82,9 @@ public final class AndroidAnalysisInput {
             if(captureDiagnostic && (result.renderedDiagnostic==null || result.renderedDiagnostic.nonce!=descriptor.nonce ||
                     result.renderedDiagnostic.width!=descriptor.width || result.renderedDiagnostic.height!=descriptor.height))
                 throw new IllegalStateException("Diagnostic raster belongs to a different submission/grid");
-            delivered=true;return new BoundOutcome(descriptor,result);
+            BoundOutcome bound=new BoundOutcome(descriptor,result);delivered=true;return bound;
         } finally {
-            if(!delivered && result!=null && result.renderedDiagnostic!=null)result.renderedDiagnostic.close();
+            if(!delivered && result!=null)result.close();
             // close() releases only untransferred storage; the probe alone releases or quarantines its claim.
             if(moved!=null)moved.close();
             if(raster[0]!=null && !raster[0].isRecycled())raster[0].recycle();

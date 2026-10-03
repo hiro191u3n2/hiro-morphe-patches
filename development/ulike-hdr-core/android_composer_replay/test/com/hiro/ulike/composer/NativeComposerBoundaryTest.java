@@ -18,7 +18,7 @@ public final class NativeComposerBoundaryTest {
   String[] paths={"/one"};ComposerCommand c=ObservedComposerArguments.nodes(ComposerCommand.Kind.SET,paths,1,null,0,null);b.before(r,c);paths[0]="/mutated";bad(()->snap(b,r));b.returned(0);ok(snap(b,r).commands.get(0).paths()[0].equals("/one"));
   ComposerJournal.Snapshot old=snap(b,r);b.before(r,ComposerCommand.update("/one","x",.5f));b.returned(0);bad(old::requireCurrent);ok(snap(b,r).commands.size()==2);
   b.beforeUninit(r);r.handle=0;bad(()->snap(b,r));b.returned(-1);ok(b.invalidReason(r)!=null);bad(()->snap(b,r));
-  NativeComposerBoundary b2=boundary();Recorder r2=initialize(b2);b2.beforeUninit(r2);r2.handle=0;b2.returned(0);init(b2,r2);ok(snap(b2,r2).commands.isEmpty());
+  NativeComposerBoundary b2=boundary();Recorder r2=initialize(b2);b2.beforeUninit(r2);r2.handle=0;b2.returned(0);init(b2,r2);bad(()->snap(b2,r2));
   NativeComposerBoundary changed=boundary();Recorder cr=initialize(changed);cr.handle=99;bad(()->snap(changed,cr));ok(changed.invalidReason(cr)!=null);
   NativeComposerBoundary during=boundary();Recorder dr=initialize(during);during.before(dr,ComposerCommand.mode(1,0));dr.handle=19;during.returned(0);bad(()->snap(during,dr));
   NativeComposerBoundary failed=boundary();Recorder fr=initialize(failed);failed.before(fr,ComposerCommand.mode(1,0));failed.returned(-105);bad(()->snap(failed,fr));
@@ -44,7 +44,7 @@ public final class NativeComposerBoundaryTest {
   for(int n=0;n<=256;n++){String[] p=new String[n],k=new String[n];float[] v=new float[n];Arrays.fill(p,"/r");Arrays.fill(k,"x");ComposerCommand owned=ObservedComposerArguments.updates(n,p,k,v);if(n>0){p[0]="mutate";k[0]="mutate";v[0]=1;}ok(owned.paths().length==n);if(n>0)ok(owned.paths()[0].equals("/r")&&owned.keys()[0].equals("x")&&owned.values()[0]==0);}
   // Compile-time disabled hooks must be callable before any SDK object exists,
   // including malformed fields, unmatched exits and every typed entry point.
-  NativeComposerHooks.beforeInit(null,0,0,null,0,0,null,0,false,false,false);NativeComposerHooks.beforeUnsupportedInit(null,null);NativeComposerHooks.beforeUninit(null);
+  NativeComposerHooks.beforeInit(null,0,0,null,0,0,null,0,false,false,false);NativeComposerHooks.beforeUnsupportedInit(null,null);NativeComposerHooks.beforeUninit(null);NativeComposerHooks.initCallback(null,-1);
   NativeComposerHooks.beforeMode(null,0,0);NativeComposerHooks.beforeResource(null,null);NativeComposerHooks.beforeSet(null,null,-1);NativeComposerHooks.beforeAppend(null,null,-1);NativeComposerHooks.beforeRemove(null,null,-1);NativeComposerHooks.beforeReload(null,null,-1);NativeComposerHooks.beforeReplace(null,null,-1,null,-1);NativeComposerHooks.beforeUpdate(null,null,null,Float.NaN);NativeComposerHooks.beforeUpdates(null,-1,null,null,null);NativeComposerHooks.beforeEffectParams(null,null);NativeComposerHooks.returned(0);NativeComposerHooks.failed(null);ok(true);
   System.out.println("PASS "+checks+" native composer boundary/owned argument checks; live barriers unavailable");
  }

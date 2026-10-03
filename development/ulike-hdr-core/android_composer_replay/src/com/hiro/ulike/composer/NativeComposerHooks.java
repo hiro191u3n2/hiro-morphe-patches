@@ -14,6 +14,7 @@ public final class NativeComposerHooks {
     public static void beforeInit(Object r,int w,int h,String p,int a,int b,String q,int c,boolean x,boolean y,boolean z){if(ENABLED)BOUNDARY.beforeInit(r,w,h,p,a,b,q,c,x,y,z);}
     public static void beforeUnsupportedInit(Object r,Object settings){if(ENABLED)BOUNDARY.beforeUnsupportedInit(r);}
     public static void beforeUninit(Object r){if(ENABLED)BOUNDARY.beforeUninit(r);}
+    public static void initCallback(Object r,int status){if(ENABLED)BOUNDARY.initCallback(r,status);}
     public static void beforeMode(Object r,int a,int b){if(ENABLED)BOUNDARY.before(r,ComposerCommand.mode(a,b));}
     public static void beforeResource(Object r,String p){if(ENABLED)try{BOUNDARY.before(r,ComposerCommand.resource(p));}catch(IllegalArgumentException e){BOUNDARY.malformed(r,"invalid resource argument");}}
     public static void beforeSet(Object r,String[] p,int n){nodes(r,ComposerCommand.Kind.SET,p,n,null,0,null);}

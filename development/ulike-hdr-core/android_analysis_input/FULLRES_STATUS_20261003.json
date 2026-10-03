@@ -1,0 +1,135 @@
+{
+  "date": "2026-10-03",
+  "status": "SOFTWARE_NATIVE_GRID_ROUTE_VERIFIED_HOST_ONLY_NOT_COMPLETE_DEVICE_INTEGRATION",
+  "new_photo_route_enabled": false,
+  "published_patch_changed": false,
+  "candidate_pixels": 12484800,
+  "candidate_maximum_dimension": 4080,
+  "candidate_known_payload_bytes": 187288320,
+  "legacy_copy_route_limit_pixels": 4194304,
+  "candidate_streaming_route_4mp_guard": false,
+  "software_route_existing_before_this_turn": true,
+  "no_resizing": true,
+  "test_scope": {
+    "sdk36_compile": true,
+    "d8_compile": true,
+    "owned_submission_tests": 46,
+    "analysis_provenance_host_checks": 3353,
+    "stream_host_checks": 12491154,
+    "independent_nonuniform_fullgrid_review": true,
+    "independent_fullgrid_host_checks": 12488304,
+    "pause_restore_host_scenarios": 9,
+    "still_analysis_host_checks": 45,
+    "recorder_admission_host_checks": 29,
+    "native_lifetime_host_checks": 14,
+    "native_camera_execution": false,
+    "actual_android_bitmap_execution": false,
+    "phone_total_memory_measured": false,
+    "all_lenses_modes_tested": false
+  },
+  "fixes": [
+    "BoundOutcome and Outcome now forward AutoCloseable diagnostic ownership.",
+    "Completed but undelivered full-resolution analysis is wiped if preview or composer restoration fails.",
+    "Restoration Error and cleanup failures preserve original exception identity without self-suppression.",
+    "Input adapters retain ownership until wrapper allocation succeeds and close rejected diagnostics.",
+    "Callback copy ownership is transferred only on normal observer return; rejection wipes copied array, never SDK borrowed array."
+  ],
+  "remaining_blockers": [
+    "No phone/native/GL capacity measurement or callback coordinate calibration.",
+    "Global native lifecycle hooks and actual composer restoration barrier are not installed/validated in an enabled camera route.",
+    "No complete app PlanProvider and NativeBindingProvider implementing exact face/mask/style binding.",
+    "A host-accepted 4080x3060 raster does not establish native segmentation texture resolution.",
+    "No all-mode or all-lens phone execution; software admission is not camera capability evidence.",
+    "5712x4284 remains unsupported by this policy and unavailable in user-reported public native input formats."
+  ],
+  "changed_files": {
+    "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AndroidAnalysisInput.java": {
+      "bytes": 7200,
+      "sha256": "13c58548d374eb2ef0ed6ae731d2dceea6735a001bb7c6354ab33d1cf3b63fc5"
+    },
+    "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java": {
+      "bytes": 15408,
+      "sha256": "5680d69c3553fd8c63327911f8fc7151d94ae0f72f0819e5d521f26c19dd4657"
+    },
+    "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/PausedStockPreview.java": {
+      "bytes": 8303,
+      "sha256": "124497ca8034d589037a1e594f8de34d192758b52e30f4514bb30686f05108a9"
+    },
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java": {
+      "bytes": 1712,
+      "sha256": "42ab0c8fba050aab1e29c3c82678338894b31ef883627bc6dbb9280368bf0a30"
+    },
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": {
+      "bytes": 18957,
+      "sha256": "f69631aaa1d6b8c376461cfdcc29823f2e0925058516622b5e761e04d600c3fb"
+    },
+    "android_analysis_input/src/test/java/com/hiro/ulike/hdr/input/SubmissionOwnershipTest.java": {
+      "bytes": 8936,
+      "sha256": "4029dbcfa53e4c31c629fddf7d8504f5faa4d978b6ee3d066118451b9e36893d"
+    },
+    "android_still_analysis/verify_output_ownership.py": {
+      "bytes": 2401,
+      "sha256": "040213fe76ed93dce9b8f6d6cf157dd1b2f5ed9107f28f50d9ee6dfbac29f8ed"
+    },
+    "android_analysis_input/README.md": {
+      "bytes": 5714,
+      "sha256": "20dedf5276eec145db3329366576ab349c0ccdd50b319f38791cee50a995c208"
+    },
+    "android_analysis_input/FULL_RESOLUTION_ROUTE.md": {
+      "bytes": 6298,
+      "sha256": "cff9f4c42c07f64c53eb409fc11c3ab8195f9bfa991ec8aa8cb579882ef4f056"
+    },
+    "android_still_analysis/README.md": {
+      "bytes": 9807,
+      "sha256": "fc99c52466f693a7b855c3e118277372c69f082a6b8976a1709581f2742fc9c4"
+    },
+    "android_analysis_input/QA.json": {
+      "bytes": 6671,
+      "sha256": "6013d65779dac495f7b75dd5eda25b1db406443b8121bd2c1e3ccec48ad24932"
+    },
+    "android_analysis_input/review_fullres/INDEPENDENT_REVIEW.json": {
+      "bytes": 8259,
+      "sha256": "3bb5b446315d1230c34f79cc4ba1c61dca18144ff2587375c90655d21422cb9c"
+    },
+    "android_still_analysis/QA_OUTPUT_OWNERSHIP.json": {
+      "bytes": 3281,
+      "sha256": "55f603cab4536b27f2eea50b2502090abf9913064a6f866acfad77dcd2a493d2"
+    },
+    "android_still_analysis/ownership_host/android/content/Context.java": {
+      "bytes": 189,
+      "sha256": "508b14b3111ee1c6f6ff487922ec3baaeb6c696ef843ef09770406f94730bd78"
+    },
+    "android_still_analysis/ownership_host/android/os/Looper.java": {
+      "bytes": 255,
+      "sha256": "b6e263d936fc25fab69e657cc982389f0262369983b17e58d75b9a086b6af964"
+    },
+    "android_still_analysis/ownership_host/android/view/Surface.java": {
+      "bytes": 118,
+      "sha256": "e8b6ae39cf8e7ac80db1d02e5a4582a7b47594390574970f9ef93745f248e965"
+    },
+    "android_still_analysis/ownership_host/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": {
+      "bytes": 285,
+      "sha256": "831ed49f2e1acedc06e34196498091040fd5662580b78496fc6d0d0c456bca07"
+    },
+    "android_still_analysis/ownership_host/com/hiro/ulike/hdr/stillanalysis/PausedOutputOwnershipTest.java": {
+      "bytes": 4750,
+      "sha256": "33a4a7ee32306c616ccd4425168a0b83e73906548a8773a74efe411fcffffdbe"
+    },
+    "android_still_analysis/ownership_host/com/ss/android/medialib/RecordInvoker.java": {
+      "bytes": 221,
+      "sha256": "4610790248cdc26bff418c73fade07bad37fc8f6c964671ea5067d4f5f3a3866"
+    },
+    "android_still_analysis/ownership_host/com/ss/android/vesdk/TECameraVideoRecorder.java": {
+      "bytes": 812,
+      "sha256": "817b66534816789f12e7a0c6ed4a461fec2be3fae12f952b587273df95e8e747"
+    },
+    "android_still_analysis/ownership_host/com/ss/android/vesdk/VEListener.java": {
+      "bytes": 160,
+      "sha256": "b32c312d6630d179d033505d02c461c9dd3eb8b920da7d9208ea6936e8bea909"
+    },
+    "android_still_analysis/ownership_host/com/ss/android/vesdk/VERecorder.java": {
+      "bytes": 1194,
+      "sha256": "daf4a20affdb4a82bd7bacd8c644fe00de312e4e26184c32c6f9fc13d56a365f"
+    }
+  }
+}

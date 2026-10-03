@@ -83,3 +83,36 @@ was restored on the native render queue. `ReplayPlan.UNAVAILABLE` remains the
 production default, no `PlanProvider` is supplied, and no complete restoration
 receipt is synthesized. Live integration still requires a verified, shot-bound
 native setup/render acknowledgement and full relevant mutation coverage.
+
+## Initialization callback correlation checkpoint 182
+
+The disabled private observer now also records the exact
+`RecordInvoker.onNativeCallback_Init(int)` entry. A separate
+`initializationReceipt` requires a successful terminal return, one callback whose
+status follows the pinned Java wrapper's nonnegative success branch, the same
+receiver, the same nonzero native handle and the same initialization request.
+Callback arrival before the terminal return is supported once the handle has
+been assigned. Missing, duplicate, negative, unknown-owner or mismatched callbacks
+cannot produce this receipt. Teardown and uncertain mutations invalidate it.
+
+The callback has no generation argument. Receiver reuse is therefore rejected,
+including reuse after malformed or unsupported initialization; bounded tombstones
+prevent a delayed callback from being assigned to a later initialization. This
+is a conservative eligibility restriction until native teardown/join and callback
+drain have been verified. Request-only `snapshot()` semantics remain unchanged;
+an initialization receipt is an additional prerequisite, not a replacement for
+any source/target queue barrier.
+
+`PrepareNativeInitCallback182` inserts one entry observation before the original
+listener dispatch. Stripping this hook reconstructs every original instruction.
+The pinned original wrapper writes its native handle before invoking native init,
+and no direct DEX caller of the callback was found. Reflection and JNI execution
+are not verified by that static inventory. Both hook families remain disabled
+and uninstalled. The receipt explicitly reports listener completion, native queue
+completion and restoration as **unproved**.
+
+`verify_init_callback.py` runs existing replay/boundary tests and the new early,
+late, stale and concurrent callback protocol tests, plus SDK36/D8 compilation.
+The matching private DEX transform is produced by
+`lifecycle/validate_init_callback.sh`. `QA_INIT_CALLBACK.json` records this
+checkpoint; earlier `QA.json` is historical and does not bind the new source.

@@ -13,6 +13,7 @@ def main():
  env=os.environ.copy();env['ORT_DISABLE_TELEMETRY']='1';env['PYTHONPATH']=str(WORK/'models168/python_deps')+os.pathsep+str(WORK/'models168/emulation_deps')
  logs={}
  effect=WORK/'models168/inputs/stock/split_config.arm64_v8a/lib/arm64-v8a/libeffect.so'
+ logs['legacy_accessors']=run(['python3',ROOT/'verify_legacy_accessors.py','--effect',effect,'--output',ROOT/'LEGACY_ACCESSOR_EVIDENCE.json'],env)
  logs['legacy_opacity']=run(['python3',ROOT/'verify_legacy_opacity.py','--purity',a.purity,'--output',ROOT/'LEGACY_OPACITY_EVIDENCE.json'],env)
  logs['native_evidence']=run(['python3',ROOT/'verify_native.py','--effect',effect,'--output',ROOT/'EVIDENCE.json'],env)
  with tempfile.TemporaryDirectory(prefix='ulike-geometry-qa-') as t:

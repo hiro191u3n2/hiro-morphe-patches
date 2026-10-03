@@ -1,0 +1,60 @@
+{
+  "schema": "ulike-composer-init-callback-182-v1",
+  "status": "PASS_BOUNDED_HOST_SDK36_AND_PINNED_CALLBACK_TRANSFORM",
+  "host_tests": {
+    "ComposerReplayTest": "PASS 1137 composer replay checks",
+    "NativeComposerBoundaryTest": "PASS 568 native composer boundary/owned argument checks; live barriers unavailable",
+    "NativeInitCallbackTest": "PASS 270 init callback correlation checks; no native queue/restoration receipt"
+  },
+  "sdk36_compile": true,
+  "d8_min_api": 26,
+  "dex_bytes": 40916,
+  "source_sha256": {
+    "src/com/hiro/ulike/composer/ComposerCommand.java": "5ec13c5aa12697505221da85bb686c0d0153e927e03bec2fa845121e7058a05c",
+    "src/com/hiro/ulike/composer/ComposerJournal.java": "ea3e708835d1b7e5c1541b9583b2476a2c251ce6214ecc49051fdb8c0529bc98",
+    "src/com/hiro/ulike/composer/ExactResourceMap.java": "970553556b0d4778cf9653c7238bb46c3768840284152d960a9d802408f10eab",
+    "src/com/hiro/ulike/composer/NativeComposerBoundary.java": "2b96603850edd7ed43cae2c58ae53e3881071cb0bb758e00a777a3e68819105f",
+    "src/com/hiro/ulike/composer/NativeComposerHooks.java": "07b0a38bbb8f49afed6ffd0ae6cd26c20ac34700c9adb3b6c51aff089b45102d",
+    "src/com/hiro/ulike/composer/ObservedComposerArguments.java": "aa1b08b2e5898c6d5dbb7c3b6ff45be174b46b3d2caa826d885a6134b0723062",
+    "src/com/hiro/ulike/composer/RecordInvokerCommands.java": "1906c792b666205e17d73c2037800c56d3c71247a79f2802932883f45b695bfd",
+    "src/com/hiro/ulike/composer/ReplayPlan.java": "9d2690176ba2bb2c82682eacecaeb539edf823821438ed962c938ce84ac63a72",
+    "src/com/hiro/ulike/composer/V164ReplayAudit.java": "b2b6b0c959fce2efca3d1ea8215146e428745e3c87d4cda16c8b8304add58b01",
+    "test/com/hiro/ulike/composer/ComposerReplayTest.java": "29059099b72e5e30fa79cf4a6d21780911f44d9cf7cc14a370b292db917999e7",
+    "test/com/hiro/ulike/composer/NativeComposerBoundaryTest.java": "50c1d5cc3324f0b02aea00001a92346bbee1104a2d2282752a48b045b854d785",
+    "test/com/hiro/ulike/composer/NativeInitCallbackTest.java": "e3ff5186e4f7ff2f104203dc61fe00ba55f496a54b98385d58d507d29b5554e5",
+    "test/com/ss/android/medialib/RecordInvoker.java": "47921f58afb69a0989a61fa4d073db36df370352ab51a24841abfa17b2e80f58",
+    "test/com/ss/android/vesdk/VEEffectParams.java": "ed43fb493a04453b5e97b3a61ef9d719e6692d20251d437c073d1d6ab306b7b4",
+    "verify_init_callback.py": "e52a61d41345979d24ca6dd330659e55c459fe76b85aad66c4b0178872cd033f"
+  },
+  "callback_transform_sha256": "02e905544fbc94e0ff870b443c783de2a78b7357bd216131c2f545ddd782ff20",
+  "callback_evidence_sha256": "f856d08cfbfd70dc530c8e8ec513f2c93267ed378b857b0aad59412914b31bf5",
+  "callback_evidence": {
+    "schema": "ulike-native-init-callback-182-v1",
+    "callback_method_sha256": "9293eb56a7330b0d64008948b5710f0c088334878ed7a874d06667724883eff5",
+    "terminal_init_method_sha256": "8dc53066a33d64e75cd562ebbaae682d5831f482d020a5f011a8f898a897c95e",
+    "callback_access_flags": 2,
+    "original_callback_instructions": 29,
+    "direct_dex_callback_callers": 0,
+    "callback_java_success_branch": "status >= 0",
+    "handle_assigned_before_native_init": true,
+    "stripped_original_method_reconstruction": true,
+    "installed": false,
+    "device_execution": false,
+    "native_queue_barrier_proven": false,
+    "restoration_proven": false
+  },
+  "tools_sha256": {
+    "android_sdk36": "d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a",
+    "r8": "900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199"
+  },
+  "production_callback_hook_enabled": false,
+  "native_queue_barrier_implemented": false,
+  "complete_settings_restoration": false,
+  "device_execution": false,
+  "limitations": [
+    "Callback receipt proves an observed entry status and identity correlation only; listener and queued style work may remain pending.",
+    "Zero terminal return without a callback remains insufficient for initializationReceipt.",
+    "Receiver reuse is rejected because the pinned callback supplies no native generation ID; a verified prior native join could enable a future different policy.",
+    "Compiler and host protocol tests do not run JNI callbacks or Android camera/preview restoration."
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "ulike-native-binding-followup-20261003",
+  "status": "EXACT_BINDING_UNFINISHED_NO_RUNTIME_CHANGE",
+  "checked_effect_sha256": "d40af10b250b91cf8f30f4a265ac1d3b7b5b88a82bbf63da332c3f47a415d48e",
+  "validation": {
+    "complete_pinned_method_tables": "PASS: 24 FaceMakeupV2Feature and 29 FaceMakeupV2Filter methods, class pointers, name/wrapper relocations, null terminators",
+    "unsupported_inputs": "PASS: empty, truncated, one-byte-modified exact library all rejected",
+    "ramp_counterexample": "PASS: 2040x1530 ramps enlarged to 4080x3060 fit existing one-code validation tolerance",
+    "full_module_previous_suite_rerun": false,
+    "device_execution": false
+  },
+  "findings": [
+    "No readback getter for native opacity-array or mesh in those two complete direct method tables. This does not exclude all possible inherited or unknown native routes.",
+    "G1/D1 observers expose positions and topology but do not establish final active face-to-draw routing, transforms, source texture routing, or same-still completion.",
+    "Purity legacy attOpacity is a vertex attribute and cannot be replaced with its scalar slider/intensity. No grounded data producer is connected.",
+    "8-bit diagnostic mask transport cannot prove original mask precision or native-resolution sampling grid from UV ramps. Existing false production flags are correct."
+  ],
+  "production_changes": [],
+  "completion_blockers": [
+    "Same-still per-face native draw/material/source/matrix routing",
+    "Legacy per-vertex opacity or equivalent validated precision-preserving output",
+    "Native segmentation sampling grid and precision",
+    "Actual Android callbacks, synchronization, per-mode/all-lens/device visual verification"
+  ],
+  "source_sha256": {
+    "native_geometry_contract/verify_legacy_accessors.py": "bddf001c73c70c42ef24293b8218b27f875de552c335922ea5ccdb67140c7ba3",
+    "native_geometry_contract/LEGACY_ACCESSOR_EVIDENCE.json": "b055ff7f0fd577453f6ef471c92a2288ae1ed68e18793b77c8c7dd66bfe0dbe1",
+    "native_geometry_contract/run_checks.py": "e5b1ddaf4ec1f9159b59adce62c0d62a58d6b236ad3893adbdc7b138e78021c5",
+    "native_geometry_contract/SOURCE_ALLOWLIST.json": "1faf4c71c5d162197d00c323896144f8dd7f068f69acab56a8bda7ba4a24cdae",
+    "native_geometry_contract/README.md": "d8f40464e9e4c546be9867aeff5560af3595e888456d35df6421d0dfb865cacf",
+    "android_style_binding/README.md": "66d7672ba4cd1caaebab8b9682d526f13657828faf6bfce42029aef7530511d4",
+    "native_readback_contract/README.md": "1eabbf802bb3d085747960c11a28d3f186cef4fe2285c701a8c63b3398da1ab5",
+    "native_readback_contract/RAMP_PRECISION_LIMIT.json": "3ce559d05a7dfead52f854f2f8389bbff8d1f2eca1ea3aa979c66711b95e9ef2"
+  },
+  "public_original_assets_added": false,
+  "publish_new_mpp": false
+}

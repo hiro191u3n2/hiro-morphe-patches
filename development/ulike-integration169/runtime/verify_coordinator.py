@@ -35,7 +35,18 @@ def production_sources():
         if "native_geometry_contract" in path.parts:
             continue
         sources.append(path)
-    return sorted(sources + list((HERE / "src").rglob("*.java")))
+    # The separately published 1.8.1 trial classes link to the released
+    # ModelLookup/ModelFiles helpers. They are not part of this disabled HDR
+    # coordinator closure; their own verifier compiles against that baseline.
+    trial_sources = {
+        "com/hiro/ulike/TrialModelAccess181.java",
+        "com/hiro/ulike/trial181/TrialDiagnostics181.java",
+        "com/hiro/ulike/trial181/TrialNativeInputs181.java",
+        "com/hiro/ulike/trial181/TrialTensorCheck181.java",
+    }
+    app_sources = [path for path in (HERE / "src").rglob("*.java")
+                   if path.relative_to(HERE / "src").as_posix() not in trial_sources]
+    return sorted(sources + app_sources)
 
 
 def main():
@@ -51,7 +62,7 @@ def main():
             host[cls] = run([JDK / "java", "-cp", root / "host", cls])
         sources = production_sources()
         before = {str(path.relative_to(WORK)): sha(path) for path in sources}
-        ort = APP / "runtime_payload/onnxruntime-android-1.30.0-classes.jar"
+        ort = TOOLS / "onnxruntime-android-1.30.0-classes.jar"
         assert sha(ort) == "65e2e2d76d672253aaf0792a06c71cc40d09b0e2e251ccf925bee7175b91a1b0"
         optical_stub = APP / "compile_stubs/com/hiro/ulike/OpticalZoom.java"
         run([JDK / "javac", "--release", "8", "-cp", TOOLS / "android.jar", "-d", root / "stub", optical_stub])

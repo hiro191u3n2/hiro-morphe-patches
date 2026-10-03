@@ -175,7 +175,7 @@ public final class StockStillFaceProbe {
                                 throw new IllegalArgumentException("Unexpected callback grid");
                             if(originalPixels[0]!=null)ledger.orientationEvidence(PixelOrientationEvidence.measure(
                                 originalPixels[0],width,height,pixels,rw,rh,capacity));
-                            if(observer.observesImage())observer.image(OwnedRenderPixels.copy(pixels,rw,rh,width,height,capacity),width,height);
+                            if(observer.observesImage())OwnedRenderPixels.copyAndDeliver(pixels,rw,rh,width,height,capacity,observer::image);
                             ledger.rendered(rw,rh,pixels.length); // Completion only after synchronous ownership conversion.
                         } catch(Exception|Error e) { ledger.fail("Diagnostic callback rejected: "+e.getClass().getSimpleName()); }
                     } else if (name.equals("onResult")) ledger.status((Integer)values[0], (Integer)values[1]);

@@ -209,7 +209,7 @@ public final class StockStillAnalysis {
             if(pixels!=null){java.util.Arrays.fill(pixels,0);pixels=null;}
         }
     }
-    public static final class Outcome {
+    public static final class Outcome implements AutoCloseable {
         public final Request request;
         public final String submittedProxySha256;
         public final ProbeLedger.Snapshot nativeEvidence;
@@ -224,5 +224,6 @@ public final class StockStillAnalysis {
             request=r;submittedProxySha256=sha;nativeEvidence=evidence;this.faces=faces;scriptExports=messages;this.renderedDiagnostic=renderedDiagnostic;
             observationsComplete=evidence.callbacksObserved && faces!=null && messages.allExpectedExportsObserved && (!r.captureRenderedDiagnostic || renderedDiagnostic!=null);
         }
+        @Override public void close(){if(renderedDiagnostic!=null)renderedDiagnostic.close();}
     }
 }

@@ -14,6 +14,9 @@ public final class NativeComposerBoundary {
     private final HandlerReader handles;
     private final IdentityHashMap<Object,ComposerJournal> journals=new IdentityHashMap<>();
     private final IdentityHashMap<Object,Long> nativeHandles=new IdentityHashMap<>();
+    // Tombstones deliberately survive teardown: the callback contains no generation ID.
+    // Reusing one Java receiver could otherwise attribute an old native callback to a new init.
+    private final IdentityHashMap<Object,Initialization> initializations=new IdentityHashMap<>();
     private final ThreadLocal<ArrayDeque<Call>> calls=new ThreadLocal<ArrayDeque<Call>>() {
         @Override protected ArrayDeque<Call> initialValue(){return new ArrayDeque<>();}
     };
@@ -21,9 +24,14 @@ public final class NativeComposerBoundary {
     /** Hook must execute before the pinned terminal native allocation wrapper. */
     public synchronized void beforeInit(Object recorder,int width,int height,String workspace,int one,int two,String resource,int three,boolean a,boolean b,boolean c) {
         if(recorder==null)throw new NullPointerException();
+        if(initializations.containsKey(recorder)) {
+            ComposerJournal old=lookup(recorder);old.unrecordedMutation("receiver reused without callback generation identity");
+            initializations.get(recorder).invalid=true;push(new Call(recorder,old,null,2));return;
+        }
         if(journals.containsKey(recorder)){journals.get(recorder).unrecordedMutation("repeated init");push(new Call(recorder,journals.get(recorder),null,2));return;}
-        if(journals.size()>=MAX_RECORDERS)throw new IllegalStateException("observation recorder budget exhausted");
+        if(journals.size()>=MAX_RECORDERS || initializations.size()>=MAX_RECORDERS)throw new IllegalStateException("observation recorder budget exhausted");
         ComposerJournal j=new ComposerJournal(recorder);journals.put(recorder,j);Call call=new Call(recorder,j,null,0);push(call);
+        Initialization initialization=new Initialization(recorder,j);initializations.put(recorder,initialization);
         try {
             ComposerCommand.text(workspace);ComposerCommand.text(resource);
             if(handles.read(recorder)!=0)throw new IllegalStateException("late observation of live handle");
@@ -32,13 +40,18 @@ public final class NativeComposerBoundary {
             // Version identity and native-library checks remain external proof requirements.
             out.writeInt(width);out.writeInt(height);ComposerCommand.string(out,workspace);out.writeInt(one);out.writeInt(two);
             ComposerCommand.string(out,resource);out.writeInt(three);out.writeBoolean(a);out.writeBoolean(b);out.writeBoolean(c);out.flush();
-            j.beforeNativeInit(ComposerJournal.hex(MessageDigest.getInstance("SHA-256").digest(bytes.toByteArray())));
-        }catch(Exception failure){j.unrecordedMutation("initialization arguments/handle could not be observed");call.kind=2;}
+            String fingerprint=ComposerJournal.hex(MessageDigest.getInstance("SHA-256").digest(bytes.toByteArray()));
+            j.beforeNativeInit(fingerprint);initialization.fingerprint=fingerprint;
+        }catch(Exception failure){initialization.invalid=true;j.unrecordedMutation("initialization arguments/handle could not be observed");call.kind=2;}
     }
     /** Unknown initialization is rejected, never treated as the normal profile. */
     public synchronized void beforeUnsupportedInit(Object recorder) {
+        if(recorder==null)throw new NullPointerException();
         ComposerJournal j=journals.get(recorder);
         if(j==null){if(journals.size()>=MAX_RECORDERS)throw new IllegalStateException("observation recorder budget exhausted");j=new ComposerJournal(recorder);journals.put(recorder,j);}
+        Initialization init=initializations.get(recorder);
+        if(init==null){if(initializations.size()>=MAX_RECORDERS)throw new IllegalStateException("observation recorder budget exhausted");init=new Initialization(recorder,j);initializations.put(recorder,init);}
+        init.invalid=true;
         j.unrecordedMutation("unsupported initialization profile");push(new Call(recorder,j,null,2));
     }
     public synchronized void before(Object recorder,ComposerCommand command) {
@@ -51,12 +64,22 @@ public final class NativeComposerBoundary {
         ComposerJournal j=lookup(recorder);j.unrecordedMutation(reason);push(new Call(recorder,j,null,2));
     }
     public synchronized void beforeUninit(Object recorder) {
-        ComposerJournal j=lookup(recorder);j.disposed();push(new Call(recorder,j,null,3));
+        ComposerJournal j=lookup(recorder);j.disposed();Initialization init=initializations.get(recorder);if(init!=null)init.invalid=true;
+        push(new Call(recorder,j,null,3));
     }
     public synchronized void returned(int code) {
         Call call=pop();
         if(call.kind==0) {
-            try {long handle=handles.read(call.recorder);call.journal.nativeInitResult(code,handle);if(code==0 && handle!=0)nativeHandles.put(call.recorder,handle);}
+            try {
+                long handle=handles.read(call.recorder);call.journal.nativeInitResult(code,handle);
+                Initialization init=initializations.get(call.recorder);
+                if(init==null)throw new IllegalStateException("initialization record absent");
+                init.returned=true;init.returnCode=code;init.returnHandle=handle;
+                if(code!=0 || handle==0 || (init.callbackSeen && init.callbackHandle!=handle)) {
+                    init.invalid=true;call.journal.unrecordedMutation("native init return/callback identity mismatch");
+                }
+                if(code==0 && handle!=0)nativeHandles.put(call.recorder,handle);
+            }
             catch(Exception failure){call.journal.unrecordedMutation("native init completion not observed");}
         } else if(call.kind==1){checkHandle(call.recorder,call.journal);call.journal.result(call.ticket,code);}
         else if(call.kind==3 && code==0){journals.remove(call.recorder);nativeHandles.remove(call.recorder);}
@@ -65,6 +88,48 @@ public final class NativeComposerBoundary {
         Call call=pop();
         if(call.recorder!=recorder){call.journal.unrecordedMutation("exception receiver mismatch");ComposerJournal j=journals.get(recorder);if(j!=null)j.unrecordedMutation("exception receiver mismatch");return;}
         call.journal.threw(call.ticket);
+        if(call.kind==0){Initialization init=initializations.get(recorder);if(init!=null)init.invalid=true;}
+    }
+    /** Entry of the exact pinned onNativeCallback_Init(int) method, before listeners run.
+     * Observes actual callback status, never the unreliable mIsRenderReady flag.
+     * Does not claim listener completion, composer queue completion or restored rendering. */
+    public synchronized void initCallback(Object recorder,int status) {
+        ComposerJournal journal=lookup(recorder);Initialization init=initializations.get(recorder);
+        if(init==null){journal.unrecordedMutation("init callback has no observed initialization");return;}
+        if(init.invalid || init.callbackSeen){init.invalid=true;journal.unrecordedMutation("duplicate/stale init callback");return;}
+        init.callbackSeen=true;init.callbackStatus=status;
+        try {
+            init.callbackHandle=handles.read(recorder);
+            if(status<0 || init.callbackHandle==0 || (init.returned && init.returnHandle!=init.callbackHandle)) {
+                init.invalid=true;journal.unrecordedMutation("native init callback failed or handle mismatch");
+            }
+        }catch(Exception error){init.invalid=true;journal.unrecordedMutation("native init callback handle not observed");}
+    }
+    /** Separate evidence prerequisite for a future replay provider. Request snapshots alone
+     * remain request-only; neither this receipt nor a positive status is a setup barrier. */
+    public synchronized InitializationReceipt initializationReceipt(Object recorder) {
+        Initialization init=initializations.get(recorder);requireInitialization(init);return new InitializationReceipt(this,init);
+    }
+    private void requireInitialization(Initialization init) {
+        ComposerJournal.require(init!=null && initializations.get(init.recorder)==init && !init.invalid
+                && init.returned && init.returnCode==0 && init.callbackSeen && init.callbackStatus>=0
+                && init.returnHandle!=0 && init.callbackHandle==init.returnHandle,"initialization callback evidence incomplete");
+        checkHandle(init.recorder,init.journal);
+        ComposerJournal.require(journals.get(init.recorder)==init.journal && init.journal.invalidReason()==null,
+                "initialization evidence became stale");
+    }
+    public static final class InitializationReceipt {
+        public final Object recorderIdentity;
+        public final long nativeHandler;
+        public final int callbackStatus;
+        public final String initConfigurationSha256;
+        public final boolean nativeQueueBarrierProven=false,listenerCompletionProven=false,restorationProven=false;
+        private final NativeComposerBoundary owner;private final Initialization initialization;
+        private InitializationReceipt(NativeComposerBoundary owner,Initialization init) {
+            this.owner=owner;initialization=init;recorderIdentity=init.recorder;nativeHandler=init.returnHandle;
+            callbackStatus=init.callbackStatus;initConfigurationSha256=init.fingerprint;
+        }
+        public void requireCurrent(){synchronized(owner){owner.requireInitialization(initialization);}}
     }
     public synchronized ComposerJournal.Snapshot snapshot(Object recorder,Object shot,long epoch,String style) {
         // No implication that native init callbacks or queued style work completed.
@@ -87,4 +152,9 @@ public final class NativeComposerBoundary {
     private void push(Call call){ArrayDeque<Call> stack=calls.get();if(stack.size()>=MAX_DEPTH){call.journal.unrecordedMutation("nested hook budget exceeded");throw new IllegalStateException("nested hook budget exhausted");}stack.push(call);}
     private Call pop(){ArrayDeque<Call> stack=calls.get();if(stack.isEmpty())throw new IllegalStateException("unmatched hook completion");Call c=stack.pop();if(stack.isEmpty())calls.remove();return c;}
     private static final class Call { final Object recorder;final ComposerJournal journal;final ComposerJournal.Ticket ticket;int kind;Call(Object r,ComposerJournal j,ComposerJournal.Ticket t,int kind){recorder=r;journal=j;ticket=t;this.kind=kind;} }
+    private static final class Initialization {
+        final Object recorder;final ComposerJournal journal;String fingerprint;
+        boolean returned,callbackSeen,invalid;int returnCode,callbackStatus;long returnHandle,callbackHandle;
+        Initialization(Object recorder,ComposerJournal journal){this.recorder=recorder;this.journal=journal;}
+    }
 }

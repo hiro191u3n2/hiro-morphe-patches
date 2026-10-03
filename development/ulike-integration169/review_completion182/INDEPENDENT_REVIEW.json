@@ -1,0 +1,112 @@
+{
+  "schema": "ulike-completion182-independent-review-1",
+  "result": "PASS_DEVELOPMENT_FIXES_ONLY",
+  "complete_release_allowed": false,
+  "published_trial181_changed": false,
+  "device_execution": false,
+  "reviewed_production_sha256": {
+    "android_analysis_input/src/main/java/com/hiro/ulike/hdr/analysisinput/AndroidAnalysisInput.java": "13c58548d374eb2ef0ed6ae731d2dceea6735a001bb7c6354ab33d1cf3b63fc5",
+    "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/StockStillAnalysis.java": "5680d69c3553fd8c63327911f8fc7151d94ae0f72f0819e5d521f26c19dd4657",
+    "android_still_analysis/src/main/java/com/hiro/ulike/hdr/stillanalysis/PausedStockPreview.java": "124497ca8034d589037a1e594f8de34d192758b52e30f4514bb30686f05108a9",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/OwnedRenderPixels.java": "42ab0c8fba050aab1e29c3c82678338894b31ef883627bc6dbb9280368bf0a30",
+    "android_face_backend/src/main/java/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "f69631aaa1d6b8c376461cfdcc29823f2e0925058516622b5e761e04d600c3fb",
+    "android_composer_replay/src/com/hiro/ulike/composer/NativeComposerBoundary.java": "2b96603850edd7ed43cae2c58ae53e3881071cb0bb758e00a777a3e68819105f",
+    "android_composer_replay/src/com/hiro/ulike/composer/NativeComposerHooks.java": "07b0a38bbb8f49afed6ffd0ae6cd26c20ac34700c9adb3b6c51aff089b45102d",
+    "android_composer_replay/src/com/hiro/ulike/composer/ReplayPlan.java": "9d2690176ba2bb2c82682eacecaeb539edf823821438ed962c938ce84ac63a72"
+  },
+  "reviewed_transform_sha256": {
+    "PrepareNativeInitCallback182.java": "02e905544fbc94e0ff870b443c783de2a78b7357bd216131c2f545ddd782ff20"
+  },
+  "reviewed_disabled_gate_sha256": "c96835534710ffadc67b7063e45db18af8b28c1558dd989ab7369ecc7f1bd9c4",
+  "bounded_independent_tests": {
+    "pause_restore_owned_result": {
+      "checks": 26,
+      "scenarios": [
+        "caller retains success ownership",
+        "restore failure with cleanup Error",
+        "restore and cleanup throw same Throwable",
+        "cleanup InterruptedException preserves interrupted flag",
+        "private native still active prevents restart and closes undelivered output"
+      ],
+      "production_executed": [
+        "PausedStockPreview",
+        "RecorderAdmission"
+      ],
+      "collaborators": "Author host-only SDK lifecycle fixtures, no Android or native execution"
+    },
+    "callback_owned_clone": {
+      "checks": 11,
+      "production_executed": [
+        "OwnedRenderPixels",
+        "AnalysisCapacity"
+      ],
+      "assertions": [
+        "Receiver IOException and OutOfMemoryError preserve exact failure identity",
+        "Only rejected owned clone is wiped",
+        "Borrowed SDK array remains unchanged",
+        "Successful normal callback transfers clone ownership",
+        "Invalid grid never reaches receiver"
+      ]
+    },
+    "native_initialization_receipt": {
+      "checks": 20,
+      "production_executed": [
+        "NativeComposerBoundary",
+        "ComposerJournal",
+        "ComposerCommand"
+      ],
+      "assertions": [
+        "Entry-only, return-only and callback-only evidence rejected",
+        "Actual callback may precede wrapper return if assigned handle matches",
+        "Separate callback thread correlates to exact Java receiver",
+        "Wrong receiver, negative status, zero/mismatched handle rejected",
+        "Duplicate callback invalidates already-issued receipt",
+        "Receiver reuse and stale/unobserved/unsupported init rejected",
+        "Live handle changes and unrecorded mutations invalidate receipt",
+        "Queue/listener completion/restoration flags remain false"
+      ]
+    },
+    "private_dex_callback": {
+      "pinned_base_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+      "only_one_private_method_changed": true,
+      "receiver_and_status_registers": [
+        4,
+        5
+      ],
+      "removing_exact_entry_call_restores_original_method_hash": true,
+      "original_callback_instructions": 29,
+      "callback_java_branch": "status >= 0",
+      "handle_assignment_before_native_init": true,
+      "native_success_semantics_beyond_Java_branch_inferred": false
+    }
+  },
+  "author_reports_verified_by_hash": {
+    "android_analysis_input/FULLRES_STATUS_20261003.json": "96f8e3ba98abe393842a4df9e2a493de940a551a91018908a513454e7c22d45b",
+    "android_analysis_input/QA.json": "6013d65779dac495f7b75dd5eda25b1db406443b8121bd2c1e3ccec48ad24932",
+    "android_analysis_input/review_fullres/INDEPENDENT_REVIEW.json": "3bb5b446315d1230c34f79cc4ba1c61dca18144ff2587375c90655d21422cb9c",
+    "android_still_analysis/QA_OUTPUT_OWNERSHIP.json": "55f603cab4536b27f2eea50b2502090abf9913064a6f866acfad77dcd2a493d2",
+    "android_composer_replay/QA_INIT_CALLBACK.json": "fa1eced2cfe7a2e8df0ff346d6c8605b5a0584513622eb37a17264d8630e0771"
+  },
+  "native_callback_evidence": {
+    "schema": "ulike-native-init-callback-182-v1",
+    "callback_method_sha256": "9293eb56a7330b0d64008948b5710f0c088334878ed7a874d06667724883eff5",
+    "terminal_init_method_sha256": "8dc53066a33d64e75cd562ebbaae682d5831f482d020a5f011a8f898a897c95e",
+    "callback_access_flags": 2,
+    "original_callback_instructions": 29,
+    "direct_dex_callback_callers": 0,
+    "callback_java_success_branch": "status >= 0",
+    "handle_assigned_before_native_init": true,
+    "stripped_original_method_reconstruction": true,
+    "installed": false,
+    "device_execution": false,
+    "native_queue_barrier_proven": false,
+    "restoration_proven": false
+  },
+  "remaining_release_blockers": [
+    "No actual phone/native lifecycle, 10-bit capture, full memory and all-lens/all-mode tests.",
+    "Exact same-shot native face/mask/material bindings remain missing.",
+    "Initialization callback receipt is not proof of queued composer completion or restored rendering.",
+    "NativeComposerHooks remains disabled and ReplayPlan.UNAVAILABLE still rejects completion.",
+    "CandidateGate169 remains false; no complete production camera/HDR/save provider is enabled."
+  ]
+}

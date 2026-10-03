@@ -80,6 +80,18 @@ return null. This is a concrete future read-only investigation route; this
 checkpoint never forces `setUseAmazing`, casts the result to an unverified
 userdata type, or invents per-vertex opacity. Legacy V2 opacity remains unknown.
 
+The 2026-10-03 follow-up `verify_legacy_accessors.py` checks the complete
+null-terminated direct Lua method tables, their class pointers and every name /
+wrapper relocation in the pinned library. `FaceMakeupV2Feature` has 24 methods
+and `FaceMakeupV2Filter` has 29. Neither table exposes an opacity-array or mesh
+readback getter. `setOpacity` and `setIntensityOpacity` are setters; `getUniform`
+does not turn the shader's vertex attribute `attOpacity` into a uniform. This
+is a bounded negative result for those tables, not a claim that every native
+route is impossible. `LEGACY_ACCESSOR_EVIDENCE.json` records the actual method
+inventory and exact remaining completion blockers. There is still no
+frame-correlated producer for this renderer input, so adding another
+caller-supplied opacity interface would not finish the user's requirement.
+
 ## Validation
 
 Run `python3 native_geometry_contract/run_checks.py` from any directory, or

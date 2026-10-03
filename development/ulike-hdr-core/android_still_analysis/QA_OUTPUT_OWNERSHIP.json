@@ -1,0 +1,80 @@
+{
+  "status": "PASS_HOST_PAUSE_RESTORE_UNDELIVERED_RESULT_OWNERSHIP",
+  "scenarios": [
+    {
+      "scenario": "success",
+      "checks": 6,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "work-exception",
+      "checks": 5,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "work-error",
+      "checks": 5,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-exception",
+      "checks": 12484807,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-error",
+      "checks": 12484807,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-interrupt",
+      "checks": 12484807,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-close-exception",
+      "checks": 12484808,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-close-error",
+      "checks": 12484808,
+      "result_pixels": 12484800,
+      "device_execution": false
+    },
+    {
+      "scenario": "restore-same-failure",
+      "checks": 12484807,
+      "result_pixels": 12484800,
+      "device_execution": false
+    }
+  ],
+  "source_sha256": {
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/PausedStockPreview.java": "124497ca8034d589037a1e594f8de34d192758b52e30f4514bb30686f05108a9",
+    "src/main/java/com/hiro/ulike/hdr/stillanalysis/RecorderAdmission.java": "2084629b69a6af97b9cc25a6fedc56990c12cdce1f48e4753769e69bda863a14",
+    "ownership_host/android/content/Context.java": "508b14b3111ee1c6f6ff487922ec3baaeb6c696ef843ef09770406f94730bd78",
+    "ownership_host/android/os/Looper.java": "b6e263d936fc25fab69e657cc982389f0262369983b17e58d75b9a086b6af964",
+    "ownership_host/android/view/Surface.java": "e8b6ae39cf8e7ac80db1d02e5a4582a7b47594390574970f9ef93745f248e965",
+    "ownership_host/com/hiro/ulike/hdr/faceprobe/StockStillFaceProbe.java": "831ed49f2e1acedc06e34196498091040fd5662580b78496fc6d0d0c456bca07",
+    "ownership_host/com/hiro/ulike/hdr/stillanalysis/PausedOutputOwnershipTest.java": "33a4a7ee32306c616ccd4425168a0b83e73906548a8773a74efe411fcffffdbe",
+    "ownership_host/com/ss/android/medialib/RecordInvoker.java": "4610790248cdc26bff418c73fade07bad37fc8f6c964671ea5067d4f5f3a3866",
+    "ownership_host/com/ss/android/vesdk/TECameraVideoRecorder.java": "817b66534816789f12e7a0c6ed4a461fec2be3fae12f952b587273df95e8e747",
+    "ownership_host/com/ss/android/vesdk/VEListener.java": "b32c312d6630d179d033505d02c461c9dd3eb8b920da7d9208ea6936e8bea909",
+    "ownership_host/com/ss/android/vesdk/VERecorder.java": "daf4a20affdb4a82bd7bacd8c644fe00de312e4e26184c32c6f9fc13d56a365f",
+    "verify_output_ownership.py": "040213fe76ed93dce9b8f6d6cf157dd1b2f5ed9107f28f50d9ee6dfbac29f8ed"
+  },
+  "actual_android_bitmap_execution": false,
+  "actual_native_sdk_execution": false,
+  "application_lifecycle_hook_coverage_verified": false,
+  "limitations": [
+    "SDK lifecycle callbacks are host fixtures, not measured vendor callbacks.",
+    "An 80MiB host Java heap for the output fixture does not establish phone total memory capacity."
+  ]
+}

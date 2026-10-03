@@ -89,8 +89,11 @@ The SDK backend's explicitly enabled `renderedDiagnostic` callback supplies its
 owned raw packed `int[]`, dimensions and request nonce. `DiagnosticSkinMask`
 requires an explicitly declared byte-channel interpretation, row origin and
 horizontal mirror. It checks alpha and the entire G/B pixel-center UV grid
-within one 8-bit code. A transfer, rotation, scaling or packing mismatch rejects;
-there is no inferred gamma repair. It retains only R and returns same-frame
+within one 8-bit code. An observed mismatch rejects; there is no inferred gamma
+repair. Passing these quantized ramps does not prove native-resolution output:
+an enlarged lower-resolution ramp can remain within the one-code tolerance.
+Dimensions and ramp agreement cannot establish the original mask's sampling
+grid, source ownership or precision. It retains only R and returns same-frame
 mask tiles in the declared top-left raster. This checks transport interpretation;
 it cannot prove R came from the expected native mask or settle global graph
 ordering. Source identity, callback ownership, actual device channel packing

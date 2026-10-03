@@ -15,6 +15,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public final class PausedStockPreview {
     private PausedStockPreview() {}
+    /** AutoCloseable results are owned here until preview/composer restoration succeeds.
+     * On failure they are closed rather than silently dropping full-image storage. */
     public interface Work<T> { T run(StockStillFaceProbe.IdleSdkLease lease)throws Exception; }
     public interface RestoreVerification {
         /** Confirm actual original native-init success, app's normal composer
@@ -36,7 +38,7 @@ public final class PausedStockPreview {
         if(status(expectedBackend)!=2 || handle(nativeInvoker)==0)throw new IllegalStateException("Require original live preview, not recording");
         RecorderAdmission.Session session=RecorderAdmission.acquire(originalRecorder,nativeInvoker);
         boolean released=false,analysisEntered=false,restorationComplete=false,interrupted=false;
-        Exception primary=null;T output=null;
+        Throwable primary=null;T output=null;
         try {
             Completion stopped=new Completion(context.getClassLoader());
             invoke(originalRecorder,"stopPreviewAsync",new Class<?>[]{stopped.type},stopped.listener);
@@ -56,7 +58,7 @@ public final class PausedStockPreview {
                 }
             };
             output=work.run(lease);
-        } catch(Exception e) { primary=e;interrupted=e instanceof InterruptedException; }
+        } catch(Exception|Error e) { primary=e;interrupted=e instanceof InterruptedException; }
         finally {
             // Never overlap a still worker that did not join with a restarted
             // original recorder. The admission ledger refuses restoration then.
@@ -70,12 +72,17 @@ public final class PausedStockPreview {
                     if(status(expectedBackend)!=2 || handle(nativeInvoker)==0)throw new IllegalStateException("Preview restart state/handle mismatch");
                     restored.requireRestored(originalRecorder,timeoutMillis);
                     RecorderAdmission.complete(session);restorationComplete=true;
-                }catch(Exception e){interrupted|=e instanceof InterruptedException;if(primary==null)primary=e;else primary.addSuppressed(e);}
+                }catch(Exception|Error e){interrupted|=e instanceof InterruptedException;if(primary==null)primary=e;else if(primary!=e)primary.addSuppressed(e);}
             }
-            if(!restorationComplete)RecorderAdmission.quarantine(session);
+            if(!restorationComplete) {
+                RecorderAdmission.quarantine(session);
+                if(output instanceof AutoCloseable)try{((AutoCloseable)output).close();}
+                catch(Exception|Error e){interrupted|=e instanceof InterruptedException;if(primary==null)primary=e;else if(primary!=e)primary.addSuppressed(e);}
+            }
         }
         if(interrupted)Thread.currentThread().interrupt();
-        if(primary!=null)throw primary;
+        if(primary instanceof Exception)throw (Exception)primary;
+        if(primary instanceof Error)throw (Error)primary;
         return output;
     }
     private static Object field(Object value,String name)throws ReflectiveOperationException {return value.getClass().getField(name).get(value);}

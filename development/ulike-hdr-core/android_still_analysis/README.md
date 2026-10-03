@@ -130,3 +130,18 @@ exits. Native-size `.pixels()` refuses an extra full raster copy. A binding can
 convert directly to the existing byte mask validator. This removes the 4MP
 application guard for the explicit 4080×3060 candidate, not the unresolved device
 capacity, native geometry or all-mode integration requirements.
+
+`Outcome` is now closeable and its `AndroidAnalysisInput.BoundOutcome` wrapper
+forwards closure. `PausedStockPreview` owns any closeable work result until
+the original preview and composer restoration succeeds. If restoration fails,
+it closes that undelivered result before throwing, including `Error` paths,
+without replacing the primary failure with cleanup failure. This prevents a
+full-size diagnostic from being abandoned when the caller never receives it.
+A successfully restored result stays open for its caller.
+
+`verify_output_ownership.py` executes the production pause/restore method and
+admission ledger using explicit host fixtures for Android/SDK lifecycle calls.
+Nine scenarios allocate a 4080×3060 result and check success transfer, work
+errors, restoration errors, interruption, cleanup failures and self-suppression.
+These fixtures are test-only sources, not app code or vendor binaries. They do
+not execute native SDK operations or prove app-wide hook coverage.

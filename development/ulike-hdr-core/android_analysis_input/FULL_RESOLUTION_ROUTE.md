@@ -53,9 +53,10 @@ the SDK callback and one owned diagnostic remain.
 These are calculated payloads, **not measured heap/RSS or sufficient-memory
 guarantees**. Bitmap backing/stride, native readback buffers, GPU textures,
 models, app baseline, object overhead and allocator behavior remain additional.
-Later, `RenderedDiagnostic.pixels()` also clones the retained callback before
-`DiagnosticSkinMask.validate` allocates a byte mask. That later copy must be
-addressed separately.
+On the legacy API, `RenderedDiagnostic.pixels()` clones the retained callback
+before `DiagnosticSkinMask.validate` allocates a byte mask. The implemented
+native-size candidate refuses this extra clone and uses consuming conversion
+instead, as described below.
 
 ## Implemented ownership patch
 
