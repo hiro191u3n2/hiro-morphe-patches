@@ -1,0 +1,127 @@
+name: Publish ULike 1.8.2 native draw acquisition trial
+on:
+  push:
+    branches: ['work/ulike-hdr-experimental182']
+    paths: ['.github/workflows/ulike-hdr-experimental182.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact reviewed transport before unpacking
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input dist
+          python3 - <<'PY'
+          import base64, hashlib, io, json, re, tarfile
+          from pathlib import Path, PurePosixPath
+          expected = '9b321973966300e8a8b892de615ce715703ef647f001dffb614e62ba2164c36f'
+          assert re.fullmatch(r'[0-9a-f]{64}', expected)
+          parts = sorted(Path('releases/ulike-v1.8.2').glob('source.b64.*'))
+          assert len(parts) == int('25')
+          raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
+          assert hashlib.sha256(raw).hexdigest() == expected
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:xz') as archive:
+              members = archive.getmembers()
+              seen = set()
+              for member in members:
+                  path = PurePosixPath(member.name)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert member.isfile(), 'Only regular reviewed files allowed'
+                  assert member.name not in seen
+                  seen.add(member.name)
+                  assert path.suffix.lower() not in {'.apk','.apks','.aab','.so','.p12','.pfx','.jks','.keystore','.model','.onnx'}
+              catalog = json.load(archive.extractfile('SOURCE_ARCHIVE_MANIFEST.json'))
+              assert seen == set(catalog['files']) | {'SOURCE_ARCHIVE_MANIFEST.json'}
+              for name, record in catalog['files'].items():
+                  data = archive.extractfile(name).read()
+                  assert len(data) == record['bytes'] and hashlib.sha256(data).hexdigest() == record['sha256'], name
+                  assert not data.startswith((b'\x7fELF', b'PK\x03\x04', b'PK\x05\x06')), name
+              archive.extractall('source', filter='data')
+          required = ['integration/package182.py', 'release_payload/payload-manifest.json',
+                      'core/android_native_readback/build_android.sh',
+                      'core/android_native_readback/native/readback_core.h',
+                      'core/android_native_readback/native/readback_core.cpp',
+                      'core/android_native_readback/native/native_capture.cpp',
+                      'release.json', 'release_pipeline/LOCAL_QA.json', 'release_pipeline/publish182.py',
+                      'release_pipeline/package_sources182.py', 'release_pipeline/PUBLICATION_BASELINE.json']
+          assert all((Path('source') / name).is_file() for name in required)
+          print('Reviewed source and generated payload transport verified.')
+          PY
+      - name: Read exact current predecessor assets
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release download ulike-v1.8.1 --pattern ULike_HQ_Texture_Online_v1.8.1.mpp --dir input
+          gh release download ulike-v1.8.1 --pattern Hiro_Morphe_Patches_v1.0.114.mpp --dir input
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'ULike_HQ_Texture_Online_v1.8.1.mpp': '4b1ac0a232a78b362a37cceefb4af7d819334d7f065b3fd06d558cbe6dad5146',
+              'Hiro_Morphe_Patches_v1.0.114.mpp': 'b66a849cc3569741277c33992360da33e38ca971015e21709270e0b95dd271d9'}
+          for name, digest in expected.items():
+              assert hashlib.sha256((Path('input') / name).read_bytes()).hexdigest() == digest, name
+          PY
+      - name: Rebuild own native draw reader with the pinned Android NDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          sdk_root="${ANDROID_SDK_ROOT:-${ANDROID_HOME:-}}"
+          test -n "$sdk_root"
+          sdkmanager --sdk_root="$sdk_root" 'ndk;27.2.12479018'
+          bash source/core/android_native_readback/build_android.sh "$sdk_root/ndk/27.2.12479018" input/libhiro_draw_readback.so
+          python3 - <<'PY'
+          import hashlib,json,struct
+          from pathlib import Path
+          spec=json.loads(Path('source/release_payload/payload-manifest.json').read_bytes())
+          pin=spec['files']['ulike182/runtime/0000.bin']
+          raw=Path('input/libhiro_draw_readback.so').read_bytes()
+          assert len(raw)==pin['bytes'] and hashlib.sha256(raw).hexdigest()==pin['sha256'], 'Native rebuild differs from locally checked bytes'
+          assert raw[:6]==b'\x7fELF\x02\x01' and struct.unpack_from('<H',raw,18)[0]==183, 'Expected little-endian arm64 ELF'
+          print('Own arm64 native library reproduced exactly from reviewed source.')
+          PY
+      - name: Reproduce exact locally checked trial MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/integration/package182.py --baseline-dir input --payload-dir source/release_payload --release source/release.json --outdir dist --rehydrate-native-library input/libhiro_draw_readback.so
+          python3 - <<'PY'
+          import hashlib,json
+          from pathlib import Path
+          raw = Path('source/release_pipeline/LOCAL_QA.json').read_bytes()
+          qa = json.loads(raw)
+          expected = {'ULike_HQ_Texture_Online_v1.8.2.mpp','Hiro_Morphe_Patches_v1.0.115.mpp'}
+          assert len(qa['artifacts']) == 2 and {r['file'] for r in qa['artifacts']} == expected
+          for row in qa['artifacts']:
+              data = (Path('dist') / row['file']).read_bytes()
+              assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256'], row['file']
+          assert qa['publication_gate'] == {'trial_ready':True,'complete_hdr_pipeline':False,'device_tested':False}
+          Path('dist/QA_ULike_v1.8.2.json').write_bytes(raw)
+          PY
+          python3 source/release_pipeline/package_sources182.py --source source --output dist/ULike_v1.8.2_sources_and_QA.zip
+      - name: Draft upload, full download verification, prerelease and CAS Manager update
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/publish182.py --qa source/release_pipeline/LOCAL_QA.json --dist dist --notes source/release_pipeline/RELEASE_NOTES.txt --release-body source/release_pipeline/README.md --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt --expected-baseline source/release_pipeline/PUBLICATION_BASELINE.json --release-date 2026-10-03
+      - name: Retain publication state and outputs even after a partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-experimental182-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 14
