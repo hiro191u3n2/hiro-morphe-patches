@@ -1,0 +1,154 @@
+name: Publish ULike 1.8.9 dedicated unprocessed 10bit mode
+on:
+  push:
+    branches: ['fix/ulike-tenbit189']
+    paths: ['.github/workflows/ulike-tenbit189-release.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8'
+      - name: Verify exact reviewed source transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir source input tools dist build
+          python3 - <<'PY'
+          import base64, hashlib, io, json, tarfile
+          from pathlib import Path, PurePosixPath
+          parts = sorted(Path('releases/ulike-v1.8.9').glob('source.b64.*'))
+          assert len(parts) == 7
+          raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
+          assert hashlib.sha256(raw).hexdigest() == 'f8a1c61993a97830abfa428eb3b2005453aa48b43ceca14188caa651308dd13c'
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:xz') as archive:
+              seen = set()
+              for member in archive.getmembers():
+                  path = PurePosixPath(member.name)
+                  assert member.isfile() and not path.is_absolute() and '..' not in path.parts
+                  assert member.name not in seen
+                  seen.add(member.name)
+                  assert path.suffix.lower() not in {'.apk','.apks','.aab','.so','.p12','.pfx','.jks','.keystore','.model','.onnx','.heic','.heif','.jpg','.jpeg','.png','.webp','.avif','.gif','.dng','.raw','.yuv','.h265','.hevc'}
+              catalog = json.load(archive.extractfile('SOURCE_ARCHIVE_MANIFEST.json'))
+              assert seen == set(catalog['files']) | {'SOURCE_ARCHIVE_MANIFEST.json'}
+              for name, row in catalog['files'].items():
+                  data = archive.extractfile(name).read()
+                  assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+                  assert not data.startswith((b'PK\x03\x04', b'PK\x05\x06', b'\x7fELF'))
+              archive.extractall('source', filter='data')
+          assert (Path('source') / 'tenbit189/build/reproduce189.py').is_file()
+          assert (Path('source') / 'SOURCE_ALLOWLIST.json').is_file()
+          PY
+      - name: Read the exact pinned public predecessor MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release download ulike-v1.8.8 --pattern ULike_HQ_Texture_Online_v1.8.8.mpp --dir input
+          gh release download ulike-v1.8.8 --pattern Hiro_Morphe_Patches_v1.0.121.mpp --dir input
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'ULike_HQ_Texture_Online_v1.8.8.mpp': 'dbdaab4f578604b725f6285d1312eb33f52160cbc024a9168b95202b1dde2d79',
+              'Hiro_Morphe_Patches_v1.0.121.mpp': '22d76eae43bf5dc0770b23a81e5883271e73a4da1f0c549580076e7668cd20d2'}
+          for name, digest in expected.items():
+              assert hashlib.sha256((Path('input') / name).read_bytes()).hexdigest() == digest
+          PY
+      - name: Restore pinned public build tooling
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh run download 36946580808 --name ulike-preview177-tools --dir tools
+          (cd tools && sha256sum -c SHA256SUMS)
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'morphe-1.16.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+              'r8-8.3.37.jar': '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199',
+              'android.jar': '1db2419dbd45457f83b90ef8a7ef41e118174782c9a5c2185b55899df022767f'}
+          for name, digest in expected.items():
+              assert hashlib.sha256((Path('tools') / name).read_bytes()).hexdigest() == digest
+          PY
+      - name: Rebuild from authored sources without a private original APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/tenbit189/build/reproduce189.py --tools tools --jdk "$JAVA_HOME" --baseline-dir input --build-dir build --dist dist
+          python3 - <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'source/tenbit189/publication')
+          from publish189 import validate_release_gate
+          raw = Path('source/tenbit189/publication/LOCAL_QA.json').read_bytes()
+          qa = json.loads(raw)
+          validate_release_gate(qa)
+          for row in qa['artifacts']:
+              data = (Path('dist') / row['file']).read_bytes()
+              assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+          Path('dist/QA_ULike_v1.8.9.json').write_bytes(raw)
+          print('Source-rebuilt MPP bytes match exact locally APK-applied release; device execution remains untested.')
+          PY
+      - name: Package and validate the exact public source catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/tenbit189/publication/package_sources189.py --source source --allowlist source/SOURCE_ALLOWLIST.json --output dist/ULike_v1.8.9_sources_and_QA.zip
+      - name: Read-only live main/dev preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/tenbit189/publication/publish189.py --qa source/tenbit189/publication/LOCAL_QA.json --dist dist --notes source/tenbit189/publication/RELEASE_NOTES.txt --release-body source/tenbit189/publication/README.md --summary-file source/tenbit189/publication/CHANGELOG_SUMMARY.txt --expected-baseline source/tenbit189/publication/PUBLICATION_BASELINE.json --release-date 2026-10-04 --preflight-only
+      - name: One-shot publication and Manager update
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/tenbit189/publication/publish189.py --qa source/tenbit189/publication/LOCAL_QA.json --dist dist --notes source/tenbit189/publication/RELEASE_NOTES.txt --release-body source/tenbit189/publication/README.md --summary-file source/tenbit189/publication/CHANGELOG_SUMMARY.txt --expected-baseline source/tenbit189/publication/PUBLICATION_BASELINE.json --release-date 2026-10-04
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-tenbit189-standalone
+          path: dist/ULike_HQ_Texture_Online_v1.8.9.mpp
+          if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-tenbit189-integrated
+          path: dist/Hiro_Morphe_Patches_v1.0.122.mpp
+          if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-tenbit189-source
+          path: dist/ULike_v1.8.9_sources_and_QA.zip
+          if-no-files-found: warn
+          retention-days: 14
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-tenbit189-publication-state
+          path: |
+            dist/QA_ULike_v1.8.9.json
+            dist/publication-state.json
+            dist/publication_ULike_v1.8.9.json
+            dist/publication-preview.json
+            dist/build-artifacts.json
+          if-no-files-found: warn
+          retention-days: 14
