@@ -28,14 +28,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir source input tools dist build
+          mkdir source input toolchain dist build
           python3 - <<'PY'
           import base64, hashlib, io, json, tarfile
           from pathlib import Path, PurePosixPath
           parts = sorted(Path('releases/ulike-v1.8.9').glob('source.b64.*'))
           assert len(parts) == 7
           raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
-          assert hashlib.sha256(raw).hexdigest() == 'f8a1c61993a97830abfa428eb3b2005453aa48b43ceca14188caa651308dd13c'
+          assert hashlib.sha256(raw).hexdigest() == '2aa955cb5c65814a14581cf752b80746ae2776f0ee32fe904c8d77235e7172a1'
           with tarfile.open(fileobj=io.BytesIO(raw), mode='r:xz') as archive:
               seen = set()
               for member in archive.getmembers():
@@ -73,8 +73,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          gh run download 36946580808 --name ulike-preview177-tools --dir tools
-          (cd tools && sha256sum -c SHA256SUMS)
+          gh run download 36946580808 --name ulike-preview177-tools --dir toolchain
+          (cd toolchain && sha256sum -c SHA256SUMS)
           python3 - <<'PY'
           import hashlib
           from pathlib import Path
@@ -83,13 +83,13 @@ jobs:
               'r8-8.3.37.jar': '900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199',
               'android.jar': '1db2419dbd45457f83b90ef8a7ef41e118174782c9a5c2185b55899df022767f'}
           for name, digest in expected.items():
-              assert hashlib.sha256((Path('tools') / name).read_bytes()).hexdigest() == digest
+              assert hashlib.sha256((Path('toolchain') / name).read_bytes()).hexdigest() == digest
           PY
       - name: Rebuild from authored sources without a private original APK
         shell: bash
         run: |
           set -euo pipefail
-          python3 source/tenbit189/build/reproduce189.py --tools tools --jdk "$JAVA_HOME" --baseline-dir input --build-dir build --dist dist
+          python3 source/tenbit189/build/reproduce189.py --tools toolchain --jdk "$JAVA_HOME" --baseline-dir input --build-dir build --dist dist
           python3 - <<'PY'
           import hashlib, json, sys
           from pathlib import Path
