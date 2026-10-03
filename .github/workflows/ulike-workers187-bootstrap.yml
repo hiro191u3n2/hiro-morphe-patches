@@ -1,0 +1,173 @@
+name: Restore pinned ULike187 build tools
+on:
+  push:
+    branches: ['fix/ulike-workers187']
+    paths: ['.github/workflows/ulike-workers187-bootstrap.yml']
+permissions:
+  contents: read
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Fetch and verify public tools and unchanged public186 MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import concurrent.futures, hashlib, io, json, tarfile, urllib.request, zipfile
+          root=Path('payload187');tools=root/'tools';baseline=root/'baseline';tools.mkdir(parents=True);baseline.mkdir()
+          items=[
+           ('morphe-1.16.jar','https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar','82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',tools),
+           ('r8-8.3.37.jar','https://storage.googleapis.com/r8-releases/raw/8.3.37/r8.jar','900dfbc649519969fc5a4c7520d6b7355338e565fa1249874e0190b8d61b1199',tools),
+           ('android-platform35.zip','https://dl.google.com/android/repository/platform-35_r02.zip',None,Path('.')),
+           ('jdk21.tar.gz','https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz',None,Path('.')),
+           ('ULike_HQ_Texture_Online_v1.8.6.mpp','https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.8.6/ULike_HQ_Texture_Online_v1.8.6.mpp','863f28ea651e55bf526ffccd6b72e1412562a03c70ff357c4ec1cb46ee6a8248',baseline),
+           ('Hiro_Morphe_Patches_v1.0.119.mpp','https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.8.6/Hiro_Morphe_Patches_v1.0.119.mpp','eb089b726c3dff7d8b21d11afe2705455831eeff891eb4e7b50fb1b15272062e',baseline)
+          ]
+          def download(item):
+           name,url,pin,directory=item;path=directory/name
+           with urllib.request.urlopen(urllib.request.Request(url,headers={'User-Agent':'ULike-build-recovery'}),timeout=60) as r,path.open('wb') as f:
+            assert r.status==200
+            while chunk:=r.read(1024*1024):f.write(chunk)
+           digest=hashlib.sha256(path.read_bytes()).hexdigest();assert pin is None or digest==pin,(name,digest)
+           return {'name':name,'sha256':digest,'bytes':path.stat().st_size,'url':url}
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as p:receipts=list(p.map(download,items))
+          with urllib.request.urlopen('https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.12.1%2B1/OpenJDK21U-jdk_x64_linux_hotspot_21.0.12.1_1.tar.gz.sha256.txt',timeout=60) as r:expected=r.read().decode().split()[0]
+          assert hashlib.sha256(Path('jdk21.tar.gz').read_bytes()).hexdigest()==expected
+          with tarfile.open('jdk21.tar.gz') as t:t.extractall(tools/'jdk21',filter='data')
+          with zipfile.ZipFile('android-platform35.zip') as z:
+           names=[n for n in z.namelist() if n.endswith('/android.jar')];assert len(names)==1
+           (tools/'android.jar').write_bytes(z.read(names[0]))
+          android_sha=hashlib.sha256((tools/'android.jar').read_bytes()).hexdigest()
+          assert android_sha=='d9eb9da824d9e247a352f570f01e1169e725b2954bca9e283a71786c59b59f9a',android_sha
+          file_hashes={str(p.relative_to(root)):{'bytes':p.stat().st_size,'sha256':hashlib.sha256(p.read_bytes()).hexdigest()} for p in root.rglob('*') if p.is_file()}
+          (root/'TOOL_RESTORATION187_QA.json').write_text(json.dumps({'result':'PASS_PINNED_PUBLIC_TOOL_AND_BASELINE_RECOVERY','jdk_archive_checksum_verified':True,'downloads':receipts,'files':file_hashes},indent=2)+'\n')
+          transfer=Path('transfer187');transfer.mkdir();archive=Path('tools187.tar.gz')
+          with tarfile.open(archive,'w:gz',compresslevel=1) as t:t.add(root,arcname='payload187')
+          data=archive.read_bytes();parts=[]
+          for i,start in enumerate(range(0,len(data),31*1024*1024)):
+           chunk=data[start:start+31*1024*1024];name='chunk.%02d'%i;(transfer/name).write_bytes(chunk)
+           parts.append({'file':name,'bytes':len(chunk),'sha256':hashlib.sha256(chunk).hexdigest()})
+          assert len(parts)<=16
+          (transfer/'MANIFEST187.json').write_text(json.dumps({'archive_bytes':len(data),'archive_sha256':hashlib.sha256(data).hexdigest(),'parts':parts},indent=2)+'\n')
+          print(json.dumps({'result':'PASS_PINNED_TOOL_BOOTSTRAP','parts':len(parts),'archive_bytes':len(data),'android_jar_sha256':android_sha}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike187-tool-manifest
+          path: transfer187/MANIFEST187.json
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.00') != ''
+        with:
+          name: ulike187-tool-chunk-00
+          path: transfer187/chunk.00
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.01') != ''
+        with:
+          name: ulike187-tool-chunk-01
+          path: transfer187/chunk.01
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.02') != ''
+        with:
+          name: ulike187-tool-chunk-02
+          path: transfer187/chunk.02
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.03') != ''
+        with:
+          name: ulike187-tool-chunk-03
+          path: transfer187/chunk.03
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.04') != ''
+        with:
+          name: ulike187-tool-chunk-04
+          path: transfer187/chunk.04
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.05') != ''
+        with:
+          name: ulike187-tool-chunk-05
+          path: transfer187/chunk.05
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.06') != ''
+        with:
+          name: ulike187-tool-chunk-06
+          path: transfer187/chunk.06
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.07') != ''
+        with:
+          name: ulike187-tool-chunk-07
+          path: transfer187/chunk.07
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.08') != ''
+        with:
+          name: ulike187-tool-chunk-08
+          path: transfer187/chunk.08
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.09') != ''
+        with:
+          name: ulike187-tool-chunk-09
+          path: transfer187/chunk.09
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.10') != ''
+        with:
+          name: ulike187-tool-chunk-10
+          path: transfer187/chunk.10
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.11') != ''
+        with:
+          name: ulike187-tool-chunk-11
+          path: transfer187/chunk.11
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.12') != ''
+        with:
+          name: ulike187-tool-chunk-12
+          path: transfer187/chunk.12
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.13') != ''
+        with:
+          name: ulike187-tool-chunk-13
+          path: transfer187/chunk.13
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.14') != ''
+        with:
+          name: ulike187-tool-chunk-14
+          path: transfer187/chunk.14
+          compression-level: 0
+          retention-days: 1
+      - uses: actions/upload-artifact@v4
+        if: hashFiles('transfer187/chunk.15') != ''
+        with:
+          name: ulike187-tool-chunk-15
+          path: transfer187/chunk.15
+          compression-level: 0
+          retention-days: 1
