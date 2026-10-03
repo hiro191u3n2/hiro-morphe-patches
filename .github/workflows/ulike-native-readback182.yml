@@ -1,0 +1,34 @@
+name: Build original ULike draw acquisition native module 182
+on:
+  push:
+    branches: ['work/ulike-native-readback182']
+    paths: ['.github/workflows/ulike-native-readback182.yml']
+permissions:
+  contents: write
+concurrency:
+  group: ulike-native-readback182
+  cancel-in-progress: false
+jobs:
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: native-build182
+      - name: Compile pinned original source using pinned NDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 native-build182/verify_sources.py
+          if [ ! -d "$ANDROID_SDK_ROOT/ndk/27.2.12479018" ]; then
+            "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018'
+          fi
+          bash native-build182/build_android.sh "$ANDROID_SDK_ROOT/ndk/27.2.12479018" /tmp/libhiro_draw_readback.so
+          bash native-build182/build_android.sh "$ANDROID_SDK_ROOT/ndk/27.2.12479018" /tmp/libhiro_draw_readback-repeat.so
+          cmp /tmp/libhiro_draw_readback.so /tmp/libhiro_draw_readback-repeat.so
+          python3 native-build182/commit_output.py
