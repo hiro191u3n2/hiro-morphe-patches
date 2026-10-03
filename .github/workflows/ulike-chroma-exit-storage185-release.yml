@@ -1,0 +1,123 @@
+name: Publish ULike 1.8.5 chroma exit and storage repair
+on:
+  push:
+    branches: ['fix/ulike-chroma-exit-storage185']
+    paths: ['.github/workflows/ulike-chroma-exit-storage185-release.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify exact reviewed transport before unpacking
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input dist
+          python3 - <<'PY'
+          import base64, hashlib, io, json, re, tarfile
+          from pathlib import Path, PurePosixPath
+          expected = '4057a5766f5229b9e397c464025272bcdcfb04bfe76f35610bbaa6eff67e6876'
+          assert re.fullmatch(r'[0-9a-f]{64}', expected)
+          parts = sorted(Path('releases/ulike-v1.8.5').glob('source.b64.*'))
+          assert len(parts) == int('21')
+          raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
+          assert hashlib.sha256(raw).hexdigest() == expected
+          with tarfile.open(fileobj=io.BytesIO(raw), mode='r:xz') as archive:
+              members = archive.getmembers()
+              seen = set()
+              for member in members:
+                  path = PurePosixPath(member.name)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert member.isfile(), 'Only regular reviewed files allowed'
+                  assert member.name not in seen
+                  seen.add(member.name)
+                  assert path.suffix.lower() not in {'.apk','.apks','.aab','.so','.p12','.pfx','.jks','.keystore','.model','.onnx','.heic','.heif','.jpg','.jpeg','.png','.webp','.avif','.gif','.dng','.raw'}
+              catalog = json.load(archive.extractfile('SOURCE_ARCHIVE_MANIFEST.json'))
+              assert seen == set(catalog['files']) | {'SOURCE_ARCHIVE_MANIFEST.json'}
+              for name, record in catalog['files'].items():
+                  data = archive.extractfile(name).read()
+                  assert len(data) == record['bytes'] and hashlib.sha256(data).hexdigest() == record['sha256'], name
+                  assert not data.startswith((b'\x7fELF', b'PK\x03\x04', b'PK\x05\x06')), name
+              archive.extractall('source', filter='data')
+          required = ['integration/package185.py', 'release_payload/payload-manifest.json',
+                      'release.json', 'release_pipeline/LOCAL_QA.json',
+                      'release_pipeline/publish185.py', 'release_pipeline/package_sources185.py',
+                      'release_pipeline/manager_metadata.py', 'release_pipeline/verify_metadata185.py',
+                      'release_pipeline/PUBLICATION_BASELINE.json']
+          assert all((Path('source') / name).is_file() for name in required)
+          print('Reviewed source and generated payload transport verified.')
+          PY
+      - name: Read exact current public predecessor MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release download ulike-v1.8.4 --pattern ULike_HQ_Texture_Online_v1.8.4.mpp --dir input
+          gh release download ulike-v1.8.4 --pattern Hiro_Morphe_Patches_v1.0.117.mpp --dir input
+          python3 - <<'PY'
+          import hashlib
+          from pathlib import Path
+          expected = {
+              'ULike_HQ_Texture_Online_v1.8.4.mpp': 'c1dc11b9b285fc9b89b650657b557e9e92df6756102f9de1f9fb1133d8748414',
+              'Hiro_Morphe_Patches_v1.0.117.mpp': '9dfe64eb35d22c4e37649714e4fc93d1ee7f71eee4cca1db53df977661123186'}
+          for name, digest in expected.items():
+              assert hashlib.sha256((Path('input') / name).read_bytes()).hexdigest() == digest, name
+          print('Exact latest 1.8.4 / 1.0.117 baseline MPPs verified.')
+          PY
+      - name: Reproduce exact locally checked MPPs from reviewed generated payload
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/integration/package185.py --baseline-dir input --payload-dir source/release_payload --release source/release.json --outdir dist
+          python3 - <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'source/release_pipeline')
+          from publish185 import validate_release_gate
+          raw = Path('source/release_pipeline/LOCAL_QA.json').read_bytes()
+          qa = json.loads(raw)
+          validate_release_gate(qa)
+          assert qa['version'] == '1.8.5' and qa['bundle_version'] == '1.0.118'
+          assert qa['previous_bundle_version'] == '1.0.117'
+          expected = {'ULike_HQ_Texture_Online_v1.8.5.mpp', 'Hiro_Morphe_Patches_v1.0.118.mpp'}
+          assert len(qa['artifacts']) == 2 and {r['file'] for r in qa['artifacts']} == expected
+          for row in qa['artifacts']:
+              data = (Path('dist') / row['file']).read_bytes()
+              assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256'], row['file']
+          Path('dist/QA_ULike_v1.8.5.json').write_bytes(raw)
+          print('Generated MPPs match exact locally checked bytes; stock/application gates passed, device execution remains untested.')
+          PY
+      - name: Verify Manager update eligibility and package the exact source catalog
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/verify_metadata185.py --notes source/release_pipeline/RELEASE_NOTES.txt --summary source/release_pipeline/CHANGELOG_SUMMARY.txt --bundle dist/Hiro_Morphe_Patches_v1.0.118.mpp --output dist/metadata-preview-qa.json
+          python3 source/release_pipeline/package_sources185.py --source source --output dist/ULike_v1.8.5_sources_and_QA.zip
+      - name: Read-only live CAS preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/publish185.py --qa source/release_pipeline/LOCAL_QA.json --dist dist --notes source/release_pipeline/RELEASE_NOTES.txt --release-body source/release_pipeline/README.md --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt --expected-baseline source/release_pipeline/PUBLICATION_BASELINE.json --release-date 2026-10-03 --preflight-only
+      - name: One-shot draft upload, byte verification and CAS Manager publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/release_pipeline/publish185.py --qa source/release_pipeline/LOCAL_QA.json --dist dist --notes source/release_pipeline/RELEASE_NOTES.txt --release-body source/release_pipeline/README.md --summary-file source/release_pipeline/CHANGELOG_SUMMARY.txt --expected-baseline source/release_pipeline/PUBLICATION_BASELINE.json --release-date 2026-10-03
+      - name: Retain publication state and outputs after success or partial failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike-chroma-exit-storage185-publication
+          path: dist/*
+          if-no-files-found: warn
+          retention-days: 14
