@@ -53,6 +53,7 @@ jobs:
           for n,h in overlay.items(): assert hashlib.sha256((root/n).read_bytes()).hexdigest()==h,n
           print('PASS pinned197 baseline and complete reviewed198 source overlay')
           PY
+          python3 fix198/amend198.py work/source198
       - name: Restore build toolchain and software GPU
         shell: bash
         run: |
