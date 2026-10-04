@@ -66,7 +66,8 @@ jobs:
           sudo apt-get update -qq
           sudo apt-get install -y g++ libegl1-mesa-dev libgl1-mesa-dev
           python3 source/fix197/publication/get_tools197.py --output tools
-          if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then sdkmanager 'ndk;27.2.12479018'; fi
+          if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null; fi
+          test -f "$ANDROID_HOME/ndk/27.2.12479018/source.properties"
       - name: Execute regressions and two independent native Java and MPP builds
         shell: bash
         run: |
