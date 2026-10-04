@@ -1,0 +1,34 @@
+name: ULike phase1911 Java tools
+on:
+  push:
+    branches: [fix/ulike-phase1911]
+    paths: [.github/workflows/ulike-phase1911-tools.yml]
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Fetch pinned released source and verified public build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir source
+          gh release download ulike-v1.9.10 --repo hiro191u3n2/hiro-morphe-patches -p ULike_v1.9.10_sources_and_QA.zip
+          python3 - <<'PY'
+          import zipfile
+          with zipfile.ZipFile('ULike_v1.9.10_sources_and_QA.zip') as z:
+              z.extractall('source')
+          PY
+          python3 source/fix197/publication/get_tools197.py --output tools
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1911-pinned-java-tools
+          retention-days: 7
+          path: |
+            tools/morphe-1.16.jar
+            tools/r8-8.3.37.jar
+            tools/android.jar
