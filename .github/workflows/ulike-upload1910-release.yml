@@ -62,7 +62,8 @@ jobs:
           sudo apt-get install -y -qq g++ libegl1-mesa-dev libgles2-mesa-dev libgl1-mesa-dev python3
           python3 source/fix197/publication/get_tools197.py --output tools
           NDK="$ANDROID_HOME/ndk/27.2.12479018"
-          if [ ! -d "$NDK" ]; then yes | sdkmanager 'ndk;27.2.12479018' >/dev/null; fi
+          if [ ! -d "$NDK" ]; then "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null; fi
+          test -f "$NDK/source.properties"
           echo "ULIKE_NDK=$NDK" >> "$GITHUB_ENV"
       - name: Execute native, geometry, Java, independent builds and preservation gates
         shell: bash
