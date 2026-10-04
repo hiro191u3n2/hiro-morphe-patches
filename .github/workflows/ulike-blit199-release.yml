@@ -1,0 +1,107 @@
+name: ULike blit199 source-verified trial
+on:
+  push:
+    branches: [fix/ulike-blit199]
+    paths: [fix199/trigger.json]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Restore pinned198 baseline and reviewed199 source
+        id: mode
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work/base
+          gh release download ulike-v1.9.8 --repo "$GH_REPO" --pattern ULike_HQ_Texture_Online_v1.9.8.mpp --pattern Hiro_Morphe_Patches_v1.0.132.mpp --pattern ULike_v1.9.8_sources_and_QA.zip --dir work/base
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,os,shutil,subprocess,zipfile
+          from pathlib import Path
+          base=Path('work/base');root=Path('work/source199');root.mkdir()
+          pins={'ULike_HQ_Texture_Online_v1.9.8.mpp':'2dca9a8344f97925aa0ff503c4dba9b187b68905460f2be07460e58682df8311','Hiro_Morphe_Patches_v1.0.132.mpp':'4917b7ff39db3d0b1b6b6eec5f51e271674432b8e57d5d9339a6926458057f47','ULike_v1.9.8_sources_and_QA.zip':'751f115ba2af1d2e25c7499b2c7aa63fba5788b45bbd4407c35d1a86f5f7177b'}
+          for n,h in pins.items():assert hashlib.sha256((base/n).read_bytes()).hexdigest()==h,n
+          def safe(n):
+            p=Path(n);assert not p.is_absolute() and '..' not in p.parts;return p
+          with zipfile.ZipFile(base/'ULike_v1.9.8_sources_and_QA.zip') as z:
+            for n in z.namelist():safe(n)
+            z.extractall(root)
+          transport=Path('fix199');m=json.loads((transport/'transport.json').read_text());parts=[]
+          for i in range(m['parts']):
+            p=transport/('overlay.b64.%04d'%i);data=p.read_bytes()
+            assert hashlib.sha1(('blob %d\0'%len(data)).encode()+data).hexdigest()==m['git_blobs'][p.name],p.name
+            parts.append(data.strip())
+          raw=base64.b64decode(b''.join(parts),validate=True)
+          assert len(raw)==m['bytes'] and hashlib.sha256(raw).hexdigest()==m['sha256']
+          payload=json.loads(lzma.decompress(raw))
+          for n,src in payload['copies'].items():
+            p=root/safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(root/safe(src),p)
+          subprocess.run(['patch','-p1','--batch','--forward'],input=payload['patch'],cwd=root,text=True,check=True)
+          for n,t in payload['new'].items():
+            p=root/safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(t,encoding='utf-8')
+          for n,h in json.loads((root/'fix199/overlay-files.json').read_text()).items():assert hashlib.sha256((root/safe(n)).read_bytes()).hexdigest()==h,n
+          mode=json.loads((transport/'trigger.json').read_text())['stage'];assert mode in ('build','publish')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:print('stage='+mode,file=f)
+          print('PASS pinned198 baseline and exact reviewed199 source; stage='+mode)
+          PY
+      - name: Restore pinned tools and software GPU
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri g++ patch
+          python3 work/source199/fix197/publication/get_tools197.py --output "$GITHUB_WORKSPACE/work/tools"
+          if [[ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]]; then
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null
+          fi
+      - name: Regression tests and independent ARM64 and MPP rebuilds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os,subprocess,sys
+          from pathlib import Path
+          w=Path(os.environ['GITHUB_WORKSPACE']);stage=json.loads((w/'fix199/trigger.json').read_text())['stage']
+          cmd=[sys.executable,str(w/'work/source199/fix199/run199.py'),'--base',str(w/'work/base'),'--tools',str(w/'work/tools'),'--ndk',os.environ['ANDROID_HOME']+'/ndk/27.2.12479018','--out',str(w/'work/results')]
+          if stage=='publish':cmd+=['--apk-qa',str(w/'fix199/apk-qa.json')]
+          subprocess.run(cmd,check=True)
+          PY
+      - name: Publish trial and verify both Manager manifests
+        if: steps.mode.outputs.stage == 'publish'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 work/source199/fix199/publish199.py "$GITHUB_WORKSPACE/work/results/dist"
+      - name: Retain exact candidates and validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike199-${{ steps.mode.outputs.stage }}-results
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            work/results/dist/*.mpp
+            work/results/dist/*.zip
+            work/results/dist/*.json
+            work/results/evidence/*.log
+            work/results/dist/work/**/*.txt
+            work/results/dist/work/**/installer-test.log
+      - name: Tools for private original-APK validation
+        if: steps.mode.outputs.stage == 'build'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike199-private-apply-tool
+          retention-days: 3
+          path: work/tools/morphe-1.16.jar
