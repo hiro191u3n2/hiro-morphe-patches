@@ -48,6 +48,8 @@ jobs:
           for n,text in payload['new'].items():
               p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
           for n,h in json.loads((root/'fix1910/overlay-files.json').read_text()).items():assert sha(safe(n).read_bytes())==h,n
+          assert sha(P('fix1910/amend1910.py').read_bytes())=='c2c448854371b52dc6ffc41b03bda62f68928f3c9e422d3876e79de6d4187a6e'
+          subprocess.run(['python3','fix1910/amend1910.py','source'],check=True)
           stage=json.loads(P('fix1910/trigger.json').read_text())['stage'];assert stage in ('build','publish')
           if stage=='publish':
               p=root/'fix1910/apk-qa.json';p.write_bytes(P('fix1910/apk-qa.json').read_bytes())
