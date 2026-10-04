@@ -57,7 +57,10 @@ def main():
  qa={'schema':'ulike1916-source-build-release-1','version':'1.9.16','bundle_version':'1.0.140','result':'PASS_EXACT_SOURCE_HOST_GPU_INDEPENDENT_BUILD_AND_ORIGINAL_APK_APPLICATION','trial':True,'status':'READY_FOR_VERIFIED_TRIAL_PUBLICATION','latest_source_input':source,'native_and_harness_source_sha256':pins,'host_regressions':host,'controlled_original_shader_tests':graph,'build':build,'artifacts':build['artifacts'],'original_apk_application':apk,'android_arm64_native_built':True,'mpp_built':True,'native_independent_rebuild_byte_identical':True,'java_independent_rebuild_byte_identical':True,'mpp_independent_rebuild_byte_identical':True,'native_exported_abi_preserved':True,'native_exports':after,'full_original_apk_apply_tested':True,'android_device_tested':False,'physical_original_sdk_execution_verified':False,'capture_success_proven':False,'no_8bit_photo_fallback_added':True,'limits':graph['limits']+['Publication completion is separately recorded by publication-graph1916.json; build evidence is not a device capture success.']}
  qa_bytes=js(qa);(dist/'QA_ULike_v1.9.16.json').write_bytes(qa_bytes)
  # Include only already released authored files, exact new authored sources and sanitized evidence.
- with zipfile.ZipFile(a.base/'ULike_v1.9.15_sources_and_QA.zip') as z:names={n for n in z.namelist() if not n.endswith('/') and n!='SOURCE_ARCHIVE_MANIFEST.json'}
+ with zipfile.ZipFile(a.base/'ULike_v1.9.15_sources_and_QA.zip') as z:
+  names={n for n in z.namelist() if not n.endswith('/') and n!='SOURCE_ARCHIVE_MANIFEST.json'}
+  factory=z.read('implementation191/integration/deltas/factory-delta.dex')
+  assert len(factory)==884 and sha(factory)=='50180394aa4f1f06297e471d56fdf7d4957c4685f2cc59497be57e3913fefbbf'
  names.update(source['pins']);names.update('fix1916/'+n for n in ('source-input.json','local-graph-qa.json','apk-qa.json','finalize1916.py','publish1916.py','RELEASE_NOTES.txt','SUMMARY.txt'))
  exported={n:(R/n).read_bytes() for n in names}
  exported['fix1916/evidence/QA_ULike_v1.9.16.json']=qa_bytes
@@ -65,8 +68,9 @@ def main():
  for folder,label in ((a.results/'logs','build'),(a.host,'host')):
   for p in folder.iterdir():
    if p.is_file() and p.suffix in ('.log','.json'):exported['fix1916/evidence/'+label+'/'+p.name]=p.read_bytes()
- for n in exported:
-  p=Path(n);assert not p.is_absolute() and '..' not in p.parts and p.suffix not in ('.apk','.apks','.so','.jar','.dex','.mpp','.png','.jpg','.frag','.vert','.glsl')
+ for n,b in exported.items():
+  p=Path(n);assert not p.is_absolute() and '..' not in p.parts and p.suffix not in ('.apk','.apks','.so','.jar','.mpp','.png','.jpg','.frag','.vert','.glsl')
+  if p.suffix=='.dex':assert n=='implementation191/integration/deltas/factory-delta.dex' and b==factory
  manifest={'schema':'ulike1916-source-manifest-1','files':{n:{'bytes':len(b),'sha256':sha(b)} for n,b in sorted(exported.items())}}
  exported['SOURCE_ARCHIVE_MANIFEST.json']=js(manifest)
  archive=dist/'ULike_v1.9.16_sources_and_QA.zip'
