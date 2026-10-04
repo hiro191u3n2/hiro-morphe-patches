@@ -1,0 +1,89 @@
+name: ULike cached-target198 verified trial release
+on:
+  push:
+    branches: [fix/ulike-cached-target198]
+    paths: [fix198/trigger.json]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Restore pinned release and verified source overlay
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work/base
+          gh release download ulike-v1.9.7 --repo "$GH_REPO" --pattern ULike_HQ_Texture_Online_v1.9.7.mpp --pattern Hiro_Morphe_Patches_v1.0.131.mpp --pattern ULike_v1.9.7_sources_and_QA.zip --dir work/base
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,subprocess,zipfile
+          from pathlib import Path
+          base=Path('work/base'); root=Path('work/source198'); root.mkdir()
+          pins={'ULike_HQ_Texture_Online_v1.9.7.mpp':'a2499cc3d29c907462ee86e85e21039732ad72be02c10158f8229ff71665cc1c','Hiro_Morphe_Patches_v1.0.131.mpp':'86a0e57820dae7386d5bd8cfa708690cd9b0f0f471d234ca25a4b391cbd165d3','ULike_v1.9.7_sources_and_QA.zip':'91f2f956bad0179e49783898b818d8975f7626dbb4d008b41f99795a640eadf4'}
+          for n,h in pins.items(): assert hashlib.sha256((base/n).read_bytes()).hexdigest()==h,n
+          with zipfile.ZipFile(base/'ULike_v1.9.7_sources_and_QA.zip') as z:
+            for n in z.namelist(): assert not Path(n).is_absolute() and '..' not in Path(n).parts,n
+            z.extractall(root)
+          transport=Path('fix198'); m=json.loads((transport/'transport.json').read_text())
+          parts=[]
+          for i in range(m['parts']):
+            p=transport/('overlay.b64.%04d'%i); data=p.read_bytes()
+            assert hashlib.sha1(('blob %d\0'%len(data)).encode()+data).hexdigest()==m['git_blobs'][p.name],p.name
+            parts.append(data.strip())
+          raw=base64.b64decode(b''.join(parts),validate=True)
+          assert len(raw)==m['bytes'] and hashlib.sha256(raw).hexdigest()==m['sha256']
+          payload=json.loads(lzma.decompress(raw))
+          subprocess.run(['patch','-p1','--batch','--forward'],input=payload['patch'],cwd=root,text=True,check=True)
+          for n,t in payload['new'].items():
+            rel=Path(n); assert not rel.is_absolute() and '..' not in rel.parts
+            p=root/rel; assert not p.exists(),n
+            p.parent.mkdir(parents=True,exist_ok=True); p.write_text(t,encoding='utf-8')
+          overlay=json.loads((root/'fix198/overlay-files.json').read_text())
+          for n,h in overlay.items(): assert hashlib.sha256((root/n).read_bytes()).hexdigest()==h,n
+          print('PASS pinned197 baseline and complete reviewed198 source overlay')
+          PY
+      - name: Restore build toolchain and software GPU
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgl1 libgl1-mesa-dri g++ patch
+          python3 work/source198/fix197/publication/get_tools197.py --output "$GITHUB_WORKSPACE/work/tools"
+          if [[ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]]; then
+            "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null
+          fi
+      - name: Regression tests, independent ARM64 and MPP rebuilds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 work/source198/fix198/run198.py --base "$GITHUB_WORKSPACE/work/base" --tools "$GITHUB_WORKSPACE/work/tools" --ndk "$ANDROID_HOME/ndk/27.2.12479018" --out "$GITHUB_WORKSPACE/work/results"
+      - name: Publish verified trial and update Manager manifests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 work/source198/fix198/publish198.py "$GITHUB_WORKSPACE/work/results/dist"
+      - name: Retain release files and exact validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike198-release-and-publication-state
+          retention-days: 14
+          if-no-files-found: warn
+          path: |
+            work/results/dist/*.mpp
+            work/results/dist/*.zip
+            work/results/dist/*.json
+            work/results/evidence/*.log
+            work/results/dist/work/**/*.txt
+            work/results/dist/work/**/installer-test.log
