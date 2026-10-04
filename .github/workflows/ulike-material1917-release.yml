@@ -28,6 +28,7 @@ jobs:
           import json,os
           request=json.load(open('fix1917/trigger.json'))
           assert request['version']=='1.9.17' and request['stage'] in ('build','publish')
+          if request['stage']=='publish':assert json.load(open('fix1917/review-hold.json'))['publication_hold'] is False
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+request['stage']+'\n')
           PY
           mkdir base source
@@ -36,14 +37,16 @@ jobs:
           import base64,hashlib,json,lzma,pathlib,subprocess,zipfile
           root=pathlib.Path('source');transport=pathlib.Path('fix1917');m=json.loads((transport/'transport.json').read_text())
           assert hashlib.sha256(pathlib.Path('base/ULike_v1.9.16_sources_and_QA.zip').read_bytes()).hexdigest()==m['baseline_sha256']
-          pieces=[]
-          for i in range(m['parts']):
-              name='overlay.b64.%04d'%i;b=(transport/name).read_bytes()
-              assert hashlib.sha1(('blob %d\0'%len(b)).encode()+b).hexdigest()==m['git_blobs'][name],name
-              pieces.append(b.strip())
-          packed=base64.b64decode(b''.join(pieces),validate=True)
-          assert len(packed)==m['bytes'] and hashlib.sha256(packed).hexdigest()==m['sha256']
-          payload=json.loads(lzma.decompress(packed))
+          def unpack(meta,prefix):
+              pieces=[]
+              for i in range(meta['parts']):
+                  name=prefix+'.b64.%04d'%i;b=(transport/name).read_bytes()
+                  assert hashlib.sha1(('blob %d\0'%len(b)).encode()+b).hexdigest()==meta['git_blobs'][name],name
+                  pieces.append(b.strip())
+              packed=base64.b64decode(b''.join(pieces),validate=True)
+              assert len(packed)==meta['bytes'] and hashlib.sha256(packed).hexdigest()==meta['sha256']
+              return json.loads(lzma.decompress(packed))
+          payload=unpack(m,'overlay')
           def safe(n):
               p=pathlib.Path(n);assert not p.is_absolute() and '..' not in p.parts;return root/p
           with zipfile.ZipFile('base/ULike_v1.9.16_sources_and_QA.zip') as z:
@@ -59,10 +62,16 @@ jobs:
           for n,text in payload['new'].items():
               p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
           for n,h in payload['pins'].items():assert hashlib.sha256(safe(n).read_bytes()).hexdigest()==h,n
-          safe('fix1917/source-input.json').write_text(json.dumps({'baseline_sha256':m['baseline_sha256'],'pins':payload['pins']},indent=2)+'\n')
+          review_meta=json.loads((transport/'review-transport.json').read_text());review=unpack(review_meta,'review')
+          assert review['initial_pins']==payload['pins']
+          subprocess.run(['patch','-p1','--batch','--forward'],cwd=root,input=review['patch'],text=True,check=True)
+          for n,text in review['new'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+          for n,h in review['pins'].items():assert hashlib.sha256(safe(n).read_bytes()).hexdigest()==h,n
+          safe('fix1917/source-input.json').write_text(json.dumps({'baseline_sha256':m['baseline_sha256'],'review_transport_sha256':review_meta['sha256'],'pins':review['pins']},indent=2)+'\n')
           if json.load(open('fix1917/trigger.json'))['stage']=='publish':
               p=safe('fix1917/apk-qa.json');assert not p.exists();p.write_bytes((transport/'apk-qa.json').read_bytes())
-          print('PASS_EXACT_REVIEWED_MATERIAL1917_SOURCE_RESTORED')
+          print('PASS_EXACT_REVIEWED_MATERIAL1917_SOURCE_AND_STATIC_INITIALIZATION_FIX_RESTORED')
           PY
       - name: Restore pinned Java tools and real Android NDK r27c
         shell: bash
