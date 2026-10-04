@@ -1,0 +1,91 @@
+name: Publish Trip My Plan 1.10.14 follow-up fix
+on:
+  push:
+    branches: ['fix/trip-myplan11014']
+    paths: ['.github/workflows/trip-myplan11014-release.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Install pinned CRN archive reader
+        run: python3 -m pip install py7zr==1.1.3
+      - name: Restore exact reviewed source and small Trip delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p source input tools dist
+          python3 - <<'PY'
+          import base64, hashlib, io, json, re, zipfile
+          from pathlib import Path, PurePosixPath
+          parts = sorted(Path('releases/trip-v1.10.14').glob('source.b64.*'))
+          assert len(parts) == 7
+          raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
+          assert hashlib.sha256(raw).hexdigest() == '1246e3908456d4cfdd00d08ea1a1411feb5ae93fc2c89180a5f3e3208dd1cc90'
+          with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+              names = archive.namelist()
+              assert len(names) == len(set(names)) and archive.testzip() is None
+              catalog = json.loads(archive.read('SOURCE_ARCHIVE_MANIFEST.json'))
+              assert catalog['schema'] == 'trip-myplan11014-source-catalog-1'
+              assert set(names) == set(catalog['files']) | {'SOURCE_ARCHIVE_MANIFEST.json'}
+              for name in names:
+                  path = PurePosixPath(name)
+                  assert not path.is_absolute() and '..' not in path.parts and '\\' not in name
+                  assert str(path) == name
+                  assert path.suffix.lower() in {'.py','.js','.cjs','.mjs','.java','.json','.txt','.md','.tsv','.sha256','.zip','.yml','.template'}
+                  data = archive.read(name)
+                  if name != 'SOURCE_ARCHIVE_MANIFEST.json':
+                      row = catalog['files'][name]
+                      assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+                  if path.suffix == '.zip':
+                      assert name == 'transport.zip'
+                  else:
+                      assert b'\x00' not in data
+                      assert not re.search(rb'-----BEGIN (?:[A-Z ]+ )?PRIVATE KEY-----', data)
+                      data.decode('utf-8')
+              archive.extractall('source')
+          Path('dist/Tripcom_v1.10.14_sources_and_QA.zip').write_bytes(raw)
+          PY
+      - name: Reconstruct exact reviewed MPPs and preserve all unrelated entries
+        run: python3 source/publication/rebuild_trip.py --config source/publication/release.json --source source --dist dist --input input
+      - name: Run current JS render and independent non-Trip DEX preservation checks
+        run: python3 source/publication/run_checks.py --config source/publication/release.json --source source --dist dist --input input --tools tools
+      - name: Recheck reviewed main/dev heads and preview Manager metadata
+        run: >-
+          python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
+          --source-archive dist/Tripcom_v1.10.14_sources_and_QA.zip --source-sha256 1246e3908456d4cfdd00d08ea1a1411feb5ae93fc2c89180a5f3e3208dd1cc90
+          --target-commit "${GITHUB_SHA}" --preflight-only
+      - name: Publish verified release and update Manager main/dev metadata
+        run: >-
+          python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
+          --source-archive dist/Tripcom_v1.10.14_sources_and_QA.zip --source-sha256 1246e3908456d4cfdd00d08ea1a1411feb5ae93fc2c89180a5f3e3208dd1cc90
+          --target-commit "${GITHUB_SHA}"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trip-myplan11014-release-and-publication-state
+          path: |
+            dist/*.mpp
+            dist/*.zip
+            dist/*.json
+            dist/*.log
+            dist/native-checks/*.json
+            dist/native-checks/*.log
+          if-no-files-found: warn
+          retention-days: 14
