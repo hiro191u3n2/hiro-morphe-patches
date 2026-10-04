@@ -1,0 +1,95 @@
+name: ULike upload1910 source-verified trial
+on:
+  push:
+    branches: [fix/ulike-upload1910]
+    paths: [fix1910/trigger.json]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Restore exact released199 source and reviewed overlay
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p base source
+          gh release download ulike-v1.9.9 --repo "$GH_REPO" --dir base -p 'ULike_HQ_Texture_Online_v1.9.9.mpp' -p 'Hiro_Morphe_Patches_v1.0.133.mpp' -p 'ULike_v1.9.9_sources_and_QA.zip'
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,os,pathlib,subprocess,zipfile
+          P=pathlib.Path; sha=lambda b:hashlib.sha256(b).hexdigest()
+          pins={'ULike_HQ_Texture_Online_v1.9.9.mpp':'8f4dce25e19d62323b8eacd481af7acccfc9dc49ea34304d2956ccf9a1b70416','Hiro_Morphe_Patches_v1.0.133.mpp':'baf11d92ef439a3919458eaaa1f194c0e5be7d47cfe1b873079f62ae56e5e02f','ULike_v1.9.9_sources_and_QA.zip':'ed8d98663ed32284b7ff5f35757ca5fa44562372cb77f67ad37d13cfd48ea7ce'}
+          for n,h in pins.items():assert sha((P('base')/n).read_bytes())==h,n
+          with zipfile.ZipFile('base/ULike_v1.9.9_sources_and_QA.zip') as z:z.extractall('source')
+          transport=json.loads(P('fix1910/transport.json').read_text());encoded=b''
+          for i in range(transport['parts']):
+              n='overlay.b64.%04d'%i;b=(P('fix1910')/n).read_bytes()
+              assert hashlib.sha1(('blob %d\0'%len(b)).encode()+b).hexdigest()==transport['git_blobs'][n],n
+              encoded+=b.strip()
+          raw=base64.b64decode(encoded,validate=True);assert len(raw)==transport['bytes'] and sha(raw)==transport['sha256']
+          payload=json.loads(lzma.decompress(raw));root=P('source')
+          def safe(n):
+              p=P(n);assert not p.is_absolute() and '..' not in p.parts;return root/p
+          for n,old in payload['copies'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(safe(old).read_bytes())
+          subprocess.run(['patch','-p1','--batch','--forward'],cwd=root,input=payload['patch'],text=True,check=True)
+          for n,text in payload['new'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+          for n,h in json.loads((root/'fix1910/overlay-files.json').read_text()).items():assert sha(safe(n).read_bytes())==h,n
+          stage=json.loads(P('fix1910/trigger.json').read_text())['stage'];assert stage in ('build','publish')
+          if stage=='publish':
+              p=root/'fix1910/apk-qa.json';p.write_bytes(P('fix1910/apk-qa.json').read_bytes())
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('stage='+stage+'\n')
+          print('PASS_PINNED_SOURCE_TRANSPORT stage='+stage)
+          PY
+      - name: Install pinned toolchain and software GPU dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq g++ libegl1-mesa-dev libgles2-mesa-dev libgl1-mesa-dev python3
+          python3 source/fix197/publication/get_tools197.py --output tools
+          NDK="$ANDROID_HOME/ndk/27.2.12479018"
+          if [ ! -d "$NDK" ]; then yes | sdkmanager 'ndk;27.2.12479018' >/dev/null; fi
+          echo "ULIKE_NDK=$NDK" >> "$GITHUB_ENV"
+      - name: Execute native, geometry, Java, independent builds and preservation gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXTRA=()
+          if [ '${{ steps.source.outputs.stage }}' = publish ]; then EXTRA=(--apk-qa "$PWD/source/fix1910/apk-qa.json"); fi
+          python3 source/fix1910/run1910.py --base "$PWD/base" --tools "$PWD/tools" --ndk "$ULIKE_NDK" --out "$PWD/results" "${EXTRA[@]}"
+      - name: Publish only after exact-artifact original-APK application gate
+        if: steps.source.outputs.stage == 'publish'
+        shell: bash
+        run: python3 source/fix1910/publish1910.py "$PWD/results/dist"
+      - name: Store authored build results and evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1910-${{ steps.source.outputs.stage }}-results
+          retention-days: 7
+          if-no-files-found: warn
+          path: |
+            results/dist/*.mpp
+            results/dist/*.zip
+            results/dist/*.json
+            results/evidence/*.log
+            results/dist/work/**/*.txt
+            results/dist/work/**/runtime-audit.tsv
+            results/dist/work/**/runtime-source-merge.log
+            results/renderer1910.json
+            results/runtime/*.txt
+            results/runtime/SOURCE_COMPILE197.json
