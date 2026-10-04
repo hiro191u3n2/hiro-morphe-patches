@@ -1,0 +1,94 @@
+name: ULike state1912 reviewed build and trial release
+on:
+  push:
+    branches: [fix/ulike-state1912]
+    paths: [fix1912/trigger.json]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Read authorized stage and restore verified source
+        id: stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import json,os
+          request=json.load(open('fix1912/trigger.json'))
+          assert request['version']=='1.9.12' and request['stage'] in ('build','publish')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+request['stage']+'\n')
+          PY
+          mkdir base source
+          gh release download ulike-v1.9.11 --repo hiro191u3n2/hiro-morphe-patches -D base -p ULike_v1.9.11_sources_and_QA.zip -p ULike_HQ_Texture_Online_v1.9.11.mpp -p Hiro_Morphe_Patches_v1.0.135.mpp
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,pathlib,subprocess,zipfile
+          root=pathlib.Path('source');transport=pathlib.Path('fix1912');m=json.loads((transport/'transport.json').read_text())
+          assert hashlib.sha256(pathlib.Path('base/ULike_v1.9.11_sources_and_QA.zip').read_bytes()).hexdigest()=='2945047ea0a39d6255049cc5f9fe9f58eab07fda6e9c211d23763aa3bf20c2ab'
+          pieces=[]
+          for i in range(m['parts']):
+              name='overlay.b64.%04d'%i;b=(transport/name).read_bytes()
+              assert hashlib.sha1(('blob %d\0'%len(b)).encode()+b).hexdigest()==m['git_blobs'][name],name
+              pieces.append(b.strip())
+          packed=base64.b64decode(b''.join(pieces),validate=True)
+          assert len(packed)==m['bytes'] and hashlib.sha256(packed).hexdigest()==m['sha256']
+          payload=json.loads(lzma.decompress(packed))
+          with zipfile.ZipFile('base/ULike_v1.9.11_sources_and_QA.zip') as z:
+              for n in z.namelist():assert not pathlib.Path(n).is_absolute() and '..' not in pathlib.Path(n).parts
+              z.extractall(root)
+          def safe(n):
+              p=pathlib.Path(n);assert not p.is_absolute() and '..' not in p.parts;return root/p
+          for n,old in payload['copies'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(safe(old).read_bytes())
+          subprocess.run(['patch','-p1','--batch','--forward'],cwd=root,input=payload['patch'],text=True,check=True)
+          for n,text in payload['new'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+          for n,h in json.loads((root/'fix1912/overlay-files.json').read_text()).items():assert hashlib.sha256(safe(n).read_bytes()).hexdigest()==h,n
+          if json.load(open('fix1912/trigger.json'))['stage']=='publish':
+              (root/'fix1912/apk-qa.json').write_bytes((transport/'apk-qa.json').read_bytes())
+          print('PASS_REVIEWED_STATE1912_TRANSPORT')
+          PY
+      - name: Restore pinned build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y g++ libegl1-mesa-dev libgl1-mesa-dev
+          python3 source/fix197/publication/get_tools197.py --output tools
+          if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null; fi
+          test -f "$ANDROID_HOME/ndk/27.2.12479018/source.properties"
+      - name: Execute actual-source regressions and two independent native and MPP builds
+        shell: bash
+        run: |
+          set -euo pipefail
+          args=()
+          if [ '${{ steps.stage.outputs.mode }}' = publish ]; then args+=(--apk-qa source/fix1912/apk-qa.json); fi
+          python3 source/fix1912/run1912.py --base "$PWD/base" --tools "$PWD/tools" --ndk "$ANDROID_HOME/ndk/27.2.12479018" --out "$PWD/results" "${args[@]}"
+      - name: Publish trial only after exact original APK application receipt
+        if: steps.stage.outputs.mode == 'publish'
+        shell: bash
+        run: python3 source/fix1912/publish1912.py results/dist
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1912-${{ steps.stage.outputs.mode }}-results
+          retention-days: 14
+          path: |
+            results/dist/*.mpp
+            results/dist/*.zip
+            results/dist/*.json
+            results/evidence/
+            results/renderer.json
+            results/renderer-work/*.log
+            results/dist/work/*/*.log
