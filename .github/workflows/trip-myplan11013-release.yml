@@ -37,7 +37,7 @@ jobs:
           parts = sorted(Path('releases/trip-v1.10.13').glob('source.b64.*'))
           assert len(parts) == 13
           raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
-          assert hashlib.sha256(raw).hexdigest() == 'a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255'
+          assert hashlib.sha256(raw).hexdigest() == '9060f72d11fdd9e44a88991ed3aae8d085fa45e7c397218064b0dcd39dee1973'
           with zipfile.ZipFile(io.BytesIO(raw)) as archive:
               names = archive.namelist()
               assert len(names) == len(set(names)) and archive.testzip() is None
@@ -69,12 +69,12 @@ jobs:
       - name: Recheck reviewed main/dev heads and preview Manager metadata
         run: >-
           python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
-          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255
+          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 9060f72d11fdd9e44a88991ed3aae8d085fa45e7c397218064b0dcd39dee1973
           --target-commit "${GITHUB_SHA}" --preflight-only
       - name: Publish verified release and update Manager main/dev metadata
         run: >-
           python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
-          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255
+          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 9060f72d11fdd9e44a88991ed3aae8d085fa45e7c397218064b0dcd39dee1973
           --target-commit "${GITHUB_SHA}"
       - uses: actions/upload-artifact@v4
         if: always()
