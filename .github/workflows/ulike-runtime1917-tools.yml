@@ -1,0 +1,21 @@
+name: ULike runtime1917 audit tools
+on:
+  push:
+    branches: [fix/ulike-runtime1917]
+    paths: [.github/workflows/ulike-runtime1917-tools.yml]
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - run: |
+          mkdir wheels
+          python3 -m pip download --only-binary=:all: --no-deps --dest wheels unicorn==2.1.4 capstone==5.0.6 pyelftools==0.32
+          sha256sum wheels/* > wheels/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1917-audit-wheels
+          path: wheels/
+          retention-days: 7
