@@ -30,14 +30,14 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir source input tools dist
+          mkdir -p source input tools dist
           python3 - <<'PY'
           import base64, hashlib, io, json, re, zipfile
           from pathlib import Path, PurePosixPath
           parts = sorted(Path('releases/trip-v1.10.13').glob('source.b64.*'))
           assert len(parts) == 13
           raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
-          assert hashlib.sha256(raw).hexdigest() == '973c7bc028794a1e0c43c9eeeef88bedcbb5d5fb416cfe1bd6dd90a8abb95667'
+          assert hashlib.sha256(raw).hexdigest() == 'a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255'
           with zipfile.ZipFile(io.BytesIO(raw)) as archive:
               names = archive.namelist()
               assert len(names) == len(set(names)) and archive.testzip() is None
@@ -69,12 +69,12 @@ jobs:
       - name: Recheck reviewed main/dev heads and preview Manager metadata
         run: >-
           python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
-          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 973c7bc028794a1e0c43c9eeeef88bedcbb5d5fb416cfe1bd6dd90a8abb95667
+          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255
           --target-commit "${GITHUB_SHA}" --preflight-only
       - name: Publish verified release and update Manager main/dev metadata
         run: >-
           python3 source/publication/publish_trip.py --config source/publication/release.json --dist dist
-          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 973c7bc028794a1e0c43c9eeeef88bedcbb5d5fb416cfe1bd6dd90a8abb95667
+          --source-archive dist/Tripcom_v1.10.13_sources_and_QA.zip --source-sha256 a0f0b2e1e94683dc016c713d2dfb56b7451f1a85bdc92bebc3d72cc0977bd255
           --target-commit "${GITHUB_SHA}"
       - uses: actions/upload-artifact@v4
         if: always()
