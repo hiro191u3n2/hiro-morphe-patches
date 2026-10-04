@@ -1,0 +1,105 @@
+name: Publish ULike 1.9.1 10bit beauty and filters
+on:
+  push:
+    branches: ['fix/ulike-beauty191']
+    paths: ['.github/workflows/ulike-beauty191-release.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Verify reviewed authored source bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir source input toolchain dist
+          python3 - <<'PY'
+          import base64, hashlib, io, json, zipfile
+          from pathlib import Path, PurePosixPath
+          parts = sorted(Path('releases/ulike-v1.9.1').glob('source.b64.*'))
+          assert len(parts) == 36
+          raw = base64.b64decode(''.join(''.join(p.read_text().split()) for p in parts), validate=True)
+          assert hashlib.sha256(raw).hexdigest() == 'a4ef9b0fb3200f9db35e2e81925a4abb381fd3e452537f4d6bae7538716d4928'
+          with zipfile.ZipFile(io.BytesIO(raw)) as archive:
+              assert archive.testzip() is None
+              names = archive.namelist()
+              assert len(names) == len(set(names))
+              catalog = json.loads(archive.read('SOURCE_ARCHIVE_MANIFEST.json'))
+              assert set(names) == set(catalog['files']) | {'SOURCE_ARCHIVE_MANIFEST.json'}
+              for name in names:
+                  path = PurePosixPath(name)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert path.suffix.lower() not in {'.apk','.apks','.aab','.so','.model','.onnx','.heic','.heif','.jpg','.jpeg','.png','.webp','.avif','.gif','.dng','.raw','.yuv','.h265','.hevc'}
+                  data = archive.read(name)
+                  if name != 'SOURCE_ARCHIVE_MANIFEST.json':
+                      row = catalog['files'][name]
+                      assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+                  assert not data.startswith((b'PK\x03\x04', b'PK\x05\x06', b'\x7fELF'))
+              archive.extractall('source')
+          Path('dist/ULike_v1.9.1_sources_and_QA.zip').write_bytes(raw)
+          PY
+      - name: Read exact public predecessor MPPs
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh release download ulike-v1.8.9 --pattern ULike_HQ_Texture_Online_v1.8.9.mpp --dir input
+          gh release download ulike-v1.8.9 --pattern Hiro_Morphe_Patches_v1.0.122.mpp --dir input
+      - name: Restore pinned public toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/implementation191/build/get_tools191.py --output toolchain
+      - name: Rebuild reviewed patch entirely from source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/implementation191/build/package191.py --tools toolchain --jdk toolchain/jdk21 --ndk toolchain/android-ndk-r27c --baseline-dir input --output dist
+          python3 - <<'PY'
+          import hashlib, json, sys
+          from pathlib import Path
+          sys.path.insert(0, 'source/implementation191/publication')
+          from publish191 import validate_local
+          qa_path = Path('source/implementation191/publication/LOCAL_QA.json')
+          raw = qa_path.read_bytes()
+          qa = json.loads(raw)
+          for row in qa['artifacts']:
+              data = (Path('dist') / row['file']).read_bytes()
+              assert len(data) == row['bytes'] and hashlib.sha256(data).hexdigest() == row['sha256']
+          Path('dist/QA_ULike_v1.9.1.json').write_bytes(raw)
+          validate_local(qa_path, Path('dist'))
+          print('PASS source-rebuilt bytes match exact locally APK-applied release. Physical Android SDK execution remains untested.')
+          PY
+      - name: Read-only current main/dev preflight
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/implementation191/publication/publish191.py --qa source/implementation191/publication/LOCAL_QA.json --dist dist --notes source/implementation191/publication/RELEASE_NOTES.txt --release-body source/implementation191/publication/README.md --summary-file source/implementation191/publication/CHANGELOG_SUMMARY.txt --expected-baseline source/implementation191/publication/PUBLICATION_BASELINE.json --release-date 2026-10-04 --preflight-only
+      - name: Publish verified implementation and update Manager
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/implementation191/publication/publish191.py --qa source/implementation191/publication/LOCAL_QA.json --dist dist --notes source/implementation191/publication/RELEASE_NOTES.txt --release-body source/implementation191/publication/README.md --summary-file source/implementation191/publication/CHANGELOG_SUMMARY.txt --expected-baseline source/implementation191/publication/PUBLICATION_BASELINE.json --release-date 2026-10-04
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike-beauty191-release-and-publication-state
+          path: |
+            dist/*.mpp
+            dist/*.zip
+            dist/*.json
+            dist/build/*.txt
+            dist/build/runtime/*.json
+          if-no-files-found: warn
+          retention-days: 14
