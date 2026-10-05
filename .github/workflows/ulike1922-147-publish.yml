@@ -1,0 +1,108 @@
+name: Publish ULike1922 preview layout repair and bundle147
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1922-147-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed sources and desktop evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma
+          folder = Path('releases/ulike1922-147/transport')
+          encoded = ''.join((folder / f'part{i}.b64').read_text().strip() for i in range(5))
+          assert len(encoded) == 32920, 'Source transport length mismatch'
+          raw = base64.b64decode(encoded, validate=True)
+          assert len(raw) == 24688
+          assert hashlib.sha256(raw).hexdigest() == 'a6dd1245d0361934dff660e855f9ed62660cf01197715b3cd14d4d43d0fa54b1'
+          obj = json.loads(lzma.decompress(raw))
+          assert obj['schema'] == 'ulike1922-reviewed-source-and-evidence-v1'
+          assert len(obj['entries']) == 47 and len(obj['blobs']) == 43
+          restored = {}
+          for digest, spec in obj['blobs'].items():
+              if 'text' in spec:
+                  data = spec['text'].encode('utf-8')
+              elif 'base64' in spec:
+                  data = base64.b64decode(spec['base64'], validate=True)
+              else:
+                  base = Path(spec['base'])
+                  assert spec['base'].startswith('releases/ulike1921-146/src/')
+                  assert not base.is_absolute() and '..' not in base.parts
+                  before = base.read_bytes()
+                  assert hashlib.sha256(before).hexdigest() == spec['base_sha256'], 'Source base drift: ' + str(base)
+                  lines = before.decode('utf-8').splitlines(keepends=True)
+                  last = len(lines)
+                  for start, end, replacement in reversed(spec['edits']):
+                      assert 0 <= start <= end <= last
+                      lines[start:end] = replacement
+                      last = start
+                  data = ''.join(lines).encode('utf-8')
+              assert hashlib.sha256(data).hexdigest() == digest, 'Restored source hash mismatch'
+              restored[digest] = data
+          destination = Path('stage1922')
+          assert not destination.exists(), 'Fresh workspace required'
+          for name, digest in obj['entries'].items():
+              relative = Path(name)
+              assert not relative.is_absolute() and '..' not in relative.parts
+              assert relative.parts[0] in ('src', 'evidence')
+              assert relative.suffix in ('.java', '.py', '.json', '.txt', '.tsv', '.log', '.dex')
+              path = destination / relative
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(restored[digest])
+          print('PASS exact47 reviewed source/evidence files restored; no full APK or user image included')
+          PY
+      - name: Download pinned approved baseline and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir input1922 tools1922
+          for name in ULike_HQ_Texture_Online_v1.9.21.mpp Hiro_Morphe_Patches_v1.0.146.mpp; do
+            curl --fail --location --retry 3 --output "input1922/$name" "https://github.com/$GH_REPO/releases/download/ulike-v1.9.21/$name"
+          done
+          curl --fail --location --retry 3 --output tools1922/morphe.jar https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" tools1922/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" tools1922/d8.jar
+      - name: Rebuild, run239 host assertions and bind desktop validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stage1922/src/build1922.py --input input1922 --tools tools1922 --work build1922 --output dist1922 | tee build1922.log
+          python stage1922/src/finalize1922.py --dist dist1922 --evidence stage1922/evidence --build build1922 | tee finalize1922.log
+      - name: Publish exact bytes and verify main and dev Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stage1922/src/publish1922.py --dist dist1922 --repo . | tee publication1922.log
+      - name: Retain release and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1922-147-release-results
+          retention-days: 14
+          path: |
+            dist1922
+            build1922.log
+            finalize1922.log
+            publication1922.log
