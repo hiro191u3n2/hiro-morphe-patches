@@ -1,0 +1,45 @@
+name: ULike 188 settings cleanup inspection tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-settings-cleanup-tools.yml']
+permissions:
+  contents: read
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch exact rollback base and inspection tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p inspect/input inspect/toolchain inspect/source
+          gh release download ulike-v1.8.8 -p 'ULike_HQ_Texture_Online_v1.8.8.mpp' -p 'ULike_v1.8.8_sources_and_QA.zip' -D inspect/input
+          gh release download ulike-rollback-v1.8.8-bundle-v1.0.142 -p 'Hiro_Morphe_Patches_v1.0.142.mpp' -D inspect/input
+          curl -fL --retry 3 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o inspect/toolchain/morphe.jar
+          echo 'dbdaab4f578604b725f6285d1312eb33f52160cbc024a9168b95202b1dde2d79  inspect/input/ULike_HQ_Texture_Online_v1.8.8.mpp' | sha256sum -c -
+          echo '2c0cdcf6719a9448b7198185e78f93bf9ea7b9504cecb86c3971b0ff881a30b0  inspect/input/ULike_v1.8.8_sources_and_QA.zip' | sha256sum -c -
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  inspect/toolchain/morphe.jar' | sha256sum -c -
+          unzip -q inspect/input/ULike_v1.8.8_sources_and_QA.zip -d inspect/source
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" inspect/toolchain/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" inspect/toolchain/d8.jar
+          find inspect/source -type f | sort
+          sha256sum inspect/input/* inspect/toolchain/*
+          java -version
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike188-settings-inspection
+          path: inspect/
+          retention-days: 7
+          compression-level: 0
