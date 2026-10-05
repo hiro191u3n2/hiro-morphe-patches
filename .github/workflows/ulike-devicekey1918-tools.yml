@@ -1,0 +1,31 @@
+name: ULike devicekey1918 public tools
+on:
+  push:
+    branches: [fix/ulike-devicekey1918]
+    paths: [.github/workflows/ulike-devicekey1918-tools.yml]
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Restore checksum-pinned Java tools and public emulation wheels
+        run: |
+          set -euo pipefail
+          mkdir source wheels
+          gh release download ulike-v1.9.17 --repo hiro191u3n2/hiro-morphe-patches -p ULike_v1.9.17_sources_and_QA.zip
+          python3 -m zipfile -e ULike_v1.9.17_sources_and_QA.zip source
+          python3 source/fix197/publication/get_tools197.py --output tools
+          python3 -m pip download --only-binary=:all: --no-deps -d wheels unicorn==2.1.4 capstone==5.0.6 pyelftools==0.32
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1918-public-tools
+          retention-days: 7
+          path: |
+            wheels/*.whl
+            tools/morphe-1.16.jar
+            tools/r8-8.3.37.jar
+            tools/android.jar
