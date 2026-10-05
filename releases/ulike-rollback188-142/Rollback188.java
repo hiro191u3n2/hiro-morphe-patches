@@ -16,7 +16,7 @@ public final class Rollback188 {
     var result = new TreeMap<String,ClassDef>();
     var container = DexFileFactory.loadDexContainer(Path.of(path).toFile(), OPS);
     for (String name : container.getDexEntryNames())
-      for (ClassDef c : container.getDexEntry(name).getDexFile().getClasses())
+      for (ClassDef c : container.getEntry(name).getDexFile().getClasses())
         check(result.put(c.getType(), c) == null, "Duplicate class: " + c.getType());
     return result;
   }
