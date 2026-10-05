@@ -1,0 +1,23 @@
+name: EasyLoupe141 alignment support
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/easyloupe141-native-tools.yml']
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Collect zipalign runtime
+        run: |
+          set -eu
+          mkdir -p support
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib64/libc++.so" support/libc++.so
+          sha256sum support/libc++.so > support/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easyloupe141-alignment-support
+          path: support/
+          retention-days: 3
