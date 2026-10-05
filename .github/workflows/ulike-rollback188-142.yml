@@ -1,0 +1,72 @@
+name: Exact uploaded ULike188 rollback and bundle142 publication
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-rollback188-142.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore and verify exact reviewed source transport
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import base64, hashlib, json, subprocess
+          from pathlib import Path
+          folder = Path('releases/ulike-rollback188-142')
+          source = folder / 'rollback142.py'
+          raw = source.read_bytes()
+          expected = '9094656cdd70fd6539e318d2bde3074f2c0c13c271ddf5e13f6184bf67ee8e1f'
+          if hashlib.sha256(raw).hexdigest() != expected:
+              before = b"n.startswith('ulike191/' for n in actual)"
+              after = b"n.startswith('ulike191/') for n in actual)"
+              assert raw.count(before) == 1
+              corrected = raw.replace(before, after, 1)
+              assert hashlib.sha256(corrected).hexdigest() == expected
+              source.write_bytes(corrected)
+              endpoint = 'repos/hiro191u3n2/hiro-morphe-patches/contents/' + source.as_posix()
+              current = json.loads(subprocess.check_output(['gh','api',endpoint+'?ref=main']))
+              assert base64.b64decode(current['content']) == raw
+              body = {'message':'Fix source transport parenthesis and preserve reviewed checksum',
+                      'content':base64.b64encode(corrected).decode(),'sha':current['sha'],'branch':'main'}
+              subprocess.run(['gh','api','-X','PUT',endpoint,'--input','-'],input=json.dumps(body),text=True,check=True)
+          assert hashlib.sha256(source.read_bytes()).hexdigest() == expected
+          assert hashlib.sha256((folder/'Rollback188.java').read_bytes()).hexdigest() == '57d9ca1e174c897769d378b6f993ecc109cf31841e4e0022daf1e0a8cd260128'
+          compile(source.read_bytes(), str(source), 'exec')
+          print('PASS reviewed Python and Java source checksums')
+          PY
+      - name: Replace exact ULike loader and resources; verify all other apps
+        run: python3 releases/ulike-rollback188-142/rollback142.py build
+      - name: Publish checked rollback, update Manager and withdraw rejected MPP
+        shell: bash
+        run: |
+          set -euo pipefail
+          export GITHUB_SHA="$(gh api repos/hiro191u3n2/hiro-morphe-patches/git/ref/heads/main --jq .object.sha)"
+          python3 releases/ulike-rollback188-142/rollback142.py publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike188-rollback142-results
+          path: |
+            dist/
+            build/classes*.tsv
+          if-no-files-found: warn
+          retention-days: 14
