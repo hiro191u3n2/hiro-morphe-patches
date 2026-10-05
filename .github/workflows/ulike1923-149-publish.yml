@@ -1,0 +1,113 @@
+name: Publish ULike1923 preview and shadow repair bundle149
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1923-149-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed source and desktop evidence
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma
+          folder = Path('releases/ulike1923-149/transport')
+          manifest = json.loads((folder / 'manifest.json').read_text())
+          assert manifest['schema'] == 'ulike1923-reviewed-source-evidence-v1'
+          encoded = ''.join((folder / f'part{i}.b64').read_text().strip() for i in range(6))
+          assert len(encoded) == 61368, 'Source transport length mismatch'
+          raw = base64.b64decode(encoded, validate=True)
+          assert len(raw) == 46024
+          assert hashlib.sha256(raw).hexdigest() == 'ac39a19f2e5a3d8623b6af17cbaf27132ec9d2d1a81d054511ec40c3a28d1c0e'
+          obj = json.loads(lzma.decompress(raw))
+          assert obj['schema'] == manifest['schema']
+          assert len(obj['entries']) == 74 and len(obj['blobs']) == 66
+          restored = {}
+          for digest, spec in obj['blobs'].items():
+              if 'text' in spec:
+                  data = spec['text'].encode('utf-8')
+              elif 'base64' in spec:
+                  data = base64.b64decode(spec['base64'], validate=True)
+              else:
+                  base = Path(spec['base'])
+                  assert spec['base'].startswith('releases/ulike1922-147/src/')
+                  assert not base.is_absolute() and '..' not in base.parts
+                  before = base.read_bytes()
+                  assert hashlib.sha256(before).hexdigest() == spec['base_sha256'], 'Source base drift: ' + str(base)
+                  lines = before.decode('utf-8').splitlines(keepends=True)
+                  last = len(lines)
+                  for start, end, replacement in reversed(spec['edits']):
+                      assert 0 <= start <= end <= last
+                      lines[start:end] = replacement
+                      last = start
+                  data = ''.join(lines).encode('utf-8')
+              assert hashlib.sha256(data).hexdigest() == digest, 'Restored source hash mismatch'
+              restored[digest] = data
+          destination = Path('work1923')
+          assert not destination.exists()
+          for name, digest in obj['entries'].items():
+              relative = Path(name)
+              assert not relative.is_absolute() and '..' not in relative.parts
+              assert relative.parts[0] in ('src', 'evidence')
+              assert relative.suffix in ('.java', '.py', '.json', '.txt', '.tsv', '.log', '.dex')
+              path = destination / relative
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(restored[digest])
+          print('PASS exact74 reviewed source/evidence files restored; no full APK or user image included')
+          PY
+      - name: Download pinned approved baselines and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir input1923 tools1923
+          python - <<'PY'
+          import json, pathlib
+          assert json.loads(pathlib.Path('patches-bundle.json').read_text())['version'] == '1.0.148', 'Active baseline changed'
+          PY
+          curl --fail --location --retry 3 --output input1923/ULike_HQ_Texture_Online_v1.9.22.mpp "https://github.com/$GH_REPO/releases/download/ulike-v1.9.22/ULike_HQ_Texture_Online_v1.9.22.mpp"
+          curl --fail --location --retry 3 --output input1923/Hiro_Morphe_Patches_v1.0.148.mpp "https://raw.githubusercontent.com/$GH_REPO/c1882c8bf27f5af6af58b1640298284f08d5dafb/downloads/Hiro_Morphe_Patches_v1.0.148.mpp"
+          curl --fail --location --retry 3 --output tools1923/morphe.jar https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" tools1923/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" tools1923/d8.jar
+      - name: Rebuild and run285 host assertions; bind original APK desktop validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1923/src/build1923.py --input input1923 --tools tools1923 --work build1923 --output dist1923 | tee build1923.log
+          python work1923/src/finalize1923.py --dist dist1923 --evidence work1923/evidence --build build1923 | tee finalize1923.log
+      - name: Publish exact bytes and verify main and dev Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1923/src/publish1923.py --dist dist1923 --repo "$GITHUB_WORKSPACE" | tee publication1923.log
+      - name: Retain published release and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1923-149-publication-verification
+          retention-days: 14
+          path: |
+            dist1923
+            build1923.log
+            finalize1923.log
+            publication1923.log
