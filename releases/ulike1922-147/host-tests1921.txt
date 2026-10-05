@@ -1,0 +1,86 @@
+warning: [options] source value 8 is obsolete and will be removed in a future release
+warning: [options] target value 8 is obsolete and will be removed in a future release
+warning: [options] To suppress warnings about obsolete options, use -Xlint:-options.
+Note: /home/runner/work/hiro-morphe-patches/hiro-morphe-patches/build1922/exit-host/src/com/hiro/ulike/LensRelease163.java uses unchecked or unsafe operations.
+Note: Recompile with -Xlint:unchecked for details.
+3 warnings
+PASS	baseline missing diagnostics field reproduces fail-closed busy (host model)
+PASS	fixed empty camera is not busy
+PASS	persistent style configuration is not pending work
+PASS	in-flight capture protected
+PASS	closed screen ignores retired lens front-end count only
+PASS	capture deadline protected
+PASS	elapsed lens deadline is idle
+PASS	delivering true protected
+PASS	delivering complete becomes idle
+PASS	selected true protected
+PASS	selected complete becomes idle
+PASS	pending nonnull protected
+PASS	pending remains protected after screen close
+PASS	pending cleared becomes idle
+PASS	captureCallback nonnull protected
+PASS	captureCallback remains protected after screen close
+PASS	captureCallback cleared becomes idle
+PASS	null weak state ignored
+PASS	lens callbacks protected
+PASS	lens callbacks protected after screens close
+PASS	lens callbacks completion releases wait
+PASS	lens nativeCallbacks protected
+PASS	lens nativeCallbacks protected after screens close
+PASS	lens nativeCallbacks completion releases wait
+PASS	lens deliveries protected
+PASS	lens deliveries protected after screens close
+PASS	lens deliveries completion releases wait
+PASS	lens stops protected
+PASS	lens stops protected after screens close
+PASS	lens stops completion releases wait
+PASS	unexpected live state remains fail closed
+PASS	failed inspection logs once
+PASS	no repeated warning flood
+PASS	fixed idle no false saving toast
+PASS	idle first Back requests exit
+PASS	idle retains first quiet safety window
+PASS	cannot close before400ms quiet
+PASS	idle closes screens once after400ms
+PASS	postclose quiet protects writes
+PASS	idle seals and exits after both quiet windows
+PASS	exit cannot terminate twice
+PASS	capture actual busy prevents close/kill
+PASS	capture completion permits normal exit
+PASS	save actual busy prevents close/kill
+PASS	save completion permits normal exit
+PASS	wait remains pending just before15s
+PASS	15s cancels wait without discarding save
+PASS	old timer cannot close after timeout
+PASS	second Back cancels pending exit
+PASS	duplicate cancellation harmless
+PASS	cancelled timer cannot late-exit
+PASS	new explicit Back after cancel can exit
+PASS	dispatchTouchEvent releases input and cancels wait
+PASS	dispatchTouchEvent cancelled timers do not close
+PASS	dispatchGenericMotionEvent releases input and cancels wait
+PASS	dispatchGenericMotionEvent cancelled timers do not close
+PASS	dispatchKeyShortcutEvent releases input and cancels wait
+PASS	dispatchKeyShortcutEvent cancelled timers do not close
+PASS	non-Back key cancels wait and propagates
+PASS	onWindowFocusChanged does not cancel pending exit
+PASS	onContentChanged does not cancel pending exit
+PASS	onWindowAttributesChanged does not cancel pending exit
+PASS	onAttachedToWindow does not cancel pending exit
+PASS	closing cannot be cancelled
+PASS	lifecycle events do not prevent termination
+PASS	recording stop requested exactly once
+PASS	recording output flush protected
+PASS	recording exits only after flush
+PASS	rejected record stop cancels instead of killing
+PASS	record-stop hang cancels wait without forcing process death
+PASS	writer failure stamp cancels exit
+PASS	failed seal never terminates
+PASS	late writer remains protected after close
+PASS	original postclose deadline never forces kill
+PASS	unknown capture state bounded and operable
+PASS	adapter second Back cancels before native routing
+PASS	adapter preserves native panel consume
+PASS	adapter bare camera delegates to original exit
+PASS	worker adapter does not mutate pending flow
+PASS exit assertions=79; production Java, mocked platform/states; no Android device execution

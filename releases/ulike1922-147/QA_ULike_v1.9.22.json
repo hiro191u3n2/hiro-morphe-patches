@@ -1,0 +1,191 @@
+{
+  "schema": "ulike1922-layout-hotfix-1",
+  "status": "REBUILD_MATCHES_DESKTOP_TESTED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.22",
+  "bundle_version": "1.0.147",
+  "base_versions": [
+    "1.9.21",
+    "1.0.146"
+  ],
+  "approved_lineage": "1.8.8",
+  "code_defects_confirmed": true,
+  "screenshot_root_cause_device_confirmed": false,
+  "code_defects": [
+    "Running shade animator handle discarded immediately after start; a new layout cannot cancel its old writes.",
+    "Delayed first-frame task reads whichever animator is current at execution instead of capturing the original.",
+    "Layout callback uses parent right/bottom as local dimensions.",
+    "Top offset setter does not invalidate computed mask targets."
+  ],
+  "host_tests": {
+    "total": 239,
+    "back": 26,
+    "session": 45,
+    "exit": 79,
+    "layout": 89,
+    "android_device_test": false
+  },
+  "other_app_loader_classes_unchanged": 220,
+  "other_app_resources_byte_identical": true,
+  "existing_runtime_classes_bytecode_unchanged": 222,
+  "stock_layout_methods_repaired": 9,
+  "preserved_face_feature_and_camera_processing": true,
+  "preserved_native_panel_back": true,
+  "rebuild_deterministic": true,
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.22.mpp": {
+      "sha256": "5fd0d17b8e5001d77f1bb8299610349fd0c3934318db76fb735dcb51fd2bade3",
+      "bytes": 687576
+    },
+    "Hiro_Morphe_Patches_v1.0.147.mpp": {
+      "sha256": "a2157ac3d1dd34a9681b0123090d2b863e067afcccf28054d09d9dfad91ed70b",
+      "bytes": 17247798
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.21.mpp": "201dfb110a64da8962bf3a20ea6f531feb5a8ad39242c2f642a9cc872a3fe25a",
+    "Hiro_Morphe_Patches_v1.0.146.mpp": "c248e0e278868187a9f35f1f4de698382735d48047dfe97108626aa40fd7b8d6",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy execution or logcat. Host tests use mocked View/Animator and task scheduling.",
+    "Code defects match a plausible intermittent mask mismatch; screenshot-trigger sequence is not device-confirmed.",
+    "No hardware image-quality comparison. Image-processing code is unchanged."
+  ],
+  "original_apk_apply_tested": true,
+  "desktop_validation": {
+    "single": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33360 unique classes / 213512 methods. 1524 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1177,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 176,
+          "failed": 0
+        }
+      }
+    },
+    "bundle": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33360 unique classes / 213512 methods. 1524 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1177,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 176,
+          "failed": 0
+        }
+      }
+    }
+  },
+  "layout_contracts": "PASS 9 original layout contracts; 2 callback guards; local width/height math; setter no-op branch; instruction boundaries; 40 direct helper-to-stock references accessible. Not an ART/device test.",
+  "independent_build_exact": true,
+  "rebuild_sha256_matches_desktop_evidence": true,
+  "ci_android_apply_tested": false,
+  "device_tested": false,
+  "source_sha256": {
+    "AnalyzeAll.java": "8e24326b40a24132a8d59a7050def3e24b1d70f1214249b7d4f5a3109dfdfef3",
+    "AnalyzeStock.java": "64c3973e80303a8087257b20c854934675c978e0dc5224eb4432ce94c90aaf41",
+    "BackRoute1920.java": "adeafef8b9cc344a1598b93da60ad85b912135bf109ae240a1931ae01c448156",
+    "CameraSession1920.java": "51a3079a714319a768541146b1129d531413c05ad6502126f28a63ce58282518",
+    "DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "ExitBusy1921.java": "f2e62749873c0e95a0e7599d4830e5019aa820e65b14f9bbb397ce6427de4f66",
+    "ExitFlow185.java": "02ce07c9bd16c8588ec020293635e05d7e48a1139f6fa016e35bd24f380d5e47",
+    "FindRefs.java": "c8b24dd7eb3d5fa654943706d05f4d633d3cf88d37a7c5e84e8b20a0ad256238",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "PatchClass1922.java": "d0cde831d8af5f3f77162a5f5fe1e500dceae169e4c924db15684dbbc56fb804",
+    "PreviewLayout1922.java": "00121cabcd31d6f6d484236df6e20a87af07098e5bef9b5e2529d485c374b136",
+    "Seed1922.java": "1989e6bb5c1a2504aa39deefa4d368ff3ed5dfa4e61b3e2ea4f53af9e2a221df",
+    "Transform1922.java": "40e58dbcd3610777c58fca27f0141f26cd1c663b040b9be51a6cbb5faae6ee38",
+    "VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "VerifyLayout1922.java": "af01e5f14b0e23826e2ed59025794b38b737ee78705120d3cb7fc65dd0b92bf7",
+    "build1922.py": "6ae24e5378cbb482887b9a9b368868aa1936584150eb0f5aba521f27d6f17e63",
+    "busy-schema.tsv": "1725cf70b38e4e473f27359fc88533056e1f93af371abaff1d63b8ddf378f805",
+    "finalize1922.py": "533cdd946975721cb07d419274027b52029567abc4ec4836d95b4f80796ca6c1",
+    "host_tests1920.py": "599b7e2d336a6eee4d76a8fc613924eabd80116867f7ceac83a6a0b646b81e74",
+    "host_tests1921.py": "d6ea38b6463fe79b92a08dbafd871170c5928e3f690992174eccf68ddfc4de4f",
+    "host_tests1922.py": "0b50d9555ef11cfd6254732c75f6a3bf1841254d260fdc5c9327d9b384fc3aa5",
+    "layout-stock-seed-hashes.tsv": "1ecc89c89b82eab8f95e82af314c07c036f1eccd9f22b4bcf3b62e20d598e390",
+    "layout-stock-seed.dex": "b3a953405ee6f8c7cbff0e5ef1c0cfd0923aea527aa535dfbf23fd538fe08f55",
+    "layout-stubs/com/bytedance/corecamera/ui/view/CameraShadeView.java": "a148aa9f47a19109eb085c1a78d8d7ee3ade2b59fb71a6bd470da1b98a837353",
+    "layout-stubs/com/ss/android/vesdk/VEPreviewRadio.java": "681cf9ee0d87d90271f840d619c78fbe893350c1487dfa68c1c5a3c34e6a60f8",
+    "publish1922.py": "9538f614383a28bc84412fd04dfc1e6cee31f6af9a8de8c8d31cb91113708615",
+    "stubs/com/hiro/ulike/BackExit185.java": "cef8e44967820fa59387b5f56a695a7546fddcfbe65e15842357d539e7a5ec26",
+    "stubs/com/hiro/ulike/CaptureAdvanced3.java": "fdaaaef49878471aeb4ff9d1387ba6834d323fa2b5ef10ab15015ba27492298e",
+    "stubs/com/hiro/ulike/ManualLens170.java": "66f2b9c6ba1a46f8c2435d74cc53be5eec27c5ab3e5a3c2e2967ee61b26eadc9",
+    "stubs/com/hiro/ulike/SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "stubs/com/light/beauty/mainpage/MainActivity.java": "dfe41399ab88254b95db417a4289afe2f5d9e8863a75c3d24e4d05723cccf0fa",
+    "stubs/com/light/beauty/mc/preview/page/main/UlikeMainPage.java": "c90e0855b06fb6bf3de59c1159138b6a67cf3c3fb4223a83daffc44262e0d4ff",
+    "validate1922.py": "85d76b4331ccb1e987ee2303b7ac6f3370c80b030ef31f3ca933db98a9843ffb"
+  },
+  "desktop_evidence_sha256": {
+    "bundle-all-registers.txt": "ad31668c6bb63a619e2f425c79d5d36ef56f41c52a4f9e5616b42555a70c014c",
+    "bundle-apply.log": "2dde8e96938f11fe6b2ee372dfc9446c8cc6c3eda698c4cacc069feaad7b8fa0",
+    "bundle-method-contracts.txt": "d3bf9c35586d62a4cf792cea9d7b0b1a390fb090f4ab3716c229381d0d24b58a",
+    "bundle-result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "bundle-stock-registers.txt": "c3b006c9bf8b67b2be3138df0bed55caba0142f445171aa80253e1c36a145187",
+    "desktop-validation.json": "cfb2b91dcede7ba6cfdd4b0e1a7935fe1c939324a76c976764ee88fd1f86e8be",
+    "layout-contracts.txt": "1363a6177da18ce79a3900db3c3058826923a034d02c331f561b78d1f9446bba",
+    "local-test-identity.json": "d0575b0a1fab44953ff25787dc1b62252219198a6c2b376e5f887694ec3a49aa",
+    "single-all-registers.txt": "ad31668c6bb63a619e2f425c79d5d36ef56f41c52a4f9e5616b42555a70c014c",
+    "single-apply.log": "7f789d8e4d3dc6334216dac61e1fcb43d72fa3c4d073d823fbf7d34cd3e4e47c",
+    "single-method-contracts.txt": "d3bf9c35586d62a4cf792cea9d7b0b1a390fb090f4ab3716c229381d0d24b58a",
+    "single-result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "single-stock-registers.txt": "c3b006c9bf8b67b2be3138df0bed55caba0142f445171aa80253e1c36a145187"
+  }
+}
