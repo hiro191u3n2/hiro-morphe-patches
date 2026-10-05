@@ -1,0 +1,44 @@
+name: Stage ULike1923 verification toolchain
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1923-toolchain.yml']
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Stage existing public tools, release sources, and approved baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p transfer/tools transfer/input transfer/repo
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o transfer/tools/morphe.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" transfer/tools/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" transfer/tools/d8.jar
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.22/ULike_HQ_Texture_Online_v1.9.22.mpp -o transfer/input/ULike_HQ_Texture_Online_v1.9.22.mpp
+          python - <<'PY'
+          import pathlib,json,urllib.request,hashlib
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          version=feed['version']
+          assert version=='1.0.148',('Baseline changed',version)
+          raw=urllib.request.urlopen(feed['download_url'],timeout=120).read()
+          pathlib.Path('transfer/input/Hiro_Morphe_Patches_v'+version+'.mpp').write_bytes(raw)
+          pathlib.Path('transfer/feed.json').write_text(json.dumps(feed,ensure_ascii=False))
+          print('BUNDLE',version,len(raw),hashlib.sha256(raw).hexdigest())
+          PY
+          cp -r releases transfer/repo/
+          cp -r .github transfer/repo/
+          cp patches-bundle.json CHANGELOG.md transfer/repo/
+          (cd transfer; find tools input -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1923-toolchain-and-approved-baseline
+          path: transfer
+          retention-days: 3
+          compression-level: 1
