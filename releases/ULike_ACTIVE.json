@@ -1,17 +1,17 @@
 {
-  "ulike_version": "1.9.23",
-  "bundle_version": "1.0.149",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.23.mpp",
-  "source_sha256": "3aaba8d00986ee55af332e08b17000a254910598e2b1c666039d571d5c366de8",
-  "source_release": "ulike-v1.9.23",
-  "active_release": "ulike-v1.9.23",
-  "base_ulike_version": "1.9.22",
+  "ulike_version": "1.9.24",
+  "bundle_version": "1.0.150",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.24.mpp",
+  "source_sha256": "239973e573882faca608f67138409a282451e9bad1083102f266864068820b75",
+  "source_release": "ulike-v1.9.24",
+  "active_release": "ulike-v1.9.24",
+  "base_ulike_version": "1.9.23",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "5fd0d17b8e5001d77f1bb8299610349fd0c3934318db76fb735dcb51fd2bade3",
+  "base_source_sha256": "3aaba8d00986ee55af332e08b17000a254910598e2b1c666039d571d5c366de8",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "User requested persistent preview range repair and smoother shadows. Replace label-bearing returns to prevent skipped recovery; use live view dimensions and coherent render rectangles. Add luminance-only edge-aware shadow finishing after both chroma paths, preserving corrected color. Device unverified.",
+  "reason": "User requested persistent preview range repair and smoother shadows. Validate cached3:4 targets against measured View geometry and native margin; redeliver rectangles for new rendering sessions. Smooth immutable processed pixels after chroma without injecting pre-correction luminance; preserve constant tones. Device unverified.",
   "future_ulike_base": "Use this approved188-lineage layout hotfix; preserve native panel Back, cancellable exit wait and face feature. Do not restore removed diagnostics or withdrawn1917/10bit route.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
@@ -25,5 +25,8 @@
   "layout_code_defects_confirmed": true,
   "layout_screenshot_cause_device_confirmed": false,
   "shadow_code_host_tested": true,
-  "shadow_finishing_preserves_existing_chroma": true
+  "shadow_finishing_preserves_existing_chroma": true,
+  "processed_domain_finishing": true,
+  "raw_luminance_not_reintroduced": true,
+  "shadow_chroma_smoothing": true
 }
