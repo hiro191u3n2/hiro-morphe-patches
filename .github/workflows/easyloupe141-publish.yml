@@ -1,0 +1,60 @@
+name: Publish EasyLoupe141 startup repair
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/easyloupe141-publish.yml'
+permissions:
+  contents: write
+concurrency:
+  group: easyloupe-publication
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore reviewed public inputs
+        run: python tools/easyloupe141_publish.py prepare
+      - name: Fetch exact Android toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p easyloupe141_tools
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" easyloupe141_tools/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" easyloupe141_tools/d8.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/apksigner.jar" easyloupe141_tools/apksigner.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/zipalign" easyloupe141_tools/zipalign
+          cp "$ANDROID_HOME/build-tools/35.0.0/aapt2" easyloupe141_tools/aapt2
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib64/libc++.so" easyloupe141_tools/libc++.so
+          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o easyloupe141_tools/apktool.jar
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o easyloupe141_tools/morphe.jar
+          echo '56d59c524fc764263ba8d345754d8daf55b1887818b15cd3b594f555d249e2db  easyloupe141_tools/apktool.jar' | sha256sum -c -
+          echo '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b  easyloupe141_tools/android.jar' | sha256sum -c -
+          echo '305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5  easyloupe141_tools/d8.jar' | sha256sum -c -
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  easyloupe141_tools/morphe.jar' | sha256sum -c -
+      - name: Independent rebuild and all validation gates
+        run: python tools/easyloupe141_publish.py verify
+      - name: Publish signed APK and source
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python tools/easyloupe141_publish.py publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: easyloupe141-publication-evidence
+          path: |
+            stage_easyloupe141/publication.json
+            stage_easyloupe141/EasyLoupe_v1.4.1_QA.json
+            stage_easyloupe141/EasyLoupe_v1.4.1_SHA256SUMS.txt
+            stage_easyloupe141/EasyLoupe141/tests/report.json
+            stage_easyloupe141/EasyLoupe141/qa_lifecycle/report.json
+            stage_easyloupe141/rebuild/build_report.json
+          retention-days: 14
