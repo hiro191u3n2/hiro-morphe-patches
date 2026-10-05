@@ -1,0 +1,86 @@
+{
+  "schema": "ulike1918-cleanup-1",
+  "result": "PASS_BUILD_HOST_TESTS_STRUCTURAL_CHECKS",
+  "ulike_version": "1.9.18",
+  "bundle_version": "1.0.143",
+  "base_ulike_version": "1.8.8",
+  "base_bundle_version": "1.0.142",
+  "rejected_1917_restored": false,
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "original_apk_apply_report": "APK_APPLY1918_QA.json",
+  "host_assertions": 11,
+  "host_test_result": "PASS 11 host assertions: null/camera/settings/repeat/destroyed/subclass/main-thread routing. Android device not tested.",
+  "removed_runtime_classes": 181,
+  "added_runtime_classes": 2,
+  "remaining_runtime_classes": 226,
+  "removed_loader_classes": 10,
+  "remaining_ulike_loader_classes": 13,
+  "unchanged_other_app_loader_classes": 220,
+  "unchanged_other_app_resource_entries": 31,
+  "original_stock_method_contracts_preserved": 170,
+  "deleted_resource_entries": [
+    "app/hiro/ulike/patches/IntegrationPayload181$Payload.class",
+    "app/hiro/ulike/patches/IntegrationPayload181$Resolver.class",
+    "app/hiro/ulike/patches/IntegrationPayload181.class",
+    "app/hiro/ulike/patches/IntegrationPayload182$Payload.class",
+    "app/hiro/ulike/patches/IntegrationPayload182$Resolver.class",
+    "app/hiro/ulike/patches/IntegrationPayload182.class",
+    "ulike181/resourceitems.tsv",
+    "ulike181/runtime/0000.bin",
+    "ulike181/runtime/0001.bin",
+    "ulike181/runtime/0002.bin",
+    "ulike181/runtime/0003.bin",
+    "ulike181/runtime/0004.bin",
+    "ulike181/runtime/0005.bin",
+    "ulike182/resourceitems.tsv",
+    "ulike182/runtime/0000.bin"
+  ],
+  "native_image_processor_sha256": "0ac181fac2afbd9260b8c59d922843deead72d3184e78ce97346d57a76b169cb",
+  "native_and_bundled_beauty_assets_byte_identical": true,
+  "camera_exit_tail_bytecode_contract_identical": true,
+  "dangling_removed_code_references": 0,
+  "seven_setting_labels_absent": true,
+  "diagnostic_state_writers_exporters_and_ai_tests_removed": true,
+  "independent_dex_and_mpp_rebuild_identical": true,
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.18.mpp": {
+      "bytes": 690949,
+      "sha256": "1d9ee52e86183badccef10c3cc3280ade31a8a921feef7c398ca1114cecb9ae5"
+    },
+    "Hiro_Morphe_Patches_v1.0.143.mpp": {
+      "bytes": 17251257,
+      "sha256": "61cde34775a62225a1b1f13cdd96baedb3833b20a1976d6804b2c208253ff537"
+    }
+  },
+  "input_tool_pins": {
+    "ULike_HQ_Texture_Online_v1.8.8.mpp": "dbdaab4f578604b725f6285d1312eb33f52160cbc024a9168b95202b1dde2d79",
+    "Hiro_Morphe_Patches_v1.0.142.mpp": "a7ab3ee725986779c01a2a50ac6ccd7b976968e5ef7aab8b7a81ea88bc140742",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "source_sha256": {
+    "Analyze1918.java": "169615c415302140299eef3e3eeb65743b3453227d582d9fbce5874c8876b594",
+    "Clean1918.java": "607f5981327314d861eabe89ed23edb238e7a9019981660245cd0a8f5d6f7b4e",
+    "CleanClass1918.java": "cbe4fdbf093452bbb0a24437e6d8543d0bea7ca94ee6401f69178f5272e67044",
+    "InspectDex.java": "6bc59ae397881a9457b4935fb11267440aa452295253d98cc3852eee470b0eec",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "VerifyApplied1918.java": "60cefdce5ca78f7eb36277fe3f3a8327aeda0079ef2e98ac041124f347e523b2",
+    "build1918.py": "320607bccbd46d1b31e1c59187a5531c6b29817431f4387bad2e44c3ef466812",
+    "finalize1918.py": "3fa75380a87255398f610b1e25b385d25357c4a421905873a804807bdb32e762",
+    "publish1918.py": "055e079bc16592337f4a9b17e4054f9b0906835abdeb8867733a6d269752fd33",
+    "validate1918.py": "1de934d409161b91288ec3fe8ca52d8f7068fc9edd27180eb8c70089bf2117bf"
+  },
+  "limitations": [
+    "No Android/Galaxy physical-device navigation/camera/save execution.",
+    "Removing the high-resolution landmark override intentionally returns that setting to the underlying application defaults.",
+    "Existing exported user files and old preference storage are left intact but are not read by the removed features."
+  ],
+  "original_apk_apply_execution": "Local authoring container; exact MPP hashes bound to this independent build. Original APK is not uploaded to CI.",
+  "original_apk_applied_variants": 2,
+  "applied_method_contracts_per_variant": 1532,
+  "host_register_flow_targets_per_variant": 42,
+  "host_register_flow_failures": 0
+}
