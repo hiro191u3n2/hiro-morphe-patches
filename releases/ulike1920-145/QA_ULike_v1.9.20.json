@@ -1,0 +1,185 @@
+{
+  "schema": "ulike1920-candidate-1",
+  "status": "CI_REBUILD_MATCHES_DESKTOP_VALIDATED_ATTACHMENT_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.20",
+  "bundle_version": "1.0.145",
+  "base_versions": [
+    "1.9.19",
+    "1.0.144"
+  ],
+  "approved_lineage": "1.8.8",
+  "back_interception_cause_confirmed_in_code": true,
+  "black_preview_cause_confirmed": false,
+  "black_preview_fixed_on_device": false,
+  "camera_timeout_scope": "Advanced/maximum-sensor-mode session only; absent configuration callback for10s after createSession returns. Existing normal-mode recovery; original executor; current owner/device/reader/token; foreground/focused guard.",
+  "host_tests": {
+    "total": 71,
+    "back": 26,
+    "session": 45,
+    "android_device_test": false
+  },
+  "other_app_loader_classes_unchanged": 220,
+  "other_app_resources_byte_identical": true,
+  "stock_method_payload_byte_identical": true,
+  "restored_face_feature_classes_byte_identical": true,
+  "settings_return_and_save_exit_protection_byte_identical": true,
+  "camera_session_core_instruction_identical": true,
+  "late_callback_timeout_arbitration_tested": true,
+  "rebuild_deterministic": true,
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.20.mpp": {
+      "sha256": "4a62ca3e345a918da881df33e2316a4bb1cdeb72bda042b7608b1018b094329a",
+      "bytes": 684283
+    },
+    "Hiro_Morphe_Patches_v1.0.145.mpp": {
+      "sha256": "4a61b5ef5a11be93d79d23959a89ecbdb1ea3aac4ca970440e54428b55053477",
+      "bytes": 17244540
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.19.mpp": "1f415b2ff980f5923dd9c853b18f44faec309abb39e458f569d84485c93fadc3",
+    "Hiro_Morphe_Patches_v1.0.144.mpp": "a39322cfb5914b52d567e194a079d7401782b89c00897f0fdd2828352be2910e",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy execution or logcat. Screenshot alone cannot identify the actual black-preview failure.",
+    "Added timeout does not cover native renderer failure, camera permission/privacy state, standard-mode stalls or a synchronously blocked driver/executor.",
+    "If timeout recovery triggers, it uses the pre-existing ordinary sensor mode fallback; maximum sensor mode is abandoned for that failed session.",
+    "Host tests use mocked platform and page objects. They validate helper control flow, not actual native UI/camera execution.",
+    "DEX register-flow analysis used dexlib2 ClassPath.NOT_ART; it is not the Android ART verifier or an execution test."
+  ],
+  "validation_original": {
+    "apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+    "merged_apk_sha256": "dbcdbc532c248e206d6c3ca297de6295d4416b39261f91868ffc0053d69c7e87",
+    "original_dex_exactly_retained_in_merge": true,
+    "original_dex_sha256": {
+      "classes.dex": "4fb5923b8cf7c28f393ba91dca6a9d4be91f69a8d2a4ae067670987e642b0f83",
+      "classes2.dex": "9c71360debb8d11fed8403bfca3b0247198d99218bd02d129d7205aa39df6933",
+      "classes3.dex": "7d63365d601600f64f6552d6c84f375db36279d95785d27f49157d4d1e4247e0",
+      "classes4.dex": "2ffe409e7b98e36cd2f3d84fe9a7c7146c1e84a3b084961fe089c044229c5392"
+    }
+  },
+  "final_apk_validation": {
+    "single": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33355 unique classes / 213486 methods. 1492 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_flow_analysis": {
+        "all-registers": {
+          "tested": 1151,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 170,
+          "failed": 0
+        }
+      },
+      "apk_crc_pass": true,
+      "native_architectures": [
+        "arm64-v8a"
+      ],
+      "native_libs_byte_identical_to_v1919_applied": true,
+      "native_library_count": 59,
+      "apk_sha256": "cd542c3a5296620a4b3e13daa513c64256b1f54d3c454862326a115b3e382dca",
+      "dex_sha256": {
+        "classes.dex": "4517c724bcf86b807d95fea45fb87367ad2e53f79a594510820b478ff7487a4f",
+        "classes2.dex": "81ed8bb6917c4f929196919bfbd77dcacee751904ea67efd884a0905cf627029",
+        "classes3.dex": "b0dc4abc30cd44e0406e74732cdcd289bfcb7588dc157bb21fa66e419c576875",
+        "classes4.dex": "3e1b638581a157ca27acc8d734a763b4225902973145f0024b7d67b113a30fc8",
+        "classes5.dex": "e30c2e4f844fdb2bae089a1c74ac2eff6cc8a616188d9e725009d80cd61f38c0",
+        "classes6.dex": "ff637399ca7a92ada1b2ceff0c00a3b2970a05ac85b873ba0e78d5556bd0cccd"
+      }
+    },
+    "bundle": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33355 unique classes / 213486 methods. 1492 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_flow_analysis": {
+        "all-registers": {
+          "tested": 1151,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 170,
+          "failed": 0
+        }
+      },
+      "apk_crc_pass": true,
+      "native_architectures": [
+        "arm64-v8a"
+      ],
+      "native_libs_byte_identical_to_v1919_applied": true,
+      "native_library_count": 59,
+      "apk_sha256": "f53cab15d65695fcdbf472db50f5bb99d738d2bae8aad263f6f8c0a4dea56e2d",
+      "dex_sha256": {
+        "classes.dex": "4517c724bcf86b807d95fea45fb87367ad2e53f79a594510820b478ff7487a4f",
+        "classes2.dex": "81ed8bb6917c4f929196919bfbd77dcacee751904ea67efd884a0905cf627029",
+        "classes3.dex": "b0dc4abc30cd44e0406e74732cdcd289bfcb7588dc157bb21fa66e419c576875",
+        "classes4.dex": "3e1b638581a157ca27acc8d734a763b4225902973145f0024b7d67b113a30fc8",
+        "classes5.dex": "e30c2e4f844fdb2bae089a1c74ac2eff6cc8a616188d9e725009d80cd61f38c0",
+        "classes6.dex": "ff637399ca7a92ada1b2ceff0c00a3b2970a05ac85b873ba0e78d5556bd0cccd"
+      }
+    }
+  },
+  "single_and_bundle_applied_dex_byte_identical": true,
+  "independent_full_build_byte_identical": true,
+  "helper_linkage": {
+    "changed_methods": 20,
+    "resolved_members": 109,
+    "unresolved_included_members": 0
+  },
+  "validation_execution_note": "Earlier foreground validation attempts hit the container execution time limit. Fresh complete single and bundle runs subsequently exited 0 and passed all listed checks; only completed runs support this report.",
+  "ci_rebuilt_and_sha256_matched": true,
+  "ci_host_tests_passed": true,
+  "original_apk_execution_location": "Earlier authoring container only; exact MPP SHA256 bound. CI does not execute or upload the original APK.",
+  "ci_original_apk_execution": false,
+  "preserved_evidence_files_verified": 31,
+  "evidence_format": "Selected original local evidence: full build/validation sources, QA JSON and result summaries. Full original archive SHA256 9a30d5c673bdc1db46f728ac98259d6d6833d31751d495df19084ece273c50ab remains attached in the originating conversation.",
+  "publication_note": "Pre-publication QA snapshot. See publication_ULike_v1.9.20.json for completed release and feed verification."
+}
