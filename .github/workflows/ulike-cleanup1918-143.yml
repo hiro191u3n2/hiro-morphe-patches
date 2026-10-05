@@ -1,0 +1,84 @@
+name: ULike 1918 settings cleanup and bundle 143
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-cleanup1918-143.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore reviewed sources and local APK application evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64, hashlib, json, lzma
+          from pathlib import Path
+          root=Path('releases/ulike1918-143')
+          encoded=''.join((root/f'source.part{i}.b64').read_text().strip() for i in range(4))
+          raw=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(raw).hexdigest()=='e9469598b25981a52061b2315a2895b0bef2a11fe4e137b434ecb823b46f2b16', 'Source archive mismatch'
+          items=json.loads(lzma.decompress(raw));assert len(items)==16
+          for name,text in items.items():
+              p=Path(name)
+              assert not p.is_absolute() and '..' not in p.parts and p.parts[0] in ('src','evidence')
+              assert p.suffix in ('.py','.java','.json','.tsv','.txt')
+              target=Path('work/source')/p;target.parent.mkdir(parents=True,exist_ok=True);target.write_text(text)
+          print('Verified and restored',len(items),'source/evidence files; no original or patched APK is included.')
+          PY
+      - name: Download pinned approved188 base and toolchain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work/input work/toolchain
+          gh release download ulike-v1.8.8 -p 'ULike_HQ_Texture_Online_v1.8.8.mpp' -D work/input
+          gh release download ulike-rollback-v1.8.8-bundle-v1.0.142 -p 'Hiro_Morphe_Patches_v1.0.142.mpp' -D work/input
+          curl -fL --retry 3 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o work/toolchain/morphe.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" work/toolchain/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" work/toolchain/d8.jar
+      - name: Independent build and structural tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/build1918.py --input work/input --tools work/toolchain --work work/build --output work/dist | tee work/build.log
+      - name: Bind exact rebuilt MPPs to successful original APK tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/finalize1918.py --dist work/dist --evidence work/source/evidence
+      - name: Publish and verify assets plus both Manager channels
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/publish1918.py --dist work/dist --repo . | tee work/publication.log
+      - name: Save artifacts and publication receipt
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1918-bundle143-verified-delivery
+          path: |
+            work/dist/
+            work/build.log
+            work/publication.log
+          if-no-files-found: warn
+          retention-days: 14
+          compression-level: 0
