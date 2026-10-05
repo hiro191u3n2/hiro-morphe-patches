@@ -1,0 +1,30 @@
+name: EasyLoupe141 verification tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/easyloupe141-tools.yml']
+permissions:
+  contents: read
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Collect Android build and verification tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p tools/lib
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" tools/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/zipalign" tools/zipalign
+          cp "$ANDROID_HOME/build-tools/35.0.0/aapt2" tools/aapt2
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/apksigner.jar" tools/apksigner.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" tools/d8.jar
+          curl -fL --retry 3 https://github.com/iBotPeaches/Apktool/releases/download/v2.11.1/apktool_2.11.1.jar -o tools/apktool.jar
+          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.3/jadx-1.5.3.zip -o tools/jadx.zip
+          sha256sum tools/*.* > tools/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: easyloupe141-verification-tools
+          path: tools/
+          retention-days: 3
