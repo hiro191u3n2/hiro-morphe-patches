@@ -1,0 +1,46 @@
+name: ULike reviewed1917 restore sources
+on:
+  push:
+    branches: [release/ulike-reviewed1917]
+    paths: [.github/workflows/ulike-review1917-restore.yml]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Execute existing checksum-verified restore step only
+        run: |
+          set -euo pipefail
+          python3 -m pip install PyYAML==6.0.2
+          python3 - <<'PY'
+          import yaml,subprocess,os,pathlib,zipfile
+          workflow=yaml.safe_load(pathlib.Path('.github/workflows/ulike-material1917-release.yml').read_text())
+          steps=workflow['jobs']['release']['steps'];restore=next(s for s in steps if s.get('id')=='stage')
+          subprocess.run(['bash','-euo','pipefail','-c',restore['run']],check=True)
+          subprocess.run(['python3','source/fix197/publication/get_tools197.py','--output','tools'],check=True)
+          with zipfile.ZipFile('review1917-restored-source.zip','w',compression=zipfile.ZIP_DEFLATED,compresslevel=9) as z:
+              for p in sorted(pathlib.Path('source').rglob('*')):
+                  if p.is_file():z.write(p,p.relative_to('source'))
+          PY
+          mkdir runtime-partial
+          gh api repos/hiro191u3n2/hiro-morphe-patches/contents/fix1917/overlay.b64.0000?ref=00759eb4a664ffd2a2a4b93e50fdc70553491f4a --jq .content | base64 -d > runtime-partial/overlay.b64.0000
+          gh api repos/hiro191u3n2/hiro-morphe-patches/contents/fix1917/overlay.b64.0001?ref=00759eb4a664ffd2a2a4b93e50fdc70553491f4a --jq .content | base64 -d > runtime-partial/overlay.b64.0001
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reviewed1917-source-and-tools
+          retention-days: 14
+          path: |
+            review1917-restored-source.zip
+            tools/morphe-1.16.jar
+            tools/r8-8.3.37.jar
+            tools/android.jar
+            runtime-partial/
+            fix1917/review-hold.json
