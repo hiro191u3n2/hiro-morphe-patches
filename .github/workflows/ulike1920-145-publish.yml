@@ -1,0 +1,101 @@
+name: Publish exact ULike1920 candidate and bundle145
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1920-145-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound candidate source and original desktop evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma
+          folder=Path('releases/ulike1920-145')
+          encoded=''.join((folder/f'reviewed-v2.part{i}.b64').read_text().strip() for i in range(4))
+          raw=base64.b64decode(encoded,validate=True)
+          assert len(raw)==26732
+          assert hashlib.sha256(raw).hexdigest()=='ecc52e0a4a4fa6da702264ec4c433b7d7ee47c2a60a6807eb25cfa3620c43edf','Transport checksum mismatch'
+          payload=json.loads(lzma.decompress(raw))
+          assert payload['schema']=='ulike1920-reviewed-sources-and-evidence-v2'
+          assert len(payload['entries'])==52 and len(payload['blobs'])==30
+          restored={}
+          for digest,item in payload['blobs'].items():
+              if 'text' in item:
+                  data=item['text'].encode()
+              else:
+                  base=Path(item['base'])
+                  assert not base.is_absolute() and '..' not in base.parts
+                  assert base.parent==Path('releases/ulike1919-144/src')
+                  before=base.read_bytes()
+                  assert hashlib.sha256(before).hexdigest()==item['base_sha256'],'Dictionary source drift: '+str(base)
+                  lines=before.decode().splitlines(keepends=True)
+                  for start,end,value in reversed(item['edits']):
+                      assert 0<=start<=end<=len(lines)
+                      lines[start:end]=value
+                  data=''.join(lines).encode()
+              assert hashlib.sha256(data).hexdigest()==digest,'Reconstructed source hash mismatch'
+              restored[digest]=data
+          for name,digest in payload['entries'].items():
+              p=Path(name)
+              assert not p.is_absolute() and '..' not in p.parts and p.parts[0] in ('src','evidence')
+              assert p.suffix in ('.java','.py','.json','.txt','.tsv')
+              out=Path('work/source')/p
+              out.parent.mkdir(parents=True,exist_ok=True)
+              out.write_bytes(restored[digest])
+          print('PASS 52 reviewed source/evidence files restored exactly; no original APK uploaded')
+          PY
+      - name: Download pinned approved baseline MPPs and toolchain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work/input work/toolchain work/dist
+          gh release download ulike-v1.9.19 --repo "$GH_REPO" --pattern 'ULike_HQ_Texture_Online_v1.9.19.mpp' --pattern 'Hiro_Morphe_Patches_v1.0.144.mpp' --dir work/input
+          curl --fail --location --retry 3 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o work/toolchain/morphe.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" work/toolchain/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" work/toolchain/d8.jar
+      - name: Rebuild both MPPs and run 71 host tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/build1920.py --input work/input --tools work/toolchain --work work/build --output work/dist | tee work/build.log
+          python work/source/src/finalize1920.py --dist work/dist --evidence work/source/evidence --build work/build | tee work/finalize.log
+      - name: Publish exact candidate bytes and update Manager main and dev feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/publish1920.py --dist work/dist --repo . | tee work/publication.log
+      - name: Retain verification and publication evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1920-bundle145-delivery-evidence
+          path: |
+            work/dist/
+            work/build.log
+            work/finalize.log
+            work/publication.log
+          retention-days: 14
+          compression-level: 0
