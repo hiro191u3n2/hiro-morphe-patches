@@ -1,0 +1,125 @@
+name: Publish ULike1924 processed shadows and preview repair bundle150
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1924-150-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed source and desktop verification evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --output old1923.zip "https://github.com/$GH_REPO/releases/download/ulike-v1.9.23/ULike_v1.9.23_sources_and_QA.zip"
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma, zipfile
+          folder = Path('releases/ulike1924-150/transport')
+          manifest = json.loads((folder / 'manifest.json').read_text())
+          assert manifest['schema'] == 'ulike1924-reviewed-source-evidence-v1'
+          baseline = Path('old1923.zip').read_bytes()
+          assert hashlib.sha256(baseline).hexdigest() == manifest['base_source_zip_sha256'] == 'afd4332f27a51f268cc563a20df30dfdce0abecd6539d023e46d9c444c0e3002'
+          base_root = Path('old1923')
+          assert not base_root.exists()
+          with zipfile.ZipFile('old1923.zip') as archive:
+              for item in archive.infolist():
+                  path = Path(item.filename)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert not ((item.external_attr >> 16) & 0o170000) == 0o120000
+              archive.extractall(base_root)
+          encoded = ''.join((folder / f'part{i}.b64').read_text().strip() for i in range(4))
+          assert len(encoded) == manifest['encoded_chars'] == 39920
+          raw = base64.b64decode(encoded, validate=True)
+          assert len(raw) == manifest['compressed_bytes'] == 29940
+          assert hashlib.sha256(raw).hexdigest() == manifest['compressed_sha256'] == '7b865954a953c69d6e833b7dc28adb9415af8c8704e63dea5779c91900a4e742'
+          obj = json.loads(lzma.decompress(raw))
+          assert obj['schema'] == manifest['schema']
+          assert len(obj['entries']) == 79 and len(obj['blobs']) == 73
+          restored = {}
+          for digest, spec in obj['blobs'].items():
+              if 'text' in spec:
+                  data = spec['text'].encode('utf-8')
+              elif 'base64' in spec:
+                  data = base64.b64decode(spec['base64'], validate=True)
+              else:
+                  relative = Path(spec['base'])
+                  assert not relative.is_absolute() and '..' not in relative.parts
+                  assert relative.parts[0] in ('src', 'evidence')
+                  before = (base_root / relative).read_bytes()
+                  assert hashlib.sha256(before).hexdigest() == spec['base_sha256'], 'Source base drift: ' + str(relative)
+                  lines = before.decode('utf-8').splitlines(keepends=True)
+                  last = len(lines)
+                  for start, end, replacement in reversed(spec['edits']):
+                      assert 0 <= start <= end <= last
+                      lines[start:end] = replacement
+                      last = start
+                  data = ''.join(lines).encode('utf-8')
+              assert hashlib.sha256(data).hexdigest() == digest, 'Restored source hash mismatch'
+              restored[digest] = data
+          destination = Path('work1924')
+          assert not destination.exists()
+          for name, digest in obj['entries'].items():
+              relative = Path(name)
+              assert not relative.is_absolute() and '..' not in relative.parts
+              assert relative.parts[0] in ('src', 'evidence')
+              assert relative.suffix in ('.java', '.py', '.json', '.txt', '.tsv', '.log', '.dex')
+              path = destination / relative
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(restored[digest])
+          print('PASS exact79 reviewed source/evidence files restored; no full APK or user photo included')
+          PY
+      - name: Download pinned approved baselines and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir input1924 tools1924
+          python - <<'PY'
+          import json, pathlib
+          assert json.loads(pathlib.Path('patches-bundle.json').read_text())['version'] == '1.0.149', 'Active baseline changed'
+          PY
+          curl --fail --location --retry 3 --output input1924/ULike_HQ_Texture_Online_v1.9.23.mpp "https://github.com/$GH_REPO/releases/download/ulike-v1.9.23/ULike_HQ_Texture_Online_v1.9.23.mpp"
+          curl --fail --location --retry 3 --output input1924/Hiro_Morphe_Patches_v1.0.149.mpp "https://raw.githubusercontent.com/$GH_REPO/3b6bccc0694255a83b2bc33da041728435ec9ce0/downloads/Hiro_Morphe_Patches_v1.0.149.mpp"
+          curl --fail --location --retry 3 --output tools1924/morphe.jar https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" tools1924/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" tools1924/d8.jar
+      - name: Rebuild and run690 host assertions then bind original APK desktop validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1924/src/build1924.py --input input1924 --tools tools1924 --work build1924 --output dist1924 | tee build1924.log
+          python work1924/src/finalize1924.py --dist dist1924 --evidence work1924/evidence --build build1924 | tee finalize1924.log
+      - name: Publish exact bytes and verify main and dev Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1924/src/publish1924.py --dist dist1924 --repo "$GITHUB_WORKSPACE" | tee publication1924.log
+      - name: Retain release and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1924-150-publication-verification
+          retention-days: 14
+          path: |
+            dist1924
+            build1924.log
+            finalize1924.log
+            publication1924.log
