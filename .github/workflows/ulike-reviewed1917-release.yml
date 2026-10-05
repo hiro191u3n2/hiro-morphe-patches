@@ -1,0 +1,105 @@
+name: ULike reviewed1917 runtime repair and trial release
+on:
+  push:
+    branches: [release/ulike-reviewed1917]
+    paths: [reviewed1917/trigger.json]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-morphe-patch-release
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Restore verified material baseline and exact reviewed runtime repair
+        id: stage
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 -m pip install PyYAML==6.0.2
+          python3 - <<'PY'
+          import base64,hashlib,json,lzma,os,pathlib,subprocess,yaml
+          root=pathlib.Path('source');transport=pathlib.Path('reviewed1917')
+          request=json.loads((transport/'trigger.json').read_text())
+          assert request['version']=='1.9.17' and request['stage'] in ('build','publish')
+          inherited=yaml.safe_load(pathlib.Path('.github/workflows/ulike-material1917-release.yml').read_text())
+          step=next(s for s in inherited['jobs']['release']['steps'] if s.get('id')=='stage')
+          env=dict(os.environ,GITHUB_OUTPUT=str(pathlib.Path('inherited-stage-output.txt').resolve()))
+          subprocess.run(['bash','-euo','pipefail','-c',step['run']],env=env,check=True)
+          m=json.loads((transport/'repair-transport.json').read_text());pieces=[]
+          for i in range(m['parts']):
+              name='repair.b64.%04d'%i;b=(transport/name).read_bytes()
+              assert hashlib.sha1(('blob %d\0'%len(b)).encode()+b).hexdigest()==m['git_blobs'][name],name
+              pieces.append(b.strip())
+          packed=base64.b64decode(b''.join(pieces),validate=True)
+          assert len(packed)==m['bytes'] and hashlib.sha256(packed).hexdigest()==m['sha256']
+          payload=json.loads(lzma.decompress(packed));assert payload['schema']==m['schema']
+          def safe(n):
+              p=pathlib.Path(n);assert not p.is_absolute() and '..' not in p.parts;return root/p
+          def sha(b):return hashlib.sha256(b).hexdigest()
+          for n,h in payload['before'].items():assert sha(safe(n).read_bytes())==h,n
+          subprocess.run(['patch','-p1','--batch','--forward'],cwd=root,input=payload['patch'],text=True,check=True)
+          for n,text in payload['new'].items():
+              p=safe(n);assert not p.exists();p.parent.mkdir(parents=True,exist_ok=True);p.write_text(text)
+          for n,h in payload['after'].items():assert sha(safe(n).read_bytes())==h,n
+          inputs=json.loads(safe('fix1917/source-input.json').read_text())
+          inputs['runtime_repair_sha256']=m['sha256'];inputs['pins'].update(payload['after'])
+          safe('fix1917/source-input.json').write_text(json.dumps(inputs,indent=2)+'\n')
+          for n,h in inputs['pins'].items():assert sha(safe(n).read_bytes())==h,n
+          if request['stage']=='publish':
+              evidence=json.loads((transport/'evidence-transport.json').read_text())
+              raw=base64.b64decode((transport/'evidence.b64').read_bytes(),validate=False)
+              assert len(raw)==evidence['bytes'] and sha(raw)==evidence['sha256']
+              qa=json.loads(lzma.decompress(raw))
+              assert set(qa)=={'local-qa.json','apk-qa.json','review-closure.json'}
+              for n,document in qa.items():safe('fix1917/'+n).write_text(json.dumps(document,ensure_ascii=False,indent=2)+'\n')
+          with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+request['stage']+'\n')
+          print('PASS_REVIEWED_ORIGINAL_RUNTIME1917_SOURCE')
+          PY
+      - name: Restore pinned Java tools and real Android NDK r27c
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update -qq
+          sudo apt-get install -y g++ libegl1-mesa-dev libgl1-mesa-dev
+          python3 source/fix197/publication/get_tools197.py --output tools
+          if [ ! -d "$ANDROID_HOME/ndk/27.2.12479018" ]; then "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018' </dev/null; fi
+          test -f "$ANDROID_HOME/ndk/27.2.12479018/source.properties"
+      - name: Execute final current-source host and lifecycle regressions
+        shell: bash
+        run: python3 source/fix1917/verify_host1917.py --out "$PWD/host" --tools "$PWD/tools"
+      - name: Independently build ARM64 Java and both MPP variants twice
+        shell: bash
+        run: python3 source/fix1917/rebuild1917.py --ndk "$ANDROID_HOME/ndk/27.2.12479018" --tools "$PWD/tools" --base "$PWD/base" --out "$PWD/results"
+      - name: Verify current source and applied APK receipts then publish trial
+        if: steps.stage.outputs.mode == 'publish'
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 source/fix1917/finalize1917.py --results "$PWD/results" --host "$PWD/host" --base "$PWD/base"
+          python3 source/fix1917/publish1917.py results/dist
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1917-reviewed-${{ steps.stage.outputs.mode }}-results
+          retention-days: 14
+          path: |
+            results/dist/*.mpp
+            results/dist/*.zip
+            results/dist/*.json
+            results/LOCAL_BUILD1917.json
+            results/logs/
+            results/dist/work/**/*.log
+            results/dist/work/**/*.txt
+            results/runtime/SOURCE_COMPILE197.json
+            results/runtime/*.txt
+            host/*.log
+            host/*.json
