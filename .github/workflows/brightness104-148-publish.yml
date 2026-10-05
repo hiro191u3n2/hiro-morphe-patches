@@ -1,0 +1,86 @@
+name: Publish BrightnessClick104 Recents exclusion and bundle148
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/brightness104-148-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed source
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma
+          folder=Path('releases/brightness104-148/transport')
+          encoded=''.join((folder/f'part{i}.b64').read_text().strip() for i in range(3))
+          assert len(encoded)==13248, 'Source transport length mismatch'
+          raw=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(raw).hexdigest()=='1cf5713a2acdbd0a8d2601a4476e3b6aedfe1ebc51120a9cf39ed92bf8b95f5f', 'Source transport digest mismatch'
+          obj=json.loads(lzma.decompress(raw))
+          assert obj['schema']=='brightness104-reviewed-source-v1'
+          assert set(obj['files'])=={'NoRecents.java','NoRecentsTest.java','TransformBrightness.java','build.py','publish.py'}
+          destination=Path('stagebrightness')
+          destination.mkdir()
+          for name,text in obj['files'].items():
+              assert Path(name).name==name
+              (destination/name).write_text(text)
+          Path('expected-brightness-mpp.json').write_text(json.dumps(obj['mpp_sha256']))
+          print('PASS exact five reviewed sources restored')
+          PY
+      - name: Download pinned baseline and toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir inputbrightness toolsbrightness
+          curl --fail --location --retry 3 --output inputbrightness/Hiro_Morphe_Patches_v1.0.147.mpp "https://github.com/$GH_REPO/releases/download/ulike-v1.9.22/Hiro_Morphe_Patches_v1.0.147.mpp"
+          curl --fail --location --retry 3 --output toolsbrightness/morphe.jar https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" toolsbrightness/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" toolsbrightness/d8.jar
+      - name: Rebuild and verify manifest and unrelated-app preservation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stagebrightness/build.py --repo . --base inputbrightness/Hiro_Morphe_Patches_v1.0.147.mpp --tools toolsbrightness --work buildbrightness --dist distbrightness | tee brightness-build.log
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json
+          for name,row in json.loads(Path('expected-brightness-mpp.json').read_text()).items():
+              data=(Path('distbrightness')/name).read_bytes()
+              assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256'], 'Desktop/CI MPP mismatch: '+name
+          print('PASS CI output matches independently reviewed desktop MPP bytes')
+          PY
+      - name: Publish and verify release and main-dev Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stagebrightness/publish.py --repo . --dist distbrightness | tee brightness-publication.log
+      - name: Retain output and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: brightness104-148-release-results
+          retention-days: 14
+          path: |
+            distbrightness
+            brightness-build.log
+            brightness-publication.log
