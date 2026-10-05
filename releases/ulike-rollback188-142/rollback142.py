@@ -146,7 +146,7 @@ def build():
     actual=archive(Path('dist')/OUTPUT)
     require({n:raw for n,raw in actual.items() if target(n)}==replacement,'Donor resources not exact')
     require({n:raw for n,raw in actual.items() if not target(n) and n not in ('classes.dex','META-INF/MANIFEST.MF')}==retained,'Other app bytes changed')
-    require(not any(n.startswith('ulike191/' for n in actual),'Withdrawn runtime residue')
+    require(not any(n.startswith('ulike191/') for n in actual),'Withdrawn runtime residue')
     shutil.copyfile(Path('input')/DONOR,Path('dist')/DONOR)
     qa={'result':'PASS_EXACT_UPLOADED188_REPLACEMENT_OTHER_APPS_PRESERVED','bundle_version':BUNDLE,'ulike_version':VERSION,
         'previous_bundle_version':PREVIOUS,'withdrawn_ulike_version':PREVIOUS_APP,'attachment_sha256':PINS[DONOR],
