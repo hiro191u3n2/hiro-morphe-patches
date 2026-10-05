@@ -1,0 +1,84 @@
+{
+  "schema": "ulike1919-face-restoration-diagnostic-cleanup-1",
+  "result": "PASS_BUILD_HOST_TESTS_STRUCTURAL_CHECKS",
+  "ulike_version": "1.9.19",
+  "bundle_version": "1.0.144",
+  "base_ulike_version": "1.9.18",
+  "approved_lineage_version": "1.8.8",
+  "base_bundle_version": "1.0.143",
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "restored_face_classes_exact188": 3,
+  "restored_face_hook_spans_exact188": 4,
+  "restored_face_default_enabled": true,
+  "existing_face_preference_preserved": true,
+  "face_preference_changes_require_restart": true,
+  "removed_diagnostic_classes": 13,
+  "remaining_runtime_classes": 216,
+  "remaining_runtime_methods": 1305,
+  "stock_method_contracts": 170,
+  "host_back_routing_assertions": 11,
+  "host_restored_policy_dex_cases": 20,
+  "host_test_result": "PASS 11 host assertions: null/camera/settings/repeat/destroyed/subclass/main-thread routing. Android device not tested.",
+  "host_policy_test_result": "PASS 20 restored-policy DEX host cases; no Android/SDK inference execution claimed.",
+  "camera_and_settings_back_classes_exact1918": true,
+  "save_exit_jobs_class_exact1918": true,
+  "deleted_feature_references_remaining": 0,
+  "deleted_setting_labels_remaining_in_runtime": 0,
+  "other_app_loader_classes_identical": 220,
+  "other_app_resources_identical": true,
+  "non_dex_native_and_asset_bytes_identical": true,
+  "failure_notification_preserved_without_history": true,
+  "changed_archive_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "independent_dex_and_mpp_rebuild_identical": true,
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.19.mpp": {
+      "bytes": 682463,
+      "sha256": "1f415b2ff980f5923dd9c853b18f44faec309abb39e458f569d84485c93fadc3"
+    },
+    "Hiro_Morphe_Patches_v1.0.144.mpp": {
+      "bytes": 17242757,
+      "sha256": "a39322cfb5914b52d567e194a079d7401782b89c00897f0fdd2828352be2910e"
+    }
+  },
+  "input_tool_pins": {
+    "ULike_HQ_Texture_Online_v1.8.8.mpp": "dbdaab4f578604b725f6285d1312eb33f52160cbc024a9168b95202b1dde2d79",
+    "ULike_HQ_Texture_Online_v1.9.18.mpp": "1d9ee52e86183badccef10c3cc3280ade31a8a921feef7c398ca1114cecb9ae5",
+    "Hiro_Morphe_Patches_v1.0.143.mpp": "61cde34775a62225a1b1f13cdd96baedb3833b20a1976d6804b2c208253ff537",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "source_sha256": {
+    "Analyze1919.java": "f5255061625afdace7f6c079c186398488fe021d43f68855a16c2488a469cd6c",
+    "FacePolicyTest1919.java": "eaec47115eb69dac0fe001137518752cfd068a31fb5d09ff07ba435d35ad0c27",
+    "InspectDex.java": "6bc59ae397881a9457b4935fb11267440aa452295253d98cc3852eee470b0eec",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "PatchClass1919.java": "c8c4249b42d5bc4003ad08dddbe9fa50629fb412e3d82f7d5b59b210f56fdb8e",
+    "SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "Transform1919.java": "ca6f7577845371bbd9857dc9b3c76a370f9489df328e826502ecacc481aaf671",
+    "VerifyApplied1919.java": "8320db59a41e574869af714b125b97b3b5de9af68558155be5100a4ed98e5c20",
+    "build1919.py": "52a9719bb920ad0a869b3086ba8ea02199d3f24bbf531313d8d59bd4d741c1de",
+    "finalize1919.py": "40852453294e029cd04ec22367f46dcc86533852cb9f47d36cfb8f967f0f7e50",
+    "publish1919.py": "f882e217e48843ae1dbf589c8c0eb7199893a81a4dd0afbf2de1d55ae8429124",
+    "validate1919.py": "6eaa4461256835debf376cb7ca6fef6dddcbd041b7ab92c5f527b349aace9b91"
+  },
+  "limitations": [
+    "No Android/Galaxy physical-device navigation/camera/save execution.",
+    "Policy tests interpret only the restored pure policy DEX on the host, not the camera SDK or Android runtime.",
+    "Existing diagnostic preference values and existing user photos/files are not deleted; removed reporting code does not read/write them."
+  ],
+  "original_apk_apply_report": "APK_APPLY1919_QA.json",
+  "original_apk_apply_execution": "Local authoring container; exact MPP hashes bound to this independent build. Original APK is not uploaded to CI.",
+  "original_apk_applied_variants": 2,
+  "applied_method_contracts_per_variant": 1475,
+  "host_register_flow_targets_per_variant": 42,
+  "host_register_flow_failures": 0
+}

@@ -1,0 +1,76 @@
+{
+  "schema": "ulike1919-original-apks-apply-1",
+  "result": "PASS_BOTH_MPP_VARIANTS_ORIGINAL_APKS_APPLICATION",
+  "ulike_version": "1.9.19",
+  "bundle_version": "1.0.144",
+  "original_apk_apply_tested": true,
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "execution_environment": "authoring_container_with_Morphe_1.16.0",
+  "android_device_tested": false,
+  "variants": [
+    {
+      "kind": "standalone",
+      "mpp_filename": "ULike_HQ_Texture_Online_v1.9.19.mpp",
+      "mpp_sha256": "1f415b2ff980f5923dd9c853b18f44faec309abb39e458f569d84485c93fadc3",
+      "mpp_bytes": 682463,
+      "result": "PASS_ORIGINAL_APKS_APPLICATION",
+      "applied_patches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "apk_sha256": "a16e60935e36f1ddf6c59c674b76fea73af770179feb64009c7a29c081dc479e",
+      "runtime_and_stock_method_contracts_verified": 1475,
+      "register_flow_targets": 42,
+      "register_flow_failures": 0,
+      "removed_trial_resources_absent": true,
+      "remaining_asset_bytes_verified": true,
+      "native_architectures": [
+        "arm64-v8a"
+      ],
+      "apk_local_only": true
+    },
+    {
+      "kind": "integrated",
+      "mpp_filename": "Hiro_Morphe_Patches_v1.0.144.mpp",
+      "mpp_sha256": "a39322cfb5914b52d567e194a079d7401782b89c00897f0fdd2828352be2910e",
+      "mpp_bytes": 17242757,
+      "result": "PASS_ORIGINAL_APKS_APPLICATION",
+      "applied_patches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "apk_sha256": "b9584b55cbb480c09cd0691fe165d70bef5ae2413dc7d9fd99d7cbfe004bd570",
+      "runtime_and_stock_method_contracts_verified": 1475,
+      "register_flow_targets": 42,
+      "register_flow_failures": 0,
+      "removed_trial_resources_absent": true,
+      "remaining_asset_bytes_verified": true,
+      "native_architectures": [
+        "arm64-v8a"
+      ],
+      "apk_local_only": true
+    }
+  ],
+  "removed_trial_resource_paths": [
+    "lib/arm64-v8a/libonnxruntime.so",
+    "lib/arm64-v8a/libonnxruntime4j_jni.so",
+    "assets/ulike181/onnxruntime-LICENSE.txt",
+    "assets/ulike181/onnxruntime-ThirdPartyNotices.txt",
+    "assets/ulike181/onnxruntime-Privacy.md",
+    "assets/ulike181/onnxruntime-LICENSE-1DS.txt",
+    "lib/arm64-v8a/libhiro_draw_readback.so"
+  ],
+  "native_library_count": 59,
+  "source_sha256": {
+    "validate1919.py": "6eaa4461256835debf376cb7ca6fef6dddcbd041b7ab92c5f527b349aace9b91",
+    "VerifyApplied1919.java": "8320db59a41e574869af714b125b97b3b5de9af68558155be5100a4ed98e5c20",
+    "Analyze1919.java": "f5255061625afdace7f6c079c186398488fe021d43f68855a16c2488a469cd6c"
+  },
+  "limitations": [
+    "No Android/Galaxy device execution.",
+    "DEX MethodAnalyzer is a host register-flow check, not ART runtime verification.",
+    "Successful APK patching does not establish actual camera/photo/save behavior."
+  ]
+}
