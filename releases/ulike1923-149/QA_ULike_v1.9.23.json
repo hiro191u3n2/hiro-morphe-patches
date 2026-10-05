@@ -1,0 +1,217 @@
+{
+  "schema": "ulike1923-geometry-shadows-1",
+  "status": "REBUILD_MATCHES_DESKTOP_TESTED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.23",
+  "bundle_version": "1.0.149",
+  "base_versions": [
+    "1.9.22",
+    "1.0.148"
+  ],
+  "approved_lineage": "1.8.8",
+  "device_symptom_reproduction": false,
+  "host_tests": {
+    "total": 285,
+    "back_and_session": 71,
+    "exit": 79,
+    "layout": 96,
+    "shadow": 39,
+    "android_device_test": false
+  },
+  "other_app_resources_byte_identical": true,
+  "preserved_face_detection": true,
+  "preserved_panel_back": true,
+  "preserved_capture_resolution_and_codec": true,
+  "noise_off_respected": true,
+  "shadows_off_respected": true,
+  "source_photo_uploaded_to_repository": false,
+  "rebuild_deterministic": true,
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.23.mpp": {
+      "sha256": "3aaba8d00986ee55af332e08b17000a254910598e2b1c666039d571d5c366de8",
+      "bytes": 690681
+    },
+    "Hiro_Morphe_Patches_v1.0.149.mpp": {
+      "sha256": "04d34885d68b556f66175455d64e96d683339c0bc4fc29c970d10a42a900a5f4",
+      "bytes": 17251489
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.22.mpp": "5fd0d17b8e5001d77f1bb8299610349fd0c3934318db76fb735dcb51fd2bade3",
+    "Hiro_Morphe_Patches_v1.0.148.mpp": "4b995b563be1c024b1d1e438149835fee1b303f1301d87a822ef9da7fe0ffcff",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "stock_seed_sha256": "2701a8a19773bf4b9ddddb0a02b11fe0b272cd6d0ea77665f02058ebad7e9172",
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Galaxy device, logcat, or hardware camera test.",
+    "Code defects confirmed in DEX; exact screenshot trigger is not device-reproduced.",
+    "Shadow tests are synthetic/host raster tests, not a new phone capture. Strong denoising can suppress low-contrast texture in dark regions.",
+    "HDR/10bit paths not introduced. Existing approved SDR processing guards preserved."
+  ],
+  "original_apk_apply_tested": true,
+  "desktop_validation": {
+    "single": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33361 unique classes / 213527 methods. 1541 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1192,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 178,
+          "failed": 0
+        }
+      }
+    },
+    "bundle": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33361 unique classes / 213527 methods. 1541 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1192,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 178,
+          "failed": 0
+        }
+      }
+    }
+  },
+  "layout_contracts": "PASS 5 original contracts; 2 ratio returns and 1 onLayout return are label-safe; 26 metric calls use live view bounds; viewport native fallback; 4 legacy exits; production worker hook; 72 native ABI references. Host/DEX verification, not ART/device execution.",
+  "rebuild_sha256_matches_desktop_evidence": true,
+  "ci_android_apply_tested": false,
+  "device_tested": false,
+  "other_app_loader_classes_unchanged": 221,
+  "code_defects_confirmed": true,
+  "screenshot_root_cause_device_confirmed": false,
+  "shadow_finishing_preserves_existing_chroma": true,
+  "source_sha256": {
+    "AnalyzeAll.java": "8e24326b40a24132a8d59a7050def3e24b1d70f1214249b7d4f5a3109dfdfef3",
+    "AnalyzeStock.java": "64c3973e80303a8087257b20c854934675c978e0dc5224eb4432ce94c90aaf41",
+    "BackRoute1920.java": "adeafef8b9cc344a1598b93da60ad85b912135bf109ae240a1931ae01c448156",
+    "CameraSession1920.java": "51a3079a714319a768541146b1129d531413c05ad6502126f28a63ce58282518",
+    "DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "ExitBusy1921.java": "f2e62749873c0e95a0e7599d4830e5019aa820e65b14f9bbb397ce6427de4f66",
+    "ExitFlow185.java": "02ce07c9bd16c8588ec020293635e05d7e48a1139f6fa016e35bd24f380d5e47",
+    "FindRefs.java": "c8b24dd7eb3d5fa654943706d05f4d633d3cf88d37a7c5e84e8b20a0ad256238",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "PatchClass1922.java": "d0cde831d8af5f3f77162a5f5fe1e500dceae169e4c924db15684dbbc56fb804",
+    "PatchClass1923.java": "7a389b262fcd10bfc497aaa48932684a5c8760ecbffc75e4d55351d8fa6de4f8",
+    "PreviewLayout1922.java": "78584f7e679de5f09e67e495f1663a1d9211f52334fe6150908f17e786a273cf",
+    "Seed1922.java": "1989e6bb5c1a2504aa39deefa4d368ff3ed5dfa4e61b3e2ea4f53af9e2a221df",
+    "Seed1923.java": "fbdbc74917c8147d44abf1c12e8ebacb513a0b63ddb8e10df803e407e3a5dfe6",
+    "ShadowDetail1923.java": "ea03e187765e5f16a6ba8beea9e0a015024553034162a858d804045b123235b8",
+    "ShadowTests1923.java": "19de1f417d09904e8a2f6862ad9c640e687fcfbd90e25f93c253f6dc3382032a",
+    "Transform1922.java": "40e58dbcd3610777c58fca27f0141f26cd1c663b040b9be51a6cbb5faae6ee38",
+    "Transform1923.java": "80f02ee1e05558e0d42221fad85f182848883f5b6176c4acd84e37e847476301",
+    "VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "VerifyLayout1922.java": "af01e5f14b0e23826e2ed59025794b38b737ee78705120d3cb7fc65dd0b92bf7",
+    "VerifyLayout1923.java": "f13ab6f0e89a0121e62f884e68db7b4e767cc06309ce0e819eef78c0e0802dc9",
+    "build1922.py": "6ae24e5378cbb482887b9a9b368868aa1936584150eb0f5aba521f27d6f17e63",
+    "build1923.py": "439c7be64a2e96ae51571a1054020ccf3892c87272148c74698b498b70944bf5",
+    "busy-schema.tsv": "1725cf70b38e4e473f27359fc88533056e1f93af371abaff1d63b8ddf378f805",
+    "finalize1922.py": "533cdd946975721cb07d419274027b52029567abc4ec4836d95b4f80796ca6c1",
+    "finalize1923.py": "41b35490de92537142f7b4d8a82b6641749afc8eaf53bda87bebab7b5b9db74b",
+    "host_tests1920.py": "599b7e2d336a6eee4d76a8fc613924eabd80116867f7ceac83a6a0b646b81e74",
+    "host_tests1921.py": "d6ea38b6463fe79b92a08dbafd871170c5928e3f690992174eccf68ddfc4de4f",
+    "host_tests1922.py": "eb3c32d40256274e2a4ad126e91062f4fee607194742495153a1019b14848990",
+    "host_tests1923.py": "339d9b274a4a2a44f29fcf2c99be5256c2943be9b2214d115b1fc3d46baf105e",
+    "layout-stock-seed-hashes.tsv": "1ecc89c89b82eab8f95e82af314c07c036f1eccd9f22b4bcf3b62e20d598e390",
+    "layout-stock-seed.dex": "b3a953405ee6f8c7cbff0e5ef1c0cfd0923aea527aa535dfbf23fd538fe08f55",
+    "layout-stubs/com/bytedance/corecamera/ui/view/CameraShadeView.java": "739f3218f2d5ee5638752f0274cf8b081b6304a5096de0c6b6d7b77984a514e5",
+    "layout-stubs/com/ss/android/vesdk/VEPreviewRadio.java": "681cf9ee0d87d90271f840d619c78fbe893350c1487dfa68c1c5a3c34e6a60f8",
+    "noise-stubs/com/hiro/ulike/Chroma186.java": "fa196b0fce4b7cbcceaf070bd124638a904841098776080d69fc94fc76d03410",
+    "noise-stubs/com/hiro/ulike/ChromaPipeline186.java": "f05dfbf601e5bc2e49e27dd89cce71292a817766be8884ff186e900100c10940",
+    "noise-stubs/com/hiro/ulike/DetailPixels.java": "2ee25a6184105c40b50b40c5a8bec5e2713df7b19359407b7dcdfd2c85e02ecd",
+    "noise-stubs/com/hiro/ulike/DetailSerial186.java": "203bc86ff38919a05483de78cf70b21c74c6ecfd9a5f64290789ac34c5da5d4e",
+    "publish1922.py": "9538f614383a28bc84412fd04dfc1e6cee31f6af9a8de8c8d31cb91113708615",
+    "publish1923.py": "40eacfff27ed0e027cb1d5413fa57fd62fea5c3637441834ba7713e342a23490",
+    "stock-seed1923.dex": "2701a8a19773bf4b9ddddb0a02b11fe0b272cd6d0ea77665f02058ebad7e9172",
+    "stubs/com/hiro/ulike/BackExit185.java": "cef8e44967820fa59387b5f56a695a7546fddcfbe65e15842357d539e7a5ec26",
+    "stubs/com/hiro/ulike/CaptureAdvanced3.java": "fdaaaef49878471aeb4ff9d1387ba6834d323fa2b5ef10ab15015ba27492298e",
+    "stubs/com/hiro/ulike/ManualLens170.java": "66f2b9c6ba1a46f8c2435d74cc53be5eec27c5ab3e5a3c2e2967ee61b26eadc9",
+    "stubs/com/hiro/ulike/SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "stubs/com/light/beauty/mainpage/MainActivity.java": "dfe41399ab88254b95db417a4289afe2f5d9e8863a75c3d24e4d05723cccf0fa",
+    "stubs/com/light/beauty/mc/preview/page/main/UlikeMainPage.java": "c90e0855b06fb6bf3de59c1159138b6a67cf3c3fb4223a83daffc44262e0d4ff",
+    "validate1922.py": "85d76b4331ccb1e987ee2303b7ac6f3370c80b030ef31f3ca933db98a9843ffb",
+    "validate1923.py": "940adcfc89faa4c0cf4fc920689fd267004653542f475fa6e84aebe6e8cdfd7f"
+  },
+  "desktop_evidence_sha256": {
+    "bundle/all-registers.tsv": "6b8c6a00ce2678f2d82de6771561d65d830c8fde11b367dfb35c61bdc7389c92",
+    "bundle/all-registers.txt": "3f49a77a3294970b119d2a819e350693c7d6aa37479e22f3c987c41a6c89ed91",
+    "bundle/apply.log": "3c868469f0cd6db4f46a19a74fd63c179c2b5c82294b90cea4331963af137c3a",
+    "bundle/method-contracts.txt": "462e6366c0fdb016bbf5a2a32e27b4bd5a1a1b9a3442da49aa4ca73086617351",
+    "bundle/result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "bundle/stock-registers.tsv": "8a9eb37c8069304dac30a10309743b12030d55aab8200c49cde92d5e061c5014",
+    "bundle/stock-registers.txt": "28655335b5e41330cc96ca92b0685485370cc97bb3dc15ff3eb3a01d35febd07",
+    "d8.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "helper-javac.log": "312e9bd919c699a2f8409f70240177012720c94095f0f4374d44152defc50f7e",
+    "layout-contracts.txt": "a1197a459d467f33f0ee8070faaa32633721f139cbf9dc342972abee58a42f41",
+    "metadata-javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "metadata.log": "47710f85689b0e87b4f959b86ac7c827df9c8733571a17db3334be51c3f954fb",
+    "references.log": "c7bbf1d75a99a871ac7a10a05e6e590818fcd495907b1621768b18bafd0847f7",
+    "single/all-registers.tsv": "6b8c6a00ce2678f2d82de6771561d65d830c8fde11b367dfb35c61bdc7389c92",
+    "single/all-registers.txt": "3f49a77a3294970b119d2a819e350693c7d6aa37479e22f3c987c41a6c89ed91",
+    "single/apply.log": "3ec879124fa48baa9d8137683e03a9e742b6888af1aacec2e90952fb901aafa3",
+    "single/method-contracts.txt": "462e6366c0fdb016bbf5a2a32e27b4bd5a1a1b9a3442da49aa4ca73086617351",
+    "single/result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "single/stock-registers.tsv": "8a9eb37c8069304dac30a10309743b12030d55aab8200c49cde92d5e061c5014",
+    "single/stock-registers.txt": "28655335b5e41330cc96ca92b0685485370cc97bb3dc15ff3eb3a01d35febd07",
+    "single-bundle-identity.json": "46955e74568402ec0cda5089f7c03cf54c4049d05c63ef26554c56c1c279213e",
+    "transform-javac.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "validated-artifacts.json": "8cccf15e7556e02bc5b0e2e8c524e54dd90b41a77cf105d3cab90af78b532ea0",
+    "validation.json": "ab030a728d4af60f96ed78269804ccd89165475a89fcc4d0ee22e09a55d5b0ac"
+  }
+}
