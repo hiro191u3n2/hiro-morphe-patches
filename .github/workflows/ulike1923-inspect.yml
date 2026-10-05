@@ -1,0 +1,68 @@
+name: Inspect ULike1923 geometry and shadow processing
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1923-inspect.yml']
+permissions:
+  contents: write
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Download existing public patch and verified analysis tool
+        run: |
+          set -euo pipefail
+          mkdir -p inspect1923/classes inspect1923/base inspect1923/report
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.22/ULike_HQ_Texture_Online_v1.9.22.mpp -o inspect1923/base.mpp
+          curl -fL --retry 3 https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar -o inspect1923/morphe.jar
+          echo '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c  inspect1923/morphe.jar' | sha256sum -c -
+          unzip -q inspect1923/base.mpp -d inspect1923/base
+          javac -cp inspect1923/morphe.jar -d inspect1923/classes releases/ulike1922-147/src/DumpDex.java
+          CP=inspect1923/morphe.jar:inspect1923/classes
+          java -cp "$CP" DumpDex inspect1923/base/ulike/methods.dex '.*(CameraShadeView|Preview|Ratio|Radio).*' > inspect1923/report/preview-methods.txt
+          java -cp "$CP" DumpDex inspect1923/base/ulike/runtime.dex '.*(PhotoDetail|Noise|Denois|Sharp).*' > inspect1923/report/noise-runtime.txt
+          java -cp "$CP" DumpDex inspect1923/base/ulike/runtime.dex > inspect1923/report/runtime-classes.txt
+          find releases -type f \( -iname '*PhotoDetail*' -o -iname '*Noise*' -o -iname '*Preview*' \) | sort > inspect1923/report/source-paths.txt
+          cp releases/ULike_ACTIVE.json inspect1923/report/active.json
+          python - <<'PY'
+          import json,pathlib
+          m=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          pathlib.Path('inspect1923/report/feed-summary.json').write_text(json.dumps({k:v for k,v in m.items() if k!='description'},ensure_ascii=False,indent=2))
+          PY
+      - name: Save source-only inspection evidence on separate branch
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import subprocess,json,pathlib,base64
+          repo='hiro191u3n2/hiro-morphe-patches'
+          def api(path,obj=None):
+              p=subprocess.run(['gh','api',path]+(['--input','-'] if obj is not None else []),input=json.dumps(obj) if obj is not None else None,text=True,capture_output=True,check=True)
+              return json.loads(p.stdout)
+          head=api(f'repos/{repo}/git/ref/heads/main')['object']['sha']
+          branch='work/ulike1923-inspection'
+          api(f'repos/{repo}/git/refs',{'ref':'refs/heads/'+branch,'sha':head})
+          tree=api(f'repos/{repo}/git/commits/{head}')['tree']['sha']
+          entries=[]
+          for p in sorted(pathlib.Path('inspect1923/report').glob('*')):
+              # Only already-public source-code disassembly and public release metadata.
+              blob=api(f'repos/{repo}/git/blobs',{'content':base64.b64encode(p.read_bytes()).decode(),'encoding':'base64'})
+              entries.append({'path':'inspection1923/'+p.name,'mode':'100644','type':'blob','sha':blob['sha']})
+          t=api(f'repos/{repo}/git/trees',{'base_tree':tree,'tree':entries})
+          c=api(f'repos/{repo}/git/commits',{'message':'analysis: existing public ULike1922 preview and noise bytecode','tree':t['sha'],'parents':[head]})
+          subprocess.run(['gh','api','-X','PATCH',f'repos/{repo}/git/refs/heads/{branch}','--input','-'],input=json.dumps({'sha':c['sha'],'force':False}),text=True,check=True)
+          print('INSPECTION_COMMIT='+c['sha'])
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1923-source-inspection
+          path: inspect1923/report
