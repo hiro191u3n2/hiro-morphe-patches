@@ -53,6 +53,15 @@ jobs:
           inputs=json.loads(safe('fix1917/source-input.json').read_text())
           inputs['runtime_repair_sha256']=m['sha256'];inputs['pins'].update(payload['after'])
           for n,h in inputs['pins'].items():assert sha(safe(n).read_bytes())==h,n
+          notes_path='fix1917/RELEASE_NOTES.txt'
+          notes=safe(notes_path).read_bytes()
+          assert sha(notes)=='3c02171b714874b2a3ab30e7c393f16e38b28367ce3fa5cf4ecb21b7c9fd268c'
+          before='* **保持:**'.encode();after='* **ULike - 保持:**'.encode()
+          assert notes.count(before)==1
+          corrected=notes.replace(before,after)
+          assert sha(corrected)=='d95fa61b02a9e0e0a885c292ead50de7d0e891d1c78aee6e817bbb86426a6f12'
+          safe(notes_path).write_bytes(corrected);inputs['pins'][notes_path]=sha(corrected)
+          inputs['publication_notes_scope_fix']={'before_sha256':sha(notes),'after_sha256':sha(corrected),'code_changed':False}
           if request['stage']=='publish':
               evidence=json.loads((transport/'evidence-transport.json').read_text())
               raw=base64.b64decode((transport/'evidence.b64').read_bytes().strip(),validate=True)
