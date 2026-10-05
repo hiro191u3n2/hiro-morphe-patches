@@ -1,17 +1,17 @@
 {
-  "ulike_version": "1.9.22",
-  "bundle_version": "1.0.147",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.22.mpp",
-  "source_sha256": "5fd0d17b8e5001d77f1bb8299610349fd0c3934318db76fb735dcb51fd2bade3",
-  "source_release": "ulike-v1.9.22",
-  "active_release": "ulike-v1.9.22",
-  "base_ulike_version": "1.9.21",
+  "ulike_version": "1.9.23",
+  "bundle_version": "1.0.149",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.23.mpp",
+  "source_sha256": "3aaba8d00986ee55af332e08b17000a254910598e2b1c666039d571d5c366de8",
+  "source_release": "ulike-v1.9.23",
+  "active_release": "ulike-v1.9.23",
+  "base_ulike_version": "1.9.22",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "201dfb110a64da8962bf3a20ea6f531feb5a8ad39242c2f642a9cc872a3fe25a",
+  "base_source_sha256": "5fd0d17b8e5001d77f1bb8299610349fd0c3934318db76fb735dcb51fd2bade3",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "User requested intermittent preview layout repair: retain/cancel animator ownership, guard obsolete callbacks, bind delayed starts, use local layout dimensions and invalidate inset changes. Device unverified.",
+  "reason": "User requested persistent preview range repair and smoother shadows. Replace label-bearing returns to prevent skipped recovery; use live view dimensions and coherent render rectangles. Add luminance-only edge-aware shadow finishing after both chroma paths, preserving corrected color. Device unverified.",
   "future_ulike_base": "Use this approved188-lineage layout hotfix; preserve native panel Back, cancellable exit wait and face feature. Do not restore removed diagnostics or withdrawn1917/10bit route.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
@@ -23,5 +23,7 @@
   "pending_exit_user_cancellable": true,
   "pending_exit_wait_limit_ms": 15000,
   "layout_code_defects_confirmed": true,
-  "layout_screenshot_cause_device_confirmed": false
+  "layout_screenshot_cause_device_confirmed": false,
+  "shadow_code_host_tested": true,
+  "shadow_finishing_preserves_existing_chroma": true
 }
