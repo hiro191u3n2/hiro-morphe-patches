@@ -1,0 +1,165 @@
+{
+  "schema": "ulike1921-exit-hotfix-1",
+  "status": "REBUILD_MATCHES_DESKTOP_TESTED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.21",
+  "bundle_version": "1.0.146",
+  "base_versions": [
+    "1.9.20",
+    "1.0.145"
+  ],
+  "approved_lineage": "1.8.8",
+  "root_cause_confirmed_in_code": true,
+  "root_cause": "BackExit185.captureBusy reflects nonexistent StyleStill4.callbacks, catches NoSuchFieldException as busy; requested exit masks input for up to90s. StyleStill4.strictRequests is configuration, not pending work.",
+  "host_tests": {
+    "total": 150,
+    "back": 26,
+    "session": 45,
+    "exit": 79,
+    "android_device_test": false
+  },
+  "other_app_loader_classes_unchanged": 220,
+  "other_app_resources_byte_identical": true,
+  "stock_method_payload_byte_identical": true,
+  "preserved_runtime_classes": 217,
+  "preserved_face_feature_and_camera_processing": true,
+  "preserved_native_panel_back": true,
+  "pending_exit_wait_limit_ms": 15000,
+  "pending_exit_user_cancellable": true,
+  "active_work_never_force_cleared": true,
+  "postclose_safety_deadline_ms": 90000,
+  "rebuild_deterministic": true,
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.21.mpp": {
+      "sha256": "201dfb110a64da8962bf3a20ea6f531feb5a8ad39242c2f642a9cc872a3fe25a",
+      "bytes": 684730
+    },
+    "Hiro_Morphe_Patches_v1.0.146.mpp": {
+      "sha256": "c248e0e278868187a9f35f1f4de698382735d48047dfe97108626aa40fd7b8d6",
+      "bytes": 17244937
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.20.mpp": "4a62ca3e345a918da881df33e2316a4bb1cdeb72bda042b7608b1018b094329a",
+    "Hiro_Morphe_Patches_v1.0.145.mpp": "4a61b5ef5a11be93d79d23959a89ecbdb1ea3aac4ca970440e54428b55053477",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy execution or logcat. Host tests use mocked platform and work state.",
+    "The prior black-preview cause/device resolution remains unconfirmed; its1920 recovery is unchanged.",
+    "Timeout cancels the pending exit, never a running save/record job; a previously requested recording stop is not reversed."
+  ],
+  "original_apk_apply_tested": true,
+  "desktop_validation": {
+    "single": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33356 unique classes / 213494 methods. 1500 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1159,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 170,
+          "failed": 0
+        }
+      }
+    },
+    "bundle": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33356 unique classes / 213494 methods. 1500 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1159,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 170,
+          "failed": 0
+        }
+      }
+    }
+  },
+  "independent_build_exact": true,
+  "rebuild_sha256_matches_desktop_evidence": true,
+  "ci_android_apply_tested": false,
+  "device_tested": false,
+  "source_sha256": {
+    "AnalyzeAll.java": "8e24326b40a24132a8d59a7050def3e24b1d70f1214249b7d4f5a3109dfdfef3",
+    "AnalyzeStock.java": "64c3973e80303a8087257b20c854934675c978e0dc5224eb4432ce94c90aaf41",
+    "BackRoute1920.java": "adeafef8b9cc344a1598b93da60ad85b912135bf109ae240a1931ae01c448156",
+    "CameraSession1920.java": "51a3079a714319a768541146b1129d531413c05ad6502126f28a63ce58282518",
+    "ExitBusy1921.java": "f2e62749873c0e95a0e7599d4830e5019aa820e65b14f9bbb397ce6427de4f66",
+    "ExitFlow185.java": "02ce07c9bd16c8588ec020293635e05d7e48a1139f6fa016e35bd24f380d5e47",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "PatchClass1921.java": "827749a2737e0e49ea73b9fad9688e6523d06b81128feb3c61d8f3a1fdb0d173",
+    "Transform1921.java": "06b19e169d1bdcc207f411e8af4d9aef8cb81450eb3c61540a0fbde82158db8f",
+    "VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "build1921.py": "5d4e3c0af1f77f7a33f07f07a53945e844dc8b5ae072d2a745719592225b9c80",
+    "finalize1921.py": "cd662e98690344b947900c453c06379d69695b8a1bb0d035c4c073a5170563f4",
+    "host_tests1920.py": "599b7e2d336a6eee4d76a8fc613924eabd80116867f7ceac83a6a0b646b81e74",
+    "host_tests1921.py": "d6ea38b6463fe79b92a08dbafd871170c5928e3f690992174eccf68ddfc4de4f",
+    "publish1921.py": "42ec55a79d411dbfe3abfbc2c9b10d735b0dc707eb61cf1c5bc8dbd91febba54",
+    "stubs/com/hiro/ulike/BackExit185.java": "cef8e44967820fa59387b5f56a695a7546fddcfbe65e15842357d539e7a5ec26",
+    "stubs/com/hiro/ulike/CaptureAdvanced3.java": "fdaaaef49878471aeb4ff9d1387ba6834d323fa2b5ef10ab15015ba27492298e",
+    "stubs/com/hiro/ulike/ManualLens170.java": "66f2b9c6ba1a46f8c2435d74cc53be5eec27c5ab3e5a3c2e2967ee61b26eadc9",
+    "stubs/com/hiro/ulike/SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "stubs/com/light/beauty/mainpage/MainActivity.java": "dfe41399ab88254b95db417a4289afe2f5d9e8863a75c3d24e4d05723cccf0fa",
+    "stubs/com/light/beauty/mc/preview/page/main/UlikeMainPage.java": "c90e0855b06fb6bf3de59c1159138b6a67cf3c3fb4223a83daffc44262e0d4ff",
+    "validate1921.py": "212cf4f2806f5483eaa523ecbe6c12a90b148982c50ffc3e804c2d6626378823"
+  },
+  "desktop_evidence_sha256": {
+    "desktop-validation.json": "7c7874194eb18dd85a9d724752b357633c2ee514dd90aaf3d80348bb5f021666",
+    "independent-build.txt": "149e9644c04091a407da8036e95f209bdb86f83d312c4b616a571f23019e79df",
+    "local-test-identity.json": "32e5608dde462a948f44ea528c0b741d1eef53bf4b281a192070b56ca66c7227",
+    "root-cause-before-dex.txt": "7082c5bc1f25a5e95d33873112dcf98db1f14716913dbaed59134a998b4df144"
+  }
+}
