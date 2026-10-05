@@ -1,0 +1,93 @@
+name: ULike 1919 face restoration and bundle 144
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-restoration1919-144.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed sources and local APK evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma
+          folder=Path('releases/ulike1919-144')
+          encoded=''.join((folder/f'source.part{i}.b64').read_text().strip() for i in range(2))
+          raw=base64.b64decode(encoded,validate=True)
+          assert hashlib.sha256(raw).hexdigest()=='d39819c8480626d292fe83199b3218e6c810c1b152281602f9a961e9fe8efe12','Source transport checksum mismatch'
+          entries=json.loads(lzma.decompress(raw));assert len(entries)==17
+          base=Path('releases/ulike1918-143/src')
+          for name,item in entries.items():
+              p=Path(name)
+              assert not p.is_absolute() and '..' not in p.parts and p.parts[0] in ('src','evidence')
+              assert p.suffix in ('.py','.java','.json','.tsv','.txt')
+              if 'text' in item:
+                  text=item['text']
+              else:
+                  assert Path(item['base']).name==item['base']
+                  before=(base/item['base']).read_bytes()
+                  assert hashlib.sha256(before).hexdigest()==item['base_sha256'],name+' base drift'
+                  lines=before.decode().splitlines(keepends=True)
+                  for start,end,value in reversed(item['edits']):
+                      assert 0<=start<=end<=len(lines)
+                      lines[start:end]=value
+                  text=''.join(lines)
+              data=text.encode()
+              assert hashlib.sha256(data).hexdigest()==item['sha256'],name+' restoration mismatch'
+              out=Path('work/source')/p;out.parent.mkdir(parents=True,exist_ok=True);out.write_bytes(data)
+          print('PASS 17 exact reviewed source/evidence files restored; no original APK uploaded')
+          PY
+      - name: Download pinned approved baselines and toolchain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p work/input work/toolchain work/dist
+          gh release download ulike-v1.9.18 --repo "$GH_REPO" --pattern 'ULike_HQ_Texture_Online_v1.9.18.mpp' --pattern 'Hiro_Morphe_Patches_v1.0.143.mpp' --dir work/input
+          gh release download ulike-v1.8.8 --repo "$GH_REPO" --pattern 'ULike_HQ_Texture_Online_v1.8.8.mpp' --dir work/input
+          curl --fail --location --retry 3 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o work/toolchain/morphe.jar
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" work/toolchain/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" work/toolchain/d8.jar
+      - name: Independently rebuild both MPPs and run structural and host tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/build1919.py --input work/input --tools work/toolchain --work work/build --output work/dist | tee work/build.log
+          python work/source/src/finalize1919.py --dist work/dist --evidence work/source/evidence
+      - name: Publish verified files and update Manager main and dev feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work/source/src/publish1919.py --dist work/dist --repo . | tee work/publication.log
+      - name: Retain exact release delivery and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1919-bundle144-verified-delivery
+          path: |
+            work/dist/
+            work/build.log
+            work/publication.log
+          retention-days: 14
+          compression-level: 0
