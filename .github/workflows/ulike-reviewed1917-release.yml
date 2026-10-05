@@ -52,15 +52,21 @@ jobs:
           for n,h in payload['after'].items():assert sha(safe(n).read_bytes())==h,n
           inputs=json.loads(safe('fix1917/source-input.json').read_text())
           inputs['runtime_repair_sha256']=m['sha256'];inputs['pins'].update(payload['after'])
-          safe('fix1917/source-input.json').write_text(json.dumps(inputs,indent=2)+'\n')
           for n,h in inputs['pins'].items():assert sha(safe(n).read_bytes())==h,n
           if request['stage']=='publish':
               evidence=json.loads((transport/'evidence-transport.json').read_text())
-              raw=base64.b64decode((transport/'evidence.b64').read_bytes(),validate=False)
+              raw=base64.b64decode((transport/'evidence.b64').read_bytes().strip(),validate=True)
               assert len(raw)==evidence['bytes'] and sha(raw)==evidence['sha256']
               qa=json.loads(lzma.decompress(raw))
               assert set(qa)=={'local-qa.json','apk-qa.json','review-closure.json'}
-              for n,document in qa.items():safe('fix1917/'+n).write_text(json.dumps(document,ensure_ascii=False,indent=2)+'\n')
+              inputs['predecessor_local_qa_sha256']=inputs['pins']['fix1917/local-qa.json']
+              inputs['current_evidence_transport_sha256']=evidence['sha256']
+              for n,document in qa.items():
+                  path='fix1917/'+n
+                  data=(json.dumps(document,ensure_ascii=False,indent=2)+'\n').encode()
+                  safe(path).write_bytes(data);inputs['pins'][path]=sha(data)
+          safe('fix1917/source-input.json').write_text(json.dumps(inputs,indent=2)+'\n')
+          for n,h in inputs['pins'].items():assert sha(safe(n).read_bytes())==h,n
           with open(os.environ['GITHUB_OUTPUT'],'a') as f:f.write('mode='+request['stage']+'\n')
           print('PASS_REVIEWED_ORIGINAL_RUNTIME1917_SOURCE')
           PY
