@@ -24,32 +24,17 @@ jobs:
         with:
           distribution: temurin
           java-version: '21'
-      - name: Restore and verify exact reviewed source transport
+      - name: Verify exact reviewed sources
         shell: bash
         run: |
           set -euo pipefail
           python3 - <<'PY'
-          import base64, hashlib, json, subprocess
+          import hashlib
           from pathlib import Path
           folder = Path('releases/ulike-rollback188-142')
           source = folder / 'rollback142.py'
-          raw = source.read_bytes()
-          expected = '9094656cdd70fd6539e318d2bde3074f2c0c13c271ddf5e13f6184bf67ee8e1f'
-          if hashlib.sha256(raw).hexdigest() != expected:
-              before = b"n.startswith('ulike191/' for n in actual)"
-              after = b"n.startswith('ulike191/') for n in actual)"
-              assert raw.count(before) == 1
-              corrected = raw.replace(before, after, 1)
-              assert hashlib.sha256(corrected).hexdigest() == expected
-              source.write_bytes(corrected)
-              endpoint = 'repos/hiro191u3n2/hiro-morphe-patches/contents/' + source.as_posix()
-              current = json.loads(subprocess.check_output(['gh','api',endpoint+'?ref=main']))
-              assert base64.b64decode(current['content']) == raw
-              body = {'message':'Fix source transport parenthesis and preserve reviewed checksum',
-                      'content':base64.b64encode(corrected).decode(),'sha':current['sha'],'branch':'main'}
-              subprocess.run(['gh','api','-X','PUT',endpoint,'--input','-'],input=json.dumps(body),text=True,check=True)
-          assert hashlib.sha256(source.read_bytes()).hexdigest() == expected
-          assert hashlib.sha256((folder/'Rollback188.java').read_bytes()).hexdigest() == '57d9ca1e174c897769d378b6f993ecc109cf31841e4e0022daf1e0a8cd260128'
+          assert hashlib.sha256(source.read_bytes()).hexdigest() == '9094656cdd70fd6539e318d2bde3074f2c0c13c271ddf5e13f6184bf67ee8e1f'
+          assert hashlib.sha256((folder/'Rollback188.java').read_bytes()).hexdigest() == '4304a6ad55c481dd63fea8e17e65a9e728f76288083e055f2e087303dba8579a'
           compile(source.read_bytes(), str(source), 'exec')
           print('PASS reviewed Python and Java source checksums')
           PY
@@ -59,7 +44,6 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          export GITHUB_SHA="$(gh api repos/hiro191u3n2/hiro-morphe-patches/git/ref/heads/main --jq .object.sha)"
           python3 releases/ulike-rollback188-142/rollback142.py publish
       - uses: actions/upload-artifact@v4
         if: always()
