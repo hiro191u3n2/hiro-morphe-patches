@@ -1,0 +1,125 @@
+name: Publish ULike1925 global noise and black tap bundle152
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1925-152-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_REPO: hiro191u3n2/hiro-morphe-patches
+      PYTHONUNBUFFERED: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore checksum-bound reviewed source and desktop verification evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --output old1924.zip "https://github.com/$GH_REPO/releases/download/ulike-v1.9.24/ULike_v1.9.24_sources_and_QA.zip"
+          python - <<'PY'
+          from pathlib import Path
+          import base64, hashlib, json, lzma, zipfile
+          folder = Path('releases/ulike1925-152/transport')
+          manifest = json.loads((folder / 'manifest.json').read_text())
+          assert manifest['schema'] == 'ulike1925-reviewed-source-evidence-v1'
+          baseline = Path('old1924.zip').read_bytes()
+          assert hashlib.sha256(baseline).hexdigest() == manifest['base_source_zip_sha256'] == '8060f36b7fc82cbfe17d2e8bef9a661b9c4cef76d93c5dbc3be13dc090c3aa4a'
+          base_root = Path('old1924')
+          assert not base_root.exists()
+          with zipfile.ZipFile('old1924.zip') as archive:
+              for item in archive.infolist():
+                  path = Path(item.filename)
+                  assert not path.is_absolute() and '..' not in path.parts
+                  assert not ((item.external_attr >> 16) & 0o170000) == 0o120000
+              archive.extractall(base_root)
+          assert manifest['parts'] == 3
+          encoded = ''.join((folder / f'part{i}.b64').read_text().strip() for i in range(3))
+          assert len(encoded) == manifest['encoded_chars'] == 29008
+          raw = base64.b64decode(encoded, validate=True)
+          assert len(raw) == manifest['compressed_bytes'] == 21756
+          assert hashlib.sha256(raw).hexdigest() == manifest['compressed_sha256'] == 'e28dfc3a862f5214054ebde7943dba85e9ffec951afe5d92ca7ac0ee471e7692'
+          obj = json.loads(lzma.decompress(raw))
+          assert obj['schema'] == manifest['schema']
+          assert len(obj['entries']) == manifest['entries'] == 93
+          assert len(obj['blobs']) == manifest['blobs'] == 87
+          restored = {}
+          for digest, spec in obj['blobs'].items():
+              if 'text' in spec:
+                  data = spec['text'].encode('utf-8')
+              elif 'base64' in spec:
+                  data = base64.b64decode(spec['base64'], validate=True)
+              else:
+                  relative = Path(spec['base'])
+                  assert not relative.is_absolute() and '..' not in relative.parts
+                  assert relative.parts[0] in ('src', 'evidence')
+                  before = (base_root / relative).read_bytes()
+                  assert hashlib.sha256(before).hexdigest() == spec['base_sha256'], 'Source base drift: ' + str(relative)
+                  if not spec['edits']:
+                      data = before
+                  else:
+                      lines = before.decode('utf-8').splitlines(keepends=True)
+                      last = len(lines)
+                      for start, end, replacement in reversed(spec['edits']):
+                          assert 0 <= start <= end <= last
+                          lines[start:end] = replacement
+                          last = start
+                      data = ''.join(lines).encode('utf-8')
+              assert hashlib.sha256(data).hexdigest() == digest, 'Restored source hash mismatch'
+              restored[digest] = data
+          destination = Path('work1925')
+          assert not destination.exists()
+          for name, digest in obj['entries'].items():
+              relative = Path(name)
+              assert not relative.is_absolute() and '..' not in relative.parts
+              assert relative.parts[0] in ('src', 'evidence')
+              assert relative.suffix in ('.java', '.py', '.json', '.txt', '.tsv', '.log', '.dex')
+              path = destination / relative
+              path.parent.mkdir(parents=True, exist_ok=True)
+              path.write_bytes(restored[digest])
+          print('PASS exact93 reviewed source/evidence files restored; no full APK or user photo included')
+          assert json.loads(Path('patches-bundle.json').read_text())['version'] == '1.0.151', 'Active baseline changed'
+          PY
+      - name: Restore pinned staged baseline and toolchain
+        uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          path: staged1925
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+      - name: Rebuild and run872 host assertions then bind original APK desktop validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1925/src/build1925.py --input staged1925/input --tools staged1925/tools --work build1925 --output dist1925 | tee build1925.log
+          python work1925/src/finalize1925.py --dist dist1925 --evidence work1925/evidence --build build1925 | tee finalize1925.log
+      - name: Publish exact bytes and verify main and dev Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python work1925/src/publish1925.py --dist dist1925 --repo "$GITHUB_WORKSPACE" | tee publication1925.log
+      - name: Retain release and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ulike1925-152-publication-verification
+          retention-days: 14
+          path: |
+            dist1925
+            build1925.log
+            finalize1925.log
+            publication1925.log
