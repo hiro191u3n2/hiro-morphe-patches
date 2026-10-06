@@ -1,0 +1,162 @@
+{
+  "schema": "quicksearch-exit-recents-v2",
+  "bundle_version": "1.0.161",
+  "patch_version": "1.0.1",
+  "baseline_bundle_version": "1.0.160",
+  "baseline_sha256": "7e3a1f531cf127f9c8c16cb8c12548ce9437b84adac82ea0d9bb2244e7333b5a",
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "supported_package": "jp.ddo.sugihiro.quicksearch",
+  "supported_version": "0.4.5",
+  "supported_version_code": 36,
+  "existing_non_quicksearch_zip_entries_preserved": 51,
+  "previous_quicksearch_zip_entries": [
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$1.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$2.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch.class",
+    "extensions/quicksearch_recents.mpe"
+  ],
+  "replacement_quicksearch_zip_entries": [
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$1.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$2.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch.class",
+    "extensions/quicksearch_recents.mpe"
+  ],
+  "runtime_jvm_class_count": 10,
+  "patch_jvm_class_count": 3,
+  "non_quicksearch_resources_unchanged": true,
+  "non_quicksearch_loader_classes_unchanged": true,
+  "standalone_and_bundle_quicksearch_resources_identical": true,
+  "host_test_result": "PASS SearchTask host assertions=126; task ownership/stack/duplicates, Window callbacks, old key boundaries, external flags, X dimensions. Android device behavior NOT tested.",
+  "loader_merge_result": "PASS bundle replacement merge: baseline non-QuickSearch classes preserved=238; old QuickSearch classes=3; new=3",
+  "runtime_stubs_packaged": false,
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.161.mpp": {
+      "bytes": 17310850,
+      "sha256": "92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03"
+    },
+    "QuickSearch_NoRecents_v1.0.1.mpp": {
+      "bytes": 34236,
+      "sha256": "846855431aad1d83df367278344033d7ce8951a4ec542acf59c0e2070cb2d584"
+    }
+  },
+  "status": "BUILT_HOST_AND_ORIGINAL_APK_VERIFIED_DEVICE_UNVERIFIED",
+  "device_tested": false,
+  "original_apk_apply_tested": true,
+  "original_apk_evidence": {
+    "schema": "quicksearch-original-apk-qa-v2",
+    "device_tested": false,
+    "original_apk_apply_tested": true,
+    "applied_artifact": "Hiro_Morphe_Patches_v1.0.161.mpp",
+    "artifacts": {
+      "Hiro_Morphe_Patches_v1.0.161.mpp": {
+        "bytes": 17310850,
+        "sha256": "92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03"
+      },
+      "QuickSearch_NoRecents_v1.0.1.mpp": {
+        "bytes": 34236,
+        "sha256": "846855431aad1d83df367278344033d7ce8951a4ec542acf59c0e2070cb2d584"
+      }
+    },
+    "standalone_payload_identical_to_applied_bundle": true,
+    "input_and_output": {
+      "attachment_apks": {
+        "bytes": 3679781,
+        "sha256": "4c7f8f5e9de0d9b0cb8e445df3b6b812daf404d550d2d21b0758b19dfdee2518"
+      },
+      "original_base_apk": {
+        "bytes": 9379079,
+        "sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46"
+      },
+      "patched_base_apk": {
+        "bytes": 3861494,
+        "sha256": "03f30a16cec8b9bc91cb1bd9892f3d39ae216f8f3fa53178c3b7e0a617f138e4"
+      }
+    },
+    "morphe_version": "1.16.0",
+    "morphe_bytecode_mode": "STRIP_FAST",
+    "unsigned_local_test_output": true,
+    "patching_result": {
+      "packageName": "jp.ddo.sugihiro.quicksearch",
+      "packageVersion": "0.4.5",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "検索後の終了時に履歴へ残さない"
+        }
+      ],
+      "failedPatches": []
+    },
+    "static_audit": "PASS final APK: all 6353 non-target classes unchanged; 13 reviewed classes match; runtime classes=10; runtime hooks=28\nPASS static QA: original classes=6366; operations=31; assertions=39605; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested.",
+    "host_runtime_audit": "PASS SearchTask host assertions=126; task ownership/stack/duplicates, Window callbacks, old key boundaries, external flags, X dimensions. Android device behavior NOT tested.",
+    "loader_merge_audit": "PASS bundle replacement merge: baseline non-QuickSearch classes preserved=238; old QuickSearch classes=3; new=3",
+    "non_dex_apk_entries_byte_identical": 355,
+    "apk_manifest_byte_identical": true,
+    "resources_arsc_byte_identical": true,
+    "apk_entries_removed": [],
+    "apk_entries_changed": [
+      "classes.dex"
+    ],
+    "apk_entries_added": [
+      "classes2.dex"
+    ],
+    "original_application_classes": 6366,
+    "unchanged_non_target_classes": 6353,
+    "changed_application_classes": 13,
+    "changed_existing_methods": 17,
+    "added_methods": 11,
+    "added_interfaces": 1,
+    "editing_operations": 31,
+    "original_method_fingerprint_gates": 18,
+    "original_widget_class_fingerprint_gates": 2,
+    "runtime_classes_added": 10,
+    "runtime_hook_calls_in_application": 28,
+    "source_attachment_split_count": 3,
+    "original_app_binary_distributed": false,
+    "verified_exit_paths": [
+      "Main/Web search-bar close button",
+      "history-dialog close listener",
+      "Activity Back",
+      "Dialog Back",
+      "legacy Back key DOWN/UP",
+      "text-input Back before IME",
+      "configured search auto-exit",
+      "Main cancel callback"
+    ],
+    "limitations": [
+      "Host fakes check runtime decisions and registrations; they do not emulate Android WindowManager or Samsung IME.",
+      "No Android/Galaxy device was connected; physical taps and actual Recents UI were not tested."
+    ]
+  },
+  "search_exit_setting_preserved": true,
+  "manual_close_independent_of_search_exit_setting": true,
+  "external_search_new_task_for_all_exit_preferences": true,
+  "foreign_caller_task_preserved": true,
+  "other_task_ids_preserved": true,
+  "same_task_application_screens_finished_together": true,
+  "close_button_minimum_height_dp": 48,
+  "non_weighted_close_button_minimum_width_dp": 48,
+  "classic_button_layout_width_and_weight_preserved": true,
+  "modern_activity_and_dialog_back_callbacks": true,
+  "legacy_back_key_down_consumed_and_up_finishes": true,
+  "legacy_input_back_before_ime_hook": true,
+  "clipboard_timer_stopped_on_exit": true,
+  "manifest_changed": false,
+  "published": false,
+  "limitations": [
+    "No connected Android/Galaxy device; recents UI behavior is not device-tested.",
+    "Desktop patch application and host/runtime control checks do not prove OEM task behavior."
+  ]
+}
