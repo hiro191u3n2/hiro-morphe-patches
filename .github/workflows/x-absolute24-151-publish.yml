@@ -1,0 +1,85 @@
+name: Publish X absolute24 and integrated bundle151
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/x-absolute24-151-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Restore reviewed source and local test evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,hashlib,json,lzma,pathlib
+          p=pathlib.Path('releases/x-absolute24-151/transport')
+          chunks=[p/f'{i:02d}.b64' for i in range(5)]
+          data=base64.b64decode(''.join(f.read_text().strip() for f in chunks),validate=True)
+          assert hashlib.sha256(data).hexdigest()=='3c0fd2458eee1c5c1725d423d56ff7b3110cf69cb20e55b546a9c213651e8d21'
+          payload=json.loads(lzma.decompress(data))
+          assert payload['schema']=='x24-reviewed-source-v1'
+          allowed={'expected-mpp.json','publish.py','local-qa.json','build.py','RELEASE.md','runtime/AbsoluteTime.java','stubs/d.java','test/DexAudit.java','test/AbsoluteTimeTest.java','patch/XAbsoluteTimePatch.java'}
+          assert set(payload['files'])==allowed
+          for name,text in payload['files'].items():
+              path=pathlib.Path('stagex')/name
+              path.parent.mkdir(parents=True,exist_ok=True)
+              path.write_text(text,encoding='utf-8')
+          print('Reviewed sources restored. No original/rebuilt app APK is included.')
+          PY
+      - name: Fetch pinned baseline and build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p xtools xdist
+          curl --fail --location --retry 3 --output xtools/morphe.jar https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+          curl --fail --location --retry 3 --output xtools/baseline.mpp https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/85480b81d8e37932e56cf96a3ef11258798a2eed/downloads/Hiro_Morphe_Patches_v1.0.150.mpp
+          cp "$ANDROID_HOME/platforms/android-35/android.jar" xtools/android.jar
+          cp "$ANDROID_HOME/build-tools/35.0.0/lib/d8.jar" xtools/d8.jar
+      - name: Rebuild and test without the user APK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stagex/build.py --base xtools/baseline.mpp --tools xtools --work xbuild --dist xdist 2>&1 | tee xbuild.log
+          cp stagex/local-qa.json xdist/local-qa.json
+          java -jar xtools/morphe.jar list-patches --patches xdist/Hiro_Morphe_Patches_v1.0.151.mpp -f com.twitter.android -p -v 2>&1 | tee xdist/patch-list.txt
+          python - <<'PY'
+          import hashlib,json,pathlib
+          expected=json.loads(pathlib.Path('stagex/expected-mpp.json').read_text())
+          for name,row in expected.items():
+              data=(pathlib.Path('xdist')/name).read_bytes()
+              assert len(data)==row['bytes'] and hashlib.sha256(data).hexdigest()==row['sha256'],name+' differs from locally tested MPP'
+          assert '12.19.1-release.0' in pathlib.Path('xdist/patch-list.txt').read_text()
+          print('CI files match the exact locally patched-and-audited MPPs.')
+          PY
+      - name: Publish artifacts and atomically update Manager feeds
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python stagex/publish.py --dist xdist 2>&1 | tee xpublish.log
+      - name: Retain release evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: x-absolute24-bundle151-evidence
+          path: |
+            xdist/
+            xbuild.log
+            xpublish.log
+          retention-days: 7
