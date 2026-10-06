@@ -87,21 +87,13 @@ jobs:
         run: |
           set -euo pipefail
           python .ci-ulike1929/src/build1929.py --input .ci-ulike1929/input --tools .ci-ulike1929/staged/tools --work .ci-ulike1929/build --output .ci-ulike1929/dist | tee .ci-ulike1929/build.log
-      - name: Bind complete outputs to desktop-validated artifacts
+      - name: Bind complete outputs to desktop-validated artifacts and current CI logs
         shell: bash
         run: |
           set -euo pipefail
           python .ci-ulike1929/src/finalize1929.py --dist .ci-ulike1929/dist --evidence .ci-ulike1929/evidence --build .ci-ulike1929/build | tee .ci-ulike1929/finalize.log
-          python - <<'PY'
-          import hashlib,json,pathlib
-          m=json.loads(pathlib.Path('releases/ulike1929-156/transport/manifest.json').read_text())
-          d=pathlib.Path('.ci-ulike1929/dist')
-          expected=dict(m['expected_dist'])
-          expected.update({n:v['sha256'] for n,v in m['expected_mpp'].items()})
-          for n,s in expected.items():
-              assert hashlib.sha256((d/n).read_bytes()).hexdigest()==s,'Exact final artifact mismatch: '+n
-          print('PASS exact local/CI MPP, QA and release notes equality; no device execution')
-          PY
+          echo '3e4ccd88da4fb244f529fab01161b1d4f9725bf5d8f1a3aed9199e5b58c3cee3  releases/ulike1929-156/verify_publication_package.py' | sha256sum -c -
+          python releases/ulike1929-156/verify_publication_package.py --manifest releases/ulike1929-156/transport/manifest.json --dist .ci-ulike1929/dist --build .ci-ulike1929/build | tee .ci-ulike1929/package-verification.log
       - name: Publish exact artifacts and verify both Manager feeds
         shell: bash
         run: |
