@@ -1,0 +1,1 @@
+package com.light.beauty.mc.preview.page.main; public final class UlikeMainPage { public boolean isAdded(){return false;} public boolean G2(int i,android.view.KeyEvent e){return false;} public boolean H2(int i,android.view.KeyEvent e){return false;} }
