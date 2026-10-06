@@ -1,0 +1,66 @@
+{
+  "schema": "x-absolute-time-local-qa-v1",
+  "source_apk": "User-supplied Piko-patched X 12.19.1-release.0; NOT a stock APK",
+  "source_apk_published": false,
+  "bundle_patching": {
+    "packageName": "com.twitter.android",
+    "packageVersion": "12.19.1-release.0",
+    "patchingSteps": [
+      {
+        "step": "PATCHING",
+        "success": true
+      },
+      {
+        "step": "REBUILDING",
+        "success": true
+      }
+    ],
+    "appliedPatches": [
+      {
+        "name": "ポストの日時を絶対時間・24時間表記にする"
+      }
+    ],
+    "failedPatches": []
+  },
+  "standalone_patching": {
+    "packageName": "com.twitter.android",
+    "packageVersion": "12.19.1-release.0",
+    "patchingSteps": [
+      {
+        "step": "PATCHING",
+        "success": true
+      },
+      {
+        "step": "REBUILDING",
+        "success": true
+      }
+    ],
+    "appliedPatches": [
+      {
+        "name": "ポストの日時を絶対時間・24時間表記にする"
+      }
+    ],
+    "failedPatches": []
+  },
+  "bundle_static_audit": "PASS scoped hooks Lcom/twitter/tweetview/core/b;\nPASS scoped hooks Lcom/twitter/tweetview/core/g$a;\nPASS scoped hooks Lcom/twitter/tweetview/core/QuoteView;\nPASS scoped hooks Lcom/twitter/tweetview/core/ui/accessibility/u;\nPASS scoped hooks Lcom/twitter/tweetview/focal/ui/combinedbyline/e;\nPASS APK static audit: hooks=6, original classes=241847, assertions=725590. Android device behavior NOT tested.\n",
+  "standalone_static_audit": "PASS scoped hooks Lcom/twitter/tweetview/core/b;\nPASS scoped hooks Lcom/twitter/tweetview/core/g$a;\nPASS scoped hooks Lcom/twitter/tweetview/core/QuoteView;\nPASS scoped hooks Lcom/twitter/tweetview/core/ui/accessibility/u;\nPASS scoped hooks Lcom/twitter/tweetview/focal/ui/combinedbyline/e;\nPASS APK static audit: hooks=6, original classes=241847, assertions=725590. Android device behavior NOT tested.\n",
+  "rebuilt_apk_payloads_identical": true,
+  "device_tested": false,
+  "stock_apk_tested": false,
+  "screen_layout_verified": false,
+  "time_format": "yyyy/MM/dd HH:mm",
+  "timezone": "device default at each format call",
+  "seconds_or_snowflake_guessing": false,
+  "unchanged_original_patch_classes": 234,
+  "unchanged_original_assets": 47,
+  "tested_mpp_sha256": {
+    "Hiro_Morphe_Patches_v1.0.151.mpp": {
+      "bytes": 17178419,
+      "sha256": "4ec164486fe1603736cc26155eb37e9ae2b522bd99e99dba932075459efadc01"
+    },
+    "X_Absolute_Time_24h_v1.0.0.mpp": {
+      "bytes": 14598,
+      "sha256": "b53965e1048280756aee800db1075a2aa0a300a91ce201b734feab406770d1d9"
+    }
+  }
+}
