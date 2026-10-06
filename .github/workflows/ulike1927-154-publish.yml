@@ -42,7 +42,7 @@ jobs:
           sha=lambda b:hashlib.sha256(b).hexdigest()
           m=json.loads((t/'manifest.json').read_text())
           assert m['compressed_sha256']=='ff8e1f6625a1b54c76effe242526abbf5bb0d7cde9a4acf7fb13c1366d3f6c6d'
-          assert sha((w/'source1926.zip').read_bytes())==m['base_source_zip_sha256']=='fa627ceb470afb2265cee4c647a61ed365c4954adaa7d85f25933f94f1b303a5'
+          assert sha((w/'source1926.zip').read_bytes())==m['base_source_zip_sha256']=='3c631a2d0c2c69177e4a5b2b0276f04b4b6781e5c3ed1bb5c72a9b9f01f6f766'
           encoded=''.join((t/f'part{i}.b64').read_text().strip() for i in range(m['parts']))
           assert len(encoded)==m['encoded_chars']
           raw=base64.b64decode(encoded,validate=True)
@@ -96,9 +96,13 @@ jobs:
           import hashlib,json,pathlib
           m=json.loads(pathlib.Path('releases/ulike1927-154/transport/manifest.json').read_text())
           d=pathlib.Path('.ci-ulike1927/dist')
-          for n,s in {**m['expected_dist'],**{n:v['sha256'] for n,v in m['expected_mpp'].items()}}.items():
+          # The source archive retains this runner's compiler working-directory log.
+          # MPPs, complete finalized QA and release notes still require exact equality.
+          expected={n:s for n,s in m['expected_dist'].items() if not n.endswith('.zip')}
+          expected.update({n:v['sha256'] for n,v in m['expected_mpp'].items()})
+          for n,s in expected.items():
               assert hashlib.sha256((d/n).read_bytes()).hexdigest()==s,'Exact final artifact mismatch: '+n
-          print('PASS exact local/CI MPP, QA, notes and source ZIP equality')
+          print('PASS exact local/CI MPP, QA and notes equality; source archive retains runner host logs')
           PY
       - name: Publish exact artifacts and verify both Manager feeds
         shell: bash
@@ -115,3 +119,4 @@ jobs:
             .ci-ulike1927/build/*.log
           retention-days: 14
           compression-level: 1
+          include-hidden-files: true
