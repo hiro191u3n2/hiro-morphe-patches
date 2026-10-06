@@ -1,18 +1,18 @@
 {
-  "ulike_version": "1.9.27",
-  "bundle_version": "1.0.154",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.27.mpp",
-  "source_sha256": "1f15889594f90d27ca6a097e62c6b394a372cf5354c07ae2949d9793098def22",
-  "source_release": "ulike-v1.9.27",
-  "active_release": "ulike-v1.9.27",
-  "base_ulike_version": "1.9.26",
+  "ulike_version": "1.9.28",
+  "bundle_version": "1.0.155",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.28.mpp",
+  "source_sha256": "dc3f52b63fe01476ea0a10a5389d8ad2bd3e2f122437cb0b2a2da03fe6917404",
+  "source_release": "ulike-v1.9.28",
+  "active_release": "ulike-v1.9.28",
+  "base_ulike_version": "1.9.27",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "f5aeb66dead588cbe336b08fd7911fd9b4d0eca4a08521fee4078e43350ffb42",
+  "base_source_sha256": "1f15889594f90d27ca6a097e62c6b394a372cf5354c07ae2949d9793098def22",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "Repair a native preview-start lost wakeup: retain readiness-only start failures and replay after valid inputs arrive, bound to the same rear capture, route and epoch, with no existing session/frames and no recording/save work; limit5 seconds and2 calls. Preserve every pre-existing runtime method, image pipeline, lens preference, approved188 lineage and all other apps from bundle153. Device symptom reproduction and resolution remain unverified.",
-  "future_ulike_base": "Use this approved188-lineage startup-handshake hotfix; preserve native panel Back, cancellable exit wait and face feature. Do not restore removed diagnostics or withdrawn1917/10bit route.",
+  "reason": "Restore last front/rear camera choice through the native startup getter. Persist the existing last_use_front_camera preference on selection and before closing screens; do not overwrite a valid choice when teardown state is absent. Retain185 existing native patches and1405 runtime methods, image processing and all other apps from bundle154. Front/rear restart has not been tested on a physical device.",
+  "future_ulike_base": "Use this approved188-lineage facing-memory update; preserve native panel Back, cancellable exit wait and face feature. Do not restore removed diagnostics or withdrawn1917/10bit route.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
   "release_status": "hotfix_device_unverified",
@@ -39,5 +39,9 @@
   "lost_preview_start_handshake": true,
   "max_native_replays": 2,
   "retry_deadline_ms": 5000,
-  "all_existing_runtime_unchanged": true
+  "all_existing_runtime_unchanged": false,
+  "unrelated_runtime_unchanged": true,
+  "remember_last_camera": true,
+  "front_restart_device_tested": false,
+  "null_teardown_does_not_reset_facing": true
 }
