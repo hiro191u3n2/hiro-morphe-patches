@@ -1,0 +1,243 @@
+{
+  "schema": "ulike1925-global-noise-blacktap-1",
+  "status": "REBUILD_MATCHES_DESKTOP_TESTED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.25",
+  "bundle_version": "1.0.152",
+  "base_versions": [
+    "1.9.24",
+    "1.0.151"
+  ],
+  "approved_lineage": "1.8.8",
+  "device_symptom_reproduction": false,
+  "host_tests": {
+    "total": 872,
+    "back_and_session": 71,
+    "exit": 79,
+    "layout": 134,
+    "shadow": 223,
+    "pipeline_contract": 299,
+    "black_tap": 66,
+    "android_device_test": false
+  },
+  "other_app_resources_byte_identical": true,
+  "preserved_face_detection": true,
+  "preserved_panel_back": true,
+  "preserved_capture_resolution_and_codec": true,
+  "noise_off_respected": true,
+  "shadow_priority_off_uses_global_only": true,
+  "source_photo_uploaded_to_repository": false,
+  "rebuild_deterministic": true,
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.25.mpp": {
+      "sha256": "e9ffd9c53cac07205b435590290dc00df6c8cd0c0f17a6987dc417f4150e2919",
+      "bytes": 694016
+    },
+    "Hiro_Morphe_Patches_v1.0.152.mpp": {
+      "sha256": "21fbbaa6f885fc8075854f12046269cfeb738d6d47452e6e10687f147bd7ad8f",
+      "bytes": 17266414
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.24.mpp": "239973e573882faca608f67138409a282451e9bad1083102f266864068820b75",
+    "Hiro_Morphe_Patches_v1.0.151.mpp": "4ec164486fe1603736cc26155eb37e9ae2b522bd99e99dba932075459efadc01",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "stock_seed_sha256": "f9ed4795f4ca7925a9d258d83ccc00314c1a19bff12639eb84a7b2f8abf798e8",
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Galaxy device, logcat, or hardware camera test.",
+    "Code defects confirmed in DEX; exact screenshot trigger is not device-reproduced.",
+    "Shadow tests are synthetic/host raster tests, not a new phone capture. Strong denoising can suppress low-contrast texture in dark regions.",
+    "HDR/10bit paths not introduced. Existing approved SDR processing guards preserved."
+  ],
+  "original_apk_apply_tested": true,
+  "desktop_validation": {
+    "single": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33362 unique classes / 213545 methods. 1563 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1210,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 182,
+          "failed": 0
+        }
+      }
+    },
+    "bundle": {
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33362 unique classes / 213545 methods. 1563 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "register_analysis": {
+        "all-registers": {
+          "tested": 1210,
+          "failed": 0
+        },
+        "stock-registers": {
+          "tested": 182,
+          "failed": 0
+        }
+      }
+    }
+  },
+  "layout_contracts": "PASS 5 original contracts; 2 ratio returns and 1 onLayout return are label-safe; 26 metric calls use live view bounds; viewport native fallback; 4 legacy exits; production worker hook; 104 native ABI references. Host/DEX verification, not ART/device execution.\nPASS1924 original attach hash and guarded return; volatile immutable viewport; renderer performs no live View reads; processed-domain shadow snapshot and both upstream stages connected.\nPASS1925 4 original gesture contracts; 3 exclusive callback routes; native touch opcodes retained; 22 native ABI references; switchCamera ready/debounce path verified. Not device execution.",
+  "rebuild_sha256_matches_desktop_evidence": true,
+  "ci_android_apply_tested": false,
+  "device_tested": false,
+  "other_app_loader_classes_unchanged": 224,
+  "code_defects_confirmed": true,
+  "screenshot_root_cause_device_confirmed": false,
+  "processed_domain_finishing": true,
+  "raw_luminance_not_reintroduced": true,
+  "shadow_chroma_smoothing": true,
+  "all_tone_denoising": true,
+  "black_tap_native_switch": true,
+  "black_tap_device_tested": false,
+  "source_sha256": {
+    "AnalyzeAll.java": "8e24326b40a24132a8d59a7050def3e24b1d70f1214249b7d4f5a3109dfdfef3",
+    "AnalyzeStock.java": "64c3973e80303a8087257b20c854934675c978e0dc5224eb4432ce94c90aaf41",
+    "BackRoute1920.java": "adeafef8b9cc344a1598b93da60ad85b912135bf109ae240a1931ae01c448156",
+    "BlackTap1925.java": "d337c1ba71f3203144512db836eabd6dfaf113f8baf1a500c976dd9a609a0c8e",
+    "CameraSession1920.java": "51a3079a714319a768541146b1129d531413c05ad6502126f28a63ce58282518",
+    "DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "ExitBusy1921.java": "f2e62749873c0e95a0e7599d4830e5019aa820e65b14f9bbb397ce6427de4f66",
+    "ExitFlow185.java": "02ce07c9bd16c8588ec020293635e05d7e48a1139f6fa016e35bd24f380d5e47",
+    "FindRefs.java": "c8b24dd7eb3d5fa654943706d05f4d633d3cf88d37a7c5e84e8b20a0ad256238",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "PatchClass1922.java": "d0cde831d8af5f3f77162a5f5fe1e500dceae169e4c924db15684dbbc56fb804",
+    "PatchClass1923.java": "7a389b262fcd10bfc497aaa48932684a5c8760ecbffc75e4d55351d8fa6de4f8",
+    "PatchClass1924.java": "ab5a27d79345db21c6de919585d693e2e9f4236de337a67659eb69df5f529840",
+    "PatchClass1925.java": "0a3df510170b833d8df12567538c31b2cde53775280ab95143f320c54639b376",
+    "PreviewLayout1922.java": "7fc5ad000f6ef0f5c057931ea41cce5c1e2aa6e53d84d8ee8556c557f0bc4b88",
+    "Seed1922.java": "1989e6bb5c1a2504aa39deefa4d368ff3ed5dfa4e61b3e2ea4f53af9e2a221df",
+    "Seed1923.java": "fbdbc74917c8147d44abf1c12e8ebacb513a0b63ddb8e10df803e407e3a5dfe6",
+    "Seed1924.java": "406930d54dd2ee74e03f9e130079e3f545f5469f248eb97f356842b3199f8843",
+    "Seed1925.java": "2292c742b496ad5ac3cd4172bc608af74bd388bcb9810c0691cf3e26df9c3bcd",
+    "ShadowDetail1923.java": "d769b71a6d25f900368543a705c1df8b3f396db3138f9428443aaf08cd5d678e",
+    "ShadowTests1923.java": "e00ad60e755bc2fb75cbbaa40b6713e3efca896c16b7f692f3031ee45b8735d0",
+    "Transform1922.java": "40e58dbcd3610777c58fca27f0141f26cd1c663b040b9be51a6cbb5faae6ee38",
+    "Transform1923.java": "80f02ee1e05558e0d42221fad85f182848883f5b6176c4acd84e37e847476301",
+    "Transform1924.java": "10c79b79cbb8524414755ffa3d093522e289014f843f22f9cad4a6b01b3f1657",
+    "Transform1925.java": "ad497f769e1bf068710a8eb71f6f13828db3eb37cc8c5d98b5d525a91c01943d",
+    "VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "VerifyGesture1925.java": "19f5bf44ff33624a8d1d7bed3f4de12aa88c8b75c2736d9da5d5b62d3ebcbf54",
+    "VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "VerifyLayout1922.java": "af01e5f14b0e23826e2ed59025794b38b737ee78705120d3cb7fc65dd0b92bf7",
+    "VerifyLayout1923.java": "f13ab6f0e89a0121e62f884e68db7b4e767cc06309ce0e819eef78c0e0802dc9",
+    "VerifyLayout1924.java": "36db486ba737d3f78a7c48c512da06437cc2d90786c0bfa5d11afea30c02b718",
+    "build1922.py": "6ae24e5378cbb482887b9a9b368868aa1936584150eb0f5aba521f27d6f17e63",
+    "build1923.py": "439c7be64a2e96ae51571a1054020ccf3892c87272148c74698b498b70944bf5",
+    "build1924.py": "9d2b535e21fae9017a6507afb565dc9d02025c86ba54038c47ff3e3edcc4a417",
+    "build1925.py": "72d5bb220ab8a57a38ed46a7d3952e3b47dd4b5cd2429fc2ce6f000c29593708",
+    "busy-schema.tsv": "1725cf70b38e4e473f27359fc88533056e1f93af371abaff1d63b8ddf378f805",
+    "finalize1922.py": "533cdd946975721cb07d419274027b52029567abc4ec4836d95b4f80796ca6c1",
+    "finalize1923.py": "41b35490de92537142f7b4d8a82b6641749afc8eaf53bda87bebab7b5b9db74b",
+    "finalize1924.py": "efcbb6490fc0ca0cafb2be7089666efaacea2a0198407710d5dd2d06a5f39f16",
+    "finalize1925.py": "5c14bcf5500f8e465fc0c61607c852fbe9f208905f89f5bad9b691d875916d06",
+    "gesture-stubs/com/bytedance/corecamera/ui/view/GestureBgLayout.java": "05f12dd7f49d969ce4b06c1c245161f04f0b657055a6522c6eee107f0366dd9b",
+    "gesture-stubs/com/hiro/ulike/ExitBusy1921.java": "093590fa7b1ea7916a7a8adbc1e410ac21855f1701778c2e3225b0f302e3e39f",
+    "gesture-stubs/i/o/a/b1/a/g/y.java": "c5319251fc25076bd63ab8f26a19a84f6ab48e729a6bef5990859e5cf1f92bf7",
+    "host_gesture1925.py": "d18ab23e83633d783ec18301f9ea63389b713190b779c9c24bda7e5ac2075208",
+    "host_pipeline1924.py": "ac0b8fbf0c199ef7fad2c6826e3c0b78ec96e0b53d568177dcce7729462f9ced",
+    "host_tests1920.py": "599b7e2d336a6eee4d76a8fc613924eabd80116867f7ceac83a6a0b646b81e74",
+    "host_tests1921.py": "d6ea38b6463fe79b92a08dbafd871170c5928e3f690992174eccf68ddfc4de4f",
+    "host_tests1922.py": "913a7b4404c68cf80da625f8f3af234fe3332e817286f5b0f83a70f154b3837e",
+    "host_tests1923.py": "339d9b274a4a2a44f29fcf2c99be5256c2943be9b2214d115b1fc3d46baf105e",
+    "layout-stock-seed-hashes.tsv": "1ecc89c89b82eab8f95e82af314c07c036f1eccd9f22b4bcf3b62e20d598e390",
+    "layout-stock-seed.dex": "b3a953405ee6f8c7cbff0e5ef1c0cfd0923aea527aa535dfbf23fd538fe08f55",
+    "layout-stubs/com/bytedance/corecamera/ui/view/CameraShadeView.java": "0a5c5b2757d9f92580111631ae504fd8aa12cb4ef36e7294d710ebb6409285e4",
+    "layout-stubs/com/ss/android/vesdk/VEPreviewRadio.java": "681cf9ee0d87d90271f840d619c78fbe893350c1487dfa68c1c5a3c34e6a60f8",
+    "noise-stubs/com/hiro/ulike/Chroma186.java": "fa196b0fce4b7cbcceaf070bd124638a904841098776080d69fc94fc76d03410",
+    "noise-stubs/com/hiro/ulike/ChromaPipeline186.java": "f05dfbf601e5bc2e49e27dd89cce71292a817766be8884ff186e900100c10940",
+    "noise-stubs/com/hiro/ulike/DetailPixels.java": "2ee25a6184105c40b50b40c5a8bec5e2713df7b19359407b7dcdfd2c85e02ecd",
+    "noise-stubs/com/hiro/ulike/DetailSerial186.java": "203bc86ff38919a05483de78cf70b21c74c6ecfd9a5f64290789ac34c5da5d4e",
+    "publish1922.py": "9538f614383a28bc84412fd04dfc1e6cee31f6af9a8de8c8d31cb91113708615",
+    "publish1923.py": "40eacfff27ed0e027cb1d5413fa57fd62fea5c3637441834ba7713e342a23490",
+    "publish1924.py": "5e23bea865124a8347bc070c97707ba28a950f06abba6e65ed2c4784df9342c6",
+    "publish1925.py": "c753a4fa7449655d0a614356f5eff093ec3614313aba5fc1e3b00c9bc2750f7e",
+    "stock-seed1923.dex": "2701a8a19773bf4b9ddddb0a02b11fe0b272cd6d0ea77665f02058ebad7e9172",
+    "stock-seed1924.dex": "82914f9521a1b4a2c541ad2ea46c3644ccb9dc67866e9dec419cdf8e90670971",
+    "stock-seed1925.dex": "f9ed4795f4ca7925a9d258d83ccc00314c1a19bff12639eb84a7b2f8abf798e8",
+    "stubs/com/hiro/ulike/BackExit185.java": "cef8e44967820fa59387b5f56a695a7546fddcfbe65e15842357d539e7a5ec26",
+    "stubs/com/hiro/ulike/CaptureAdvanced3.java": "fdaaaef49878471aeb4ff9d1387ba6834d323fa2b5ef10ab15015ba27492298e",
+    "stubs/com/hiro/ulike/ManualLens170.java": "66f2b9c6ba1a46f8c2435d74cc53be5eec27c5ab3e5a3c2e2967ee61b26eadc9",
+    "stubs/com/hiro/ulike/SettingsReturn1918.java": "7b53fec68c936a982d26ab9e7b0d148909aadd482b49c8e628814a1ecda5dcea",
+    "stubs/com/light/beauty/mainpage/MainActivity.java": "dfe41399ab88254b95db417a4289afe2f5d9e8863a75c3d24e4d05723cccf0fa",
+    "stubs/com/light/beauty/mc/preview/page/main/UlikeMainPage.java": "c90e0855b06fb6bf3de59c1159138b6a67cf3c3fb4223a83daffc44262e0d4ff",
+    "validate1922.py": "85d76b4331ccb1e987ee2303b7ac6f3370c80b030ef31f3ca933db98a9843ffb",
+    "validate1923.py": "940adcfc89faa4c0cf4fc920689fd267004653542f475fa6e84aebe6e8cdfd7f",
+    "validate1924.py": "43b22ee4800ca01b3d35ef914a65e0cb92f23863837792f6ff7a3a1125677a9b",
+    "validate1925.py": "dd8942b5005dd832198f157fc949940cf5e1eb9c6774b54e3b0aea85c8bfe3f3"
+  },
+  "desktop_evidence_sha256": {
+    "bundle/all-registers.tsv": "38f1b978c19cba32d686c4140937fd891661d235f5732c6be71706aeae9bd2d1",
+    "bundle/all-registers.txt": "c6da33040b6e42d0788d0e181fa70da270f551f1cddbf38e55b5f61fdb95adcc",
+    "bundle/apply.log": "fbb06b6ff2813cfdff53fadf549db09f29097230e6bbd18fcadb4b147952c700",
+    "bundle/method-contracts.txt": "983a5397a0b8929adcda7a09752c52686fc58e7becd6d9387b56d10308b4caaa",
+    "bundle/result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "bundle/stock-registers.tsv": "225395574ce2e68699f3d4188d13151cb866bebce1803c8e1cef18069b803f6c",
+    "bundle/stock-registers.txt": "301266738dd4d114513168377eeb6ae271b286084025daa750679b21bc0a267d",
+    "geometry1924-contracts.txt": "1dc31fbae1be8a9d188f75359d47453fb5f199bf5f48e99d22967c28d740443e",
+    "gesture1925-contracts.txt": "fd26b74bb94040a836e89e1167fbe680e7be861103fa1c6cf63978c5553ea145",
+    "layout-contracts.txt": "1ed006bb0c1dd683a03a5d1ded3e3547a324aab6928e161dc5ac30c347635056",
+    "single/all-registers.tsv": "38f1b978c19cba32d686c4140937fd891661d235f5732c6be71706aeae9bd2d1",
+    "single/all-registers.txt": "c6da33040b6e42d0788d0e181fa70da270f551f1cddbf38e55b5f61fdb95adcc",
+    "single/apply.log": "73be52a0d7ec6441e7f9af007fe7a0b499896bfcca45f9a243e56829a93860c4",
+    "single/method-contracts.txt": "983a5397a0b8929adcda7a09752c52686fc58e7becd6d9387b56d10308b4caaa",
+    "single/result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "single/stock-registers.tsv": "225395574ce2e68699f3d4188d13151cb866bebce1803c8e1cef18069b803f6c",
+    "single/stock-registers.txt": "301266738dd4d114513168377eeb6ae271b286084025daa750679b21bc0a267d",
+    "validated-artifacts.json": "56b0e28decca3d3bd004beabb50fdca285364a9e7684fec39b0581044dbf8ab2",
+    "validation.json": "9debdf13ad897128b7325920f92d50488846147aeec7466ad25fb0e3a07378f5"
+  }
+}
