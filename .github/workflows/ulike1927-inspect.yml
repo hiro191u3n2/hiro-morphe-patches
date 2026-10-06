@@ -1,0 +1,35 @@
+name: ULike1927 rear startup investigation tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1927-inspect.yml']
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Collect current baseline and decompiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p stage/tools stage/input stage/repo
+          curl -fL --retry 3 'https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip' -o stage/tools/jadx.zip
+          curl -fL --retry 3 'https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.26/ULike_HQ_Texture_Online_v1.9.26.mpp' -o stage/input/ULike_HQ_Texture_Online_v1.9.26.mpp
+          cp patches-bundle.json stage/repo/
+          cp -a releases stage/repo/
+          python - <<'PY'
+          import hashlib,pathlib
+          p=pathlib.Path('stage/input/ULike_HQ_Texture_Online_v1.9.26.mpp')
+          assert hashlib.sha256(p.read_bytes()).hexdigest()=='f5aeb66dead588cbe336b08fd7911fd9b4d0eca4a08521fee4078e43350ffb42'
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1927-investigation-tools
+          path: stage/
+          retention-days: 3
+          compression-level: 0
