@@ -225,7 +225,7 @@ def finalize(output):
     source_zip = 'SwiftKeyBeta_v1.8.2_sources_and_QA.zip'
     content = {}
     for path in sorted(ROOT.rglob('*')):
-        if path.is_file() and path.suffix in ('.java', '.py'):
+        if path.is_file() and path.suffix in ('.java', '.py', '.json'):
             content['src/' + path.relative_to(ROOT).as_posix()] = path.read_bytes()
     require('src/publish182.py' in content, 'Publication source missing from source package')
     for path in sorted((output / 'evidence').rglob('*')):
@@ -234,7 +234,8 @@ def finalize(output):
     for name in ('QA_SwiftKey_v1.8.2.json', 'RELEASE_NOTES.txt'):
         content[name] = (output / name).read_bytes()
     content['BUILD_INPUTS.json'] = (json.dumps({'sha256': PINS, 'urls': URLS, 'java': '21',
-        'command': 'python src/build182.py --input input --tools tools --work build --output dist'},
+        'command': 'python src/build182.py --input input --tools tools --work build --output dist',
+        'offline_single_baseline': 'python src/restore_baseline182.py --bundle input/Hiro_Morphe_Patches_v1.0.156.mpp --transport src/data/baseline181.json --output input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.1.mpp'},
         ensure_ascii=False, indent=2) + '\n').encode()
     with zipfile.ZipFile(output / source_zip, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=9) as z:
         for name, raw in sorted(content.items()):

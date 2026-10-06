@@ -51,8 +51,14 @@ jobs:
           single_sha = '077ad014caa5825a690fa2aad9d4d743ecc36267ae86491563e12ffade9ee8e0'
           assert manifest['baseline_swiftkey_version'] == '1.8.1'
           assert manifest['baseline_swiftkey_sha256'] == single_sha
-          download('https://hiro-morphe-patches.otoha10.chatgpt.site/' + single_name,
-                   pathlib.Path('.ci-swiftkey182/input') / single_name, single_sha, 16083358)
+          import importlib.util
+          restore_path = pathlib.Path('releases/swiftkey182-157/src/restore_baseline182.py')
+          spec = importlib.util.spec_from_file_location('restore_public_baseline', restore_path)
+          restore = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(restore)
+          restore.restore(pathlib.Path('.ci-swiftkey182/input/Hiro_Morphe_Patches_v1.0.156.mpp'),
+                          pathlib.Path('releases/swiftkey182-157/src/data/baseline181.json'),
+                          pathlib.Path('.ci-swiftkey182/input') / single_name)
           tools = manifest['toolchain']
           assert tools['apktool']['version'] == '3.0.3'
           assert tools['r8']['version'] == '8.7.18'
