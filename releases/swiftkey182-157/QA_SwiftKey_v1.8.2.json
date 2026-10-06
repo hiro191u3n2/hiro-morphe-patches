@@ -1,0 +1,426 @@
+{
+  "status": "HOST_AND_STATIC_CHECKS_PASSED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.2",
+  "bundle_version": "1.0.157",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "cause_confirmed_in_code": "ASCII-only token check excludes accented Latin in existing cursor protection",
+  "device_cause_confirmed": false,
+  "device_fix_confirmed": false,
+  "host_tests_output": "PASS UnicodeLatinToken: 587 classifier cases; 6 historical ASCII-leak checks; 10 optional smali guard-contract checks.\nNative tokenizer, live Android selection and language switching were not executed.\n",
+  "runtime": {
+    "existing_class_count": 36,
+    "unchanged_existing_classes": 35,
+    "changed_existing_methods": 1,
+    "changed_invocation_references": 1,
+    "new_classes": 1,
+    "canonical_dex_equality_verified": true,
+    "original_language_switch_preserved": true,
+    "japanese_mode_guard_preserved": true,
+    "explicit_selection_guard_preserved": true,
+    "cursor_change_guards_preserved": true,
+    "document_mutation_not_added": true
+  },
+  "single_and_bundle_swiftkey_android_loaders_equal": true,
+  "morphe_desktop_single_list_passed": true,
+  "morphe_manager_device_tested": false,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "base_and_tool_sha256": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.1.mpp": "077ad014caa5825a690fa2aad9d4d743ecc36267ae86491563e12ffade9ee8e0",
+    "Hiro_Morphe_Patches_v1.0.156.mpp": "40c885d205d0a087192be599263a13858ff5c48fec935835791bfc93a364de88",
+    "apktool.jar": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423",
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "single_preservation": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "unchanged_entries": 16,
+    "top_classes_dex_byte_identical": true,
+    "zip_crc_verified": true,
+    "entries": {
+      "META-INF/MANIFEST.MF": {
+        "unchanged": false,
+        "sha256": "7af0da7832fec1e3458ed8bdf575d219bba5c94098a535460313a24f3c6349ea",
+        "bytes": 560
+      },
+      "classes.dex": {
+        "unchanged": true,
+        "sha256": "1d99dad64ef7ce83834b66158e387c9ec83146e2108ea26a56d051c0c937c870",
+        "bytes": 50116
+      },
+      "extensions/swiftkey_japanese.mpe": {
+        "unchanged": false,
+        "sha256": "e96a773bfb988e03c19282fd0cdf0f484ed0e21e9268e35f4b1beb772d339931",
+        "bytes": 318288
+      },
+      "swiftkey/emoji_LICENSE.txt": {
+        "unchanged": true,
+        "sha256": "b4c0ae8ef04f7059f96ce5bbe0467f9fe6f6d81bbe13517701dfeb961fb4d0b6",
+        "bytes": 2033
+      },
+      "swiftkey/emoji_ja.tsv": {
+        "unchanged": true,
+        "sha256": "24ea97801a5756f9f5d7d5244a8e6eb094de8b7c10a9986e5f363fc0fc595e12",
+        "bytes": 1193057
+      },
+      "swiftkey/words_LICENSE.txt": {
+        "unchanged": true,
+        "sha256": "cab6e0d7ddc41d32e6ea7a7b6d4629367a7d1dfd7744aa14bd8b87bf53b89fca",
+        "bytes": 95907
+      },
+      "swiftkey/words_ja.tsv": {
+        "unchanged": true,
+        "sha256": "1f15766663f5cbf1de8bce2df6a2b8f5e80a488166950979b92ecac8f9e27ca0",
+        "bytes": 25181960
+      },
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": {
+        "unchanged": true,
+        "sha256": "cfce8f9dc5ffba1b2db17b05ce4185af0e328c234c6b66059134da43d9374ad6",
+        "bytes": 21727
+      },
+      "app/hiro/swiftkey/patches/MethodContract.class": {
+        "unchanged": true,
+        "sha256": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6",
+        "bytes": 10221
+      },
+      "app/hiro/swiftkey/patches/InputLearningPatch.class": {
+        "unchanged": true,
+        "sha256": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01",
+        "bytes": 9254
+      },
+      "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": {
+        "unchanged": true,
+        "sha256": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4",
+        "bytes": 3793
+      },
+      "app/hiro/swiftkey/patches/KeySwapPatch.class": {
+        "unchanged": true,
+        "sha256": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c",
+        "bytes": 8649
+      },
+      "app/hiro/swiftkey/patches/PasteProtectionPatch.class": {
+        "unchanged": true,
+        "sha256": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113",
+        "bytes": 8300
+      },
+      "swiftkey/katakana_en.tsv": {
+        "unchanged": true,
+        "sha256": "895eb9d40c12bda31b77d9992adc38add46cd06819857e73ebe3785d34e9b074",
+        "bytes": 1362212
+      },
+      "swiftkey/katakana_en_NOTICE.txt": {
+        "unchanged": true,
+        "sha256": "19a40a031c56b3eab90188c8f7ccba6d7a6e1e2a37c5cbfa2f934726cfd80f6f",
+        "bytes": 2524
+      },
+      "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": {
+        "unchanged": true,
+        "sha256": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479",
+        "bytes": 11247
+      },
+      "swiftkey/glide_ja.bin": {
+        "unchanged": true,
+        "sha256": "8f21e641a8b7f86c4bc26252be07515f9a4f402e4a2a516187d6194e7b264a4e",
+        "bytes": 29755501
+      },
+      "swiftkey/glide_ja_NOTICE.txt": {
+        "unchanged": true,
+        "sha256": "76ebc1d8efee519aae49db5aa80bff6602828d10287c8b164958d2e1a9997592",
+        "bytes": 1824
+      }
+    }
+  },
+  "bundle_preservation": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "unchanged_entries": 51,
+    "top_classes_dex_byte_identical": true,
+    "zip_crc_verified": true,
+    "entries": {
+      "META-INF/MANIFEST.MF": {
+        "unchanged": false,
+        "sha256": "195a20e0602f2dd2a4eb1b958b70c5cc93a996a2badc1f09b176f0e51570fb79",
+        "bytes": 532
+      },
+      "app.hiro.amazonfilter.SponsoredFilterProvider": {
+        "unchanged": true,
+        "sha256": "7fc17fcda8134b06283b21374defdc656bff5e63cff9cefa0ebd38ce92fcc9a8",
+        "bytes": 13556
+      },
+      "app/hiro/tripcom/patches/HideHomeRecommendationsPatchKt$hideHomeRecommendationsPatch$1$1.class": {
+        "unchanged": true,
+        "sha256": "3cd3b88ce140656c19f57e6ffc576c715c5057e841de9b51deab3d83d84528ab",
+        "bytes": 7310
+      },
+      "app/hiro/tripcom/patches/HideHomeRecommendationsPatchKt$hideHomeRecommendationsPatch$1.class": {
+        "unchanged": true,
+        "sha256": "b95fb718b8dad39ce0d886bc09386b919b5803d5a4a450d008713dd8d664162d",
+        "bytes": 2326
+      },
+      "app/hiro/tripcom/patches/HideHomeRecommendationsPatchKt.class": {
+        "unchanged": true,
+        "sha256": "0933c4a4789494fc71b7fc26a3352dcfa97759d187e79065f73cb23f76671eed",
+        "bytes": 5817
+      },
+      "app/hiro/tripcom/patches/MyPlanPreparationNativePatch.class": {
+        "unchanged": true,
+        "sha256": "8fa5833ddb18c313a0c8d3001090ba375311717100968e7012c6e3802b268f66",
+        "bytes": 6936
+      },
+      "app/hiro/tripcom/patches/TripPatchAssets.class": {
+        "unchanged": true,
+        "sha256": "c9d4f3b8e08557346a5ec0ff8670c6332a24e571cbfb45050acbaf37034515b2",
+        "bytes": 2002
+      },
+      "app/hiro/twitter/patches/XAbsoluteTimePatch$1.class": {
+        "unchanged": true,
+        "sha256": "a116b94563162c78f47acef6ff09084b35eb7e2c3cf922835c73e73ea68d8144",
+        "bytes": 955
+      },
+      "app/hiro/twitter/patches/XAbsoluteTimePatch$2.class": {
+        "unchanged": true,
+        "sha256": "773a57a385af64b85a56c32c3af29c1cff56270bcbac22051b00b3e33047aacc",
+        "bytes": 2274
+      },
+      "app/hiro/twitter/patches/XAbsoluteTimePatch.class": {
+        "unchanged": true,
+        "sha256": "c4bd198b6f7dae592ba90bf73f66a6ce161c303a08bfc34b4044e4366bbc5bf1",
+        "bytes": 10454
+      },
+      "app/hiro/ulike/patches/IntegrationPayload186$Payload.class": {
+        "unchanged": true,
+        "sha256": "722067cc64836406237e1e3e6b7fee55d1f623d263254355478914f1446c0d32",
+        "bytes": 352
+      },
+      "app/hiro/ulike/patches/IntegrationPayload186$Resolver.class": {
+        "unchanged": true,
+        "sha256": "23347ba0e1272d649914ee3b531d6557bd5573b128c835e0e24c7c5941344e84",
+        "bytes": 350
+      },
+      "app/hiro/ulike/patches/IntegrationPayload186.class": {
+        "unchanged": true,
+        "sha256": "b0b00ac5a30d8982350494cde7d94c10ef5419d07d429c0aaef21bebf23416e1",
+        "bytes": 9742
+      },
+      "app/hiro/ulike/patches/MethodContract.class": {
+        "unchanged": true,
+        "sha256": "80812b9cce38ba7ac7e451077255739a01d1b97c349e655d44b855a708e0ebc7",
+        "bytes": 10452
+      },
+      "app/hiro/ulike/patches/NativeNv21EffectFlag.class": {
+        "unchanged": true,
+        "sha256": "7cadfa07d78307da91bba6c5d3dd904500cd01dab0c23def77f11dadfe39a766",
+        "bytes": 3211
+      },
+      "app/hiro/ulike/patches/UlikeHqMaxPatch.class": {
+        "unchanged": true,
+        "sha256": "a7aa472465936b3feb9aee82e6aac553b9cea8ae07377e816b0f38e015d3e4aa",
+        "bytes": 17591
+      },
+      "brightnessclick/main.dex": {
+        "unchanged": true,
+        "sha256": "915d5a09455ca72e2897c77a7f12ef0394ae76eaccd83ce7cc3e90f304c0ecc1",
+        "bytes": 6568
+      },
+      "brightnessclick/original-methods.properties": {
+        "unchanged": true,
+        "sha256": "1347321ca2690b64793e9b65c8c1d67e4aa09286ca37a8d9b3d5295b6fe4a2da",
+        "bytes": 2722
+      },
+      "brightnessclick/permission.mpe": {
+        "unchanged": true,
+        "sha256": "052f344f48d574aa0136263d5dc6bac772a730c8df16479f43cc551df5fc9fc9",
+        "bytes": 2388
+      },
+      "brightnessclick/replacement.dex": {
+        "unchanged": true,
+        "sha256": "dedb6457e5e1c4768a75892c83843588b2439210c119d6ee4d9200d843118215",
+        "bytes": 5872
+      },
+      "classes.dex": {
+        "unchanged": true,
+        "sha256": "9cc9e4aa043a74f70d5a19e1a93b6871b2f8945bf73be518eff995d95a02ee0f",
+        "bytes": 375824
+      },
+      "desktop-preserved/SharedExtensionPatchKt.class.bin": {
+        "unchanged": true,
+        "sha256": "f538a94e25d3594cb9b2506d36a066e2a3f3297edcc7ecbf0670ab0c590b0bfe",
+        "bytes": 13494
+      },
+      "extensions/berry_browser_visibility.mpe": {
+        "unchanged": true,
+        "sha256": "4a958c89ddc7b8f174ec1064415f175814384b6693d99dbb2566f7605f287786",
+        "bytes": 8620
+      },
+      "extensions/berry_foreground_tabs.mpe": {
+        "unchanged": true,
+        "sha256": "9af184ec2d3f70b7646f17b008edc02c29d83fd5525332afda6dfc65758f5a01",
+        "bytes": 10336
+      },
+      "extensions/berry_onehand_zoom.mpe": {
+        "unchanged": true,
+        "sha256": "7e5e30bd851ad6f82740a7f495ca2994f2ae74b1a8bf3adb93eedfde60bdf9e2",
+        "bytes": 7296
+      },
+      "extensions/extension.mpe": {
+        "unchanged": true,
+        "sha256": "d80fe39145b09c1c6b86c4bec4a49ece868b7b61781234e1c39a486a855b041e",
+        "bytes": 6100
+      },
+      "extensions/instagram_account_setup_guard.mpe": {
+        "unchanged": true,
+        "sha256": "1247f7835f99f076b0e698144643f016e89a3d84faad32171f092744a151a9a9",
+        "bytes": 33648
+      },
+      "extensions/myplan_preparation_guard.mpe": {
+        "unchanged": true,
+        "sha256": "2493b594378be82808b24f3425c0eb5f55bdb40f1a5748457fb470c2482cbd85",
+        "bytes": 1300
+      },
+      "extensions/search_landing_guard.mpe": {
+        "unchanged": true,
+        "sha256": "c34b0274a9dcc2058c0144cdc211a7cedc9906720d113ef9f957fdc75985bac2",
+        "bytes": 16532
+      },
+      "extensions/shared.mpe": {
+        "unchanged": true,
+        "sha256": "685d7a7dd61e10784c7ffa3ead8cad39de4c0fb030f3c495914d718366dc531d",
+        "bytes": 816
+      },
+      "extensions/swiftkey_japanese.mpe": {
+        "unchanged": false,
+        "sha256": "e96a773bfb988e03c19282fd0cdf0f484ed0e21e9268e35f4b1beb772d339931",
+        "bytes": 318288
+      },
+      "extensions/tiktok.mpe": {
+        "unchanged": true,
+        "sha256": "c8353b601f17869f9c783742287cf918932d11ac6c5202b479ff6242596c5947",
+        "bytes": 1340
+      },
+      "extensions/uber_eats_promotion_filter.mpe": {
+        "unchanged": true,
+        "sha256": "5b4f75afd18c96dd9699bd11d38f8a56a0620f56a4534d158a5b24b4a11714f4",
+        "bytes": 3672
+      },
+      "extensions/x_absolute_time.mpe": {
+        "unchanged": true,
+        "sha256": "6f5f287c038b8894f00addfa09c618dd87143461a02e523939887af13c4eb0fb",
+        "bytes": 2756
+      },
+      "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z": {
+        "unchanged": true,
+        "sha256": "b4ee8ad8555d0541aba178afa953a341a915a8cddbebd67a63ee206c5c7f0e2d",
+        "bytes": 324792
+      },
+      "swiftkey/emoji_LICENSE.txt": {
+        "unchanged": true,
+        "sha256": "b4c0ae8ef04f7059f96ce5bbe0467f9fe6f6d81bbe13517701dfeb961fb4d0b6",
+        "bytes": 2033
+      },
+      "swiftkey/emoji_ja.tsv": {
+        "unchanged": true,
+        "sha256": "24ea97801a5756f9f5d7d5244a8e6eb094de8b7c10a9986e5f363fc0fc595e12",
+        "bytes": 1193057
+      },
+      "swiftkey/glide_ja.bin": {
+        "unchanged": true,
+        "sha256": "8f21e641a8b7f86c4bc26252be07515f9a4f402e4a2a516187d6194e7b264a4e",
+        "bytes": 29755501
+      },
+      "swiftkey/glide_ja_NOTICE.txt": {
+        "unchanged": true,
+        "sha256": "76ebc1d8efee519aae49db5aa80bff6602828d10287c8b164958d2e1a9997592",
+        "bytes": 1824
+      },
+      "swiftkey/katakana_en.tsv": {
+        "unchanged": true,
+        "sha256": "895eb9d40c12bda31b77d9992adc38add46cd06819857e73ebe3785d34e9b074",
+        "bytes": 1362212
+      },
+      "swiftkey/katakana_en_NOTICE.txt": {
+        "unchanged": true,
+        "sha256": "19a40a031c56b3eab90188c8f7ccba6d7a6e1e2a37c5cbfa2f934726cfd80f6f",
+        "bytes": 2524
+      },
+      "swiftkey/words_LICENSE.txt": {
+        "unchanged": true,
+        "sha256": "cab6e0d7ddc41d32e6ea7a7b6d4629367a7d1dfd7744aa14bd8b87bf53b89fca",
+        "bytes": 95907
+      },
+      "swiftkey/words_ja.tsv": {
+        "unchanged": true,
+        "sha256": "1f15766663f5cbf1de8bce2df6a2b8f5e80a488166950979b92ecac8f9e27ca0",
+        "bytes": 25181960
+      },
+      "ulike/assets.tsv": {
+        "unchanged": true,
+        "sha256": "dee918d04de69e5ede66ae26fb45261d35576b8f22ded525e1f81725be25c957",
+        "bytes": 507
+      },
+      "ulike/assets/0000.bin": {
+        "unchanged": true,
+        "sha256": "43009d4354fad19be708974f246b1141ddb3ad8a683fd8cea91acf149eee0f66",
+        "bytes": 98721
+      },
+      "ulike/assets/0001.bin": {
+        "unchanged": true,
+        "sha256": "71d1c16353936fc567651dd06ffcae82bffeea32e9dda560edf5d8962ddc26af",
+        "bytes": 301583
+      },
+      "ulike/assets/0002.bin": {
+        "unchanged": true,
+        "sha256": "72257c89250abbae8e70ee3fd1173b92fd68428f243824d61a0811fb360d9571",
+        "bytes": 49487
+      },
+      "ulike/heifwriter-NOTICE.txt": {
+        "unchanged": true,
+        "sha256": "809fa1ed21450f59827d1e9aec720bbc4b687434fa22283c6cb5dd82a47ab9c0",
+        "bytes": 10175
+      },
+      "ulike/methods.dex": {
+        "unchanged": true,
+        "sha256": "dc370cb67a4319399e0317441ebbc7f68b9ea6f81c3d1909b9cf47a5cebc6f4a",
+        "bytes": 126872
+      },
+      "ulike/methods.tsv": {
+        "unchanged": true,
+        "sha256": "4d5aad7b8c18acef1fd7f5d78e628abe1c901f1d0f690a40630ead56b7fbbca9",
+        "bytes": 39965
+      },
+      "ulike/runtime.dex": {
+        "unchanged": true,
+        "sha256": "a6b672d726e5d6d05f8748246c8708068a57de4c1b06306a83e7b5e394163207",
+        "bytes": 373320
+      },
+      "ulike186/resourceitems.tsv": {
+        "unchanged": true,
+        "sha256": "f1e337dcf55144ce9f9e4005850799a51dec1f4c5442f351b2da75076f662eb3",
+        "bytes": 133
+      },
+      "ulike186/runtime/0000.bin": {
+        "unchanged": true,
+        "sha256": "0ac181fac2afbd9260b8c59d922843deead72d3184e78ce97346d57a76b169cb",
+        "bytes": 10320
+      }
+    }
+  },
+  "artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.2.mpp": {
+      "bytes": 16083815,
+      "sha256": "a705113b98f1f0fa13a9c1e73adb778abe7b30392b6c575234faa5ed2abb454a"
+    },
+    "Hiro_Morphe_Patches_v1.0.157.mpp": {
+      "bytes": 17278891,
+      "sha256": "9b50baa737d9891a725586f567e5ee43a4a7b279a286577934fceffb1fc4a5c4"
+    }
+  }
+}
