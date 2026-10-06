@@ -1,0 +1,94 @@
+name: Verify and publish SwiftKey183 Latin deletion protection
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey183-158-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Fetch pinned public baseline and build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-swiftkey183/input .ci-swiftkey183/tools .ci-swiftkey183/dist
+          python - <<'PY'
+          import hashlib, json, pathlib, re, urllib.request
+          manifest = json.loads(pathlib.Path('releases/swiftkey183-158/manifest.json').read_text())
+          assert manifest['schema'] == 'swiftkey183-publication-v1'
+          assert manifest['baseline_bundle_version'] == '1.0.157'
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version'] == '1.0.157', 'Active bundle changed; do not overwrite other patches'
+          expected = '9b50baa737d9891a725586f567e5ee43a4a7b279a286577934fceffb1fc4a5c4'
+          assert manifest['baseline_bundle_sha256'] == expected
+          assert feed['download_url'] == 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/44297719591f12a18476c074246bd58b623099ce/downloads/Hiro_Morphe_Patches_v1.0.157.mpp'
+          def download(url, target, digest, size=None):
+              assert re.fullmatch('[0-9a-f]{64}', digest), 'Missing reviewed checksum'
+              with urllib.request.urlopen(url, timeout=120) as response:
+                  data = response.read()
+              assert hashlib.sha256(data).hexdigest() == digest, str(target) + ' checksum mismatch'
+              if size is not None:
+                  assert len(data) == size, str(target) + ' size mismatch'
+              target.write_bytes(data)
+          download(feed['download_url'], pathlib.Path('.ci-swiftkey183/input/Hiro_Morphe_Patches_v1.0.157.mpp'), expected, 17278891)
+          single_name = 'SwiftKeyBeta_v2_SamsungEmoji_v1.8.2.mpp'
+          single_sha = 'a705113b98f1f0fa13a9c1e73adb778abe7b30392b6c575234faa5ed2abb454a'
+          assert manifest['baseline_swiftkey_version'] == '1.8.2'
+          assert manifest['baseline_swiftkey_sha256'] == single_sha
+          single_url = 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/44297719591f12a18476c074246bd58b623099ce/downloads/' + single_name
+          download(single_url, pathlib.Path('.ci-swiftkey183/input') / single_name, single_sha, 16083815)
+          tools = manifest['toolchain']
+          assert tools['apktool']['version'] == '3.0.3'
+          assert tools['r8']['version'] == '8.7.18'
+          assert tools['morphe']['version'] == '1.17.0-dev.6'
+          for key, tool in tools.items():
+              name = tool['filename']
+              assert pathlib.PurePosixPath(name).name == name and not name.startswith('.'), 'Invalid tool filename'
+              download(tool['url'], pathlib.Path('.ci-swiftkey183/tools') / name, tool['sha256'], tool['bytes'])
+          print('PASS exact active bundle and pinned public build tools')
+          PY
+          java -version
+          java -jar .ci-swiftkey183/tools/apktool.jar --version
+          java -cp .ci-swiftkey183/tools/r8.jar com.android.tools.r8.R8 --version
+      - name: Rebuild reviewed SwiftKey MPPs and run host verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey183-158/src/build183.py --input .ci-swiftkey183/input --tools .ci-swiftkey183/tools --work .ci-swiftkey183/build --output .ci-swiftkey183/dist 2>&1 | tee .ci-swiftkey183/build.log
+      - name: Match reviewed hashes and exact SwiftKey loader/runtime change plan
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey183-158/src/publish183.py --dist .ci-swiftkey183/dist --repo . --expected releases/swiftkey183-158/manifest.json --baseline .ci-swiftkey183/input/Hiro_Morphe_Patches_v1.0.157.mpp --standalone-baseline .ci-swiftkey183/input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.2.mpp --local-only 2>&1 | tee .ci-swiftkey183/local-verification.log
+      - name: Publish exact MPPs and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey183-158/src/publish183.py --dist .ci-swiftkey183/dist --repo . --expected releases/swiftkey183-158/manifest.json --baseline .ci-swiftkey183/input/Hiro_Morphe_Patches_v1.0.157.mpp --standalone-baseline .ci-swiftkey183/input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.2.mpp 2>&1 | tee .ci-swiftkey183/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey183-bundle158-verified-publication
+          path: |
+            .ci-swiftkey183/dist/
+            .ci-swiftkey183/*.log
+            .ci-swiftkey183/build/*.log
+          retention-days: 14
+          compression-level: 1
+          include-hidden-files: true

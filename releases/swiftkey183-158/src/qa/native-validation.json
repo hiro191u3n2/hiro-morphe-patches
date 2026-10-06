@@ -1,0 +1,23 @@
+{
+  "status": "PASSED",
+  "checks": 300,
+  "source_package": "com.touchtype.swiftkey.beta",
+  "source_version": "9.13.16.4",
+  "source_description": "Archived v2 modified APK; the deletion methods are original and unchanged by the v2 patch",
+  "input_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "class": "Lec0/x;",
+  "native_methods": {
+    "i(Lec0/n;I)Z": "51b836fc90aaf016f87ebef9fb316d7c2b63aa2e4022e434f3233c687e717214",
+    "k(Lec0/n;I)Z": "a47a2a74b52c561d0f1165e68108295947b82e7c7c6547d806e8caac188ac19c",
+    "w(Ljava/lang/String;Lec0/n;Ljava/lang/Long;)Z": "e1c3d49a56e518713f3da45c252a5624fc99bf5d16c24701122d2faf59b04814"
+  },
+  "production_loader_applied": true,
+  "native_bodies_and_registers_preserved": true,
+  "non_target_native_methods_preserved": true,
+  "native_arguments_return_and_exceptions_preserved": true,
+  "dex_roundtrip_preserved": true,
+  "invalid_and_repatch_inputs_rejected_before_mutation": true,
+  "whole_original_apk_apply_tested": false,
+  "android_art_executed": false,
+  "rerun_command": "java -cp build/test_classes:build/patcher_classes:tools/morphe.jar:input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.2.mpp app.hiro.swiftkey.patches.NativeDeleteHooksTest target.apk native-wrapped.dex"
+}
