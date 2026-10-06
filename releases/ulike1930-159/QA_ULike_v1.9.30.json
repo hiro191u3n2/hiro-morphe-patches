@@ -1,0 +1,160 @@
+{
+  "schema": "ulike1930-rear-lens-ui-v1",
+  "status": "REBUILD_MATCHES_ORIGINAL_APKS_VALIDATED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.30",
+  "bundle_version": "1.0.159",
+  "base_versions": [
+    "1.9.29",
+    "1.0.158"
+  ],
+  "approved_lineage": "1.8.8",
+  "device_tested": false,
+  "device_fix_confirmed": false,
+  "original_apk_apply_tested": true,
+  "ci_android_apply_tested": false,
+  "native_methods_byte_identical": true,
+  "native_methods_tsv_byte_identical": true,
+  "non_ulike_resources_byte_identical": true,
+  "non_ulike_loader_classes_unchanged": true,
+  "image_pipeline_byte_identical": true,
+  "camera_lifecycle_byte_identical": true,
+  "black_bar_gesture_byte_identical": true,
+  "rear_lens_ui_predraw_guard": true,
+  "rear_lens_ui_selection_guard": true,
+  "standalone_and_bundle_ulike_resources_identical": true,
+  "changed_runtime_methods": [
+    "Lcom/hiro/ulike/OpticalZoom;->select(I)V",
+    "Lcom/hiro/ulike/OpticalZoom;->show()Z",
+    "Lcom/hiro/ulike/OpticalZoomUi$Bar;->onPreDraw()Z"
+  ],
+  "new_helper_classes": [
+    "Lcom/hiro/ulike/RearLensUi1930;"
+  ],
+  "existing_runtime_methods_unchanged": 1435,
+  "non_ulike_loader_classes_preserved": 225,
+  "host_helper_assertions": 54,
+  "dex_verification": "RUNTIME_UI1930 changed_methods=3 retained_methods=1435 inverse_reconstructed_classes=238 added_helper_classes=1\nLOADER_UI1930 kind=standalone classes=13 methods=52 metadata_replacements=1 all_logic_retained=true\nLOADER_UI1930 kind=integrated classes=238 methods=1125 metadata_replacements=1 all_logic_retained=true\nHELPER_UI1930 native_field_reads=3 native_getters=4 stock_abi_verified=0 field_writes=0 native_declarations=0 cached_fields=0 note=transitive_getter_semantics_audited_separately\nDEX_HOST_UI1930_CASES=245\nDEX_HOST_UI1930 actual_Dex_instructions=true baseline_failure_reproduced=true immediate_hide_before_clock=true rear_throttle_retained=true stale_clicks_blocked=true environment=focused_host_interpreter native_selection_result=injected update_body=boundary_stub Android_runtime=false device_camera=false\nVERIFY_UI1930_ASSERTIONS=14343\nPASS1930 emitted_guards=3 original_conditions_restored_exactly=true unrelated_runtime_and_loaders_preserved=true native_methods_and_contracts_byte_identical=true added_camera_or_image_mutations=false Android_device_verification=not_performed",
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.30.mpp": {
+      "sha256": "8b7de29e47362d8e2291b5c2d506dd85688279443269ee8d854513d4cae5d723",
+      "bytes": 706227
+    },
+    "Hiro_Morphe_Patches_v1.0.159.mpp": {
+      "sha256": "4bca13ce08031eb42fb7f73f5c7e8b267ec3df5f553793f57a5c14080d362959",
+      "bytes": 17281159
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.29.mpp": "2faae3114d5663cfb924f544b7c114f910caadc5b517eb575ea38b1d89311f6c",
+    "Hiro_Morphe_Patches_v1.0.158.mpp": "4d0dca101976cfdd14b48949ec7f828c11b9c0dcf2e0c01e99a379dd6898aded",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy/ART or camera hardware execution.",
+    "Host helper checks and DEX control-flow checks do not prove the device symptom is resolved.",
+    "Unmodified image and camera-session code is preserved; no new image-quality claim."
+  ],
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33373 unique classes / 213604 methods. 1637 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "register_analysis": {
+        "tested": 1269,
+        "failed": 0
+      }
+    },
+    "bundle": {
+      "patch_index": 2,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33373 unique classes / 213604 methods. 1637 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "register_analysis": {
+        "tested": 1269,
+        "failed": 0
+      }
+    }
+  },
+  "ui_abi_verification": "RUNTIME_UI1930 changed_methods=3 retained_methods=1435 inverse_reconstructed_classes=238 added_helper_classes=1\nLOADER_UI1930 kind=standalone classes=13 methods=52 metadata_replacements=1 all_logic_retained=true\nLOADER_UI1930 kind=integrated classes=238 methods=1125 metadata_replacements=1 all_logic_retained=true\nHELPER_UI1930 native_field_reads=3 native_getters=4 stock_abi_verified=7 field_writes=0 native_declarations=0 cached_fields=0 note=transitive_getter_semantics_audited_separately\nDEX_HOST_UI1930_CASES=245\nDEX_HOST_UI1930 actual_Dex_instructions=true baseline_failure_reproduced=true immediate_hide_before_clock=true rear_throttle_retained=true stale_clicks_blocked=true environment=focused_host_interpreter native_selection_result=injected update_body=boundary_stub Android_runtime=false device_camera=false\nVERIFY_UI1930_ASSERTIONS=14358\nPASS1930 emitted_guards=3 original_conditions_restored_exactly=true unrelated_runtime_and_loaders_preserved=true native_methods_and_contracts_byte_identical=true added_camera_or_image_mutations=false Android_device_verification=not_performed",
+  "desktop_evidence_sha256": "cd7d62c3c84f247b82264a8046d20e04c3d3cc9f09825d2f57f8d16ba06d9de3",
+  "source_sha256": {
+    "src/AnalyzeAll.java": "8e24326b40a24132a8d59a7050def3e24b1d70f1214249b7d4f5a3109dfdfef3",
+    "src/DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "src/MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "src/PatchClass1930.java": "aaee9cbb4317d2dd0092e9521d6fd45c66b8419ec1e47fa1d7383602410f4de0",
+    "src/RearLensUi1930.java": "f46c1aef17e8d0f581d5a4fa683b279e662d35238481a266967a4b936731f005",
+    "src/Transform1930.java": "b85a99991a09d1bc042a94a08bfaf141a40cea0c83f8ec2f0a861e9de4389644",
+    "src/VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "src/VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "src/VerifyUi1930.java": "ad9c743fefa8f0753473724d72bb6d3aae8067ac20d31da2058e2f3140fcf867",
+    "src/build1930.py": "a9d0da3d132578ddd9c9b7eee226a58889dc320c367d4708053a9716235b50f2",
+    "src/finalize1930.py": "bc4c4641903ae72a45c21347df4162feb2f0cc3dddb1bbacbc4c6985371ab125",
+    "src/host_ui1930.py": "0aa0be8a8b8e6f0b9c39870d55c77e5f62d1922ac852a3d459fa35e1fb3870bc",
+    "src/native-ui1930-abi.txt": "289d61db2490d211f07d16b129b0461815b1e60b21837a2beb568179256f7f0c",
+    "src/ui-host/com/hiro/ulike/RearLensUiHost1930.java": "82509f867566feb9e5ade242b6bca809998571b297c236de573b0066f38cab9a",
+    "src/ui-host/i/f/l/j.java": "73a6835c1e8dc472eee3149b22c834790ac6f1d18f23f1a2b33e00172bbe91d2",
+    "src/ui-host/i/f/l/n/q/y/m.java": "eac8c10d3f5f75cdf55a9bccc841a31d92d440da4ce0f073c78af4764469940c",
+    "src/ui-host/i/f/l/u/g.java": "a7280eea380df1d70bdcb6d099af140a29f554f06409a9c0012cc96616f850b6",
+    "src/ui-host/i/f/l/u/j.java": "6259cf07363a0bc6a5b4a86bdf2d5460d1dcdf6cc92b28eb574b0040b5ede9ce",
+    "src/ui-host/i/f/l/u/p.java": "499589cea83d8fd4986a1b2167665a54ec12f9e9160ddcb98bef16d94f6d9a65",
+    "src/ui-stubs/i/f/l/j.java": "1056dc61e5e16e29420d2ee684bc1b75968cd0101c453efac551621d8c1a98f6",
+    "src/ui-stubs/i/f/l/n/q/y/m.java": "68f5db5987bc5d20839634a780160255aee392c242789e033138fb44f088bcd1",
+    "src/ui-stubs/i/f/l/u/g.java": "270b839c60e5c9a45a3e557b26ca75b9bd13d83b1d49a0d149b44348487c367a",
+    "src/ui-stubs/i/f/l/u/j.java": "a5b7cc63fbf8d8d5504a35673e9987c6d6f0ea8d3a4d8d4defb469c7b021c439",
+    "src/ui-stubs/i/f/l/u/p.java": "327470be765f32e6870de3c3d775a5de665d4a684a3182747c02eed7075375b7",
+    "src/validate1930.py": "5b2ff22d82eabce7193e7174b4a4ae53da1a9ca9123a1b534bb94e90496c834b"
+  }
+}
