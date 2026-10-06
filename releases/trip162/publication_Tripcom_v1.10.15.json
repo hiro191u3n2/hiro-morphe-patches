@@ -1,0 +1,107 @@
+{
+  "schema": "trip162-publication-receipt-v1",
+  "trip_version": "1.10.15",
+  "baseline_trip_version": "1.10.14",
+  "bundle_version": "1.0.162",
+  "baseline_bundle_version": "1.0.161",
+  "baseline_bundle_sha256": "92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03",
+  "source_commit": "1131ca540998850ebc81f02b7362d384adc54f73",
+  "publication_manifest_sha256": "5f2353a2b95d476879327e4ad1704696c6f9432f0071ea5e28d4f541fc0fcdc2",
+  "assets": {
+    "Tripcom_Quiet_v1.10.15.mpp": {
+      "bytes": 388507,
+      "sha256": "b179932d58e43d329a9609eec268d64f9c6c9adaf15a47a898587dd03331dc80"
+    },
+    "Hiro_Morphe_Patches_v1.0.162.mpp": {
+      "bytes": 17322782,
+      "sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5"
+    },
+    "QA_Tripcom_v1.10.15.json": {
+      "bytes": 37811,
+      "sha256": "db52c851b5d40840d8735519fdac22c63afbed6f18defc271269e76041aa490c"
+    },
+    "Tripcom_v1.10.15_sources_and_QA.zip": {
+      "bytes": 115287,
+      "sha256": "91015f76d24be8e71b6d8d6f553fe65845ef64d4a5ca04d10d54925dafc226ad"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 1855,
+      "sha256": "757199b47f96b3f5bd18946ddd806a89cc3e56b1bb687753ad3bd4f13d48f6f2"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 469,
+      "sha256": "211e6ea5357f25c8f939ff61c71b7baa3d34dbbbe5e7d16d73e8e4e6794d1a87"
+    }
+  },
+  "local_validation": {
+    "bundle_changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/tripcom/patches/HideHomeRecommendationsPatchKt$hideHomeRecommendationsPatch$1$1.class",
+      "app/hiro/tripcom/patches/MyPlanPreparationNativePatch.class",
+      "classes.dex",
+      "replacements/rn_xtaro_ibu_schedule-431156475-30041599.7z"
+    ],
+    "bundle_added_entries": [
+      "app/hiro/tripcom/patches/HomeResourceDocuments.class",
+      "app/hiro/tripcom/patches/MyPlanBundleNativePatch.class",
+      "extensions/myplan_bundle_guard.mpe"
+    ],
+    "bundle_removed_entries": [],
+    "existing_non_trip_resource_entries_byte_identical": 46,
+    "standalone_and_bundle_trip_resources_identical": true,
+    "baseline_bundle_version": "1.0.161",
+    "baseline_bundle_sha256": "92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03",
+    "baseline_trip_version": "1.10.14",
+    "baseline_trip_sha256": "e99d82b7d5250662c82c3a50463ac9cbd551d56db299c8837c9056cfcdaef3e4",
+    "qa_assertions_verified": [
+      "android_device_tested",
+      "original_apk_apply_tested",
+      "non_trip_resources_unchanged",
+      "non_trip_loader_classes_unchanged",
+      "standalone_and_bundle_trip_resources_identical",
+      "js_regression_passed",
+      "native_hook_host_tests_passed",
+      "native_hook_original_apk_verified"
+    ],
+    "source_files_checked": 43,
+    "qa_sha256": "db52c851b5d40840d8735519fdac22c63afbed6f18defc271269e76041aa490c",
+    "android_device_tested": false,
+    "original_apk_apply_tested": true
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "f946cd06e89fcc1f48e36c5c8a6482c7fbf7d544",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "9185dcc457d14287f50186335fb9a729d353cea9",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 405094128,
+  "raw_commit": "50524e48dcc4851f4486e5b17b28010ec4cc4c19",
+  "download_urls": {
+    "Tripcom_Quiet_v1.10.15.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/50524e48dcc4851f4486e5b17b28010ec4cc4c19/downloads/Tripcom_Quiet_v1.10.15.mpp",
+    "Hiro_Morphe_Patches_v1.0.162.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/50524e48dcc4851f4486e5b17b28010ec4cc4c19/downloads/Hiro_Morphe_Patches_v1.0.162.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/tripcom-v1.10.15",
+  "manager_main_dev_updated_atomically": true,
+  "manager_trip_scope_verified": true,
+  "other_apps_false_updates": false,
+  "existing_quicksearch_ulike_and_swiftkey_preserved": true,
+  "fixed_chatgpt_site_updated": false
+}
