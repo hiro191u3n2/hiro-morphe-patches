@@ -1,0 +1,1 @@
+package com.bytedance.corecamera.ui.view; public class CameraShadeView extends android.view.View { public CameraShadeView(android.content.Context c){super(c);} }

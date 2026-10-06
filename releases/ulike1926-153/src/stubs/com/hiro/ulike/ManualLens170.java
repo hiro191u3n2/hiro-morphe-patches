@@ -1,0 +1,1 @@
+package com.hiro.ulike; public final class ManualLens170 { static boolean yes(String n)throws ReflectiveOperationException{return true;} static boolean ready()throws ReflectiveOperationException{return true;} }

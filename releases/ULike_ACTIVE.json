@@ -1,17 +1,17 @@
 {
-  "ulike_version": "1.9.25",
-  "bundle_version": "1.0.152",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.25.mpp",
-  "source_sha256": "e9ffd9c53cac07205b435590290dc00df6c8cd0c0f17a6987dc417f4150e2919",
-  "source_release": "ulike-v1.9.25",
-  "active_release": "ulike-v1.9.25",
-  "base_ulike_version": "1.9.24",
+  "ulike_version": "1.9.26",
+  "bundle_version": "1.0.153",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.26.mpp",
+  "source_sha256": "f5aeb66dead588cbe336b08fd7911fd9b4d0eca4a08521fee4078e43350ffb42",
+  "source_release": "ulike-v1.9.26",
+  "active_release": "ulike-v1.9.26",
+  "base_ulike_version": "1.9.25",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "239973e573882faca608f67138409a282451e9bad1083102f266864068820b75",
+  "base_source_sha256": "e9ffd9c53cac07205b435590290dc00df6c8cd0c0f17a6987dc417f4150e2919",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "User requested modest all-tone denoising and front/back camera switching on black-bar double tap. Isolate confirmed-single and double callbacks on measured black bars; route to native switch with capture/recording and 800ms guards. Preserve processed-domain tones, approved188 lineage, native panel Back and all other apps from bundle151. Device unverified.",
+  "reason": "Rear restart black-preview mitigation: move ownership tracking to native init completion, require concrete preview surfaces for current fixed physical rear routes, use live-window recovery readiness. Preserve facing preference, image pipeline, approved188 lineage and all other apps from bundle152. Exact device root cause and resolution unverified.",
   "future_ulike_base": "Use this approved188-lineage layout hotfix; preserve native panel Back, cancellable exit wait and face feature. Do not restore removed diagnostics or withdrawn1917/10bit route.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
@@ -31,5 +31,9 @@
   "shadow_chroma_smoothing": true,
   "all_tone_denoising": true,
   "black_tap_native_switch": true,
-  "black_tap_device_tested": false
+  "black_tap_device_tested": false,
+  "native_tracking_after_init": true,
+  "fixed_physical_rear_concrete_surfaces": true,
+  "recovery_uses_live_window": true,
+  "rear_restart_device_cause_confirmed": false
 }
