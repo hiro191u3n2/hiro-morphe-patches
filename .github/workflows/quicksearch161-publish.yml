@@ -1,0 +1,95 @@
+name: Verify and publish QuickSearch close-button and Back fix and bundle161
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/quicksearch161-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+          path: .ci-quicksearch161/staged
+      - name: Verify active bundle160, independently reviewed MPP hashes and pinned tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-quicksearch161/input .ci-quicksearch161/dist
+          python - <<'PY'
+          import hashlib, json, pathlib, re, urllib.request
+          root = pathlib.Path('.ci-quicksearch161')
+          source = pathlib.Path('releases/quicksearch161/src')
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          expected = json.loads((source / 'expected-mpp.json').read_text())
+          names = {'QuickSearch_NoRecents_v1.0.1.mpp', 'Hiro_Morphe_Patches_v1.0.161.mpp'}
+          assert set(expected) == names, 'Missing independently reviewed MPP hashes'
+          for name, row in expected.items():
+              assert type(row['bytes']) is int and row['bytes'] > 0, name
+              assert re.fullmatch('[0-9a-f]{64}', row['sha256']), name
+          baseline_name = 'Hiro_Morphe_Patches_v1.0.160.mpp'
+          baseline_sha = '7e3a1f531cf127f9c8c16cb8c12548ce9437b84adac82ea0d9bb2244e7333b5a'
+          baseline_url = 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0e15c2c64dfb9fcffbdc4f4738c587af5a5c9b18/downloads/' + baseline_name
+          assert feed['version'] == '1.0.160', 'Active bundle advanced; preserve newer application patches'
+          assert feed['download_url'] == baseline_url, 'Active baseline source differs'
+          with urllib.request.urlopen(baseline_url, timeout=60) as response:
+              data = response.read()
+          assert len(data) == 17292368 and hashlib.sha256(data).hexdigest() == baseline_sha, 'Pinned baseline160 bytes differ'
+          (root / 'input' / baseline_name).write_bytes(data)
+          tools = {
+              'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+              'android.jar': '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',
+              'd8.jar': '305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5',
+          }
+          for name, digest in tools.items():
+              assert hashlib.sha256((root / 'staged/tools' / name).read_bytes()).hexdigest() == digest, 'Pinned tool differs: ' + name
+          assert isinstance(json.loads((source / 'local-qa.json').read_text()), dict), 'Missing recorded original-APK validation'
+          print('PASS exact public bundle160, reviewed MPP expectations, original-APK evidence and pinned tools')
+          PY
+          java -version
+      - name: Rebuild both reviewed MPPs and run host and loader-preservation checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/quicksearch161/src/build.py --base .ci-quicksearch161/input/Hiro_Morphe_Patches_v1.0.160.mpp --tools .ci-quicksearch161/staged/tools --work .ci-quicksearch161/build --dist .ci-quicksearch161/dist 2>&1 | tee .ci-quicksearch161/build.log
+      - name: Verify exact tested MPP bytes, source archive, QA and complete entry delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/quicksearch161/src/publish161.py --dist .ci-quicksearch161/dist --repo . --base .ci-quicksearch161/input/Hiro_Morphe_Patches_v1.0.160.mpp --expected releases/quicksearch161/src/expected-mpp.json --local-only 2>&1 | tee .ci-quicksearch161/local-verification.log
+      - name: Publish verified assets and atomically update main and dev Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/quicksearch161/src/publish161.py --dist .ci-quicksearch161/dist --repo . --base .ci-quicksearch161/input/Hiro_Morphe_Patches_v1.0.160.mpp --expected releases/quicksearch161/src/expected-mpp.json 2>&1 | tee .ci-quicksearch161/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: quicksearch101-bundle161-verified-publication
+          path: |
+            .ci-quicksearch161/dist/
+            .ci-quicksearch161/*.log
+            .ci-quicksearch161/build/*.txt
+            .ci-quicksearch161/build/*.log
+          retention-days: 14
+          compression-level: 1
+          include-hidden-files: true

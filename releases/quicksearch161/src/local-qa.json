@@ -1,0 +1,94 @@
+{
+  "schema": "quicksearch-original-apk-qa-v2",
+  "device_tested": false,
+  "original_apk_apply_tested": true,
+  "applied_artifact": "Hiro_Morphe_Patches_v1.0.161.mpp",
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.161.mpp": {
+      "bytes": 17310850,
+      "sha256": "92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03"
+    },
+    "QuickSearch_NoRecents_v1.0.1.mpp": {
+      "bytes": 34236,
+      "sha256": "846855431aad1d83df367278344033d7ce8951a4ec542acf59c0e2070cb2d584"
+    }
+  },
+  "standalone_payload_identical_to_applied_bundle": true,
+  "input_and_output": {
+    "attachment_apks": {
+      "bytes": 3679781,
+      "sha256": "4c7f8f5e9de0d9b0cb8e445df3b6b812daf404d550d2d21b0758b19dfdee2518"
+    },
+    "original_base_apk": {
+      "bytes": 9379079,
+      "sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46"
+    },
+    "patched_base_apk": {
+      "bytes": 3861494,
+      "sha256": "03f30a16cec8b9bc91cb1bd9892f3d39ae216f8f3fa53178c3b7e0a617f138e4"
+    }
+  },
+  "morphe_version": "1.16.0",
+  "morphe_bytecode_mode": "STRIP_FAST",
+  "unsigned_local_test_output": true,
+  "patching_result": {
+    "packageName": "jp.ddo.sugihiro.quicksearch",
+    "packageVersion": "0.4.5",
+    "patchingSteps": [
+      {
+        "step": "PATCHING",
+        "success": true
+      },
+      {
+        "step": "REBUILDING",
+        "success": true
+      }
+    ],
+    "appliedPatches": [
+      {
+        "name": "検索後の終了時に履歴へ残さない"
+      }
+    ],
+    "failedPatches": []
+  },
+  "static_audit": "PASS final APK: all 6353 non-target classes unchanged; 13 reviewed classes match; runtime classes=10; runtime hooks=28\nPASS static QA: original classes=6366; operations=31; assertions=39605; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested.",
+  "host_runtime_audit": "PASS SearchTask host assertions=126; task ownership/stack/duplicates, Window callbacks, old key boundaries, external flags, X dimensions. Android device behavior NOT tested.",
+  "loader_merge_audit": "PASS bundle replacement merge: baseline non-QuickSearch classes preserved=238; old QuickSearch classes=3; new=3",
+  "non_dex_apk_entries_byte_identical": 355,
+  "apk_manifest_byte_identical": true,
+  "resources_arsc_byte_identical": true,
+  "apk_entries_removed": [],
+  "apk_entries_changed": [
+    "classes.dex"
+  ],
+  "apk_entries_added": [
+    "classes2.dex"
+  ],
+  "original_application_classes": 6366,
+  "unchanged_non_target_classes": 6353,
+  "changed_application_classes": 13,
+  "changed_existing_methods": 17,
+  "added_methods": 11,
+  "added_interfaces": 1,
+  "editing_operations": 31,
+  "original_method_fingerprint_gates": 18,
+  "original_widget_class_fingerprint_gates": 2,
+  "runtime_classes_added": 10,
+  "runtime_hook_calls_in_application": 28,
+  "source_attachment_split_count": 3,
+  "original_app_binary_distributed": false,
+  "verified_exit_paths": [
+    "Main/Web search-bar close button",
+    "history-dialog close listener",
+    "Activity Back",
+    "Dialog Back",
+    "legacy Back key DOWN/UP",
+    "text-input Back before IME",
+    "configured search auto-exit",
+    "Main cancel callback"
+  ],
+  "limitations": [
+    "Host fakes check runtime decisions and registrations; they do not emulate Android WindowManager or Samsung IME.",
+    "No Android/Galaxy device was connected; physical taps and actual Recents UI were not tested."
+  ]
+}
