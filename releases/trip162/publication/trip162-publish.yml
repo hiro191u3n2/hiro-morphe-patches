@@ -1,0 +1,109 @@
+name: Verify and publish Trip schedule visibility and bundle162
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/trip162-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+          path: .ci-trip162/staged
+      - name: Install matching CRN archive reader
+        run: python3 -m pip install py7zr==1.0.0
+      - name: Verify current baseline161, Trip1.10.14 and reviewed toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-trip162/input .ci-trip162/dist
+          python3 - <<'PY'
+          import hashlib, json, pathlib, re, urllib.request
+          root = pathlib.Path('.ci-trip162')
+          cfg = json.loads(pathlib.Path('releases/trip162/publication/manifest.json').read_text())
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert cfg['schema'] == 'trip162-publication-v1' and cfg['review_status'] == 'reviewed'
+          assert cfg['trip_version'] == '1.10.15' and cfg['bundle_version'] == '1.0.162'
+          expected = cfg['expected_mpp']
+          assert set(expected) == {'Tripcom_Quiet_v1.10.15.mpp', 'Hiro_Morphe_Patches_v1.0.162.mpp'}
+          for name, row in expected.items():
+              assert type(row['bytes']) is int and row['bytes'] > 0, name
+              assert re.fullmatch('[0-9a-f]{64}', row['sha256']), name
+          assert re.fullmatch('[0-9a-f]{64}', cfg['expected_qa_sha256'])
+          assert feed['version'] == cfg['baseline_bundle']['version'] == '1.0.161', 'Active bundle advanced; incorporate concurrent changes'
+          assert feed['download_url'] == cfg['baseline_bundle']['url'], 'Advertised baseline source differs'
+          pinned = {
+              'baseline_bundle': ('Hiro_Morphe_Patches_v1.0.161.mpp', 17310850, '92d1a60ed74859eca0f9d24413167d4b792031fbd50c6a1495a608d4043b2d03'),
+              'baseline_standalone': ('Tripcom_Quiet_v1.10.14.mpp', 376932, 'e99d82b7d5250662c82c3a50463ac9cbd551d56db299c8837c9056cfcdaef3e4'),
+          }
+          for key, (filename, size, digest) in pinned.items():
+              row = cfg[key]
+              assert (row['file'], row['bytes'], row['sha256']) == (filename, size, digest), key
+              with urllib.request.urlopen(row['url'], timeout=60) as response:
+                  data = response.read()
+              assert len(data) == size and hashlib.sha256(data).hexdigest() == digest, 'Pinned baseline differs: ' + filename
+              (root / 'input' / filename).write_bytes(data)
+          toolchain = {
+              'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+              'android.jar': '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',
+              'd8.jar': '305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5',
+          }
+          for name, digest in toolchain.items():
+              assert hashlib.sha256((root / 'staged/tools' / name).read_bytes()).hexdigest() == digest, 'Pinned tool differs: ' + name
+          assert pathlib.Path('releases/trip162/publication/trip162-publish.yml').read_bytes() == pathlib.Path('.github/workflows/trip162-publish.yml').read_bytes(), 'Archived workflow differs from executed workflow'
+          print('PASS current baseline161, exact standalone Trip1.10.14, reviewed MPP/QA expectations and pinned tools')
+          PY
+          java -version
+      - name: Rebuild reviewed MPPs and run JS, native and loader preservation checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/trip162/src/build.py --base .ci-trip162/input/Hiro_Morphe_Patches_v1.0.161.mpp --single-base .ci-trip162/input/Tripcom_Quiet_v1.10.14.mpp --tools .ci-trip162/staged/tools --work .ci-trip162/build --dist .ci-trip162/dist 2>&1 | tee .ci-trip162/build.log
+      - name: Verify exact reviewed MPP bytes, QA, complete sources and entry delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/trip162/publication/publish162.py --dist .ci-trip162/dist --repo . --base .ci-trip162/input/Hiro_Morphe_Patches_v1.0.161.mpp --single-base .ci-trip162/input/Tripcom_Quiet_v1.10.14.mpp --config releases/trip162/publication/manifest.json --local-only 2>&1 | tee .ci-trip162/local-verification.log
+      - name: Read-only preflight of both Manager feeds and release identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/trip162/publication/publish162.py --dist .ci-trip162/dist --repo . --base .ci-trip162/input/Hiro_Morphe_Patches_v1.0.161.mpp --single-base .ci-trip162/input/Tripcom_Quiet_v1.10.14.mpp --config releases/trip162/publication/manifest.json --preflight-only 2>&1 | tee .ci-trip162/preflight.log
+      - name: Publish verified assets and atomically update main and dev Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/trip162/publication/publish162.py --dist .ci-trip162/dist --repo . --base .ci-trip162/input/Hiro_Morphe_Patches_v1.0.161.mpp --single-base .ci-trip162/input/Tripcom_Quiet_v1.10.14.mpp --config releases/trip162/publication/manifest.json 2>&1 | tee .ci-trip162/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: trip11015-bundle162-verified-publication
+          path: |
+            .ci-trip162/dist/
+            .ci-trip162/*.log
+            .ci-trip162/build/*.txt
+            .ci-trip162/build/*.log
+            .ci-trip162/build/*.json
+          retention-days: 14
+          compression-level: 1
+          include-hidden-files: true

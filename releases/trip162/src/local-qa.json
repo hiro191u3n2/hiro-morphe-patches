@@ -1,0 +1,410 @@
+{
+  "schema": "trip162-original-apks-qa-v1",
+  "result": "PASS",
+  "original_apk_apply_tested": true,
+  "both_final_mpps_apks_merge_apply_and_rebuild_tested": true,
+  "device_tested": false,
+  "source_apks": {
+    "filename": "Trip.com_v8.54.2.apks",
+    "bytes": 146575968,
+    "sha256": "6b063b0ce867f30b6ca8442b14139755c0ccf8ea53bb38ebdcbee49f297bf0e0"
+  },
+  "source_base_apk": {
+    "filename": "base.apk",
+    "bytes": 109688486,
+    "sha256": "f146f8eb9eff41ff1d310ba7961346e9688828618e3917b39c3d13061b863c37"
+  },
+  "source_splits": {
+    "base.apk": {
+      "bytes": 109688486,
+      "sha256": "f146f8eb9eff41ff1d310ba7961346e9688828618e3917b39c3d13061b863c37"
+    },
+    "config.arm64_v8a.apk": {
+      "bytes": 31247370,
+      "sha256": "b648ce08ad0b87ed280ec165502888af891c2896a9162890532fbd7a2699a4e6"
+    },
+    "config.ja.apk": {
+      "bytes": 5542297,
+      "sha256": "e8605760fde29d9879a46706f21bdd91fb20ace32ed3714b4dbc2a868c51fe68"
+    },
+    "config.xxhdpi.apk": {
+      "bytes": 74954,
+      "sha256": "6416db95c225dbd2b14017cd60f448eb183fae0062d4d8f28ff91feb0597bbcf"
+    }
+  },
+  "unmodified_merged_reference": {
+    "filename": "Trip.com_v8.54.2-merged.apk",
+    "bytes": 90572195,
+    "sha256": "bc0c2d37119055837a9d9e9a6870f2f4ef3efd665eb0fa3de053b1957973160c",
+    "provenance": "Untouched intermediate merged from the same source APKS; retained from failed prior resource-resolution test. Successful Morphe runs remove their merge intermediate."
+  },
+  "morphe_toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "apply_options": [
+    "--unsigned",
+    "--exclusive",
+    "--bytecode-mode",
+    "FULL",
+    "--striplibs",
+    "arm64-v8a",
+    "--disable-purge",
+    "-e",
+    "ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）"
+  ],
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.162.mpp": {
+      "bytes": 17322782,
+      "sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5"
+    },
+    "Tripcom_Quiet_v1.10.15.mpp": {
+      "bytes": 388507,
+      "sha256": "b179932d58e43d329a9609eec268d64f9c6c9adaf15a47a898587dd03331dc80"
+    }
+  },
+  "cases": {
+    "Tripcom_Quiet_v1.10.15.mpp": {
+      "input_mpp": {
+        "bytes": 388507,
+        "sha256": "b179932d58e43d329a9609eec268d64f9c6c9adaf15a47a898587dd03331dc80"
+      },
+      "input_mode": "Original Trip.com 8.54.2 split APKS merged by pinned Morphe CLI",
+      "unsigned_test_apk": {
+        "bytes": 92028247,
+        "sha256": "5ce7b07db4ffb7b19564b4045d432701b955089a8b989d8ecc6f82b9b912337e"
+      },
+      "morphe_result": {
+        "packageName": "ctrip.english",
+        "packageVersion": "8.54.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）"
+          }
+        ],
+        "failedPatches": []
+      },
+      "native_hook_audit": {
+        "result": "PASS_ACTUAL_MPP_APPLY",
+        "new_guard_matches_reviewed_mpe": true,
+        "class_inventory_is_original_plus_two_guards": true,
+        "original_app_class_count": 85229,
+        "path_prefix_and_original_fallback_branch_verified": true,
+        "native_load_preserves_product_package_id_and_Hermes_flag": true,
+        "pinned_identity_captured_before_path_register_reused": true,
+        "resource_key_initialized_for_pinned_result_one_only": true,
+        "native_result_one_return_preserved_for_MIXED_selection": true,
+        "both_existing_preparation_API_gates_retained": true,
+        "all_original_code_in_three_hooked_classes_restored_exactly": true,
+        "restored_normalized_class_sha256": {
+          "Lctrip/android/reactnative/CRNURL;": "9628c297099459348e6fe03d38f6e0fd02f5a3f1bdfe8704fb920578875bff94",
+          "Lcom/facebook/react/runtime/ReactInstance;": "f7fd9c04a1f39e24dd70126928cf3efbffb10ab45062ff852a0c31e32f293c9a",
+          "Lcom/ctrip/ibu/framework/baseview/widget/cmtv2/crn/IBUCRNCMTV2Model;": "899bd6613e5b9dc9800aa88a10f0a40e38b56787281471661d4e8dbdddcc5821"
+        },
+        "android_device_tested": false,
+        "blocking_findings": []
+      },
+      "encoded_resources_and_assets_audit": {
+        "result": "PASS_ENCODED_HOME_RESOURCES_AND_ASSETS",
+        "original_apk_sha256": "bc0c2d37119055837a9d9e9a6870f2f4ef3efd665eb0fa3de053b1957973160c",
+        "patched_apk_sha256": "5ce7b07db4ffb7b19564b4045d432701b955089a8b989d8ecc6f82b9b912337e",
+        "final_mpp_sha256": "b179932d58e43d329a9609eec268d64f9c6c9adaf15a47a898587dd03331dc80",
+        "compiled_gone_enum_independently_anchored": {
+          "unmodified_layout": "p8",
+          "widget": "FrameLayout",
+          "android_id": "@id/h3b",
+          "resource_id": "0x7f0a2a07",
+          "original_decoded_visibility": "gone",
+          "original_encoded_visibility_type": "DEC",
+          "original_encoded_visibility_data": 2,
+          "decoded_fixture_sha256": "c088e46150bc576a28cd49835f743192dc87e2e32ed2740b50d1e6824b048a00"
+        },
+        "myplan_asset_matches_final_mpp": true,
+        "myplan_asset_sha256": "e8689eb3642d66181ca45c542cf56d2eaf050ca1672f88777600ff3a993041e8",
+        "other_assets_preserved_byte_for_byte": 317,
+        "other_webapp_assets_preserved_byte_for_byte": 18,
+        "native_libraries_preserved_byte_for_byte": 36,
+        "arm64_libraries_preserved_byte_for_byte": 36,
+        "four_logical_layout_effects_verified_from_encoded_apk": true,
+        "four_alias_collision_layout_semantics_unchanged": true,
+        "layout_evidence": [
+          {
+            "logical_layout": "p8",
+            "resource_id": "0x7f0d024d",
+            "original_zip_path": "res/layout/p4.xml",
+            "patched_zip_path": "res/layout/p4.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "3c5bd513552d73139c3d91d45f0e5ea32090674963e696bbc2fa806bd6ea445c",
+            "patched_binary_sha256": "759e14a983208e2f5d3b8d3f61dc50a58002665363c37f893d870fc3ea1c115e",
+            "unchanged_semantics_sha256": "81fddc1d8869339c5f88bf157957459b5791f7bab35cef1f7d9ae25c82c90a04"
+          },
+          {
+            "logical_layout": "pb",
+            "resource_id": "0x7f0d0251",
+            "original_zip_path": "res/layout/p8.xml",
+            "patched_zip_path": "res/layout/p8.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "42bb34cd9a2fd85903c98b6f147f3d553598c7eb69b29947ebca65b33dac175d",
+            "patched_binary_sha256": "42bb34cd9a2fd85903c98b6f147f3d553598c7eb69b29947ebca65b33dac175d",
+            "unchanged_semantics_sha256": "e16594742b22c66d041f3e73d7bb4df24ceffbd31278a6b98b90085026085d84"
+          },
+          {
+            "logical_layout": "pf",
+            "resource_id": "0x7f0d0255",
+            "original_zip_path": "res/layout/pb.xml",
+            "patched_zip_path": "res/layout/pb.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "7a4a103c46192631a7e13212a885ede151bde72fd3fd83f480bfcd87e4f9a6e8",
+            "patched_binary_sha256": "8a1cc4fffd7318adf40042a4c7b99fd8fdca3847395a67757699cf8a9335b379",
+            "unchanged_semantics_sha256": "53fe21b5d99759031b019e316c235d402695f61ff4fe622550c05b3817a69e13"
+          },
+          {
+            "logical_layout": "pj",
+            "resource_id": "0x7f0d0259",
+            "original_zip_path": "res/layout/pf.xml",
+            "patched_zip_path": "res/layout/pf.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "e8d7729a6c85cc17ac40703f70549b5b86a4a1ca016bc5550b4bf75600db737f",
+            "patched_binary_sha256": "e8d7729a6c85cc17ac40703f70549b5b86a4a1ca016bc5550b4bf75600db737f",
+            "unchanged_semantics_sha256": "16cd5b460ba65da5558da1a44077b8b1904928bf40f3007f43edb13e92c0de3b"
+          },
+          {
+            "logical_layout": "s9",
+            "resource_id": "0x7f0d02bd",
+            "original_zip_path": "res/layout/s5.xml",
+            "patched_zip_path": "res/layout/s5.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "ea7a071182149ef4bbc1333aae0b35b66c406aa567b6b9a14d20490b08b245b4",
+            "patched_binary_sha256": "7c51fa9155876591337502f27cee627cf6dd4661edafe6eacc7c8c50eaacdd1c",
+            "unchanged_semantics_sha256": "a42470d51ea6a50f41a8ef3996035de6a55e754bda7b79977e7420799771baf2"
+          },
+          {
+            "logical_layout": "sc",
+            "resource_id": "0x7f0d02c1",
+            "original_zip_path": "res/layout/s9.xml",
+            "patched_zip_path": "res/layout/s9.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "39174b0c7f7b67ee142b45649a7cc2152675e88e96cf49b66cf584593856a636",
+            "patched_binary_sha256": "39174b0c7f7b67ee142b45649a7cc2152675e88e96cf49b66cf584593856a636",
+            "unchanged_semantics_sha256": "684f2c28bbadbfd45404a1049e805ef5eea65cbe35b010f588a88ddb55c38de3"
+          },
+          {
+            "logical_layout": "t0",
+            "resource_id": "0x7f0d02d9",
+            "original_zip_path": "res/layout/sw.xml",
+            "patched_zip_path": "res/layout/sw.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "0be4316e4ca57003f89f0ce975c84879e2516a4a281ad2c7edc3c648e5ed253d",
+            "patched_binary_sha256": "e54627cafa7ca57b4de7d3e1a2d9fd51a712087cd300b1d0b832768b0db7eba8",
+            "unchanged_semantics_sha256": "4e6bd04fb63ad801eedefa903f5b25e4234eb802cc955bd82c451af835ff736b"
+          },
+          {
+            "logical_layout": "t4",
+            "resource_id": "0x7f0d02dd",
+            "original_zip_path": "res/layout/t0.xml",
+            "patched_zip_path": "res/layout/t0.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "f3269aad9c304e88daec709e50b90f33240407b5d25f0f17188fa6cb11471bf6",
+            "patched_binary_sha256": "f3269aad9c304e88daec709e50b90f33240407b5d25f0f17188fa6cb11471bf6",
+            "unchanged_semantics_sha256": "4b419f89d1b2dba06187e28dde7681b88eaf529dc02fcd1333b38ab61398edd7"
+          }
+        ],
+        "android_device_tested": false,
+        "blocking_findings": []
+      },
+      "wrong_alias_layout_bytes_unchanged": true
+    },
+    "Hiro_Morphe_Patches_v1.0.162.mpp": {
+      "input_mpp": {
+        "bytes": 17322782,
+        "sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5"
+      },
+      "input_mode": "Original Trip.com 8.54.2 split APKS merged by pinned Morphe CLI",
+      "unsigned_test_apk": {
+        "bytes": 92028424,
+        "sha256": "9218deca41099884535c070cbd8de0314eb8370a4d03de079d05a5ea95f88148"
+      },
+      "morphe_result": {
+        "packageName": "ctrip.english",
+        "packageVersion": "8.54.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）"
+          }
+        ],
+        "failedPatches": []
+      },
+      "native_hook_audit": {
+        "result": "PASS_ACTUAL_MPP_APPLY",
+        "new_guard_matches_reviewed_mpe": true,
+        "class_inventory_is_original_plus_two_guards": true,
+        "original_app_class_count": 85229,
+        "path_prefix_and_original_fallback_branch_verified": true,
+        "native_load_preserves_product_package_id_and_Hermes_flag": true,
+        "pinned_identity_captured_before_path_register_reused": true,
+        "resource_key_initialized_for_pinned_result_one_only": true,
+        "native_result_one_return_preserved_for_MIXED_selection": true,
+        "both_existing_preparation_API_gates_retained": true,
+        "all_original_code_in_three_hooked_classes_restored_exactly": true,
+        "restored_normalized_class_sha256": {
+          "Lctrip/android/reactnative/CRNURL;": "9628c297099459348e6fe03d38f6e0fd02f5a3f1bdfe8704fb920578875bff94",
+          "Lcom/facebook/react/runtime/ReactInstance;": "f7fd9c04a1f39e24dd70126928cf3efbffb10ab45062ff852a0c31e32f293c9a",
+          "Lcom/ctrip/ibu/framework/baseview/widget/cmtv2/crn/IBUCRNCMTV2Model;": "899bd6613e5b9dc9800aa88a10f0a40e38b56787281471661d4e8dbdddcc5821"
+        },
+        "android_device_tested": false,
+        "blocking_findings": []
+      },
+      "encoded_resources_and_assets_audit": {
+        "result": "PASS_ENCODED_HOME_RESOURCES_AND_ASSETS",
+        "original_apk_sha256": "bc0c2d37119055837a9d9e9a6870f2f4ef3efd665eb0fa3de053b1957973160c",
+        "patched_apk_sha256": "9218deca41099884535c070cbd8de0314eb8370a4d03de079d05a5ea95f88148",
+        "final_mpp_sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5",
+        "compiled_gone_enum_independently_anchored": {
+          "unmodified_layout": "p8",
+          "widget": "FrameLayout",
+          "android_id": "@id/h3b",
+          "resource_id": "0x7f0a2a07",
+          "original_decoded_visibility": "gone",
+          "original_encoded_visibility_type": "DEC",
+          "original_encoded_visibility_data": 2,
+          "decoded_fixture_sha256": "c088e46150bc576a28cd49835f743192dc87e2e32ed2740b50d1e6824b048a00"
+        },
+        "myplan_asset_matches_final_mpp": true,
+        "myplan_asset_sha256": "e8689eb3642d66181ca45c542cf56d2eaf050ca1672f88777600ff3a993041e8",
+        "other_assets_preserved_byte_for_byte": 317,
+        "other_webapp_assets_preserved_byte_for_byte": 18,
+        "native_libraries_preserved_byte_for_byte": 36,
+        "arm64_libraries_preserved_byte_for_byte": 36,
+        "four_logical_layout_effects_verified_from_encoded_apk": true,
+        "four_alias_collision_layout_semantics_unchanged": true,
+        "layout_evidence": [
+          {
+            "logical_layout": "p8",
+            "resource_id": "0x7f0d024d",
+            "original_zip_path": "res/layout/p4.xml",
+            "patched_zip_path": "res/layout/p4.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "3c5bd513552d73139c3d91d45f0e5ea32090674963e696bbc2fa806bd6ea445c",
+            "patched_binary_sha256": "759e14a983208e2f5d3b8d3f61dc50a58002665363c37f893d870fc3ea1c115e",
+            "unchanged_semantics_sha256": "81fddc1d8869339c5f88bf157957459b5791f7bab35cef1f7d9ae25c82c90a04"
+          },
+          {
+            "logical_layout": "pb",
+            "resource_id": "0x7f0d0251",
+            "original_zip_path": "res/layout/p8.xml",
+            "patched_zip_path": "res/layout/p8.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "42bb34cd9a2fd85903c98b6f147f3d553598c7eb69b29947ebca65b33dac175d",
+            "patched_binary_sha256": "42bb34cd9a2fd85903c98b6f147f3d553598c7eb69b29947ebca65b33dac175d",
+            "unchanged_semantics_sha256": "e16594742b22c66d041f3e73d7bb4df24ceffbd31278a6b98b90085026085d84"
+          },
+          {
+            "logical_layout": "pf",
+            "resource_id": "0x7f0d0255",
+            "original_zip_path": "res/layout/pb.xml",
+            "patched_zip_path": "res/layout/pb.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "7a4a103c46192631a7e13212a885ede151bde72fd3fd83f480bfcd87e4f9a6e8",
+            "patched_binary_sha256": "8a1cc4fffd7318adf40042a4c7b99fd8fdca3847395a67757699cf8a9335b379",
+            "unchanged_semantics_sha256": "53fe21b5d99759031b019e316c235d402695f61ff4fe622550c05b3817a69e13"
+          },
+          {
+            "logical_layout": "pj",
+            "resource_id": "0x7f0d0259",
+            "original_zip_path": "res/layout/pf.xml",
+            "patched_zip_path": "res/layout/pf.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "e8d7729a6c85cc17ac40703f70549b5b86a4a1ca016bc5550b4bf75600db737f",
+            "patched_binary_sha256": "e8d7729a6c85cc17ac40703f70549b5b86a4a1ca016bc5550b4bf75600db737f",
+            "unchanged_semantics_sha256": "16cd5b460ba65da5558da1a44077b8b1904928bf40f3007f43edb13e92c0de3b"
+          },
+          {
+            "logical_layout": "s9",
+            "resource_id": "0x7f0d02bd",
+            "original_zip_path": "res/layout/s5.xml",
+            "patched_zip_path": "res/layout/s5.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "ea7a071182149ef4bbc1333aae0b35b66c406aa567b6b9a14d20490b08b245b4",
+            "patched_binary_sha256": "7c51fa9155876591337502f27cee627cf6dd4661edafe6eacc7c8c50eaacdd1c",
+            "unchanged_semantics_sha256": "a42470d51ea6a50f41a8ef3996035de6a55e754bda7b79977e7420799771baf2"
+          },
+          {
+            "logical_layout": "sc",
+            "resource_id": "0x7f0d02c1",
+            "original_zip_path": "res/layout/s9.xml",
+            "patched_zip_path": "res/layout/s9.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "39174b0c7f7b67ee142b45649a7cc2152675e88e96cf49b66cf584593856a636",
+            "patched_binary_sha256": "39174b0c7f7b67ee142b45649a7cc2152675e88e96cf49b66cf584593856a636",
+            "unchanged_semantics_sha256": "684f2c28bbadbfd45404a1049e805ef5eea65cbe35b010f588a88ddb55c38de3"
+          },
+          {
+            "logical_layout": "t0",
+            "resource_id": "0x7f0d02d9",
+            "original_zip_path": "res/layout/sw.xml",
+            "patched_zip_path": "res/layout/sw.xml",
+            "targeted": true,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "0be4316e4ca57003f89f0ce975c84879e2516a4a281ad2c7edc3c648e5ed253d",
+            "patched_binary_sha256": "e54627cafa7ca57b4de7d3e1a2d9fd51a712087cd300b1d0b832768b0db7eba8",
+            "unchanged_semantics_sha256": "4e6bd04fb63ad801eedefa903f5b25e4234eb802cc955bd82c451af835ff736b"
+          },
+          {
+            "logical_layout": "t4",
+            "resource_id": "0x7f0d02dd",
+            "original_zip_path": "res/layout/t0.xml",
+            "patched_zip_path": "res/layout/t0.xml",
+            "targeted": false,
+            "unrelated_semantics_unchanged": true,
+            "original_binary_sha256": "f3269aad9c304e88daec709e50b90f33240407b5d25f0f17188fa6cb11471bf6",
+            "patched_binary_sha256": "f3269aad9c304e88daec709e50b90f33240407b5d25f0f17188fa6cb11471bf6",
+            "unchanged_semantics_sha256": "4b419f89d1b2dba06187e28dde7681b88eaf529dc02fcd1333b38ab61398edd7"
+          }
+        ],
+        "android_device_tested": false,
+        "blocking_findings": []
+      },
+      "wrong_alias_layout_bytes_unchanged": true
+    }
+  },
+  "blocking_findings": [],
+  "limitations": [
+    "These are actual desktop Morphe patch/rebuild tests and encoded APK audits, not Android device tests.",
+    "The unsigned APKs and original APK/APKS are not release assets."
+  ]
+}

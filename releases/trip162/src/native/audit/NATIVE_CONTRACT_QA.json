@@ -1,0 +1,89 @@
+{
+  "result": "PASS_STATIC_NATIVE_CONTRACT_REVIEW",
+  "android_device_tested": false,
+  "app_package": "ctrip.english",
+  "app_version": "8.54.2",
+  "original_base_apk_sha256": "f146f8eb9eff41ff1d310ba7961346e9688828618e3917b39c3d13061b863c37",
+  "original_arm64_libreactnative_sha256": "3a076ea67c501c63a9121873541b215b3c604c6f3d8fb6bf48957461e18d5abc",
+  "jsbundle_bytes": 971104,
+  "jsbundle_sha256": "0194baa9f2e652fc88d7a97de72a5f80993019b7d32743f768e2f0690f7318bc",
+  "original_targets": [
+    {
+      "method": "Lcom/facebook/react/runtime/ReactInstance;->loadBusinessScript(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Z)I",
+      "static": false,
+      "registers": 8,
+      "this_v": 3,
+      "path_v": 4,
+      "product_v": 5,
+      "package_id_v": 6,
+      "hermes_v": 7,
+      "dead_scratch_before_native_v": 2,
+      "original_method_single_class_sha256": "e57aaff6e880e4b15809c434d660b995eaf5c1362534d862f310ad8770fe63fb",
+      "original_whole_class_sha256": "005e7fc2ae937f0015a2f39ff1c97697315066e458e106b97d56df401c40da8f"
+    },
+    {
+      "method": "Lctrip/android/reactnative/CRNURL;->correctRNBusinessPath(Lctrip/crn/instance/JSExecutorType;Ljava/lang/String;)Ljava/lang/String;",
+      "static": true,
+      "registers": 11,
+      "executor_v": 9,
+      "path_v": 10,
+      "scratch_v": 0,
+      "original_method_single_class_sha256": "105dfa15872c7ee76c4b404859fa70902dd01a1b82e2e8c90d75d9e800d975f5",
+      "original_whole_class_sha256": "38f68ae2c89a2a1f2e2336794a2b150711c9bc1d8fdc0f61550a83d905b09613"
+    }
+  ],
+  "native_findings": [
+    {
+      "function": "facebook::react::ReactInstance::loadBusinessScript",
+      "address": "0x330b94",
+      "evidence_addresses": [
+        "0x330c38-0x330cd4",
+        "0x330ce0-0x330f38",
+        "0x331164-0x3311ec",
+        "0x331274-0x331334",
+        "0x3313bc-0x3313cc",
+        "0x3315a4-0x3315b4"
+      ],
+      "observed": "Business directory must contain product name. If requested Hermes bytecode/config is absent, an existing rn_business.jsbundle selects V5. Business dependencies resolve as siblings of the business directory. Native V5 success returns1 when original Hermes flag was true, otherwise0."
+    },
+    {
+      "function": "facebook::react::ReactInstance::loadBusinessScriptV5",
+      "address": "0x32fec0",
+      "evidence_addresses": [
+        "0x32ffc4-0x330040",
+        "0x330104-0x3301a4",
+        "0x330274-0x330294"
+      ],
+      "observed": "Parses rn_business.jsbundle directly with a product_packageID_jsc key; no generated _crn_config is required."
+    },
+    {
+      "function": "facebook::react::CRNBundleManager::parseCRNBusinessBundle",
+      "address": "0x322fa0",
+      "evidence_addresses": [
+        "0x3230bc-0x3230c0",
+        "0x32310c-0x323154",
+        "0x32328c-0x32329c"
+      ],
+      "observed": "__open_2 flags0 and fopen mode r with fread; bundle and resource indexes are allocated in memory. No filesystem writes in reviewed V5 parse and resource-access path."
+    },
+    {
+      "function": "facebook::react::CRNBundleManager::getModuleFromBundle/getResourceFromBundle",
+      "address": "0x323be4/0x32427c",
+      "observed": "Resource/module slices are read from in-memory BundleUnit data; no generated files."
+    }
+  ],
+  "implementation_decisions": [
+    "Use revision directory as sibling of the normal schedule directory to preserve existing common-dependency lookup.",
+    "Leave original CRNURL strings, query maps, product names, package IDs and Hermes flag unchanged.",
+    "Redirect final Java/native business load after cache/server package selection, including preloadV1 and V2.",
+    "Redirect module path to exact isolated indexed JS so combined-bundle resources use the same source.",
+    "Initialize Java resource bundle key for successful raw fallback result1 only when the path is the confirmed revision; preserve result1 return for the existing caller MIXED transition.",
+    "Extract original-named patched APK7z through existing verified Un7zUtil ABI, validate SHA-256 every load, stage privately and rename atomically.",
+    "Reject duplicate hooks, mismatched ABIs/register layouts, symlinked destination/lock, unknown archive members, and invalid bytes before redirecting."
+  ],
+  "limitations": [
+    "No Android device executed and no user on-device cache was read.",
+    "Fail-open behavior applies to context, path setup, extraction, reflection, or integrity failure before redirection. Native parse failures after successful redirection still follow the original app retry/error handling.",
+    "Existing common dependencies and server-selected package IDs are retained. Their actual in-device compatibility is not runtime-tested."
+  ]
+}

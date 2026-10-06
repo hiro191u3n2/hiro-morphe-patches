@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<com.ctrip.ibu.framework.baseview.widget.roundview.RoundLinearLayout android:gravity="center_vertical"
+                      android:orientation="vertical"
+                      android:clipChildren="false"
+                      android:clipToPadding="false"
+                      android:layout_width="fill_parent"
+                      android:layout_height="wrap_content"
+                      android:paddingStart="@dimen/ct_dp_12"
+                      app:rBottomRadius="@dimen/ct_dp_8" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+  <androidx.appcompat.widget.LinearLayoutCompat android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content">
+    <include android:id="@id/e_f"
+             android:layout_width="0.0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1.0"
+             layout="@layout/pa" />
+    <include android:id="@id/e_g"
+             android:layout_width="0.0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1.0"
+             android:layout_marginStart="8.0dp"
+             layout="@layout/pa" />
+  </androidx.appcompat.widget.LinearLayoutCompat>
+</com.ctrip.ibu.framework.baseview.widget.roundview.RoundLinearLayout>

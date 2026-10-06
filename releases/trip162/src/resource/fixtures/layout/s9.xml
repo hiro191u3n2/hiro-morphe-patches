@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<FrameLayout android:id="@id/bob"
+             android:layout_width="fill_parent"
+             android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+  <com.ctrip.ibu.home.home.presentation.head.refresh.HomeRefreshLayout android:id="@id/ehe"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        app:srlDragRate="0.7"
+                        app:srlEnableOverScrollBounce="false"
+                        app:srlEnableOverScrollDrag="false"
+                        app:srlFooterHeight="0.0dp"
+                        app:srlHeaderMaxDragRate="1.5"
+                        app:srlHeaderTriggerRate="0.9"
+                        app:srlReboundDuration="350">
+    <com.ctrip.ibu.home.home.presentation.page.fragment.widget.HomeCoordinatorLayout android:id="@id/aj4"
+                          android:clipChildren="false"
+                          android:clipToPadding="false"
+                          android:layout_width="fill_parent"
+                          android:layout_height="fill_parent">
+      <include layout="@layout/t0" />
+      <androidx.viewpager2.widget.ViewPager2 android:id="@id/b4r"
+                            android:background="@drawable/feeds_background_gradient"
+                            android:layout_width="fill_parent"
+                            android:layout_height="fill_parent"
+                            app:layout_behavior="@string/aa" />
+      <include layout="@layout/sz" />
+    </com.ctrip.ibu.home.home.presentation.page.fragment.widget.HomeCoordinatorLayout>
+  </com.ctrip.ibu.home.home.presentation.head.refresh.HomeRefreshLayout>
+  <com.ctrip.ibu.home.home.presentation.page.fragment.HomeHeadFloatWidght android:orientation="vertical"
+                        android:id="@id/boa"
+                        android:visibility="gone"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:elevation="@dimen/ct_dp_6" />
+  <FrameLayout android:id="@id/b4s"
+               android:visibility="gone"
+               android:layout_width="fill_parent"
+               android:layout_height="wrap_content"
+               android:elevation="@dimen/ct_dp_6" />
+  <FrameLayout android:layout_gravity="bottom|center"
+               android:id="@id/h3b"
+               android:visibility="gone"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="@dimen/ct_dp_8" />
+</FrameLayout>
