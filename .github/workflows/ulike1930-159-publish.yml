@@ -1,0 +1,102 @@
+name: Verify and publish ULike1930 front-camera lens UI fix
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1930-159-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+          path: .ci-ulike1930/staged
+      - name: Verify pinned tools and active bundle158 and ULike1929 baselines
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1930/input .ci-ulike1930/dist
+          python - <<'PY'
+          import hashlib, json, pathlib, urllib.request
+          root = pathlib.Path('.ci-ulike1930')
+          manifest = json.loads(pathlib.Path('releases/ulike1930-159/manifest.json').read_text())
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert manifest['schema'] == 'ulike1930-publication-v1'
+          assert manifest['ulike_version'] == '1.9.30' and manifest['bundle_version'] == '1.0.159'
+          assert feed['version'] == manifest['baseline_bundle_version'] == '1.0.158', 'Active bundle changed; preserve concurrent edits'
+          assert manifest['baseline_ulike_version'] == '1.9.29'
+          bundle_sha = '4d0dca101976cfdd14b48949ec7f828c11b9c0dcf2e0c01e99a379dd6898aded'
+          single_sha = '2faae3114d5663cfb924f544b7c114f910caadc5b517eb575ea38b1d89311f6c'
+          assert manifest['baseline_bundle_sha256'] == bundle_sha
+          assert manifest['baseline_ulike_sha256'] == single_sha
+          bundle_url = 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/fec446ac275d92a7b366ca83a3b63d5ad6dddf0e/downloads/Hiro_Morphe_Patches_v1.0.158.mpp'
+          assert feed['download_url'] == bundle_url
+          single_url = 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/906600c1098fdd412ce8b22018929850e2543d14/downloads/ULike_HQ_Texture_Online_v1.9.29.mpp'
+          def download(url, filename, digest, size):
+              with urllib.request.urlopen(url, timeout=120) as response:
+                  data = response.read()
+              assert len(data) == size and hashlib.sha256(data).hexdigest() == digest, 'Pinned baseline differs: ' + filename
+              (root / 'input' / filename).write_bytes(data)
+          download(bundle_url, 'Hiro_Morphe_Patches_v1.0.158.mpp', bundle_sha, 17281055)
+          download(single_url, 'ULike_HQ_Texture_Online_v1.9.29.mpp', single_sha, 705976)
+          fixed_tools = {
+              'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+              'android.jar': '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',
+              'd8.jar': '305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5',
+          }
+          assert manifest['toolchain_sha256'] == fixed_tools, 'Reviewed toolchain differs'
+          for filename, digest in fixed_tools.items():
+              assert hashlib.sha256((root / 'staged/tools' / filename).read_bytes()).hexdigest() == digest, filename
+          print('PASS exact active bundle158, ULike1929 and pinned public build tools')
+          PY
+          java -version
+      - name: Rebuild reviewed ULike UI fix and run host verification
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/ulike1930-159/src/build1930.py --input .ci-ulike1930/input --tools .ci-ulike1930/staged/tools --work .ci-ulike1930/build --output .ci-ulike1930/dist 2>&1 | tee .ci-ulike1930/build.log
+      - name: Bind rebuilt MPPs to recorded desktop validation and finalize package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/ulike1930-159/src/finalize1930.py --dist .ci-ulike1930/dist --source releases/ulike1930-159/src --validation releases/ulike1930-159/evidence/validation.json 2>&1 | tee .ci-ulike1930/finalize.log
+      - name: Match independently reviewed hashes and QA and complete entry delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/ulike1930-159/publication/publish1930.py --dist .ci-ulike1930/dist --repo . --expected releases/ulike1930-159/manifest.json --baseline .ci-ulike1930/input/Hiro_Morphe_Patches_v1.0.158.mpp --standalone-baseline .ci-ulike1930/input/ULike_HQ_Texture_Online_v1.9.29.mpp --local-only 2>&1 | tee .ci-ulike1930/local-verification.log
+      - name: Publish exact MPPs and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/ulike1930-159/publication/publish1930.py --dist .ci-ulike1930/dist --repo . --expected releases/ulike1930-159/manifest.json --baseline .ci-ulike1930/input/Hiro_Morphe_Patches_v1.0.158.mpp --standalone-baseline .ci-ulike1930/input/ULike_HQ_Texture_Online_v1.9.29.mpp 2>&1 | tee .ci-ulike1930/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1930-bundle159-verified-publication
+          path: |
+            .ci-ulike1930/dist/
+            .ci-ulike1930/*.log
+            .ci-ulike1930/build/*.log
+          retention-days: 14
+          compression-level: 1
+          include-hidden-files: true

@@ -1,0 +1,182 @@
+ULike v1.9.30 rear-lens visibility: original native ABI and state-path audit
+=======================================================================
+
+Scope: manual inspection of original DEX instructions with dexlib2/DumpDex.
+This is static original-code evidence, not Android View, ART, or device execution.
+The native camera-switch and image-processing methods below are not modified by
+RearLensUi1930. Compile-only and host-only native fixtures must not be packaged.
+
+Original inputs
+---------------
+ULike_v5.6.2(740).apks
+  bytes: 89511266
+  sha256: 73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293
+base.apk (the exact base.apk entry from that APKS)
+  bytes: 56790896
+  sha256: f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d
+
+Direct native references emitted by the helper
+--------------------------------------------
+The decimal flags are the original DEX access flags.
+25 = public static final; 9 = public static; 17 = public final.
+All methods below are instance methods called with INVOKE_VIRTUAL.
+All fields below are read with SGET_OBJECT; the helper never writes them.
+
+FIELD flags=25 Li/f/l/n/q/y/m;->a:Li/f/l/n/q/y/m;
+FIELD flags=9  Li/f/l/n/q/y/m;->b:Li/f/l/j;
+FIELD flags=9  Li/f/l/n/q/y/m;->c:Ljava/lang/String;
+METHOD flags=17 Li/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g;
+METHOD flags=17 Li/f/l/u/g;->k()Li/f/l/u/j;
+METHOD flags=17 Li/f/l/u/j;->x()Li/f/l/u/p;
+METHOD flags=17 Li/f/l/u/p;->a()Ljava/lang/Object;
+
+The only non-native decision call is Boolean.FALSE.equals(Object).
+It accepts an explicit Boolean false and rejects true, null, strings, numbers,
+and unrelated objects. RuntimeException and LinkageError return false.
+
+Why the helper does not call the native convenience getter
+-------------------------------------------------------
+Li/f/l/n/q/y/m;->g()Li/f/l/u/j; flags=17
+  0000..0019: builds "getCameraUiState mCurrentSessionId = " + m.c,
+              then calls Li/f/n0/b;->a(String,String)V.
+  001b: INVOKE_VIRTUAL m.e()Li/f/l/j;
+  001f: SGET_OBJECT m.c:Ljava/lang/String;
+  0021: INVOKE_VIRTUAL session.g(scene)Li/f/l/u/g;
+  0025: IF_EQZ cameraState -> null return
+  0027: INVOKE_VIRTUAL cameraState.k()Li/f/l/u/j;
+  002b: RETURN_OBJECT
+  The lookup body has an exception handler that returns null.
+
+Li/f/n0/b;->a(Ljava/lang/String;Ljava/lang/String;)V flags=17
+  Reads its registered logger b. When non-null it invokes
+  Li/f/n0/e;->d(Ljava/lang/String;Ljava/lang/String;)V.
+  Calling m.g() on every draw would therefore allocate log text and could emit
+  repeated logging even though the helper itself contained no logging call.
+
+Li/f/l/n/q/y/m;->e()Li/f/l/j; flags=17
+  0000: SGET_OBJECT m.b:Li/f/l/j;
+  0002: IF_EQZ -> Kotlin uninitialized-property exception path
+  0004: RETURN_OBJECT
+  It performs no lazy camera construction. Reading public m.b and rejecting null
+  directly preserves the usable-session behavior without the exception path.
+
+Equivalent read-only lookup used by RearLensUi1930
+------------------------------------------------
+1. Require m.a != null.
+2. Snapshot public m.b (current camera session) and m.c (current scene key).
+3. If session or scene is null, return false.
+4. Call session.g(scene), then registered cameraState.k(), state.x(), property.a().
+5. Return Boolean.FALSE.equals(value).
+
+This is the same session and scene lookup used by m.g(), with its log construction
+omitted. It does not retain a state or selection from a previous camera screen.
+Missing registry entry, missing UI state, missing property, and missing value all
+deny rear controls. No fallback to an old scene, saved preference, or route occurs.
+
+Transitive original getter bodies
+--------------------------------
+Li/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g; flags=17
+  Kotlin non-null check of scene.
+  IGET_OBJECT Li/f/l/j;->a:Li/f/l/h;
+  INVOKE_VIRTUAL Li/f/l/h;->g(Ljava/lang/String;)Li/f/l/u/g;
+  RETURN_OBJECT
+
+Li/f/l/h;->g(Ljava/lang/String;)Li/f/l/u/g; flags=17
+  Kotlin non-null check of scene.
+  SGET_OBJECT Li/f/l/u/h;->a:Li/f/l/u/h;
+  INVOKE_VIRTUAL Li/f/l/u/h;->a(Ljava/lang/String;)Li/f/l/u/g;
+  RETURN_OBJECT
+
+Li/f/l/u/h;->a(Ljava/lang/String;)Li/f/l/u/g; flags=17
+  0000..0004: Kotlin non-null check of scene
+  0005: SGET_OBJECT Li/f/l/u/h;->b:Ljava/util/concurrent/ConcurrentHashMap;
+  0007: INVOKE_VIRTUAL ConcurrentHashMap.get(Object)Object
+  000a: MOVE_RESULT_OBJECT
+  000b: CHECK_CAST Li/f/l/u/g;
+  000d: RETURN_OBJECT
+
+Li/f/l/u/g;->k()Li/f/l/u/j; flags=17
+  0000: IGET_OBJECT Li/f/l/u/g;->c:Li/f/l/u/j;
+  0002: RETURN_OBJECT
+
+Li/f/l/u/j;->x()Li/f/l/u/p; flags=17
+  0000: IGET_OBJECT Li/f/l/u/j;->k:Li/f/l/u/p;
+  0002: RETURN_OBJECT
+
+Li/f/l/u/p;->a()Ljava/lang/Object; flags=17
+  0000: IGET_OBJECT Li/f/l/u/p;->a:Ljava/lang/Object;
+  0002: RETURN_OBJECT
+
+These valid-state getter bodies contain no logging, writes, camera operations,
+observer installation, or scene construction. Registry initialization itself is
+ordinary native class initialization; the helper does not add a new registry.
+
+Boolean meaning confirmed against camera settings
+------------------------------------------------
+Li/f/l/u/g;->e()Li/f/l/u/p; flags=17
+  IGET_OBJECT g.c:Li/f/l/u/j; then INVOKE_VIRTUAL j.x()Li/f/l/u/p;.
+  Thus g.e() reads the same property as g.k().x().
+
+Li/f/l/u/i;->b(Li/f/l/u/g;I)Lcom/ss/android/vesdk/VECameraSettings;
+  flags=17
+  0005: reads g.e().a(), casts Boolean and obtains booleanValue().
+  0013: IF_EQZ -> 0018
+  0015: SGET_OBJECT VECameraSettings$CAMERA_FACING_ID.FACING_FRONT
+  0017: GOTO -> 001a
+  0018: SGET_OBJECT VECameraSettings$CAMERA_FACING_ID.FACING_BACK
+  0098: passes that selected enum to VECameraSettings$Builder.setCameraFacing(...).
+  Therefore true means front and false means rear.
+
+Native switching order and normal/black-tap convergence
+-----------------------------------------------------
+Original class interface lists additionally confirm:
+  Li/o/a/b1/a/g/y; implements Li/o/a/b1/a/g/e0; (classes3.dex).
+  Lcom/bytedance/corecamera/camera/basic/PureCameraFragment; implements
+    Li/f/l/t/g; (classes.dex).
+  Li/f/l/n/h; implements Li/f/l/n/n; (classes.dex).
+
+Li/o/a/b1/a/g/y;->switchCamera()V flags=1
+  Calls its existing i0() readiness/debounce guard and rejects l==true.
+  Records its native uptime timestamp, then calls O0().switchCamera() through
+  Li/f/l/t/g;. No separate facing toggle exists in the black-tap helper.
+
+Lcom/bytedance/corecamera/camera/basic/PureCameraFragment;->switchCamera()V
+  flags=1
+  Reads its c coordinator F() value, XORs it with 1, then calls c.g0(Z).
+
+Li/f/l/n/q/y/c;->F()Z flags=17
+  Reads its session.g(scene).k().x().a() Boolean.
+  Null state uses the stock front default. RearLensUi1930 denies unknown state
+  instead of substituting a previous rear-camera result.
+
+Li/f/l/n/q/y/c;->g0(Z)V flags=17
+  Preserves native missing-SurfaceView, unchanged-camera, and inactive guards.
+  0064: session.g(scene)
+  006c: g.e() supplies the same current facing property as g.k().x().
+  0075: invokes p.k(...) with the requested front Boolean to update that property.
+  007e: calls Li/f/l/n/n;->C(Z)V to request the camera switch.
+  The UI selection is written before the downstream camera request.
+
+Li/f/l/n/h;->C(Z)V flags=1
+  Logs "frontCamera:" with its argument and stores it through native d.J(Z).
+  002d..0032: true -> FACING_FRONT; false -> FACING_BACK.
+  This independently confirms the same Boolean semantics for switching.
+
+Li/o/a/b1/a/v/h;->L()V flags=1 (existing normal UI dispatch)
+  Invokes its controller through Li/o/a/b1/a/g/e0;->switchCamera()V,
+  then records a "screen" UI event. The controller implementation is the same
+  y.switchCamera() entry called directly by BlackTap1925.doubleTap().
+
+No synthetic facing inversion, timer, camera close/open, or persistence write is
+needed in the visibility helper. Rejected native switches retain their current
+selection. The helper follows the completed native selection on the next read.
+
+Host evidence
+-------------
+host_ui1930.py compiles the production RearLensUi1930.java, targets Java 8, and
+runs it against ui-host fixtures. The 54 assertions cover explicit front/rear,
+all null levels, non-Booleans, exceptions and recovery at each getter, repeated
+selection changes, unchanged/rejected-switch simulation, current scene changes,
+same-key registry replacement/removal, and current session replacement.
+The fixtures simulate native model changes; they do not execute Android drawing,
+the patched DEX guards, real camera switching, or device preview pixels.

@@ -1,0 +1,84 @@
+{
+  "schema": "ulike1930-desktop-validation-v1",
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "original_apk_apply_tested": true,
+  "device_tested": false,
+  "device_fix_confirmed": false,
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33373 unique classes / 213604 methods. 1637 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "register_analysis": {
+        "tested": 1269,
+        "failed": 0
+      }
+    },
+    "bundle": {
+      "patch_index": 2,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33373 unique classes / 213604 methods. 1637 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "register_analysis": {
+        "tested": 1269,
+        "failed": 0
+      }
+    }
+  },
+  "ui_abi_verification": "RUNTIME_UI1930 changed_methods=3 retained_methods=1435 inverse_reconstructed_classes=238 added_helper_classes=1\nLOADER_UI1930 kind=standalone classes=13 methods=52 metadata_replacements=1 all_logic_retained=true\nLOADER_UI1930 kind=integrated classes=238 methods=1125 metadata_replacements=1 all_logic_retained=true\nHELPER_UI1930 native_field_reads=3 native_getters=4 stock_abi_verified=7 field_writes=0 native_declarations=0 cached_fields=0 note=transitive_getter_semantics_audited_separately\nDEX_HOST_UI1930_CASES=245\nDEX_HOST_UI1930 actual_Dex_instructions=true baseline_failure_reproduced=true immediate_hide_before_clock=true rear_throttle_retained=true stale_clicks_blocked=true environment=focused_host_interpreter native_selection_result=injected update_body=boundary_stub Android_runtime=false device_camera=false\nVERIFY_UI1930_ASSERTIONS=14358\nPASS1930 emitted_guards=3 original_conditions_restored_exactly=true unrelated_runtime_and_loaders_preserved=true native_methods_and_contracts_byte_identical=true added_camera_or_image_mutations=false Android_device_verification=not_performed",
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.30.mpp": {
+      "sha256": "8b7de29e47362d8e2291b5c2d506dd85688279443269ee8d854513d4cae5d723",
+      "bytes": 706227
+    },
+    "Hiro_Morphe_Patches_v1.0.159.mpp": {
+      "sha256": "4bca13ce08031eb42fb7f73f5c7e8b267ec3df5f553793f57a5c14080d362959",
+      "bytes": 17281159
+    }
+  },
+  "published": false,
+  "limitations": "Morphe rebuild, DEX host execution and type analysis do not execute Android/ART or camera hardware."
+}

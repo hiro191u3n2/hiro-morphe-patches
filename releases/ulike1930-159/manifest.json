@@ -1,0 +1,84 @@
+{
+  "schema": "ulike1930-publication-v1",
+  "ulike_version": "1.9.30",
+  "bundle_version": "1.0.159",
+  "baseline_bundle_version": "1.0.158",
+  "baseline_bundle_sha256": "4d0dca101976cfdd14b48949ec7f828c11b9c0dcf2e0c01e99a379dd6898aded",
+  "baseline_ulike_version": "1.9.29",
+  "baseline_ulike_sha256": "2faae3114d5663cfb924f544b7c114f910caadc5b517eb575ea38b1d89311f6c",
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_bundle_entries": [],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_standalone_entries": [],
+  "qa_required_values": {
+    "schema": "ulike1930-rear-lens-ui-v1",
+    "ulike_version": "1.9.30",
+    "bundle_version": "1.0.159",
+    "changed_runtime_methods": [
+      "Lcom/hiro/ulike/OpticalZoom;->select(I)V",
+      "Lcom/hiro/ulike/OpticalZoom;->show()Z",
+      "Lcom/hiro/ulike/OpticalZoomUi$Bar;->onPreDraw()Z"
+    ],
+    "new_helper_classes": [
+      "Lcom/hiro/ulike/RearLensUi1930;"
+    ],
+    "camera_lifecycle_byte_identical": true,
+    "black_bar_gesture_byte_identical": true,
+    "device_tested": false,
+    "device_fix_confirmed": false,
+    "native_methods_byte_identical": true,
+    "native_methods_tsv_byte_identical": true,
+    "non_ulike_resources_byte_identical": true,
+    "non_ulike_loader_classes_unchanged": true,
+    "image_pipeline_byte_identical": true,
+    "rear_lens_ui_predraw_guard": true,
+    "rear_lens_ui_selection_guard": true,
+    "standalone_and_bundle_ulike_resources_identical": true,
+    "original_apk_apply_tested": true
+  },
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.30.mpp": {
+      "bytes": 706227,
+      "sha256": "8b7de29e47362d8e2291b5c2d506dd85688279443269ee8d854513d4cae5d723"
+    },
+    "Hiro_Morphe_Patches_v1.0.159.mpp": {
+      "bytes": 17281159,
+      "sha256": "4bca13ce08031eb42fb7f73f5c7e8b267ec3df5f553793f57a5c14080d362959"
+    },
+    "QA_ULike_v1.9.30.json": {
+      "bytes": 9199,
+      "sha256": "3fa0117eb95c4c6463eeac29be026eec106b79308a9c2fc79ba36111abb0059d"
+    },
+    "ULike_v1.9.30_sources_and_QA.zip": {
+      "bytes": 50204,
+      "sha256": "c2a74f047fb4f0f4646f5f3fe3a75b05cc2a7c98a1754ab2266282f4694fd157"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2787,
+      "sha256": "906c3b10e25b6b67b53f3cafde2bb479d5d103b1ac70d5dde932c9a88d7fc3c9"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 472,
+      "sha256": "e81e73ce526bcc08ffff237e5d8029c4add40e830f68af46ead048f057924d8d"
+    }
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  }
+}
