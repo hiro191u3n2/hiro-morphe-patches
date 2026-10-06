@@ -1,0 +1,221 @@
+#!/usr/bin/env python3
+"""Build the additive QuickSearch recents patch; original APKs never enter output."""
+import argparse
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import zipfile
+
+ROOT = Path(__file__).resolve().parent
+BASE_SHA = '4bca13ce08031eb42fb7f73f5c7e8b267ec3df5f553793f57a5c14080d362959'
+TOOLS = {
+    'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+    'android.jar': '4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',
+    'd8.jar': '305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5',
+}
+BUNDLE = 'Hiro_Morphe_Patches_v1.0.160.mpp'
+SINGLE = 'QuickSearch_NoRecents_v1.0.0.mpp'
+QA = 'QA_QuickSearch_v1.0.0.json'
+SOURCE = 'QuickSearch_v1.0.0_sources_and_QA.zip'
+MF = 'META-INF/MANIFEST.MF'
+DATE = (2026, 10, 7, 0, 0, 0)
+
+
+def require(condition, message):
+    if not condition:
+        raise RuntimeError(message)
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def json_bytes(value):
+    return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
+
+
+def run(command, log):
+    with Path(log).open('wb') as stream:
+        result = subprocess.run(list(map(str, command)), stdout=stream, stderr=subprocess.STDOUT, timeout=300)
+    output = Path(log).read_text(errors='replace')
+    if result.returncode:
+        print(output[-10000:])
+        raise RuntimeError('Command failed; log=' + str(log))
+    return output
+
+
+def archive(path):
+    with zipfile.ZipFile(path) as z:
+        require(z.testzip() is None, 'Corrupt archive')
+        require(len(z.namelist()) == len(set(z.namelist())), 'Duplicate archive paths')
+        for name in z.namelist():
+            require(not Path(name).is_absolute() and '..' not in Path(name).parts, 'Unsafe archive path')
+        return {n: z.read(n) for n in z.namelist() if not n.endswith('/')}
+
+
+def write_zip(path, entries):
+    with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED, compresslevel=6) as z:
+        for name in sorted(entries, key=lambda n: (n != MF, n)):
+            info = zipfile.ZipInfo(name, DATE)
+            info.external_attr = 0o100644 << 16
+            info.compress_type = zipfile.ZIP_DEFLATED
+            z.writestr(info, entries[name], compress_type=zipfile.ZIP_DEFLATED, compresslevel=6)
+
+
+def headers(raw):
+    rows = []
+    for line in raw.replace(b'\r\n', b'\n').split(b'\n'):
+        if line.startswith(b' '):
+            rows[-1] += line[1:]
+        elif line:
+            rows.append(line)
+    return dict(row.decode().split(': ', 1) for row in rows)
+
+
+def manifest(fields):
+    lines = []
+    for key, value in fields.items():
+        require(not any(c in value for c in '\r\n\0'), 'Invalid manifest field')
+        raw, prefix = (key + ': ' + value).encode(), b''
+        while len(prefix) + len(raw) > 72:
+            cut = 72 - len(prefix)
+            while raw[cut] & 192 == 128:
+                cut -= 1
+            lines.append(prefix + raw[:cut])
+            raw, prefix = raw[cut:], b' '
+        lines.append(prefix + raw)
+    raw = b'\r\n'.join(lines) + b'\r\n\r\n'
+    require(headers(raw) == fields, 'Manifest roundtrip failed')
+    return raw
+
+
+def class_files(folder):
+    return {p.relative_to(folder).as_posix(): p.read_bytes() for p in sorted(folder.rglob('*.class'))}
+
+
+def build(args):
+    require(not args.work.exists(), 'Use a fresh build directory')
+    args.work.mkdir(parents=True)
+    args.dist.mkdir(parents=True, exist_ok=True)
+    require(sha(args.base.read_bytes()) == BASE_SHA, 'Baseline159 checksum mismatch; reconcile a newer bundle before publishing')
+    for name, digest in TOOLS.items():
+        require(sha((args.tools / name).read_bytes()) == digest, 'Tool checksum mismatch: ' + name)
+    baseline = archive(args.base)
+    require(headers(baseline[MF])['Version'] == '1.0.159', 'Wrong baseline version')
+    for folder in ('runtimeclasses', 'patchclasses', 'testclasses', 'auditclasses', 'runtime-dex', 'patch-dex'):
+        (args.work / folder).mkdir()
+    common = ['javac', '--release', '8', '-encoding', 'UTF-8']
+    run([*common, '-cp', args.tools / 'android.jar', '-d', args.work / 'runtimeclasses', ROOT / 'runtime/SearchTask.java'], args.work / 'runtime-javac.log')
+    run([*common, '-cp', args.tools / 'morphe.jar', '-d', args.work / 'patchclasses', ROOT / 'patch/QuickSearchRecentsPatch.java'], args.work / 'patch-javac.log')
+    host_cp = os.pathsep.join(map(str, (args.work / 'runtimeclasses', args.tools / 'android.jar')))
+    run([*common, '-cp', host_cp, '-d', args.work / 'testclasses', *sorted((ROOT / 'test-stubs').rglob('*.java')), ROOT / 'test/SearchTaskTest.java'], args.work / 'host-javac.log')
+    host_cp = os.pathsep.join(map(str, (args.work / 'testclasses', args.work / 'runtimeclasses', args.tools / 'android.jar')))
+    host_result = run(['java', '-cp', host_cp, 'SearchTaskTest'], args.work / 'host-tests.txt')
+    audit_cp = os.pathsep.join(map(str, (args.work / 'patchclasses', args.tools / 'morphe.jar')))
+    run(['javac', '-encoding', 'UTF-8', '-cp', audit_cp, '-d', args.work / 'auditclasses', ROOT / 'test/DexAudit.java'], args.work / 'audit-javac.log')
+    runtime = class_files(args.work / 'runtimeclasses')
+    patch = class_files(args.work / 'patchclasses')
+    require(set(runtime) == {'app/hiro/quicksearch/runtime/SearchTask.class'}, 'Unexpected runtime class')
+    require(patch and all(n.startswith('app/hiro/quicksearch/patches/') for n in patch), 'Unexpected patch class')
+    write_zip(args.work / 'runtime.jar', runtime)
+    write_zip(args.work / 'patch.jar', patch)
+    for kind, min_api, classpath in (('runtime', '29', args.tools / 'android.jar'), ('patch', '26', args.tools / 'morphe.jar')):
+        run(['java', '-cp', args.tools / 'd8.jar', 'com.android.tools.r8.D8', '--release', '--min-api', min_api,
+             '--lib', args.tools / 'android.jar', '--classpath', classpath,
+             '--output', args.work / (kind + '-dex'), args.work / (kind + '.jar')], args.work / (kind + '-d8.log'))
+        require({p.name for p in (args.work / (kind + '-dex')).iterdir()} == {'classes.dex'}, 'Unexpected multidex')
+    (args.work / 'base.dex').write_bytes(baseline['classes.dex'])
+    audit_cp = os.pathsep.join(map(str, (args.work / 'auditclasses', args.work / 'patchclasses', args.tools / 'morphe.jar')))
+    merge_result = run(['java', '-cp', audit_cp, 'DexAudit', 'merge', args.work / 'base.dex', args.work / 'patch-dex/classes.dex', args.work / 'merged.dex'], args.work / 'loader-merge.txt')
+    addition = dict(patch)
+    addition['extensions/quicksearch_recents.mpe'] = (args.work / 'runtime-dex/classes.dex').read_bytes()
+    require(not set(addition).intersection(baseline), 'New patch path collision')
+    combined = {**baseline, **addition, 'classes.dex': (args.work / 'merged.dex').read_bytes()}
+    fields = headers(baseline[MF])
+    fields.update(Version='1.0.160', Timestamp='2026-10-07T00:00:00',
+                  Description='QuickSearch0.4.5 removes its task after configured search exit. External results are kept in their own task. Existing bundle159 patches retained. Device untested.')
+    combined[MF] = manifest(fields)
+    fields.update(Name='QuickSearch No Recents', Version='1.0.0',
+                  Description='QuickSearch0.4.5(36) search-exit recents cleanup. External results kept. Existing exit setting respected. Device untested.')
+    standalone = {**addition, 'classes.dex': (args.work / 'patch-dex/classes.dex').read_bytes(), MF: manifest(fields)}
+    artifacts = {}
+    for name, entries in ((BUNDLE, combined), (SINGLE, standalone)):
+        path = args.dist / name
+        write_zip(path, entries)
+        require(archive(path) == entries, 'Written MPP entries differ')
+        run(['java', '-jar', args.tools / 'morphe.jar', 'list-patches', '--patches', path, '-f', 'jp.ddo.sugihiro.quicksearch', '-p', '-v'], args.work / (name + '.list.txt'))
+        listing = (args.work / (name + '.list.txt')).read_text()
+        require('検索後の終了時に履歴へ残さない' in listing and '0.4.5' in listing, 'Patch discovery failed')
+        artifacts[name] = {'bytes': path.stat().st_size, 'sha256': sha(path.read_bytes())}
+    preserved = [n for n in baseline if n not in (MF, 'classes.dex')]
+    require(all(combined[n] == baseline[n] for n in preserved), 'Existing bundle asset changed')
+    require({n: combined[n] for n in addition} == addition, 'Standalone/integrated patch payload mismatch')
+    evidence = {
+        'schema': 'quicksearch160-build-v1', 'bundle_version': '1.0.160', 'patch_version': '1.0.0',
+        'baseline_bundle_version': '1.0.159', 'baseline_sha256': BASE_SHA, 'toolchain_sha256': TOOLS,
+        'supported_package': 'jp.ddo.sugihiro.quicksearch', 'supported_version': '0.4.5', 'supported_version_code': 36,
+        'existing_zip_entries_preserved': len(preserved), 'new_zip_entries': sorted(addition),
+        'non_quicksearch_resources_unchanged': True, 'non_quicksearch_loader_classes_unchanged': True,
+        'standalone_and_bundle_quicksearch_resources_identical': True,
+        'host_test_result': host_result.strip(), 'loader_merge_result': merge_result.strip(),
+        'runtime_stubs_packaged': False, 'artifacts': artifacts,
+    }
+    (args.dist / 'build-evidence.json').write_bytes(json_bytes(evidence))
+    for name in ('host-tests.txt', 'loader-merge.txt'):
+        shutil.copyfile(args.work / name, args.dist / name)
+    print(json.dumps({'status': 'BUILT_AND_HOST_VERIFIED', 'artifacts': artifacts}, indent=2))
+
+
+def package_outputs(args):
+    local_path = ROOT / 'local-qa.json'
+    if not local_path.exists():
+        print('MPP build complete. Original-APK QA is required before release packaging.')
+        return
+    local = json.loads(local_path.read_text())
+    evidence = json.loads((args.dist / 'build-evidence.json').read_text())
+    require(local['original_apk_apply_tested'] is True and local['device_tested'] is False, 'Invalid local QA claim')
+    require(local['artifacts'] == evidence['artifacts'], 'Original-APK QA does not match built MPPs')
+    expected = json.loads((ROOT / 'expected-mpp.json').read_text())
+    require(expected == evidence['artifacts'], 'Independent expected MPP checksums differ')
+    for name, record in expected.items():
+        raw = (args.dist / name).read_bytes()
+        require(len(raw) == record['bytes'] and sha(raw) == record['sha256'], 'Built file checksum mismatch: ' + name)
+    qa = {**evidence, 'schema': 'quicksearch-recents-v1',
+          'status': 'BUILT_HOST_AND_ORIGINAL_APK_VERIFIED_DEVICE_UNVERIFIED',
+          'device_tested': False, 'original_apk_apply_tested': True,
+          'original_apk_evidence': local,
+          'search_exit_setting_preserved': True, 'external_search_new_task_only_when_exit_enabled': True,
+          'foreign_caller_task_preserved': True, 'internal_web_result_flow_preserved': True,
+          'main_call_sites_replaced': 2, 'manifest_changed': False,
+          'published': False,
+          'limitations': ['No connected Android/Galaxy device; recents UI behavior is not device-tested.',
+                          'Desktop patch application and host/runtime control checks do not prove OEM task behavior.']}
+    (args.dist / QA).write_bytes(json_bytes(qa))
+    shutil.copyfile(ROOT / 'RELEASE_NOTES.txt', args.dist / 'RELEASE_NOTES.txt')
+    allowed = {'.py', '.java', '.json', '.txt'}
+    files = {p.relative_to(ROOT).as_posix(): p.read_bytes() for p in sorted(ROOT.rglob('*'))
+             if p.is_file() and p.suffix in allowed and '__pycache__' not in p.parts}
+    require({'build.py', 'publish160.py', 'expected-mpp.json', 'local-qa.json'}.issubset(files), 'Incomplete release sources')
+    for name in ('build-evidence.json', 'host-tests.txt', 'loader-merge.txt', QA):
+        files['evidence/' + name] = (args.dist / name).read_bytes()
+    write_zip(args.dist / SOURCE, files)
+    assets = (BUNDLE, SINGLE, QA, SOURCE, 'RELEASE_NOTES.txt')
+    sums = ''.join(sha((args.dist / name).read_bytes()) + '  ' + name + '\n' for name in assets)
+    (args.dist / 'SHA256SUMS.txt').write_text(sums)
+    print('PASS release package uses the exact original-APK-tested MPPs; no app APK included')
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ('base', 'tools', 'work', 'dist'):
+        parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--package-only', action='store_true')
+    args = parser.parse_args()
+    for name in ('base', 'tools', 'work', 'dist'):
+        setattr(args, name, getattr(args, name).resolve())
+    if not args.package_only:
+        build(args)
+    package_outputs(args)

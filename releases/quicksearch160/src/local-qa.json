@@ -1,0 +1,73 @@
+{
+  "schema": "quicksearch-original-apk-qa-v1",
+  "device_tested": false,
+  "original_apk_apply_tested": true,
+  "applied_artifact": "Hiro_Morphe_Patches_v1.0.160.mpp",
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.160.mpp": {
+      "bytes": 17292368,
+      "sha256": "7e3a1f531cf127f9c8c16cb8c12548ce9437b84adac82ea0d9bb2244e7333b5a"
+    },
+    "QuickSearch_NoRecents_v1.0.0.mpp": {
+      "bytes": 14591,
+      "sha256": "f8f667ee1f398eb433c925a7ed5827e9249b67dc0af4d59d828a683585a26ea3"
+    }
+  },
+  "standalone_payload_identical_to_applied_bundle": true,
+  "input_and_output": {
+    "attachment_apks": {
+      "bytes": 3679781,
+      "sha256": "4c7f8f5e9de0d9b0cb8e445df3b6b812daf404d550d2d21b0758b19dfdee2518"
+    },
+    "original_base_apk": {
+      "bytes": 9379079,
+      "sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46"
+    },
+    "patched_base_apk": {
+      "bytes": 3843021,
+      "sha256": "62690a0e5c88826e7a9d7d76a5757daf5f1902ea01f674f0b419f865a879d4e3"
+    }
+  },
+  "morphe_version": "1.16.0",
+  "morphe_bytecode_mode": "STRIP_FAST",
+  "unsigned_local_test_output": true,
+  "patching_result": {
+    "packageName": "jp.ddo.sugihiro.quicksearch",
+    "packageVersion": "0.4.5",
+    "patchingSteps": [
+      {
+        "step": "PATCHING",
+        "success": true
+      },
+      {
+        "step": "REBUILDING",
+        "success": true
+      }
+    ],
+    "appliedPatches": [
+      {
+        "name": "検索後の終了時に履歴へ残さない"
+      }
+    ],
+    "failedPatches": []
+  },
+  "static_audit": "PASS final APK: all 6365 non-target classes unchanged; MainActivity exactly two invoke replacements; one runtime class added.\nPASS static QA: original classes=6366; assertions=39022; version/package gate, wrong-variant rejection, atomic double-patch rejection. Android device behavior NOT tested.",
+  "host_runtime_audit": "PASS SearchTask host assertions=128; exit ON/OFF/absent, flags, root/non-root, exception propagation. Android device behavior NOT tested.",
+  "loader_merge_audit": "PASS bundle merge: every baseline loader class preserved=238; added=3",
+  "non_dex_apk_entries_byte_identical": 355,
+  "apk_manifest_byte_identical": true,
+  "resources_arsc_byte_identical": true,
+  "apk_entries_removed": [],
+  "apk_entries_changed": [
+    "classes.dex"
+  ],
+  "apk_entries_added": [
+    "classes2.dex"
+  ],
+  "original_application_classes": 6366,
+  "unchanged_non_target_classes": 6365,
+  "main_method_call_sites_changed": 2,
+  "runtime_classes_added": 1,
+  "source_attachment_split_count": 3,
+  "original_app_binary_distributed": false
+}
