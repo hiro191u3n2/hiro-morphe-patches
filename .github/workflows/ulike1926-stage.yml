@@ -1,0 +1,41 @@
+name: Stage ULike1926 rear restart tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1926-stage.yml']
+permissions:
+  contents: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Fetch public checksum-bound tools and active release
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p stage1926/input stage1926/tools
+          curl -fL --retry 3 https://github.com/skylot/jadx/releases/download/v1.5.6/jadx-1.5.6.zip -o stage1926/tools/jadx.zip
+          echo '545ea2be9c242511bc145755cf4bda2485ade42966e096f8b4d3da2a230e8974  stage1926/tools/jadx.zip' | sha256sum -c -
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.25/ULike_HQ_Texture_Online_v1.9.25.mpp -o stage1926/input/ULike_HQ_Texture_Online_v1.9.25.mpp
+          echo 'e9ffd9c53cac07205b435590290dc00df6c8cd0c0f17a6987dc417f4150e2919  stage1926/input/ULike_HQ_Texture_Online_v1.9.25.mpp' | sha256sum -c -
+          cp patches-bundle.json stage1926/input/patches-bundle.json
+          python - <<'PY'
+          import hashlib,json,pathlib,urllib.request
+          d=pathlib.Path('stage1926/input')
+          feed=json.loads((d/'patches-bundle.json').read_text())
+          assert feed['version']=='1.0.152', 'Active baseline changed; do not regress other patches'
+          raw=urllib.request.urlopen(feed['download_url'],timeout=120).read()
+          (d/'Hiro_Morphe_Patches_v1.0.152.mpp').write_bytes(raw)
+          print('Bundle152 SHA256',hashlib.sha256(raw).hexdigest())
+          PY
+          (cd stage1926; find input tools -type f -print0 | sort -z | xargs -0 sha256sum > SHA256SUMS)
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1926-active-baseline-and-jadx
+          path: stage1926
+          retention-days: 3
+          compression-level: 1
