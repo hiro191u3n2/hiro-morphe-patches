@@ -1,0 +1,2 @@
+import java.nio.file.*;import java.util.*;import com.android.tools.smali.dexlib2.iface.*;
+public class Seed1929{public static void main(String[]a)throws Exception{var ms=MergePayloads.methods(MergePayloads.classes(a[0]).values());var out=new TreeMap<String,Method>();for(String id:Transform1929.TARGETS){var m=ms.get(id);MergePayloads.require(m!=null,"Missing seed "+id);out.put(id,m);}MergePayloads.writeDex(Path.of(a[1]),MergePayloads.holders(out));}}

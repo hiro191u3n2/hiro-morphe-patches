@@ -1,0 +1,1 @@
+package android.os;import java.util.*;public class Handler{public boolean accept=true;public final ArrayDeque<Runnable> tasks=new ArrayDeque<>();public boolean post(Runnable r){if(!accept)return false;tasks.add(r);return true;}public void drain(){int count=0;while(!tasks.isEmpty()){if(count++>100)throw new AssertionError("unbounded tasks");tasks.remove().run();}}}

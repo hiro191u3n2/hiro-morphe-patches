@@ -1,0 +1,1 @@
+package android.hardware.camera2;public class CameraCaptureSession{public int closes;public void close(){closes++;}public abstract static class StateCallback{public abstract void onConfigureFailed(CameraCaptureSession s);}}

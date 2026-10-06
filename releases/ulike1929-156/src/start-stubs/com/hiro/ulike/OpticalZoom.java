@@ -1,0 +1,1 @@
+package com.hiro.ulike;import android.os.Handler;import java.lang.ref.WeakReference;public class OpticalZoom{static Handler MAIN;static Object field(Object o,String s)throws ReflectiveOperationException{return null;}static final class Route{long epoch;boolean rear;WeakReference<Object> mode;volatile boolean failed,configured;volatile int frames;}}

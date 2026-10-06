@@ -1,0 +1,1 @@
+package com.ss.android.vesdk;import java.util.concurrent.atomic.AtomicBoolean;import com.ss.android.vesdk.frame.TECapturePipeline;public class VECameraCapture{public ConcurrentList<TECapturePipeline>n=new ConcurrentList<>();public AtomicBoolean p=new AtomicBoolean(true);public int renewals;public int startPreview(){return 0;}public void newSurfaceTexture(){renewals++;}}
