@@ -1,0 +1,125 @@
+{
+  "schema": "quicksearch-recents-v1",
+  "bundle_version": "1.0.160",
+  "patch_version": "1.0.0",
+  "baseline_bundle_version": "1.0.159",
+  "baseline_sha256": "4bca13ce08031eb42fb7f73f5c7e8b267ec3df5f553793f57a5c14080d362959",
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "supported_package": "jp.ddo.sugihiro.quicksearch",
+  "supported_version": "0.4.5",
+  "supported_version_code": 36,
+  "existing_zip_entries_preserved": 51,
+  "new_zip_entries": [
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$1.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch$2.class",
+    "app/hiro/quicksearch/patches/QuickSearchRecentsPatch.class",
+    "extensions/quicksearch_recents.mpe"
+  ],
+  "non_quicksearch_resources_unchanged": true,
+  "non_quicksearch_loader_classes_unchanged": true,
+  "standalone_and_bundle_quicksearch_resources_identical": true,
+  "host_test_result": "PASS SearchTask host assertions=128; exit ON/OFF/absent, flags, root/non-root, exception propagation. Android device behavior NOT tested.",
+  "loader_merge_result": "PASS bundle merge: every baseline loader class preserved=238; added=3",
+  "runtime_stubs_packaged": false,
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.160.mpp": {
+      "bytes": 17292368,
+      "sha256": "7e3a1f531cf127f9c8c16cb8c12548ce9437b84adac82ea0d9bb2244e7333b5a"
+    },
+    "QuickSearch_NoRecents_v1.0.0.mpp": {
+      "bytes": 14591,
+      "sha256": "f8f667ee1f398eb433c925a7ed5827e9249b67dc0af4d59d828a683585a26ea3"
+    }
+  },
+  "status": "BUILT_HOST_AND_ORIGINAL_APK_VERIFIED_DEVICE_UNVERIFIED",
+  "device_tested": false,
+  "original_apk_apply_tested": true,
+  "original_apk_evidence": {
+    "schema": "quicksearch-original-apk-qa-v1",
+    "device_tested": false,
+    "original_apk_apply_tested": true,
+    "applied_artifact": "Hiro_Morphe_Patches_v1.0.160.mpp",
+    "artifacts": {
+      "Hiro_Morphe_Patches_v1.0.160.mpp": {
+        "bytes": 17292368,
+        "sha256": "7e3a1f531cf127f9c8c16cb8c12548ce9437b84adac82ea0d9bb2244e7333b5a"
+      },
+      "QuickSearch_NoRecents_v1.0.0.mpp": {
+        "bytes": 14591,
+        "sha256": "f8f667ee1f398eb433c925a7ed5827e9249b67dc0af4d59d828a683585a26ea3"
+      }
+    },
+    "standalone_payload_identical_to_applied_bundle": true,
+    "input_and_output": {
+      "attachment_apks": {
+        "bytes": 3679781,
+        "sha256": "4c7f8f5e9de0d9b0cb8e445df3b6b812daf404d550d2d21b0758b19dfdee2518"
+      },
+      "original_base_apk": {
+        "bytes": 9379079,
+        "sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46"
+      },
+      "patched_base_apk": {
+        "bytes": 3843021,
+        "sha256": "62690a0e5c88826e7a9d7d76a5757daf5f1902ea01f674f0b419f865a879d4e3"
+      }
+    },
+    "morphe_version": "1.16.0",
+    "morphe_bytecode_mode": "STRIP_FAST",
+    "unsigned_local_test_output": true,
+    "patching_result": {
+      "packageName": "jp.ddo.sugihiro.quicksearch",
+      "packageVersion": "0.4.5",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "検索後の終了時に履歴へ残さない"
+        }
+      ],
+      "failedPatches": []
+    },
+    "static_audit": "PASS final APK: all 6365 non-target classes unchanged; MainActivity exactly two invoke replacements; one runtime class added.\nPASS static QA: original classes=6366; assertions=39022; version/package gate, wrong-variant rejection, atomic double-patch rejection. Android device behavior NOT tested.",
+    "host_runtime_audit": "PASS SearchTask host assertions=128; exit ON/OFF/absent, flags, root/non-root, exception propagation. Android device behavior NOT tested.",
+    "loader_merge_audit": "PASS bundle merge: every baseline loader class preserved=238; added=3",
+    "non_dex_apk_entries_byte_identical": 355,
+    "apk_manifest_byte_identical": true,
+    "resources_arsc_byte_identical": true,
+    "apk_entries_removed": [],
+    "apk_entries_changed": [
+      "classes.dex"
+    ],
+    "apk_entries_added": [
+      "classes2.dex"
+    ],
+    "original_application_classes": 6366,
+    "unchanged_non_target_classes": 6365,
+    "main_method_call_sites_changed": 2,
+    "runtime_classes_added": 1,
+    "source_attachment_split_count": 3,
+    "original_app_binary_distributed": false
+  },
+  "search_exit_setting_preserved": true,
+  "external_search_new_task_only_when_exit_enabled": true,
+  "foreign_caller_task_preserved": true,
+  "internal_web_result_flow_preserved": true,
+  "main_call_sites_replaced": 2,
+  "manifest_changed": false,
+  "published": false,
+  "limitations": [
+    "No connected Android/Galaxy device; recents UI behavior is not device-tested.",
+    "Desktop patch application and host/runtime control checks do not prove OEM task behavior."
+  ]
+}
