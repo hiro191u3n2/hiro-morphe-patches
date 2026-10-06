@@ -1,0 +1,117 @@
+name: Verify and publish ULike1927 rear preview startup handshake
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1927-154-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+          path: .ci-ulike1927/staged
+      - name: Restore hash-pinned reviewed sources and desktop evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1927/input .ci-ulike1927/dist
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.26/ULike_v1.9.26_sources_and_QA.zip -o .ci-ulike1927/source1926.zip
+          curl -fL --retry 3 https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.26/ULike_HQ_Texture_Online_v1.9.26.mpp -o .ci-ulike1927/input/ULike_HQ_Texture_Online_v1.9.26.mpp
+          python - <<'PY'
+          import base64,hashlib,json,lzma,pathlib,urllib.request,zipfile
+          w=pathlib.Path('.ci-ulike1927');t=pathlib.Path('releases/ulike1927-154/transport')
+          sha=lambda b:hashlib.sha256(b).hexdigest()
+          m=json.loads((t/'manifest.json').read_text())
+          assert m['compressed_sha256']=='ff8e1f6625a1b54c76effe242526abbf5bb0d7cde9a4acf7fb13c1366d3f6c6d'
+          assert sha((w/'source1926.zip').read_bytes())==m['base_source_zip_sha256']=='fa627ceb470afb2265cee4c647a61ed365c4954adaa7d85f25933f94f1b303a5'
+          encoded=''.join((t/f'part{i}.b64').read_text().strip() for i in range(m['parts']))
+          assert len(encoded)==m['encoded_chars']
+          raw=base64.b64decode(encoded,validate=True)
+          assert len(raw)==m['compressed_bytes'] and sha(raw)==m['compressed_sha256']
+          data=json.loads(lzma.decompress(raw));assert data['schema']==m['schema'] and len(data['entries'])==m['entries']
+          with zipfile.ZipFile(w/'source1926.zip') as z:
+              assert z.testzip() is None
+              old={n:z.read(n) for n in z.namelist() if n.startswith(('src/','evidence/')) and not n.endswith('/')}
+          restored=dict(old)
+          for n,s in data['entries'].items():
+              assert n.startswith(('src/','evidence/')) and not pathlib.PurePosixPath(n).is_absolute() and '..' not in pathlib.PurePosixPath(n).parts
+              if 'text' in s:
+                  content=s['text'].encode()
+              elif 'binary' in s:
+                  content=base64.b64decode(s['binary'],validate=True)
+              else:
+                  content=old[s['base']];assert sha(content)==s['base_sha256']
+                  lines=content.decode().splitlines(keepends=True)
+                  for start,end,replace in reversed(s['edits']):
+                      assert 0<=start<=end<=len(lines)
+                      lines[start:end]=replace
+                  content=''.join(lines).encode()
+              assert sha(content)==s['sha256'],'Source/evidence mismatch: '+n
+              restored[n]=content
+          assert data['remove']==m['removed_sources']
+          for n in data['remove']:restored.pop(n)
+          for n,b in restored.items():
+              assert not pathlib.PurePosixPath(n).is_absolute() and '..' not in pathlib.PurePosixPath(n).parts
+              p=w/n;p.parent.mkdir(parents=True,exist_ok=True);p.write_bytes(b)
+          assert sum(n.startswith('src/') for n in restored)==m['source_files']
+          assert sum(n.startswith('evidence/') for n in restored)==m['evidence_files']
+          assert all(pathlib.Path(n).suffix in ('.json','.txt','.log','.tsv') for n in restored if n.startswith('evidence/'))
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version']=='1.0.153','Active bundle changed: do not regress other patches'
+          bundle=urllib.request.urlopen(feed['download_url'],timeout=120).read()
+          assert sha(bundle)=='8146387a9ce3c9f760a165b08f75f437b25b24482d5a74a6adacaa509ddb85aa'
+          (w/'input/Hiro_Morphe_Patches_v1.0.153.mpp').write_bytes(bundle)
+          print('PASS exact reviewed source reconstruction and completed original-APK desktop evidence; no device claim')
+          PY
+      - name: Deterministic rebuild and 1287 host assertions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .ci-ulike1927/src/build1927.py --input .ci-ulike1927/input --tools .ci-ulike1927/staged/tools --work .ci-ulike1927/build --output .ci-ulike1927/dist | tee .ci-ulike1927/build.log
+      - name: Bind complete outputs to desktop-validated artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .ci-ulike1927/src/finalize1927.py --dist .ci-ulike1927/dist --evidence .ci-ulike1927/evidence --build .ci-ulike1927/build | tee .ci-ulike1927/finalize.log
+          python - <<'PY'
+          import hashlib,json,pathlib
+          m=json.loads(pathlib.Path('releases/ulike1927-154/transport/manifest.json').read_text())
+          d=pathlib.Path('.ci-ulike1927/dist')
+          for n,s in {**m['expected_dist'],**{n:v['sha256'] for n,v in m['expected_mpp'].items()}}.items():
+              assert hashlib.sha256((d/n).read_bytes()).hexdigest()==s,'Exact final artifact mismatch: '+n
+          print('PASS exact local/CI MPP, QA, notes and source ZIP equality')
+          PY
+      - name: Publish exact artifacts and verify both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python .ci-ulike1927/src/publish1927.py --dist .ci-ulike1927/dist --repo . | tee .ci-ulike1927/publish.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1927-bundle154-verified-publication
+          path: |
+            .ci-ulike1927/dist/
+            .ci-ulike1927/*.log
+            .ci-ulike1927/build/*.log
+          retention-days: 14
+          compression-level: 1
