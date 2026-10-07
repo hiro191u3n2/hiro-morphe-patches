@@ -1,0 +1,135 @@
+name: Verify and publish ULike1944 quality-preserving save speed with complete QA evidence
+# Exact original-APKS-tested asset hashes are required before publication.
+# QA JSON uses canonical key order for repeatable finalization.
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1944-speed-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1943-timing-verified-publication
+          run-id: 37656620954
+          github-token: ${{ github.token }}
+          path: .ci-ulike1944/prior
+      - name: Verify reviewed manifest, current bundle176, ULike1943 and pinned toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1944/input .ci-ulike1944/dist .ci-ulike1944/tools
+          python3 - <<'PY'
+          import hashlib, importlib.util, json, pathlib, shutil, urllib.request
+          root = pathlib.Path('.ci-ulike1944')
+          location = pathlib.Path('releases/ulike1944-speed/publication/publish1944.py')
+          spec = importlib.util.spec_from_file_location('reviewed_publisher', location)
+          pub = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(pub)
+          manifest = pub.load_expected(pathlib.Path('releases/ulike1944-speed/manifest.json'))
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version'] == manifest['baseline_bundle_version'], 'Active bundle advanced; preserve concurrent edits'
+          assert feed['download_url'] == pub.BASE_URL, 'Advertised bundle baseline differs'
+          policy = json.loads(pathlib.Path('releases/ULike_ACTIVE.json').read_text())
+          assert policy['ulike_version'] == pub.PREVIOUS_APP and policy['source_sha256'] == pub.SINGLE_BASE_SHA256
+          def download(url, filename, digest, size):
+              with urllib.request.urlopen(url, timeout=90) as response:
+                  data = response.read()
+              assert len(data) == size and hashlib.sha256(data).hexdigest() == digest, 'Pinned baseline differs: ' + filename
+              (root / 'input' / filename).write_bytes(data)
+          download(pub.BASE_URL, pub.BASE_NAME, pub.BASE_SHA256, pub.BASE_BYTES)
+          download(pub.SINGLE_BASE_URL, pub.SINGLE_BASE_NAME, pub.SINGLE_BASE_SHA256, pub.SINGLE_BASE_BYTES)
+          for filename, digest in pub.TOOLCHAIN_SHA256.items():
+              matches = [p for p in (root / 'prior').rglob(filename) if p.is_file()]
+              assert len(matches) == 1, 'Ambiguous or absent tool in verified artifact: ' + filename
+              assert hashlib.sha256(matches[0].read_bytes()).hexdigest() == digest, filename
+              shutil.copyfile(matches[0], root / 'tools' / filename)
+          assert pathlib.Path('releases/ulike1944-speed/publication/ulike1944-speed-publish.yml').read_bytes() == pathlib.Path('.github/workflows/ulike1944-speed-publish.yml').read_bytes(), 'Archived and executed workflow differ'
+          print('PASS reviewed manifest, exact active bundle, approved ULike1943 and pinned tools')
+          PY
+          java -version
+      - name: Build pinned native kernel and rebuild reviewed quality-preserving speed changes
+        shell: bash
+        run: |
+          set -euo pipefail
+          ndk_path="${ANDROID_HOME}/ndk/27.2.12479018"
+          if [ ! -d "$ndk_path" ]; then sdkmanager 'ndk;27.2.12479018'; fi
+          python3 releases/ulike1944-speed/src/native1944/build_native1944.py --ndk "$ndk_path" --output .ci-ulike1944/native
+          python3 releases/ulike1944-speed/src/build1944.py --native-library .ci-ulike1944/native/libulike_speed1935.so --input .ci-ulike1944/input --tools .ci-ulike1944/tools --work .ci-ulike1944/build --output .ci-ulike1944/dist 2>&1 | tee .ci-ulike1944/build.log
+      - name: Bind rebuilt MPPs to original-APKS validation and finalize package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1944-speed/src/finalize1944.py --dist .ci-ulike1944/dist --source releases/ulike1944-speed/src --validation releases/ulike1944-speed/evidence/validation.json 2>&1 | tee .ci-ulike1944/finalize.log
+      - name: Compare source archive entries with reviewed content
+        shell: bash
+        run: |
+          python3 - <<'PYARCHIVE'
+          import hashlib, json, pathlib, zipfile, zlib
+          expected = json.loads(pathlib.Path('releases/ulike1944-speed/publication/source-zip-entries.json').read_text())
+          with zipfile.ZipFile('.ci-ulike1944/dist/ULike_v1.9.44_sources_and_QA.zip') as archive:
+              actual = {name: {'bytes': len(data := archive.read(name)), 'sha256': hashlib.sha256(data).hexdigest()} for name in archive.namelist()}
+          differences = {name: {'expected': expected.get(name), 'actual': actual.get(name)} for name in sorted(expected.keys() | actual.keys()) if expected.get(name) != actual.get(name)}
+          print(json.dumps({'zlib': zlib.ZLIB_RUNTIME_VERSION, 'source_archive_entry_differences': differences}, ensure_ascii=False, indent=2))
+          assert not differences, 'Source archive differs from reviewed entries'
+          PYARCHIVE
+      - name: Verify reviewed assets, QA contract and complete resource delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1944-speed/publication/publish1944.py --dist .ci-ulike1944/dist --repo . --expected releases/ulike1944-speed/manifest.json --local-only --baseline "$(python3 -c 'import json; x=json.load(open("releases/ulike1944-speed/manifest.json")); print(".ci-ulike1944/input/Hiro_Morphe_Patches_v"+x["baseline_bundle_version"]+".mpp")')" --standalone-baseline .ci-ulike1944/input/ULike_HQ_Texture_Online_v1.9.43.mpp 2>&1 | tee .ci-ulike1944/local-verification.log
+      - name: Read-only preflight of both Manager feeds and approved ULike policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1944-speed/publication/publish1944.py --dist .ci-ulike1944/dist --repo . --expected releases/ulike1944-speed/manifest.json --preflight-only 2>&1 | tee .ci-ulike1944/preflight.log
+      - name: Publish verified assets and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1944-speed/publication/publish1944.py --dist .ci-ulike1944/dist --repo . --expected releases/ulike1944-speed/manifest.json 2>&1 | tee .ci-ulike1944/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1944-speed-verified-publication
+          path: |
+            .ci-ulike1944/dist/
+            .ci-ulike1944/*.log
+            .ci-ulike1944/build/*.log
+            .ci-ulike1944/build/*.json
+            .ci-ulike1944/build/*.txt
+            .ci-ulike1944/tools/
+            .ci-ulike1944/native/
+          retention-days: 30
+          compression-level: 1
+          include-hidden-files: true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1944-source-archive-diagnostics
+          path: |
+            .ci-ulike1944/dist/ULike_v1.9.44_sources_and_QA.zip
+            .ci-ulike1944/dist/QA_ULike_v1.9.44.json
+            .ci-ulike1944/dist/SHA256SUMS.txt
+          retention-days: 7
+          compression-level: 1
+          include-hidden-files: true
+
