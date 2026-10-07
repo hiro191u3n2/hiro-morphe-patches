@@ -1,0 +1,63 @@
+Independent static/source review: ULike v1.9.34
+
+Scope
+Reviewed production source changes for Q1, Q4, Q6, Q7, Q11 and Q13 against
+v1.9.33 frozen sources and the v1.9.32 quality baseline. Inspected build1934-2
+emitted runtime.dex and methods.dex. This reviewer did not modify production.
+No publication-blocking defect was found within this review scope.
+
+Source findings
+- Q1: selected-reference pixels, exact sensor timestamp and SDK metadata use
+  the same Frame. Invalid/cancelled fusion preserves the first real frame.
+- Q4: upright raster mapping and inverse quarter-turn/center-cover-crop mapping
+  agree. Detection failures provide an empty mask rather than an unrelated
+  global skin-color fallback.
+- Q6: local NR blending precedes chroma/tone correction; shadow smoothing uses
+  already corrected pixels. Direct scheduler calls match the emitted runtime
+  State/Buffer fields and method descriptors. Fields/read/write are package
+  accessible; required filtering functions are static and accessible.
+- Q7: the 32-pixel halo covers the longest two-cycle sampling radius, including
+  diagonal directions. Sequential source reads retain original preceding halo
+  rows despite out-of-order worker writes.
+- Q11: separate Y/U/V planes use actual row/pixel strides and buffer positions
+  and limits. Every plane and destination length is validated before writes.
+- Q13: eligible integer crops/unit-scale quarter turns directly copy pixels;
+  fractional crops and real scaling retain the established interpolation.
+
+Additional emitted-DEX audits
+1. Extended the helper-reference audit to include unchanged callers as well
+   as changed callers. This checks old synthetic callers after whole-family
+   replacement. All 2,099 methods were considered, and 9,620 included helper
+   members resolved. Three inherited external members require Android runtime.
+2. Checked 10,471 exactly resolved emitted-runtime member references for
+   static-versus-instance instruction agreement, private cross-class access,
+   and package-private visibility. No mismatch was found. This is not a full
+   ART verifier or a complete protected/inherited-access proof.
+
+Actual audit output
+PASS helper references in 2099 new/changed methods: 9620 included members resolved; 3 inherited external members deferred to Android runtime.
+PASS member opcode/private/package checks=10471
+
+The first audit retains its original console label "new/changed methods";
+its temporary review variant removed the unchanged-caller skip, so the count
+above includes all callers in both emitted DEX inputs.
+
+Reviewed emitted inputs (SHA-256)
+runtime.dex  ae451fa5c3a4efaf19ea4a4d00861bbcd9a58311995135ee1d9d8932c80f856f
+methods.dex  421b09c4e6809d087a7caff9d26aff1de99119677e33b721b967f8959a1b13e6
+
+Limitations
+- No Galaxy hardware, Android/ART execution, camera capture, or user-photo
+  visual comparison was performed by this reviewer.
+- No device save-time improvement or image-quality improvement is established
+  by these static checks.
+- Q4 uses facial eye anchors and conservative geometric regions; it does not
+  perform exact semantic hair/lip segmentation.
+- Q11 repairs plane packing. The proprietary native renderer's color standard,
+  range and conversion coefficients remain unverified.
+- Q13 optimizes final-save geometry. It does not fuse or reimplement native
+  beauty/body warps.
+- Long-period chroma detection is heuristic: RGB alone cannot distinguish all
+  real isoluminant patterns from moire.
+- Temporary checker sources are included as review evidence only and are not
+  added to the production build or release validation gates.

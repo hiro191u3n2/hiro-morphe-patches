@@ -1,0 +1,94 @@
+{
+  "schema": "ulike1934-desktop-validation-v1",
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "ulike_version": "1.9.34",
+  "bundle_version": "1.0.167",
+  "original_apk_apply_tested": true,
+  "device_tested": false,
+  "device_quality_verified": false,
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33461 unique classes / 214059 methods. 2099 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1920,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33461 apk=patched.apk"
+    },
+    "bundle": {
+      "patch_index": 4,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33461 unique classes / 214059 methods. 2099 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1920,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33461 apk=patched.apk"
+    }
+  },
+  "quality_dex_verification": "PASS1934 assertions=1509; compiled production bytecode equals shipped; native hook inverse verified; unchanged camera recovery/other apps; actual original APK contracts checked=true; device untested",
+  "stock_burst_capture_abi_verification": "PASS burst native reflection ABI: checks=66, apk=stock.apk. No device execution.",
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.34.mpp": {
+      "sha256": "28bd1782392fb2cc4d703a1a5a32c090eb17dfb2b7de52c41e11e4e2e884ed83",
+      "bytes": 773260
+    },
+    "Hiro_Morphe_Patches_v1.0.167.mpp": {
+      "sha256": "fa0a578e0ad34e21afc1ae8a40f4d0e13b986eff88474e2025b0decbf6555b7c",
+      "bytes": 17420321
+    }
+  },
+  "published": false,
+  "limitations": "Morphe rebuild, host execution and DEX type analysis do not execute Android/ART or camera hardware.",
+  "stock_lifecycle_abi_verification": "PASS front native ABI/lifecycle checks=93 classes=33134 apk=stock.apk"
+}
