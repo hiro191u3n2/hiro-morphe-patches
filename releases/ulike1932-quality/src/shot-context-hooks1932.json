@@ -1,0 +1,182 @@
+{
+  "baseline": "ULike 1.9.31 runtime.dex and methods.dex",
+  "stock_seed": {
+    "file": "stock-seed1932-watermark.dex",
+    "bytes": 1460,
+    "sha256": "92cc011c4b719d1de4ed3fee74399315b3c543b3f5cfa2f136adf894022af5a9",
+    "stock_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+    "method_contract_sha256": "ff8ddd52a708366663435721f0c8ef1bc9ac3d6098f2ace2cc1e5db355eaff4a",
+    "deterministic_extraction_verified": true,
+    "extractor": "SeedShot1932.java using existing MergePayloads and baseline MethodContract",
+    "command": "java -cp morphe.jar:compiled-seed-tools:baseline SeedShot1932 stock.apk src/stock-seed1932-watermark.dex"
+  },
+  "helper": "Lcom/hiro/ulike/ShotContext1932;",
+  "register_policy": "Numbers below are original 1.9.31 registers. Insert without changing parameter positions, or remap if the containing implementation register count changes.",
+  "runtime_hooks": [
+    {
+      "method": "Lcom/hiro/ulike/LensRelease163;->cameraPhoto(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "placement": "entry",
+      "original_register_count": 5,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->begin(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "registers": [
+        3,
+        4
+      ]
+    },
+    {
+      "method": "Lcom/hiro/ulike/CaptureYuv;->received(Ljava/lang/Object;Landroid/media/Image;Landroid/hardware/camera2/CaptureResult;)V",
+      "placement": "entry; original offsets 0x0000..0x0002 are three NOP code units and can be replaced by one invoke-static",
+      "original_register_count": 9,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->received(Ljava/lang/Object;Landroid/media/Image;Landroid/hardware/camera2/CaptureResult;)V",
+      "registers": [
+        6,
+        7,
+        8
+      ]
+    },
+    {
+      "method": "Lcom/hiro/ulike/LensRelease163;->bindDelivery(Ljava/lang/Object;Ljava/lang/Object;Landroid/graphics/Bitmap;)V",
+      "placement": "entry, before bitmap register is reused for height",
+      "original_register_count": 7,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->bindDelivery(Ljava/lang/Object;Ljava/lang/Object;Landroid/graphics/Bitmap;)V",
+      "registers": [
+        4,
+        5,
+        6
+      ]
+    },
+    {
+      "method": "Lcom/hiro/ulike/LensRelease163;->captureFailed(Ljava/lang/Object;I)V",
+      "placement": "entry",
+      "original_register_count": 3,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->failed(Ljava/lang/Object;I)V",
+      "registers": [
+        1,
+        2
+      ]
+    },
+    {
+      "method": "Lcom/hiro/ulike/SaveQuality2;->confirmPublish(Li/o/a/i1/e/c;)V",
+      "placement": "after MOVE_RESULT_OBJECT v9 at original code offset 0x0060, immediately after Bitmap.copy; before v1 is overwritten at 0x0063",
+      "anchor": "Landroid/graphics/Bitmap;->copy(Landroid/graphics/Bitmap$Config;Z)Landroid/graphics/Bitmap;",
+      "original_register_count": 13,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V",
+      "registers": [
+        1,
+        9
+      ],
+      "note": "Preserves context across the explicit worker-owned copy used for confirm-screen HEIF saves."
+    }
+  ],
+  "existing_method_payload_hooks": [
+    {
+      "method": "Lcom/ss/android/vesdk/VERecorder;->updateComposerNode(Ljava/lang/String;Ljava/lang/String;F)I",
+      "placement": "after MOVE_RESULT v0 at original code offset 0x000d, immediately after the SDK call below",
+      "anchor": "Lcom/ss/android/vesdk/TERecorderBase;->updateComposerNode(Ljava/lang/String;Ljava/lang/String;F)I",
+      "original_register_count": 8,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->observeBeautyResult(Ljava/lang/Object;Ljava/lang/String;FI)V",
+      "registers": [
+        4,
+        6,
+        7,
+        0
+      ],
+      "meaning": [
+        "VERecorder owner",
+        "node tag",
+        "actual post-TextureBeauty value",
+        "SDK result code"
+      ],
+      "note": "The TextureBeauty.tune result has already replaced v7 at 0x0007. Failed updates are ignored."
+    },
+    {
+      "method": "Lcom/ss/android/vesdk/VERecorder;->updateMultiComposerNodes(I[Ljava/lang/String;[Ljava/lang/String;[F)I",
+      "placement": "after MOVE_RESULT v4 at original code offset 0x0019, immediately after the SDK call below",
+      "anchor": "Lcom/ss/android/vesdk/TERecorderBase;->updateMultiComposerNodes(I[Ljava/lang/String;[Ljava/lang/String;[F)I",
+      "original_register_count": 8,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->observeBeautyArrayResult(Ljava/lang/Object;[Ljava/lang/String;[FI)V",
+      "registers": [
+        3,
+        6,
+        7,
+        4
+      ],
+      "meaning": [
+        "VERecorder owner",
+        "node tags",
+        "actual post-TextureBeauty array",
+        "SDK result code"
+      ]
+    }
+  ],
+  "watermark_bitmap_propagation": {
+    "preferred": {
+      "method": "Li/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;",
+      "placement": "after MOVE_RESULT_OBJECT v0 at original offset 0x000d, after Bitmap.createBitmap",
+      "original_register_count": 16,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V",
+      "registers": [
+        9,
+        0
+      ],
+      "stock_seed_required": true,
+      "note": "Covers both immediate camera-save a$a.run and e.n watermark paths. Neither changes pixels nor alters watermark behavior."
+    },
+    "existing_payload_only_alternative": {
+      "method": "Li/o/a/q/c/c/b/e;->n(Landroid/graphics/Bitmap;IIZLjava/lang/String;)Z",
+      "placement": "common join at original offset 0x001b, before CONST_4 v11",
+      "original_register_count": 13,
+      "call": "Lcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V",
+      "registers": [
+        8,
+        10
+      ],
+      "stock_seed_required": false,
+      "limitation": "Does not propagate context through the separate pre-save watermark call in Li/o/a/b1/a/b/f/a$a.run. That path must use image-only estimation."
+    }
+  },
+  "composer_invalidation": {
+    "class": "Lcom/ss/android/vesdk/VERecorder;",
+    "method_names": [
+      "setComposerMode",
+      "setComposerResourcePath",
+      "setComposerNodes",
+      "setComposerNodesWithTag",
+      "appendComposerNodes",
+      "appendComposerNodesWithTag",
+      "reloadComposerNodes",
+      "reloadComposerNodesWithTag",
+      "removeComposerNodes",
+      "replaceComposerNodes",
+      "replaceComposerNodesWithTag"
+    ],
+    "placement": "entry with p0; all listed methods already exist in methods.dex",
+    "call": "Lcom/hiro/ulike/ShotContext1932;->invalidateBeauty(Ljava/lang/Object;)V",
+    "note": "Composer replacement can change active smoothing without another numeric update. Unknown is safer than retaining an obsolete smoothing value."
+  },
+  "callback_contracts_verified_in_stock_apk": [
+    "i.s.a.w.q$g$a.a -> q$g.c -> TECameraVideoRecorder$60",
+    "TECameraVideoRecorder$60.a -> VERecorder$13",
+    "VERecorder$13.a -> i.f.l.r.v$a",
+    "VERecorder$13.d -> VERecorder owner; field b is a boolean and must not be used",
+    "i.f.l.r.v$a.onImageRenderSuccess calls LensRelease163.bindDelivery(this, runnable, bitmap) before submitting the runnable"
+  ],
+  "pixel_pipeline_contract": {
+    "lookup": "ShotContext1932.forBitmap(Bitmap) returns immutable Snapshot; UNKNOWN when no exact record exists",
+    "explicit_copy": "ShotContext1932.copy(Bitmap source, Bitmap destination)",
+    "generic_transfer": "ShotContext1932.transfer(Object source, Object destination)",
+    "cleanup": "ShotContext1932.forget(Object key)",
+    "lens_kind": {
+      "unknown": 0,
+      "front": 1,
+      "back": 2,
+      "ultrawide": 3,
+      "telephoto": 4
+    },
+    "beauty_strength": "-1 unknown, 0 explicit smoothing off, otherwise the tuned value in [0,1]",
+    "metadata": "ISO/exposure/focal length only accepted when the correct physical or logical CaptureResult SENSOR_TIMESTAMP equals Image.getTimestamp()",
+    "source_dimensions": "Dimensions of the received capture Image. Use the actual pipeline Bitmap dimensions for resize-scale calculations."
+  },
+  "host_test_command": "python src/host_shot_context1932.py --javac /path/to/jdk/bin/javac --java /path/to/jdk/bin/java --out /unique/capture-host1932",
+  "host_test_result": "SHOT_CONTEXT_1932_PASS checks=28 interleaved_captures=400"
+}

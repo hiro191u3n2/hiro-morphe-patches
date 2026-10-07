@@ -1,0 +1,182 @@
+{
+  "schema": "ulike1932-publication-v1",
+  "ulike_version": "1.9.32",
+  "bundle_version": "1.0.165",
+  "baseline_bundle_version": "1.0.164",
+  "baseline_bundle_sha256": "b9debbda89eca8eb91aecf32a17dab8df86e9767a708c8c0c96037ded6daf06e",
+  "baseline_bundle_bytes": 17359645,
+  "baseline_bundle_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0d0801bda43f6ad0c8eabed70429f317a347a862/downloads/Hiro_Morphe_Patches_v1.0.164.mpp",
+  "baseline_ulike_version": "1.9.31",
+  "baseline_ulike_sha256": "646a4e78e1905c2172d50205c4058a16d0ef76d9bbfcbd8b888f7dc34cee678e",
+  "baseline_ulike_bytes": 712640,
+  "baseline_ulike_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0d0801bda43f6ad0c8eabed70429f317a347a862/downloads/ULike_HQ_Texture_Online_v1.9.31.mpp",
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_bundle_entries": [],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_standalone_entries": [],
+  "required_source_paths": [
+    "src/AnalyzeAll.java",
+    "src/DumpDex.java",
+    "src/MergePayloads.java",
+    "src/PatchClass1932.java",
+    "src/QualityPipeline1932.java",
+    "src/QualityPixels1932.java",
+    "src/QualityShadow1932.java",
+    "src/SeedShot1932.java",
+    "src/ShotContext1932.java",
+    "src/Transform1932.java",
+    "src/VerifyApplied1920.java",
+    "src/VerifyFrontAbi1931.java",
+    "src/VerifyHelperReferences.java",
+    "src/VerifyNativeAbi1931.java",
+    "src/VerifyQuality1932.java",
+    "src/build1932.py",
+    "src/finalize1932.py",
+    "src/host_pipeline1932.py",
+    "src/host_quality1932.py",
+    "src/host_shot_context1932.py",
+    "src/quality-stubs/com/hiro/ulike/ChromaPipeline177.java",
+    "src/quality-stubs/com/hiro/ulike/ChromaPipeline186.java",
+    "src/quality-stubs/com/hiro/ulike/PhotoDetail.java",
+    "src/quality-stubs/com/hiro/ulike/SaveQuality2.java",
+    "src/quality-stubs/com/hiro/ulike/ShadowDetail1923.java",
+    "src/shot-context-hooks1932.json",
+    "src/stock-seed1932-watermark-hashes.tsv",
+    "src/stock-seed1932-watermark.dex",
+    "src/tests/QualityPixels1932Benchmark.java",
+    "src/tests/QualityPixels1932Test.java",
+    "src/validate1932.py"
+  ],
+  "qa_required_values": {
+    "schema": "ulike1932-quality-v1",
+    "ulike_version": "1.9.32",
+    "bundle_version": "1.0.165",
+    "selected_candidates": [
+      1,
+      2,
+      8,
+      12,
+      15,
+      20
+    ],
+    "approved_lineage": "1.8.8",
+    "device_tested": false,
+    "device_quality_verified": false,
+    "non_ulike_resources_byte_identical": true,
+    "non_ulike_loader_classes_unchanged": true,
+    "camera_lifecycle_byte_identical": true,
+    "standalone_and_bundle_ulike_resources_identical": true,
+    "original_apk_apply_tested": true,
+    "changed_runtime_methods": [
+      "Lcom/hiro/ulike/CaptureYuv;->received(Ljava/lang/Object;Landroid/media/Image;Landroid/hardware/camera2/CaptureResult;)V",
+      "Lcom/hiro/ulike/ChromaPipeline186$State;-><init>(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IIIIIIZZZZ)V",
+      "Lcom/hiro/ulike/ChromaPipeline186$Worker;->run()V",
+      "Lcom/hiro/ulike/LensRelease163;->bindDelivery(Ljava/lang/Object;Ljava/lang/Object;Landroid/graphics/Bitmap;)V",
+      "Lcom/hiro/ulike/LensRelease163;->cameraPhoto(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/LensRelease163;->captureFailed(Ljava/lang/Object;I)V",
+      "Lcom/hiro/ulike/PhotoDetail;->applyDetail(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;",
+      "Lcom/hiro/ulike/PhotoDetail;->applyDetailLegacy177(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/graphics/Bitmap;",
+      "Lcom/hiro/ulike/SaveFd186;->saveStage(Landroid/graphics/Bitmap;Ljava/io/File;I)Z",
+      "Lcom/hiro/ulike/SaveQuality2;->confirmPublish(Li/o/a/i1/e/c;)V",
+      "Lcom/hiro/ulike/SaveQuality2;->saveFinal(Landroid/graphics/Bitmap;Ljava/io/File;Landroid/graphics/Bitmap$CompressFormat;I)Z",
+      "Lcom/hiro/ulike/ShadowDetail1923;->legacy(Lcom/hiro/ulike/DetailPixels$Work;IIIIIIZZZ)V",
+      "Lcom/hiro/ulike/ShadowDetail1923;->run(Lcom/hiro/ulike/ChromaPipeline186$State;Lcom/hiro/ulike/ChromaPipeline186$Buffer;)V"
+    ],
+    "changed_native_methods": [
+      "Lcom/ss/android/vesdk/VERecorder;->appendComposerNodes([Ljava/lang/String;I)I",
+      "Lcom/ss/android/vesdk/VERecorder;->appendComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I",
+      "Lcom/ss/android/vesdk/VERecorder;->reloadComposerNodes([Ljava/lang/String;I)I",
+      "Lcom/ss/android/vesdk/VERecorder;->reloadComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I",
+      "Lcom/ss/android/vesdk/VERecorder;->removeComposerNodes([Ljava/lang/String;I)I",
+      "Lcom/ss/android/vesdk/VERecorder;->replaceComposerNodes([Ljava/lang/String;I[Ljava/lang/String;I)I",
+      "Lcom/ss/android/vesdk/VERecorder;->replaceComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;I[Ljava/lang/String;)I",
+      "Lcom/ss/android/vesdk/VERecorder;->setComposerMode(II)I",
+      "Lcom/ss/android/vesdk/VERecorder;->setComposerNodes([Ljava/lang/String;I)I",
+      "Lcom/ss/android/vesdk/VERecorder;->setComposerNodesWithTag([Ljava/lang/String;I[Ljava/lang/String;)I",
+      "Lcom/ss/android/vesdk/VERecorder;->setComposerResourcePath(Ljava/lang/String;)I",
+      "Lcom/ss/android/vesdk/VERecorder;->updateComposerNode(Ljava/lang/String;Ljava/lang/String;F)I",
+      "Lcom/ss/android/vesdk/VERecorder;->updateMultiComposerNodes(I[Ljava/lang/String;[Ljava/lang/String;[F)I",
+      "Li/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;"
+    ],
+    "new_helper_classes": [
+      "Lcom/hiro/ulike/QualityPipeline1932$1;",
+      "Lcom/hiro/ulike/QualityPipeline1932$2;",
+      "Lcom/hiro/ulike/QualityPipeline1932$Prepared;",
+      "Lcom/hiro/ulike/QualityPipeline1932$Strips;",
+      "Lcom/hiro/ulike/QualityPipeline1932$Worker;",
+      "Lcom/hiro/ulike/QualityPipeline1932;",
+      "Lcom/hiro/ulike/QualityPixels1932$1;",
+      "Lcom/hiro/ulike/QualityPixels1932$Axis;",
+      "Lcom/hiro/ulike/QualityPixels1932$NoiseProbe;",
+      "Lcom/hiro/ulike/QualityPixels1932$NoiseStats;",
+      "Lcom/hiro/ulike/QualityPixels1932$Plan;",
+      "Lcom/hiro/ulike/QualityPixels1932$RowCache;",
+      "Lcom/hiro/ulike/QualityPixels1932$RowSink;",
+      "Lcom/hiro/ulike/QualityPixels1932$RowSource;",
+      "Lcom/hiro/ulike/QualityPixels1932;",
+      "Lcom/hiro/ulike/QualityShadow1932;",
+      "Lcom/hiro/ulike/ShotContext1932$1;",
+      "Lcom/hiro/ulike/ShotContext1932$BeautyKey;",
+      "Lcom/hiro/ulike/ShotContext1932$Shot;",
+      "Lcom/hiro/ulike/ShotContext1932$ShotKey;",
+      "Lcom/hiro/ulike/ShotContext1932$Snapshot;",
+      "Lcom/hiro/ulike/ShotContext1932;"
+    ],
+    "native_methods_byte_identical": false,
+    "native_methods_tsv_byte_identical": false,
+    "host_quality_passed": true,
+    "host_quality_result.status": "passed",
+    "host_quality_result.assertions": 119335,
+    "desktop_validation.single.register_analysis.failed": 0,
+    "desktop_validation.bundle.register_analysis.failed": 0
+  },
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.32.mpp": {
+      "bytes": 729478,
+      "sha256": "010a8dcaa1ba37467fafe92183d19930f59f87dea3e93dfe94cc84825c80b2d0"
+    },
+    "Hiro_Morphe_Patches_v1.0.165.mpp": {
+      "bytes": 17376489,
+      "sha256": "de603911aa3608736e8246b6ffdd89f234d2b0979b66bbacb71db13ba7ea873c"
+    },
+    "QA_ULike_v1.9.32.json": {
+      "bytes": 15249,
+      "sha256": "09aeb0ceeaf18979a03babfafaa3b44b2fe8b80af52bb3c261f81110f4e7d613"
+    },
+    "ULike_v1.9.32_sources_and_QA.zip": {
+      "bytes": 129137,
+      "sha256": "7475b659e3c4a5b6c853ed444ed7cbadc56cebf6b28bf0879a92a8d07cbdca01"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3336,
+      "sha256": "bd818ce69619c025b886359dbc4c82edba4f0f1cc4dc0f3821f448ca1d138dff"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 472,
+      "sha256": "6b406816ee70956a8c1d72a7473e79c7a36a0894de94da7e260c41c71844b8c0"
+    }
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  }
+}

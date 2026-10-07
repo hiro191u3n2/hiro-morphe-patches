@@ -1,0 +1,102 @@
+name: Verify and publish ULike1932 quality improvements
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1932-quality-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1925-baseline-and-tools
+          run-id: 37412171927
+          github-token: ${{ github.token }}
+          path: .ci-ulike1932/staged
+      - name: Verify reviewed manifest, current bundle, ULike1931 and pinned toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1932/input .ci-ulike1932/dist
+          python3 - <<'PY'
+          import hashlib, importlib.util, json, pathlib, urllib.request
+          root = pathlib.Path('.ci-ulike1932')
+          location = pathlib.Path('releases/ulike1932-quality/publication/publish1932.py')
+          spec = importlib.util.spec_from_file_location('reviewed_publisher', location)
+          pub = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(pub)
+          manifest = pub.load_expected(pathlib.Path('releases/ulike1932-quality/manifest.json'))
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version'] == manifest['baseline_bundle_version'], 'Active bundle advanced; preserve concurrent edits'
+          assert feed['download_url'] == pub.BASE_URL, 'Advertised bundle baseline differs'
+          policy = json.loads(pathlib.Path('releases/ULike_ACTIVE.json').read_text())
+          assert policy['ulike_version'] == pub.PREVIOUS_APP and policy['source_sha256'] == pub.SINGLE_BASE_SHA256
+          def download(url, filename, digest, size):
+              with urllib.request.urlopen(url, timeout=90) as response:
+                  data = response.read()
+              assert len(data) == size and hashlib.sha256(data).hexdigest() == digest, 'Pinned baseline differs: ' + filename
+              (root / 'input' / filename).write_bytes(data)
+          download(pub.BASE_URL, pub.BASE_NAME, pub.BASE_SHA256, pub.BASE_BYTES)
+          download(pub.SINGLE_BASE_URL, pub.SINGLE_BASE_NAME, pub.SINGLE_BASE_SHA256, pub.SINGLE_BASE_BYTES)
+          for filename, digest in pub.TOOLCHAIN_SHA256.items():
+              assert hashlib.sha256((root / 'staged/tools' / filename).read_bytes()).hexdigest() == digest, filename
+          assert pathlib.Path('releases/ulike1932-quality/publication/ulike1932-quality-publish.yml').read_bytes() == pathlib.Path('.github/workflows/ulike1932-quality-publish.yml').read_bytes(), 'Archived and executed workflow differ'
+          print('PASS reviewed manifest, exact active bundle, approved ULike1931 and pinned tools')
+          PY
+          java -version
+      - name: Rebuild reviewed quality improvements and verify code preservation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1932-quality/src/build1932.py --input .ci-ulike1932/input --tools .ci-ulike1932/staged/tools --work .ci-ulike1932/build --output .ci-ulike1932/dist 2>&1 | tee .ci-ulike1932/build.log
+      - name: Bind rebuilt MPPs to original-APKS validation and finalize package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1932-quality/src/finalize1932.py --dist .ci-ulike1932/dist --source releases/ulike1932-quality/src --validation releases/ulike1932-quality/evidence/validation.json 2>&1 | tee .ci-ulike1932/finalize.log
+      - name: Verify reviewed assets, QA contract and complete resource delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1932-quality/publication/publish1932.py --dist .ci-ulike1932/dist --repo . --expected releases/ulike1932-quality/manifest.json --local-only --baseline "$(python3 -c 'import json; x=json.load(open("releases/ulike1932-quality/manifest.json")); print(".ci-ulike1932/input/Hiro_Morphe_Patches_v"+x["baseline_bundle_version"]+".mpp")')" --standalone-baseline .ci-ulike1932/input/ULike_HQ_Texture_Online_v1.9.31.mpp 2>&1 | tee .ci-ulike1932/local-verification.log
+      - name: Read-only preflight of both Manager feeds and approved ULike policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1932-quality/publication/publish1932.py --dist .ci-ulike1932/dist --repo . --expected releases/ulike1932-quality/manifest.json --preflight-only 2>&1 | tee .ci-ulike1932/preflight.log
+      - name: Publish verified assets and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1932-quality/publication/publish1932.py --dist .ci-ulike1932/dist --repo . --expected releases/ulike1932-quality/manifest.json 2>&1 | tee .ci-ulike1932/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1932-quality-verified-publication
+          path: |
+            .ci-ulike1932/dist/
+            .ci-ulike1932/*.log
+            .ci-ulike1932/build/*.log
+            .ci-ulike1932/build/*.json
+            .ci-ulike1932/build/*.txt
+            .ci-ulike1932/staged/tools/
+          retention-days: 30
+          compression-level: 1
+          include-hidden-files: true
