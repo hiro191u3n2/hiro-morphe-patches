@@ -50,7 +50,7 @@ public final class Transform1938 {
   for(var e:oldNative.entrySet())req(MergePayloads.hash(e.getValue()).equals(rows.get(e.getKey())[2]),"Baseline native contract "+e.getKey());
   var seed=args[3].equals("-")?new TreeMap<String,Method>():MergePayloads.methods(MergePayloads.classes(args[3]).values());
   var audit=new ArrayList<String>();var nativeChanged=new TreeSet<String>();var nativeAdded=new TreeSet<String>();
-  for(String key:Hooks1938.NATIVE){
+  for(String key:new TreeSet<>(Hooks1938.NATIVE)){
    Method before=oldNative.getOrDefault(key,seed.get(key));req(before!=null,"Native target absent "+key);
    Method after=Hooks1938.repair(before);req(!MergePayloads.hash(before).equals(MergePayloads.hash(after)),"Native hook did not change "+key);
    payload.put(key,after);nativeChanged.add(key);
