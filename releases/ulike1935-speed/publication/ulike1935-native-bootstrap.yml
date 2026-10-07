@@ -1,0 +1,38 @@
+name: Build and test ULike1935 exact ARM64 kernels
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1935-native-bootstrap.yml']
+permissions:
+  contents: read
+jobs:
+  native:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install pinned native toolchain and emulator
+        run: |
+          set -euo pipefail
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" 'ndk;27.2.12479018'
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq gcc-aarch64-linux-gnu qemu-user
+      - name: Compile exact Android JNI library and exercise ARM64 kernels
+        run: |
+          set -euo pipefail
+          src=releases/ulike1935-speed/src/native1935
+          mkdir -p native1935
+          python3 "$src/build_native1935.py" --ndk "$ANDROID_HOME/ndk/27.2.12479018" --output native1935 | tee native1935/build.log
+          gcc -O3 -fno-fast-math -ffp-contract=off -fno-tree-vectorize "$src/kernels1935.c" "$src/test_kernels1935.c" -o /tmp/ulike1935-host
+          /tmp/ulike1935-host | tee native1935/host-tests.json
+          aarch64-linux-gnu-gcc -static -O3 -fno-fast-math -ffp-contract=off -fno-tree-vectorize "$src/kernels1935.c" "$src/test_kernels1935.c" -o /tmp/ulike1935-arm64
+          qemu-aarch64 /tmp/ulike1935-arm64 | tee native1935/arm64-tests.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1935-native-reviewed
+          path: native1935/
+          retention-days: 30
+          compression-level: 6
