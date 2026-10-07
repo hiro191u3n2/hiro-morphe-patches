@@ -1,0 +1,232 @@
+{
+  "schema": "ulike1931-front-preview-v1",
+  "status": "REBUILD_MATCHES_ORIGINAL_APKS_VALIDATED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.31",
+  "bundle_version": "1.0.164",
+  "base_versions": [
+    "1.9.30",
+    "1.0.163"
+  ],
+  "approved_lineage": "1.8.8",
+  "device_tested": false,
+  "device_fix_confirmed": false,
+  "original_apk_apply_tested": true,
+  "ci_android_apply_tested": false,
+  "non_ulike_resources_byte_identical": true,
+  "non_ulike_loader_classes_unchanged": true,
+  "image_pipeline_byte_identical": true,
+  "rear_preview_retry_logic_unchanged": true,
+  "front_preview_retry": true,
+  "front_released_texture_refresh": true,
+  "front_deferred_surface_wait": true,
+  "remember_last_camera": true,
+  "black_bar_gesture_byte_identical": true,
+  "rear_lens_ui_predraw_guard": true,
+  "rear_lens_ui_selection_guard": true,
+  "standalone_and_bundle_ulike_resources_identical": true,
+  "provider_lifecycle_byte_identical": true,
+  "native_methods_byte_identical": false,
+  "native_methods_tsv_byte_identical": false,
+  "changed_runtime_methods": [
+    "Lcom/hiro/ulike/OpticalZoom;->background(Ljava/lang/Object;)V",
+    "Lcom/hiro/ulike/OpticalZoom;->closing(Ljava/lang/Object;)V",
+    "Lcom/hiro/ulike/OpticalZoom;->prepared(Ljava/lang/Object;I)V"
+  ],
+  "changed_native_methods": [
+    "Lcom/ss/android/vesdk/VECameraCapture;->addCapturePipelines(Lcom/ss/android/vesdk/ConcurrentList;)V",
+    "Lcom/ss/android/vesdk/VECameraCapture;->destroy()V",
+    "Lcom/ss/android/vesdk/VECameraCapture;->onCaptureStarted(II)V",
+    "Lcom/ss/android/vesdk/VECameraCapture;->start(Lcom/ss/android/vesdk/ConcurrentList;)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->startPreview()I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->stopPreview(Z)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;Lcom/bytedance/bpea/basics/Cert;)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings;Lcom/bytedance/bpea/basics/Cert;)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCameraMode(ILcom/ss/android/ttvecamera/TECameraSettings;)I",
+    "Li/s/a/w/l0/b;->m(Li/s/a/w/m;)V"
+  ],
+  "new_native_hooks": [
+    "Lcom/ss/android/vesdk/VECameraCapture;->destroy()V",
+    "Lcom/ss/android/vesdk/VECameraCapture;->stopPreview(Z)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;Lcom/bytedance/bpea/basics/Cert;)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings;Lcom/bytedance/bpea/basics/Cert;)I",
+    "Lcom/ss/android/vesdk/VECameraCapture;->switchCameraMode(ILcom/ss/android/ttvecamera/TECameraSettings;)I"
+  ],
+  "new_helper_classes": [
+    "Lcom/hiro/ulike/FrontPreview1931$Pending$1;",
+    "Lcom/hiro/ulike/FrontPreview1931$Pending$2;",
+    "Lcom/hiro/ulike/FrontPreview1931$Pending;",
+    "Lcom/hiro/ulike/FrontPreview1931;"
+  ],
+  "existing_runtime_methods_unchanged": 1437,
+  "non_ulike_loader_classes_preserved": 240,
+  "host_helper_assertions": 124,
+  "dex_verification": "PASS native bridges=5, new cancellation hooks=5, native methods retained=192, runtime bridges=3, runtime methods retained=1437, production helper classes=4, original stop/switch contracts=deferred to stock validation",
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.31.mpp": {
+      "sha256": "646a4e78e1905c2172d50205c4058a16d0ef76d9bbfcbd8b888f7dc34cee678e",
+      "bytes": 712640
+    },
+    "Hiro_Morphe_Patches_v1.0.164.mpp": {
+      "sha256": "b9debbda89eca8eb91aecf32a17dab8df86e9767a708c8c0c96037ded6daf06e",
+      "bytes": 17359645
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.30.mpp": "8b7de29e47362d8e2291b5c2d506dd85688279443269ee8d854513d4cae5d723",
+    "Hiro_Morphe_Patches_v1.0.163.mpp": "d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "native_seed_sha256": "5a3d209986efa6eb99d90ba90f65023023f9e981ae3e8a3328aee55f5c2d4f0a",
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy/ART or camera hardware execution.",
+    "Native-semantics host regressions and DEX verification do not prove device symptom resolution."
+  ],
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33377 unique classes / 213659 methods. 1697 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "dex_integrity_entries": 4,
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33377 apk=patched.apk",
+      "register_analysis": {
+        "tested": 1334,
+        "failed": 0
+      }
+    },
+    "bundle": {
+      "patch_index": 4,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33377 unique classes / 213659 methods. 1697 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "dex_integrity_entries": 4,
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33377 apk=patched.apk",
+      "register_analysis": {
+        "tested": 1334,
+        "failed": 0
+      }
+    }
+  },
+  "front_abi_verification": "REFLECTION_SYMBOLS\tFACING_FRONT,H,INSTANCE,K,M,PIXEL_FORMAT_OpenGL_OES,PIXEL_FORMAT_Recorder,ULikeFront1931,a,c,capture,d,e,epoch,foreground,g,getCameraFacing,getCaptureListener,getFormat,getRecorderSurface,getSurface,getSurfaceTexture,h,i.s.a.w.q,j,k,l,mCameraClient,mCameraInstance,mCameraSettings,mCurrentCameraState,mHandler,mHandlerDestroyed,mIsCameraPendingClose,mIsCameraSwitchState,mOnBackGround,mProviderManager,o,recording,u0\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->a:Lcom/ss/android/vesdk/VECameraSettings;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->c:Lcom/ss/android/ttvecamera/TECameraSettings;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->d:Landroid/content/Context;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->o:Li/s/a/w/k;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->n:Lcom/ss/android/vesdk/ConcurrentList;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraCapture;->p:Ljava/util/concurrent/atomic/AtomicBoolean;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/ttvecamera/TECameraSettings;->l:I\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/ttvecamera/TECameraSettings;->j:I\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/ttvecamera/TECameraSettings;->M:I\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/ttvecamera/TECameraSettings;->u0:Z\treceivers=1\tstatic=false\twrite=true\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->INSTANCE:Li/s/a/w/q;\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mCameraClient:Li/s/a/w/k;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mCameraSettings:Lcom/ss/android/ttvecamera/TECameraSettings;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mCameraInstance:Li/s/a/w/a;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mCurrentCameraState:I\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mHandler:Landroid/os/Handler;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mProviderManager:Li/s/a/w/l0/c;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mIsCameraPendingClose:Z\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mHandlerDestroyed:Z\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mOnBackGround:Z\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/q;->mIsCameraSwitchState:Z\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/d;->H:Landroid/hardware/Camera;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/d;->K:Ljava/lang/String;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/g;->K:Landroid/hardware/camera2/CameraDevice;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/g;->H:Li/s/a/w/i0/c;\treceivers=1\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/h0/b;->h:Lcom/ss/android/ttvecamera/TECameraSettings;\treceivers=4\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/h0/b;->g:Li/s/a/w/g;\treceivers=4\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/h0/b;->a:Landroid/hardware/camera2/CameraCharacteristics;\treceivers=4\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->d:Li/s/a/w/a;\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->h:Z\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->e:Z\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->a:Li/s/a/w/l0/b$c;\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->j:Li/s/a/w/l0/b$c;\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/l0/b;->k:Li/s/a/w/l0/b$c;\treceivers=7\tstatic=false\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/hiro/ulike/OpticalZoom;->capture:Ljava/lang/ref/WeakReference;\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/hiro/ulike/OpticalZoom;->foreground:Z\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/hiro/ulike/OpticalZoom;->recording:Z\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/hiro/ulike/OpticalZoom;->epoch:J\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/VECameraSettings;->getCameraFacing()Lcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;\treceivers=1\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/frame/TECapturePipeline;->getFormat()Li/s/a/w/m$d;\treceivers=4\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/frame/TECapturePipeline;->getSurfaceTexture()Landroid/graphics/SurfaceTexture;\treceivers=4\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/frame/TECapturePipeline;->getCaptureListener()Lcom/ss/android/vesdk/frame/TECapturePipeline$CaptureListener;\treceivers=4\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/frame/TETextureCapturePipeline;->getSurface()Landroid/view/Surface;\treceivers=1\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLcom/ss/android/vesdk/frame/TERecorderCapturePipeline;->getRecorderSurface()Landroid/view/Surface;\treceivers=1\tpublic_instance=true\nREFLECTION_ABI\tMETHOD\tLi/s/a/w/l0/c;->h()Li/s/a/w/l0/b;\treceivers=1\tpublic_instance=true\nREFLECTION_ABI\tFIELD\tLi/s/a/w/m$d;->PIXEL_FORMAT_OpenGL_OES:Li/s/a/w/m$d;\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLi/s/a/w/m$d;->PIXEL_FORMAT_Recorder:Li/s/a/w/m$d;\treceivers=1\tstatic=true\twrite=false\nREFLECTION_ABI\tFIELD\tLcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;->FACING_FRONT:Lcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;\treceivers=1\tstatic=true\twrite=false\nABI_INPUT_SHA256\tstock=f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d\truntime=d88695c598a275663b97486569c892000cfa5d2131bb4163652a624afb849d75\tmethods=d2f289712e7c32340f9c3f8df571fbb0b5463dbb798212dc20a568c212ee6add\nVERIFY_NATIVE_ABI1931\thelper_methods=55\tnative_hook_methods=10\truntime_hook_methods=3\tdirect_member_instructions=763\tresolved_unique_native_runtime_members=212\tchecked_type_instructions=93\tresolved_unique_native_runtime_types=14\treflection_contracts=48\tplatform_jdk_members_deferred=58\tplatform_jdk_types_deferred=17\tassertions=253262\nPASS native/runtime ABI declarations, access and reflection contracts. Platform/JDK linkage deferred; no Android/ART execution, hardware camera test, or proof of device symptom resolution.",
+  "stock_lifecycle_abi_verification": "PASS front native ABI/lifecycle checks=93 classes=33134 apk=stock.apk",
+  "front_dex_verification": "PASS native bridges=5, new cancellation hooks=5, native methods retained=192, runtime bridges=3, runtime methods retained=1437, production helper classes=4, original stop/switch contracts=verified",
+  "desktop_evidence_sha256": "b74ea91d00597283025a097612976212b38223f37cbdd655fae5d7244456e748",
+  "source_sha256": {
+    "src/AnalyzeAll.java": "546720160b8921341131695e4426cdf5444737a5e5d47aca7d5763959890724b",
+    "src/DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "src/FrontPreview1931.java": "f61a0d03fdaa4d3c495541e8cd81538b2d2ad5334d2fee34f0fe3aaa18f1a2eb",
+    "src/MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "src/PatchClass1931.java": "cbfcdc0d173bb77b2620e46e24715037f08d6e1cbcb485dc796845f39526c95b",
+    "src/Seed1931.java": "1c13cf5207d730d31d6e8a0f1f4ba4154680df952743954f4b12cc2e8f464df3",
+    "src/Transform1931.java": "0254696602fa1eceb29a7d0790c465a5e48e2325d5821d3ab4221514d4c904b8",
+    "src/VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "src/VerifyFront1931.java": "98d1fc7645f396e0948681725e62d67312d9253bb184e80f6f3dc701ac650949",
+    "src/VerifyFrontAbi1931.java": "f7f96eaa189d2e495c37a09eef03aa54ac604db4f18fd368134b9bdbf1a048ca",
+    "src/VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "src/VerifyNativeAbi1931.java": "563c38eeebf76bbb823f9c0113921cdaed55ccfc164005165bddec628b1d4b0f",
+    "src/build1931.py": "a47b4d0eef07cb70305f943051542d628109ac310ac0a6303ddeaae989e080f1",
+    "src/finalize1931.py": "16b6bfe37139435dc1b9c46053ce143baacdc8c42b38667c72a757f4fb341c36",
+    "src/front-baseline/PreviewInputs1929.java": "670970b8fc0dd426830d5ca1a1edfa919eb2afe52f025f36d6f94d905172268c",
+    "src/front-baseline/PreviewStart1927.java": "c2c3167a48d400b8283b029db161fcffa12b3ff65124af1a3fbaba6bc03e9ed8",
+    "src/front-baseline/ProviderLifecycle1929.java": "a4a665fd7fe67c747ddcfe39bc1e7c90df09db8997376ef57bdcae409f978d75",
+    "src/front-host/android/content/Context.java": "4373444fe4ec6f6388c6669b99ca9729cc8dbca10cf33cfc2c4b41089276ff38",
+    "src/front-host/android/graphics/SurfaceTexture.java": "88698263088fb79537c57b15885b62c4dff23c2e493d324c58f558ddf3a989cd",
+    "src/front-host/android/hardware/Camera.java": "ffaef086bbab613e645d4d42686cded88ef65d6803497ff260e9b6d43f47a9c3",
+    "src/front-host/android/hardware/camera2/CameraCaptureSession.java": "a2c287c346123c4fec497aa696d2007200cb9016a8182bf2245630de9f3421ff",
+    "src/front-host/android/hardware/camera2/CameraCharacteristics.java": "4473323bceaded8d3c9bfd3f633a8b9a3d989a5c907432717fb351b748a96890",
+    "src/front-host/android/hardware/camera2/CameraDevice.java": "06c9437e23783627a3e9095e7280f3b178dfac488fde1f5acc90bfcd2588151e",
+    "src/front-host/android/os/Build.java": "c874d38fc8241e643a3eeed95bf6d4517c503a3460aa9be321ff8bee7e05649f",
+    "src/front-host/android/os/Handler.java": "c109ce8e7217cf0bece8cf823653209a25c59a261eb20c7c3190deffe91250a3",
+    "src/front-host/android/os/Looper.java": "52357a0a4e1dd42b8a011e04c532e509a6a0a19d4591ba3cc0f5cf0665c84955",
+    "src/front-host/android/os/SystemClock.java": "01e86cc2e86c60c9183b4044f3c0980f4999de4d2146c33c8063f495b374492f",
+    "src/front-host/android/util/Log.java": "2c264ce4cf1d12a0d387131feb226d22b80396e85fc99beae7bdbe507d50d265",
+    "src/front-host/android/view/Surface.java": "2f115a526137011165c7b6bf407fc529047e8c722dfd009cdd63d5d699bbf22f",
+    "src/front-host/com/hiro/ulike/ExitBusy1921.java": "21341f9c25f539fa0b6b2579db5f4c4b95d748cdea36d7474bac74f419765cbb",
+    "src/front-host/com/hiro/ulike/FrontTest1931.java": "7dfc5379ee8670b8f154451d10d296409bcbc16952dd86a6b4b1b49aa88a561d",
+    "src/front-host/com/hiro/ulike/ManualLens170.java": "d57ac03960828b70db8fb469f7b3ff107316b16b9f5265a4f9f9060cb1eaa05f",
+    "src/front-host/com/hiro/ulike/OpticalZoom.java": "7484bffa8544608700b4b9da31ea4e09a3ab64d21251a367840987987c692955",
+    "src/front-host/com/hiro/ulike/RearRestart1926.java": "191f6f38d91f27f9bd3c1990f08d4f381049c95de6073e76ca4b03a0bbfcaa9e",
+    "src/front-host/com/ss/android/ttvecamera/TECameraSettings.java": "84bab5ae28579fe52221173965ae8af5e38fe2d0b6ad7c966ff0b2c6166990fd",
+    "src/front-host/com/ss/android/vesdk/ConcurrentList.java": "de2733252b642a0d233369003834d0fc9f3d78ebd65759289e6d5d78b9be5729",
+    "src/front-host/com/ss/android/vesdk/VECameraCapture.java": "ea1afccd0e0be0597b7e6978f866aa72249db686d6bad87b3cb31fa387c80856",
+    "src/front-host/com/ss/android/vesdk/VECameraSettings.java": "ecc56c53b7c1b70a044cc0eb9883e2c895fbb658a5fcdcda722d890807ff4b84",
+    "src/front-host/com/ss/android/vesdk/frame/TECapturePipeline.java": "97e8fae69c778dda7b1836855ef6b6ec2e9af99b4ce1a842afbf98f9a7271415",
+    "src/front-host/i/s/a/w/d.java": "d2dcd4becb41db640c074d9210bd6a33a99c830b86754d44bef86955dacfebba",
+    "src/front-host/i/s/a/w/g.java": "33332615e9b6fa3fef816f821a6787a0f0e29b873fc01632b133137530d4ed95",
+    "src/front-host/i/s/a/w/h0/b.java": "7d79bd2b6deda6b8ce0c0913f60791df0ac94424427ae004d867164baebc1da6",
+    "src/front-host/i/s/a/w/k.java": "179b7d764f8e8d0490804dc9bf54fbc5e03e987c74750e29b508605ce28cc8d2",
+    "src/front-host/i/s/a/w/l0/b.java": "8d1c70af009f3054afa3a1e69ae92500c19e657c679399ccd2f61db89e15d45e",
+    "src/front-host/i/s/a/w/l0/c.java": "89b12b560e0bbb1d5099206e7c67b48b920f032dd1a5c56e34824b100606ddae",
+    "src/front-host/i/s/a/w/m.java": "c13b4d496060fc5cff21894d1f9ca2f7a4e253dc85ce42c1614cd5d5feb72ea3",
+    "src/front-host/i/s/a/w/q.java": "d75e84c39244347f680557c75da98d79c841e0306d280a3ebaa0f1712c886807",
+    "src/front-host/i/s/a/w/w.java": "cd69028fbe2739416fdc790dc269c81756785bb901176b1afa99cfd588ec57c6",
+    "src/front-stubs/com/hiro/ulike/ExitBusy1921.java": "30efb4ade2b609e478c30eb278891cd3fc2496c370a2472ec2a39d3038c1c3d4",
+    "src/front-stubs/com/hiro/ulike/ManualLens170.java": "da1829e66aca1cc6ce75f4f519001f47e5e3f76992c80c27d0220aa7d650d3ca",
+    "src/front-stubs/com/hiro/ulike/OpticalZoom.java": "7bcfb2037a00071631f63ee8d9f75c9fcd9fe6299757d35e21952346f35e1b3f",
+    "src/front-stubs/com/hiro/ulike/PreviewInputs1929.java": "1b762567d278949a33c2878b0a4f0b8ed7d2ebba232199b93c83d4bc34d3f781",
+    "src/front-stubs/com/hiro/ulike/PreviewStart1927.java": "e1ae7039a628b9df49f2b8826b59b19dc2b399e3ce714480da7d08ef989c5644",
+    "src/front-stubs/com/hiro/ulike/ProviderLifecycle1929.java": "405a880dd1a861d248234680b6f226d624e314516d8095bb74eb21eb23f22b09",
+    "src/front-stubs/com/hiro/ulike/RearRestart1926.java": "1ed62281601dcce8cba79fd673300b0b3a973575a7c68692c9539132a3732759",
+    "src/front-stubs/com/ss/android/vesdk/ConcurrentList.java": "b685ad6d98058a582e97ddfd0f4352b2337ab8248e5ce484edd30bc2c6141a43",
+    "src/front-stubs/com/ss/android/vesdk/VECameraCapture.java": "1d927392450b9530beafaf4ec072dece0ba380c63c4e0881a58e49961b04f0e6",
+    "src/front-stubs/com/ss/android/vesdk/frame/TECapturePipeline.java": "d679fbf7eef684614b8cfcf0dacdd81c166c9c579771deb141d9a376e0f5d68f",
+    "src/host_front1931.py": "6243b24625a5d813cdf66d5cebf047cf9d92e78c2b164d00302690e28396a25f",
+    "src/stock-seed1931-hashes.tsv": "0dbcf43e935c6c99a5c81e6617c53a2184771a1ca33ca50015de607c68b68d8c",
+    "src/stock-seed1931.dex": "5a3d209986efa6eb99d90ba90f65023023f9e981ae3e8a3328aee55f5c2d4f0a",
+    "src/validate1931.py": "8b3e6e47ac1eeb2d36cb7deb85876ba59a3eb3dd5c17d123138d0a094af5ed18"
+  }
+}

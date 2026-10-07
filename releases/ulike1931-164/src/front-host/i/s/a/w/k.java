@@ -1,0 +1,6 @@
+package i.s.a.w;
+public class k {
+    public int y(){return q.INSTANCE.mCurrentCameraState;}
+    public int z(boolean ignored){return y();}
+    public boolean N(){return q.INSTANCE.mIsCameraSwitchState;}
+}

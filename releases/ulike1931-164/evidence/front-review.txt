@@ -1,0 +1,108 @@
+ULike 1.9.31 independent front-preview review
+Reviewer task: /root/front_preview_audit
+Date: 2026-10-07 UTC
+Scope: front-camera startup, native client/provider ownership, original-APK ABI,
+       independent deterministic lifecycle regression tests.
+
+Accepted input baseline
+- ULike_HQ_Texture_Online_v1.9.30.mpp SHA-256:
+  8b7de29e47362d8e2291b5c2d506dd85688279443269ee8d854513d4cae5d723
+- Hiro_Morphe_Patches_v1.0.163.mpp SHA-256:
+  d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4
+- The baseline standalone and active combined bundle have byte-identical
+  ulike/runtime.dex, ulike/methods.dex, and ulike/methods.tsv.
+
+Concrete defects established by source + emitted baseline DEX inspection
+1. VECameraCapture.onCaptureStarted calls PreviewStart1927.start(), ignores its
+   return value, and still sends cameraOpenSuccess(). If the native preview input
+   list has not arrived, startPreview returns -100. The later addCapturePipelines
+   setter only signals an existing pending start.
+2. PreviewStart1927.remember and its pending worker explicitly require route.rear.
+   Thus a front-camera -100/-105/-1 readiness failure is not armed for retry;
+   adding the missing front input later leaves the camera unstarted.
+3. PreviewInputs1929.before renews released preview textures only for a current
+   rear route. Original TECapturePipeline.isValid() checks positive dimensions
+   and a listener, and TETextureCapturePipeline simply delegates to it. Neither
+   validates SurfaceTexture lifetime. A released front SurfaceTexture therefore
+   passes that test and can reach the native provider with an invalid target.
+4. Original VECameraCapture.newSurfaceTexture() only sets its existing u flag.
+   The subsequent original startPreview constructs the native TESurfaceTexture
+   and notifies the existing capture listener. The repair uses this path.
+
+The defects above explain executable ways to retain camera UI while no preview
+image starts. They are consistent with the reported restart symptom, but an
+actual Galaxy reproduction/logcat was not available to establish which defect
+fired on this particular device.
+
+Native lifecycle evidence and rejected extra change
+- i.s.a.w.q.INSTANCE is the common Camera1/Camera2 server. Client ownership is
+  mCameraClient == capture.o; getCameraState() alone is global and does not check
+  the caller. Native states are closed 0, opening 1, opened 2, preview 3, closing 4.
+- Camera1 hardware identity is i.s.a.w.d.H; Camera2 identity is i.s.a.w.g.K.
+- stopPreview(boolean) does not clear capture.p; settings-based switch can retain
+  the same Java capture/client while replacing hardware. Explicit cancellation
+  and hardware-generation checks are consequently required.
+- A proposed same-manager/provider reuse versus delayed release collision was
+  investigated and excluded from this release. Whole-APK reference inspection
+  finds exactly one q$k constructor site, q.destroy(). destroy first invalidates
+  mIsInitialized, client and cached provider settings. Its later reconnect calls
+  synchronized init(), which allocates a NEW provider manager. init/destroy use
+  the same server monitor. The only write to mProviderManager is that init site.
+  No ordinary native path establishing same-manager adoption after this release
+  task was found. ProviderLease1931 was therefore not created.
+
+Independent host regression result
+PASS1931 front lifecycle assertions=124
+- Before repair: late front pipeline leaves preview unstarted.
+- Before repair: released front texture passes stock isValid and reaches a
+  modeled native failure; no renewal was requested.
+- After repair: late front input starts exactly once, and one native texture
+  renewal notifies the renderer and avoids that invalid-target failure.
+- Camera1 without OpticalZoom/Camera2 route; Camera2 existing deferred session.
+- Pipeline arrival in either order, polling without a setter, event coalescing,
+  native success superseding a pending request, and bounded five-second expiry.
+- Owner/client/settings/epoch changes, replaced Camera1/Camera2 handles, native
+  shutdown/switch/background flags, null destroyed context, and explicit cancel.
+- Recording, photo/save busy, visible-window readiness, queue rejection, native
+  queue stall beyond expiry, and cancellation during the original call.
+- Valid Surface-only, recorder and native buffer inputs; invalid inputs withheld.
+- Current provider image completes pending work; foreign/paused/dummy listener
+  frames cannot cancel recovery. Normal front and rear starts have no extra
+  replay or unnecessary texture renewal.
+
+Independent host testing found two draft-helper omissions (hardware captured too
+late; missing native shutdown guards). The helper author corrected those before
+all 124 assertions passed. The tested and frozen helper have the same source hash.
+
+Self-contained source archive test
+- Created a ZIP with FrontPreview1931.java, host_front1931.py, front-host/, and
+  front-baseline/ only. Extracted it outside the repository and ran the runner.
+- PASS1931 front lifecycle assertions=124 in the isolated extraction.
+- No sibling legacy release directory was needed at runtime.
+
+Baseline Java source provenance
+The three front-baseline files are exact byte copies of the retained 1929 source
+components underlying the accepted 1930 baseline. Their source hashes were
+independently checked against releases/ulike1929-156/src. This is a SOURCE hash
+check, not a claim that the Java files equal every later transformed DEX method.
+The two before scenarios use the front exclusions/input guard also independently
+confirmed in the shipped baseline DEX. In particular, 1929 substituted the
+PreviewStart sourcesReady helper separately; these front-exclusion reproductions
+do not depend on that differing rear-readiness method.
+- PreviewStart1927.java SHA-256: c2c3167a48d400b8283b029db161fcffa12b3ff65124af1a3fbaba6bc03e9ed8
+- PreviewInputs1929.java SHA-256: 670970b8fc0dd426830d5ca1a1edfa919eb2afe52f025f36d6f94d905172268c
+- ProviderLifecycle1929.java SHA-256: a4a665fd7fe67c747ddcfe39bc1e7c90df09db8997376ef57bdcae409f978d75
+- Frozen FrontPreview1931.java SHA-256: f61a0d03fdaa4d3c495541e8cd81538b2d2ad5334d2fee34f0fe3aaa18f1a2eb
+
+Original APK ABI check
+VerifyFrontAbi1931.java passed 93 native ABI/lifecycle checks over 33,134 original
+classes. It verifies reflection fields, public native methods, the native renewal
+flag contract, provider-manager writer and release-constructor sites. The root
+validation runs this verifier again on original and actually patched APKs.
+
+Limits
+These are source, DEX, APK-ABI and deterministic host tests. They do not execute
+Android ART, Samsung camera hardware, GL rendering, exposure or image processing.
+No claim of device black-preview elimination, image quality, or measured startup
+latency is made by this review. Publication and final single/combined real-APK
+application gates are handled by the root release workflow.

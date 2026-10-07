@@ -1,0 +1,51 @@
+ULike v1.9.31 / Hiro Morphe Patches v1.0.164
+組み立て後 DEX の最終レビュー
+
+レビュー対象（build1931-1/emitted）
+runtime.dex SHA256: d88695c598a275663b97486569c892000cfa5d2131bb4163652a624afb849d75
+methods.dex SHA256: d2f289712e7c32340f9c3f8df571fbb0b5463dbb798212dc20a568c212ee6add
+
+結果
+レビュー範囲内で、公開を止める具体的な回帰は見つからなかった。
+この報告作成時に helper・変換ソース・DEX は変更していない。
+
+レビュー範囲
+実際の emitted DEX、元 ULike 5.6.2 (740) APK の関連メソッド、
+Transform1931 / VerifyFront1931 の変換・逆変換ロジック、既存 build の
+保持検証結果を読み取り確認した。新たな実機試験を実施した報告ではない。
+
+フックの確認
+- onCaptureStarted(II): receiver v6 を start に渡す。元どおり結果を
+  破棄し、listener と成功通知の後続処理・使用レジスタを保持。
+- start(ConcurrentList): receiver v1、move-result v2、元の戻り値を保持。
+- addCapturePipelines: n の更新と元ログの後、receiver v2 を渡す。
+- startPreview(): receiver v15、before の結果 v0 を判定。false の -100 と
+  true の元本体への分岐を保持。
+- provider m(frame): 元 listener 配信後に provider v1 / frame v2 を渡す。
+  listener がない分岐も保持。
+- OpticalZoom.prepared: 引数 v3..v4 を保持し、FrontPreview1931 が先に
+  従来の RearRestart1926.prepared を実行。後続の OpticalZoom 処理も保持。
+
+取り消し経路
+新規 native 入口 5 本は receiver のみを cancel に渡し、元の引数・結果・
+本体を保持。stopPreview()、switchCamera の各簡略 overload、
+switchCameraMode(I) は変更した正規 overload に合流する。
+close の全 4 overload は既存 OpticalZoom.closing 経由、onBackGround は
+既存 OpticalZoom.background 経由で新 cancel に到達する。
+追加の直接 startPreview 呼び出し元 a(VESize) も確認した。元の
+stop -> setPreviewSize -> newSurfaceTexture -> startPreview の流れを保持し、
+native stop の状態 3 -> 2 を新 guard はいずれも許可する。
+
+保持範囲（既存 build の検証実装・結果を照合）
+変更対象外の native メソッド 192 本、runtime メソッド 1437 本を保持。
+新規クラスは FrontPreview1931 系 4 クラスのみ。
+FacingMemory1928、RearLensUi1930、PreviewStart1927、ProviderLifecycle1929、
+PreviewInputs1929 のクラスハッシュを保持。他アプリ loader 240 クラスを保持。
+VerifyFront1931 は bridge 参照の逆変換／入口 cancel の除去後に元メソッド
+ハッシュへ一致することを検証する。元 APK を使う seed の最終照合と
+フルパッチ適用結果は、それぞれ別の validation 証跡の対象である。
+
+限界
+実機未確認。ART 上の起動、カメラ HAL / GPU / SurfaceTexture の実動作、
+センサーからの画像出力、およびユーザー端末で黒画面が解消したことを
+このレビュー単独で確認したものではない。
