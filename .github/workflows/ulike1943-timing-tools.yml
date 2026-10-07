@@ -52,7 +52,7 @@ jobs:
           jdk=pathlib.Path(os.environ['JAVA_HOME']).resolve()
           with tarfile.open('timing-tools.tar.gz','w:gz',compresslevel=3) as tar:
               tar.add(root,arcname='.')
-              tar.add(jdk,arcname='jdk')
+              tar.add(jdk,arcname='jdk',filter=lambda info: None if info.name.startswith('jdk/jmods') or info.name=='jdk/lib/src.zip' else info)
           data=pathlib.Path('timing-tools.tar.gz').read_bytes()
           pieces=pathlib.Path('timing-pieces');pieces.mkdir()
           chunk=20*1024*1024
@@ -155,3 +155,4 @@ jobs:
           path: timing-pieces/part011
           retention-days: 3
           compression-level: 0
+
