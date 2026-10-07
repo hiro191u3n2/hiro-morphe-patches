@@ -1,0 +1,361 @@
+{
+  "schema": "ulike1933-burst-v1",
+  "status": "REBUILD_MATCHES_ORIGINAL_APKS_VALIDATED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.33",
+  "bundle_version": "1.0.166",
+  "base_versions": [
+    "1.9.32",
+    "1.0.165"
+  ],
+  "approved_lineage": "1.8.8",
+  "selected_candidates": [
+    47,
+    50,
+    60
+  ],
+  "device_tested": false,
+  "device_quality_verified": false,
+  "original_apk_apply_tested": true,
+  "ci_android_apply_tested": false,
+  "non_ulike_resources_byte_identical": true,
+  "non_ulike_loader_classes_unchanged": true,
+  "camera_lifecycle_byte_identical": false,
+  "camera_startup_recovery_byte_identical": true,
+  "image_pipeline_byte_identical": false,
+  "standalone_and_bundle_ulike_resources_identical": true,
+  "native_methods_byte_identical": false,
+  "native_methods_tsv_byte_identical": false,
+  "changed_runtime_methods": [
+    "Lcom/hiro/ulike/CaptureYuv;->failed(Ljava/lang/Object;)V",
+    "Lcom/hiro/ulike/CaptureYuv;->receive(Ljava/lang/Object;Lcom/hiro/ulike/CaptureYuv$State;Landroid/media/ImageReader;)V",
+    "Lcom/hiro/ulike/CaptureYuv;->release(Ljava/lang/Object;)V",
+    "Lcom/hiro/ulike/CaptureYuv;->result(Ljava/lang/Object;Landroid/hardware/camera2/CaptureResult;)V",
+    "Lcom/hiro/ulike/QualityPipeline1932;->normalize(Landroid/graphics/Bitmap;IZ)Landroid/graphics/Bitmap;"
+  ],
+  "changed_native_methods": [
+    "Li/s/a/w/d0/a$g;->onImageAvailable(Landroid/media/ImageReader;)V",
+    "Li/s/a/w/d0/a;->Q0(Landroid/media/Image;Landroid/hardware/camera2/TotalCaptureResult;)V",
+    "Li/s/a/w/d0/a;->u0(Lcom/ss/android/ttvecamera/TECameraSettings$m;I)V"
+  ],
+  "new_helper_classes": [
+    "Lcom/hiro/ulike/BurstCapture1933$10;",
+    "Lcom/hiro/ulike/BurstCapture1933$11;",
+    "Lcom/hiro/ulike/BurstCapture1933$12;",
+    "Lcom/hiro/ulike/BurstCapture1933$1;",
+    "Lcom/hiro/ulike/BurstCapture1933$2;",
+    "Lcom/hiro/ulike/BurstCapture1933$3;",
+    "Lcom/hiro/ulike/BurstCapture1933$4;",
+    "Lcom/hiro/ulike/BurstCapture1933$5;",
+    "Lcom/hiro/ulike/BurstCapture1933$6;",
+    "Lcom/hiro/ulike/BurstCapture1933$7$1;",
+    "Lcom/hiro/ulike/BurstCapture1933$7;",
+    "Lcom/hiro/ulike/BurstCapture1933$8;",
+    "Lcom/hiro/ulike/BurstCapture1933$9$1;",
+    "Lcom/hiro/ulike/BurstCapture1933$9;",
+    "Lcom/hiro/ulike/BurstCapture1933$Deferred;",
+    "Lcom/hiro/ulike/BurstCapture1933$Epoch;",
+    "Lcom/hiro/ulike/BurstCapture1933$Frame;",
+    "Lcom/hiro/ulike/BurstCapture1933$NativeBridge;",
+    "Lcom/hiro/ulike/BurstCapture1933$Replay;",
+    "Lcom/hiro/ulike/BurstCapture1933$ResultStamp;",
+    "Lcom/hiro/ulike/BurstCapture1933$Retired;",
+    "Lcom/hiro/ulike/BurstCapture1933$Source;",
+    "Lcom/hiro/ulike/BurstCapture1933$State;",
+    "Lcom/hiro/ulike/BurstCapture1933$Ticket;",
+    "Lcom/hiro/ulike/BurstCapture1933$Work;",
+    "Lcom/hiro/ulike/BurstCapture1933;",
+    "Lcom/hiro/ulike/CapturePolicy1933$Decision;",
+    "Lcom/hiro/ulike/CapturePolicy1933;",
+    "Lcom/hiro/ulike/FastPixels1933$1;",
+    "Lcom/hiro/ulike/FastPixels1933$Axis;",
+    "Lcom/hiro/ulike/FastPixels1933$Plan;",
+    "Lcom/hiro/ulike/FastPixels1933$RowCache;",
+    "Lcom/hiro/ulike/FastPixels1933$RowSink;",
+    "Lcom/hiro/ulike/FastPixels1933$RowSource;",
+    "Lcom/hiro/ulike/FastPixels1933;",
+    "Lcom/hiro/ulike/FastResize1933$Group;",
+    "Lcom/hiro/ulike/FastResize1933$Rows;",
+    "Lcom/hiro/ulike/FastResize1933$Worker$1;",
+    "Lcom/hiro/ulike/FastResize1933$Worker;",
+    "Lcom/hiro/ulike/FastResize1933;",
+    "Lcom/hiro/ulike/FusionPixels1933$1;",
+    "Lcom/hiro/ulike/FusionPixels1933$Motion;",
+    "Lcom/hiro/ulike/FusionPixels1933$Pair;",
+    "Lcom/hiro/ulike/FusionPixels1933$Result;",
+    "Lcom/hiro/ulike/FusionPixels1933$Small;",
+    "Lcom/hiro/ulike/FusionPixels1933$Stats;",
+    "Lcom/hiro/ulike/FusionPixels1933$Work;",
+    "Lcom/hiro/ulike/FusionPixels1933$Worker;",
+    "Lcom/hiro/ulike/FusionPixels1933;"
+  ],
+  "new_runtime_aliases": [
+    "Lcom/hiro/ulike/ShotContext1932;->receivedValues1933(Ljava/lang/Object;Ljava/lang/Object;JIILandroid/hardware/camera2/CaptureResult;)Z"
+  ],
+  "new_native_methods": [
+    "Li/s/a/w/d0/a$g;->onImageAvailable(Landroid/media/ImageReader;)V"
+  ],
+  "host_burst_passed": true,
+  "host_burst_result": {
+    "status": "passed",
+    "assertions": 1832029,
+    "suites": {
+      "fusion": {
+        "status": "passed",
+        "assertions": 7794,
+        "scenarios": {
+          "off_invalid_and_reference_ownership": 11,
+          "real_distinct_capture_requirement": 4,
+          "same_exposure_metadata_gate": 4,
+          "static_noise_and_nv21_chroma_gain": 9,
+          "flat_noise_and_level_bounds": 10,
+          "integer_camera_translation": 3,
+          "fractional_translation_and_warm_hue": 3,
+          "foreground_motion_reference_and_background_gain": 4609,
+          "large_motion_scene_flash_and_colour_mismatch": 4,
+          "small_local_warp_and_uncertain_rotation": 3,
+          "night_low_contrast_motion_and_vu_only_motion": 1042,
+          "edges_lines_and_no_overshoot": 272,
+          "worker_equivalence_seams_and_immutable_inputs": 1814,
+          "cancellation_and_probe_immutability": 6
+        },
+        "metrics": {
+          "static_y_mse_ratio_ppm": 208913,
+          "static_uv_mse_ratio_ppm": 212042,
+          "flat_y_mse_ratio_ppm": 202651,
+          "translation_y_mse_ratio_ppm": 316653
+        }
+      },
+      "capture": {
+        "status": "passed",
+        "assertions": 458,
+        "scenarios": 39,
+        "scope": "capture policy, YUV ownership and scripted Android callback order; no device claim"
+      },
+      "metadata": {
+        "status": "passed",
+        "assertions": 40,
+        "interleaved_captures": 400,
+        "exact_burst_reference_metadata": true,
+        "callback_replacement_rejected": true,
+        "physical_timestamp_validated": true,
+        "device_tested": false
+      },
+      "fast": {
+        "status": "passed",
+        "assertions": 1823698,
+        "scenarios": 34,
+        "bit_identical_to_1932": true,
+        "alpha_fallback_verified": true,
+        "block_rotation_verified": true,
+        "worker_failure_cleanup_verified": true,
+        "device_tested": false,
+        "reference_sha256": "d67433da7946fbafb83a6e1736c1860b9cc967f4f8afe7f104f7351c2adf107d"
+      },
+      "integration": {
+        "status": "passed",
+        "assertions": 39,
+        "scenarios": {
+          "normal_three_real_frames_to_renderer": 16,
+          "night_measured_probe_and_new_four_frame_group": 23
+        },
+        "metrics": {
+          "normal_y_mse_ratio_ppm": 411029,
+          "night_y_mse_ratio_ppm": 329105
+        },
+        "device_tested": false
+      }
+    },
+    "device_tested": false,
+    "performance_measured_on_device": false
+  },
+  "dex_verification": "PASS independent burst DEX verification: assertions=10146, runtime_changed=5, runtime_retained=1620, native_changed=3, native_retained=201, new_native=1, helpers=49, aliases=1, protected_startup_recovery_classes=33, other_app_loader_classes=240, original_APK_contracts=0. Device untested.",
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.33.mpp": {
+      "sha256": "1a7c03aca7f9260b22f4a80cf7d17dde44408ec52e5237cf1b2633c1473d10ce",
+      "bytes": 761986
+    },
+    "Hiro_Morphe_Patches_v1.0.166.mpp": {
+      "sha256": "c541826f308e93b269b70c459e31406ff13328c018f42ccee0fc9056cfd30eee",
+      "bytes": 17409037
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.32.mpp": "010a8dcaa1ba37467fafe92183d19930f59f87dea3e93dfe94cc84825c80b2d0",
+    "Hiro_Morphe_Patches_v1.0.165.mpp": "de603911aa3608736e8246b6ffdd89f234d2b0979b66bbacb71db13ba7ea873c",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "jdk_identity": {
+    "runtime_version": "21.0.8+9-LTS",
+    "vendor": "Eclipse Adoptium",
+    "javac_version": "21.0.8"
+  },
+  "native_seed_sha256": "6b0c2a6af686d764a1bb3bab8ab4405b760c07f7ffdcbb0d645d9b2a72eb902a",
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy/ART or camera hardware execution.",
+    "Host tests and DEX checks do not measure device image quality or save latency."
+  ],
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33448 unique classes / 214006 methods. 2046 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1669,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33448 apk=patched.apk"
+    },
+    "bundle": {
+      "patch_index": 4,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33448 unique classes / 214006 methods. 2046 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1669,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33448 apk=patched.apk"
+    }
+  },
+  "burst_dex_verification": "PASS independent burst DEX verification: assertions=10351, runtime_changed=5, runtime_retained=1620, native_changed=3, native_retained=201, new_native=1, helpers=49, aliases=1, protected_startup_recovery_classes=33, other_app_loader_classes=240, original_APK_contracts=204. Device untested.",
+  "stock_burst_capture_abi_verification": "PASS burst native reflection ABI: checks=66, apk=stock.apk. No device execution.",
+  "desktop_evidence_sha256": "4c40bd5747681e596f9b29e13329001808eefa592c2b28a2fe17010d2ad10daa",
+  "stock_lifecycle_abi_verification": "PASS front native ABI/lifecycle checks=93 classes=33134 apk=stock.apk",
+  "source_sha256": {
+    "src/AnalyzeAll.java": "ac6e74a0143ecbd39281419a61f43d32e6c6450f5b866d8df34ddcd4d05ab6a1",
+    "src/BurstCapture1933.java": "33a161c6c993ad6753b8c0cdf4a5ed7fe336a87542dd5401020ab903628add35",
+    "src/CapturePolicy1933.java": "525551d47efa500641c62d38f1526f24f002a49b8f1cfec9b1afc8788b0b1ee3",
+    "src/DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "src/FastPixels1933.java": "ecee3d8fe05724e3ec15ab8b7277f0946bb03e5bb6d312424d51f5e74c9a0a44",
+    "src/FastResize1933.java": "e13df9670e1bee12066eee9e35379d319bbe05e2111dad440b60092337d64f9e",
+    "src/FusionPixels1933.java": "5e1ba972b3bf6266d972669babb8cd087eedf10059dc38f870f8aaf1d9111549",
+    "src/MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "src/PatchClass1933.java": "002baba5918e6f78a7aaa397ab484e278b4922aa0e6c8459bbb3a9090b66c8f5",
+    "src/SeedBurst1933.java": "cfb5b84f12fbe3f441cb04d5651fa7a23d0853bef7e1397fb16dced3e2768a31",
+    "src/Transform1933.java": "07b52771145fe149d29d9293e0efa267978e99152b4e2a14614195042ec724ff",
+    "src/VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "src/VerifyBurst1933.java": "ad9d30fd2940f681442af326a03b6a4fa788a03ec75525180b32727f9c594955",
+    "src/VerifyBurstAbi1933.java": "4b92b2fc7836ba54fe9d50f18015cb7b75e5e7fb387242436c9b3e7ed43f192b",
+    "src/VerifyFrontAbi1931.java": "f7f96eaa189d2e495c37a09eef03aa54ac604db4f18fd368134b9bdbf1a048ca",
+    "src/VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "src/build1933.py": "6fc3cd76736e1372867be27b4cb20da2937418699ee4270a8e65a846251eb673",
+    "src/capture-stubs/com/hiro/ulike/ExitJobs185.java": "3f2218b45273e96d9d5daa3656c7d87113b3dae9298fc915c5df85834499bcd8",
+    "src/capture-stubs/com/hiro/ulike/PhotoDetail.java": "c7e94da7cdcd28a8ecf6fede68dccba1319fb9e45c126ac9095e1408f4098093",
+    "src/extract_seed1933.py": "279d1b55c462d4eeb5bf20f41cf2478d8a227e357d3a7963cea269adf90e44c8",
+    "src/fast-stubs/com/hiro/ulike/QualityPipeline1932.java": "c82d53d816dd0dcbfbee7e5a18266b0296f749bd1cdf22770a66e809a5c2a247",
+    "src/finalize1933.py": "1b537c03c3e40861f3892364c953b3cf62fa4f90a3e59483ba7b6f42fdd962dc",
+    "src/host_burst1933.py": "2e1f4588cbc65100422b4b99bf1932be8b9ccbb72dcfabae3f1027164ec2beae",
+    "src/host_capture1933.py": "fb4b81e3e93ce1cdd47ab59a8d760cac4f6bbc4a6209cd8ed6bf5d4b5f042a87",
+    "src/host_fast1933.py": "b11ad9c60395d6be2ec904021f55ee25c034909d79827662e6d4705b21c13fac",
+    "src/host_fusion1933.py": "3932c3bace86d0f5ca5e471a09e41dabcc821dd9280e2302f521c66c5877bb51",
+    "src/host_integration1933.py": "4d4ac11f203b569d387ad953c333d7122cc4c300952bf069d93437e3d0844dbc",
+    "src/host_metadata1933.py": "06972c937b40d1a2c558a69dcebb9170da91ed68f07f16d1265f3d980ed4b3f1",
+    "src/metadata-stubs/com/hiro/ulike/ShotContext1932.java": "9d7341d3fd1c71c63e6a5488d2b057c229a3e310b3339e165353049e758f085e",
+    "src/stock-seed1933-capture-hashes.tsv": "260d639e6b46ba0f27da21598160b123571255af2b3b4a4418a4a8cf549d69cb",
+    "src/stock-seed1933-capture.dex": "6b0c2a6af686d764a1bb3bab8ab4405b760c07f7ffdcbb0d645d9b2a72eb902a",
+    "src/tests/Benchmark1933.java": "33fd8953c3dbb8e00db61facc7c8d572177d0591051631f42e3ae4117eb58ee6",
+    "src/tests/Capture1933Test.java": "e9412688ae0a8e160bd283b104c89696061b70a4d2eba3987e54afe65c0c80eb",
+    "src/tests/Fast1933Test.java": "92edc3cced386f03be233e14f8f0d46346fe61fffbd1083e480903280d5c2d3c",
+    "src/tests/FusionCaptureBoundary1933Test.java": "7b6c2938d5cc2d7233ac891f561f0c70f2463ec1d4c80cbdaa621f71ee8a4b12",
+    "src/tests/FusionPixels1933Test.java": "2f363915dca791b61f7680a6fdb5d001971ec8bc540b2bf15a39d6159f26753a",
+    "src/tests/capture-fixtures/android/graphics/ImageFormat.java": "a218c151419bb6aac67ec8b5a47853208a2b752c5a113c1d745f16af7314da28",
+    "src/tests/capture-fixtures/android/graphics/Rect.java": "6e7ddcc315a2fe0eb1a18b7811f88600dc9da1e05336ba3ae99a9d5b74b1cdcf",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraCaptureSession.java": "354f1e96c4efcb19f360429605cd9b2bbae3ab8bfc65a4f8344754f2a903de26",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraCharacteristics.java": "83a4b193c8ff9b2675ba60e87d1e3a00b9550f9e50f82b8bda868ffb795a6a45",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraDevice.java": "a25f270d8e6677a9ed56f59a27044f73a77d3d2a10ca8139df19ce99e5ea7adc",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraMetadata.java": "45b2427e68d049084ac8c3237b7367767214765a7318baca7bf7474ca281e5fd",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureFailure.java": "fcb8e63343af7dbc40b1ba70bd5cef90e6461594920be0dffd3fafd5bbc40190",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureRequest.java": "1310cb1ededa9b3c4aaafc34e187b5ec9700d16673e39c628b19c46fd90911a7",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureResult.java": "80b1e8a9db258eb4c53d23f48d588ddfd9accee75739400c88bf2295431ceb0d",
+    "src/tests/capture-fixtures/android/hardware/camera2/TotalCaptureResult.java": "184280208cdd09cdfb0cbf4e53fbb296a017ec6d4b3817eda8a165852911673d",
+    "src/tests/capture-fixtures/android/hardware/camera2/params/RggbChannelVector.java": "b8adf5170f74c2468c3bd24e93809fdebf92e91159906b92087d97c644d0f461",
+    "src/tests/capture-fixtures/android/media/Image.java": "d620afc1e437c2489ee62b0b082c2c3699ce3a1b7aed4f65abbf1c566018f3f8",
+    "src/tests/capture-fixtures/android/media/ImageReader.java": "cd930fc1af000023c1c4f25a7321779926d69168c2f73f6d4cef3599e0a8fdd1",
+    "src/tests/capture-fixtures/android/os/Build.java": "52f99e2ef8d88eae190a19d0c9bba81abfff502c5f5f5b88ffa0e484b0e645b4",
+    "src/tests/capture-fixtures/android/os/Handler.java": "367197772ee40a39815ee913ada23136cba193fa2a57541c8c3ada370aa6cbf2",
+    "src/tests/capture-fixtures/android/os/SystemClock.java": "abcd9822be5feb5e81621a8704d870e03d8722b0757e675e20b82fc61c5aa33b",
+    "src/tests/capture-fixtures/android/util/Range.java": "7b0eb98f149a6a9c6152944f517fcad83f520337240fb67045f427517a389d50",
+    "src/tests/capture-fixtures/android/view/Surface.java": "eef05ae00db3872878ea76e16ded7349ad6cff787bcc88c7d8a0f30d10d6a0a1",
+    "src/tests/capture-fixtures/com/hiro/ulike/CaptureYuv.java": "31ff89b689bcfdc05c346c1874433835e8974242b93ef79854914753492b14d4",
+    "src/tests/capture-fixtures/com/hiro/ulike/ExitJobs185.java": "96b276bbce76cd6e8d724d972819fbd629576b3a60dd787e0eba50070f7fb962",
+    "src/tests/capture-fixtures/com/hiro/ulike/FusionPixels1933.java": "c0e55ba1c6567d82eacb12e05edc96ea02404c121ba056b34b8accabeea41d28",
+    "src/tests/capture-fixtures/com/hiro/ulike/OpticalZoom.java": "3214e0303cc2d792b1d0729a63533f5359b235db4c4e5b34ffab88d6688e4b4d",
+    "src/tests/capture-fixtures/com/hiro/ulike/PhotoDetail.java": "fe3d64f57c24d5bd8f19331af55df9d418227b9b61c225e389027d8066f031a2",
+    "src/tests/capture-fixtures/com/hiro/ulike/ShotContext1932.java": "fd196d949353727768dcf9ec326cf7e708ccd6bfdb9efbf3cf43e224d90fabf1",
+    "src/tests/capture-fixtures/com/ss/android/vesdk/TECameraVideoRecorder$60.java": "499e2a037d50a804c7fd7af5a5567cee66b7a28745e274abc55d73bd3f7e091a",
+    "src/tests/capture-fixtures/i/s/a/w/i.java": "749694431868fcce5e63bed0204e6b75a91ce9340328914c5e946b2948e0f93b",
+    "src/tests/capture-fixtures/i/s/a/w/m.java": "33ce970c6f64fcb45c68ef75f5a265a8c2e7b9d073e94012df4f1c5af1507706",
+    "src/tests/fast-fixtures/android/graphics/Bitmap.java": "0f9b3f70090da74886b6d35bb40a8a1b0a12e1ffea2e631cedf3c3d159db274a",
+    "src/tests/fast-fixtures/com/hiro/ulike/QualityPipeline1932.java": "073307e7b52ec7a640fd4f3cacda7f24903b18659faf7070b9d41ad4b39af5ce",
+    "src/tests/reference/QualityPixels1932.java": "d67433da7946fbafb83a6e1736c1860b9cc967f4f8afe7f104f7351c2adf107d",
+    "src/validate1933.py": "beacf2417bc5ada175bbf8b80113c6e36e7dfc910756428532f533b34ae0de75",
+    "manifest.json": "11afb455684108a1e1a0ba052dcb1dd12971eff09fa5c0dcc990146f432fc4d7"
+  }
+}
