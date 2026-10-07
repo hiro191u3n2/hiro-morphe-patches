@@ -1,0 +1,67 @@
+Q4 source audit — ULike 5.6.2(740), 2026-10-07
+Original APK SHA-256:
+f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d
+
+Observed SDK data:
+com.ss.android.medialib.model.FaceDetect.getPoints(), getPointVisibility(),
+getRect(), getScore(), getFaceExtInfo(). FaceExtInfo public fields:
+eyeLeftPoints, eyeRightPoints, eyeBrowLeftPoints, eyeBrowRightPoints,
+lipPoints, irisLeftPoints, irisRightPoints plus counts.
+
+Stock recorder delivers raw FaceDetectInfo through:
+com.ss.android.vesdk.TECameraVideoRecorder$38.onResult(
+ com.ss.android.medialib.model.FaceAttributeInfo,
+ com.ss.android.medialib.model.FaceDetectInfo).
+This callback has no image/timestamp/dimensions/crop/facing parameters. Its
+owner is TECameraVideoRecorder; it loops mFaceListeners. Reusing it as a mask
+for an independently captured, beauty-warped saved bitmap is not justified.
+No hook was installed and no preview face snapshot is retained.
+
+Potential separate-image SDK API (NOT USED / NOT CLAIMED WORKING):
+VEImage.init(int,int,boolean,boolean,VEImageInstanceType,VEImageCacheManager)
+VEImage.initOffScreenSurface(int,int)
+VEImage.regFaceInfoCallback(VEImageFaceInfoCallback)
+VEImage.addNewBitmapLayer(Bitmap,int,OnLayerAddListener)
+VEImage.requestRenderAlgorithm(int)
+VEImage.destory()
+VEImageFaceInfoCallback.onResult(VEImageFAttributeInfo,VEImageFDetectInfo)
+Lower-level TEImageInterface exposes createVEImage, getNativeHandler,
+addNewBitmapLayer(Bitmap,int,boolean), doRenderLayerQueue(boolean),
+destoryVEImage; TEImageALGCallbackInterface(handler) exposes
+registerFaceInfoUpload(FInfoCallback) / unRegisterFaceInfoUpload().
+VEImageInstanceTypeNormalPublish ordinal = 2.
+
+The original APK contains no actual application call sites to VEImage.init,
+VEImage.regFaceInfoCallback, or VEImage.requestRenderAlgorithm (only SDK
+synthetic/default wrappers; VESurfaceCallback calls initPreviewSurface).
+Native model availability/licensing, requestRenderAlgorithm flag semantics,
+callback geometry and offscreen renderer cancellation timing could not be
+established from this Java API. A secondary renderer was not introduced.
+TEVideoUtils.nativeFaceDetectScanPicture(Bitmap,boolean,String,String,String)
+returns VEFaceDetectCropResult, not per-feature landmark geometry.
+No effectsar.labcv FaceDetect API or Java semantic hair mask was found.
+
+Implemented conservative subset:
+FaceRegions1934 detects eye midpoint/distance/pose from the exact saved
+Bitmap using Android's bundled FaceDetector on an upright RGB_565 thumbnail
+(max edge 640 pixels, even width). FaceRegions1934Pixels makes feathered,
+conservative cheek/forehead eligibility plus broad eye/brow/mouth/outline
+protection. A color/detail veto can only reduce these regions; it cannot
+label skin-colored background outside a detected face as face skin.
+No facial prior for low confidence, profiles, overlap, unsupported native
+library, allocation/drawing failure, or no detected face. Same immutable
+Mask tracks exact rotation/crop/resample pixel-center mapping.
+
+Not implemented / must not claim:
+- Precise semantic skin/eye/lip/hair parsing.
+- Hair segmentation or precise lip/eyebrow contours from a saved-image model.
+- SDK landmarks bound to exact still-image timestamp/crop/beauty transform.
+- Android/Galaxy real-world FaceDetector accuracy or timing measured.
+
+Host verification:
+host_faces1934.test(root,work): actual production mask/transform functions,
+scripted Android detector and bitmap boundaries. Tests cover detector
+failures, owned-image recycle, no source recycle, budgeted thumbnail,
+rotation/crop/scale coordinates, multiple/overlapping/invalid faces,
+background exclusion and detail/chroma veto. This does not substitute for
+real device detector or photo quality validation.
