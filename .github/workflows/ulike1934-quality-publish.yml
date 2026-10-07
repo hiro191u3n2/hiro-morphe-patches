@@ -1,4 +1,4 @@
-name: Verify and publish ULike1934 quality improvements with exact baseline URL
+name: Verify and publish ULike1934 quality improvements with archive diagnostics
 on:
   push:
     branches: [main]
@@ -74,6 +74,17 @@ jobs:
         run: |
           set -euo pipefail
           python3 releases/ulike1934-quality/src/finalize1934.py --dist .ci-ulike1934/dist --source releases/ulike1934-quality/src --validation releases/ulike1934-quality/evidence/validation.json 2>&1 | tee .ci-ulike1934/finalize.log
+      - name: Compare source archive entries with reviewed content
+        shell: bash
+        run: |
+          python3 - <<'PYARCHIVE'
+          import hashlib, json, pathlib, zipfile, zlib
+          expected = json.loads(pathlib.Path('releases/ulike1934-quality/publication/source-zip-entries.json').read_text())
+          with zipfile.ZipFile('.ci-ulike1934/dist/ULike_v1.9.34_sources_and_QA.zip') as archive:
+              actual = {name: {'bytes': len(data := archive.read(name)), 'sha256': hashlib.sha256(data).hexdigest()} for name in archive.namelist()}
+          differences = {name: {'expected': expected.get(name), 'actual': actual.get(name)} for name in sorted(expected.keys() | actual.keys()) if expected.get(name) != actual.get(name)}
+          print(json.dumps({'zlib': zlib.ZLIB_RUNTIME_VERSION, 'source_archive_entry_differences': differences}, ensure_ascii=False, indent=2))
+          PYARCHIVE
       - name: Verify reviewed assets, QA contract and complete resource delta
         shell: bash
         run: |
@@ -101,5 +112,16 @@ jobs:
             .ci-ulike1934/build/*.txt
             .ci-ulike1934/tools/
           retention-days: 30
+          compression-level: 1
+          include-hidden-files: true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike1934-source-archive-diagnostics
+          path: |
+            .ci-ulike1934/dist/ULike_v1.9.34_sources_and_QA.zip
+            .ci-ulike1934/dist/QA_ULike_v1.9.34.json
+            .ci-ulike1934/dist/SHA256SUMS.txt
+          retention-days: 7
           compression-level: 1
           include-hidden-files: true
