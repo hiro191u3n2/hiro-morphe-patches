@@ -1,0 +1,435 @@
+{
+  "schema": "oneback163-qa-v1",
+  "result": "PASS",
+  "blocking_findings": [],
+  "review_date_utc": "2026-10-07",
+  "bundle_version": "1.0.163",
+  "patch_version": "1.0.0",
+  "patch_name": "戻る1回で終了・履歴削除",
+  "supported_packages": [
+    "com.ss.android.ugc.trill",
+    "com.zhiliaoapp.musically",
+    "com.instagram.android",
+    "com.twitter.android",
+    "ctrip.english"
+  ],
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.163.mpp": {
+      "bytes": 17353320,
+      "sha256": "d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4"
+    },
+    "OneBack_Exit_NoRecents_v1.0.0.mpp": {
+      "bytes": 34425,
+      "sha256": "e14fc97986eb581d3078aca0b800b549cb4015d9914e5c6234abbcabc5fcc568"
+    }
+  },
+  "patch_default_enabled": true,
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "original_apk_apply_tested_definition": "Global assertion means all four apps were tested using their unmodified original APKs. This is false: Trip.com original input and a previously patched X input were tested; TikTok/Instagram used original synthetic fixtures only. See per-app coverage.",
+  "all_four_original_apks_tested": false,
+  "existing_resource_entries_unchanged": true,
+  "existing_loader_classes_unchanged": true,
+  "standalone_and_bundle_new_entries_identical": true,
+  "runtime_host_tests_passed": true,
+  "synthetic_apply_tests_passed": true,
+  "validation_coverage": {
+    "runtime_host": {
+      "result": "PASS",
+      "cases": 20,
+      "assertions": 137,
+      "compiled_against_android_sdk": 36,
+      "same_production_runtime_bytecode_tested": true
+    },
+    "dex_transform_selftests": {
+      "result": "PASS",
+      "categories": 12,
+      "assertions": 2382
+    },
+    "synthetic_integration": {
+      "result": "PASS",
+      "runs": 10,
+      "assertions": 74320,
+      "scope": "Five exact target packages, standalone and combined MPP, actual Morphe CLI patch/rebuild and independent output verification",
+      "report": {
+        "file": "src/validation/synthetic-validation-final.json",
+        "bytes": 25027,
+        "sha256": "424aa9ac312dc2f7ad73553a2a442f445af66b1e8c0734745513e9ab7e66cf1a"
+      }
+    },
+    "existing_bundle": {
+      "baseline_version": "1.0.162",
+      "loader_classes_canonically_unchanged": 246,
+      "resource_entries_byte_identical": 58,
+      "new_patch_classes": 7,
+      "new_runtime_classes": 19
+    },
+    "TikTok": {
+      "packages": [
+        "com.ss.android.ugc.trill",
+        "com.zhiliaoapp.musically"
+      ],
+      "coverage": "synthetic-only",
+      "unmodified_original_apk_apply_tested": false,
+      "android_device_tested": false
+    },
+    "Instagram": {
+      "package": "com.instagram.android",
+      "coverage": "synthetic-only",
+      "unmodified_original_apk_apply_tested": false,
+      "android_device_tested": false
+    },
+    "X": {
+      "result": "PASS",
+      "package": "com.twitter.android",
+      "version": "12.19.1-release.0",
+      "input_kind": "Previously patched X APK supplied in prior work; not an unmodified official APK",
+      "unmodified_original_apk_apply_tested": false,
+      "android_device_tested": false,
+      "applied_patches": [
+        "戻る1回で終了・履歴削除"
+      ],
+      "patching_and_rebuilding_passed": true,
+      "input": {
+        "bytes": 186795155,
+        "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae"
+      },
+      "output": {
+        "bytes": 186784949,
+        "sha256": "79443fd84a001dfd38bb549a1adf9e4e16b13d4bbe6b85beeadbcea268d47da5"
+      },
+      "dex_files_valid": 18,
+      "original_classes": 241847,
+      "emitted_classes": 241866,
+      "missing_original_classes": 0,
+      "added_classes": 19,
+      "manifest_assertions": 408,
+      "activity_callback_flags_enabled": 396,
+      "application_callback_flag_enabled": true,
+      "identity_sdk_and_other_manifest_preserved": true,
+      "evidence": [
+        {
+          "file": "src/validation/x-final-apply.json",
+          "bytes": 248,
+          "sha256": "cf4869783da449418a7e24a23781ca01622a08f662f352b17d375a50ec5ecfee"
+        },
+        {
+          "file": "src/validation/x-final-manifest-audit.json",
+          "bytes": 128636,
+          "sha256": "483c01abee953f1135c5548cd0ddd23fb480d1b2f3d35145789f6a2bfa2ae72d"
+        },
+        {
+          "file": "src/validation/x-final-dex-inventory.json",
+          "bytes": 65595,
+          "sha256": "538d820fb625642ab12b46e6ee7b8a51c911e957989f8a5fd1414dace5512803"
+        },
+        {
+          "file": "src/validation/x-final-entry-audit.json",
+          "bytes": 1195,
+          "sha256": "cfde14f276ba620d49cb65673b7a094d2c572aa6e75436919fc055bda6a0ef88"
+        },
+        {
+          "file": "src/validation/x-final-dex-audit.json",
+          "bytes": 1369,
+          "sha256": "17afc2919cb4a01dc26c6eb98d9c44505122a7dee46c103096ed906625cae684"
+        }
+      ],
+      "unchanged_other_apk_entries": 7389,
+      "unchanged_native_library_entries": 33,
+      "dex_semantic_audit_assertions": 1978177,
+      "unchanged_classes": 241587,
+      "reviewed_modified_classes": 260,
+      "public_hooks": 398,
+      "resolved_runtime_calls": 515,
+      "audit_version_note": "X passed with the 2233-assertion auditor including exact GOTO-width equivalence. The final 2382-assertion auditor adds only a narrowly constrained Trip payload-padding line-event normalization; no patch/runtime change and no invalidation of the earlier X PASS."
+    },
+    "Trip.com": {
+      "result": "PASS",
+      "package": "ctrip.english",
+      "version": "8.54.2",
+      "input_kind": "User-provided original split APK set merged using the included MergeSplitInputs.java",
+      "unmodified_original_apk_apply_tested": true,
+      "android_device_tested": false,
+      "applied_patches": [
+        "戻る1回で終了・履歴削除"
+      ],
+      "patching_and_rebuilding_passed": true,
+      "input": {
+        "bytes": 90559754,
+        "sha256": "bced821428077c4f04dd5f5626a43f60c21564165e7f6a5fc17c928b7ede2bec"
+      },
+      "output": {
+        "bytes": 90992472,
+        "sha256": "e30fc00fdcb1b50f2c95a0f8c82c1519f90069509170b43ec4eb09aace9c7089"
+      },
+      "dex_files_valid": 10,
+      "original_classes": 85229,
+      "emitted_classes": 85248,
+      "missing_original_classes": 0,
+      "added_classes": 19,
+      "manifest_assertions": 245,
+      "activity_callback_flags_enabled": 233,
+      "application_callback_flag_enabled": true,
+      "identity_sdk_and_other_manifest_preserved": true,
+      "evidence": [
+        {
+          "file": "src/validation/trip-serial-apply.json",
+          "bytes": 231,
+          "sha256": "aa351b801d2c57f7a7ff9e6b96c4afa9e4473729fc57194069695a455f850ac4"
+        },
+        {
+          "file": "src/validation/trip-serial-manifest-audit.json",
+          "bytes": 76249,
+          "sha256": "cfca1a89582d3569081fc788a0b6033bfb14471836ec4f9ed78291c8317a6499"
+        },
+        {
+          "file": "src/validation/trip-serial-dex-inventory.json",
+          "bytes": 35943,
+          "sha256": "c66e66c8a9d8ed150a50be5d2e99f8f07702fc54b9330577e4badb5e3c08b6b4"
+        },
+        {
+          "file": "src/validation/trip-serial-entry-audit.json",
+          "bytes": 979,
+          "sha256": "d273d75fd4299553be699a64ec0ede44cb458411e724294e2ebfc428a66c5292"
+        },
+        {
+          "file": "src/validation/trip-serial-dex-audit.json",
+          "bytes": 1656,
+          "sha256": "d73d47d200c4ae33d585ff043f2eb51772f322977000fbb7bed9b9fe2c304735"
+        }
+      ],
+      "unchanged_other_apk_entries": 8429,
+      "unchanged_native_library_entries": 36,
+      "dex_semantic_audit_assertions": 8111718,
+      "unchanged_classes": 84428,
+      "reviewed_modified_classes": 801,
+      "public_hooks": 993,
+      "resolved_runtime_calls": 1110,
+      "desktop_build_settings": {
+        "morphe_mode": "FULL",
+        "java_vm_argument": "-XX:ActiveProcessorCount=1"
+      }
+    },
+    "Trip.com_existing_patch_coexistence": {
+      "result": "PASS",
+      "package": "ctrip.english",
+      "version": "8.54.2",
+      "input_kind": "Same merged original Trip.com input; existing Trip patch plus new OneBack patch",
+      "unmodified_original_apk_apply_tested": true,
+      "android_device_tested": false,
+      "applied_patches": [
+        "ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）",
+        "戻る1回で終了・履歴削除"
+      ],
+      "patching_and_rebuilding_passed": true,
+      "input": {
+        "bytes": 90559754,
+        "sha256": "bced821428077c4f04dd5f5626a43f60c21564165e7f6a5fc17c928b7ede2bec"
+      },
+      "output": {
+        "bytes": 90993357,
+        "sha256": "a3d180892ac50c1ed7ec8a42d3dd034cca47233d72e8f9907811e59aa8d72422"
+      },
+      "dex_files_valid": 10,
+      "original_classes": 85229,
+      "emitted_classes": 85250,
+      "missing_original_classes": 0,
+      "added_classes": 21,
+      "manifest_assertions": 245,
+      "activity_callback_flags_enabled": 233,
+      "application_callback_flag_enabled": true,
+      "identity_sdk_and_other_manifest_preserved": true,
+      "evidence": [
+        {
+          "file": "src/validation/trip-combined-serial-apply.json",
+          "bytes": 329,
+          "sha256": "b925d7fcc6d15dc0892c83184e46a72cc53e5cf5b85a8930fef16e591a1e3f16"
+        },
+        {
+          "file": "src/validation/trip-combined-serial-manifest.json",
+          "bytes": 76250,
+          "sha256": "4d6093161c54dc277819fe5ce08b1eb652e1b4071e0f19258e87f0945c5b9d75"
+        },
+        {
+          "file": "src/validation/trip-combined-serial-dex-inventory.json",
+          "bytes": 37955,
+          "sha256": "d917a191c1776ced9d08f92429f6edd46a8dfdd1f154c70893e2a7370fbb4ca8"
+        }
+      ],
+      "desktop_build_settings": {
+        "morphe_mode": "FULL",
+        "java_vm_argument": "-XX:ActiveProcessorCount=1"
+      },
+      "scope": "Successful coexistence application/rebuild, all raw DEX headers/checksums/class definitions and complete Manifest verification. Full method-level comparison is for the OneBack-only candidate; existing Trip method edits are outside the OneBack-only transform.",
+      "additional_existing_trip_classes": [
+        "Lapp/hiro/tripcom/extension/MyPlanBundleGuard;",
+        "Lapp/hiro/tripcom/extension/MyPlanPreparationGuard;"
+      ]
+    }
+  },
+  "build_evidence": {
+    "file": "src/validation/desktop-build-evidence.json",
+    "bytes": 12923,
+    "sha256": "9bdf41d7f96b39807e54a4583955de8667c867e64b9675c873e80588eabcb4ad"
+  },
+  "source_inputs": {
+    "build.py": {
+      "bytes": 21365,
+      "sha256": "baa8fe2a52c357a67c8ca5e3abcde4fb35a6ecaa8790f3b91ce790ed9feee141"
+    },
+    "patch/OneBackPatch.java": {
+      "bytes": 23196,
+      "sha256": "760d158c2c234507cf284578ae6ca880410dc01d46878ea51a5e071cfb311a6f"
+    },
+    "runtime/OneBackExit.java": {
+      "bytes": 26971,
+      "sha256": "a9da21c2605f36ee1cdbf33ae3a240eceaddcde34d9c557dd030f932b4a46309"
+    },
+    "test-dex/DexAudit.java": {
+      "bytes": 73959,
+      "sha256": "6faa8f2411f60e08f0ea6b1f3f31962465a0fc65c0fca6995ca7ab7d94913f0c"
+    },
+    "test-dex/Fixtures.java": {
+      "bytes": 11591,
+      "sha256": "8d9701fe2cc4530d6ebd2652d678682221df2ed5a19d0d1d764beff07603e052"
+    },
+    "test-dex/MergeSplitInputs.java": {
+      "bytes": 964,
+      "sha256": "6a33e8c94dc3bb96d1705bb45cd4524b5242463a45f9625b4ef5f0b2223fe1e2"
+    },
+    "test-runtime/OneBackExitHostTest.java": {
+      "bytes": 28351,
+      "sha256": "eaa7a0f0380f1f9bce53c0f3fb6f4ff74bea7897f897f3402fe08f765ac42b62"
+    },
+    "test-stubs/android/app/Activity.java": {
+      "bytes": 1443,
+      "sha256": "4cb649c177b1d2a7920f17d2bcbce07bfde29bdad3a968a734f50f7005f15a63"
+    },
+    "test-stubs/android/app/ActivityManager.java": {
+      "bytes": 1783,
+      "sha256": "d1a7fdf337f0ec0a83ef31de5f876a5f55d856a13b646189fc73fba63aee6fdf"
+    },
+    "test-stubs/android/app/Application.java": {
+      "bytes": 2084,
+      "sha256": "fcea9409e85a4f6bebee176ee6c66cdc3977cc9407793fb8b554d1f9bec1e205"
+    },
+    "test-stubs/android/app/Dialog.java": {
+      "bytes": 820,
+      "sha256": "b386cef684d6f5811660b48d2795b0f1cf23e515790d0fdf487f7cd5a619ca6e"
+    },
+    "test-stubs/android/content/ComponentName.java": {
+      "bytes": 389,
+      "sha256": "59e43fd3b29bdb87045d402d15490a78ecba4810a597b8fb40146a4c0e294750"
+    },
+    "test-stubs/android/content/Context.java": {
+      "bytes": 617,
+      "sha256": "9ddf80c36c066c460a01fc0822ba2b8a687bc56d5086563bc84c7a71efeac7e5"
+    },
+    "test-stubs/android/content/ContextWrapper.java": {
+      "bytes": 504,
+      "sha256": "92cbd842020563fda4945a1c1d50930f8a12f07f9f974a49c64f24b5f2910a8e"
+    },
+    "test-stubs/android/content/Intent.java": {
+      "bytes": 404,
+      "sha256": "d944fbd8c0e1930bfe9eca57f6647db4362835b57f2419362412874359e7cd29"
+    },
+    "test-stubs/android/os/Build.java": {
+      "bytes": 123,
+      "sha256": "c874d38fc8241e643a3eeed95bf6d4517c503a3460aa9be321ff8bee7e05649f"
+    },
+    "test-stubs/android/os/Bundle.java": {
+      "bytes": 44,
+      "sha256": "279a7e06c007b20b9d07d820087d08169d5e86fd86d40a33741216413902a5cf"
+    },
+    "test-stubs/android/os/Handler.java": {
+      "bytes": 749,
+      "sha256": "9ff069808ba1c2e9ca394df8c341d6b38dca1232b4dd678a9110949fe0df6a5e"
+    },
+    "test-stubs/android/os/Looper.java": {
+      "bytes": 319,
+      "sha256": "f931c2d5fe9c8536ed6b585e14c634b1239c22cf73cb1e00734c5d482ba97f04"
+    },
+    "test-stubs/android/view/KeyEvent.java": {
+      "bytes": 747,
+      "sha256": "f67f5e16dd7dd746d56076bfeb6f121e5da2fa40459c0d4505b1cc3c67a99b81"
+    },
+    "test-stubs/android/view/View.java": {
+      "bytes": 2147,
+      "sha256": "23a7a9c256d182aac6d44f8b7d3c6830e099249e51a994dfe5f94b669e4e6be5"
+    },
+    "test-stubs/android/view/ViewTreeObserver.java": {
+      "bytes": 970,
+      "sha256": "6d3d869006ff0c94d0e53d6d63d0601604265a25fa42ad70262afcc6ddd5546f"
+    },
+    "test-stubs/android/view/Window.java": {
+      "bytes": 858,
+      "sha256": "cdb1d869d9d51a6df70263bb62e2ec73073b07de2e4c8a8d461b960626b4a50f"
+    },
+    "test-stubs/android/view/inspector/WindowInspector.java": {
+      "bytes": 562,
+      "sha256": "e3c51c74e568cc1a364bd0440be3f362dc52af984358158a4daadc9c89038189"
+    },
+    "test-stubs/android/window/FakeDispatcher.java": {
+      "bytes": 1494,
+      "sha256": "fad5a6d6a27d924775c3e81551f913845e07449089de97613e50c91139138a63"
+    },
+    "test-stubs/android/window/OnBackInvokedCallback.java": {
+      "bytes": 89,
+      "sha256": "e4907fdb3e7873b798bb4d94d8417584acaaea92f298bacc543de91aa7709bf7"
+    },
+    "test-stubs/android/window/OnBackInvokedDispatcher.java": {
+      "bytes": 295,
+      "sha256": "6de7a05f5d36f5144e632c97514206cd6b1f96adc8dd0bd9e8b9cbf774f12368"
+    }
+  },
+  "reviewed_encoding_equivalence": {
+    "meaning": "All executable instruction operands, branch targets, exception handlers, class/member metadata and ordered debug event values are compared. Only independently verified representation changes are accepted. Existing 246 loader classes use exact canonical equality.",
+    "accepted_representations": [
+      "Exact const-string/const-string-jumbo string and register equivalence with address relocation",
+      "Exact GOTO/GOTO_16/GOTO_32 target equivalence; conditional opcode changes rejected",
+      "Debug offsets inside an instruction floor to that instruction start with value/order preserved",
+      "Same protected-range exception handler entries regrouped without changing type/order/targets",
+      "Unreachable, untargeted, unprotected payload alignment NOPs only",
+      "LineNumber on such alignment NOP can move forward only to the same immediately following payload"
+    ],
+    "evidence": [
+      {
+        "file": "src/validation/x-dex-reencoding-analysis.json",
+        "bytes": 2582,
+        "sha256": "62c7cf3a01efde7a44bc37402c1e0777a7e4e395dcea41045b88a52e63f8e380"
+      },
+      {
+        "file": "src/validation/trip-dex-normalization-analysis.json",
+        "bytes": 5976,
+        "sha256": "3b146951975ca4ff0a6bef5a73d51ba4e9fb167a1b885e5c0a7a06d1c6b3f96b"
+      }
+    ]
+  },
+  "discarded_desktop_attempts": {
+    "result": "EXCLUDED_FROM_FINAL_PASS",
+    "mpp_code_changed_to_bypass_issue": false,
+    "parallel_full_dex_header_failure": "Some desktop parallel FULL rebuilds produced DEX entries with all-zero 112-byte headers while CLI reported success. Independent raw DEX validation rejected those APKs. They are not release assets.",
+    "historical_combined_diagnostic": {
+      "file": "src/validation/reproduce-summary.json",
+      "bytes": 2751,
+      "sha256": "a43d5ae57b8ff5611d98987a1cd51d57682689abf2011ef733b022e75fb658f7"
+    },
+    "manifest_eof_attempt": "An initial combined attempt reported a truncated Manifest while the new dependency read it. It did not recur with the same inputs/order. No speculative patch change was made.",
+    "final_resolution": "Same reviewed MPP rebuilt with ActiveProcessorCount=1. OneBack-only and existing-Trip+OneBack final candidates have valid DEX headers/checksums, all original classes retained and valid Manifest; OneBack-only also passed full semantic audit.",
+    "root_cause_established": false,
+    "android_manager_reproduction_tested": false
+  },
+  "limitations": [
+    "No Android physical-device installation or Back/Recents interaction test was performed.",
+    "TikTok and Instagram coverage is synthetic application only; X input was previously patched.",
+    "Desktop parallel FULL DEX writer issue is documented; single-CPU final candidates passed. Android Manager behavior remains untested.",
+    "Morphe Manager device update-badge visibility is not verified.",
+    "Publishing the MPP does not install or repatch the four apps on the phone."
+  ],
+  "distribution": {
+    "application_apk_or_apks_included": false,
+    "third_party_disassembly_included": false,
+    "signing_keys_included": false,
+    "artifacts": "Two MPPs, authored source, review records, release notes and checksums"
+  }
+}
