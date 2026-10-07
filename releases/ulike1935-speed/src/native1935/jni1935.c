@@ -7,7 +7,9 @@ JNIEXPORT jboolean JNICALL JNINAME(packNative)(JNIEnv *env,jclass cls,
     jobject v,jint vs,jint vl,jint vr,jint vp,jint width,jint height,jbyteArray out) {
     (void)cls;
     if(!y || !u || !v || !out || width<2 || height<2 || (width&1) || (height&1))return JNI_FALSE;
-    int64_t size=(int64_t)width*height*3/2;
+    int64_t pixels=(int64_t)width*height;
+    if(pixels>1431655754)return JNI_FALSE; /* bound before multiplying by three */
+    int64_t size=pixels+pixels/2;
     if(size>0x7ffffff7 || (*env)->GetArrayLength(env,out)<size)return JNI_FALSE;
     if(!speed1935_plane_valid(ys,yl,yr,yp,width,height) || !speed1935_plane_valid(us,ul,ur,up,width/2,height/2) || !speed1935_plane_valid(vs,vl,vr,vp,width/2,height/2))return JNI_FALSE;
     if((*env)->GetDirectBufferCapacity(env,y)<yl || (*env)->GetDirectBufferCapacity(env,u)<ul || (*env)->GetDirectBufferCapacity(env,v)<vl)return JNI_FALSE;
