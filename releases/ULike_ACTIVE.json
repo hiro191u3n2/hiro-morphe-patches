@@ -1,21 +1,21 @@
 {
-  "ulike_version": "1.9.32",
-  "bundle_version": "1.0.165",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.32.mpp",
-  "source_sha256": "010a8dcaa1ba37467fafe92183d19930f59f87dea3e93dfe94cc84825c80b2d0",
-  "source_release": "ulike-v1.9.32",
-  "active_release": "ulike-v1.9.32",
-  "base_ulike_version": "1.9.31",
+  "ulike_version": "1.9.33",
+  "bundle_version": "1.0.166",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.33.mpp",
+  "source_sha256": "1a7c03aca7f9260b22f4a80cf7d17dde44408ec52e5237cf1b2633c1473d10ce",
+  "source_release": "ulike-v1.9.33",
+  "active_release": "ulike-v1.9.33",
+  "base_ulike_version": "1.9.32",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "646a4e78e1905c2172d50205c4058a16d0ef76d9bbfcbd8b888f7dc34cee678e",
+  "base_source_sha256": "010a8dcaa1ba37467fafe92183d19930f59f87dea3e93dfe94cc84825c80b2d0",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "Implement requested quality candidates1,2,8,12,15,20 from approved ULike1.9.31. Preserve current camera lifecycle and all other apps in the exact latest bundle baseline.",
-  "future_ulike_base": "Use ULike1.9.32 from approved1.8.8 lineage. Preserve the six quality improvements and existing front/rear preview recovery, camera-facing memory and UI gating. Do not restore withdrawn1.9.17/10bit or removed diagnostics.",
+  "reason": "Implement requested candidates47,50,60 from approved ULike1.9.32. Preserve existing quality processing, camera startup/recovery and all other apps in the exact latest bundle baseline.",
+  "future_ulike_base": "Use ULike1.9.33 from approved1.8.8 lineage. Preserve same-exposure multiframe denoise, motion-aware dark-scene fusion, existing six quality improvements, front/rear preview recovery, camera-facing memory and UI gating. Do not restore withdrawn1.9.17/10bit or removed diagnostics.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
-  "release_status": "quality_update_device_unverified",
+  "release_status": "burst_quality_update_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": true,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -44,7 +44,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.164",
+  "base_bundle_version": "1.0.165",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": false,
@@ -52,7 +52,7 @@
   "swiftkey183_preserved": true,
   "rear_lens_ui_device_fix_confirmed": false,
   "native_methods_tsv_byte_identical": false,
-  "camera_lifecycle_byte_identical": true,
+  "camera_lifecycle_byte_identical": false,
   "provider_lifecycle_byte_identical": true,
   "black_bar_gesture_byte_identical": true,
   "rear_preview_retry_logic_unchanged": true,
@@ -63,12 +63,10 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    1,
-    2,
-    8,
-    12,
-    15,
-    20
+    47,
+    50,
+    60
   ],
-  "baseline_other_apps_preserved": true
+  "baseline_other_apps_preserved": true,
+  "camera_startup_recovery_byte_identical": true
 }
