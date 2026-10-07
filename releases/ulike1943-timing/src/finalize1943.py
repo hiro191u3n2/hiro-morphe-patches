@@ -177,7 +177,7 @@ def main():
     build_inputs = {'schema': 'ulike1943-build-inputs-v1', **{key: reviewed[key] for key in BUILD_INPUT_KEYS if key in reviewed}}
     sources['manifest.json'] = (json.dumps(build_inputs, ensure_ascii=False, indent=2) + '\n').encode()
     qa['source_sha256'] = {name: sha(data) for name, data in sources.items()}
-    qa_path.write_text(json.dumps(qa, ensure_ascii=False, indent=2) + '\n')
+    qa_path.write_text(json.dumps(qa, ensure_ascii=False, indent=2, sort_keys=True) + '\n')
     (args.dist / 'RELEASE_NOTES.txt').write_text(release_notes(qa))
     package = dict(sources)
     package['README.md'] = (args.source.parent / 'README.md').read_bytes()
