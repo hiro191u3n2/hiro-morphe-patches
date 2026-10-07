@@ -1,0 +1,1 @@
+package android.os; import java.util.*; public class Handler { public final List<Runnable> queue=new ArrayList<>(); public long lastDelay; public boolean postDelayed(Runnable task,long delay){lastDelay=delay;queue.add(task);return true;} public void drain(){List<Runnable> q=new ArrayList<>(queue);queue.clear();for(Runnable r:q)r.run();} }
