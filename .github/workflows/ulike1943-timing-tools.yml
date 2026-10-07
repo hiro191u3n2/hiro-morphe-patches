@@ -1,0 +1,157 @@
+name: Stage pinned ULike1943 timing verification tools
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1943-timing-tools.yml']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  stage:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike1942-noise-verified-publication
+          run-id: 37646826925
+          github-token: ${{ github.token }}
+          path: timing-prior
+      - name: Prepare pinned local verification bundle
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,hashlib,json,os,shutil,tarfile,urllib.request
+          root=pathlib.Path('timing-transfer');root.mkdir()
+          tools=root/'tools';tools.mkdir()
+          pins={
+            'morphe.jar':'82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+            'android.jar':'4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b',
+            'd8.jar':'305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5'}
+          for name,digest in pins.items():
+              found=list(pathlib.Path('timing-prior').rglob(name))
+              assert len(found)==1,name
+              assert hashlib.sha256(found[0].read_bytes()).hexdigest()==digest,name
+              shutil.copyfile(found[0],tools/name)
+          inputs=root/'input';inputs.mkdir()
+          for name,digest in {
+            'ULike_HQ_Texture_Online_v1.9.42.mpp':'b854a3b27d53231b30a5a9b21805c143e0f55a6f4bfa1616366fa58bbe4a7ee0',
+            'Hiro_Morphe_Patches_v1.0.175.mpp':'d8cf06ca8d6e8f3913e94666496d194e19d87f27b7395771aedba3b744ec1dcc'}.items():
+              url='https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/c43b78673d2d45dfb16174737faea614baf85f9c/downloads/'+name
+              data=urllib.request.urlopen(url,timeout=90).read()
+              assert hashlib.sha256(data).hexdigest()==digest,name
+              (inputs/name).write_bytes(data)
+          jdk=pathlib.Path(os.environ['JAVA_HOME']).resolve()
+          with tarfile.open('timing-tools.tar.gz','w:gz',compresslevel=3) as tar:
+              tar.add(root,arcname='.')
+              tar.add(jdk,arcname='jdk')
+          data=pathlib.Path('timing-tools.tar.gz').read_bytes()
+          pieces=pathlib.Path('timing-pieces');pieces.mkdir()
+          chunk=20*1024*1024
+          out=[]
+          for i,start in enumerate(range(0,len(data),chunk)):
+              name=f'part{i:03d}'
+              piece=data[start:start+chunk];(pieces/name).write_bytes(piece)
+              out.append({'name':name,'bytes':len(piece),'sha256':hashlib.sha256(piece).hexdigest()})
+          assert len(out)<=12
+          (pieces/'manifest.json').write_text(json.dumps({'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest(),'pieces':out},indent=2)+'\n')
+          print(json.dumps({'transfer_bytes':len(data),'chunks':len(out)}))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1943-timing-tool-manifest
+          path: timing-pieces/manifest.json
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part000') != '' }}
+        with:
+          name: ulike1943-timing-tools-000
+          path: timing-pieces/part000
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part001') != '' }}
+        with:
+          name: ulike1943-timing-tools-001
+          path: timing-pieces/part001
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part002') != '' }}
+        with:
+          name: ulike1943-timing-tools-002
+          path: timing-pieces/part002
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part003') != '' }}
+        with:
+          name: ulike1943-timing-tools-003
+          path: timing-pieces/part003
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part004') != '' }}
+        with:
+          name: ulike1943-timing-tools-004
+          path: timing-pieces/part004
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part005') != '' }}
+        with:
+          name: ulike1943-timing-tools-005
+          path: timing-pieces/part005
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part006') != '' }}
+        with:
+          name: ulike1943-timing-tools-006
+          path: timing-pieces/part006
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part007') != '' }}
+        with:
+          name: ulike1943-timing-tools-007
+          path: timing-pieces/part007
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part008') != '' }}
+        with:
+          name: ulike1943-timing-tools-008
+          path: timing-pieces/part008
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part009') != '' }}
+        with:
+          name: ulike1943-timing-tools-009
+          path: timing-pieces/part009
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part010') != '' }}
+        with:
+          name: ulike1943-timing-tools-010
+          path: timing-pieces/part010
+          retention-days: 3
+          compression-level: 0
+      - uses: actions/upload-artifact@v4
+        if: ${{ hashFiles('timing-pieces/part011') != '' }}
+        with:
+          name: ulike1943-timing-tools-011
+          path: timing-pieces/part011
+          retention-days: 3
+          compression-level: 0
