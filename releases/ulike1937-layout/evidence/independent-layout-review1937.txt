@@ -1,0 +1,36 @@
+{
+  "scope": "Independent read-only review of final preview coordinator, lifecycle and geometry helpers against actual applied 1.9.36 APK",
+  "device_test": false,
+  "baseline_apk": "validate1936-s3b/single/patched.apk",
+  "reviewed_sources": {
+    "PreviewLayout1922.java": "98a2ff63348e3370a307fe41a5febfecbe75f500c61acb956cd23d8cece1d5e6",
+    "LayoutLifecycle1937.java": "c64b0f96a4a89b47d19721db19118359db311b1a2d7313eb1173d54b7335334f",
+    "LayoutHooks1937.java": "14de44dba3981cc60fa24cc76e20aa62eea783a4efeaf79e360207ddfc6ab892",
+    "LayoutGeometry1937.java": "b76c6fc70bfcc25b2989de36a77c4c84a8d0e2333956af054398e1a7cb663079",
+    "GeometryHooks1937.java": "c043e7990650ac84265be691097ae2a05f2cbbf3f9c3a8e6d182f3c7623fb6ed",
+    "VerifyGeometryAbi1937.java": "c3383858ad82afefea83bf424df3c216ed2adcf92d43305defde052ff0355668"
+  },
+  "independent_tests": {
+    "core_assertions": 282,
+    "lifecycle_assertions": 57,
+    "baseline_stall_viewport_height": 811,
+    "expected_viewport_height": 989,
+    "geometry_assertions": 99
+  },
+  "resolved_findings": [
+    "Initial strict transition-generation gate could suppress required 200ms camera display/focus geometry delivery after first measurement or inset changes. Attachment ownership gate plus current native ratio/grid now permits fresh delivery.",
+    "Settled rectangle could be cached before a late native V listener registered. Native successful-listener-add hook now schedules weak, current-generation delivery on the UI thread.",
+    "Native o0 void return did not prove scene/display preparation existed. Final cache requires scene/property, measured PreviewView and supplier, refuses queued manager mode and invalid/empty rectangles, and snapshots helper.v along with preview dimensions and weak identities."
+  ],
+  "review_notes": [
+    "Native shade.b() dispatches static V; sole CameraShadeView$c implementation t$a reports current viewport through t.l to the camera preview-ready state. It does not call shade.m directly.",
+    "Native animator final callback calls shade.b then animateListener, with an additional 50ms callback; transition-specific 50ms delivery remains generation guarded.",
+    "Started animator watchdog uses original deadline; repeated drawing/first-frame callbacks do not renew its deadline. Exact stale animator and view generations cannot complete the current transition.",
+    "Native ratio mapping 0/1/2/3/other to FULL/3_4/(1_1 or ROUND)/9_16/FULL matches lifecycle guard.",
+    "Geometry hooks preserve native O call order, invoking beginDelivery immediately before o0 and markDelivery immediately after. Pre/post comparison rejects synchronous renderer, scene/property, generation or RectF changes.",
+    "Empty and nonfinite RectF never populate a success cache or satisfy equality; original native geometry update remains enabled for those sentinels.",
+    "Native readiness facts independently traced: o0 obtains scene from helper.r.g(helper.b); registry is ConcurrentHashMap.get; absent scene skips the RectF property update. Manager.E returns when PreviewView is absent and only queues delivery when manager.s is true."
+  ],
+  "geometry_followup": "Resolved by final readiness refinement; independent focused geometry host reports 99 checks passed. No remaining blocker identified in reviewed scope.",
+  "limitations": "Host tests model Android and native owners. Native ABI and code paths inspected against actual APK; no physical Android device or end-to-end GPU frame confirmation."
+}
