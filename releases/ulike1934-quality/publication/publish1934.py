@@ -33,11 +33,11 @@ BASE_NAME = "Hiro_Morphe_Patches_v1.0.166.mpp"
 BASE_SHA256 = "c541826f308e93b269b70c459e31406ff13328c018f42ccee0fc9056cfd30eee"
 BASE_BYTES = 17409037
 BASE_URL = (f"https://raw.githubusercontent.com/{REPO}/"
-            f"ef4e928900b570cbc6323c8f0114c62766a1ef51/downloads/{BASE_NAME}")
+            f"255dd6d1339a76212727ef1aa9fcab88077d967e/downloads/{BASE_NAME}")
 SINGLE_BASE_NAME = "ULike_HQ_Texture_Online_v1.9.33.mpp"
 SINGLE_BASE_SHA256 = "1a7c03aca7f9260b22f4a80cf7d17dde44408ec52e5237cf1b2633c1473d10ce"
 SINGLE_BASE_BYTES = 761986
-SINGLE_BASE_URL = f"https://raw.githubusercontent.com/{REPO}/ef4e928900b570cbc6323c8f0114c62766a1ef51/downloads/{SINGLE_BASE_NAME}"
+SINGLE_BASE_URL = f"https://raw.githubusercontent.com/{REPO}/255dd6d1339a76212727ef1aa9fcab88077d967e/downloads/{SINGLE_BASE_NAME}"
 QA_NAME = "QA_ULike_v1.9.34.json"
 SOURCE_ZIP = "ULike_v1.9.34_sources_and_QA.zip"
 RECEIPT_NAME = "publication_ULike_v1.9.34.json"

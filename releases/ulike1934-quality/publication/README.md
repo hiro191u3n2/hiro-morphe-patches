@@ -13,7 +13,7 @@ main/dev Manager-feed updates. The new changelog scope is ULike only.
 | Bundle 1.0.166 | 17409037 | c541826f308e93b269b70c459e31406ff13328c018f42ccee0fc9056cfd30eee |
 
 Immutable download URLs use payload commit
-`ef4e928900b570cbc6323c8f0114c62766a1ef51`.
+`255dd6d1339a76212727ef1aa9fcab88077d967e`.
 If the active bundle advances, use its exact bytes as the new baseline and
 increment its version once. Preserve all other application patches.
 
