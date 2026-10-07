@@ -1,0 +1,56 @@
+name: Install verified ULike1943 release sources
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1943-timing-source-install.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-source-install
+  cancel-in-progress: false
+jobs:
+  install:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      VERIFIED_SOURCE_SHA: f2ed9251ac1a36fe49e83ad8e8dd065efa1e3c28
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Install only the reviewed release sources while preserving the current branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh auth setup-git
+          git fetch --no-tags origin "$VERIFIED_SOURCE_SHA"
+          test "$(git rev-parse FETCH_HEAD)" = "$VERIFIED_SOURCE_SHA"
+          git restore --source "$VERIFIED_SOURCE_SHA" --staged --worktree -- releases/ulike1943-timing
+          python3 - <<'PY'
+          import hashlib, json, pathlib
+          root=pathlib.Path('releases/ulike1943-timing')
+          manifest=json.loads((root/'manifest.json').read_text())
+          evidence=json.loads((root/'evidence/validation.json').read_text())
+          assert manifest['schema']=='ulike1943-publication-v1'
+          assert manifest['ulike_version']=='1.9.43' and manifest['bundle_version']=='1.0.176'
+          assert manifest['original_apk_apply_tested'] is True
+          assert evidence['original_apk_application']['status']=='passed'
+          assert evidence['artifacts']=={n:v for n,v in manifest['artifacts'].items() if n.endswith('.mpp')}
+          for name,digest in manifest['qa_required_values']['compiled_production_source_sha256'].items():
+              assert hashlib.sha256((root/'src'/name).read_bytes()).hexdigest()==digest
+          assert not any(p.suffix.lower() in ('.apk','.apks','.aab','.jks','.keystore') for p in root.rglob('*') if p.is_file())
+          print('PASS original-APKS-validated source snapshot and production hashes')
+          PY
+          git diff --cached --name-only > "$RUNNER_TEMP/ulike1943-source-paths.txt"
+          python3 - <<'PY'
+          import os,pathlib
+          rows=(pathlib.Path(os.environ['RUNNER_TEMP'])/'ulike1943-source-paths.txt').read_text().splitlines()
+          assert rows and all(p.startswith('releases/ulike1943-timing/') for p in rows)
+          print('PASS confined source update:',len(rows),'files')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Install original-APKS-verified ULike1.9.43 capture timing sources'
+          git push --force-with-lease="refs/heads/main:$GITHUB_SHA" origin HEAD:refs/heads/main
