@@ -1,0 +1,19 @@
+ULike v1.9.39 source review
+
+Scope: responsive manual shutter taps and consecutive manually requested photos.
+No automatically repeated captures or deferred replay of rejected taps.
+
+Reviewed behaviours:
+- The existing still capture callbacks and native readiness checks remain in place.
+- Standard tap-on-release and alternate tap-on-down photo paths are covered.
+- Only the ready-photo 200ms/500ms suppression windows are changed.
+- Existing 300ms long-video scheduling is tied to the exact press, listener and mode; old timers cannot start recording during a newer tap.
+- The original e() scheduling callers (J(MotionEvent) and c()) gate the route to q=1002.
+- An owned, already-rendered bitmap and per-photo metadata/options are retained before the next manual capture is admitted.
+- FaceRegions1934 derives masks from the exact saved bitmap, not a later preview face.
+- Quality and encoding remain serialized; capacity is two actual photos.
+- Out-of-memory, hardware, gainmap and high-precision paths retain full-quality serial ownership.
+- The latest-job compare/clear operation and failed-capture notifications are generation/lock guarded.
+- Quality algorithms, frame counts, exposure selection, camera startup/layout, native kernel and unrelated app patches remain protected by emitted-code comparisons.
+
+Limits: host and DEX verification do not execute Android camera hardware. Speed and image quality on the Galaxy have not been measured.

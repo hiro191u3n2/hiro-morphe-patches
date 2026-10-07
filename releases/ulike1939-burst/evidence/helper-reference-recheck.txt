@@ -1,0 +1,18 @@
+Helper-reference evidence recovery for exact trial3 candidate
+
+The original report was unexpectedly empty after the build gate had accepted successful verifier output. The cause of report truncation is unknown. No verifier or approval gate was weakened.
+
+Exact executed command (argument vector):
+["/workspace/scratch/35167e803068/tools1932/jdk-21.0.8+9/bin/java", "-XX:ActiveProcessorCount=1", "-cp", "/workspace/scratch/35167e803068/tools1932/morphe.jar:/workspace/scratch/9dd374ba99aa/build1939-trial3/baseline:/workspace/scratch/9dd374ba99aa/build1939-trial3/classes", "VerifyHelperReferences", "/workspace/scratch/9dd374ba99aa/build1939-trial3/baseline/ulike/methods.dex", "/workspace/scratch/9dd374ba99aa/build1939-trial3/baseline/ulike/runtime.dex", "/workspace/scratch/9dd374ba99aa/build1939-trial3/emitted/methods.dex", "/workspace/scratch/9dd374ba99aa/build1939-trial3/emitted/runtime.dex"]
+
+Exit code: 0
+Output:
+PASS helper references in 41 new/changed methods: 372 included members resolved; 0 inherited external members deferred to Android runtime.
+
+The verified stdout was written atomically to build1939-trial3/helper-references.txt and dist1939-trial3/helper-references.txt. All other required report files were nonempty. No production or build source changed; no MPP bytes changed.
+
+Verified DEX SHA-256:
+b5b9a133d7239985cf7a359cc0d370ecea99d1b5a281b62b209de4742c5709d2  /workspace/scratch/9dd374ba99aa/build1939-trial3/baseline/ulike/methods.dex
+4f6ca63787a2fb3ea3b079344f7669daba8206c2f015619d7ebcbdd8b8e9aa4a  /workspace/scratch/9dd374ba99aa/build1939-trial3/baseline/ulike/runtime.dex
+c0eed81d282f883f257a1b2021bbe8b3612998b4a14556d4b1ca33a7af02ede2  /workspace/scratch/9dd374ba99aa/build1939-trial3/emitted/methods.dex
+8d90f72ee636c79341eb7e7b8f94f0c613ddb74b3b8b47dd42a7ebd682936dbd  /workspace/scratch/9dd374ba99aa/build1939-trial3/emitted/runtime.dex
