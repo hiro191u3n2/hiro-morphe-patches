@@ -140,7 +140,11 @@ def main():
                         'quality-dex-verification.txt', 'quality-inventory.json',
                         'helper-references.txt', 'host-quality1934-result.json')
     for name in required_reports:
-        package[name] = (args.dist / name).read_bytes()
+        report = (args.dist / name).read_bytes()
+        if name == 'helper-references.txt':
+            require(report.startswith(b'PASS helper references in ') and len(report.strip()) > 25,
+                    'Missing executed helper-reference verification report')
+        package[name] = report
     for pattern in ('host-burst*.txt', 'host-burst*.json', 'host-quality*.txt', 'host-quality*.json'):
         for path in args.dist.glob(pattern):
             package[path.name] = path.read_bytes()
