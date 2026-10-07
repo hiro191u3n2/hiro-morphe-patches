@@ -19,7 +19,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p oneback-tools
-          jlink --add-modules ALL-MODULE-PATH --strip-debug --compress=2 --no-header-files --no-man-pages --launcher javac=jdk.compiler/com.sun.tools.javac.Main --launcher javap=jdk.jdeps/com.sun.tools.javap.Main --output oneback-tools/jdk21
+          jlink --add-modules ALL-MODULE-PATH --strip-debug --compress=2 --no-header-files --no-man-pages --output oneback-tools/jdk21
           oneback-tools/jdk21/bin/java -version
           oneback-tools/jdk21/bin/javac -version
           tar -C oneback-tools -czf oneback-tools/jdk21.tar.gz jdk21
