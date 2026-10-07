@@ -1,0 +1,571 @@
+{
+  "schema": "ulike1934-quality-v1",
+  "status": "REBUILD_MATCHES_ORIGINAL_APKS_VALIDATED_MPP_DEVICE_UNVERIFIED",
+  "ulike_version": "1.9.34",
+  "bundle_version": "1.0.167",
+  "base_versions": [
+    "1.9.33",
+    "1.0.166"
+  ],
+  "approved_lineage": "1.8.8",
+  "selected_candidates": [
+    "Q1",
+    "Q4",
+    "Q6",
+    "Q7",
+    "Q11",
+    "Q13"
+  ],
+  "device_tested": false,
+  "device_quality_verified": false,
+  "original_apk_apply_tested": true,
+  "ci_android_apply_tested": false,
+  "non_ulike_resources_byte_identical": true,
+  "non_ulike_loader_classes_unchanged": true,
+  "camera_lifecycle_byte_identical": false,
+  "camera_startup_recovery_byte_identical": true,
+  "image_pipeline_byte_identical": false,
+  "standalone_and_bundle_ulike_resources_identical": true,
+  "native_methods_byte_identical": false,
+  "native_methods_tsv_byte_identical": false,
+  "host_quality_passed": true,
+  "host_quality_result": {
+    "status": "passed",
+    "assertions": 2019138,
+    "suites": {
+      "fusion": {
+        "status": "passed",
+        "assertions": 7794,
+        "scenarios": {
+          "off_invalid_and_reference_ownership": 11,
+          "real_distinct_capture_requirement": 4,
+          "same_exposure_metadata_gate": 4,
+          "static_noise_and_nv21_chroma_gain": 9,
+          "flat_noise_and_level_bounds": 10,
+          "integer_camera_translation": 3,
+          "fractional_translation_and_warm_hue": 3,
+          "foreground_motion_reference_and_background_gain": 4609,
+          "large_motion_scene_flash_and_colour_mismatch": 4,
+          "small_local_warp_and_uncertain_rotation": 3,
+          "night_low_contrast_motion_and_vu_only_motion": 1042,
+          "edges_lines_and_no_overshoot": 272,
+          "worker_equivalence_seams_and_immutable_inputs": 1814,
+          "cancellation_and_probe_immutability": 6
+        },
+        "metrics": {
+          "static_y_mse_ratio_ppm": 208913,
+          "static_uv_mse_ratio_ppm": 212042,
+          "flat_y_mse_ratio_ppm": 202651,
+          "translation_y_mse_ratio_ppm": 316653
+        }
+      },
+      "q1": {
+        "status": "passed",
+        "assertions": 36,
+        "scenarios": {
+          "real_sharp_frame_and_exact_metadata": 12,
+          "third_frame_selection_and_translation": 2,
+          "noise_detail_and_photometric_false_winners": 6,
+          "moving_scene_and_local_false_detail": 3,
+          "capture_identity_exposure_and_duplicate_gates": 8,
+          "cancelled_and_selected_single_fallback_identity": 5
+        },
+        "metrics": {
+          "sharp_reference_mse_vs_original_ppm": 287123,
+          "sharp_reference_mse_vs_single_ppm": 374172
+        }
+      },
+      "capture": {
+        "status": "passed",
+        "assertions": 516,
+        "scenarios": 42,
+        "scope": "capture policy, YUV ownership and scripted Android callback order; no device claim"
+      },
+      "metadata": {
+        "status": "passed",
+        "assertions": 40,
+        "interleaved_captures": 400,
+        "exact_burst_reference_metadata": true,
+        "callback_replacement_rejected": true,
+        "physical_timestamp_validated": true,
+        "device_tested": false
+      },
+      "fast": {
+        "status": "passed",
+        "assertions": 1823698,
+        "scenarios": 34,
+        "bit_identical_to_1932": true,
+        "alpha_fallback_verified": true,
+        "block_rotation_verified": true,
+        "worker_failure_cleanup_verified": true,
+        "device_tested": false,
+        "reference_sha256": "d67433da7946fbafb83a6e1736c1860b9cc967f4f8afe7f104f7351c2adf107d"
+      },
+      "integration": {
+        "status": "passed",
+        "assertions": 61,
+        "scenarios": {
+          "normal_three_real_frames_to_renderer": 16,
+          "night_measured_probe_and_new_four_frame_group": 23,
+          "sharp_reference_pixels_and_metadata_to_renderer": 22
+        },
+        "metrics": {
+          "normal_y_mse_ratio_ppm": 411029,
+          "night_y_mse_ratio_ppm": 329105
+        },
+        "device_tested": false
+      },
+      "yuv_geometry": {
+        "status": "passed",
+        "assertions": 2854,
+        "scenarios": 52,
+        "device_tested": false
+      },
+      "spatial": {
+        "status": "passed",
+        "assertions": 57,
+        "metrics": {
+          "sigma_clean": 0.74130094,
+          "sigma_noisy": 12.31096458,
+          "maximum_budget_step_q8": 5.0,
+          "nr_clean_variance_ratio": 1.0,
+          "nr_noisy_variance_ratio": 0.11302659,
+          "long_moire_ratio_d0_p6": 0.4010876,
+          "long_moire_ratio_d0_p8": 0.09130581,
+          "long_moire_ratio_d0_p12": 0.10132887,
+          "long_moire_ratio_d0_p16": 0.09367215,
+          "long_moire_ratio_d1_p6": 0.39827083,
+          "long_moire_ratio_d1_p8": 0.09130581,
+          "long_moire_ratio_d1_p12": 0.10127436,
+          "long_moire_ratio_d1_p16": 0.09367215,
+          "long_moire_ratio_d2_p6": 0.39852187,
+          "long_moire_ratio_d2_p8": 0.03793219,
+          "long_moire_ratio_d2_p12": 0.100381,
+          "long_moire_ratio_d2_p16": 0.09367215,
+          "long_moire_ratio_d3_p6": 0.39842557,
+          "long_moire_ratio_d3_p8": 0.03793219,
+          "long_moire_ratio_d3_p12": 0.10144578,
+          "long_moire_ratio_d3_p16": 0.09367215
+        }
+      },
+      "faces": {
+        "status": "passed",
+        "assertions": 59722,
+        "scenarios": [
+          "face-only gating",
+          "eye-mouth margins",
+          "detail and color veto",
+          "invalid-overlap-multiface",
+          "rotation-crop-resize pixel centers"
+        ],
+        "device_detector_accuracy_tested": false
+      },
+      "scheduler": {
+        "status": "passed",
+        "assertions": 124360,
+        "physical_device_verified": false
+      }
+    },
+    "device_tested": false,
+    "performance_measured_on_device": false
+  },
+  "dex_verification": "PASS1934 assertions=1305; compiled production bytecode equals shipped; native hook inverse verified; unchanged camera recovery/other apps; actual original APK contracts checked=false; device untested",
+  "changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.34.mpp": {
+      "sha256": "28bd1782392fb2cc4d703a1a5a32c090eb17dfb2b7de52c41e11e4e2e884ed83",
+      "bytes": 773260
+    },
+    "Hiro_Morphe_Patches_v1.0.167.mpp": {
+      "sha256": "fa0a578e0ad34e21afc1ae8a40f4d0e13b986eff88474e2025b0decbf6555b7c",
+      "bytes": 17420321
+    }
+  },
+  "input_sha256": {
+    "ULike_HQ_Texture_Online_v1.9.33.mpp": "1a7c03aca7f9260b22f4a80cf7d17dde44408ec52e5237cf1b2633c1473d10ce",
+    "Hiro_Morphe_Patches_v1.0.166.mpp": "c541826f308e93b269b70c459e31406ff13328c018f42ccee0fc9056cfd30eee",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "jdk_identity": {
+    "runtime_version": "21.0.8+9-LTS",
+    "vendor": "Eclipse Adoptium",
+    "javac_version": "21.0.8"
+  },
+  "published": false,
+  "manager_feed_updated": false,
+  "limitations": [
+    "No Android/Galaxy/ART or camera-hardware execution.",
+    "No device save latency or visual quality measurement."
+  ],
+  "changed_runtime_methods": [
+    "Lcom/hiro/ulike/BurstCapture1933$9;->run()Ljava/lang/Runnable;",
+    "Lcom/hiro/ulike/BurstCapture1933;->copyNv21(Landroid/media/Image;)[B",
+    "Lcom/hiro/ulike/FastPixels1933$Plan;-><init>(IIIIDDDD)V",
+    "Lcom/hiro/ulike/FastPixels1933;->runRows(Lcom/hiro/ulike/FastPixels1933$Plan;Lcom/hiro/ulike/FastPixels1933$RowSource;Lcom/hiro/ulike/FastPixels1933$RowSink;II)V",
+    "Lcom/hiro/ulike/FastResize1933;->resample(Landroid/graphics/Bitmap;III)Landroid/graphics/Bitmap;",
+    "Lcom/hiro/ulike/FusionPixels1933;->align([B[BIILcom/hiro/ulike/FusionPixels1933$Stats;Lcom/hiro/ulike/FusionPixels1933$Stats;Z)Lcom/hiro/ulike/FusionPixels1933$Pair;",
+    "Lcom/hiro/ulike/FusionPixels1933;->fuse([[BII[J[J[IIZI)Lcom/hiro/ulike/FusionPixels1933$Result;",
+    "Lcom/hiro/ulike/QualityPipeline1932$Strips;-><init>(Landroid/graphics/Bitmap;)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$Worker;->run()V",
+    "Lcom/hiro/ulike/QualityPipeline1932;-><clinit>()V",
+    "Lcom/hiro/ulike/QualityPipeline1932;->finishInPlace(Landroid/graphics/Bitmap;Lcom/hiro/ulike/QualityPixels1932$Plan;ZZ)V",
+    "Lcom/hiro/ulike/QualityPipeline1932;->normalize(Landroid/graphics/Bitmap;IZ)Landroid/graphics/Bitmap;",
+    "Lcom/hiro/ulike/QualityPipeline1932;->resample(Landroid/graphics/Bitmap;III)Landroid/graphics/Bitmap;",
+    "Lcom/hiro/ulike/QualityPipeline1932;->run(Lcom/hiro/ulike/ChromaPipeline186$State;Lcom/hiro/ulike/ChromaPipeline186$Buffer;)V",
+    "Lcom/hiro/ulike/QualityPixels1932$Axis;-><init>(IIDD)V",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;->withHaloSuppression(Z)Lcom/hiro/ulike/QualityPixels1932$Plan;",
+    "Lcom/hiro/ulike/QualityPixels1932$RowCache;->get(I)[F",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$1000(I)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$700(D)D",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$900(I)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->denoiseBudgetQ8(IILcom/hiro/ulike/QualityPixels1932$Plan;)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->finishStrip([I[IIIIILcom/hiro/ulike/QualityPixels1932$Plan;ZZ)V",
+    "Lcom/hiro/ulike/QualityPixels1932;->plan(Lcom/hiro/ulike/QualityPixels1932$NoiseStats;IJIFIIZZF)Lcom/hiro/ulike/QualityPixels1932$Plan;",
+    "Lcom/hiro/ulike/QualityPixels1932;->shadowBudgetQ8(IILcom/hiro/ulike/QualityPixels1932$Plan;)I",
+    "Lcom/hiro/ulike/QualityShadow1932;->smoothRange([I[IIIIIIIIZI)V"
+  ],
+  "changed_native_methods": [
+    "Li/s/a/w/d0/a;->Q0(Landroid/media/Image;Landroid/hardware/camera2/TotalCaptureResult;)V"
+  ],
+  "new_native_methods": [],
+  "new_helper_classes": [
+    "Lcom/hiro/ulike/FaceRegions1934$1;",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;",
+    "Lcom/hiro/ulike/FaceRegions1934;",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels$Anchor;",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels$Raster;",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;",
+    "Lcom/hiro/ulike/LongMoire1934;",
+    "Lcom/hiro/ulike/QualityPipeline1932$3;",
+    "Lcom/hiro/ulike/QualityPixels1932$RegionMask;",
+    "Lcom/hiro/ulike/SpatialNoise1934$Patches;",
+    "Lcom/hiro/ulike/SpatialNoise1934;",
+    "Lcom/hiro/ulike/YuvPlanes1934$Plane;",
+    "Lcom/hiro/ulike/YuvPlanes1934;"
+  ],
+  "replaced_helper_roots": [
+    "BurstCapture1933",
+    "FaceRegions1934",
+    "FaceRegions1934Pixels",
+    "FastPixels1933",
+    "FastResize1933",
+    "FusionPixels1933",
+    "LongMoire1934",
+    "QualityPipeline1932",
+    "QualityPixels1932",
+    "QualityShadow1932",
+    "SpatialNoise1934",
+    "YuvPlanes1934"
+  ],
+  "new_runtime_methods": [
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;-><init>(IIII[B[BDDDDDDZ)V",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;-><init>(IIII[B[BDDDDDDZLcom/hiro/ulike/FaceRegions1934$1;)V",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;->detailQ8(II)I",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;->resample(III)Lcom/hiro/ulike/FaceRegions1934$Mask;",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;->sample([BII)I",
+    "Lcom/hiro/ulike/FaceRegions1934$Mask;->skinQ8(II)I",
+    "Lcom/hiro/ulike/FaceRegions1934;-><init>()V",
+    "Lcom/hiro/ulike/FaceRegions1934;->empty(II)Lcom/hiro/ulike/FaceRegions1934$Mask;",
+    "Lcom/hiro/ulike/FaceRegions1934;->forBitmap(Landroid/graphics/Bitmap;I)Lcom/hiro/ulike/FaceRegions1934$Mask;",
+    "Lcom/hiro/ulike/FaceRegions1934;->uprightRaster(IIII[B[BI)Lcom/hiro/ulike/FaceRegions1934$Mask;",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels$Anchor;-><init>(FFFFFF)V",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels$Raster;-><init>([B[BZ)V",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;-><init>()V",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;->build([III[Lcom/hiro/ulike/FaceRegions1934Pixels$Anchor;)Lcom/hiro/ulike/FaceRegions1934Pixels$Raster;",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;->ellipse(DDDDDD)D",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;->localRange([IIIII)I",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;->skinCompatible(I)Z",
+    "Lcom/hiro/ulike/FaceRegions1934Pixels;->valid(Lcom/hiro/ulike/FaceRegions1934Pixels$Anchor;II)Z",
+    "Lcom/hiro/ulike/FusionPixels1933$Result;-><init>([BIJIFFJZ)V",
+    "Lcom/hiro/ulike/FusionPixels1933$Result;-><init>([BIJIFFJZLcom/hiro/ulike/FusionPixels1933$1;)V",
+    "Lcom/hiro/ulike/FusionPixels1933;->align([B[BIILcom/hiro/ulike/FusionPixels1933$Stats;Lcom/hiro/ulike/FusionPixels1933$Stats;ZLcom/hiro/ulike/FusionPixels1933$Small;Lcom/hiro/ulike/FusionPixels1933$Small;)Lcom/hiro/ulike/FusionPixels1933$Pair;",
+    "Lcom/hiro/ulike/FusionPixels1933;->sameExposure([J[III)Z",
+    "Lcom/hiro/ulike/FusionPixels1933;->sharpnessGain([B[BIILcom/hiro/ulike/FusionPixels1933$Stats;Lcom/hiro/ulike/FusionPixels1933$Stats;Lcom/hiro/ulike/FusionPixels1933$Pair;)F",
+    "Lcom/hiro/ulike/FusionPixels1933;->single([BIJZ)Lcom/hiro/ulike/FusionPixels1933$Result;",
+    "Lcom/hiro/ulike/LongMoire1934;-><clinit>()V",
+    "Lcom/hiro/ulike/LongMoire1934;-><init>()V",
+    "Lcom/hiro/ulike/LongMoire1934;->correct([IIII)I",
+    "Lcom/hiro/ulike/LongMoire1934;->distance(IIII)I",
+    "Lcom/hiro/ulike/LongMoire1934;->round(II)I",
+    "Lcom/hiro/ulike/LongMoire1934;->u(I)I",
+    "Lcom/hiro/ulike/LongMoire1934;->v(I)I",
+    "Lcom/hiro/ulike/LongMoire1934;->y(I)I",
+    "Lcom/hiro/ulike/QualityPipeline1932$1;-><init>(Landroid/graphics/Bitmap;)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$1;->read([IIIII)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$2;-><init>(ILandroid/graphics/Bitmap;III)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$2;->readRow(I[I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$3;-><init>(Landroid/graphics/Bitmap;I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$3;->writeRow(I[I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932;->probeSpatial(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/SpatialNoise1934;",
+    "Lcom/hiro/ulike/QualityPipeline1932;->shadowBudgetQ8(IIII)I",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;-><init>(IIIIIIIFFZZZLcom/hiro/ulike/SpatialNoise1934;Lcom/hiro/ulike/QualityPixels1932$RegionMask;)V",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;-><init>(IIIIIIIFFZZZLcom/hiro/ulike/SpatialNoise1934;Lcom/hiro/ulike/QualityPixels1932$RegionMask;Lcom/hiro/ulike/QualityPixels1932$1;)V",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;->withFaceRegions(Lcom/hiro/ulike/QualityPixels1932$RegionMask;)Lcom/hiro/ulike/QualityPixels1932$Plan;",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;->withLocalNoise(Lcom/hiro/ulike/SpatialNoise1934;I)Lcom/hiro/ulike/QualityPixels1932$Plan;",
+    "Lcom/hiro/ulike/QualityPixels1932$RegionMask;->detailQ8(II)I",
+    "Lcom/hiro/ulike/QualityPixels1932$RegionMask;->skinQ8(II)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$1100(I)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$1200(FFF)F",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$500(III)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$800(D)D",
+    "Lcom/hiro/ulike/QualityPixels1932;->denoiseBudgetQ8(IILcom/hiro/ulike/QualityPixels1932$Plan;II)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->finishStripAt([I[IIIIILcom/hiro/ulike/QualityPixels1932$Plan;ZZI)V",
+    "Lcom/hiro/ulike/QualityPixels1932;->localDenoiseMix([I[IIIIIILcom/hiro/ulike/QualityPixels1932$Plan;)V",
+    "Lcom/hiro/ulike/QualityPixels1932;->localDenoiseMix([I[IIIIILcom/hiro/ulike/QualityPixels1932$Plan;)V",
+    "Lcom/hiro/ulike/QualityPixels1932;->mix(III)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->shadowBudgetQ8(IILcom/hiro/ulike/QualityPixels1932$Plan;II)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->sharpen([IIIILcom/hiro/ulike/QualityPixels1932$Plan;II)I",
+    "Lcom/hiro/ulike/SpatialNoise1934$Patches;->read([IIIII)V",
+    "Lcom/hiro/ulike/SpatialNoise1934;-><init>(IIIIFFFF[FLcom/hiro/ulike/QualityPixels1932$NoiseStats;)V",
+    "Lcom/hiro/ulike/SpatialNoise1934;->budgetQ8(FF)I",
+    "Lcom/hiro/ulike/SpatialNoise1934;->probe(Lcom/hiro/ulike/SpatialNoise1934$Patches;II)Lcom/hiro/ulike/SpatialNoise1934;",
+    "Lcom/hiro/ulike/SpatialNoise1934;->sigmaAt(FF)F",
+    "Lcom/hiro/ulike/YuvPlanes1934$Plane;-><init>(Landroid/media/Image$Plane;II)V",
+    "Lcom/hiro/ulike/YuvPlanes1934$Plane;->write(II[BIII)V",
+    "Lcom/hiro/ulike/YuvPlanes1934;-><init>()V",
+    "Lcom/hiro/ulike/YuvPlanes1934;->copy(Landroid/media/Image;[B)Z",
+    "Lcom/hiro/ulike/YuvPlanes1934;->copyStrict(Landroid/media/Image;[B)V",
+    "Lcom/hiro/ulike/YuvPlanes1934;->owned(Landroid/media/Image;)[B",
+    "Lcom/hiro/ulike/YuvPlanes1934;->required(Landroid/media/Image;)I"
+  ],
+  "removed_runtime_methods": [
+    "Lcom/hiro/ulike/BurstCapture1933;->copyPlane(Landroid/media/Image$Plane;II[BIII)V",
+    "Lcom/hiro/ulike/FusionPixels1933$Result;-><init>([BIFFJZ)V",
+    "Lcom/hiro/ulike/FusionPixels1933$Result;-><init>([BIFFJZLcom/hiro/ulike/FusionPixels1933$1;)V",
+    "Lcom/hiro/ulike/FusionPixels1933;->sameExposure([J[II)Z",
+    "Lcom/hiro/ulike/FusionPixels1933;->single([BZ)Lcom/hiro/ulike/FusionPixels1933$Result;",
+    "Lcom/hiro/ulike/QualityPipeline1932$1;-><init>(ILandroid/graphics/Bitmap;III)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$1;->readRow(I[I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$2;-><init>(Landroid/graphics/Bitmap;I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932$2;->writeRow(I[I)V",
+    "Lcom/hiro/ulike/QualityPipeline1932;->probe(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/QualityPixels1932$NoiseStats;",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;-><init>(IIIIIIIFFZZZ)V",
+    "Lcom/hiro/ulike/QualityPixels1932$Plan;-><init>(IIIIIIIFFZZZLcom/hiro/ulike/QualityPixels1932$1;)V",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$1100(FFF)F",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$600(D)D",
+    "Lcom/hiro/ulike/QualityPixels1932;->access$800(I)I",
+    "Lcom/hiro/ulike/QualityPixels1932;->sharpen([IIIILcom/hiro/ulike/QualityPixels1932$Plan;)I"
+  ],
+  "new_runtime_aliases": [],
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33461 unique classes / 214059 methods. 2099 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1920,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33461 apk=patched.apk"
+    },
+    "bundle": {
+      "patch_index": 4,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33461 unique classes / 214059 methods. 2099 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "dex_integrity_entries": 4,
+      "register_analysis": {
+        "tested": 1920,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=93 classes=33461 apk=patched.apk"
+    }
+  },
+  "quality_dex_verification": "PASS1934 assertions=1509; compiled production bytecode equals shipped; native hook inverse verified; unchanged camera recovery/other apps; actual original APK contracts checked=true; device untested",
+  "stock_burst_capture_abi_verification": "PASS burst native reflection ABI: checks=66, apk=stock.apk. No device execution.",
+  "desktop_evidence_sha256": "ed3e6c13522176e3da63a881f0411fafa0fcf9cad95c2c1be2a565258e07266d",
+  "stock_lifecycle_abi_verification": "PASS front native ABI/lifecycle checks=93 classes=33134 apk=stock.apk",
+  "source_sha256": {
+    "src/AnalyzeAll.java": "3c85fc76cf942edc0e31f932fd1af36b8df89b1bb13d92958edbdef20b510c71",
+    "src/BurstCapture1933.java": "cee5df40376f639e1de2cac4f725cc2a102e66af2eb74a2025492abf70c1d9dc",
+    "src/CapturePolicy1933.java": "525551d47efa500641c62d38f1526f24f002a49b8f1cfec9b1afc8788b0b1ee3",
+    "src/DumpDex.java": "b9610d360ff17d028654c3207eb8bb2ca6afaee292f4c6ffeb561047295e2319",
+    "src/FaceRegions1934.java": "37fbf464dc2a63dd51bb219e55934555679315e2d618b9da27d4776a783ff00e",
+    "src/FaceRegions1934Pixels.java": "3f8e7bdab5c4c43f82dc3fd76756d393b498115f05e2a187ec66ff33e27d5f52",
+    "src/FastPixels1933.java": "74cfbfa2220eeec3a0885d063ee142d60a163f9b846e846a87341fc9cefbb33e",
+    "src/FastResize1933.java": "b99334d1899d3204b801644e77c358b59b108858b6123785e358133009281d8f",
+    "src/FusionPixels1933.java": "c9e31be95946bef01417d46ecdae99e4dbb038f3eeda9fd665fdf63aa62aef1a",
+    "src/Hooks1934.java": "0735e522dc028af5a2770f7d30983d431b7fbedd381db04c5ede20c4089b4515",
+    "src/LongMoire1934.java": "3efa95b627ec6ff160026b9b1a8d1582d7ba355c73ffc8bef575fdee1210de99",
+    "src/MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "src/PatchClass1933.java": "002baba5918e6f78a7aaa397ab484e278b4922aa0e6c8459bbb3a9090b66c8f5",
+    "src/PatchClass1934.java": "efaf3efaae0fade612c686a42bc1735a40d9f98f987e48fc10167eb7933693d7",
+    "src/Q11_Q13_AUDIT.md": "6cbda7901b11889b7640aae73ac87d7e1eb429ddcca063b1082adb0d70890c4b",
+    "src/QualityPipeline1932.java": "3b31dca724179aca7c407f3fcb617617bb2942377f91c1b2a1c4b64b41d6e670",
+    "src/QualityPixels1932.java": "94abcdff77f3382241aed68f93338219c189cf287c58d236099e6f1d793e398b",
+    "src/QualityShadow1932.java": "b0c61e3411efa09700ed35388cbea118b928241143155494d17ce9b16ff89de3",
+    "src/SeedBurst1933.java": "cfb5b84f12fbe3f441cb04d5651fa7a23d0853bef7e1397fb16dced3e2768a31",
+    "src/ShotContext1932.java": "62cd54a240d68e60429c47c07509194b18bd53a4ff71d60553a4c7246bd95118",
+    "src/SpatialNoise1934.java": "e0220b9bc76d8f1f8e09ac712f048dc643b589b6c30da901502db7d0e2c297e6",
+    "src/Transform1933.java": "07b52771145fe149d29d9293e0efa267978e99152b4e2a14614195042ec724ff",
+    "src/Transform1934.java": "1572168ff55cddf3f58ed19585f1929336f290ba458cf6eae17200230bcbcb9a",
+    "src/VerifyApplied1920.java": "c01b6cd737be8ffa34ea4cf75a41dd0dd96993e1b37d078020a7e071502a5b06",
+    "src/VerifyBurst1933.java": "ad9d30fd2940f681442af326a03b6a4fa788a03ec75525180b32727f9c594955",
+    "src/VerifyBurstAbi1933.java": "4b92b2fc7836ba54fe9d50f18015cb7b75e5e7fb387242436c9b3e7ed43f192b",
+    "src/VerifyFrontAbi1931.java": "f7f96eaa189d2e495c37a09eef03aa54ac604db4f18fd368134b9bdbf1a048ca",
+    "src/VerifyHelperReferences.java": "dde877441ec635bc4d1973a91362f585c0c4da0f4ae77ffa9b3e6b5c0ced8031",
+    "src/VerifyQuality1934.java": "0fe273615e42383e02f9d559db81d9ef3b25846098356d310f065a38e46f84d7",
+    "src/YuvHooks1934.java": "ba01f52ebd6a2bb2a2f3cd67b3dfe683929a2a44b9be7f537e99065ad1be50dc",
+    "src/YuvPlanes1934.java": "41c17e07dc65af875dfdccdfc39f1b42f5a724f753903e63ee69280697cf61f9",
+    "src/build1933.py": "6fc3cd76736e1372867be27b4cb20da2937418699ee4270a8e65a846251eb673",
+    "src/build1934.py": "fd266408bd9b26b072aea9f0961d09e86fefb37a7c73c663ec289f96a1019564",
+    "src/capture-stubs/com/hiro/ulike/CapturePolicy1933.java": "525551d47efa500641c62d38f1526f24f002a49b8f1cfec9b1afc8788b0b1ee3",
+    "src/capture-stubs/com/hiro/ulike/ExitJobs185.java": "3f2218b45273e96d9d5daa3656c7d87113b3dae9298fc915c5df85834499bcd8",
+    "src/capture-stubs/com/hiro/ulike/PhotoDetail.java": "c7e94da7cdcd28a8ecf6fede68dccba1319fb9e45c126ac9095e1408f4098093",
+    "src/extract_seed1933.py": "279d1b55c462d4eeb5bf20f41cf2478d8a227e357d3a7963cea269adf90e44c8",
+    "src/face-sdk-audit1934.txt": "817543806914aebc677d85df473c36b6fd4ae01a9603968db1089be2988aa91c",
+    "src/fast-stubs/com/hiro/ulike/QualityPipeline1932.java": "c82d53d816dd0dcbfbee7e5a18266b0296f749bd1cdf22770a66e809a5c2a247",
+    "src/finalize1933.py": "d61633ff4dbd7041aca50ed66b3649c3193f3e550519c8cb6229f628280af6c5",
+    "src/finalize1934.py": "99a2568fac46393ffcfb4b3284703f39345c4f0490e2e6e6f0ab97d91ea18462",
+    "src/host_burst1933.py": "2e1f4588cbc65100422b4b99bf1932be8b9ccbb72dcfabae3f1027164ec2beae",
+    "src/host_capture1933.py": "4ccc998d89b34ed982f9bbdd56c0a7ef5aa605993d4e62abe586c97fa8250726",
+    "src/host_faces1934.py": "c335a2a00e2296a8cb5516d899e7bac5b4cbe3914684b23f2cf68881241a9e07",
+    "src/host_fast1933.py": "b11ad9c60395d6be2ec904021f55ee25c034909d79827662e6d4705b21c13fac",
+    "src/host_fusion1933.py": "3932c3bace86d0f5ca5e471a09e41dabcc821dd9280e2302f521c66c5877bb51",
+    "src/host_integration1933.py": "0c8f80f035e1470d682fe6c8a3cdcb3d5701894db543d3fb1afdeeb6f6a66117",
+    "src/host_metadata1933.py": "06972c937b40d1a2c558a69dcebb9170da91ed68f07f16d1265f3d980ed4b3f1",
+    "src/host_q1_1934.py": "44801abf2409cae06a15322568afcc05a4c7dae39faf25256dd12ddff56aee2a",
+    "src/host_quality1934.py": "491fd57db0c83c694fec30867f3be78f82085f39e8dfaf9f356933e4bd42ebae",
+    "src/host_scheduler1934.py": "b7f24c6331dabd5e8a70bcd2b11ed303ee7b4b7a1023ed9d30690d02060435d3",
+    "src/host_spatial1934.py": "86cbc053362257582577914f75f1106d6dabb7f5bbec2ccf3ad1f8464f3f0608",
+    "src/host_yuv_geometry1934.py": "a569714c0e4aec97b9d208cc827c38c4530040b9e362988caf0249c2b154a7ef",
+    "src/metadata-stubs/com/hiro/ulike/ShotContext1932.java": "9d7341d3fd1c71c63e6a5488d2b057c229a3e310b3339e165353049e758f085e",
+    "src/production1934.json": "ee25f94255f41fc35835c8390a9522de1ad1f6673ecb4900c10748c02d30c2e4",
+    "src/quality-stubs/com/hiro/ulike/Chroma186.java": "fa196b0fce4b7cbcceaf070bd124638a904841098776080d69fc94fc76d03410",
+    "src/quality-stubs/com/hiro/ulike/ChromaPipeline177.java": "0ae95f697f50ff4ca24bf07209c4a5135c0c01997c6268a14f5c5b79fb64be0e",
+    "src/quality-stubs/com/hiro/ulike/ChromaPipeline186.java": "f05dfbf601e5bc2e49e27dd89cce71292a817766be8884ff186e900100c10940",
+    "src/quality-stubs/com/hiro/ulike/DetailPixels.java": "2ee25a6184105c40b50b40c5a8bec5e2713df7b19359407b7dcdfd2c85e02ecd",
+    "src/quality-stubs/com/hiro/ulike/DetailSerial186.java": "203bc86ff38919a05483de78cf70b21c74c6ecfd9a5f64290789ac34c5da5d4e",
+    "src/quality-stubs/com/hiro/ulike/PhotoDetail.java": "eb73714558fa13703906efeb381e8550f582a3a7175ecda8ff252db99173ca0d",
+    "src/quality-stubs/com/hiro/ulike/SaveQuality2.java": "978cdfbf1fd9414544f5de4bd99d0cb4f4d34ae3d02b51b2e01e29e700db4a88",
+    "src/quality-stubs/com/hiro/ulike/ShadowDetail1923.java": "feec088e3c6afaf2ab866dc1b33f33373631ef60ab8d25b86f895de5f385ea00",
+    "src/stock-seed1933-capture-hashes.tsv": "260d639e6b46ba0f27da21598160b123571255af2b3b4a4418a4a8cf549d69cb",
+    "src/stock-seed1933-capture.dex": "6b0c2a6af686d764a1bb3bab8ab4405b760c07f7ffdcbb0d645d9b2a72eb902a",
+    "src/tests/Benchmark1933.java": "33fd8953c3dbb8e00db61facc7c8d572177d0591051631f42e3ae4117eb58ee6",
+    "src/tests/Capture1933Test.java": "692f99749267a7f85c6a267c43fb6b5fd6f39e42060a7879ecfe26bc37cda33f",
+    "src/tests/FaceRegions1934Test.java": "73ec530b69de6c910eec43cf36572aa0cc6246e9f8103ef6e745b6b468dab960",
+    "src/tests/Fast1933Test.java": "92edc3cced386f03be233e14f8f0d46346fe61fffbd1083e480903280d5c2d3c",
+    "src/tests/FusionCaptureBoundary1933Test.java": "51f213404df1e8185e26550597ef0f6d762b9f1a3205f008606ff1ef1a8a22d6",
+    "src/tests/FusionPixels1933Test.java": "2f363915dca791b61f7680a6fdb5d001971ec8bc540b2bf15a39d6159f26753a",
+    "src/tests/Q1Reference1934Test.java": "f494f69d89a385ed731af8a8e4b7939157d3b736cd01d7b0674f825d6327d061",
+    "src/tests/SchedulerQuality1934Test.java": "a9606384a2e08a5dff5d701d1c755e3345c710685cfba902a804dab2058f7222",
+    "src/tests/SpatialQuality1934Test.java": "e2876041d332284704049080b80a5d431def5d185b7595c1480cc7b0021effc5",
+    "src/tests/YuvGeometry1934Test.java": "f7b46cf955a4325a005915a78ce90ee82da4acb11de1f0a9d6619d3371895382",
+    "src/tests/capture-fixtures/android/graphics/ImageFormat.java": "a218c151419bb6aac67ec8b5a47853208a2b752c5a113c1d745f16af7314da28",
+    "src/tests/capture-fixtures/android/graphics/Rect.java": "6e7ddcc315a2fe0eb1a18b7811f88600dc9da1e05336ba3ae99a9d5b74b1cdcf",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraCaptureSession.java": "354f1e96c4efcb19f360429605cd9b2bbae3ab8bfc65a4f8344754f2a903de26",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraCharacteristics.java": "83a4b193c8ff9b2675ba60e87d1e3a00b9550f9e50f82b8bda868ffb795a6a45",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraDevice.java": "a25f270d8e6677a9ed56f59a27044f73a77d3d2a10ca8139df19ce99e5ea7adc",
+    "src/tests/capture-fixtures/android/hardware/camera2/CameraMetadata.java": "45b2427e68d049084ac8c3237b7367767214765a7318baca7bf7474ca281e5fd",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureFailure.java": "fcb8e63343af7dbc40b1ba70bd5cef90e6461594920be0dffd3fafd5bbc40190",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureRequest.java": "1310cb1ededa9b3c4aaafc34e187b5ec9700d16673e39c628b19c46fd90911a7",
+    "src/tests/capture-fixtures/android/hardware/camera2/CaptureResult.java": "80b1e8a9db258eb4c53d23f48d588ddfd9accee75739400c88bf2295431ceb0d",
+    "src/tests/capture-fixtures/android/hardware/camera2/TotalCaptureResult.java": "184280208cdd09cdfb0cbf4e53fbb296a017ec6d4b3817eda8a165852911673d",
+    "src/tests/capture-fixtures/android/hardware/camera2/params/RggbChannelVector.java": "b8adf5170f74c2468c3bd24e93809fdebf92e91159906b92087d97c644d0f461",
+    "src/tests/capture-fixtures/android/media/Image.java": "d620afc1e437c2489ee62b0b082c2c3699ce3a1b7aed4f65abbf1c566018f3f8",
+    "src/tests/capture-fixtures/android/media/ImageReader.java": "cd930fc1af000023c1c4f25a7321779926d69168c2f73f6d4cef3599e0a8fdd1",
+    "src/tests/capture-fixtures/android/os/Build.java": "52f99e2ef8d88eae190a19d0c9bba81abfff502c5f5f5b88ffa0e484b0e645b4",
+    "src/tests/capture-fixtures/android/os/Handler.java": "367197772ee40a39815ee913ada23136cba193fa2a57541c8c3ada370aa6cbf2",
+    "src/tests/capture-fixtures/android/os/SystemClock.java": "abcd9822be5feb5e81621a8704d870e03d8722b0757e675e20b82fc61c5aa33b",
+    "src/tests/capture-fixtures/android/util/Range.java": "7b0eb98f149a6a9c6152944f517fcad83f520337240fb67045f427517a389d50",
+    "src/tests/capture-fixtures/android/view/Surface.java": "eef05ae00db3872878ea76e16ded7349ad6cff787bcc88c7d8a0f30d10d6a0a1",
+    "src/tests/capture-fixtures/com/hiro/ulike/CaptureYuv.java": "31ff89b689bcfdc05c346c1874433835e8974242b93ef79854914753492b14d4",
+    "src/tests/capture-fixtures/com/hiro/ulike/ExitJobs185.java": "96b276bbce76cd6e8d724d972819fbd629576b3a60dd787e0eba50070f7fb962",
+    "src/tests/capture-fixtures/com/hiro/ulike/FusionPixels1933.java": "e6728b5d1db1534a0696c92a1ccac7beb3883331f399b52148844066d50da685",
+    "src/tests/capture-fixtures/com/hiro/ulike/OpticalZoom.java": "3214e0303cc2d792b1d0729a63533f5359b235db4c4e5b34ffab88d6688e4b4d",
+    "src/tests/capture-fixtures/com/hiro/ulike/PhotoDetail.java": "fe3d64f57c24d5bd8f19331af55df9d418227b9b61c225e389027d8066f031a2",
+    "src/tests/capture-fixtures/com/hiro/ulike/ShotContext1932.java": "fd196d949353727768dcf9ec326cf7e708ccd6bfdb9efbf3cf43e224d90fabf1",
+    "src/tests/capture-fixtures/com/ss/android/vesdk/TECameraVideoRecorder$60.java": "499e2a037d50a804c7fd7af5a5567cee66b7a28745e274abc55d73bd3f7e091a",
+    "src/tests/capture-fixtures/i/s/a/w/i.java": "749694431868fcce5e63bed0204e6b75a91ce9340328914c5e946b2948e0f93b",
+    "src/tests/capture-fixtures/i/s/a/w/m.java": "33ce970c6f64fcb45c68ef75f5a265a8c2e7b9d073e94012df4f1c5af1507706",
+    "src/tests/face-fixtures/android/graphics/Bitmap.java": "306d86cc942b6716856477b8e73cc0294ea6abba22929cae723ef97c9f6001e9",
+    "src/tests/face-fixtures/android/graphics/Canvas.java": "39b15b5f9f75e4ffff59d7390f937fdca22b29e0414dd6575523fe534eb5df4d",
+    "src/tests/face-fixtures/android/graphics/Matrix.java": "fed723962533b311ace5b64609fbb365f7f37cd39a4fd3daad18b894f9209375",
+    "src/tests/face-fixtures/android/graphics/Paint.java": "1116bf6bd70edcb95320a0b4c9a61e81d8a39dba3e9512bf74cd3818883eb82f",
+    "src/tests/face-fixtures/android/graphics/PointF.java": "4a70a27088f0d9c5fd3a115ab7a68ad422e33dd447d9da92c034cfb218865c28",
+    "src/tests/face-fixtures/android/media/FaceDetector.java": "455e4a0bd273cd122f60617b0fa020a3b77cbcfeac0f17d7932fbd389f8618ac",
+    "src/tests/fast-fixtures/android/graphics/Bitmap.java": "0f9b3f70090da74886b6d35bb40a8a1b0a12e1ffea2e631cedf3c3d159db274a",
+    "src/tests/fast-fixtures/com/hiro/ulike/QualityPipeline1932.java": "073307e7b52ec7a640fd4f3cacda7f24903b18659faf7070b9d41ad4b39af5ce",
+    "src/tests/reference/QualityPixels1932.java": "d67433da7946fbafb83a6e1736c1860b9cc967f4f8afe7f104f7351c2adf107d",
+    "src/tests/scheduler-fixtures/android/graphics/Bitmap.java": "3f4ef05e68cfb95fbd52484cd7c59dd9ec107815884c917693d372d53c024d80",
+    "src/tests/scheduler-fixtures/android/graphics/ColorSpace.java": "6e9c86f4549071ab96d7882e93d198e0a98f8da82cdb19c0b2c916de6d8df972",
+    "src/tests/scheduler-fixtures/android/os/Build.java": "0bacc305a84b48f3335e4d047ed017ceb64a3c170d57f8ad0362b83fafeb4ab3",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/Chroma186.java": "97f96373cbaf304059247ce7be0f652d3b231ab35a67fa09c45ddba8fd5d2b59",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/ChromaPipeline177.java": "26167c3a03394402011082d3626a936e8029bf4e51c6bd0a42e2833fb584b2c0",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/ChromaPipeline186.java": "0554450496193ee552cbf62381f7c9e546bd70501520abb207df618ec67dcb49",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/DetailPixels.java": "2ee25a6184105c40b50b40c5a8bec5e2713df7b19359407b7dcdfd2c85e02ecd",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/DetailSerial186.java": "0176309e628af4b9f506a6bf286f178c3d29d7ea1f996448dbce334c402b2d92",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/FaceRegions1934.java": "d2af061be721e0478ffc404474dcfa161e7462c4a18b9f68ad971e26fbce54e2",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/FastResize1933.java": "7a3c58e8342e5bf903f075857216f1e7c2f015bbb7fdbaafabbb57d7603b6522",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/HostAudit1932.java": "951dfb25a666463e788d7d2145a3fbefbbfb193f8c5df61e43f75d973e8d7eab",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/PhotoDetail.java": "56a4dd0687291095c8df130480f64ea7da36301be8d72c1b1b6e0caf0007592f",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/SaveQuality2.java": "ceeb5b73b7ef98eaaa8a3ee04c1c9d1bb25516d8827bb43c0fa1cdd7cd1cc246",
+    "src/tests/scheduler-fixtures/com/hiro/ulike/ShotContext1932.java": "9ffbc989c9aba7b2f58bf758ab502bdae24ec6bbcbb17c249a199a85c7e6ac25",
+    "src/validate1933.py": "beacf2417bc5ada175bbf8b80113c6e36e7dfc910756428532f533b34ae0de75",
+    "src/validate1934.py": "0150d237357c419c842508d1b1a383d47bdb350718132af7fa70b8e8c3112a25",
+    "manifest.json": "184fff58536417a5f75fbbd98b80fc6ac370058b9b8f852a17f0f93a914928b0"
+  }
+}
