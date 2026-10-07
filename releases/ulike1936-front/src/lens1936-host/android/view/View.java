@@ -1,0 +1,1 @@
+package android.view; public class View {public static final int VISIBLE=0,GONE=8; private int visibility=VISIBLE; public int layouts,invalidations; public void setVisibility(int v){visibility=v;} public int getVisibility(){return visibility;} public void requestLayout(){layouts++;} public void invalidate(){invalidations++;}}

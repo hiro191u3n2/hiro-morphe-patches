@@ -1,0 +1,1 @@
+package android.os; public final class Handler {private static final java.util.ArrayList<Runnable> QUEUE=new java.util.ArrayList<Runnable>();public Handler(Looper l){}public boolean post(Runnable r){QUEUE.add(r);return true;}public static void drain(){Looper.worker=false;while(!QUEUE.isEmpty())QUEUE.remove(0).run();}public static int queued(){return QUEUE.size();}}

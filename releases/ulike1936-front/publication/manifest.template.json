@@ -1,0 +1,459 @@
+{
+  "schema": "ulike1936-publication-v1",
+  "ulike_version": "1.9.36",
+  "bundle_version": "1.0.169",
+  "baseline_bundle_version": "1.0.168",
+  "baseline_bundle_sha256": "2a9f78322dc78a4055338679d8cad71b7499627223c98002015172ffb4d136a6",
+  "baseline_bundle_bytes": 17437628,
+  "baseline_bundle_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/7a3be455d791e4a8773b0dd1e855b2c2c83bb95d/downloads/Hiro_Morphe_Patches_v1.0.168.mpp",
+  "baseline_ulike_version": "1.9.35",
+  "baseline_ulike_sha256": "412e144dd96c968cb5511a796cb3a24a8346a75b2ebf7a0034cb8e7ac42ec413",
+  "baseline_ulike_bytes": 790500,
+  "baseline_ulike_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/7a3be455d791e4a8773b0dd1e855b2c2c83bb95d/downloads/ULike_HQ_Texture_Online_v1.9.35.mpp",
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "jdk_runtime_version": "21.0.8+9-LTS",
+  "jdk_vendor": "Eclipse Adoptium",
+  "ndk_revision": "27.2.12479018",
+  "native_library_sha256": "90fc1423983fb629f3e3bf5d55ebb9d1e47c0f9054d3d645af5ac8621144301c",
+  "native_library_bytes": 7712,
+  "native_seed_sha256": "271a120ccbf67b484a53ed6adcaefe65a81c099dc02f0457c49129e7b0c26efa",
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_bundle_entries": [],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+    "classes.dex",
+    "ulike/methods.dex",
+    "ulike/methods.tsv",
+    "ulike/runtime.dex"
+  ],
+  "allowed_added_standalone_entries": [],
+  "required_source_paths": [
+    "src/AnalyzeAll.java",
+    "src/FrontHooks1936.java",
+    "src/FrontPreview1936.java",
+    "src/Hooks1936.java",
+    "src/LensHooks1936.java",
+    "src/LensVisibility1936.java",
+    "src/MergePayloads.java",
+    "src/PatchClass1936.java",
+    "src/SeedFront1936.java",
+    "src/Transform1936.java",
+    "src/VerifyApplied1920.java",
+    "src/VerifyBurstAbi1933.java",
+    "src/VerifyFront1936.java",
+    "src/VerifyFrontAbi1931.java",
+    "src/VerifyFrontAbi1936.java",
+    "src/VerifyHelperReferences.java",
+    "src/VerifyLensAbi1936.java",
+    "src/VerifySaveAbi1935.java",
+    "src/build1936.py",
+    "src/extract_seed1936.py",
+    "src/finalize1936.py",
+    "src/front1936-baseline/FrontPreview1931.java",
+    "src/front1936-baseline/PreviewInputs1929.java",
+    "src/front1936-baseline/PreviewStart1927.java",
+    "src/front1936-baseline/ProviderLifecycle1929.java",
+    "src/front1936-host/android/content/Context.java",
+    "src/front1936-host/android/graphics/SurfaceTexture.java",
+    "src/front1936-host/android/hardware/Camera.java",
+    "src/front1936-host/android/hardware/camera2/CameraCaptureSession.java",
+    "src/front1936-host/android/hardware/camera2/CameraCharacteristics.java",
+    "src/front1936-host/android/hardware/camera2/CameraDevice.java",
+    "src/front1936-host/android/os/Build.java",
+    "src/front1936-host/android/os/Handler.java",
+    "src/front1936-host/android/os/Looper.java",
+    "src/front1936-host/android/os/SystemClock.java",
+    "src/front1936-host/android/util/Log.java",
+    "src/front1936-host/android/view/Surface.java",
+    "src/front1936-host/com/hiro/ulike/ExitBusy1921.java",
+    "src/front1936-host/com/hiro/ulike/FrontTest1936.java",
+    "src/front1936-host/com/hiro/ulike/ManualLens170.java",
+    "src/front1936-host/com/hiro/ulike/OpticalZoom.java",
+    "src/front1936-host/com/hiro/ulike/RearRestart1926.java",
+    "src/front1936-host/com/ss/android/ttvecamera/TECameraSettings.java",
+    "src/front1936-host/com/ss/android/vesdk/ConcurrentList.java",
+    "src/front1936-host/com/ss/android/vesdk/VECameraCapture.java",
+    "src/front1936-host/com/ss/android/vesdk/VECameraSettings.java",
+    "src/front1936-host/com/ss/android/vesdk/frame/TECapturePipeline.java",
+    "src/front1936-host/i/s/a/w/d.java",
+    "src/front1936-host/i/s/a/w/g.java",
+    "src/front1936-host/i/s/a/w/h0/b.java",
+    "src/front1936-host/i/s/a/w/k.java",
+    "src/front1936-host/i/s/a/w/l0/b.java",
+    "src/front1936-host/i/s/a/w/l0/c.java",
+    "src/front1936-host/i/s/a/w/m.java",
+    "src/front1936-host/i/s/a/w/q.java",
+    "src/front1936-host/i/s/a/w/w.java",
+    "src/front1936-stubs/com/hiro/ulike/ExitBusy1921.java",
+    "src/front1936-stubs/com/hiro/ulike/ManualLens170.java",
+    "src/front1936-stubs/com/hiro/ulike/OpticalZoom.java",
+    "src/front1936-stubs/com/hiro/ulike/PreviewInputs1929.java",
+    "src/front1936-stubs/com/hiro/ulike/PreviewStart1927.java",
+    "src/front1936-stubs/com/hiro/ulike/ProviderLifecycle1929.java",
+    "src/front1936-stubs/com/hiro/ulike/RearRestart1926.java",
+    "src/front1936-stubs/com/ss/android/vesdk/ConcurrentList.java",
+    "src/front1936-stubs/com/ss/android/vesdk/VECameraCapture.java",
+    "src/front1936-stubs/com/ss/android/vesdk/frame/TECapturePipeline.java",
+    "src/host_front1936.py",
+    "src/host_lens1936.py",
+    "src/host_regression1936.py",
+    "src/lens1936-host/android/os/Handler.java",
+    "src/lens1936-host/android/os/Looper.java",
+    "src/lens1936-host/android/view/View.java",
+    "src/lens1936-host/android/widget/LinearLayout.java",
+    "src/lens1936-host/com/hiro/ulike/LensVisibilityHost1936.java",
+    "src/lens1936-host/com/hiro/ulike/OpticalZoomUi.java",
+    "src/lens1936-host/com/hiro/ulike/RearLensUi1930.java",
+    "src/lens1936-host/i/f/l/j.java",
+    "src/lens1936-host/i/f/l/n/q/y/c.java",
+    "src/lens1936-host/i/f/l/n/q/y/m.java",
+    "src/lens1936-host/i/f/l/u/g.java",
+    "src/lens1936-host/i/f/l/u/j.java",
+    "src/lens1936-host/i/f/l/u/p.java",
+    "src/lens1936-stubs/com/hiro/ulike/OpticalZoomUi.java",
+    "src/lens1936-stubs/com/hiro/ulike/RearLensUi1930.java",
+    "src/lens1936-stubs/i/f/l/j.java",
+    "src/lens1936-stubs/i/f/l/n/q/y/c.java",
+    "src/lens1936-stubs/i/f/l/n/q/y/m.java",
+    "src/lens1936-stubs/i/f/l/u/g.java",
+    "src/lens1936-stubs/i/f/l/u/j.java",
+    "src/lens1936-stubs/i/f/l/u/p.java",
+    "src/production1936.json",
+    "src/review_release1936.py",
+    "src/stock-seed1936-hashes.tsv",
+    "src/stock-seed1936.dex",
+    "src/validate1936.py"
+  ],
+  "qa_required_values": {
+    "schema": "ulike1936-front-v1",
+    "status": "REBUILD_MATCHES_ORIGINAL_APKS_VALIDATED_MPP_DEVICE_UNVERIFIED",
+    "ulike_version": "1.9.36",
+    "bundle_version": "1.0.169",
+    "base_versions": [
+      "1.9.35",
+      "1.0.168"
+    ],
+    "approved_lineage": "1.8.8",
+    "selected_candidates": [
+      "front_restart_preview",
+      "front_switch_lens_visibility"
+    ],
+    "device_tested": false,
+    "device_quality_verified": false,
+    "original_apk_apply_tested": true,
+    "ci_android_apply_tested": false,
+    "non_ulike_resources_byte_identical": true,
+    "non_ulike_loader_classes_unchanged": true,
+    "camera_lifecycle_byte_identical": false,
+    "camera_startup_recovery_byte_identical": false,
+    "image_pipeline_byte_identical": true,
+    "standalone_and_bundle_ulike_resources_identical": true,
+    "native_methods_byte_identical": false,
+    "native_methods_tsv_byte_identical": false,
+    "host_quality_passed": true,
+    "host_quality_result": {
+      "status": "passed",
+      "assertions": 211,
+      "suites": {
+        "front_restart": {
+          "status": "passed",
+          "assertions": 186,
+          "device_tested": false
+        },
+        "lens_visibility": {
+          "status": "passed",
+          "assertions": 25,
+          "scope": "production Java helper with host View and native state fixtures; no hardware"
+        }
+      },
+      "device_tested": false,
+      "performance_measured_on_device": false
+    },
+    "dex_verification": "PASS1936 assertions=1544; compiled production bytecode equals shipped; native hook inverse verified; unchanged quality, speed, save and other apps; actual original APK contracts checked=false; device untested",
+    "changed_standalone_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+      "classes.dex",
+      "ulike/methods.dex",
+      "ulike/methods.tsv",
+      "ulike/runtime.dex"
+    ],
+    "added_standalone_entries": [],
+    "changed_bundle_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
+      "classes.dex",
+      "ulike/methods.dex",
+      "ulike/methods.tsv",
+      "ulike/runtime.dex"
+    ],
+    "added_bundle_entries": [],
+    "native_library_sha256": "90fc1423983fb629f3e3bf5d55ebb9d1e47c0f9054d3d645af5ac8621144301c",
+    "native_library_bytes": 7712,
+    "native_library_byte_identical": true,
+    "native_installer_byte_identical": true,
+    "native_preservation": {
+      "sha256": "90fc1423983fb629f3e3bf5d55ebb9d1e47c0f9054d3d645af5ac8621144301c",
+      "bytes": 7712,
+      "installer_sha256": "862ba401bcf21f08397d9e3e37a3c8e802ee063c2a8f6b27f9d137b7d7899390",
+      "byte_identical_to_1935": true
+    },
+    "speed_and_save_helpers_byte_identical": true,
+    "jdk_identity": {
+      "runtime_version": "21.0.8+9-LTS",
+      "vendor": "Eclipse Adoptium",
+      "javac_version": "21.0.8"
+    },
+    "published": false,
+    "manager_feed_updated": false,
+    "limitations": [
+      "No Android/Galaxy/ART or camera-hardware execution.",
+      "No device save latency or visual quality measurement."
+    ],
+    "changed_runtime_methods": [
+      "Lcom/hiro/ulike/OpticalZoom;->background(Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/OpticalZoom;->closing(Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/OpticalZoom;->prepared(Ljava/lang/Object;I)V",
+      "Lcom/hiro/ulike/OpticalZoomUi$Bar;->install()V"
+    ],
+    "changed_native_methods": [
+      "Lcom/ss/android/vesdk/VECameraCapture;->addCapturePipelines(Lcom/ss/android/vesdk/ConcurrentList;)V",
+      "Lcom/ss/android/vesdk/VECameraCapture;->destroy()V",
+      "Lcom/ss/android/vesdk/VECameraCapture;->onCaptureStarted(II)V",
+      "Lcom/ss/android/vesdk/VECameraCapture;->start(Lcom/ss/android/vesdk/ConcurrentList;)I",
+      "Lcom/ss/android/vesdk/VECameraCapture;->startPreview()I",
+      "Lcom/ss/android/vesdk/VECameraCapture;->stopPreview(Z)I",
+      "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings$CAMERA_FACING_ID;Lcom/bytedance/bpea/basics/Cert;)I",
+      "Lcom/ss/android/vesdk/VECameraCapture;->switchCamera(Lcom/ss/android/vesdk/VECameraSettings;Lcom/bytedance/bpea/basics/Cert;)I",
+      "Lcom/ss/android/vesdk/VECameraCapture;->switchCameraMode(ILcom/ss/android/ttvecamera/TECameraSettings;)I",
+      "Li/f/l/n/q/y/c;->g0(Z)V",
+      "Li/s/a/w/l0/b;->m(Li/s/a/w/m;)V"
+    ],
+    "new_native_methods": [
+      "Li/f/l/n/q/y/c;->g0(Z)V"
+    ],
+    "new_helper_classes": [
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$1;",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$2;",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;",
+      "Lcom/hiro/ulike/FrontPreview1936;",
+      "Lcom/hiro/ulike/LensVisibility1936$1;",
+      "Lcom/hiro/ulike/LensVisibility1936;"
+    ],
+    "replaced_helper_roots": [
+      "FrontPreview1936",
+      "LensVisibility1936"
+    ],
+    "new_runtime_methods": [
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$1;-><init>(Lcom/hiro/ulike/FrontPreview1936$Pending;)V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$1;->run()V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$2;-><init>(Lcom/hiro/ulike/FrontPreview1936$Pending;)V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending$2;->run()V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;-><init>(Lcom/ss/android/vesdk/VECameraCapture;Ljava/lang/Object;Ljava/lang/Object;JJJ)V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;->current(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;->exhausted()Z",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;->run()V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;->runNative()V",
+      "Lcom/hiro/ulike/FrontPreview1936$Pending;->snapshot(Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;-><clinit>()V",
+      "Lcom/hiro/ulike/FrontPreview1936;-><init>()V",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$000()Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$100()Ljava/util/Map;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1000()Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1100(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1200(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1300(Lcom/ss/android/vesdk/VECameraCapture;Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1400(Lcom/ss/android/vesdk/VECameraCapture;)I",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1500(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1600()Ljava/util/Map;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1700()Ljava/util/Map;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1800(Lcom/ss/android/vesdk/VECameraCapture;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$1900(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$200()Ljava/util/Map;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$2000(Ljava/lang/Object;Ljava/lang/String;)I",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$2100(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$2200(Lcom/ss/android/vesdk/VECameraCapture;IZJ)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$2300(Lcom/ss/android/vesdk/VECameraCapture;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$300(Lcom/ss/android/vesdk/VECameraCapture;Lcom/hiro/ulike/FrontPreview1936$Pending;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$400(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$500(Ljava/lang/Object;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$600(Lcom/ss/android/vesdk/VECameraCapture;)J",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$700(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$800()Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->access$900(Lcom/hiro/ulike/FrontPreview1936$Pending;J)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->before(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->busy()Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->call(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->cancel(Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->cancelGeneration(Lcom/ss/android/vesdk/VECameraCapture;J)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->completed(Lcom/ss/android/vesdk/VECameraCapture;IZJ)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->drop(Lcom/ss/android/vesdk/VECameraCapture;Lcom/hiro/ulike/FrontPreview1936$Pending;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->enter(Lcom/ss/android/vesdk/VECameraCapture;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->front(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->generation(Lcom/ss/android/vesdk/VECameraCapture;)J",
+      "Lcom/hiro/ulike/FrontPreview1936;->get(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->hardware(Ljava/lang/Object;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->inputs(Lcom/ss/android/vesdk/VECameraCapture;)I",
+      "Lcom/hiro/ulike/FrontPreview1936;->isFront(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->leave(Lcom/ss/android/vesdk/VECameraCapture;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->nativeBlocked(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->nativeEnded(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->nativeReady(Lcom/ss/android/vesdk/VECameraCapture;Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->nativeTransition(Ljava/lang/Object;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->notReady(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->number(Ljava/lang/Object;Ljava/lang/String;)I",
+      "Lcom/hiro/ulike/FrontPreview1936;->observe(Lcom/ss/android/vesdk/VECameraCapture;J)Lcom/hiro/ulike/FrontPreview1936$Pending;",
+      "Lcom/hiro/ulike/FrontPreview1936;->optional(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->owned(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/FrontPreview1936;->pipelines(Lcom/ss/android/vesdk/VECameraCapture;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->pixel(Ljava/lang/Object;Ljava/lang/Object;)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->prepared(Ljava/lang/Object;I)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->remember(Lcom/ss/android/vesdk/VECameraCapture;IZJ)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->schedule(Lcom/hiro/ulike/FrontPreview1936$Pending;J)V",
+      "Lcom/hiro/ulike/FrontPreview1936;->server()Ljava/lang/Object;",
+      "Lcom/hiro/ulike/FrontPreview1936;->start(Lcom/ss/android/vesdk/VECameraCapture;)I",
+      "Lcom/hiro/ulike/FrontPreview1936;->texturePreview(Lcom/ss/android/vesdk/VECameraCapture;)Z",
+      "Lcom/hiro/ulike/LensVisibility1936$1;-><init>(Ljava/lang/ref/WeakReference;)V",
+      "Lcom/hiro/ulike/LensVisibility1936$1;->run()V",
+      "Lcom/hiro/ulike/LensVisibility1936;-><clinit>()V",
+      "Lcom/hiro/ulike/LensVisibility1936;-><init>()V",
+      "Lcom/hiro/ulike/LensVisibility1936;->acceptedSwitch(Li/f/l/n/q/y/c;Z)V",
+      "Lcom/hiro/ulike/LensVisibility1936;->access$000(Li/f/l/n/q/y/c;)V",
+      "Lcom/hiro/ulike/LensVisibility1936;->refresh(Li/f/l/n/q/y/c;)V",
+      "Lcom/hiro/ulike/LensVisibility1936;->register(Ljava/lang/Object;)V"
+    ],
+    "removed_runtime_methods": [],
+    "new_runtime_aliases": [],
+    "desktop_validation": {
+      "single": {
+        "patch_index": 0,
+        "patch_result": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "高画質撮影・質感美肌・素材通信を復旧"
+            }
+          ],
+          "failedPatches": []
+        },
+        "method_contracts": "PASS final APK: 33484 unique classes / 214256 methods. 2299 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+        "native_abis": [
+          "arm64-v8a"
+        ],
+        "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+        "save_native_abi": "FIELD\tLi/o/a/b1/a/b/f/a;->a:Li/o/a/q/c/c/b/e;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->b:Li/o/a/b1/a/b/f/a$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->c:Li/o/a/q/c/c/b/e$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a$a;->k:Li/o/a/b1/a/b/f/a;\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->c:I\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->j:I\tflags=4113\nMETHOD\tLi/o/a/b1/a/b/f/a$a;-><init>(Li/o/a/b1/a/b/f/a;II)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e;-><init>(Li/o/a/q/c/c/b/e$c;)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e$a;-><init>(Li/o/a/q/c/c/b/e;Landroid/graphics/Bitmap;IIZ)V\tflags=65537\nFIELD\tLi/o/a/q/c/c/b/e;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->g:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->d:J\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e;->r(Landroid/graphics/Bitmap;IIZ)Ljava/lang/String;\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e$a;->c()V\tflags=4097\nMETHOD\tLi/o/a/b1/a/b/f/a$c;->a()V\tflags=1025\nMETHOD\tLi/f/l/n/s/a;->b()Li/f/l/n/s/a;\tflags=9\nMETHOD\tLi/f/l/n/s/a;->e()Landroid/graphics/Bitmap;\tflags=1\nMETHOD\tLi/f/l/n/q/y/n;->f()Landroid/graphics/Bitmap;\tflags=9\nMETHOD\tLi/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;\tflags=9\nFIELD\tLi/o/a/p/b;->a:Li/o/a/p/b;\tflags=25\nMETHOD\tLi/o/a/p/b;->f()V\tflags=17\nFIELD\tLi/o/a/b0/f/a;->a:Li/o/a/b0/f/a;\tflags=25\nMETHOD\tLi/o/a/b0/f/a;->d(Z)V\tflags=17\nMETHOD\tLi/o/a/b1/a/g/y;->D1()I\tflags=1\nFIELD\tLcom/hiro/ulike/CaptureYuv;->active:Ljava/lang/ref/WeakReference;\tflags=74\nFIELD\tLcom/hiro/ulike/CaptureYuv;->states:Ljava/util/Map;\tflags=26\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->ready:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->closed:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->original:Landroid/media/ImageReader;\tflags=16\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->yuv:Landroid/media/ImageReader;\tflags=16\nFIELD\tLi/s/a/w/d0/a;->e0:Landroid/media/ImageReader;\tflags=1\nMETHOD\tLcom/hiro/ulike/CaptureYuv;->isReady()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PhotoDetail;->snapshot1932()Lcom/hiro/ulike/PhotoDetail$Settings;\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->forBitmap(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/ShotContext1932$Snapshot;\tflags=9\nFACT\tnotification_has_no_bitmap_access=true\teffective_global_exif_reads=0\tsettings_immutable=true\nPASS save native reflection ABI: checks=138, apk=patched.apk. No physical device execution.",
+        "lens_native_abi": "FIELD\tLi/f/l/n/q/y/c;->r:Li/f/l/j;\tflags=17\nFIELD\tLi/f/l/n/q/y/c;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/f/l/n/q/y/m;->b:Li/f/l/j;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->c:Ljava/lang/String;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->a:Li/f/l/n/q/y/m;\tflags=25\nMETHOD\tLi/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g;\tflags=17\nMETHOD\tLi/f/l/u/g;->k()Li/f/l/u/j;\tflags=17\nMETHOD\tLi/f/l/u/j;->x()Li/f/l/u/p;\tflags=17\nMETHOD\tLi/f/l/u/p;->a()Ljava/lang/Object;\tflags=17\nFIELD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->root:Landroid/widget/LinearLayout;\tflags=16\nMETHOD\tLcom/hiro/ulike/RearLensUi1930;->rearSelected()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;-><init>(Landroid/view/View;)V\tflags=65536\nMETHOD\tLcom/hiro/ulike/MacroUi168;->attach(Ljava/lang/Object;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->installCore168()V\tflags=2\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->updateCore168()V\tflags=2\nMETHOD\tLi/f/l/n/q/y/c;->g0(Z)V\tflags=17\nPASS lens direct native/helper ABI: checks=218, apk=patched.apk. No physical device execution.",
+        "dex_integrity_entries": 4,
+        "speed_native_library_sha256": "90fc1423983fb629f3e3bf5d55ebb9d1e47c0f9054d3d645af5ac8621144301c",
+        "speed_native_library_bytes": 7712,
+        "register_analysis": {
+          "tested": 2116,
+          "failed": 0
+        },
+        "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=454 classes=33484 apk=patched.apk"
+      },
+      "bundle": {
+        "patch_index": 4,
+        "patch_result": {
+          "packageName": "com.gorgeous.liteinternational",
+          "packageVersion": "5.6.2",
+          "patchingSteps": [
+            {
+              "step": "PATCHING",
+              "success": true
+            },
+            {
+              "step": "REBUILDING",
+              "success": true
+            }
+          ],
+          "appliedPatches": [
+            {
+              "name": "高画質撮影・質感美肌・素材通信を復旧"
+            }
+          ],
+          "failedPatches": []
+        },
+        "method_contracts": "PASS final APK: 33484 unique classes / 214256 methods. 2299 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+        "native_abis": [
+          "arm64-v8a"
+        ],
+        "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+        "save_native_abi": "FIELD\tLi/o/a/b1/a/b/f/a;->a:Li/o/a/q/c/c/b/e;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->b:Li/o/a/b1/a/b/f/a$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->c:Li/o/a/q/c/c/b/e$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a$a;->k:Li/o/a/b1/a/b/f/a;\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->c:I\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->j:I\tflags=4113\nMETHOD\tLi/o/a/b1/a/b/f/a$a;-><init>(Li/o/a/b1/a/b/f/a;II)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e;-><init>(Li/o/a/q/c/c/b/e$c;)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e$a;-><init>(Li/o/a/q/c/c/b/e;Landroid/graphics/Bitmap;IIZ)V\tflags=65537\nFIELD\tLi/o/a/q/c/c/b/e;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->g:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->d:J\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e;->r(Landroid/graphics/Bitmap;IIZ)Ljava/lang/String;\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e$a;->c()V\tflags=4097\nMETHOD\tLi/o/a/b1/a/b/f/a$c;->a()V\tflags=1025\nMETHOD\tLi/f/l/n/s/a;->b()Li/f/l/n/s/a;\tflags=9\nMETHOD\tLi/f/l/n/s/a;->e()Landroid/graphics/Bitmap;\tflags=1\nMETHOD\tLi/f/l/n/q/y/n;->f()Landroid/graphics/Bitmap;\tflags=9\nMETHOD\tLi/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;\tflags=9\nFIELD\tLi/o/a/p/b;->a:Li/o/a/p/b;\tflags=25\nMETHOD\tLi/o/a/p/b;->f()V\tflags=17\nFIELD\tLi/o/a/b0/f/a;->a:Li/o/a/b0/f/a;\tflags=25\nMETHOD\tLi/o/a/b0/f/a;->d(Z)V\tflags=17\nMETHOD\tLi/o/a/b1/a/g/y;->D1()I\tflags=1\nFIELD\tLcom/hiro/ulike/CaptureYuv;->active:Ljava/lang/ref/WeakReference;\tflags=74\nFIELD\tLcom/hiro/ulike/CaptureYuv;->states:Ljava/util/Map;\tflags=26\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->ready:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->closed:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->original:Landroid/media/ImageReader;\tflags=16\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->yuv:Landroid/media/ImageReader;\tflags=16\nFIELD\tLi/s/a/w/d0/a;->e0:Landroid/media/ImageReader;\tflags=1\nMETHOD\tLcom/hiro/ulike/CaptureYuv;->isReady()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PhotoDetail;->snapshot1932()Lcom/hiro/ulike/PhotoDetail$Settings;\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->forBitmap(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/ShotContext1932$Snapshot;\tflags=9\nFACT\tnotification_has_no_bitmap_access=true\teffective_global_exif_reads=0\tsettings_immutable=true\nPASS save native reflection ABI: checks=138, apk=patched.apk. No physical device execution.",
+        "lens_native_abi": "FIELD\tLi/f/l/n/q/y/c;->r:Li/f/l/j;\tflags=17\nFIELD\tLi/f/l/n/q/y/c;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/f/l/n/q/y/m;->b:Li/f/l/j;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->c:Ljava/lang/String;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->a:Li/f/l/n/q/y/m;\tflags=25\nMETHOD\tLi/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g;\tflags=17\nMETHOD\tLi/f/l/u/g;->k()Li/f/l/u/j;\tflags=17\nMETHOD\tLi/f/l/u/j;->x()Li/f/l/u/p;\tflags=17\nMETHOD\tLi/f/l/u/p;->a()Ljava/lang/Object;\tflags=17\nFIELD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->root:Landroid/widget/LinearLayout;\tflags=16\nMETHOD\tLcom/hiro/ulike/RearLensUi1930;->rearSelected()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;-><init>(Landroid/view/View;)V\tflags=65536\nMETHOD\tLcom/hiro/ulike/MacroUi168;->attach(Ljava/lang/Object;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->installCore168()V\tflags=2\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->updateCore168()V\tflags=2\nMETHOD\tLi/f/l/n/q/y/c;->g0(Z)V\tflags=17\nPASS lens direct native/helper ABI: checks=218, apk=patched.apk. No physical device execution.",
+        "dex_integrity_entries": 4,
+        "speed_native_library_sha256": "90fc1423983fb629f3e3bf5d55ebb9d1e47c0f9054d3d645af5ac8621144301c",
+        "speed_native_library_bytes": 7712,
+        "register_analysis": {
+          "tested": 2116,
+          "failed": 0
+        },
+        "front_lifecycle_abi": "PASS front native ABI/lifecycle checks=454 classes=33484 apk=patched.apk"
+      }
+    },
+    "quality_dex_verification": "PASS1936 assertions=1751; compiled production bytecode equals shipped; native hook inverse verified; unchanged quality, speed, save and other apps; actual original APK contracts checked=true; device untested",
+    "stock_burst_capture_abi_verification": "PASS burst native reflection ABI: checks=66, apk=stock.apk. No device execution.",
+    "desktop_evidence_sha256": "7de88bee7193381cddc4b10865837e8ef3199a4f747b4bd8fa47a32375bce1f7",
+    "stock_lifecycle_abi_verification": "PASS front native ABI/lifecycle checks=451 classes=33134 apk=stock.apk",
+    "host_quality_result.status": "passed",
+    "jdk_identity.runtime_version": "21.0.8+9-LTS",
+    "jdk_identity.vendor": "Eclipse Adoptium",
+    "jdk_identity.javac_version": "21.0.8",
+    "host_quality_result.assertions": 211,
+    "host_quality_result.suites.front_restart.status": "passed",
+    "host_quality_result.suites.lens_visibility.status": "passed"
+  },
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.36.mpp": {
+      "sha256": "5cfb1648269ff03448fc2ab8990e073a43af49f83ffc6ad9a64fc0f86a38aba1",
+      "bytes": 796309
+    },
+    "Hiro_Morphe_Patches_v1.0.169.mpp": {
+      "sha256": "d2c8c4bef3b400ac117e6a794751a1140305bca75c510bf4368f74391ed8e8aa",
+      "bytes": 17443387
+    },
+    "QA_ULike_v1.9.36.json": {
+      "sha256": "e2bb783f40248d83ee17b4bdc68dff5449bafd3d7c08330946e520b019a1897f",
+      "bytes": 33570
+    },
+    "ULike_v1.9.36_sources_and_QA.zip": {
+      "sha256": "9c4282ec3b1b664de7f4a958793e98738d6c57c97cbafb38e35be5a8c556adec",
+      "bytes": 132509
+    },
+    "RELEASE_NOTES.txt": {
+      "sha256": "f5a104db28c3ef193af9761ae2ddb56ad5f70d81521511431f2c6112ae71295f",
+      "bytes": 1863
+    },
+    "SHA256SUMS.txt": {
+      "sha256": "5a5ff08f11005695bd2b00262d8c0c8bafdb50568651142ceb20f4eb5d6d6a7d",
+      "bytes": 472
+    }
+  }
+}
