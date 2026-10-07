@@ -70,8 +70,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          ndk_path="${ANDROID_HOME}/ndk/27.2.12479018"
-          if [ ! -d "$ndk_path" ]; then sdkmanager 'ndk;27.2.12479018'; fi
+          ndk_path=".ci-ulike1944/android-ndk-r27c"
+          curl --fail --location --retry 3 --output .ci-ulike1944/ndk-r27c.zip https://dl.google.com/android/repository/android-ndk-r27c-linux.zip
+          python3 -c 'import hashlib,pathlib; assert hashlib.sha256(pathlib.Path(".ci-ulike1944/ndk-r27c.zip").read_bytes()).hexdigest()=="59c2f6dc96743b5daf5d1626684640b20a6bd2b1d85b13156b90333741bad5cc", "Pinned NDK archive differs"'
+          unzip -q .ci-ulike1944/ndk-r27c.zip -d .ci-ulike1944
           python3 releases/ulike1944-speed/src/native1944/build_native1944.py --ndk "$ndk_path" --output .ci-ulike1944/native
           python3 releases/ulike1944-speed/src/build1944.py --native-library .ci-ulike1944/native/libulike_speed1935.so --input .ci-ulike1944/input --tools .ci-ulike1944/tools --work .ci-ulike1944/build --output .ci-ulike1944/dist 2>&1 | tee .ci-ulike1944/build.log
       - name: Bind rebuilt MPPs to original-APKS validation and finalize package
