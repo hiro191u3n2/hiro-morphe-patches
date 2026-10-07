@@ -1,0 +1,718 @@
+{
+  "schema": "oneback163-synthetic-integration-v1",
+  "result": "PASS",
+  "blocking_findings": [],
+  "input_kind": "original synthetic fixtures; no third-party app code/resources",
+  "physical_device_tested": false,
+  "packages": [
+    "com.ss.android.ugc.trill",
+    "com.zhiliaoapp.musically",
+    "com.instagram.android",
+    "com.twitter.android",
+    "ctrip.english"
+  ],
+  "expected_runs": 10,
+  "bundle_sha256": {
+    "standalone": "e14fc97986eb581d3078aca0b800b549cb4015d9914e5c6234abbcabc5fcc568",
+    "combined": "d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4"
+  },
+  "audit_source_sha256": {
+    "DexAudit.java": "6faa8f2411f60e08f0ea6b1f3f31962465a0fc65c0fca6995ca7ab7d94913f0c",
+    "Fixtures.java": "8d9701fe2cc4530d6ebd2652d678682221df2ed5a19d0d1d764beff07603e052",
+    "run_synthetic.py": "7fce465dda1f10ed898cdabd535fb6d737be8df498998ef9944f646ce2fe7dca"
+  },
+  "runs": [
+    {
+      "variant": "standalone",
+      "package": "com.ss.android.ugc.trill",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "195e9973fa9b2f57726fb3234ca62b81b0d0c024e7be1131db084d4cf82a4015",
+      "output_sha256": "c84f04c4d367dc0b470d5ac5f6e8b16e923e602440408f01f81160df1483b44c",
+      "morphe": {
+        "packageName": "com.ss.android.ugc.trill",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.ss.android.ugc.trill",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.297
+    },
+    {
+      "variant": "standalone",
+      "package": "com.zhiliaoapp.musically",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "467b9a7243ed624204f2b52d8d0d24fe46689e853ebacaf064b836ea644cf012",
+      "output_sha256": "1d84895f83663a2d0d78c50c24fa3a6228b888503dcc497da64a638ba245c012",
+      "morphe": {
+        "packageName": "com.zhiliaoapp.musically",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.zhiliaoapp.musically",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.326
+    },
+    {
+      "variant": "standalone",
+      "package": "com.instagram.android",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "2534dcd25431b02f276631248affcc4c6cf555d79be121c00f15b446f4504899",
+      "output_sha256": "b5ffa0810e99314e78376f5035195324592b1630d19d4256be3bd1bb77e0d46e",
+      "morphe": {
+        "packageName": "com.instagram.android",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.instagram.android",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.357
+    },
+    {
+      "variant": "standalone",
+      "package": "com.twitter.android",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "736167aaf642c3caf57056d5b004ac64a42415e31fa358df59d8c1531dc22756",
+      "output_sha256": "b8ff66b089a43f17b82d240b03c0bf5f4f2c48c5b2c0d1df3608a8b543b1ed37",
+      "morphe": {
+        "packageName": "com.twitter.android",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.twitter.android",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.467
+    },
+    {
+      "variant": "standalone",
+      "package": "ctrip.english",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "c87ce0712c2834e02bb437241025df4d3953ae9a4196827b9f6b91c843c5cca1",
+      "output_sha256": "42fdfc92b5fa42393f307b360ca894a6fc52e7c9f3e07dd3e924c03eb24e7a45",
+      "morphe": {
+        "packageName": "ctrip.english",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "ctrip.english",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.235
+    },
+    {
+      "variant": "combined",
+      "package": "com.ss.android.ugc.trill",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "195e9973fa9b2f57726fb3234ca62b81b0d0c024e7be1131db084d4cf82a4015",
+      "output_sha256": "e497accc6369a026288ee14ade1d7958d5c40935523e0c789b1c3b19e8b33bca",
+      "morphe": {
+        "packageName": "com.ss.android.ugc.trill",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.ss.android.ugc.trill",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.166
+    },
+    {
+      "variant": "combined",
+      "package": "com.zhiliaoapp.musically",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "467b9a7243ed624204f2b52d8d0d24fe46689e853ebacaf064b836ea644cf012",
+      "output_sha256": "8267189d670627bbd10b6b1ba52862b1be7ff1bed826c1c1afab42e5ccb0496c",
+      "morphe": {
+        "packageName": "com.zhiliaoapp.musically",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.zhiliaoapp.musically",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.092
+    },
+    {
+      "variant": "combined",
+      "package": "com.instagram.android",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "2534dcd25431b02f276631248affcc4c6cf555d79be121c00f15b446f4504899",
+      "output_sha256": "887f9f8301fb680abf01675e8ce5154c6fc34cb7c9f135ce894182ed438e4c2d",
+      "morphe": {
+        "packageName": "com.instagram.android",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.instagram.android",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.444
+    },
+    {
+      "variant": "combined",
+      "package": "com.twitter.android",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "736167aaf642c3caf57056d5b004ac64a42415e31fa358df59d8c1531dc22756",
+      "output_sha256": "8f94ed0e94c9283df84cadac6164d38ca70bdaead5a087d0abdebd2b2ba93343",
+      "morphe": {
+        "packageName": "com.twitter.android",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "com.twitter.android",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.511
+    },
+    {
+      "variant": "combined",
+      "package": "ctrip.english",
+      "version": "999.0",
+      "result": "PASS",
+      "input_sha256": "c87ce0712c2834e02bb437241025df4d3953ae9a4196827b9f6b91c843c5cca1",
+      "output_sha256": "106821b42a1b6d77faae4ea7df55bbe6746498ab88607d178e51f8c3022d5a64",
+      "morphe": {
+        "packageName": "ctrip.english",
+        "packageVersion": "999.0",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "戻る1回で終了・履歴削除"
+          }
+        ],
+        "failedPatches": []
+      },
+      "manifest_resources": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "package": "ctrip.english",
+        "version": "999.0",
+        "activity_callback_flags": 2,
+        "assertions": 17,
+        "permissions_flags_assets_and_resource_ids_preserved": true,
+        "physical_device_tested": false
+      },
+      "dex": {
+        "result": "PASS",
+        "blocking_findings": [],
+        "assertions": 7415,
+        "tests": [
+          "emitted application: every original class equals reviewed transform, allowing only verified const-string/jumbo reencoding and exact debug instruction-start floor; instruction operands/targets, catches, and all debug event values/order retained; added classes limited to OneBackExit runtime",
+          "emitted application: every OneBack runtime invocation resolves, only nine public hook signatures cross application boundary"
+        ],
+        "counts": {
+          "activity_lifecycle_added": 10,
+          "back_added": 4,
+          "activity_classes": 5,
+          "activity_lifecycle_entry": 4,
+          "back_replaced": 2,
+          "key_guard_wrapped": 7,
+          "dialog_classes": 3,
+          "preime_classes": 3,
+          "dialog_builder_hooks": 1,
+          "dialog_show_hooks": 1,
+          "key_guard_added": 4
+        },
+        "original_classes": 14,
+        "unchanged_classes": 3,
+        "changed_classes": 11,
+        "runtime_classes_added": 19,
+        "public_hooks": 33,
+        "resolved_runtime_calls": 150,
+        "physical_device_tested": false,
+        "encoding_normalizations": {}
+      },
+      "seconds": 2.636
+    }
+  ],
+  "completed_runs": 10,
+  "assertions": 74320
+}

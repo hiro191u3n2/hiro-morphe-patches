@@ -1,0 +1,90 @@
+{
+  "result": "PASS",
+  "validation": "focused DEX re-encoding analysis of one unchanged X class",
+  "class": "Lcom/twitter/commerce/api/CommerceProductDetailViewArgs$$serializer;",
+  "original_apk": "Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+  "patched_apk": "x-oneback-final.apk",
+  "original_dex": {
+    "entry": "classes9.dex",
+    "string_count": 62697,
+    "string_indexes": {
+      "type": 61509,
+      "value": 62007
+    }
+  },
+  "patched_dex": {
+    "entry": "classes17.dex",
+    "string_count": 67364,
+    "string_indexes": {
+      "type": 66034,
+      "value": 66736
+    }
+  },
+  "class_metadata_and_fields_equal": true,
+  "method_set_equal": true,
+  "method_count": 9,
+  "all_method_metadata_equal": true,
+  "canonically_identical_methods": 7,
+  "changed_encoding_methods": [
+    {
+      "method": "<clinit>()V",
+      "instruction_index_zero_based": 14,
+      "original_code_address": 31,
+      "patched_code_address": 31,
+      "string": "type",
+      "register": 0,
+      "opcode_before": "CONST_STRING",
+      "opcode_after": "CONST_STRING_JUMBO",
+      "instruction_counts": [
+        19,
+        19
+      ],
+      "code_units": [
+        40,
+        41
+      ],
+      "register_counts": [
+        4,
+        4
+      ],
+      "all_other_instruction_operands_equal": true,
+      "try_blocks_equal": true,
+      "debug_items_equal": true
+    },
+    {
+      "method": "serialize(Lkotlinx/serialization/encoding/Encoder;Lcom/twitter/commerce/api/CommerceProductDetailViewArgs;)V",
+      "instruction_index_zero_based": 2,
+      "original_code_address": 5,
+      "patched_code_address": 5,
+      "string": "value",
+      "register": 0,
+      "opcode_before": "CONST_STRING",
+      "opcode_after": "CONST_STRING_JUMBO",
+      "instruction_counts": [
+        10,
+        10
+      ],
+      "code_units": [
+        23,
+        24
+      ],
+      "register_counts": [
+        4,
+        4
+      ],
+      "all_other_instruction_operands_equal": true,
+      "try_blocks_equal": true,
+      "debug_changes": [
+        {
+          "line_number_before": 1,
+          "line_number_after": 1,
+          "code_address_before": 10,
+          "code_address_after": 11
+        }
+      ]
+    }
+  ],
+  "conclusion": "Both emitted string indexes exceed 65535, requiring jumbo encoding. The one debug address advances by the added code unit. No instruction meaning, operand, class metadata, field or method metadata changed in this class.",
+  "scope_limit": "This record covers the named class only; full application DEX audit is separate.",
+  "physical_device_tested": false
+}

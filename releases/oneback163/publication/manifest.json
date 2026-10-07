@@ -1,0 +1,76 @@
+{
+  "schema": "oneback163-publication-v1",
+  "review_status": "reviewed",
+  "repo": "hiro191u3n2/hiro-morphe-patches",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.163",
+  "single_manifest_name": "OneBack Exit No Recents",
+  "patch_class_prefix": "app/hiro/oneback/patches/",
+  "patch_default_enabled": true,
+  "supported_packages": [
+    "com.ss.android.ugc.trill",
+    "com.zhiliaoapp.musically",
+    "com.instagram.android",
+    "com.twitter.android",
+    "ctrip.english"
+  ],
+  "baseline_bundle": {
+    "version": "1.0.162",
+    "file": "Hiro_Morphe_Patches_v1.0.162.mpp",
+    "bytes": 17322782,
+    "sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5",
+    "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/50524e48dcc4851f4486e5b17b28010ec4cc4c19/downloads/Hiro_Morphe_Patches_v1.0.162.mpp"
+  },
+  "expected_mpp": {
+    "Hiro_Morphe_Patches_v1.0.163.mpp": {
+      "bytes": 17353320,
+      "sha256": "d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4"
+    },
+    "OneBack_Exit_NoRecents_v1.0.0.mpp": {
+      "bytes": 34425,
+      "sha256": "e14fc97986eb581d3078aca0b800b549cb4015d9914e5c6234abbcabc5fcc568"
+    }
+  },
+  "expected_qa_sha256": "08d38385ccd39d4b9b505dab0197474df1ce02c0fd77d1b8bf1db0b45db159fe",
+  "new_entries": {
+    "app/hiro/oneback/patches/OneBackPatch$1.class": {
+      "bytes": 1666,
+      "sha256": "c94ba568d613ce30e0bd272cbf444e1c7ab04bf5027fdb4224f82345797e32fe"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$2.class": {
+      "bytes": 929,
+      "sha256": "ca0b4db2b225dbf2869f6c118aeb9e71627f4c41dd05ee8715c8b855e335460c"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3$1.class": {
+      "bytes": 1305,
+      "sha256": "82a2cce6877a402ab36ae07b97ee2128ac5a33ad6cfa9d272714f5cde2640ea4"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3$2.class": {
+      "bytes": 1059,
+      "sha256": "0138bca8401b0bfd054929ec41d9dc44b5ad1b87b43607e3e3b5204f22e3704a"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3.class": {
+      "bytes": 2019,
+      "sha256": "477aa86ceaa0177297ae82363466d204de264bd5f236f676a567a1f019754cb3"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$Editor.class": {
+      "bytes": 318,
+      "sha256": "63b972dda3b2e75a9a46d4f48e0e3990960cb670c8eaaab74d1e4187256faa70"
+    },
+    "app/hiro/oneback/patches/OneBackPatch.class": {
+      "bytes": 23410,
+      "sha256": "214cb9915ce7787a582ff8d1fd20d8a887861e5ed7311218dfa597dec068a82f"
+    },
+    "extensions/oneback_exit.mpe": {
+      "bytes": 18752,
+      "sha256": "b051395a0d750d6bdbe9f13903d188d1a588372f9f51667db53906cae5833b7c"
+    }
+  },
+  "required_qa_assertions": {
+    "runtime_host_tests_passed": true,
+    "synthetic_apply_tests_passed": true,
+    "original_apk_apply_tested": false
+  },
+  "release_title": "戻る1回で終了・履歴削除 v1.0.0 / Hiro Morphe Patches v1.0.163",
+  "summary": "ナビゲーションの戻る1回で画面を終了し、最近使ったアプリの履歴から取り除く共通パッチを追加。実機未確認。"
+}

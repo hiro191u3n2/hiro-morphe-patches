@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "case_count": 12,
+  "verifier_source_sha256": "cda9d0c93fb11bd9abde0d2800c264c0203d305c3e4df45d097aee64400022c6",
+  "cases": [
+    {
+      "case": "positive",
+      "expected_result": "PASS",
+      "exit_code": 0,
+      "specific_rejection": null
+    },
+    {
+      "case": "bad_magic",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "DEX magic mismatch"
+    },
+    {
+      "case": "bad_file_size",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "header file_size"
+    },
+    {
+      "case": "bad_endian",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "endian_tag"
+    },
+    {
+      "case": "bad_adler32",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "Adler-32"
+    },
+    {
+      "case": "bad_sha1",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "SHA-1"
+    },
+    {
+      "case": "zero_header",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "DEX magic mismatch"
+    },
+    {
+      "case": "bad_map_count",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "map class_def"
+    },
+    {
+      "case": "duplicate_zip_entry",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "duplicate ZIP"
+    },
+    {
+      "case": "duplicate_class_across_dex",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "duplicate class"
+    },
+    {
+      "case": "missing_original_class",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "Original class definitions missing"
+    },
+    {
+      "case": "unexpected_runtime_class",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection": "Unexpected added class"
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "schema": "oneback163-independent-dex-normalization-analysis-v1",
+  "application": "ctrip.english",
+  "analysis_result": "REPRESENTATION_DIFFERENCES_CONFIRMED",
+  "physical_device_tested": false,
+  "reproduction": "Construct a MutableClass/MutableMethod from the original class, before adding any OneBack hook; compare instructions, operands, debug events, and exception handlers.",
+  "cases": [
+    {
+      "method": "La81/m;-><init>(Landroid/content/Context;La81/m$a;)V",
+      "instruction_count": 18,
+      "instructions_and_operands_identical": true,
+      "oneback_hooks_added_to_this_method": 0,
+      "debug_event_count": 42,
+      "debug_values_and_order_identical": true,
+      "debug_events_moved_to_owning_instruction_start": 24,
+      "examples": [
+        {
+          "original_address": 1,
+          "mutable_address": 0,
+          "line": 2
+        },
+        {
+          "original_address": 2,
+          "mutable_address": 0,
+          "line": 3
+        },
+        {
+          "original_address": 4,
+          "mutable_address": 3,
+          "line": 5
+        }
+      ],
+      "exception_handlers": "none in either representation",
+      "instruction_trace_sha256": "ee1213f2c21b7deccd54a8f34f2a9f027a2c21af8c1cdecda0f36932c33acff5",
+      "cause": "dexlib MutableMethodImplementation associates debug events inside multi-code-unit instructions with the start of the same instruction"
+    },
+    {
+      "method": "Landroidx/appcompat/widget/AppCompatTextView;->h()V",
+      "instruction_count": 9,
+      "instructions_and_operands_identical": true,
+      "debug_event_count": 17,
+      "debug_values_and_order_identical": true,
+      "debug_events_moved_to_owning_instruction_start": 8,
+      "original_try_entry_count": 1,
+      "mutable_try_entry_count": 2,
+      "protected_code_unit_interval": [
+        5,
+        16
+      ],
+      "ordered_handlers_in_both_representations": [
+        {
+          "exception": "Ljava/lang/InterruptedException;",
+          "target_address": 16
+        },
+        {
+          "exception": "Ljava/util/concurrent/ExecutionException;",
+          "target_address": 16
+        }
+      ],
+      "instruction_trace_sha256": "f32a6e8ac3748b0c7f1f2a28a0dbea37cd5e7430dc5d18a6a5e25031733cf3dd",
+      "cause": "dexlib represents the ordered handlers of one try entry as consecutive single-handler entries with the same exact protected range"
+    },
+    {
+      "method": "Landroidx/credentials/playservices/HiddenActivity;->onCreate(Landroid/os/Bundle;)V",
+      "reproduction": "Add the reviewed install(Activity) entry hook and then remove that exact hook from a copy; compare original and restored method bodies.",
+      "executable_instructions_and_all_operands_identical_after_restoration": true,
+      "padding_context": {
+        "original_terminal_opcode": "RETURN_VOID",
+        "original_terminal_address": 116,
+        "original_alignment_nop_address": 117,
+        "original_sparse_switch_payload_address": 118,
+        "padding_is_branch_switch_or_catch_target": false,
+        "padding_is_in_protected_try_range": false
+      },
+      "line_event": {
+        "line": 118,
+        "original_address": 117,
+        "hooked_address": 120,
+        "restored_address": 118,
+        "event_values_and_order_retained": true
+      },
+      "cause": "The 3-code-unit entry hook makes the existing one-code-unit alignment NOP unnecessary. dexlib transfers its line event to the following payload; removing the hook recreates the NOP but keeps that line event attached to the same payload.",
+      "allowed_comparison": "Only a LineNumber event on the unreferenced, unprotected, odd-address alignment NOP directly after a terminal and directly before its aligned payload may move forward to that same payload. Every value and event order remains exact.",
+      "negative_regressions": [
+        "Omitted padding line event",
+        "Padding line moved onto an executable return",
+        "Payload line moved backward onto padding",
+        "Switch-case target NOP removed",
+        "General debug event value, order, and local-variable metadata changed"
+      ],
+      "positive_regressions": [
+        "Exact original-to-restored HiddenActivity method comparison",
+        "Synthetic padding line forwarded to the same payload"
+      ],
+      "implementation_guards": [
+        "No incoming branch, switch-case, or catch target",
+        "No protected try range contains the NOP",
+        "No non-LineNumber debug item exists at the NOP",
+        "Odd-address NOP directly follows an unconditional terminal and directly precedes an aligned payload"
+      ]
+    }
+  ],
+  "allowed_audit_normalization": {
+    "debug": "Keep every event and its value/order/local-variable data. Require the same owning instruction. Permit an unchanged offset inside that instruction or a move from inside it to its start only.",
+    "exceptions": "Join only consecutive entries whose protected start and end are exactly the same, retaining the complete handler sequence. Require the same protected instructions, exception types, handler order, and handler target instructions.",
+    "not_allowed": [
+      "changed executable instruction or operand",
+      "changed branch or switch target",
+      "changed protected instruction range",
+      "handler reordering or omission",
+      "debug-event omission, reordering, or changed values"
+    ],
+    "padding_line": "Keep LineNumber values and ordering exactly. Only an unreferenced, unprotected odd-address NOP directly after an unconditional terminal and directly before its aligned payload may forward a line event to that same payload. Other debug events cannot qualify the NOP for removal. Reverse or executable-target moves are forbidden."
+  },
+  "scope": "Diagnostic conclusions and limited location examples only. Original application bytecode and disassembly are not included. This analysis does not validate the separate full-DEX writer failure found in a rejected trial output."
+}

@@ -1,0 +1,881 @@
+{
+  "schema_version": 1,
+  "validation": "Independent stdlib ZIP and raw DEX class_def preservation audit",
+  "format_reference": "https://source.android.com/docs/core/runtime/dex-format",
+  "verifier_source_sha256": "cda9d0c93fb11bd9abde0d2800c264c0203d305c3e4df45d097aee64400022c6",
+  "result": "PASS",
+  "blocking_findings": [],
+  "original": {
+    "path": "/workspace/scratch/d8b42d40d09c/oneback163/trip-original-merged.apk",
+    "bytes": 90559754,
+    "sha256": "bced821428077c4f04dd5f5626a43f60c21564165e7f6a5fc17c928b7ede2bec",
+    "unchanged_during_read": true,
+    "zip_entry_count": 8441,
+    "duplicate_zip_entries": {},
+    "dex_entry_count": 10,
+    "dex_entries": [
+      {
+        "name": "classes.dex",
+        "bytes": 8780568,
+        "sha256": "20c1236eb1865637dd5f58990d76a2dad660ba87690d175f7d9ae6f87ae16d6e",
+        "header_hex": "6465780a303337004ab51eea670922d4091047758b30be9205f2fd40b3c804e818fb8500700000007856341200000000000000003cfa850076ec000070000000942b000048b20300693b0000986004006da3000084290700ffff0000ec440c00e4220000e4441400b4596d0064a11800",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 8780568,
+        "header_class_count": 8932,
+        "parsed_class_count": 8932,
+        "unique_class_count": 8932,
+        "map_class_defs": [
+          {
+            "count": 8932,
+            "offset": 1328356
+          }
+        ],
+        "string_count": 60534,
+        "type_count": 11156,
+        "class_descriptor_set_sha256": "f9f554ca137a91ba05e63f68f79d967dfc65faf8e0143420f4a489361ff3f787",
+        "dex_sha1_signature": "670922d4091047758b30be9205f2fd40b3c804e8",
+        "calculated_sha1_signature": "670922d4091047758b30be9205f2fd40b3c804e8",
+        "dex_adler32": "ea1eb54a",
+        "calculated_adler32": "ea1eb54a",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "0da9d5ec",
+        "calculated_crc32": "0da9d5ec",
+        "zip_uncompressed_size": 8780568,
+        "zip_compressed_size": 3431268,
+        "zip_local_header_offset": 13079493
+      },
+      {
+        "name": "classes2.dex",
+        "bytes": 10194996,
+        "sha256": "bb742ae1cafb695c52f8f7637db5f133153ab40ae068028b0f305919edfe525c",
+        "header_hex": "6465780a3033370029fd11e3efaf69f38a788835cde730c04043689f7e414e3934909b0070000000785634120000000000000000588f9b00d7a200007000000087350000cc8b02006d380000e86103000a91000004070600edff0000548f0a0056280000bc8e1200b8f683007c991700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 10194996,
+        "header_class_count": 10326,
+        "parsed_class_count": 10326,
+        "unique_class_count": 10326,
+        "map_class_defs": [
+          {
+            "count": 10326,
+            "offset": 1216188
+          }
+        ],
+        "string_count": 41687,
+        "type_count": 13703,
+        "class_descriptor_set_sha256": "ff6d2956583b18c686a36c6f6cb3e887aa25ae6f318fefd277538737bc32f03e",
+        "dex_sha1_signature": "efaf69f38a788835cde730c04043689f7e414e39",
+        "calculated_sha1_signature": "efaf69f38a788835cde730c04043689f7e414e39",
+        "dex_adler32": "e311fd29",
+        "calculated_adler32": "e311fd29",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "a65df0e1",
+        "calculated_crc32": "a65df0e1",
+        "zip_uncompressed_size": 10194996,
+        "zip_compressed_size": 3675706,
+        "zip_local_header_offset": 16510802
+      },
+      {
+        "name": "classes3.dex",
+        "bytes": 9708832,
+        "sha256": "8cb0bcfa320335aaac2a1808e9913f6c99a544d495d2f90ada24a856c3498e7b",
+        "header_hex": "6465780a303337005310a4f82daca82b0dd6aebd06ac52a7c5a8d730f818cc222025940070000000785634120000000000000000442494004eb20000700000003f2a0000a8c90200b9300000a4720300e18d000050bb050058ff0000582a0a00762200001825120048b17d00d8731600",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 9708832,
+        "header_class_count": 8822,
+        "parsed_class_count": 8822,
+        "unique_class_count": 8822,
+        "map_class_defs": [
+          {
+            "count": 8822,
+            "offset": 1189144
+          }
+        ],
+        "string_count": 45646,
+        "type_count": 10815,
+        "class_descriptor_set_sha256": "f6546f23695b93a4f2d2ab01ec104764c1db8f11a1bbdd8223162cd7976199df",
+        "dex_sha1_signature": "2daca82b0dd6aebd06ac52a7c5a8d730f818cc22",
+        "calculated_sha1_signature": "2daca82b0dd6aebd06ac52a7c5a8d730f818cc22",
+        "dex_adler32": "f8a41053",
+        "calculated_adler32": "f8a41053",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "0234f1a4",
+        "calculated_crc32": "0234f1a4",
+        "zip_uncompressed_size": 9708832,
+        "zip_compressed_size": 3454829,
+        "zip_local_header_offset": 20186550
+      },
+      {
+        "name": "classes4.dex",
+        "bytes": 9916840,
+        "sha256": "16bee95962f4de96e458a6c5e32fe0984b1afab574f46a743412f02059273c7b",
+        "header_hex": "6465780a303337005bc7d733b2034e42774a35607c1930406f6988855ac32a25a851970070000000785634120000000000000000cc50970092ba0000700000003a310000b8ea020070390000a0af030051890000e060060024fd000068ab0a0020250000889412002019800088381700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 9916840,
+        "header_class_count": 9504,
+        "parsed_class_count": 9504,
+        "unique_class_count": 9504,
+        "map_class_defs": [
+          {
+            "count": 9504,
+            "offset": 1217672
+          }
+        ],
+        "string_count": 47762,
+        "type_count": 12602,
+        "class_descriptor_set_sha256": "5ecd15d562085e2496a43181b9f77d5f81b439b2e6c9cc092a140fc75da004c8",
+        "dex_sha1_signature": "b2034e42774a35607c1930406f6988855ac32a25",
+        "calculated_sha1_signature": "b2034e42774a35607c1930406f6988855ac32a25",
+        "dex_adler32": "33d7c75b",
+        "calculated_adler32": "33d7c75b",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "6a37a364",
+        "calculated_crc32": "6a37a364",
+        "zip_uncompressed_size": 9916840,
+        "zip_compressed_size": 3625634,
+        "zip_local_header_offset": 23641421
+      },
+      {
+        "name": "classes5.dex",
+        "bytes": 7855464,
+        "sha256": "1962a147eafcdf4aa7695af9fd2a0a8d4f17a31c6889749e2b36377a4bff8957",
+        "header_hex": "6465780a303337006da9501f93acd8ff944bf52ced43e7bccad07013fc3fb3f468dd7700700000007856341200000000000000008cdc770033b7000070000000423500003cdd0200f838000044b203002a760000e45d060071fe0000340f0a00ad2b0000bc0212000c6560005c781700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 7855464,
+        "header_class_count": 11181,
+        "parsed_class_count": 11181,
+        "unique_class_count": 11181,
+        "map_class_defs": [
+          {
+            "count": 11181,
+            "offset": 1180348
+          }
+        ],
+        "string_count": 46899,
+        "type_count": 13634,
+        "class_descriptor_set_sha256": "ea22678fd4d1837ef96a9fe849094e725e819df247d2090f22b0753be3f73446",
+        "dex_sha1_signature": "93acd8ff944bf52ced43e7bccad07013fc3fb3f4",
+        "calculated_sha1_signature": "93acd8ff944bf52ced43e7bccad07013fc3fb3f4",
+        "dex_adler32": "1f50a96d",
+        "calculated_adler32": "1f50a96d",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "0f68f665",
+        "calculated_crc32": "0f68f665",
+        "zip_uncompressed_size": 7855464,
+        "zip_compressed_size": 3061639,
+        "zip_local_header_offset": 27267097
+      },
+      {
+        "name": "classes6.dex",
+        "bytes": 8226776,
+        "sha256": "77f21604d527af6233dd32ff8bbd5537533e355627ef1c03190cc47be08dfcdb",
+        "header_hex": "6465780a30333700b0abd1534636e6d976b96d51b9c2965d7f355f729ddf5ef1d8877d0070000000785634120000000000000000fc867d0021c9000070000000ff290000f42403009e390000f0cc0300755d00005880060023fe0000006c0900a71f0000185d1100e0356800f8511500",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 8226776,
+        "header_class_count": 8103,
+        "parsed_class_count": 8103,
+        "unique_class_count": 8103,
+        "map_class_defs": [
+          {
+            "count": 8103,
+            "offset": 1137944
+          }
+        ],
+        "string_count": 51489,
+        "type_count": 10751,
+        "class_descriptor_set_sha256": "93d9ce0bfb33315f5e6797d941c9c17494b116fa11da32d621d57ba12c536402",
+        "dex_sha1_signature": "4636e6d976b96d51b9c2965d7f355f729ddf5ef1",
+        "calculated_sha1_signature": "4636e6d976b96d51b9c2965d7f355f729ddf5ef1",
+        "dex_adler32": "53d1abb0",
+        "calculated_adler32": "53d1abb0",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "bd961116",
+        "calculated_crc32": "bd961116",
+        "zip_uncompressed_size": 8226776,
+        "zip_compressed_size": 2916262,
+        "zip_local_header_offset": 30328778
+      },
+      {
+        "name": "classes7.dex",
+        "bytes": 10459736,
+        "sha256": "2e507e6176afd5f1d74fd40890a52a0776954469f321f10bd7f0e5759586806f",
+        "header_hex": "6465780a303337008585c58d2ba48bc72cba2cb0bebc3f51005ca172e28480ea589a9f00700000007856341200000000000000007c999f00badf00007000000091350000587f03001f3d00009c550400ec940000103307009ffd000070da0b00432a000068c71300908a8600c80f1900",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 10459736,
+        "header_class_count": 10819,
+        "parsed_class_count": 10819,
+        "unique_class_count": 10819,
+        "map_class_defs": [
+          {
+            "count": 10819,
+            "offset": 1296232
+          }
+        ],
+        "string_count": 57274,
+        "type_count": 13713,
+        "class_descriptor_set_sha256": "215709595b197f4ba3f3c2af922eb8ce245174bb51d7af3a1f9598e481648970",
+        "dex_sha1_signature": "2ba48bc72cba2cb0bebc3f51005ca172e28480ea",
+        "calculated_sha1_signature": "2ba48bc72cba2cb0bebc3f51005ca172e28480ea",
+        "dex_adler32": "8dc58585",
+        "calculated_adler32": "8dc58585",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "758b630b",
+        "calculated_crc32": "758b630b",
+        "zip_uncompressed_size": 10459736,
+        "zip_compressed_size": 3872786,
+        "zip_local_header_offset": 33245082
+      },
+      {
+        "name": "classes8.dex",
+        "bytes": 11168492,
+        "sha256": "3c786439b6c2cf48b1793148d5a47dd0d4ac79eee74a00bfdc86cd48725b666e",
+        "header_hex": "6465780a3033370096e68e9bba23fb4f3bb2f551b008835572cee7403965917eec6aaa0070000000785634120000000000000000106aaa0096ad00007000000032360000c8b602002e3b0000908f030051ab0000b855060006ff000040b00b006b2b000070a813001c559100d0151900",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 11168492,
+        "header_class_count": 11115,
+        "parsed_class_count": 11115,
+        "unique_class_count": 11115,
+        "map_class_defs": [
+          {
+            "count": 11115,
+            "offset": 1288304
+          }
+        ],
+        "string_count": 44438,
+        "type_count": 13874,
+        "class_descriptor_set_sha256": "d89c80bb42a7508f9d71ebef5e6aeaea159ee73bdeeeba4715e6651da4cf913b",
+        "dex_sha1_signature": "ba23fb4f3bb2f551b008835572cee7403965917e",
+        "calculated_sha1_signature": "ba23fb4f3bb2f551b008835572cee7403965917e",
+        "dex_adler32": "9b8ee696",
+        "calculated_adler32": "9b8ee696",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "0134c0ab",
+        "calculated_crc32": "0134c0ab",
+        "zip_uncompressed_size": 11168492,
+        "zip_compressed_size": 3981282,
+        "zip_local_header_offset": 37117910
+      },
+      {
+        "name": "classes9.dex",
+        "bytes": 4878476,
+        "sha256": "91bc78ba7740a14ea7a05db76a3e2b6cbb027a31621aa4b02024de9316ba6114",
+        "header_hex": "6465780a303337003ffe05f1d741a004bc8624a8987218dbfc8579fe0c5d6b158c704a0070000000785634120000000000000000b06f4a00f46a000070000000ff1e000040ac0100302400003c280200b24400007cda0300419e00000c000600db18000014f20a0018633c00740d0e00",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 4878476,
+        "header_class_count": 6363,
+        "parsed_class_count": 6363,
+        "unique_class_count": 6363,
+        "map_class_defs": [
+          {
+            "count": 6363,
+            "offset": 717332
+          }
+        ],
+        "string_count": 27380,
+        "type_count": 7935,
+        "class_descriptor_set_sha256": "d8fcd46939e63b3f461bb14f29e32712a9eace118968a1739751591fc7a64325",
+        "dex_sha1_signature": "d741a004bc8624a8987218dbfc8579fe0c5d6b15",
+        "calculated_sha1_signature": "d741a004bc8624a8987218dbfc8579fe0c5d6b15",
+        "dex_adler32": "f105fe3f",
+        "calculated_adler32": "f105fe3f",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "dde30ba4",
+        "calculated_crc32": "dde30ba4",
+        "zip_uncompressed_size": 4878476,
+        "zip_compressed_size": 1897734,
+        "zip_local_header_offset": 41099234
+      },
+      {
+        "name": "classes10.dex",
+        "bytes": 4176244,
+        "sha256": "8f256c39b8810208e469ab67b88392e088d4bfd6a78a6670fb88b86a87bbdeed",
+        "header_hex": "6465780a30333700538a7e57a9b1d87a92f778a73ef24eafea6357ab1cd6d8ca74b93f007000000078563412000000000000000098b83f00a4ef0000700000004701000000bf03000d0100001cc40300cbec0000b8d003008a02000010370b0040000000604b0b001466340060530b00",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 4176244,
+        "header_class_count": 64,
+        "parsed_class_count": 64,
+        "unique_class_count": 64,
+        "map_class_defs": [
+          {
+            "count": 64,
+            "offset": 740192
+          }
+        ],
+        "string_count": 61348,
+        "type_count": 327,
+        "class_descriptor_set_sha256": "46b701658d3eacc2951a8886922284d798fcc427d525df214b8112d7ae4af5de",
+        "dex_sha1_signature": "a9b1d87a92f778a73ef24eafea6357ab1cd6d8ca",
+        "calculated_sha1_signature": "a9b1d87a92f778a73ef24eafea6357ab1cd6d8ca",
+        "dex_adler32": "577e8a53",
+        "calculated_adler32": "577e8a53",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "ca4c33e9",
+        "calculated_crc32": "ca4c33e9",
+        "zip_uncompressed_size": 4176244,
+        "zip_compressed_size": 787505,
+        "zip_local_header_offset": 42997010
+      }
+    ],
+    "header_class_count_sum": 85229,
+    "parsed_class_count_sum": 85229,
+    "unique_class_count": 85229,
+    "duplicate_class_definitions": {},
+    "class_descriptor_set_sha256": "3d427c935bb9e851a262cf787728f1aff0394dce1eb65bcc0f6014b8c87ac119",
+    "errors": [],
+    "result": "PASS"
+  },
+  "patched": {
+    "path": "/workspace/scratch/d8b42d40d09c/oneback163/trip-combined-serial.apk",
+    "bytes": 90993357,
+    "sha256": "a3d180892ac50c1ed7ec8a42d3dd034cca47233d72e8f9907811e59aa8d72422",
+    "unchanged_during_read": true,
+    "zip_entry_count": 8443,
+    "duplicate_zip_entries": {},
+    "dex_entry_count": 10,
+    "dex_entries": [
+      {
+        "name": "classes.dex",
+        "bytes": 9138368,
+        "sha256": "4d5335662723d47ec4aba69a2c59415f761e0d4ad138b4cb569f96bdd6270894",
+        "header_hex": "6465780a303337001d63dacd0ae2fb868a94a009614676192628bedfd7cdb083c0708b0070000000785634120000000000000000e46f8b0055ec0000700000008f2b0000c4b10300583b00000060040061a3000020280700faff000028430c00d9220000f8421400a8d27200189e1800",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 9138368,
+        "header_class_count": 8921,
+        "parsed_class_count": 8921,
+        "unique_class_count": 8921,
+        "map_class_defs": [
+          {
+            "count": 8921,
+            "offset": 1327864
+          }
+        ],
+        "string_count": 60501,
+        "type_count": 11151,
+        "class_descriptor_set_sha256": "ed37a87c0a999d04f4a15b97e80a1d4f563bc0983c5f77d2ed2c1f231fe7e21a",
+        "dex_sha1_signature": "0ae2fb868a94a009614676192628bedfd7cdb083",
+        "calculated_sha1_signature": "0ae2fb868a94a009614676192628bedfd7cdb083",
+        "dex_adler32": "cdda631d",
+        "calculated_adler32": "cdda631d",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "e6e13cc3",
+        "calculated_crc32": "e6e13cc3",
+        "zip_uncompressed_size": 9138368,
+        "zip_compressed_size": 3466724,
+        "zip_local_header_offset": 27081
+      },
+      {
+        "name": "classes2.dex",
+        "bytes": 10835772,
+        "sha256": "32f7c504a159553ab584b38b8ad977796a1c7c89f1d205d80dfaaeedadd1d1f0",
+        "header_hex": "6465780a30333700150d17afcc1978dcbcdf3fbbe4ab5dd16a8805890b956c3f3c57a500700000007856341200000000000000006056a50005a3000070000000a2350000848c0200773800000c630300f4900000a0080600feff000040900a005b28000030901200acbb8d00909b1700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 10835772,
+        "header_class_count": 10331,
+        "parsed_class_count": 10331,
+        "unique_class_count": 10331,
+        "map_class_defs": [
+          {
+            "count": 10331,
+            "offset": 1216560
+          }
+        ],
+        "string_count": 41733,
+        "type_count": 13730,
+        "class_descriptor_set_sha256": "27c93270531da7fba539abdf9b7a3306b2b96dd3a1a7d966cd48732dfc97d541",
+        "dex_sha1_signature": "cc1978dcbcdf3fbbe4ab5dd16a8805890b956c3f",
+        "calculated_sha1_signature": "cc1978dcbcdf3fbbe4ab5dd16a8805890b956c3f",
+        "dex_adler32": "af170d15",
+        "calculated_adler32": "af170d15",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "a5db032d",
+        "calculated_crc32": "a5db032d",
+        "zip_uncompressed_size": 10835772,
+        "zip_compressed_size": 3750128,
+        "zip_local_header_offset": 3728525
+      },
+      {
+        "name": "classes3.dex",
+        "bytes": 10330964,
+        "sha256": "3f1ac464bbdad244cdfc77275ce2a694e353ac11d83d40472bca2c24a212b2cc",
+        "header_hex": "6465780a30333700658c1fd6264933ba70ef8226eef4c9bc98b623122990b46154a39d007000000078563412000000000000000078a29d00b6b2000070000000932a000048cb0200f530000094750300fe8d000010c10500fdff000000310a0079220000e83012004c23870008801600",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 10330964,
+        "header_class_count": 8825,
+        "parsed_class_count": 8825,
+        "unique_class_count": 8825,
+        "map_class_defs": [
+          {
+            "count": 8825,
+            "offset": 1192168
+          }
+        ],
+        "string_count": 45750,
+        "type_count": 10899,
+        "class_descriptor_set_sha256": "847cd18d2a66da7ffd16d857c997d3f74e0183a7d2ce6a0fddc61f47f0b18985",
+        "dex_sha1_signature": "264933ba70ef8226eef4c9bc98b623122990b461",
+        "calculated_sha1_signature": "264933ba70ef8226eef4c9bc98b623122990b461",
+        "dex_adler32": "d61f8c65",
+        "calculated_adler32": "d61f8c65",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "b15d1dff",
+        "calculated_crc32": "b15d1dff",
+        "zip_uncompressed_size": 10330964,
+        "zip_compressed_size": 3518045,
+        "zip_local_header_offset": 7478695
+      },
+      {
+        "name": "classes4.dex",
+        "bytes": 10692020,
+        "sha256": "dbb06b61543fb01f843f273d0560cbd4a815acccc182d75bfd9a327873afa6b8",
+        "header_hex": "6465780a303337001c848273604d22d0798ecd5fd9e7c4e4daa2beaeab1d0cfbb425a30070000000785634120000000000000000d824a30028bc0000700000002b32000010f10200423a0000bcb90300588a0000d47406000000010094c70a006325000094c71200c0b18b00f4731700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 10692020,
+        "header_class_count": 9571,
+        "parsed_class_count": 9571,
+        "unique_class_count": 9571,
+        "map_class_defs": [
+          {
+            "count": 9571,
+            "offset": 1230740
+          }
+        ],
+        "string_count": 48168,
+        "type_count": 12843,
+        "class_descriptor_set_sha256": "0e1a3e2297ff08b6cf30a029f19b0305caccb2f7aacc91bdfd10787a3cffac65",
+        "dex_sha1_signature": "604d22d0798ecd5fd9e7c4e4daa2beaeab1d0cfb",
+        "calculated_sha1_signature": "604d22d0798ecd5fd9e7c4e4daa2beaeab1d0cfb",
+        "dex_adler32": "7382841c",
+        "calculated_adler32": "7382841c",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "2027dd97",
+        "calculated_crc32": "2027dd97",
+        "zip_uncompressed_size": 10692020,
+        "zip_compressed_size": 3731238,
+        "zip_local_header_offset": 10996782
+      },
+      {
+        "name": "classes5.dex",
+        "bytes": 8280928,
+        "sha256": "2f6bc81ea3899f3c4b3866a7b92a8934beb0fc36763dbcfa5403cf318ddbf6a3",
+        "header_hex": "6465780a303337006a1dd6bdeadceb1495dbb54e1cba6073795d79b3a883395d605b7e0070000000785634120000000000000000845a7e0039b8000070000000cf35000054e102005c39000090b80300a3760000e0680600ffff0000f81d0a00c22b0000f01d120030c5660030961700",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 8280928,
+        "header_class_count": 11202,
+        "parsed_class_count": 11202,
+        "unique_class_count": 11202,
+        "map_class_defs": [
+          {
+            "count": 11202,
+            "offset": 1187312
+          }
+        ],
+        "string_count": 47161,
+        "type_count": 13775,
+        "class_descriptor_set_sha256": "a976e688419333e79de06a1d1a545263e0ad4bdebcbb07935c1128cb61c1eaa8",
+        "dex_sha1_signature": "eadceb1495dbb54e1cba6073795d79b3a883395d",
+        "calculated_sha1_signature": "eadceb1495dbb54e1cba6073795d79b3a883395d",
+        "dex_adler32": "bdd61d6a",
+        "calculated_adler32": "bdd61d6a",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "ba8b9d98",
+        "calculated_crc32": "ba8b9d98",
+        "zip_uncompressed_size": 8280928,
+        "zip_compressed_size": 3132588,
+        "zip_local_header_offset": 14728062
+      },
+      {
+        "name": "classes6.dex",
+        "bytes": 8557056,
+        "sha256": "959a8fa25d52bc54a3aa16e1b4c5b200cfabbfe9b9e553e35527a852a5ff6d67",
+        "header_hex": "6465780a30333700825df314a1096c1656aed1212d25fc486788a0a747394798009282007000000078563412000000000000000024918200a1ca000070000000eb2a0000f42a0300373a0000a0d60300a85d000034910600faff0000747e0900c71f0000447e1100dc1a6d0024771500",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 8557056,
+        "header_class_count": 8135,
+        "parsed_class_count": 8135,
+        "unique_class_count": 8135,
+        "map_class_defs": [
+          {
+            "count": 8135,
+            "offset": 1146436
+          }
+        ],
+        "string_count": 51873,
+        "type_count": 10987,
+        "class_descriptor_set_sha256": "e48bd40550d0900807a9b7bd2754548913f69587d55c0e3e84152c921281f7ba",
+        "dex_sha1_signature": "a1096c1656aed1212d25fc486788a0a747394798",
+        "calculated_sha1_signature": "a1096c1656aed1212d25fc486788a0a747394798",
+        "dex_adler32": "14f35d82",
+        "calculated_adler32": "14f35d82",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "75934114",
+        "calculated_crc32": "75934114",
+        "zip_uncompressed_size": 8557056,
+        "zip_compressed_size": 2942869,
+        "zip_local_header_offset": 17860692
+      },
+      {
+        "name": "classes7.dex",
+        "bytes": 11141712,
+        "sha256": "afdfe6525da50560d18087cfcc4911e0323174464d0ba475d49a963c53d9560b",
+        "header_hex": "6465780a3033370032ebb214b9809fa759b2c2a83aeeb4ae5c638c166af391cc5002aa00700000007856341200000000000000007401aa008be1000070000000923600009c860300093e0000e4600400c895000050490700feff000090f70b00522a000080f7130090c09000c0411900",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 11141712,
+        "header_class_count": 10834,
+        "parsed_class_count": 10834,
+        "unique_class_count": 10834,
+        "map_class_defs": [
+          {
+            "count": 10834,
+            "offset": 1308544
+          }
+        ],
+        "string_count": 57739,
+        "type_count": 13970,
+        "class_descriptor_set_sha256": "8bf67f946cbac7a20ff597f546fd3dfc29565126eda50357eefd109e84aa1419",
+        "dex_sha1_signature": "b9809fa759b2c2a83aeeb4ae5c638c166af391cc",
+        "calculated_sha1_signature": "b9809fa759b2c2a83aeeb4ae5c638c166af391cc",
+        "dex_adler32": "14b2eb32",
+        "calculated_adler32": "14b2eb32",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "2391fd1a",
+        "calculated_crc32": "2391fd1a",
+        "zip_uncompressed_size": 11141712,
+        "zip_compressed_size": 3983456,
+        "zip_local_header_offset": 20803603
+      },
+      {
+        "name": "classes8.dex",
+        "bytes": 11946308,
+        "sha256": "02bf560bcd8036615fcf32cbb9c6a31b5259601c7fd77521b77b783923b39cb0",
+        "header_hex": "6465780a303337008d9118838f542485d46487f56e6d1900a71207716ddc2ae54449b600700000007856341200000000000000006848b600f3ad000070000000ad3600003cb80200693b0000f092030029ab0000dc5b0600f7ff000024b50b00282b0000dcb41300682f9d00dc191900",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 11946308,
+        "header_class_count": 11048,
+        "parsed_class_count": 11048,
+        "unique_class_count": 11048,
+        "map_class_defs": [
+          {
+            "count": 11048,
+            "offset": 1291484
+          }
+        ],
+        "string_count": 44531,
+        "type_count": 13997,
+        "class_descriptor_set_sha256": "b3cddcc66088cec4dabf3b184589444997624f76ebcb84c8d63bbdc83169134f",
+        "dex_sha1_signature": "8f542485d46487f56e6d1900a71207716ddc2ae5",
+        "calculated_sha1_signature": "8f542485d46487f56e6d1900a71207716ddc2ae5",
+        "dex_adler32": "8318918d",
+        "calculated_adler32": "8318918d",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "7f3f907b",
+        "calculated_crc32": "7f3f907b",
+        "zip_uncompressed_size": 11946308,
+        "zip_compressed_size": 4026808,
+        "zip_local_header_offset": 24787101
+      },
+      {
+        "name": "classes9.dex",
+        "bytes": 8201904,
+        "sha256": "5b583302c0d3dab6461a5938d1d69d6edb17a5b3805b46c8c1ca76c48cd8b5ba",
+        "header_hex": "6465780a30333700aa31d88212dd5e7f3df2bfd63812075a5b47c1c526f59c0db0267d0070000000785634120000000000000000d4257d00351b0100700000000a1f0000446d0400132400006ce9040021f40000509a0600e89d0000583b0e00ad180000982a130078e6660038401600",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 8201904,
+        "header_class_count": 6317,
+        "parsed_class_count": 6317,
+        "unique_class_count": 6317,
+        "map_class_defs": [
+          {
+            "count": 6317,
+            "offset": 1256088
+          }
+        ],
+        "string_count": 72501,
+        "type_count": 7946,
+        "class_descriptor_set_sha256": "217c4886adaac7d3f67bfcd99ed7a00928169355eedbd59d40680bca1167dafc",
+        "dex_sha1_signature": "12dd5e7f3df2bfd63812075a5b47c1c526f59c0d",
+        "calculated_sha1_signature": "12dd5e7f3df2bfd63812075a5b47c1c526f59c0d",
+        "dex_adler32": "82d831aa",
+        "calculated_adler32": "82d831aa",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "e72a7a2b",
+        "calculated_crc32": "e72a7a2b",
+        "zip_uncompressed_size": 8201904,
+        "zip_compressed_size": 2489694,
+        "zip_local_header_offset": 87965784
+      },
+      {
+        "name": "classes10.dex",
+        "bytes": 1113096,
+        "sha256": "25cec700f3fafb7cda4b53b7703c733a80dd7e65b96f3db69c83d4b172f5cb6d",
+        "header_hex": "6465780a303337000bbc11f85635e007359e8db0c28bc40ac65dc022063384f208fc10007000000078563412000000000000000038fb1000793f0000700000003801000054fe00000b010000340301008e3c0000b80f01008f02000028f4020042000000a008030028eb0d00e0100300",
+        "header_all_zero": false,
+        "magic": "dex\n037\u0000",
+        "header_size": 112,
+        "header_file_size": 1113096,
+        "header_class_count": 66,
+        "parsed_class_count": 66,
+        "unique_class_count": 66,
+        "map_class_defs": [
+          {
+            "count": 66,
+            "offset": 198816
+          }
+        ],
+        "string_count": 16249,
+        "type_count": 312,
+        "class_descriptor_set_sha256": "fead4a9d9611526146d8b4a0b57b420a5b50ed3c7f6ab6bdca7a81a503b3c471",
+        "dex_sha1_signature": "5635e007359e8db0c28bc40ac65dc022063384f2",
+        "calculated_sha1_signature": "5635e007359e8db0c28bc40ac65dc022063384f2",
+        "dex_adler32": "f811bc0b",
+        "calculated_adler32": "f811bc0b",
+        "class_duplicates": [],
+        "errors": [],
+        "zip_crc32": "34ffef5d",
+        "calculated_crc32": "34ffef5d",
+        "zip_uncompressed_size": 1113096,
+        "zip_compressed_size": 234636,
+        "zip_local_header_offset": 3493846
+      }
+    ],
+    "header_class_count_sum": 85250,
+    "parsed_class_count_sum": 85250,
+    "unique_class_count": 85250,
+    "duplicate_class_definitions": {},
+    "class_descriptor_set_sha256": "0bd47cbea163804e4833add51f800462ecc35deae6414bfc0da74b0989f1eb57",
+    "errors": [],
+    "result": "PASS"
+  },
+  "comparison": {
+    "result": "PASS",
+    "blocking_findings": [],
+    "original_count": 85229,
+    "emitted_count": 85250,
+    "retained_count": 85229,
+    "missing_count": 0,
+    "added_count": 21,
+    "missing_by_original_dex": {},
+    "original_dex_class_retention": [
+      {
+        "original_dex": "classes.dex",
+        "original_class_count": 8932,
+        "retained_class_count": 8932,
+        "missing_class_count": 0,
+        "original_dex_sha256": "20c1236eb1865637dd5f58990d76a2dad660ba87690d175f7d9ae6f87ae16d6e",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes2.dex",
+        "original_class_count": 10326,
+        "retained_class_count": 10326,
+        "missing_class_count": 0,
+        "original_dex_sha256": "bb742ae1cafb695c52f8f7637db5f133153ab40ae068028b0f305919edfe525c",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes3.dex",
+        "original_class_count": 8822,
+        "retained_class_count": 8822,
+        "missing_class_count": 0,
+        "original_dex_sha256": "8cb0bcfa320335aaac2a1808e9913f6c99a544d495d2f90ada24a856c3498e7b",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes4.dex",
+        "original_class_count": 9504,
+        "retained_class_count": 9504,
+        "missing_class_count": 0,
+        "original_dex_sha256": "16bee95962f4de96e458a6c5e32fe0984b1afab574f46a743412f02059273c7b",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes5.dex",
+        "original_class_count": 11181,
+        "retained_class_count": 11181,
+        "missing_class_count": 0,
+        "original_dex_sha256": "1962a147eafcdf4aa7695af9fd2a0a8d4f17a31c6889749e2b36377a4bff8957",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes6.dex",
+        "original_class_count": 8103,
+        "retained_class_count": 8103,
+        "missing_class_count": 0,
+        "original_dex_sha256": "77f21604d527af6233dd32ff8bbd5537533e355627ef1c03190cc47be08dfcdb",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes7.dex",
+        "original_class_count": 10819,
+        "retained_class_count": 10819,
+        "missing_class_count": 0,
+        "original_dex_sha256": "2e507e6176afd5f1d74fd40890a52a0776954469f321f10bd7f0e5759586806f",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes8.dex",
+        "original_class_count": 11115,
+        "retained_class_count": 11115,
+        "missing_class_count": 0,
+        "original_dex_sha256": "3c786439b6c2cf48b1793148d5a47dd0d4ac79eee74a00bfdc86cd48725b666e",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes9.dex",
+        "original_class_count": 6363,
+        "retained_class_count": 6363,
+        "missing_class_count": 0,
+        "original_dex_sha256": "91bc78ba7740a14ea7a05db76a3e2b6cbb027a31621aa4b02024de9316ba6114",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      },
+      {
+        "original_dex": "classes10.dex",
+        "original_class_count": 64,
+        "retained_class_count": 64,
+        "missing_class_count": 0,
+        "original_dex_sha256": "8f256c39b8810208e469ab67b88392e088d4bfd6a78a6670fb88b86a87bbdeed",
+        "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      }
+    ],
+    "missing_descriptor_set_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "added_descriptor_set_sha256": "aa0a3eed6656a8bed6bbbde2a39285e5dc6971f79d79d48ab2c1c651b66919fc",
+    "unexpected_added_count": 0,
+    "unexpected_added_examples": [],
+    "missing_oneback_additions": [],
+    "required_oneback_runtime_classes": [
+      "Lapp/hiro/oneback/runtime/OneBackExit$1;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$2;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$3;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$4;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$5;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$6;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$7;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$8;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Api29;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Api33$Registration$1;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Api33$Registration;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Api33;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Lifecycle;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Root$1;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Root$2;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Root;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$Scope;",
+      "Lapp/hiro/oneback/runtime/OneBackExit$State;",
+      "Lapp/hiro/oneback/runtime/OneBackExit;"
+    ],
+    "explicit_additional_allowed_classes": [
+      "Lapp/hiro/tripcom/extension/MyPlanBundleGuard;",
+      "Lapp/hiro/tripcom/extension/MyPlanPreparationGuard;"
+    ],
+    "explicit_additional_classes_added": [
+      "Lapp/hiro/tripcom/extension/MyPlanBundleGuard;",
+      "Lapp/hiro/tripcom/extension/MyPlanPreparationGuard;"
+    ],
+    "no_original_classes_missing": true,
+    "only_explicitly_allowed_classes_added": true,
+    "all_19_oneback_classes_added": true
+  },
+  "scope": "APK/DEX integrity and class-definition inventory; method behavior is checked by the separate DEX audit.",
+  "physical_device_tested": false,
+  "additional_allowlist_provenance": {
+    "result": "PASS",
+    "baseline_bundle": "Hiro_Morphe_Patches_v1.0.162.mpp",
+    "baseline_bundle_sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5",
+    "previous_diagnostic": "kept-temp-stage-inventory.json",
+    "previous_diagnostic_sha256": "9a527f2b9acba7378b1ad5ead1c06fbd85c1f318d1a3860b58fe0c83026e3c07",
+    "previous_added_count": 21,
+    "oneback_class_count": 19,
+    "explicit_additional_classes": [
+      "Lapp/hiro/tripcom/extension/MyPlanBundleGuard;",
+      "Lapp/hiro/tripcom/extension/MyPlanPreparationGuard;"
+    ],
+    "all_additional_classes_present_in_baseline_payloads": true,
+    "baseline_extension_payloads": [
+      {
+        "bundle_entry": "extensions/myplan_bundle_guard.mpe",
+        "bytes": 6452,
+        "sha256": "5fba7f41d8e8a33c4c835a80a4e3dd292fbe69c7d2dbdc321d560a8867a9b481",
+        "dex_payloads": [
+          {
+            "entry": "raw DEX",
+            "sha256": "5fba7f41d8e8a33c4c835a80a4e3dd292fbe69c7d2dbdc321d560a8867a9b481",
+            "class_count": 1,
+            "verified_additional_classes": [
+              "Lapp/hiro/tripcom/extension/MyPlanBundleGuard;"
+            ]
+          }
+        ]
+      },
+      {
+        "bundle_entry": "extensions/myplan_preparation_guard.mpe",
+        "bytes": 1300,
+        "sha256": "2493b594378be82808b24f3425c0eb5f55bdb40f1a5748457fb470c2482cbd85",
+        "dex_payloads": [
+          {
+            "entry": "raw DEX",
+            "sha256": "2493b594378be82808b24f3425c0eb5f55bdb40f1a5748457fb470c2482cbd85",
+            "class_count": 1,
+            "verified_additional_classes": [
+              "Lapp/hiro/tripcom/extension/MyPlanPreparationGuard;"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "result": "PASS",
+  "case_count": 8,
+  "cases": [
+    {
+      "case": "positive_emitted_manifest",
+      "expected_result": "PASS",
+      "exit_code": 0,
+      "specific_rejection_checked": null
+    },
+    {
+      "case": "reject_integer_callback",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection_checked": "application_callback_enabled"
+    },
+    {
+      "case": "reject_wrong_callback_id",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection_checked": "application_callback_enabled"
+    },
+    {
+      "case": "reject_wrong_callback_namespace",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection_checked": "application_callback_enabled"
+    },
+    {
+      "case": "reject_target_sdk_change",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection_checked": "target_sdk_preserved"
+    },
+    {
+      "case": "reject_unrelated_recents_flag",
+      "expected_result": "FAIL",
+      "exit_code": 1,
+      "specific_rejection_checked": "canonical_manifest_unchanged"
+    },
+    {
+      "case": "allow_root_compiler_metadata",
+      "expected_result": "PASS",
+      "exit_code": 0,
+      "specific_rejection_checked": null
+    },
+    {
+      "case": "reject_original_false_and_missing_callbacks",
+      "expected_result": "FAIL",
+      "exit_code": 1
+    }
+  ],
+  "scope": "Manifest verifier positive/negative controls only; no device test",
+  "verifier_source_sha256": "8ea29ee9f2066fd7ed5dc0dec6880f2dd6386ed902fbd373894020622212fe91"
+}

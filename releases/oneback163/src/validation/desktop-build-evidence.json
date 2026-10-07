@@ -1,0 +1,272 @@
+{
+  "schema": "oneback163-build-v1",
+  "bundle_version": "1.0.163",
+  "patch_version": "1.0.0",
+  "baseline_bundle_version": "1.0.162",
+  "baseline_sha256": "17184ecbfe63b35871afff33a833a8b2b87d00d1bef8fcc22ce2997bcd297da5",
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "java_version": "openjdk version \"21.0.12.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS, mixed mode)",
+  "javac_version": "javac 21.0.12.1",
+  "supported_packages": [
+    "com.ss.android.ugc.trill",
+    "com.zhiliaoapp.musically",
+    "com.instagram.android",
+    "com.twitter.android",
+    "ctrip.english"
+  ],
+  "patch_default_enabled": true,
+  "source_inputs": {
+    "build.py": {
+      "bytes": 21365,
+      "sha256": "baa8fe2a52c357a67c8ca5e3abcde4fb35a6ecaa8790f3b91ce790ed9feee141"
+    },
+    "patch/OneBackPatch.java": {
+      "bytes": 23196,
+      "sha256": "760d158c2c234507cf284578ae6ca880410dc01d46878ea51a5e071cfb311a6f"
+    },
+    "runtime/OneBackExit.java": {
+      "bytes": 26971,
+      "sha256": "a9da21c2605f36ee1cdbf33ae3a240eceaddcde34d9c557dd030f932b4a46309"
+    },
+    "test-dex/DexAudit.java": {
+      "bytes": 73959,
+      "sha256": "6faa8f2411f60e08f0ea6b1f3f31962465a0fc65c0fca6995ca7ab7d94913f0c"
+    },
+    "test-dex/Fixtures.java": {
+      "bytes": 11591,
+      "sha256": "8d9701fe2cc4530d6ebd2652d678682221df2ed5a19d0d1d764beff07603e052"
+    },
+    "test-dex/MergeSplitInputs.java": {
+      "bytes": 964,
+      "sha256": "6a33e8c94dc3bb96d1705bb45cd4524b5242463a45f9625b4ef5f0b2223fe1e2"
+    },
+    "test-runtime/OneBackExitHostTest.java": {
+      "bytes": 28351,
+      "sha256": "eaa7a0f0380f1f9bce53c0f3fb6f4ff74bea7897f897f3402fe08f765ac42b62"
+    },
+    "test-stubs/android/app/Activity.java": {
+      "bytes": 1443,
+      "sha256": "4cb649c177b1d2a7920f17d2bcbce07bfde29bdad3a968a734f50f7005f15a63"
+    },
+    "test-stubs/android/app/ActivityManager.java": {
+      "bytes": 1783,
+      "sha256": "d1a7fdf337f0ec0a83ef31de5f876a5f55d856a13b646189fc73fba63aee6fdf"
+    },
+    "test-stubs/android/app/Application.java": {
+      "bytes": 2084,
+      "sha256": "fcea9409e85a4f6bebee176ee6c66cdc3977cc9407793fb8b554d1f9bec1e205"
+    },
+    "test-stubs/android/app/Dialog.java": {
+      "bytes": 820,
+      "sha256": "b386cef684d6f5811660b48d2795b0f1cf23e515790d0fdf487f7cd5a619ca6e"
+    },
+    "test-stubs/android/content/ComponentName.java": {
+      "bytes": 389,
+      "sha256": "59e43fd3b29bdb87045d402d15490a78ecba4810a597b8fb40146a4c0e294750"
+    },
+    "test-stubs/android/content/Context.java": {
+      "bytes": 617,
+      "sha256": "9ddf80c36c066c460a01fc0822ba2b8a687bc56d5086563bc84c7a71efeac7e5"
+    },
+    "test-stubs/android/content/ContextWrapper.java": {
+      "bytes": 504,
+      "sha256": "92cbd842020563fda4945a1c1d50930f8a12f07f9f974a49c64f24b5f2910a8e"
+    },
+    "test-stubs/android/content/Intent.java": {
+      "bytes": 404,
+      "sha256": "d944fbd8c0e1930bfe9eca57f6647db4362835b57f2419362412874359e7cd29"
+    },
+    "test-stubs/android/os/Build.java": {
+      "bytes": 123,
+      "sha256": "c874d38fc8241e643a3eeed95bf6d4517c503a3460aa9be321ff8bee7e05649f"
+    },
+    "test-stubs/android/os/Bundle.java": {
+      "bytes": 44,
+      "sha256": "279a7e06c007b20b9d07d820087d08169d5e86fd86d40a33741216413902a5cf"
+    },
+    "test-stubs/android/os/Handler.java": {
+      "bytes": 749,
+      "sha256": "9ff069808ba1c2e9ca394df8c341d6b38dca1232b4dd678a9110949fe0df6a5e"
+    },
+    "test-stubs/android/os/Looper.java": {
+      "bytes": 319,
+      "sha256": "f931c2d5fe9c8536ed6b585e14c634b1239c22cf73cb1e00734c5d482ba97f04"
+    },
+    "test-stubs/android/view/KeyEvent.java": {
+      "bytes": 747,
+      "sha256": "f67f5e16dd7dd746d56076bfeb6f121e5da2fa40459c0d4505b1cc3c67a99b81"
+    },
+    "test-stubs/android/view/View.java": {
+      "bytes": 2147,
+      "sha256": "23a7a9c256d182aac6d44f8b7d3c6830e099249e51a994dfe5f94b669e4e6be5"
+    },
+    "test-stubs/android/view/ViewTreeObserver.java": {
+      "bytes": 970,
+      "sha256": "6d3d869006ff0c94d0e53d6d63d0601604265a25fa42ad70262afcc6ddd5546f"
+    },
+    "test-stubs/android/view/Window.java": {
+      "bytes": 858,
+      "sha256": "cdb1d869d9d51a6df70263bb62e2ec73073b07de2e4c8a8d461b960626b4a50f"
+    },
+    "test-stubs/android/view/inspector/WindowInspector.java": {
+      "bytes": 562,
+      "sha256": "e3c51c74e568cc1a364bd0440be3f362dc52af984358158a4daadc9c89038189"
+    },
+    "test-stubs/android/window/FakeDispatcher.java": {
+      "bytes": 1494,
+      "sha256": "fad5a6d6a27d924775c3e81551f913845e07449089de97613e50c91139138a63"
+    },
+    "test-stubs/android/window/OnBackInvokedCallback.java": {
+      "bytes": 89,
+      "sha256": "e4907fdb3e7873b798bb4d94d8417584acaaea92f298bacc543de91aa7709bf7"
+    },
+    "test-stubs/android/window/OnBackInvokedDispatcher.java": {
+      "bytes": 295,
+      "sha256": "6de7a05f5d36f5144e632c97514206cd6b1f96adc8dd0bd9e8b9cbf774f12368"
+    }
+  },
+  "existing_resource_entries_byte_identical": 58,
+  "new_entries": {
+    "app/hiro/oneback/patches/OneBackPatch$1.class": {
+      "bytes": 1666,
+      "sha256": "c94ba568d613ce30e0bd272cbf444e1c7ab04bf5027fdb4224f82345797e32fe"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$2.class": {
+      "bytes": 929,
+      "sha256": "ca0b4db2b225dbf2869f6c118aeb9e71627f4c41dd05ee8715c8b855e335460c"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3$1.class": {
+      "bytes": 1305,
+      "sha256": "82a2cce6877a402ab36ae07b97ee2128ac5a33ad6cfa9d272714f5cde2640ea4"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3$2.class": {
+      "bytes": 1059,
+      "sha256": "0138bca8401b0bfd054929ec41d9dc44b5ad1b87b43607e3e3b5204f22e3704a"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$3.class": {
+      "bytes": 2019,
+      "sha256": "477aa86ceaa0177297ae82363466d204de264bd5f236f676a567a1f019754cb3"
+    },
+    "app/hiro/oneback/patches/OneBackPatch$Editor.class": {
+      "bytes": 318,
+      "sha256": "63b972dda3b2e75a9a46d4f48e0e3990960cb670c8eaaab74d1e4187256faa70"
+    },
+    "app/hiro/oneback/patches/OneBackPatch.class": {
+      "bytes": 23410,
+      "sha256": "214cb9915ce7787a582ff8d1fd20d8a887861e5ed7311218dfa597dec068a82f"
+    },
+    "extensions/oneback_exit.mpe": {
+      "bytes": 18752,
+      "sha256": "b051395a0d750d6bdbe9f13903d188d1a588372f9f51667db53906cae5833b7c"
+    }
+  },
+  "runtime_jvm_class_count": 19,
+  "patch_jvm_class_count": 7,
+  "existing_resource_entries_unchanged": true,
+  "existing_loader_classes_unchanged": true,
+  "standalone_and_bundle_new_entries_identical": true,
+  "runtime_host_tests_passed": true,
+  "synthetic_dex_tests_passed": true,
+  "synthetic_patch_tests_passed": true,
+  "host_test_result": {
+    "main_class": "app.hiro.oneback.runtime.OneBackExitHostTest",
+    "cases": 20,
+    "assertions": 137,
+    "output": "PASS allowlist and idempotent install\nPASS onCreate does not force decor\nPASS all own tasks including dormant recents\nPASS root and embedded Activity fallbacks\nPASS foreign task preservation\nPASS vanished tasks and per-task failure isolation\nPASS task package identity validation\nPASS legacy key phases and cancellation\nPASS pre-IME and Dialog entry points\nPASS overlay ahead of IME and AndroidX\nPASS equal-priority callback rearm\nPASS lifecycle covers later Activities\nPASS unhooked Dialog focus discovery\nPASS nested app-context Dialog\nPASS detach, reattach, destroy and stale callback\nPASS relaunch after exit in same process\nPASS worker request runs on main\nPASS reentrant exit is idempotent\nPASS API28 and API32 guards\nPASS fully rejected exit can retry\nSUCCESS: 20 cases, 137 assertions"
+  },
+  "synthetic_dex_test_result": {
+    "result": "PASS",
+    "blocking_findings": [],
+    "assertions": 2382,
+    "tests": [
+      "metadata: default enabled, five exact packages, unrestricted versions, one hidden resource dependency",
+      "manifest: namespace-aware and Morphe namespace-unaware DOM serialization; exact callback opt-in; aliases/permissions/targetSdk/recents/service preserved; atomic rejection",
+      "encoding-normalization regression: exact string/jumbo and debug floor with relocated catch PCs accepted; string/literal/branch/instruction/debug line/local/order/position/catch changes rejected",
+      "try-group/payload-padding regression: exact ordered same-range handler grouping and unreachable unreferenced alignment pad accepted; handler reordering/range changes and referenced/debug-bearing padding rejected",
+      "GOTO width regression: GOTO/GOTO_16/GOTO_32 target-preserving encoding accepted; different target or conditional opcode rejected",
+      "padding line-event regression: non-executable unreferenced padding line may move only to its same payload; dropping it, moving to executable code, or moving backward rejected",
+      "Activity hierarchy: zero-local/high-register lifecycle and original dispatch bodies, final inheritance, abstract override preservation, framework boundary bridges",
+      "View hierarchy: existing onKeyPreIme/dispatchKeyEventPreIme, high registers, text boundary bridge and inherited final method",
+      "Dialog hierarchy/show sites: high-register virtual show, Builder materialized result, unrelated/discarded result unchanged",
+      "independent scope audit: original bodies restored byte-for-byte, original flags/annotations/fields/class metadata preserved",
+      "atomic preflight: duplicate application, late helper collision, missing Activity, seven native callback signatures",
+      "roundtrip: emitted original and patched DEX reopen with exactly audited code and hierarchy"
+    ],
+    "counts": {
+      "activity_lifecycle_added": 10,
+      "back_added": 4,
+      "activity_classes": 5,
+      "activity_lifecycle_entry": 4,
+      "back_replaced": 2,
+      "key_guard_wrapped": 7,
+      "dialog_classes": 3,
+      "preime_classes": 3,
+      "dialog_builder_hooks": 1,
+      "dialog_show_hooks": 1,
+      "key_guard_added": 4
+    },
+    "fixture_classes": 14,
+    "changed_classes": 12,
+    "physical_device_tested": false,
+    "encoding_normalizations": {
+      "selftest_alignment_const_string_widened": 1,
+      "selftest_alignment_methods_encoding_equivalent": 1,
+      "selftest_alignment_unreachable_alignment_nops_removed": 1,
+      "selftest_goto_width_branch_offsets_relocated": 2,
+      "selftest_goto_width_debug_addresses_relocated": 2,
+      "selftest_goto_width_debug_events_floored": 2,
+      "selftest_goto_width_goto_width_widened": 2,
+      "selftest_goto_width_handler_addresses_relocated": 2,
+      "selftest_goto_width_methods_encoding_equivalent": 2,
+      "selftest_normalization_const_string_widened": 1,
+      "selftest_normalization_debug_addresses_relocated": 3,
+      "selftest_normalization_debug_events_floored": 1,
+      "selftest_normalization_handler_addresses_relocated": 1,
+      "selftest_normalization_methods_encoding_equivalent": 1,
+      "selftest_normalization_try_boundaries_relocated": 1,
+      "selftest_padding_debug_const_string_widened": 1,
+      "selftest_padding_debug_debug_addresses_relocated": 1,
+      "selftest_padding_debug_debug_lines_from_padding_to_payload": 1,
+      "selftest_padding_debug_methods_encoding_equivalent": 1,
+      "selftest_padding_debug_unreachable_alignment_nops_removed": 1,
+      "selftest_same_range_try_debug_addresses_relocated": 1,
+      "selftest_same_range_try_debug_events_floored": 1,
+      "selftest_same_range_try_methods_encoding_equivalent": 1,
+      "selftest_same_range_try_same_range_try_handler_groups_reformatted": 1
+    }
+  },
+  "synthetic_dex_test_output": "PASS OneBack DEX audit: assertions=2382; tests=12",
+  "loader_merge_result": "PASS OneBack union merge: all 246 baseline classes canonically unchanged; added=7; total=253; assertions=1281",
+  "morphe_patch_discovery": {
+    "Hiro_Morphe_Patches_v1.0.163.mpp": {
+      "com.ss.android.ugc.trill": true,
+      "com.zhiliaoapp.musically": true,
+      "com.instagram.android": true,
+      "com.twitter.android": true,
+      "ctrip.english": true
+    },
+    "OneBack_Exit_NoRecents_v1.0.0.mpp": {
+      "com.ss.android.ugc.trill": true,
+      "com.zhiliaoapp.musically": true,
+      "com.instagram.android": true,
+      "com.twitter.android": true,
+      "ctrip.english": true
+    }
+  },
+  "runtime_stubs_packaged": false,
+  "android_device_tested": false,
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.163.mpp": {
+      "bytes": 17353320,
+      "sha256": "d8fa1b78392803316a73a65c791fc5dd5e56e50a45884dbaf05097190230f1b4"
+    },
+    "OneBack_Exit_NoRecents_v1.0.0.mpp": {
+      "bytes": 34425,
+      "sha256": "e14fc97986eb581d3078aca0b800b549cb4015d9914e5c6234abbcabc5fcc568"
+    }
+  }
+}
