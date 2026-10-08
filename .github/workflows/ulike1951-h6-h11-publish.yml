@@ -4,6 +4,7 @@ name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 # Baseline MPPs and toolchain are byte-pinned; NDK revision checks accept the
 # exact source.properties line even when it ends with a newline. The H8 Java
 # compile uses Android's pinned bootclasspath without LambdaMetafactory before
+# running the H8 Dex transformer with separate Java local declarations. Then
 # any MPP is published. Source changes use the
 # same byte-pinned rebuild and package checks, including all 640 H8 stripe
 # comparisons. Outputs are checked

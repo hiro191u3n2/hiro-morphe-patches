@@ -48,7 +48,8 @@ public final class H8Hooks {
   return changedIds;
  }
  static void verify(Map<String,ClassDef> before,Map<String,ClassDef> after){
-  var a=MergePayloads.methods(before.values()),b=MergePayloads.methods(after.values());
+  var a=MergePayloads.methods(before.values());
+  var b=MergePayloads.methods(after.values());
   for(String id:changedIds){Method original=a.get(id),replacement=b.get(id);require(original!=null&&replacement!=null,"H8 method preserved");
    String alias=id.equals(FILTER)?FILTER_ALIAS:STAGE_ALIAS;
    require(MergePayloads.hash(bridge(original)).equals(MergePayloads.hash(replacement)),"H8 bridge exact "+id);
