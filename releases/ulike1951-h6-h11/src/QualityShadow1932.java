@@ -329,8 +329,12 @@ public final class QualityShadow1932 {
             if(end-begin>tileRows) {
                 meta[1]=SpeedWorkers1935.borrowInts(capacity);
                 policy[1]=SpeedWorkers1935.borrowInts(capacity);
-                worker=Executors.newSingleThreadExecutor(r -> {
-                    Thread thread=new Thread(r,"ulike-residual-gpu");thread.setDaemon(true);return thread;
+                worker=Executors.newSingleThreadExecutor(new java.util.concurrent.ThreadFactory() {
+                    @Override public Thread newThread(Runnable runnable) {
+                        Thread thread=new Thread(runnable,"ulike-residual-gpu");
+                        thread.setDaemon(true);
+                        return thread;
+                    }
                 });
             }
             final int global=plan.shadowBudgetQ8;
@@ -349,20 +353,24 @@ public final class QualityShadow1932 {
                 if(!prepareSavedTile(input,width,start,limit,noise,plan,originY,global,stronger,
                         smoothLimit,m,p)){okay=false;break;}
                 if(Thread.currentThread().isInterrupted()){interrupted=true;break;}
-                java.util.concurrent.Callable<Boolean> task=() -> {
-                    GpuInteger1949.CpuFinishInto cpu=(destination,destinationOffset) -> {
-                        int[] summary=SpeedWorkers1935.borrowInts(capacity*3);
-                        try {
-                            if(!NativeSpeed1944.aggregateCpu(input,m,summary,width,rows,start,limit,
-                                    validBegin,validEnd,radius,FLAT_RANGE))return false;
-                            finishSummaryPacked(input,m,p,summary,destination,destinationOffset,width,
-                                    start,(limit-start)*width,noise,shadows,plan);
-                            return true;
-                        } finally {SpeedWorkers1935.release(summary);}
-                    };
-                    return GpuInteger1949.finishSavedInto(input,m,p,output,start*width,width,rows,
-                            start,limit,validBegin,validEnd,radius,FLAT_RANGE,noise,shadows,
-                            global,plan.beautyQ8,smoothLimit,cpu) || cpu.run(output,start*width);
+                java.util.concurrent.Callable<Boolean> task=new java.util.concurrent.Callable<Boolean>() {
+                    @Override public Boolean call() {
+                        GpuInteger1949.CpuFinishInto cpu=new GpuInteger1949.CpuFinishInto() {
+                            @Override public boolean run(int[] destination,int destinationOffset) {
+                                int[] summary=SpeedWorkers1935.borrowInts(capacity*3);
+                                try {
+                                    if(!NativeSpeed1944.aggregateCpu(input,m,summary,width,rows,start,limit,
+                                            validBegin,validEnd,radius,FLAT_RANGE))return false;
+                                    finishSummaryPacked(input,m,p,summary,destination,destinationOffset,width,
+                                            start,(limit-start)*width,noise,shadows,plan);
+                                    return true;
+                                } finally {SpeedWorkers1935.release(summary);}
+                            }
+                        };
+                        return GpuInteger1949.finishSavedInto(input,m,p,output,start*width,width,rows,
+                                start,limit,validBegin,validEnd,radius,FLAT_RANGE,noise,shadows,
+                                global,plan.beautyQ8,smoothLimit,cpu) || cpu.run(output,start*width);
+                    }
                 };
                 if(worker==null) {
                     if(!task.call()){okay=false;break;}
