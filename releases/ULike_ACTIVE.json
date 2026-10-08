@@ -1,21 +1,21 @@
 {
-  "ulike_version": "1.9.48",
-  "bundle_version": "1.0.181",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.48.mpp",
-  "source_sha256": "dbe2fcf3b5d1e1d280b4024eac2e2b845e78aaebb0cc279f74880fa9946dfcae",
-  "source_release": "ulike-v1.9.48",
-  "active_release": "ulike-v1.9.48",
-  "base_ulike_version": "1.9.47",
+  "ulike_version": "1.9.49",
+  "bundle_version": "1.0.182",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.49.mpp",
+  "source_sha256": "949ca9b8666dbe20b00b0cc876a45a1257de67e89558f5a8a946961a57ce236e",
+  "source_release": "ulike-v1.9.49",
+  "active_release": "ulike-v1.9.49",
+  "base_ulike_version": "1.9.48",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "47bddb21c9ff9c459afa2c560365c605cdb185a91f4e1b1c2bab6a98aa8420c9",
+  "base_source_sha256": "dbe2fcf3b5d1e1d280b4024eac2e2b845e78aaebb0cc279f74880fa9946dfcae",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "M1/M2/M3/M4/M6/M7/M8/M10 optimize exact-output fusion preparation, work scheduling and reusable buffers. The .47 per-shot stage timing algorithm is preserved; only current version strings change in its family. Pixel output is covered by independent host equivalence, format, compression settings and native kernel are retained. Host tests and original APKS applications pass; Galaxy speed and quality are unverified.",
-  "future_ulike_base": "Use ULike1.9.48 M optimizations from approved1.8.8 lineage and exact1.9.47 baseline. Preserve per-shot stage ownership, stale-record detection, latest report refresh and explicit skipped/failed stages. Preserve pixel arithmetic, output resolution/compression, beauty/color, maximum4 fusion, first-still capture reference, reviewed three-photo admission, serial correction and FIFO encoding, and exclusive codec ownership through confirmed release. Do not restore withdrawn1.9.17/10bit or stale additional-processing diagnostics.",
+  "reason": "G10 policy integrates G1/G3/G5/G6/G9 for exact integer fusion preparation and noise aggregation. Runtime CPU equivalence and transfer-inclusive speed admission gate the optional GPU route; otherwise CPU fallback preserves output. Baseline M48 optimizations, per-shot stage timing, capture and save policies retained. Host Mesa shader tests and original APKS applications pass; Galaxy speed and quality are unverified.",
+  "future_ulike_base": "Use ULike1.9.49 integer GPU optimizations from approved1.8.8 lineage and exact1.9.48 baseline. Preserve G10 exactness and transfer-inclusive speed admission, integer precision, CPU fallback on unsupported/error/mismatch/slower GPU, and M48 optimization. Preserve pixel arithmetic, output resolution/compression, beauty/color, maximum4 fusion, first-still capture reference, reviewed three-photo admission, serial correction and FIFO encoding, and exclusive codec ownership through confirmed release. Preserve per-shot timing and stale-record detection. Do not restore withdrawn1.9.17/10bit diagnostics.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
-  "release_status": "optimization1948_device_unverified",
+  "release_status": "gpu1949_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": true,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -44,7 +44,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.180",
+  "base_bundle_version": "1.0.181",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": true,
@@ -63,13 +63,12 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    "P10",
-    "P7",
-    "P4",
-    "P20",
-    "P29",
-    "P32",
-    "P33"
+    "G10",
+    "G1",
+    "G3",
+    "G5",
+    "G6",
+    "G9"
   ],
   "baseline_other_apps_preserved": true,
   "camera_startup_recovery_byte_identical": true,
@@ -77,14 +76,12 @@
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "M1",
-    "M2",
-    "M4",
-    "M8",
-    "M3",
-    "M6",
-    "M7",
-    "M10"
+    "G10",
+    "G1",
+    "G3",
+    "G5",
+    "G6",
+    "G9"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -112,7 +109,7 @@
   "quality_algorithm_and_settings_preserved": true,
   "save_format_and_codec_configuration_preserved": true,
   "native_library_byte_identical": true,
-  "native_installer_byte_identical": true,
+  "native_installer_byte_identical": false,
   "diagnostic_stage_names": [
     "fusion",
     "noise",
@@ -126,5 +123,25 @@
   "legacy_report_not_displayed_as_current": true,
   "diagnostic_per_shot_owner": true,
   "stage_timing_payload_byte_identical": false,
-  "stage_timing_algorithm_preserved": true
+  "stage_timing_algorithm_preserved": true,
+  "retained_baseline_candidates": {
+    "ulike_version": "1.9.48",
+    "candidates": [
+      "M1",
+      "M2",
+      "M4",
+      "M8",
+      "M3",
+      "M6",
+      "M7",
+      "M10"
+    ]
+  },
+  "gpu_processing_added": true,
+  "gpu_execution_on_physical_android": false,
+  "gpu_shader_execution_on_host": true,
+  "gpu_policy": "G10 integer-only exact CPU fallback with transfer-inclusive speed admission",
+  "gpu_native_library_sha256": "484f1826a74e54a7250a7638399cde1231fb6c08717800183e5c0b73404bc911",
+  "gpu_native_library_bytes": 24720,
+  "native_installer_existing_rows_preserved": true
 }
