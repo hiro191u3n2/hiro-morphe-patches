@@ -1,0 +1,128 @@
+{
+  "schema": "ulike1945-desktop-validation-v1",
+  "original_input_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "original_input_format": "APKS",
+  "original_base_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+  "original_split_merge_tested": true,
+  "ulike_version": "1.9.45",
+  "bundle_version": "1.0.178",
+  "original_apk_apply_tested": true,
+  "device_tested": false,
+  "device_quality_verified": false,
+  "original_apk_application": {
+    "status": "passed",
+    "input_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+    "single_and_bundle": true,
+    "split_merge_tested": true,
+    "device_tested": false
+  },
+  "desktop_validation": {
+    "single": {
+      "patch_index": 0,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33509 unique classes / 214448 methods. 2513 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "render_lifecycle_abi": "PASS render1938 native ABI/lifecycle checks=1367 applied=true; no device execution",
+      "feedback_native_abi": "PASS feedback1941 native ABI checks=34 applied=true; no device execution",
+      "save_native_abi": "FIELD\tLi/o/a/b1/a/b/f/a;->a:Li/o/a/q/c/c/b/e;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->b:Li/o/a/b1/a/b/f/a$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->c:Li/o/a/q/c/c/b/e$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a$a;->k:Li/o/a/b1/a/b/f/a;\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->c:I\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->j:I\tflags=4113\nMETHOD\tLi/o/a/b1/a/b/f/a$a;-><init>(Li/o/a/b1/a/b/f/a;II)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e;-><init>(Li/o/a/q/c/c/b/e$c;)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e$a;-><init>(Li/o/a/q/c/c/b/e;Landroid/graphics/Bitmap;IIZ)V\tflags=65537\nFIELD\tLi/o/a/q/c/c/b/e;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->g:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->d:J\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e;->r(Landroid/graphics/Bitmap;IIZ)Ljava/lang/String;\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e$a;->c()V\tflags=4097\nMETHOD\tLi/o/a/b1/a/b/f/a$c;->a()V\tflags=1025\nMETHOD\tLi/f/l/n/s/a;->b()Li/f/l/n/s/a;\tflags=9\nMETHOD\tLi/f/l/n/s/a;->e()Landroid/graphics/Bitmap;\tflags=1\nMETHOD\tLi/f/l/n/q/y/n;->f()Landroid/graphics/Bitmap;\tflags=9\nMETHOD\tLi/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;\tflags=9\nFIELD\tLi/o/a/p/b;->a:Li/o/a/p/b;\tflags=25\nMETHOD\tLi/o/a/p/b;->f()V\tflags=17\nFIELD\tLi/o/a/b0/f/a;->a:Li/o/a/b0/f/a;\tflags=25\nMETHOD\tLi/o/a/b0/f/a;->d(Z)V\tflags=17\nMETHOD\tLi/o/a/b1/a/g/y;->D1()I\tflags=1\nFIELD\tLcom/hiro/ulike/CaptureYuv;->active:Ljava/lang/ref/WeakReference;\tflags=74\nFIELD\tLcom/hiro/ulike/CaptureYuv;->states:Ljava/util/Map;\tflags=26\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->ready:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->closed:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->original:Landroid/media/ImageReader;\tflags=16\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->yuv:Landroid/media/ImageReader;\tflags=16\nFIELD\tLi/s/a/w/d0/a;->e0:Landroid/media/ImageReader;\tflags=1\nMETHOD\tLcom/hiro/ulike/CaptureYuv;->isReady()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PhotoDetail;->snapshot1932()Lcom/hiro/ulike/PhotoDetail$Settings;\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->forBitmap(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/ShotContext1932$Snapshot;\tflags=9\nFACT\tnotification_has_no_bitmap_access=true\teffective_global_exif_reads=0\tsettings_immutable=true\nPASS save native reflection ABI: checks=138, apk=patched.apk. No physical device execution.",
+      "codec_lifecycle_abi": "PASS codec1945 pinned ABI checks=1677 applied=true shared_looper=true output_callback_unchanged=true direct_fd_preserved=true device_tested=false",
+      "lens_native_abi": "FIELD\tLi/f/l/n/q/y/c;->r:Li/f/l/j;\tflags=17\nFIELD\tLi/f/l/n/q/y/c;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/f/l/n/q/y/m;->b:Li/f/l/j;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->c:Ljava/lang/String;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->a:Li/f/l/n/q/y/m;\tflags=25\nMETHOD\tLi/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g;\tflags=17\nMETHOD\tLi/f/l/u/g;->k()Li/f/l/u/j;\tflags=17\nMETHOD\tLi/f/l/u/j;->x()Li/f/l/u/p;\tflags=17\nMETHOD\tLi/f/l/u/p;->a()Ljava/lang/Object;\tflags=17\nFIELD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->root:Landroid/widget/LinearLayout;\tflags=16\nMETHOD\tLcom/hiro/ulike/RearLensUi1930;->rearSelected()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;-><init>(Landroid/view/View;)V\tflags=65536\nMETHOD\tLcom/hiro/ulike/MacroUi168;->attach(Ljava/lang/Object;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->installCore168()V\tflags=2\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->updateCore168()V\tflags=2\nMETHOD\tLi/f/l/n/q/y/c;->g0(Z)V\tflags=17\nPASS lens direct native/helper ABI: checks=218, apk=patched.apk. No physical device execution.",
+      "layout_native_abi": "PASS layout native/direct ABI checks=33977 resolvedHelperReferences=290 helperClasses=8 apk=patched.apk; no device execution",
+      "geometry_native_abi": "PASS geometry native ABI 90 assertions across 1 actual APK(s); five scoped method transforms, no device execution",
+      "layout_lifecycle_abi": "FIELD\tLi/o/a/b1/a/d/b;->b:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=1\nFIELD\tLi/o/a/b1/a/d/b;->c:I\tflags=1\nFIELD\tLi/o/a/m/j/f;->a:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=1\nFIELD\tLi/o/a/m/j/f;->d:I\tflags=1\nFIELD\tLi/o/a/b1/a/d/a;->c:Li/o/a/b1/a/d/b;\tflags=4113\nFIELD\tLi/o/a/m/j/b;->c:Li/o/a/m/j/f;\tflags=4113\nFIELD\tLi/f/l/v/b/b;->c:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=4113\nFIELD\tLcom/bytedance/corecamera/ui/view/CameraShadeView;->v:Lcom/ss/android/vesdk/VEPreviewRadio;\tflags=1\nFIELD\tLcom/bytedance/corecamera/ui/view/CameraShadeView;->w:Landroid/animation/ValueAnimator;\tflags=1\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->current(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->current(Lcom/bytedance/corecamera/ui/view/CameraShadeView;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->generation(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)J\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->ownershipGeneration(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)J\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->camera(Li/o/a/b1/a/d/b;II)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->preview(Li/o/a/m/j/f;I)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->settled(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postCamera(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postPreview(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postSettled(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLi/o/a/b1/a/d/b;->h(Li/o/a/b1/a/d/b;IIZ)V\tflags=25\nMETHOD\tLi/o/a/m/j/f;->l(Li/o/a/m/j/f;IZ)V\tflags=25\nMETHOD\tLcom/bytedance/corecamera/ui/view/CameraShadeView$h;->b(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)V\tflags=25\nMETHOD\tLi/o/a/b1/a/d/b;->g(IIZ)V\tflags=17\nMETHOD\tLi/o/a/m/j/f;->k(IZ)V\tflags=17\nMETHOD\tLcom/bytedance/corecamera/ui/view/CameraShadeView$h;->onAnimationEnd(Landroid/animation/Animator;)V\tflags=1\nPASS layout lifecycle native/helper ABI and six callback hooks checks=159. No physical device execution.",
+      "dex_integrity_entries": 4,
+      "speed_native_library_sha256": "50613d3ed433de1aa3b6c0608753dc98479ac9ce8238033b972cd025b67b297a",
+      "speed_native_library_bytes": 18560,
+      "register_analysis": {
+        "tested": 2327,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front1938 native ABI/lifecycle checks=4442 classes=33509 apk=patched.apk"
+    },
+    "bundle": {
+      "patch_index": 4,
+      "patch_result": {
+        "packageName": "com.gorgeous.liteinternational",
+        "packageVersion": "5.6.2",
+        "patchingSteps": [
+          {
+            "step": "PATCHING",
+            "success": true
+          },
+          {
+            "step": "REBUILDING",
+            "success": true
+          }
+        ],
+        "appliedPatches": [
+          {
+            "name": "高画質撮影・質感美肌・素材通信を復旧"
+          }
+        ],
+        "failedPatches": []
+      },
+      "method_contracts": "PASS final APK: 33509 unique classes / 214448 methods. 2513 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+      "native_abis": [
+        "arm64-v8a"
+      ],
+      "burst_capture_abi": "PASS burst native reflection ABI: checks=73, apk=patched.apk. No device execution.",
+      "render_lifecycle_abi": "PASS render1938 native ABI/lifecycle checks=1367 applied=true; no device execution",
+      "feedback_native_abi": "PASS feedback1941 native ABI checks=34 applied=true; no device execution",
+      "save_native_abi": "FIELD\tLi/o/a/b1/a/b/f/a;->a:Li/o/a/q/c/c/b/e;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->b:Li/o/a/b1/a/b/f/a$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a;->c:Li/o/a/q/c/c/b/e$c;\tflags=1\nFIELD\tLi/o/a/b1/a/b/f/a$a;->k:Li/o/a/b1/a/b/f/a;\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->c:I\tflags=4113\nFIELD\tLi/o/a/b1/a/b/f/a$a;->j:I\tflags=4113\nMETHOD\tLi/o/a/b1/a/b/f/a$a;-><init>(Li/o/a/b1/a/b/f/a;II)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e;-><init>(Li/o/a/q/c/c/b/e$c;)V\tflags=65537\nMETHOD\tLi/o/a/q/c/c/b/e$a;-><init>(Li/o/a/q/c/c/b/e;Landroid/graphics/Bitmap;IIZ)V\tflags=65537\nFIELD\tLi/o/a/q/c/c/b/e;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->g:Ljava/lang/String;\tflags=1\nFIELD\tLi/o/a/q/c/c/b/e;->d:J\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e;->r(Landroid/graphics/Bitmap;IIZ)Ljava/lang/String;\tflags=1\nMETHOD\tLi/o/a/q/c/c/b/e$a;->c()V\tflags=4097\nMETHOD\tLi/o/a/b1/a/b/f/a$c;->a()V\tflags=1025\nMETHOD\tLi/f/l/n/s/a;->b()Li/f/l/n/s/a;\tflags=9\nMETHOD\tLi/f/l/n/s/a;->e()Landroid/graphics/Bitmap;\tflags=1\nMETHOD\tLi/f/l/n/q/y/n;->f()Landroid/graphics/Bitmap;\tflags=9\nMETHOD\tLi/p/a/t/e;->d(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;IDD)Landroid/graphics/Bitmap;\tflags=9\nFIELD\tLi/o/a/p/b;->a:Li/o/a/p/b;\tflags=25\nMETHOD\tLi/o/a/p/b;->f()V\tflags=17\nFIELD\tLi/o/a/b0/f/a;->a:Li/o/a/b0/f/a;\tflags=25\nMETHOD\tLi/o/a/b0/f/a;->d(Z)V\tflags=17\nMETHOD\tLi/o/a/b1/a/g/y;->D1()I\tflags=1\nFIELD\tLcom/hiro/ulike/CaptureYuv;->active:Ljava/lang/ref/WeakReference;\tflags=74\nFIELD\tLcom/hiro/ulike/CaptureYuv;->states:Ljava/util/Map;\tflags=26\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->ready:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->closed:Z\tflags=64\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->original:Landroid/media/ImageReader;\tflags=16\nFIELD\tLcom/hiro/ulike/CaptureYuv$State;->yuv:Landroid/media/ImageReader;\tflags=16\nFIELD\tLi/s/a/w/d0/a;->e0:Landroid/media/ImageReader;\tflags=1\nMETHOD\tLcom/hiro/ulike/CaptureYuv;->isReady()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PhotoDetail;->snapshot1932()Lcom/hiro/ulike/PhotoDetail$Settings;\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->copy(Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/ShotContext1932;->forBitmap(Landroid/graphics/Bitmap;)Lcom/hiro/ulike/ShotContext1932$Snapshot;\tflags=9\nFACT\tnotification_has_no_bitmap_access=true\teffective_global_exif_reads=0\tsettings_immutable=true\nPASS save native reflection ABI: checks=138, apk=patched.apk. No physical device execution.",
+      "codec_lifecycle_abi": "PASS codec1945 pinned ABI checks=1677 applied=true shared_looper=true output_callback_unchanged=true direct_fd_preserved=true device_tested=false",
+      "lens_native_abi": "FIELD\tLi/f/l/n/q/y/c;->r:Li/f/l/j;\tflags=17\nFIELD\tLi/f/l/n/q/y/c;->b:Ljava/lang/String;\tflags=1\nFIELD\tLi/f/l/n/q/y/m;->b:Li/f/l/j;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->c:Ljava/lang/String;\tflags=9\nFIELD\tLi/f/l/n/q/y/m;->a:Li/f/l/n/q/y/m;\tflags=25\nMETHOD\tLi/f/l/j;->g(Ljava/lang/String;)Li/f/l/u/g;\tflags=17\nMETHOD\tLi/f/l/u/g;->k()Li/f/l/u/j;\tflags=17\nMETHOD\tLi/f/l/u/j;->x()Li/f/l/u/p;\tflags=17\nMETHOD\tLi/f/l/u/p;->a()Ljava/lang/Object;\tflags=17\nFIELD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->root:Landroid/widget/LinearLayout;\tflags=16\nMETHOD\tLcom/hiro/ulike/RearLensUi1930;->rearSelected()Z\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;-><init>(Landroid/view/View;)V\tflags=65536\nMETHOD\tLcom/hiro/ulike/MacroUi168;->attach(Ljava/lang/Object;)V\tflags=9\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->installCore168()V\tflags=2\nMETHOD\tLcom/hiro/ulike/OpticalZoomUi$Bar;->updateCore168()V\tflags=2\nMETHOD\tLi/f/l/n/q/y/c;->g0(Z)V\tflags=17\nPASS lens direct native/helper ABI: checks=218, apk=patched.apk. No physical device execution.",
+      "layout_native_abi": "PASS layout native/direct ABI checks=33977 resolvedHelperReferences=290 helperClasses=8 apk=patched.apk; no device execution",
+      "geometry_native_abi": "PASS geometry native ABI 90 assertions across 1 actual APK(s); five scoped method transforms, no device execution",
+      "layout_lifecycle_abi": "FIELD\tLi/o/a/b1/a/d/b;->b:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=1\nFIELD\tLi/o/a/b1/a/d/b;->c:I\tflags=1\nFIELD\tLi/o/a/m/j/f;->a:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=1\nFIELD\tLi/o/a/m/j/f;->d:I\tflags=1\nFIELD\tLi/o/a/b1/a/d/a;->c:Li/o/a/b1/a/d/b;\tflags=4113\nFIELD\tLi/o/a/m/j/b;->c:Li/o/a/m/j/f;\tflags=4113\nFIELD\tLi/f/l/v/b/b;->c:Lcom/bytedance/corecamera/ui/view/CameraShadeView;\tflags=4113\nFIELD\tLcom/bytedance/corecamera/ui/view/CameraShadeView;->v:Lcom/ss/android/vesdk/VEPreviewRadio;\tflags=1\nFIELD\tLcom/bytedance/corecamera/ui/view/CameraShadeView;->w:Landroid/animation/ValueAnimator;\tflags=1\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->current(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->current(Lcom/bytedance/corecamera/ui/view/CameraShadeView;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->generation(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)J\tflags=9\nMETHOD\tLcom/hiro/ulike/PreviewLayout1922;->ownershipGeneration(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)J\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->camera(Li/o/a/b1/a/d/b;II)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->preview(Li/o/a/m/j/f;I)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->settled(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postCamera(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postPreview(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLcom/hiro/ulike/LayoutLifecycle1937;->postSettled(Landroid/os/Handler;Ljava/lang/Runnable;J)Z\tflags=9\nMETHOD\tLi/o/a/b1/a/d/b;->h(Li/o/a/b1/a/d/b;IIZ)V\tflags=25\nMETHOD\tLi/o/a/m/j/f;->l(Li/o/a/m/j/f;IZ)V\tflags=25\nMETHOD\tLcom/bytedance/corecamera/ui/view/CameraShadeView$h;->b(Lcom/bytedance/corecamera/ui/view/CameraShadeView;)V\tflags=25\nMETHOD\tLi/o/a/b1/a/d/b;->g(IIZ)V\tflags=17\nMETHOD\tLi/o/a/m/j/f;->k(IZ)V\tflags=17\nMETHOD\tLcom/bytedance/corecamera/ui/view/CameraShadeView$h;->onAnimationEnd(Landroid/animation/Animator;)V\tflags=1\nPASS layout lifecycle native/helper ABI and six callback hooks checks=159. No physical device execution.",
+      "dex_integrity_entries": 4,
+      "speed_native_library_sha256": "50613d3ed433de1aa3b6c0608753dc98479ac9ce8238033b972cd025b67b297a",
+      "speed_native_library_bytes": 18560,
+      "register_analysis": {
+        "tested": 2327,
+        "failed": 0
+      },
+      "front_lifecycle_abi": "PASS front1938 native ABI/lifecycle checks=4442 classes=33509 apk=patched.apk"
+    }
+  },
+  "speed_dex_verification": "PASS1945 assertions=6922; compiled production bytecode equals shipped; native hook contracts checked; save encoders, shutter feedback, capture first-image policies and unrelated resources retained; only reviewed speed helper families and installer pins replaced; actual original APK contracts checked=true; device untested",
+  "stock_burst_capture_abi_verification": "PASS burst native reflection ABI: checks=66, apk=stock.apk. No device execution.",
+  "stock_render_lifecycle_abi_verification": "PASS render1938 native ABI/lifecycle checks=51 applied=false; no device execution",
+  "stock_feedback_abi_verification": "PASS feedback1941 native ABI checks=24 applied=false; no device execution",
+  "baseline_codec_lifecycle_abi_verification": "PASS codec1945 pinned ABI checks=1678 applied=false shared_looper=true output_callback_unchanged=true direct_fd_preserved=true device_tested=false",
+  "artifacts": {
+    "ULike_HQ_Texture_Online_v1.9.45.mpp": {
+      "sha256": "5d930e059aa031e6df970fbddcc60fbfd0fda5cf04c58b8fba0bd16a52cf3e20",
+      "bytes": 835098
+    },
+    "Hiro_Morphe_Patches_v1.0.178.mpp": {
+      "sha256": "a91d4937852d9db6d67a365b6bb3086b13f74d3cf9e6f4f8d3f9506f9ff99e83",
+      "bytes": 17482157
+    }
+  },
+  "published": false,
+  "limitations": "Morphe rebuild, host execution and DEX type analysis do not execute Android/ART or camera hardware.",
+  "original_apks_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+  "stock_lifecycle_abi_verification": "PASS front1938 native ABI/lifecycle checks=454 classes=33134 apk=stock.apk"
+}
