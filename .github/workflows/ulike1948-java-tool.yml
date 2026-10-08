@@ -1,0 +1,32 @@
+name: ULike1948 pinned Java build tool
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1948-java-tool.yml']
+permissions:
+  contents: read
+jobs:
+  tool:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Package exact compiler runtime
+        shell: bash
+        run: |
+          set -euo pipefail
+          java -version
+          javac -version
+          tar -C "$JAVA_HOME" -czf "$RUNNER_TEMP/ulike1948-jdk21.tar.gz" .
+          sha256sum "$RUNNER_TEMP/ulike1948-jdk21.tar.gz" > "$RUNNER_TEMP/ulike1948-jdk21.sha256"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1948-jdk21
+          path: |
+            ${{ runner.temp }}/ulike1948-jdk21.tar.gz
+            ${{ runner.temp }}/ulike1948-jdk21.sha256
+          retention-days: 3
+          compression-level: 0
