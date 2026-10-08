@@ -1,0 +1,1 @@
+package com.bytedance.corecamera.ui.view; public class CameraShadeView {public int width=742,height=1536;public long epoch;public boolean attached=true;public int getWidth(){return width;}public int getHeight(){return height;}}
