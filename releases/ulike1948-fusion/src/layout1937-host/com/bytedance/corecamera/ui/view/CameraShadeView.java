@@ -1,0 +1,11 @@
+package com.bytedance.corecamera.ui.view;
+import java.util.*;import android.animation.ValueAnimator;import android.graphics.RectF;import com.ss.android.vesdk.VEPreviewRadio;import com.hiro.ulike.PreviewLayout1922;
+public class CameraShadeView {public static java.util.List<Object> V=new ArrayList<>(); public boolean attached=true;public boolean isAttachedToWindow(){return attached;} public boolean post(Runnable r){return postDelayed(r,0);}
+ public static int d0,e0,S;public static float Q,R;public static VEPreviewRadio U;public int notifications;public int c=1080,j=2340,r,s,t,u,A;public boolean G;public VEPreviewRadio v=VEPreviewRadio.RADIO_3_4;public ValueAnimator w;public RectF n=new RectF(),o=new RectF(),p=new RectF(),q=new RectF();public static float b0,c0;public int margin=100,measuredWidth=-1,measuredHeight=-1;public int redraws,recalculations;public long now;public List<Task> queue=new ArrayList<>();
+ public static class Task {public Runnable action;public long at;Task(Runnable r,long t){action=r;at=t;}}
+ public int getWidth(){return measuredWidth<0?c:measuredWidth;} public int getHeight(){return measuredHeight<0?j:measuredHeight;}public int getRatio34TopMargin(){return margin+A;}public android.content.res.Resources getResources(){return new android.content.res.Resources();}public void b(){notifications++;for(Object listener:V)if(listener instanceof java.util.function.Consumer)((java.util.function.Consumer<RectF>)listener).accept(PreviewLayout1922.viewport());}public void i(){redraws++;n.bottom=r+((v==VEPreviewRadio.RADIO_1_1||v==VEPreviewRadio.RADIO_ROUND)?1:0);o.top=j-s;}
+ public boolean m(VEPreviewRadio ratio,boolean a,boolean b,boolean d){recalculations++;PreviewLayout1922.cancel(this);v=ratio;u=margin+A;t=j-(int)((long)c*4/3)-u;PreviewLayout1922.reconcile(this);return false;}
+ public boolean postDelayed(Runnable r,long delay){queue.add(new Task(r,now+delay));return true;}
+ public boolean removeCallbacks(Runnable r){queue.removeIf(t->t.action==r);return true;}
+ public void advance(long time){while(true){Task next=null;for(Task t:queue)if(t.at<=time&&(next==null||t.at<next.at))next=t;if(next==null)break;queue.remove(next);now=next.at;android.os.SystemClock.now=now;next.action.run();}now=time;android.os.SystemClock.now=now;}
+}
