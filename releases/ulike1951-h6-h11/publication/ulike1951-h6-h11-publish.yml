@@ -1,7 +1,8 @@
 name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 # The original APKS is not available to this workflow. Its application status
 # remains false throughout the generated evidence, QA, receipt and policy.
-# Baseline MPPs and toolchain are byte-pinned; generated outputs are checked
+# Baseline MPPs and toolchain are byte-pinned; NDK revision checks accept the
+# exact source.properties line even when it ends with a newline. Outputs are checked
 # against the checked-out source and downloaded release bytes before feed edits.
 on:
   push:

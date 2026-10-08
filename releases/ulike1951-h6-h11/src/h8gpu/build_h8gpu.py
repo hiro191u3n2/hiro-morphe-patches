@@ -12,7 +12,7 @@ def run(args):
 def build(ndk,output):
     root=Path(__file__).resolve().parent
     ndk=Path(ndk).resolve();output=Path(output).resolve();output.mkdir(parents=True,exist_ok=True)
-    if not re.search(r'^Pkg.Revision\s*=\s*'+re.escape(NDK_REVISION)+r'\s$',(ndk/'source.properties').read_text(),re.M):
+    if not re.search(r'^Pkg.Revision\s*=\s*'+re.escape(NDK_REVISION)+r'\s*$',(ndk/'source.properties').read_text(),re.M):
         raise RuntimeError('Pinned NDK r27c required')
     shader=(root/'bilateral1950.comp').read_text()
     (output/'bilateral_source1951.h').write_text('/* Generated from bilateral1950.comp. */\nstatic const char bilateral1951_source[] =\n'+''.join(json.dumps(line+'\n')+'\n' for line in shader.splitlines())+';\n')
