@@ -1,0 +1,1 @@
+package i.o.a.b1.a.d; public final class a implements Runnable { public final b c; public int j,k; public a(b owner,int value,int grid){c=owner;j=value;k=grid;} public void run(){if(com.hiro.ulike.LayoutLifecycle1937.camera(c,j,k)){c.executions++;c.deliveredTop=c.focusTop=c.b.u;c.deliveredBottom=c.focusBottom=c.b.t;c.deliveredHeight=c.b.j-c.b.u-c.b.t;}} }
