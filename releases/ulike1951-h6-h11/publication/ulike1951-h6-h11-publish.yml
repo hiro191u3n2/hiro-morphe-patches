@@ -2,15 +2,13 @@ name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 # The original APKS is not available to this workflow. Its application status
 # remains false throughout the generated evidence, QA, receipt and policy.
 # Baseline MPPs and toolchain are byte-pinned; NDK revision checks accept the
-# exact source.properties line even when it ends with a newline. Outputs are checked
+# exact source.properties line even when it ends with a newline. The H8 Java
+# compile is verified before any MPP is published. Outputs are checked
 # against the checked-out source and downloaded release bytes before feed edits.
 on:
   push:
     branches: [main]
-    paths:
-      - '.github/workflows/ulike1951-h6-h11-publish.yml'
-      - 'releases/ulike1951-h6-h11/src/**'
-      - 'releases/ulike1951-h6-h11/publication/**'
+    paths: ['.github/workflows/ulike1951-h6-h11-publish.yml']
 permissions:
   contents: write
   actions: read
