@@ -163,7 +163,7 @@ def build(args):
         'core_native_library_sha256':core_digest,'core_native_library_bytes':len(core_bytes),'core_native_build':core_report,'compiled_core_native_source_sha256':core_sources,
         'moire_native_library_sha256':moire_digest,'moire_native_library_bytes':len(moire_bytes),'moire_native_build':moire_report,
         'h8gpu_native_library_sha256':h8_digest,'h8gpu_native_library_bytes':len(h8_bytes),'h8gpu_native_build':h8_report,
-        'changed_standalone_entries':changes,'added_standalone_entries':[MOIRE_ENTRY,H8_ENTRY],'changed_bundle_entries':sorted(n for n in bundle if integrated[n]!=bundle[n]),'added_bundle_entries':[MOIRE_ENTRY,H8_ENTRY],
+        'changed_standalone_entries':changes,'added_standalone_entries':sorted((MOIRE_ENTRY,H8_ENTRY)),'changed_bundle_entries':sorted(n for n in bundle if integrated[n]!=bundle[n]),'added_bundle_entries':sorted((MOIRE_ENTRY,H8_ENTRY)),
         'dex_verification':verification.strip(),'published':False,'manager_feed_updated':False,
         'limitations':['No Android/Galaxy camera execution.','Stage intervals may overlap and do not sum to shutter-to-save elapsed time.','Host equivalence and reduced work do not establish a device speedup.','Unmeasured or skipped stages are labeled explicitly.']}
     qa.update(inventory)
