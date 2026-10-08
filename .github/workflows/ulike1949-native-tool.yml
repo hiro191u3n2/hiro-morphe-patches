@@ -23,12 +23,13 @@ jobs:
           dst = pathlib.Path('ndk27c')
           pre = pathlib.Path('toolchains/llvm/prebuilt/linux-x86_64')
           selected = [pathlib.Path('source.properties'), pre/'sysroot/usr/include', pre/'sysroot/usr/lib/aarch64-linux-android/26']
-          for name in ['clang', 'aarch64-linux-android26-clang', 'llvm-readelf', 'llvm-objdump']:
+          for name in ['clang', 'aarch64-linux-android26-clang', 'ld.lld', 'llvm-readelf', 'llvm-objdump']:
               p = pre/'bin'/name
               selected.append(p)
               q = (src/p).resolve()
               if q.is_relative_to(src.resolve()): selected.append(q.relative_to(src.resolve()))
           selected.extend(pre/'lib'/p.name for p in (src/pre/'lib').glob('*.so*'))
+          selected.extend(p.relative_to(src) for p in (src/pre/'sysroot/usr/lib/aarch64-linux-android').iterdir() if p.is_file())
           for version in (src/pre/'lib/clang').iterdir():
               selected.append(version.relative_to(src)/'include')
               for p in (version/'lib/linux').glob('*aarch64*'): selected.append(p.relative_to(src))
