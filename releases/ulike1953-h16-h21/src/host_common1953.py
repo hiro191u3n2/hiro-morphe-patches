@@ -57,9 +57,12 @@ def inherited1952_root(root,work):
   if not p.is_file() or '__pycache__' in p.parts:continue
   name=p.relative_to(root).as_posix();target=view/name
   target.parent.mkdir(parents=True,exist_ok=True)
-  if target.exists() or target.is_symlink():continue
+  # These runners resolve __file__ when recording source provenance. A
+  # symlink resolves back into the forward source tree and cannot honestly
+  # be made relative to this independent inherited snapshot.
+  if target.is_symlink():target.unlink()
   if name in pins:target.write_bytes((root/'tests/pipeline1953-reference'/name).read_bytes())
-  else:target.symlink_to(p)
+  else:target.write_bytes(p.read_bytes())
  for name,expected in pins.items():
   if hashlib.sha256((view/name).read_bytes()).hexdigest()!=expected:raise AssertionError('Inherited .52 view differs: '+name)
  return view
