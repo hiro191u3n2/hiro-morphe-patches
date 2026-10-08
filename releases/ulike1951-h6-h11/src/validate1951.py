@@ -97,6 +97,10 @@ def validate(args):
             and suites['h8_two_pass_gpu_exact'].get('software_egl_two_pass_pixel_exact') is True
             and suites['h9_h11_gpu_exact'].get('software_egl_saved_output_pixel_exact') is True,
             'Native JNI and integer software GPU execution evidence required')
+    require(all(suites['h8_two_pass_gpu_exact'].get(key) is True for key in (
+                'stage_parameter_order_verified', 'sharpening_halo_pixel_exact',
+                'production_filter_dex_oracle_executed')),
+            'Production H8 stage order and sharpening halo pixel equivalence required')
     for key in ('original_apk_apply_tested', 'device_tested', 'device_quality_verified',
                 'ci_android_apply_tested', 'device_save_speed_measured'):
         require(qa.get(key) is False, 'Unperformed Android testing claimed: ' + key)

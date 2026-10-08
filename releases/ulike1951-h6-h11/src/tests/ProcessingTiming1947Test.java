@@ -121,7 +121,7 @@ public final class ProcessingTiming1947Test {
   // Process restart restores only current-version data, version mismatches are not reused.
   reset();Context restore=new Context();restore.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.51").putLong("id",99).putString("summary","Current version saved result").apply();
   ProcessingTiming1947.init(restore);ok(ProcessingTiming1947.summary().equals("Current version saved result"),"Current record restore");
-  reset();Context stale=new Context();stale.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.49").putLong("id",100).putString("summary","Old build result").apply();
+  reset();Context stale=new Context();stale.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.50").putLong("id",100).putString("summary","Old build result").apply();
   ProcessingTiming1947.init(stale);has("新しい撮影の計測待ち");
 
   // Bounded metadata retains no strong image references and cannot grow indefinitely.

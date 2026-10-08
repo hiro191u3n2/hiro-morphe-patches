@@ -11,6 +11,8 @@ name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 # same byte-pinned rebuild and package checks, including all 640 H8 stripe
 # comparisons. Outputs are checked
 # against the checked-out source and downloaded release bytes before feed edits.
+# The H8 production filter oracle checks stage argument order and sharp halos
+# before the rebuilt package can be finalized or advertised to Manager.
 on:
   push:
     branches: [main]

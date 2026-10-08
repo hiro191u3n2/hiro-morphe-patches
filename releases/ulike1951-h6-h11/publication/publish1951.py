@@ -107,6 +107,10 @@ REQUIRED_QA = {
     "host_quality_result.suites.h7_primary_denoise_exact.baseline_c_jni_pixel_exact":True,
     "host_quality_result.suites.h7_primary_denoise_exact.output_copy_race_guard":True,
     "host_quality_result.suites.h8_two_pass_gpu_exact.software_egl_two_pass_pixel_exact":True,
+    "host_quality_result.suites.h8_two_pass_gpu_exact.stage_parameter_order_verified":True,
+    "host_quality_result.suites.h8_two_pass_gpu_exact.sharpening_halo_pixel_exact":True,
+    "host_quality_result.suites.h8_two_pass_gpu_exact.production_filter_dex_oracle_executed":True,
+    "host_quality_result.suites.h8_two_pass_gpu_exact.software_gpu_two_pass_exact_cases":640,
     "host_quality_result.suites.h8_two_pass_gpu_exact.gpu_execution_on_physical_android":False,
     "host_quality_result.suites.h9_h11_gpu_exact.software_egl_saved_output_pixel_exact":True,
     "host_quality_result.suites.h9_h11_gpu_exact.overlap_and_cpu_fallback_pixel_exact":True,
@@ -522,7 +526,11 @@ def validate_local(dist, expected, baseline, standalone_baseline, repo):
             "H6 oracle did not compare enough actual pixels")
     require(suites["h7_primary_denoise_exact"].get("assertions") == 122827264,
             "H7 native-denoise exhaustive suite did not execute")
-    require(suites["h8_two_pass_gpu_exact"].get("assertions") == 640,
+    h8_suite=suites["h8_two_pass_gpu_exact"]
+    require(type(h8_suite.get("production_filter_wrapper_assertions")) is int
+            and h8_suite["production_filter_wrapper_assertions"] > 0
+            and h8_suite.get("software_gpu_two_pass_exact_cases") == 640
+            and h8_suite.get("assertions") == 640 + h8_suite["production_filter_wrapper_assertions"],
             "H8 software EGL two-pass cases did not execute")
     require(suites["h9_h11_gpu_exact"].get("assertions") == 32 + 39990 + 14310,
             "H9-H11 saved-output and overlap cases did not execute")

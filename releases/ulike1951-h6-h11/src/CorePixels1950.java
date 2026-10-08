@@ -83,7 +83,7 @@ public final class CorePixels1950 {
             return;
         }
         long started=System.nanoTime();
-        if(!gpuPair(work,width,rows,first,(long)first+count,noise,texture,shadows)) {
+        if(!gpuPair(work,width,rows,first,(long)first+count,noise,sharp,texture,shadows)) {
             long cpuStarted=System.nanoTime();
             DetailSerial186.filterBeforeH8(work,width,rows,first,count,noise,sharp,
                     texture,halos,shadows);
@@ -105,12 +105,12 @@ public final class CorePixels1950 {
         }
     }
     /** Called by the original filter's stage invocations through H8Hooks. */
-    public static void stage(DetailSerial186.Context context,int first,int last,int phase) {
+    public static void stage(DetailSerial186.Context context,int phase,int first,int last) {
         if((phase==0 || phase==1) && Boolean.TRUE.equals(GPU_PAIR.get()))return;
-        DetailSerial186.stageBeforeH8(context,first,last,phase);
+        DetailSerial186.stageBeforeH8(context,phase,first,last);
     }
     private static boolean gpuPair(DetailPixels.Work work,int width,int rows,int first,long last,
-            int noise,boolean texture,boolean shadows) {
+            int noise,int sharp,boolean texture,boolean shadows) {
         if(!GPU_LOADED || !ready() || gpuAdmission<0 || work==null ||
                 work.source==null || work.denoised==null || work.horizontal==null ||
                 work.output==null || width<1 || rows<1 || noise<1 || noise>4 ||
@@ -121,9 +121,14 @@ public final class CorePixels1950 {
                 work.horizontal.length<(long)width*rows ||
                 work.output.length<(long)width*rows)return false;
         if(!gpuReady())return false;
+        // The preserved filter denoises and packs four additional rows before
+        // sharpening. The two-pass GPU endpoint must produce that same vertical
+        // interval; its own horizontal support adds a further three rows.
+        int denoiseFirst=sharp>0?Math.max(0,first-4):first;
+        int denoiseLast=sharp>0?(int)Math.min((long)rows,last+4):(int)last;
         boolean successful;
         try { successful=bilateralPairGpuNative(work.source,work.denoised,work.horizontal,width,rows,
-                noise,texture,shadows,first,(int)last,LUMA,COLOUR); }
+                noise,texture,shadows,denoiseFirst,denoiseLast,LUMA,COLOUR); }
         catch(LinkageError badNative) { gpuVerified=-1;return false; }
         catch(OutOfMemoryError unavailable) { return false; }
         if(!successful){gpuAdmission=-1;return false;}

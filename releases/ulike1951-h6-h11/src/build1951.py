@@ -120,7 +120,7 @@ def build(args):
     require(references.startswith('PASS helper references in '),'Executed helper reference verification missing')
     spec=importlib.util.spec_from_file_location('optimization_tests',ROOT/'host_regression1951.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
     host_sources=host_source_pins()
-    result=module.test(ROOT,args.work,args.tools/'android.jar')
+    result=module.test(ROOT,args.work,args.tools/'android.jar',args.input/BASE_SINGLE)
     require(host_sources==host_source_pins(),'Sources changed during executed host regression')
     require(result.get('status')=='passed' and result.get('assertions',0)>0,'Executed optimization and preservation tests must pass')
     require(set(result.get('suites',{})) >= {'baseline_camera_quality_save_timing','exact_temporal_fusion','capture_preprocessing_lifecycle','primary_denoise_native_exact','fused_gpu_finishing_exact','gpu_runtime_admission1950','exact_correction_copy_elision','h6_moire_exact','h7_primary_denoise_exact','h8_two_pass_gpu_exact','h9_h11_gpu_exact'} and result.get('pixel_equivalence_to_baseline') is True and result.get('full_resolution_nv21_checked') == '4080x3060','Executed H6-H11 pixel-exact and full-resolution preservation evidence required')

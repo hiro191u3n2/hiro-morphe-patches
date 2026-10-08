@@ -11,7 +11,7 @@ def run(cmd,env=None):
     p=subprocess.run([str(x) for x in cmd],capture_output=True,text=True,check=True,env=env,timeout=360)
     return p.stdout+p.stderr
 
-def test(root,work,android):
+def test(root,work,android,baseline):
     root,work=Path(root),Path(work)/'host-regression1951'
     work.mkdir(parents=True,exist_ok=True)
     original=load(root,'host_regression1950').test(root,work,android)
@@ -25,7 +25,16 @@ def test(root,work,android):
     env=os.environ.copy();env.update(EGL_PLATFORM='surfaceless',LIBGL_ALWAYS_SOFTWARE='1')
     h8=run([sys.executable,root/'h8gpu/test_bilateral1950.py'],env)
     assert 'PASS: 640 exact integer cases' in h8,h8
-    suites['h8_two_pass_gpu_exact']={'status':'passed','assertions':640,'software_egl_two_pass_pixel_exact':True,'gpu_execution_on_physical_android':False}
+    wrapper=load(root/'h8gpu','test_h8_wrapper1951').test(root,work,baseline)
+    for key in ('stage_parameter_order_verified','sharpening_halo_pixel_exact',
+                'production_filter_dex_oracle_executed'):
+        assert wrapper.get(key) is True,wrapper
+    assert wrapper.get('status')=='passed' and wrapper.get('assertions',0)>0,wrapper
+    suites['h8_two_pass_gpu_exact']={**wrapper,'status':'passed',
+        'assertions':640+wrapper['assertions'],'software_egl_two_pass_pixel_exact':True,
+        'software_gpu_two_pass_exact_cases':640,
+        'production_filter_wrapper_assertions':wrapper['assertions'],
+        'gpu_execution_on_physical_android':False}
     env['ULIKE_H9_PREBUILT']=str(work/'host-regression1950')
     env['ULIKE_H9_WORK']=str(work)
     h9=run([sys.executable,root/'tests/h9/verify_h9_h11.py'],env)
