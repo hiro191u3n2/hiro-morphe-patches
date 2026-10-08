@@ -4,7 +4,7 @@ import com.android.tools.smali.dexlib2.iface.*;
 /** Independently reload serialized DEX and verify every unrelated class is retained. */
 public final class Verify1952 {
  static void need(boolean value,String label){if(!value)throw new IllegalStateException(label);}
- static void exactUnowned(Map<String,ClassDef> before,Map<String,ClassDef> after,boolean runtime){
+ static void exactUnowned(Map<String,ClassDef> before,Map<String,ClassDef> after,boolean runtime)throws Exception{
   for(var row:before.entrySet()){
    String type=row.getKey();boolean allowed=runtime?Transform1952.owned(type):type.equals(Transform1952.LOADER)||type.equals(Transform1952.INSTALLER);
    if(!allowed)need(after.containsKey(type)&&MergePayloads.classHash(row.getValue()).equals(MergePayloads.classHash(after.get(type))),"Unrelated class differs: "+type);
