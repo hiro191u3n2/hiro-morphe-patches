@@ -1,0 +1,1 @@
+package android.graphics;public class Bitmap {public enum CompressFormat {JPEG,PNG,WEBP} }

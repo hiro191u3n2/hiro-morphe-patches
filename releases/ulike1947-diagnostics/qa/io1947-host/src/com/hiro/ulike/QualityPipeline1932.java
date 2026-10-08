@@ -1,0 +1,1 @@
+package com.hiro.ulike;public class QualityPipeline1932 {public static PhotoDetail.Settings settingsForLegacy(PhotoDetail.Settings s){return s;}}

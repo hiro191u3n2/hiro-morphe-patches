@@ -1,0 +1,1 @@
+package com.hiro.ulike;import android.graphics.Bitmap;import java.io.File;public class SaveQuality2 {public static Bitmap.CompressFormat format;public static boolean saveFinalBefore1947(Bitmap b,File f,Bitmap.CompressFormat c,int q){format=c;return TimedIo1947.saveStage(b,f,q);}public static String publishFinalBefore1947(String p){return TimedIo1947.publishStage(p);}}

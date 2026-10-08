@@ -1,0 +1,1 @@
+package android.media;import java.nio.ByteBuffer;public class MediaMuxer {public int writes,starts,stops,releases;public RuntimeException failure;public void writeSampleData(int t,ByteBuffer b,MediaCodec.BufferInfo i){writes++;if(failure!=null)throw failure;}public void start(){starts++;}public void stop(){stops++;}public void release(){releases++;}}

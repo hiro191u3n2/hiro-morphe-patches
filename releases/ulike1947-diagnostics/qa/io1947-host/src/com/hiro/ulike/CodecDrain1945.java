@@ -1,0 +1,1 @@
+package com.hiro.ulike;import androidx.heifwriter.HeifWriter;public class CodecDrain1945 {public static void close(HeifWriter w){w.close();}}
