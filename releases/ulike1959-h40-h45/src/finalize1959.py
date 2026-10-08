@@ -121,7 +121,7 @@ def finalize(args):
     notes = release_notes(qa)
     (args.dist/'RELEASE_NOTES.txt').write_text(notes)
     package = {**sources, 'README.md': sources['publication/README.md'], 'evidence/validation.json': evidence_bytes}
-    diagnostics = ('QA_ULike_v1.9.59.json', 'host-regression1959-result.json', 'native-build1958.json',
+    diagnostics = ('QA_ULike_v1.9.59.json', 'host-regression1959-result.json', 'native-build1959.json',
         'speed-inventory1959.json', 'emitted-audit.tsv', 'helper-references.txt', 'emitted.log',
         'metadata.log', 'native-installer-metadata.log', 'nr-native-readelf.txt', 'RELEASE_NOTES.txt')
     for name in diagnostics:
