@@ -1,0 +1,54 @@
+name: ULike1949 pinned Android native tool
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1949-native-tool.yml']
+permissions:
+  contents: read
+jobs:
+  tool:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: Prepare pinned NDK r27c subset
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fL --retry 3 https://dl.google.com/android/repository/android-ndk-r27c-linux.zip -o ndk.zip
+          echo '090e8083a715fdb1a3e402d0763c388abb03fb4e  ndk.zip' | sha1sum -c -
+          unzip -q ndk.zip
+          python3 - <<'PY'
+          import pathlib, shutil, subprocess, tarfile, hashlib, json
+          src = pathlib.Path('android-ndk-r27c')
+          dst = pathlib.Path('ndk27c')
+          pre = pathlib.Path('toolchains/llvm/prebuilt/linux-x86_64')
+          selected = [pathlib.Path('source.properties'), pre/'sysroot/usr/include', pre/'sysroot/usr/lib/aarch64-linux-android/26']
+          for name in ['clang', 'aarch64-linux-android26-clang', 'llvm-readelf', 'llvm-objdump']:
+              p = pre/'bin'/name
+              selected.append(p)
+              q = (src/p).resolve()
+              if q.is_relative_to(src.resolve()): selected.append(q.relative_to(src.resolve()))
+          selected.extend(pre/'lib'/p.name for p in (src/pre/'lib').glob('*.so*'))
+          for version in (src/pre/'lib/clang').iterdir():
+              selected.append(version.relative_to(src)/'include')
+              for p in (version/'lib/linux').glob('*aarch64*'): selected.append(p.relative_to(src))
+          for rel in selected:
+              p, q = src/rel, dst/rel
+              q.parent.mkdir(parents=True, exist_ok=True)
+              if p.is_symlink():
+                  if not q.exists() and not q.is_symlink(): q.symlink_to(p.readlink())
+              elif p.is_dir(): shutil.copytree(p, q, dirs_exist_ok=True, symlinks=True)
+              elif p.exists(): shutil.copy2(p, q)
+          print(subprocess.check_output([str(dst/pre/'bin/aarch64-linux-android26-clang'), '--version'], text=True))
+          with tarfile.open('ndk27c.tar.gz', 'w:gz') as out: out.add(dst, arcname='ndk27c')
+          b = pathlib.Path('ndk27c.tar.gz').read_bytes()
+          pathlib.Path('ndk27c-artifact.json').write_text(json.dumps({'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest(),'ndk_archive_sha1':'090e8083a715fdb1a3e402d0763c388abb03fb4e'}, indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ulike1949-ndk27c-tool
+          path: |
+            ndk27c.tar.gz
+            ndk27c-artifact.json
+          retention-days: 7
+          compression-level: 0
