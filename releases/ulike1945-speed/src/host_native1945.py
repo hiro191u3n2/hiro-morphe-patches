@@ -28,6 +28,13 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def canonical_disassembly(disassembly, obj):
+    header = str(obj) + ':\tfile format elf64-littleaarch64'
+    if disassembly.splitlines().count(header) != 1:
+        raise RuntimeError('Unexpected llvm-objdump object header')
+    return disassembly.replace(header, obj.name + ':\tfile format elf64-littleaarch64', 1), header
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--jdk', required=True)
@@ -83,7 +90,8 @@ def main():
     jni = run([sys.executable, src / 'host_native1944.py', '--jdk', args.jdk,
                '--output', output / 'jni'])
     print(jni, end='')
-    disassembly = run([bindir / 'llvm-objdump', '-d', obj])
+    disassembly, raw_objdump_header = canonical_disassembly(
+        run([bindir / 'llvm-objdump', '-d', obj]), obj)
     (output / 'production-residual1945-disassembly.txt').write_text(disassembly)
     if not any(op in disassembly for op in ['uabd', 'umla', 'mla\t']):
         raise RuntimeError('Expected integer NEON instructions absent')
@@ -95,7 +103,8 @@ def main():
         raise RuntimeError('Unreviewed cross-linker or emulator semantic version')
     diagnostics = {'cross_linker_banner': cross_banner, 'qemu_banner': qemu_banner,
                    'cross_gcc_path': str(pathlib.Path(args.cross_gcc).resolve()),
-                   'qemu_path': str(pathlib.Path(args.qemu).resolve())}
+                   'qemu_path': str(pathlib.Path(args.qemu).resolve()),
+                   'llvm_objdump_header': raw_objdump_header}
     (output / 'native-tool-identities1945.diagnostics.json').write_text(json.dumps(diagnostics, indent=2) + '\n')
     report = {
         'schema': 'ulike-native1945-p10-p7-tests-v1', 'pass': True,
