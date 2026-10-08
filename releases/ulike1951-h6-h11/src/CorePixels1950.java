@@ -84,11 +84,11 @@ public final class CorePixels1950 {
         }
         long started=System.nanoTime();
         if(!gpuPair(work,width,rows,first,(long)first+count,noise,texture,shadows)) {
-            long started=System.nanoTime();
+            long cpuStarted=System.nanoTime();
             DetailSerial186.filterBeforeH8(work,width,rows,first,count,noise,sharp,
                     texture,halos,shadows);
             if(GPU_LOADED && noise>0 && gpuAdmission==0 && pixels>=131072) {
-                cpuFilterNanos=System.nanoTime()-started;
+                cpuFilterNanos=System.nanoTime()-cpuStarted;
                 cpuFilterPixels=pixels;
             }
             return;

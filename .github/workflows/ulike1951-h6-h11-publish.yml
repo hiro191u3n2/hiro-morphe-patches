@@ -7,7 +7,10 @@ name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 on:
   push:
     branches: [main]
-    paths: ['.github/workflows/ulike1951-h6-h11-publish.yml']
+    paths:
+      - '.github/workflows/ulike1951-h6-h11-publish.yml'
+      - 'releases/ulike1951-h6-h11/src/**'
+      - 'releases/ulike1951-h6-h11/publication/**'
 permissions:
   contents: write
   actions: read
