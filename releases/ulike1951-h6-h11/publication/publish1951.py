@@ -522,7 +522,7 @@ def validate_local(dist, expected, baseline, standalone_baseline, repo):
             "H6 oracle did not compare enough actual pixels")
     require(suites["h7_primary_denoise_exact"].get("assertions") == 122827264,
             "H7 native-denoise exhaustive suite did not execute")
-    require(suites["h8_two_pass_gpu_exact"].get("assertions") == 384,
+    require(suites["h8_two_pass_gpu_exact"].get("assertions") == 640,
             "H8 software EGL two-pass cases did not execute")
     require(suites["h9_h11_gpu_exact"].get("assertions") == 32 + 39990 + 14310,
             "H9-H11 saved-output and overlap cases did not execute")

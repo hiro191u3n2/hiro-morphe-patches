@@ -5,7 +5,8 @@ name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
 # exact source.properties line even when it ends with a newline. The H8 Java
 # compile uses Android's pinned bootclasspath without LambdaMetafactory before
 # any MPP is published. Source changes use the
-# same byte-pinned rebuild and package checks. Outputs are checked
+# same byte-pinned rebuild and package checks, including all 640 H8 stripe
+# comparisons. Outputs are checked
 # against the checked-out source and downloaded release bytes before feed edits.
 on:
   push:
