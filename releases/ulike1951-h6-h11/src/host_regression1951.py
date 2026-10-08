@@ -20,7 +20,9 @@ def test(root,work,android,baseline):
     assert moire['host_C_to_original_Java_pixel_exact'] and moire['pixels_compared']>100000
     suites['h6_moire_exact']={**moire,'assertions':moire['pixels_compared']}
     h7=run(['bash',root/'tests/h7/run_host.sh',work/'h7'])
-    assert 'PASS' in h7 and '122827264' in h7.replace(',',''),h7
+    h7_reports=[json.loads(line) for line in h7.splitlines() if line.startswith('{')]
+    assert len(h7_reports)==2 and all(report['status']=='passed' for report in h7_reports),h7
+    assert h7_reports[0]['compared_array_elements']==122827264 and h7_reports[1]['production_c_jni_executed'] is True,h7
     suites['h7_primary_denoise_exact']={'status':'passed','assertions':122827264,'baseline_c_jni_pixel_exact':True,'output_copy_race_guard':True}
     env=os.environ.copy();env.update(EGL_PLATFORM='surfaceless',LIBGL_ALWAYS_SOFTWARE='1')
     h8=run([sys.executable,root/'h8gpu/test_bilateral1950.py'],env)
