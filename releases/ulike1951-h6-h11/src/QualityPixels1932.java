@@ -340,22 +340,9 @@ public final class QualityPixels1932 {
     public static void finishStripAt(int[] processed,int[] output,int width,int rows,
             int begin,int end,Plan plan,boolean moire,boolean sharp,int originY) {
         checkStrip(processed, output, width, rows, begin, end);
-        if (moire && NativeMoire1951.run(processed,output,width,rows,begin,end)) {
-            if (sharp && plan != null && plan.sharpGainQ8 > 0) {
-                for (int row=begin;row<end;row++) {
-                    if ((row & 15)==0 && Thread.currentThread().isInterrupted())
-                        throw new IllegalStateException("quality interrupted");
-                    if(row==0 || row==rows-1)continue;
-                    int offset=row*width;
-                    for(int x=1;x<width-1;x++) {
-                        int at=offset+x;
-                        if((processed[at]>>>24)==255)
-                            output[at]=sharpen(processed,at,width,rows,output[at],plan,x,row,row+originY);
-                    }
-                }
-            }
+        if ((moire || (sharp && plan != null && plan.sharpGainQ8 > 0)) &&
+                NativeMoire1951.run(processed,output,width,rows,begin,end,plan,moire,sharp,originY))
             return;
-        }
         finishStripAtBefore1951(processed,output,width,rows,begin,end,plan,moire,sharp,originY);
     }
 

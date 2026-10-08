@@ -18,6 +18,9 @@ def test(root,work,android,baseline):
     suites=dict(original['suites'])
     moire=load(root,'host_moire1951').test(root,work)
     assert moire['host_C_to_original_Java_pixel_exact'] and moire['pixels_compared']>100000
+    for key in ('native_sharpen_c_executed','native_sharpen_pixel_exact',
+                'combined_moire_sharpen_pixel_exact'):
+        assert moire.get(key) is True,moire
     suites['h6_moire_exact']={**moire,'assertions':moire['pixels_compared']}
     h7=run(['bash',root/'tests/h7/run_host.sh',work/'h7'])
     h7_reports=[json.loads(line) for line in h7.splitlines() if line.startswith('{')]

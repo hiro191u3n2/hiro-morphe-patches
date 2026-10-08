@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build exact ARM64 chroma kernel; no float math or source-pixel alteration."""
+"""Build exact ARM64 moire and final sharpening; Java supplies exact integer policy."""
 from pathlib import Path
 import argparse,hashlib,json,re,subprocess
 NDK_REVISION='27.2.12479018'
@@ -23,7 +23,7 @@ def build(ndk,output):
     run([cc,*flags,source/'moire1951.c','-o',target])
     elf=run([tools/'llvm-readelf','-h','-d','-Ws','--program-headers','--wide',target])
     exports=['Java_com_hiro_ulike_NativeMoire1951_'+name
-             for name in ['nativeAbi','moireStripNative']]
+             for name in ['nativeAbi','finishStripNative']]
     if any(name not in elf for name in exports):
         raise RuntimeError('Missing JNI export')
     needed=re.findall(r'\(NEEDED\).*?\[(.*?)\]',elf)
@@ -39,7 +39,8 @@ def build(ndk,output):
             'bytes':target.stat().st_size,
             'sha256':hashlib.sha256(target.read_bytes()).hexdigest(),
             'exports':exports,'needed_libraries':needed,
-            'load_segment_alignments':alignments,'native_moire_and_long_wave':True,
+            'load_segment_alignments':alignments,'native_moire_and_long_wave':True,'native_final_sharpening':True,
+            'java_float_and_mask_policy_preserved':True,'jni_abi':19512,
             'integer_only':True,'source_image_immutable':True,
             'original_java_fallback':True,'runtime_pixel_exact_selfcheck':True,
             'disjoint_row_writes_and_copied_output_rejection':True,

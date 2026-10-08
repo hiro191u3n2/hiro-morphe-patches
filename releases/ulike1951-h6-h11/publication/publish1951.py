@@ -143,7 +143,7 @@ HEADING = re.compile(r"^#{1,3}\s+(?:\S+\s+)?(?:\[([^]]+)]\([^)]*\)|([^\s\[(]+))\
 SCOPE = re.compile(r"^\* \*\*(.+?):\*\*")
 EXPERIMENTAL_ONLY = re.compile(r"^Add(?:ed)?\s+experimental\s+support\s+for\b", re.I)
 INVENTORY = re.compile(r"(?m)^(ULike：)v(1\.9\.50)(（5\.6\.2／740）)\r?$")
-SUMMARY = "H6～H11を統合。モアレ補正、主ノイズ除去の並列計算、GPU二段処理と転送・準備の重ね合わせを改善。画素一致と転送込み速度で採用し、条件不成立時はCPUへ戻す。画質・保存設定・工程別時間表示を維持。元APKSへの今回の適用とGalaxy実機の速度・画質は未確認。"
+SUMMARY = "H6～H11を統合。モアレ補正と最終シャープ処理のC移行、主ノイズ除去の並列計算、GPU二段処理と転送・準備の重ね合わせを改善。画素一致と転送込み速度で採用し、条件不成立時はCPUへ戻す。画質・保存設定・工程別時間表示を維持。元APKSへの今回の適用とGalaxy実機の速度・画質は未確認。"
 
 
 def require(condition, message):
@@ -631,7 +631,7 @@ def new_policy(old, expected):
               "source_sha256": expected["artifacts"][SINGLE]["sha256"], "source_release": TAG,
               "active_release": TAG, "base_ulike_version": PREVIOUS_APP,
               "base_bundle_version": PREVIOUS, "base_source_sha256": SINGLE_BASE_SHA256,
-              "reason": "H6-H11 improve exact moire/correction, primary denoise vector work, two-stage GPU processing and transfer preparation. Host equality and read-only package provenance are checked; this release was not applied to the original APKS and Galaxy speed and quality are unverified.",
+              "reason": "H6-H11 improve exact native moire/final sharpening, primary denoise vector work, two-stage GPU processing and transfer preparation. Host equality and read-only package provenance are checked; this release was not applied to the original APKS and Galaxy speed and quality are unverified.",
               "future_ulike_base": "Use ULike1.9.51 H6-H11 from approved1.8.8 lineage and exact1.9.50 baseline. Preserve H1-H5 and G10 exactness and transfer-inclusive speed admission, integer precision and CPU fallback on unsupported/error/mismatch/slower GPU. Preserve output resolution, compression, beauty/color, capture reference, up to four-frame fusion, FIFO encoding, codec ownership and per-shot timing. Do not restore withdrawn1.9.17/10bit diagnostics. Validate original APKS and Galaxy hardware separately.",
               "selected_candidates": ["H6","H7","H8","H9","H10","H11"],
               "retained_baseline_candidates": {"ulike_version":"1.9.50","candidates":["H1","H2","H3","H4","H5","G10","G1","G3","G5","G6","G9","M1","M2","M4","M8","M3","M6","M7","M10"]},

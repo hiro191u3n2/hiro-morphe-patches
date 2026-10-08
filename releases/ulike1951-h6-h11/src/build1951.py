@@ -134,7 +134,7 @@ def build(args):
     inventory=json.loads((emitted/'optimization-inventory.json').read_text())
     final=dict(base)
     final.update({GPU_ENTRY:gpu_bytes,CORE_ENTRY:core_bytes,MOIRE_ENTRY:moire_bytes,H8_ENTRY:h8_bytes,'app/hiro/ulike/patches/IntegrationPayload186.class':(emitted/'IntegrationPayload186.class').read_bytes(),'classes.dex':(emitted/'loader.dex').read_bytes(),'ulike/runtime.dex':(emitted/'runtime.dex').read_bytes(),'app/hiro/ulike/patches/UlikeHqMaxPatch.class':(emitted/'UlikeHqMaxPatch.class').read_bytes()})
-    fields=headers(base['META-INF/MANIFEST.MF']);fields.update(Version=VERSION,Timestamp='2026-10-08T10:00:00',Description='H6-H11 exact moire, primary denoise and two-pass GPU plus lossless metadata transfer/parallel tile preparation/save output seed. CPU fallback; device speed and image quality unmeasured.')
+    fields=headers(base['META-INF/MANIFEST.MF']);fields.update(Version=VERSION,Timestamp='2026-10-08T10:00:00',Description='H6-H11 exact native moire/final sharpening, primary denoise and two-pass GPU plus lossless metadata transfer/parallel tile preparation/save output seed. CPU fallback; device speed and image quality unmeasured.')
     final['META-INF/MANIFEST.MF']=manifest(fields)
     integrated=dict(bundle);integrated.update({n:b for n,b in final.items() if own(n)});integrated['classes.dex']=(emitted/'bundle-loader.dex').read_bytes()
     fields=headers(bundle['META-INF/MANIFEST.MF']);fields.update(Version=BUNDLE_VERSION,Timestamp='2026-10-08T10:00:00',Description='ULike1.9.51 H6-H11 exact native and two-pass GPU; all other applications retained from1.0.183; CPU fallback; device unverified.')

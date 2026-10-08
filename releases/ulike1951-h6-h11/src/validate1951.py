@@ -101,6 +101,10 @@ def validate(args):
                 'stage_parameter_order_verified', 'sharpening_halo_pixel_exact',
                 'production_filter_dex_oracle_executed')),
             'Production H8 stage order and sharpening halo pixel equivalence required')
+    require(all(suites['h6_moire_exact'].get(key) is True for key in (
+                'native_sharpen_c_executed', 'native_sharpen_pixel_exact',
+                'combined_moire_sharpen_pixel_exact')),
+            'H6 native final sharpening and combined pixel equivalence required')
     for key in ('original_apk_apply_tested', 'device_tested', 'device_quality_verified',
                 'ci_android_apply_tested', 'device_save_speed_measured'):
         require(qa.get(key) is False, 'Unperformed Android testing claimed: ' + key)

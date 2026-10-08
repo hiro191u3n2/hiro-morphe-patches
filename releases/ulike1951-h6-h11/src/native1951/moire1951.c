@@ -123,48 +123,149 @@ static uint32_t long_wave(const uint32_t *src,int at,int width,uint32_t center){
     return (center&0xff000000u)|((uint32_t)red<<16)|((uint32_t)green<<8)|(uint32_t)blue;
 }
 
-static void run_rows(const uint32_t *src,uint32_t *dst,int width,int rows,int first,int last) {
-    for(int row=first;row<last;row++)for(int x=0;x<width;x++){
+/* Exact QualityShadow1932.textureQ8 luma-neighbourhood test. */
+static int texture_q8(const uint32_t *src,int width,int rows,int x,int row,int threshold) {
+    const int support=4,length=9;
+    if(x<support || x>=width-support || row<support || row>=rows-support)return 0;
+    int best=0,at=row*width+x,samples[9];
+    for(int direction=0;direction<4;direction++) {
+        int step=direction==0?1:direction==1?width:direction==2?width+1:width-1;
+        int opaque=1,low=255,high=0,adjacent=0;
+        for(int i=0;i<length;i++) {
+            uint32_t p=src[at+(i-support)*step];
+            if((p>>24)!=255){opaque=0;break;}
+            int value=samples[i]=yy(p);low=mn(low,value);high=mx(high,value);
+            if(i>0)adjacent+=ab(value-samples[i-1]);
+        }
+        if(!opaque || high-low<threshold*2 || adjacent<(length-1)*threshold)continue;
+        int average=(adjacent+(length-2)/2)/(length-1);
+        for(int period=2;period<=4;period++) {
+            int error=0,count=length-period;
+            for(int i=0;i<count;i++)error+=ab(samples[i]-samples[i+period]);
+            error=(error+count/2)/count;
+            int confidence=clamp((average*4-error*9)*256/mx(1,average*4),0,256);
+            confidence=confidence*confidence>>8;
+            best=mx(best,confidence);
+        }
+    }
+    return best;
+}
+/* Java int multiplication wraps before the arithmetic right shift. */
+static int mul_shift(int a,int b,int bits) {
+    uint32_t product=(uint32_t)a*(uint32_t)b;
+    uint32_t shifted=product>>bits;
+    if(product&0x80000000u)shifted|=~0u<<(32-bits);
+    return (int32_t)shifted;
+}
+static uint32_t sharpen(const uint32_t *src,int at,int width,int rows,
+        int x,int row,uint32_t corrected,const int32_t *policy,
+        int gain,int base_floor,int limit,int texture_priority,int halo) {
+    int center=yy(src[at]),left=yy(src[at-1]),right=yy(src[at+1]);
+    int up=yy(src[at-width]),down=yy(src[at+width]);
+    if((src[at-1]>>24)!=255 || (src[at+1]>>24)!=255 ||
+       (src[at-width]>>24)!=255 || (src[at+width]>>24)!=255 ||
+       (src[at-width-1]>>24)!=255 || (src[at-width+1]>>24)!=255 ||
+       (src[at+width-1]>>24)!=255 || (src[at+width+1]>>24)!=255)return corrected;
+    int nw=yy(src[at-width-1]),ne=yy(src[at-width+1]);
+    int sw=yy(src[at+width-1]),se=yy(src[at+width+1]);
+    int detail_q8=(center*12-(left+right+up+down)*2-nw-ne-sw-se)*16;
+    /* Identical result-bound gate: do not change noise/mask policy or quality. */
+    if(ab(detail_q8)<=base_floor)return corrected;
+    int edge=mx(ab(nw+2*left+sw-ne-2*right-se),ab(nw+2*up+ne-sw-2*down-se))/4;
+    int tolerance=policy[0],texture=texture_q8(src,width,rows,x,row,policy[1]);
+    int flat=clamp((tolerance*2-edge)*256/mx(1,tolerance*2),0,256);
+    flat=flat*(256-texture)>>8;
+    int floor=base_floor+((policy[2]-base_floor)*flat>>8);
+    int magnitude=ab(detail_q8)-floor;
+    if(magnitude<=0)return corrected;
+    gain=gain*(256-(flat*176>>8))>>8;
+    if(center<64)gain=gain*(96+center*160/64)>>8;
+    if(texture_priority)gain=mul_shift(gain,policy[3],8);
+    int64_t amount=((int64_t)magnitude*gain+32768)>>16;
+    int delta=(int)(amount<limit?amount:limit);
+    if(delta==0)return corrected;
+    if(detail_q8<0)delta=-delta;
+    int low=mn(center,mn(mn(left,right),mn(up,down)));
+    int high=mx(center,mx(mx(left,right),mx(up,down)));
+    if(halo)delta=clamp(delta,low-center,high-center);
+    int red=r(corrected),green=g(corrected),blue=b(corrected);
+    delta=clamp(delta,-mn(red,mn(green,blue)),255-mx(red,mx(green,blue)));
+    return (corrected&0xff000000u)|((uint32_t)(red+delta)<<16)|
+        ((uint32_t)(green+delta)<<8)|(uint32_t)(blue+delta);
+}
+static void run_rows(const uint32_t *src,uint32_t *dst,const int32_t *policy,
+        int variable,int width,int rows,int first,int last,int moire,int sharp,
+        int gain,int floor,int limit,int texture_priority,int halo) {
+    for(int row=first;row<last;row++)for(int x=0;x<width;x++) {
         int at=row*width+x;
         uint32_t original=src[at],p=original;
-        if((p>>24)==255 && row>=4 && row<rows-4 && x>=4 && x<width-4){
-            p=periodic(src,at,width,p);
-            if(p==original && row>=32 && row<rows-32 && x>=32 && x<width-32)
-                p=long_wave(src,at,width,p);
+        if((p>>24)==255) {
+            if(moire && row>=4 && row<rows-4 && x>=4 && x<width-4) {
+                p=periodic(src,at,width,p);
+                if(p==original && row>=32 && row<rows-32 && x>=32 && x<width-32)
+                    p=long_wave(src,at,width,p);
+            }
+            if(sharp && row>0 && row<rows-1 && x>0 && x<width-1)
+                p=sharpen(src,at,width,rows,x,row,p,
+                    policy+(variable?((row-first)*width+x)*4:0),
+                    gain,floor,limit,texture_priority,halo);
         }
         dst[at]=p;
     }
 }
 #ifdef MOIRE1951_HOST
 void moire1951_host(const uint32_t *src,uint32_t *dst,int width,int rows,int first,int last) {
-    run_rows(src,dst,width,rows,first,last);
+    run_rows(src,dst,0,0,width,rows,first,last,1,0,0,0,0,0,0);
+}
+void finish1951_host(const uint32_t *src,uint32_t *dst,const int32_t *policy,
+        int variable,int width,int rows,int first,int last,int moire,int sharp,
+        int gain,int floor,int limit,int texture_priority,int halo) {
+    run_rows(src,dst,policy,variable,width,rows,first,last,moire,sharp,
+        gain,floor,limit,texture_priority,halo);
 }
 #else
-JNIEXPORT jint JNICALL JNI_FN(nativeAbi)(JNIEnv *env,jclass cls){
-    (void)env;(void)cls;return 1951;
+JNIEXPORT jint JNICALL JNI_FN(nativeAbi)(JNIEnv *env,jclass cls) {
+    (void)env;(void)cls;return 19512;
 }
-JNIEXPORT jboolean JNICALL JNI_FN(moireStripNative)(JNIEnv *env,jclass cls,
-    jintArray source,jintArray target,jint width,jint rows,jint first,jint last){
+JNIEXPORT jboolean JNICALL JNI_FN(finishStripNative)(JNIEnv *env,jclass cls,
+    jintArray source,jintArray target,jintArray settings,jboolean variable,
+    jint width,jint rows,jint first,jint last,jboolean moire,jboolean sharp,
+    jint gain,jint floor,jint limit,jboolean texture_priority,jboolean halo) {
     (void)cls;
     if(!source || !target || (*env)->IsSameObject(env,source,target) ||
         width<=0 || rows<=0 || first<0 || last<first || last>rows ||
-        (int64_t)width*rows>INT_MAX)return JNI_FALSE;
+        last-first>16 || (int64_t)width*rows>INT_MAX ||
+        (sharp && (!settings || (*env)->IsSameObject(env,settings,source) ||
+                    (*env)->IsSameObject(env,settings,target))))return JNI_FALSE;
     int count=width*rows;
+    int64_t policy_count=variable?(int64_t)width*(last-first)*4:4;
     if((*env)->GetArrayLength(env,source)<count ||
-       (*env)->GetArrayLength(env,target)<count)return JNI_FALSE;
+       (*env)->GetArrayLength(env,target)<count ||
+       (sharp && (policy_count>INT_MAX || (*env)->GetArrayLength(env,settings)<policy_count)))return JNI_FALSE;
     const jint *src=(*env)->GetPrimitiveArrayCritical(env,source,0);
     if(!src)return JNI_FALSE;
+    const jint *policy=0;
+    if(sharp) {
+        policy=(*env)->GetPrimitiveArrayCritical(env,settings,0);
+        if(!policy) {
+            (*env)->ReleasePrimitiveArrayCritical(env,source,(void*)src,JNI_ABORT);
+            return JNI_FALSE;
+        }
+    }
     jboolean output_is_copy=JNI_FALSE;
     jint *dst=(*env)->GetPrimitiveArrayCritical(env,target,&output_is_copy);
     if(!dst || output_is_copy) {
         if(dst)(*env)->ReleasePrimitiveArrayCritical(env,target,dst,JNI_ABORT);
+        if(policy)(*env)->ReleasePrimitiveArrayCritical(env,settings,(void*)policy,JNI_ABORT);
         (*env)->ReleasePrimitiveArrayCritical(env,source,(void*)src,JNI_ABORT);
         return JNI_FALSE;
     }
-    /* Pinned arrays are held for at most 16 rows. No JNI operations, allocations,
-     * callbacks or blocking occur while critical arrays are held. */
-    run_rows((const uint32_t*)src,(uint32_t*)dst,width,rows,first,last);
+    /* At most 16 disjoint output rows. No JNI operations, allocations, callbacks
+     * or blocking occur while source, integer policy and target are pinned. */
+    run_rows((const uint32_t*)src,(uint32_t*)dst,(const int32_t*)policy,variable,
+        width,rows,first,last,moire,sharp,gain,floor,limit,texture_priority,halo);
     (*env)->ReleasePrimitiveArrayCritical(env,target,dst,0);
+    if(policy)(*env)->ReleasePrimitiveArrayCritical(env,settings,(void*)policy,JNI_ABORT);
     (*env)->ReleasePrimitiveArrayCritical(env,source,(void*)src,JNI_ABORT);
     return JNI_TRUE;
 }

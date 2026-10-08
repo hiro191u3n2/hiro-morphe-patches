@@ -1,20 +1,12 @@
 name: Verify and publish ULike1951 H6-H11 pixel-exact optimizations
-# The original APKS is not available to this workflow. Its application status
-# remains false throughout the generated evidence, QA, receipt and policy.
-# Baseline MPPs and toolchain are byte-pinned; NDK revision checks accept the
-# exact source.properties line even when it ends with a newline. The H8 Java
-# compile uses Android's pinned bootclasspath without LambdaMetafactory before
-# running the H8 Dex transformer with separate Java local declarations. The
-# current-version timing oracle, H6 scheduling fixture and H9 host fixture use
-# the same build input. Then
-# any MPP is published. Source changes use the
-# same byte-pinned rebuild and package checks, including all 640 H8 stripe
-# comparisons. Outputs are checked
-# against the checked-out source and downloaded release bytes before feed edits.
-# New ELF entries are recorded in canonical order in QA and manifest.
-# H7 host coverage is parsed from both structured JNI comparison reports.
-# The H8 production filter oracle checks stage argument order and sharp halos
-# before the rebuilt package can be finalized or advertised to Manager.
+# Original APKS application and physical-device execution remain untested.
+# Baseline MPPs, SDK, JDK and Android NDK are pinned before a fresh rebuild.
+# H6 compares actual fused native moire/final sharpening with v1.9.50 Java,
+# including real JNI execution; all three native sharpening proofs are required.
+# H8 verifies all 640 software-GPU stripes plus production DEX stage order and
+# sharpening halos. H7 checks both structured C/JNI comparison reports.
+# Package metadata, source archives, both Manager feeds and full release bytes
+# are verified before publication. Concurrent main changes stop publication.
 on:
   push:
     branches: [main]
