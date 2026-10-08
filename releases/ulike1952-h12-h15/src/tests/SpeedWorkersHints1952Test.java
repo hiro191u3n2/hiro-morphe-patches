@@ -1,6 +1,8 @@
 package com.hiro.ulike;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -19,8 +21,10 @@ public final class SpeedWorkersHints1952Test {
         final AtomicInteger workers=new AtomicInteger(),closed=new AtomicInteger();
         final AtomicInteger begins=new AtomicInteger(),success=new AtomicInteger(),failure=new AtomicInteger();
         final AtomicInteger active=new AtomicInteger(),maximum=new AtomicInteger(),ended=new AtomicInteger();
+        final List<Thread> actualWorkers=new ArrayList<Thread>();
         volatile boolean throwBegin,throwComplete;
         public Runnable worker(final Runnable loop) {
+            synchronized(actualWorkers){actualWorkers.add(Thread.currentThread());}
             workers.incrementAndGet();
             return new Runnable(){public void run(){try{loop.run();}finally{closed.incrementAndGet();}}};
         }
@@ -88,6 +92,16 @@ public final class SpeedWorkersHints1952Test {
         Field f=SpeedWorkers1935.class.getDeclaredField("EXECUTOR");f.setAccessible(true);
         ThreadPoolExecutor executor=(ThreadPoolExecutor)f.get(null);executor.shutdown();
         yes(executor.awaitTermination(5,TimeUnit.SECONDS),"actual executor worker loops terminate");
+        // Executor termination is signalled inside runWorker/processWorkerExit.
+        // ThreadFactory's outer OS-session finally runs after that signal, so
+        // join the actual wrapped Threads before checking their final closure.
+        Thread[] actual;
+        synchronized(hints.actualWorkers){actual=hints.actualWorkers.toArray(new Thread[0]);}
+        yes(actual.length==hints.workers.get() && actual.length>0,"all actual hint-owning worker threads captured");
+        for(Thread worker:actual){
+            worker.join(5000);
+            yes(!worker.isAlive(),"actual wrapped worker exits after its session finally");
+        }
         yes(hints.closed.get()==hints.workers.get() && hints.closed.get()>0,"wrapped worker session lifetime closes with each actual worker");
         SpeedWorkers1935.installHints(null);SpeedWorkers1935.trim();
         System.out.println("{\"status\":\"passed\",\"assertions\":"+assertions+",\"worker_budget_preserved\":true,\"nested_work_not_double_reported\":true,\"worker_lifecycle_closes\":true,\"optional_hint_failure_preserves_work\":true,\"cancellation_drains_before_return\":true}");
