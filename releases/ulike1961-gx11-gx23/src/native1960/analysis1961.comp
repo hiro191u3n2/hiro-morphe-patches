@@ -1,0 +1,145 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+#ifndef GX_LOCAL_SIZE
+#define GX_LOCAL_SIZE 64
+#endif
+layout(local_size_x=GX_LOCAL_SIZE,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint pixels[]; } source;
+layout(std430,binding=1) buffer Features { uint words[]; } features;
+layout(std430,binding=2) buffer Values { float data[]; } values;
+layout(std430,binding=3) buffer Histograms { uint data[]; } histogram;
+layout(std430,binding=4) readonly buffer Evidence { float data[]; } evidence;
+layout(std430,binding=5) buffer Within { uint prefix[]; } withinChunk;
+layout(std430,binding=6) buffer Chunks { uint prefix[]; } chunks;
+layout(std430,binding=7) buffer Scratch { uint data[]; } scratch;
+uniform highp int u[32];
+uniform highp float f[32];
+// Spatial u0 modes:6 clear histogram,0 exact packed sample features/per-patch
+// histograms,1 per-256-sample exclusive prefix,2 chunk exclusive prefix,
+// 3 first32768 accepted aggregate,4 per-patch and aggregate statistics,
+// 5 ordered global statistics and spatial sigma grid.
+// u1/2 patchW/H,u3 patchCount,u4 samplesPerPatch,u5 totalSamples,
+// u6 chunkCount,u7 histogramWords (2051*(patchCount+1)). No sample reduction.
+// Region u0=10: u1/2 patchW/H,u3 regions; one invocation owns one unchanged
+// 32x32 source patch,2064 histogram words and three regional evidence outputs.
+// Per-region FP32 reduction order is the original Java order. Global bins
+// evidence[0..15] are original source estimates used only for fallback.
+int integerLuma(uint p){return (77*int((p>>16u)&255u)+150*int((p>>8u)&255u)+29*int(p&255u)+128)>>8;}
+int redGreen(uint p){return int((p>>16u)&255u)-int((p>>8u)&255u);}
+int blueGreen(uint p){return int(p&255u)-int((p>>8u)&255u);}
+float floatLuma(uint p){
+    precise float a=.299*float((p>>16u)&255u),b=.587*float((p>>8u)&255u),c=.114*float(p&255u);
+    precise float sum=a+b;return sum+c;
+}
+int javaRound(float value){int bits=floatBitsToInt(value),shift=149-((bits>>23)&255);if((shift&~31)==0){int m=(bits&0x7fffff)|0x800000;if(bits<0)m=-m;return ((m>>shift)+1)>>1;}return int(value);}
+void spatialAdd(int base,uint feature) {
+    if((feature&(1u<<28u))==0u)return;
+    atomicAdd(histogram.data[base+2049],1u);atomicAdd(histogram.data[base+2050],(feature>>20u)&255u);
+    if((feature&(1u<<29u))!=0u){atomicAdd(histogram.data[base+int(feature&1023u)],1u);atomicAdd(histogram.data[base+1024+int((feature>>10u)&1023u)],1u);atomicAdd(histogram.data[base+2048],1u);}
+}
+int median1024(int base,int plane,uint count){uint total=0u,target=(count+1u)/2u;for(int i=0;i<1024;i++){total+=histogram.data[base+plane*1024+i];if(total>=target)return i;}return 0;}
+void regionClear(int base){for(int i=0;i<2064;i++)histogram.data[base+i]=0u;}
+void regionLag(int pixelBase,int histogramBase,int lag) {
+    for(int y=0;y+lag<u[2];y++)for(int x=0;x+lag<u[1];x++) {
+        uint a=source.pixels[pixelBase+y*u[1]+x],b=source.pixels[pixelBase+y*u[1]+x+lag],c=source.pixels[pixelBase+(y+lag)*u[1]+x],d=source.pixels[pixelBase+(y+lag)*u[1]+x+lag];
+        if((a>>24u)!=255u||(b>>24u)!=255u||(c>>24u)!=255u||(d>>24u)!=255u)continue;
+        precise float ya=floatLuma(a),yb=floatLuma(b),yc=floatLuma(c),yd=floatLuma(d);
+        precise float mean=ya+yb;mean=mean+yc;mean=mean+yd;mean=mean*.25;
+        if(mean<3.0||mean>252.0)continue;int bin=min(7,int(mean)/32);
+        precise float dy=ya-yb;dy=dy-yc;dy=dy+yd;dy=dy*.5;
+        precise float cr=float((a>>16u)&255u)-ya;cr=cr-(float((b>>16u)&255u)-yb);cr=cr-(float((c>>16u)&255u)-yc);cr=cr+(float((d>>16u)&255u)-yd);cr=cr*.5;
+        precise float cb=float(a&255u)-ya;cb=cb-(float(b&255u)-yb);cb=cb-(float(c&255u)-yc);cb=cb+(float(d&255u)-yd);cb=cb*.5;
+        int sy=min(127,javaRound(abs(dy)*4.0)),sc=min(127,javaRound((abs(cr)+abs(cb))*2.0));
+        histogram.data[histogramBase+bin*128+sy]++;histogram.data[histogramBase+2048+bin]++;
+        histogram.data[histogramBase+(bin+8)*128+sc]++;histogram.data[histogramBase+2048+bin+8]++;
+    }
+}
+float regionalMeasured(int base,int bin) {
+    uint count=histogram.data[base+2048+bin];
+    if(count<16u){int best=-1,distance=99;for(int j=0;j<8;j++)if(histogram.data[base+2048+(bin/8)*8+j]>=16u&&abs(bin%8-j)<distance){best=(bin/8)*8+j;distance=abs(bin%8-j);}if(best<0)return 0.0;bin=best;count=histogram.data[base+2048+bin];}
+    uint sum=0u,target=(count+1u)/2u;
+    for(int i=0;i<128;i++){sum+=histogram.data[base+bin*128+i];if(sum>=target)return float(i)/2.69796;}return 0.0;
+}
+float originalAverage(int offset){precise float sum=0.0;for(int i=0;i<8;i++)sum=sum+evidence.data[offset+i];return sum/8.0;}
+vec2 regionSummary(int base) {
+    precise float sumY=0.0,sumC=0.0,total=0.0;
+    for(int b=0;b<8;b++) {
+        precise float y=regionalMeasured(base,b)*float(histogram.data[base+2048+b]);sumY=sumY+y;
+        precise float c=regionalMeasured(base,b+8)*float(histogram.data[base+2048+b+8]);sumC=sumC+c;
+        total=total+float(histogram.data[base+2048+b]);
+    }
+    if(total>=16.0)return vec2(sumY/total,sumC/total);
+    return vec2(originalAverage(0),originalAverage(8));
+}
+float periodicTexture(int base) {
+    if(u[1]<24||u[2]<24)return 0.0;
+    precise float mean=0.0,energy=0.0;int count=0,pixels=u[1]*u[2];
+    for(int i=0;i<pixels;i++)if((source.pixels[base+i]>>24u)==255u){mean=mean+floatLuma(source.pixels[base+i]);count++;}
+    precise float minimum=float(pixels)*.9;if(float(count)<minimum)return 0.0;mean=mean/float(count);
+    for(int i=0;i<pixels;i++)if((source.pixels[base+i]>>24u)==255u){precise float delta=floatLuma(source.pixels[base+i])-mean;precise float square=delta*delta;energy=energy+square;}
+    energy=energy/float(count);if(energy<.50)return 0.0;precise float lowest=0.0;
+    for(int lag=8;lag<=12;lag+=4)for(int direction=0;direction<3;direction++) {
+        int dx=direction==1?0:lag,dy=direction==0?0:lag;precise float covariance=0.0;int n=0;
+        for(int y=0;y+dy<u[2];y++)for(int x=0;x+dx<u[1];x++) {
+            uint a=source.pixels[base+y*u[1]+x],b=source.pixels[base+(y+dy)*u[1]+x+dx];
+            if((a>>24u)!=255u||(b>>24u)!=255u)continue;
+            precise float da=floatLuma(a)-mean,db=floatLuma(b)-mean,product=da*db;covariance=covariance+product;n++;
+        }
+        if(n>=64){precise float ratio=covariance/float(n);ratio=ratio/energy;lowest=min(lowest,ratio);}
+    }
+    precise float result=(-lowest-.18)/.30;return clamp(result,0.0,1.0);
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x),mode=u[0];
+    if(mode==6){if(id<u[7])histogram.data[id]=0u;return;}
+    if(mode==0) {
+        if(id>=u[5])return;int patchIndex=id/u[4],within=id%u[4],x=within%(u[1]-1),y=within/(u[1]-1),at=patchIndex*u[1]*u[2]+y*u[1]+x;
+        uint a=source.pixels[at],b=source.pixels[at+1],c=source.pixels[at+u[1]],d=source.pixels[at+u[1]+1],feature=0u;
+        if((a>>24u)==255u&&(b>>24u)==255u&&(c>>24u)==255u&&(d>>24u)==255u) {
+            int ay=integerLuma(a),by=integerLuma(b),cy=integerLuma(c),dy=integerLuma(d),mean=(ay+by+cy+dy+2)>>2;
+            feature=(uint(mean)<<20u)|(1u<<28u);
+            if(mean>=5&&mean<=250&&abs(ay+cy-by-dy)<=72&&abs(ay+by-cy-dy)<=72) {
+                int yl=min(1023,abs(ay-by-cy+dy));int uc=abs(blueGreen(a)-blueGreen(b)-blueGreen(c)+blueGreen(d));int vc=abs(redGreen(a)-redGreen(b)-redGreen(c)+redGreen(d));
+                feature|=uint(yl)|(uint(min(1023,(uc+vc+1)>>1))<<10u)|(1u<<29u);
+            }
+        }
+        features.words[id]=feature;spatialAdd(patchIndex*2051,feature);
+    } else if(mode==1) {
+        if(id>=u[6])return;uint accepted=0u;int end=min(u[5],(id+1)*256);
+        for(int i=id*256;i<end;i++){withinChunk.prefix[i]=accepted;if((features.words[i]&(1u<<29u))!=0u)accepted++;}chunks.prefix[id]=accepted;
+    } else if(mode==2) {
+        if(id!=0)return;uint accepted=0u;for(int i=0;i<u[6];i++){uint count=chunks.prefix[i];chunks.prefix[i]=accepted;accepted+=count;}
+    } else if(mode==3) {
+        if(id>=u[5])return;
+        if(chunks.prefix[id/256]+withinChunk.prefix[id]<32768u)spatialAdd(u[3]*2051,features.words[id]);
+    } else if(mode==4) {
+        if(id>u[3])return;int base=id*2051,outBase=id*5;uint accepted=histogram.data[base+2048],examined=histogram.data[base+2049],sum=histogram.data[base+2050];
+        precise float mean=examined==0u?128.0:float(sum)/float(examined),detail=examined==0u?0.0:1.0;
+        precise float sy=0.0,sc=0.0;
+        if(accepted!=0u){sy=float(median1024(base,0,accepted))/1.34898;sc=float(median1024(base,1,accepted))/1.34898;detail=1.0-float(accepted)/float(max(1u,examined));}
+        values.data[outBase]=clamp(sy,0.0,64.0);values.data[outBase+1]=clamp(sc,0.0,96.0);values.data[outBase+2]=clamp(mean,0.0,255.0);values.data[outBase+3]=clamp(detail,0.0,1.0);values.data[outBase+4]=uintBitsToFloat(accepted);
+    } else if(mode==5) {
+        if(id!=0)return;precise float sy=0.0,sc=0.0,mean=0.0,detail=0.0;int valid=0;
+        int gridBase=(u[3]+1)*5;
+        for(int p=0;p<u[3];p++) {
+            int at=p*5;
+            if(histogram.data[p*2051+2048]>=48u){sy=sy+values.data[at];sc=sc+values.data[at+1];mean=mean+values.data[at+2];detail=detail+values.data[at+3];valid++;values.data[gridBase+p]=max(values.data[at],values.data[at+1]*.42);}
+            else values.data[gridBase+p]=uintBitsToFloat(0x7fc00000u);
+        }
+        int overall=gridBase+u[3],fallback=u[3]*5;
+        if(valid==0){for(int c=0;c<5;c++)values.data[overall+c]=values.data[fallback+c];}
+        else{values.data[overall]=sy/float(valid);values.data[overall+1]=sc/float(valid);values.data[overall+2]=mean/float(valid);values.data[overall+3]=detail/float(valid);values.data[overall+4]=uintBitsToFloat(uint(valid*48));}
+        precise float baseline=max(values.data[overall],values.data[overall+1]*.42);
+        for(int p=0;p<u[3];p++)if(isnan(values.data[gridBase+p]))values.data[gridBase+p]=baseline;
+    } else if(mode==10) {
+        if(id>=u[3])return;int pixelBase=id*u[1]*u[2],base=id*2064;
+        regionClear(base);regionLag(pixelBase,base,1);vec2 result=regionSummary(base);precise float periodic=periodicTexture(pixelBase);
+        regionClear(base);regionLag(pixelBase,base,4);
+        precise float sumY=0.0,sumC=0.0,total=0.0;
+        for(int b=0;b<8;b++){precise float y=regionalMeasured(base,b)*float(histogram.data[base+2048+b]);sumY=sumY+y;precise float c=regionalMeasured(base,b+8)*float(histogram.data[base+2048+b+8]);sumC=sumC+c;total=total+float(histogram.data[base+2048+b]);}
+        if(total>=16.0){precise float y=.65*sumY;y=y/total;precise float c=.65*sumC;c=c/total;result.x=max(result.x,y);result.y=max(result.y,c);}
+        values.data[id*3]=result.x;values.data[id*3+1]=result.y;values.data[id*3+2]=periodic;
+    }
+}
