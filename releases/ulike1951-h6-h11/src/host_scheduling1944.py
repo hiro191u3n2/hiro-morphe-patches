@@ -8,7 +8,7 @@ def test(root,work,android=None):
  javac=os.environ.get('ULIKE_JAVAC') or shutil.which('javac')
  java=os.environ.get('ULIKE_JAVA') or (str(Path(javac).with_name('java')) if javac else shutil.which('java'))
  compiler=[javac] if javac else [java,'com.sun.tools.javac.Main']
- names=('SpeedWorkers1935','Scheduling1944','QualityPixels1932','PolicyCache1945','QualityPipeline1932','QualityShadow1932','SpatialNoise1934','LongMoire1934','NoiseCache1944','NativeSpeed1944','GpuInteger1949')
+ names=('SpeedWorkers1935','Scheduling1944','QualityPixels1932','NativeMoire1951','PolicyCache1945','QualityPipeline1932','QualityShadow1932','SpatialNoise1934','LongMoire1934','NoiseCache1944','NativeSpeed1944','GpuInteger1949')
  sources=list((root/'tests/pipeline1942-fixtures').rglob('*.java'))+[root/(n+'.java') for n in names]+[root/'tests/Scheduling1944Test.java']
  sources += list((root/'tests/timing1947-fixtures').rglob('*.java'))+[root/'ProcessingTiming1947.java']
  result=subprocess.run(compiler+['-source','8','-target','8','-Xlint:-options','-d',str(classes),*map(str,sources)],capture_output=True,text=True,timeout=120)
