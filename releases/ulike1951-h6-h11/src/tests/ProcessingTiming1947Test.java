@@ -24,7 +24,7 @@ public final class ProcessingTiming1947Test {
   Context context=new Context();
   context.getSharedPreferences("hiro_photo_detail",0).edit().putString("last_result","v1.7.5 2738ms").apply();
   ProcessingTiming1947.init(context);
-  has("v1.9.50");has("新しい撮影の計測待ち");ok(!ProcessingTiming1947.summary().contains("2738"),"Never load legacy status");
+  has("v1.9.51");has("新しい撮影の計測待ち");ok(!ProcessingTiming1947.summary().contains("2738"),"Never load legacy status");
   Object key=new Object();ProcessingTiming1947.Trace trace=ProcessingTiming1947.begin(key);
   ProcessingTiming1947.recordInterval(trace,ProcessingTiming1947.FUSION,0,10000000);
   ProcessingTiming1947.recordInterval(trace,ProcessingTiming1947.FUSION,5000000,15000000);
@@ -119,7 +119,7 @@ public final class ProcessingTiming1947Test {
   ProcessingTiming1947.output(null,0,0,null);ProcessingTiming1947.finish(null,false);ok(true,"All optional malformed/no-context calls fail open");
 
   // Process restart restores only current-version data, version mismatches are not reused.
-  reset();Context restore=new Context();restore.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.50").putLong("id",99).putString("summary","Current version saved result").apply();
+  reset();Context restore=new Context();restore.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.51").putLong("id",99).putString("summary","Current version saved result").apply();
   ProcessingTiming1947.init(restore);ok(ProcessingTiming1947.summary().equals("Current version saved result"),"Current record restore");
   reset();Context stale=new Context();stale.getSharedPreferences("hiro_ulike_timing_1947",0).edit().putString("version","1.9.49").putLong("id",100).putString("summary","Old build result").apply();
   ProcessingTiming1947.init(stale);has("新しい撮影の計測待ち");

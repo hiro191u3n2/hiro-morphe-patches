@@ -26,7 +26,7 @@ def test(root,work,android):
     h8=run([sys.executable,root/'h8gpu/test_bilateral1950.py'],env)
     assert 'PASS: 640 exact integer cases' in h8,h8
     suites['h8_two_pass_gpu_exact']={'status':'passed','assertions':640,'software_egl_two_pass_pixel_exact':True,'gpu_execution_on_physical_android':False}
-    env['ULIKE_H9_PREBUILT']=str(work/'host-regression1950'/'gpu-finish1950-host')
+    env['ULIKE_H9_PREBUILT']=str(work/'host-regression1950')
     env['ULIKE_H9_WORK']=str(work)
     h9=run([sys.executable,root/'tests/h9/verify_h9_h11.py'],env)
     for marker in ('GPU saved-vs-general pixel equality passed: 32 tile cases',
