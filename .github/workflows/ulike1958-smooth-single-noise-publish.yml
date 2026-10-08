@@ -1,0 +1,210 @@
+name: Verify and publish ULike1958 NR9-NR13 strong single-image noise reduction
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1958-smooth-single-noise-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Verify reviewed NR9-NR13 declaration, active bundle190, ULike1957 and pinned toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1958/input .ci-ulike1958/dist .ci-ulike1958/tools
+          cp releases/ulike1958-smooth-single-noise/manifest.json .ci-ulike1958/reviewed-manifest.json
+          python3 - <<'PY'
+          import hashlib, importlib.util, json, pathlib, shutil, urllib.request
+          root = pathlib.Path('.ci-ulike1958')
+          location = pathlib.Path('releases/ulike1958-smooth-single-noise/publication/publish1958.py')
+          spec = importlib.util.spec_from_file_location('reviewed_publisher', location)
+          pub = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(pub)
+          manifest = json.loads(pathlib.Path('.ci-ulike1958/reviewed-manifest.json').read_text())
+          assert manifest['ulike_version'] == pub.VERSION and manifest['bundle_version'] == pub.BUNDLE
+          assert manifest['baseline_ulike_version'] == pub.PREVIOUS_APP and manifest['baseline_bundle_version'] == pub.PREVIOUS
+          assert manifest['baseline_ulike_sha256'] == pub.SINGLE_BASE_SHA256 and manifest['baseline_bundle_sha256'] == pub.BASE_SHA256
+          assert manifest['selected_candidates'] == ['NR9','NR10','NR11','NR12','NR13']
+          assert manifest['original_apk_apply_tested'] is False and manifest['android_device_tested'] is False
+          assert manifest['toolchain_sha256'] == pub.TOOLCHAIN_SHA256
+          pub.configure(manifest)
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version'] in (pub.PREVIOUS, pub.BUNDLE), 'Active bundle advanced; preserve concurrent edits'
+          if feed['version'] == pub.PREVIOUS:
+              assert feed['download_url'] == pub.BASE_URL, 'Advertised bundle baseline differs'
+          policy = json.loads(pathlib.Path('releases/ULike_ACTIVE.json').read_text())
+          if feed['version'] == pub.PREVIOUS:
+              assert policy['ulike_version'] == pub.PREVIOUS_APP and policy['source_sha256'] == pub.SINGLE_BASE_SHA256
+          else:
+              assert policy['ulike_version'] == pub.VERSION and policy['capture_fusion_enabled'] is False
+          def download(url, filename, digest, size):
+              with urllib.request.urlopen(url, timeout=90) as response:
+                  data = response.read()
+              assert len(data) == size and hashlib.sha256(data).hexdigest() == digest, 'Pinned baseline differs: ' + filename
+              (root / 'input' / filename).write_bytes(data)
+          download(pub.BASE_URL, pub.BASE_NAME, pub.BASE_SHA256, pub.BASE_BYTES)
+          download(pub.SINGLE_BASE_URL, pub.SINGLE_BASE_NAME, pub.SINGLE_BASE_SHA256, pub.SINGLE_BASE_BYTES)
+          import io, zipfile
+          tool_urls = {
+              'morphe.jar': ('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar', None, None),
+              'android.jar': ('https://dl.google.com/android/repository/platform-35_r02.zip', '0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0', 'android-35/android.jar'),
+              'd8.jar': ('https://dl.google.com/android/repository/build-tools_r35_linux.zip', 'bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88', 'android-15/lib/d8.jar'),
+          }
+          for filename, (url, archive_digest, entry) in tool_urls.items():
+              with urllib.request.urlopen(url, timeout=180) as response:
+                  data = response.read()
+              if entry:
+                  assert hashlib.sha256(data).hexdigest() == archive_digest, 'Pinned SDK archive differs: ' + filename
+                  with zipfile.ZipFile(io.BytesIO(data)) as archive:
+                      data = archive.read(entry)
+              assert hashlib.sha256(data).hexdigest() == pub.TOOLCHAIN_SHA256[filename], 'Pinned tool differs: ' + filename
+              (root / 'tools' / filename).write_bytes(data)
+          assert pathlib.Path('releases/ulike1958-smooth-single-noise/publication/ulike1958-smooth-single-noise-publish.yml').read_bytes() == pathlib.Path('.github/workflows/ulike1958-smooth-single-noise-publish.yml').read_bytes(), 'Archived and executed workflow differ'
+          print('PASS reviewed declaration, exact active bundle, approved ULike1957 and pinned tools')
+          PY
+          java -version
+      - name: Install fresh host JNI test compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install -y gcc
+      - name: Install exact Android NDK r27c
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PYNDK'
+          import hashlib, pathlib, urllib.request, subprocess
+          path=pathlib.Path('.ci-ulike1958/android-ndk-r27c-linux.zip')
+          urllib.request.urlretrieve('https://dl.google.com/android/repository/android-ndk-r27c-linux.zip',path)
+          data=path.read_bytes()
+          assert len(data)==663987688 and hashlib.sha1(data).hexdigest()=='090e8083a715fdb1a3e402d0763c388abb03fb4e', 'Exact official NDK r27c archive required'
+          subprocess.run(['unzip','-q',str(path),'-d','.ci-ulike1958'],check=True)
+          ndk=pathlib.Path('.ci-ulike1958/android-ndk-r27c')
+          assert 'Pkg.Revision = 27.2.12479018' in (ndk/'source.properties').read_text()
+          for p in (ndk/'toolchains/llvm/prebuilt/linux-x86_64/bin').iterdir():
+              if p.is_file():p.chmod(p.stat().st_mode|0o111)
+          path.unlink()
+          print('PASS exact official NDK r27c archive and revision')
+          PYNDK
+      - name: Rebuild NR9-NR13 and execute Java, fresh C/JNI, pipeline, fallback and preservation tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/src/build1958.py --input .ci-ulike1958/input --tools .ci-ulike1958/tools --ndk .ci-ulike1958/android-ndk-r27c --work .ci-ulike1958/build --output .ci-ulike1958/dist --jdk "$JAVA_HOME" 2>&1 | tee .ci-ulike1958/build.log
+      - name: Record fresh host evidence and explicit original-APKS test status
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/src/validate1958.py --build .ci-ulike1958/build --dist .ci-ulike1958/dist --output .ci-ulike1958/validation.json --input .ci-ulike1958/input 2>&1 | tee .ci-ulike1958/validation.log
+          python3 - <<'PYVALIDATION'
+          import json, pathlib
+          evidence=json.loads(pathlib.Path('.ci-ulike1958/validation.json').read_text())
+          assert evidence['schema']=='ulike1958-desktop-validation-v1'
+          assert evidence['original_apk_apply_tested'] is False
+          assert evidence['device_tested'] is False and evidence['device_quality_verified'] is False
+          assert evidence['bundle_version']=='1.0.191'
+          print('PASS fresh host evidence; original APKS application and physical device untested')
+          PYVALIDATION
+      - name: Finalize package from fresh host evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/src/finalize1958.py --dist .ci-ulike1958/dist --source releases/ulike1958-smooth-single-noise/src --validation .ci-ulike1958/validation.json --manifest .ci-ulike1958/generated-manifest.json 2>&1 | tee .ci-ulike1958/finalize.log
+      - name: Compare generated manifest to reviewed declaration and source archive to checkout
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PYARCHIVE'
+          import hashlib, json, pathlib, zipfile
+          declared=json.loads(pathlib.Path('.ci-ulike1958/reviewed-manifest.json').read_text())
+          produced=json.loads(pathlib.Path('.ci-ulike1958/generated-manifest.json').read_text())
+          for key in ('ulike_version','bundle_version','baseline_ulike_version','baseline_bundle_version',
+                      'baseline_ulike_sha256','baseline_bundle_sha256','baseline_ulike_bytes','baseline_bundle_bytes',
+                      'baseline_ulike_url','baseline_bundle_url','selected_candidates','production_helper_roots',
+                      'toolchain_sha256','original_apk_apply_tested','android_device_tested',
+                      'jdk_runtime_version','jdk_vendor','ndk_revision'):
+              assert produced[key]==declared[key], f'Reviewed input declaration differs: {key}'
+          for key in ('allowed_changed_bundle_entries','allowed_added_bundle_entries',
+                      'allowed_changed_standalone_entries','allowed_added_standalone_entries'):
+              assert produced[key]==declared[key], f'Reviewed resource delta differs: {key}'
+          assert produced['original_apk_apply_tested'] is False
+          assert produced['nr_native_payload']==declared['nr_native_payload'] and len(produced['inherited_native_payloads'])==10
+          host=produced['qa_required_values']['host_quality_result']
+          assert host['fresh_production_c_jni_executed'] is True and host['forced_native_unavailable_java_fallback_executed'] is True
+          assert host['native_java_pixel_equivalence'] is True and host['native_parity_cases']>=5
+          root=pathlib.Path('releases/ulike1958-smooth-single-noise')
+          diagnostics={}
+          with zipfile.ZipFile('.ci-ulike1958/dist/ULike_v1.9.58_sources_and_QA.zip') as archive:
+              assert archive.testzip() is None
+              for name in archive.namelist():
+                  data=archive.read(name)
+                  diagnostics[name]={'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()}
+                  if name.startswith(('src/','publication/')):
+                      assert (root/name).read_bytes()==data, f'Archive differs from checked-out source: {name}'
+          assert set(produced['required_source_paths']) <= set(diagnostics)
+          pathlib.Path('.ci-ulike1958/source-entry-report.json').write_text(json.dumps(diagnostics,sort_keys=True,indent=2)+'\n')
+          print('PASS generated manifest matches reviewed source declaration; archive matches checked-out implementation')
+          PYARCHIVE
+      - name: Verify reviewed diagnostics assets, QA contract and complete resource delta
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/publication/publish1958.py --dist .ci-ulike1958/dist --repo . --expected .ci-ulike1958/generated-manifest.json --local-only --baseline .ci-ulike1958/input/Hiro_Morphe_Patches_v1.0.190.mpp --standalone-baseline .ci-ulike1958/input/ULike_HQ_Texture_Online_v1.9.57.mpp 2>&1 | tee .ci-ulike1958/local-verification.log
+      - name: Read-only preflight of both Manager feeds and approved ULike policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/publication/publish1958.py --dist .ci-ulike1958/dist --repo . --expected .ci-ulike1958/generated-manifest.json --preflight-only 2>&1 | tee .ci-ulike1958/preflight.log
+      - name: Publish verified assets and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/ulike1958-smooth-single-noise/publication/publish1958.py --dist .ci-ulike1958/dist --repo . --expected .ci-ulike1958/generated-manifest.json 2>&1 | tee .ci-ulike1958/publication.log
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ulike1958-smooth-single-noise-verified-publication
+          path: |
+            .ci-ulike1958/dist/
+            .ci-ulike1958/*.log
+            .ci-ulike1958/build/*.log
+            .ci-ulike1958/build/*.json
+            .ci-ulike1958/build/*.txt
+            .ci-ulike1958/build/**/*.diagnostics.json
+            .ci-ulike1958/validation.json
+            .ci-ulike1958/generated-manifest.json
+            .ci-ulike1958/source-entry-report.json
+          retention-days: 30
+          compression-level: 1
+          include-hidden-files: true
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ulike1958-source-archive-diagnostics
+          path: |
+            .ci-ulike1958/dist/ULike_v1.9.58_sources_and_QA.zip
+            .ci-ulike1958/dist/QA_ULike_v1.9.58.json
+            .ci-ulike1958/dist/SHA256SUMS.txt
+          retention-days: 7
+          compression-level: 1
+          include-hidden-files: true
+
