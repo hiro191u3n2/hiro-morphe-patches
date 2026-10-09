@@ -1,0 +1,45 @@
+ULike v1.9.38 front-camera restart audit
+
+Baseline: public ULike v1.9.37 and Hiro Morphe Patches v1.0.170.
+Observed user evidence: controls remain visible while the preview region is entirely black.
+The screenshot does not identify which camera, renderer or driver operation failed.
+No Android device, device logcat, sensor stream or displayed frame was available here.
+
+Code-grounded startup gaps addressed
+1. The previous camera-input wait expired five seconds after the initial request,
+   including time spent waiting for pipelines. Slow input readiness could leave no
+   observer by the time a valid start became possible. Input wait and first accepted
+   start now have separate finite budgets; repeated events cannot extend them.
+2. A no-frame recovery stopped and restarted the retained preview session but reused
+   its still-valid SurfaceTexture. The detached OES path now requests one native
+   texture renewal after stop and revalidates ownership before resuming. Native code
+   creates and notifies its renderer; no helper fabricates GL objects or binds a GL
+   context on the camera thread. Nonzero GL IDs and mixed outputs do not use this
+   forced renewal path.
+3. The previous post-stop guard required READY even when native stop had released
+   an input texture. It can now complete the native RENEW path rather than remaining
+   stopped solely because the matching restart needs texture renewal.
+4. Camera input and output rendering have independent lifecycles. In the actual
+   TECameraVideoRecorder$36.onFrameCaptured implementation, record state 0 discards
+   input frames. Camera-frame delivery is therefore not proof of preview display.
+   A separate output-renderer guard checks the current surface, foreground capture,
+   lifecycle and native renderer status. It uses a bounded native restart only for
+   an idle/uninitialized renderer and cancels on explicit stop/destroy.
+
+Audited settings with no justified changes
+The native last_use_front_camera preference preserves the selected front camera.
+ManualLens170.choose derives facing from CameraCharacteristics, keeps the front ID,
+and clears queued rear-lens switching. Rear crop/physical-lens/startup-focus changes
+are guarded by the rear route. FrontPreview1936.prepared's settings/camera identity
+checks match actual initialization order and ordinary front deferred surfaces are
+already disabled. The native Camera2 selection remains conditional. No evidence
+justifies resetting user-facing, brightness, exposure or app data.
+
+Verification boundary
+Host tests model callback order, native state, ownership and external call effects.
+Applying both MPPs to the original APK checks actual method contracts and Android
+bytecode; it is not an execution on ART or a camera device. Existing pixel quality,
+save-speed code and other app resources are protected by binary comparisons.
+The device-specific cause and visual resolution remain unverified until installed
+and exercised on the user's Galaxy. Do not describe this audit as proof that every
+possible hardware/driver cause has been eliminated.
