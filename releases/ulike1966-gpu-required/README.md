@@ -6,6 +6,8 @@ GPU precision or processing failure preserves the original source, permits bound
 
 Sources and tests are under `src`; publication operations and atomic main/dev feed guards are under `publication`. The workflow only publishes after all fresh compilation, source-pin, native-linkage, test and package checks succeed. A functional original-GLES path is required before this candidate can be published.
 
-No physical Android capture, original-APKS application, saved-image quality or device speed claim is made. Software host GPU execution and desktop GLSL adaptations do not establish Galaxy support.
+Physical Android capture, saved-image quality and device speed remain unverified. Software host GPU execution does not establish Galaxy support.
+
+Separately from CI, the exact published standalone MPP was applied to the private original ULike 5.6.2 (740) APKS and the APK was rebuilt. [Original APKS application evidence](original-APKS-application_ULike_v1.9.66.json) records the input/output hashes, matching published artifacts, retained camera hooks, native payload checks and limits. CI's original-APKS flag remains false because this application test ran locally; the bundle was checked for identical ULike payloads rather than separately applied.
 
 The GPU binary64 implementation includes Berkeley SoftFloat derived BSD 3-clause code. The complete notice is shipped in each MPP as `ulike1965/THIRD_PARTY_LICENSES.txt`, and in the source archive as `THIRD_PARTY_LICENSES.txt`.

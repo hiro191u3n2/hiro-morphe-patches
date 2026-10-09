@@ -1,0 +1,283 @@
+{
+  "schema": "ulike1966-original-apks-application-public-v1",
+  "status": "passed",
+  "releaseVersion": "1.9.66",
+  "scope": {
+    "standaloneOriginalApksApplyTested": true,
+    "bundleOriginalApksApplyTested": false,
+    "bundleUlikePayloadByteIdenticalToTestedStandalone": true,
+    "bundleComparedPayloadEntries": 22,
+    "physicalAndroidTested": false,
+    "physicalDeviceImageQualityTested": false,
+    "physicalDeviceSpeedTested": false,
+    "signingOrInstallationTested": false
+  },
+  "input": {
+    "filename": "ULike_v5.6.2(740).apks",
+    "bytes": 89511266,
+    "sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+    "packageName": "com.gorgeous.liteinternational",
+    "versionName": "5.6.2",
+    "versionCode": 740,
+    "minSdk": 21,
+    "targetSdk": 34,
+    "archiveEntries": {
+      "base.apk": {
+        "bytes": 56790896,
+        "sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d"
+      },
+      "split_config.arm64_v8a.apk": {
+        "bytes": 92217944,
+        "sha256": "fae90c7c9623194bbbf450ac36439958cbd7ef8c00439915704740248d6d3bc6"
+      },
+      "manifest.json": {
+        "bytes": 204,
+        "sha256": "3ea277166691db0b6e840931a3349e5899ef421f36a8e8e91ef57826983e96f2"
+      },
+      "icon.png": {
+        "bytes": 5127,
+        "sha256": "cac18685c1f875f0ad69109c2b7cd9a55917a9f52dd54ef875719ce46d7dafad"
+      }
+    },
+    "crcVerified": true,
+    "splitCount": 2
+  },
+  "testedStandaloneMpp": {
+    "filename": "ULike_HQ_Texture_Online_v1.9.66.mpp",
+    "bytes": 1286915,
+    "sha256": "4ef193d460ce2605fca5a13ba86dfc0b1d090b9d95c63cf692ff971d53d0bd4f"
+  },
+  "bundleMpp": {
+    "filename": "Hiro_Morphe_Patches_v1.0.199.mpp",
+    "bytes": 17933951,
+    "sha256": "acf6174e39e101b8f0ff27976b817aa6259ee0f70210ca3ed92f50b262a2d8d8"
+  },
+  "outputApk": {
+    "bytes": 150239455,
+    "sha256": "c7814e2923fbc807215f21e5a8d9aadcc105993dd0694606943cc491525e22ee",
+    "unsigned": true,
+    "publiclyDistributed": false,
+    "filename": "patched-output.apk"
+  },
+  "morphe": {
+    "jarSha256": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "commandWithPathValuesSanitized": [
+      "java",
+      "-Xmx3g",
+      "-jar",
+      "morphe.jar",
+      "patch",
+      "ULike_v5.6.2(740).apks",
+      "--exclusive",
+      "-p",
+      "ULike_HQ_Texture_Online_v1.9.66.mpp",
+      "--ei",
+      "0",
+      "--unsigned",
+      "--bytecode-mode",
+      "FULL",
+      "--striplibs",
+      "arm64-v8a",
+      "-o",
+      "patched-output.apk",
+      "-t",
+      "temporary-work",
+      "-r",
+      "patch-result.json"
+    ],
+    "actualPatchResult": {
+      "packageName": "com.gorgeous.liteinternational",
+      "packageVersion": "5.6.2",
+      "patchingSteps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "appliedPatches": [
+        {
+          "name": "高画質撮影・質感美肌・素材通信を復旧"
+        }
+      ],
+      "failedPatches": []
+    },
+    "realPatchLogSha256": "24ed3c7a209338ed3cccac57a3ce50e3c4b4b26f4495ec7f2163f013628bedf5",
+    "realLogSummary": [
+      "Merged base.apk and split_config.arm64_v8a.apk",
+      "Applied exactly one compatible ULike patch without --force",
+      "FULL bytecode rebuilding emitted six DEX files",
+      "Kept arm64-v8a native architecture; no application libraries stripped",
+      "Resource compilation and APK alignment completed"
+    ],
+    "rawLogsPubliclyDistributed": false
+  },
+  "verification": {
+    "originalSplitMergeTested": true,
+    "dexCount": 6,
+    "dexEntries": {
+      "classes.dex": {
+        "bytes": 8441284,
+        "sha256": "115daebc13c78c1e211e1cd069a362bf4b57cbb0008f41172dfcdb9b729138ee"
+      },
+      "classes2.dex": {
+        "bytes": 7711252,
+        "sha256": "cdd5b1d3725a2364683787461e9c2c54e2e4af1569dcc9a36b9c529fdf625b50"
+      },
+      "classes3.dex": {
+        "bytes": 8542664,
+        "sha256": "affd7fab97496a86982ad36e82ee318ab19633eba14227e3cad78ebc707ef104"
+      },
+      "classes4.dex": {
+        "bytes": 1654328,
+        "sha256": "8c7940217fdabdde805af555d53d554ce7cbe02a5d06a943685fec63bda7a642"
+      },
+      "classes5.dex": {
+        "bytes": 7658240,
+        "sha256": "59f0406ebb7e493c8b2ff6b99e81fd68b28dd307ee96e4acb02c6486eb30fb3a"
+      },
+      "classes6.dex": {
+        "bytes": 1661560,
+        "sha256": "d32f93e3aa5b6ea7acce0bae8f832ceab1eaaf4a3e060ee6bc998ffa9f21e9b4"
+      }
+    },
+    "dexHeaderSha1AdlerAndArchiveCrcValid": true,
+    "uniqueClasses": 33788,
+    "methods": 216217,
+    "exactRuntimeAndPayloadMethodContracts": 4282,
+    "exactMethodContractResult": "PASS final APK: 33788 unique classes / 216217 methods. 4282 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+    "staticApkLinkageAudit": {
+      "status": "passed",
+      "assertions": 42639,
+      "classes": 33788,
+      "methods": 216217,
+      "requiredGpuActualEntryLinkage": true,
+      "nativeJniExportAbi": true,
+      "manualGpuReceiptInspected": true,
+      "physicalAndroidTested": false
+    },
+    "originalNativeLibraryCountPresent": 58,
+    "originalNativeLibraryCountByteIdentical": 57,
+    "inheritedPinnedNativeTransformations": {
+      "lib/arm64-v8a/libttvesdk.so": {
+        "beforeSha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+        "afterSha256": "eac57bcaa613860c7ca03ea516c4370520f9775cdfe700688d74e223bd59c2bb",
+        "offset": 4241508,
+        "beforeHex": "26008052",
+        "afterHex": "a6e34039",
+        "inheritedContract": "app.hiro.ulike.patches.NativeNv21EffectFlag"
+      }
+    },
+    "inheritedNativeClassContract": {
+      "class": "app/hiro/ulike/patches/NativeNv21EffectFlag.class",
+      "classBytes": 3211,
+      "classSha256": "7cadfa07d78307da91bba6c5d3dd904500cd01dab0c23def77f11dadfe39a766",
+      "baselineMppSha256": "cf6621ed1ec55c5b115516a04f897e380c785c56d9772ab48043b32c568ae48b",
+      "entry": "lib/arm64-v8a/libttvesdk.so",
+      "beforeSha256": "67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095",
+      "afterSha256": "eac57bcaa613860c7ca03ea516c4370520f9775cdfe700688d74e223bd59c2bb",
+      "offset": 4241508,
+      "beforeHex": "26008052",
+      "afterHex": "a6e34039",
+      "classByteIdenticalBaseline1964ToFinal1966": true
+    },
+    "patchedNativeAssetCount": 12,
+    "patchedNativeAssets": {
+      "lib/arm64-v8a/libulike_speed1935.so": {
+        "bytes": 21496,
+        "sha256": "5e9e5b5d383f5b33326102409c0c0887ea33f032646acce016f3b92637f6bea1"
+      },
+      "lib/arm64-v8a/libulike_gpu1949.so": {
+        "bytes": 37320,
+        "sha256": "e8e193bf807b137136bf179a66da3fe577b25b87c5f90511826ff5e10e97d01f"
+      },
+      "lib/arm64-v8a/libulike_core1950.so": {
+        "bytes": 19776,
+        "sha256": "d359fdde15f13810868ae8420fc5c0f7a7dc579b06ed9dc5e187c61ca761884d"
+      },
+      "lib/arm64-v8a/libulike_h8gpu1951.so": {
+        "bytes": 26184,
+        "sha256": "d5a371443c48d40f56064a8cb850ad731a32ca394dc50c1fda9b72ce65c44b47"
+      },
+      "lib/arm64-v8a/libulike_moire1951.so": {
+        "bytes": 13304,
+        "sha256": "b02f1f0ff0a06820ceec8c24dfd74ca06e3113c8c0f7c7b58a6774d8f2b20155"
+      },
+      "lib/arm64-v8a/libulike_finish1952.so": {
+        "bytes": 27632,
+        "sha256": "91d4f007f619357b16bd007a346fe2286c35c536554463ef984b8ea5c78ee83e"
+      },
+      "lib/arm64-v8a/libulike_finish1953.so": {
+        "bytes": 38168,
+        "sha256": "43e188e4f19c637f7d7ad05dbbdee1c3bb46495ef846a3a73f4454d17d84cfb4"
+      },
+      "lib/arm64-v8a/libulike_nr1955.so": {
+        "bytes": 17064,
+        "sha256": "9efda833adbdf65cb26c9f55cc283d973e7b8b5d5366be8157d83f598303c84c"
+      },
+      "lib/arm64-v8a/libulike_strong1957.so": {
+        "bytes": 16104,
+        "sha256": "a1bd2a7f1661866e2c44099545ae197b7a39f765a96c878ef473ea19fd0edc71"
+      },
+      "lib/arm64-v8a/libulike_smooth1958.so": {
+        "bytes": 33128,
+        "sha256": "2c7634030f2e6c2177c033f931f6b7976c76da465fdada29ea5023ce088f4974"
+      },
+      "lib/arm64-v8a/libulike_gpu1960.so": {
+        "bytes": 467200,
+        "sha256": "cde68f172d59219c0b005ae76eb5b2ef61780771798d7a951435ba0c5f7cdaf2"
+      },
+      "lib/arm64-v8a/libulike_chroma186.so": {
+        "bytes": 10320,
+        "sha256": "0ac181fac2afbd9260b8c59d922843deead72d3184e78ce97346d57a76b169cb"
+      }
+    },
+    "nativeAssetsByteIdenticalToTestedMpp": true,
+    "gpuBackendElf64Aarch64": true,
+    "gpuSoftwareDriverRefusalCodePresent": true,
+    "recoveryAndPrecisionProbeNativeExportsPresent": [
+      "recoverNative1965",
+      "diagnosticsNative1965",
+      "failureNative1965",
+      "fp64ProbeNative1965",
+      "soft64ProbeNative1965"
+    ],
+    "manualEncoderAndPublicationReceiptsPresent": true,
+    "requiredGpuEntryAndFailurePropagationPresent": true,
+    "reviewedForbiddenCpuFallbackReferencesAbsentInRequiredGraph": true,
+    "existingTimingCameraDialogAndZipGpuLogEntryLinked": true,
+    "testFixtureArchiveEntriesAbsent": true
+  },
+  "privateEvidenceLogSha256": {
+    "real-patch.log": "24ed3c7a209338ed3cccac57a3ce50e3c4b4b26f4495ec7f2163f013628bedf5",
+    "patch-result.json": "f26a81e882e4573245a2d8aa88667cd3704f5023593abf51b0cbda21a311efcb",
+    "exact-method-contracts.log": "9d61df643fea9cb3936dbfe2276bdfa4662b6f50c93f91315b258f6f7fdd3d0a",
+    "required-route-jni-linkage.log": "a8483e8b241e5c5266976cd3e4141de1b66b894f9a6b18ddd82fe8284e11baed"
+  },
+  "distribution": {
+    "originalApksPubliclyDistributed": false,
+    "patchedApkPubliclyDistributed": false,
+    "photoOrFrameContentsIncluded": false
+  },
+  "limitations": "Executed desktop Morphe split merging, resource and DEX rebuilding, APK integrity checks, exact method-contract comparison and static JNI/hook/native inspection. Android ART, device cameras, saved-photo appearance, shader startup time and device processing speed were not executed.",
+  "publicationVerification": {
+    "status": "passed",
+    "sourceCommit": "6b1d465c65f8a422b5307191f95e54c51c3645ca",
+    "ciRunId": 37878430807,
+    "ciRunUrl": "https://github.com/hiro191u3n2/hiro-morphe-patches/actions/runs/37878430807",
+    "ciConclusion": "success",
+    "releaseUrl": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.9.66",
+    "releaseAssetsDownloadedAndSha256Verified": 7,
+    "sourceArchiveEntriesComparedToCheckout": 1479,
+    "hostAssertions": 2545920,
+    "hostSuites": 10,
+    "publishedMppBytesEqualOriginalApksTestedLocalMpp": true,
+    "mainAndDevManagerFeedVersion": "1.0.199",
+    "mainAndDevManagerDownloadsEqualTestedBundle": true,
+    "ciOriginalApksApplyTested": false,
+    "originalApplicationExecutedSeparatelyOnExactPublishedStandalone": true
+  }
+}
