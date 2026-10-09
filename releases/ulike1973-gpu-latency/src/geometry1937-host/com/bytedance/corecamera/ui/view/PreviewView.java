@@ -1,0 +1,1 @@
+package com.bytedance.corecamera.ui.view; public class PreviewView extends android.view.SurfaceView {public int width=742,height=1536; public int getWidth(){return width;} public int getHeight(){return height;} }
