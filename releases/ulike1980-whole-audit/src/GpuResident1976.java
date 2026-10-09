@@ -1,0 +1,168 @@
+package com.hiro.ulike;
+
+import android.graphics.Bitmap;
+
+/** Whole Strong-to-finish admission. One immutable queued source is sufficient;
+ * half-resolution input is reconstructed after save. A missing ordinary finish
+ * proof is resolved first in the same idle job. Every candidate still requires
+ * two complete CPU comparisons and a real existing-route timing advantage. */
+final class GpuResident1976 {
+    private GpuResident1976() {}
+    private static final ThreadLocal<Boolean> BENCHMARK=new ThreadLocal<Boolean>();
+    private static final ThreadLocal<Boolean> CPU=new ThreadLocal<Boolean>();
+    private static final ThreadLocal<GpuQualification1961.Cancellation> CANCELLATION=new ThreadLocal<GpuQualification1961.Cancellation>();
+    static GpuQualification1961.Cancellation cancellation(){return CANCELLATION.get();}
+    static boolean benchmarking(){return Boolean.TRUE.equals(BENCHMARK.get());}
+    static boolean cpuOracle(){return Boolean.TRUE.equals(CPU.get());}
+    private static String key(Bitmap source,QualityPixels1932.Plan plan,int level,boolean shadows,
+            int rotation,int width,int height,QualityPixels1932.Plan output,boolean identity) {
+        return "strong-resident1978:3:v1:"+GpuNoise1960.fingerprint()+":"+source.getWidth()+":"+source.getHeight()+":"+
+            level+":"+shadows+":"+rotation+":"+width+":"+height+":"+plan.beautyQ8+":"+plan.shadowBudgetQ8+":"+
+            output.sharpGainQ8+":"+output.sharpFloorQ8+":"+output.sharpLimit+":"+output.texturePriority+":"+output.haloSuppression+":"+
+            Float.floatToRawIntBits(output.sourceSigma)+":"+Float.floatToRawIntBits(output.outputScale)+":"+
+            (output.faceRegions!=null)+":"+(output.localNoise!=null)+":"+identity;
+    }
+    private static void note(ProcessingTiming1947.Trace trace,Bitmap source,int width,int height,int rotation,
+            boolean identity,int halfLength,long retained,int reason) {
+        if(source!=null&&!source.isRecycled())ProcessingTiming1947.resident1978(trace,source.getWidth(),source.getHeight(),width,height,
+            rotation,identity,halfLength,retained,reason);
+    }
+    static Bitmap finish(final Bitmap source,final QualityPixels1932.Plan plan,final int level,final boolean shadows,
+            final int[] half,final int rotation,final int width,final int height,final QualityPixels1932.Plan output,
+            ProcessingTiming1947.Trace trace) {
+        // The existing API includes reduce-first images whose remaining geometry
+        // is a no-op, but whose evidence must still be refreshed after moire.
+        return finish1978(source,plan,level,shadows,half,rotation,width,height,output,false,trace);
+    }
+    static Bitmap finish1978(final Bitmap source,final QualityPixels1932.Plan plan,final int level,final boolean shadows,
+            final int[] half,final int rotation,final int width,final int height,final QualityPixels1932.Plan output,
+            final boolean identity,ProcessingTiming1947.Trace trace) {
+        final int halfLength=half==null?0:half.length;
+        note(trace,source,width,height,rotation,identity,halfLength,0,0);
+        if(source==null||source.isRecycled()||source.getConfig()!=Bitmap.Config.ARGB_8888||level<=0||output==null||
+                identity&&!ResidentProof1978.identity(source,rotation,width,height)||
+                !detachedPlan1976(plan)||!detachedPlan1976(output)||
+                !GpuChain1961.eligibleResident1976(source,rotation,width,height,output)||output.sharpGainQ8<=0||
+                GpuQualification1961.background()||GpuNoise1960.sessionBusy()||
+                !GpuNoise1960.supports(GpuNoise1960.FINISH1961)||!identity&&!GpuNoise1960.supports(GpuNoise1960.GEOMETRY)||
+                !GpuNoise1960.supports(GpuNoise1960.ANALYSIS1961)) {
+            note(trace,source,width,height,rotation,identity,halfLength,0,3);return null;
+        }
+        final QualityPixels1932.Plan frozenPlan=plan,frozenOutput=output;
+        final String base=key(source,frozenPlan,level,shadows,rotation,width,height,frozenOutput,identity);
+        final String initialBaseline=GpuChain1961.residentBaseline1978(source,rotation,width,height,frozenOutput,identity);
+        final String qualifiedKey=initialBaseline==null?null:base+":"+initialBaseline;
+        if(qualifiedKey!=null&&GpuQualification1961.exactRejected(qualifiedKey)) {
+            note(trace,source,width,height,rotation,identity,halfLength,0,4);return null;
+        }
+        GpuQualification1961.Record proof=qualifiedKey==null?null:GpuQualification1961.restore(qualifiedKey);
+        if(proof!=null) {
+            try {
+                long started=System.nanoTime();Bitmap result=QualityPipeline1932.strongFinish1978(source,frozenPlan,level,shadows,half,rotation,width,height,frozenOutput,true,false,identity);
+                if(result==null)return null;
+                if(!win(proof.cpuNanos,System.nanoTime()-started))GpuQualification1961.rejectSpeed(qualifiedKey);
+                ProcessingTiming1947.detailRoute1976(trace,4);
+                note(trace,source,width,height,rotation,identity,halfLength,0,1);return result;
+            } catch(java.util.concurrent.CancellationException cancelled){throw cancelled;}
+            catch(RuntimeException unavailable){if(Thread.currentThread().isInterrupted())throw new java.util.concurrent.CancellationException("resident interrupted");return null;}
+            catch(LinkageError unavailable){return null;}
+            catch(OutOfMemoryError unavailable){return null;}
+        }
+        final String scheduledKey=qualifiedKey==null?base+":finish-dependency":qualifiedKey;
+        final long retained=ResidentProof1978.retainedBytes(source,plan,output);
+        if(retained>96L*1024*1024||!GpuNoise1960.workspaceFits(retained)) {
+            note(trace,source,width,height,rotation,identity,halfLength,retained,5);return null;
+        }
+        if(!GpuQualification1961.canQueue(scheduledKey,retained)) {
+            note(trace,source,width,height,rotation,identity,halfLength,retained,6);return null;
+        }
+        Bitmap snapshot=null;
+        try {
+            snapshot=source.copy(Bitmap.Config.ARGB_8888,false);if(snapshot==null)return null;
+            final Bitmap owned=snapshot;
+            final long snapshotRetained=ResidentProof1978.retainedBytes(owned,plan,output);
+            if(snapshotRetained>96L*1024*1024) {
+                note(trace,source,width,height,rotation,identity,halfLength,snapshotRetained,5);return null;
+            }
+            if(!GpuQualification1961.canQueue(scheduledKey,snapshotRetained)) {
+                note(trace,source,width,height,rotation,identity,halfLength,snapshotRetained,6);return null;
+            }
+            boolean accepted=GpuQualification1961.schedule(scheduledKey,snapshotRetained,new GpuQualification1961.Probe(){
+                public void run(GpuQualification1961.Cancellation cancellation) {
+                    CANCELLATION.set(cancellation);
+                    try {
+                        if(cancellation.cancelled()||!GpuChain1961.opaqueResident1976(owned))return;
+                        long halfBytes=4L*((owned.getWidth()+1L)/2)*((owned.getHeight()+1L)/2)+8L*owned.getWidth();
+                        if(!GpuNoise1960.workspaceFits(halfBytes))return;
+                        final int[] frozenHalf=ResidentProof1978.half(owned,cancellation);
+                        String baselineKey=initialBaseline;
+                        if(baselineKey==null) {
+                            CPU.set(Boolean.TRUE);
+                            try {QualityPipeline1932.qualifyResidentBaseline1978(owned,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,identity,cancellation);}
+                            finally {CPU.remove();}
+                            if(cancellation.cancelled())return;
+                            baselineKey=GpuChain1961.residentBaseline1978(owned,rotation,width,height,frozenOutput,identity);
+                            if(baselineKey==null){GpuQualification1961.rejectSpeed(scheduledKey);return;}
+                        }
+                        final String resultKey=base+":"+baselineKey;
+                        if(GpuQualification1961.exactRejected(resultKey))return;
+                        long baseline=Long.MAX_VALUE,candidateWorst=0;
+                        for(int trial=0;trial<2;trial++) {
+                            if(cancellation.cancelled()||!baselineKey.equals(GpuChain1961.residentBaseline1978(owned,rotation,width,height,frozenOutput,identity)))return;
+                            Bitmap oracle=null;
+                            try {
+                                CPU.set(Boolean.TRUE);
+                                try {oracle=QualityPipeline1932.strongFinish1978(owned,frozenPlan,level,shadows,null,rotation,width,height,frozenOutput,false,true,identity);}
+                                finally {CPU.remove();}
+                                if(cancellation.cancelled()||oracle==null)return;
+                                for(int candidate=0;candidate<2;candidate++) {
+                                    BENCHMARK.set(Boolean.TRUE);int comparison;
+                                    try {comparison=QualityPipeline1932.compareStrongFinish1978(owned,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,candidate==1,identity,oracle,cancellation);}
+                                    finally {BENCHMARK.remove();}
+                                    if(cancellation.cancelled())return;
+                                    if(comparison==ResidentProof1978.MISMATCH){GpuQualification1961.rejectExact(resultKey);return;}
+                                    if(comparison!=ResidentProof1978.EXACT)return;
+                                }
+                            } finally {CPU.remove();BENCHMARK.remove();if(oracle!=null)oracle.recycle();}
+                            // Real foreground-shaped timing includes destination
+                            // allocation/Bitmap writes. No CPU reference is held
+                            // during this phase and proof-only row reads are absent.
+                            for(int candidate=0;candidate<2;candidate++) {
+                                if(cancellation.cancelled())return;
+                                Bitmap result=null;long elapsed;
+                                Bitmap ordinaryInput=candidate==0?owned.copy(Bitmap.Config.ARGB_8888,true):null;
+                                if(candidate==0&&ordinaryInput==null)return;
+                                BENCHMARK.set(Boolean.TRUE);long started=System.nanoTime();
+                                try {
+                                    result=candidate==0?QualityPipeline1932.strongFinishOwned1978(ordinaryInput,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,false,identity)
+                                        :QualityPipeline1932.strongFinish1978(owned,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,true,false,identity);
+                                    elapsed=System.nanoTime()-started;
+                                    if(result==null||cancellation.cancelled())return;
+                                    if(candidate==0)baseline=Math.min(baseline,elapsed);else candidateWorst=Math.max(candidateWorst,elapsed);
+                                } finally {BENCHMARK.remove();if(result!=null)result.recycle();if(ordinaryInput!=null&&!ordinaryInput.isRecycled())ordinaryInput.recycle();}
+                            }
+                        }
+                        if(cancellation.cancelled())return;
+                        if(win(baseline,candidateWorst))GpuQualification1961.qualified(resultKey,baseline,candidateWorst,0);
+                        else GpuQualification1961.rejectSpeed(resultKey);
+                    } finally {CPU.remove();BENCHMARK.remove();CANCELLATION.remove();}
+                }
+                public void close(){if(!owned.isRecycled())owned.recycle();}
+            });snapshot=null;
+            note(trace,source,width,height,rotation,identity,halfLength,snapshotRetained,accepted?2:6);
+        } catch(RuntimeException unavailable){}catch(LinkageError unavailable){}catch(OutOfMemoryError unavailable){}
+        finally {if(snapshot!=null&&!snapshot.isRecycled())snapshot.recycle();}
+        return null;
+    }
+    private static boolean detachedPlan1976(QualityPixels1932.Plan plan) {
+        if(plan==null||plan.smoothedRegions!=null)return false;
+        if(plan.faceRegions!=null&&(plan.faceRegions.getClass().getClassLoader()!=GpuResident1976.class.getClassLoader()||
+                !plan.faceRegions.getClass().getName().equals("com.hiro.ulike.FaceRegions1934$Mask")))return false;
+        try {
+            java.lang.reflect.Field cache=QualityPixels1932.Plan.class.getDeclaredField("policyCache");
+            cache.setAccessible(true);return cache.get(plan)==null;
+        } catch(ReflectiveOperationException unavailable){return false;}
+          catch(RuntimeException unavailable){return false;}
+    }
+    private static boolean win(long baseline,long candidate){return baseline>0&&candidate>0&&candidate<=baseline-baseline/20;}
+}
