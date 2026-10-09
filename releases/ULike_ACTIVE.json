@@ -1,21 +1,22 @@
 {
-  "ulike_version": "1.9.66",
-  "bundle_version": "1.0.199",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.66.mpp",
-  "source_sha256": "4ef193d460ce2605fca5a13ba86dfc0b1d090b9d95c63cf692ff971d53d0bd4f",
-  "source_release": "ulike-v1.9.66",
-  "active_release": "ulike-v1.9.66",
-  "base_ulike_version": "1.9.65",
+  "ulike_version": "1.9.65",
+  "bundle_version": "1.0.198",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.65.mpp",
+  "source_sha256": "4b4ea78a8f3ee6d959d6f89585296061bc87454db67debeae9b1541a60a6ecfa",
+  "source_release": "ulike-v1.9.65",
+  "active_release": "ulike-v1.9.65",
+  "base_ulike_version": "1.9.64",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "4b4ea78a8f3ee6d959d6f89585296061bc87454db67debeae9b1541a60a6ecfa",
+  "base_source_sha256": "cf6621ed1ec55c5b115516a04f897e380c785c56d9772ab48043b32c568ae48b",
   "withdrawn_versions": [
-    "1.9.17"
+    "1.9.17",
+    "1.9.66"
   ],
-  "reason": "Mandatory GPU noise/protection/additional correction; GPU failures trigger bounded reinitialization then fail save. CPU image fallback and untreated success are prohibited. Physical Galaxy quality/speed unverified.",
-  "future_ulike_base": "Use .66/.199. Keep mandatory GPU image arithmetic, strict precision, retained-source retry and explicit failed-save behavior. Preserve camera/encoder/unrelated-app payloads.",
+  "reason": "User rejected buggy .66/.199 and requested restoration of exact published .65/.198 files.",
+  "future_ulike_base": "Use exact published ULike .65 and bundle .198. Do not restore rejected .66/.199 or its mandatory GPU processing without a new user instruction.",
   "android_device_tested": false,
   "original_apk_apply_tested": false,
-  "release_status": "gpu_required_host_verified_original_apks_device_unverified",
+  "release_status": "restored_exact_1965_198_rejected_1966_199",
   "ci_rebuild_matches_local_tested_artifacts": false,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -44,11 +45,11 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.198",
+  "base_bundle_version": "1.0.197",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": true,
-  "image_pipeline_byte_identical": false,
+  "image_pipeline_byte_identical": true,
   "swiftkey183_preserved": true,
   "rear_lens_ui_device_fix_confirmed": false,
   "native_methods_tsv_byte_identical": true,
@@ -63,11 +64,7 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    "GPU_REQUIRED_NOISE",
-    "GPU_REQUIRED_PROTECTION",
-    "GPU_REQUIRED_CORRECTION",
-    "GPU_REQUIRED_RECOVERY",
-    "GPU_REQUIRED_DIAGNOSTICS"
+    "CAMERA_TRACE"
   ],
   "baseline_other_apps_preserved": true,
   "camera_startup_recovery_byte_identical": false,
@@ -75,11 +72,7 @@
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "GPU_REQUIRED_NOISE",
-    "GPU_REQUIRED_PROTECTION",
-    "GPU_REQUIRED_CORRECTION",
-    "GPU_REQUIRED_RECOVERY",
-    "GPU_REQUIRED_DIAGNOSTICS"
+    "CAMERA_TRACE"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -95,19 +88,19 @@
   "startup_fix_verified_on_device": false,
   "shutter_feedback_device_tested": false,
   "shutter_feedback_duration_ms": 320,
-  "quality_pixel_math_byte_identical": false,
+  "quality_pixel_math_byte_identical": true,
   "manual_capture_safety_checks_preserved": true,
   "viewport_layout_byte_identical": false,
   "resolution_and_save_format_preserved": true,
   "shutter_feedback_byte_identical": false,
   "capture_save_policies_byte_identical": false,
-  "save_encoding_helpers_byte_identical": false,
+  "save_encoding_helpers_byte_identical": true,
   "front_lens_fixes_preserved": true,
   "non_ulike_resources_byte_identical": true,
-  "quality_algorithm_and_settings_preserved": false,
+  "quality_algorithm_and_settings_preserved": true,
   "save_format_and_codec_configuration_preserved": true,
-  "native_library_byte_identical": false,
-  "native_installer_byte_identical": false,
+  "native_library_byte_identical": true,
+  "native_installer_byte_identical": true,
   "diagnostic_stage_names": [
     "fusion",
     "noise",
@@ -123,7 +116,7 @@
   "stage_timing_payload_byte_identical": false,
   "stage_timing_algorithm_preserved": true,
   "retained_baseline_candidates": {
-    "ulike_version": "1.9.65",
+    "ulike_version": "1.9.64",
     "candidates": [
       "H1",
       "H2",
@@ -230,16 +223,15 @@
       "GX33",
       "GX34",
       "GX35",
-      "GX36",
-      "CAMERA_TRACE"
+      "GX36"
     ]
   },
   "gpu_processing_added": true,
   "gpu_execution_on_physical_android": false,
   "gpu_shader_execution_on_host": true,
-  "gpu_policy": "Enabled noise, protection and additional correction calculations require GPU. Preserve original input until a complete successful result. Retry by reinitializing GPU at most three attempts with a finite retry budget; permanent unsupported precision or unrecoverable errors fail processing/save. CPU remains for orchestration, copies, logging and file/codec management. Host evidence is not Galaxy execution or speed evidence.",
-  "gpu_native_library_sha256": "cde68f172d59219c0b005ae76eb5b2ef61780771798d7a951435ba0c5f7cdaf2",
-  "gpu_native_library_bytes": 467200,
+  "gpu_policy": "Per-stage exact pixel acceptance, strict precision and a guarded speed threshold. Speed-only rejection permits bounded idle requalification; GX30 uses measured parallel CPU/GPU wall time for edited admission paths. Unsupported fp64, surface/encoder integration, context/fence/GL failure, memory pressure or result mismatch returns to byte-preserved CPU paths. Host shader execution is software Mesa, not a Galaxy GPU speed measurement.",
+  "gpu_native_library_sha256": "7e2ede1e77344639f38b5d8dc22a6b2fe74390697066de03d10daeea4af02ae8",
+  "gpu_native_library_bytes": 133960,
   "native_installer_existing_rows_preserved": true,
   "core_native_library_sha256": "b8d762d30a0b0e448069e3354774af22fb5402a79f043434a683159c469d2e4a",
   "core_native_library_bytes": 12312,
@@ -260,16 +252,16 @@
   "capture_begin_image_false_return_verified": true,
   "capture_other_methods_and_fields_preserved": true,
   "intentional_quality_algorithm_change": false,
-  "host_pixel_equivalence_to_baseline": false,
+  "host_pixel_equivalence_to_baseline": true,
   "device_save_speed_measured": false,
-  "native_installer_preserved_rows": 11,
+  "native_installer_preserved_rows": 12,
   "native_installer_total_rows": 12,
   "nr_native_library_sha256": "9efda833adbdf65cb26c9f55cc283d973e7b8b5d5366be8157d83f598303c84c",
   "nr_native_library_bytes": 17064,
-  "capture_class_bytecode_identical": true,
+  "capture_class_bytecode_identical": false,
   "nr1_nr4_preserved": true,
   "host_optimized_kernel_pixel_equivalence_verified": true,
-  "native_installer_updated_rows": 1,
+  "native_installer_updated_rows": 0,
   "h28_h33_helpers_and_native_payloads_preserved": true,
   "strong_nr_native_library_sha256": "a1bd2a7f1661866e2c44099545ae197b7a39f765a96c878ef473ea19fd0edc71",
   "strong_nr_native_library_bytes": 16104,
@@ -282,11 +274,13 @@
   "speed_core_and_save_helpers_byte_identical": false,
   "nr13_shared_finish_policy_bytecode_identical": false,
   "gx_implementation_status": {
-    "GPU_REQUIRED_NOISE": "mandatory_gpu_or_explicit_failure",
-    "GPU_REQUIRED_PROTECTION": "mandatory_gpu_or_explicit_failure",
-    "GPU_REQUIRED_CORRECTION": "mandatory_gpu_or_explicit_failure",
-    "GPU_REQUIRED_RECOVERY": "mandatory_gpu_or_explicit_failure",
-    "GPU_REQUIRED_DIAGNOSTICS": "mandatory_gpu_or_explicit_failure"
+    "GX30": "conditional_actual_parallel_cpu_gpu_wall_time_admission",
+    "GX31": "single_exact_protection_preparation_reused",
+    "GX32": "exact_same_order_reused_pair_differences",
+    "GX33": "conditional_exact_2d_workgroup_cache_tuning",
+    "GX34": "same_source_exact_residual_block_transform_cache",
+    "GX35": "conditional_direct_binary64_prepared_residual_gpu_transfer",
+    "GX36": "conditional_measured_cpu_gpu_bank_scheduling"
   },
   "all_processing_on_gpu": false,
   "gx9_beauty_interop_supported": false,
@@ -376,1144 +370,13 @@
     "host_shader_execution_in_baseline": true
   },
   "unrelated_runtime_classes_bytecode_identical": true,
-  "gpu_required_noise": true,
-  "gpu_required_protection": true,
-  "gpu_required_correction": true,
-  "cpu_image_processing_fallback_enabled": false,
-  "untreated_success_on_gpu_failure_enabled": false,
-  "gpu_recovery_max_attempts": 3,
-  "same_quality_on_device_verified": false,
-  "gpu_required_validation": {
-    "camera_regression1965": {
-      "assertions": 1258,
-      "camera_session_lifecycle_regressions_passed": true,
-      "executed_test_count": 10,
-      "fresh_gpu_execution_in_this_release": false,
-      "logs": "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/.ci-ulike1966/build/gpu-host/camera-preservation1966/host-camera1965/run-8_0p5jer",
-      "output_probe_session_ownership_tests_passed": true,
-      "persistent_trace_storage_tests_passed": true,
-      "physical_android_tested": false,
-      "sampled_input_is_not_visible_success": true,
-      "scope": "Actual production camera helpers; Android/native-owner delivery doubles. Image/native retention is proved independently by fresh DEX and archive byte comparisons.",
-      "status": "passed",
-      "tests": {
-        "camera_hooks1965": {
-          "assertions": 80,
-          "baseline_mpp_sha256": "cf6621ed1ec55c5b115516a04f897e380c785c56d9772ab48043b32c568ae48b",
-          "modified_baseline_rejected": true,
-          "original_control_flow_restored_by_inverse": true,
-          "physical_android_tested": false,
-          "serialized_inverse_verified": true,
-          "status": "passed"
-        },
-        "camera_session1965": {
-          "assertions": 91,
-          "bounded_weak_ownership_tests_passed": true,
-          "five_second_sampling_tests_passed": true,
-          "optional_observer_sink_faults_guarded": true,
-          "physical_android_tested": false,
-          "sampled_input_is_not_visible_success": true,
-          "scalar_privacy_tests_passed": true,
-          "scope": "Actual CameraSession1965 source; dedicated Android clock and retained ownership/state doubles; no frame inspection or physical camera execution.",
-          "status": "passed"
-        },
-        "preview_output1965": {
-          "assertions": 169,
-          "bounded_native_bitmap_lifetime_tests_passed": true,
-          "initial_observation_owner_pin_tests_passed": true,
-          "output_probe_session_ownership_tests_passed": true,
-          "ownership_variants_executed": 12,
-          "photos_saved": false,
-          "physical_android_tested": false,
-          "public_api_source": "https://developer.android.com/reference/android/view/PixelCopy",
-          "request_time_owner_pinning_tests_passed": true,
-          "sampled_input_is_not_visible_success": true,
-          "status": "passed",
-          "temporary_destination_max_bytes": 2048,
-          "trace_field_limit_preserves_scalar_evidence": true,
-          "worker_main_thread_separation_tests_passed": true
-        },
-        "retained_front1936": {
-          "assertions": 202,
-          "device_tested": false,
-          "status": "passed"
-        },
-        "retained_geometry1937": {
-          "assertions": 99,
-          "device_tested": false,
-          "scope": "production Java geometry helper; modeled Android/native owners, no physical device",
-          "status": "passed"
-        },
-        "retained_layout1937": {
-          "assertions": 282,
-          "baseline": "1.9.36 persistent 811px viewport reproduced",
-          "scope": "production Java coordinator; modeled Android animation/View, no physical device",
-          "status": "passed"
-        },
-        "retained_layout_lifecycle1937": {
-          "assertions": 57,
-          "scope": "production lifecycle and core coordinator; modeled native callbacks/View/Handler, no physical device",
-          "status": "passed"
-        },
-        "retained_renderer1938": {
-          "assertions": 55,
-          "device_tested": false,
-          "status": "passed"
-        },
-        "trace_storage1965": {
-          "anomaly_followup_window_ms": 5000,
-          "assertions": 178,
-          "bounded_queue_drop_report_verified": true,
-          "cleanup_retry_single_writer_guard_verified": true,
-          "exported_user_snapshot_immutable": true,
-          "pending_export_cleanup_faults_verified": true,
-          "physical_android_tested": false,
-          "post_trigger_cap_and_expiry_verified": true,
-          "prior_tail_recovery_verified": true,
-          "protected_limit_bytes": 786432,
-          "protected_tail_recovery_and_live_export_verified": true,
-          "retained_across_jvm_processes": true,
-          "retained_json_lines_validated": 9199,
-          "rotation_limit_bytes": 1048576,
-          "same_epoch_anomalies_coalesced": true,
-          "share_read_only_grant_verified": true,
-          "snapshot_pending_cleanup_fault_verified": true,
-          "status": "passed"
-        },
-        "ui_camera1965": {
-          "assertions": 45,
-          "groups": {
-            "layout": 15,
-            "renderer": 30
-          },
-          "physical_android_tested": false,
-          "scope": "actual production helper bodies; Android/SDK queue doubles; output-hook spy",
-          "status": "passed"
-        }
-      },
-      "trace_export_tests_passed": true
-    },
-    "gpu_binary64_foundation1965": {
-      "assertions": 75243,
-      "cases": 75243,
-      "counts": {
-        "0": 4441,
-        "1": 4441,
-        "10": 4005,
-        "11": 4441,
-        "12": 4441,
-        "13": 4441,
-        "14": 4005,
-        "15": 4021,
-        "16": 4021,
-        "17": 4021,
-        "2": 4441,
-        "3": 4441,
-        "4": 4021,
-        "5": 4021,
-        "6": 4021,
-        "7": 3994,
-        "8": 4021,
-        "9": 4005
-      },
-      "elapsed_seconds": 9.059,
-      "error_count": 0,
-      "errors": [],
-      "gles": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4",
-      "library_sha256": "0ed8c23215885fbd2b4e176d9f4f9f9748e875007dc937dfa9bd02aa4cc5ce4f",
-      "native_fp64_required": false,
-      "original_gles_required_math_executed": true,
-      "physical_android_tested": false,
-      "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "shader_dialect_unmodified": true,
-      "status": "passed"
-    },
-    "gpu_chroma1965": {
-      "actual_published_dex_oracle": true,
-      "actually_corrected_pixels": 42243,
-      "assertions": 57592,
-      "cases": 46,
-      "desktop_header_only_adaptation": false,
-      "errors": [],
-      "exact_output_pixels": 57546,
-      "gles_version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4",
-      "hardware_fp64_required": false,
-      "host_shader_body_unchanged": true,
-      "live_cpu_qualification_used": false,
-      "oracle_sha256": "02b3337ff3fc918b35e7a1b4f81c689009104d855713afc6a8da2fdfafdd423a",
-      "original_gles_required_math_executed": true,
-      "physical_android_tested": false,
-      "published_runtime_dex_sha256": "ca1097d231c5c9ba120f9705928412b9178d890335e330570d2f61611c8700b7",
-      "records": [
-        {
-          "begin": 0,
-          "changed_pixels": 1050,
-          "end": 29,
-          "height": 29,
-          "name": "mode0-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1060,
-          "end": 29,
-          "height": 29,
-          "name": "mode0-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1065,
-          "end": 29,
-          "height": 29,
-          "name": "mode0-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 722,
-          "end": 29,
-          "height": 29,
-          "name": "mode1-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 749,
-          "end": 29,
-          "height": 29,
-          "name": "mode1-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 747,
-          "end": 29,
-          "height": 29,
-          "name": "mode1-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1068,
-          "end": 29,
-          "height": 29,
-          "name": "mode2-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1069,
-          "end": 29,
-          "height": 29,
-          "name": "mode2-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1069,
-          "end": 29,
-          "height": 29,
-          "name": "mode2-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1041,
-          "end": 29,
-          "height": 29,
-          "name": "mode3-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1057,
-          "end": 29,
-          "height": 29,
-          "name": "mode3-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1063,
-          "end": 29,
-          "height": 29,
-          "name": "mode3-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode4-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode4-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode4-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode5-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode5-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode5-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode6-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode6-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 29,
-          "height": 29,
-          "name": "mode6-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1050,
-          "end": 29,
-          "height": 29,
-          "name": "mode7-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1016,
-          "end": 29,
-          "height": 29,
-          "name": "mode7-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 773,
-          "end": 29,
-          "height": 29,
-          "name": "mode7-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 29,
-          "end": 29,
-          "height": 29,
-          "name": "mode8-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 48,
-          "end": 29,
-          "height": 29,
-          "name": "mode8-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 68,
-          "end": 29,
-          "height": 29,
-          "name": "mode8-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 851,
-          "end": 29,
-          "height": 29,
-          "name": "mode9-r1",
-          "pixels": 1073,
-          "radius": 1,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 930,
-          "end": 29,
-          "height": 29,
-          "name": "mode9-r3",
-          "pixels": 1073,
-          "radius": 3,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 931,
-          "end": 29,
-          "height": 29,
-          "name": "mode9-r8",
-          "pixels": 1073,
-          "radius": 8,
-          "width": 37
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1344,
-          "end": 33,
-          "height": 33,
-          "name": "radius1",
-          "pixels": 1353,
-          "radius": 1,
-          "width": 41
-        },
-        {
-          "begin": 7,
-          "changed_pixels": 585,
-          "end": 25,
-          "height": 33,
-          "name": "band-r1",
-          "pixels": 738,
-          "radius": 1,
-          "width": 41
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1351,
-          "end": 33,
-          "height": 33,
-          "name": "radius8",
-          "pixels": 1353,
-          "radius": 8,
-          "width": 41
-        },
-        {
-          "begin": 7,
-          "changed_pixels": 632,
-          "end": 25,
-          "height": 33,
-          "name": "band-r8",
-          "pixels": 738,
-          "radius": 8,
-          "width": 41
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1350,
-          "end": 33,
-          "height": 33,
-          "name": "radius32",
-          "pixels": 1353,
-          "radius": 32,
-          "width": 41
-        },
-        {
-          "begin": 7,
-          "changed_pixels": 632,
-          "end": 25,
-          "height": 33,
-          "name": "band-r32",
-          "pixels": 738,
-          "radius": 32,
-          "width": 41
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 1350,
-          "end": 33,
-          "height": 33,
-          "name": "radius128",
-          "pixels": 1353,
-          "radius": 128,
-          "width": 41
-        },
-        {
-          "begin": 7,
-          "changed_pixels": 632,
-          "end": 25,
-          "height": 33,
-          "name": "band-r128",
-          "pixels": 738,
-          "radius": 128,
-          "width": 41
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 0,
-          "end": 1,
-          "height": 1,
-          "name": "border1x1",
-          "pixels": 1,
-          "radius": 8,
-          "width": 1
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 17,
-          "end": 17,
-          "height": 17,
-          "name": "border1x17",
-          "pixels": 17,
-          "radius": 8,
-          "width": 1
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 16,
-          "end": 1,
-          "height": 1,
-          "name": "border17x1",
-          "pixels": 17,
-          "radius": 8,
-          "width": 17
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 4,
-          "end": 2,
-          "height": 2,
-          "name": "border2x2",
-          "pixels": 4,
-          "radius": 8,
-          "width": 2
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 27,
-          "end": 9,
-          "height": 9,
-          "name": "border3x9",
-          "pixels": 27,
-          "radius": 8,
-          "width": 3
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 27,
-          "end": 3,
-          "height": 3,
-          "name": "border9x3",
-          "pixels": 27,
-          "radius": 8,
-          "width": 9
-        },
-        {
-          "begin": 0,
-          "changed_pixels": 16820,
-          "end": 131,
-          "height": 131,
-          "name": "large-radius128",
-          "pixels": 16899,
-          "radius": 128,
-          "width": 129
-        },
-        {
-          "begin": 4,
-          "changed_pixels": 0,
-          "end": 4,
-          "height": 11,
-          "name": "empty-band",
-          "pixels": 0,
-          "radius": 3,
-          "width": 17
-        }
-      ],
-      "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "schema": "ulike-original-chroma-gpu1965-v1",
-      "seconds": 5.982,
-      "software_ieee_binary64_preserved": true,
-      "sources": {
-        "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/.ci-ulike1966/build/host-oracle1965/runtime1964.dex": "ca1097d231c5c9ba120f9705928412b9178d890335e330570d2f61611c8700b7",
-        "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/releases/ulike1966-gpu-required/src/native1960/chroma1965_soft.comp": "a80e878a10f463d73e8ac22ea28a74aba21f7e052316464649741daa0dfee8b3",
-        "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/releases/ulike1966-gpu-required/src/native1960/soft64_1965.glsl": "0ed8c23215885fbd2b4e176d9f4f9f9748e875007dc937dfa9bd02aa4cc5ce4f",
-        "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/releases/ulike1966-gpu-required/src/tests1965/ChromaDexOracle1965.java": "712a3ef94b967cefecf52ae96886c47ff4ab1fd1cd8b9ba4ef94f02c86891c80",
-        "/home/runner/work/hiro-morphe-patches/hiro-morphe-patches/releases/ulike1966-gpu-required/src/tests1965/ChromaOracle1965.java": "c72c37a751f10587713f633453187cadbbed9457e02e537659436884167ba168"
-      },
-      "status": "passed"
-    },
-    "gpu_model1965": {
-      "assertions": 85837,
-      "binary64_rounding_cases": 43012,
-      "cases": 50,
-      "desktop_header_only_adaptation": false,
-      "exact_model_float_words": true,
-      "exact_output_pixels": 35635,
-      "frozen_reference_sha256": "4419d131521aa59c47bd6ecea92687aabdea8647138dea8d53b248944d8e7bdf",
-      "gles": {
-        "compiler_error": "model1965: 0:2(12): error: extension `GL_EXT_shader_explicit_arithmetic_types_float64' unsupported in compute shader\n",
-        "fp64_shader_supported": false,
-        "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-        "unsupported_precision_rejected": true,
-        "version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4"
-      },
-      "hardware_fp64_required": false,
-      "host_shader_body_unchanged": true,
-      "live_cpu_qualification_used": false,
-      "naive_rounding_regressions": 1,
-      "oracle_sha256": "80d43378d2bbb9ed4c06a6fea5eb7a15b2ae2f5e41a8b5e94aaeeb5e57f0abe2",
-      "original_gles_required_math_executed": true,
-      "physical_android_tested": false,
-      "required_gles_version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4",
-      "required_renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "schema": "ulike-gpu-noise-model1965-v1",
-      "seconds": 51.998,
-      "software_ieee_binary64_preserved": true,
-      "sources": {
-        "native1960/model1965.comp": "1acdeeb075c0808cf57e11339794a39f4ca590fff02091e39ab5ccf0643c7e46",
-        "native1960/model1965_soft.comp": "d2bc03398774c93c847e51aea3f5bf01e7dfd2aec4594b91e68a63585c08c0c2",
-        "native1960/single1960.comp": "a321d0200b6055fb362b013429cd66146ec33af8afa38359321d5a3f6343c19f",
-        "native1960/single1965_soft.comp": "c9cc3e95c931e39a53c6a8e4aab775c922d2c943b2cf2a9b56d04745b0295ca2",
-        "native1960/soft64_1965.glsl": "0ed8c23215885fbd2b4e176d9f4f9f9748e875007dc937dfa9bd02aa4cc5ce4f"
-      },
-      "status": "passed"
-    },
-    "gpu_plan1965": {
-      "assertions": 180000,
-      "cases": 20000,
-      "exact_policy_words": true,
-      "oracle_sha256": "a02f25f2ae3a9360f8fd5ead0e8bad9a9e9f58c656ea9e21fb65664b63d6e5ab",
-      "original_gles_required_math_executed": true,
-      "physical_android_tested": false,
-      "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "schema": "ulike-gpu-shot-plan1965-v1",
-      "seconds": 2.558,
-      "shader_header_adapted": false,
-      "software_binary64": true,
-      "sources": {
-        "native1960/plan1965_soft.comp": "12cac5e12b00194052bd04a6797187499255a1e398672557185bdcb34746efb2",
-        "native1960/soft64_1965.glsl": "0ed8c23215885fbd2b4e176d9f4f9f9748e875007dc937dfa9bd02aa4cc5ce4f",
-        "tests1964/published1963-reference/QualityPixels1932.java": "37ceb0882dc3f975ca9310a03d7b19a17db308db059d768d0115ea6dcae84793"
-      },
-      "status": "passed",
-      "version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4"
-    },
-    "gpu_policy1965": {
-      "assertions": 2144100,
-      "cases": 77,
-      "errors": [],
-      "frozen_reference_sha256": {
-        "FaceRegions1934.java": "2d7dd9efdfa10ee78d5387e54f6925438f7fec65d6e44b7150e345b29c130fbe",
-        "QualityPixels1932.java": "04c6ebd0913609b1ec2f4645601fe28b1b659ed79fa6f97537ce108f93b4e711",
-        "ReferenceFacePixels1960.java": "f5afe9cd1ea9152f0bb303bde5a38b6849cf44c8949664312d2393ea3ab533b5"
-      },
-      "gpu_shader_execution_on_host": true,
-      "header_only_adaptation": false,
-      "host_llvm_optimization_disabled": true,
-      "original_gles_required_math_executed": true,
-      "physical_android_tested": false,
-      "production_fp64_gles_confirmed": false,
-      "production_shader_sha256": "dde18e92d4d5610ae278a5fbc1050c84af94cfa273a2dccfae6792eb4b26d9a8",
-      "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "seconds": 47.872878313064575,
-      "software_binary64_gpu": true,
-      "software_binary64_library_sha256": "0ed8c23215885fbd2b4e176d9f4f9f9748e875007dc937dfa9bd02aa4cc5ce4f",
-      "status": "passed",
-      "version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4"
-    },
-    "gpu_recovery1965": {
-      "actualMesaCompute": true,
-      "actualProductionJNI": true,
-      "android_guard_actual_jni_no_dispatch": true,
-      "android_guard_driver_evidence": "GPU required: known software GLES driver refused fingerprint=GX1961:Mesa|llvmpipe (LLVM 20.1.2, 256 bits)|OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4|OpenGL ES GLSL ES 3.20|ssbo=16|maxStorage=134217728|fp64=0|source=6bfbaa01c47b33540f300f431adb75a5991ac09c0778c4f3c3bebeab0e51b78e",
-      "android_software_driver_refused": true,
-      "assertions": 70,
-      "physicalAndroidTested": false,
-      "platformBoundary": "Desktop arithmetic QA compiles the unchanged production shader/JNI source for the host; a separate JNI library explicitly compiled with the NDK predefined __ANDROID__ macro rejects actual llvmpipe before any image buffers/compute work. Production Android has no runtime bypass.",
-      "status": "passed",
-      "tests": {
-        "allfail": {
-          "actualDispatches": 3,
-          "assertions": 11,
-          "attempts": 3,
-          "mode": "allfail",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "android-software-driver": {
-          "actualDispatches": 0,
-          "assertions": 11,
-          "attempts": 1,
-          "mode": "android-software-driver",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "forbidden": {
-          "actualDispatches": 0,
-          "assertions": 3,
-          "attempts": 1,
-          "mode": "forbidden",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "fp64": {
-          "actualDispatches": 0,
-          "assertions": 3,
-          "attempts": 0,
-          "mode": "fp64",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "logs": {
-          "actualDispatches": 0,
-          "assertions": 7,
-          "attempts": 0,
-          "mode": "logs",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "quarantine": {
-          "actualDispatches": 0,
-          "assertions": 9,
-          "attempts": 0,
-          "mode": "quarantine",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "recovery": {
-          "actualDispatches": 3,
-          "assertions": 11,
-          "attempts": 3,
-          "mode": "recovery",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "soft64": {
-          "actualDispatches": 2,
-          "assertions": 7,
-          "attempts": 0,
-          "mode": "soft64",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "stale": {
-          "actualDispatches": 0,
-          "assertions": 8,
-          "attempts": 0,
-          "mode": "stale",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        }
-      }
-    },
-    "gpu_trace_export1966": {
-      "actualProductionZipExporter": true,
-      "assertions": 24,
-      "boundedGpuDiagnosticsIncluded": true,
-      "frozenCameraSnapshotPreserved": true,
-      "physicalAndroidTested": false,
-      "status": "passed"
-    },
-    "strict_route1965": {
-      "actual_production_jni_compute": true,
-      "actual_production_strict_routes_executed": true,
-      "assertions": 140,
-      "cpu_image_processing_fallback_enabled": false,
-      "host_mesa_flag": "LP_DEBUG=noopt",
-      "host_mesa_llvm_optimization": false,
-      "physical_android_tested": false,
-      "status": "passed",
-      "strict_gpu_required_routes_verified": true,
-      "tests": {
-        "capability": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 11,
-          "mode": "capability",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "chroma": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 12,
-          "mode": "chroma",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "detail": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 5,
-          "mode": "detail",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "format": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 32,
-          "mode": "format",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "geometry": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 12,
-          "mode": "geometry",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "late": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 13,
-          "mode": "late",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "manual": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 11,
-          "mode": "manual",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "mutation": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 8,
-          "mode": "mutation",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "noise": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 12,
-          "mode": "noise",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "off": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 4,
-          "mode": "off",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "sharp": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 12,
-          "mode": "sharp",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        },
-        "ui": {
-          "actualJNICompute": true,
-          "actualProductionStrictRoute": true,
-          "assertions": 8,
-          "mode": "ui",
-          "physicalAndroidTested": false,
-          "status": "passed"
-        }
-      },
-      "untreated_success_on_gpu_failure_enabled": false
-    },
-    "strong_shader_regression": {
-      "actual_mesa_gles_execution": true,
-      "assertions": 1656,
-      "assertions_counting": "executed reference pin, program layout, output/confidence array, coverage, pair-expression and cache-index comparisons",
-      "bounded_source_map_and_evidence_rows_verified": true,
-      "cases": 160,
-      "changed_full_pixels": 27613,
-      "confidence_values_compared": 17844,
-      "distance_cache_indexing_fp32_bit_equivalence": {
-        "actual_gles_execution": true,
-        "assertions": 360,
-        "cached_and_direct_terms_bit_identical": true,
-        "dispatch_cases": 360,
-        "every_original_candidate_sample_tested": true,
-        "pixel_candidate_patch_sets": 575292
-      },
-      "generic_stripe_verified": true,
-      "gl_version": "OpenGL ES 3.2 Mesa 25.2.8-0ubuntu0.24.04.4",
-      "gx32_all_candidate_pair_distances_reused": true,
-      "gx33_actual_2d_shared_tile": true,
-      "host_timings": {
-        "android_admission_uses_device_measurements": true,
-        "host_only": true,
-        "records": [
-          {
-            "height": 17,
-            "layout": "published63",
-            "median_upload_dispatch_readback_ms": 2.576,
-            "mode": 0,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "32",
-            "median_upload_dispatch_readback_ms": 2.479,
-            "mode": 0,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "64",
-            "median_upload_dispatch_readback_ms": 2.412,
-            "mode": 0,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "128",
-            "median_upload_dispatch_readback_ms": 3.279,
-            "mode": 0,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "published63",
-            "median_upload_dispatch_readback_ms": 6.172,
-            "mode": 1,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "32",
-            "median_upload_dispatch_readback_ms": 8.197,
-            "mode": 1,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "64",
-            "median_upload_dispatch_readback_ms": 8.315,
-            "mode": 1,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "128",
-            "median_upload_dispatch_readback_ms": 8.18,
-            "mode": 1,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "published63",
-            "median_upload_dispatch_readback_ms": 1.541,
-            "mode": 2,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "32",
-            "median_upload_dispatch_readback_ms": 0.882,
-            "mode": 2,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "64",
-            "median_upload_dispatch_readback_ms": 0.929,
-            "mode": 2,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "128",
-            "median_upload_dispatch_readback_ms": 1.237,
-            "mode": 2,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "published63",
-            "median_upload_dispatch_readback_ms": 2.858,
-            "mode": 3,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "32",
-            "median_upload_dispatch_readback_ms": 2.442,
-            "mode": 3,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "64",
-            "median_upload_dispatch_readback_ms": 2.727,
-            "mode": 3,
-            "samples": 3,
-            "width": 257
-          },
-          {
-            "height": 17,
-            "layout": "128",
-            "median_upload_dispatch_readback_ms": 3.469,
-            "mode": 3,
-            "samples": 3,
-            "width": 257
-          }
-        ]
-      },
-      "immutable_bindings_verified": true,
-      "layouts": [
-        32,
-        64,
-        128
-      ],
-      "mode_cases": [
-        40,
-        40,
-        40,
-        40
-      ],
-      "nonzero_evidence_grid_origins": 4,
-      "oracle": "published1.9.63actualGPUshader",
-      "original_accumulation_and_cutoff_order_retained": true,
-      "pair_expression_fp32_bit_equivalence": {
-        "actual_gles_execution": true,
-        "assertions": 2,
-        "reversed_pairs_bit_identical": true,
-        "scalar_pairs": 65536
-      },
-      "physical_android_tested": false,
-      "pixels_compared": 1026276,
-      "reference_sha256": "757a1488507de570a420aa82d8dd08f55c4c86fdf528030950a416b9071d1492",
-      "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
-      "resident_preparation_evidence_offsets": 40,
-      "seconds": 16.010234674999992,
-      "shader_sha256": "b07eec20341825fc16a7be553770e701641c513ec145400676a2eceef79d5842",
-      "shared_bytes": {
-        "0": {
-          "128": 12416,
-          "32": 6272,
-          "64": 8320
-        },
-        "1": {
-          "128": 28992,
-          "32": 15552,
-          "64": 20032
-        },
-        "2": {
-          "128": 4928,
-          "32": 2240,
-          "64": 3136
-        },
-        "3": {
-          "128": 12416,
-          "32": 6272,
-          "64": 8320
-        }
-      },
-      "specialized_tile_programs": 12,
-      "split_nonzero_group_origins_verified": true,
-      "status": "passed",
-      "tile_heights": [
-        4,
-        8,
-        16
-      ],
-      "tile_width": 8
-    }
-  }
+  "withdrawn_bundle_versions": [
+    "1.0.199"
+  ],
+  "restored_from_ulike_version": "1.9.66",
+  "restored_from_bundle_version": "1.0.199",
+  "restoration_exact_published_bytes": true,
+  "restoration_metadata_source_commit": "f57155718a4b56dcf3b2317c821fca97faba2e0f",
+  "restoration_created_at": "2026-10-09T04:38:57",
+  "manager_downgrade_update_badge_guaranteed": false
 }
