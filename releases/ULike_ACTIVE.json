@@ -1,21 +1,21 @@
 {
-  "ulike_version": "1.9.62",
-  "bundle_version": "1.0.195",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.62.mpp",
-  "source_sha256": "e3db4401688863d56de30d6e6afdfc6dc8a941d42f7cc1cebec5700bd0f775cd",
-  "source_release": "ulike-v1.9.62",
-  "active_release": "ulike-v1.9.62",
-  "base_ulike_version": "1.9.61",
+  "ulike_version": "1.9.63",
+  "bundle_version": "1.0.196",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.63.mpp",
+  "source_sha256": "013e7e154f2a9912802ac6cfc702152bb34a1b759298b7f08e2acea5f6d50162",
+  "source_release": "ulike-v1.9.63",
+  "active_release": "ulike-v1.9.63",
+  "base_ulike_version": "1.9.62",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "cbdb34bd082a114b3644f9a95c8b7ceccafcc7a49f3e198e41a48495f14e50d9",
+  "base_source_sha256": "e3db4401688863d56de30d6e6afdfc6dc8a941d42f7cc1cebec5700bd0f775cd",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "GX24-GX29 conditional GPU compute extensions on exact .61/.194. Same-output guards, precision/capability admission, transactional rollback and CPU fallback preserve quality. Beauty surface and codec-buffer interop unavailable in current boundary; physical Galaxy untested.",
-  "future_ulike_base": "Use .62/.195 and preserve .61 pixel algorithms, high-depth/wide-colour/gainmap fallback, settings, camera recovery, native ABI, FIFO publication and unrelated apps. GPU precision/capability and runtime equivalence admission is mandatory.",
+  "reason": "Whole-app audit fixes and optimizations on exact .62/.195. Same-output guards, precision/capability admission, transactional rollback and CPU fallback preserve quality. Physical Galaxy capture and save remain untested.",
+  "future_ulike_base": "Use .63/.196 and preserve .62 pixel algorithms, high-depth/wide-colour/gainmap fallback, settings, camera recovery, native ABI, FIFO publication and unrelated apps. GPU precision/capability and runtime equivalence admission is mandatory.",
   "android_device_tested": false,
   "original_apk_apply_tested": false,
-  "release_status": "gx_gpu_host_verified_original_apks_device_unverified",
+  "release_status": "whole_app_audit_host_verified_original_apks_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": false,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -30,7 +30,7 @@
   "raw_luminance_not_reintroduced": true,
   "shadow_chroma_smoothing": true,
   "all_tone_denoising": true,
-  "black_tap_native_switch": true,
+  "black_tap_native_switch": false,
   "black_tap_device_tested": false,
   "native_tracking_after_init": true,
   "fixed_physical_rear_concrete_surfaces": true,
@@ -44,7 +44,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.194",
+  "base_bundle_version": "1.0.195",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": true,
@@ -52,9 +52,9 @@
   "swiftkey183_preserved": true,
   "rear_lens_ui_device_fix_confirmed": false,
   "native_methods_tsv_byte_identical": true,
-  "camera_lifecycle_byte_identical": true,
-  "provider_lifecycle_byte_identical": true,
-  "black_bar_gesture_byte_identical": true,
+  "camera_lifecycle_byte_identical": false,
+  "provider_lifecycle_byte_identical": false,
+  "black_bar_gesture_byte_identical": false,
   "rear_preview_retry_logic_unchanged": true,
   "front_preview_retry": true,
   "front_released_texture_refresh": true,
@@ -63,25 +63,21 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    "GX24",
-    "GX25",
-    "GX26",
-    "GX27",
-    "GX28",
-    "GX29"
+    "AUDIT_GPU",
+    "AUDIT_SAVE",
+    "AUDIT_PIPELINE",
+    "AUDIT_UI"
   ],
   "baseline_other_apps_preserved": true,
-  "camera_startup_recovery_byte_identical": true,
+  "camera_startup_recovery_byte_identical": false,
   "q4_scope": "Saved-bitmap detected eye geometry with conservative face zones; precise lip contours and semantic hair segmentation are not implemented.",
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "GX24",
-    "GX25",
-    "GX26",
-    "GX27",
-    "GX28",
-    "GX29"
+    "AUDIT_GPU",
+    "AUDIT_SAVE",
+    "AUDIT_PIPELINE",
+    "AUDIT_UI"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -90,7 +86,7 @@
   "front_completion_scope": "A committed native-handler preview stop/resume may complete after the admission deadline; no extra stop is admitted.",
   "speed_and_save_helpers_byte_identical": false,
   "front_fix_verified_on_device": false,
-  "front_lens_fixes_byte_identical": true,
+  "front_lens_fixes_byte_identical": false,
   "layout_fix_verified_on_device": false,
   "front_input_readiness_timeout_ms": 15000,
   "front_retry_admission_deadline_origin": "first accepted native start",
@@ -99,11 +95,11 @@
   "shutter_feedback_duration_ms": 320,
   "quality_pixel_math_byte_identical": false,
   "manual_capture_safety_checks_preserved": true,
-  "viewport_layout_byte_identical": true,
+  "viewport_layout_byte_identical": false,
   "resolution_and_save_format_preserved": true,
-  "shutter_feedback_byte_identical": true,
-  "capture_save_policies_byte_identical": true,
-  "save_encoding_helpers_byte_identical": true,
+  "shutter_feedback_byte_identical": false,
+  "capture_save_policies_byte_identical": false,
+  "save_encoding_helpers_byte_identical": false,
   "front_lens_fixes_preserved": true,
   "non_ulike_resources_byte_identical": true,
   "quality_algorithm_and_settings_preserved": true,
@@ -125,7 +121,7 @@
   "stage_timing_payload_byte_identical": false,
   "stage_timing_algorithm_preserved": true,
   "retained_baseline_candidates": {
-    "ulike_version": "1.9.61",
+    "ulike_version": "1.9.62",
     "candidates": [
       "H1",
       "H2",
@@ -215,15 +211,21 @@
       "GX20",
       "GX21",
       "GX22",
-      "GX23"
+      "GX23",
+      "GX24",
+      "GX25",
+      "GX26",
+      "GX27",
+      "GX28",
+      "GX29"
     ]
   },
   "gpu_processing_added": true,
   "gpu_execution_on_physical_android": false,
   "gpu_shader_execution_on_host": true,
   "gpu_policy": "Per-stage exact pixel acceptance, strict precision and a guarded speed threshold. Speed-only rejection permits bounded idle requalification; inherited CPU admission estimates remain in some individual stages. Unsupported fp64, surface/encoder integration, context/fence/GL failure, memory pressure or result mismatch returns to byte-preserved CPU paths. Host shader execution is software Mesa, not a Galaxy GPU speed measurement.",
-  "gpu_native_library_sha256": "bd0b580eed75a9868f3fa283174bce0c42fb6cb6e6e5ea1617a148b636db16cd",
-  "gpu_native_library_bytes": 122480,
+  "gpu_native_library_sha256": "a261b554687156adc973fae28ae2229483494f873c1f63ecfcce904fa6f6d7b3",
+  "gpu_native_library_bytes": 123232,
   "native_installer_existing_rows_preserved": true,
   "core_native_library_sha256": "b8d762d30a0b0e448069e3354774af22fb5402a79f043434a683159c469d2e4a",
   "core_native_library_bytes": 12312,
@@ -264,7 +266,7 @@
   "smooth_nr_native_library_sha256": "2c7634030f2e6c2177c033f931f6b7976c76da465fdada29ea5023ce088f4974",
   "smooth_nr_native_library_bytes": 33128,
   "speed_core_and_save_helpers_byte_identical": false,
-  "nr13_shared_finish_policy_bytecode_identical": true,
+  "nr13_shared_finish_policy_bytecode_identical": false,
   "gx_implementation_status": {
     "GX24": "conditional_post_strong_noise_resident_analysis_protection_finish",
     "GX25": "conditional_cpu_binary64_preparation_overlap_with_two_gpu_residual_banks",
@@ -276,5 +278,39 @@
   "all_processing_on_gpu": false,
   "gx9_beauty_interop_supported": false,
   "gx10_encoder_interop_supported": false,
-  "native_installer_appended_rows": 0
+  "native_installer_appended_rows": 0,
+  "black_tap_disabled": true,
+  "black_tap_outside_delegate_preserved": true,
+  "black_tap_other_methods_preserved": true,
+  "save_publication_contract_preserved": true,
+  "whole_app_audit_verified_on_host": true,
+  "host_pixel_equivalence_to_published1962": true,
+  "audit_implementation_status": {
+    "AUDIT_GPU": "host_regressions_passed_device_unverified",
+    "AUDIT_SAVE": "host_regressions_passed_device_unverified",
+    "AUDIT_PIPELINE": "host_regressions_passed_device_unverified",
+    "AUDIT_UI": "host_regressions_passed_device_unverified"
+  },
+  "audit_validation": {
+    "AUDIT_GPU": {
+      "status": "passed",
+      "assertions": 68,
+      "physical_android_tested": false
+    },
+    "AUDIT_SAVE": {
+      "status": "passed",
+      "assertions": 165,
+      "physical_android_tested": false
+    },
+    "AUDIT_PIPELINE": {
+      "status": "passed",
+      "assertions": 451756,
+      "physical_android_tested": false
+    },
+    "AUDIT_UI": {
+      "status": "passed",
+      "assertions": 21,
+      "physical_android_tested": false
+    }
+  }
 }
