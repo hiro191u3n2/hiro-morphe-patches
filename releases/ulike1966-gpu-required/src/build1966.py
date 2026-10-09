@@ -141,6 +141,8 @@ def build(args):
  (host_oracle/'runtime1964.dex').write_bytes(oracle['ulike/runtime.dex']);shutil.copyfile(args.tools/'morphe.jar',host_oracle/'tools/morphe.jar')
  os.environ['ULIKE_TOOLCHAIN1965']=str(host_oracle)
  host=load_module('host_gpu1966_build',ROOT/'host_gpu1966.py');result=host.test(ROOT,args.work/'gpu-host',jdk=args.jdk,ndk=args.ndk)
+ # JSON object keys are strings on disk; normalize before hashing numeric-key suite reports.
+ result=json.loads(json.dumps(result,ensure_ascii=False))
  require(isinstance(result,dict) and result.get('status')=='passed' and type(result.get('assertions')) is int and result['assertions']>0,'Fresh GPU host test result required')
  require(result.get('gpu_shader_execution_on_host') is True and result.get('strict_gpu_required_routes_verified') is True,'Actual host GPU and strict route behavior evidence required')
  require(result.get('reports',{}).get('gpu_chroma1965',{}).get('published_runtime_dex_sha256')==sha(oracle['ulike/runtime.dex']),'Chroma oracle is not exact pinned published .64 runtime')
