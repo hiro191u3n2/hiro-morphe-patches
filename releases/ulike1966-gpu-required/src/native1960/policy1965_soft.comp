@@ -1,0 +1,377 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+#define D uvec2
+/* True binary64 mask geometry. No CPU raster oracle, float-only geometry, or
+ * implicit lower-precision fallback is permitted. The bounded roll polynomial
+ * uses binary64 throughout; saved integer masks are tested against frozen Java.
+ */
+/* SOFT64_1965_LIBRARY */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Source {uint values[];} source;
+layout(std430,binding=1) writeonly buffer Output {int values[];} outputData;
+layout(std430,binding=2) buffer Metadata {D values[];} metadata;
+layout(std430,binding=3) readonly buffer Raster {int values[];} raster;
+layout(std430,binding=4) readonly buffer Grid {float values[];} grid;
+layout(std430,binding=5) readonly buffer Smooth {int values[];} smoothData;
+layout(std430,binding=6) writeonly buffer Sigma {float values[];} sigmaData;
+uniform int u[32];
+uniform float f[32];
+#ifndef POLICY_MODE1965
+#define POLICY_MODE1965 u[0]
+#endif
+int roundD(uvec2 x){
+int base=s64_toInt(s64_floor(x));
+uvec2 fraction=s64_sub(x,s64_fromInt(base));
+return (s64_ge(fraction,uvec2(0x00000000u,0x3fe00000u))?(base+1):base);
+}
+int roundF(float value){
+int bits=floatBitsToInt(value),exponent=((bits>>23)&255),shift=(149-exponent);
+if(((shift&(~31))==0)){
+int mantissa=((bits&0x7fffff)|0x800000);
+if((bits<0))mantissa=(-mantissa);
+return (((mantissa>>shift)+1)>>1);
+}
+return int(value);
+}
+int luma(uint p){
+return (((((77*int(((p>>16u)&255u)))+(150*int(((p>>8u)&255u))))+(29*int((p&255u))))+128)>>8);
+}
+bool validFace(int index){
+int p=(index*6);
+float x=s64_toFloat(metadata.values[p]),y=s64_toFloat(metadata.values[(p+1)]),e=s64_toFloat(metadata.values[(p+2)]);
+float r=s64_toFloat(metadata.values[(p+3)]),yaw=s64_toFloat(metadata.values[(p+4)]),c=s64_toFloat(metadata.values[(p+5)]);
+precise float maxE=(float(min(u[1],u[2]))*.48);
+precise float minY=(e*.65),maxY=(e*1.42);
+return ((((((((((c>=.60)&&(c<=1.0))&&(e>=16.0))&&(e<=maxE))&&(abs(r)<=25.0))&&(abs(yaw)<=20.0))&&(x>=e))&&(x<(float(u[1])-e)))&&(y>=minY))&&(y<(float(u[2])-maxY)));
+}
+bool acceptedFace(int index){
+if((!validFace(index)))return false;
+int p=(index*6);
+for(int j=0;(j<u[29]);j++)if(((j!=index)&&validFace(j))){
+int q=(j*6);
+precise float fx=(s64_toFloat(metadata.values[p])-s64_toFloat(metadata.values[q]));
+precise float fy=(s64_toFloat(metadata.values[(p+1)])-s64_toFloat(metadata.values[(q+1)]));
+uvec2 dx=s64_fromFloat(fx),dy=s64_fromFloat(fy);
+uvec2 distance=s64_sqrt(s64_add(s64_mul(dx,dx),s64_mul(dy,dy)));
+precise float sum=(s64_toFloat(metadata.values[(p+2)])+s64_toFloat(metadata.values[(q+2)]));
+if(s64_lt(distance,s64_mul(s64_fromFloat(sum),uvec2(0xcccccccdu,0x3ff0ccccu))))return false;
+}
+return true;
+}
+uvec2 sine(uvec2 angle){
+uvec2 z=s64_mul(angle,angle),p=metadata.values[64];
+for(int i=1;(i<(u[23]-1));i++)p=s64_add(metadata.values[(64+i)],s64_mul(z,p));
+return s64_mul(angle,s64_add(uvec2(0x00000000u,0x3ff00000u),s64_mul(z,p)));
+}
+uvec2 cosine(uvec2 angle){
+uvec2 z=s64_mul(angle,angle),p=metadata.values[73];
+for(int i=1;(i<u[23]);i++)p=s64_add(metadata.values[(73+i)],s64_mul(z,p));
+return s64_add(uvec2(0x00000000u,0x3ff00000u),s64_mul(z,p));
+}
+uvec2 ellipse(uvec2 x,uvec2 y,uvec2 cx,uvec2 cy,uvec2 rx,uvec2 ry){
+uvec2 dx=s64_div(s64_sub(x,cx),rx),dy=s64_div(s64_sub(y,cy),ry);
+uvec2 r=s64_add(s64_mul(dx,dx),s64_mul(dy,dy));
+if(s64_ge(r,uvec2(0x00000000u,0x3ff00000u)))return uvec2(0x00000000u,0x00000000u);
+uvec2 t=s64_min(uvec2(0x00000000u,0x3ff00000u),s64_mul(s64_sub(uvec2(0x00000000u,0x3ff00000u),r),uvec2(0x00000000u,0x40080000u)));
+return s64_mul(s64_mul(t,t),s64_sub(uvec2(0x00000000u,0x40080000u),s64_mul(uvec2(0x00000000u,0x40000000u),t)));
+}
+void prepareFace(int id){
+int p=(id*6),at=(96+(id*3));
+uvec2 angle=s64_div(s64_mul(metadata.values[(p+3)],uvec2(0x54442d18u,0x400921fbu)),uvec2(0x00000000u,0x40668000u));
+metadata.values[at]=cosine(angle);
+metadata.values[(at+1)]=sine(angle);
+metadata.values[(at+2)]=(acceptedFace(id)?uvec2(0x00000000u,0x3ff00000u):uvec2(0x00000000u,0x00000000u));
+}
+void faceRaster(int id){
+int x=(id%u[1]),y=(id/u[1]),skinValue=0,detailValue=0,accepted=0;
+uint pixel=source.values[id];
+int r=int(((pixel>>16u)&255u)),g=int(((pixel>>8u)&255u)),b=int((pixel&255u));
+bool compatible=((((luma(pixel)>=28)&&(r>=(g-10)))&&(r>(b+2)))&&((max(r,max(g,b))-min(r,min(g,b)))>6));
+int lo=255,hi=0;
+for(int yy=max(0,(y-1));(yy<=min((u[2]-1),(y+1)));yy++)for(int xx=max(0,(x-1));(xx<=min((u[1]-1),(x+1)));xx++){
+int l=luma(source.values[((yy*u[1])+xx)]);
+lo=min(lo,l);
+hi=max(hi,l);
+}
+for(int i=0;(i<u[29]);i++)if(!s64_eq(metadata.values[((96+(i*3))+2)],uvec2(0x00000000u,0x00000000u))){
+accepted++;
+int p=(i*6);
+uvec2 cx=metadata.values[p],cy=metadata.values[(p+1)],ed=metadata.values[(p+2)];
+int x0=max(0,s64_toInt(s64_sub(cx,s64_mul(uvec2(0xcccccccdu,0x3ff8ccccu),ed)))),x1=min((u[1]-1),s64_toInt(s64_add(cx,s64_mul(uvec2(0xcccccccdu,0x3ff8ccccu),ed))));
+int y0=max(0,s64_toInt(s64_sub(cy,s64_mul(uvec2(0x9999999au,0x3ff19999u),ed)))),y1=min((u[2]-1),s64_toInt(s64_add(cy,s64_mul(uvec2(0x33333333u,0x3fff3333u),ed))));
+if(((((x<x0)||(x>x1))||(y<y0))||(y>y1)))continue;
+uvec2 co=metadata.values[(96+(i*3))],si=metadata.values[(97+(i*3))];
+uvec2 dx=s64_div(s64_fromFloat((float(x)-s64_toFloat(cx))),ed),dy=s64_div(s64_fromFloat((float(y)-s64_toFloat(cy))),ed);
+uvec2 fx=s64_add(s64_mul(co,dx),s64_mul(si,dy)),fy=s64_add(s64_mul(s64_neg(si),dx),s64_mul(co,dy));
+uvec2 cheeks=uvec2(0x00000000u,0x00000000u),forehead=uvec2(0x00000000u,0x00000000u),eyes=uvec2(0x00000000u,0x00000000u),brows=uvec2(0x00000000u,0x00000000u),mouth=uvec2(0x00000000u,0x00000000u);
+for(int region=0;(region<u[24]);region++){
+uvec2 ex=uvec2(0x00000000u,0x00000000u),ey=uvec2(0x00000000u,0x00000000u),erx=uvec2(0xf5c28f5cu,0x3fdf5c28u),ery=uvec2(0x70a3d70au,0x3fd70a3du);
+if((region<2)){
+ex=((region==0)?s64_neg(uvec2(0xf5c28f5cu,0x3fdf5c28u)):uvec2(0xf5c28f5cu,0x3fdf5c28u));
+ey=uvec2(0xae147ae1u,0x3fe2e147u);
+erx=uvec2(0x66666666u,0x3fd66666u);
+ery=uvec2(0xb851eb85u,0x3fdb851eu);
+}else if((region==2)){
+ex=uvec2(0x00000000u,0x00000000u);
+ey=s64_neg(uvec2(0xae147ae1u,0x3fdae147u));
+erx=uvec2(0xd70a3d71u,0x3fdd70a3u);
+ery=uvec2(0xeb851eb8u,0x3fceb851u);
+}else if((region<5)){
+ex=((region==3)?s64_neg(uvec2(0x00000000u,0x3fe00000u)):uvec2(0x00000000u,0x3fe00000u));
+ey=uvec2(0x00000000u,0x00000000u);
+erx=uvec2(0x7ae147aeu,0x3fd7ae14u);
+ery=uvec2(0x1eb851ecu,0x3fd1eb85u);
+}else if((region<7)){
+ex=((region==5)?s64_neg(uvec2(0x00000000u,0x3fe00000u)):uvec2(0x00000000u,0x3fe00000u));
+ey=s64_neg(uvec2(0x00000000u,0x3fd00000u));
+erx=uvec2(0xae147ae1u,0x3fdae147u);
+ery=uvec2(0x5c28f5c3u,0x3fc5c28fu);
+}else {
+ex=uvec2(0x00000000u,0x00000000u);
+ey=uvec2(0x00000000u,0x3ff00000u);
+erx=uvec2(0xf5c28f5cu,0x3fdf5c28u);
+ery=uvec2(0x70a3d70au,0x3fd70a3du);
+}
+uvec2 value=ellipse(fx,fy,ex,ey,erx,ery);
+if((region<2))cheeks=s64_max(cheeks,value);else if((region==2))forehead=value;else if((region<5))eyes=s64_max(eyes,value);else if((region<7))brows=s64_max(brows,value);else mouth=value;
+}
+int eligibility=roundD(s64_mul(s64_max(cheeks,forehead),uvec2(0x00000000u,0x406fe000u)));
+uvec2 outline=s64_sqrt(s64_add(s64_div(s64_mul(fx,fx),uvec2(0xc7e28240u,0x3feebb98u)),s64_div(s64_mul(s64_sub(fy,uvec2(0x33333333u,0x3fd33333u)),s64_sub(fy,uvec2(0x33333333u,0x3fd33333u))),uvec2(0x7525460bu,0x3ff89a02u))));
+uvec2 margin=((s64_gt(outline,uvec2(0xa3d70a3du,0x3fea3d70u))&&s64_lt(outline,uvec2(0x1eb851ecu,0x3ff1eb85u)))?s64_max(uvec2(0x00000000u,0x00000000u),s64_sub(uvec2(0x00000000u,0x3ff00000u),s64_div(s64_abs(s64_sub(outline,uvec2(0x70a3d70au,0x3fef0a3du))),uvec2(0x33333333u,0x3fc33333u)))):uvec2(0x00000000u,0x00000000u));
+int protection=roundD(s64_mul(s64_max(s64_max(eyes,brows),s64_max(mouth,margin)),uvec2(0x00000000u,0x406fe000u)));
+if((eligibility!=0))eligibility=(compatible?((eligibility*max(0,(48-(hi-lo))))/48):0);
+eligibility=((eligibility*(255-protection))/255);
+skinValue=max(skinValue,eligibility);
+detailValue=max(detailValue,protection);
+}
+outputData.values[(id*2)]=skinValue;
+outputData.values[((id*2)+1)]=detailValue;
+if((id==0))outputData.values[(u[30]*2)]=((accepted>0)?1:0);
+}
+void computeFaceAffine(out uvec2 a,out uvec2 b,out uvec2 c,out uvec2 d,out uvec2 e,out uvec2 f0,out int width,out int height){
+width=u[4];
+height=u[5];
+if((u[26]!=0)){
+a=metadata.values[0];
+b=metadata.values[1];
+c=metadata.values[2];
+d=metadata.values[3];
+e=metadata.values[4];
+f0=metadata.values[5];
+return;
+}
+bool quarter=((u[27]==90)||(u[27]==270));
+uvec2 sx=s64_div(s64_fromInt(u[6]),s64_fromInt((quarter?height:width))),sy=s64_div(s64_fromInt(u[7]),s64_fromInt((quarter?width:height)));
+if((u[27]==90)){
+a=uvec2(0x00000000u,0x00000000u);
+b=s64_neg(sx);
+c=s64_sub(s64_mul(s64_sub(s64_fromInt(height),uvec2(0x00000000u,0x3fe00000u)),sx),uvec2(0x00000000u,0x3fe00000u));
+d=sy;
+e=uvec2(0x00000000u,0x00000000u);
+f0=s64_sub(s64_mul(uvec2(0x00000000u,0x3fe00000u),sy),uvec2(0x00000000u,0x3fe00000u));
+}else if((u[27]==180)){
+a=s64_neg(sx);
+b=uvec2(0x00000000u,0x00000000u);
+c=s64_sub(s64_mul(s64_sub(s64_fromInt(width),uvec2(0x00000000u,0x3fe00000u)),sx),uvec2(0x00000000u,0x3fe00000u));
+d=uvec2(0x00000000u,0x00000000u);
+e=s64_neg(sy);
+f0=s64_sub(s64_mul(s64_sub(s64_fromInt(height),uvec2(0x00000000u,0x3fe00000u)),sy),uvec2(0x00000000u,0x3fe00000u));
+}else if((u[27]==270)){
+a=uvec2(0x00000000u,0x00000000u);
+b=sx;
+c=s64_sub(s64_mul(uvec2(0x00000000u,0x3fe00000u),sx),uvec2(0x00000000u,0x3fe00000u));
+d=s64_neg(sy);
+e=uvec2(0x00000000u,0x00000000u);
+f0=s64_sub(s64_mul(s64_sub(s64_fromInt(width),uvec2(0x00000000u,0x3fe00000u)),sy),uvec2(0x00000000u,0x3fe00000u));
+}else {
+a=sx;
+b=uvec2(0x00000000u,0x00000000u);
+c=s64_sub(s64_mul(uvec2(0x00000000u,0x3fe00000u),sx),uvec2(0x00000000u,0x3fe00000u));
+d=uvec2(0x00000000u,0x00000000u);
+e=sy;
+f0=s64_sub(s64_mul(uvec2(0x00000000u,0x3fe00000u),sy),uvec2(0x00000000u,0x3fe00000u));
+}
+for(int i=0;(i<u[28]);i++){
+int turn=s64_toInt(metadata.values[(12+(i*3))]),ow=s64_toInt(metadata.values[(13+(i*3))]),oh=s64_toInt(metadata.values[(14+(i*3))]);
+uvec2 rw=s64_fromInt((((turn==90)||(turn==270))?height:width)),rh=s64_fromInt((((turn==90)||(turn==270))?width:height));
+uvec2 scale=s64_max(s64_div(s64_fromInt(ow),rw),s64_div(s64_fromInt(oh),rh)),ox=s64_sub(s64_add(s64_mul(s64_sub(rw,s64_div(s64_fromInt(ow),scale)),uvec2(0x00000000u,0x3fe00000u)),s64_div(uvec2(0x00000000u,0x3fe00000u),scale)),uvec2(0x00000000u,0x3fe00000u)),oy=s64_sub(s64_add(s64_mul(s64_sub(rh,s64_div(s64_fromInt(oh),scale)),uvec2(0x00000000u,0x3fe00000u)),s64_div(uvec2(0x00000000u,0x3fe00000u),scale)),uvec2(0x00000000u,0x3fe00000u)),s=s64_div(uvec2(0x00000000u,0x3ff00000u),scale);
+uvec2 aa,bb,cc,dd,ee,ff;
+if((turn==90)){
+aa=uvec2(0x00000000u,0x00000000u);
+bb=s;
+cc=oy;
+dd=s64_neg(s);
+ee=uvec2(0x00000000u,0x00000000u);
+ff=s64_sub(s64_sub(s64_fromInt(height),uvec2(0x00000000u,0x3ff00000u)),ox);
+}else if((turn==180)){
+aa=s64_neg(s);
+bb=uvec2(0x00000000u,0x00000000u);
+cc=s64_sub(s64_sub(s64_fromInt(width),uvec2(0x00000000u,0x3ff00000u)),ox);
+dd=uvec2(0x00000000u,0x00000000u);
+ee=s64_neg(s);
+ff=s64_sub(s64_sub(s64_fromInt(height),uvec2(0x00000000u,0x3ff00000u)),oy);
+}else if((turn==270)){
+aa=uvec2(0x00000000u,0x00000000u);
+bb=s64_neg(s);
+cc=s64_sub(s64_sub(s64_fromInt(width),uvec2(0x00000000u,0x3ff00000u)),oy);
+dd=s;
+ee=uvec2(0x00000000u,0x00000000u);
+ff=ox;
+}else {
+aa=s;
+bb=uvec2(0x00000000u,0x00000000u);
+cc=ox;
+dd=uvec2(0x00000000u,0x00000000u);
+ee=s;
+ff=oy;
+}
+uvec2 na=s64_add(s64_mul(a,aa),s64_mul(b,dd)),nb=s64_add(s64_mul(a,bb),s64_mul(b,ee)),nc=s64_add(s64_add(s64_mul(a,cc),s64_mul(b,ff)),c),nd=s64_add(s64_mul(d,aa),s64_mul(e,dd)),ne=s64_add(s64_mul(d,bb),s64_mul(e,ee)),nf=s64_add(s64_add(s64_mul(d,cc),s64_mul(e,ff)),f0);
+a=na;
+b=nb;
+c=nc;
+d=nd;
+e=ne;
+f0=nf;
+width=ow;
+height=oh;
+}
+}
+int faceSample(int x,int y,int channel){
+if((u[8]==0))return 0;
+uvec2 a=metadata.values[32],b=metadata.values[33],c=metadata.values[34],d=metadata.values[35],e=metadata.values[36],f0=metadata.values[37];
+int width=s64_toInt(metadata.values[38]),height=s64_toInt(metadata.values[39]);
+if(((((x<0)||(y<0))||(x>=width))||(y>=height)))return 0;
+uvec2 px=s64_add(s64_add(s64_mul(a,s64_fromInt(x)),s64_mul(b,s64_fromInt(y))),c),py=s64_add(s64_add(s64_mul(d,s64_fromInt(x)),s64_mul(e,s64_fromInt(y))),f0);
+if((((s64_lt(px,s64_neg(uvec2(0x00000000u,0x3fe00000u)))||s64_lt(py,s64_neg(uvec2(0x00000000u,0x3fe00000u))))||s64_gt(px,s64_sub(s64_fromInt(u[6]),uvec2(0x00000000u,0x3fe00000u))))||s64_gt(py,s64_sub(s64_fromInt(u[7]),uvec2(0x00000000u,0x3fe00000u)))))return 0;
+px=s64_min(s64_max(px,uvec2(0x00000000u,0x00000000u)),s64_fromInt((u[6]-1)));
+py=s64_min(s64_max(py,uvec2(0x00000000u,0x00000000u)),s64_fromInt((u[7]-1)));
+int x0=s64_toInt(px),y0=s64_toInt(py),x1=min((u[6]-1),(x0+1)),y1=min((u[7]-1),(y0+1));
+uvec2 fx=s64_sub(px,s64_fromInt(x0)),fy=s64_sub(py,s64_fromInt(y0));
+uvec2 top=s64_add(s64_mul(s64_fromInt(raster.values[((((y0*u[6])+x0)*2)+channel)]),s64_sub(uvec2(0x00000000u,0x3ff00000u),fx)),s64_mul(s64_fromInt(raster.values[((((y0*u[6])+x1)*2)+channel)]),fx));
+uvec2 bottom=s64_add(s64_mul(s64_fromInt(raster.values[((((y1*u[6])+x0)*2)+channel)]),s64_sub(uvec2(0x00000000u,0x3ff00000u),fx)),s64_mul(s64_fromInt(raster.values[((((y1*u[6])+x1)*2)+channel)]),fx));
+return roundD(s64_div(s64_mul(s64_add(s64_mul(top,s64_sub(uvec2(0x00000000u,0x3ff00000u),fy)),s64_mul(bottom,fy)),uvec2(0x00000000u,0x40700000u)),uvec2(0x00000000u,0x406fe000u)));
+}
+float noiseSigma(int x,int y){
+if((u[11]==0))return s64_toFloat(metadata.values[6]);
+precise float gx=((u[9]==1)?0.0:clamp(((float(x)-s64_toFloat(metadata.values[8]))/s64_toFloat(metadata.values[10])),0.0,float((u[9]-1))));
+precise float gy=((u[10]==1)?0.0:clamp(((float(y)-s64_toFloat(metadata.values[9]))/s64_toFloat(metadata.values[11])),0.0,float((u[10]-1))));
+int ix=min((u[9]-1),int(gx)),iy=min((u[10]-1),int(gy)),nx=min((u[9]-1),(ix+1)),ny=min((u[10]-1),(iy+1));
+precise float fx=(gx-float(ix)),fy=(gy-float(iy));
+precise float a=((grid.values[((iy*u[9])+ix)]*(1.0-fx))+(grid.values[((iy*u[9])+nx)]*fx));
+precise float b=((grid.values[((ny*u[9])+ix)]*(1.0-fx))+(grid.values[((ny*u[9])+nx)]*fx));
+return ((a*(1.0-fy))+(b*fy));
+}
+int smoothSample(int x,int y){
+if((((((u[25]==0)||(x<0))||(y<0))||(x>=u[23]))||(y>=u[24])))return 0;
+uvec2 xx=s64_fromInt(x),yy=s64_fromInt(y);
+if((((u[22]!=0)||(u[18]!=u[23]))||(u[19]!=u[24]))){
+uvec2 left=metadata.values[40],top=metadata.values[41],cw=metadata.values[42],ch=metadata.values[43];
+uvec2 rx=s64_sub(s64_add(left,s64_div(s64_mul(s64_add(s64_fromInt(x),uvec2(0x00000000u,0x3fe00000u)),cw),s64_fromInt(u[23]))),uvec2(0x00000000u,0x3fe00000u)),ry=s64_sub(s64_add(top,s64_div(s64_mul(s64_add(s64_fromInt(y),uvec2(0x00000000u,0x3fe00000u)),ch),s64_fromInt(u[24]))),uvec2(0x00000000u,0x3fe00000u));
+if((u[22]==90)){
+xx=ry;
+yy=s64_sub(s64_sub(s64_fromInt(u[19]),uvec2(0x00000000u,0x3ff00000u)),rx);
+}else if((u[22]==180)){
+xx=s64_sub(s64_sub(s64_fromInt(u[18]),uvec2(0x00000000u,0x3ff00000u)),rx);
+yy=s64_sub(s64_sub(s64_fromInt(u[19]),uvec2(0x00000000u,0x3ff00000u)),ry);
+}else if((u[22]==270)){
+xx=s64_sub(s64_sub(s64_fromInt(u[18]),uvec2(0x00000000u,0x3ff00000u)),ry);
+yy=rx;
+}else {
+xx=rx;
+yy=ry;
+}
+}
+if((((s64_lt(xx,uvec2(0x00000000u,0x00000000u))||s64_lt(yy,uvec2(0x00000000u,0x00000000u)))||s64_gt(xx,s64_fromInt((u[18]-1))))||s64_gt(yy,s64_fromInt((u[19]-1)))))return 0;
+uvec2 gx=s64_min(s64_max(s64_div(s64_sub(xx,uvec2(0x00000000u,0x3ff80000u)),uvec2(0x00000000u,0x40100000u)),uvec2(0x00000000u,0x00000000u)),s64_fromInt((u[20]-1))),gy=s64_min(s64_max(s64_div(s64_sub(yy,uvec2(0x00000000u,0x3ff80000u)),uvec2(0x00000000u,0x40100000u)),uvec2(0x00000000u,0x00000000u)),s64_fromInt((u[21]-1)));
+int ix=s64_toInt(gx),iy=s64_toInt(gy),nx=min((u[20]-1),(ix+1)),ny=min((u[21]-1),(iy+1));
+uvec2 fx=s64_sub(gx,s64_fromInt(ix)),fy=s64_sub(gy,s64_fromInt(iy));
+uvec2 a=s64_add(s64_mul(s64_fromInt(smoothData.values[((iy*u[20])+ix)]),s64_sub(uvec2(0x00000000u,0x3ff00000u),fx)),s64_mul(s64_fromInt(smoothData.values[((iy*u[20])+nx)]),fx));
+uvec2 b=s64_add(s64_mul(s64_fromInt(smoothData.values[((ny*u[20])+ix)]),s64_sub(uvec2(0x00000000u,0x3ff00000u),fx)),s64_mul(s64_fromInt(smoothData.values[((ny*u[20])+nx)]),fx));
+return roundD(s64_add(s64_mul(a,s64_sub(uvec2(0x00000000u,0x3ff00000u),fy)),s64_mul(b,fy)));
+}
+void prepareMasks(){
+if((u[8]!=0)){
+uvec2 a,b,c,d,e,f0;
+int width,height;
+computeFaceAffine(a,b,c,d,e,f0,width,height);
+metadata.values[32]=a;
+metadata.values[33]=b;
+metadata.values[34]=c;
+metadata.values[35]=d;
+metadata.values[36]=e;
+metadata.values[37]=f0;
+metadata.values[38]=s64_fromInt(width);
+metadata.values[39]=s64_fromInt(height);
+}
+if((u[25]!=0)){
+int rw=(((u[22]==90)||(u[22]==270))?u[19]:u[18]),rh=(((u[22]==90)||(u[22]==270))?u[18]:u[19]);
+uvec2 scale=s64_max(s64_div(s64_fromInt(u[23]),s64_fromInt(rw)),s64_div(s64_fromInt(u[24]),s64_fromInt(rh)));
+uvec2 cw=s64_min(s64_fromInt(rw),s64_div(s64_fromInt(u[23]),scale)),ch=s64_min(s64_fromInt(rh),s64_div(s64_fromInt(u[24]),scale));
+metadata.values[40]=s64_max(uvec2(0x00000000u,0x00000000u),s64_mul(s64_sub(s64_fromInt(rw),cw),uvec2(0x00000000u,0x3fe00000u)));
+metadata.values[41]=s64_max(uvec2(0x00000000u,0x00000000u),s64_mul(s64_sub(s64_fromInt(rh),ch),uvec2(0x00000000u,0x3fe00000u)));
+metadata.values[42]=cw;
+metadata.values[43]=ch;
+}
+}
+void main(){
+int id=(u[31]+int(gl_GlobalInvocationID.x));
+if((POLICY_MODE1965==4)){
+if((id<u[29]))prepareFace(id);
+return;
+}
+if((POLICY_MODE1965==5)){
+if((id==0))prepareMasks();
+return;
+}
+if((id>=u[30]))return;
+if((POLICY_MODE1965==0)){
+faceRaster(id);
+return;
+}
+if((POLICY_MODE1965==3)){
+int x=((id%u[7])*4),row=(u[3]+((id/u[7])*4)),y=(row+u[5]),minimum=256;
+for(int dy=0;((dy<4)&&((y+dy)<u[6]));dy++)for(int dx=0;((dx<4)&&((x+dx)<u[1]));dx++){
+int rr=(row+dy),c=(x+dx);
+if(((rr>=u[2])||((source.values[((rr*u[1])+c)]>>24u)!=255u))){
+minimum=0;
+continue;
+}
+int at=((((rr-u[3])*u[1])+c)*2);
+minimum=min(minimum,((raster.values[at]*(256-raster.values[(at+1)]))>>8));
+}
+outputData.values[id]=min(255,((smoothData.values[id]*minimum)>>8));
+return;
+}
+int x=(id%u[1]),y=((id/u[1])+u[3]);
+int skin=faceSample(x,y,0),detail=faceSample(x,y,1);
+precise float sigma=noiseSigma(x,y);
+if((POLICY_MODE1965==1)){
+int budget=(256-((skin*u[12])>>9));
+if((u[14]==0))budget=((u[13]*budget)>>8);
+outputData.values[(id*2)]=clamp(budget,0,256);
+outputData.values[((id*2)+1)]=clamp(detail,0,256);
+sigmaData.values[id]=sigma;
+return;
+}
+if((POLICY_MODE1965==2)){
+precise float scale=s64_toFloat(metadata.values[7]);
+if((!((u[11]!=0)&&((u[17]!=0)||(abs((scale-1.0))<.00001)))))sigma=s64_toFloat(metadata.values[6]);
+if(((u[17]==0)&&(scale<1.0)))sigma=(sigma*s64_toFloat(s64_sqrt(metadata.values[7])));
+int confidence=clamp(smoothSample(x,y),0,256);
+precise float product=(sigma*.65);
+int tolerance=(3+roundF(product));
+precise float sourceSigma=s64_toFloat(metadata.values[6]),admission=(min(32.0,sourceSigma)*.85);
+tolerance=(tolerance+((max(2,roundF(admission))*confidence)>>8));
+precise float fp=(1.0+(sigma*1.8)),fs=(fp*256.0);
+int floorValue=max(u[16],roundF(fs));
+precise float admitted=((2.0+(min(32.0,sourceSigma)*2.4))*256.0);
+floorValue=(floorValue+(((max(floorValue,roundF(admitted))-floorValue)*confidence)>>8));
+precise float dark=(sigma*.75);
+outputData.values[(id*4)]=tolerance;
+outputData.values[((id*4)+1)]=max(3,roundF(dark));
+outputData.values[((id*4)+2)]=floorValue;
+outputData.values[((id*4)+3)]=(256-((((u[15]!=0)?skin:0)*(20+(u[12]>>3)))>>8));
+}
+}

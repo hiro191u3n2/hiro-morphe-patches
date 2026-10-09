@@ -1,0 +1,28 @@
+#version 310 es
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Source {uint pixels[];};
+layout(std430,binding=1) buffer Probe {uint result[];};
+uniform int u[32];
+/* Both capability evidence and opacity admission execute on the real compute
+ * program. Uniform-dependent operands prevent constant folding of the probe.
+ * A driver cannot pass this test with fp32 substituted for float64_t. */
+void main(){
+ uint id=uint(u[31])+gl_GlobalInvocationID.x;
+ if(u[0]==1){if(id<uint(u[2])&&(pixels[id]>>24)!=255u)atomicOr(result[0],1u);return;}
+ if(id!=0u)return;
+ precise float64_t a=float64_t(u[1]);
+ precise float64_t tiny=0.0000000000009094947017729282379150390625LF;
+ precise float64_t b=a+tiny;
+ precise float64_t c=b-a;
+ precise float64_t large=16777216.0LF+a;
+ precise float64_t difference=large-16777216.0LF;
+ precise float64_t square=sqrt(a+1.0LF);
+ result[0]=c==tiny?1u:0u;
+ result[1]=difference==a?1u:0u;
+ result[2]=abs(square-1.41421356237309504880168872420969808LF)<0.000000000000000444089209850062616169452667236328125LF?1u:0u;
+ result[3]=0x19650164u;
+}

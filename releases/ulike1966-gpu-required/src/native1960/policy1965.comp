@@ -1,0 +1,236 @@
+#version 310 es
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+#define D float64_t
+/* True binary64 mask geometry. No CPU raster oracle, float-only geometry, or
+ * implicit lower-precision fallback is permitted. The bounded roll polynomial
+ * uses binary64 throughout; saved integer masks are tested against frozen Java.
+ */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Source {uint values[];} source;
+layout(std430,binding=1) writeonly buffer Output {int values[];} outputData;
+layout(std430,binding=2) buffer Metadata {D values[];} metadata;
+layout(std430,binding=3) readonly buffer Raster {int values[];} raster;
+layout(std430,binding=4) readonly buffer Grid {float values[];} grid;
+layout(std430,binding=5) readonly buffer Smooth {int values[];} smoothData;
+layout(std430,binding=6) writeonly buffer Sigma {float values[];} sigmaData;
+uniform int u[32];
+uniform float f[32];
+#ifndef POLICY_MODE1965
+#define POLICY_MODE1965 u[0]
+#endif
+int roundD(D x){int base=int(floor(x));precise D fraction=x-D(base);return fraction>=.5LF?base+1:base;}
+int roundF(float value) {
+    int bits=floatBitsToInt(value),exponent=(bits>>23)&255,shift=149-exponent;
+    if((shift&~31)==0){int mantissa=(bits&0x7fffff)|0x800000;if(bits<0)mantissa=-mantissa;return ((mantissa>>shift)+1)>>1;}
+    return int(value);
+}
+int luma(uint p){return (77*int((p>>16u)&255u)+150*int((p>>8u)&255u)+29*int(p&255u)+128)>>8;}
+bool validFace(int index) {
+    int p=index*6;
+    float x=float(metadata.values[p]),y=float(metadata.values[p+1]),e=float(metadata.values[p+2]);
+    float r=float(metadata.values[p+3]),yaw=float(metadata.values[p+4]),c=float(metadata.values[p+5]);
+    precise float maxE=float(min(u[1],u[2]))*.48;
+    precise float minY=e*.65,maxY=e*1.42;
+    return c>=.60&&c<=1.0&&e>=16.0&&e<=maxE&&abs(r)<=25.0&&abs(yaw)<=20.0&&x>=e&&x<float(u[1])-e&&y>=minY&&y<float(u[2])-maxY;
+}
+bool acceptedFace(int index) {
+    if(!validFace(index))return false;
+    int p=index*6;
+    for(int j=0;j<u[29];j++)if(j!=index&&validFace(j)) {
+        int q=j*6;
+        precise float fx=float(metadata.values[p])-float(metadata.values[q]);
+        precise float fy=float(metadata.values[p+1])-float(metadata.values[q+1]);
+        precise D dx=D(fx),dy=D(fy);
+        precise D distance=sqrt(dx*dx+dy*dy);
+        precise float sum=float(metadata.values[p+2])+float(metadata.values[q+2]);
+        if(distance<D(sum)*1.05LF)return false;
+    }
+    return true;
+}
+D sine(D angle) {
+    precise D z=angle*angle,p=metadata.values[64];
+    for(int i=1;i<u[23]-1;i++)p=metadata.values[64+i]+z*p;
+    return angle*(1.0LF+z*p);
+}
+D cosine(D angle) {
+    precise D z=angle*angle,p=metadata.values[73];
+    for(int i=1;i<u[23];i++)p=metadata.values[73+i]+z*p;
+    return 1.0LF+z*p;
+}
+D ellipse(D x,D y,D cx,D cy,D rx,D ry) {
+    precise D dx=(x-cx)/rx,dy=(y-cy)/ry;
+    precise D r=dx*dx+dy*dy;
+    if(r>=1.0LF)return 0.0LF;
+    precise D t=min(1.0LF,(1.0LF-r)*3.0LF);
+    return t*t*(3.0LF-2.0LF*t);
+}
+void prepareFace(int id) {
+    int p=id*6,at=96+id*3;
+    precise D angle=metadata.values[p+3]*3.1415926535897932384626433832795LF/180.0LF;
+    metadata.values[at]=cosine(angle);
+    metadata.values[at+1]=sine(angle);
+    metadata.values[at+2]=acceptedFace(id)?1.0LF:0.0LF;
+}
+void faceRaster(int id) {
+    int x=id%u[1],y=id/u[1],skinValue=0,detailValue=0,accepted=0;
+    uint pixel=source.values[id];int r=int((pixel>>16u)&255u),g=int((pixel>>8u)&255u),b=int(pixel&255u);
+    bool compatible=luma(pixel)>=28&&r>=g-10&&r>b+2&&max(r,max(g,b))-min(r,min(g,b))>6;
+    int lo=255,hi=0;
+    for(int yy=max(0,y-1);yy<=min(u[2]-1,y+1);yy++)for(int xx=max(0,x-1);xx<=min(u[1]-1,x+1);xx++) {
+        int l=luma(source.values[yy*u[1]+xx]);lo=min(lo,l);hi=max(hi,l);
+    }
+    for(int i=0;i<u[29];i++)if(metadata.values[96+i*3+2]!=0.0LF) {
+        accepted++;int p=i*6;
+        precise D cx=metadata.values[p],cy=metadata.values[p+1],ed=metadata.values[p+2];
+        int x0=max(0,int(cx-1.55LF*ed)),x1=min(u[1]-1,int(cx+1.55LF*ed));
+        int y0=max(0,int(cy-1.1LF*ed)),y1=min(u[2]-1,int(cy+1.95LF*ed));
+        if(x<x0||x>x1||y<y0||y>y1)continue;
+        precise D co=metadata.values[96+i*3],si=metadata.values[97+i*3];
+        precise D dx=D(float(x)-float(cx))/ed,dy=D(float(y)-float(cy))/ed;
+        precise D fx=co*dx+si*dy,fy=-si*dx+co*dy;
+        precise D cheeks=0.0LF,forehead=0.0LF,eyes=0.0LF,brows=0.0LF,mouth=0.0LF;
+        /* Uniform eight-region loop keeps software binary64's ellipse body
+         * shared, rather than expanding eight copies in mobile compilers. */
+        for(int region=0;region<u[24];region++) {
+            precise D ex=0.0LF,ey=0.0LF,erx=.49LF,ery=.36LF;
+            if(region<2){ex=region==0?-.49LF:.49LF;ey=.59LF;erx=.35LF;ery=.43LF;}
+            else if(region==2){ex=0.0LF;ey=-.42LF;erx=.46LF;ery=.24LF;}
+            else if(region<5){ex=region==3?-.5LF:.5LF;ey=0.0LF;erx=.37LF;ery=.28LF;}
+            else if(region<7){ex=region==5?-.5LF:.5LF;ey=-.25LF;erx=.42LF;ery=.17LF;}
+            else {ex=0.0LF;ey=1.0LF;erx=.49LF;ery=.36LF;}
+            precise D value=ellipse(fx,fy,ex,ey,erx,ery);
+            if(region<2)cheeks=max(cheeks,value);
+            else if(region==2)forehead=value;
+            else if(region<5)eyes=max(eyes,value);
+            else if(region<7)brows=max(brows,value);
+            else mouth=value;
+        }
+        int eligibility=roundD(max(cheeks,forehead)*255.0LF);
+        precise D outline=sqrt(fx*fx/(.98LF*.98LF)+(fy-.30LF)*(fy-.30LF)/(1.24LF*1.24LF));
+        precise D margin=outline>.82LF&&outline<1.12LF?max(0.0LF,1.0LF-abs(outline-.97LF)/.15LF):0.0LF;
+        int protection=roundD(max(max(eyes,brows),max(mouth,margin))*255.0LF);
+        if(eligibility!=0)eligibility=compatible?eligibility*max(0,48-(hi-lo))/48:0;
+        eligibility=eligibility*(255-protection)/255;
+        skinValue=max(skinValue,eligibility);detailValue=max(detailValue,protection);
+    }
+    outputData.values[id*2]=skinValue;outputData.values[id*2+1]=detailValue;
+    if(id==0)outputData.values[u[30]*2]=accepted>0?1:0;
+}
+void computeFaceAffine(out D a,out D b,out D c,out D d,out D e,out D f0,out int width,out int height) {
+    width=u[4];height=u[5];
+    if(u[26]!=0){a=metadata.values[0];b=metadata.values[1];c=metadata.values[2];d=metadata.values[3];e=metadata.values[4];f0=metadata.values[5];return;}
+    bool quarter=u[27]==90||u[27]==270;
+    precise D sx=D(u[6])/D(quarter?height:width),sy=D(u[7])/D(quarter?width:height);
+    if(u[27]==90){a=0.0LF;b=-sx;c=(D(height)-.5LF)*sx-.5LF;d=sy;e=0.0LF;f0=.5LF*sy-.5LF;}
+    else if(u[27]==180){a=-sx;b=0.0LF;c=(D(width)-.5LF)*sx-.5LF;d=0.0LF;e=-sy;f0=(D(height)-.5LF)*sy-.5LF;}
+    else if(u[27]==270){a=0.0LF;b=sx;c=.5LF*sx-.5LF;d=-sy;e=0.0LF;f0=(D(width)-.5LF)*sy-.5LF;}
+    else {a=sx;b=0.0LF;c=.5LF*sx-.5LF;d=0.0LF;e=sy;f0=.5LF*sy-.5LF;}
+    for(int i=0;i<u[28];i++) {
+        int turn=int(metadata.values[12+i*3]),ow=int(metadata.values[13+i*3]),oh=int(metadata.values[14+i*3]);
+        precise D rw=D(turn==90||turn==270?height:width),rh=D(turn==90||turn==270?width:height);
+        precise D scale=max(D(ow)/rw,D(oh)/rh),ox=(rw-D(ow)/scale)*.5LF+.5LF/scale-.5LF,oy=(rh-D(oh)/scale)*.5LF+.5LF/scale-.5LF,s=1.0LF/scale;
+        precise D aa,bb,cc,dd,ee,ff;
+        if(turn==90){aa=0.0LF;bb=s;cc=oy;dd=-s;ee=0.0LF;ff=D(height)-1.0LF-ox;}
+        else if(turn==180){aa=-s;bb=0.0LF;cc=D(width)-1.0LF-ox;dd=0.0LF;ee=-s;ff=D(height)-1.0LF-oy;}
+        else if(turn==270){aa=0.0LF;bb=-s;cc=D(width)-1.0LF-oy;dd=s;ee=0.0LF;ff=ox;}
+        else {aa=s;bb=0.0LF;cc=ox;dd=0.0LF;ee=s;ff=oy;}
+        precise D na=a*aa+b*dd,nb=a*bb+b*ee,nc=a*cc+b*ff+c,nd=d*aa+e*dd,ne=d*bb+e*ee,nf=d*cc+e*ff+f0;
+        a=na;b=nb;c=nc;d=nd;e=ne;f0=nf;width=ow;height=oh;
+    }
+}
+int faceSample(int x,int y,int channel) {
+    if(u[8]==0)return 0;
+    precise D a=metadata.values[32],b=metadata.values[33],c=metadata.values[34],d=metadata.values[35],e=metadata.values[36],f0=metadata.values[37];
+    int width=int(metadata.values[38]),height=int(metadata.values[39]);
+    if(x<0||y<0||x>=width||y>=height)return 0;
+    precise D px=a*D(x)+b*D(y)+c,py=d*D(x)+e*D(y)+f0;
+    if(px<-.5LF||py<-.5LF||px>D(u[6])-.5LF||py>D(u[7])-.5LF)return 0;
+    px=clamp(px,0.0LF,D(u[6]-1));py=clamp(py,0.0LF,D(u[7]-1));
+    int x0=int(px),y0=int(py),x1=min(u[6]-1,x0+1),y1=min(u[7]-1,y0+1);
+    precise D fx=px-D(x0),fy=py-D(y0);
+    precise D top=D(raster.values[(y0*u[6]+x0)*2+channel])*(1.0LF-fx)+D(raster.values[(y0*u[6]+x1)*2+channel])*fx;
+    precise D bottom=D(raster.values[(y1*u[6]+x0)*2+channel])*(1.0LF-fx)+D(raster.values[(y1*u[6]+x1)*2+channel])*fx;
+    return roundD((top*(1.0LF-fy)+bottom*fy)*256.0LF/255.0LF);
+}
+float noiseSigma(int x,int y) {
+    if(u[11]==0)return float(metadata.values[6]);
+    precise float gx=u[9]==1?0.0:clamp((float(x)-float(metadata.values[8]))/float(metadata.values[10]),0.0,float(u[9]-1));
+    precise float gy=u[10]==1?0.0:clamp((float(y)-float(metadata.values[9]))/float(metadata.values[11]),0.0,float(u[10]-1));
+    int ix=min(u[9]-1,int(gx)),iy=min(u[10]-1,int(gy)),nx=min(u[9]-1,ix+1),ny=min(u[10]-1,iy+1);
+    precise float fx=gx-float(ix),fy=gy-float(iy);
+    precise float a=grid.values[iy*u[9]+ix]*(1.0-fx)+grid.values[iy*u[9]+nx]*fx;
+    precise float b=grid.values[ny*u[9]+ix]*(1.0-fx)+grid.values[ny*u[9]+nx]*fx;
+    return a*(1.0-fy)+b*fy;
+}
+int smoothSample(int x,int y) {
+    if(u[25]==0||x<0||y<0||x>=u[23]||y>=u[24])return 0;
+    precise D xx=D(x),yy=D(y);
+    if(u[22]!=0||u[18]!=u[23]||u[19]!=u[24]) {
+        precise D left=metadata.values[40],top=metadata.values[41],cw=metadata.values[42],ch=metadata.values[43];
+        precise D rx=left+(D(x)+.5LF)*cw/D(u[23])-.5LF,ry=top+(D(y)+.5LF)*ch/D(u[24])-.5LF;
+        if(u[22]==90){xx=ry;yy=D(u[19])-1.0LF-rx;}
+        else if(u[22]==180){xx=D(u[18])-1.0LF-rx;yy=D(u[19])-1.0LF-ry;}
+        else if(u[22]==270){xx=D(u[18])-1.0LF-ry;yy=rx;}
+        else {xx=rx;yy=ry;}
+    }
+    if(xx<0.0LF||yy<0.0LF||xx>D(u[18]-1)||yy>D(u[19]-1))return 0;
+    precise D gx=clamp((xx-1.5LF)/4.0LF,0.0LF,D(u[20]-1)),gy=clamp((yy-1.5LF)/4.0LF,0.0LF,D(u[21]-1));
+    int ix=int(gx),iy=int(gy),nx=min(u[20]-1,ix+1),ny=min(u[21]-1,iy+1);
+    precise D fx=gx-D(ix),fy=gy-D(iy);
+    precise D a=D(smoothData.values[iy*u[20]+ix])*(1.0LF-fx)+D(smoothData.values[iy*u[20]+nx])*fx;
+    precise D b=D(smoothData.values[ny*u[20]+ix])*(1.0LF-fx)+D(smoothData.values[ny*u[20]+nx])*fx;
+    return roundD(a*(1.0LF-fy)+b*fy);
+}
+void prepareMasks() {
+    if(u[8]!=0) {
+        precise D a,b,c,d,e,f0;int width,height;computeFaceAffine(a,b,c,d,e,f0,width,height);
+        metadata.values[32]=a;metadata.values[33]=b;metadata.values[34]=c;metadata.values[35]=d;metadata.values[36]=e;metadata.values[37]=f0;
+        metadata.values[38]=D(width);metadata.values[39]=D(height);
+    }
+    if(u[25]!=0) {
+        int rw=u[22]==90||u[22]==270?u[19]:u[18],rh=u[22]==90||u[22]==270?u[18]:u[19];
+        precise D scale=max(D(u[23])/D(rw),D(u[24])/D(rh));
+        precise D cw=min(D(rw),D(u[23])/scale),ch=min(D(rh),D(u[24])/scale);
+        metadata.values[40]=max(0.0LF,(D(rw)-cw)*.5LF);metadata.values[41]=max(0.0LF,(D(rh)-ch)*.5LF);
+        metadata.values[42]=cw;metadata.values[43]=ch;
+    }
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x);
+    if(POLICY_MODE1965==4){if(id<u[29])prepareFace(id);return;}
+    if(POLICY_MODE1965==5){if(id==0)prepareMasks();return;}
+    if(id>=u[30])return;
+    if(POLICY_MODE1965==0){faceRaster(id);return;}
+    if(POLICY_MODE1965==3) {
+        int x=(id%u[7])*4,row=u[3]+(id/u[7])*4,y=row+u[5],minimum=256;
+        for(int dy=0;dy<4&&y+dy<u[6];dy++)for(int dx=0;dx<4&&x+dx<u[1];dx++) {
+            int rr=row+dy,c=x+dx;if(rr>=u[2]||(source.values[rr*u[1]+c]>>24u)!=255u){minimum=0;continue;}
+            int at=((rr-u[3])*u[1]+c)*2;minimum=min(minimum,(raster.values[at]*(256-raster.values[at+1]))>>8);
+        }
+        outputData.values[id]=min(255,(smoothData.values[id]*minimum)>>8);return;
+    }
+    int x=id%u[1],y=id/u[1]+u[3];int skin=faceSample(x,y,0),detail=faceSample(x,y,1);
+    precise float sigma=noiseSigma(x,y);
+    if(POLICY_MODE1965==1) {
+        int budget=256-((skin*u[12])>>9);if(u[14]==0)budget=(u[13]*budget)>>8;
+        outputData.values[id*2]=clamp(budget,0,256);outputData.values[id*2+1]=clamp(detail,0,256);sigmaData.values[id]=sigma;return;
+    }
+    if(POLICY_MODE1965==2) {
+        precise float scale=float(metadata.values[7]);
+        if(!(u[11]!=0&&(u[17]!=0||abs(scale-1.0)<.00001)))sigma=float(metadata.values[6]);
+        if(u[17]==0&&scale<1.0)sigma=sigma*float(sqrt(metadata.values[7]));
+        int confidence=clamp(smoothSample(x,y),0,256);
+        precise float product=sigma*.65;int tolerance=3+roundF(product);
+        precise float sourceSigma=float(metadata.values[6]),admission=min(32.0,sourceSigma)*.85;
+        tolerance+=max(2,roundF(admission))*confidence>>8;
+        precise float fp=1.0+sigma*1.8,fs=fp*256.0;int floorValue=max(u[16],roundF(fs));
+        precise float admitted=(2.0+min(32.0,sourceSigma)*2.4)*256.0;
+        floorValue+=((max(floorValue,roundF(admitted))-floorValue)*confidence)>>8;
+        precise float dark=sigma*.75;
+        outputData.values[id*4]=tolerance;outputData.values[id*4+1]=max(3,roundF(dark));outputData.values[id*4+2]=floorValue;
+        outputData.values[id*4+3]=256-(((u[15]!=0?skin:0)*(20+(u[12]>>3)))>>8);
+    }
+}

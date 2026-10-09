@@ -1,0 +1,105 @@
+#version 310 es
+precision highp float;
+precision highp int;
+/* SOFT64_1965_LIBRARY */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Source { uint pixels[]; };
+layout(std430,binding=1) buffer Columns { int columns[]; };
+layout(std430,binding=2) buffer Result { uint result[]; };
+uniform int u[32];
+uniform float f[32];
+
+int lum(uint p) { return (77*int((p>>16)&255u)+150*int((p>>8)&255u)+29*int(p&255u)+128)>>8; }
+uvec2 di(int v) { return s64_fromInt(v); }
+uvec2 add(uvec2 a,uvec2 b) { return s64_add(a,b); }
+uvec2 sub(uvec2 a,uvec2 b) { return s64_sub(a,b); }
+uvec2 mul(uvec2 a,uvec2 b) { return s64_mul(a,b); }
+uvec2 divd(uvec2 a,uvec2 b) { return s64_div(a,b); }
+uvec2 unitd(uvec2 a) { return s64_max(di(0),s64_min(di(1),a)); }
+int near(uvec2 a) {
+    uvec2 halfway=uvec2(0u,0x3fe00000u);
+    return s64_lt(a,di(0))?-s64_toInt(add(s64_neg(a),halfway)):s64_toInt(add(a,halfway));
+}
+int idivNear(int value,int count) {
+    return value>=0?(value+count/2)/count:-((-value+count/2)/count);
+}
+int ddivNear(uvec2 value,int count) {
+    uvec2 absval=s64_abs(value);
+    int v=s64_toInt(divd(add(absval,di(count/2)),di(count)));
+    return s64_lt(value,di(0))?-v:v;
+}
+uint rgb(int y,int cb,int cr) {
+    int r=y+cr,b=y+cb,g=y-idivNear(cr*77+cb*29,150);
+    if(r<0||r>255||g<0||g>255||b<0||b>255)return 0u;
+    uint p=0xff000000u|(uint(r)<<16)|(uint(g)<<8)|uint(b);
+    return lum(p)==y?p:0u;
+}
+void vertical(int x,int y,int at) {
+    int sy=0,sy2=0,scb=0,scr=0,scb2=0,scr2=0,count=0,sycb=0,sycr=0;
+    for(int yy=max(0,y-u[5]);yy<min(u[2],y+u[5]+1);yy++) {
+        uint p=pixels[yy*u[1]+x];if((p>>24)!=255u)continue;
+        int l=lum(p),cb=int(p&255u)-l,cr=int((p>>16)&255u)-l;
+        sy+=l;sy2+=l*l;scb+=cb;scr+=cr;scb2+=cb*cb;scr2+=cr*cr;count++;sycb+=l*cb;sycr+=l*cr;
+    }
+    columns[at]=sy;columns[at+1]=sy2;columns[at+2]=scb;columns[at+3]=scr;
+    columns[at+4]=scb2;columns[at+5]=scr2;columns[at+6]=count;
+    columns[at+7]=sycb;columns[at+8]=sycr;
+}
+void finishPixel(int x,int y,int index) {
+    uint p=pixels[y*u[1]+x];result[index]=p;
+    uvec2 sy=di(0),sy2=di(0),scb=di(0),scr=di(0),scb2=di(0),scr2=di(0),sycb=di(0),sycr=di(0);
+    int count=0;
+    for(int xx=max(0,x-u[5]);xx<min(u[1],x+u[5]+1);xx++) {
+        int at=((y-u[3])*u[1]+xx)*9;
+        sy=add(sy,di(columns[at]));sy2=add(sy2,di(columns[at+1]));
+        scb=add(scb,di(columns[at+2]));scr=add(scr,di(columns[at+3]));
+        scb2=add(scb2,di(columns[at+4]));scr2=add(scr2,di(columns[at+5]));
+        count+=columns[at+6];sycb=add(sycb,di(columns[at+7]));sycr=add(sycr,di(columns[at+8]));
+    }
+    int full=(min(u[2],y+u[5]+1)-max(0,y-u[5]))*(min(u[1],x+u[5]+1)-max(0,x-u[5]));
+    if(count!=full||count<=0||(p>>24)!=255u)return;
+    int l=lum(p),cb=int(p&255u)-l,cr=int((p>>16)&255u)-l;
+    int magnitude=max(abs(cb),abs(cr)),meanY=ddivNear(sy,count);
+    int deltaCb=ddivNear(scb,count)-cb,deltaCr=ddivNear(scr,count)-cr;
+    int gap=max(abs(deltaCb),abs(deltaCr));
+    uvec2 n=di(count),n2=mul(n,n);
+    if(magnitude<72&&gap>0&&gap<24) {
+        int vy=max(0,s64_toInt(divd(sub(mul(sy2,n),mul(sy,sy)),n2)));
+        int vc=max(0,max(s64_toInt(divd(sub(mul(scb2,n),mul(scb,scb)),n2)),s64_toInt(divd(sub(mul(scr2,n),mul(scr,scr)),n2))));
+        int difference=l-meanY;
+        if(vy<4096&&difference*difference<vy*9+196&&vc<128) {
+            int amount=clamp((4096-vy)*256/3072,0,256)*240/256;
+            amount=amount*clamp((128-vc)*256/92,0,256)/256;
+            amount=amount*clamp((72-magnitude)*256/24,0,256)/256;
+            amount=amount*clamp((24-gap)*256/12,0,256)/256;
+            int bc=clamp(idivNear(deltaCb*amount,256),-12,12),rc=clamp(idivNear(deltaCr*amount,256),-12,12);
+            if(bc!=0||rc!=0){uint q=rgb(l,cb+bc,cr+rc);if(q!=0u)result[index]=q;}
+        }
+    }
+    if(magnitude>=128||l<64||cb>=-12||cr< -8||cr*5>(-cb)*6)return;
+    uvec2 reciprocal=divd(di(1),n),my=mul(sy,reciprocal),mb=mul(scb,reciprocal),mr=mul(scr,reciprocal);
+    uvec2 variance=s64_max(di(0),sub(mul(sy2,reciprocal),mul(my,my)));
+    uvec2 covb=sub(mul(sycb,reciprocal),mul(my,mb)),covr=sub(mul(sycr,reciprocal),mul(my,mr));
+    uvec2 denom=add(variance,di(64)),slopeb=divd(covb,denom),sloper=divd(covr,denom);
+    uvec2 residual=s64_max(di(0),s64_max(sub(sub(mul(scb2,reciprocal),mul(mb,mb)),mul(covb,slopeb)),sub(sub(mul(scr2,reciprocal),mul(mr,mr)),mul(covr,sloper))));
+    uvec2 dy=sub(di(lum(p)),my),db=sub(add(mb,mul(slopeb,dy)),di(cb)),dr=sub(add(mr,mul(sloper,dy)),di(cr));
+    uvec2 maximum=s64_max(s64_abs(db),s64_abs(dr));
+    if(!s64_lt(di(2),db)||!s64_lt(maximum,di(64))||!s64_lt(residual,di(384))||!s64_lt(mul(dy,dy),add(mul(di(9),variance),di(196))))return;
+    uvec2 amount=mul(unitd(divd(sub(di(384),residual),di(256))),uvec2(0u,0x3fee0000u));
+    amount=mul(amount,unitd(divd(di(128-magnitude),di(32))));
+    amount=mul(amount,unitd(divd(sub(di(64),maximum),di(24))));
+    int bc=clamp(near(mul(db,amount)),0,32),rc=clamp(near(mul(dr,amount)),-8,0);
+    uint previous=result[index];
+    if(l+cb+bc<=int(previous&255u))bc=0;
+    if(bc<=0)return;
+    int red=min(l+cr+rc,int((previous>>16)&255u)),blue=l+cb+bc;
+    uint q=rgb(l,blue-l,red-l);if(q!=0u)result[index]=q;
+}
+void main() {
+    int index=int(gl_GlobalInvocationID.x)+u[31],count=u[1]*(u[4]-u[3]);
+    if(index>=count)return;
+    int x=index%u[1],y=u[3]+index/u[1];
+    if(u[0]==0)vertical(x,y,index*9);else finishPixel(x,y,index);
+    /* Keep the full command descriptor live for the bounded native dispatcher. */
+    if(u[30]!=0&&f[31]!=0.0)result[index]=pixels[0];
+}

@@ -1,0 +1,72 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+/* SOFT64_1965_LIBRARY */
+/* Exact GPU QualityPixels1932.plan + withLocalNoise policy. Metadata and
+ * user options enter as copied scalars. All image-statistic arithmetic and
+ * ISO/output-scale sqrt operations execute on GPU. Binary32 operations keep
+ * the original sequence and no contraction; binary64 uses integer-pair IEEE.
+ * u: statsPresent,iso,exposureLo,exposureHi,lens,requestedNoise,
+ * requestedSharp,samples. f: lumaSigma,chromaSigma,beautyStrength,outputScale.
+ * result: seven integer Plan fields followed by sigma and scale float words.
+ */
+layout(local_size_x=64) in;
+layout(std430,binding=0) writeonly buffer Result {uint result[];};
+uniform int u[32];
+uniform float f[32];
+float finiteClamp(float v,float low,float high,float fallback) {
+    return isnan(v)||isinf(v)?fallback:clamp(v,low,high);
+}
+bool exposureGreater(uint threshold) {
+    return u[3]>0||(u[3]==0&&uint(u[2])>threshold);
+}
+int rounded(float v) {
+    // Java Math.round(float) does not round v+0.5 back to binary32 first.
+    return s64_toInt(s64_floor(s64_add(s64_fromFloat(v),uvec2(0x00000000u,0x3fe00000u))));
+}
+void main() {
+    if(u[31]+int(gl_GlobalInvocationID.x)!=0)return;
+    int noise=clamp(u[5],0,4),sharp=clamp(u[6],0,4);
+    precise float scale=finiteClamp(f[3],.01,64.0,1.0);
+    precise float beauty=finiteClamp(f[2],0.0,1.0,0.0);
+    precise float sy=u[0]==0?3.0:finiteClamp(f[0],0.0,64.0,0.0);
+    precise float sc=u[0]==0?4.0:finiteClamp(f[1],0.0,96.0,0.0);
+    int samples=u[0]==0?0:max(0,u[7]);
+    precise float measured=max(sy,sc*.42);
+    precise float prior=0.0;
+    if(u[1]>0) {
+        uvec2 iso=s64_div(s64_fromInt(max(1,u[1])),uvec2(0x00000000u,0x40590000u));
+        prior=s64_toFloat(s64_mul(uvec2(0xcccccccdu,0x3ffcccccu),
+            s64_sub(s64_sqrt(iso),uvec2(0x00000000u,0x3ff00000u))));
+    }
+    prior=max(0.0,prior);
+    if(u[4]==1||u[4]==4||u[4]==3)prior=prior*1.06;
+    precise float sigma;
+    if(samples>=48)sigma=measured*.88+min(prior,measured+2.0)*.12;
+    else sigma=max(measured,min(8.0,2.0+prior*.3));
+    sigma=finiteClamp(sigma,0.0,32.0,3.0);
+    if(samples>=48) {
+        if(sigma<.8)noise=max(0,noise-2);
+        else if(sigma<3.8)noise=max(0,noise-1);
+    }
+    precise float shadowAmount=256.0*(.50+.40*min(1.0,sigma/12.0));
+    int shadow=noise==0?0:rounded(shadowAmount);
+    precise float gain=sharp==0?0.0:.17+.17*float(sharp);
+    precise float root=s64_toFloat(s64_sqrt(s64_fromFloat(scale)));
+    if(scale>1.0)gain=gain/root;
+    if(scale<1.0)gain=gain*(.90+.10*scale);
+    if(exposureGreater(50000000u))gain=gain*.94;
+    if(u[4]==4&&exposureGreater(25000000u))gain=gain*.95;
+    gain=gain*(1.0/(1.0+sigma*.012));
+    precise float effectiveSigma=sigma*(scale<1.0?root:1.0);
+    precise float floorValue=.65+effectiveSigma*1.25;
+    // The original strict route always attaches local evidence; requested
+    // noise is the per-pixel maximum and minimum remaining budget is 128.
+    noise=clamp(u[5],0,4);
+    shadow=u[5]<=0?0:max(128,clamp(shadow,0,256));
+    result[0]=uint(noise);result[1]=uint(sharp);result[2]=uint(shadow);
+    result[3]=uint(rounded(beauty*256.0));result[4]=uint(rounded(gain*256.0));
+    result[5]=uint(rounded(floorValue*256.0));result[6]=uint(3+sharp*2);
+    result[7]=floatBitsToUint(sigma);result[8]=floatBitsToUint(scale);
+}

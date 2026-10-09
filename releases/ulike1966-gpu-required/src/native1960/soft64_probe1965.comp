@@ -1,0 +1,24 @@
+#version 310 es
+precision highp float;
+precision highp int;
+/* SOFT64_1965_LIBRARY */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Source {uint pixels[];};
+layout(std430,binding=1) buffer Result {uint result[];};
+uniform int u[32];
+uniform float f[32];
+void pairAt(int at,uvec2 value){result[at]=value.x;result[at+1]=value.y;}
+void main(){
+    int id=u[31]+int(gl_GlobalInvocationID.x);
+    if(u[0]==1){if(id<u[2]&&(pixels[id]>>24)!=255u)atomicOr(result[0],1u);return;}
+    if(id!=0)return;
+    uvec2 one=s64_fromInt(u[1]);
+    pairAt(0,s64_add(one,uvec2(0u,0x3ca00000u)));
+    pairAt(2,s64_add(one,uvec2(0u,0x3cb80000u)));
+    pairAt(4,s64_mul(s64_add(one,uvec2(0u,0x3cb00000u)),s64_sub(one,uvec2(0u,0x3cb00000u))));
+    pairAt(6,s64_div(one,s64_fromInt(3)));
+    pairAt(8,s64_sqrt(s64_fromInt(2)));
+    pairAt(10,s64_div(uvec2(0u,0x00100000u),s64_fromInt(2)));
+    pairAt(12,s64_floor(s64_neg(s64_add(one,uvec2(0u,0x3fd00000u)))));
+    pairAt(14,s64_fromFloat(-.1));
+}

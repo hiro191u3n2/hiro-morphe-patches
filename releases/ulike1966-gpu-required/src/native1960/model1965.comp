@@ -1,0 +1,150 @@
+#version 310 es
+#extension GL_EXT_shader_explicit_arithmetic_types_float64 : require
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+#define D float64_t
+/* v1.9.65 GPU-required SingleNoise1955.probe, including original binary64
+ * sample/DCT arithmetic and original binary32 model arithmetic. Histogram
+ * atomics add integers only; means reduce in the original by,bx order. CPU
+ * supplies an immutable copy of the original sampled patches, no coefficients,
+ * noise estimates, masks or per-pixel calculations. There is no fp32 substitute.
+ * u: mode,width,height,columns,rows,patchWidth,patchHeight,blocksX,blocksY;
+ * output: native model floats, globalY, globalC, accepted-as-int-bits.
+ */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Patches {uint pixels[];};
+layout(std430,binding=1) buffer LocalHist {uint localHist[];};
+layout(std430,binding=2) buffer GlobalHist {uint globalHist[];};
+layout(std430,binding=3) buffer Means {D means[];};
+layout(std430,binding=4) buffer Accepted {uint accepted[];};
+layout(std430,binding=5) buffer Model {float model[];};
+uniform int u[32];
+uniform float f[32];
+const D D8[32]=D[32](
+    .35355339059327379LF,.35355339059327379LF,.35355339059327379LF,.35355339059327379LF,
+    .49039264020161522LF,.41573480615127262LF,.27778511650980114LF,.097545161008064166LF,
+    .46193976625564337LF,.19134171618254492LF,-.19134171618254486LF,-.46193976625564337LF,
+    .41573480615127262LF,-.097545161008064096LF,-.49039264020161522LF,-.27778511650980109LF,
+    .35355339059327379LF,-.35355339059327373LF,-.35355339059327384LF,.35355339059327368LF,
+    .27778511650980114LF,-.49039264020161522LF,.097545161008064152LF,.41573480615127273LF,
+    .19134171618254492LF,-.46193976625564342LF,.46193976625564326LF,-.19134171618254495LF,
+    .097545161008064166LF,-.27778511650980109LF,.41573480615127273LF,-.49039264020161533LF);
+D luma(uint p) {precise D y=.299LF*D((p>>16)&255u)+.587LF*D((p>>8)&255u)+.114LF*D(p&255u);return y;}
+int roundPositive(D value) {
+    // Math.round(double) does not round value+0.5 to binary64 first. The
+    // coefficient range is nonnegative and bounded well within int limits.
+    precise D lower=floor(value),fraction=value-lower;
+    return int(lower)+(fraction>=.5LF?1:0);
+}
+void transform(inout D values[64]) {
+    precise D temp[64];
+    for(int row=0;row<8;row++)for(int k=0;k<8;k++) {
+        precise D sum=0.0LF;
+        for(int x=0;x<4;x++)sum+=(values[row*8+x]+((k&1)==0?values[row*8+7-x]:-values[row*8+7-x]))*D8[k*4+x];
+        temp[row*8+k]=sum;
+    }
+    for(int col=0;col<8;col++)for(int k=0;k<8;k++) {
+        precise D sum=0.0LF;
+        for(int y=0;y<4;y++)sum+=(temp[y*8+col]+((k&1)==0?temp[(7-y)*8+col]:-temp[(7-y)*8+col]))*D8[k*4+y];
+        values[k*8+col]=sum;
+    }
+}
+uint localMedian(int offset,out uint count) {
+    count=0u;for(int k=0;k<1024;k++)count+=localHist[offset+k];
+    uint target=(count+1u)/2u,total=0u;
+    for(int k=0;k<1024;k++){total+=localHist[offset+k];if(total>=target)return uint(k);}return 0u;
+}
+float sigma(int slot,out uint count) {
+    int offset=slot*1024;count=0u;
+    for(int k=0;k<1024;k++)count+=globalHist[offset+k];
+    if(count<24u)return 0.0;
+    uint target=(count+1u)/2u,total=0u;
+    for(int k=0;k<1024;k++) {
+        total+=globalHist[offset+k];
+        if(total>=target){precise float result=float(k)/2.69796;return min(48.0,result);}
+    }
+    return 0.0;
+}
+void fillMissing(int offset) {
+    // Sequential mutation is intentional: a copied earlier bin can be the
+    // nearest populated neighbor of a later missing bin in the Java baseline.
+    for(int i=0;i<8;i++)if(model[offset+i]==0.0) {
+        int best=-1,distance=99;
+        for(int j=0;j<8;j++)if(model[offset+j]>0.0&&abs(i-j)<distance){best=j;distance=abs(i-j);}
+        if(best>=0)model[offset+i]=model[offset+best];
+    }
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x),cells=u[3]*u[4],blocks=u[7]*u[8];
+    if(u[0]==0) {
+        if(id<cells*2048)localHist[id]=0u;
+        if(id<72*1024)globalHist[id]=0u;
+        if(id<cells*blocks){means[id]=0.0LF;accepted[id]=0u;}
+        return;
+    }
+    if(u[0]==1) {
+        if(blocks==0||id>=cells*blocks)return;
+        int cell=id/blocks,block=id%blocks,bx=(block%u[7])*8,by=(block/u[7])*8;
+        precise D yvalues[64],values[64];
+        precise D mean=0.0LF,minimum=255.0LF,maximum=0.0LF;bool opaque=true;
+        for(int yy=0;yy<8;yy++)for(int xx=0;xx<8;xx++) {
+            uint p=pixels[cell*u[5]*u[6]+(by+yy)*u[5]+bx+xx];int at=yy*8+xx;
+            if((p>>24)!=255u)opaque=false;
+            precise D value=luma(p);yvalues[at]=value;mean+=value;minimum=min(minimum,value);maximum=max(maximum,value);
+        }
+        mean/=64.0LF;means[id]=mean;
+        if(!opaque||mean<3.0LF||mean>252.0LF||maximum-minimum>100.0LF)return;
+        precise D dx=0.0LF,dy=0.0LF;
+        for(int yy=0;yy<8;yy++)for(int xx=0;xx<8;xx++) {
+            precise D value=yvalues[yy*8+xx];dx+=(xx<4?-value:value);dy+=(yy<4?-value:value);
+        }
+        if(abs(dx)/32.0LF>18.0LF||abs(dy)/32.0LF>18.0LF)return;
+        int bin=clamp(int(mean)/32,0,7);
+        for(int plane=0;plane<3;plane++) {
+            for(int yy=0;yy<8;yy++)for(int xx=0;xx<8;xx++) {
+                int at=yy*8+xx;uint p=pixels[cell*u[5]*u[6]+(by+yy)*u[5]+bx+xx];
+                values[at]=plane==0?yvalues[at]:D(plane==1?((p>>16)&255u):(p&255u))-yvalues[at];
+            }
+            transform(values);
+            for(int v=0;v<8;v++)for(int x=0;x<8;x++) {
+                int frequency=x+v;if(frequency<2)continue;
+                int band=frequency<4?0:frequency<8?1:2;
+                precise D magnitude=abs(values[v*8+x])*4.0LF;
+                int value=min(1023,roundPositive(magnitude)),slot=(bin*3+plane)*3+band;
+                atomicAdd(globalHist[slot*1024+value],1u);
+                if(frequency>=4)atomicAdd(localHist[(cell*2+(plane==0?0:1))*1024+value],1u);
+            }
+        }
+        accepted[id]=1u;return;
+    }
+    if(u[0]==2) {
+        if(id>=cells)return;
+        uint ycount,ccount;uint ym=localMedian(id*2048,ycount),cm=localMedian(id*2048+1024,ccount);
+        precise float sy=float(ym)/2.69796,sc=float(cm)/2.69796;
+        model[id]=ycount>=32u?min(32.0,sy):0.0;model[cells+id]=ccount>=64u?min(48.0,sc):0.0;
+        precise D sum=0.0LF;for(int block=0;block<blocks;block++)sum+=means[id*blocks+block];
+        model[cells*2+id]=blocks==0?128.0:float(sum/D(blocks));return;
+    }
+    if(id!=0)return;
+    int brightness=cells*3,ratios=brightness+16;
+    for(int bin=0;bin<8;bin++) {
+        uint ignored;float r=sigma((bin*3+1)*3+1,ignored),b=sigma((bin*3+2)*3+1,ignored);
+        model[brightness+bin]=sigma((bin*3)*3+1,ignored);
+        precise float color=(r+b)*.5;model[brightness+8+bin]=color;
+        for(int plane=0;plane<3;plane++) {
+            float reference=sigma((bin*3+plane)*3+1,ignored);
+            for(int band=0;band<3;band++) {
+                int slot=(bin*3+plane)*3+band;uint count;float measured=sigma(slot,count);
+                precise float ratio=reference>.30&&count>=24u?measured/reference:1.0;
+                model[ratios+slot]=clamp(ratio,band==0?.5:.45,band==0?1.7:2.4);
+            }
+        }
+    }
+    fillMissing(brightness);fillMissing(brightness+8);
+    precise float sy=0.0,sc=0.0;
+    for(int cell=0;cell<cells;cell++){sy+=model[cell];sc+=model[cells+cell];}
+    model[ratios+72]=sy/float(cells);model[ratios+73]=sc/float(cells);
+    uint count=0u;for(int block=0;block<cells*blocks;block++)count+=accepted[block];
+    model[ratios+74]=uintBitsToFloat(count);
+}

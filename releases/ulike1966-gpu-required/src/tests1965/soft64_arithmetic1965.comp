@@ -1,0 +1,31 @@
+#version 310 es
+precision highp float;
+precision highp int;
+/* SOFT64_1965_LIBRARY */
+layout(local_size_x=64) in;
+layout(std430,binding=0) readonly buffer Input {uint data[];};
+layout(std430,binding=1) writeonly buffer Output {uint result[];};
+uniform int u[32];
+void main(){
+    int id=u[31]+int(gl_GlobalInvocationID.x);if(id>=u[2])return;
+    int at=id*5,op=int(data[at]);uvec2 a=uvec2(data[at+1],data[at+2]),b=uvec2(data[at+3],data[at+4]),z;
+    if(op==0)z=s64_add(a,b);
+    else if(op==1)z=s64_sub(a,b);
+    else if(op==2)z=s64_mul(a,b);
+    else if(op==3)z=s64_div(a,b);
+    else if(op==4)z=s64_sqrt(a);
+    else if(op==5)z=s64_floor(a);
+    else if(op==6)z=s64_trunc(a);
+    else if(op==7)z=s64_fromFloat(uintBitsToFloat(a.x));
+    else if(op==8)z=uvec2(floatBitsToUint(s64_toFloat(a)),0u);
+    else if(op==9)z=s64_fromInt(int(a.x));
+    else if(op==10)z=uvec2(uint(s64_toInt(a)),0u);
+    else if(op==11)z=uvec2(uint(s64_eq(a,b))|uint(s64_lt(a,b))<<1|uint(s64_le(a,b))<<2|uint(s64_gt(a,b))<<3|uint(s64_ge(a,b))<<4,0u);
+    else if(op==12)z=s64_min(a,b);
+    else if(op==13)z=s64_max(a,b);
+    else if(op==14)z=s64_fromUint(a.x);
+    else if(op==15)z=s64_abs(a);
+    else if(op==16)z=s64_neg(a);
+    else z=uvec2(uint(s64_finite(a))|(uint(s64_zero(a))<<1),0u);
+    result[id*2]=z.x;result[id*2+1]=z.y;
+}
