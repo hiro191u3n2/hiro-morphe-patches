@@ -1,4 +1,8 @@
-# ULike v1.9.66 / bundle v1.0.199 — GPU required
+# Withdrawn: ULike v1.9.66 / bundle v1.0.199
+
+ユーザーから実動作の不具合報告があり、本版の採用を取り消しました。復帰先と今後の改造基準は **ULike v1.9.65 / Hiro Morphe Patches v1.0.198** です。本ディレクトリのソースと検証記録は撤回前の履歴です。
+
+[復帰先の公開版](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/ulike-v1.9.65)
 
 Build candidate on the exact published ULike v1.9.65 / bundle v1.0.198. Enabled noise, protection-mask and additional correction image calculations must use GPU. CPU orchestration, copies, logging and file/codec management remain. Existing ULike beauty SDK and face-detection internals are not proved GPU-only.
 

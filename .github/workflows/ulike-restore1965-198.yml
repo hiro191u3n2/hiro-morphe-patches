@@ -1,0 +1,46 @@
+name: Restore exact ULike1965 and bundle198; withdraw rejected GPU release
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike-restore1965-198.yml']
+permissions:
+  contents: write
+  actions: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  restore:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Restore byte-identical published ULike .65 and bundle .198
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib, pathlib
+          source = pathlib.Path('releases/ulike-restore1965-198/restore.py')
+          helper = pathlib.Path('releases/ulike1966-gpu-required/publication/publish1966.py')
+          assert hashlib.sha256(source.read_bytes()).hexdigest() == 'a5aaafc8c30ade4a66ab72140f387ef65053e700e60a25c700e04bcb67eebbb3'
+          assert hashlib.sha256(helper.read_bytes()).hexdigest() == '5f25ebd4dc33bb22241147e9877d4a22287451e08c273cf2481f6186d9af2164'
+          compile(source.read_bytes(), str(source), 'exec')
+          print('PASS reviewed restoration script and pinned atomic publication helper')
+          PY
+          python3 releases/ulike-restore1965-198/restore.py \
+            --repo "$GITHUB_WORKSPACE" \
+            --work-dir "$RUNNER_TEMP/ulike-restore1965-198"
+      - name: Keep restoration receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: ULike1965-bundle198-restoration-receipt
+          path: ${{ runner.temp }}/ulike-restore1965-198/restoration_receipt.json
+          if-no-files-found: warn
