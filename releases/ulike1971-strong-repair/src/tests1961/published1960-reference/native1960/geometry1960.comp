@@ -1,0 +1,66 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint pixels[]; } source;
+layout(std430,binding=1) writeonly buffer Destination { uint pixels[]; } destination;
+layout(std430,binding=2) buffer Intermediate { float rgb[]; } intermediate;
+layout(std430,binding=4) readonly buffer Coefficients { float weights[]; } coefficients;
+layout(std430,binding=5) readonly buffer Axes { int data[]; } axes;
+uniform highp int u[32];
+uniform highp float f[32];
+// u: mode,sourceW,sourceH,rotation,outW,outH,cropLeft,cropTop,
+// horizontalOffsets,horizontalIndices,verticalOffsets,verticalIndices,
+// horizontalWeights,verticalWeights,rotatedH,firstOutputRow,endOutputRow.
+// Axis coefficients come from the unchanged CPU double-precision preparation;
+// each FP32 accumulation follows exactly the original tap order. No sampler,
+// texture interpolation or half precision is used. Publication is equality-gated.
+uint rotatedPixel(int x,int y) {
+    int sx=x,sy=y;
+    if(u[3]==90){sx=y;sy=u[2]-1-x;}
+    else if(u[3]==180){sx=u[1]-1-x;sy=u[2]-1-y;}
+    else if(u[3]==270){sx=u[1]-1-y;sy=x;}
+    return source.pixels[sy*u[1]+sx];
+}
+vec3 rgb(uint p){return vec3(float((p>>16u)&255u),float((p>>8u)&255u),float(p&255u));}
+// Java Math.round(float) avoids an extra rounded x+.5 operation. In particular
+// .49999997f must round to zero, even if x+.5f becomes exactly1.0f.
+int javaRound(float value) {
+    int bits=floatBitsToInt(value),exponent=(bits>>23)&255,shift=149-exponent;
+    if((shift&~31)==0){int mantissa=(bits&0x7fffff)|0x800000;if(bits<0)mantissa=-mantissa;return ((mantissa>>shift)+1)>>1;}
+    return int(value);
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x);
+    if(u[0]==0) {
+        if(id>=u[4]*(u[16]-u[15]))return;
+        int x=id%u[4],y=id/u[4]+u[15];
+        destination.pixels[y*u[4]+x]=rotatedPixel(x+u[6],y+u[7]);
+    } else if(u[0]==1) {
+        if(id>=u[4]*u[14])return;
+        int x=id%u[4],y=id/u[4];
+        precise vec3 sum=vec3(0.0);vec3 lo=vec3(1.0/0.0),hi=vec3(-1.0/0.0);
+        int begin=axes.data[u[8]+x],end=axes.data[u[8]+x+1];
+        for(int t=begin;t<end;t++) {
+            vec3 value=rgb(rotatedPixel(axes.data[u[9]+t],y));
+            precise vec3 product=value*coefficients.weights[u[12]+t];sum=sum+product;
+            lo=min(lo,value);hi=max(hi,value);
+        }
+        vec3 value=clamp(sum,lo,hi);int at=id*3;
+        intermediate.rgb[at]=value.r;intermediate.rgb[at+1]=value.g;intermediate.rgb[at+2]=value.b;
+    } else if(u[0]==2) {
+        if(id>=u[4]*(u[16]-u[15]))return;
+        int x=id%u[4],y=id/u[4]+u[15];
+        precise vec3 sum=vec3(0.0);vec3 lo=vec3(1.0/0.0),hi=vec3(-1.0/0.0);
+        int begin=axes.data[u[10]+y],end=axes.data[u[10]+y+1];
+        for(int t=begin;t<end;t++) {
+            int row=axes.data[u[11]+t],at=(row*u[4]+x)*3;
+            vec3 value=vec3(intermediate.rgb[at],intermediate.rgb[at+1],intermediate.rgb[at+2]);
+            precise vec3 product=value*coefficients.weights[u[13]+t];sum=sum+product;
+            lo=min(lo,value);hi=max(hi,value);
+        }
+        vec3 bounded=clamp(sum,lo,hi);uvec3 channels=uvec3(clamp(javaRound(bounded.r),0,255),clamp(javaRound(bounded.g),0,255),clamp(javaRound(bounded.b),0,255));
+        destination.pixels[y*u[4]+x]=0xff000000u|(channels.r<<16u)|(channels.g<<8u)|channels.b;
+    }
+}

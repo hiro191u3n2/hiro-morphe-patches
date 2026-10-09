@@ -1,0 +1,62 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+/* GX13: original float residual blend/ordered overlap/reconstruction. Double
+ * DCT and residual safeguards are prepared unchanged by native1955 on CPU.
+ * No unordered atomic float sum, reduced precision, skipped block or pixel.
+ */
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source {uint pixels[];};
+layout(std430,binding=1) writeonly buffer Result {uint result[];};
+layout(std430,binding=2) readonly buffer Residuals {float records[];};
+layout(std430,binding=3) readonly buffer Protection {int policy[];};
+uniform highp int u[32];
+uniform highp float f[32];
+const float WINDOW8[8]=float[8](.03806023,.30865828,.6913417,.96193975,
+    .96193975,.6913417,.30865828,.03806023);
+void addBlock(int bx,int by,int n,int base,int ax,int ay,int policyIndex,
+        inout float weightSum,inout vec3 deltaSum) {
+    if(records[base]==0.0||ax<bx||ax>=bx+n||ay<by||ay>=by+n)return;
+    int xx=ax-bx,yy=ay-by,at=yy*n+xx;
+    precise float blend=records[base+1];
+    if(u[15]!=0) {
+        int budget=clamp(policy[policyIndex*2],0,256),detail=clamp(policy[policyIndex*2+1],0,256);
+        blend*=float(budget)/256.0*(1.0-float(detail)/256.0);
+    }
+    precise float weight=n==8?.82*WINDOW8[xx]*WINDOW8[yy]:.18;
+    precise float nextWeight=weightSum+weight;weightSum=nextWeight;
+    for(int plane=0;plane<3;plane++) {
+        precise float delta=records[base+2+plane*n*n+at]*weight*blend;
+        precise float next=deltaSum[plane]+delta;deltaSum[plane]=next;
+    }
+}
+/* Java1955 promotes value to double before adding .5. The floor+fraction
+ * threshold gives that exact rounding without falsely rounding127.499992
+ * upward when a float value+.5 rounds to128.0. */
+int byteValue(float value) {
+    if(value<=0.0)return 0;if(value>=255.0)return 255;
+    precise float whole=floor(value),fraction=value-whole;
+    return int(whole)+(fraction>=.5?1:0);
+}
+void main() {
+    uint id=uint(u[31])+gl_GlobalInvocationID.x;
+    int count=u[1]*(u[5]-u[4]);if(id>=uint(count))return;
+    int ax=int(id)%u[1],localY=int(id)/u[1]+u[4],ay=localY+u[6];
+    uint p=pixels[localY*u[1]+ax];if((p>>24)!=255u){result[id]=p;return;}
+    precise float weight=0.0;precise vec3 delta=vec3(0.0);
+    int by0=(ay/4)*4-4,bx0=(ax/4)*4-4;
+    int policyIndex=(localY-u[20])*u[1]+ax;
+    for(int by=by0;by<=by0+4;by+=4)for(int bx=bx0;bx<=bx0+4;bx+=4) {
+        int row=(by-u[16])/4,col=(bx+4)/4;
+        if(by<u[16]||row>=u[18]||col<0||col>=u[17])continue;
+        int base=(row*u[17]+col)*248;
+        addBlock(bx,by,8,base,ax,ay,policyIndex,weight,delta);
+        addBlock(bx,by,4,base+196,ax,ay,policyIndex,weight,delta);
+    }
+    if(weight==0.0){result[id]=p;return;}
+    precise float dy=delta[0]/weight,dr=delta[1]/weight,db=delta[2]/weight;
+    precise float r=float((p>>16)&255u)+dy+dr,b=float(p&255u)+dy+db;
+    precise float g=float((p>>8)&255u)+dy-(.299*dr+.114*db)/.587;
+    result[id]=(p&0xff000000u)|(uint(byteValue(r))<<16)|(uint(byteValue(g))<<8)|uint(byteValue(b));
+}
