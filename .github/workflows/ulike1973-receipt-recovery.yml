@@ -1,0 +1,47 @@
+name: Verify ULike1973 publication and recover its receipt
+on:
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+    paths: ['.github/workflows/ulike1973-receipt-recovery.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  receipt:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Download the exact original successful verification artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-ulike1973-recovery
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/11612364539/zip > .ci-ulike1973-recovery/original-artifact.zip
+          python3 - <<'PY'
+          import hashlib,pathlib
+          raw=pathlib.Path('.ci-ulike1973-recovery/original-artifact.zip').read_bytes()
+          assert hashlib.sha256(raw).hexdigest()=='dee9b7371c3c5c8d43716eb6b58d39ca7843bb900e8b2717d81da447e65dc221', 'Original CI artifact ZIP differs'
+          PY
+      - name: Read-only verification of original assets, immutable downloads and both feed commits
+        run: python3 maintenance/recover_ulike1973.py --repo . --artifact-zip .ci-ulike1973-recovery/original-artifact.zip --output .ci-ulike1973-recovery/proof
+      - name: Save matching publication receipt atomically and upload the seventh release asset
+        run: python3 maintenance/recover_ulike1973.py --repo . --artifact-zip .ci-ulike1973-recovery/original-artifact.zip --output .ci-ulike1973-recovery/completed --complete
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: ulike1973-receipt-recovery-proof
+          path: |
+            .ci-ulike1973-recovery/proof/recovery-verification.json
+            .ci-ulike1973-recovery/completed/recovery-verification.json
+            .ci-ulike1973-recovery/completed/publication_ULike_v1.9.73.json
+          retention-days: 30
