@@ -1,21 +1,21 @@
 {
-  "ulike_version": "1.9.63",
-  "bundle_version": "1.0.196",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.63.mpp",
-  "source_sha256": "013e7e154f2a9912802ac6cfc702152bb34a1b759298b7f08e2acea5f6d50162",
-  "source_release": "ulike-v1.9.63",
-  "active_release": "ulike-v1.9.63",
-  "base_ulike_version": "1.9.62",
+  "ulike_version": "1.9.64",
+  "bundle_version": "1.0.197",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.64.mpp",
+  "source_sha256": "cf6621ed1ec55c5b115516a04f897e380c785c56d9772ab48043b32c568ae48b",
+  "source_release": "ulike-v1.9.64",
+  "active_release": "ulike-v1.9.64",
+  "base_ulike_version": "1.9.63",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "e3db4401688863d56de30d6e6afdfc6dc8a941d42f7cc1cebec5700bd0f775cd",
+  "base_source_sha256": "013e7e154f2a9912802ac6cfc702152bb34a1b759298b7f08e2acea5f6d50162",
   "withdrawn_versions": [
     "1.9.17"
   ],
-  "reason": "Whole-app audit fixes and optimizations on exact .62/.195. Same-output guards, precision/capability admission, transactional rollback and CPU fallback preserve quality. Physical Galaxy capture and save remain untested.",
-  "future_ulike_base": "Use .63/.196 and preserve .62 pixel algorithms, high-depth/wide-colour/gainmap fallback, settings, camera recovery, native ABI, FIFO publication and unrelated apps. GPU precision/capability and runtime equivalence admission is mandatory.",
+  "reason": "GX30-GX36 noise speed optimizations on exact .63/.196; .63 GX30-GX36 exact-output noise optimizations retained. Same-output guards, precision/capability admission, transactional rollback and CPU fallback preserve quality. Physical Galaxy capture and save remain untested.",
+  "future_ulike_base": "Use .64/.197 and preserve .63 pixel algorithms, high-depth/wide-colour/gainmap fallback, settings, camera recovery, native ABI, FIFO publication and unrelated apps. GPU precision/capability and runtime equivalence admission is mandatory.",
   "android_device_tested": false,
   "original_apk_apply_tested": false,
-  "release_status": "whole_app_audit_host_verified_original_apks_device_unverified",
+  "release_status": "gx30_gx36_host_verified_original_apks_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": false,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -44,7 +44,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.195",
+  "base_bundle_version": "1.0.196",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": true,
@@ -63,10 +63,13 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    "AUDIT_GPU",
-    "AUDIT_SAVE",
-    "AUDIT_PIPELINE",
-    "AUDIT_UI"
+    "GX30",
+    "GX31",
+    "GX32",
+    "GX33",
+    "GX34",
+    "GX35",
+    "GX36"
   ],
   "baseline_other_apps_preserved": true,
   "camera_startup_recovery_byte_identical": false,
@@ -74,10 +77,13 @@
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "AUDIT_GPU",
-    "AUDIT_SAVE",
-    "AUDIT_PIPELINE",
-    "AUDIT_UI"
+    "GX30",
+    "GX31",
+    "GX32",
+    "GX33",
+    "GX34",
+    "GX35",
+    "GX36"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -121,7 +127,7 @@
   "stage_timing_payload_byte_identical": false,
   "stage_timing_algorithm_preserved": true,
   "retained_baseline_candidates": {
-    "ulike_version": "1.9.62",
+    "ulike_version": "1.9.63",
     "candidates": [
       "H1",
       "H2",
@@ -217,15 +223,19 @@
       "GX26",
       "GX27",
       "GX28",
-      "GX29"
+      "GX29",
+      "AUDIT_GPU",
+      "AUDIT_SAVE",
+      "AUDIT_PIPELINE",
+      "AUDIT_UI"
     ]
   },
   "gpu_processing_added": true,
   "gpu_execution_on_physical_android": false,
   "gpu_shader_execution_on_host": true,
-  "gpu_policy": "Per-stage exact pixel acceptance, strict precision and a guarded speed threshold. Speed-only rejection permits bounded idle requalification; inherited CPU admission estimates remain in some individual stages. Unsupported fp64, surface/encoder integration, context/fence/GL failure, memory pressure or result mismatch returns to byte-preserved CPU paths. Host shader execution is software Mesa, not a Galaxy GPU speed measurement.",
-  "gpu_native_library_sha256": "a261b554687156adc973fae28ae2229483494f873c1f63ecfcce904fa6f6d7b3",
-  "gpu_native_library_bytes": 123232,
+  "gpu_policy": "Per-stage exact pixel acceptance, strict precision and a guarded speed threshold. Speed-only rejection permits bounded idle requalification; GX30 uses measured parallel CPU/GPU wall time for edited admission paths. Unsupported fp64, surface/encoder integration, context/fence/GL failure, memory pressure or result mismatch returns to byte-preserved CPU paths. Host shader execution is software Mesa, not a Galaxy GPU speed measurement.",
+  "gpu_native_library_sha256": "7e2ede1e77344639f38b5d8dc22a6b2fe74390697066de03d10daeea4af02ae8",
+  "gpu_native_library_bytes": 133960,
   "native_installer_existing_rows_preserved": true,
   "core_native_library_sha256": "b8d762d30a0b0e448069e3354774af22fb5402a79f043434a683159c469d2e4a",
   "core_native_library_bytes": 12312,
@@ -268,12 +278,13 @@
   "speed_core_and_save_helpers_byte_identical": false,
   "nr13_shared_finish_policy_bytecode_identical": false,
   "gx_implementation_status": {
-    "GX24": "conditional_post_strong_noise_resident_analysis_protection_finish",
-    "GX25": "conditional_cpu_binary64_preparation_overlap_with_two_gpu_residual_banks",
-    "GX26": "conditional_direct_gpu_buffer_upload_and_caller_owned_readback",
-    "GX27": "conditional_stage_specific_exact_halo_and_shared_memory_programs",
-    "GX28": "conditional_proven_rejected_candidate_early_exit_in_original_float_order",
-    "GX29": "conditional_retryable_speed_rejection_with_exact_quality_guard"
+    "GX30": "conditional_actual_parallel_cpu_gpu_wall_time_admission",
+    "GX31": "single_exact_protection_preparation_reused",
+    "GX32": "exact_same_order_reused_pair_differences",
+    "GX33": "conditional_exact_2d_workgroup_cache_tuning",
+    "GX34": "same_source_exact_residual_block_transform_cache",
+    "GX35": "conditional_direct_binary64_prepared_residual_gpu_transfer",
+    "GX36": "conditional_measured_cpu_gpu_bank_scheduling"
   },
   "all_processing_on_gpu": false,
   "gx9_beauty_interop_supported": false,
@@ -310,6 +321,36 @@
     "AUDIT_UI": {
       "status": "passed",
       "assertions": 21,
+      "physical_android_tested": false
+    }
+  },
+  "audit_blacktap_bytecode_preserved": true,
+  "audit_exitbusy_bytecode_preserved": true,
+  "host_pixel_equivalence_to_published1963": true,
+  "gx30_gx36_validation": {
+    "gx31_policy": {
+      "status": "passed",
+      "assertions": 189503,
+      "physical_android_tested": false
+    },
+    "gx32_gx33_shader": {
+      "status": "passed",
+      "assertions": 1656,
+      "physical_android_tested": false
+    },
+    "gx34_gx35_native": {
+      "status": "passed",
+      "assertions": 3416719,
+      "physical_android_tested": false
+    },
+    "gx30_gx36_schedule": {
+      "status": "passed",
+      "assertions": 89,
+      "physical_android_tested": false
+    },
+    "gx35_direct_transfer": {
+      "status": "passed",
+      "assertions": 10770,
       "physical_android_tested": false
     }
   }
