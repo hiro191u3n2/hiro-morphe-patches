@@ -116,6 +116,8 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          export ULIKE1963_BASELINE_MPP="$GITHUB_WORKSPACE/.ci-ulike1963/input/ULike_HQ_Texture_Online_v1.9.62.mpp"
+          export ULIKE1963_MORPHE_JAR="$GITHUB_WORKSPACE/.ci-ulike1963/tools/morphe.jar"
           python3 releases/ulike1963-audit/src/build1963.py --input .ci-ulike1963/input --tools .ci-ulike1963/tools --ndk .ci-ulike1963/android-ndk-r27c --work .ci-ulike1963/build --output .ci-ulike1963/dist --jdk "$JAVA_HOME" 2>&1 | tee .ci-ulike1963/build.log
       - name: Record fresh host evidence and explicit original-APKS test status
         shell: bash
