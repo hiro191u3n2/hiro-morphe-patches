@@ -1,0 +1,1 @@
+package android.os;public final class Process {public static int myPid(){return 1965;}public static int myTid(){return (int)Thread.currentThread().getId();}public static final int THREAD_PRIORITY_BACKGROUND=10;public static void setThreadPriority(int n){}}
