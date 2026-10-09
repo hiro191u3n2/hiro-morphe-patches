@@ -1,0 +1,1 @@
+package com.hiro.ulike; public final class CameraSession1965 {public static void phase(String n,Object o){}public static void prepared(Object o,int r){}public static void previewResult(Object o,int r){}public static void input(Object p,Object f){}public static void inputTimeout(Object o,long e,boolean a){}}

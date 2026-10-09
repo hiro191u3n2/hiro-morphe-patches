@@ -1,0 +1,1 @@
+package android.os; public final class Build {public static final String MODEL="HOST_MODEL_1965", MANUFACTURER="HOST_VENDOR", DEVICE="host-device", FINGERPRINT="host";public static final class VERSION {public static int SDK_INT=36;public static final String RELEASE="16";}}
