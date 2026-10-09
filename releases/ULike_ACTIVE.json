@@ -1,22 +1,22 @@
 {
-  "ulike_version": "1.9.71",
-  "bundle_version": "1.0.204",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.71.mpp",
-  "source_sha256": "1b9bdef9a94c6b5114d34882c42d55b8d66157b4153b7a8f177c22a767a5e4a8",
-  "source_release": "ulike-v1.9.71",
-  "active_release": "ulike-v1.9.71",
-  "base_ulike_version": "1.9.70",
+  "ulike_version": "1.9.72",
+  "bundle_version": "1.0.205",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.72.mpp",
+  "source_sha256": "9fc266478d38864f62edbe21490035e8411a2dc500375494adc732d4d50c6e6c",
+  "source_release": "ulike-v1.9.72",
+  "active_release": "ulike-v1.9.72",
+  "base_ulike_version": "1.9.71",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "6d3691e7f4b534e52033ecf39b90c9989ab59cfbf9ed2b22203021fe875c3ded",
+  "base_source_sha256": "1b9bdef9a94c6b5114d34882c42d55b8d66157b4153b7a8f177c22a767a5e4a8",
   "withdrawn_versions": [
     "1.9.17",
     "1.9.66"
   ],
-  "reason": "Strong full-mode generic GPU requalification restored after candidate failure; capacity reservations account only for growth of existing slots/staging. Two complete CPU/GPU quality checks, bounded admission, CPU fallback and precise scalar failure diagnostics are retained. GPU engine allocation/diagnostics and two JNI getters are updated; shader/pixel math, other11 native payloads, camera, formats and other apps are preserved. Samsung failure root cause and speed remain unverified.",
-  "future_ulike_base": "Use .70/.203 and preserve guarded Strong mode3 GPU preference, two full-output exact quality trials, bounded GPU waits and CPU fallback, .69 complete diagnostics UI, .68 camera recovery/layout, native hooks, pixel algorithms, FIFO publication, settings and unrelated apps. Withdrawn .66/.199 remains excluded.",
+  "reason": "Camera restart recovery and bounded layout diagnostics repair from exact .71/.204. Actual camera sources pass host regressions; all other GPU/pixel/save/native and app payloads are preserved. Physical-device black-preview resolution is unverified.",
+  "future_ulike_base": "Use .72/.205 and retain .71 guarded Strong GPU preference and bounded allocation diagnostics, exact quality certification, camera restart ownership/readiness/recovery diagnostics, bounded layout sampling, pixel algorithms, formats, native ABI and unrelated apps. Withdrawn .66/.199 stays excluded.",
   "android_device_tested": false,
   "original_apk_apply_tested": false,
-  "release_status": "strong_gpu_route_repair_host_verified_original_apks_device_unverified",
+  "release_status": "camera_restart_host_verified_original_apks_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": true,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -45,7 +45,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.203",
+  "base_bundle_version": "1.0.204",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "native_methods_byte_identical": true,
@@ -64,7 +64,8 @@
   "bundle163_other_apps_preserved": true,
   "device_quality_verified": false,
   "selected_candidates": [
-    "STRONG_GPU_ROUTE_REPAIR"
+    "FRONT_RESTART_RECOVERY",
+    "LAYOUT_DIAGNOSTICS_REPAIR"
   ],
   "baseline_other_apps_preserved": true,
   "camera_startup_recovery_byte_identical": false,
@@ -72,7 +73,8 @@
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "STRONG_GPU_ROUTE_REPAIR"
+    "FRONT_RESTART_RECOVERY",
+    "LAYOUT_DIAGNOSTICS_REPAIR"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -99,8 +101,8 @@
   "non_ulike_resources_byte_identical": true,
   "quality_algorithm_and_settings_preserved": true,
   "save_format_and_codec_configuration_preserved": true,
-  "native_library_byte_identical": false,
-  "native_installer_byte_identical": false,
+  "native_library_byte_identical": true,
+  "native_installer_byte_identical": true,
   "diagnostic_stage_names": [
     "fusion",
     "noise",
@@ -116,7 +118,7 @@
   "stage_timing_payload_byte_identical": false,
   "stage_timing_algorithm_preserved": true,
   "retained_baseline_candidates": {
-    "ulike_version": "1.9.70",
+    "ulike_version": "1.9.71",
     "candidates": [
       "H1",
       "H2",
@@ -230,7 +232,8 @@
       "CAMERA_PREVIEW_REBIND",
       "LAYOUT_DIAGNOSTICS",
       "GPU_STATUS_VISIBILITY",
-      "STRONG_GPU_PREFERENCE"
+      "STRONG_GPU_PREFERENCE",
+      "STRONG_GPU_ROUTE_REPAIR"
     ]
   },
   "gpu_processing_added": true,
@@ -261,14 +264,14 @@
   "intentional_quality_algorithm_change": false,
   "host_pixel_equivalence_to_baseline": true,
   "device_save_speed_measured": false,
-  "native_installer_preserved_rows": 11,
+  "native_installer_preserved_rows": 12,
   "native_installer_total_rows": 12,
   "nr_native_library_sha256": "9efda833adbdf65cb26c9f55cc283d973e7b8b5d5366be8157d83f598303c84c",
   "nr_native_library_bytes": 17064,
   "capture_class_bytecode_identical": false,
   "nr1_nr4_preserved": true,
   "host_optimized_kernel_pixel_equivalence_verified": true,
-  "native_installer_updated_rows": 1,
+  "native_installer_updated_rows": 0,
   "h28_h33_helpers_and_native_payloads_preserved": true,
   "strong_nr_native_library_sha256": "a1bd2a7f1661866e2c44099545ae197b7a39f765a96c878ef473ea19fd0edc71",
   "strong_nr_native_library_bytes": 16104,
@@ -359,7 +362,7 @@
   },
   "camera_host_evidence": {
     "status": "passed",
-    "assertions": 726,
+    "assertions": 819,
     "physical_android_tested": false
   },
   "camera_trace_log_data_excluded": true,
@@ -368,11 +371,11 @@
   "user_incident_snapshot": true,
   "logging_async_bounded": true,
   "camera_visible_preview_verified_on_device": false,
-  "inherited_host_validation_source_version": "1.9.70",
+  "inherited_host_validation_source_version": "1.9.71",
   "fresh_whole_app_audit_in_this_release": false,
   "inherited_gpu_validation": {
-    "ulike_version": "1.9.70",
-    "source_sha256": "6d3691e7f4b534e52033ecf39b90c9989ab59cfbf9ed2b22203021fe875c3ded",
+    "ulike_version": "1.9.71",
+    "source_sha256": "1b9bdef9a94c6b5114d34882c42d55b8d66157b4153b7a8f177c22a767a5e4a8",
     "fresh_gpu_execution_in_this_release": false,
     "host_shader_execution_in_baseline": true
   },
@@ -387,10 +390,9 @@
   "restoration_created_at": "2026-10-09T04:38:57",
   "manager_downgrade_update_badge_guaranteed": false,
   "gpu_safety_gates_preserved": true,
-  "backend_diagnostics_regressions_passed": true,
   "logging_regressions_passed": true,
-  "camera_control_lifecycle_bytecode_identical": true,
-  "camera_session_bytecode_identical": true,
+  "camera_control_lifecycle_bytecode_identical": false,
+  "camera_session_bytecode_identical": false,
   "critical_pixel_kernel_methods_bytecode_identical": true,
   "pixel_kernel_helpers_bytecode_identical": true,
   "preview_output_observer_bytecode_identical": true,
@@ -406,8 +408,8 @@
   },
   "renderer_startup_repair_compiled": false,
   "inherited_camera_validation": {
-    "ulike_version": "1.9.70",
-    "source_sha256": "6d3691e7f4b534e52033ecf39b90c9989ab59cfbf9ed2b22203021fe875c3ded",
+    "ulike_version": "1.9.71",
+    "source_sha256": "1b9bdef9a94c6b5114d34882c42d55b8d66157b4153b7a8f177c22a767a5e4a8",
     "host_evidence": {
       "status": "passed",
       "assertions": 726,
@@ -421,32 +423,18 @@
   "strong_gpu_bank_wait_limit_ms": 15000,
   "strong_gpu_worker_limit": 4,
   "inherited_logging_validation": {
-    "ulike_version": "1.9.70",
-    "source_sha256": "6d3691e7f4b534e52033ecf39b90c9989ab59cfbf9ed2b22203021fe875c3ded",
+    "ulike_version": "1.9.71",
+    "source_sha256": "1b9bdef9a94c6b5114d34882c42d55b8d66157b4153b7a8f177c22a767a5e4a8",
     "fresh_logger_regressions_in_this_release": false
   },
-  "strong_gpu_preference_regressions_passed": true,
-  "qualification_certificate_regressions_passed": true,
-  "strong_preference_telemetry_regressions_passed": true,
   "gpu_other_runtime_helpers_bytecode_identical": true,
-  "strong_gpu_host_evidence": {
-    "status": "passed",
-    "assertions": 3707,
-    "physical_android_tested": false
-  },
   "inherited_gpu_admission_host_evidence": {
     "status": "passed",
     "assertions": 557,
     "physical_android_tested": false
   },
-  "new_jni_methods": [
-    "Lcom/hiro/ulike/GpuNoise1960;->capacityNative1971(J)[J",
-    "Lcom/hiro/ulike/GpuNoise1960;->failureCodeNative1971()I"
-  ],
-  "new_native_methods": [
-    "Lcom/hiro/ulike/GpuNoise1960;->capacityNative1971(J)[J",
-    "Lcom/hiro/ulike/GpuNoise1960;->failureCodeNative1971()I"
-  ],
+  "new_jni_methods": [],
+  "new_native_methods": [],
   "native_installer_inverse_verified": true,
   "samsung_gpu_failure_root_cause_confirmed": false,
   "strong_generic_fallback_regressions_passed": true,
@@ -454,5 +442,14 @@
   "native_failure_diagnostics_regressions_passed": true,
   "strong_failure_diagnostics_regressions_passed": true,
   "native_facade_regressions_passed": true,
-  "gpu_shader_and_included_cpu_sources_byte_identical": true
+  "gpu_shader_and_included_cpu_sources_byte_identical": false,
+  "changed_native_methods": [],
+  "front_restart_repair_compiled": true,
+  "preview_layout_diagnostics_repair_compiled": true,
+  "fresh_camera_recovery_test_in_this_release": true,
+  "inherited_strong_gpu_host_evidence": {
+    "status": "passed",
+    "assertions": 3707,
+    "physical_android_tested": false
+  }
 }
