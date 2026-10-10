@@ -1,0 +1,743 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+/* GX1/GX2/GX4/GX7: NR9--NR13 unchanged single-image computation.
+ * No search reduction, precision reduction, synthetic detail or frame merging.
+ * GL_EXT_gpu_shader5 precise prevents contraction/reassociation; every device
+ * must additionally pass the Java oracle admission before this shader is used.
+ * Binding 0: immutable ARGB source band, row u[14] is its first row.
+ * Binding 1: packed preparation delta or full ARGB, core rows only.
+ * Binding 2: 16 noise bins then interleaved regional Y/C/detail evidence;
+ *            regional grid row u[13] is first retained row.
+ * Binding 3: optional core-only interleaved budgetQ8/detailQ8.
+ * Binding 4/5/6: immutable half/quarter/eighth delta maps, first rows u[15..17].
+ * Binding 7: sparse NR13 confidence, ceil(width/4)*ceil(coreRows/4) integers;
+ *            allocate/clear before dispatch. One owning invocation per cell.
+ * u[0]=width,u[1]=source rows,u[2]=begin,u[3]=end,u[4]=validBegin,
+ * u[5]=validEnd,u[6]=originY,u[7]=fullHeight,u[8]=noise,u[9]=shadows,
+ * u[10]=mode (0 half prep,1 quarter prep,2 eighth prep,3 full),
+ * u[11]=hasPolicy,u[12]=captureConfidence,u[13]=firstGridY,
+ * u[14]=sourceFirstY,u[15..17]=mapFirstY. f[] unused.
+ * u[31]=global invocation base for a stripe; groupStart*localSize for tile8.
+ * Stripe dispatch: ceil(width*(end-begin)/localSize) workgroups.
+ * Tile8 dispatch: ceil(width/8)*ceil((end-begin)/(localSize/8)) workgroups.
+ */
+precision highp float;
+precision highp int;
+#ifndef GX_LOCAL_SIZE
+#define GX_LOCAL_SIZE 64
+#endif
+#ifndef GX_STRONG_MODE
+#define GX_STRONG_MODE -1
+#endif
+#ifndef GX_TILE_WIDTH
+#define GX_TILE_WIDTH 0
+#endif
+#if GX_STRONG_MODE >= 0
+#define STRONG_MODE GX_STRONG_MODE
+#else
+#define STRONG_MODE u[10]
+#endif
+// GX27: compile each preparation/full mode with exactly its original support.
+// No NLM candidate or patch observation is removed. Generic mode keeps radius7.
+#if GX_STRONG_MODE == 2
+#define GX_CACHE_RADIUS 3
+#elif GX_STRONG_MODE == 0 || GX_STRONG_MODE == 3
+#define GX_CACHE_RADIUS 5
+#else
+#define GX_CACHE_RADIUS 7
+#endif
+layout(local_size_x=GX_LOCAL_SIZE,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source1960 { uint src[]; };
+layout(std430,binding=1) writeonly buffer Output1960 { uint dst[]; };
+layout(std430,binding=2) readonly buffer Evidence1960 { float evidence[]; };
+layout(std430,binding=3) readonly buffer Policy1960 { int policy[]; };
+layout(std430,binding=4) readonly buffer Half1960 { uint halfMap[]; };
+layout(std430,binding=5) readonly buffer Quarter1960 { uint quarterMap[]; };
+layout(std430,binding=6) readonly buffer Eighth1960 { uint eighthMap[]; };
+layout(std430,binding=7) writeonly buffer Confidence1960 { int confidenceMap[]; };
+uniform int u[32];
+uniform float f[32];
+
+#ifndef GX_IEEE_DIV73
+#define GX_IEEE_DIV73 0
+#endif
+#ifndef GX_POW2_EXACT78
+#define GX_POW2_EXACT78 0
+#endif
+#if GX_IEEE_DIV73
+/* Finite binary32 division with round-to-nearest, ties-to-even. Hardware
+ * division supplies only a guess; every published quotient is verified with
+ * exact integer products/remainders. Outlier guesses use integer long division.
+ * NaN payload propagation is outside the finite contract; return a quiet NaN. */
+bool divGreater1973(uint ah,uint al,uint bh,uint bl){return ah>bh||(ah==bh&&al>bl);}
+uint divFloor1973(uint a,uint b,int shift){
+    uint q=1u,r=a-b;
+    for(int bit=0;bit<23;bit++)if(bit<shift){
+        r<<=1;q<<=1;
+        if(r>=b){r-=b;q|=1u;}
+    }
+    return q;
+}
+uint ieeeDivBits1973(uint ax,uint bx){
+    uint sign=(ax^bx)&0x80000000u,a=ax&0x7fffffffu,b=bx&0x7fffffffu;
+    if(a>0x7f800000u||b>0x7f800000u)return 0x7fc00000u;
+    if(a==0x7f800000u)return b==0x7f800000u?0x7fc00000u:sign|0x7f800000u;
+    if(b==0x7f800000u)return sign;
+    if(b==0u)return a==0u?0x7fc00000u:sign|0x7f800000u;
+    if(a==0u)return sign;
+    int ea=int(a>>23)-127,eb=int(b>>23)-127;
+    uint ma=(a&0x007fffffu)|0x00800000u,mb=(b&0x007fffffu)|0x00800000u;
+    if((a>>23)==0u){int normal=23-findMSB(a);ma=a<<uint(normal);ea=-126-normal;}
+    if((b>>23)==0u){int normal=23-findMSB(b);mb=b<<uint(normal);eb=-126-normal;}
+    int exponent=ea-eb+127;
+    if(ma<mb){ma<<=1;exponent--;}
+    if(exponent>=255)return sign|0x7f800000u;
+    if(exponent<-23)return sign;
+    // Exactly half the minimum subnormal ties to zero. Greater ratios round
+    // up; reduced precision is selected before rounding, never double-rounded.
+    if(exponent==-23)return sign|(ma>mb?1u:0u);
+    int shift=exponent>0?23:exponent+22;
+    uint nh=shift==0?0u:ma>>uint(32-shift),nl=ma<<uint(shift);
+    precise float guess=float(ma)/float(mb);
+    precise float scaled=guess*uintBitsToFloat(uint(shift+127)<<23);
+    uint q=uint(scaled);
+    #ifdef GX_DIV_GUESS_PERTURB73
+    q=uint(max(0,int(q)+GX_DIV_GUESS_PERTURB73));
+    #endif
+    uint ph=0u,pl=0u;
+    bool verified=false;
+    for(int correction=0;correction<8;correction++){
+        umulExtended(mb,q,ph,pl);
+        if(divGreater1973(ph,pl,nh,nl)){if(q==0u)break;q--;continue;}
+        uint nextLo=pl+mb,nextHi=ph+(nextLo<pl?1u:0u);
+        if(!divGreater1973(nextHi,nextLo,nh,nl)){q++;continue;}
+        verified=true;break;
+    }
+    if(!verified){q=divFloor1973(ma,mb,shift);umulExtended(mb,q,ph,pl);}
+    // The validated difference is <mb<2^24; modulo low-word subtraction is
+    // exact even when the 48-bit subtraction borrows from its high word.
+    uint remainder=nl-pl,twice=remainder<<1;
+    if(twice>mb||(twice==mb&&(q&1u)!=0u))q++;
+    if(exponent<=0)return sign|q;
+    if(q==0x01000000u){q>>=1;exponent++;}
+    if(exponent>=255)return sign|0x7f800000u;
+    return sign|(uint(exponent)<<23)|(q&0x007fffffu);
+}
+float ieeeDiv1973(float a,float b){return uintBitsToFloat(ieeeDivBits1973(floatBitsToUint(a),floatBitsToUint(b)));}
+
+#if GX_POW2_EXACT78
+/* .78: positive power-of-two scaling is exact while both operands/results
+ * are normal. Only the exponent changes; subnormal boundaries and specials
+ * retain the original integer-verified RNE divider, including signed zero. */
+uint ieeePow2DivBits1978(uint bits,uint shift){
+    uint exponent=(bits>>23)&255u;
+    if(shift<=127u&&exponent>shift&&exponent<255u)return bits-(shift<<23);
+    return ieeeDivBits1973(bits,(shift+127u)<<23);
+}
+float ieeePow2Div1978(float value,uint shift){return uintBitsToFloat(ieeePow2DivBits1978(floatBitsToUint(value),shift));}
+#endif
+
+#endif
+
+/* GX16/GX27: immutable packed pixels and their unchanged scalar luma are loaded
+ * cooperatively once for this linear workgroup's support. Each vertical row
+ * covers GX_LOCAL_SIZE+2*radius adjacent source positions; crossings use
+ * their actual source row. Full/half needs radius5, quarter NLM radius7,
+ * eighth preparation radius3. The
+ * cache contains all original 8x5/24x9 observations; no reduction/reordering.
+ * GX33 additionally retains the exact scalar red/blue chroma and uses a
+ * rectangular output tile for specialized programs. The engine accounts for
+ * all pixel/chroma/difference bytes before compilation; every candidate also
+ * needs unchanged-output admission and actual complete-path device timing.
+ */
+#if GX_TILE_WIDTH > 0
+// GX33: a real 2D output tile. The engine dispatches ceil(width/8) by
+// ceil(coreRows/(localSize/8)) tiles, and u[31] is groupStart*localSize.
+const int TILE_HEIGHT=GX_LOCAL_SIZE/GX_TILE_WIDTH;
+const int CACHE_PITCH=GX_TILE_WIDTH+2*GX_CACHE_RADIUS;
+const int CACHE_ROWS=TILE_HEIGHT+2*GX_CACHE_RADIUS;
+#else
+const int CACHE_PITCH=GX_LOCAL_SIZE+2*GX_CACHE_RADIUS;
+const int CACHE_ROWS=2*GX_CACHE_RADIUS+1;
+#endif
+const int CACHE_COUNT=CACHE_PITCH*CACHE_ROWS;
+shared uint cachedPixels[CACHE_COUNT];
+shared float cachedLuma[CACHE_COUNT];
+// The 2D shape is small enough to retain both unchanged scalar chroma
+// components at all sizes. A large legacy 128-lane stripe keeps its original
+// 8B/pixel cache to remain below the GLES minimum 32KiB shared-memory limit.
+#if GX_TILE_WIDTH > 0 || GX_LOCAL_SIZE <= 64
+#define GX_CACHE_CHROMA 1
+shared float cachedRed[CACHE_COUNT];
+shared float cachedBlue[CACHE_COUNT];
+#else
+#define GX_CACHE_CHROMA 0
+#endif
+#if GX_TILE_WIDTH > 0 && GX_STRONG_MODE != 2
+#define GX_DIFF_CACHE 1
+#if GX_STRONG_MODE == 1 || GX_STRONG_MODE < 0
+const int DIFF_RADIUS=7;
+const int DIFF_OFFSETS=12;
+#else
+const int DIFF_RADIUS=5;
+const int DIFF_OFFSETS=4;
+#endif
+// For a negative candidate displacement, the same squared distance is read
+// from its reverse pair. Only the lower half of candidate orientations needs
+// storage. Patch positions extend one pixel beyond the output tile.
+const int DIFF_PITCH=GX_TILE_WIDTH+DIFF_RADIUS+1;
+const int DIFF_ROWS=TILE_HEIGHT+DIFF_RADIUS+1;
+const int DIFF_PLANE=DIFF_PITCH*DIFF_ROWS;
+shared float cachedDistance[DIFF_OFFSETS*DIFF_PLANE];
+#else
+#define GX_DIFF_CACHE 0
+#endif
+int centerX=0,centerY=0,centerLane=0,tileX=0,tileY=0;
+bool cacheReady=false;
+float rawLuma(uint p){
+    precise float result=.299*float((p>>16)&255u)+.587*float((p>>8)&255u)+.114*float(p&255u);
+    return result;
+}
+uint rawPixel(int x,int y){
+    x=clamp(x,0,u[0]-1);y=clamp(y,0,u[1]-1);
+    return src[(y-u[14])*u[0]+x];
+}
+int cacheAt(int x,int y){
+#if GX_TILE_WIDTH > 0
+    int col=x-tileX+GX_CACHE_RADIUS,dy=y-tileY+GX_CACHE_RADIUS;
+#else
+    int col=centerLane+x-centerX+GX_CACHE_RADIUS,dy=y-centerY+GX_CACHE_RADIUS;
+#endif
+    return col>=0&&col<CACHE_PITCH&&dy>=0&&dy<CACHE_ROWS?dy*CACHE_PITCH+col:-1;
+}
+vec3 cacheColor(int x,int y){
+    x=clamp(x,0,u[0]-1);y=clamp(y,0,u[1]-1);
+    int at=cacheReady?cacheAt(x,y):-1;
+    uint p=at>=0?cachedPixels[at]:rawPixel(x,y);
+    precise float yy=at>=0?cachedLuma[at]:rawLuma(p);
+#if GX_CACHE_CHROMA
+    if(at>=0)return vec3(yy,cachedRed[at],cachedBlue[at]);
+#endif
+    precise float rr=float((p>>16)&255u)-yy,bb=float(p&255u)-yy;
+    return vec3(yy,rr,bb);
+}
+float pairDistance(vec3 ca,vec3 cb){
+    // Exact original expression, including the multiplication/addition order.
+    precise float dy=ca.x-cb.x,dr=ca.y-cb.y,db=ca.z-cb.z;
+    precise float result=dy*dy+.11*(dr*dr+db*db);
+    return result;
+}
+#if GX_DIFF_CACHE
+ivec2 differenceOffset(int offset){
+    if(STRONG_MODE==1){
+        if(offset<2)return ivec2((offset+1)*3,0);
+        return ivec2(((offset-2)%5-2)*3,((offset-2)/5+1)*3);
+    }
+    return offset==0?ivec2(4,0):ivec2((offset-2)*4,4);
+}
+void fillDifferences(int first,int last){
+    int count=STRONG_MODE==1?12:4;
+    for(int at=int(gl_LocalInvocationIndex);at<count*DIFF_PLANE;at+=GX_LOCAL_SIZE){
+        int offset=at/DIFF_PLANE,pos=at%DIFF_PLANE;
+        int x=tileX+pos%DIFF_PITCH-DIFF_RADIUS;
+        int y=tileY+pos/DIFF_PITCH-DIFF_RADIUS;
+        ivec2 delta=differenceOffset(offset);
+        // Extra unused support never reads outside the immutable supplied band.
+        precise vec3 ca=cacheColor(x,clamp(y,first,last));
+        precise vec3 cb=cacheColor(x+delta.x,clamp(y+delta.y,first,last));
+        cachedDistance[at]=pairDistance(ca,cb);
+    }
+    barrier();
+}
+#endif
+void fillCache(){
+    int groupBase=int(uint(u[31])+gl_WorkGroupID.x*uint(GX_LOCAL_SIZE));
+    int sourceBase=u[2]*u[0]+groupBase;
+    int radius=STRONG_MODE==1?7:STRONG_MODE==2?3:5;
+    int first=max(u[14],max(u[4],u[2]-radius));
+    int last=min(u[5],u[3]+radius)-1;
+    for(int at=int(gl_LocalInvocationIndex);at<CACHE_COUNT;at+=GX_LOCAL_SIZE){
+        int col=at%CACHE_PITCH,dy=at/CACHE_PITCH-GX_CACHE_RADIUS;
+#if GX_TILE_WIDTH > 0
+        int x=clamp(tileX+col-GX_CACHE_RADIUS,0,u[0]-1),y=clamp(tileY+dy,first,last);
+#else
+        // Invalid trailing lanes still join the barrier. Their unused support
+        // loads are clamped into the supplied immutable source band.
+        int logical=clamp(sourceBase+col-GX_CACHE_RADIUS,0,u[0]*u[1]-1);
+        int x=logical%u[0],y=clamp(logical/u[0]+dy,first,last);
+#endif
+        uint p=rawPixel(x,y);cachedPixels[at]=p;cachedLuma[at]=rawLuma(p);
+#if GX_CACHE_CHROMA
+        precise float rr=float((p>>16)&255u)-cachedLuma[at],bb=float(p&255u)-cachedLuma[at];
+        cachedRed[at]=rr;cachedBlue[at]=bb;
+#endif
+    }
+    barrier();cacheReady=true;
+#if GX_DIFF_CACHE
+    fillDifferences(first,last);
+#endif
+}
+
+int halfSize(int a){return a/2+(a&1);}
+int roundFloat(float value){
+    int whole=int(value);
+    // Exact Java Math.round ties, without rounding value+0.5 prematurely.
+    precise float fraction=value-float(whole);
+    return whole+(fraction>=0.5?1:fraction< -0.5?-1:0);
+}
+int byteValue(float value){return clamp(roundFloat(value),0,255);}
+float square(float value){precise float result=value*value;return result;}
+uint pixel(int x,int y){
+    x=clamp(x,0,u[0]-1);y=clamp(y,0,u[1]-1);
+    int at=cacheReady?cacheAt(x,y):-1;
+    return at>=0?cachedPixels[at]:rawPixel(x,y);
+}
+float luma(uint p){
+    return rawLuma(p);
+}
+vec3 color(int x,int y){
+    return cacheColor(x,y);
+}
+float sampleDistance(int ax,int ay,int bx,int by,vec3 ca,vec3 cb){
+#if GX_DIFF_CACHE
+    // The original observation can clamp each endpoint independently. Reuse
+    // only if the resulting displacement is still an original candidate;
+    // otherwise compute that exact clamped pair directly.
+    ax=clamp(ax,0,u[0]-1);bx=clamp(bx,0,u[0]-1);
+    ay=clamp(ay,0,u[1]-1);by=clamp(by,0,u[1]-1);
+    int dx=bx-ax,dy=by-ay;
+    if(dy<0||(dy==0&&dx<0)){int tx=ax,ty=ay;ax=bx;ay=by;bx=tx;by=ty;dx=-dx;dy=-dy;}
+    int offset=-1;
+    if(STRONG_MODE==1){
+        if(dy==0&&(dx==3||dx==6))offset=dx/3-1;
+        else if((dy==3||dy==6)&&dx>=-6&&dx<=6&&dx%3==0)offset=2+(dy/3-1)*5+(dx+6)/3;
+    }else{
+        if(dy==0&&dx==4)offset=0;
+        else if(dy==4&&(dx==-4||dx==0||dx==4))offset=1+(dx+4)/4;
+    }
+    int col=ax-tileX+DIFF_RADIUS,row=ay-tileY+DIFF_RADIUS;
+    if(offset>=0&&col>=0&&col<DIFF_PITCH&&row>=0&&row<DIFF_ROWS)
+        return cachedDistance[offset*DIFF_PLANE+row*DIFF_PITCH+col];
+#endif
+    return pairDistance(ca,cb);
+}
+float sigma(int offset,float mean){
+#if GX_IEEE_DIV73
+    precise float x=clamp(ieeeDiv1973((mean-16.0),32.0),0.0,7.0);
+#else
+    precise float x=clamp((mean-16.0)/32.0,0.0,7.0);
+#endif
+    int a=int(x),b=min(7,a+1);
+    precise float result=evidence[u[20]+offset+a]*(1.0-(x-float(a)))+evidence[u[20]+offset+b]*(x-float(a));
+    return result;
+}
+float structure(int x,int y,int validBegin,int validEnd){
+    precise float left=0.0,right=0.0,up=0.0,down=0.0;
+    int n=0;
+    for(int k=-1;k<=1;k++){
+        int sideY=clamp(y+k,validBegin,validEnd-1),upY=clamp(y-2,validBegin,validEnd-1),downY=clamp(y+2,validBegin,validEnd-1);
+        uint a=pixel(x-2,sideY),b=pixel(x+2,sideY),c=pixel(x+k,upY),d=pixel(x+k,downY);
+        if((a>>24)!=255u||(b>>24)!=255u||(c>>24)!=255u||(d>>24)!=255u)return 255.0;
+        left+=color(x-2,sideY).x;right+=color(x+2,sideY).x;
+        up+=color(x+k,upY).x;down+=color(x+k,downY).x;n++;
+    }
+#if GX_IEEE_DIV73
+    precise float result=ieeeDiv1973((abs(right-left)+abs(down-up)),float(n));return result;
+#else
+    precise float result=(abs(right-left)+abs(down-up))/float(n);return result;
+#endif
+}
+vec2 guide(int x,int y,int validBegin,int validEnd,float sy,float sc){
+    precise float ly=0.0,ry=0.0,uy=0.0,dy=0.0,lr=0.0,rr=0.0,ur=0.0,dr=0.0,lb=0.0,rb=0.0,ub=0.0,db=0.0;
+    for(int k=-1;k<=1;k++)for(int d=2;d<=3;d++){
+        int sideY=clamp(y+k,validBegin,validEnd-1),upY=clamp(y-d,validBegin,validEnd-1),downY=clamp(y+d,validBegin,validEnd-1);
+        uint a=pixel(x-d,sideY),b=pixel(x+d,sideY),c=pixel(x+k,upY),e=pixel(x+k,downY);
+        if((a>>24)!=255u||(b>>24)!=255u||(c>>24)!=255u||(e>>24)!=255u)return vec2(0.0);
+        precise vec3 ca=color(x-d,sideY),cb=color(x+d,sideY),cc=color(x+k,upY),ce=color(x+k,downY);
+        ly+=ca.x;ry+=cb.x;uy+=cc.x;dy+=ce.x;
+        lr+=ca.y;rr+=cb.y;ur+=cc.y;dr+=ce.y;
+        lb+=ca.z;rb+=cb.z;ub+=cc.z;db+=ce.z;
+    }
+    precise float centerY=0.0,centerR=0.0,centerB=0.0;
+    for(int py=-1;py<=1;py++)for(int px=-1;px<=1;px++){
+        int cy=clamp(y+py,validBegin,validEnd-1);uint p=pixel(x+px,cy);
+        if((p>>24)!=255u)return vec2(0.0);
+        precise vec3 cp=color(x+px,cy);centerY+=cp.x;centerR+=cp.y;centerB+=cp.z;
+    }
+#if GX_IEEE_DIV73
+    precise float curveY=ieeeDiv1973(max(abs(ly+ry-ieeeDiv1973(centerY*4.0,3.0)),abs(uy+dy-ieeeDiv1973(centerY*4.0,3.0))),6.0);
+#else
+    precise float curveY=max(abs(ly+ry-centerY*4.0/3.0),abs(uy+dy-centerY*4.0/3.0))/6.0;
+#endif
+#if GX_IEEE_DIV73
+    precise float curveC=ieeeDiv1973(max(abs(lr+rr-ieeeDiv1973(centerR*4.0,3.0))+abs(lb+rb-ieeeDiv1973(centerB*4.0,3.0)),abs(ur+dr-ieeeDiv1973(centerR*4.0,3.0))+abs(ub+db-ieeeDiv1973(centerB*4.0,3.0))),6.0);
+#else
+    precise float curveC=max(abs(lr+rr-centerR*4.0/3.0)+abs(lb+rb-centerB*4.0/3.0),abs(ur+dr-centerR*4.0/3.0)+abs(ub+db-centerB*4.0/3.0))/6.0;
+#endif
+#if GX_IEEE_DIV73
+    precise float edgeY=ieeeDiv1973(max(abs(ry-ly),abs(dy-uy)),6.0);
+#else
+    precise float edgeY=max(abs(ry-ly),abs(dy-uy))/6.0;
+#endif
+#if GX_IEEE_DIV73
+    precise float edgeC=ieeeDiv1973(max(abs(rr-lr)+abs(rb-lb),abs(dr-ur)+abs(db-ub)),6.0);
+#else
+    precise float edgeC=max(abs(rr-lr)+abs(rb-lb),abs(dr-ur)+abs(db-ub))/6.0;
+#endif
+    edgeY=max(0.0,edgeY-sy*.85);edgeC=max(0.0,edgeC-sc*2.0);
+#if GX_IEEE_DIV73
+    precise float outY=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(edgeY,(sy*1.7+2.0)))+square(ieeeDiv1973(max(0.0,curveY-sy*1.4),(sy*.85+1.0)))));
+#else
+    precise float outY=1.0/(1.0+square(edgeY/(sy*1.7+2.0))+square(max(0.0,curveY-sy*1.4)/(sy*.85+1.0)));
+#endif
+#if GX_IEEE_DIV73
+    precise float outC=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(edgeC,(sc*1.0+1.5)))+square(ieeeDiv1973(max(0.0,curveC-sc*2.5),(sc*1.5+2.0)))));
+#else
+    precise float outC=1.0/(1.0+square(edgeC/(sc*1.0+1.5))+square(max(0.0,curveC-sc*2.5)/(sc*1.5+2.0)));
+#endif
+    return vec2(outY,outC);
+}
+float regionalSigma(int x,int y,int plane){
+    int rw=(u[0]+63)/64,rh=(u[7]+63)/64;
+#if GX_POW2_EXACT78
+    precise float fx=clamp(ieeePow2Div1978((float(x)+.5),6u)-.5,0.0,float(rw-1));
+#elif GX_IEEE_DIV73
+    precise float fx=clamp(ieeeDiv1973((float(x)+.5),64.0)-.5,0.0,float(rw-1));
+#else
+    precise float fx=clamp((float(x)+.5)/64.0-.5,0.0,float(rw-1));
+#endif
+#if GX_POW2_EXACT78
+    precise float fy=clamp(ieeePow2Div1978((float(y)+.5),6u)-.5,0.0,float(rh-1));
+#elif GX_IEEE_DIV73
+    precise float fy=clamp(ieeeDiv1973((float(y)+.5),64.0)-.5,0.0,float(rh-1));
+#else
+    precise float fy=clamp((float(y)+.5)/64.0-.5,0.0,float(rh-1));
+#endif
+    int ix=int(fx),iy=int(fy),nx=min(rw-1,ix+1),ny=min(rh-1,iy+1);
+    fx-=float(ix);fy-=float(iy);iy-=u[13];ny-=u[13];
+    precise float a=evidence[16+3*(iy*rw+ix)+plane],b=evidence[16+3*(iy*rw+nx)+plane];
+    precise float c=evidence[16+3*(ny*rw+ix)+plane],d=evidence[16+3*(ny*rw+nx)+plane];
+    precise float result=(a*(1.0-fx)+b*fx)*(1.0-fy)+(c*(1.0-fx)+d*fx)*fy;return result;
+}
+/* GX28: only reject an already impossible candidate. Every squared term is
+ * finite/nonnegative, so its ordered partial distance cannot decrease. Use
+ * the original final divide/subtract/max/divide predicate on that partial sum,
+ * not an algebraically rearranged threshold: this preserves fp32 cutoff ties.
+ * Any candidate that can contribute still evaluates all5/9 original samples
+ * in their original order, and alpha-invalid patches still never contribute. */
+bool impossibleDistance(float distance,float samples,float variance,float h2){
+#if GX_IEEE_DIV73
+    precise float adjusted=max(0.0,ieeeDiv1973(distance,samples)-2.0*variance);
+#else
+    precise float adjusted=max(0.0,distance/samples-2.0*variance);
+#endif
+#if GX_IEEE_DIV73
+    precise float z=ieeeDiv1973(adjusted,h2);
+#else
+    precise float z=adjusted/h2;
+#endif
+    return z>5.0;
+}
+// Eight original-resolution or half-resolution candidates, five samples each.
+vec3 nonlocalFine(int x,int y,int validBegin,int validEnd,float sy,float sc){
+    precise vec3 cp=color(x,y);
+    precise float total=1.0,sumY=cp.x,sumR=cp.y,sumB=cp.z;
+    precise float variance=sy*sy+.22*sc*sc,h2=max(1.5,variance*3.2);
+    for(int dy=-4;dy<=4;dy+=4)for(int dx=-4;dx<=4;dx+=4){
+        if(dx==0&&dy==0)continue;
+        int cx=x+dx,cy=y+dy;
+        if(cx<0||cy<validBegin||cx>=u[0]||cy>=validEnd)continue;
+        precise float distance=0.0,patchY=0.0,patchR=0.0,patchB=0.0;bool valid=true;
+        for(int k=0;k<5;k++){
+            int px=k==1?-1:k==2?1:0,py=k==3?-1:k==4?1:0;
+            int ay=clamp(y+py,validBegin,validEnd-1),by=clamp(cy+py,validBegin,validEnd-1);
+            uint a=pixel(x+px,ay),b=pixel(cx+px,by);
+            if((a>>24)!=255u||(b>>24)!=255u){valid=false;continue;}
+            precise vec3 ca=color(x+px,ay),cb=color(cx+px,by);
+            distance+=sampleDistance(x+px,ay,cx+px,by,ca,cb);
+            if(impossibleDistance(distance,5.0,variance,h2)){valid=false;break;}
+            patchY+=cb.x;patchR+=cb.y;patchB+=cb.z;
+        }
+        if(!valid)continue;
+#if GX_IEEE_DIV73
+        distance=max(0.0,ieeeDiv1973(distance,5.0)-2.0*variance);precise float z=ieeeDiv1973(distance,h2);
+#else
+        distance=max(0.0,distance/5.0-2.0*variance);precise float z=distance/h2;
+#endif
+        if(z>5.0)continue;
+#if GX_IEEE_DIV73
+        precise float weight=ieeeDiv1973(1.0,(1.0+z+z*z*.5+ieeeDiv1973(z*z*z,6.0)));
+#else
+        precise float weight=1.0/(1.0+z+z*z*.5+z*z*z/6.0);
+#endif
+#if GX_IEEE_DIV73
+        sumY+=weight*(ieeeDiv1973(patchY,5.0));sumR+=weight*(ieeeDiv1973(patchR,5.0));sumB+=weight*(ieeeDiv1973(patchB,5.0));total+=weight;
+#else
+        sumY+=weight*(patchY/5.0);sumR+=weight*(patchR/5.0);sumB+=weight*(patchB/5.0);total+=weight;
+#endif
+    }
+#if GX_IEEE_DIV73
+    precise vec3 result=vec3(ieeeDiv1973(sumY,total),ieeeDiv1973(sumR,total),ieeeDiv1973(sumB,total));return result;
+#else
+    precise vec3 result=vec3(sumY/total,sumR/total,sumB/total);return result;
+#endif
+}
+// Twenty-four quarter-resolution candidates, nine samples each.
+vec3 nonlocalCoarse(int x,int y,float sy,float sc){
+    precise vec3 cp=color(x,y);
+    precise float total=1.0,sumY=cp.x,sumR=cp.y,sumB=cp.z;
+    precise float variance=sy*sy+.22*sc*sc,h2=max(1.5,variance*2.6);
+    for(int dy=-6;dy<=6;dy+=3)for(int dx=-6;dx<=6;dx+=3){
+        if(dx==0&&dy==0)continue;
+        int cx=x+dx,cy=y+dy;
+        if(cx<0||cy<0||cx>=u[0]||cy>=u[1])continue;
+        if((pixel(cx,cy)>>24)!=255u)continue;
+        precise float distance=0.0;bool valid=true;
+        // Flatten only the loop indices; row-major observation order is exact.
+        for(int k=0;k<9;k++){
+            int py=k/3-1,px=k%3-1;
+            uint a=pixel(x+px,y+py),b=pixel(cx+px,cy+py);
+            if((a>>24)!=255u||(b>>24)!=255u){valid=false;continue;}
+            precise vec3 ca=color(x+px,y+py),cb=color(cx+px,cy+py);
+            distance+=sampleDistance(x+px,y+py,cx+px,cy+py,ca,cb);
+            if(impossibleDistance(distance,9.0,variance,h2)){valid=false;break;}
+        }
+        if(!valid)continue;
+#if GX_IEEE_DIV73
+        distance=max(0.0,ieeeDiv1973(distance,9.0)-2.0*variance);precise float z=ieeeDiv1973(distance,h2);
+#else
+        distance=max(0.0,distance/9.0-2.0*variance);precise float z=distance/h2;
+#endif
+        if(z>5.0)continue;
+#if GX_IEEE_DIV73
+        precise float weight=ieeeDiv1973(1.0,(1.0+z+z*z*.5+ieeeDiv1973(z*z*z,6.0)));
+#else
+        precise float weight=1.0/(1.0+z+z*z*.5+z*z*z/6.0);
+#endif
+        precise vec3 cq=color(cx,cy);
+        sumY+=weight*cq.x;sumR+=weight*cq.y;sumB+=weight*cq.z;total+=weight;
+    }
+#if GX_IEEE_DIV73
+    precise vec3 result=vec3(ieeeDiv1973(sumY,total),ieeeDiv1973(sumR,total),ieeeDiv1973(sumB,total));return result;
+#else
+    precise vec3 result=vec3(sumY/total,sumR/total,sumB/total);return result;
+#endif
+}
+uint packDelta(int gray,float r,float g,float b){
+    return (uint(clamp(gray,0,255))<<24)|(uint(clamp(roundFloat(r),-127,127)&255)<<16)|
+           (uint(clamp(roundFloat(g),-127,127)&255)<<8)|uint(clamp(roundFloat(b),-127,127)&255);
+}
+void localWork(int x,int y,int validBegin,int validEnd,float thresholdY,float thresholdC,vec3 cp,
+               out vec3 sums,out vec3 weights){
+    precise float sumY=0.0,sumR=0.0,sumB=0.0,weightY=0.0,weightC=0.0,varY=0.0;
+    for(int dy=-2;dy<=2;dy++)for(int dx=-2;dx<=2;dx++){
+        int cy=clamp(y+dy,validBegin,validEnd-1);uint q=pixel(x+dx,cy);
+        if((q>>24)!=255u)continue;
+        precise vec3 cq=color(x+dx,cy);
+        precise float base=dx==0&&dy==0?4.0:abs(dx)<=1&&abs(dy)<=1?2.0:1.0;
+#if GX_IEEE_DIV73
+        precise float wy=ieeeDiv1973(base,(1.0+square(ieeeDiv1973((cq.x-cp.x),thresholdY))));
+#else
+        precise float wy=base/(1.0+square((cq.x-cp.x)/thresholdY));
+#endif
+#if GX_IEEE_DIV73
+        precise float wc=ieeeDiv1973(base,(1.0+.12*square(ieeeDiv1973((cq.x-cp.x),thresholdY))+square(ieeeDiv1973((cq.y-cp.y),thresholdC))+square(ieeeDiv1973((cq.z-cp.z),thresholdC))));
+#else
+        precise float wc=base/(1.0+.12*square((cq.x-cp.x)/thresholdY)+square((cq.y-cp.y)/thresholdC)+square((cq.z-cp.z)/thresholdC));
+#endif
+        sumY+=wy*cq.x;weightY+=wy;varY+=wy*square(cq.x-cp.x);
+        sumR+=wc*cq.y;sumB+=wc*cq.z;weightC+=wc;
+    }
+    sums=vec3(sumY,sumR,sumB);weights=vec3(weightY,weightC,varY);
+}
+uint preparePixel(int x,int y){
+    uint p=pixel(x,y);precise vec3 cp=color(x,y);
+    if((p>>24)!=255u)return 0u;
+    precise float sy=sigma(0,cp.x),sc=sigma(8,cp.x);
+    if(sy<.40&&sc<.40)return uint(roundFloat(cp.x))<<24;
+    precise vec2 flatness=guide(x,y,0,u[1],sy,sc);
+#if GX_IEEE_DIV73
+    precise float legacyFlat=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(structure(x,y,0,u[1]),(sy*3.0+3.0)))));
+#else
+    precise float legacyFlat=1.0/(1.0+square(structure(x,y,0,u[1])/(sy*3.0+3.0)));
+#endif
+    precise float thresholdY=max(3.0,sy*4.5),thresholdC=max(5.0,sc*5.5);
+    precise vec3 sums,weights;localWork(x,y,0,u[1],thresholdY,thresholdC,cp,sums,weights);
+#if GX_IEEE_DIV73
+    precise float dark=clamp(ieeeDiv1973((144.0-cp.x),112.0),0.0,1.0);
+#else
+    precise float dark=clamp((144.0-cp.x)/112.0,0.0,1.0);
+#endif
+    precise float strength=.60+.08*float(u[8])+(u[9]!=0?.10*dark:0.0);
+#if GX_IEEE_DIV73
+    precise float localVar=ieeeDiv1973(weights.z,max(.001,weights.x));
+#else
+    precise float localVar=weights.z/max(.001,weights.x);
+#endif
+#if GX_IEEE_DIV73
+    precise float ly=sy>=.40?min(.98,strength)*legacyFlat*clamp(ieeeDiv1973(sy*sy,max(sy*sy,localVar*.55)),.12,1.0):0.0;
+#else
+    precise float ly=sy>=.40?min(.98,strength)*legacyFlat*clamp(sy*sy/max(sy*sy,localVar*.55),.12,1.0):0.0;
+#endif
+    precise float lc=sc>=.40?min(.99,strength+.10)*(STRONG_MODE==0?flatness.y:max(flatness.y,legacyFlat)):0.0;
+#if GX_IEEE_DIV73
+    precise float targetY=ieeeDiv1973(sums.x,max(.001,weights.x)),targetR=ieeeDiv1973(sums.y,max(.001,weights.y)),targetB=ieeeDiv1973(sums.z,max(.001,weights.y));
+#else
+    precise float targetY=sums.x/max(.001,weights.x),targetR=sums.y/max(.001,weights.y),targetB=sums.z/max(.001,weights.y);
+#endif
+    if(STRONG_MODE<=1&&(sy>=.60||sc>=.60)&&flatness.x>.72){
+        precise vec3 nl=STRONG_MODE==1?nonlocalCoarse(x,y,sy,sc):nonlocalFine(x,y,0,u[1],sy,sc);
+        precise float blend=(STRONG_MODE==1?.65:.78)*flatness.x;
+        targetY=targetY*(1.0-blend)+nl.x*blend;
+        targetR=targetR*(1.0-blend)+nl.y*blend;
+        targetB=targetB*(1.0-blend)+nl.z*blend;
+        ly=min(.98,ly+.15*flatness.x);lc=min(.99,lc+.10*flatness.y);
+    }
+    precise float dy=(targetY-cp.x)*ly,dr=(targetR-cp.y)*lc,db=(targetB-cp.z)*lc;
+#if GX_IEEE_DIV73
+    precise float red=dy+dr,green=dy-ieeeDiv1973((.299*dr+.114*db),.587),blue=dy+db;
+#else
+    precise float red=dy+dr,green=dy-(.299*dr+.114*db)/.587,blue=dy+db;
+#endif
+    return packDelta(roundFloat(cp.x),red,green,blue);
+}
+uint mapPixel(int map,int x,int y,int width){
+    int at=(y-u[15+map])*width+x;
+    return map==0?halfMap[at]:map==1?quarterMap[at]:eighthMap[at];
+}
+float signedByte(uint p,int shift){int value=int((p>>uint(shift))&255u);return float(value>=128?value-256:value);}
+vec4 sampleMap(int map,int x,int y){
+    int width=u[0],height=u[7];for(int i=0;i<=map;i++){width=halfSize(width);height=halfSize(height);}
+    int scale=1<<(map+1);
+#if GX_POW2_EXACT78
+    precise float fx=clamp(ieeePow2Div1978((float(x)+.5),uint(map+1))-.5,0.0,float(width-1));
+#elif GX_IEEE_DIV73
+    precise float fx=clamp(ieeeDiv1973((float(x)+.5),float(scale))-.5,0.0,float(width-1));
+#else
+    precise float fx=clamp((float(x)+.5)/float(scale)-.5,0.0,float(width-1));
+#endif
+#if GX_POW2_EXACT78
+    precise float fy=clamp(ieeePow2Div1978((float(y)+.5),uint(map+1))-.5,0.0,float(height-1));
+#elif GX_IEEE_DIV73
+    precise float fy=clamp(ieeeDiv1973((float(y)+.5),float(scale))-.5,0.0,float(height-1));
+#else
+    precise float fy=clamp((float(y)+.5)/float(scale)-.5,0.0,float(height-1));
+#endif
+    int ix=int(fx),iy=int(fy),nx=min(width-1,ix+1),ny=min(height-1,iy+1);fx-=float(ix);fy-=float(iy);
+    uint a=mapPixel(map,ix,iy,width),b=mapPixel(map,nx,iy,width),c=mapPixel(map,ix,ny,width),d=mapPixel(map,nx,ny,width);
+    precise vec4 result;
+    for(int plane=0;plane<4;plane++){
+        int shift=plane==3?24:16-plane*8;
+        precise float av=plane==3?float(a>>24):signedByte(a,shift),bv=plane==3?float(b>>24):signedByte(b,shift);
+        precise float cv=plane==3?float(c>>24):signedByte(c,shift),dv=plane==3?float(d>>24):signedByte(d,shift);
+        result[plane]=(av*(1.0-fx)+bv*fx)*(1.0-fy)+(cv*(1.0-fx)+dv*fx)*fy;
+    }
+    return result;
+}
+uint fullPixel(int x,int row,int at,out int confidenceOut){
+    confidenceOut=0;uint p=pixel(x,row);
+    if((p>>24)!=255u||u[8]==0)return p;
+    int budget=u[11]!=0?clamp(policy[at*2],0,256):256,detail=u[11]!=0?clamp(policy[at*2+1],0,256):0;
+    if(budget==0)return p;
+    precise vec3 cp=color(x,row);
+    precise float sy=regionalSigma(x,row+u[6],0),sc=regionalSigma(x,row+u[6],1);
+    precise vec2 flatness=guide(x,row,u[4],u[5],sy,sc);
+#if GX_IEEE_DIV73
+    precise float confidenceValue=256.0*clamp(ieeeDiv1973((flatness.x-.65),.30),0.0,1.0)*clamp(ieeeDiv1973((max(sy,sc)-.60),1.8),0.0,1.0)*(1.0-regionalSigma(x,row+u[6],2));
+#else
+    precise float confidenceValue=256.0*clamp((flatness.x-.65)/.30,0.0,1.0)*clamp((max(sy,sc)-.60)/1.8,0.0,1.0)*(1.0-regionalSigma(x,row+u[6],2));
+#endif
+    confidenceOut=roundFloat(confidenceValue);
+#if GX_IEEE_DIV73
+    precise float dark=clamp(ieeeDiv1973((144.0-cp.x),112.0),0.0,1.0);
+#else
+    precise float dark=clamp((144.0-cp.x)/112.0,0.0,1.0);
+#endif
+    precise float thresholdY=max(2.5,sy*4.0),thresholdC=max(5.0,sc*5.0);
+    precise vec3 sums,weights;localWork(x,row,u[4],u[5],thresholdY,thresholdC,cp,sums,weights);
+#if GX_POW2_EXACT78
+    precise float strength=(.56+.09*float(u[8])+(u[9]!=0?.12*dark:0.0))*(ieeePow2Div1978((160.0+float(budget)*.375),8u));
+#elif GX_IEEE_DIV73
+    precise float strength=(.56+.09*float(u[8])+(u[9]!=0?.12*dark:0.0))*(ieeeDiv1973((160.0+float(budget)*.375),256.0));
+#else
+    precise float strength=(.56+.09*float(u[8])+(u[9]!=0?.12*dark:0.0))*((160.0+float(budget)*.375)/256.0);
+#endif
+#if GX_POW2_EXACT78
+    precise float texture=(1.0-ieeePow2Div1978(.55*float(detail),8u))*(1.0-.85*regionalSigma(x,row+u[6],2));
+#elif GX_IEEE_DIV73
+    precise float texture=(1.0-ieeeDiv1973(.55*float(detail),256.0))*(1.0-.85*regionalSigma(x,row+u[6],2));
+#else
+    precise float texture=(1.0-.55*float(detail)/256.0)*(1.0-.85*regionalSigma(x,row+u[6],2));
+#endif
+#if GX_IEEE_DIV73
+    precise float confidence=clamp(ieeeDiv1973((flatness.x-.62),.34),0.0,1.0),residual=clamp(ieeeDiv1973((max(sy,sc)-.60),3.0),0.0,1.0);
+#else
+    precise float confidence=clamp((flatness.x-.62)/.34,0.0,1.0),residual=clamp((max(sy,sc)-.60)/3.0,0.0,1.0);
+#endif
+#if GX_IEEE_DIV73
+    precise float ly=sy>=.40?min(.98,strength*(.70+.30*confidence*residual))*flatness.x*texture*clamp(ieeeDiv1973(sy*sy,max(sy*sy,ieeeDiv1973(weights.z,max(.001,weights.x))*.55)),.16,1.0):0.0;
+#else
+    precise float ly=sy>=.40?min(.98,strength*(.70+.30*confidence*residual))*flatness.x*texture*clamp(sy*sy/max(sy*sy,weights.z/max(.001,weights.x)*.55),.16,1.0):0.0;
+#endif
+    precise float lc=sc>=.40?min(.995,strength+.15*residual)*flatness.y*texture:0.0;
+#if GX_IEEE_DIV73
+    precise float targetY=ieeeDiv1973(sums.x,max(.001,weights.x)),targetR=ieeeDiv1973(sums.y,max(.001,weights.y)),targetB=ieeeDiv1973(sums.z,max(.001,weights.y));
+#else
+    precise float targetY=sums.x/max(.001,weights.x),targetR=sums.y/max(.001,weights.y),targetB=sums.z/max(.001,weights.y);
+#endif
+    if(confidence>.45&&residual>.15&&detail<192&&texture>.6){
+        precise vec3 nl=nonlocalFine(x,row,u[4],u[5],sy,sc);
+        precise float by=.84*confidence*residual,bc=.88*confidence*residual*flatness.y;
+        targetY=targetY*(1.0-by)+nl.x*by;targetR=targetR*(1.0-bc)+nl.y*bc;targetB=targetB*(1.0-bc)+nl.z*bc;
+        ly=min(.985,ly+.18*confidence*residual*texture);lc=min(.995,lc+.10*confidence*residual*texture);
+    }
+    precise float dy=(targetY-cp.x)*ly,dr=(targetR-cp.y)*lc,db=(targetB-cp.z)*lc;
+#if GX_IEEE_DIV73
+    precise float dR=dy+dr,dG=dy-ieeeDiv1973((.299*dr+.114*db),.587),dB=dy+db;
+#else
+    precise float dR=dy+dr,dG=dy-(.299*dr+.114*db)/.587,dB=dy+db;
+#endif
+    for(int k=0;k<3;k++){
+        precise vec4 coarse=sampleMap(k,x,row+u[6]);
+#if GX_IEEE_DIV73
+        precise float gate=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973((coarse.w-cp.x),(sy*5.0+16.0)))));
+#else
+        precise float gate=1.0/(1.0+square((coarse.w-cp.x)/(sy*5.0+16.0)));
+#endif
+        precise float blend=(k==0?.48:k==1?.32:.22)*min(1.0,strength)*texture*gate;
+        precise float cy=.299*coarse.x+.587*coarse.y+.114*coarse.z,cr=coarse.x-cy,cb=coarse.z-cy;
+        precise float by=blend*(.30+.70*flatness.x),bc=blend*flatness.y;
+#if GX_IEEE_DIV73
+        dR+=cy*by+cr*bc;dG+=cy*by-ieeeDiv1973((.299*cr+.114*cb),.587)*bc;dB+=cy*by+cb*bc;
+#else
+        dR+=cy*by+cr*bc;dG+=cy*by-(.299*cr+.114*cb)/.587*bc;dB+=cy*by+cb*bc;
+#endif
+    }
+    precise float red=float((p>>16)&255u)+dR,green=float((p>>8)&255u)+dG,blue=float(p&255u)+dB;
+    return (p&0xff000000u)|(uint(byteValue(red))<<16)|(uint(byteValue(green))<<8)|uint(byteValue(blue));
+}
+void main(){
+#if GX_TILE_WIDTH > 0
+    int group=int(uint(u[31])/uint(GX_LOCAL_SIZE)+gl_WorkGroupID.x);
+    int columns=(u[0]+GX_TILE_WIDTH-1)/GX_TILE_WIDTH;
+    tileX=(group%columns)*GX_TILE_WIDTH;tileY=u[2]+(group/columns)*TILE_HEIGHT;
+    int lane=int(gl_LocalInvocationIndex);
+    int x=tileX+lane%GX_TILE_WIDTH,row=tileY+lane/GX_TILE_WIDTH;
+    int at=(row-u[2])*u[0]+x;
+#else
+    int at=int(uint(u[31])+gl_GlobalInvocationID.x);
+    int x=at%u[0],row=u[2]+at/u[0];
+#endif
+    centerX=x;centerY=row;centerLane=int(gl_LocalInvocationIndex);
+    fillCache();
+#if GX_TILE_WIDTH > 0
+    if(x>=u[0]||row>=u[3])return;
+#else
+    if(at>=u[0]*(u[3]-u[2]))return;
+#endif
+    if(STRONG_MODE!=3){dst[at]=preparePixel(x,row);return;}
+    int confidenceOut;dst[at]=fullPixel(x,row,at,confidenceOut);
+    int ay=row+u[6];
+    if(u[12]!=0&&x==min(u[0]-1,(x/4)*4+1)&&ay==min(u[7]-1,(ay/4)*4+1))
+        confidenceMap[((row-u[2])/4)*((u[0]+3)/4)+x/4]=confidenceOut;
+}
