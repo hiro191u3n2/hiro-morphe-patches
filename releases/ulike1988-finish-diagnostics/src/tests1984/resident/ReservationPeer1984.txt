@@ -1,0 +1,96 @@
+ // Controlled qualification peer for the real Resident producer. The actual
+ // qualification engine is exercised independently by host_qualification1984.
+ static int reservationCalls1984,commitCalls1984,currentCalls1984,ticketCloseCalls1984;
+ static int releases1984,probeCloses1984,reserved1984,reserveFault1984,currentFault1984,currentFaultAt1984;
+ static int commitFault1984,commitReject1984,diagnosticFault1984,diagnosticCalls1984;
+ static long limit1984=96L*1024*1024,cpuTime1984,gpuTime1984;
+ static Runnable afterReserve1984,beforeCommit1984,afterCommit1984;
+ static Reservation1984 lastReservation1984;
+ static String outcome1984;
+ static final List<String> phases1984=new ArrayList<String>();
+ static final List<String> events1984=new ArrayList<String>();
+ static void fault1984(int fault){
+  if(fault==1)throw new IllegalStateException("injected ticket runtime");
+  if(fault==2)throw new OutOfMemoryError("injected ticket allocation");
+  if(fault==3)throw new UnsatisfiedLinkError("injected ticket linkage");
+  if(fault==4)throw new java.util.concurrent.CancellationException("injected ticket cancellation");
+  if(fault==5)throw new AssertionError("injected ticket fatal error");
+ }
+ static void resetTicket1984(){
+  if(lastReservation1984!=null)lastReservation1984.close();
+  reservationCalls1984=commitCalls1984=currentCalls1984=ticketCloseCalls1984=0;
+  releases1984=probeCloses1984=reserved1984=reserveFault1984=currentFault1984=currentFaultAt1984=0;
+  commitFault1984=commitReject1984=diagnosticFault1984=diagnosticCalls1984=0;
+  limit1984=96L*1024*1024;cpuTime1984=gpuTime1984=0;
+  afterReserve1984=beforeCommit1984=afterCommit1984=null;
+  lastReservation1984=null;outcome1984=null;phases1984.clear();events1984.clear();
+  Bitmap.beforeCopy1984=null;
+ }
+ public static final class Reservation1984 implements AutoCloseable {
+  public final QueueDecision1983 decision;
+  final String reservedKey;final long bytes,epoch;
+  boolean owns,committed;int effectiveReleases;
+  Reservation1984(String k,long b,boolean accepted,int reason){
+   reservedKey=k;bytes=b;epoch=ProcessingTiming1947.epoch;
+   owns=accepted;if(accepted){held+=b;reserved1984++;}
+   decision=new QueueDecision1983(accepted,reason,b);
+  }
+  public boolean current(){
+   currentCalls1984++;
+   if(currentCalls1984==currentFaultAt1984)fault1984(currentFault1984);
+   return owns&&epoch==ProcessingTiming1947.epoch&&!cancel&&!Thread.currentThread().isInterrupted();
+  }
+  public QueueDecision1983 commit(final Probe probe){
+   commitCalls1984++;events1984.add("commit");
+   if(beforeCommit1984!=null)beforeCommit1984.run();
+   if(commitFault1984>=6){closeProbe1984(probe);close();fault1984(commitFault1984-5);}
+   fault1984(commitFault1984);
+   int reason=!current()?6:negatives.contains(reservedKey)?8:records.containsKey(reservedKey)?11:
+      commitReject1984!=0?commitReject1984:decline?scheduleReason1983:0;
+   if(reason!=0){
+    QueueDecision1983 result=new QueueDecision1983(false,reason,bytes);
+    closeProbe1984(probe);close();
+    if(afterSchedule1983!=null)afterSchedule1983.run();
+    if(afterCommit1984!=null)afterCommit1984.run();
+    return result;
+   }
+   if(!owns||queued!=null)throw new AssertionError("fixture commit ownership");
+   owns=false;committed=true;reserved1984--;key=reservedKey;
+   queued=new Probe(){boolean closed;
+    public void run(Cancellation c){probe.run(c);}
+    public void close(){if(closed)return;closed=true;try{closeProbe1984(probe);}finally{release1984();}}
+   };
+   QueueDecision1983 result=new QueueDecision1983(true,1,bytes);
+   if(afterSchedule1983!=null)afterSchedule1983.run();
+   if(afterCommit1984!=null)afterCommit1984.run();
+   return result;
+  }
+  private void release1984(){
+   if(effectiveReleases!=0)throw new AssertionError("ticket bytes released twice");
+   effectiveReleases++;releases1984++;held-=bytes;events1984.add("release");
+   if(held<0)throw new AssertionError("negative held bytes");
+  }
+  public void close(){
+   ticketCloseCalls1984++;
+   if(!owns)return;owns=false;reserved1984--;release1984();
+  }
+ }
+ static void closeProbe1984(Probe probe){if(probe!=null){probeCloses1984++;probe.close();}}
+ public static Reservation1984 reserve1984(String k,long b){
+  reservationCalls1984++;events1984.add("reserve");fault1984(reserveFault1984);
+  boolean allowed=canQueue(k,b);int reason=allowed?0:declineReason1983;
+  if(allowed&&(b>limit1984||held>limit1984-b)){allowed=false;reason=16;}
+  lastReservation1984=new Reservation1984(k,b,allowed,reason);
+  if(afterDecision1983!=null)afterDecision1983.run();
+  if(afterReserve1984!=null)afterReserve1984.run();
+  return lastReservation1984;
+ }
+ public static void progress1984(String phase,int completed,int total){
+  diagnosticCalls1984++;phases1984.add(phase+":"+completed+":"+total);fault1984(diagnosticFault1984);
+ }
+ public static void outcome1984(String reason){
+  diagnosticCalls1984++;outcome1984=reason;fault1984(diagnosticFault1984);
+ }
+ public static void timings1984(long cpu,long gpu){
+  diagnosticCalls1984++;cpuTime1984=cpu;gpuTime1984=gpu;fault1984(diagnosticFault1984);
+ }

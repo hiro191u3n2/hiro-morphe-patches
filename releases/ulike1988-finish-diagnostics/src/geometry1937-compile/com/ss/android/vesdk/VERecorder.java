@@ -1,0 +1,1 @@
+package com.ss.android.vesdk; public class VERecorder { public com.ss.android.vesdk.render.VERenderView render; public com.ss.android.vesdk.camera.ICameraCapture capture; public com.ss.android.vesdk.render.VERenderView getRenderView(){return render;} public com.ss.android.vesdk.camera.ICameraCapture getCurrentCameraCapture(){return capture;} }
