@@ -301,7 +301,10 @@
       "qualification_queue_cache_separate",
       "qualification_retry_categories",
       "status_observation_no_state_changes",
-      "strong_forecast_fixture_adapter1986_verified"
+      "strong_forecast_fixture_adapter1986_verified",
+      "strong_diagnostic_history_leak_reproduced1986_verified",
+      "strong_diagnostic_case_isolation1986_verified",
+      "strong_diagnostic_within_case_forecast1986_preserved"
     ],
     "timing": [
       "stage_details1976_regressions_passed",
@@ -460,6 +463,15 @@
     ]
   ],
   "schema": "ulike1986-host-contract-v1",
+  "strong_diagnostic_fixture_isolation1986": {
+    "ci_observation_limit": "The failing CI did not log its individual bank timings. The reproduced isolation defect explains timing sensitivity; no specific CI delay value is asserted.",
+    "evidence": "The new current-production regression seeds deterministic two-capture nonslow history and reproduces the unchanged case-15 assertion failure without isolation. Clearing prior-case history restores the expected ranking; within-case cross-capture history and complete pixel/confidence output remain verified.",
+    "historical_source_and_runner_changed": false,
+    "production_changed": false,
+    "scope": "The retained .82 Strong diagnostic matrix defines independent no-history scenarios. A source-pinned .86 adapter clears Forecast1983.RECENT only at the existing reset boundary; it preserves all historical route/output expectations and assertions.",
+    "timing_thresholds_relaxed": false,
+    "within_case_forecast_history_retained": true
+  },
   "superseded_expectations": {
     "audit80": "The .80 camera, save cleanup and GPU failure-classification regressions remain current executed gates, with added .81 dependency declarations and only explicitly superseded queue/speed expectations adapted.",
     "cpu_speed": ".81 preliminary NR uses the caller workspace and independent detached comparison workspaces. Transport/speed failures use a separate speed identity while existing GPU exact certificates and mismatches are retained.",
