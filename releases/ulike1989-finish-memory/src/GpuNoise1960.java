@@ -1,0 +1,676 @@
+package com.hiro.ulike;
+
+import java.util.ArrayList;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.locks.LockSupport;
+import java.util.concurrent.ThreadFactory;
+
+/** GX1-GX8 real compute engine. Every candidate remains private until the exact
+ * whole-route owner admits it. No precision substitute is accepted by this API.
+ * One private EGL-owner thread; per-photo persistent GPU SSBOs; bounded memory.
+ * Camera/native codec/GPU interop is separately capability checked, never assumed. */
+public final class GpuNoise1960 {
+    private GpuNoise1960() { }
+    public static final int STRONG=0,SINGLE=1,ANALYSIS=2,GEOMETRY=3,
+        ANALYSIS1961=4,RESIDUAL1961=5,PROTECTION1961=6,COMPARE1961=7,FINISH1961=8;
+    static final int SHADERS=9,VARIANTS=3;
+    // GX27: preserve published0..26 IDs, append four mode-specific strong
+    // programs for each layout; mode0half,1quarter,2eighth,3full.
+    static final int STRONG_PROGRAM_BASE=SHADERS*VARIANTS,PROGRAMS=STRONG_PROGRAM_BASE+8*VARIANTS;
+    static int variant(int shader,int choice){return shader>=0&&shader<SHADERS&&choice>=0&&choice<VARIANTS?shader+choice*SHADERS:-1;}
+    static int strongProgram(int mode,int choice){return mode>=0&&mode<4&&choice>=0&&choice<VARIANTS?STRONG_PROGRAM_BASE+mode+choice*4:-1;}
+    static int strongExactProgram1973(int choice){return choice>=0&&choice<VARIANTS?STRONG_PROGRAM_BASE+4*VARIANTS+choice:-1;}
+    public static final long MAX_BYTES=512L*1024*1024;
+    static final int STORAGE_SLOTS1976=25;
+    private static volatile int loaded;
+    private static volatile long knownSupported,knownUnsupported;
+    private static volatile long retained;
+    private static volatile long storageLimit1981;
+    private static volatile boolean activeSession;
+    private static volatile String environment="";
+    // Only OWNER mutates these scalar reservations. Actual native capacities
+    // replace their pending growth after upload/submit; already resident banks
+    // are never charged again. No image or command payload belongs to a lease.
+    private static final ArrayList<Lease1971> leases1971=new ArrayList<Lease1971>();
+    private static volatile long reserved1971;
+    private static final long STAGING1971=64L*1024*1024;
+    static final int FAILURE_NONE1971=0,FAILURE_ALLOCATION1971=1,FAILURE_UPLOAD1971=2,
+        FAILURE_DISPATCH1971=3,FAILURE_READBACK1971=4,FAILURE_FENCE1971=5,FAILURE_UNKNOWN1971=6;
+    private static final ExecutorService OWNER=Executors.newSingleThreadExecutor(new ThreadFactory(){
+        public Thread newThread(Runnable task){Thread t=new Thread(task,"Hiro-ULike-GX1960");t.setDaemon(true);return t;}
+    });
+    static boolean available(){
+        if(loaded==0)synchronized(GpuNoise1960.class){if(loaded==0){
+            try{System.loadLibrary("ulike_gpu1960");loaded=nativeAbi()==19601?1:-1;}
+            catch(LinkageError unavailable){loaded=-1;}
+            catch(SecurityException unavailable){loaded=-1;}
+        }}
+        return loaded>0;
+    }
+    public static long retainedBytes(){return retained;}
+    static boolean sessionBusy(){return activeSession;}
+    /** Native GPU allocations share the capture's physical memory allowance.
+     * The heap figures already include all live Java buffers; callers pass only
+     * their additional peak allocation, including private qualification results. */
+    static boolean workspaceFits(long extra){
+        if(extra<0||extra>MAX_BYTES)return false;
+        if(extra<=freeBudget())return true;
+        if(!activeSession&&retained>0){trimIdle();return extra<=freeBudget();}
+        return false;
+    }
+    private static long freeBudget(){
+        return physicalBudget1971(true);
+    }
+    private static long physicalBudget1971(boolean includeReservations){
+        Runtime r=Runtime.getRuntime();
+        long available=r.maxMemory()-(r.totalMemory()-r.freeMemory());
+        long[] owners={retained,WholeRoute1953.retainedBytes(),GpuFinish1953.retainedBytes(),
+            SpeedWorkers1935.nativeRetainedBytes1956(),64L*1024*1024,includeReservations?reserved1971:0};
+        for(long bytes:owners){if(bytes<0||bytes>available)return 0;available-=bytes;}
+        return available;
+    }
+    /** Observation immediately after a Finish refusal/recheck. This is not an
+     * OS free-RAM reading or the authoritative earlier admission snapshot.
+     * No GPU lease mutation or policy decision uses these values. Native owner
+     * queries keep their existing accounting/idle-expiry contract. */
+    static boolean snapshotMemory1989(long[] values,int offset) {
+        if(values==null||offset<0||offset>values.length-12)return false;
+        try {
+            Runtime r=Runtime.getRuntime();long maximum=r.maxMemory(),used=r.totalMemory()-r.freeMemory();
+            long headroom=maximum-used,gpu=observedBytes1989(retained),whole=observedBytes1989(WholeRoute1953.retainedBytes());
+            long finish=observedBytes1989(GpuFinish1953.retainedBytes()),reserved=observedBytes1989(reserved1971);
+            long nativeBytes=SpeedWorkers1935.nativeRetainedBytes1989(values,offset+7);
+            long available=observedRemainder1989(headroom,gpu);
+            available=observedRemainder1989(available,whole);
+            available=observedRemainder1989(available,finish);
+            available=observedRemainder1989(available,nativeBytes);
+            available=observedRemainder1989(available,64L*1024*1024);
+            available=observedRemainder1989(available,reserved);
+            values[offset]=maximum;values[offset+1]=used;values[offset+2]=headroom;
+            values[offset+3]=gpu;values[offset+4]=whole;values[offset+5]=finish;
+            boolean complete=maximum>=0&&used>=0&&headroom>=0&&gpu>=0&&whole>=0&&finish>=0&&nativeBytes>=0&&reserved>=0;
+            values[offset+6]=nativeBytes;values[offset+10]=reserved;values[offset+11]=complete?available:-1;
+            return complete;
+        }catch(Throwable optional){return false;}
+    }
+    private static long observedBytes1989(long bytes) {
+        return bytes<0||bytes==Long.MAX_VALUE?-1:bytes;
+    }
+    private static long observedRemainder1989(long available,long bytes) {
+        return bytes<0||bytes>available?0:available-bytes;
+    }
+    /** Warm only the bounded private context identity for persisted admission.
+     * No program compilation, session, SSBO allocation or GPU command occurs. */
+    static boolean warmEnvironment1973(){
+        try{
+            if(!available()||Thread.currentThread().isInterrupted())return false;
+            if(environment.length()!=0)return true;
+            return owner(new Callable<Boolean>(){public Boolean call(){
+                String e=environmentNative();if(environment.length()==0&&e!=null)environment=e;
+                refresh();return Boolean.valueOf(environment.length()!=0);
+            }},Boolean.FALSE);
+        }catch(LinkageError unavailable){loaded=-1;return false;}
+        catch(RuntimeException unavailable){return false;}
+        catch(OutOfMemoryError unavailable){return false;}
+    }
+    static String fingerprint(){return environment;}
+    private static void refresh(){
+        retained=retainedNative();
+        reconcile1971();
+        // The private native context is initialized once and quarantined on a
+        // fatal driver error. Its fingerprint cannot change during this process;
+        // avoid another JNI String allocation for every strip/bank command.
+        if(environment.length()==0){String e=environmentNative();environment=e==null?"":e;}
+    }
+    static long reservedBytes1971(){return reserved1971;}
+    /** Scalar forecast for a later phase. Native storage limits are immutable
+     * for this private context; cached limits avoid reopening/closing an idle
+     * pool for every certified photograph. Actual session leases remain the
+     * authoritative admission before Strong and again before final dispatch. */
+    static boolean planFits1981(long[] capacities,long javaBytes){
+        return planFits1983(capacities,capacities,javaBytes);
+    }
+    /** Upload peaks describe bytes copied from CPU memory, not GPU-generated
+     * destination capacity. Mapped Java-array uploads still reserve their exact
+     * staged fallback. The legacy entry point deliberately assumes every target
+     * can be uploaded; only callers with a complete command graph opt in. */
+    static boolean planFits1983(long[] capacities,long[] uploadBytes,long javaBytes){
+        if(capacities==null||capacities.length==0||uploadBytes==null||uploadBytes.length!=capacities.length||
+                javaBytes<0||javaBytes>MAX_BYTES)return false;
+        long maximum=storageLimit1981;
+        if(maximum<=0){
+            Session probe=open();if(probe==null)return false;
+            try{long[] actual=probe.capacity1976();if(actual==null)return false;maximum=actual[26];}
+            finally{probe.close();}
+        }
+        long total=0,staging=0,temporary=0;
+        for(int i=0;i<capacities.length;i++){
+            long bytes=capacities[i],upload=uploadBytes[i];
+            if(bytes<=0||bytes>maximum||bytes>MAX_BYTES||upload<0||upload>bytes)return false;
+            long rounded=round1971(bytes,maximum);
+            if(rounded>MAX_BYTES-total)return false;total+=rounded;
+            if(upload>0){if(upload<=STAGING1971)staging=Math.max(staging,round1971(upload,Long.MAX_VALUE));else temporary=Math.max(temporary,upload);}
+        }
+        if(staging>MAX_BYTES-total)return false;total+=staging;
+        if(temporary>MAX_BYTES-total)return false;total+=temporary;
+        if(javaBytes>MAX_BYTES-total)return false;
+        return workspaceFits(total+javaBytes);
+    }
+    /** A bounded scalar lease for native capacity growth and private Java
+     * readback peaks. Close after the caller commits or discards every result. */
+    static final class Lease1971 implements AutoCloseable {
+        final long token;final long[] capacities;final long staging,temporary;
+        final long[] uploadLimits1983;final boolean explicitUploads1983;
+        // OWNER only: future Java allocations. Materialized private results are
+        // already included by Runtime's used heap and must leave this debt.
+        private long javaBytes;
+        // Additional bounded CPU scratch while an overlapped oracle is active.
+        // This is host growth, never a charge against the native GPU ceiling.
+        private long scratchPeak1975;
+        private volatile boolean closed;
+        private Lease1971(long token,long[] capacities,long staging,long temporary,long javaBytes){
+            this(token,capacities,staging,temporary,javaBytes,capacities.clone(),false);
+        }
+        Lease1971(long token,long[] capacities,long staging,long temporary,long javaBytes,
+                long[] uploadLimits,boolean explicitUploads){
+            this.token=token;this.capacities=capacities;this.staging=staging;this.temporary=temporary;this.javaBytes=javaBytes;
+            uploadLimits1983=uploadLimits;explicitUploads1983=explicitUploads;
+        }
+        /** Call only after these bytes have been allocated in a live private
+         * readback result. Native/staging debt and the fixed heap reserve stay
+         * unchanged. Invalid or closed consumption cannot release any debt. */
+        boolean consumeJava1974(final long bytes){
+            if(closed||bytes<0)return false;
+            return owner(new Callable<Boolean>(){public Boolean call(){
+                if(closed||!leases1971.contains(Lease1971.this)||bytes>javaBytes)return Boolean.FALSE;
+                javaBytes-=bytes;
+                reconcile1971();
+                return Boolean.TRUE;
+            }},Boolean.FALSE);
+        }
+        /** Reserve a future CPU oracle peak before submitting overlapping GPU
+         * work. A declined reservation leaves the original serial lease intact. */
+        boolean tryReserveScratch1975(final long bytes){
+            if(closed||bytes<0||bytes>MAX_BYTES)return false;
+            return owner(new Callable<Boolean>(){public Boolean call(){
+                if(closed||!leases1971.contains(Lease1971.this)||scratchPeak1975!=0)return Boolean.FALSE;
+                scratchPeak1975=bytes;boolean admitted=false;
+                try{
+                    long[] actual=capacities1971(token),debt=actual==null?null:debt1971(actual);
+                    if(debt==null||debt[0]>MAX_BYTES-retained||debt[1]>physicalBudget1971(false))return Boolean.FALSE;
+                    reserved1971=debt[1];admitted=true;return Boolean.TRUE;
+                }finally{if(!admitted){scratchPeak1975=0;reconcile1971();}}
+            }},Boolean.FALSE);
+        }
+        /** Only after the CPU oracle has returned: live Java/native scratch is
+         * now accounted by Runtime and the native scratch owner themselves. */
+        void releaseScratch1975(){
+            if(closed)return;
+            owner(new Callable<Boolean>(){public Boolean call(){
+                if(closed||!leases1971.contains(Lease1971.this))return Boolean.FALSE;
+                scratchPeak1975=0;reconcile1971();return Boolean.TRUE;
+            }},Boolean.FALSE);
+        }
+        /** Recheck after CPU scratch/oracle growth and immediately before GPU
+         * submission. A failed check leaves ownership intact for close(). */
+        boolean revalidate1971(){
+            if(closed||Thread.currentThread().isInterrupted())return false;
+            return owner(new Callable<Boolean>(){public Boolean call(){
+                if(closed||!leases1971.contains(Lease1971.this))return Boolean.FALSE;
+                long[] actual=capacities1971(token);long[] debt=actual==null?null:debt1971(actual);
+                if(debt==null){reserved1971=Long.MAX_VALUE;return Boolean.FALSE;}
+                reserved1971=debt[1];
+                return debt[0]<=MAX_BYTES-retained&&debt[1]<=physicalBudget1971(false);
+            }},Boolean.FALSE);
+        }
+        public void close(){
+            if(closed)return;
+            owner(new Callable<Boolean>(){public Boolean call(){
+                if(!closed){closed=true;leases1971.remove(Lease1971.this);reconcile1971();}return Boolean.TRUE;
+            }},Boolean.FALSE);
+        }
+    }
+    private static long round1971(long bytes,long maximum){
+        long rounded=(bytes+4095L)&~4095L;return rounded>MAX_BYTES||rounded>maximum?bytes:rounded;
+    }
+    /** OWNER only. Native snapshot remains available after a session failure so
+     * quarantined capacities continue to count, even when work is no longer usable. */
+    private static long[] capacities1971(long token){
+        long[] values=capacityNative1971(token);
+        if(values==null||values.length!=28||values[25]<0||values[26]<1||values[27]<0||
+                values[25]>MAX_BYTES||values[27]>MAX_BYTES-values[25])return null;
+        long total=0;for(int i=0;i<STORAGE_SLOTS1976;i++){if(values[i]<0||values[i]>MAX_BYTES||values[i]>MAX_BYTES-total)return null;total+=values[i];}
+        if(total!=values[27])return null;retained=values[25]+values[27];storageLimit1981=values[26];return values;
+    }
+    private static long[] debt1971(long[] actual){
+        long[] desired=new long[STORAGE_SLOTS1976];System.arraycopy(actual,0,desired,0,STORAGE_SLOTS1976);
+        long staging=actual[25],temporary=0,javaBytes=0;
+        for(Lease1971 lease:leases1971)if(!lease.closed){
+            for(int i=0;i<STORAGE_SLOTS1976;i++)desired[i]=Math.max(desired[i],lease.capacities[i]);
+            staging=Math.max(staging,lease.staging);temporary=Math.max(temporary,lease.temporary);
+            if(lease.javaBytes>MAX_BYTES-javaBytes)return null;javaBytes+=lease.javaBytes;
+            if(lease.scratchPeak1975>MAX_BYTES-javaBytes)return null;javaBytes+=lease.scratchPeak1975;
+        }
+        long nativeGrowth=staging-actual[25];
+        for(int i=0;i<STORAGE_SLOTS1976;i++){long growth=desired[i]-actual[i];if(growth>MAX_BYTES-nativeGrowth)return null;nativeGrowth+=growth;}
+        if(temporary>MAX_BYTES-nativeGrowth)return null;nativeGrowth+=temporary;
+        if(javaBytes>MAX_BYTES-nativeGrowth)return null;
+        return new long[]{nativeGrowth,nativeGrowth+javaBytes};
+    }
+    private static void reconcile1971(){
+        if(leases1971.isEmpty()){reserved1971=0;return;}
+        // A failed diagnostic allocation cannot leave an optimistic old debt.
+        reserved1971=Long.MAX_VALUE;
+        long[] actual=capacities1971(leases1971.get(0).token);
+        long[] debt=actual==null?null:debt1971(actual);
+        reserved1971=debt==null?Long.MAX_VALUE:debt[1];
+    }
+    private static void releaseLeases1971(long token){
+        for(int i=leases1971.size()-1;i>=0;i--)if(leases1971.get(i).token==token){leases1971.remove(i).closed=true;}
+        reconcile1971();
+    }
+    /** OWNER only. A declared GPU output cannot silently become a CPU upload.
+     * Overlapping legacy/model leases can authorize their own real transfers;
+     * their staging/temporary debt is already included by debt1971. Slots not
+     * owned by an explicit transfer lease retain their established admission. */
+    static boolean uploadAllowed1983(long token,int slot,long bytes){
+        if(slot<0||slot>=STORAGE_SLOTS1976||bytes<=0||bytes>MAX_BYTES)return false;
+        boolean explicit=false;long allowed=0;
+        for(Lease1971 lease:leases1971)if(!lease.closed&&lease.token==token&&lease.capacities[slot]>0){
+            explicit|=lease.explicitUploads1983;allowed=Math.max(allowed,lease.uploadLimits1983[slot]);
+        }
+        return !explicit||bytes<=allowed;
+    }
+    private static <T> T owner(Callable<T> task,T fallback){
+        Future<T> f;
+        try{f=OWNER.submit(task);}catch(RuntimeException unavailable){return fallback;}catch(OutOfMemoryError unavailable){return fallback;}
+        boolean interrupted=false;
+        try{for(;;)try{return f.get();}catch(InterruptedException cancelled){interrupted=true;}catch(ExecutionException failed){
+            if(failed.getCause() instanceof LinkageError)loaded=-1;return fallback;
+        }}finally{if(interrupted)Thread.currentThread().interrupt();}
+    }
+    static void warmupAsync(){
+        if(!available())return;
+        try{OWNER.execute(new Runnable(){public void run(){try{supportedNative(STRONG);refresh();}catch(LinkageError unavailable){loaded=-1;}catch(RuntimeException unavailable){}}});}
+        catch(RuntimeException unavailable){}catch(OutOfMemoryError unavailable){}
+    }
+    static boolean supports(final int shader){
+        if(shader<0||shader>=PROGRAMS||!available()||Thread.currentThread().isInterrupted())return false;
+        long bit=1L<<shader;if((knownSupported&bit)!=0)return true;if((knownUnsupported&bit)!=0)return false;
+        Boolean result=owner(new Callable<Boolean>(){public Boolean call(){try{return supportedNative(shader);}finally{refresh();}}},null);
+        // No native answer was obtained if owner admission or execution failed.
+        // Such an unknown result must not permanently poison this program ID.
+        if(result==null)return false;
+        synchronized(GpuNoise1960.class){if(result)knownSupported|=bit;else knownUnsupported|=bit;}return result;
+    }
+    static int workgroup(final int shader){
+        if(shader<0||shader>=PROGRAMS||!available()||Thread.currentThread().isInterrupted())return 0;
+        return owner(new Callable<Integer>(){public Integer call(){return workgroupNative(shader);}},Integer.valueOf(0));
+    }
+    static Session open(){
+        if(!available()||Thread.currentThread().isInterrupted())return null;
+        return owner(new Callable<Session>(){public Session call(){
+            long token=openNative();refresh();if(token==0)return null;activeSession=true;
+            boolean passed=false;try{Session s=new Session(token);passed=true;return s;}finally{if(!passed){try{closeNative(token);}finally{activeSession=false;refresh();}}}
+        }},null);
+    }
+    /** GX18 immutable command descriptors; upload arrays belong to caller and
+     * must stay unchanged until run/submit/execute returns. Uniforms are copied
+     * when recorded. Upload bytes are copied before an asynchronous ticket returns. */
+    static final class Batch {
+        private final ArrayList<Command> commands=new ArrayList<Command>();
+        Batch allocate(int slot,long bytes){commands.add(new Command(0,slot,bytes,0,null,null,null,null,0));return this;}
+        Batch upload(int slot,int[] values){commands.add(new Command(1,slot,0,0,values,null,null,null,0));return this;}
+        Batch upload(int slot,float[] values){commands.add(new Command(2,slot,0,0,values,null,null,null,0));return this;}
+        /** GX26 optional mapped inputs; source ownership lasts through submit. */
+        Batch uploadDirect(int slot,int[] values){commands.add(new Command(4,slot,0,0,values,null,null,null,0));return this;}
+        Batch uploadDirect(int slot,float[] values){commands.add(new Command(5,slot,0,0,values,null,null,null,0));return this;}
+        /** GX35: caller-owned direct coefficient words. Recording freezes the
+         * byte range; its contents belong to the caller until submit returns.
+         * The native upload consumes them synchronously before returning a
+         * ticket, so no Java array or pinned array is needed in this path. */
+        Batch uploadDirect(int slot,ByteBuffer values){
+            if(slot<0||slot>=STORAGE_SLOTS1976||values==null||!values.isDirect()||
+                    values.order()!=ByteOrder.nativeOrder()||values.position()!=0||
+                    values.remaining()<4||(values.remaining()&3)!=0||values.remaining()>MAX_BYTES)
+                throw new IllegalArgumentException("GPU direct coefficient buffer");
+            ByteBuffer view=values.slice().order(ByteOrder.nativeOrder());
+            commands.add(new Command(6,slot,view.remaining(),0,view,null,null,null,0));return this;
+        }
+        Batch dispatch(int shader,int[] bindings,int[] u,float[] f,int count){
+            commands.add(new Command(3,0,0,shader,null,bindings==null?null:bindings.clone(),u==null?null:u.clone(),f==null?null:f.clone(),count));return this;
+        }
+        private Packet packet(){return new Packet(commands);}
+    }
+    private static final class Command {
+        final int kind,slot,shader,count;final long bytes;final Object payload;
+        final int[] bindings,u;final float[] f;
+        Command(int k,int s,long b,int p,Object a,int[] v,int[] i,float[] n,int c){kind=k;slot=s;bytes=b;shader=p;payload=a;bindings=v;u=i;f=n;count=c;}
+    }
+    private static final class Packet {
+        final int[] kinds,slots,shaders,counts;final long[] bytes;final Object[] payloads;
+        final int[][] bindings,u;final float[][] f;
+        Packet(ArrayList<Command> list){
+            int n=list.size();if(n<1||n>128)throw new IllegalArgumentException("GPU batch commands");
+            kinds=new int[n];slots=new int[n];shaders=new int[n];counts=new int[n];bytes=new long[n];payloads=new Object[n];bindings=new int[n][];u=new int[n][];f=new float[n][];
+            for(int i=0;i<n;i++){Command c=list.get(i);kinds[i]=c.kind;slots[i]=c.slot;shaders[i]=c.shader;counts[i]=c.count;bytes[i]=c.bytes;payloads[i]=c.payload;bindings[i]=c.bindings;u[i]=c.u;f[i]=c.f;}
+        }
+        boolean run(long token){return batchNative(token,kinds,slots,bytes,shaders,payloads,bindings,u,f,counts);}
+    }
+    static final class Ticket {
+        final Session session;final int bank;long nativeTicket;private boolean collected,collecting;
+        Ticket(Session s,int b,long n){session=s;bank=b;nativeTicket=n;}
+    }
+    static final class Session implements AutoCloseable {
+        private final long token;
+        private boolean failed,closed;
+        private int lastFailure1971;
+        private long dispatched;
+        private final Ticket[] pending=new Ticket[2];
+        private Session(long token){this.token=token;}
+        /** Actual SSBO capacities, staging, maxStorage and totalSSBO scalars.
+         * No driver strings, memory addresses or picture contents are returned. */
+        synchronized long[] capacity1971(){
+            long[] full=capacity1976();if(full==null)return null;
+            // Preserve the legacy diagnostic view for slots0..23. Resident
+            // slot24 is exposed by capacity1976 and counted in total retained.
+            long[] legacy=new long[27];System.arraycopy(full,0,legacy,0,24);
+            legacy[24]=full[25];legacy[25]=full[26];legacy[26]=full[27];return legacy;
+        }
+        synchronized long[] capacity1976(){
+            if(closed)return null;
+            return owner(new Callable<long[]>(){public long[] call(){return capacities1971(token);}},null);
+        }
+        /** Exact copy within one private context. Caller owns an admitted
+         * destination capacity and must not expose it before all rows succeed. */
+        synchronized boolean copy1976(final int source,final int destination,final int sourceOffset,final int destinationOffset,final int count){
+            if(!usable()||source<0||source>=STORAGE_SLOTS1976||destination<0||destination>=STORAGE_SLOTS1976||source==destination||sourceOffset<0||destinationOffset<0||count<1||4L*count>MAX_BYTES)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return copyNative1976(token,source,destination,sourceOffset,destinationOffset,count);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok&&!Thread.currentThread().isInterrupted();
+        }
+        synchronized boolean uploadRange1976(final int destination,final int destinationOffset,final int[] values,final int offset,final int count){
+            if(!usable()||destination<0||destination>=STORAGE_SLOTS1976||destinationOffset<0||values==null||offset<0||count<1||offset>values.length||count>values.length-offset||4L*count>MAX_BYTES)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return admittedRange1983(destination,destinationOffset,values,offset,count)&&uploadRangeNative1976(token,destination,destinationOffset,values,offset,count);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok&&!Thread.currentThread().isInterrupted();
+        }
+        synchronized int failureCode1971(){
+            if(closed)return lastFailure1971;
+            int code=owner(new Callable<Integer>(){public Integer call(){return failureCodeNative1971();}},Integer.valueOf(FAILURE_UNKNOWN1971));
+            if(code<0||code>FAILURE_UNKNOWN1971)code=FAILURE_UNKNOWN1971;
+            if(lastFailure1971==0&&code!=0)lastFailure1971=code;
+            return lastFailure1971;
+        }
+        /** Reserve target capacities before any CPU verification or GPU upload.
+         * Include every slot the batch may allocate/upload. Its largest target
+         * conservatively covers shared upload staging; Java bytes include both
+         * old and new readback results if they can coexist across two trials. */
+        synchronized Lease1971 reserveCapacity1971(final int[] slots,final long[] targetBytes,final long javaReadbackBytes){
+            return reserveCapacity1983(slots,targetBytes,targetBytes,javaReadbackBytes,false);
+        }
+        /** The complete route supplies a maximum CPU upload per target slot.
+         * Zero means GPU-generated storage. Native capacity, real transfers,
+         * future Java output and the actual used heap keep separate ownership. */
+        synchronized Lease1971 reserveCapacity1983(final int[] slots,final long[] targetBytes,
+                final long[] uploadBytes,final long javaReadbackBytes){
+            return reserveCapacity1983(slots,targetBytes,uploadBytes,javaReadbackBytes,true);
+        }
+        private Lease1971 reserveCapacity1983(final int[] slots,final long[] targetBytes,
+                final long[] uploadBytes,final long javaReadbackBytes,final boolean explicitUploads){
+            if(!usable()||slots==null||targetBytes==null||uploadBytes==null||slots.length<1||slots.length>STORAGE_SLOTS1976||
+                    slots.length!=targetBytes.length||slots.length!=uploadBytes.length||javaReadbackBytes<0||javaReadbackBytes>MAX_BYTES)return null;
+            final int[] privateSlots=slots.clone();
+            // Keep the published Callable's capture types and constructor ABI.
+            // One immutable vector owns capacities, uploads and the opt-in bit.
+            final long[] privateBytes=new long[targetBytes.length*2+1];
+            System.arraycopy(targetBytes,0,privateBytes,0,targetBytes.length);
+            System.arraycopy(uploadBytes,0,privateBytes,targetBytes.length,uploadBytes.length);
+            privateBytes[targetBytes.length*2]=explicitUploads?1:0;
+            return owner(new Callable<Lease1971>(){public Lease1971 call(){
+                if(leases1971.size()>=3)return null;
+                long[] actual=capacities1971(token);if(actual==null)return null;
+                long[] desired=new long[STORAGE_SLOTS1976],uploads=new long[STORAGE_SLOTS1976];boolean[] seen=new boolean[STORAGE_SLOTS1976];long largestSmall=0,largestTemporary=0;
+                for(int i=0;i<privateSlots.length;i++){
+                    int slot=privateSlots[i];long bytes=privateBytes[i],upload=privateBytes[privateSlots.length+i];
+                    if(slot<0||slot>=STORAGE_SLOTS1976||seen[slot]||bytes<1||bytes>MAX_BYTES||bytes>actual[26]||upload<0||upload>bytes)return null;
+                    seen[slot]=true;desired[slot]=round1971(bytes,actual[26]);uploads[slot]=upload;
+                    if(upload>0){if(upload<=STAGING1971)largestSmall=Math.max(largestSmall,upload);
+                    else largestTemporary=Math.max(largestTemporary,upload);}
+                }
+                long staging=largestSmall==0?0:round1971(largestSmall,Long.MAX_VALUE);
+                long temporary=largestTemporary;
+                boolean explicit=privateBytes[privateSlots.length*2]!=0;
+                Lease1971 lease=explicit?new Lease1971(token,desired,staging,temporary,javaReadbackBytes,uploads,true):
+                    new Lease1971(token,desired,staging,temporary,javaReadbackBytes);
+                if(!explicit)System.arraycopy(uploads,0,lease.uploadLimits1983,0,uploads.length);
+                boolean admitted=false;leases1971.add(lease);
+                try{
+                    long[] debt=debt1971(actual);
+                    if(debt==null||debt[0]>MAX_BYTES-retained||debt[1]>physicalBudget1971(false))return null;
+                    reserved1971=debt[1];admitted=true;return lease;
+                }finally{
+                    if(!admitted){
+                        leases1971.remove(lease);lease.closed=true;
+                        try{reconcile1971();}catch(RuntimeException unavailable){reserved1971=leases1971.isEmpty()?0:Long.MAX_VALUE;}
+                        catch(LinkageError unavailable){reserved1971=leases1971.isEmpty()?0:Long.MAX_VALUE;}
+                        catch(OutOfMemoryError unavailable){reserved1971=leases1971.isEmpty()?0:Long.MAX_VALUE;}
+                    }
+                }
+            }},null);
+        }
+        Batch newBatch(){return new Batch();}
+        private boolean usable(){return !closed&&!failed&&!Thread.currentThread().isInterrupted();}
+        /** Called on OWNER immediately before native transfer. This checks only
+         * the new explicit contract; it never grants a missing capacity lease. */
+        boolean admittedUpload1983(int slot,long bytes){
+            boolean allowed=uploadAllowed1983(token,slot,bytes);
+            if(!allowed&&lastFailure1971==0)lastFailure1971=FAILURE_ALLOCATION1971;
+            return allowed;
+        }
+        // Keep the native descriptor order so the published anonymous caller's
+        // captured-argument constructor remains unchanged in Java 8 bytecode.
+        boolean admittedRange1983(int destination,int destinationOffset,int[] values,int offset,int count){
+            return admittedUpload1983(destination,4L*count);
+        }
+        boolean admittedUploads1983(int bank,Packet packet){return bank>=0&&bank<2&&admittedUploads1983(packet);}
+        boolean admittedUploads1983(Packet packet){
+            for(int i=0;i<packet.kinds.length;i++){
+                int kind=packet.kinds[i];long bytes;
+                if(kind==1||kind==4)bytes=packet.payloads[i] instanceof int[]?4L*((int[])packet.payloads[i]).length:0;
+                else if(kind==2||kind==5)bytes=packet.payloads[i] instanceof float[]?4L*((float[])packet.payloads[i]).length:0;
+                else if(kind==6)bytes=packet.bytes[i];
+                else continue;
+                if(!admittedUpload1983(packet.slots[i],bytes))return false;
+            }
+            return true;
+        }
+        synchronized boolean allocate(final int slot,final long bytes){
+            if(!usable()||slot<0||slot>=STORAGE_SLOTS1976||bytes<=0||bytes>MAX_BYTES)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return allocateNative(token,slot,bytes);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok;
+        }
+        synchronized boolean upload(final int slot,final int[] values){
+            if(!usable()||slot<0||slot>=STORAGE_SLOTS1976||values==null||values.length==0||(long)values.length*4>MAX_BYTES)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return admittedUpload1983(slot,4L*values.length)&&uploadIntsNative(token,slot,values);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok;
+        }
+        synchronized boolean upload(final int slot,final float[] values){
+            if(!usable()||slot<0||slot>=STORAGE_SLOTS1976||values==null||values.length==0||(long)values.length*4>MAX_BYTES)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return admittedUpload1983(slot,4L*values.length)&&uploadFloatsNative(token,slot,values);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok;
+        }
+        /** u[31] is reserved for the native invocation offset. Kernel workgroup width is read from its linked program; Y/Z must be1.
+         * Each kernel explicitly bounds total pixels/blocks in its parameters. */
+        synchronized boolean dispatch(final int shader,final int[] bindings,final int[] u,final float[] f,final int invocations){
+            if(!usable()||shader<0||shader>=PROGRAMS||bindings==null||bindings.length<1||bindings.length>8||u==null||u.length<1||u.length>32||f!=null&&f.length>32||invocations<1||(long)invocations>MAX_BYTES/4)return false;
+            for(int slot:bindings)if(slot<0||slot>=STORAGE_SLOTS1976)return false;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){return dispatchNative(token,shader,bindings,u,f,invocations);}},Boolean.FALSE);
+            if(!ok)failed=true;else dispatched+=invocations;return ok;
+        }
+        synchronized int[] readInts(final int slot,final int count){
+            if(!usable()||slot<0||slot>=STORAGE_SLOTS1976||count<1||(long)count*4>MAX_BYTES)return null;
+            int[] result=owner(new Callable<int[]>(){public int[] call(){return readIntsNative(token,slot,count);}},null);
+            if(result==null)failed=true;return result;
+        }
+        synchronized boolean run(Batch batch){
+            if(!usable()||batch==null)return false;
+            final Packet p=batch.packet();
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return admittedUploads1983(p)&&p.run(token);}finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok;
+        }
+        /** GX18 one owner/JNI command graph followed by one drain and all private
+         * readbacks. A late readback failure discards the complete result array. */
+        synchronized int[][] execute(Batch batch,final int[] slots,final int[] counts){
+            if(!usable()||batch==null||!readsValid(slots,counts))return null;
+            final Packet p=batch.packet();
+            int[][] result=owner(new Callable<int[][]>(){public int[][] call(){try{return admittedUploads1983(p)?executeNative(token,p.kinds,p.slots,p.bytes,p.shaders,p.payloads,p.bindings,p.u,p.f,p.counts,slots,counts):null;}finally{refresh();}}},null);
+            if(result==null)failed=true;return result;
+        }
+        /** GX26 write into an already allocated private candidate. On false the
+         * target must be discarded; it is never a published/borrowed bitmap. */
+        synchronized boolean executeInto(Batch batch,final int slot,final int count,final int[] target,final int offset){
+            if(!usable()||batch==null||!targetValid(slot,count,target,offset))return false;
+            final Packet p=batch.packet();
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{
+                return admittedUploads1983(p)&&p.run(token)&&readIntoNative(token,0,slot,count,target,offset);
+            }finally{refresh();}}},Boolean.FALSE);
+            if(!ok)failed=true;return ok;
+        }
+        synchronized int[][] readMany(final int[] slots,final int[] counts){
+            if(!usable()||!readsValid(slots,counts))return null;
+            int[][] result=owner(new Callable<int[][]>(){public int[][] call(){return readManyNative(token,0,slots,counts);}},null);
+            if(result==null)failed=true;return result;
+        }
+        /** GX19 bounded two-bank submission: input snapshots complete before
+         * return, GPU work does not wait. Bank slots must be disjoint until collect. */
+        synchronized Ticket submit(Batch batch,final int bank){
+            if(!usable()||batch==null||bank<0||bank>1||pending[bank]!=null)return null;
+            final Packet p=batch.packet();
+            Ticket ticket=new Ticket(this,bank,0);
+            long nativeTicket=owner(new Callable<Long>(){public Long call(){try{
+                return admittedUploads1983(bank,p)?submitNative(token,bank,p.kinds,p.slots,p.bytes,p.shaders,p.payloads,p.bindings,p.u,p.f,p.counts):0L;
+            }finally{refresh();}}},Long.valueOf(0));
+            if(nativeTicket==0){failed=true;return null;}
+            ticket.nativeTicket=nativeTicket;pending[bank]=ticket;return ticket;
+        }
+        int[][] collect(final Ticket ticket,final int[] slots,final int[] counts){
+            synchronized(this){if(!usable()||ticket==null||ticket.session!=this||ticket.collected||ticket.collecting||pending[ticket.bank]!=ticket||!readsValid(slots,counts))return null;ticket.collecting=true;}
+            int[][] result=null;
+            final long deadline=System.nanoTime()+5000000000L;
+            try{
+                for(;;){
+                    synchronized(this){if(!usable())return null;}
+                    int ready=owner(new Callable<Integer>(){public Integer call(){return ticketReadyNative(token,ticket.nativeTicket);}},Integer.valueOf(-1));
+                    if(ready<0)return null;
+                    if(ready>0){result=owner(new Callable<int[][]>(){public int[][] call(){return readManyNative(token,ticket.nativeTicket,slots,counts);}},null);return result;}
+                    if(System.nanoTime()-deadline>=0){owner(new Callable<Boolean>(){public Boolean call(){return timeoutNative(token);}},Boolean.FALSE);return null;}
+                    // Yield the private EGL owner to the other bank's commands.
+                    LockSupport.parkNanos(250000L);
+                }
+            }finally{synchronized(this){ticket.collecting=false;if(result==null)failed=true;else{pending[ticket.bank]=null;ticket.collected=true;}}}
+        }
+        private boolean readsValid(int[] slots,int[] counts){
+            if(slots==null||counts==null||slots.length<1||slots.length>STORAGE_SLOTS1976||slots.length!=counts.length)return false;
+            long sum=0;for(int i=0;i<slots.length;i++){if(slots[i]<0||slots[i]>=STORAGE_SLOTS1976||counts[i]<1)return false;sum+=(long)counts[i]*4;if(sum>MAX_BYTES)return false;}return true;
+        }
+        private boolean targetValid(int slot,int count,int[] target,int offset){
+            return slot>=0&&slot<STORAGE_SLOTS1976&&count>0&&(long)count*4<=MAX_BYTES&&target!=null&&
+                offset>=0&&offset<=target.length&&count<=target.length-offset;
+        }
+        /** GX25/GX26 two-bank collection without allocating an intermediate
+         * Java result array. The same completion and ownership rules apply. */
+        boolean collectInto(final Ticket ticket,final int slot,final int count,final int[] target,final int offset){
+            synchronized(this){if(!usable()||ticket==null||ticket.session!=this||ticket.collected||ticket.collecting||
+                pending[ticket.bank]!=ticket||!targetValid(slot,count,target,offset))return false;ticket.collecting=true;}
+            boolean ok=false;final long deadline=System.nanoTime()+5000000000L;
+            try{
+                for(;;){
+                    synchronized(this){if(!usable())return false;}
+                    int ready=owner(new Callable<Integer>(){public Integer call(){return ticketReadyNative(token,ticket.nativeTicket);}},Integer.valueOf(-1));
+                    if(ready<0)return false;
+                    if(ready>0){ok=owner(new Callable<Boolean>(){public Boolean call(){try{
+                        return readIntoNative(token,ticket.nativeTicket,slot,count,target,offset);
+                    }finally{refresh();}}},Boolean.FALSE);return ok;}
+                    if(System.nanoTime()-deadline>=0){owner(new Callable<Boolean>(){public Boolean call(){return timeoutNative(token);}},Boolean.FALSE);return false;}
+                    LockSupport.parkNanos(250000L);
+                }
+            }finally{synchronized(this){ticket.collecting=false;if(!ok)failed=true;else{pending[ticket.bank]=null;ticket.collected=true;}}}
+        }
+        /** Reuse exclusively owned private output arrays. All descriptors and
+         * targets stay unchanged by the caller until this method returns.
+         * On false every target is uncommitted, even if a preceding read wrote
+         * some private bytes. A complete successful collection owns one ticket. */
+        boolean collectManyInto(final Ticket ticket,final int[] slots,final int[] counts,
+                final int[][] targets,final int[] offsets){
+            synchronized(this){if(!usable()||ticket==null||ticket.session!=this||ticket.collected||ticket.collecting||
+                pending[ticket.bank]!=ticket||!targetsValid1975(slots,counts,targets,offsets))return false;ticket.collecting=true;}
+            boolean ok=false;final long deadline=System.nanoTime()+5000000000L;
+            try{
+                for(;;){
+                    synchronized(this){if(!usable())return false;}
+                    int ready=owner(new Callable<Integer>(){public Integer call(){return ticketReadyNative(token,ticket.nativeTicket);}},Integer.valueOf(-1));
+                    if(ready<0)return false;
+                    if(ready>0){ok=owner(new Callable<Boolean>(){public Boolean call(){try{
+                        return readManyIntoNative(token,ticket.nativeTicket,slots,counts,targets,offsets);
+                    }finally{refresh();}}},Boolean.FALSE);
+                        if(Thread.currentThread().isInterrupted())ok=false;return ok;}
+                    if(System.nanoTime()-deadline>=0){owner(new Callable<Boolean>(){public Boolean call(){return timeoutNative(token);}},Boolean.FALSE);return false;}
+                    LockSupport.parkNanos(250000L);
+                }
+            }finally{synchronized(this){ticket.collecting=false;if(!ok)failed=true;else{pending[ticket.bank]=null;ticket.collected=true;}}}
+        }
+        private boolean targetsValid1975(int[] slots,int[] counts,int[][] targets,int[] offsets){
+            if(!readsValid(slots,counts)||targets==null||offsets==null||targets.length!=slots.length||offsets.length!=slots.length)return false;
+            for(int i=0;i<slots.length;i++){
+                if(!targetValid(slots[i],counts[i],targets[i],offsets[i]))return false;
+                for(int j=0;j<i;j++)if(slots[i]==slots[j]||targets[i]==targets[j])return false;
+            }
+            return true;
+        }
+        synchronized String stats(){return "gx1960 dispatched="+dispatched+" residentBytes="+retained+" failed="+failed;}
+        public synchronized void close(){
+            if(closed)return;
+            boolean ok=owner(new Callable<Boolean>(){public Boolean call(){try{return closeNative(token);}finally{
+                try{int code=failureCodeNative1971();if(lastFailure1971==0&&code>0&&code<=FAILURE_UNKNOWN1971)lastFailure1971=code;}
+                catch(RuntimeException unavailable){if(lastFailure1971==0)lastFailure1971=FAILURE_UNKNOWN1971;}
+                catch(LinkageError unavailable){if(lastFailure1971==0)lastFailure1971=FAILURE_UNKNOWN1971;}
+                // A timeout closes the native token while retaining quarantined
+                // allocations whose completion is unknown. Those bytes remain
+                // counted; they do not represent an active photograph session.
+                activeSession=false;releaseLeases1971(token);refresh();
+            }}},Boolean.FALSE);
+            if(!ok)failed=true;closed=true;pending[0]=pending[1]=null;
+        }
+    }
+    static void trimIdle(){if(!available()||activeSession)return;owner(new Callable<Boolean>(){public Boolean call(){try{return trimNative();}finally{refresh();}}},Boolean.FALSE);}
+    private static native boolean batchNative(long token,int[] kinds,int[] slots,long[] bytes,int[] shaders,Object[] payloads,int[][] bindings,int[][] u,float[][] f,int[] counts);
+    private static native int[][] executeNative(long token,int[] kinds,int[] slots,long[] bytes,int[] shaders,Object[] payloads,int[][] bindings,int[][] u,float[][] f,int[] counts,int[] readSlots,int[] readCounts);
+    private static native long submitNative(long token,int bank,int[] kinds,int[] slots,long[] bytes,int[] shaders,Object[] payloads,int[][] bindings,int[][] u,float[][] f,int[] counts);
+    private static native int[][] readManyNative(long token,long ticket,int[] slots,int[] counts);
+    private static native boolean readIntoNative(long token,long ticket,int slot,int count,int[] target,int offset);
+    private static native boolean readManyIntoNative(long token,long ticket,int[] slots,int[] counts,int[][] targets,int[] offsets);
+    private static native boolean trimNative();
+    private static native int ticketReadyNative(long token,long ticket);
+    private static native boolean timeoutNative(long token);
+    private static native int workgroupNative(int shader);
+    private static native int nativeAbi();
+    private static native long openNative();
+    private static native boolean supportedNative(int id);
+    private static native long retainedNative();
+    private static native long[] capacityNative1971(long token);
+    private static native int failureCodeNative1971();
+    private static native String environmentNative();
+    private static native boolean allocateNative(long token,int slot,long bytes);
+    private static native boolean uploadIntsNative(long token,int slot,int[] values);
+    private static native boolean uploadFloatsNative(long token,int slot,float[] values);
+    private static native boolean dispatchNative(long token,int shader,int[] bindings,int[] u,float[] f,int invocations);
+    private static native int[] readIntsNative(long token,int slot,int count);
+    private static native boolean copyNative1976(long token,int source,int destination,int sourceOffset,int destinationOffset,int count);
+    private static native boolean uploadRangeNative1976(long token,int destination,int destinationOffset,int[] values,int offset,int count);
+    private static native boolean closeNative(long token);
+}

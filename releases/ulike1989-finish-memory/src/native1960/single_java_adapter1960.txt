@@ -1,0 +1,49 @@
+SingleNoise1955.Model already caches the exact native model in nativeData.
+Do not rebuild or lower its precision. Expose package-private accessors to
+GpuStages1960 (or place the session call within SingleNoise1955):
+
+    float[] gpuData1960() { return nativeData; }
+    int gpuPatchWidth1960() { return patchWidth; }
+    int gpuPatchHeight1960() { return patchHeight; }
+
+The returned data is immutable model storage; only upload, never modify.
+Model layout: luma[cells], chroma[cells], mean[cells], brightnessY[8],
+brightnessC[8], ratios[72], with cells=columns*rows.
+
+single1960.comp binding slots:
+0 input ARGB int[] containing inputRows*width rows, with immutable HALO=7.
+1 packed core ARGB output, width*(end-begin) ints.
+2 model float[] in existing nativeData layout.
+3 policy interleaved budget,detail integers, both bounded 0..256, packed core.
+  Bind a four-byte dummy buffer when hasProtection=0.
+4 scratch, (blockCols*blockRows)*248*4 bytes. Each block record contains
+  196 floats for scale 8 and 52 for scale 4: enabled,safeguard,3*n*n deltas.
+  All scratch entries used are written by pass 0 before pass 1 reads them.
+
+Int uniform u[32]:
+0=pass(0 transform/filter/safeguard;1 ordered gather/finish)
+1=width 2=full image height 3=inputRows 4=begin 5=end 6=originY
+7=validBegin 8=validEnd 9=model.columns 10=model.rows
+11=patchWidth 12=patchHeight 13=noise(0..4) 14=shadows(0/1)
+15=hasProtection(0/1)
+16=firstBy=Math.floorDiv(originY+begin-7,4)*4
+17=blockCols=(width+3)/4+1
+18=blockRows=(originY+end-firstBy+3)/4
+31=global invocation offset, set by engine chunk dispatch
+Float uniforms are unused.
+
+Caller retains existing validation, global-clean/noise=0 fast path and
+transactional commit. Dispatch pass 0 for blockCols*blockRows invocations,
+then shader-storage barrier, pass 1 for width*(end-begin) invocations.
+Before adopting GPU output, use the current frozen CPU backend as the exact
+oracle; fp64 capability and equality failure must preserve current CPU output.
+This shader deliberately needs actual fp64. If a driver's GLES dialect cannot
+compile GL_EXT_shader_explicit_arithmetic_types_float64, fail this shader only
+and allow independently available integer GPU stages. Do not rewrite D as
+float or change LF constants. Desktop validation may change only the dialect
+header to #version 430 plus GL_ARB_gpu_shader_fp64 and #define D double.
+
+The current CPU order visits blocks by increasing by, then bx, then 8 before
+4. For a destination pixel only four scale-8 blocks plus one scale-4 block
+can contribute; pass 1 gathers them in this same order. No unordered atomics,
+different accumulation reduction or candidate-count change is introduced.

@@ -1,0 +1,848 @@
+{
+  "schema": "ulike1989-pipeline-reasons-exact-inverse-v1",
+  "files": {
+    "SingleNoise1955.java": {
+      "baseline_sha256": "ffccfb3c81782e250fb9501ab9619940128ed54cc74a95c289e50613753655c6",
+      "candidate_sha256": "0ff40183a4f372fbd8c051cf3616400fe6b88f1749e73a6346278bb9863256c7",
+      "edit_count": 2,
+      "edits": [
+        {
+          "baseline_char_start": 12792,
+          "baseline_char_end": 12792,
+          "candidate_char_start": 12792,
+          "candidate_char_end": 12998,
+          "baseline_line": 203,
+          "candidate_line": 203,
+          "before": "",
+          "after": "        // Reset by each enclosing strip. The primary handoff is independent\n        // of the final Residual/CPU selection and never aliases its cause.\n        int selectedReason1989,primaryGpuReason1989;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "cc977f4563c64ad3308667eb2dd8cef8c58e085e14104bf60113c6a4eb021c14"
+        },
+        {
+          "baseline_char_start": 14587,
+          "baseline_char_end": 14587,
+          "candidate_char_start": 14793,
+          "candidate_char_end": 14935,
+          "baseline_line": 219,
+          "candidate_line": 222,
+          "before": "",
+          "after": "            workspace.selectedReason1989=PipelineDetail1988.CPU_FIXED;\n            workspace.primaryGpuReason1989=PipelineDetail1988.UNKNOWN;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "0337606caa9360da8d770fe8ead55aeaf2afdfe98e27ea112adc6b82301b2c78"
+        }
+      ]
+    },
+    "GpuSingle1960.java": {
+      "baseline_sha256": "2ed0c0ee874dcc71985a928114995c7a35127a7dc3e2001cd9521f01ff1b39eb",
+      "candidate_sha256": "ccb1170b5c5995ef7ff8c4d04502d8df130f8eddd8b07d16c722d307f34a5a6a",
+      "edit_count": 9,
+      "edits": [
+        {
+          "baseline_char_start": 804,
+          "baseline_char_end": 804,
+          "candidate_char_start": 804,
+          "candidate_char_end": 958,
+          "baseline_line": 19,
+          "candidate_line": 19,
+          "before": "",
+          "after": "    private static void reason1989(SingleNoise1955.Workspace workspace,int reason){\n        if(workspace!=null)workspace.selectedReason1989=reason;\n    }\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "1fa25f15d7f8c7b76e88e10eccdb0ce288d719ab4cd3b7c739d8fc38f516aa2a"
+        },
+        {
+          "baseline_char_start": 2206,
+          "baseline_char_end": 2469,
+          "candidate_char_start": 2360,
+          "candidate_char_end": 2949,
+          "baseline_line": 41,
+          "candidate_line": 44,
+          "before": "        if(end<=begin||noise==0||Thread.currentThread().isInterrupted())return false;\n        if(!supported())return GpuResidual1961.process1981(input,output,width,rows,begin,end,validBegin,\n            validEnd,originY,noise,shadows,model,protection,workspace);\n",
+          "after": "        reason1989(workspace,PipelineDetail1988.UNKNOWN);\n        if(end<=begin||noise==0){reason1989(workspace,PipelineDetail1988.INPUT_INELIGIBLE);return false;}\n        if(Thread.currentThread().isInterrupted()){reason1989(workspace,PipelineDetail1988.INTERRUPTED_REASON);return false;}\n        if(!supported()){\n            if(workspace!=null)workspace.primaryGpuReason1989=PipelineDetail1988.UNAVAILABLE;\n            return GpuResidual1961.process1981(input,output,width,rows,begin,end,validBegin,\n                validEnd,originY,noise,shadows,model,protection,workspace);\n        }\n",
+          "before_sha256": "970d52e9efdae11f9f3ccb0814cabe412530058d77c112372011562f7a9e9506",
+          "after_sha256": "372f5ae3999d2f0d1abb8a492534f07c9ca8ee36a8a47c4f4c8045bd5c3bc6d2"
+        },
+        {
+          "baseline_char_start": 3112,
+          "baseline_char_end": 3207,
+          "candidate_char_start": 3592,
+          "candidate_char_end": 3765,
+          "baseline_line": 54,
+          "candidate_line": 62,
+          "before": "                total>GpuNoise1960.MAX_BYTES||!GpuNoise1960.workspaceFits(total))return false;\n",
+          "after": "                total>GpuNoise1960.MAX_BYTES||!GpuNoise1960.workspaceFits(total)){\n            reason1989(workspace,PipelineDetail1988.MEMORY_LIMIT);return false;\n        }\n",
+          "before_sha256": "b91b0469e7f115b9cf1cf47938b86e02a05ec5130607f598c9995e2c2ebc20d0",
+          "after_sha256": "efe473d1ad54a55f31a28c92f5ce2082f31d45dc07463ccfbbcbf0434f0ba214"
+        },
+        {
+          "baseline_char_start": 3994,
+          "baseline_char_end": 4074,
+          "candidate_char_start": 4552,
+          "candidate_char_end": 4780,
+          "baseline_line": 67,
+          "candidate_line": 77,
+          "before": "            if(GpuQualification1961.exactRejected(key)||gate.busy)return false;\n",
+          "after": "            boolean rejected1989=GpuQualification1961.exactRejected(key);\n            if(rejected1989||gate.busy){reason1989(workspace,rejected1989?PipelineDetail1988.EXACT_REJECTED:PipelineDetail1988.ROUTE_BUSY);return false;}\n",
+          "before_sha256": "3c8da226b9bad19f0f1590209620706ed74b15e000e6afd8a53e09d97ebef59a",
+          "after_sha256": "ee0bd569a3cbae7a0bccab606aa225defb8c80f5d66e70fab12c92c429553807"
+        },
+        {
+          "baseline_char_start": 4842,
+          "baseline_char_end": 4929,
+          "candidate_char_start": 5548,
+          "candidate_char_end": 5801,
+          "baseline_line": 80,
+          "candidate_line": 91,
+          "before": "            if((!gate.admitted&&!stageAdmitted)||SingleCpu1981.prefersCpu(speedKey)) {\n",
+          "after": "            boolean missing1989=!gate.admitted&&!stageAdmitted;\n            if(missing1989||SingleCpu1981.prefersCpu(speedKey)) {\n                reason1989(workspace,missing1989?PipelineDetail1988.PROOF_MISSING:PipelineDetail1988.CPU_POLICY_SELECTED);\n",
+          "before_sha256": "f2dd93a1c6413f61b031057877708a4fc061428518d16a2a2fc491d8743e6825",
+          "after_sha256": "2ac753ed32c6f7e188c89f4cfad9103fe5e261ab49d42a64f9b0b9131ac3a1e6"
+        },
+        {
+          "baseline_char_start": 6807,
+          "baseline_char_end": 6930,
+          "candidate_char_start": 7679,
+          "candidate_char_end": 7975,
+          "baseline_line": 106,
+          "candidate_line": 119,
+          "before": "            if(lease==null&&(stageSelected||SingleStage1981.blocksLegacy(model)||GpuNoise1960.sessionBusy()))return false;\n",
+          "after": "            boolean busy1989=false;\n            if(lease==null&&(stageSelected||SingleStage1981.blocksLegacy(model)||(busy1989=GpuNoise1960.sessionBusy()))){\n                reason1989(workspace,busy1989?PipelineDetail1988.SESSION_BUSY:PipelineDetail1988.STAGE_LEASE);return false;\n            }\n",
+          "before_sha256": "a4e556117801e1f847e85e4bb78bee5cae43b5230737f0643c535d3afa2e5f41",
+          "after_sha256": "1c8b6573fa5dcfcba15fd4c31f8e6548844e5daa83e8f41ccd66ea5b8a7a1c59"
+        },
+        {
+          "baseline_char_start": 7156,
+          "baseline_char_end": 7208,
+          "candidate_char_start": 8201,
+          "candidate_char_end": 8308,
+          "baseline_line": 109,
+          "candidate_line": 125,
+          "before": "            if(candidate==UNAVAILABLE)return false;\n",
+          "after": "            if(candidate==UNAVAILABLE){reason1989(workspace,PipelineDetail1988.UNAVAILABLE);return false;}\n",
+          "before_sha256": "753ec8da1b01ae69b1070c82847d91812903b3c5c1aa5f77ad07b6e859e4455e",
+          "after_sha256": "4d5f84c6609ad36699aa095fdbbf61a0f5cec5049527d7cfab04ae6c743aefcb"
+        },
+        {
+          "baseline_char_start": 7365,
+          "baseline_char_end": 7538,
+          "candidate_char_start": 8465,
+          "candidate_char_end": 8759,
+          "baseline_line": 112,
+          "candidate_line": 128,
+          "before": "            if(candidate==null){GpuQualification1961.rejectSpeed(speedKey);return false;}\n            interrupted();if(GpuQualification1961.exactRejected(key))return false;\n",
+          "after": "            if(candidate==null){reason1989(workspace,PipelineDetail1988.CANDIDATE_UNAVAILABLE);GpuQualification1961.rejectSpeed(speedKey);return false;}\n            interrupted();if(GpuQualification1961.exactRejected(key)){reason1989(workspace,PipelineDetail1988.EXACT_REJECTED);return false;}\n",
+          "before_sha256": "a3ce177832a0877cc8f1c184513b0853bd506321789c049a5a46d7eee981eb37",
+          "after_sha256": "c6d04c6b3e3b823510fd78963b58c28e8dca0cd1959212aa795d8c111ba85f35"
+        },
+        {
+          "baseline_char_start": 8889,
+          "baseline_char_end": 9223,
+          "candidate_char_start": 10110,
+          "candidate_char_end": 10658,
+          "baseline_line": 130,
+          "candidate_line": 146,
+          "before": "          catch(RuntimeException failed){if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(LinkageError failed){if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(OutOfMemoryError failed){return completed;}\n",
+          "after": "          catch(RuntimeException failed){if(!completed)reason1989(workspace,PipelineDetail1988.CANDIDATE_FAILURE);if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(LinkageError failed){if(!completed)reason1989(workspace,PipelineDetail1988.CANDIDATE_FAILURE);if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(OutOfMemoryError failed){if(!completed)reason1989(workspace,PipelineDetail1988.MEMORY_LIMIT);return completed;}\n",
+          "before_sha256": "f6c1e8ec0607a5e7f72753e7ecaaa22c91fa49b083d0ea2dbd256d6024e34d77",
+          "after_sha256": "b2a3fdbe96201678d5fa6526a0154af8cb5a845bd4210980d5aa77cf2d71aeaf"
+        }
+      ]
+    },
+    "GpuResidual1961.java": {
+      "baseline_sha256": "92aace4509d84a09e4a334051124ce2f24e44d77e13b566c8b5e205bf7bd9315",
+      "candidate_sha256": "85cbac6e220f9b6cbf0234be9036292ff81165f6531f8776cfa4390b03e4b9f5",
+      "edit_count": 9,
+      "edits": [
+        {
+          "baseline_char_start": 2552,
+          "baseline_char_end": 2710,
+          "candidate_char_start": 2552,
+          "candidate_char_end": 3073,
+          "baseline_line": 44,
+          "candidate_line": 44,
+          "before": "        if(end<=begin||noise<=0||Thread.currentThread().isInterrupted()||!supported()||GpuNoise1960.sessionBusy()&&!SingleStage1981.owns(model))return false;\n",
+          "after": "        reason1989(workspace,PipelineDetail1988.UNKNOWN);\n        if(end<=begin||noise<=0){reason1989(workspace,PipelineDetail1988.INPUT_INELIGIBLE);return false;}\n        if(Thread.currentThread().isInterrupted()){reason1989(workspace,PipelineDetail1988.INTERRUPTED_REASON);return false;}\n        if(!supported()){reason1989(workspace,PipelineDetail1988.UNAVAILABLE);return false;}\n        if(GpuNoise1960.sessionBusy()&&!SingleStage1981.owns(model)){reason1989(workspace,PipelineDetail1988.SESSION_BUSY);return false;}\n",
+          "before_sha256": "bb577d6ad7ee6c88c074b4ddab72c128bfdefefdce0a2b37e5c69d931d03bbba",
+          "after_sha256": "a089f44cec11a496945ab1f2bb4297cebc55dba9201586be75bf6955add1155b"
+        },
+        {
+          "baseline_char_start": 2821,
+          "baseline_char_end": 2936,
+          "candidate_char_start": 3184,
+          "candidate_char_end": 3377,
+          "baseline_line": 47,
+          "candidate_line": 51,
+          "before": "        if(count>Integer.MAX_VALUE/2||peak>GpuNoise1960.MAX_BYTES||!GpuNoise1960.workspaceFits(peak))return false;\n",
+          "after": "        if(count>Integer.MAX_VALUE/2||peak>GpuNoise1960.MAX_BYTES||!GpuNoise1960.workspaceFits(peak)){\n            reason1989(workspace,PipelineDetail1988.MEMORY_LIMIT);return false;\n        }\n",
+          "before_sha256": "353257c51ddd38b3ec248f95e6d85924b372dc6da4896325ae2d70f5c981b35d",
+          "after_sha256": "c4f809546610b970370225c1f0846e5d520b9cc4c4089624edac9edb59f34c9a"
+        },
+        {
+          "baseline_char_start": 3729,
+          "baseline_char_end": 3824,
+          "candidate_char_start": 4170,
+          "candidate_char_end": 4413,
+          "baseline_line": 59,
+          "candidate_line": 65,
+          "before": "            if(GpuQualification1961.exactRejected(key)||gate.busy)return false;gate.busy=true;\n",
+          "after": "            boolean rejected1989=GpuQualification1961.exactRejected(key);\n            if(rejected1989||gate.busy){reason1989(workspace,rejected1989?PipelineDetail1988.EXACT_REJECTED:PipelineDetail1988.ROUTE_BUSY);return false;}gate.busy=true;\n",
+          "before_sha256": "b70a071bc1b5f5ff033d358e2bed543c2bcc1b52038b5ff856afd33cd1731b6b",
+          "after_sha256": "b7725411a01b8d56094961b1bee4258a633f6bd0e5804170dd05731033ea71e1"
+        },
+        {
+          "baseline_char_start": 4594,
+          "baseline_char_end": 4681,
+          "candidate_char_start": 5183,
+          "candidate_char_end": 5436,
+          "baseline_line": 71,
+          "candidate_line": 78,
+          "before": "            if((!gate.admitted&&!stageAdmitted)||SingleCpu1981.prefersCpu(speedKey)) {\n",
+          "after": "            boolean missing1989=!gate.admitted&&!stageAdmitted;\n            if(missing1989||SingleCpu1981.prefersCpu(speedKey)) {\n                reason1989(workspace,missing1989?PipelineDetail1988.PROOF_MISSING:PipelineDetail1988.CPU_POLICY_SELECTED);\n",
+          "before_sha256": "f2dd93a1c6413f61b031057877708a4fc061428518d16a2a2fc491d8743e6825",
+          "after_sha256": "2ac753ed32c6f7e188c89f4cfad9103fe5e261ab49d42a64f9b0b9131ac3a1e6"
+        },
+        {
+          "baseline_char_start": 6262,
+          "baseline_char_end": 6385,
+          "candidate_char_start": 7017,
+          "candidate_char_end": 7313,
+          "baseline_line": 93,
+          "candidate_line": 102,
+          "before": "            if(lease==null&&(stageSelected||SingleStage1981.blocksLegacy(model)||GpuNoise1960.sessionBusy()))return false;\n",
+          "after": "            boolean busy1989=false;\n            if(lease==null&&(stageSelected||SingleStage1981.blocksLegacy(model)||(busy1989=GpuNoise1960.sessionBusy()))){\n                reason1989(workspace,busy1989?PipelineDetail1988.SESSION_BUSY:PipelineDetail1988.STAGE_LEASE);return false;\n            }\n",
+          "before_sha256": "a4e556117801e1f847e85e4bb78bee5cae43b5230737f0643c535d3afa2e5f41",
+          "after_sha256": "1c8b6573fa5dcfcba15fd4c31f8e6548844e5daa83e8f41ccd66ea5b8a7a1c59"
+        },
+        {
+          "baseline_char_start": 6582,
+          "baseline_char_end": 6634,
+          "candidate_char_start": 7510,
+          "candidate_char_end": 7617,
+          "baseline_line": 96,
+          "candidate_line": 108,
+          "before": "            if(candidate==UNAVAILABLE)return false;\n",
+          "after": "            if(candidate==UNAVAILABLE){reason1989(workspace,PipelineDetail1988.UNAVAILABLE);return false;}\n",
+          "before_sha256": "753ec8da1b01ae69b1070c82847d91812903b3c5c1aa5f77ad07b6e859e4455e",
+          "after_sha256": "4d5f84c6609ad36699aa095fdbbf61a0f5cec5049527d7cfab04ae6c743aefcb"
+        },
+        {
+          "baseline_char_start": 6791,
+          "baseline_char_end": 6958,
+          "candidate_char_start": 7774,
+          "candidate_char_end": 8062,
+          "baseline_line": 99,
+          "candidate_line": 111,
+          "before": "            if(candidate==null){GpuQualification1961.rejectSpeed(speedKey);return false;}\n            check();if(GpuQualification1961.exactRejected(key))return false;\n",
+          "after": "            if(candidate==null){reason1989(workspace,PipelineDetail1988.CANDIDATE_UNAVAILABLE);GpuQualification1961.rejectSpeed(speedKey);return false;}\n            check();if(GpuQualification1961.exactRejected(key)){reason1989(workspace,PipelineDetail1988.EXACT_REJECTED);return false;}\n",
+          "before_sha256": "672540011801a812c918ffcd8d56ee7906d53de743ab90641fdff9fed4cb9065",
+          "after_sha256": "56adac6db58b7d933f33a775bc0b1abbd30e988a94c918e430b2c092056b3914"
+        },
+        {
+          "baseline_char_start": 8120,
+          "baseline_char_end": 8454,
+          "candidate_char_start": 9224,
+          "candidate_char_end": 9772,
+          "baseline_line": 116,
+          "candidate_line": 128,
+          "before": "          catch(RuntimeException failed){if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(LinkageError failed){if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(OutOfMemoryError failed){return completed;}\n",
+          "after": "          catch(RuntimeException failed){if(!completed)reason1989(workspace,PipelineDetail1988.CANDIDATE_FAILURE);if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(LinkageError failed){if(!completed)reason1989(workspace,PipelineDetail1988.CANDIDATE_FAILURE);if(!completed&&activeSpeed!=null)GpuQualification1961.rejectSpeed(activeSpeed);return completed;}\n          catch(OutOfMemoryError failed){if(!completed)reason1989(workspace,PipelineDetail1988.MEMORY_LIMIT);return completed;}\n",
+          "before_sha256": "f6c1e8ec0607a5e7f72753e7ecaaa22c91fa49b083d0ea2dbd256d6024e34d77",
+          "after_sha256": "b2a3fdbe96201678d5fa6526a0154af8cb5a845bd4210980d5aa77cf2d71aeaf"
+        },
+        {
+          "baseline_char_start": 8510,
+          "baseline_char_end": 8510,
+          "candidate_char_start": 9828,
+          "candidate_char_end": 9982,
+          "baseline_line": 120,
+          "candidate_line": 132,
+          "before": "",
+          "after": "    }\n    private static void reason1989(SingleNoise1955.Workspace workspace,int reason){\n        if(workspace!=null)workspace.selectedReason1989=reason;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "81104231954f1d6897625baf936d5252976e0ec71d27dd6e01facb9caf0f8ef0"
+        }
+      ]
+    },
+    "QualityPipeline1932.java": {
+      "baseline_sha256": "6aece3e1e44d5aa7ad79f3606daa712688a269c3203801ac51b1bb6df3ad0372",
+      "candidate_sha256": "f1990c84419817f1d592de257cdfbe415d4562d2092d4870ac75fc9ecf1802af",
+      "edit_count": 4,
+      "edits": [
+        {
+          "baseline_char_start": 38728,
+          "baseline_char_end": 38823,
+          "candidate_char_start": 38728,
+          "candidate_char_end": 38940,
+          "baseline_line": 649,
+          "candidate_line": 649,
+          "before": "                        worker.singleWorkspace.selectedBackend1982,PipelineDetail1988.UNKNOWN,\n",
+          "after": "                        worker.singleWorkspace.selectedBackend1982,worker.singleWorkspace.selectedBackend1982==0?\n                            worker.singleWorkspace.selectedReason1989:PipelineDetail1988.UNKNOWN,\n",
+          "before_sha256": "9ce248053334e64b88a1d4561f2e0059f279d9070329df6ecb340cd935d6c473",
+          "after_sha256": "65551d1facf7ed893c77fc7ba6f3dbbb4e81587ad797b7ad14d1e998aff3ff71"
+        },
+        {
+          "baseline_char_start": 38894,
+          "baseline_char_end": 38894,
+          "candidate_char_start": 39011,
+          "candidate_char_end": 39322,
+          "baseline_line": 651,
+          "candidate_line": 652,
+          "before": "",
+          "after": "                }catch(Throwable optional){}\n                if(worker.singleTrace1982!=null&&worker.singleWorkspace!=null)try {\n                    PipelineDetail1988.priorReason1989(worker.singleTrace1982,PipelineDetail1988.FRONT_STRIP,\n                        worker.singleWorkspace.primaryGpuReason1989,1);\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "b61ddbab46e9dc891073e5a3e6c5f0a24fb46bec36d82f33e2d30cd80af2ee1f"
+        },
+        {
+          "baseline_char_start": 75327,
+          "baseline_char_end": 75455,
+          "candidate_char_start": 75755,
+          "candidate_char_end": 75917,
+          "baseline_line": 1196,
+          "candidate_line": 1201,
+          "before": "                PipelineDetail1988.CPU,PipelineDetail1988.UNKNOWN,1,System.nanoTime()-started1982);}catch(Throwable optional){}\n",
+          "after": "                PipelineDetail1988.CPU,work.published?PipelineDetail1988.UNKNOWN:work.cpuReason1989,1,System.nanoTime()-started1982);}catch(Throwable optional){}\n",
+          "before_sha256": "c8071e8d42fca0a0c84e0f3b0ef0cc151b59a74d623a0b8e6ed9901bf75329ee",
+          "after_sha256": "20387a4f3770dd966fdfb0e49caf0237c1fd16549aba4fd2dd3926c7304b43df"
+        },
+        {
+          "baseline_char_start": 76562,
+          "baseline_char_end": 76562,
+          "candidate_char_start": 77024,
+          "candidate_char_end": 77120,
+          "baseline_line": 1216,
+          "candidate_line": 1221,
+          "before": "",
+          "after": "        int cpuReason1989;\n        public void cpuReason1989(int reason){cpuReason1989=reason;}\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "f3a014f90164a7dd5680bfa8fb25f3bec9d884cf4fc1c8334bf1a914f9f66120"
+        }
+      ]
+    },
+    "FastResize1933.java": {
+      "baseline_sha256": "92dc85522fd06ef8a543642e884f7a9cb4ca4cd85a1cb894ab81ee727c418e17",
+      "candidate_sha256": "88492b772439c7408f99bb331521ce1215c6fb0b6abbb8c57f0aab5a27f466b9",
+      "edit_count": 4,
+      "edits": [
+        {
+          "baseline_char_start": 1787,
+          "baseline_char_end": 1860,
+          "candidate_char_start": 1787,
+          "candidate_char_end": 1894,
+          "baseline_line": 33,
+          "candidate_line": 33,
+          "before": "                PipelineDetail1988.UNKNOWN,1,System.nanoTime()-started);\n",
+          "after": "                result==cpu.result?cpu.reason1989:PipelineDetail1988.UNKNOWN,1,System.nanoTime()-started);\n",
+          "before_sha256": "de77ebc2128110da9d7a2e18f76d07bcdc585f6aebbac6123c4d04438575574d",
+          "after_sha256": "9e2436a9ff56891cb127733f32e4e8cb8701395d76418b33110a57a63910408c"
+        },
+        {
+          "baseline_char_start": 1926,
+          "baseline_char_end": 2006,
+          "candidate_char_start": 1960,
+          "candidate_char_end": 2050,
+          "baseline_line": 37,
+          "candidate_line": 37,
+          "before": "    private static final class MeasuredCpu1982 implements GpuGeometry1960.Cpu {\n",
+          "after": "    private static final class MeasuredCpu1982 implements GpuGeometry1960.CpuReason1989 {\n",
+          "before_sha256": "3190116f9a84677ea24652c7a5396709148746fa44915a2b485992db4646b7f1",
+          "after_sha256": "1610f61c48c6c513ffed8051dc600a802f6ca13b4e73c2c1ee14e45e7552d7fc"
+        },
+        {
+          "baseline_char_start": 2081,
+          "baseline_char_end": 2081,
+          "candidate_char_start": 2125,
+          "candidate_char_end": 2149,
+          "baseline_line": 39,
+          "candidate_line": 39,
+          "before": "",
+          "after": "        int reason1989;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "27a0e496fb453d5530c1eb598ac362edc8b62de135d7a489d20e1b466bb12ec4"
+        },
+        {
+          "baseline_char_start": 2172,
+          "baseline_char_end": 2172,
+          "candidate_char_start": 2240,
+          "candidate_char_end": 2306,
+          "baseline_line": 40,
+          "candidate_line": 41,
+          "before": "",
+          "after": "        public void cpuReason1989(int reason){reason1989=reason;}\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "c9d43f35b3480c980f50c275871e7989f966d7205443608271ba2f555adcd4b9"
+        }
+      ]
+    },
+    "GpuGeometry1960.java": {
+      "baseline_sha256": "56facfe246b630d1c578e8246f18a15923d63090b18850dbc66a3d173c75be89",
+      "candidate_sha256": "7844cf8dc9763117c1e4b0ddb5ab9303471fe68c9beb00d4e10d4c20550bb729",
+      "edit_count": 9,
+      "edits": [
+        {
+          "baseline_char_start": 601,
+          "baseline_char_end": 601,
+          "candidate_char_start": 601,
+          "candidate_char_end": 949,
+          "baseline_line": 15,
+          "candidate_line": 15,
+          "before": "",
+          "after": "    interface CpuReason1989 extends Cpu {void cpuReason1989(int reason);}\n    private static void reason1989(Cpu cpu,int reason){\n        try{if(cpu instanceof CpuReason1989)((CpuReason1989)cpu).cpuReason1989(reason);}catch(Throwable optional){}\n    }\n    private static Bitmap cpu1989(Cpu cpu,int reason){reason1989(cpu,reason);return cpu.run();}\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "027064fa8ccfa6ffc7d54a93e4f4f4e943b0da98c501c67d171171218928c631"
+        },
+        {
+          "baseline_char_start": 1495,
+          "baseline_char_end": 1790,
+          "candidate_char_start": 1843,
+          "candidate_char_end": 2457,
+          "baseline_line": 28,
+          "candidate_line": 33,
+          "before": "        if(GpuQualification1961.background()||!eligible(bitmap,rotation,width,height)||GpuNoise1960.sessionBusy()||!GpuNoise1960.supports(GpuNoise1960.GEOMETRY))return cpu.run();\n        String environment=GpuNoise1960.fingerprint();if(environment==null||environment.isEmpty())return cpu.run();\n",
+          "after": "        reason1989(cpu,PipelineDetail1988.UNKNOWN);\n        if(GpuQualification1961.background())return cpu1989(cpu,PipelineDetail1988.BACKGROUND);\n        if(!eligible(bitmap,rotation,width,height))return cpu1989(cpu,PipelineDetail1988.INPUT_INELIGIBLE);\n        if(GpuNoise1960.sessionBusy())return cpu1989(cpu,PipelineDetail1988.SESSION_BUSY);\n        if(!GpuNoise1960.supports(GpuNoise1960.GEOMETRY))return cpu1989(cpu,PipelineDetail1988.UNAVAILABLE);\n        String environment=GpuNoise1960.fingerprint();if(environment==null||environment.isEmpty())return cpu1989(cpu,PipelineDetail1988.ENVIRONMENT_MISSING);\n",
+          "before_sha256": "88e7bfb7c20b57b98a0aff8b6de1259edbe1b088a94614450f2fba67795c66c2",
+          "after_sha256": "278226ae75ce9574cfeb55c3662ac16077555df1b72c3a474093dede8a0725e5"
+        },
+        {
+          "baseline_char_start": 1840,
+          "baseline_char_end": 1840,
+          "candidate_char_start": 2507,
+          "candidate_char_end": 2543,
+          "baseline_line": 31,
+          "candidate_line": 40,
+          "before": "",
+          "after": "        final boolean rejected1989;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "547bd04305ef22e0fdd64e5e81ebbc46b95f86ba9419622fb20f38b0356c8ac9"
+        },
+        {
+          "baseline_char_start": 2545,
+          "baseline_char_end": 2671,
+          "candidate_char_start": 3248,
+          "candidate_char_end": 3400,
+          "baseline_line": 38,
+          "candidate_line": 48,
+          "before": "            state=found;fallback=GpuQualification1961.exactRejected(key1961(state))||state.busy;if(!fallback)state.busy=true;\n",
+          "after": "            state=found;rejected1989=GpuQualification1961.exactRejected(key1961(state));fallback=rejected1989||state.busy;if(!fallback)state.busy=true;\n",
+          "before_sha256": "8dca10381db369ededf7a7a12c53078c686c4b842725c7f2acf891b5a9b1b1e0",
+          "after_sha256": "d62bdf9fe5d4a11097904ef82a83bcba69c81b53119d24acf39eedc8268db2d6"
+        },
+        {
+          "baseline_char_start": 2681,
+          "baseline_char_end": 2719,
+          "candidate_char_start": 3410,
+          "candidate_char_end": 3528,
+          "baseline_line": 40,
+          "candidate_line": 50,
+          "before": "        if(fallback)return cpu.run();\n",
+          "after": "        if(fallback)return cpu1989(cpu,rejected1989?PipelineDetail1988.EXACT_REJECTED:PipelineDetail1988.ROUTE_BUSY);\n",
+          "before_sha256": "b28b1d7255c3c6bcb727f564f9b6d9ed20fcffc37e7fe064e9d147b59f1b9b4a",
+          "after_sha256": "ec73adfa46562b6f6bc53d19410a5f1184b3a50e3f0c210a0016ff261bcde9d9"
+        },
+        {
+          "baseline_char_start": 3333,
+          "baseline_char_end": 3437,
+          "candidate_char_start": 4142,
+          "candidate_char_end": 4290,
+          "baseline_line": 52,
+          "candidate_line": 62,
+          "before": "                state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));return cpu.run();\n",
+          "after": "                state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));return cpu1989(cpu,PipelineDetail1988.CANDIDATE_UNAVAILABLE);\n",
+          "before_sha256": "29189e4ec6ad03320b69139570877e4037749066c5042bb6d46f6a60d82d4019",
+          "after_sha256": "6d8a426a5fdd0af9cf789b0050883c6282546ac3c9e27d8a096bc4ad2e0a5bc7"
+        },
+        {
+          "baseline_char_start": 3609,
+          "baseline_char_end": 3683,
+          "candidate_char_start": 4462,
+          "candidate_char_end": 4572,
+          "baseline_line": 56,
+          "candidate_line": 66,
+          "before": "            reference=cpu.run();interrupted();schedule1961(bitmap,state);\n",
+          "after": "            reference=cpu1989(cpu,PipelineDetail1988.PROOF_MISSING);interrupted();schedule1961(bitmap,state);\n",
+          "before_sha256": "7d2657d1c76fa76d2d5455dd1dc1c07e7bb10f07c28e7638152123fbb393621c",
+          "after_sha256": "daf21787d20be726eb4c784f95789169b914b53230ceed0afedf7e7fa61f2370"
+        },
+        {
+          "baseline_char_start": 3749,
+          "baseline_char_end": 3897,
+          "candidate_char_start": 4638,
+          "candidate_char_end": 4820,
+          "baseline_line": 58,
+          "candidate_line": 68,
+          "before": "        } catch(DeferredGpu unavailable){interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu.run();}\n",
+          "after": "        } catch(DeferredGpu unavailable){interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu1989(cpu,PipelineDetail1988.UNAVAILABLE);}\n",
+          "before_sha256": "8ceb32d739eba5e84b30c64cc8c72f3d778c86ae8f1a8863f66963620273ab66",
+          "after_sha256": "fcc5d55cb2e3638d4039b630cbf823261610d4bea4a8cc5a51776754700e0293"
+        },
+        {
+          "baseline_char_start": 3964,
+          "baseline_char_end": 4592,
+          "candidate_char_start": 4887,
+          "candidate_char_end": 5630,
+          "baseline_line": 60,
+          "candidate_line": 70,
+          "before": "          catch(RuntimeException optionalFailure){state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu.run();}\n          catch(LinkageError optionalFailure){state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu.run();}\n          catch(OutOfMemoryError optionalFailure){state.admitted=false;interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu.run();}\n",
+          "after": "          catch(RuntimeException optionalFailure){state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu1989(cpu,PipelineDetail1988.CANDIDATE_FAILURE);}\n          catch(LinkageError optionalFailure){state.admitted=false;GpuQualification1961.rejectSpeed(key1961(state));interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu1989(cpu,PipelineDetail1988.CANDIDATE_FAILURE);}\n          catch(OutOfMemoryError optionalFailure){state.admitted=false;interrupted();if(reference!=null){Bitmap result=reference;reference=null;return result;}return cpu1989(cpu,PipelineDetail1988.MEMORY_LIMIT);}\n",
+          "before_sha256": "6995fedf7285ae828c5efb443f094ef696994497d54b268cb98b0145e41b3778",
+          "after_sha256": "b33ecc05c2c63ec93c351e4628a7be55905196f39afd8a89b9c5140d7d40514b"
+        }
+      ]
+    },
+    "WholeRoute1953.java": {
+      "baseline_sha256": "0fdbcd12f48038f5663ca8083e7f4ff2bb17b513ab31b7d9c5d1fabd3f22b5e3",
+      "candidate_sha256": "fe8c42c72eb30047b5bb3330b9daca9d24d4777ae73db02280a1bb58ff6ca7f8",
+      "edit_count": 12,
+      "edits": [
+        {
+          "baseline_char_start": 1878,
+          "baseline_char_end": 1878,
+          "candidate_char_start": 1878,
+          "candidate_char_end": 2008,
+          "baseline_line": 39,
+          "candidate_line": 39,
+          "before": "",
+          "after": "        /** Optional scalar selected at the original foreground CPU branch. */\n        default void cpuReason1989(int reason) { }\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "9a5e0f5209f26eba252036858802b93b16b1f5b372977e0f8b6c4427a338a54f"
+        },
+        {
+          "baseline_char_start": 5623,
+          "baseline_char_end": 5715,
+          "candidate_char_start": 5753,
+          "candidate_char_end": 6008,
+          "baseline_line": 114,
+          "candidate_line": 116,
+          "before": "            if(unavailable||key==null||key.length==0||key.length>MAX_KEY)return work.cpu();\n",
+          "after": "            reason1989(work,PipelineDetail1988.UNKNOWN);\n            if(unavailable)return cpu1989(work,PipelineDetail1988.UNAVAILABLE);\n            if(key==null||key.length==0||key.length>MAX_KEY)return cpu1989(work,PipelineDetail1988.INPUT_INELIGIBLE);\n",
+          "before_sha256": "4f04b756ba1f8b901e2a6d3579d2335c57943a397a14ab3cebd801b2881c0e51",
+          "after_sha256": "993be906a6cf763983c8bdda53cdef04e1002abf8850cde3da3eef069b7056db"
+        },
+        {
+          "baseline_char_start": 5800,
+          "baseline_char_end": 5913,
+          "candidate_char_start": 6093,
+          "candidate_char_end": 6398,
+          "baseline_line": 117,
+          "candidate_line": 121,
+          "before": "            catch(OutOfMemoryError noState) { return work.cpu(); }\n            if(state==null)return work.cpu();\n",
+          "after": "            catch(OutOfMemoryError noState) { return cpu1989(work,PipelineDetail1988.MEMORY_LIMIT); }\n            if(state==null)return cpu1989(work,PipelineDetail1988.ROUTE_BUSY);\n            int reason1989=state.environment==null?PipelineDetail1988.ENVIRONMENT_MISSING:PipelineDetail1988.PROOF_MISSING;\n",
+          "before_sha256": "55e1cdece3784776782c9c9ae8f630a58771b86c5297f1809c0e53892e59d477",
+          "after_sha256": "cfac0b3f96996439128bd42152c20b4ec766730cb6e52d767e93c67b363dbf6e"
+        },
+        {
+          "baseline_char_start": 6041,
+          "baseline_char_end": 6322,
+          "candidate_char_start": 6526,
+          "candidate_char_end": 6922,
+          "baseline_line": 122,
+          "candidate_line": 127,
+          "before": "                catch(RuntimeException optionalFailure) { state.release();return work.cpu(); }\n                catch(LinkageError optionalFailure) { state.release();return work.cpu(); }\n                catch(OutOfMemoryError optionalFailure) { state.release();return work.cpu(); }\n",
+          "after": "                catch(RuntimeException optionalFailure) { state.release();return cpu1989(work,PipelineDetail1988.CANDIDATE_FAILURE); }\n                catch(LinkageError optionalFailure) { state.release();return cpu1989(work,PipelineDetail1988.CANDIDATE_FAILURE); }\n                catch(OutOfMemoryError optionalFailure) { state.release();return cpu1989(work,PipelineDetail1988.MEMORY_LIMIT); }\n",
+          "before_sha256": "0b7e01d0b9efba90433b621e54e7cd8b7b21430717fbf4e9e3f06003eb3d38a0",
+          "after_sha256": "1ae8a3ed17bfea6b01f9f45a9cf988ec6551a30fc953bf6094ebf3892a7e2b30"
+        },
+        {
+          "baseline_char_start": 6453,
+          "baseline_char_end": 6453,
+          "candidate_char_start": 7053,
+          "candidate_char_end": 7123,
+          "baseline_line": 127,
+          "candidate_line": 132,
+          "before": "",
+          "after": "                reason1989=PipelineDetail1988.DISPATCH_PROOF_MISSING;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "ce24ac13e0b53867a985a148fbbb92eabb9341b9a68e078d549ef974923e1cc2"
+        },
+        {
+          "baseline_char_start": 6868,
+          "baseline_char_end": 6924,
+          "candidate_char_start": 7538,
+          "candidate_char_end": 7608,
+          "baseline_line": 137,
+          "candidate_line": 143,
+          "before": "                if(reservation==null)return work.cpu();\n",
+          "after": "                if(reservation==null)return cpu1989(work,reason1989);\n",
+          "before_sha256": "0a9abb33cc24c8bf1253785cbbee1a187191cf48a9b69f87bfb6c00fba80c378",
+          "after_sha256": "9cd3530a8bae2dbb0bab6316bfcd7bb395d9250c94a8cfbdfd6bf1e7d49ea9ff"
+        },
+        {
+          "baseline_char_start": 7410,
+          "baseline_char_end": 7410,
+          "candidate_char_start": 8094,
+          "candidate_char_end": 8139,
+          "baseline_line": 145,
+          "candidate_line": 151,
+          "before": "",
+          "after": "                reason1989(work,reason1989);\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "d4810be12852a574de7f585ab31b914eb0cf2948406f037c9d2af958c5e424c7"
+        },
+        {
+          "baseline_char_start": 9044,
+          "baseline_char_end": 9044,
+          "candidate_char_start": 9773,
+          "candidate_char_end": 9846,
+          "baseline_line": 178,
+          "candidate_line": 185,
+          "before": "",
+          "after": "                int reason1989=PipelineDetail1988.CANDIDATE_UNAVAILABLE;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "317855783b446aa4dc21896d14fe0379a69184a0e4a63f4a59e020aafcf1befb"
+        },
+        {
+          "baseline_char_start": 9185,
+          "baseline_char_end": 9396,
+          "candidate_char_start": 9987,
+          "candidate_char_end": 10337,
+          "baseline_line": 180,
+          "candidate_line": 188,
+          "before": "                catch(OutOfMemoryError failed) { reject(state); }\n                catch(LinkageError failed) { unavailable=true;reject(state); }\n                catch(RuntimeException failed) { reject(state); }\n",
+          "after": "                catch(OutOfMemoryError failed) { reason1989=PipelineDetail1988.MEMORY_LIMIT;reject(state); }\n                catch(LinkageError failed) { reason1989=PipelineDetail1988.CANDIDATE_FAILURE;unavailable=true;reject(state); }\n                catch(RuntimeException failed) { reason1989=PipelineDetail1988.CANDIDATE_FAILURE;reject(state); }\n",
+          "before_sha256": "665309a7591c0c83c02a07036529b741a09bf5fdb82db838148304d7c023ddad",
+          "after_sha256": "7d8f6406edf818534e56e1369849150bcd9e66edc4553317f01ce5372adf4876"
+        },
+        {
+          "baseline_char_start": 9623,
+          "baseline_char_end": 9846,
+          "candidate_char_start": 10564,
+          "candidate_char_end": 10926,
+          "baseline_line": 187,
+          "candidate_line": 195,
+          "before": "                    catch(OutOfMemoryError failed) { reject(state); }\n                    catch(LinkageError failed) { unavailable=true;reject(state); }\n                    catch(RuntimeException failed) { reject(state); }\n",
+          "after": "                    catch(OutOfMemoryError failed) { reason1989=PipelineDetail1988.MEMORY_LIMIT;reject(state); }\n                    catch(LinkageError failed) { reason1989=PipelineDetail1988.CANDIDATE_FAILURE;unavailable=true;reject(state); }\n                    catch(RuntimeException failed) { reason1989=PipelineDetail1988.CANDIDATE_FAILURE;reject(state); }\n",
+          "before_sha256": "f89a6a1433e04c80617883108836a86c3c6f8cb5100a904274368fe046c1edb9",
+          "after_sha256": "12ec3165027f4a9fb936d7306c495437e4511681665d8ba96e7f853c0e35cf7b"
+        },
+        {
+          "baseline_char_start": 9884,
+          "baseline_char_end": 9937,
+          "candidate_char_start": 10964,
+          "candidate_char_end": 11031,
+          "baseline_line": 191,
+          "candidate_line": 199,
+          "before": "                complete=work.cpu();return complete;\n",
+          "after": "                complete=cpu1989(work,reason1989);return complete;\n",
+          "before_sha256": "faf4ed7987310ecc48f9a618dd1d4d697dbece3af1b17ac5ab707d45210b79e3",
+          "after_sha256": "699f727fb30be7058e7ef9c70fa3351d84d3b638ba893916457b1599a35cfd44"
+        },
+        {
+          "baseline_char_start": 23223,
+          "baseline_char_end": 23223,
+          "candidate_char_start": 24317,
+          "candidate_char_end": 24568,
+          "baseline_line": 430,
+          "candidate_line": 438,
+          "before": "",
+          "after": "        private static void reason1989(Work work,int reason) {\n            try{work.cpuReason1989(reason);}catch(Throwable optional){}\n        }\n        private static boolean cpu1989(Work work,int reason) {reason1989(work,reason);return work.cpu();}\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "b40a22571cf0fcfa513f2ba9584674f52c45902990d8c181bdd6eba3e97eb722"
+        }
+      ]
+    },
+    "GpuAnalysis1961.java": {
+      "baseline_sha256": "ce3d53c20b2a804f458b400e4080f7d4b52a2d57f0a775302e1b0e71c84d6537",
+      "candidate_sha256": "a0de6da717f315523b24fefa443066aa2adb0ba46b6b837a1d939291c676b53d",
+      "edit_count": 14,
+      "edits": [
+        {
+          "baseline_char_start": 2112,
+          "baseline_char_end": 2112,
+          "candidate_char_start": 2112,
+          "candidate_char_end": 3446,
+          "baseline_line": 29,
+          "candidate_line": 29,
+          "before": "",
+          "after": "    }\n    /** The existing event remains intact. No permission/provider is consulted\n     * for this additional scalar observation of the decision already returned. */\n    private static void copy1989(ProcessingTiming1947.Trace trace,int phase,int outcome,long legacyBytes,\n            long requestedBytes,long acquiredPixelBytes,long nanos,GpuQualification1961.QueueDecision1983 decision){\n        copy1988(trace,phase,outcome,legacyBytes,nanos);\n        if(trace!=null)try{PipelineDetail1988.copyState1989(trace,phase,outcome,requestedBytes,acquiredPixelBytes,nanos,\n            decision==null?-1:decision.reason,decision==null?-1:decision.retryRemainingNanos,decision==null?-1:decision.retries,\n            decision==null?-1:decision.queuedJobs,decision==null?-1:decision.runningJobs,decision==null?-1:decision.retainedBytes);\n        }catch(Throwable optional){}\n    }\n    private static long pixelBytes1989(Snapshot snapshot){\n        try{return snapshot==null||snapshot.pixels==null?-1:4L*snapshot.pixels.length;}catch(Throwable optional){return -1;}\n    }\n    private static long pixelBytes1989(Capture1987 capture){\n        try{return capture==null||!capture.valid||capture.cursor<0||capture.cursor>capture.shape.count?\n            -1:4L*capture.cursor*capture.shape.pw*capture.shape.ph;}catch(Throwable optional){return -1;}\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "a55508ae9bfd77a1630496c41d12412d3a8a88df83fb38a40ca7f2d42013eda6"
+        },
+        {
+          "baseline_char_start": 6050,
+          "baseline_char_end": 6143,
+          "candidate_char_start": 7384,
+          "candidate_char_end": 7487,
+          "baseline_line": 91,
+          "candidate_line": 108,
+          "before": "                copy1988(detail1988,phase1988,PipelineDetail1988.SKIPPED,-1,-1);return null;\n",
+          "after": "                copy1989(detail1988,phase1988,PipelineDetail1988.SKIPPED,-1,-1,0,-1,null);return null;\n",
+          "before_sha256": "1ed56d33e8a660127384d31dc7ed1cbccb777cf4a895e22ad2812fee29cc1b27",
+          "after_sha256": "33d313f9204189248691bf68032cd18cc960ea154f58c991015a04faa4b6d58b"
+        },
+        {
+          "baseline_char_start": 6970,
+          "baseline_char_end": 7069,
+          "candidate_char_start": 8314,
+          "candidate_char_end": 8429,
+          "baseline_line": 103,
+          "candidate_line": 120,
+          "before": "                copy1988(detail1988,phase1988,PipelineDetail1988.SKIPPED,retained,-1);return null;\n",
+          "after": "                copy1989(detail1988,phase1988,PipelineDetail1988.SKIPPED,retained,retained,0,-1,null);return null;\n",
+          "before_sha256": "b7090d6f4421aad24b81f7608e1d2e506c6af72ddfb79ef335fa8acef0aa4634",
+          "after_sha256": "8c67777e7370d755aca9d2b076b18f00a68b1a0f92a097312b2ea2f907c76118"
+        },
+        {
+          "baseline_char_start": 7155,
+          "baseline_char_end": 7499,
+          "candidate_char_start": 8515,
+          "candidate_char_end": 8955,
+          "baseline_line": 106,
+          "candidate_line": 123,
+          "before": "            if(!reservation.accepted()){copy1988(detail1988,phase1988,PipelineDetail1988.QUEUE_DECLINED,retained,-1);return null;}\n            if(!reservation.begin1985()){copy1988(detail1988,phase1988,PipelineDetail1988.INTERRUPTED,retained,-1);return null;}\n            copy1988(detail1988,phase1988,PipelineDetail1988.RESERVED,retained,-1);\n",
+          "after": "            if(!reservation.accepted()){copy1989(detail1988,phase1988,PipelineDetail1988.QUEUE_DECLINED,retained,retained,0,-1,reservation.decision);return null;}\n            if(!reservation.begin1985()){copy1989(detail1988,phase1988,PipelineDetail1988.INTERRUPTED,retained,retained,0,-1,reservation.decision);return null;}\n            copy1989(detail1988,phase1988,PipelineDetail1988.RESERVED,retained,retained,0,-1,reservation.decision);\n",
+          "before_sha256": "72f170d7dbc1cfe1ba0d45bfe4c12c2d37998065e63c824e76ce1439fd4774bd",
+          "after_sha256": "137fb06337b65f9d4c94ae0e2b36fdcfcb3a35a03cefe04f6960a3a76475339c"
+        },
+        {
+          "baseline_char_start": 8249,
+          "baseline_char_end": 8745,
+          "candidate_char_start": 9705,
+          "candidate_char_end": 10252,
+          "baseline_line": 119,
+          "candidate_line": 136,
+          "before": "        }catch(RuntimeException unavailable){copy1988(detail1988,phase1988,PipelineDetail1988.INCOMPLETE,bytes1988,started1988<0?-1:System.nanoTime()-started1988);}\n        catch(LinkageError unavailable){copy1988(detail1988,phase1988,PipelineDetail1988.INCOMPLETE,bytes1988,started1988<0?-1:System.nanoTime()-started1988);}\n        catch(OutOfMemoryError unavailable){copy1988(detail1988,phase1988,PipelineDetail1988.ALLOCATION_FAILED,bytes1988,started1988<0?-1:System.nanoTime()-started1988);}\n",
+          "after": "        }catch(RuntimeException unavailable){copy1989(detail1988,phase1988,PipelineDetail1988.INCOMPLETE,bytes1988,bytes1988,0,started1988<0?-1:System.nanoTime()-started1988,null);}\n        catch(LinkageError unavailable){copy1989(detail1988,phase1988,PipelineDetail1988.INCOMPLETE,bytes1988,bytes1988,0,started1988<0?-1:System.nanoTime()-started1988,null);}\n        catch(OutOfMemoryError unavailable){copy1989(detail1988,phase1988,PipelineDetail1988.ALLOCATION_FAILED,bytes1988,bytes1988,0,started1988<0?-1:System.nanoTime()-started1988,null);}\n",
+          "before_sha256": "404a9ae14efa0f1e5a06eba8a77b256c493ca94d089140d8e8b0667e516bbe1c",
+          "after_sha256": "37307b43d5d1242cd4c9958f66ffef70db41c0965fbcb73dc070f072a85a79a9"
+        },
+        {
+          "baseline_char_start": 11721,
+          "baseline_char_end": 11831,
+          "candidate_char_start": 13228,
+          "candidate_char_end": 13364,
+          "baseline_line": 157,
+          "candidate_line": 174,
+          "before": "                copy1988(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.REPLAYED,s.bytes(),-1);\n",
+          "after": "                copy1989(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.REPLAYED,s.bytes(),-1,pixelBytes1989(s),-1,null);\n",
+          "before_sha256": "721ccddab3e4d12001ceb1ebfd0df199df52916e4e395b54b2299d77506c3626",
+          "after_sha256": "6e2685aa15d70e3faab0248914a459eedfb3821efbb6130b57faa929190fda16"
+        },
+        {
+          "baseline_char_start": 12585,
+          "baseline_char_end": 12808,
+          "candidate_char_start": 14118,
+          "candidate_char_end": 14414,
+          "baseline_line": 170,
+          "candidate_line": 187,
+          "before": "            detached=capture.finish();if(detached==null){copy1988(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,-1);returned1988=true;return reference;}\n",
+          "after": "            detached=capture.finish();if(detached==null){copy1989(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,pixelBytes1989(capture),-1,null);returned1988=true;return reference;}\n",
+          "before_sha256": "bcd2a956269b10a6401dd8dbacf5af357e385abbf1dc9065f0b05adaf6d6aed9",
+          "after_sha256": "d195afee1d765cea5612dfa49707cb34668928f38d6fc3e08d64cf342fff4bc8"
+        },
+        {
+          "baseline_char_start": 12847,
+          "baseline_char_end": 12998,
+          "candidate_char_start": 14453,
+          "candidate_char_end": 14715,
+          "baseline_line": 172,
+          "candidate_line": 189,
+          "before": "            copy1988(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.CAPTURED,capture.reservation.decision.requestedBytes,s.gatherNanos);\n",
+          "after": "            long acquired1989=pixelBytes1989(s);\n            copy1989(detail1988,PipelineDetail1988.AUX_SPATIAL,PipelineDetail1988.CAPTURED,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,acquired1989,s.gatherNanos,null);\n",
+          "before_sha256": "5243f3066a2cd005e95f481a74af7915139022874492a93062c9f88b30251b37",
+          "after_sha256": "fc154b2b3992c4b118f8fa9224c2ee8adbcd67b4e2a08bbcfa64b106d4685e25"
+        },
+        {
+          "baseline_char_start": 14933,
+          "baseline_char_end": 15142,
+          "candidate_char_start": 16650,
+          "candidate_char_end": 16927,
+          "baseline_line": 197,
+          "candidate_line": 215,
+          "before": "            copy1988(detail1988,PipelineDetail1988.AUX_SPATIAL,queued1988.accepted?PipelineDetail1988.QUEUED:\n                PipelineDetail1988.QUEUE_DECLINED,capture.reservation.decision.requestedBytes,-1);\n",
+          "after": "            copy1989(detail1988,PipelineDetail1988.AUX_SPATIAL,queued1988.accepted?PipelineDetail1988.QUEUED:\n                PipelineDetail1988.QUEUE_DECLINED,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,acquired1989,-1,queued1988);\n",
+          "before_sha256": "14cd94111902eb93897077b38ff3951c89273e800d6061323a60cd5eef865df1",
+          "after_sha256": "c361685cc7332f361bdb0832e1fb593020565267489fdb11a52ba82e524b5eff"
+        },
+        {
+          "baseline_char_start": 23366,
+          "baseline_char_end": 23532,
+          "candidate_char_start": 25151,
+          "candidate_char_end": 25343,
+          "baseline_line": 286,
+          "candidate_line": 304,
+          "before": "                float[] result=cpu.compute(s.reader());copy1988(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.REPLAYED,s.bytes(),-1);return result;}\n",
+          "after": "                float[] result=cpu.compute(s.reader());copy1989(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.REPLAYED,s.bytes(),-1,pixelBytes1989(s),-1,null);return result;}\n",
+          "before_sha256": "2f19be244257ca1070b7cb20dbb29ee4bd160ee984c5e248fcc89baa453416d8",
+          "after_sha256": "a5f236fd04ba458addd01c259ad85f54a9a9b9cb0009df8d77ca5dde17dd718e"
+        },
+        {
+          "baseline_char_start": 24288,
+          "baseline_char_end": 24453,
+          "candidate_char_start": 26099,
+          "candidate_char_end": 26337,
+          "baseline_line": 298,
+          "candidate_line": 316,
+          "before": "                if(capture!=null)copy1988(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,-1);\n",
+          "after": "                if(capture!=null)copy1989(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,pixelBytes1989(capture),-1,null);\n",
+          "before_sha256": "4d28dd9b30fc9a78bdb1ed84e0b72aa1e474a74520a63e6bb7cc938e45b77094",
+          "after_sha256": "3ba497e84682e248bbfb3c9574b56d35beee7e47218d8bab1c5ea414bb21e46c"
+        },
+        {
+          "baseline_char_start": 24518,
+          "baseline_char_end": 24725,
+          "candidate_char_start": 26402,
+          "candidate_char_end": 26682,
+          "baseline_line": 302,
+          "candidate_line": 320,
+          "before": "            detached=capture.finish();if(detached==null){copy1988(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,-1);return reference;}\n",
+          "after": "            detached=capture.finish();if(detached==null){copy1989(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.INCOMPLETE,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,pixelBytes1989(capture),-1,null);return reference;}\n",
+          "before_sha256": "feb281a77d2994955e76495c8dd9e1413e5b71dc4393bffae617499c87db13d8",
+          "after_sha256": "62bffb2e3e9face8bcb895a374723448c96b606b02de064305d0ed188277fa6d"
+        },
+        {
+          "baseline_char_start": 24808,
+          "baseline_char_end": 24961,
+          "candidate_char_start": 26765,
+          "candidate_char_end": 27029,
+          "baseline_line": 304,
+          "candidate_line": 322,
+          "before": "            copy1988(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.CAPTURED,capture.reservation.decision.requestedBytes,s.gatherNanos);\n",
+          "after": "            long acquired1989=pixelBytes1989(s);\n            copy1989(detail1988,PipelineDetail1988.MODEL_REGIONS,PipelineDetail1988.CAPTURED,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,acquired1989,s.gatherNanos,null);\n",
+          "before_sha256": "9caed08cc3c4be9478d8c31db79ccda7252cd6074ead65e832d337dc85a0892e",
+          "after_sha256": "70685a97ea00fe310239bfaafbf8aa5368f5ba083e29f20bbee8b90ee11cfcce"
+        },
+        {
+          "baseline_char_start": 26672,
+          "baseline_char_end": 26883,
+          "candidate_char_start": 28740,
+          "candidate_char_end": 29019,
+          "baseline_line": 323,
+          "candidate_line": 342,
+          "before": "            copy1988(detail1988,PipelineDetail1988.MODEL_REGIONS,queued1988.accepted?PipelineDetail1988.QUEUED:\n                PipelineDetail1988.QUEUE_DECLINED,capture.reservation.decision.requestedBytes,-1);\n",
+          "after": "            copy1989(detail1988,PipelineDetail1988.MODEL_REGIONS,queued1988.accepted?PipelineDetail1988.QUEUED:\n                PipelineDetail1988.QUEUE_DECLINED,capture.reservation.decision.requestedBytes,capture.reservation.decision.requestedBytes,acquired1989,-1,queued1988);\n",
+          "before_sha256": "8d5d9354e365383bae824a921e82cd233ab28f83bc3bcdd2aa7407d4acd0ea41",
+          "after_sha256": "7f288a227d839d5008a99f0bc295a66d0e87a7ec8767a01d5fa06815c40bd458"
+        }
+      ]
+    },
+    "PipelineDetail1988.java": {
+      "baseline_sha256": "e003a261544a6280ddd3d4fdee90ef3a7ddc0ad208645f447ee06620b7962b7c",
+      "candidate_sha256": "ba5d1c63743ba170a1699192690a0ce411102e355ada25c09985b1239e9cb471",
+      "edit_count": 2,
+      "edits": [
+        {
+          "baseline_char_start": 912,
+          "baseline_char_end": 912,
+          "candidate_char_start": 912,
+          "candidate_char_end": 1123,
+          "baseline_line": 15,
+          "candidate_line": 15,
+          "before": "",
+          "after": "    static final int EXACT_REJECTED=12, CPU_POLICY_SELECTED=13, ROUTE_BUSY=14, STAGE_LEASE=15;\n    static final int ENVIRONMENT_MISSING=16, DISPATCH_PROOF_MISSING=17, INPUT_INELIGIBLE=18, INTERRUPTED_REASON=19;\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "8d93fa8ce23bd38bef84cef6efc25e8c7d22ebe7f0983109da1000d9d37a774c"
+        },
+        {
+          "baseline_char_start": 2834,
+          "baseline_char_end": 2834,
+          "candidate_char_start": 3045,
+          "candidate_char_end": 4326,
+          "baseline_line": 46,
+          "candidate_line": 48,
+          "before": "",
+          "after": "    /** A rejected primary candidate may hand off to another GPU candidate. This\n     * observation does not add a selected CPU/GPU operation or a work timer. */\n    static void priorReason1989(ProcessingTiming1947.Trace trace,int phase,int reason,int units) {\n        try {\n            if(reason!=UNKNOWN&&foreground(trace)!=null)\n                ProcessingTiming1947.pipelinePriorReason1989(trace,phase,reason,units);\n        }catch(Throwable optional){}\n    }\n    /** Requested closure bytes and acquired pixel payload are distinct facts.\n     * Unknown metadata is -1. The caller separately emits the existing .88\n     * copy observation; this sink never increments that observation again. */\n    static void copyState1989(ProcessingTiming1947.Trace trace,int phase,int outcome,long requestedBytes,\n            long acquiredPixelBytes,long nanos,int queueReason,long retryRemainingNanos,int retries,\n            int queuedJobs,int runningJobs,long retainedBytes) {\n        try {\n            if(foreground(trace)!=null)ProcessingTiming1947.pipelineCopyState1989(trace,phase,outcome,\n                requestedBytes,acquiredPixelBytes,nanos,queueReason,retryRemainingNanos,retries,\n                queuedJobs,runningJobs,retainedBytes);\n        }catch(Throwable optional){}\n    }\n",
+          "before_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "after_sha256": "7a648827889d7394feb232f71b524c7ea41caf1c3bea2ca6ec9408cf4353255b"
+        }
+      ]
+    }
+  }
+}

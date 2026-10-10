@@ -1,0 +1,102 @@
+{
+  "GpuChain1961.java": {
+    "baseline_sha256": "ee4c2da3ff453e50f23fc256002ea0d9c5644907aa9cd8e8378fd08bf26541d4",
+    "current_sha256": "5098c65fec1dc99a25cd8f26247fd031a1860e72b4ad17abdeb6db7d953e1cdd",
+    "hunks": [
+      {
+        "old_first": 254,
+        "old_last": 254,
+        "new_first": 254,
+        "new_last": 255,
+        "old": "",
+        "new": "        finishShape1989(owned,rotation,width,height);\n"
+      },
+      {
+        "old_first": 267,
+        "old_last": 267,
+        "new_first": 268,
+        "new_last": 272,
+        "old": "",
+        "new": "                // A second CPU image cannot prove a candidate which already\n                // stopped. Keep the normal classification and cleanup below,\n                // and retain both complete trials if even the legacy survives.\n                if(trial>0&&finishPendingMask1988(reason)==0){finishOracle1989(false);break;}\n"
+      },
+      {
+        "old_first": 273,
+        "old_last": 273,
+        "new_first": 278,
+        "new_last": 279,
+        "old": "",
+        "new": "                    finishOracle1989(true);\n"
+      },
+      {
+        "old_first": 632,
+        "old_last": 633,
+        "new_first": 638,
+        "new_last": 639,
+        "old": "        if(!GpuNoise1960.workspaceFits(extra))throw new DeferredChain(4);\n",
+        "new": "        if(!(GpuQualification1961.background()?FinishMemory1989.fits(extra):GpuNoise1960.workspaceFits(extra)))throw new DeferredChain(4);\n"
+      },
+      {
+        "old_first": 910,
+        "old_last": 910,
+        "new_first": 916,
+        "new_last": 920,
+        "old": "",
+        "new": "    static void finishShape1989(Bitmap source,int rotation,int width,int height){\n        try{GpuQualification1961.finishShape1989(source.getWidth(),source.getHeight(),width,height,rotation);}catch(Throwable optional){}\n    }\n    static void finishOracle1989(boolean executed){try{GpuQualification1961.finishOracle1989(executed);}catch(Throwable optional){}}\n"
+      }
+    ]
+  },
+  "GpuQualification1961.java": {
+    "baseline_sha256": "ae51bce549f4efca7f75e8d72e380e5a42e3fc1ede5646a16c23994cdb6ad001",
+    "current_sha256": "06f3931021f940a0ff816d27be051ff01c1f4db48b891896b0b8a47839733cff",
+    "hunks": [
+      {
+        "old_first": 602,
+        "old_last": 603,
+        "new_first": 602,
+        "new_last": 620,
+        "old": "        Attempt1984(long sequence,long epoch,int family,int phase){this.sequence=sequence;this.epoch=epoch;this.family=family;this.phase=phase;}\n",
+        "new": "        // The queue owner's capture identity is frozen when its attempt starts.\n        // Memory reports are copied into fixed primitive slots, never retained.\n        final long captureId1989;\n        int finishSourceWidth1989,finishSourceHeight1989,finishOutputWidth1989,finishOutputHeight1989,finishRotation1989;\n        int finishOracleRuns1989,finishOracleSkipped1989;\n        int finishMemorySeen1989,finishMemoryFinal1989,finishMemoryTrim1989,finishMemoryChecks1989,finishMemoryPhase1989;\n        int finishBudgetSlot1989= -1,finishBudgetPhase1989,finishBudgetMask1989;\n        long finishRequested01989,finishRequested11989,finishRequested21989,finishRequested31989;\n        long finishAvailableBefore01989,finishAvailableBefore11989,finishAvailableBefore21989,finishAvailableBefore31989;\n        long finishAvailableAfter01989,finishAvailableAfter11989,finishAvailableAfter21989,finishAvailableAfter31989;\n        long finishTrimNanos01989,finishTrimNanos11989,finishTrimNanos21989,finishTrimNanos31989;\n        long finishBudgetBeforeMax1989= -1,finishBudgetBeforeUsed1989= -1,finishBudgetBeforeHeadroom1989= -1,finishBudgetBeforeGpu1989= -1;\n        long finishBudgetBeforeWhole1989= -1,finishBudgetBeforeOldFinish1989= -1,finishBudgetBeforeNative1989= -1,finishBudgetBeforeNativeH81989= -1;\n        long finishBudgetBeforeNativeStrong1989= -1,finishBudgetBeforeNativeSingle1989= -1,finishBudgetBeforeReserved1989= -1,finishBudgetBeforeAvailable1989= -1;\n        long finishBudgetAfterMax1989= -1,finishBudgetAfterUsed1989= -1,finishBudgetAfterHeadroom1989= -1,finishBudgetAfterGpu1989= -1;\n        long finishBudgetAfterWhole1989= -1,finishBudgetAfterOldFinish1989= -1,finishBudgetAfterNative1989= -1,finishBudgetAfterNativeH81989= -1;\n        long finishBudgetAfterNativeStrong1989= -1,finishBudgetAfterNativeSingle1989= -1,finishBudgetAfterReserved1989= -1,finishBudgetAfterAvailable1989= -1;\n        Attempt1984(long sequence,long epoch,int family,int phase){this.sequence=sequence;this.epoch=epoch;this.family=family;this.phase=phase;captureId1989=finishCaptureId1989(epoch);}\n"
+      },
+      {
+        "old_first": 875,
+        "old_last": 875,
+        "new_first": 892,
+        "new_last": 893,
+        "old": "",
+        "new": "            emitFinish1989(value,slot);\n"
+      },
+      {
+        "old_first": 890,
+        "old_last": 890,
+        "new_first": 908,
+        "new_last": 909,
+        "old": "",
+        "new": "            appendFinishIdentity1989(text,latest);\n"
+      },
+      {
+        "old_first": 906,
+        "old_last": 906,
+        "new_first": 925,
+        "new_last": 926,
+        "old": "",
+        "new": "                appendFinishMemory1989(text,latest,slot);\n"
+      },
+      {
+        "old_first": 907,
+        "old_last": 907,
+        "new_first": 927,
+        "new_last": 928,
+        "old": "",
+        "new": "            appendFinishBudget1989(text,latest);\n"
+      },
+      {
+        "old_first": 1252,
+        "old_last": 1252,
+        "new_first": 1273,
+        "new_last": 1421,
+        "old": "",
+        "new": "    static final String[] FINISH_TRIM_LABELS1989={\"未実施\",\"未使用ネイティブ作業領域の整理を要求\", \"CPU使用中のため見送り\",\n        \"GPU使用中のため見送り\",\"取消のため見送り\",\"前景処理のため見送り\",\"容量上限のため見送り\",\"一部の整理を完了できず\"};\n    static long finishCaptureId1989(long epoch){try{return Math.max(0,ProcessingTiming1947.captureId1989(epoch));}catch(Throwable optional){return 0;}}\n    /** Immutable owner identity comes from the admitted attempt, not the photo\n     * which happens to be displayed when this saved-image proof completes. */\n    public static void finishShape1989(int sourceWidth,int sourceHeight,int outputWidth,int outputHeight,int rotation){\n        try{\n            if(sourceWidth<1||sourceHeight<1||outputWidth<1||outputHeight<1||\n                    (long)sourceWidth*sourceHeight>Integer.MAX_VALUE||(long)outputWidth*outputHeight>Integer.MAX_VALUE||\n                    rotation!=0&&rotation!=90&&rotation!=180&&rotation!=270)return;\n            Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished||value.finishSourceWidth1989!=0)return;\n                value.finishSourceWidth1989=sourceWidth;value.finishSourceHeight1989=sourceHeight;\n                value.finishOutputWidth1989=outputWidth;value.finishOutputHeight1989=outputHeight;value.finishRotation1989=rotation;}\n        }catch(Throwable optional){}\n    }\n    /** Count attempted oracle calls outside their timers. Skipping is reported\n     * only after the first trial; these optional counters never drive a gate. */\n    public static void finishOracle1989(boolean executed){\n        try{Job job=CURRENT.get();if(job==null)return;synchronized(LOCK){Attempt1984 value=job.attempt1984;\n            if(activeJob!=job||value==null||value.finished)return;\n            if(executed){if(value.finishOracleRuns1989<2)value.finishOracleRuns1989++;}\n            else if(value.finishOracleRuns1989==1)value.finishOracleSkipped1989=1;}}\n        catch(Throwable optional){}\n    }\n    /** schema 1 is 33 finite scalars. The decision booleans describe the real\n     * unchanged guards; before/after operands are optional samples taken just\n     * after those guards, and must never be mistaken for admission evidence. */\n    public static void finishMemory1989(long[] values){\n        try{\n            if(values==null||values.length!=33||values[0]!=1||values[1]<0||values[2]!=0||values[3]<0||values[3]>7||\n                    values[4]<0||values[4]>1||values[5]<1||values[5]>2||values[6]!=1||values[7]<0||values[8]<0||values[8]>3||\n                    values[4]==1&&values[5]!=2||values[5]==1&&(values[8]&2)!=0)return;\n            for(int i=9;i<33;i++)if(values[i]< -1)return;\n            Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished)return;\n                int slot=value.finishActiveSlot1988;if(slot<0||slot>3)return;\n                int phase=(value.finishPhases1988>>>(slot*2))&3;if(phase<2)return;\n                value.finishMemorySeen1989|=1<<slot;\n                value.finishMemoryFinal1989=(value.finishMemoryFinal1989&~(1<<slot))|((int)values[4]<<slot);\n                value.finishMemoryTrim1989=(value.finishMemoryTrim1989&~(7<<(slot*3)))|((int)values[3]<<(slot*3));\n                value.finishMemoryChecks1989=(value.finishMemoryChecks1989&~(3<<(slot*2)))|((int)values[5]<<(slot*2));\n                value.finishMemoryPhase1989=(value.finishMemoryPhase1989&~(3<<(slot*2)))|(phase<<(slot*2));\n                long before=(values[8]&1)!=0?values[20]:-1,after=(values[8]&2)!=0?values[32]:-1;\n                switch(slot){\n                    case 0:value.finishRequested01989=values[1];value.finishAvailableBefore01989=before;value.finishAvailableAfter01989=after;value.finishTrimNanos01989=values[7];break;\n                    case 1:value.finishRequested11989=values[1];value.finishAvailableBefore11989=before;value.finishAvailableAfter11989=after;value.finishTrimNanos11989=values[7];break;\n                    case 2:value.finishRequested21989=values[1];value.finishAvailableBefore21989=before;value.finishAvailableAfter21989=after;value.finishTrimNanos21989=values[7];break;\n                    case 3:value.finishRequested31989=values[1];value.finishAvailableBefore31989=before;value.finishAvailableAfter31989=after;value.finishTrimNanos31989=values[7];break;\n                }\n                value.finishBudgetSlot1989=slot;value.finishBudgetPhase1989=phase;value.finishBudgetMask1989=(int)values[8];\n                value.finishBudgetBeforeMax1989=values[9];\n                value.finishBudgetBeforeUsed1989=values[10];\n                value.finishBudgetBeforeHeadroom1989=values[11];\n                value.finishBudgetBeforeGpu1989=values[12];\n                value.finishBudgetBeforeWhole1989=values[13];\n                value.finishBudgetBeforeOldFinish1989=values[14];\n                value.finishBudgetBeforeNative1989=values[15];\n                value.finishBudgetBeforeNativeH81989=values[16];\n                value.finishBudgetBeforeNativeStrong1989=values[17];\n                value.finishBudgetBeforeNativeSingle1989=values[18];\n                value.finishBudgetBeforeReserved1989=values[19];\n                value.finishBudgetBeforeAvailable1989=values[20];\n                value.finishBudgetAfterMax1989=values[21];\n                value.finishBudgetAfterUsed1989=values[22];\n                value.finishBudgetAfterHeadroom1989=values[23];\n                value.finishBudgetAfterGpu1989=values[24];\n                value.finishBudgetAfterWhole1989=values[25];\n                value.finishBudgetAfterOldFinish1989=values[26];\n                value.finishBudgetAfterNative1989=values[27];\n                value.finishBudgetAfterNativeH81989=values[28];\n                value.finishBudgetAfterNativeStrong1989=values[29];\n                value.finishBudgetAfterNativeSingle1989=values[30];\n                value.finishBudgetAfterReserved1989=values[31];\n                value.finishBudgetAfterAvailable1989=values[32];\n            }\n        }catch(Throwable optional){}\n    }\n    static long finishMemoryValue1989(Attempt1984 value,int slot,int part){\n        switch(slot){\n            case 0:return part==0?value.finishRequested01989:part==1?value.finishAvailableBefore01989:part==2?value.finishAvailableAfter01989:value.finishTrimNanos01989;\n            case 1:return part==0?value.finishRequested11989:part==1?value.finishAvailableBefore11989:part==2?value.finishAvailableAfter11989:value.finishTrimNanos11989;\n            case 2:return part==0?value.finishRequested21989:part==1?value.finishAvailableBefore21989:part==2?value.finishAvailableAfter21989:value.finishTrimNanos21989;\n            case 3:return part==0?value.finishRequested31989:part==1?value.finishAvailableBefore31989:part==2?value.finishAvailableAfter31989:value.finishTrimNanos31989;\n            default:return -1;\n        }\n    }\n    static void finishMiB1989(StringBuilder text,long bytes){\n        if(bytes<0){text.append(\"未観測\");return;}\n        text.append(bytes/1048576L).append('.').append(bytes%1048576L*10L/1048576L).append(\" MiB\");\n    }\n    static void appendFinishIdentity1989(StringBuilder text,Attempt1984 value){\n        text.append(\"\\n検証画像の撮影 #\");if(value.captureId1989>0)text.append(value.captureId1989);else text.append(\"未観測\");\n        text.append(\" / 所有する撮影世代: \").append(value.epoch);\n        if(value.finishSourceWidth1989>0)text.append(\" / 入力 \").append(value.finishSourceWidth1989).append('×').append(value.finishSourceHeight1989)\n            .append(\" → 出力 \").append(value.finishOutputWidth1989).append('×').append(value.finishOutputHeight1989).append(\" / 回転 \").append(value.finishRotation1989).append(\"度\");\n        text.append(\"\\nCPU基準の実行 \").append(value.finishOracleRuns1989).append(\"回 / 継続候補がなく省略 \").append(value.finishOracleSkipped1989).append(\"回\");\n    }\n    static void appendFinishMemory1989(StringBuilder text,Attempt1984 value,int slot){\n        if((value.finishMemorySeen1989&(1<<slot))==0)return;\n        text.append(\"\\n  追加メモリの初回不足（\").append(FINISH_PHASES1988[(value.finishMemoryPhase1989>>>(slot*2))&3]).append(\"）: 必要 \");\n        finishMiB1989(text,finishMemoryValue1989(value,slot,0));text.append(\" / 不足判定後の観測空き \");\n        finishMiB1989(text,finishMemoryValue1989(value,slot,1));\n        int checks=(value.finishMemoryChecks1989>>>(slot*2))&3;\n        if(checks==2){text.append(\" / 整理後の観測空き \");finishMiB1989(text,finishMemoryValue1989(value,slot,2));}\n        text.append(\" / \").append(FINISH_TRIM_LABELS1989[(value.finishMemoryTrim1989>>>(slot*3))&7]);\n        text.append(\" / 再判定: \").append(checks==1?\"未実施\":(value.finishMemoryFinal1989&(1<<slot))!=0?\"既存の上限内で成立\":\"既存の上限で不足\");\n    }\n    static void appendFinishBudget1989(StringBuilder text,Attempt1984 value){\n        if(value.finishBudgetSlot1989<0)return;\n        text.append(\"\\n\\n最後の不足時メモリ観測: \").append(FINISH_CANDIDATES1986[value.finishBudgetSlot1989])\n            .append(\" / \").append(FINISH_PHASES1988[value.finishBudgetPhase1989]);\n        if((value.finishBudgetMask1989&1)!=0)appendFinishBudgetSide1989(text,value,false);\n        if((value.finishBudgetMask1989&2)!=0)appendFinishBudgetSide1989(text,value,true);\n        if(value.finishBudgetMask1989==0)text.append(\"\\n内訳は未観測\");\n        text.append(\"\\n※内訳は不足判定・再判定の直後の観測です。写真全体の処理時間とは別で、空きは物理 RAM の残量ではありません。固定の予備 64 MiB と、使用中の領域・予約を差し引く既存条件を維持しています。\");\n    }\n    static void appendFinishBudgetSide1989(StringBuilder text,Attempt1984 value,boolean after){\n        text.append(after?\"\\n整理・再判定後: \":\"\\n初回不足判定後: \");\n        text.append(\"ヒープ上限 \");finishMiB1989(text,after?value.finishBudgetAfterMax1989:value.finishBudgetBeforeMax1989);\n        text.append(\" / 使用中ヒープ \");finishMiB1989(text,after?value.finishBudgetAfterUsed1989:value.finishBudgetBeforeUsed1989);\n        text.append(\" / ヒープ差分 \");finishMiB1989(text,after?value.finishBudgetAfterHeadroom1989:value.finishBudgetBeforeHeadroom1989);\n        text.append(\" / GPU保持 \");finishMiB1989(text,after?value.finishBudgetAfterGpu1989:value.finishBudgetBeforeGpu1989);\n        text.append(\" / 全体経路保持 \");finishMiB1989(text,after?value.finishBudgetAfterWhole1989:value.finishBudgetBeforeWhole1989);\n        text.append(\" / 旧仕上げ保持 \");finishMiB1989(text,after?value.finishBudgetAfterOldFinish1989:value.finishBudgetBeforeOldFinish1989);\n        text.append(\" / ネイティブ保持合計 \");finishMiB1989(text,after?value.finishBudgetAfterNative1989:value.finishBudgetBeforeNative1989);\n        text.append(\" / H8 \");finishMiB1989(text,after?value.finishBudgetAfterNativeH81989:value.finishBudgetBeforeNativeH81989);\n        text.append(\" / Strong \");finishMiB1989(text,after?value.finishBudgetAfterNativeStrong1989:value.finishBudgetBeforeNativeStrong1989);\n        text.append(\" / Single \");finishMiB1989(text,after?value.finishBudgetAfterNativeSingle1989:value.finishBudgetBeforeNativeSingle1989);\n        text.append(\" / 未消費GPU予約 \");finishMiB1989(text,after?value.finishBudgetAfterReserved1989:value.finishBudgetBeforeReserved1989);\n        text.append(\" / 観測空き \");finishMiB1989(text,after?value.finishBudgetAfterAvailable1989:value.finishBudgetBeforeAvailable1989);\n    }\n    static void emitFinish1989(Attempt1984 value,int slot){\n        try{\n            java.lang.reflect.Method event=traceEvent1984;if(event==null)return;\n            event.invoke(null,\"gpu_finish89_owner\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\" capture=\"+value.captureId1989+\" owner_epoch=\"+value.epoch);\n            event.invoke(null,\"gpu_finish89_shape\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\" src=\"+value.finishSourceWidth1989+\"x\"+value.finishSourceHeight1989+\n                \" out=\"+value.finishOutputWidth1989+\"x\"+value.finishOutputHeight1989+\" turn=\"+value.finishRotation1989+\n                \" cpu_runs=\"+value.finishOracleRuns1989+\" cpu_skipped=\"+value.finishOracleSkipped1989);\n            if((value.finishMemorySeen1989&(1<<slot))==0)return;\n            event.invoke(null,\"gpu_finish89_memory\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\" candidate=\"+(slot-1)+\n                \" phase=\"+((value.finishMemoryPhase1989>>>(slot*2))&3)+\" trim=\"+((value.finishMemoryTrim1989>>>(slot*3))&7)+\n                \" checks=\"+((value.finishMemoryChecks1989>>>(slot*2))&3)+\" fit=\"+((value.finishMemoryFinal1989>>>slot)&1));\n            event.invoke(null,\"gpu_finish89_bytes\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\" candidate=\"+(slot-1)+\" requested=\"+finishMemoryValue1989(value,slot,0)+\n                \" observed_before=\"+finishMemoryValue1989(value,slot,1)+\" observed_after=\"+finishMemoryValue1989(value,slot,2));\n        }catch(Throwable optional){}\n    }\n\n"
+      }
+    ]
+  }
+}
