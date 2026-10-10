@@ -1,0 +1,1 @@
+package android.content;public class ContextWrapper extends Context {private final Context base;public ContextWrapper(Context c){super(c.files);base=c;}public Context getBaseContext(){return base;}public Context getApplicationContext(){return base.getApplicationContext();}}
