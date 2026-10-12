@@ -1,0 +1,31 @@
+package com.hiro.ulike;
+import java.nio.*;
+import java.util.*;
+public final class ColourGate1976Test {
+ static {System.loadLibrary("colourcache1976");}static int assertions;static native void mode(int value);static native long calls(boolean cached);
+ static void check(boolean b,String s){assertions++;if(!b)throw new AssertionError(s);}
+ static int w=33,h=43;static int[] input(){int[] a=new int[w*h];Random r=new Random(788);for(int i=0;i<a.length;i++)a[i]=0xff000000|r.nextInt(0xffffff);return a;}
+ static float[] model(){float[]m=new float[91];Arrays.fill(m,1.6f);m[0]=6;m[1]=9;m[2]=114;return m;}
+ static boolean cpu(int[] source,int[]out,float[]m){return ColourCache1976.cpu(source,out,w,h,0,h,0,h,0,4,true,w,h,1,1,w,h,m,null);}
+ static void reset(){GpuQualification1961.reset();mode(0);calls(false);calls(true);}
+ static byte[] bytes(ByteBuffer buffer){byte[]a=new byte[buffer.capacity()];ByteBuffer v=buffer.duplicate();v.clear();v.get(a);return a;}
+ static int recordBytes(int begin,int end){int first=Math.floorDiv(begin-7,4)*4;return ((w+3)/4+1)*((end-first+3)/4)*248*4;}
+ static Object field(String name){try{java.lang.reflect.Field f=GpuQualification1961.pending.getClass().getDeclaredField(name);f.setAccessible(true);return f.get(GpuQualification1961.pending);}catch(Exception e){throw new AssertionError(e);}}
+ public static void main(String[] args) {
+  reset();int[] source=input(),out=new int[source.length];float[]m=model();check(cpu(source,out,m),"unqualified foreground succeeds");check(calls(false)==1&&calls(true)==0,"unqualified foreground uses original source loader");check(GpuQualification1961.pending!=null,"probe scheduled");
+  int[] reference=out.clone();check(field("input")!=source&&Arrays.equals((int[])field("input"),source),"detached source snapshot");check(field("model")!=m&&Arrays.equals((float[])field("model"),m),"detached model snapshot");source[2]^=255;m[0]=31;mode(1);GpuQualification1961.run(0);check(GpuQualification1961.qualified==1,"two measured exact cached wins qualify");check(calls(false)==3&&calls(true)==3,"warmup plus two trials both algorithms");
+  source=input();m=model();calls(false);calls(true);check(cpu(source,out,m),"qualified foreground succeeds");check(calls(true)==1&&calls(false)==0,"verified cache selected");check(Arrays.equals(out,reference),"qualified exact original output");check(GpuQualification1961.pending==null,"accepted key does not retain more photos");
+  reset();cpu(input(),out,model());mode(2);GpuQualification1961.run(0);check(GpuQualification1961.qualified==0&&GpuQualification1961.slow.size()==1,"slower cache refused");calls(false);calls(true);cpu(input(),out,model());check(calls(false)==1&&calls(true)==0,"speed rejection preserves original algorithm");
+  reset();cpu(input(),out,model());mode(3);GpuQualification1961.run(0);check(GpuQualification1961.qualified==0&&GpuQualification1961.exact.size()==1,"single pixel mismatch permanently refused");
+  reset();cpu(input(),out,model());mode(1);GpuQualification1961.run(2);check(GpuQualification1961.qualified==0&&GpuQualification1961.slow.isEmpty()&&GpuQualification1961.exact.isEmpty(),"new capture cancellation leaves no certificate/rejection");check(GpuQualification1961.pendingBytes==0,"cancelled snapshots released");
+  reset();GpuNoise1960.fit=false;cpu(input(),out,model());check(GpuQualification1961.pending==null&&GpuQualification1961.qualified==0,"memory shortage retains old foreground without detached allocation");
+  reset();float[] first=ColourCache1976.prepare(input(),w,h,0,h,0,h,0,4,true,h,1,1,w,h,model());check(first!=null,"legacy residual preparation");mode(1);GpuQualification1961.run(0);check(GpuQualification1961.qualified==1,"full residual record cache speed proof");float[] second=ColourCache1976.prepare(input(),w,h,0,h,0,h,0,4,true,h,1,1,w,h,model());check(Arrays.equals(first,second),"qualified residual exact");
+  reset();int cacheBytes=80+91*4+((w+3)/4+1)*4*1260,recordBytes=((w+3)/4+1)*((h+8+3)/4)*248*4;ByteBuffer cache=ByteBuffer.allocateDirect(cacheBytes).order(ByteOrder.nativeOrder()),record=ByteBuffer.allocateDirect(recordBytes).order(ByteOrder.nativeOrder());
+  byte[] preCall=bytes(cache);check(ColourCache1976.direct(cache,record,input(),w,h,0,h,0,h,0,4,true,h,1,1,w,h,model()),"direct foreground");check(Arrays.equals(preCall,bytes((ByteBuffer)field("cache"))),"cold proof owns exact pre-call tail state");check(!Arrays.equals(preCall,bytes(cache)),"native direct call actually changed the live tail");byte[] snapshot=new byte[recordBytes];record.duplicate().get(snapshot);mode(1);GpuQualification1961.run(0);check(GpuQualification1961.qualified==1,"direct path full exact timing proof");check(ColourCache1976.direct(cache,record,input(),w,h,0,h,0,h,0,4,true,h,1,1,w,h,model()),"qualified direct foreground");byte[] actual=new byte[recordBytes];record.duplicate().get(actual);check(Arrays.equals(snapshot,actual),"direct qualified output exact");
+  reset();cache=ByteBuffer.allocateDirect(cacheBytes).order(ByteOrder.nativeOrder());record=ByteBuffer.allocateDirect(recordBytes(0,23)).order(ByteOrder.nativeOrder());
+  check(ColourCache1976.direct(cache,record,input(),w,h,0,23,0,h,0,4,true,h,1,1,w,h,model()),"first warm-cache band");reset();preCall=bytes(cache);record=ByteBuffer.allocateDirect(recordBytes(23,h)).order(ByteOrder.nativeOrder());
+  check(ColourCache1976.direct(cache,record,input(),w,h,23,h,0,h,0,4,true,h,1,1,w,h,model()),"second warm-cache band");check(Arrays.equals(preCall,bytes((ByteBuffer)field("cache"))),"warm proof owns previous band's pre-call tail");check(!Arrays.equals(preCall,bytes(cache)),"second band advances live tail");mode(1);GpuQualification1961.run(0);check(GpuQualification1961.qualified==1,"warm pre-state full comparison qualifies");
+  reset();Thread.currentThread().interrupt();cpu(input(),out,model());check(GpuQualification1961.pending==null,"interrupted foreground never schedules");Thread.interrupted();
+  System.out.println("{\"status\":\"passed\",\"assertions\":"+assertions+",\"production_java_and_jni\":true,\"default_original_loader\":true,\"exact2_and_five_percent_gate\":true,\"actual_mode_branches\":true,\"idle_queue_fixture\":true,\"cancellation_and_memory_refusal\":true,\"physical_android_tested\":false}");
+ }
+}
