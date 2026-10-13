@@ -9,9 +9,14 @@ import android.os.Looper;
 import android.preference.Preference;
 import android.widget.Toast;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.FileVisitResult;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.SimpleFileVisitor;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
@@ -33,7 +38,19 @@ public final class CameraDetails1969Test {
     static Object field(String name)throws Exception{Field f=CameraTrace1965.class.getDeclaredField(name);f.setAccessible(true);return f.get(null);}
     static List<File> files(File directory)throws Exception{
         List<File> result=new ArrayList<File>();
-        if(directory.exists())try(java.util.stream.Stream<Path> paths=Files.walk(directory.toPath())){paths.filter(p->p.toString().endsWith(".jsonl")).sorted().forEach(p->result.add(p.toFile()));}
+        if(directory.exists())Files.walkFileTree(directory.toPath(),new SimpleFileVisitor<Path>(){
+            @Override public FileVisitResult visitFile(Path path,BasicFileAttributes attributes){
+                if(path.toString().endsWith(".jsonl"))result.add(path.toFile());
+                return FileVisitResult.CONTINUE;
+            }
+            @Override public FileVisitResult visitFileFailed(Path path,IOException failure)throws IOException{
+                // The writer atomically renames .pending files while this test
+                // observes completed records. Only that vanished-path race is benign.
+                if(failure instanceof NoSuchFileException)return FileVisitResult.CONTINUE;
+                throw failure;
+            }
+        });
+        result.sort((left,right)->left.toPath().compareTo(right.toPath()));
         return result;
     }
     static String records(File root)throws Exception{StringBuilder result=new StringBuilder();for(File f:files(root))result.append(new String(Files.readAllBytes(f.toPath()),StandardCharsets.UTF_8));return result.toString();}
