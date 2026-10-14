@@ -36,7 +36,7 @@ def test(source,work,jdk=None,ndk=None):
         ('gpu_math','host_shader1996.py'),('strong_adaptive94','host_strong_adaptive1994.py'),('strong_transport95','host_strong_transport1995.py'),
         ('model_layout94','host_model_layout1994.py'),('model_parallel96','host_model_parallel1996.py'),
         ('cpu_copy96','tests/host_copy1996.py'),('front_timing96','host_front_timing1996.py'),
-        ('native91','host_native1991.py'),('finish_memory92','host_finish_memory1992.py'),('chain','host1990_chain.py')]
+        ('native91','host_native1991.py'),('finish_memory92','host_finish_memory1992.py'),('chain','host_chain1997.py')]
     for name,path in groups:
         runner=module('audit95_'+name,source/path)
         record(name,runner.test(source,work/name,jdk,ndk))
