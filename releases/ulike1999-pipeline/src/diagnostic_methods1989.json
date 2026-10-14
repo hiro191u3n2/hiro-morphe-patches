@@ -1,0 +1,98 @@
+{
+  "baseline_runtime_sha256": "5d0318670b423a35ad8d8d79bc7faca8af13e545677151b9678b2ff11cc21f92",
+  "compiled_helper_dex_sha256": "5325c280129ec585616cb3bc334deae8b294d2d04c72662e471e2a6cb098dfee",
+  "compiled_replaced_class_count": 173,
+  "diagnostic_orchestration_methods1989": [
+    "Lcom/hiro/ulike/GpuChain1961;->runFinishStages(Landroid/graphics/Bitmap;IIILcom/hiro/ulike/QualityPixels1932$Plan;ZLcom/hiro/ulike/GpuChain1961$Timing1962;ILcom/hiro/ulike/GpuNoise1960$Session;ZLcom/hiro/ulike/ResidentProof1978;Z)Landroid/graphics/Bitmap;"
+  ],
+  "methods": {
+    "FastResize1933": [
+      "resample1982"
+    ],
+    "GpuAnalysis1961": [
+      "capture1987",
+      "regions1982",
+      "spatial"
+    ],
+    "GpuChain1961": [
+      "qualifyFinish1978",
+      "runFinishStages"
+    ],
+    "GpuGeometry1960": [
+      "resample"
+    ],
+    "GpuQualification1961": [
+      "<clinit>",
+      "attemptSummary1986",
+      "emitFinish1986"
+    ],
+    "GpuQualification1961$Attempt1984": [
+      "<init>"
+    ],
+    "GpuResidual1961": [
+      "process1981"
+    ],
+    "GpuSingle1960": [
+      "process1981"
+    ],
+    "ProcessingTiming1947": [
+      "<clinit>",
+      "appendPipelineDetail1988",
+      "associate",
+      "begin",
+      "init",
+      "pipelineDetail1988",
+      "publish",
+      "render",
+      "summary"
+    ],
+    "ProcessingTiming1947$Trace": [
+      "<init>"
+    ],
+    "QualityPipeline1932": [
+      "finishRoute1954"
+    ],
+    "QualityPipeline1932$Strips": [
+      "write"
+    ],
+    "SingleNoise1955": [
+      "processRange"
+    ],
+    "WholeRoute1953$Engine": [
+      "foreground",
+      "run"
+    ]
+  },
+  "raw_method_differences": {
+    "added": 43,
+    "changed": 30,
+    "missing_before_bridge_retention": 4
+  },
+  "retained_compiler_bridges1989": [
+    "Lcom/hiro/ulike/GpuQualification1961$Reservation1984;->access$2302(Lcom/hiro/ulike/GpuQualification1961$Reservation1984;Z)Z",
+    "Lcom/hiro/ulike/GpuQualification1961$Reservation1984;->access$2400(Lcom/hiro/ulike/GpuQualification1961$Reservation1984;)J",
+    "Lcom/hiro/ulike/GpuQualification1961;->access$100()V",
+    "Lcom/hiro/ulike/GpuQualification1961;->access$2500()V"
+  ],
+  "review_complete": true,
+  "review_scope": "Exact current source and actual Java8/D8 output. Finish skips a second CPU oracle only after all candidates are terminal. Only the existing runFinishStages critical signature gains the bounded background memory helper; strict source inverses restore exact .88 arithmetic and all other critical methods remain byte-identical. Actual CPU branch/queue metadata and finite per-owner observations are optional. All four pre-existing synthetic ABI bridges retain exact .88 bodies. Native/shader bytes, certificate identities, limits, reserves, ownership, cancellation, exact2/speed5 gates and save paths remain unchanged.",
+  "reviewed_production_sha256": {
+    "CameraTrace1965.java": "4678f385b1fe022ce756671de0761077da0eb693d274c9dc1de5a94d5b9ba5cb",
+    "FastResize1933.java": "88492b772439c7408f99bb331521ce1215c6fb0b6abbb8c57f0aab5a27f466b9",
+    "FinishMemory1989.java": "f20a987f5b3cc60003b868d83231cc72ac53e2669ed3ce8353a09bb1591c8b86",
+    "GpuAnalysis1961.java": "a0de6da717f315523b24fefa443066aa2adb0ba46b6b837a1d939291c676b53d",
+    "GpuChain1961.java": "5098c65fec1dc99a25cd8f26247fd031a1860e72b4ad17abdeb6db7d953e1cdd",
+    "GpuGeometry1960.java": "7844cf8dc9763117c1e4b0ddb5ab9303471fe68c9beb00d4e10d4c20550bb729",
+    "GpuNoise1960.java": "8805f10efbd28995f20c3acfe6803d29d3529953407daab8aeba1f96571a7500",
+    "GpuQualification1961.java": "06f3931021f940a0ff816d27be051ff01c1f4db48b891896b0b8a47839733cff",
+    "GpuResidual1961.java": "85cbac6e220f9b6cbf0234be9036292ff81165f6531f8776cfa4390b03e4b9f5",
+    "GpuSingle1960.java": "ccb1170b5c5995ef7ff8c4d04502d8df130f8eddd8b07d16c722d307f34a5a6a",
+    "PipelineDetail1988.java": "ba5d1c63743ba170a1699192690a0ce411102e355ada25c09985b1239e9cb471",
+    "ProcessingTiming1947.java": "5e2f7efc9709a0f0e149343967d31c1764cc3140aded917bacc91eeee3b1dd47",
+    "QualityPipeline1932.java": "f1990c84419817f1d592de257cdfbe415d4562d2092d4870ac75fc9ecf1802af",
+    "SingleNoise1955.java": "0ff40183a4f372fbd8c051cf3616400fe6b88f1749e73a6346278bb9863256c7",
+    "SpeedWorkers1935.java": "3b8bd7b6969456279e75cdfab2948e2d0355e3d568c608ca233d483942171bcd",
+    "WholeRoute1953.java": "fe8c42c72eb30047b5bb3330b9daca9d24d4777ae73db02280a1bb58ff6ca7f8"
+  },
+  "schema": "ulike1989-instrumented-methods-v1"
+}
