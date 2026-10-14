@@ -58,6 +58,10 @@ def positive_host(report):
         require(child.get('physical_android_tested',False) is False,'Host group claims Android execution: '+name)
         total+=child['assertions']
     require(total==report['assertions'],'Host assertion total differs from executed groups')
+    for key in ('retained_pipeline_gate1992', 'strict_narrow_baseline_metadata1999', 'readiness_peer_pixels_forbidden1999'):
+        require(tests['pipeline_gate'].get(key) is True,'Current pipeline readiness fixture proof missing: '+key)
+    for key in ('retained_finish_memory1992_gate', 'strict_standard1999_baseline_identity'):
+        require(tests['finish_memory92'].get(key) is True,'Current finish route fixture proof missing: '+key)
     for group,keys in (('timing', ('capture_bitmap_provenance_verified', 'ambiguous_metadata_trace_preserved', 'exact_input_lookup_verified')), ('capture99', ('completed_bitmap_trace_isolated', 'save_input_pixels_unchanged', 'save_bitmap_dimensions_observed'))):
         require(tests[group].get('device_speedup_verified') is False,'Current capture host group claims device speed: '+group)
         for key in keys:require(tests[group].get(key) is True,'Current .99 capture proof missing: '+group+'/'+key)

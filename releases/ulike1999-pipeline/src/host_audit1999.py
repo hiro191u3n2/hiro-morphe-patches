@@ -36,7 +36,7 @@ def test(source,work,jdk=None,ndk=None):
         ('gpu_math','host_shader1996.py'),('strong_adaptive94','host_strong_adaptive1998.py'),('strong_transport95','host_strong_transport1995.py'),
         ('model_layout94','host_model_layout1994.py'),('model_parallel96','host_model_parallel1996.py'),
         ('cpu_copy96','tests/host_copy1996.py'),('front_timing96','host_front_timing1996.py'),
-        ('native91','host_native1991.py'),('finish_memory92','host_finish_memory1992.py'),('chain','host_chain1997.py')]
+        ('native91','host_native1991.py'),('finish_memory92','host_finish_memory1999.py'),('chain','host_chain1997.py')]
     for name,path in groups:
         runner=module('audit95_'+name,source/path)
         record(name,runner.test(source,work/name,jdk,ndk))
@@ -45,15 +45,15 @@ def test(source,work,jdk=None,ndk=None):
     # when this final audit has just compiled the current chain itself.
     os.environ['ULIKE1990_CHAIN_CLASSES']=str(chain/'classes')
     os.environ['ULIKE1994_CHAIN_CLASSES']=str(chain/'classes')
-    runner=module('audit97_memory',source/'tests/host_memory1997.py')
+    runner=module('audit97_memory',source/'tests/host_memory1999.py')
     record('memory97',runner.test(source,work/'memory97',jdk,ndk))
     runner=module('audit95_front',source/'host_front1994.py')
     record('front94',runner.test(source,work/'front94',jdk,ndk))
     runner=module('audit95_finish_domain',source/'tests/host1992_finish_domain.py')
     record('finish_domain',runner.test(source,work/'finish_domain',chain/'classes',chain/'native',jdk))
-    runner=module('audit95_pipeline_gate',source/'tests/host1992_pipeline_gate.py')
+    runner=module('audit95_pipeline_gate',source/'tests/host1999_pipeline_gate.py')
     record('pipeline_gate',runner.test(source,work/'pipeline_gate',chain/'classes',chain/'native',jdk))
-    runner=module('audit95_failure',source/'host_failure1992.py')
+    runner=module('audit95_failure',source/'host_failure1999.py')
     record('failure92',runner.test(source,work/'failure92',jdk,ndk))
     runner=module('audit95_finish_policy',source/'host_wide_restore1998.py')
     record('finish_recovery95',runner.test(source,work/'finish_policy93',jdk,ndk))

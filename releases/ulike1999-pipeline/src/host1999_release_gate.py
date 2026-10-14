@@ -117,6 +117,8 @@ def test(source,work,jdk=None,ndk=None):
         children[group].update(**{key:True for key in keys},device_speedup_verified=False)
     for group,keys in (('timing', ('capture_bitmap_provenance_verified', 'ambiguous_metadata_trace_preserved', 'exact_input_lookup_verified')), ('capture99', ('completed_bitmap_trace_isolated', 'save_input_pixels_unchanged', 'save_bitmap_dimensions_observed'))):
         children[group].update(**{key:True for key in keys},device_speedup_verified=False)
+    children['finish_memory92'].update(**{key:True for key in ('retained_finish_memory1992_gate', 'strict_standard1999_baseline_identity')})
+    children['pipeline_gate'].update(**{key:True for key in ('retained_pipeline_gate1992', 'strict_narrow_baseline_metadata1999', 'readiness_peer_pixels_forbidden1999')})
     good={'status':'passed','assertions':2*len(children),'physical_android_tested':False,'tests':children}
     gate.positive_host(good);assertions+=1
     for update in ({'status':'pending'},{'assertions':True},{'assertions':0},{'assertions':3},{'physical_android_tested':True},
@@ -168,6 +170,12 @@ def test(source,work,jdk=None,ndk=None):
             for missing in (False,None,1):
                 rejected(lambda group=group,key=key,missing=missing:gate.positive_host({**good,'tests':{**children,group:{**children[group],key:missing}}}))
         rejected(lambda group=group:gate.positive_host({**good,'tests':{**children,group:{**children[group],'device_speedup_verified':True}}}))
+    for key in ('retained_finish_memory1992_gate', 'strict_standard1999_baseline_identity'):
+        for missing in (False,None,1):
+            rejected(lambda key=key,missing=missing:gate.positive_host({**good,'tests':{**children,'finish_memory92':{**children['finish_memory92'],key:missing}}}))
+    for key in ('retained_pipeline_gate1992', 'strict_narrow_baseline_metadata1999', 'readiness_peer_pixels_forbidden1999'):
+        for missing in (False,None,1):
+            rejected(lambda key=key,missing=missing:gate.positive_host({**good,'tests':{**children,'pipeline_gate':{**children['pipeline_gate'],key:missing}}}))
     bad=work/'unsafe.zip'
     with zipfile.ZipFile(bad,'w') as archive:archive.writestr('../secret.apk',b'private')
     rejected(lambda:gate.checked_archive(bad))
