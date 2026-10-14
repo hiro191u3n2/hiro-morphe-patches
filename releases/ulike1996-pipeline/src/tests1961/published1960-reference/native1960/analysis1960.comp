@@ -1,0 +1,118 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint pixels[]; } source;
+layout(std430,binding=1) writeonly buffer Destination { uint pixels[]; } destination;
+layout(std430,binding=2) buffer Values { float data[]; } values;
+layout(std430,binding=3) buffer PolicyHistogram { uint data[]; } policy;
+layout(std430,binding=4) readonly buffer Model { float data[]; } model;
+layout(std430,binding=5) readonly buffer Tables { int data[]; } tables;
+uniform highp int u[32];
+uniform highp float f[32];
+// mode0: exact integer average2 pyramid. u1/2=srcW/H,u3/4=dstW/H.
+// mode1: original StrongNoise estimateLag. u1/2=srcW/H,u3=step,u4=lag,
+// u5/6=patchLeft/Top,u7/8=patchW/H,u9=histBase. Layout 2048bins+16counts.
+// mode2: original float-D8 estimateSpectral. u3/4=sampleCols/Rows,
+// u9=histBase, binding4 contains64 original basis floats.
+// mode3: finishEstimate. u9=histBase,u10=valuesOffset,u11=mergeMax.
+// mode4: protection budget from exact shot-derived skin/detail. u1=width,
+// u2=ownedRows,u3=absoluteFirstY,u6=shadowBudgetQ8,u7=beautyQ8,u8=strong,
+// u9/10=localNoise cols/rows,u11=hasLocalNoise; f0=sourceSigma,f1/2=left/top,
+// f3/4=stepX/Y. tables two exact integer mask channels per owned pixel.
+// GPU computes current budget (and optional noise interpolation); it does not
+// replace the existing detector or approximate its double-precision raster.
+float luma(uint p) {
+    precise float a=.299*float((p>>16u)&255u);
+    precise float b=.587*float((p>>8u)&255u);
+    precise float c=.114*float(p&255u);
+    precise float sum=a+b;return sum+c;
+}
+int javaRound(float value) {
+    int bits=floatBitsToInt(value),exponent=(bits>>23)&255,shift=149-exponent;
+    if((shift&~31)==0){int mantissa=(bits&0x7fffff)|0x800000;if(bits<0)mantissa=-mantissa;return ((mantissa>>shift)+1)>>1;}
+    return int(value);
+}
+void addBin(int bin,int value) {
+    atomicAdd(policy.data[u[9]+bin*128+value],1u);
+    atomicAdd(policy.data[u[9]+2048+bin],1u);
+}
+float measured(int bin) {
+    uint count=policy.data[u[9]+2048+bin];
+    if(count<16u)return 0.0;
+    uint target=(count+1u)/2u,sum=0u;
+    for(int i=0;i<128;i++){sum+=policy.data[u[9]+bin*128+i];if(sum>=target)return float(i)/2.69796;}
+    return 0.0;
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x);
+    if(u[0]==0) {
+        if(id>=u[3]*u[4])return;
+        int x=(id%u[3])*2,y=(id/u[3])*2;
+        uint r=0u,g=0u,b=0u,n=0u;bool opaque=true;
+        for(int yy=y;yy<min(u[2],y+2);yy++)for(int xx=x;xx<min(u[1],x+2);xx++) {
+            uint p=source.pixels[yy*u[1]+xx];opaque=opaque&&((p>>24u)==255u);
+            r+=(p>>16u)&255u;g+=(p>>8u)&255u;b+=p&255u;n++;
+        }
+        destination.pixels[id]=(opaque?0xff000000u:0u)|(((r+n/2u)/n)<<16u)|(((g+n/2u)/n)<<8u)|((b+n/2u)/n);
+    } else if(u[0]==1) {
+        int nx=(u[7]-u[4]+u[3]-1)/u[3],ny=(u[8]-u[4]+u[3]-1)/u[3];
+        if(id>=nx*ny)return;
+        int x=u[5]+(id%nx)*u[3],y=u[6]+(id/nx)*u[3],lag=u[4];
+        uint a=source.pixels[y*u[1]+x],b=source.pixels[y*u[1]+x+lag],c=source.pixels[(y+lag)*u[1]+x],d=source.pixels[(y+lag)*u[1]+x+lag];
+        if((a>>24u)!=255u||(b>>24u)!=255u||(c>>24u)!=255u||(d>>24u)!=255u)return;
+        precise float ya=luma(a),yb=luma(b),yc=luma(c),yd=luma(d);
+        precise float mean=ya+yb;mean=mean+yc;mean=mean+yd;mean=mean*.25;
+        if(mean<3.0||mean>252.0)return;
+        int bin=min(7,int(mean)/32);
+        precise float dy=ya-yb;dy=dy-yc;dy=dy+yd;dy=dy*.5;
+        precise float cr=float((a>>16u)&255u)-ya;cr=cr-(float((b>>16u)&255u)-yb);cr=cr-(float((c>>16u)&255u)-yc);cr=cr+(float((d>>16u)&255u)-yd);cr=cr*.5;
+        precise float cb=float(a&255u)-ya;cb=cb-(float(b&255u)-yb);cb=cb-(float(c&255u)-yc);cb=cb+(float(d&255u)-yd);cb=cb*.5;
+        int sy=min(127,javaRound(abs(dy)*4.0)),sc=min(127,javaRound((abs(cr)+abs(cb))*2.0));
+        addBin(bin,sy);addBin(bin+8,sc);
+    } else if(u[0]==2) {
+        if(id>=u[3]*u[4]||u[1]<8||u[2]<8)return;
+        int gx=id%u[3],gy=id/u[3];
+        int x=u[3]==1?(u[1]-8)/2:(u[1]-8)*gx/(u[3]-1),y=u[4]==1?(u[2]-8)/2:(u[2]-8)*gy/(u[4]-1);
+        precise float plane[192];precise float mean=0.0;bool opaque=true;
+        for(int py=0;py<8;py++)for(int px=0;px<8;px++) {
+            uint p=source.pixels[(y+py)*u[1]+x+px];int at=py*8+px;
+            opaque=opaque&&((p>>24u)==255u);precise float yy=luma(p);mean=mean+yy;
+            plane[at]=yy;plane[64+at]=float((p>>16u)&255u)-yy;plane[128+at]=float(p&255u)-yy;
+        }
+        mean=mean/64.0;if(!opaque||mean<3.0||mean>252.0)return;int bin=min(7,int(mean)/32);
+        for(int v=0;v<6;v++)for(int k=0;k<6;k++)if(k+v>=1&&k+v<=5)for(int channel=0;channel<3;channel++) {
+            precise float coefficient=0.0;
+            for(int py=0;py<8;py++)for(int px=0;px<8;px++) {
+                precise float product=plane[channel*64+py*8+px]-(channel==0?mean:0.0);
+                product=product*model.data[k*8+px];product=product*model.data[v*8+py];coefficient=coefficient+product;
+            }
+            int value=min(127,javaRound(abs(coefficient)*4.0));addBin(bin+(channel==0?0:8),value);
+        }
+    } else if(u[0]==3) {
+        if(id>=16)return;int target=id;
+        if(policy.data[u[9]+2048+id]<16u) {
+            int best=-1,distance=99;
+            for(int j=0;j<8;j++)if(policy.data[u[9]+2048+(id/8)*8+j]>=16u&&abs(id%8-j)<distance){best=(id/8)*8+j;distance=abs(id%8-j);}
+            if(best>=0)target=best;
+        }
+        float measuredValue=measured(target);int at=u[10]+id;
+        values.data[at]=u[11]!=0?max(values.data[at],measuredValue):measuredValue;
+    } else if(u[0]==4) {
+        if(id>=u[1]*u[2])return;
+        int skin=clamp(tables.data[id*2],0,256),detail=clamp(tables.data[id*2+1],0,256);
+        int budget=256-((skin*u[7])>>9);
+        if(u[8]==0)budget=(u[6]*budget)>>8;
+        policy.data[id*2]=uint(clamp(budget,0,256));policy.data[id*2+1]=uint(detail);
+        if(u[11]!=0) {
+            int x=id%u[1],y=id/u[1]+u[3];
+            precise float xx=u[9]==1?0.0:clamp((float(x)-f[1])/f[3],0.0,float(u[9]-1));
+            precise float yy=u[10]==1?0.0:clamp((float(y)-f[2])/f[4],0.0,float(u[10]-1));
+            int ix=min(u[9]-1,int(xx)),iy=min(u[10]-1,int(yy)),nx=min(u[9]-1,ix+1),ny=min(u[10]-1,iy+1);xx=xx-float(ix);yy=yy-float(iy);
+            precise float a=model.data[iy*u[9]+ix]*(1.0-xx);a=a+model.data[iy*u[9]+nx]*xx;
+            precise float b=model.data[ny*u[9]+ix]*(1.0-xx);b=b+model.data[ny*u[9]+nx]*xx;
+            precise float sigma=a*(1.0-yy);sigma=sigma+b*yy;values.data[id]=sigma;
+        } else values.data[id]=f[0];
+    }
+}
