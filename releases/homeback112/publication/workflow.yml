@@ -1,0 +1,82 @@
+name: Verify and publish Back exit Recents fix 112 and bundle237
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/homeback112-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reconstruct hash-pinned local-reviewed sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback112/prepare.py
+          cp .github/workflows/homeback112-publish.yml releases/homeback112/publication/workflow.yml
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          feed=json.loads(Path('patches-bundle.json').read_text())
+          cfg=json.loads(Path('releases/homeback112/publication/manifest.json').read_text())
+          assert feed['version']==cfg['baseline_version']=='1.0.236', 'Active feed advanced; inspect before publishing'
+          assert feed['download_url']==cfg['baseline_url']
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback110-build-inputs
+          run-id: 38606338782
+          github-token: ${{ github.token }}
+          path: .ci-homeback112/staged
+      - name: Obtain immutable reviewed baseline236
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/4f5b8589dd3f2bc1c950eeeebf51ab1778aef4f5/downloads/Hiro_Morphe_Patches_v1.0.236.mpp' -o .ci-homeback112/staged/baseline236.mpp
+          echo '29a0664e50085240c0605ab428cbe2924373c4dca7ea3a4817196b381f1e848e  .ci-homeback112/staged/baseline236.mpp' | sha256sum -c -
+      - name: Fresh build and all 108 host cases plus 10 synthetic APK applications
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback112/src/build.py --base .ci-homeback112/staged/baseline236.mpp --tools .ci-homeback112/staged/tools --legacy releases/oneback163/src --work .ci-homeback112/build --dist .ci-homeback112/dist 2>&1 | tee .ci-homeback112/build.log
+          python3 releases/homeback112/publication/package.py --dist .ci-homeback112/dist --legacy releases/oneback163/src
+      - name: Require exact local-reviewed MPP QA and source bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback112/publication/publish.py --dist .ci-homeback112/dist --repo . --base .ci-homeback112/staged/baseline236.mpp --local-only 2>&1 | tee .ci-homeback112/local-verification.log
+          python3 releases/homeback112/publication/publish.py --dist .ci-homeback112/dist --repo . --base .ci-homeback112/staged/baseline236.mpp --preflight-only 2>&1 | tee .ci-homeback112/preflight.log
+      - name: Publish and atomically update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback112/publication/publish.py --dist .ci-homeback112/dist --repo . --base .ci-homeback112/staged/baseline236.mpp 2>&1 | tee .ci-homeback112/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback112-bundle237-verification
+          path: |
+            .ci-homeback112/dist/
+            .ci-homeback112/*.log
+            .ci-homeback112/build/*.txt
+            .ci-homeback112/build/*.log
+            .ci-homeback112/build/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
