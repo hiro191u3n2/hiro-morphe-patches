@@ -1,0 +1,470 @@
+{
+  "GpuChain1961.java": {
+    "baseline_sha256": "2ffb97882530d0fae926994c4b1fc9f4f90797bc3d32290cc7f42eabfb0478c6",
+    "current_sha256": "ee4c2da3ff453e50f23fc256002ea0d9c5644907aa9cd8e8378fd08bf26541d4",
+    "hunks": [
+      {
+        "old_first": 263,
+        "old_last": 264,
+        "new_first": 263,
+        "new_last": 264,
+        "old": "        byte[] cpuReference=null;int reference=0;\n",
+        "new": "        byte[] cpuReference=null;int reference=0;boolean cancelled1988=false,selected1988=false;\n"
+      },
+      {
+        "old_first": 269,
+        "old_last": 269,
+        "new_first": 269,
+        "new_last": 270,
+        "old": "",
+        "new": "                    finishCpu1988(1,reason);\n"
+      },
+      {
+        "old_first": 271,
+        "old_last": 271,
+        "new_first": 272,
+        "new_last": 273,
+        "old": "",
+        "new": "                    finishCpu1988(2,reason);\n"
+      },
+      {
+        "old_first": 273,
+        "old_last": 273,
+        "new_first": 275,
+        "new_last": 276,
+        "old": "",
+        "new": "                    finishCpu1988(3,reason);\n"
+      },
+      {
+        "old_first": 278,
+        "old_last": 278,
+        "new_first": 281,
+        "new_last": 282,
+        "old": "",
+        "new": "                    finishCpu1988(4,reason);\n"
+      },
+      {
+        "old_first": 279,
+        "old_last": 279,
+        "new_first": 283,
+        "new_last": 284,
+        "old": "",
+        "new": "                    finishCpu1988(5,reason);\n"
+      },
+      {
+        "old_first": 286,
+        "old_last": 287,
+        "new_first": 291,
+        "new_last": 293,
+        "old": "                            result=compareFinish1978(owned,rotation,width,height,outputPlan,refreshNoise,expected,\n",
+        "new": "                            finishBegin1988(variant,2);\n                            result=compareFinish1988(owned,rotation,width,height,outputPlan,refreshNoise,expected,\n"
+      },
+      {
+        "old_first": 289,
+        "old_last": 290,
+        "new_first": 295,
+        "new_last": 296,
+        "old": "                            if(result==ResidentProof1978.EXACT){exactTrials[index]++;reason[index]=1;}\n",
+        "new": "                            if(result==ResidentProof1978.EXACT){exactTrials[index]++;reason[index]=1;finishStage1988(24);}\n"
+      },
+      {
+        "old_first": 291,
+        "old_last": 291,
+        "new_first": 297,
+        "new_last": 298,
+        "old": "",
+        "new": "                            else if(result==FINISH_MEMORY1988)reason[index]=4;\n"
+      },
+      {
+        "old_first": 292,
+        "old_last": 296,
+        "new_first": 299,
+        "new_last": 304,
+        "old": "                        } catch(java.util.concurrent.CancellationException cancelled){throw cancelled;}\n                          catch(OutOfMemoryError unavailable){reason[index]=4;}\n                          catch(RuntimeException unavailable){finishCancelled1986(cancellation);reason[index]=3;}\n                          catch(LinkageError unavailable){reason[index]=3;}\n",
+        "new": "                        } catch(java.util.concurrent.CancellationException cancelled){finishFault1988(4,0);throw cancelled;}\n                          catch(OutOfMemoryError unavailable){finishFault1988(3,0);reason[index]=4;}\n                          catch(RuntimeException unavailable){finishFault1988(1,0);finishCancelled1986(cancellation);reason[index]=3;}\n                          catch(LinkageError unavailable){finishFault1988(2,0);reason[index]=3;}\n                        finally {finishEnd1988();}\n"
+      },
+      {
+        "old_first": 303,
+        "old_last": 303,
+        "new_first": 311,
+        "new_last": 312,
+        "old": "",
+        "new": "                        finishBegin1988(variant,3);\n"
+      },
+      {
+        "old_first": 311,
+        "old_last": 312,
+        "new_first": 320,
+        "new_last": 321,
+        "old": "                        else {speedTrials[index]++;if(index==0){legacyFastest=Math.min(legacyFastest,elapsed);legacyWorst=Math.max(legacyWorst,elapsed);}\n",
+        "new": "                        else {finishStage1988(24);speedTrials[index]++;if(index==0){legacyFastest=Math.min(legacyFastest,elapsed);legacyWorst=Math.max(legacyWorst,elapsed);}\n"
+      },
+      {
+        "old_first": 313,
+        "old_last": 318,
+        "new_first": 322,
+        "new_last": 328,
+        "old": "                    } catch(java.util.concurrent.CancellationException cancelled){throw cancelled;}\n                      catch(OutOfMemoryError unavailable){reason[index]=4;}\n                      catch(RuntimeException unavailable){finishCancelled1986(cancellation);reason[index]=3;}\n                      catch(LinkageError unavailable){reason[index]=3;}\n                    finally {if(candidate!=null&&candidate!=owned)candidate.recycle();}\n",
+        "new": "                    } catch(java.util.concurrent.CancellationException cancelled){finishFault1988(4,0);throw cancelled;}\n                      catch(OutOfMemoryError unavailable){finishFault1988(3,0);reason[index]=4;}\n                      catch(DeferredChain unavailable){reason[index]=unavailable.reason1988;}\n                      catch(RuntimeException unavailable){finishFault1988(1,0);finishCancelled1986(cancellation);reason[index]=3;}\n                      catch(LinkageError unavailable){finishFault1988(2,0);reason[index]=3;}\n                    finally {try{if(candidate!=null&&candidate!=owned)candidate.recycle();}finally{finishEnd1988();}}\n"
+      },
+      {
+        "old_first": 331,
+        "old_last": 332,
+        "new_first": 341,
+        "new_last": 342,
+        "old": "            if(best>=0)GpuQualification1961.qualified(key,legacyExact?Math.min(cpu,legacyFastest):cpu,gpu[best],best);\n",
+        "new": "            if(best>=0){selected1988=true;GpuQualification1961.qualified(key,legacyExact?Math.min(cpu,legacyFastest):cpu,gpu[best],best);}\n"
+      },
+      {
+        "old_first": 335,
+        "old_last": 336,
+        "new_first": 345,
+        "new_last": 345,
+        "old": "                GpuQualification1961.rejectSpeed(key);\n",
+        "new": ""
+      },
+      {
+        "old_first": 337,
+        "old_last": 339,
+        "new_first": 346,
+        "new_last": 348,
+        "old": "        } catch(java.util.concurrent.CancellationException cancelled){finishStop1986(reason,6);throw cancelled;}\n          catch(OutOfMemoryError unavailable){finishStop1986(reason,4);}\n",
+        "new": "        } catch(java.util.concurrent.CancellationException cancelled){cancelled1988=true;finishFault1988(4,finishPendingMask1988(reason));finishStop1986(reason,6);throw cancelled;}\n          catch(OutOfMemoryError unavailable){finishFault1988(3,finishPendingMask1988(reason));finishStop1986(reason,4);}\n"
+      },
+      {
+        "old_first": 341,
+        "old_last": 342,
+        "new_first": 350,
+        "new_last": 352,
+        "old": "            catch(java.util.concurrent.CancellationException cancelled){finishStop1986(reason,6);throw cancelled;}\n",
+        "new": "            catch(java.util.concurrent.CancellationException cancelled){cancelled1988=true;finishFault1988(4,finishPendingMask1988(reason));finishStop1986(reason,6);throw cancelled;}\n            finishFault1988(1,finishPendingMask1988(reason));\n"
+      },
+      {
+        "old_first": 344,
+        "old_last": 345,
+        "new_first": 354,
+        "new_last": 355,
+        "old": "          catch(LinkageError unavailable){finishStop1986(reason,3);}\n",
+        "new": "          catch(LinkageError unavailable){finishFault1988(2,finishPendingMask1988(reason));finishStop1986(reason,3);}\n"
+      },
+      {
+        "old_first": 346,
+        "old_last": 348,
+        "new_first": 356,
+        "new_last": 366,
+        "old": "            for(int index=0;index<4;index++)finishNote1986(index-1,reason[index],exactTrials[index],speedTrials[index],\n                index==0&&reference==2?1:reference,cpu,legacyFastest,index==0?legacyWorst:gpu[index-1]);\n",
+        "new": "            try {\n                // Transport, capacity and reference failures have the same\n                // bounded retry policy, but cannot claim an unmeasured speed.\n                if(!cancelled1988&&!selected1988&&!Thread.currentThread().isInterrupted()&&!cancellation.cancelled())\n                    finishReject1988(key,reason,exactTrials,speedTrials,cpu,gpu);\n            } finally {\n                finishEnd1988();\n                for(int index=0;index<4;index++)finishNote1986(index-1,reason[index],exactTrials[index],speedTrials[index],\n                    index==0&&reference==2?1:reference,cpu,legacyFastest,index==0?legacyWorst:gpu[index-1]);\n            }\n"
+      },
+      {
+        "old_first": 564,
+        "old_last": 564,
+        "new_first": 582,
+        "new_last": 591,
+        "old": "",
+        "new": "        int result=compareFinish1988(source,rotation,width,height,plan,refresh,expected,tileRows,pipeline,carried,identityNoiseBefore,cancellation);\n        return result==FINISH_MEMORY1988?ResidentProof1978.UNAVAILABLE:result;\n    }\n    /** Qualification alone distinguishes an explicit workspace refusal. Other\n     * callers retain the established three-result ResidentProof contract. */\n    static int compareFinish1988(Bitmap source,int rotation,int width,int height,\n            QualityPixels1932.Plan plan,boolean refresh,Bitmap expected,int tileRows,boolean pipeline,\n            GpuNoise1960.Session carried,boolean identityNoiseBefore,\n            GpuQualification1961.Cancellation cancellation) {\n"
+      },
+      {
+        "old_first": 566,
+        "old_last": 566,
+        "new_first": 593,
+        "new_last": 594,
+        "old": "",
+        "new": "            finishStage1988(6);\n"
+      },
+      {
+        "old_first": 567,
+        "old_last": 567,
+        "new_first": 595,
+        "new_last": 596,
+        "old": "",
+        "new": "            finishStage1988(26);\n"
+      },
+      {
+        "old_first": 570,
+        "old_last": 571,
+        "new_first": 599,
+        "new_last": 600,
+        "old": "        } catch(DeferredChain unavailable){return ResidentProof1978.UNAVAILABLE;}\n",
+        "new": "        } catch(DeferredChain unavailable){return unavailable.reason1988==4?FINISH_MEMORY1988:ResidentProof1978.UNAVAILABLE;}\n"
+      },
+      {
+        "old_first": 588,
+        "old_last": 588,
+        "new_first": 617,
+        "new_last": 618,
+        "old": "",
+        "new": "        finishStage1988(6);\n"
+      },
+      {
+        "old_first": 596,
+        "old_last": 596,
+        "new_first": 626,
+        "new_last": 627,
+        "old": "",
+        "new": "        finishStage1988(7);\n"
+      },
+      {
+        "old_first": 600,
+        "old_last": 601,
+        "new_first": 631,
+        "new_last": 633,
+        "old": "        if(!GpuNoise1960.workspaceFits(extra))throw new DeferredChain();\n",
+        "new": "        finishStage1988(8);\n        if(!GpuNoise1960.workspaceFits(extra))throw new DeferredChain(4);\n"
+      },
+      {
+        "old_first": 602,
+        "old_last": 602,
+        "new_first": 634,
+        "new_last": 635,
+        "old": "",
+        "new": "        finishStage1988(9);\n"
+      },
+      {
+        "old_first": 603,
+        "old_last": 603,
+        "new_first": 636,
+        "new_last": 637,
+        "old": "",
+        "new": "        finishStage1988(10);\n"
+      },
+      {
+        "old_first": 613,
+        "old_last": 613,
+        "new_first": 647,
+        "new_last": 648,
+        "old": "",
+        "new": "            finishStage1988(11);\n"
+      },
+      {
+        "old_first": 623,
+        "old_last": 623,
+        "new_first": 658,
+        "new_last": 659,
+        "old": "",
+        "new": "                    finishStage1988(16);\n"
+      },
+      {
+        "old_first": 627,
+        "old_last": 627,
+        "new_first": 663,
+        "new_last": 664,
+        "old": "",
+        "new": "            finishStage1988(12);\n"
+      },
+      {
+        "old_first": 637,
+        "old_last": 637,
+        "new_first": 674,
+        "new_last": 675,
+        "old": "",
+        "new": "                    finishStage1988(13);\n"
+      },
+      {
+        "old_first": 646,
+        "old_last": 647,
+        "new_first": 684,
+        "new_last": 685,
+        "old": "                        if(rows==1)throw new DeferredChain();rows=Math.max(1,rows/2);\n",
+        "new": "                        if(rows==1)throw new DeferredChain(4);rows=Math.max(1,rows/2);\n"
+      },
+      {
+        "old_first": 652,
+        "old_last": 652,
+        "new_first": 690,
+        "new_last": 691,
+        "old": "",
+        "new": "                    finishStage1988(14);\n"
+      },
+      {
+        "old_first": 654,
+        "old_last": 655,
+        "new_first": 693,
+        "new_last": 694,
+        "old": "                    try {if(!geometryLease.revalidate1971()||!session.run(b))return null;}\n",
+        "new": "                    try {if(!geometryLease.revalidate1971())return null;finishStage1988(15);if(!session.run(b))return null;}\n"
+      },
+      {
+        "old_first": 662,
+        "old_last": 662,
+        "new_first": 701,
+        "new_last": 702,
+        "old": "",
+        "new": "                    finishStage1988(16);\n"
+      },
+      {
+        "old_first": 666,
+        "old_last": 666,
+        "new_first": 706,
+        "new_last": 707,
+        "old": "",
+        "new": "            finishStage1988(17);\n"
+      },
+      {
+        "old_first": 681,
+        "old_last": 681,
+        "new_first": 722,
+        "new_last": 723,
+        "old": "",
+        "new": "        finishStage1988(26);\n"
+      },
+      {
+        "old_first": 684,
+        "old_last": 684,
+        "new_first": 726,
+        "new_last": 727,
+        "old": "",
+        "new": "            finishStage1988(18);\n"
+      },
+      {
+        "old_first": 690,
+        "old_last": 690,
+        "new_first": 733,
+        "new_last": 734,
+        "old": "",
+        "new": "                finishStage1988(27);\n"
+      },
+      {
+        "old_first": 709,
+        "old_last": 709,
+        "new_first": 753,
+        "new_last": 754,
+        "old": "",
+        "new": "        finishStage1988(19);\n"
+      },
+      {
+        "old_first": 713,
+        "old_last": 713,
+        "new_first": 758,
+        "new_last": 759,
+        "old": "",
+        "new": "            finishStage1988(26);\n"
+      },
+      {
+        "old_first": 723,
+        "old_last": 723,
+        "new_first": 769,
+        "new_last": 770,
+        "old": "",
+        "new": "                finishStage1988(18);\n"
+      },
+      {
+        "old_first": 726,
+        "old_last": 726,
+        "new_first": 773,
+        "new_last": 774,
+        "old": "",
+        "new": "                    finishStage1988(25);\n"
+      },
+      {
+        "old_first": 730,
+        "old_last": 730,
+        "new_first": 778,
+        "new_last": 779,
+        "old": "",
+        "new": "                    finishStage1988(20);\n"
+      },
+      {
+        "old_first": 748,
+        "old_last": 748,
+        "new_first": 797,
+        "new_last": 798,
+        "old": "",
+        "new": "        finishStage1988(21);\n"
+      },
+      {
+        "old_first": 752,
+        "old_last": 752,
+        "new_first": 802,
+        "new_last": 803,
+        "old": "",
+        "new": "        finishStage1988(comparison!=null?22:23);\n"
+      },
+      {
+        "old_first": 756,
+        "old_last": 757,
+        "new_first": 807,
+        "new_last": 812,
+        "old": "    private static final class DeferredChain extends RuntimeException {}\n",
+        "new": "    private static final class DeferredChain extends RuntimeException {\n        final int reason1988;\n        private DeferredChain(){reason1988=3;}\n        DeferredChain(int reason){reason1988=reason==4?4:3;}\n    }\n"
+      },
+      {
+        "old_first": 827,
+        "old_last": 827,
+        "new_first": 882,
+        "new_last": 910,
+        "old": "",
+        "new": "    static final int FINISH_MEMORY1988= -2;\n    /** This classification consumes only execution facts, never optional\n     * telemetry. A missing output/time cannot be a measured speed failure. */\n    static void finishReject1988(String key,int[] reason,int[] exact,int[] speed,long cpu,long[] gpu){\n        boolean slow=false,mismatch=false,cached=false;int failure=0;\n        for(int index=1;index<4;index++){\n            int value=reason[index];\n            if(value==5&&exact[index]==2&&speed[index]==2&&cpu>0&&cpu!=Long.MAX_VALUE&&gpu[index-1]>0)slow=true;\n            else if(value==2)mismatch=true;\n            else if(value==8)cached=true;\n            else {\n                int cause=value==3?3:value==4?4:value==10?10:11;\n                // An unstable whole CPU oracle invalidates every speed claim.\n                if(cause==10||failure==10)failure=10;\n                else failure=failure==0||failure==cause?cause:11;\n            }\n        }\n        if(failure==0&&slow&&!mismatch&&!cached){GpuQualification1961.rejectSpeed(key);return;}\n        String cause=failure==10?\"reference_unstable\":failure==0?(slow?\"comparison_incomplete\":mismatch?\"quality_mismatch\":cached?\"quality_rejected\":\"comparison_incomplete\"):\n            slow||mismatch||cached?\"comparison_incomplete\":failure==3?\"execution_unavailable\":failure==4?\"memory_budget\":\"comparison_incomplete\";\n        GpuQualification1961.rejectNonSpeed1988(key,cause);\n    }\n    static int finishPendingMask1988(int[] reason){int mask=0;for(int i=0;i<4;i++)if(reason[i]<=1)mask|=1<<i;return mask;}\n    static void finishCpu1988(int stage,int[] reason){try{GpuQualification1961.finishCpu1988(stage,finishPendingMask1988(reason));}catch(Throwable optional){}}\n    static void finishBegin1988(int candidate,int phase){try{GpuQualification1961.finishBegin1988(candidate,phase);}catch(Throwable optional){}}\n    static void finishStage1988(int stage){try{GpuQualification1961.finishStage1988(stage);}catch(Throwable optional){}}\n    static void finishFault1988(int fault,int mask){try{GpuQualification1961.finishFault1988(fault,mask);}catch(Throwable optional){}}\n    static void finishEnd1988(){try{GpuQualification1961.finishEnd1988();}catch(Throwable optional){}}\n"
+      }
+    ]
+  },
+  "GpuQualification1961.java": {
+    "baseline_sha256": "8babb1e44a87da6181582bb768c4d60623792b52e637f40a5dc5248ea13af390",
+    "current_sha256": "ae51bce549f4efca7f75e8d72e380e5a42e3fc1ede5646a16c23994cdb6ad001",
+    "hunks": [
+      {
+        "old_first": 580,
+        "old_last": 580,
+        "new_first": 580,
+        "new_last": 588,
+        "old": "",
+        "new": "    private static final String[] FINISH_PHASES1988={\"未試行\",\"CPU基準\",\"全画素比較\",\"実出力の速度計測\"};\n    private static final String[] FINISH_STAGES1988={\"未開始\",\"CPU入力コピー\",\"CPU出力作成\",\"CPU出力確認\",\"CPU比較用メモリ\",\n        \"CPU基準の安定性確認\",\"入力・経路の前提確認\",\"ジオメトリ準備\",\"追加作業メモリ\",\"入力画素の取得\",\n        \"GPUセッション開始\",\"GPU画像容量の予約\",\"入力転送・初期GPU処理\",\"ジオメトリ作業メモリ\",\"ジオメトリ容量の予約\",\n        \"ジオメトリGPU処理\",\"残差解析\",\"出力画像の確保\",\"仕上げポリシー準備\",\"仕上げバンク容量の予約\",\n        \"GPUバンクへの送信\",\"GPU結果の取得\",\"全画素比較\",\"出力画素の保存\",\"完了\",\"予約の再確認\",\n        \"比較用バッファ確保\",\"旧GPU仕上げ実行・結果取得\"};\n    private static final String[] FINISH_FAULTS1988={\"なし\",\"実行時例外\",\"リンク例外\",\"配列・画像確保失敗\",\"取消\"};\n"
+      },
+      {
+        "old_first": 591,
+        "old_last": 591,
+        "new_first": 599,
+        "new_last": 602,
+        "old": "",
+        "new": "        // Four bounded observations only. No key, exception, image or owner is retained.\n        int finishStages1988,finishPhases1988,finishFaults1988,finishActiveSlot1988= -1;\n        int nonSpeedFailures1988,nonSpeedOutcome1988;\n"
+      },
+      {
+        "old_first": 747,
+        "old_last": 748,
+        "new_first": 758,
+        "new_last": 761,
+        "old": "            if(outcome==0)outcome=value.certificates>0?OUT_QUALIFIED1984:value.exactFailures>0?OUT_EXACT1984:\n",
+        "new": "            if(outcome==0)outcome=value.certificates>0?OUT_QUALIFIED1984:value.nonSpeedFailures1988>0?\n                (value.speedFailures>0||value.exactFailures>0&&value.nonSpeedOutcome1988!=OUT_EXACT1984?\n                    OUT_INCOMPLETE1984:value.nonSpeedOutcome1988):value.exactFailures>0?OUT_EXACT1984:\n"
+      },
+      {
+        "old_first": 858,
+        "old_last": 858,
+        "new_first": 871,
+        "new_last": 875,
+        "old": "",
+        "new": "            int slot=candidate+1;\n            event.invoke(null,\"gpu_finish88_stage\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\" candidate=\"+candidate+\n                \" phase=\"+((value.finishPhases1988>>>(slot*2))&3)+\" stage=\"+((value.finishStages1988>>>(slot*5))&31)+\n                \" fault=\"+((value.finishFaults1988>>>(slot*3))&7));\n"
+      },
+      {
+        "old_first": 878,
+        "old_last": 879,
+        "new_first": 895,
+        "new_last": 900,
+        "old": "                    .append(\" / 比較基準: \").append(FINISH_REFERENCES1986[reference]);\n",
+        "new": "                    .append(\" / 比較基準: \").append(FINISH_REFERENCES1986[reference])\n                    .append(\" / 段階: \").append(FINISH_PHASES1988[(latest.finishPhases1988>>>(slot*2))&3])\n                    .append(\" / 最終工程: \").append(FINISH_STAGES1988[(latest.finishStages1988>>>(slot*5))&31]);\n                int fault=(latest.finishFaults1988>>>(slot*3))&7;\n                if(fault!=0)text.append(\" / 例外区分: \").append(FINISH_FAULTS1988[fault]);\n"
+      },
+      {
+        "old_first": 1117,
+        "old_last": 1117,
+        "new_first": 1138,
+        "new_last": 1150,
+        "old": "",
+        "new": "        rejectReason1988(key,exact,cause,exact?OUT_EXACT1984:OUT_SPEED1984);\n    }\n    /** Finish failures retain the existing nonexact retry policy without\n     * inventing a measured speed failure or persisting a pixel rejection. */\n    public static void rejectNonSpeed1988(String key,String reason) {\n        int outcome=\"execution_unavailable\".equals(reason)?OUT_TRANSPORT1984:\n            \"memory_budget\".equals(reason)?OUT_MEMORY1984:\"reference_unstable\".equals(reason)?OUT_REFERENCE1984:\n            \"quality_mismatch\".equals(reason)?OUT_EXACT1984:\"quality_rejected\".equals(reason)?OUT_CACHED1984:\n            \"unsupported\".equals(reason)?OUT_UNSUPPORTED1984:\"comparison_incomplete\".equals(reason)?OUT_INCOMPLETE1984:0;\n        if(outcome!=0)rejectReason1988(key,false,null,outcome);\n    }\n    static void rejectReason1988(String key,boolean exact,String cause,int outcome) {\n"
+      },
+      {
+        "old_first": 1144,
+        "old_last": 1145,
+        "new_first": 1177,
+        "new_last": 1179,
+        "old": "                certificateAttempt1984(job,exact,!exact);\n",
+        "new": "                if(exact||outcome==OUT_SPEED1984)certificateAttempt1984(job,exact,!exact);\n                else nonSpeedAttempt1988(job,outcome);\n"
+      },
+      {
+        "old_first": 1148,
+        "old_last": 1148,
+        "new_first": 1182,
+        "new_last": 1242,
+        "old": "",
+        "new": "    }\n    static void nonSpeedAttempt1988(Job job,int outcome){\n        try{\n            if(job==null||job.attempt1984==null)return;Attempt1984 value=job.attempt1984;if(value.finished)return;\n            if(value.nonSpeedFailures1988<65535)value.nonSpeedFailures1988++;\n            value.nonSpeedOutcome1988=value.nonSpeedOutcome1988==0||value.nonSpeedOutcome1988==outcome?outcome:OUT_INCOMPLETE1984;\n            java.lang.reflect.Method event=traceEvent1984;\n            if(event!=null)event.invoke(null,\"gpu_proof88_failure\",Long.valueOf(value.epoch),\"id=\"+value.sequence+\n                \" non_speed=\"+value.nonSpeedFailures1988+\" cause=\"+OUT_CODES1984[value.nonSpeedOutcome1988]);\n        }catch(Throwable optional){}\n    }\n    /** CPU observations update only candidates which still need a trial.\n     * Stage writes are scalar-only and never emit events inside timed loops. */\n    public static void finishCpu1988(int stage,int mask){\n        try{\n            if(stage<1||stage>5||mask<0||mask>15)return;Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished)return;\n                value.finishActiveSlot1988= -1;\n                for(int slot=0;slot<4;slot++)if((mask&(1<<slot))!=0){\n                    value.finishPhases1988=(value.finishPhases1988&~(3<<(slot*2)))|(1<<(slot*2));\n                    value.finishStages1988=(value.finishStages1988&~(31<<(slot*5)))|(stage<<(slot*5));\n                    value.finishFaults1988&=~(7<<(slot*3));\n                }\n            }\n        }catch(Throwable optional){}\n    }\n    public static void finishBegin1988(int candidate,int phase){\n        try{\n            if(candidate< -1||candidate>2||phase<2||phase>3)return;Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished)return;\n                int slot=candidate+1;value.finishActiveSlot1988=slot;\n                value.finishPhases1988=(value.finishPhases1988&~(3<<(slot*2)))|(phase<<(slot*2));\n                value.finishStages1988=(value.finishStages1988&~(31<<(slot*5)))|(6<<(slot*5));\n                value.finishFaults1988&=~(7<<(slot*3));\n            }\n        }catch(Throwable optional){}\n    }\n    public static void finishStage1988(int stage){\n        try{\n            if(stage<0||stage>=FINISH_STAGES1988.length)return;Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished)return;\n                int slot=value.finishActiveSlot1988;if(slot<0||slot>3)return;\n                value.finishStages1988=(value.finishStages1988&~(31<<(slot*5)))|(stage<<(slot*5));\n            }\n        }catch(Throwable optional){}\n    }\n    public static void finishFault1988(int fault,int mask){\n        try{\n            if(fault<0||fault>=FINISH_FAULTS1988.length||mask<0||mask>15)return;Job job=CURRENT.get();if(job==null)return;\n            synchronized(LOCK){Attempt1984 value=job.attempt1984;if(activeJob!=job||value==null||value.finished)return;\n                if(mask==0){int slot=value.finishActiveSlot1988;if(slot<0||slot>3)return;mask=1<<slot;}\n                for(int slot=0;slot<4;slot++)if((mask&(1<<slot))!=0)\n                    value.finishFaults1988=(value.finishFaults1988&~(7<<(slot*3)))|(fault<<(slot*3));\n            }\n        }catch(Throwable optional){}\n    }\n    public static void finishEnd1988(){\n        try{Job job=CURRENT.get();if(job==null)return;synchronized(LOCK){Attempt1984 value=job.attempt1984;\n            if(activeJob==job&&value!=null&&!value.finished)value.finishActiveSlot1988= -1;}}\n        catch(Throwable optional){}\n"
+      }
+    ]
+  }
+}

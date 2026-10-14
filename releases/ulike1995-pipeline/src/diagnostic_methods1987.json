@@ -1,0 +1,219 @@
+{
+  "actual_d8_method_counts": {
+    "added": 7,
+    "behavior_changed": 4,
+    "existing_identical": 4816,
+    "preserved_owned_synthetic_bridges": 21,
+    "preserved_synthetic_bridges": 567,
+    "removed": 0,
+    "version_only_changed": 6
+  },
+  "added_methods": [
+    {
+      "authorization": "versioned_1987_helper_class",
+      "candidate_method_sha256": "403f1fc0ec1368a3b016a92e8d0c7ff8ad4ac457ba1a22d8fd52030f231f5c2a",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;-><init>(Ljava/lang/Object;ZLcom/hiro/ulike/GpuAnalysis1961$Snapshot;Lcom/hiro/ulike/GpuQualification1961$Reservation1984;)V",
+      "reason": "Own the transient source adapter, immutable-layout arrays and preallocated reservation for one foreground CPU traversal."
+    },
+    {
+      "authorization": "versioned_1987_helper_class",
+      "candidate_method_sha256": "b372e4233e3b56f33634d49e74abbf77f0b635cc506c538b3e430d94a2a9b654",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;->close()V",
+      "reason": "Release optional snapshot and reservation ownership on completion, denial, exception or cancellation."
+    },
+    {
+      "authorization": "versioned_1987_helper_class",
+      "candidate_method_sha256": "c3f7437c8aed6ecd7125b2a0b098312165ab42c98e7c3341b288d7d3b5cff6af",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;->cpuNanos(J)J",
+      "reason": "Remove measured optional mirror-copy bookkeeping from the foreground CPU baseline before unchanged speed qualification."
+    },
+    {
+      "authorization": "versioned_1987_helper_class",
+      "candidate_method_sha256": "329e26d1e6a859a723d96f03da2450e01781bdfeae2ca660ca7310cb5e81dd45",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;->finish()Lcom/hiro/ulike/GpuAnalysis1961$Snapshot;",
+      "reason": "Detach a source-free Snapshot only after the complete expected traversal and a current reservation."
+    },
+    {
+      "authorization": "versioned_1987_helper_class",
+      "candidate_method_sha256": "8413de8428d13039cd164bc20cadb618732509f1b7bee7218597ff44d6b7c84e",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;->read([IIIII)V",
+      "reason": "Call the original source once, mirror its exact returned patch and track copy/gather timing without changing estimator arithmetic."
+    },
+    {
+      "authorization": "versioned_1987_method",
+      "candidate_method_sha256": "6db052d59870581ba6b02e49a9adced49203051e2c10b44337cb7243f9d50f8e",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961;->capture1987(Ljava/lang/Object;IIZLjava/lang/String;)Lcom/hiro/ulike/GpuAnalysis1961$Capture1987;",
+      "reason": "Bound and reserve all retained snapshot/evidence bytes before allocation, with CPU-only recovery on optional resource denial."
+    },
+    {
+      "authorization": "versioned_1987_method",
+      "candidate_method_sha256": "86ea8b13ba53f1aea360e6c5c72a835e82b5e83a3e1139df1a1525bb7e942964",
+      "id": "Lcom/hiro/ulike/GpuProtection1961;->finishOpportunity1987(Ljava/lang/String;)Z",
+      "reason": "Check existing busy/exact/cooldown eligibility plus a usable certificate or available idle proof opportunity before expensive finishing-policy export."
+    }
+  ],
+  "baseline_bundle_mpp_sha256": "6fd108dd1abd06602bebd85fa50ec3ed3b8ccad5d92c412e9dc07759d97b43bc",
+  "baseline_ulike_mpp_sha256": "e0687da4aca12fa2bad3e0380ca3289c8ffa74f7c12d327b0eb7affcb3447c7d",
+  "changed_existing_methods": [
+    {
+      "baseline_method_sha256": "4ecf135d0d66a4a1d290632d1535bd1fb36a0e354f0033a16a246b11248dc05f",
+      "candidate_method_sha256": "88c2f17dd547f1e81a4020379daff3e177ad065b24e460790a12b914f3b0572f",
+      "classification": "reviewed_behavior_change",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961;->regions1982(Lcom/hiro/ulike/StrongNoise1958$Patches;II[FLcom/hiro/ulike/GpuAnalysis1961$RegionsCpu;[I)[F",
+      "reason": "Capture original regional CPU patch reads once under a preallocated qualification reservation; exclude optional mirror-copy cost from CPU timing, retain complete source/copy cost in GPU comparison, enforce the bounded 3-values-per-region reference shape, and replay a completed GPU snapshot for exact CPU fallback. The regional estimator, GPU graph and two-exact-trial/5-percent gate are unchanged."
+    },
+    {
+      "baseline_method_sha256": "536484bfc15bf961257096e99a5629c138423e92546125c4db0e147903fd86b8",
+      "candidate_method_sha256": "051978c4cf683d5b0c7169cf92d7bb1c9fc46281052459298aade4c96d3e5e1c",
+      "classification": "reviewed_behavior_change",
+      "id": "Lcom/hiro/ulike/GpuAnalysis1961;->spatial(Lcom/hiro/ulike/SpatialNoise1934$Patches;II)Lcom/hiro/ulike/SpatialNoise1934;",
+      "reason": "Capture original spatial CPU patch reads once under an owned qualification reservation instead of re-reading the source to create a detached proof; use completed GPU-gather pixels for CPU fallback. Spatial estimator arithmetic, GPU command graph and exact/speed predicates are unchanged."
+    },
+    {
+      "baseline_method_sha256": "634c3ec02c44b2217c79a38e9f013535b75f3db54fb5ea04e9bebde8beb4ae1f",
+      "candidate_method_sha256": "b23cc47896d179f7af893e30165c9e13b26db486c47228555127579c4eba4b05",
+      "classification": "reviewed_behavior_change",
+      "id": "Lcom/hiro/ulike/GpuChain1961;->finish(Landroid/graphics/Bitmap;IIILcom/hiro/ulike/QualityPixels1932$Plan;ZLcom/hiro/ulike/ProcessingTiming1947$Trace;)Landroid/graphics/Bitmap;",
+      "reason": "Replace Finish canQueue/copy/schedule admission with reserve1985/begin1985/commit so the primary Finish proof holds its actual queue slot and bytes before copying and transfers ownership atomically. Existing admitted GPU dispatch, CPU fallback and qualifyFinish1978 exact/speed comparisons are unchanged."
+    },
+    {
+      "baseline_method_sha256": "58dce6f0fc22cf2cc8376bddad2a2ca2d334914c4c035d6aea81c870f18210d5",
+      "candidate_method_sha256": "9457908d668e604cb5c042301452fb8e81ac863dfe26cfe801d55739cb4f438a",
+      "classification": "reviewed_behavior_change",
+      "id": "Lcom/hiro/ulike/GpuProtection1961;->finishBand(Lcom/hiro/ulike/QualityPixels1932$Plan;IIIII)Lcom/hiro/ulike/FinishPolicy1953$Band;",
+      "reason": "Form the unchanged policy key before costly per-pixel mask export and consult finishOpportunity1987. Skip GPU-only preparation when neither a usable saved/in-memory certificate nor an idle validation opportunity exists; retain existing CPU fallback, mask semantics, candidate evaluation and numerical policy output."
+    },
+    {
+      "baseline_method_sha256": "793940c3917578953468453f60b67499c3602313fd4243187be8ed2949f63160",
+      "candidate_method_sha256": "eaa85a688edd7bb513aa29ff3076e5aba9cb8f5ff3ff1644d7daa57c140fba1c",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/CameraTrace1965$Storage;->exportZip(Ljava/io/OutputStream;)V",
+      "reason": "Only the embedded diagnostic version literal changes from 1.9.86 to 1.9.87; the complete method body matches after literal normalization."
+    },
+    {
+      "baseline_method_sha256": "7b6196b8a5a46da124713db8f9727a535eb7f00b56fd6ecf617662f39afddfa6",
+      "candidate_method_sha256": "7b941104d1563fcccd5c2d2bd49ed0c9591193820229716c9684136bf7342237",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/CameraTrace1965;->writeLoop()V",
+      "reason": "Only the diagnostic version literal changes from 1.9.86 to 1.9.87; writing order, buffering and error handling are byte-identical after literal normalization."
+    },
+    {
+      "baseline_method_sha256": "e1374af789fe88cee74d0a8147dd992fa347f26675a86eac0e6d21aa20bbac07",
+      "candidate_method_sha256": "33a284f163b4d96a865f5aa85c4cb8d7942b8e0cb30a6535d802a499ec726e21",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/ProcessingTiming1947;->init(Landroid/content/Context;)V",
+      "reason": "Only the diagnostic version literal changes from 1.9.86 to 1.9.87; initialization and saved-state behavior match after literal normalization."
+    },
+    {
+      "baseline_method_sha256": "611e93d4aef2d31180543cbc43402c8ac3cfa76755e1a71b39b59068d9cfc6be",
+      "candidate_method_sha256": "a9f8b690db914d54c6582d4fda6357fdf92615ec2c3b169844a3b1c72dc592a8",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/ProcessingTiming1947;->publish(Lcom/hiro/ulike/ProcessingTiming1947$Trace;Z)V",
+      "reason": "Only the diagnostic version literal changes from 1.9.86 to 1.9.87; trace publication, storage and timing behavior match after literal normalization."
+    },
+    {
+      "baseline_method_sha256": "ed4910a316280607cacf8a658e3ca9966cdc89f57f4f70dfdc15a8e65c4c1d78",
+      "candidate_method_sha256": "671df2b27b86d99111e42c243923d51772e723693d7131c72f5f96285e04f626",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/ProcessingTiming1947;->render(Lcom/hiro/ulike/ProcessingTiming1947$Trace;)Ljava/lang/String;",
+      "reason": "Only the displayed version literal changes from 1.9.86 to 1.9.87; all diagnostic wording other than the version, route counts and measurement formatting match after normalization."
+    },
+    {
+      "baseline_method_sha256": "aeb6a60ae6e7cfff9897af9cde88a22b0e7666129488d0eab69ef820ca3b6086",
+      "candidate_method_sha256": "20cc420029153c04b08b33b66d9d7cf3b746a3f16d570b9766fd3328d721338f",
+      "classification": "version_literal_only",
+      "id": "Lcom/hiro/ulike/ProcessingTiming1947;->summary()Ljava/lang/String;",
+      "reason": "Only the diagnostic version literal changes from 1.9.86 to 1.9.87; existing summary selection and contents otherwise match after literal normalization."
+    }
+  ],
+  "evidence_sha256": {
+    "baseline_runtime.dex": "63b46b09d099147605c9afa293de30413e7f0cee7362af20384bf86dc48680d9",
+    "detailed_methods.tsv": "e58408abe8e73b3503a341d5f286e45ac9a48d326e0bea9a7141a1a27b58dae8",
+    "emitted_runtime.dex": "65d0e8e09f107d508794426969505679c178d931dbdf526cc6bfb46e512f2715",
+    "helper_classes.dex": "b43a2aac56838287f49d13431b43d7477d6190b9e95ba8bfcc3016797e54bedd",
+    "preserved_bridges.tsv": "7752df16099ddc7003eee41e91c1e2cf692eedc5da390693947cd30690772712",
+    "strict_transform.log": "4551d001a8fe9b0a058403c919fbacdc624a2e37bcbebcc7705a8b4f19318186",
+    "whole_audit_inventory1987.json": "4fc0543da524bc9e77b1ab41dd4bb8c8072a1b5ddb0bf23c8f95997cb9b480b9"
+  },
+  "executed_verification": {
+    "all_included_member_references_resolved": 28967,
+    "all_methods_with_helper_references_checked": 5062,
+    "changed_native_methods": [],
+    "changed_or_added_included_member_references_resolved": 580,
+    "changed_or_added_methods_with_helper_references_checked": 17,
+    "critical_pixel_kernel_methods_preserved": 72,
+    "diagnostic_methods_preserved_after_version_normalization": 161,
+    "exact_reviewed_additive_api_allowance_passed": true,
+    "new_external_member_references_deferred": 0,
+    "new_native_methods": [],
+    "nonreviewed_runtime_classes_preserved": 699,
+    "serialized_runtime_verified": true,
+    "strict_transform_passed": true,
+    "test_fixture_classes_absent": true,
+    "unchanged_inherited_external_member_references_deferred_to_android": 7,
+    "version_only_inverse_passed": true
+  },
+  "methods": {
+    "GpuAnalysis1961": [
+      "regions1982",
+      "spatial"
+    ],
+    "GpuChain1961": [
+      "finish"
+    ],
+    "GpuProtection1961": [
+      "finishBand"
+    ]
+  },
+  "physical_android_tested": false,
+  "removed_methods": [],
+  "review_basis": "Executed pinned Java 21.0.8 source/target 8 compilation and release D8 API 26 for exactly five roots, compared to the immutable published 1.9.86 MPP runtime with retained TimingCameraHooks1980 reapplied. The real D8 delta contains four behavioral methods, six independently normalized version-literal-only methods, seven additive versioned APIs, and no removal. Transform1987 passes with exemptions for only the four behavior methods. All 567 inherited static synthetic access bridges, including 21 in replaced roots, remain byte-identical without restoration. Full emitted-runtime serialization, pixel/dispatch/timing preservation, native declarations and helper references were checked. No method authorization was broadened to bypass a failure.",
+  "review_complete": true,
+  "reviewed_production_sha256": {
+    "CameraTrace1965.java": "d7e0add36fe97ea54fa4d232c9cbbff1ad62072020331d7d18d16caa28d48b57",
+    "GpuAnalysis1961.java": "b6b19b63264c859e1d0ed884ef9ac84768eaf39f696366e8c086b3d26dd41c55",
+    "GpuChain1961.java": "2ffb97882530d0fae926994c4b1fc9f4f90797bc3d32290cc7f42eabfb0478c6",
+    "GpuProtection1961.java": "b015686c3db870c12171db5e062037bcf948a59f55a642f9166f14b7f35f4953",
+    "ProcessingTiming1947.java": "bccdf159231116f912228ddeb8f4560e2848b9da0264e7a377daff9a23fdb46b"
+  },
+  "reviewed_transform_sha256": "cf82ce09b405c47ff067561e4dd36153e8e897066d3933623cb784581023c89a",
+  "schema": "ulike1987-instrumented-methods-v1",
+  "synthetic_bridge_review": {
+    "added_bridges": [],
+    "all_567_inherited_static_access_bridges_byte_identical": true,
+    "owned_bridge_method_sha256": {
+      "Lcom/hiro/ulike/CameraTrace1965;->access$004()J": "6aa69eb96bda4a1ace7e47494d798a8602a79c3ce7d6d7495ad259176d42d443",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$100(Ljava/lang/String;I)Ljava/lang/String;": "bc0b00f9f92baa82ab6baf2ac1065ed1bc1cbcbe11c863c6e250b853c22c9df4",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$1000(Ljava/lang/String;JJJLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;": "f0d45b92647850e09205bfba7da399b3a463e47fa6ef2269c81715f26cc34c5d",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$1100(Ljava/lang/String;)Ljava/lang/String;": "346c537724b89a3fdcb5e35623ee25996c60dc552021ced3596cd37a3202b46f",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$1200()J": "335624020f39d5134c0eb69929d8d7472b05d3dccdefa0e3db5551a712401e7a",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$200(Ljava/lang/String;)Z": "ef4eadac3940944317382474a0ea80cef95081340944b0a26472717d0fc3a3f7",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$300(JJJLjava/lang/String;Ljava/lang/String;)Ljava/lang/String;": "8d3e7c56140de7340cfe4fb69ffe0bbaae75eece2fabe4e52c7185963c1515e7",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$400()V": "fa317473d54b6847701f4303ef9a81b9692a22b7f94d2614d737c65260295012",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$500(ILjava/lang/String;Landroid/app/Activity;)V": "7f7e855ef7dc576c114f4d79f4d2a84cab43c38b02c8ce8967788b5bad900bf2",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$600(Ljava/lang/String;)V": "78587806b39d6192233d5d47f409bbd2814ecbcee7a927feab5ab7ff8a3d9e14",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$700()Ljava/lang/Object;": "a96f9aa3580ff4383fa4f21010625f8f07835de2417479955f84997be25aae77",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$800()Landroid/content/Context;": "6bb96b78efa556f397bf37f1976b529cda02d635b368d05ddfd9c1e2ce2186d0",
+      "Lcom/hiro/ulike/CameraTrace1965;->access$900()Ljava/nio/charset/Charset;": "1779d437f26caea8b510ecdf20bb819dced754649fe090948a4813ab35f5f570",
+      "Lcom/hiro/ulike/GpuAnalysis1961;->access$100(Ljava/lang/String;)V": "9eb186efce66455208632c8afdfc20c8f0eef75bcdbba60ab4722542b1e06772",
+      "Lcom/hiro/ulike/GpuAnalysis1961;->access$200(Ljava/lang/String;)V": "ba2e8465837e3d0dca615ba98d3c9a3c4bc1e12754260839d19b2e29d79f493e",
+      "Lcom/hiro/ulike/GpuAnalysis1961;->access$300(JJ)Z": "1fc20f8c9ee67f9c9e3161c483a8bc5b4152efc8e0f14657a5dad822fae0cbb1",
+      "Lcom/hiro/ulike/GpuAnalysis1961;->access$400([F[F)Z": "f9e414e843ab566842b20d812a4e1b446872ff42ff8c00f00e2911b884050d7a",
+      "Lcom/hiro/ulike/GpuChain1961;->access$100()Ljava/lang/ThreadLocal;": "e6c18441fa4fee377a3ed7ac0d9d6dca884caa75b214992910e7bfd39e70330f",
+      "Lcom/hiro/ulike/GpuChain1961;->access$200(Ljava/lang/String;)V": "a93cf50ce7902f8cdb6c27d54fed9be73eb1f0d84fadf986d675db646445510d",
+      "Lcom/hiro/ulike/GpuChain1961;->access$300(Landroid/graphics/Bitmap;)Z": "8da94fa1e6e22b9e178f0ac06fed2addc4f3e8643238b8c8970485f2946c4f10",
+      "Lcom/hiro/ulike/GpuProtection1961;->access$000([[I[F[I[FI)[I": "2fae550aa6dc63e8436b12130efa45bee40ef2c6baba93046937130bce586ca8"
+    },
+    "removed_bridges": [],
+    "restored_bridges": []
+  },
+  "toolchain": {
+    "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8_jar_sha256": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5",
+    "d8_min_api": 26,
+    "d8_release": true,
+    "jdk_version": "21.0.8",
+    "morphe_jar_sha256": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "source_target": "8"
+  }
+}
