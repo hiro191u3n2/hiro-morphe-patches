@@ -11,6 +11,7 @@ from build1995 import (ROOT, VERSION, BUNDLE_VERSION, SINGLE, BUNDLE, BASE_PINS,
     headers, dex_integrity, sha, require, json_bytes, runtime_source_version)
 from finalize1995 import QA_NAME, SOURCE_ZIP, SELECTED
 import application_evidence1995
+import native_identity1995
 
 ASSETS=(SINGLE,BUNDLE,QA_NAME,SOURCE_ZIP,'RELEASE_NOTES.txt','SHA256SUMS.txt')
 FALSE_QA=('device_tested','physical_android_tested','device_speed_measured','device_quality_verified',
@@ -58,6 +59,7 @@ def positive_host(report):
         total+=child['assertions']
     require(total==report['assertions'],'Host assertion total differs from executed groups')
     require(tests['finish_recovery95'].get('resident_policy_trace_verified') is True,'Resident GPU finish policy trace missing')
+    require(tests['release_gate'].get('native_identity_only_inverse_verified') is True and type(tests['release_gate'].get('native_identity_negative_assertions')) is int and tests['release_gate']['native_identity_negative_assertions']>0,'Native identity corruption controls missing')
 
 def validate(args):
     root=args.root.resolve();dist=root/'dist';source=root/'src'
@@ -115,6 +117,9 @@ def validate(args):
         members=packages[name];require(headers(members['META-INF/MANIFEST.MF']).get('Version')==version,'Wrong MPP version: '+name)
         for dex in ('classes.dex','ulike/runtime.dex','ulike/methods.dex'):dex_integrity(members[dex],name+'/'+dex)
         require(sha(members[GPU_ENTRY])==build['gpu_native']['sha256'] and len(members[GPU_ENTRY])==build['gpu_native']['bytes'],'GPU payload differs from built JNI')
+        identity=native_identity1995.verify(members[GPU_ENTRY],native_identity1995.current_fingerprint(source))
+        identity.update(native_identity1995.verify_native_sources(source))
+        require(build['gpu_native'].get('identity_delta')==identity==qa['gpu_native'].get('identity_delta'),'Exact native identity-only inverse proof differs')
         shutter_rows=[line.split('\t') for line in members['ulike/methods.tsv'].decode().splitlines() if line.split('\t')[0]==hook['target']]
         require(shutter_rows==[[hook['target'],hook['original_sha256'],hook['patched_sha256']]],'Published shutter TSV differs from built/applied proof')
         for inherited,digest in build.get('inherited_native_sha256',{}).items():

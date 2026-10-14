@@ -8,6 +8,7 @@ from pathlib import Path
 import argparse, hashlib, importlib.util, json, os, re, shutil, struct, zlib
 import build1945 as common
 import build1994 as previous
+import native_identity1995
 ROOT=Path(__file__).resolve().parent
 VERSION, BUNDLE_VERSION='1.9.95','1.0.228'
 BASE_VERSION, BASE_BUNDLE_VERSION='1.9.94','1.0.227'
@@ -19,7 +20,7 @@ BASE_PINS={BASE_SINGLE: {'sha256':'1ee7dd6042a1a476d86f1653190f20f486b6c41a200d1
 GPU_ENTRY='ulike1960/runtime/libulike_gpu1960.so'
 INSTALLER='app/hiro/ulike/patches/IntegrationPayload186.class'
 LOADER='app/hiro/ulike/patches/UlikeHqMaxPatch.class'
-CHANGED={'META-INF/MANIFEST.MF','classes.dex','ulike/runtime.dex',LOADER}
+CHANGED={'META-INF/MANIFEST.MF','classes.dex','ulike/runtime.dex',LOADER,INSTALLER,GPU_ENTRY}
 TOOL_PINS=common.TOOL_PINS
 require,sha,run,archive,headers,manifest,own,write_zip=common.require,common.sha,common.run,common.archive,common.headers,common.manifest,common.own,common.write_zip
 
@@ -115,8 +116,9 @@ def build(args):
  require(len(inherited)==11 and all(final[k]==base[k] for k in inherited),'Eleven other native payloads changed')
  stock_hook=json.loads((emitted/'stock-shutter1995.json').read_text())
  require(stock_hook.get('added_method_count')==0 and stock_hook.get('existing_methods_preserved') is True and stock_hook.get('byte_identical_to_baseline') is True,'Existing stock shutter method must remain byte-identical')
- require(payload==base[GPU_ENTRY],'Unchanged GPU native sources must reproduce baseline bytes')
- require(all(final[k]==base[k] for k in ('ulike/methods.dex','ulike/methods.tsv',INSTALLER)),'Stock methods or native installer bytes changed')
+ native_identity=native_identity1995.verify(payload,native_identity1995.current_fingerprint(ROOT),base[GPU_ENTRY])
+ native_identity.update(native_identity1995.verify_native_sources(ROOT))
+ require(all(final[k]==base[k] for k in ('ulike/methods.dex','ulike/methods.tsv')),'Stock methods bytes changed')
  for kind,new in (('standalone',final),('bundle',integrated)):
   for name in ('classes.dex','ulike/runtime.dex','ulike/methods.dex'):dex_integrity(new[name],kind+'/'+name)
  write_zip(args.output/SINGLE,final);write_zip(args.output/BUNDLE,integrated)
@@ -124,7 +126,7 @@ def build(args):
  require(source_pins()==pins and publication_pins()==pubpins,'Source/publication changed during build')
  artifacts={n:{'sha256':sha((args.output/n).read_bytes()),'bytes':(args.output/n).stat().st_size} for n in (SINGLE,BUNDLE)}
  if 'reviewed_mpp_artifacts' in declaration:require(declaration['reviewed_mpp_artifacts']==artifacts,'Rebuilt MPP differs from locally applied artifact')
- report={'schema':'ulike1995-build-evidence-v1','status':'BUILT_STRUCTURALLY_VERIFIED_HOST_AND_DEVICE_PENDING','ulike_version':VERSION,'bundle_version':BUNDLE_VERSION,'runtime_version':runtime_version,'timing_version_matches_release':True,'baseline':BASE_PINS,'artifacts':artifacts,'jdk_identity':identity,'tool_sha256':TOOL_PINS,'source_sha256':pins,'publication_sha256':pubpins,'production_helper_roots':production,'compiled_production_sha256':{p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in sources},'resource_delta':deltas,'inherited_native_sha256':inherited,'gpu_native':{'sha256':sha(payload),'bytes':len(payload),'build':'rebuilt_from_current_sources','byte_identical_to_baseline':payload==base[GPU_ENTRY],'ndk_revision':'27.2.12479018','jni_exports':sorted(exports),'added_jni_exports':sorted(added_exports),'inherited_jni_exports_preserved':True,'segment_alignment':align,'dependencies':needed},'stock_shutter_hook':stock_hook,'structural_inventory':json.loads((emitted/'inventory1995.json').read_text()),'runtime_helper_references_verified':True,'deterministic_dex_verified':True,'other_apps_preserved':True,'host_tests_passed':False,'original_apk_apply_tested':False,'device_tested':False,'device_speed_measured':False,'device_quality_verified':False}
+ report={'schema':'ulike1995-build-evidence-v1','status':'BUILT_STRUCTURALLY_VERIFIED_HOST_AND_DEVICE_PENDING','ulike_version':VERSION,'bundle_version':BUNDLE_VERSION,'runtime_version':runtime_version,'timing_version_matches_release':True,'baseline':BASE_PINS,'artifacts':artifacts,'jdk_identity':identity,'tool_sha256':TOOL_PINS,'source_sha256':pins,'publication_sha256':pubpins,'production_helper_roots':production,'compiled_production_sha256':{p.relative_to(ROOT).as_posix():sha(p.read_bytes()) for p in sources},'resource_delta':deltas,'inherited_native_sha256':inherited,'gpu_native':{'sha256':sha(payload),'bytes':len(payload),'build':'rebuilt_from_current_sources','byte_identical_to_baseline':payload==base[GPU_ENTRY],'identity_delta':native_identity,'ndk_revision':'27.2.12479018','jni_exports':sorted(exports),'added_jni_exports':sorted(added_exports),'inherited_jni_exports_preserved':True,'segment_alignment':align,'dependencies':needed},'stock_shutter_hook':stock_hook,'structural_inventory':json.loads((emitted/'inventory1995.json').read_text()),'runtime_helper_references_verified':True,'deterministic_dex_verified':True,'other_apps_preserved':True,'host_tests_passed':False,'original_apk_apply_tested':False,'device_tested':False,'device_speed_measured':False,'device_quality_verified':False}
  (args.output/'build1995.json').write_bytes(json_bytes(report));print(json.dumps({'status':report['status'],'artifacts':artifacts},indent=2));return report
 
 if __name__=='__main__':

@@ -22,13 +22,14 @@ def replace(body, old, new):
 def strong_fixture(source):
     adapter = module('failure92_forecast', source/'host_strong_diagnostics1986.py')
     body = adapter.forecast_peer1986((source/'tests1982/strong/StrongDiagnosticsFixtures1982.java').read_text())
-    # These .94 calls only publish optional diagnostics. Typed transport failure
-    # behavior below still runs unchanged; host_strong_timing1994 exercises the
+    # These .94/.95 calls only publish optional diagnostics. Typed transport failure
+    # behavior below still runs unchanged; host_strong_timing1995 exercises the
     # real timing boundary/counters separately.
     body = replace(body, 'final class ProcessingTiming1947 {', '''final class ProcessingTiming1947 {
         static long captureId1989(long epoch){return epoch;}
         static void strongBreakdown1994(Trace trace,long waitNanos,long waits,long submitNanos,long submits,long collectNanos,long collects){}
         static void strongProfile1994(Trace trace,int profile,int variant,int strips){}
+        static void strongReadback1995(Trace trace,int strips,long pixels){}
     ''')
     body = replace(body, 'static volatile boolean available=true,supported=true,busy;', 'static volatile boolean available=true,supported=true,busy;static int fault1992,delay1992;')
     body = replace(body, 'int[] source,u;int program;', 'int[] source,u;int program,modelUploads;')

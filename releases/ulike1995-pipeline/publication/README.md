@@ -16,7 +16,7 @@ JDK Temurin 21.0.8+9、Android NDK r27c、Morphe Desktop 1.16.0、Android 35 / D
 
 ## 保持範囲
 
-レビューした本番ヘルパー群と GPU native だけを再構築する。その他の runtime クラス、他アプリ、11 個の既存 native、既存の原本 method 契約をすべて保持する。v1.9.94 のシャッター onTouchEvent 計測も逆変換で検証し、methods.dex と methods.tsv をバイト単位で保持する。既存の timing/camera observer は正確な位置に再適用し、GPU native は同一ソースから再構築して v1.9.94 と完全一致を必須とする。native installer の逆変換を検証し、class バイトも保持する。
+レビューした本番ヘルパー群と GPU native だけを再構築する。その他の runtime クラス、他アプリ、11 個の既存 native、既存の原本 method 契約をすべて保持する。v1.9.94 のシャッター onTouchEvent 計測も逆変換で検証し、methods.dex と methods.tsv をバイト単位で保持する。既存の timing/camera observer は正確な位置に再適用し、GPU native の計算コード・シェーダー・CPUソースを v1.9.94 と照合する。Java経路変更で認定が正しく更新されるよう、native 内の計算依存フィンガープリントと GNU build-id は再生成する。ELFセクション境界でこの64バイト・20バイトだけを特定し、旧値への逆変換で公開済み v1.9.94 native 全体の SHA-256 と一致することを必須とする。native installer の GPU 1行のハッシュ・サイズだけを更新して逆変換を検証する。
 
 既存 JNI の宣言と export を保持し、追加 JNI を許可しない。
 
