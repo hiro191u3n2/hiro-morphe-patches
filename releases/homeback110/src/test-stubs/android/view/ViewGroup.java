@@ -1,0 +1,2 @@
+package android.view;import android.content.Context;public class ViewGroup extends View implements ViewParent {
+ private final java.util.List<View> children=new java.util.ArrayList<View>();public ViewGroup(Context c){super(c);}public void addView(View v){children.add(v);v.parent=this;}public int getChildCount(){return children.size();}public View getChildAt(int n){return children.get(n);}public void removeAllViews(){for(View v:children)v.parent=null;children.clear();}}
