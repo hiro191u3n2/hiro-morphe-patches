@@ -1,0 +1,1 @@
+package com.hiro.ulike; import com.bytedance.corecamera.ui.view.CameraShadeView; public class PreviewLayout1922 { public static CameraShadeView active; public static boolean current(CameraShadeView v){return v!=null&&v==active&&v.attached;} public static long generation(CameraShadeView v){return v.epoch;} }
