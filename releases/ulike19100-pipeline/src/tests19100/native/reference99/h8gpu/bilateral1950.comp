@@ -1,0 +1,119 @@
+#version 310 es
+// Integer-only counterpart of native1950/core1950.c bilateral().
+// Pass 1: guide = values = original ARGB, horizontal = 1, output = scratch.
+// Pass 2: guide = original ARGB, values = scratch, horizontal = 0,
+//         output = final ARGB. All buffers contain width * rows uint32 pixels.
+precision highp int;
+layout(local_size_x = 16, local_size_y = 16, local_size_z = 1) in;
+
+layout(std430, binding = 0) readonly buffer GuidePixels { uint guide[]; };
+layout(std430, binding = 1) readonly buffer ValuePixels { uint values[]; };
+layout(std430, binding = 2) writeonly buffer OutputPixels { uint outputPixels[]; };
+layout(std430, binding = 3) readonly buffer LumaRange { int lr[]; };
+layout(std430, binding = 4) readonly buffer ColourRange { int cc[]; };
+
+uniform int uWidth;
+uniform int uRows;
+uniform int uNoise;
+uniform int uHorizontal;
+uniform int uTexture;
+uniform int uShadows;
+uniform int uBegin;
+uniform int uEnd;
+
+const int offsets[6] = int[6](-3, -2, -1, 1, 2, 3);
+const int spatial[6] = int[6](1, 6, 15, 15, 6, 1);
+const int lm[5] = int[5](0, 48, 68, 85, 96);
+const int cm[5] = int[5](0, 78, 91, 98, 100);
+
+int red(uint p) { return int((p >> 16) & 255u); }
+int green(uint p) { return int((p >> 8) & 255u); }
+int blue(uint p) { return int(p & 255u); }
+int luma(uint p) {
+    return (red(p) * 77 + green(p) * 150 + blue(p) * 29 + 128) >> 8;
+}
+int divround(int n, int d) {
+    return n >= 0 ? (n + d / 2) / d : -((-n + d / 2) / d);
+}
+int skin(int yy, int cbb, int crr) {
+    int a = clamp(crr * 256 / 14, 0, 256)
+          * clamp((90 - crr) * 256 / 20, 0, 256) / 256;
+    int b = clamp((20 - cbb) * 256 / 16, 0, 256)
+          * clamp((cbb + 80) * 256 / 20, 0, 256) / 256;
+    return a * b / 256 * clamp((yy - 10) * 256 / 25, 0, 256) / 256;
+}
+uint rgb(int r, int g, int b) {
+    return 0xff000000u | (uint(clamp(r, 0, 255)) << 16)
+                        | (uint(clamp(g, 0, 255)) << 8)
+                        |  uint(clamp(b, 0, 255));
+}
+
+void main() {
+    int x = int(gl_GlobalInvocationID.x);
+    int row = uBegin + int(gl_GlobalInvocationID.y);
+    if (x >= uWidth || row >= uEnd) return;
+    int at = row * uWidth + x;
+    uint center = guide[at];
+    if ((center >> 24) != 255u) {
+        outputPixels[at] = center;
+        return;
+    }
+
+    int yc = luma(center);
+    int cbb = blue(center) - yc;
+    int crr = red(center) - yc;
+    int dark = uShadows != 0 ? clamp((112 - yc) * 256 / 96, 0, 256) : 0;
+    int rangeScale = 256 - dark / 6;
+    uint vc = values[at];
+    int vy = uHorizontal != 0 ? yc : luma(vc);
+    int sumy = vy * 5120;
+    int sumb = (blue(vc) - vy) * 5120;
+    int sumr = (red(vc) - vy) * 5120;
+    int wy = 5120;
+    int wc = 5120;
+
+    for (int t = 0; t < 6; ++t) {
+        int nx = uHorizontal != 0 ? clamp(x + offsets[t], 0, uWidth - 1) : x;
+        int nr = uHorizontal != 0 ? row : clamp(row + offsets[t], 0, uRows - 1);
+        int index = nr * uWidth + nx;
+        uint neighbour = guide[index];
+        if ((neighbour >> 24) != 255u) continue;
+        int yn = luma(neighbour);
+        int dy = abs(yc - yn);
+        int dist = max(abs(cbb - (blue(neighbour) - yn)),
+                       abs(crr - (red(neighbour) - yn)));
+        if (dy > 72 || dist > 110) continue;
+        int yw = spatial[t] * lr[uNoise * 256 + max(dy, dist / 3) * rangeScale / 256];
+        int cw = spatial[t] * cc[uNoise * 256 + max(dy * 2, dist) * rangeScale / 256];
+        uint nv = values[index];
+        int ny = uHorizontal != 0 ? yn : luma(nv);
+        wy += yw;
+        sumy += yw * ny;
+        wc += cw;
+        sumb += cw * (blue(nv) - ny);
+        sumr += cw * (red(nv) - ny);
+    }
+
+    int dy = divround(sumy, wy) - yc;
+    int db = divround(sumb, wc) - cbb;
+    int dr = divround(sumr, wc) - crr;
+    if (uHorizontal == 0) {
+        int mixy = min(100, lm[uNoise] + dark * 12 / 256);
+        int mixc = min(100, cm[uNoise] + dark * 5 / 256);
+        int edge = abs(luma(guide[row * uWidth + min(uWidth - 1, x + 1)])
+                     - luma(guide[row * uWidth + max(0, x - 1)]))
+                 + abs(luma(guide[min(uRows - 1, row + 1) * uWidth + x])
+                     - luma(guide[max(0, row - 1) * uWidth + x]));
+        edge = clamp((edge - 12) * 256 / 72, 0, 256);
+        int protect = edge * 12 / 256;
+        if (uTexture != 0)
+            protect += edge * skin(yc, cbb, crr) / 256 * 20 / 256;
+        mixy = mixy * (100 - protect) / 100;
+        dy = divround(dy * mixy, 100);
+        db = divround(db * mixc, 100);
+        dr = divround(dr * mixc, 100);
+    }
+    outputPixels[at] = rgb(red(center) + dy + dr,
+                           green(center) + dy - divround(dr * 77 + db * 29, 150),
+                           blue(center) + dy + db);
+}
