@@ -1,0 +1,97 @@
+name: Verify and publish TikTok Home and Trip Recents 113 bundle238
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/homeback113-publish.yml', 'releases/homeback113/prepare.py']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reconstruct hash-pinned reviewed sources without changing feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback113/prepare.py
+          cp .github/workflows/homeback113-publish.yml releases/homeback113/publication/workflow.yml
+          python3 - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('releases/homeback113/publication')
+          cfg=json.loads((root/'manifest-template.json').read_text())
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version']==cfg['baseline_version']=='1.0.237','Baseline advanced; review before publishing'
+          assert feed['download_url']==cfg['baseline_url']
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback110-build-inputs
+          run-id: 38606338782
+          github-token: ${{ github.token }}
+          path: .ci-homeback113/staged
+      - name: Fetch immutable baseline237 and verify its hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,hashlib,urllib.request,json
+          cfg=json.loads(pathlib.Path('releases/homeback113/publication/manifest-template.json').read_text())
+          with urllib.request.urlopen(cfg['baseline_url'],timeout=180) as response: raw=response.read()
+          assert hashlib.sha256(raw).hexdigest()==cfg['baseline_sha256']
+          pathlib.Path('.ci-homeback113/staged/baseline237.mpp').write_bytes(raw)
+          PY
+      - name: First fresh SDK build and all host DEX and synthetic APK tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback113/src/build.py --base .ci-homeback113/staged/baseline237.mpp --tools .ci-homeback113/staged/tools --legacy releases/oneback163/src --work .ci-homeback113/build-a --dist .ci-homeback113/dist-a 2>&1 | tee .ci-homeback113/build-a.log
+      - name: Second fresh SDK build and repeat all tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback113/src/build.py --base .ci-homeback113/staged/baseline237.mpp --tools .ci-homeback113/staged/tools --legacy releases/oneback163/src --work .ci-homeback113/build-b --dist .ci-homeback113/dist-b 2>&1 | tee .ci-homeback113/build-b.log
+      - name: Require exact local and two clean CI build bytes then package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback113/publication/verify_pair.py .ci-homeback113/dist-a .ci-homeback113/dist-b
+          python3 releases/homeback113/publication/package.py --dist .ci-homeback113/dist-a --legacy releases/oneback163/src
+          python3 releases/homeback113/publication/publish.py --dist .ci-homeback113/dist-a --repo . --base .ci-homeback113/staged/baseline237.mpp --local-only 2>&1 | tee .ci-homeback113/byte-verification.log
+          python3 releases/homeback113/publication/publish.py --dist .ci-homeback113/dist-a --repo . --base .ci-homeback113/staged/baseline237.mpp --preflight-only 2>&1 | tee .ci-homeback113/preflight.log
+      - name: Publish verified release and atomically update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback113/publication/publish.py --dist .ci-homeback113/dist-a --repo . --base .ci-homeback113/staged/baseline237.mpp 2>&1 | tee .ci-homeback113/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback113-bundle238-verification
+          path: |
+            .ci-homeback113/dist-a/
+            .ci-homeback113/dist-b/
+            .ci-homeback113/*.log
+            .ci-homeback113/build-a/*.txt
+            .ci-homeback113/build-a/*.log
+            .ci-homeback113/build-a/*.json
+            .ci-homeback113/build-b/*.txt
+            .ci-homeback113/build-b/*.log
+            .ci-homeback113/build-b/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
