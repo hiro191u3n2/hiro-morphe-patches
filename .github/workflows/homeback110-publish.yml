@@ -65,6 +65,7 @@ jobs:
           assert feed['download_url']==cfg['baseline_url']
           print('PASS reconstructed 45 reviewed source files; baseline234 still active')
           PY
+          python3 releases/homeback110/publication_fix.py
       - uses: actions/download-artifact@v4
         with:
           name: homeback110-build-inputs
