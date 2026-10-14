@@ -1,0 +1,87 @@
+name: Verify and publish Trip home-only Back 111 and bundle236
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/homeback111-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Reconstruct hash-pinned locally tested source
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback111/prepare.py
+          cp .github/workflows/homeback111-publish.yml releases/homeback111/publication/workflow.yml
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          feed=json.loads(Path('patches-bundle.json').read_text())
+          cfg=json.loads(Path('releases/homeback111/publication/manifest.json').read_text())
+          assert feed['version']==cfg['baseline_version']=='1.0.235', 'Active feed advanced; inspect before publishing'
+          assert feed['download_url']==cfg['baseline_url']
+          print('PASS active baseline235 identity')
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback110-build-inputs
+          run-id: 38606338782
+          github-token: ${{ github.token }}
+          path: .ci-homeback111/staged
+      - name: Obtain immutable baseline235
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/973adae6ca07cf39edc67bd55659c1134a90dfeb/downloads/Hiro_Morphe_Patches_v1.0.235.mpp' -o .ci-homeback111/staged/baseline235.mpp
+          echo '7331f291f5b874ef6dfb4d27b5ae094a39b2301764fc385dce5e337f91099422  .ci-homeback111/staged/baseline235.mpp' | sha256sum -c -
+      - name: Build and test twice with independent output directories
+        shell: bash
+        run: |
+          set -euo pipefail
+          for attempt in 1 2; do
+            python3 releases/homeback111/src/build.py --base .ci-homeback111/staged/baseline235.mpp --tools .ci-homeback111/staged/tools --legacy releases/oneback163/src --work .ci-homeback111/build${attempt} --dist .ci-homeback111/dist${attempt} 2>&1 | tee .ci-homeback111/build${attempt}.log
+          done
+          python3 releases/homeback111/publication/finalize.py --first .ci-homeback111/dist1 --second .ci-homeback111/dist2 --work .ci-homeback111/build1
+          python3 releases/homeback111/publication/package.py --dist .ci-homeback111/dist1 --legacy releases/oneback163/src
+      - name: Validate all artifacts scopes and unchanged resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback111/publication/publish.py --dist .ci-homeback111/dist1 --repo . --base .ci-homeback111/staged/baseline235.mpp --local-only 2>&1 | tee .ci-homeback111/local-verification.log
+          python3 releases/homeback111/publication/publish.py --dist .ci-homeback111/dist1 --repo . --base .ci-homeback111/staged/baseline235.mpp --preflight-only 2>&1 | tee .ci-homeback111/preflight.log
+      - name: Publish verified release and atomically update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback111/publication/publish.py --dist .ci-homeback111/dist1 --repo . --base .ci-homeback111/staged/baseline235.mpp 2>&1 | tee .ci-homeback111/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback111-bundle236-verification
+          path: |
+            .ci-homeback111/dist1/
+            .ci-homeback111/*.log
+            .ci-homeback111/build1/*.txt
+            .ci-homeback111/build1/*.log
+            .ci-homeback111/build1/*.json
+            .ci-homeback111/build2/*.txt
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
