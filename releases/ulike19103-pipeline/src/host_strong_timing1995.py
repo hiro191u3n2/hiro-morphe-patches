@@ -43,6 +43,9 @@ def test(source, work, jdk=None, ndk=None):
     static int profile1994=-1,variant1994=-1,strips1994;
     static synchronized void strongProfile1994(Trace t,int profile,int variant,int strips){trace(t);profile1994=profile;variant1994=variant;strips1994+=strips;}
 ''')
+    compatibility=module('strong_peer19103',source/'host_strong_peers19103.py')
+    fixture=compatibility.transport(fixture)
+    default_peers=work/'DefaultPeers1990.java';default_peers.write_text(compatibility.startup((fix/'DefaultPeers1990.java').read_text()))
     (work/'StrongDiagnosticsFixtures1982.java').write_text(fixture)
     classes,preflight=work/'classes',work/'preflight-classes'
     classes.mkdir(exist_ok=True);preflight.mkdir(exist_ok=True)
@@ -51,7 +54,7 @@ def test(source, work, jdk=None, ndk=None):
         (work/(name+'.log')).write_text(result.stdout+result.stderr)
         if result.returncode:raise RuntimeError(name+'\n'+result.stdout+result.stderr)
         return result.stdout
-    run([javac,'--release','8','-encoding','UTF-8','-d',classes,source/'GpuStrong1960.java',source/'GpuQualification1961.java',work/'StrongDiagnosticsFixtures1982.java',source/'tests1982/strong/StrongDiagnostics1982Test.java',fix/'DefaultPeers1990.java',fix/'StrongDefaultRouting1990Test.java',source/'tests1994/strong/StrongTiming1994Test.java',source/'tests1994/strong/StrongAdaptiveRouting1994Test.java',source/'tests1995/strong/StrongReadTiming1995Test.java',*android],'compile')
+    run([javac,'--release','8','-encoding','UTF-8','-d',classes,source/'GpuStrong1960.java',source/'GpuQualification1961.java',work/'StrongDiagnosticsFixtures1982.java',source/'tests1982/strong/StrongDiagnostics1982Test.java',default_peers,fix/'StrongDefaultRouting1990Test.java',source/'tests1994/strong/StrongTiming1994Test.java',source/'tests1994/strong/StrongAdaptiveRouting1994Test.java',source/'tests1995/strong/StrongReadTiming1995Test.java',*android],'compile')
     detail=json.loads(run([java,'-ea','-XX:ActiveProcessorCount=4','-cp',classes,'com.hiro.ulike.StrongTiming1994Test'],'timing-run').strip())
     direct=json.loads(run([java,'-ea','-XX:ActiveProcessorCount=4','-cp',classes,'com.hiro.ulike.StrongReadTiming1995Test'],'direct-run').strip())
     adaptive=json.loads(run([java,'-ea','-XX:ActiveProcessorCount=4','-cp',classes,'com.hiro.ulike.StrongAdaptiveRouting1994Test'],'adaptive-run').strip())
@@ -60,7 +63,7 @@ def test(source, work, jdk=None, ndk=None):
     run([javac,'--release','8','-encoding','UTF-8','-d',preflight,source/'GpuStrongDefault1990.java',preflight_peers,fix/'StrongPreflight1990Test.java'],'preflight-compile')
     state=json.loads(run([java,'-ea','-Xmx384m','-cp',preflight,'com.hiro.ulike.StrongPreflight1990Test'],'preflight-run').strip())
     if any(item.get('status')!='passed' or item.get('assertions',0)<=0 for item in (route,state,detail,adaptive,direct)):raise AssertionError('Executed Strong assertions absent')
-    inputs=[source/name for name in ('GpuStrong1960.java','GpuQualification1961.java','GpuStrongDefault1990.java')]+sorted(fix.glob('*.java'))+[Path(__file__)]
+    inputs=[source/name for name in ('GpuStrong1960.java','GpuQualification1961.java','GpuStrongDefault1990.java')]+sorted(fix.glob('*.java'))+[Path(__file__),source/'host_strong_peers19103.py']
     result={'status':'passed','assertions':route['assertions']+state['assertions']+detail['assertions']+adaptive['assertions']+direct['assertions'],'direct_readback_timing':direct,'api_timing':detail,'adaptive_routing':adaptive,'routing':route,'preflight_state':state,'physical_android_tested':False,'actual_jni':False,'device_speedup_verified':False,'source_sha256':{str(path.relative_to(source)):hashlib.sha256(path.read_bytes()).hexdigest() for path in inputs},'scope':'Current production Strong dispatcher and corpus state machine with controlled transport/startup evidence; does not certify shader quality or device speed.'}
     (work/'result.json').write_text(json.dumps(result,indent=2)+'\n')
     return result

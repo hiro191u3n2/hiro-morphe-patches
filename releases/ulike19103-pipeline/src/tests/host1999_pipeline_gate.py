@@ -24,6 +24,19 @@ def test(source,work,classes,native,jdk):
  if peer.count(pixel)!=1:raise AssertionError('Historical pixel runner seam changed')
  peer=peer.replace(pixel,'static android.graphics.Bitmap run(android.graphics.Bitmap b,int r,int w,int h,QualityPixels1932.Plan p,boolean f,ProcessingTiming1947.Trace t,String k){throw new AssertionError("narrow-metadata peer must not execute finish pixels");}')
  retained.PEERS=dict(retained.PEERS);retained.PEERS[name]=peer
+ # .102 records the deployed startup/Strong route in a qualification key.
+ # These are nonblocking scalar reads of existing controlled readiness; they
+ # do not admit pixels, request preflight, fabricate a certificate or wait.
+ startup_name='com/hiro/ulike/GpuStartup1990.java';startup=retained.PEERS[startup_name]
+ startup_anchor=' public static boolean domainReady(){return ready;}'
+ if startup.count(startup_anchor)!=1:raise AssertionError('Historical startup readiness seam changed')
+ startup=startup.replace(startup_anchor,' public static boolean coreDomainReady19102(){return ready&&GpuStrongDefault1990.ready();}public static boolean modelDomainReady19102(){return ready&&GpuModelDefault1990.ready();}'+startup_anchor)
+ retained.PEERS[startup_name]=startup
+ strong_name='com/hiro/ulike/GpuStrongDefault1990.java';strong=retained.PEERS[strong_name]
+ strong_anchor='static boolean ready(){return available;}'
+ if strong.count(strong_anchor)!=1:raise AssertionError('Historical Strong readiness seam changed')
+ retained.PEERS[strong_name]=strong.replace(strong_anchor,strong_anchor+'static int profile1994(){return 4;}')
+
  anchor='  check(value==null,"uncertified resident leaves foreground on proven standard route");'
  extra='''
   check(GpuFinishDefault1990.narrowQueries1999>0,"resident baseline observes controlled narrow schedule metadata");

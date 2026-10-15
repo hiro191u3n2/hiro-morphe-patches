@@ -52,7 +52,7 @@ def strong_fixture(source):
         }''')
     body = replace(body, 'static boolean gpuPrepareOracleSnapshot1961(int[] s,int[] d,int w,int h,int n,boolean shadows,float[] e,int mode){throw new AssertionError("background pixels are not part of this transport test");}', 'static boolean gpuPrepareOracleSnapshot1961(int[] s,int[] d,int w,int h,int n,boolean shadows,float[] e,int mode){for(int i=0;i<s.length;i++)d[i]=pixel(s[i]);return true;}')
     body = replace(body, 'static boolean gpuOracleSnapshot1961(int[] s,int[] d,int w,int rows,int begin,int end,int vb,int ve,int origin,int n,boolean shadows,Model m,int[] policy,int[] confidence){throw new AssertionError("background pixels are not part of this transport test");}', 'static boolean gpuOracleSnapshot1961(int[] s,int[] d,int w,int rows,int begin,int end,int vb,int ve,int origin,int n,boolean shadows,Model m,int[] policy,int[] confidence){for(int i=begin*w;i<end*w;i++)d[i]=pixel(s[i]);if(confidence!=null)Arrays.fill(confidence,37);return true;}')
-    return body
+    return module('failure92_peer19103',source/'host_strong_peers19103.py').transport(body)
 
 
 def tuning_fixture(source):
@@ -89,11 +89,13 @@ def test(source, work, jdk=None, ndk=None):
         report=json.loads(run([java_home/'bin/java','-ea','-XX:ActiveProcessorCount=4','-Xmx512m','-cp',classes,'com.hiro.ulike.'+name+'Failure1992Test'],name+'-run').strip().splitlines()[-1])
         assert report.get('status')=='passed' and report.get('assertions',0)>0
         cases[name]=report
-    suite('Strong',['GpuStrong1960.java','GpuQualification1961.java'],strong_fixture(source),[*android,source/'tests1990/strongroute/DefaultPeers1990.java'])
+    default_peers=work/'DefaultPeers1990.java'
+    default_peers.write_text(module('failure92_startup19103',source/'host_strong_peers19103.py').startup((source/'tests1990/strongroute/DefaultPeers1990.java').read_text()))
+    suite('Strong',['GpuStrong1960.java','GpuQualification1961.java'],strong_fixture(source),[*android,default_peers])
     suite('Tuning',['GpuStrongTuning1975.java','GpuQualification1961.java','GpuSnapshotBudget1981.java'],tuning_fixture(source),android)
     geometry_android=sorted((fix/'android').rglob('*.java'))
     suite('Geometry',['GpuGeometry1960.java'],(fix/'GeometryPeers1992.java').read_text(),geometry_android)
-    tracked=[source/name for name in ('GpuStrong1960.java','GpuStrongTuning1975.java','GpuGeometry1960.java','GpuQualification1961.java')]+sorted(fix.rglob('*.java'))+[Path(__file__)]
+    tracked=[source/name for name in ('GpuStrong1960.java','GpuStrongTuning1975.java','GpuGeometry1960.java','GpuQualification1961.java')]+sorted(fix.rglob('*.java'))+[Path(__file__),source/'host_strong_peers19103.py']
     result=dict(status='passed',assertions=sum(v['assertions'] for v in cases.values()),cases=cases,
                 physical_android_tested=False,actual_jni=False,device_speedup_verified=False,
                 scope='Production failure-classification branches with controlled transport, reference pixels and comparison samples; no shader or device-speed claim.',
