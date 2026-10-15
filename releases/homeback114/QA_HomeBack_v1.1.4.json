@@ -1,0 +1,150 @@
+{
+  "schema": "homeback114-qa-v1",
+  "patch_version": "1.1.4",
+  "bundle_version": "1.0.239",
+  "baseline_version": "1.0.238",
+  "baseline_sha256": "27db72373b4d4413f1d3d8112d95802889fc8d2caeaa27c5a6921819f0664bca",
+  "physical_android_tested": false,
+  "third_party_apk_tested": false,
+  "home_recognition": "TikTok foreground feed plus selected Home without blockers; non-home and unknown screens navigate using real Home click, protected native unwind, or known same-task main; gesture capture and bounded task-terminal guard; other apps preserved",
+  "host": "SUCCESS: 185 cases, 870 assertions",
+  "dex_structure": "PASS selftest: wrapper structure, normalized original bodies, terminal bridge dispatch/ABI, exception paths, registration ABI, manifest, collisions; assertions=1369",
+  "loader_preservation": "PASS merge: preserved=246, replaced=7, replacement=7, assertions=1028",
+  "preserved_unrelated_entries": 69,
+  "discovery": {
+    "OneBack_Exit_NoRecents_v1.1.4.mpp": {
+      "com.twitter.android": true,
+      "com.instagram.android": true,
+      "com.zhiliaoapp.musically": true,
+      "com.ss.android.ugc.trill": true,
+      "ctrip.english": true
+    },
+    "Hiro_Morphe_Patches_v1.0.239.mpp": {
+      "com.twitter.android": true,
+      "com.instagram.android": true,
+      "com.zhiliaoapp.musically": true,
+      "com.ss.android.ugc.trill": true,
+      "ctrip.english": true
+    }
+  },
+  "synthetic": [
+    {
+      "bundle": "OneBack_Exit_NoRecents_v1.1.4.mpp",
+      "package": "com.twitter.android",
+      "result": "PASS"
+    },
+    {
+      "bundle": "OneBack_Exit_NoRecents_v1.1.4.mpp",
+      "package": "com.instagram.android",
+      "result": "PASS"
+    },
+    {
+      "bundle": "OneBack_Exit_NoRecents_v1.1.4.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "result": "PASS"
+    },
+    {
+      "bundle": "OneBack_Exit_NoRecents_v1.1.4.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "result": "PASS"
+    },
+    {
+      "bundle": "OneBack_Exit_NoRecents_v1.1.4.mpp",
+      "package": "ctrip.english",
+      "result": "PASS"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.239.mpp",
+      "package": "com.twitter.android",
+      "result": "PASS"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.239.mpp",
+      "package": "com.instagram.android",
+      "result": "PASS"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.239.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "result": "PASS"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.239.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "result": "PASS"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.239.mpp",
+      "package": "ctrip.english",
+      "result": "PASS"
+    }
+  ],
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.4.mpp": {
+      "bytes": 60543,
+      "sha256": "1878549900ec6c23c200c6ff42cc21a5abaa55dbf56f7d22619b8e54583bdf73"
+    },
+    "Hiro_Morphe_Patches_v1.0.239.mpp": {
+      "bytes": 18123390,
+      "sha256": "accc1c5da74dde1e26f727d7b2c18855503e3bc54c4d0216042c878268cbfbd9"
+    }
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "sources": {
+    "build.py": "9ace7413587774ba60ce0513b598ffe405ab73bf52b2bc9ebd5f213b7d81371b",
+    "patch/OneBackPatch.java": "0cde9f9d3a04fda259a54190adf61cdaee4ed286b4bbbf7b61278f3a672e872c",
+    "runtime/ExitScreens.java": "f17253911562606d1ec6eb10063b31e76722f82807715d9f8618920f70df3f41",
+    "runtime/HomeScreen.java": "d1cba392aa04f3b9c6bbe0d2f44f9a308c496a204ae394cdb0ef6136e0813f10",
+    "runtime/NativeBack.java": "dc1b08142e1dbebb509dbc7a8cc57b11c2815bd9659e654c16d76785bd80cc00",
+    "runtime/OneBackExit.java": "9f3051ce5a4ee0d6bc160cc05a1be24755ec815dabc136c7d8526406a6c1c460",
+    "runtime/TikTokBack.java": "7e5160b26fe7fb0670f2c3b9aee22d2374454ff03f546d11f38e455a8f44b1ca",
+    "runtime/TikTokHome.java": "0a096d1f40d8661b35c814ce9e1c84e324505173068752973cd9db9d573cd804",
+    "runtime/TikTokScreen.java": "4b3c39724289d799fa668d00b49771975ecdb2de2ed1dde6d3e7515f8fbfd27e",
+    "runtime/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+    "test-dex/HomeBackAudit.java": "ac4aa7175014d2b8d08d8fc69ade3d34e792e2df78b591ea012a513fac3b3a71",
+    "test-runtime/HomeBackHostTest.java": "66f2b2b745aae314318d44e0e2a091a4c7360a552328f5b35c759b8391f5a891",
+    "test-stubs/android/app/ActionBar.java": "c68b9e05b2529ce6ae1dd097705db7b7b4fe3f299690c5c670c09af87611e792",
+    "test-stubs/android/app/Activity.java": "d7c013ed5aa1e081ca54c36220adee5eae0c60298982000585737aab8fa70149",
+    "test-stubs/android/app/ActivityManager.java": "dc35b0da626d2b45791d48df699bdf5107df9ec8621de533f07c8ef840a8c60b",
+    "test-stubs/android/app/Application.java": "fcea9409e85a4f6bebee176ee6c66cdc3977cc9407793fb8b554d1f9bec1e205",
+    "test-stubs/android/app/Dialog.java": "9917bedbf3dd78cd7f7c5455ed8883936fd9ceedd3d027766156dfe7ad955e02",
+    "test-stubs/android/app/FragmentManager.java": "1ae497abc85b9a890c4720049c8be2c8fccbd555d73ea7464776e881524bd9a4",
+    "test-stubs/android/app/KeyguardManager.java": "d9fb51994d69138fb186584114772f12fa23013c5de6c34106ebe1a22681b953",
+    "test-stubs/android/content/ComponentName.java": "59e43fd3b29bdb87045d402d15490a78ecba4810a597b8fb40146a4c0e294750",
+    "test-stubs/android/content/Context.java": "5ccc5409c95046601b85b3535e32ceefb9b4a6e1ca3808175173fb5e0997781e",
+    "test-stubs/android/content/ContextWrapper.java": "92cbd842020563fda4945a1c1d50930f8a12f07f9f974a49c64f24b5f2910a8e",
+    "test-stubs/android/content/Intent.java": "497d8f6f38373377b64dc88d7df7c6681781e31ef6edc6279c6e6b153fa83353",
+    "test-stubs/android/content/res/Resources.java": "32b942a47765bc727d29bc7ebfef9bcb36d3b0568d4706910f59b78cd88eb4e8",
+    "test-stubs/android/graphics/Rect.java": "f5f25b83833fd7525df66c89d300ad8f55a8d03379e61d3934c0a51d7586c2bf",
+    "test-stubs/android/os/Build.java": "c874d38fc8241e643a3eeed95bf6d4517c503a3460aa9be321ff8bee7e05649f",
+    "test-stubs/android/os/Bundle.java": "279a7e06c007b20b9d07d820087d08169d5e86fd86d40a33741216413902a5cf",
+    "test-stubs/android/os/Handler.java": "72cf91a4a44f26e83a2c5f13e16fdc133bd31126e11c0d434a454a534bc0465d",
+    "test-stubs/android/os/Looper.java": "f931c2d5fe9c8536ed6b585e14c634b1239c22cf73cb1e00734c5d482ba97f04",
+    "test-stubs/android/os/PowerManager.java": "71a9432a4d0e2f66226589934870e34148383b8d29f410a9042ae570aa78923c",
+    "test-stubs/android/os/SystemClock.java": "4235acb89a054572bc1553b73ad59c5c0d2caafdf0c9df87c8123c0ea58bf3e4",
+    "test-stubs/android/util/Log.java": "83eb4b6afc3844fa512608962794f848e6e4707b0f5da96fb99dd57918ac5a0d",
+    "test-stubs/android/view/KeyEvent.java": "bb239e78bd2837acfd6d395000691858c04165278ce02b64692f67759f23827b",
+    "test-stubs/android/view/View.java": "5390876e97acd034b6a595b138b3744a6e200237d9c5040aa0e0a1ae726f8295",
+    "test-stubs/android/view/ViewGroup.java": "903fa6378e2feb9cb05ecab81efb9da368ceef54998198609b0a601fea07be60",
+    "test-stubs/android/view/ViewParent.java": "ec53c96e5c49ab494030f7ca7834b320db9d9c3cea32fd971fdfa8722b7c82ff",
+    "test-stubs/android/view/ViewTreeObserver.java": "8ff91719574ee2c8acac47f79d03461b2758449d6998f3471bd017bd11414771",
+    "test-stubs/android/view/Window.java": "8a23251385b6f470a14f33a2a92751a59aedba1a390c6b1ec353493e29d17e6f",
+    "test-stubs/android/view/WindowInsets.java": "647ff782111612168b44d580acd2bb1fb120260b2a1858e833264e060802b220",
+    "test-stubs/android/view/accessibility/AccessibilityNodeInfo.java": "b4f79c6ad8096e0df857ed76be7c26a988a6870e98c28dacd84449720a94f698",
+    "test-stubs/android/view/inspector/WindowInspector.java": "e3c51c74e568cc1a364bd0440be3f362dc52af984358158a4daadc9c89038189",
+    "test-stubs/android/widget/TextView.java": "b11a3f3defb0bf8e170f284cac4ae3e68210168e0d845217d6b962cc8046e905",
+    "test-stubs/android/window/BackEvent.java": "3a530857e1fb9d9fbbf821a24839362ea532032b121d2cd8c817ee618bbdb2b5",
+    "test-stubs/android/window/FakeDispatcher.java": "fad5a6d6a27d924775c3e81551f913845e07449089de97613e50c91139138a63",
+    "test-stubs/android/window/OnBackAnimationCallback.java": "e8ca3d75e5ed86840b53c7b4d998728fad18632d86a0efb1b55248502f1ef5da",
+    "test-stubs/android/window/OnBackInvokedCallback.java": "e4907fdb3e7873b798bb4d94d8417584acaaea92f298bacc543de91aa7709bf7",
+    "test-stubs/android/window/OnBackInvokedDispatcher.java": "6de7a05f5d36f5144e632c97514206cd6b1f96adc8dd0bd9e8b9cbf774f12368",
+    "test-stubs/com/ctrip/ibu/home/home/presentation/page/fragment/widget/HomeAppBarLayout.java": "8675dd3a510e7c4ded19490c7ead6a208f0dfd970dc4a19477c9fe7b4a8895af",
+    "test-stubs/com/instagram/mainactivity/InstagramMainActivity.java": "f7c65ab2a1d6a532536c36b66ddb70675996c3d808a31f7ef9c1247ef5436d3f",
+    "test-stubs/com/ss/android/ugc/aweme/main/MainActivity.java": "bbc6aa7931fddddab6e0e678885ea560939c700146917291cf16a1f9290d98f5",
+    "test-stubs/com/twitter/android/HomeTimelineActivity.java": "9b81b0f03a5fa9678d24d1b970c6718f13ae99483c0accdc8eacce64668baf1b"
+  }
+}

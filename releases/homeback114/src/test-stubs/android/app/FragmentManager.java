@@ -1,0 +1,1 @@
+package android.app;public class FragmentManager {public int count;public java.util.List<Object> fragments=new java.util.ArrayList<Object>();public int getBackStackEntryCount(){return count;}public java.util.List<Object> getFragments(){return fragments;}}
