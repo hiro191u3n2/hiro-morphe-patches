@@ -1,0 +1,58 @@
+{
+  "scope": "Pinned ULike 5.6.2(740) original APK static ownership audit; no device claim",
+  "stock_apk_sha256": "f51c64cc2ffedf2110f18816831e5c7cff5652980b42d6bb22a4a3f37316730d",
+  "native_capture_callback": {
+    "unique_manager_callback_implementation": "Li/o/a/b1/a/b/c$a;",
+    "unique_capture_observer": "Li/o/a/b1/a/a/e$i;->a()V (return-void)",
+    "camera_resume_chain": [
+      "c$a.a() posts main Runnable",
+      "c$a.e(c) -> e0.r()",
+      "y.r() -> PureCameraFragment.r()",
+      "PureCameraFragment.r() -> y/c.V() resumes preview"
+    ],
+    "saved_bitmap_or_camera_metadata_re_read": false,
+    "safe_release_boundary": "after owned rendered source (or new watermark canvas), per-shot settings/context, private save controller and notification are established; serial borrowed input does not release early"
+  },
+  "watermark_copy_reduction": {
+    "method": "Li/p/a/t/e;->d(Bitmap,Bitmap,int,double,double)Bitmap",
+    "first_instructions": "source.width/source.height -> Bitmap.createBitmap(ARGB_8888) -> Canvas(new output) -> drawBitmap(source)",
+    "input_writes": false,
+    "returns_distinct_bitmap": true,
+    "shortcut_restrictions": [
+      "software ARGB_8888",
+      "isPremultiplied() true",
+      "hasGainmap false (or API has no such method)"
+    ],
+    "other_config_or_gainmap_or_unpremultiplied": "original source-copy route retained",
+    "normalization_rollback_source": "pristine owned source retained; no in-place mutation of fallback source"
+  },
+  "pipeline": {
+    "photo_capacity": 3,
+    "parallel_preparation_stages": 1,
+    "parallel_encoding_stages": 1,
+    "encoding_permit": "before codec Builder.build, before deferred SaveFd prep task can allocate codec",
+    "stage_ticket": "original ExitJobs prep lease begins at its old location; queued abandon releases it on normalize failure",
+    "next_stage_start": "only after final normalized/detailed dimensions pass and encode permit acquired",
+    "available_memory_requirement": "Explicitly subtract tracked input Bitmap native allocation plus anticipated final allocation from Java headroom; also limit by ActivityManager physical availMem minus threshold and block lowMemory. Require remaining headroom >= 72 MiB + max(queued/current input and snapshotted/planned output pixels) * 24 bytes.",
+    "sdk_renderer_parallelized": false,
+    "native_bitmap_accounting": "Input getAllocationByteCount plus snapshotted output186 target estimate; after final normalization, replace estimate with actual final allocation, without double-counting if same Bitmap. Queue costs removed when terminal worker releases ownership.",
+    "fixed_output_budget": "Input dimensions, source metadata and output186(width,height,rotation,fixedSnapshot) all included before normalization; current configured next reader uses live output186 dimensions as extra admission guard."
+  },
+  "completion": {
+    "writer_close_validation_publication_synchronous": true,
+    "main_receipts_fifo": true,
+    "manager_controller_binding": "temporary exact controller within single main callback",
+    "worker_blocks_waiting_for_main": false,
+    "exit_guard_released": "after main receipt finishes, or immediately if main post failed",
+    "failed_correction_fifo": "Every queued save Job takes its FIFO encoder terminal turn even when correction fails before encoding. Captured-source preparation failures retain original failure toast/capture-release route and do not generate a native saved-file receipt.",
+    "ownership_transfer_failure": "After queue submission, optional early memory probe failure cannot release reservation twice."
+  },
+  "host_result": {
+    "suite": "save1944",
+    "status": "passed",
+    "passed": true,
+    "assertions": 124,
+    "scenarios": 24,
+    "device_tested": false
+  }
+}
