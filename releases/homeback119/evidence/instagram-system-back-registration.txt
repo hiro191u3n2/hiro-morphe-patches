@@ -1,0 +1,130 @@
+CLASS classes22.dex LX/01c; flags=1025 EXTENDS Ljava/lang/Object; interfaces=[]
+DECLARED LX/01c;->A00(Lkotlin/jvm/functions/Function0;)LX/01b; flags=25
+DECLARED LX/01c;->A01(Ljava/lang/Object;Ljava/lang/Object;)V flags=25
+DECLARED LX/01c;->A02(Ljava/lang/Object;Ljava/lang/Object;)V flags=25
+DECLARED LX/01c;->A03(Lkotlin/jvm/functions/Function0;)V flags=4105
+METHOD LX/01c;->A00(Lkotlin/jvm/functions/Function0;)LX/01b;
+0 NEW_INSTANCE LX/01b; v0
+2 INVOKE_DIRECT LX/01b;-><init>(Lkotlin/jvm/functions/Function0;)V {0,1,0,0,0}x2
+5 RETURN_OBJECT v0
+METHOD LX/01c;->A01(Ljava/lang/Object;Ljava/lang/Object;)V
+0 CONST_4 #0 v0
+1 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v1
+3 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+5 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V {1,0,2,0,0}x3
+8 RETURN_VOID
+METHOD LX/01c;->A02(Ljava/lang/Object;Ljava/lang/Object;)V
+0 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v0
+2 CHECK_CAST Landroid/window/OnBackInvokedCallback; v1
+4 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V {0,1,0,0,0}x2
+7 RETURN_VOID
+METHOD LX/01c;->A03(Lkotlin/jvm/functions/Function0;)V
+0 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+3 RETURN_VOID
+CLASS classes22.dex LX/06t; flags=1025 EXTENDS Ljava/lang/Object; interfaces=[]
+DECLARED LX/06t;->A00(Landroid/app/Activity;)Landroid/window/OnBackInvokedDispatcher; flags=9
+DECLARED LX/06t;->A01(LX/07b;Ljava/lang/Object;)LX/06s; flags=9
+DECLARED LX/06t;->A02(Ljava/lang/Object;Ljava/lang/Object;)V flags=9
+METHOD LX/06t;->A00(Landroid/app/Activity;)Landroid/window/OnBackInvokedDispatcher;
+0 INVOKE_VIRTUAL Landroid/app/Activity;->getOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {0,0,0,0,0}x1
+3 MOVE_RESULT_OBJECT v0
+4 RETURN_OBJECT v0
+METHOD LX/06t;->A01(LX/07b;Ljava/lang/Object;)LX/06s;
+0 NEW_INSTANCE LX/06s; v1
+2 INVOKE_DIRECT LX/06s;-><init>(LX/07b;)V {1,2,0,0,0}x2
+5 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v3
+7 CONST #f4240 v0
+10 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V {3,0,1,0,0}x3
+13 RETURN_OBJECT v1
+METHOD LX/06t;->A02(Ljava/lang/Object;Ljava/lang/Object;)V
+0 CHECK_CAST Landroid/window/OnBackInvokedCallback; v1
+2 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v0
+4 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V {0,1,0,0,0}x2
+7 RETURN_VOID
+CLASS classes22.dex LX/Cpp; flags=1025 EXTENDS Ljava/lang/Object; interfaces=[]
+DECLARED LX/Cpp;->A00(Landroid/view/View;)Landroid/window/OnBackInvokedDispatcher; flags=9
+DECLARED LX/Cpp;->A01(Ljava/lang/Runnable;)LX/mRQ; flags=9
+DECLARED LX/Cpp;->A02(Ljava/lang/Object;Ljava/lang/Object;)V flags=9
+DECLARED LX/Cpp;->A03(Ljava/lang/Object;Ljava/lang/Object;)V flags=9
+METHOD LX/Cpp;->A00(Landroid/view/View;)Landroid/window/OnBackInvokedDispatcher;
+0 INVOKE_VIRTUAL Landroid/view/View;->findOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {0,0,0,0,0}x1
+3 MOVE_RESULT_OBJECT v0
+4 RETURN_OBJECT v0
+METHOD LX/Cpp;->A01(Ljava/lang/Runnable;)LX/mRQ;
+0 NEW_INSTANCE LX/mRQ; v0
+2 INVOKE_DIRECT LX/mRQ;-><init>(Ljava/lang/Runnable;)V {0,1,0,0,0}x2
+5 RETURN_OBJECT v0
+METHOD LX/Cpp;->A02(Ljava/lang/Object;Ljava/lang/Object;)V
+0 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v1
+2 CONST #f4240 v0
+5 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+7 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V {1,0,2,0,0}x3
+10 RETURN_VOID
+METHOD LX/Cpp;->A03(Ljava/lang/Object;Ljava/lang/Object;)V
+0 CHECK_CAST Landroid/window/OnBackInvokedDispatcher; v0
+2 CHECK_CAST Landroid/window/OnBackInvokedCallback; v1
+4 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V {0,1,0,0,0}x2
+7 RETURN_VOID
+CLASS classes23.dex LX/lKf; flags=1025 EXTENDS Ljava/lang/Object; interfaces=[]
+DECLARED LX/lKf;->A00(Lkotlin/jvm/functions/Function0;)LX/mRR; flags=25
+DECLARED LX/lKf;->A01(Landroid/view/View;Ljava/lang/Object;)V flags=25
+DECLARED LX/lKf;->A02(Landroid/view/View;Ljava/lang/Object;)V flags=25
+DECLARED LX/lKf;->A03(Lkotlin/jvm/functions/Function0;)V flags=4105
+METHOD LX/lKf;->A00(Lkotlin/jvm/functions/Function0;)LX/mRR;
+0 NEW_INSTANCE LX/mRR; v0
+2 INVOKE_DIRECT LX/mRR;-><init>(Lkotlin/jvm/functions/Function0;)V {0,1,0,0,0}x2
+5 RETURN_OBJECT v0
+METHOD LX/lKf;->A01(Landroid/view/View;Ljava/lang/Object;)V
+0 INSTANCE_OF Landroid/window/OnBackInvokedCallback; v0,v2
+2 IF_EQZ v0 offset 14
+4 INVOKE_VIRTUAL Landroid/view/View;->findOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {1,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v1
+8 IF_EQZ v1 offset 8
+10 CONST_4 #0 v0
+11 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+13 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V {1,0,2,0,0}x3
+16 RETURN_VOID
+METHOD LX/lKf;->A02(Landroid/view/View;Ljava/lang/Object;)V
+0 INSTANCE_OF Landroid/window/OnBackInvokedCallback; v0,v2
+2 IF_EQZ v0 offset 13
+4 INVOKE_VIRTUAL Landroid/view/View;->findOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {1,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v0
+8 IF_EQZ v0 offset 7
+10 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+12 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V {0,2,0,0,0}x2
+15 RETURN_VOID
+METHOD LX/lKf;->A03(Lkotlin/jvm/functions/Function0;)V
+0 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+3 RETURN_VOID
+CLASS classes23.dex LX/lKh; flags=1025 EXTENDS Ljava/lang/Object; interfaces=[]
+DECLARED LX/lKh;->A00(Lkotlin/jvm/functions/Function0;)LX/mRT; flags=25
+DECLARED LX/lKh;->A01(Landroid/view/View;Ljava/lang/Object;)V flags=25
+DECLARED LX/lKh;->A02(Landroid/view/View;Ljava/lang/Object;)V flags=25
+DECLARED LX/lKh;->A03(Lkotlin/jvm/functions/Function0;)V flags=4105
+METHOD LX/lKh;->A00(Lkotlin/jvm/functions/Function0;)LX/mRT;
+0 NEW_INSTANCE LX/mRT; v0
+2 INVOKE_DIRECT LX/mRT;-><init>(Lkotlin/jvm/functions/Function0;)V {0,1,0,0,0}x2
+5 RETURN_OBJECT v0
+METHOD LX/lKh;->A01(Landroid/view/View;Ljava/lang/Object;)V
+0 INSTANCE_OF Landroid/window/OnBackInvokedCallback; v0,v2
+2 IF_EQZ v0 offset 16
+4 INVOKE_VIRTUAL Landroid/view/View;->findOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {1,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v1
+8 IF_EQZ v1 offset 10
+10 CONST #f4240 v0
+13 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+15 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V {1,0,2,0,0}x3
+18 RETURN_VOID
+METHOD LX/lKh;->A02(Landroid/view/View;Ljava/lang/Object;)V
+0 INSTANCE_OF Landroid/window/OnBackInvokedCallback; v0,v2
+2 IF_EQZ v0 offset 13
+4 INVOKE_VIRTUAL Landroid/view/View;->findOnBackInvokedDispatcher()Landroid/window/OnBackInvokedDispatcher; {1,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v0
+8 IF_EQZ v0 offset 7
+10 CHECK_CAST Landroid/window/OnBackInvokedCallback; v2
+12 INVOKE_STATIC Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V {0,2,0,0,0}x2
+15 RETURN_VOID
+METHOD LX/lKh;->A03(Lkotlin/jvm/functions/Function0;)V
+0 IF_EQZ v0 offset 5
+2 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+5 RETURN_VOID
