@@ -1,0 +1,1575 @@
+{
+  "schema": "homeback118-publication-receipt-v1",
+  "patch_version": "1.1.8",
+  "bundle_version": "1.0.245",
+  "baseline_bundle_version": "1.0.244",
+  "baseline_bundle_sha256": "e008f24e7e8b05fe3df40903ff26536e78f20f49db64025ca7256292b6d53205",
+  "source_commit": "8b8c313bf5353378d6eb6f32b4be56340996010c",
+  "publication_manifest_sha256": "ec7242c46d11c88d3cb1fd0be3e5e84e057bde21ff68dedf79f443da9f09dc20",
+  "assets": {
+    "OneBack_Exit_NoRecents_v1.1.8.mpp": {
+      "bytes": 69147,
+      "sha256": "0b7fac5099e73f318c5f9eab3e5db179433f0178a07053880c6bd48d7d082c55"
+    },
+    "Hiro_Morphe_Patches_v1.0.245.mpp": {
+      "bytes": 18153828,
+      "sha256": "fe60075d9fb070330f5980a6ce945379be6d113996a986dea562763f2f9b9b25"
+    },
+    "QA_HomeBack_v1.1.8.json": {
+      "bytes": 76990,
+      "sha256": "45354c4e3e449d36a75329eb197aa0da4a0f5535a4d2e61e3d61d816f24ff0ae"
+    },
+    "HomeBack_v1.1.8_sources_and_QA.zip": {
+      "bytes": 261085,
+      "sha256": "f22e44c2dbfaf11c3a812a1bef528901a25237fe58bdbe6390dedd53a097ceaf"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2947,
+      "sha256": "da68be7c7b029216e8105e6c8e7eb5e922833e82ac66316f61cc211540eaa713"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 474,
+      "sha256": "5adf63d4209f72988434bfa688ee86bc6ca15b2b6aef1e096695620eda44efd8"
+    }
+  },
+  "local_validation": {
+    "baseline_bundle_version": "1.0.244",
+    "baseline_bundle_sha256": "e008f24e7e8b05fe3df40903ff26536e78f20f49db64025ca7256292b6d53205",
+    "original_apk_apply_tested": false,
+    "android_device_tested": false,
+    "unrelated_resource_entries_byte_identical": 69,
+    "unrelated_loader_classes_unchanged": 246,
+    "trip_com_behavior_unchanged": true,
+    "trip_com_home_only_proactive_exit": true,
+    "trip_com_native_terminal_back_cleanup": true,
+    "instagram_reels_exit": true,
+    "instagram_comments_collapse_first": true,
+    "instagram_same_gesture_exit_protected": true,
+    "tiktok_native_child_back_retained": true,
+    "tiktok_messages_profile_exit": false,
+    "tiktok_messages_profile_home_navigation": true,
+    "tiktok_all_nonhome_protected_navigation": true,
+    "tiktok_foreground_home_positive_evidence": true,
+    "tiktok_unknown_navigation_failure_does_not_exit": true,
+    "tiktok_predictive_start_capture": true,
+    "trip_bounded_async_back_and_stop_cleanup": true,
+    "two_fresh_ci_builds_required": true,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "local_sdk_build": true,
+    "local_host_tested": true,
+    "provided_apk_inputs_already_patched": true,
+    "provided_apk_reference_version": "1.1.6",
+    "provided_apk_static_audit_evidence": {
+      "evidence/Instagram_v447_APK_evidence.json": {
+        "sha256": "0228bab9cf4d3a5b8780807adb57a7a5705996a6549aa1e1f60ba3d31383220a",
+        "report": {
+          "schema": "homeback117-instagram-apk-inspection-v1",
+          "physical_android_tested": false,
+          "inputs": [
+            {
+              "name": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+              "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+              "bytes": 145183736
+            },
+            {
+              "name": "Instagram_v447.0.0.55.81(2147483647).apk",
+              "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+              "bytes": 145183736
+            }
+          ],
+          "dex_identical_between_inputs": true,
+          "different_entries": [
+            "res/6py.xml",
+            "res/drawable/piko_settings_shortcut_icon.xml",
+            "resources.arsc"
+          ],
+          "existing_oneback": {
+            "runtime_dex": "classes25.dex",
+            "version_evidence": "InstagramReels + HiroBack116 constants and matching v1.1.6 runtime method shape",
+            "prepatched": true
+          },
+          "fragment_adapter": {
+            "old_lookup_failure": [
+              "FragmentActivity has no getSupportFragmentManager method",
+              "X.0dj has no getFragments method"
+            ],
+            "verified_activity_accessor": {
+              "class": "androidx.fragment.app.FragmentActivity",
+              "method": "A1Y()LX/0dj;",
+              "body": [
+                "iget-object FragmentActivity.A03:LX/0ck;",
+                "iget-object X.0ck.A00:LX/0cd;",
+                "iget-object X.0cd.A03:LX/0dj;",
+                "return-object"
+              ]
+            },
+            "manager_store_field": {
+              "owner": "X.0dj",
+              "name": "A0V",
+              "type": "X.0dw",
+              "flags": "public final"
+            },
+            "store_added_field": {
+              "owner": "X.0dw",
+              "name": "A01",
+              "type": "java.util.ArrayList",
+              "flags": "public final"
+            },
+            "store_api_equivalent": "X.0dw.A04()Ljava/util/List; returns emptyList if A01 empty, otherwise synchronized(A01) new ArrayList(A01)",
+            "preserved_fragment_methods": [
+              "isVisible()Z",
+              "getView()Landroid/view/View;",
+              "getChildFragmentManager()LX/0dj;"
+            ],
+            "runtime_adapter": "Only verified declaring classes, method return type and field types accepted; public fields read, no navigation invoked; copy list under same monitor"
+          },
+          "reels_identifiers": {
+            "classes": [
+              "instagram.features.clips.viewer.ui.ClipsSwipeRefreshLayout",
+              "instagram.features.clips.viewer.ui.HomecomingSwipeRefreshLayout"
+            ],
+            "resource_ids": {
+              "clips_swipe_refresh_container": "0x7f0b0c57",
+              "clips_viewer_fragment_container": "0x7f0b0c97",
+              "clips_viewer_view_pager": "0x7f0b0cac",
+              "clips_viewer_comments_two_pane_layout": "0x7f0b0c86"
+            },
+            "verified_content_lookup": "X.8Zv.onViewCreated loads 0x7f0b0c57 and casts result to ClipsSwipeRefreshLayout; requires view 0x7f0b0cac",
+            "module_method": "X.8Zv.getModuleName delegates to X.8h0.getModuleName via X.8z6.A1C; UNKNOWN before state initialized",
+            "module_generation": "X.8h0.getModuleName constructs clips_viewer_ + configured source; literal clips_viewer_clips_tab is conditionally replaced by clips_viewer_homecoming_fyp",
+            "two_pane_limit": "Resource identifier verified present; exact live child/visibility state not captured. Regression models permanent viewer-containing host and preserves actual comment child behavior."
+          },
+          "regressions": {
+            "suite": "Back117InstagramTest",
+            "cases": 16,
+            "v116_failures": 11,
+            "v117_failures": 0,
+            "v116_existing_suite_cases": 259,
+            "v116_existing_suite_assertions": 1260,
+            "exact_obfuscated_adapter": "Instagram447Fixture emits exact JVM names, real accessor/field descriptors and ordered list; tests positive traversal, foreground veto over selected Home and field-type mismatch rejection"
+          },
+          "limitations": [
+            "No physical device UI replay or reproduction screenshot hierarchy available",
+            "Static APK and host-runtime validation do not establish final runtime behavior on Galaxy",
+            "Obfuscated read-only adapter intentionally rejects other signatures and falls back to semantic/view detection"
+          ]
+        }
+      },
+      "evidence/Instagram_v447_v118_layout_evidence.json": {
+        "sha256": "43b643e3dfc937a6996c20448101e56e79e3848a32b191733e0826317b9209a9",
+        "report": {
+          "schema": "instagram-v447-back118-layout-evidence-v1",
+          "inputs": [
+            {
+              "file": "Instagram_v447.0.0.55.81(2147483647).apk",
+              "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+              "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99"
+            },
+            {
+              "file": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+              "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+              "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99"
+            }
+          ],
+          "packed_layout_source": "assets/layouts.bin.xz; each L|offset|size|checksum value in resources.arsc identifies an AXML slice in decompressed assets/layouts.bin",
+          "resources": {
+            "0x7f0e09f1": {
+              "name": "layout/layout_clips_comment_composer",
+              "file": "L|4B8664|6EC|57C7"
+            },
+            "0x7f0e0a4a": {
+              "name": "layout/layout_clips_viewer_container",
+              "file": "L|4F0EC0|510|480F"
+            },
+            "0x7f0e0a4e": {
+              "name": "layout/layout_clips_viewer_fragment",
+              "file": "L|4F22C4|2748|3A73"
+            },
+            "0x7f0e0a4f": {
+              "name": "layout/layout_clips_viewer_fragment_two_pane_comments",
+              "file": "L|4F4A0C|250|28CC"
+            },
+            "0x7f0e0a59": {
+              "name": "layout/layout_clips_viewer_refresh_container",
+              "file": "L|4FB67C|234|C36A"
+            }
+          },
+          "primary_false_positive": {
+            "layout_path": [
+              "root_clips_layout",
+              "clips_linear_layout_container",
+              "clips_footer_mask_container",
+              "clips_comment_composer_stub => layout_clips_comment_composer",
+              "anonymous IgFrameLayout",
+              "comment_composer_inner_layout",
+              "comment_composer_text_view"
+            ],
+            "prompt_type": "com.instagram.common.ui.base.IgTextView; not an editor",
+            "native_attributes": "Footer inner layout is match_parent/wrap_content; prompt is wrap_content with layout_weight=1. Normal footer CTA can thus satisfy old width threshold.",
+            "v117_condition": "wide && commentContainer(id) && contains(id, \"composer\", \"edit_text\")",
+            "failure": "The condition sets comments/blocked for the inline noneditable composer and forwards native Back instead of exiting Reels.",
+            "v118_scope": "Exact prompt IDs only, inside clips_footer_mask_container, lower-screen compact geometry, positive full viewer; descendants, editors, actual comments/share panels retain veto."
+          },
+          "caption_id": {
+            "id": "0x7f0b0b55",
+            "name": "id/clips_caption_component",
+            "layout_declares_id": false,
+            "programmatic_renderers": [
+              "LX/6YR;->A0l(LX/6zQ;)LX/3i0; (LegacyClipsVideoCaptionComponent)",
+              "LX/Ibv;->A0l(LX/6zQ;)LX/3i0; (ClipsVideoCaptionComponent)"
+            ],
+            "view_id_assignment": "Both renderers pass 0x7f0b0b55 to LX/7oV;->A0G(LX/09S;I)LX/09S;. Its legacy property LX/7oW;->A0S is VIEW_ID; modern property LX/moK;->AV8 invokes android.view.View.setId(int).",
+            "v118_scope": "Only generic comment-heading text detection is exempt within this caption component and a confirmed full viewer. Named actual comment panels still veto."
+          },
+          "host_regression": {
+            "test": "Back118InstagramTest.java",
+            "cases": 9,
+            "v117_failed": 6,
+            "v118_failed": 0,
+            "independence": "Caption cases hide the footer, so their old-version failures independently prove the text-heading false positive.",
+            "checks": [
+              "exit and remove own Recents task",
+              "Android key down/up exits once",
+              "actual comments first close then next Back exits",
+              "share sheet native close",
+              "real editor still blocks",
+              "same composer outside footer still blocks",
+              "three caption texts do not block"
+            ]
+          },
+          "limits": [
+            "Packed layout and DEX evidence is static from supplied APKs, not a captured device hierarchy.",
+            "Host fixtures use exact native IDs and relative hierarchy, with representative dimensions; exact per-device geometry was not recorded.",
+            "No physical Android device run was available; these tests establish the concrete old/new decision-path regression, not a device-level guarantee.",
+            "No native CommentsTwoPaneLayout.A03 Back-handler claim is made; its earlier observed Reels-fragment read belongs to onConfigurationChanged."
+          ]
+        }
+      },
+      "evidence/baseline117_runtime_abi.json": {
+        "sha256": "3493de3cb77cdeb8b180f1eef950b1531c84f52a3da11d683323fee5c966ed6f",
+        "report": {
+          "schema": "homeback118-baseline-runtime-abi-v1",
+          "baseline_version": "1.1.7",
+          "replacement_version": "1.1.8",
+          "baseline_runtime_sha256": "9701fa4c15240cbfc4590fde129eff1c8f34b445139eda699ecb2721b1ea06ea",
+          "replacement_runtime_sha256": "d7f8bde517b31a814b49dffc76a522c994c3faac86549fbe39dc2b2bbe129ca8",
+          "physical_android_tested": false,
+          "baseline_classes": 54,
+          "replacement_classes": 54,
+          "removed_public_methods": [],
+          "changed_access_or_static": [],
+          "preserved_public_methods": 23,
+          "removed_public_fields": [],
+          "preserved_public_fields": 0,
+          "result": "PASS",
+          "scope": "Static public class/method/field ABI preservation against exact published v1.1.7 runtime. Complements the provided APK hook audit against installed v1.1.6. No Android execution or behavioral validation."
+        }
+      },
+      "evidence/instagram_patches_v310_input_audit.json": {
+        "sha256": "f575c080076d7e1c50178ef6e86c29cbc769efbd3d4024c1c18cf527316c9c8d",
+        "report": {
+          "schema": "provided-patched-apk-hook-audit-v1",
+          "input_apk": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+          "input_sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+          "input_bytes": 145183736,
+          "package": "com.instagram.android",
+          "version": "447.0.0.55.81",
+          "version_code": 2147483647,
+          "min_sdk": 28,
+          "target_sdk": 36,
+          "physical_android_tested": false,
+          "clean_original_apk_tested": false,
+          "input_apk_modified": false,
+          "old_extension_sha256": "112c362a1cbc3961801f48d8b1c2fba7e1a36339a78f9e7c468b150d342e4c49",
+          "dex_entries": [
+            "classes.dex",
+            "classes10.dex",
+            "classes11.dex",
+            "classes12.dex",
+            "classes13.dex",
+            "classes14.dex",
+            "classes15.dex",
+            "classes16.dex",
+            "classes17.dex",
+            "classes18.dex",
+            "classes19.dex",
+            "classes2.dex",
+            "classes20.dex",
+            "classes21.dex",
+            "classes22.dex",
+            "classes23.dex",
+            "classes24.dex",
+            "classes25.dex",
+            "classes3.dex",
+            "classes4.dex",
+            "classes5.dex",
+            "classes6.dex",
+            "classes7.dex",
+            "classes8.dex",
+            "classes9.dex"
+          ],
+          "total_classes": 200741,
+          "non_runtime_methods": 826346,
+          "duplicate_class_definitions": [],
+          "existing_runtime_classes": 53,
+          "known_v116_runtime_classes": 53,
+          "old_runtime_canonical_class_mismatches": [],
+          "old_runtime_classes_missing": [],
+          "matches_known_v116_runtime": true,
+          "existing_wrapper_helper_methods": 851,
+          "external_runtime_callsites": 2105,
+          "external_hooked_methods": 1357,
+          "external_hooked_methods_canonical_sha256": "191a189c3c42207971cb3129a3d7390ffcf359585e93cc80b747348936fe811a",
+          "runtime_entrypoints_referenced_by_apk": [
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 5,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/01c;->A01(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/06t;->A01(LX/07b;Ljava/lang/Object;)LX/06s;",
+                "LX/Cpp;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/lKf;->A01(Landroid/view/View;Ljava/lang/Object;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 5,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/01c;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/06t;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/Cpp;->A03(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/lKf;->A02(Landroid/view/View;Ljava/lang/Object;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V",
+              "kind": "method",
+              "callsites": 187,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogKey(Landroid/app/Dialog;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 19,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/46X;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/588;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogShown(Landroid/app/Dialog;)V",
+              "kind": "method",
+              "callsites": 24,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/28o;->A00(Landroid/app/Dialog;)V",
+                "LX/46X;->show()V",
+                "LX/589;->show()V",
+                "LX/58U;->show()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 59,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onBackPressed()V",
+                "Landroidx/core/app/ComponentActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabMainActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterKey(Landroid/app/Activity;Landroid/view/KeyEvent;)V",
+              "kind": "method",
+              "callsites": 25,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/core/app/ComponentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabMainActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterNative()V",
+              "kind": "method",
+              "callsites": 103,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 159,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Landroidx/core/app/ComponentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Landroidx/fragment/app/FragmentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Lcom/facebook/CustomTabActivity;->onCreate(Landroid/os/Bundle;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->key(Landroid/app/Activity;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 25,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/core/app/ComponentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabMainActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->keyFromView(Landroid/view/View;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 64,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/6Sz;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "LX/G8O;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgCheckBox;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V",
+              "kind": "method",
+              "callsites": 374,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 61,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V",
+                "Landroidx/core/app/ComponentActivity;->onDestroy()V",
+                "Landroidx/fragment/app/FragmentActivity;->onDestroy()V",
+                "Lcom/facebook/CustomTabActivity;->onDestroy()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 68,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/core/app/ComponentActivity;->onResume()V",
+                "Landroidx/fragment/app/FragmentActivity;->onResume()V",
+                "Lcom/facebook/CustomTabActivity;->onResume()V",
+                "Lcom/facebook/CustomTabMainActivity;->onResume()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserInteraction(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 26,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/core/app/ComponentActivity;->onUserInteraction()V",
+                "Lcom/facebook/CustomTabActivity;->onUserInteraction()V",
+                "Lcom/facebook/CustomTabMainActivity;->onUserInteraction()V",
+                "Lcom/fbpay/customtabs/CustomTabsActivity;->onUserInteraction()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 28,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onUserLeaveHint()V",
+                "Landroidx/core/app/ComponentActivity;->onUserLeaveHint()V",
+                "Lcom/facebook/CustomTabActivity;->onUserLeaveHint()V",
+                "Lcom/facebook/CustomTabMainActivity;->onUserLeaveHint()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z",
+              "kind": "method",
+              "callsites": 59,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onBackPressed()V",
+                "Landroidx/core/app/ComponentActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabMainActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryDialogBack(Landroid/app/Dialog;)Z",
+              "kind": "method",
+              "callsites": 20,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->onBackPressed()V",
+                "LX/46X;->onBackPressed()V",
+                "LX/588;->onBackPressed()V",
+                "LX/589;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z",
+              "kind": "method",
+              "callsites": 794,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/15L;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/16z;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/18P;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/20W;->hiroOneBack$terminal$0(Landroid/app/Activity;)V"
+              ]
+            }
+          ],
+          "replacement_runtime_sha256": "d7f8bde517b31a814b49dffc76a522c994c3faac86549fbe39dc2b2bbe129ca8",
+          "replacement_runtime_classes": 54,
+          "old_public_methods_preserved": 23,
+          "replacement_abi_errors": [],
+          "replacement_abi_valid_for_all_existing_hooks": true,
+          "scope_note": "Reads all supplied APK DEX code; verifies the known v1.1.6 extension identity and every existing external method/field hook against replacement descriptors/access/static ABI. Does not execute app UI, repatch, sign, install or test device behavior.",
+          "result": "PASS"
+        }
+      },
+      "evidence/instagram_v447_input_audit.json": {
+        "sha256": "d74e53745e8074cee565d43c08b1c15819738cbd5e3be22967c51e549a8a0ade",
+        "report": {
+          "schema": "provided-patched-apk-hook-audit-v1",
+          "input_apk": "Instagram_v447.0.0.55.81(2147483647).apk",
+          "input_sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+          "input_bytes": 145183736,
+          "package": "com.instagram.android",
+          "version": "447.0.0.55.81",
+          "version_code": 2147483647,
+          "min_sdk": 28,
+          "target_sdk": 36,
+          "physical_android_tested": false,
+          "clean_original_apk_tested": false,
+          "input_apk_modified": false,
+          "old_extension_sha256": "112c362a1cbc3961801f48d8b1c2fba7e1a36339a78f9e7c468b150d342e4c49",
+          "dex_entries": [
+            "classes.dex",
+            "classes10.dex",
+            "classes11.dex",
+            "classes12.dex",
+            "classes13.dex",
+            "classes14.dex",
+            "classes15.dex",
+            "classes16.dex",
+            "classes17.dex",
+            "classes18.dex",
+            "classes19.dex",
+            "classes2.dex",
+            "classes20.dex",
+            "classes21.dex",
+            "classes22.dex",
+            "classes23.dex",
+            "classes24.dex",
+            "classes25.dex",
+            "classes3.dex",
+            "classes4.dex",
+            "classes5.dex",
+            "classes6.dex",
+            "classes7.dex",
+            "classes8.dex",
+            "classes9.dex"
+          ],
+          "total_classes": 200741,
+          "non_runtime_methods": 826346,
+          "duplicate_class_definitions": [],
+          "existing_runtime_classes": 53,
+          "known_v116_runtime_classes": 53,
+          "old_runtime_canonical_class_mismatches": [],
+          "old_runtime_classes_missing": [],
+          "matches_known_v116_runtime": true,
+          "existing_wrapper_helper_methods": 851,
+          "external_runtime_callsites": 2105,
+          "external_hooked_methods": 1357,
+          "external_hooked_methods_canonical_sha256": "191a189c3c42207971cb3129a3d7390ffcf359585e93cc80b747348936fe811a",
+          "runtime_entrypoints_referenced_by_apk": [
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 5,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/01c;->A01(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/06t;->A01(LX/07b;Ljava/lang/Object;)LX/06s;",
+                "LX/Cpp;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/lKf;->A01(Landroid/view/View;Ljava/lang/Object;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 5,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/01c;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/06t;->A02(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/Cpp;->A03(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/lKf;->A02(Landroid/view/View;Ljava/lang/Object;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V",
+              "kind": "method",
+              "callsites": 187,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogKey(Landroid/app/Dialog;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 19,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/46X;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/588;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogShown(Landroid/app/Dialog;)V",
+              "kind": "method",
+              "callsites": 24,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/28o;->A00(Landroid/app/Dialog;)V",
+                "LX/46X;->show()V",
+                "LX/589;->show()V",
+                "LX/58U;->show()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 59,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onBackPressed()V",
+                "Landroidx/core/app/ComponentActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabMainActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterKey(Landroid/app/Activity;Landroid/view/KeyEvent;)V",
+              "kind": "method",
+              "callsites": 25,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/core/app/ComponentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabMainActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterNative()V",
+              "kind": "method",
+              "callsites": 103,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 159,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Landroidx/core/app/ComponentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Landroidx/fragment/app/FragmentActivity;->onCreate(Landroid/os/Bundle;)V",
+                "Lcom/facebook/CustomTabActivity;->onCreate(Landroid/os/Bundle;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->key(Landroid/app/Activity;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 25,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/core/app/ComponentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/facebook/CustomTabMainActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->keyFromView(Landroid/view/View;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 64,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/6Sz;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "LX/G8O;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgCheckBox;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V",
+              "kind": "method",
+              "callsites": 374,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/00k;->onBackPressed()V",
+                "LX/05u;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/instagram/common/ui/base/IgTextView;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 61,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V",
+                "Landroidx/core/app/ComponentActivity;->onDestroy()V",
+                "Landroidx/fragment/app/FragmentActivity;->onDestroy()V",
+                "Lcom/facebook/CustomTabActivity;->onDestroy()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 68,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/core/app/ComponentActivity;->onResume()V",
+                "Landroidx/fragment/app/FragmentActivity;->onResume()V",
+                "Lcom/facebook/CustomTabActivity;->onResume()V",
+                "Lcom/facebook/CustomTabMainActivity;->onResume()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserInteraction(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 26,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/core/app/ComponentActivity;->onUserInteraction()V",
+                "Lcom/facebook/CustomTabActivity;->onUserInteraction()V",
+                "Lcom/facebook/CustomTabMainActivity;->onUserInteraction()V",
+                "Lcom/fbpay/customtabs/CustomTabsActivity;->onUserInteraction()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 28,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onUserLeaveHint()V",
+                "Landroidx/core/app/ComponentActivity;->onUserLeaveHint()V",
+                "Lcom/facebook/CustomTabActivity;->onUserLeaveHint()V",
+                "Lcom/facebook/CustomTabMainActivity;->onUserLeaveHint()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z",
+              "kind": "method",
+              "callsites": 59,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "Landroidx/activity/ComponentActivity;->onBackPressed()V",
+                "Landroidx/core/app/ComponentActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabActivity;->onBackPressed()V",
+                "Lcom/facebook/CustomTabMainActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryDialogBack(Landroid/app/Dialog;)Z",
+              "kind": "method",
+              "callsites": 20,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/00k;->onBackPressed()V",
+                "LX/46X;->onBackPressed()V",
+                "LX/588;->onBackPressed()V",
+                "LX/589;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z",
+              "kind": "method",
+              "callsites": 794,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/15L;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/16z;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/18P;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/20W;->hiroOneBack$terminal$0(Landroid/app/Activity;)V"
+              ]
+            }
+          ],
+          "replacement_runtime_sha256": "d7f8bde517b31a814b49dffc76a522c994c3faac86549fbe39dc2b2bbe129ca8",
+          "replacement_runtime_classes": 54,
+          "old_public_methods_preserved": 23,
+          "replacement_abi_errors": [],
+          "replacement_abi_valid_for_all_existing_hooks": true,
+          "scope_note": "Reads all supplied APK DEX code; verifies the known v1.1.6 extension identity and every existing external method/field hook against replacement descriptors/access/static ABI. Does not execute app UI, repatch, sign, install or test device behavior.",
+          "result": "PASS"
+        }
+      },
+      "evidence/layout_fixture_manifest.json": {
+        "sha256": "baf1984aa4cc86d8edc5b73ffe747850e6cd56afe6b09d85ee7baadc7607e33f",
+        "report": {
+          "fixtures": {
+            "evidence/layout_clips_comment_composer.xml.bin": {
+              "bytes": 1772,
+              "sha256": "6437871a224b36cade2365e81f12288527d60d7bb9764b29d296b2b0c5b85558"
+            },
+            "evidence/layout_clips_viewer_fragment.xml.bin": {
+              "bytes": 10056,
+              "sha256": "9daa2e8aaff38f5166997f86221bc282fb1b559ea9f16d0cbc71c8f5fba60777"
+            },
+            "evidence/layout_clips_viewer_fragment_two_pane_comments.xml.bin": {
+              "bytes": 592,
+              "sha256": "05164ba26ec531617bbee6d3e62dab3ea472b94d8612f87b752f43c85ce196f9"
+            },
+            "evidence/layout_clips_viewer_refresh_container.xml.bin": {
+              "bytes": 564,
+              "sha256": "cc9e4b4ad49af94fb3ff7d96127bb4096f781dc48fc1e63ee7f08504bfa3b4e4"
+            }
+          },
+          "physical_android_tested": false,
+          "schema": "homeback118-layout-fixtures-v1",
+          "source": "Four Android binary XML slices extracted from the supplied Instagram447 assets/layouts.bin.xz; full extraction references in Instagram_v447_v118_layout_evidence.json. These are static source evidence, not captured device layouts.",
+          "source_inputs": [
+            {
+              "file": "Instagram_v447.0.0.55.81(2147483647).apk",
+              "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99",
+              "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8"
+            },
+            {
+              "file": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+              "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99",
+              "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670"
+            }
+          ]
+        }
+      },
+      "evidence/provided_apk_audit_summary.json": {
+        "sha256": "52d836b9bba7a8dca5d54557c125da9006a90f981c67130e8e05cb81af7d9732",
+        "report": {
+          "input_apks_modified": false,
+          "inputs": [
+            {
+              "filename": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+              "findings": {
+                "all_existing_runtime_hook_abis_preserved": true,
+                "class_count": 200741,
+                "duplicate_classes": 0,
+                "existing_external_runtime_callsites": 2105,
+                "existing_hooked_methods": 1357,
+                "existing_unique_runtime_entrypoints": 19,
+                "old_public_methods_preserved": 23,
+                "old_runtime_classes": 53,
+                "old_runtime_matches_single_v1_1_6": true,
+                "replacement_abi_errors": []
+              },
+              "package": "com.instagram.android",
+              "report": "instagram_patches_v310_input_audit.json",
+              "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+              "version": "447.0.0.55.81",
+              "version_code": 2147483647
+            },
+            {
+              "filename": "Instagram_v447.0.0.55.81(2147483647).apk",
+              "findings": {
+                "all_existing_runtime_hook_abis_preserved": true,
+                "class_count": 200741,
+                "duplicate_classes": 0,
+                "existing_external_runtime_callsites": 2105,
+                "existing_hooked_methods": 1357,
+                "existing_unique_runtime_entrypoints": 19,
+                "old_public_methods_preserved": 23,
+                "old_runtime_classes": 53,
+                "old_runtime_matches_single_v1_1_6": true,
+                "replacement_abi_errors": []
+              },
+              "package": "com.instagram.android",
+              "report": "instagram_v447_input_audit.json",
+              "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+              "version": "447.0.0.55.81",
+              "version_code": 2147483647
+            },
+            {
+              "filename": "TikTok_v46.2.3(2147483647).apk",
+              "findings": {
+                "all_existing_runtime_hook_abis_preserved": true,
+                "class_count": 406152,
+                "duplicate_classes": 0,
+                "existing_external_runtime_callsites": 3929,
+                "existing_hooked_methods": 2829,
+                "existing_unique_runtime_entrypoints": 19,
+                "old_public_methods_preserved": 23,
+                "old_runtime_classes": 53,
+                "old_runtime_matches_single_v1_1_6": true,
+                "replacement_abi_errors": []
+              },
+              "package": "com.zhiliaoapp.musically",
+              "report": "tiktok_v4623_input_audit.json",
+              "sha256": "243231abe5c1f201b7d306bc3b9c086c60b183de790005f2acd22ea4f3325f7c",
+              "version": "46.2.3",
+              "version_code": 2147483647
+            }
+          ],
+          "inputs_already_patched": true,
+          "original_apk_apply_tested": false,
+          "physical_android_tested": false,
+          "replacement_runtime_sha256": "d7f8bde517b31a814b49dffc76a522c994c3faac86549fbe39dc2b2bbe129ca8",
+          "result": "PASS",
+          "schema": "homeback118-provided-apk-audit-v1",
+          "scope": "Static read-only audit of all DEX files in all three supplied, already patched APKs; known v1.1.6 extension identity and every existing external extension hook descriptor/access/static ABI checked against compiled v1.1.8. No clean original APK application, APK reconstruction, signing, installation or Android UI test."
+        }
+      },
+      "evidence/tiktok-apk.json": {
+        "sha256": "762bad470ed3e1daf5d94a73790d6af4905bc82912ed20cc248b037adafa3382",
+        "report": {
+          "apk": {
+            "filename": "TikTok_v46.2.3(2147483647).apk",
+            "sha256": "243231abe5c1f201b7d306bc3b9c086c60b183de790005f2acd22ea4f3325f7c",
+            "bytes": 431603949,
+            "version_reported_by_filename": "46.2.3",
+            "already_patched": true,
+            "existing_oneback": {
+              "dex": "classes55.dex",
+              "sha256": "5ee375821b95f967a29744b0b6e292739c9d5f181078c6e8e676b908673f948a",
+              "runtime_logs": [
+                "HiroBack113",
+                "HiroBack116"
+              ],
+              "classes": [
+                "Lapp/hiro/oneback/runtime/BackNavigation;",
+                "Lapp/hiro/oneback/runtime/ExitScreens$Evidence;",
+                "Lapp/hiro/oneback/runtime/ExitScreens$Failure;",
+                "Lapp/hiro/oneback/runtime/ExitScreens;",
+                "Lapp/hiro/oneback/runtime/HomeScreen$Api30;",
+                "Lapp/hiro/oneback/runtime/HomeScreen$Failure;",
+                "Lapp/hiro/oneback/runtime/HomeScreen;",
+                "Lapp/hiro/oneback/runtime/InstagramBack$Guard;",
+                "Lapp/hiro/oneback/runtime/InstagramBack$Snapshot;",
+                "Lapp/hiro/oneback/runtime/InstagramBack;",
+                "Lapp/hiro/oneback/runtime/InstagramReels;",
+                "Lapp/hiro/oneback/runtime/NativeBack$Callback;",
+                "Lapp/hiro/oneback/runtime/NativeBack$Api34$Animation;",
+                "Lapp/hiro/oneback/runtime/NativeBack$Api34$Capture;",
+                "Lapp/hiro/oneback/runtime/NativeBack$Api34;",
+                "Lapp/hiro/oneback/runtime/NativeBack$Record;",
+                "Lapp/hiro/oneback/runtime/NativeBack;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$1;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$2;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$3;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$4;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$5;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$6;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$7;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$8;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api29;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api33$Registration$1$1;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api33$Registration$1;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api33$Registration;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api33;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api34$1;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Api34;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Lifecycle;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Root$1;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Root$2;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Root$3;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Root;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$Scope;",
+                "Lapp/hiro/oneback/runtime/OneBackExit$State;",
+                "Lapp/hiro/oneback/runtime/OneBackExit;",
+                "Lapp/hiro/oneback/runtime/TikTokBack$1;",
+                "Lapp/hiro/oneback/runtime/TikTokBack$2;",
+                "Lapp/hiro/oneback/runtime/TikTokBack$Session;",
+                "Lapp/hiro/oneback/runtime/TikTokBack;",
+                "Lapp/hiro/oneback/runtime/TikTokHome;",
+                "Lapp/hiro/oneback/runtime/TikTokScreen$Failure;",
+                "Lapp/hiro/oneback/runtime/TikTokScreen$Snapshot;",
+                "Lapp/hiro/oneback/runtime/TikTokScreen;",
+                "Lapp/hiro/oneback/runtime/TripBack$1;",
+                "Lapp/hiro/oneback/runtime/TripBack$2;",
+                "Lapp/hiro/oneback/runtime/TripBack$Attempt;",
+                "Lapp/hiro/oneback/runtime/TripBack$Ticket;",
+                "Lapp/hiro/oneback/runtime/TripBack;"
+              ]
+            }
+          },
+          "physical_device_tested": false,
+          "finding": "HomeBack 1.1.6 relies on labelled/clickable Home UI, then native Back and fragment pop. A profile layout lacking a semantic Home target has no explicit native tab-selection path; repeated native no-op can leave profile unchanged.",
+          "verified_native_contract": {
+            "entry": "MainActivity.communication_gen_field_com_bytedance_tiktok_homepage_mainfragment_HomeTabAbility or MainActivity.getAbility(Class)",
+            "interface": "com.bytedance.tiktok.homepage.mainfragment.HomeTabAbility",
+            "implementation": "com.ss.android.ugc.aweme.main.assems.tabs.TabAbilityAssem",
+            "select": "HomeTabAbility.Lx0(Bundle,String):void -> TabAbilityAssem.No() -> Hox.oU2(Bundle,String,false)",
+            "target": "HOME",
+            "target_evidence": "BackToFYPGuideAssem.Xp(View) and SocialPublishLandingAssem.Ip(boolean) pass HOME to Hox.oU2; Hox routes target by native tree path and lifecycle handlers.",
+            "bottom_selection": "HomeTabAbility.Mm2():String -> Hox.YT2(\"page_feed\",false)",
+            "active_path": "HomeTabAbility.qE0():Hox; Hox.fU2(String):boolean checks tags of ancestors of currently selected leaf.",
+            "unrelated_method_rejected": "Hox.nU2(Bundle,String) hardcodes SHOP_MALL. Not used."
+          },
+          "guards": [
+            "Exact interface and implementation identity and return/argument types",
+            "MainActivity in supported TikTok package only",
+            "Existing ready/focused input checks",
+            "No native Home selection through a detected layer or editor or unknown screen",
+            "Once per gesture native selection request",
+            "Selected HOME and active path require additional visible feed and absence of blockers to confirm Home",
+            "Arrival protected by existing session; same Back cannot exit",
+            "Unsupported ABI/reflection failure falls back to visible semantic UI/native Back",
+            "Unfocused visible text editors and named edit/profile/composition/draft pages delegate one protected native Back, retaining confirmation",
+            "Acknowledged native Home transition gets four 80 ms polls before fallback; no repeated native Home requests"
+          ],
+          "regression": {
+            "before": "v1.1.6 fails tt117_unlabelled_profile_routes_native at one verified native Home selection",
+            "after": "17 TikTok-specific cases passed",
+            "test_type": "deterministic Android host doubles, plus actual APK DEX inspection; not device execution",
+            "combined": "SUCCESS: 292 cases, 1392 assertions"
+          }
+        }
+      },
+      "evidence/tiktok_v4623_input_audit.json": {
+        "sha256": "5425b85e4b010bbb85b951dfecaa9f650e74c4344ca007b25918b4685715a777",
+        "report": {
+          "schema": "provided-patched-apk-hook-audit-v1",
+          "input_apk": "TikTok_v46.2.3(2147483647).apk",
+          "input_sha256": "243231abe5c1f201b7d306bc3b9c086c60b183de790005f2acd22ea4f3325f7c",
+          "input_bytes": 431603949,
+          "package": "com.zhiliaoapp.musically",
+          "version": "46.2.3",
+          "version_code": 2147483647,
+          "min_sdk": 23,
+          "target_sdk": 36,
+          "physical_android_tested": false,
+          "clean_original_apk_tested": false,
+          "input_apk_modified": false,
+          "old_extension_sha256": "112c362a1cbc3961801f48d8b1c2fba7e1a36339a78f9e7c468b150d342e4c49",
+          "dex_entries": [
+            "classes.dex",
+            "classes10.dex",
+            "classes11.dex",
+            "classes12.dex",
+            "classes13.dex",
+            "classes14.dex",
+            "classes15.dex",
+            "classes16.dex",
+            "classes17.dex",
+            "classes18.dex",
+            "classes19.dex",
+            "classes2.dex",
+            "classes20.dex",
+            "classes21.dex",
+            "classes22.dex",
+            "classes23.dex",
+            "classes24.dex",
+            "classes25.dex",
+            "classes26.dex",
+            "classes27.dex",
+            "classes28.dex",
+            "classes29.dex",
+            "classes3.dex",
+            "classes30.dex",
+            "classes31.dex",
+            "classes32.dex",
+            "classes33.dex",
+            "classes34.dex",
+            "classes35.dex",
+            "classes36.dex",
+            "classes37.dex",
+            "classes38.dex",
+            "classes39.dex",
+            "classes4.dex",
+            "classes40.dex",
+            "classes41.dex",
+            "classes42.dex",
+            "classes43.dex",
+            "classes44.dex",
+            "classes45.dex",
+            "classes46.dex",
+            "classes47.dex",
+            "classes48.dex",
+            "classes49.dex",
+            "classes5.dex",
+            "classes50.dex",
+            "classes51.dex",
+            "classes52.dex",
+            "classes53.dex",
+            "classes54.dex",
+            "classes55.dex",
+            "classes6.dex",
+            "classes7.dex",
+            "classes8.dex",
+            "classes9.dex"
+          ],
+          "total_classes": 406152,
+          "non_runtime_methods": 1877631,
+          "duplicate_class_definitions": [],
+          "existing_runtime_classes": 53,
+          "known_v116_runtime_classes": 53,
+          "old_runtime_canonical_class_mismatches": [],
+          "old_runtime_classes_missing": [],
+          "matches_known_v116_runtime": true,
+          "existing_wrapper_helper_methods": 1399,
+          "external_runtime_callsites": 3929,
+          "external_hooked_methods": 2829,
+          "external_hooked_methods_canonical_sha256": "da8d3f4665fb6314688ea7f3c96a8146281e7797f281155b92290237c25be087",
+          "runtime_entrypoints_referenced_by_apk": [
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->register(Landroid/window/OnBackInvokedDispatcher;ILandroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 4,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0n2I;->onAttachedToWindow()V",
+                "LX/19RZ;->LIZJ(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/19SQ;->LIZIZ(Ljava/lang/Object;Landroidx/appcompat/app/AppCompatDelegateImpl;)Landroid/window/OnBackInvokedCallback;",
+                "Landroidx/activity/OnBackPressedDispatcher;->LJFF(Z)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/NativeBack;->unregister(Landroid/window/OnBackInvokedDispatcher;Landroid/window/OnBackInvokedCallback;)V",
+              "kind": "method",
+              "callsites": 4,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0n2I;->onDetachedFromWindow()V",
+                "LX/19RZ;->LIZLLL(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "LX/19SQ;->LIZJ(Ljava/lang/Object;Ljava/lang/Object;)V",
+                "Landroidx/activity/OnBackPressedDispatcher;->LJFF(Z)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V",
+              "kind": "method",
+              "callsites": 272,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0NTj;->onBackPressed()V",
+                "LX/0NiG;->onBackPressed()V",
+                "LX/0Nrd;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogKey(Landroid/app/Dialog;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 16,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0UnS;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0UnT;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0UnV;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0UnX;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->dialogShown(Landroid/app/Dialog;)V",
+              "kind": "method",
+              "callsites": 230,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "LX/0NIZ;->LIZJ(LX/0MLK;)V",
+                "LX/0NiY;->LJJLIIJ(LX/0O2b;LX/0Wth;)V",
+                "LX/0Nr6;->showPopup(LX/08fc;)Ljava/lang/Object;",
+                "LX/0Nr7;->show()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 167,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0NTj;->onBackPressed()V",
+                "LX/0Nrd;->onBackPressed()V",
+                "Landroidx/credentials/playservices/HiddenActivity;->onBackPressed()V",
+                "Lcom/bytedance/android/livesdk/comp/impl/pcs/business/foundation/serviceplus/industry/PcsIndustrySelectActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterKey(Landroid/app/Activity;Landroid/view/KeyEvent;)V",
+              "kind": "method",
+              "callsites": 30,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0Nrd;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/credentials/playservices/HiddenActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/bytedance/android/livesdk/game/broadcast/mirror/activity/UsbSourceProxyActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->enterNative()V",
+              "kind": "method",
+              "callsites": 75,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0NiG;->onBackPressed()V",
+                "LX/0UnS;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0UnS;->onBackPressed()V",
+                "LX/0UnT;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 444,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->onCreate(Landroid/os/Bundle;)V",
+                "LX/0NTj;->onCreate(Landroid/os/Bundle;)V",
+                "LX/0Nrd;->onCreate(Landroid/os/Bundle;)V",
+                "LX/0Wnr;->onCreate(Landroid/os/Bundle;)V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->key(Landroid/app/Activity;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 30,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0Nrd;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Landroidx/credentials/playservices/HiddenActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "Lcom/bytedance/android/livesdk/game/broadcast/mirror/activity/UsbSourceProxyActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->keyFromView(Landroid/view/View;Landroid/view/KeyEvent;)Z",
+              "kind": "method",
+              "callsites": 23,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0XEO;->onKeyPreIme(ILandroid/view/KeyEvent;)Z",
+                "LX/0o5C;->dispatchKeyEventPreIme(Landroid/view/KeyEvent;)Z",
+                "Landroidx/compose/ui/platform/AndroidComposeView;->dispatchKeyEventPreIme(Landroid/view/KeyEvent;)Z",
+                "Lcom/ss/android/ugc/aweme/im/sdk/chat/ui/view/SearchableEditText;->onKeyPreIme(ILandroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V",
+              "kind": "method",
+              "callsites": 544,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z",
+                "LX/0NTj;->onBackPressed()V",
+                "LX/0NiG;->onBackPressed()V",
+                "LX/0Nrd;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 217,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "LX/0MwK;->onDestroy()V",
+                "LX/0NTj;->onDestroy()V",
+                "LX/0Nrd;->onDestroy()V",
+                "LX/0ccL;->onDestroy()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 395,
+              "opcodes": [
+                "INVOKE_STATIC",
+                "INVOKE_STATIC_RANGE"
+              ],
+              "sample_callers": [
+                "LX/0Nrd;->onResume()V",
+                "LX/0ccL;->onResume()V",
+                "Landroidx/credentials/playservices/HiddenActivity;->onResume()V",
+                "Lcom/ss/android/ugc/aweme/account/otl/BaseOTLIntentHandlerActivity;->onResume()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserInteraction(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 26,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0Nrd;->onUserInteraction()V",
+                "Landroidx/credentials/playservices/HiddenActivity;->onUserInteraction()V",
+                "Lcom/bytedance/android/livesdk/game/broadcast/mirror/activity/UsbSourceProxyActivity;->onUserInteraction()V",
+                "Lcom/bytedance/bdinstall/migrate/MigrateDetectorActivity;->onUserInteraction()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V",
+              "kind": "method",
+              "callsites": 28,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0Nrd;->onUserLeaveHint()V",
+                "Landroidx/credentials/playservices/HiddenActivity;->onUserLeaveHint()V",
+                "Lcom/bytedance/android/livesdk/game/broadcast/mirror/activity/UsbSourceProxyActivity;->onUserLeaveHint()V",
+                "Lcom/bytedance/bdinstall/migrate/MigrateDetectorActivity;->onUserLeaveHint()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z",
+              "kind": "method",
+              "callsites": 167,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0NTj;->onBackPressed()V",
+                "LX/0Nrd;->onBackPressed()V",
+                "Landroidx/credentials/playservices/HiddenActivity;->onBackPressed()V",
+                "Lcom/bytedance/android/livesdk/comp/impl/pcs/business/foundation/serviceplus/industry/PcsIndustrySelectActivity;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryDialogBack(Landroid/app/Dialog;)Z",
+              "kind": "method",
+              "callsites": 36,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/0NiG;->onBackPressed()V",
+                "LX/0UnS;->onBackPressed()V",
+                "LX/0UnT;->onBackPressed()V",
+                "LX/0UnV;->onBackPressed()V"
+              ]
+            },
+            {
+              "descriptor": "Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z",
+              "kind": "method",
+              "callsites": 1221,
+              "opcodes": [
+                "INVOKE_STATIC"
+              ],
+              "sample_callers": [
+                "LX/01CD;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/0257;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/025R;->hiroOneBack$terminal$0(Landroid/app/Activity;)V",
+                "LX/025n;->hiroOneBack$terminal$0(Landroid/app/Activity;)V"
+              ]
+            }
+          ],
+          "replacement_runtime_sha256": "d7f8bde517b31a814b49dffc76a522c994c3faac86549fbe39dc2b2bbe129ca8",
+          "replacement_runtime_classes": 54,
+          "old_public_methods_preserved": 23,
+          "replacement_abi_errors": [],
+          "replacement_abi_valid_for_all_existing_hooks": true,
+          "scope_note": "Reads all supplied APK DEX code; verifies the known v1.1.6 extension identity and every existing external method/field hook against replacement descriptors/access/static ABI. Does not execute app UI, repatch, sign, install or test device behavior.",
+          "result": "PASS"
+        }
+      }
+    },
+    "validation_coverage": {
+      "host_cases": 315,
+      "host_assertions": 1476,
+      "synthetic_apk_apply_cases": 10
+    },
+    "qa_sha256": "45354c4e3e449d36a75329eb197aa0da4a0f5535a4d2e61e3d61d816f24ff0ae"
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "15366bdf125c11cb9fe3c8f2b80faaf4c712086f",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "0f045eed0b6bbe9b54ba74fb2f820d494f499d1e",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 414289421,
+  "raw_commit": "52fe0ee03ae66eb7b5dbe14ea93d59a3162d0b6a",
+  "download_urls": {
+    "OneBack_Exit_NoRecents_v1.1.8.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/52fe0ee03ae66eb7b5dbe14ea93d59a3162d0b6a/downloads/OneBack_Exit_NoRecents_v1.1.8.mpp",
+    "Hiro_Morphe_Patches_v1.0.245.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/52fe0ee03ae66eb7b5dbe14ea93d59a3162d0b6a/downloads/Hiro_Morphe_Patches_v1.0.245.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/oneback-v1.1.8",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "Instagram"
+  ],
+  "other_apps_false_updates": false,
+  "all_unrelated_patch_resources_preserved": true,
+  "trip_com_behavior_unchanged": true,
+  "trip_com_home_only_proactive_exit": true,
+  "trip_com_native_terminal_back_cleanup": true,
+  "instagram_reels_exit": true,
+  "instagram_comments_collapse_first": true,
+  "instagram_same_gesture_exit_protected": true,
+  "tiktok_native_child_back_retained": true,
+  "tiktok_messages_profile_exit": false,
+  "tiktok_messages_profile_home_navigation": true,
+  "trip_bounded_async_back_and_stop_cleanup": true,
+  "fixed_chatgpt_site_updated": false
+}
