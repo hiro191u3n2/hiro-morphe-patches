@@ -1,0 +1,22 @@
+#version 310 es
+precision highp int;
+layout(local_size_x=8,local_size_y=8,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint bytes[]; } source;
+layout(std430,binding=1) writeonly buffer Sums { int values[]; } sums;
+layout(std430,binding=2) writeonly buffer Counts { int values[]; } counts;
+uniform int width;
+uniform int height;
+uniform int step;
+uniform int smallWidth;
+uniform int smallHeight;
+void main() {
+    int x=int(gl_GlobalInvocationID.x),y=int(gl_GlobalInvocationID.y);
+    if(x>=smallWidth || y>=smallHeight)return;
+    int right=min(width,(x+1)*step),bottom=min(height,(y+1)*step);
+    int total=0,count=0;
+    for(int yy=y*step;yy<bottom;yy++)for(int xx=x*step;xx<right;xx++) {
+        int at=yy*width+xx;
+        total+=int((source.bytes[at>>2]>>uint((at&3)*8))&255u);count++;
+    }
+    int at=y*smallWidth+x;sums.values[at]=total;counts.values[at]=count;
+}
