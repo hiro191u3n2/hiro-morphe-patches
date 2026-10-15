@@ -1,0 +1,253 @@
+classes25.dex Lcom/bytedance/hox/Hox; implements [] extends Landroidx/lifecycle/ViewModel; Lcom/bytedance/hox/Hox;->oU2(Landroid/os/Bundle;Ljava/lang/String;Z)V
+registers 16
+0000 INVOKE_VIRTUAL {12,14,0,0,0} count=2 Lcom/bytedance/hox/Hox;->bU2(Ljava/lang/String;)LX/0rtL;
+0003 MOVE_RESULT_OBJECT v0
+0004 IF_NEZ v0 ->7
+0006 RETURN_VOID
+0007 IGET_OBJECT v2,v0 LX/0rtL;->LL:LX/0rtH;
+0009 IF_NEZ v2 ->12
+000b RETURN_VOID
+000c IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLILZ:LX/0rtH;
+000e CONST_4 v7 #0
+000f IF_EQZ v0 ->480
+0011 INVOKE_STATIC {0,0,0,0,0} count=1 Lcom/bytedance/hox/Hox;->XT2(LX/0rtH;)LX/0rtL;
+0014 MOVE_RESULT_OBJECT v0
+0015 IF_EQZ v0 ->480
+0017 INVOKE_VIRTUAL {0,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+001a MOVE_RESULT_OBJECT v2
+001b INVOKE_STATIC {2,14,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+001e MOVE_RESULT v0
+001f IF_NEZ v0 ->511
+0021 INVOKE_STATIC {0,0,0,0,0} count=0 LX/1C7b;->LIZ()Ljava/lang/StringBuilder;
+0024 MOVE_RESULT_OBJECT v1
+0025 INVOKE_VIRTUAL {1,2,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0028 CONST_16 v0 #95
+002a INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+002d INVOKE_VIRTUAL {1,14,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0030 INVOKE_STATIC {1,0,0,0,0} count=1 LX/1C7b;->LIZIZ(Ljava/lang/StringBuilder;)Ljava/lang/String;
+0033 MOVE_RESULT_OBJECT v6
+0034 IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLIZ:Ljava/util/HashMap;
+0036 INVOKE_VIRTUAL {0,6,0,0,0} count=2 Ljava/util/HashMap;->containsKey(Ljava/lang/Object;)Z
+0039 MOVE_RESULT v0
+003a IF_NEZ v0 ->307
+003c IGET_OBJECT v5,v12 Lcom/bytedance/hox/Hox;->LLIZ:Ljava/util/HashMap;
+003e INVOKE_VIRTUAL {12,2,0,0,0} count=2 Lcom/bytedance/hox/Hox;->bU2(Ljava/lang/String;)LX/0rtL;
+0041 MOVE_RESULT_OBJECT v3
+0042 INVOKE_VIRTUAL {12,14,0,0,0} count=2 Lcom/bytedance/hox/Hox;->bU2(Ljava/lang/String;)LX/0rtL;
+0045 MOVE_RESULT_OBJECT v2
+0046 IF_EQZ v3 ->125
+0048 INVOKE_VIRTUAL {3,0,0,0,0} count=1 LX/0rtL;->LJIJI()Ljava/util/LinkedList;
+004b MOVE_RESULT_OBJECT v11
+004c IF_EQZ v2 ->119
+004e INVOKE_VIRTUAL {2,0,0,0,0} count=1 LX/0rtL;->LJIJI()Ljava/util/LinkedList;
+0051 MOVE_RESULT_OBJECT v10
+0052 INVOKE_VIRTUAL {11,0,0,0,0} count=1 Ljava/util/AbstractSequentialList;->iterator()Ljava/util/Iterator;
+0055 MOVE_RESULT_OBJECT v9
+0056 INVOKE_VIRTUAL {10,0,0,0,0} count=1 Ljava/util/AbstractSequentialList;->iterator()Ljava/util/Iterator;
+0059 MOVE_RESULT_OBJECT v8
+005a MOVE_OBJECT v0,v7
+005b INVOKE_INTERFACE {9,0,0,0,0} count=1 Ljava/util/Iterator;->hasNext()Z
+005e MOVE_RESULT v1
+005f IF_EQZ v1 ->131
+0061 INVOKE_INTERFACE {8,0,0,0,0} count=1 Ljava/util/Iterator;->hasNext()Z
+0064 MOVE_RESULT v1
+0065 IF_EQZ v1 ->131
+0067 INVOKE_INTERFACE {9,0,0,0,0} count=1 Ljava/util/Iterator;->next()Ljava/lang/Object;
+006a MOVE_RESULT_OBJECT v4
+006b INVOKE_INTERFACE {8,0,0,0,0} count=1 Ljava/util/Iterator;->next()Ljava/lang/Object;
+006e MOVE_RESULT_OBJECT v1
+006f INVOKE_STATIC {4,1,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0072 MOVE_RESULT v1
+0073 IF_EQZ v1 ->131
+0075 MOVE_OBJECT v0,v4
+0076 GOTO ->91
+0077 NEW_INSTANCE v10 Ljava/util/LinkedList;
+0079 INVOKE_DIRECT {10,0,0,0,0} count=1 Ljava/util/LinkedList;-><init>()V
+007c GOTO ->82
+007d NEW_INSTANCE v11 Ljava/util/LinkedList;
+007f INVOKE_DIRECT {11,0,0,0,0} count=1 Ljava/util/LinkedList;-><init>()V
+0082 GOTO ->76
+0083 IF_NEZ v0 ->304
+0085 INVOKE_STATIC {0,0,0,0,0} count=0 LX/1C7b;->LIZ()Ljava/lang/StringBuilder;
+0088 MOVE_RESULT_OBJECT v1
+0089 CONST_STRING v0 can not find parent for from node: 
+008b INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+008e IF_EQZ v3 ->471
+0090 INVOKE_VIRTUAL {3,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+0093 MOVE_RESULT_OBJECT v0
+0094 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+0097 CONST_16 v4 #64
+0099 INVOKE_VIRTUAL {1,4,0,0,0} count=2 Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+009c INVOKE_VIRTUAL {1,3,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+009f INVOKE_VIRTUAL {1,4,0,0,0} count=2 Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00a2 INVOKE_VIRTUAL {11,0,0,0,0} count=1 Ljava/util/AbstractCollection;->isEmpty()Z
+00a5 MOVE_RESULT v0
+00a6 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00a9 CONST_STRING v0 , to node: 
+00ab INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00ae IF_EQZ v2 ->468
+00b0 INVOKE_VIRTUAL {2,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+00b3 MOVE_RESULT_OBJECT v0
+00b4 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00b7 INVOKE_VIRTUAL {1,4,0,0,0} count=2 Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00ba INVOKE_VIRTUAL {1,2,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder;
+00bd INVOKE_VIRTUAL {1,4,0,0,0} count=2 Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;
+00c0 INVOKE_VIRTUAL {10,0,0,0,0} count=1 Ljava/util/AbstractCollection;->isEmpty()Z
+00c3 MOVE_RESULT v0
+00c4 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Z)Ljava/lang/StringBuilder;
+00c7 CONST_STRING v0 !!!!, all node : 
+00c9 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00cc IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLILZ:LX/0rtH;
+00ce INVOKE_STATIC {0,0,0,0,0} count=1 Lcom/bytedance/hox/Hox;->iU2(LX/0rtL;)Ljava/lang/String;
+00d1 MOVE_RESULT_OBJECT v0
+00d2 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00d5 CONST_STRING v0 !!!!,fromList: 
+00d7 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00da INVOKE_STATIC {11,0,0,0,0} count=1 Lcom/bytedance/hox/Hox;->hU2(Ljava/util/List;)Ljava/lang/String;
+00dd MOVE_RESULT_OBJECT v0
+00de INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00e1 CONST_STRING v0 !!!!, toList: 
+00e3 INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00e6 INVOKE_STATIC {10,0,0,0,0} count=1 Lcom/bytedance/hox/Hox;->hU2(Ljava/util/List;)Ljava/lang/String;
+00e9 MOVE_RESULT_OBJECT v0
+00ea INVOKE_VIRTUAL {1,0,0,0,0} count=2 Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+00ed INVOKE_STATIC {1,0,0,0,0} count=1 LX/1C7b;->LIZIZ(Ljava/lang/StringBuilder;)Ljava/lang/String;
+00f0 MOVE_RESULT_OBJECT v4
+00f1 SGET_OBJECT v1 LX/0rUi;->LIZ:LX/0rtK;
+00f3 IF_EQZ v1 ->253
+00f5 NEW_INSTANCE v0 Ljava/lang/IllegalStateException;
+00f7 INVOKE_DIRECT {0,4,0,0,0} count=2 Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+00fa INVOKE_INTERFACE {1,0,0,0,0} count=2 LX/0rtK;->LIZJ(Ljava/lang/Exception;)V
+00fd IF_EQZ v3 ->474
+00ff IF_EQZ v2 ->474
+0101 IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLILZ:LX/0rtH;
+0103 IF_EQZ v0 ->474
+0105 INVOKE_STATIC {0,3,0,0,0} count=2 LX/0rtI;->LIZIZ(LX/0rtL;LX/0rtL;)Ljava/util/ArrayList;
+0108 MOVE_RESULT_OBJECT v3
+0109 INVOKE_STATIC {0,2,0,0,0} count=2 LX/0rtI;->LIZIZ(LX/0rtL;LX/0rtL;)Ljava/util/ArrayList;
+010c MOVE_RESULT_OBJECT v8
+010d CONST_4 v2 #0
+010e INVOKE_VIRTUAL {3,0,0,0,0} count=1 Ljava/util/ArrayList;->size()I
+0111 MOVE_RESULT v0
+0112 IF_GE v2,v0 ->430
+0114 INVOKE_VIRTUAL {8,0,0,0,0} count=1 Ljava/util/ArrayList;->size()I
+0117 MOVE_RESULT v0
+0118 IF_GE v2,v0 ->430
+011a INVOKE_STATIC {3,2,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+011d MOVE_RESULT_OBJECT v1
+011e INVOKE_STATIC {8,2,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+0121 MOVE_RESULT_OBJECT v0
+0122 INVOKE_STATIC {1,0,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0125 MOVE_RESULT v0
+0126 IF_NEZ v0 ->426
+0128 ADD_INT_LIT8 v0,v2 #-1
+012a INVOKE_STATIC {3,0,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+012d MOVE_RESULT_OBJECT v0
+012e IF_EQZ v0 ->474
+0130 INVOKE_VIRTUAL {5,6,0,0,0} count=3 Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+0133 IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLIZ:Ljava/util/HashMap;
+0135 INVOKE_VIRTUAL {0,6,0,0,0} count=2 Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;
+0138 MOVE_RESULT_OBJECT v4
+0139 CHECK_CAST v4 LX/0rtL;
+013b INVOKE_VIRTUAL {12,14,0,0,0} count=2 Lcom/bytedance/hox/Hox;->bU2(Ljava/lang/String;)LX/0rtL;
+013e MOVE_RESULT_OBJECT v0
+013f INVOKE_VIRTUAL {0,0,0,0,0} count=1 LX/0rtL;->LJIJI()Ljava/util/LinkedList;
+0142 MOVE_RESULT_OBJECT v0
+0143 INVOKE_VIRTUAL {0,0,0,0,0} count=1 Ljava/util/AbstractSequentialList;->iterator()Ljava/util/Iterator;
+0146 MOVE_RESULT_OBJECT v5
+0147 INSTANCE_OF v0,v4 LX/0rtH;
+0149 IF_EQZ v0 ->424
+014b CHECK_CAST v4 LX/0rtH;
+014d CONST_STRING v0 hox_skip_node
+014f INVOKE_VIRTUAL {13,0,7,0,0} count=3 Landroid/os/BaseBundle;->getString(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+0152 MOVE_RESULT_OBJECT v3
+0153 INVOKE_INTERFACE {5,0,0,0,0} count=1 Ljava/util/Iterator;->hasNext()Z
+0156 MOVE_RESULT v0
+0157 IF_EQZ v0 ->511
+0159 IF_EQZ v4 ->511
+015b INVOKE_INTERFACE {5,0,0,0,0} count=1 Ljava/util/Iterator;->next()Ljava/lang/Object;
+015e MOVE_RESULT_OBJECT v2
+015f CHECK_CAST v2 LX/0rtL;
+0161 IGET_OBJECT v0,v2 LX/0rtL;->LL:LX/0rtH;
+0163 INVOKE_STATIC {4,0,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0166 MOVE_RESULT v0
+0167 IF_EQZ v0 ->339
+0169 IF_NEZ v15 ->371
+016b IGET_OBJECT v0,v4 LX/0rtH;->LLIZ:LX/0rtL;
+016d INVOKE_STATIC {0,2,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0170 MOVE_RESULT v0
+0171 IF_NEZ v0 ->414
+0173 CONST_4 v1 #1
+0174 IF_EQZ v3 ->390
+0176 INVOKE_VIRTUAL {3,0,0,0,0} count=1 Ljava/lang/String;->length()I
+0179 MOVE_RESULT v0
+017a IF_EQZ v0 ->390
+017c INVOKE_VIRTUAL {4,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+017f MOVE_RESULT_OBJECT v0
+0180 INVOKE_STATIC {0,3,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0183 MOVE_RESULT v0
+0184 IF_NEZ v0 ->414
+0186 INVOKE_VIRTUAL {4,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+0189 MOVE_RESULT_OBJECT v0
+018a INVOKE_VIRTUAL {13,0,0,0,0} count=2 Landroid/os/BaseBundle;->containsKey(Ljava/lang/String;)Z
+018d MOVE_RESULT v0
+018e IF_NEZ v0 ->407
+0190 INVOKE_VIRTUAL {4,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+0193 MOVE_RESULT_OBJECT v0
+0194 INVOKE_VIRTUAL {13,0,1,0,0} count=3 Landroid/os/BaseBundle;->putBoolean(Ljava/lang/String;Z)V
+0197 INVOKE_VIRTUAL {2,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+019a MOVE_RESULT_OBJECT v0
+019b INVOKE_VIRTUAL {4,13,0,0,0} count=3 LX/0rtH;->LJJIIZ(Landroid/os/Bundle;Ljava/lang/String;)V
+019e INSTANCE_OF v0,v2 LX/0rtH;
+01a0 IF_EQZ v0 ->422
+01a2 MOVE_OBJECT v4,v2
+01a3 CHECK_CAST v4 LX/0rtH;
+01a5 GOTO ->339
+01a6 MOVE_OBJECT v4,v7
+01a7 GOTO ->339
+01a8 MOVE_OBJECT v4,v7
+01a9 GOTO ->333
+01aa ADD_INT_LIT8 v2,v2 #1
+01ac GOTO_16 ->270
+01ae INVOKE_VIRTUAL {3,0,0,0,0} count=1 Ljava/util/ArrayList;->size()I
+01b1 MOVE_RESULT v0
+01b2 ADD_INT_LIT8 v1,v0 #-1
+01b4 INVOKE_VIRTUAL {8,0,0,0,0} count=1 Ljava/util/ArrayList;->size()I
+01b7 MOVE_RESULT v0
+01b8 ADD_INT_LIT8 v0,v0 #-1
+01ba INVOKE_STATIC {1,0,0,0,0} count=2 Ljava/lang/Math;->min(II)I
+01bd MOVE_RESULT v2
+01be IF_LEZ v2 ->474
+01c0 INVOKE_STATIC {3,2,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+01c3 MOVE_RESULT_OBJECT v1
+01c4 INVOKE_STATIC {8,2,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+01c7 MOVE_RESULT_OBJECT v0
+01c8 INVOKE_STATIC {1,0,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+01cb MOVE_RESULT v0
+01cc IF_EQZ v0 ->474
+01ce INVOKE_STATIC {3,2,0,0,0} count=2 Lcom/bytedance/mt/protector/impl/collections/ListProtector;->get(Ljava/util/List;I)Ljava/lang/Object;
+01d1 MOVE_RESULT_OBJECT v0
+01d2 GOTO_16 ->302
+01d4 MOVE_OBJECT v0,v7
+01d5 GOTO_16 ->180
+01d7 MOVE_OBJECT v0,v7
+01d8 GOTO_16 ->148
+01da NEW_INSTANCE v0 Ljava/lang/IllegalStateException;
+01dc INVOKE_DIRECT {0,4,0,0,0} count=2 Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V
+01df THROW v0
+01e0 IGET_OBJECT v0,v2 LX/0rtH;->LLIZ:LX/0rtL;
+01e2 IF_EQZ v0 ->495
+01e4 INVOKE_VIRTUAL {0,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+01e7 MOVE_RESULT_OBJECT v0
+01e8 INVOKE_STATIC {0,14,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+01eb MOVE_RESULT v0
+01ec IF_EQZ v0 ->495
+01ee RETURN_VOID
+01ef INVOKE_VIRTUAL {2,13,14,0,0} count=3 LX/0rtH;->LJJIIZ(Landroid/os/Bundle;Ljava/lang/String;)V
+01f2 INVOKE_VIRTUAL {2,0,0,0,0} count=1 LX/0rtH;->LJJII()Z
+01f5 MOVE_RESULT v0
+01f6 IF_EQZ v0 ->511
+01f8 IGET_OBJECT v1,v12 Lcom/bytedance/hox/Hox;->LLJ:Ljava/util/concurrent/CopyOnWriteArrayList;
+01fa IGET_OBJECT v0,v12 Lcom/bytedance/hox/Hox;->LLJI:Ljava/util/concurrent/CopyOnWriteArrayList;
+01fc INVOKE_VIRTUAL {2,14,13,1,0} count=5 LX/0rtH;->LJJIFFI(Ljava/lang/String;Landroid/os/Bundle;Ljava/util/concurrent/CopyOnWriteArrayList;Ljava/util/concurrent/CopyOnWriteArrayList;)V
+01ff RETURN_VOID

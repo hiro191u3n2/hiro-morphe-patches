@@ -1,0 +1,38 @@
+{
+  "schema": "homeback117-publication-v1",
+  "patch_version": "1.1.7",
+  "bundle_version": "1.0.243",
+  "baseline_version": "1.0.242",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/03272431ddd282542ebbf57e1c6e2d50584425e1/downloads/Hiro_Morphe_Patches_v1.0.242.mpp",
+  "baseline_sha256": "c6ceb2b9c00385940c3a89349fa6f978bfc2f0bf9b84de5b17dc4e91b98e21b8",
+  "release_title": "Instagram Reels exit / TikTok profile Home fix v1.1.7 / Hiro Morphe Patches v1.0.243",
+  "summary": "提供されたAPKの実装を照合し、Instagramのリール終了とTikTokプロフィールのホーム復帰を修正。端末動作は未確認。",
+  "validation_basis": "Provided already-patched APK static audits plus local full SDK/D8/Morphe build and host tests; two clean CI builds must match the frozen local MPP and QA. Synthetic application fixtures are separate from original APK validation; physical Android untested.",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.7.mpp": {
+      "bytes": 68541,
+      "sha256": "b0efb5809cfa226bd1044dfddd4b105537b3e3df7cc2f9262ac97ed370ac17a1"
+    },
+    "Hiro_Morphe_Patches_v1.0.243.mpp": {
+      "bytes": 18142315,
+      "sha256": "36447c06165c50b33ae881bed62a185ae3e93feaa90511f0d9417c96eaa62842"
+    }
+  },
+  "local_expected_qa_sha256": "5853d6e292f831d865c0aca7f5421a59437e8cbda072f85022864e788d1d5c36",
+  "local_expected_host": "SUCCESS: 292 cases, 1392 assertions",
+  "local_expected_audit_sources": {
+    "evidence/ProvidedApkHookAudit.java": "5c83da22bd47a670e809a3ac17002fff54e4d354b46a024a44a3cefd7770ab6c",
+    "evidence/summarize_provided_apk_audit.py": "9457c544a686dc5037a281c936bc5a6899d5fc7f28439157c7122e53d28017a7"
+  },
+  "expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.7.mpp": {
+      "bytes": 68541,
+      "sha256": "b0efb5809cfa226bd1044dfddd4b105537b3e3df7cc2f9262ac97ed370ac17a1"
+    },
+    "Hiro_Morphe_Patches_v1.0.243.mpp": {
+      "bytes": 18142315,
+      "sha256": "36447c06165c50b33ae881bed62a185ae3e93feaa90511f0d9417c96eaa62842"
+    }
+  },
+  "expected_qa_sha256": "5853d6e292f831d865c0aca7f5421a59437e8cbda072f85022864e788d1d5c36"
+}
