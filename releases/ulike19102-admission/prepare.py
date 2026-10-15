@@ -111,7 +111,7 @@ def main():
  canonical=json.dumps(identity_manifest,sort_keys=True,separators=(',',':')).encode('utf-8')
  digest=hashlib.sha256(b'ulike19102-compute-fingerprint-v1\\0'+canonical);pins={}''')
  sub('native1960/build_native1960.py',"report['computeFingerprintSchema']='ulike1990-compute-fingerprint-v1'","report['computeFingerprintSchema']='ulike19102-compute-fingerprint-v1'")
- sub('ProcessingTiming1947.java','public static final String VERSION="1.9.101";','public static final String VERSION="1.9.102";')
+ sub('ProcessingTiming1947.java','public static final String VERSION = "1.9.101";','public static final String VERSION = "1.9.102";')
  sub('Transform19101.java','static final String OLD_DESCRIPTION="v1.9.100（v1.9.99基準）";','static final String OLD_DESCRIPTION="v1.9.101（v1.9.100基準）";')
  old='static final String DESCRIPTION="v1.9.101（v1.9.100基準）保存後の検証履歴を上限付きで保存し、プロセスと現在・保存時の状態を区別。復元した記録数を正しく表示。画素処理・画質・解像度・既存の認定条件を維持。この版以降の履歴が対象。実機速度は未測定。";'
  new='static final String DESCRIPTION="v1.9.102（v1.9.101基準）連結用の全画像容量と区間転送予算を分離。独立CPU比較を維持して検証時の標準Strong・モデルGPU選択を撮影経路に合わせ、経路変更時は再認定。診断専用ファイルの変更と数値・採用条件の変更を区別。例外集計と再試行を整合。実機速度は未測定。";'
