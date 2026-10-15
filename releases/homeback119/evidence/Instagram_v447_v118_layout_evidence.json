@@ -1,0 +1,87 @@
+{
+  "schema": "instagram-v447-back118-layout-evidence-v1",
+  "inputs": [
+    {
+      "file": "Instagram_v447.0.0.55.81(2147483647).apk",
+      "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+      "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99"
+    },
+    {
+      "file": "Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+      "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+      "packed_layout_asset_sha256": "46861f3826ecaa66e72c1214ee006be1bb691536d94082a44e0e399e7a34bf99"
+    }
+  ],
+  "packed_layout_source": "assets/layouts.bin.xz; each L|offset|size|checksum value in resources.arsc identifies an AXML slice in decompressed assets/layouts.bin",
+  "resources": {
+    "0x7f0e09f1": {
+      "name": "layout/layout_clips_comment_composer",
+      "file": "L|4B8664|6EC|57C7"
+    },
+    "0x7f0e0a4a": {
+      "name": "layout/layout_clips_viewer_container",
+      "file": "L|4F0EC0|510|480F"
+    },
+    "0x7f0e0a4e": {
+      "name": "layout/layout_clips_viewer_fragment",
+      "file": "L|4F22C4|2748|3A73"
+    },
+    "0x7f0e0a4f": {
+      "name": "layout/layout_clips_viewer_fragment_two_pane_comments",
+      "file": "L|4F4A0C|250|28CC"
+    },
+    "0x7f0e0a59": {
+      "name": "layout/layout_clips_viewer_refresh_container",
+      "file": "L|4FB67C|234|C36A"
+    }
+  },
+  "primary_false_positive": {
+    "layout_path": [
+      "root_clips_layout",
+      "clips_linear_layout_container",
+      "clips_footer_mask_container",
+      "clips_comment_composer_stub => layout_clips_comment_composer",
+      "anonymous IgFrameLayout",
+      "comment_composer_inner_layout",
+      "comment_composer_text_view"
+    ],
+    "prompt_type": "com.instagram.common.ui.base.IgTextView; not an editor",
+    "native_attributes": "Footer inner layout is match_parent/wrap_content; prompt is wrap_content with layout_weight=1. Normal footer CTA can thus satisfy old width threshold.",
+    "v117_condition": "wide && commentContainer(id) && contains(id, \"composer\", \"edit_text\")",
+    "failure": "The condition sets comments/blocked for the inline noneditable composer and forwards native Back instead of exiting Reels.",
+    "v118_scope": "Exact prompt IDs only, inside clips_footer_mask_container, lower-screen compact geometry, positive full viewer; descendants, editors, actual comments/share panels retain veto."
+  },
+  "caption_id": {
+    "id": "0x7f0b0b55",
+    "name": "id/clips_caption_component",
+    "layout_declares_id": false,
+    "programmatic_renderers": [
+      "LX/6YR;->A0l(LX/6zQ;)LX/3i0; (LegacyClipsVideoCaptionComponent)",
+      "LX/Ibv;->A0l(LX/6zQ;)LX/3i0; (ClipsVideoCaptionComponent)"
+    ],
+    "view_id_assignment": "Both renderers pass 0x7f0b0b55 to LX/7oV;->A0G(LX/09S;I)LX/09S;. Its legacy property LX/7oW;->A0S is VIEW_ID; modern property LX/moK;->AV8 invokes android.view.View.setId(int).",
+    "v118_scope": "Only generic comment-heading text detection is exempt within this caption component and a confirmed full viewer. Named actual comment panels still veto."
+  },
+  "host_regression": {
+    "test": "Back118InstagramTest.java",
+    "cases": 9,
+    "v117_failed": 6,
+    "v118_failed": 0,
+    "independence": "Caption cases hide the footer, so their old-version failures independently prove the text-heading false positive.",
+    "checks": [
+      "exit and remove own Recents task",
+      "Android key down/up exits once",
+      "actual comments first close then next Back exits",
+      "share sheet native close",
+      "real editor still blocks",
+      "same composer outside footer still blocks",
+      "three caption texts do not block"
+    ]
+  },
+  "limits": [
+    "Packed layout and DEX evidence is static from supplied APKs, not a captured device hierarchy.",
+    "Host fixtures use exact native IDs and relative hierarchy, with representative dimensions; exact per-device geometry was not recorded.",
+    "No physical Android device run was available; these tests establish the concrete old/new decision-path regression, not a device-level guarantee.",
+    "No native CommentsTwoPaneLayout.A03 Back-handler claim is made; its earlier observed Reels-fragment read belongs to onConfigurationChanged."
+  ]
+}

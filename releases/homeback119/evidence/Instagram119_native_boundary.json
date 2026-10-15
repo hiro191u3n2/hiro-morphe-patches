@@ -1,0 +1,63 @@
+{
+  "schema": "homeback119-instagram-native-boundary-v1",
+  "result": "PASS",
+  "physical_android_tested": false,
+  "full_apk_rebuild_tested": false,
+  "input_apks_modified": false,
+  "scope": "In-memory application of new targeted Reels hook to exact supplied v447 class; all original 408 instructions restored byte-for-byte after removing hook. Both original native popup/nested-sheet early returns and all no-layer branch destinations independently verified. Device symptom cannot be confirmed without actual updated APK/device trace.",
+  "fingerprint": {
+    "class_name_guessed": false,
+    "native_method": "LX/8Zv;->onBackPressed()Z",
+    "matching_method_count_each_apk": 1,
+    "boundary_instruction": 17,
+    "boundary_code_unit": 31,
+    "scratch_register": 0,
+    "added_instructions": 4,
+    "native_instructions": 408,
+    "other_methods_unchanged": 248,
+    "assertions_each_apk": 265,
+    "native_prefix_preserved": true,
+    "no_layer_branch_indices": [
+      8,
+      12,
+      15
+    ],
+    "no_layer_branches_retargeted": true,
+    "restored_native_method_byte_identical": true,
+    "changed_guard_mutations_rejected": 3
+  },
+  "inputs": [
+    {
+      "file": "/workspace/scratch/d238776e5025/inputs/apks/Instagram_v447.0.0.55.81(2147483647).apk",
+      "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8"
+    },
+    {
+      "file": "/workspace/scratch/d238776e5025/inputs/apks/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+      "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670"
+    }
+  ],
+  "host_regression": {
+    "cases": 15,
+    "assertions": 48,
+    "result": "PASS"
+  },
+  "proven_findings": [
+    "Existing patch instruments Activity/Dialog onBackPressed()V but not native Reels Fragment onBackPressed()Z; native pass-through suppresses generic tryBack in that inner route.",
+    "Native Reels method contains source-specific navigation and scroll-to-top instead of task removal; new hook precedes it after original two native layer guards.",
+    "Full-scene scanner can return unknown while the actual Reels fragment own view is valid; native handler now supplies identity without weakening keyboard/layer guards.",
+    "Foreground fragment/view detection had inconsistent ancestor-alpha/root-bounds handling, now unified."
+  ],
+  "files": {
+    "src/runtime/InstagramBack.java": "3d14b6abc5f8ec4da23ae283d6ca7b1696d297d7abacb89ed8dbd389205a2fd5",
+    "src/runtime/InstagramReels.java": "b6c60d428d15fc20e7d6fa44ceaacce66bf827df7639515eba9e900f7c1bc9c8",
+    "src/patch/OneBackPatch.java": "794f0459302a8ce7255e3c4136fc9f8270346c4b38ad575d5509a8f541811315",
+    "src/test-runtime/Back119InstagramTest.java": "7327907912ed8a9ff024fe51bcd563f07b0c738a8fda4f7c27fa936a806e3851",
+    "evidence/Instagram119DexAudit.java": "6ea157038d515489d1f502240036fbd74434329d58a5b688a4633ffa7a0c4f6c"
+  },
+  "native_boundary_required_for_patch": "OneBackPatch.applyAll applies this hook on semantic match; previous patched input must be rebuilt through the patch application pipeline to include it.",
+  "logs": {
+    "Instagram119_native_boundary_v447.txt": "409824f5756654d4b4e01e1e1c2c6abccbe276bbc5ef1d9288b7f1a9d85f67a1",
+    "Instagram119_native_boundary_v310.txt": "409824f5756654d4b4e01e1e1c2c6abccbe276bbc5ef1d9288b7f1a9d85f67a1",
+    "Instagram119_regression_after.txt": "bf54566ab7ca9c2a5c497ab89f8a128946f10364a87bccd827ee1558d80489ab"
+  }
+}

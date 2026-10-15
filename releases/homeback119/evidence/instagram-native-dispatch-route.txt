@@ -1,0 +1,1445 @@
+CLASS classes.dex LX/01h; flags=17 EXTENDS Ljava/lang/Object; interfaces=[]
+FIELD LX/01h;->A00:LX/01a; flags=1
+FIELD LX/01h;->A01:Z flags=1
+FIELD LX/01h;->A02:Landroid/window/OnBackInvokedCallback; flags=1
+FIELD LX/01h;->A03:Landroid/window/OnBackInvokedDispatcher; flags=1
+FIELD LX/01h;->A04:Z flags=1
+FIELD LX/01h;->A05:LX/2ps; flags=17
+FIELD LX/01h;->A06:Ljava/lang/Runnable; flags=17
+DECLARED LX/01h;-><init>()V flags=65537
+DECLARED LX/01h;-><init>(Ljava/lang/Runnable;)V flags=65537
+DECLARED LX/01h;->A00(LX/01h;)V flags=25
+DECLARED LX/01h;->A01(LX/01h;)V flags=25
+DECLARED LX/01h;->A02(Z)V flags=18
+DECLARED LX/01h;->A03(LX/01a;)LX/01g; flags=17
+DECLARED LX/01h;->A04()V flags=17
+DECLARED LX/01h;->A05(Landroid/window/OnBackInvokedDispatcher;)V flags=17
+DECLARED LX/01h;->A06(LX/01a;LX/00T;)V flags=17
+METHOD LX/01h;->A00(LX/01h;)V
+0 IGET_OBJECT LX/01h;->A00:LX/01a; v1,v4
+2 CONST_4 #0 v3
+3 IF_NEZ v1 offset 31
+5 IGET_OBJECT LX/01h;->A05:LX/2ps; v1,v4
+7 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I {1,0,0,0,0}x1
+10 MOVE_RESULT v0
+11 INVOKE_VIRTUAL Ljava/util/AbstractList;->listIterator(I)Ljava/util/ListIterator; {1,0,0,0,0}x2
+14 MOVE_RESULT_OBJECT v2
+15 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {2,0,0,0,0}x1
+18 MOVE_RESULT v0
+19 IF_EQZ v0 offset 23
+21 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {2,0,0,0,0}x1
+24 MOVE_RESULT_OBJECT v1
+25 MOVE_OBJECT v0,v1
+26 CHECK_CAST LX/01a; v0
+28 IGET_BOOLEAN LX/01a;->A01:Z v0,v0
+30 IF_EQZ v0 offset -15
+32 CHECK_CAST LX/01a; v1
+34 IPUT_OBJECT LX/01h;->A00:LX/01a; v3,v4
+36 IF_EQZ v1 offset 5
+38 INVOKE_VIRTUAL LX/01a;->A01()V {1,0,0,0,0}x1
+41 RETURN_VOID
+42 MOVE_OBJECT v1,v3
+43 GOTO offset -11
+METHOD LX/01h;->A04()V
+0 IGET_OBJECT LX/01h;->A00:LX/01a; v1,v4
+2 CONST_4 #0 v3
+3 IF_NEZ v1 offset 31
+5 IGET_OBJECT LX/01h;->A05:LX/2ps; v1,v4
+7 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I {1,0,0,0,0}x1
+10 MOVE_RESULT v0
+11 INVOKE_VIRTUAL Ljava/util/AbstractList;->listIterator(I)Ljava/util/ListIterator; {1,0,0,0,0}x2
+14 MOVE_RESULT_OBJECT v2
+15 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {2,0,0,0,0}x1
+18 MOVE_RESULT v0
+19 IF_EQZ v0 offset 31
+21 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {2,0,0,0,0}x1
+24 MOVE_RESULT_OBJECT v1
+25 MOVE_OBJECT v0,v1
+26 CHECK_CAST LX/01a; v0
+28 IGET_BOOLEAN LX/01a;->A01:Z v0,v0
+30 IF_EQZ v0 offset -15
+32 CHECK_CAST LX/01a; v1
+34 IPUT_OBJECT LX/01h;->A00:LX/01a; v3,v4
+36 IF_EQZ v1 offset 6
+38 INVOKE_VIRTUAL LX/01a;->A06()V {1,0,0,0,0}x1
+41 RETURN_VOID
+42 IGET_OBJECT LX/01h;->A06:Ljava/lang/Runnable; v0,v4
+44 IF_EQZ v0 offset -3
+46 INVOKE_INTERFACE Ljava/lang/Runnable;->run()V {0,0,0,0,0}x1
+49 RETURN_VOID
+50 MOVE_OBJECT v1,v3
+51 GOTO offset -19
+CLASS classes2.dex LX/2yG; flags=17 EXTENDS Ljava/lang/Object; interfaces=[LX/OhY;]
+FIELD LX/2yG;->A00:F flags=1
+FIELD LX/2yG;->A01:F flags=1
+FIELD LX/2yG;->A02:F flags=1
+FIELD LX/2yG;->A03:I flags=1
+FIELD LX/2yG;->A04:J flags=1
+FIELD LX/2yG;->A05:Landroid/util/Pair; flags=1
+FIELD LX/2yG;->A06:Landroid/view/MotionEvent; flags=1
+FIELD LX/2yG;->A07:Landroid/view/View; flags=1
+FIELD LX/2yG;->A08:Landroid/view/View; flags=1
+FIELD LX/2yG;->A09:Landroid/view/View; flags=1
+FIELD LX/2yG;->A0A:Landroid/view/View; flags=1
+FIELD LX/2yG;->A0B:Landroid/widget/FrameLayout$LayoutParams; flags=1
+FIELD LX/2yG;->A0C:LX/4Ka; flags=1
+FIELD LX/2yG;->A0D:LX/3eI; flags=1
+FIELD LX/2yG;->A0E:Lcom/instagram/ui/swipenavigation/container/SwipeNavigationContainer; flags=1
+FIELD LX/2yG;->A0F:Ljava/lang/String; flags=1
+FIELD LX/2yG;->A0G:Ljava/lang/ref/WeakReference; flags=1
+FIELD LX/2yG;->A0H:Ljava/lang/ref/WeakReference; flags=1
+FIELD LX/2yG;->A0I:Ljava/lang/ref/WeakReference; flags=1
+FIELD LX/2yG;->A0J:Ljava/lang/ref/WeakReference; flags=1
+FIELD LX/2yG;->A0K:Z flags=1
+FIELD LX/2yG;->A0L:Z flags=1
+FIELD LX/2yG;->A0M:Z flags=1
+FIELD LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; flags=17
+FIELD LX/2yG;->A0O:Lcom/instagram/common/session/UserSession; flags=17
+FIELD LX/2yG;->A0P:LX/2xZ; flags=17
+FIELD LX/2yG;->A0Q:LX/2yJ; flags=17
+FIELD LX/2yG;->A0R:LX/2yH; flags=17
+FIELD LX/2yG;->A0S:Ljava/util/EnumSet; flags=17
+FIELD LX/2yG;->A0T:LX/Esp; flags=17
+DECLARED LX/2yG;-><init>(Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;LX/2xZ;LX/CAZ;)V flags=65537
+DECLARED LX/2yG;->A00(LX/0dj;Lcom/instagram/common/session/UserSession;LX/2xZ;)Landroidx/fragment/app/Fragment; flags=25
+DECLARED LX/2yG;->A01(LX/2yG;)Landroidx/fragment/app/Fragment; flags=25
+DECLARED LX/2yG;->A02(LX/2yG;)Landroidx/fragment/app/Fragment; flags=25
+DECLARED LX/2yG;->A03(LX/2yG;)LX/3eH; flags=25
+DECLARED LX/2yG;->A04(LX/2yG;)LX/3eH; flags=25
+DECLARED LX/2yG;->A05(LX/2yG;)Lcom/instagram/ui/swipenavigation/container/SwipeNavigationContainer; flags=25
+DECLARED LX/2yG;->A06(LX/0ao;LX/2yl;Z)V flags=18
+DECLARED LX/2yG;->A07(LX/0dj;LX/2yG;IZZ)V flags=25
+DECLARED LX/2yG;->A08(LX/2yG;)V flags=25
+DECLARED LX/2yG;->A09(LX/2yG;LX/2yI;)V flags=25
+DECLARED LX/2yG;->A0A(LX/2yG;LX/2yI;Ljava/lang/String;Z)V flags=25
+DECLARED LX/2yG;->A0B(LX/2yG;Ljava/lang/String;)V flags=25
+DECLARED LX/2yG;->A0C(LX/2yG;Z)V flags=25
+DECLARED LX/2yG;->A0D(LX/2yG;LX/2yl;)Z flags=25
+DECLARED LX/2yG;->A0E(Ljava/lang/String;)Z flags=25
+DECLARED LX/2yG;->A0F()LX/3eH; flags=17
+DECLARED LX/2yG;->A0G()Ljava/lang/String; flags=17
+DECLARED LX/2yG;->A0H(LX/2yH;Ljava/lang/String;FZ)V flags=17
+DECLARED LX/2yG;->A0I()Z flags=17
+DECLARED LX/2yG;->A0J()Z flags=17
+DECLARED LX/2yG;->A0K()Z flags=17
+DECLARED LX/2yG;->A0L()Z flags=17
+DECLARED LX/2yG;->A0M()Z flags=17
+DECLARED LX/2yG;->A0N(Landroid/view/MotionEvent;)Z flags=17
+DECLARED LX/2yG;->Bj0()LX/CAZ; flags=17
+DECLARED LX/2yG;->DY2()LX/2yH; flags=17
+DECLARED LX/2yG;->HXO(Lcom/instagram/ui/swipenavigation/container/PositionConfig;)V flags=17
+METHOD LX/2yG;->A00(LX/0dj;Lcom/instagram/common/session/UserSession;LX/2xZ;)Landroidx/fragment/app/Fragment;
+0 INVOKE_STATIC LX/7zy;->A0C(Lcom/instagram/common/session/UserSession;)Z {4,0,0,0,0}x1
+3 MOVE_RESULT v0
+4 IF_EQZ v0 offset 59
+6 IGET_OBJECT LX/0dj;->A0V:LX/0dw; v0,v3
+8 INVOKE_VIRTUAL LX/0dw;->A04()Ljava/util/List; {0,0,0,0,0}x1
+11 MOVE_RESULT_OBJECT v0
+12 INVOKE_STATIC LX/5B5;->A0C(Ljava/lang/Object;)V {0,0,0,0,0}x1
+15 INVOKE_INTERFACE Ljava/util/List;->iterator()Ljava/util/Iterator; {0,0,0,0,0}x1
+18 MOVE_RESULT_OBJECT v4
+19 INVOKE_INTERFACE Ljava/util/Iterator;->hasNext()Z {4,0,0,0,0}x1
+22 MOVE_RESULT v1
+23 CONST_4 #0 v0
+24 IF_EQZ v1 offset 36
+26 INVOKE_INTERFACE Ljava/util/Iterator;->next()Ljava/lang/Object; {4,0,0,0,0}x1
+29 MOVE_RESULT_OBJECT v3
+30 MOVE_OBJECT v2,v3
+31 CHECK_CAST Landroidx/fragment/app/Fragment; v2
+33 INSTANCE_OF LX/0jG; v1,v2
+35 IF_EQZ v1 offset -16
+37 CHECK_CAST LX/0jG; v2
+39 IGET_OBJECT LX/0jG;->A07:LX/Esp; v1,v2
+41 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {1,0,0,0,0}x1
+44 MOVE_RESULT_OBJECT v2
+45 INVOKE_VIRTUAL LX/2xZ;->A0B()LX/2yl; {5,0,0,0,0}x1
+48 MOVE_RESULT_OBJECT v1
+49 IF_EQZ v1 offset 4
+51 IGET_OBJECT LX/2yl;->A03:Ljava/lang/String; v0,v1
+53 INVOKE_STATIC LX/5B5;->areEqual(Ljava/lang/Object;Ljava/lang/Object;)Z {2,0,0,0,0}x2
+56 MOVE_RESULT v0
+57 IF_EQZ v0 offset -38
+59 MOVE_OBJECT v0,v3
+60 CHECK_CAST Landroidx/fragment/app/Fragment; v0
+62 RETURN_OBJECT v0
+63 CONST #7f0b226f v0
+66 INVOKE_VIRTUAL LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; {3,0,0,0,0}x2
+69 MOVE_RESULT_OBJECT v0
+70 RETURN_OBJECT v0
+METHOD LX/2yG;->A04(LX/2yG;)LX/3eH;
+0 IGET_OBJECT LX/2yG;->A0P:LX/2xZ; v1,v6
+2 SGET_OBJECT LX/2yl;->A0D:LX/2yl; v0
+4 INVOKE_VIRTUAL LX/2xZ;->A0W(LX/2yl;)Z {1,0,0,0,0}x2
+7 MOVE_RESULT v0
+8 CONST_4 #0 v5
+9 IF_NEZ v0 offset 3
+11 RETURN_OBJECT v5
+12 IGET_OBJECT LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; v0,v6
+14 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {0,0,0,0,0}x1
+17 MOVE_RESULT_OBJECT v1
+18 INVOKE_STATIC LX/5B5;->A0C(Ljava/lang/Object;)V {1,0,0,0,0}x1
+21 IGET_OBJECT LX/2yG;->A0O:Lcom/instagram/common/session/UserSession; v0,v6
+23 INVOKE_STATIC LX/7zy;->A0C(Lcom/instagram/common/session/UserSession;)Z {0,0,0,0,0}x1
+26 MOVE_RESULT v0
+27 CONST_STRING_JUMBO fragment_feed_switcher v4
+30 IF_EQZ v0 offset 99
+32 IGET_OBJECT LX/0dj;->A0V:LX/0dw; v0,v1
+34 INVOKE_VIRTUAL LX/0dw;->A04()Ljava/util/List; {0,0,0,0,0}x1
+37 MOVE_RESULT_OBJECT v0
+38 INVOKE_STATIC LX/5B5;->A0C(Ljava/lang/Object;)V {0,0,0,0,0}x1
+41 NEW_INSTANCE Ljava/util/ArrayList; v3
+43 INVOKE_DIRECT Ljava/util/ArrayList;-><init>()V {3,0,0,0,0}x1
+46 INVOKE_INTERFACE Ljava/util/List;->iterator()Ljava/util/Iterator; {0,0,0,0,0}x1
+49 MOVE_RESULT_OBJECT v2
+50 INVOKE_INTERFACE Ljava/util/Iterator;->hasNext()Z {2,0,0,0,0}x1
+53 MOVE_RESULT v0
+54 IF_EQZ v0 offset 14
+56 INVOKE_INTERFACE Ljava/util/Iterator;->next()Ljava/lang/Object; {2,0,0,0,0}x1
+59 MOVE_RESULT_OBJECT v1
+60 INSTANCE_OF LX/0jG; v0,v1
+62 IF_EQZ v0 offset -12
+64 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->add(Ljava/lang/Object;)Z {3,1,0,0,0}x2
+67 GOTO offset -17
+68 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->iterator()Ljava/util/Iterator; {3,0,0,0,0}x1
+71 MOVE_RESULT_OBJECT v2
+72 INVOKE_INTERFACE Ljava/util/Iterator;->hasNext()Z {2,0,0,0,0}x1
+75 MOVE_RESULT v0
+76 IF_EQZ v0 offset 51
+78 INVOKE_INTERFACE Ljava/util/Iterator;->next()Ljava/lang/Object; {2,0,0,0,0}x1
+81 MOVE_RESULT_OBJECT v1
+82 MOVE_OBJECT v0,v1
+83 CHECK_CAST LX/0jG; v0
+85 IGET_OBJECT LX/0jG;->A07:LX/Esp; v0,v0
+87 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {0,0,0,0,0}x1
+90 MOVE_RESULT_OBJECT v0
+91 INVOKE_VIRTUAL Ljava/lang/String;->equals(Ljava/lang/Object;)Z {4,0,0,0,0}x2
+94 MOVE_RESULT v0
+95 IF_EQZ v0 offset -23
+97 CHECK_CAST LX/0jG; v1
+99 IF_EQZ v1 offset 26
+101 INVOKE_VIRTUAL LX/0jG;->A03()Landroidx/fragment/app/Fragment; {1,0,0,0,0}x1
+104 MOVE_RESULT_OBJECT v2
+105 INSTANCE_OF LX/3eH; v0,v2
+107 IF_EQZ v0 offset 15
+109 CHECK_CAST LX/3eH; v2
+111 IF_EQZ v2 offset 12
+113 INVOKE_INTERFACE LX/3eH;->CLO()Ljava/lang/Integer; {2,0,0,0,0}x1
+116 MOVE_RESULT_OBJECT v1
+117 SGET_OBJECT LX/008;->A01:Ljava/lang/Integer; v0
+119 IF_NE v1,v0 offset 52
+121 RETURN_OBJECT v2
+122 MOVE_OBJECT v2,v5
+123 MOVE_OBJECT v1,v5
+124 GOTO offset -7
+125 MOVE_OBJECT v2,v5
+126 GOTO offset -21
+127 MOVE_OBJECT v1,v5
+128 GOTO offset -31
+129 INVOKE_VIRTUAL LX/0dj;->A0Q(Ljava/lang/String;)Landroidx/fragment/app/Fragment; {1,4,0,0,0}x2
+132 MOVE_RESULT_OBJECT v1
+133 INSTANCE_OF LX/3gY; v0,v1
+135 IF_EQZ v0 offset 34
+137 IF_EQZ v1 offset 32
+139 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/0dj; {1,0,0,0,0}x1
+142 MOVE_RESULT_OBJECT v0
+143 IF_EQZ v0 offset 26
+145 INVOKE_VIRTUAL LX/0dj;->A0Q(Ljava/lang/String;)Landroidx/fragment/app/Fragment; {0,4,0,0,0}x2
+148 MOVE_RESULT_OBJECT v2
+149 INSTANCE_OF LX/3eH; v0,v2
+151 IF_EQZ v0 offset 15
+153 CHECK_CAST LX/3eH; v2
+155 IF_EQZ v2 offset 12
+157 INVOKE_INTERFACE LX/3eH;->CLO()Ljava/lang/Integer; {2,0,0,0,0}x1
+160 MOVE_RESULT_OBJECT v1
+161 SGET_OBJECT LX/008;->A01:Ljava/lang/Integer; v0
+163 IF_NE v1,v0 offset 8
+165 RETURN_OBJECT v2
+166 MOVE_OBJECT v2,v5
+167 MOVE_OBJECT v1,v5
+168 GOTO offset -7
+169 MOVE_OBJECT v2,v5
+170 GOTO offset -21
+171 RETURN_OBJECT v5
+METHOD LX/2yG;->A0I()Z
+0 MOVE_OBJECT_FROM16 v3,v27
+2 IGET_OBJECT LX/2yG;->A0E:Lcom/instagram/ui/swipenavigation/container/SwipeNavigationContainer; v0,v3
+4 CONST_4 #0 v1
+5 IF_EQZ v0 offset 443
+7 INVOKE_VIRTUAL LX/2yG;->A0F()LX/3eH; {3,0,0,0,0}x1
+10 MOVE_RESULT_OBJECT v6
+11 CONST_4 #1 v2
+12 IF_EQZ v6 offset 9
+14 INVOKE_INTERFACE LX/3eH;->onBackPressed()Z {6,0,0,0,0}x1
+17 MOVE_RESULT v0
+18 IF_NE v0,v2 offset 3
+20 RETURN v2
+21 INVOKE_STATIC LX/2yG;->A01(LX/2yG;)Landroidx/fragment/app/Fragment; {3,0,0,0,0}x1
+24 MOVE_RESULT_OBJECT v5
+25 INSTANCE_OF LX/3mP; v0,v5
+27 IF_EQZ v0 offset 30
+29 IGET_OBJECT LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; v0,v3
+31 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {0,0,0,0,0}x1
+34 MOVE_RESULT_OBJECT v4
+35 CONST #7f0b2274 v0
+38 INVOKE_VIRTUAL LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; {4,0,0,0,0}x2
+41 MOVE_RESULT_OBJECT v0
+42 IF_NE v5,v0 offset 15
+44 CHECK_CAST LX/3mP; v5
+46 INVOKE_VIRTUAL LX/3mP;->onBackPressed()Z {5,0,0,0,0}x1
+49 MOVE_RESULT v0
+50 IF_NEZ v0 offset -30
+52 SGET_OBJECT LX/2yI;->A04:LX/2yI; v0
+54 INVOKE_STATIC LX/2yG;->A09(LX/2yG;LX/2yI;)V {3,0,0,0,0}x2
+57 IGET_OBJECT LX/2yG;->A0H:Ljava/lang/ref/WeakReference; v0,v3
+59 IF_EQZ v0 offset 38
+61 INVOKE_VIRTUAL Ljava/lang/ref/Reference;->get()Ljava/lang/Object; {0,0,0,0,0}x1
+64 MOVE_RESULT_OBJECT v5
+65 CHECK_CAST Landroidx/fragment/app/Fragment; v5
+67 IF_EQZ v5 offset 30
+69 IGET_OBJECT LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; v0,v3
+71 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {0,0,0,0,0}x1
+74 MOVE_RESULT_OBJECT v4
+75 CONST #7f0b2274 v0
+78 INVOKE_VIRTUAL LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; {4,0,0,0,0}x2
+81 MOVE_RESULT_OBJECT v0
+82 IF_NE v5,v0 offset 15
+84 CHECK_CAST LX/Peq; v5
+86 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {5,0,0,0,0}x1
+89 MOVE_RESULT v0
+90 IF_NEZ v0 offset -70
+92 SGET_OBJECT LX/2yI;->A07:LX/2yI; v0
+94 INVOKE_STATIC LX/2yG;->A09(LX/2yG;LX/2yI;)V {3,0,0,0,0}x2
+97 IGET_OBJECT LX/2yG;->A0C:LX/4Ka; v4,v3
+99 IF_EQZ v4 offset 15
+101 INSTANCE_OF LX/Peq; v0,v4
+103 IF_EQZ v0 offset 11
+105 CHECK_CAST LX/Peq; v4
+107 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {4,0,0,0,0}x1
+110 MOVE_RESULT v0
+111 IF_EQZ v0 offset 3
+113 RETURN v2
+114 IGET_BOOLEAN LX/2yG;->A0K:Z v0,v3
+116 IF_EQZ v0 offset 31
+118 IGET_OBJECT LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; v0,v3
+120 INVOKE_VIRTUAL Landroid/app/Activity;->getIntent()Landroid/content/Intent; {0,0,0,0,0}x1
+123 MOVE_RESULT_OBJECT v4
+124 IF_EQZ v4 offset 324
+126 CONST_STRING StoryHandlerActivity.EXTRA_SHARE_INTENT v0
+128 INVOKE_VIRTUAL Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable; {4,0,0,0,0}x2
+131 MOVE_RESULT_OBJECT v4
+132 CHECK_CAST Landroid/content/Intent; v4
+134 IF_EQZ v4 offset 314
+136 CONST_STRING ShareHandlerActivity.IS_FROM_INSTAGRAM v0
+138 INVOKE_VIRTUAL Landroid/content/Intent;->getBooleanExtra(Ljava/lang/String;Z)Z {4,0,1,0,0}x3
+141 MOVE_RESULT v0
+142 IF_NE v0,v2 offset 306
+144 IPUT_BOOLEAN LX/2yG;->A0K:Z v1,v3
+146 RETURN v2
+147 IF_EQZ v6 offset 9
+149 INVOKE_INTERFACE LX/3eH;->B4y()Z {6,0,0,0,0}x1
+152 MOVE_RESULT v0
+153 IF_NE v0,v2 offset 3
+155 RETURN v1
+156 INVOKE_STATIC LX/2yG;->A05(LX/2yG;)Lcom/instagram/ui/swipenavigation/container/SwipeNavigationContainer; {3,0,0,0,0}x1
+159 MOVE_RESULT_OBJECT v0
+160 INVOKE_VIRTUAL Lcom/instagram/ui/swipenavigation/container/SwipeNavigationContainer;->getPosition()F {0,0,0,0,0}x1
+163 MOVE_RESULT v4
+164 IGET_OBJECT LX/2yG;->A0R:LX/2yH; v0,v3
+166 IGET_OBJECT LX/2yH;->A04:LX/CAZ; v7,v0
+168 CONST_16 #0 v24
+170 CONST_STRING_JUMBO back v14
+173 CMPG_FLOAT v0,v4,v24
+175 IF_NEZ v0 offset 215
+177 IGET_OBJECT LX/2yG;->A0O:Lcom/instagram/common/session/UserSession; v9,v3
+179 IGET_OBJECT LX/2yG;->A0N:Landroidx/fragment/app/FragmentActivity; v0,v3
+181 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {0,0,0,0,0}x1
+184 MOVE_RESULT_OBJECT v8
+185 INVOKE_STATIC LX/5B5;->A0C(Ljava/lang/Object;)V {8,0,0,0,0}x1
+188 IGET_OBJECT LX/2yG;->A0P:LX/2xZ; v6,v3
+190 INVOKE_STATIC LX/2yG;->A00(LX/0dj;Lcom/instagram/common/session/UserSession;LX/2xZ;)Landroidx/fragment/app/Fragment; {8,9,6,0,0}x3
+193 MOVE_RESULT_OBJECT v0
+194 IF_EQZ v0 offset 127
+196 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/0dj; {0,0,0,0,0}x1
+199 MOVE_RESULT_OBJECT v0
+200 IF_EQZ v0 offset 121
+202 INVOKE_VIRTUAL LX/0dj;->A0L()I {0,0,0,0,0}x1
+205 MOVE_RESULT v4
+206 IGET_OBJECT LX/2yG;->A0I:Ljava/lang/ref/WeakReference; v0,v3
+208 IF_EQZ v0 offset 76
+210 IGET LX/2yG;->A03:I v0,v3
+212 IF_NE v0,v4 offset 72
+214 INVOKE_STATIC LX/2yG;->A03(LX/2yG;)LX/3eH; {3,0,0,0,0}x1
+217 MOVE_RESULT_OBJECT v0
+218 IF_NEZ v0 offset 66
+220 CONST #34002 v0
+223 INVOKE_STATIC LX/1jd;->A01(I)Ljava/lang/Object; {0,0,0,0,0}x1
+226 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {9,1,0,0,0}x2
+229 MOVE_RESULT_OBJECT v10
+230 SGET_OBJECT LX/2gc;->A06:LX/2gc; v0
+232 CONST_WIDE v4
+237 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v10
+239 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWT(LX/2gc;J)Z {10,0,4,5,0}x4
+242 MOVE_RESULT v0
+243 IF_EQZ v0 offset 41
+245 CONST_4 #0 v11
+246 MOVE_OBJECT v0,v7
+247 CHECK_CAST LX/2vZ; v0
+249 IGET LX/2vZ;->A00:F v0,v0
+251 NEW_INSTANCE Lcom/instagram/ui/swipenavigation/container/PositionConfig; v10
+253 MOVE_OBJECT v12,v11
+254 MOVE_OBJECT v13,v11
+255 MOVE_OBJECT v15,v11
+256 MOVE_OBJECT_FROM16 v16,v11
+258 MOVE_OBJECT_FROM16 v17,v11
+260 MOVE_OBJECT_FROM16 v18,v11
+262 MOVE_OBJECT_FROM16 v19,v11
+264 MOVE_OBJECT_FROM16 v20,v11
+266 MOVE_OBJECT_FROM16 v21,v11
+268 MOVE_OBJECT_FROM16 v22,v11
+270 MOVE_OBJECT_FROM16 v23,v11
+272 MOVE_FROM16 v24,v0
+274 MOVE_FROM16 v25,v1
+276 MOVE_FROM16 v26,v1
+278 INVOKE_DIRECT_RANGE Lcom/instagram/ui/swipenavigation/container/PositionConfig;-><init>(LX/8US;Lcom/instagram/creation/cameraconfiguration/CameraConfiguration;LX/1mN;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;FIZ)V
+281 INVOKE_VIRTUAL LX/2yG;->HXO(Lcom/instagram/ui/swipenavigation/container/PositionConfig;)V {3,10,0,0,0}x2
+284 INVOKE_STATIC LX/2xZ;->A00(LX/2xZ;)LX/2yl; {6,0,0,0,0}x1
+287 MOVE_RESULT_OBJECT v0
+288 IF_EQZ v0 offset 160
+290 INVOKE_STATIC LX/2xZ;->A00(LX/2xZ;)LX/2yl; {6,0,0,0,0}x1
+293 MOVE_RESULT_OBJECT v4
+294 SGET_OBJECT LX/2yl;->A0A:LX/2yl; v0
+296 IF_NE v4,v0 offset 152
+298 INVOKE_STATIC LX/7zx;->A00(Lcom/instagram/common/session/UserSession;)Z {9,0,0,0,0}x1
+301 MOVE_RESULT v0
+302 IF_EQZ v0 offset 146
+304 INVOKE_STATIC LX/2yG;->A00(LX/0dj;Lcom/instagram/common/session/UserSession;LX/2xZ;)Landroidx/fragment/app/Fragment; {8,9,6,0,0}x3
+307 MOVE_RESULT_OBJECT v4
+308 INSTANCE_OF LX/Peq; v0,v4
+310 IF_EQZ v0 offset 13
+312 CHECK_CAST LX/Peq; v4
+314 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {4,0,0,0,0}x1
+317 MOVE_RESULT v0
+318 IF_EQZ v0 offset 5
+320 RETURN v2
+321 CONST_4 #0 v4
+322 GOTO offset -116
+323 IGET_OBJECT LX/2yG;->A0S:Ljava/util/EnumSet; v0,v3
+325 SGET_OBJECT LX/2yI;->A05:LX/2yI; v4
+327 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->contains(Ljava/lang/Object;)Z {0,4,0,0,0}x2
+330 MOVE_RESULT v0
+331 IF_NEZ v0 offset 5
+333 INVOKE_STATIC LX/2yG;->A0A(LX/2yG;LX/2yI;Ljava/lang/String;Z)V {3,4,14,1,0}x4
+336 CONST_4 #0 v11
+337 CHECK_CAST LX/2vZ; v7
+339 IGET LX/2vZ;->A00:F v0,v7
+341 NEW_INSTANCE Lcom/instagram/ui/swipenavigation/container/PositionConfig; v10
+343 MOVE_OBJECT v12,v11
+344 MOVE_OBJECT v13,v11
+345 MOVE_OBJECT v15,v11
+346 MOVE_OBJECT_FROM16 v16,v11
+348 MOVE_OBJECT_FROM16 v17,v11
+350 MOVE_OBJECT_FROM16 v18,v11
+352 MOVE_OBJECT_FROM16 v19,v11
+354 MOVE_OBJECT_FROM16 v20,v11
+356 MOVE_OBJECT_FROM16 v21,v11
+358 MOVE_OBJECT_FROM16 v22,v11
+360 MOVE_OBJECT_FROM16 v23,v11
+362 MOVE_FROM16 v24,v0
+364 MOVE_FROM16 v25,v1
+366 MOVE_FROM16 v26,v1
+368 INVOKE_DIRECT_RANGE Lcom/instagram/ui/swipenavigation/container/PositionConfig;-><init>(LX/8US;Lcom/instagram/creation/cameraconfiguration/CameraConfiguration;LX/1mN;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;FIZ)V
+371 INVOKE_VIRTUAL LX/2yG;->HXO(Lcom/instagram/ui/swipenavigation/container/PositionConfig;)V {3,10,0,0,0}x2
+374 IGET_OBJECT LX/2xZ;->A02:LX/2yE; v0,v6
+376 IF_EQZ v0 offset 64
+378 IGET_OBJECT LX/2yE;->A06:Ljava/util/Stack; v1,v0
+380 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I {1,0,0,0,0}x1
+383 MOVE_RESULT v0
+384 IF_LE v0,v2 offset -364
+386 INVOKE_VIRTUAL Ljava/util/Stack;->pop()Ljava/lang/Object; {1,0,0,0,0}x1
+389 RETURN v2
+390 IGET_OBJECT LX/2yG;->A0O:Lcom/instagram/common/session/UserSession; v0,v3
+392 INVOKE_STATIC LX/7zx;->A00(Lcom/instagram/common/session/UserSession;)Z {0,0,0,0,0}x1
+395 MOVE_RESULT v0
+396 XOR_INT_LIT8 #1 v26,v0
+398 CONST_4 #0 v11
+399 NEW_INSTANCE Lcom/instagram/ui/swipenavigation/container/PositionConfig; v10
+401 MOVE_OBJECT v12,v11
+402 MOVE_OBJECT v13,v11
+403 MOVE_OBJECT v15,v11
+404 MOVE_OBJECT_FROM16 v16,v11
+406 MOVE_OBJECT_FROM16 v17,v11
+408 MOVE_OBJECT_FROM16 v18,v11
+410 MOVE_OBJECT_FROM16 v19,v11
+412 MOVE_OBJECT_FROM16 v20,v11
+414 MOVE_OBJECT_FROM16 v21,v11
+416 MOVE_OBJECT_FROM16 v22,v11
+418 MOVE_OBJECT_FROM16 v23,v11
+420 MOVE_FROM16 v25,v1
+422 INVOKE_DIRECT_RANGE Lcom/instagram/ui/swipenavigation/container/PositionConfig;-><init>(LX/8US;Lcom/instagram/creation/cameraconfiguration/CameraConfiguration;LX/1mN;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;FIZ)V
+425 INVOKE_VIRTUAL LX/2yG;->HXO(Lcom/instagram/ui/swipenavigation/container/PositionConfig;)V {3,10,0,0,0}x2
+428 IF_EQZ v0 offset -408
+430 IGET_OBJECT LX/2yG;->A07:Landroid/view/View; v1,v3
+432 IF_EQZ v1 offset -412
+434 SGET_OBJECT LX/6iH;->A05:LX/6iH; v0
+436 INVOKE_STATIC LX/8uB;->A00(Landroid/view/View;LX/6iH;)V {1,0,0,0,0}x2
+439 RETURN v2
+440 CONST_STRING Required value was null. v1
+442 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+444 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+447 THROW v0
+448 RETURN v1
+CLASS classes2.dex LX/3gU; flags=17 EXTENDS Ljava/lang/Object; interfaces=[]
+FIELD LX/3gU;->A00:LX/Gnn; flags=9
+FIELD LX/3gU;->A01:LX/3gU; flags=25
+DECLARED LX/3gU;-><clinit>()V flags=65545
+DECLARED LX/3gU;-><init>()V flags=65537
+DECLARED LX/3gU;->A00(Landroid/view/View;Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;)V flags=25
+DECLARED LX/3gU;->A01(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;)V flags=25
+DECLARED LX/3gU;->A02(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;)V flags=25
+DECLARED LX/3gU;->A03(Landroidx/fragment/app/Fragment;LX/0dj;Ljava/lang/String;)V flags=25
+DECLARED LX/3gU;->A04(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;LX/0dj;Lcom/instagram/common/session/UserSession;)Z flags=25
+DECLARED LX/3gU;->A05(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;)V flags=17
+DECLARED LX/3gU;->A06(Landroidx/fragment/app/FragmentActivity;LX/0dj;Lcom/instagram/common/session/UserSession;)V flags=17
+DECLARED LX/3gU;->A07(Landroidx/fragment/app/FragmentActivity;LX/0dj;Lcom/instagram/common/session/UserSession;)V flags=17
+METHOD LX/3gU;->A00(Landroid/view/View;Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;)V
+0 CONST_4 #0 v2
+1 IF_EQZ v4 offset 37
+3 IGET_OBJECT Landroidx/fragment/app/Fragment;->mView:Landroid/view/View; v0,v4
+5 IF_EQZ v0 offset 33
+7 MOVE_OBJECT v0,v5
+8 CHECK_CAST Lcom/instagram/base/activity/BaseFragmentActivity; v0
+10 INVOKE_VIRTUAL Lcom/instagram/base/activity/BaseFragmentActivity;->BJy(Z)LX/3Bz; {0,2,0,0,0}x2
+13 MOVE_RESULT_OBJECT v0
+14 IF_EQZ v0 offset 25
+16 INVOKE_STATIC LX/5fG;->A00(Landroidx/fragment/app/Fragment;LX/3Bz;Lcom/instagram/common/session/UserSession;)Z {4,0,6,0,0}x3
+19 MOVE_RESULT v0
+20 IF_EQZ v0 offset 19
+22 INVOKE_STATIC LX/5bp;->A00(Landroid/content/Context;)I {5,0,0,0,0}x1
+25 MOVE_RESULT v1
+26 IF_NEZ v3 offset 9
+28 CONST #7f0b226f v0
+31 INVOKE_VIRTUAL Landroid/app/Activity;->requireViewById(I)Landroid/view/View; {5,0,0,0,0}x2
+34 MOVE_RESULT_OBJECT v3
+35 INVOKE_VIRTUAL Landroid/view/View;->setPadding(IIII)V {3,2,1,2,2}x5
+38 RETURN_VOID
+39 CONST_4 #0 v1
+40 GOTO offset -14
+METHOD LX/3gU;->A04(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;LX/0dj;Lcom/instagram/common/session/UserSession;)Z
+0 CONST_4 #0 v2
+1 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {7,2,0,0,0}x2
+4 CONST #7f0b226f v0
+7 INVOKE_VIRTUAL LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; {6,0,0,0,0}x2
+10 MOVE_RESULT_OBJECT v0
+11 IF_EQZ v0 offset 3
+13 MOVE_OBJECT v4,v0
+14 INSTANCE_OF LX/Peq; v0,v4
+16 CONST_4 #1 v3
+17 IF_EQZ v0 offset 11
+19 CHECK_CAST LX/Peq; v4
+21 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {4,0,0,0,0}x1
+24 MOVE_RESULT v0
+25 IF_EQZ v0 offset 3
+27 RETURN v3
+28 INVOKE_STATIC LX/0dk;->A01(LX/0dj;)Z {6,0,0,0,0}x1
+31 MOVE_RESULT v0
+32 IF_EQZ v0 offset -5
+34 INVOKE_STATIC LX/2xu;->A01(LX/4Nb;)LX/2xu; {7,0,0,0,0}x1
+37 MOVE_RESULT_OBJECT v1
+38 CONST_STRING_JUMBO back v0
+41 INVOKE_VIRTUAL LX/2xu;->A0D(Landroid/app/Activity;Ljava/lang/String;)V {1,5,0,0,0}x3
+44 INVOKE_VIRTUAL LX/0dj;->A0L()I {6,0,0,0,0}x1
+47 MOVE_RESULT v0
+48 IF_LEZ v0 offset 23
+50 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {7,2,0,0,0}x2
+53 MOVE_RESULT_OBJECT v2
+54 CONST_WIDE v0
+59 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v2
+61 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {2,0,1,0,0}x3
+64 MOVE_RESULT v0
+65 IF_EQZ v0 offset 6
+67 INVOKE_VIRTUAL LX/0dj;->A0c()V {6,0,0,0,0}x1
+70 RETURN v3
+71 INVOKE_VIRTUAL LX/0dj;->A15()Z {6,0,0,0,0}x1
+74 MOVE_RESULT v0
+75 RETURN v0
+CLASS classes22.dex LX/2xZ; flags=17 EXTENDS Ljava/lang/Object; interfaces=[]
+FIELD LX/2xZ;->A00:Landroidx/viewpager2/widget/ViewPager2; flags=1
+FIELD LX/2xZ;->A01:LX/Fim; flags=1
+FIELD LX/2xZ;->A02:LX/2yE; flags=1
+FIELD LX/2xZ;->A03:LX/2yG; flags=1
+FIELD LX/2xZ;->A04:LX/2yl; flags=1
+FIELD LX/2xZ;->A05:LX/2yl; flags=1
+FIELD LX/2xZ;->A06:Ljava/util/List; flags=1
+FIELD LX/2xZ;->A07:Ljava/util/List; flags=1
+FIELD LX/2xZ;->A08:Z flags=1
+FIELD LX/2xZ;->A09:LX/2yY; flags=1
+FIELD LX/2xZ;->A0A:Z flags=1
+FIELD LX/2xZ;->A0B:Z flags=1
+FIELD LX/2xZ;->A0C:Landroid/os/Bundle; flags=17
+FIELD LX/2xZ;->A0D:Landroidx/fragment/app/FragmentActivity; flags=17
+FIELD LX/2xZ;->A0E:LX/3e6; flags=17
+FIELD LX/2xZ;->A0F:LX/2gq; flags=17
+FIELD LX/2xZ;->A0G:Lcom/instagram/common/session/UserSession; flags=17
+FIELD LX/2xZ;->A0H:LX/2wD; flags=17
+FIELD LX/2xZ;->A0I:LX/2yl; flags=17
+FIELD LX/2xZ;->A0J:Ljava/util/Map; flags=17
+FIELD LX/2xZ;->A0K:Ljava/util/Map; flags=17
+FIELD LX/2xZ;->A0L:LX/Esp; flags=17
+FIELD LX/2xZ;->A0M:LX/Esp; flags=17
+FIELD LX/2xZ;->A0N:LX/2in; flags=17
+DECLARED LX/2xZ;-><init>(Landroid/content/Intent;Landroid/os/Bundle;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/common/session/UserSession;LX/Fim;LX/2wD;LX/CAZ;)V flags=65537
+DECLARED LX/2xZ;->A00(LX/2xZ;)LX/2yl; flags=25
+DECLARED LX/2xZ;->A01(Lcom/instagram/notifications/badging/ui/component/ToastingBadge;)Ljava/lang/Long; flags=25
+DECLARED LX/2xZ;->A02(LX/2xZ;)Ljava/util/List; flags=25
+DECLARED LX/2xZ;->A03(Landroidx/fragment/app/Fragment;LX/0dj;LX/0ho;LX/2xZ;)V flags=25
+DECLARED LX/2xZ;->A04(LX/2xZ;LX/2yl;)V flags=25
+DECLARED LX/2xZ;->A05(LX/2xZ;LX/2yl;Ljava/lang/String;ZZ)V flags=25
+DECLARED LX/2xZ;->A06(LX/2xZ;Z)V flags=25
+DECLARED LX/2xZ;->A07(LX/2xZ;)Z flags=25
+DECLARED LX/2xZ;->A08()Landroidx/fragment/app/Fragment; flags=17
+DECLARED LX/2xZ;->A09()Landroidx/fragment/app/Fragment; flags=17
+DECLARED LX/2xZ;->A0A()LX/0jG; flags=17
+DECLARED LX/2xZ;->A0B()LX/2yl; flags=17
+DECLARED LX/2xZ;->A0C()Ljava/lang/String; flags=17
+DECLARED LX/2xZ;->A0D()Ljava/lang/String; flags=17
+DECLARED LX/2xZ;->A0E()V flags=17
+DECLARED LX/2xZ;->A0F()V flags=17
+DECLARED LX/2xZ;->A0G()V flags=17
+DECLARED LX/2xZ;->A0H()V flags=17
+DECLARED LX/2xZ;->A0I()V flags=17
+DECLARED LX/2xZ;->A0J(Landroid/content/Intent;)V flags=17
+DECLARED LX/2xZ;->A0K(Landroid/os/Bundle;)V flags=17
+DECLARED LX/2xZ;->A0L(Landroid/os/Bundle;LX/Gkm;)V flags=17
+DECLARED LX/2xZ;->A0M(Landroid/os/Bundle;Z)V flags=17
+DECLARED LX/2xZ;->A0N(Landroid/widget/FrameLayout$LayoutParams;)V flags=17
+DECLARED LX/2xZ;->A0O(LX/2yY;)V flags=17
+DECLARED LX/2xZ;->A0P(LX/2yl;)V flags=17
+DECLARED LX/2xZ;->A0Q(LX/2yl;LX/2yl;Ljava/lang/Integer;)V flags=17
+DECLARED LX/2xZ;->A0R(LX/2yl;Ljava/lang/String;Z)V flags=17
+DECLARED LX/2xZ;->A0S(Z)V flags=17
+DECLARED LX/2xZ;->A0T(Z)V flags=17
+DECLARED LX/2xZ;->A0U()Z flags=17
+DECLARED LX/2xZ;->A0V()Z flags=17
+DECLARED LX/2xZ;->A0W(LX/2yl;)Z flags=17
+DECLARED LX/2xZ;->A0X(Z)Z flags=17
+METHOD LX/2xZ;->A00(LX/2xZ;)LX/2yl;
+0 IGET_OBJECT LX/2xZ;->A02:LX/2yE; v0,v5
+2 IF_EQZ v0 offset 47
+4 IGET_OBJECT LX/2yE;->A06:Ljava/util/Stack; v5,v0
+6 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I {5,0,0,0,0}x1
+9 MOVE_RESULT v2
+10 CONST_4 #1 v1
+11 CONST_4 #0 v0
+12 IF_LE v2,v1 offset 36
+14 INVOKE_VIRTUAL Ljava/util/Stack;->pop()Ljava/lang/Object; {5,0,0,0,0}x1
+17 MOVE_RESULT_OBJECT v1
+18 CHECK_CAST LX/2yF; v1
+20 IGET_OBJECT LX/2yF;->A00:LX/2yl; v4,v1
+22 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->isEmpty()Z {5,0,0,0,0}x1
+25 MOVE_RESULT v1
+26 IF_NEZ v1 offset 10
+28 INVOKE_VIRTUAL Ljava/util/Stack;->peek()Ljava/lang/Object; {5,0,0,0,0}x1
+31 MOVE_RESULT_OBJECT v0
+32 CHECK_CAST LX/2yF; v0
+34 IGET_OBJECT LX/2yF;->A00:LX/2yl; v0,v0
+36 INVOKE_STATIC Ljava/lang/System;->currentTimeMillis()J {0,0,0,0,0}x0
+39 MOVE_RESULT_WIDE v2
+40 NEW_INSTANCE LX/2yF; v1
+42 INVOKE_DIRECT LX/2yF;-><init>(LX/2yl;J)V {1,4,2,3,0}x4
+45 INVOKE_VIRTUAL Ljava/util/Stack;->push(Ljava/lang/Object;)Ljava/lang/Object; {5,1,0,0,0}x2
+48 RETURN_OBJECT v0
+49 CONST_STRING Required value was null. v1
+51 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+53 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+56 THROW v0
+METHOD LX/2xZ;->A04(LX/2xZ;LX/2yl;)V
+0 IGET_OBJECT LX/2xZ;->A0D:Landroidx/fragment/app/FragmentActivity; v5,v6
+2 INSTANCE_OF LX/Gbn; v0,v5
+4 IF_EQZ v0 offset 81
+6 MOVE_OBJECT v1,v5
+7 CHECK_CAST LX/Gbn; v1
+9 IF_EQZ v1 offset 76
+11 INVOKE_VIRTUAL LX/2xZ;->A0B()LX/2yl; {6,0,0,0,0}x1
+14 MOVE_RESULT_OBJECT v0
+15 IF_EQZ v0 offset 70
+17 IGET_OBJECT LX/2xZ;->A0G:Lcom/instagram/common/session/UserSession; v4,v6
+19 INVOKE_VIRTUAL LX/2yl;->A03(Lcom/instagram/common/session/UserSession;)Ljava/lang/String; {0,4,0,0,0}x2
+22 MOVE_RESULT_OBJECT v3
+23 INVOKE_INTERFACE LX/Gbn;->getAnalyticsModule()LX/9PW; {1,0,0,0,0}x1
+26 MOVE_RESULT_OBJECT v0
+27 INVOKE_STATIC LX/2by;->A01(LX/9PW;LX/4Nb;)LX/2by; {0,4,0,0,0}x2
+30 MOVE_RESULT_OBJECT v1
+31 CONST_STRING_JUMBO ig_navigation_tab_clicked v0
+34 INVOKE_VIRTUAL LX/2by;->AMl(Ljava/lang/String;)LX/0tp; {1,0,0,0,0}x2
+37 MOVE_RESULT_OBJECT v2
+38 CONST_STRING_JUMBO current_section v0
+41 INVOKE_INTERFACE LX/0tp;->AQZ(Ljava/lang/String;Ljava/lang/String;)V {2,0,3,0,0}x3
+44 INVOKE_VIRTUAL LX/2yl;->A03(Lcom/instagram/common/session/UserSession;)Ljava/lang/String; {7,4,0,0,0}x2
+47 MOVE_RESULT_OBJECT v1
+48 CONST_STRING_JUMBO destination_section v0
+51 INVOKE_INTERFACE LX/0tp;->AQZ(Ljava/lang/String;Ljava/lang/String;)V {2,0,1,0,0}x3
+54 INVOKE_STATIC LX/3Si;->A00(Landroid/content/Context;)LX/2y1; {5,0,0,0,0}x1
+57 MOVE_RESULT_OBJECT v1
+58 CONST_STRING_JUMBO device_orientation v0
+61 INVOKE_INTERFACE LX/0tp;->AOI(LX/0tk;Ljava/lang/String;)V {2,1,0,0,0}x3
+64 CONST_STRING_JUMBO swipe v1
+67 CONST_STRING_JUMBO interaction_type v0
+70 INVOKE_INTERFACE LX/0tp;->AQZ(Ljava/lang/String;Ljava/lang/String;)V {2,0,1,0,0}x3
+73 CONST_STRING_JUMBO tab v1
+76 CONST_STRING_JUMBO flag v0
+79 INVOKE_INTERFACE LX/0tp;->AQZ(Ljava/lang/String;Ljava/lang/String;)V {2,0,1,0,0}x3
+82 INVOKE_INTERFACE LX/0tp;->EYq()V {2,0,0,0,0}x1
+85 RETURN_VOID
+METHOD LX/2xZ;->A0I()V
+0 INVOKE_STATIC LX/2xZ;->A07(LX/2xZ;)Z {3,0,0,0,0}x1
+3 MOVE_RESULT v0
+4 IF_EQZ v0 offset 53
+6 INVOKE_VIRTUAL LX/2xZ;->A0B()LX/2yl; {3,0,0,0,0}x1
+9 MOVE_RESULT_OBJECT v0
+10 IF_NEZ v0 offset 48
+12 IGET_OBJECT LX/2xZ;->A0G:Lcom/instagram/common/session/UserSession; v1,v3
+14 CONST_4 #0 v0
+15 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {1,0,0,0,0}x2
+18 MOVE_RESULT_OBJECT v2
+19 CONST_WIDE v0
+24 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v2
+26 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {2,0,1,0,0}x3
+29 MOVE_RESULT v0
+30 IF_EQZ v0 offset 28
+32 CONST_STRING MainTabController v1
+34 CONST_STRING_JUMBO setDefaultTab: currentTab is null, aborting v0
+37 INVOKE_STATIC LX/0lj;->A0C(Ljava/lang/String;Ljava/lang/String;)V {1,0,0,0,0}x2
+40 SGET_OBJECT LX/2mw;->A01:LX/2mw; v2
+42 CONST #30c00621 v1
+45 CONST_STRING_JUMBO feed_current_tab_is_null v0
+48 INVOKE_VIRTUAL LX/2mw;->AWp(Ljava/lang/String;I)LX/Ndx; {2,0,1,0,0}x3
+51 MOVE_RESULT_OBJECT v0
+52 IF_EQZ v0 offset 5
+54 INVOKE_INTERFACE LX/Ndx;->report()V {0,0,0,0,0}x1
+57 RETURN_VOID
+58 INVOKE_VIRTUAL LX/2xZ;->A0B()LX/2yl; {3,0,0,0,0}x1
+61 MOVE_RESULT_OBJECT v2
+62 IF_EQZ v2 offset 8
+64 CONST_4 #0 v1
+65 CONST_4 #0 v0
+66 INVOKE_STATIC LX/2xZ;->A05(LX/2xZ;LX/2yl;Ljava/lang/String;ZZ)V {3,2,1,0,0}x5
+69 RETURN_VOID
+70 CONST_STRING Required value was null. v1
+72 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+74 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+77 THROW v0
+METHOD LX/2xZ;->A0V()Z
+0 SGET_OBJECT LX/2yl;->A0A:LX/2yl; v8
+2 MOVE_OBJECT_FROM16 v3,v24
+4 INVOKE_VIRTUAL LX/2xZ;->A0W(LX/2yl;)Z {3,8,0,0,0}x2
+7 MOVE_RESULT v0
+8 CONST_4 #0 v6
+9 CONST_4 #1 v5
+10 CONST_STRING Required value was null. v1
+12 IF_EQZ v0 offset 127
+14 IGET_OBJECT LX/2xZ;->A0G:Lcom/instagram/common/session/UserSession; v0,v3
+16 INVOKE_STATIC LX/7zx;->A00(Lcom/instagram/common/session/UserSession;)Z {0,0,0,0,0}x1
+19 MOVE_RESULT v0
+20 IF_EQZ v0 offset 119
+22 IPUT_BOOLEAN LX/2xZ;->A08:Z v5,v3
+24 IGET_OBJECT LX/2xZ;->A03:LX/2yG; v0,v3
+26 IF_EQZ v0 offset 107
+28 INVOKE_VIRTUAL LX/2yG;->A0M()Z {0,0,0,0,0}x1
+31 MOVE_RESULT v0
+32 IGET_OBJECT LX/2xZ;->A03:LX/2yG; v2,v3
+34 IF_EQZ v0 offset 75
+36 IF_EQZ v2 offset 67
+38 INVOKE_VIRTUAL LX/2yG;->A0F()LX/3eH; {2,0,0,0,0}x1
+41 MOVE_RESULT_OBJECT v0
+42 IF_EQZ v0 offset 5
+44 INVOKE_INTERFACE LX/3eH;->onBackPressed()Z {0,0,0,0,0}x1
+47 IGET_OBJECT LX/2yG;->A0S:Ljava/util/EnumSet; v0,v2
+49 SGET_OBJECT LX/2yI;->A05:LX/2yI; v1
+51 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->contains(Ljava/lang/Object;)Z {0,1,0,0,0}x2
+54 MOVE_RESULT v0
+55 CONST_STRING_JUMBO back v11
+58 IF_NEZ v0 offset 5
+60 INVOKE_STATIC LX/2yG;->A0A(LX/2yG;LX/2yI;Ljava/lang/String;Z)V {2,1,11,6,0}x4
+63 CONST_4 #0 v8
+64 IGET_OBJECT LX/2yG;->A0R:LX/2yH; v0,v2
+66 IGET_OBJECT LX/2yH;->A04:LX/CAZ; v0,v0
+68 CHECK_CAST LX/2vZ; v0
+70 IGET LX/2vZ;->A00:F v0,v0
+72 NEW_INSTANCE Lcom/instagram/ui/swipenavigation/container/PositionConfig; v7
+74 MOVE_OBJECT v9,v8
+75 MOVE_OBJECT v10,v8
+76 MOVE_OBJECT v12,v8
+77 MOVE_OBJECT v13,v8
+78 MOVE_OBJECT v14,v8
+79 MOVE_OBJECT v15,v8
+80 MOVE_OBJECT_FROM16 v16,v8
+82 MOVE_OBJECT_FROM16 v17,v8
+84 MOVE_OBJECT_FROM16 v18,v8
+86 MOVE_OBJECT_FROM16 v19,v8
+88 MOVE_OBJECT_FROM16 v20,v8
+90 MOVE_FROM16 v21,v0
+92 MOVE_FROM16 v22,v6
+94 MOVE_FROM16 v23,v6
+96 INVOKE_DIRECT_RANGE Lcom/instagram/ui/swipenavigation/container/PositionConfig;-><init>(LX/8US;Lcom/instagram/creation/cameraconfiguration/CameraConfiguration;LX/1mN;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;FIZ)V
+99 INVOKE_VIRTUAL LX/2yG;->HXO(Lcom/instagram/ui/swipenavigation/container/PositionConfig;)V {2,7,0,0,0}x2
+102 RETURN v5
+103 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+105 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+108 THROW v0
+109 IF_EQZ v2 offset 18
+111 INVOKE_VIRTUAL LX/2yG;->A0I()Z {2,0,0,0,0}x1
+114 MOVE_RESULT v0
+115 IF_EQZ v0 offset 344
+117 IGET_OBJECT LX/2xZ;->A02:LX/2yE; v4,v3
+119 IF_NEZ v4 offset 40
+121 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+123 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+126 THROW v0
+127 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+129 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+132 THROW v0
+133 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+135 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+138 THROW v0
+139 IGET_OBJECT LX/2xZ;->A03:LX/2yG; v0,v3
+141 IF_EQZ v0 offset 319
+143 INVOKE_VIRTUAL LX/2yG;->A0I()Z {0,0,0,0,0}x1
+146 MOVE_RESULT v0
+147 IF_NEZ v0 offset 311
+149 IGET_OBJECT LX/2xZ;->A02:LX/2yE; v4,v3
+151 IF_NEZ v4 offset 8
+153 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+155 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+158 THROW v0
+159 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+162 MOVE_RESULT v0
+163 IF_EQZ v0 offset 10
+165 CONST #ec547666 v1
+168 CONST_STRING NavigationController.onBackPress v0
+170 INVOKE_STATIC LX/0OO;->A01(Ljava/lang/String;I)V {0,1,0,0,0}x2
+173 IGET_OBJECT LX/2yE;->A05:LX/2yD; v0,v4
+175 CONST_4 #1 v11
+176 IF_EQZ v0 offset 8
+178 IGET_BOOLEAN LX/2yD;->A02:Z v0,v0
+180 IF_NE v0,v5 offset 4
+182 GOTO_16 offset 262
+184 INVOKE_STATIC Ljava/lang/System;->currentTimeMillis()J {0,0,0,0,0}x0
+187 MOVE_RESULT_WIDE v9
+188 IGET_WIDE LX/2yE;->A00:J v0,v4
+190 SUB_LONG_2ADDR v9,v0
+191 INVOKE_STATIC LX/43G;->A00()LX/43G; {0,0,0,0,0}x0
+194 MOVE_RESULT_OBJECT v0
+195 IGET_OBJECT LX/2yE;->A04:Lcom/instagram/common/session/UserSession; v3,v4
+197 INVOKE_VIRTUAL LX/43G;->A01(Lcom/instagram/common/session/UserSession;)J {0,3,0,0,0}x2
+200 MOVE_RESULT_WIDE v1
+201 CMP_LONG v0,v9,v1
+203 CONST_4 #0 v7
+204 IF_GEZ v0 offset 3
+206 CONST_4 #1 v7
+207 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {3,6,0,0,0}x2
+210 MOVE_RESULT_OBJECT v2
+211 CONST_WIDE v0
+216 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v2
+218 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {2,0,1,0,0}x3
+221 MOVE_RESULT v0
+222 IF_EQZ v0 offset 11
+224 INVOKE_VIRTUAL LX/2yE;->A06()LX/2yl; {4,0,0,0,0}x1
+227 MOVE_RESULT_OBJECT v1
+228 SGET_OBJECT LX/2yl;->A0C:LX/2yl; v0
+230 CONST_4 #0 v9
+231 IF_NE v1,v0 offset 3
+233 CONST_4 #1 v9
+234 INVOKE_STATIC LX/2qc;->A04(Lcom/instagram/common/session/UserSession;)Z {3,0,0,0,0}x1
+237 MOVE_RESULT v0
+238 IF_EQZ v0 offset 20
+240 INVOKE_VIRTUAL LX/2yE;->A06()LX/2yl; {4,0,0,0,0}x1
+243 MOVE_RESULT_OBJECT v2
+244 INVOKE_STATIC LX/2xp;->A00(Lcom/instagram/common/session/UserSession;)Z {3,0,0,0,0}x1
+247 MOVE_RESULT v0
+248 IF_EQZ v0 offset 5
+250 SGET_OBJECT LX/2yl;->A0D:LX/2yl; v1
+252 GOTO offset 3
+253 SGET_OBJECT LX/2yl;->A08:LX/2yl; v1
+255 CONST_4 #1 v0
+256 IF_EQ v2,v1 offset 3
+258 CONST_4 #0 v0
+259 IF_NEZ v9 offset 4
+261 IF_EQZ v0 offset 8
+263 INVOKE_STATIC Ljava/lang/System;->currentTimeMillis()J {0,0,0,0,0}x0
+266 MOVE_RESULT_WIDE v0
+267 IPUT_WIDE LX/2yE;->A00:J v0,v4
+269 INVOKE_VIRTUAL LX/2yE;->A06()LX/2yl; {4,0,0,0,0}x1
+272 MOVE_RESULT_OBJECT v0
+273 IF_NE v0,v8 offset 9
+275 INVOKE_STATIC LX/7zx;->A00(Lcom/instagram/common/session/UserSession;)Z {3,0,0,0,0}x1
+278 MOVE_RESULT v1
+279 CONST_4 #1 v0
+280 IF_NEZ v1 offset 3
+282 CONST_4 #0 v0
+283 INVOKE_VIRTUAL LX/2yE;->A05()Landroidx/fragment/app/Fragment; {4,0,0,0,0}x1
+286 MOVE_RESULT_OBJECT v1
+287 CONST_4 #0 v3
+288 IF_NEZ v0 offset 19
+290 INSTANCE_OF LX/Peq; v0,v1
+292 IF_EQZ v0 offset 15
+294 MOVE_OBJECT v0,v1
+295 CHECK_CAST LX/Peq; v0
+297 IF_EQZ v0 offset 10
+299 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {0,0,0,0,0}x1
+302 MOVE_RESULT v0
+303 IF_NE v0,v5 offset 4
+305 GOTO_16 offset 139
+307 IGET_OBJECT LX/2yE;->A06:Ljava/util/Stack; v2,v4
+309 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I {2,0,0,0,0}x1
+312 MOVE_RESULT v0
+313 IF_LE v0,v5 offset 30
+315 INVOKE_VIRTUAL Ljava/util/Stack;->pop()Ljava/lang/Object; {2,0,0,0,0}x1
+318 MOVE_RESULT_OBJECT v0
+319 CHECK_CAST LX/2yF; v0
+321 IGET_OBJECT LX/2yF;->A00:LX/2yl; v1,v0
+323 INVOKE_VIRTUAL Ljava/util/Stack;->peek()Ljava/lang/Object; {2,0,0,0,0}x1
+326 MOVE_RESULT_OBJECT v0
+327 CHECK_CAST LX/2yF; v0
+329 IGET_OBJECT LX/2yF;->A00:LX/2yl; v0,v0
+331 MOVE_FROM16 v16,v6
+333 MOVE_FROM16 v17,v6
+335 MOVE_OBJECT v12,v4
+336 MOVE_OBJECT v13,v1
+337 MOVE_OBJECT v14,v0
+338 MOVE v15,v6
+339 INVOKE_VIRTUAL_RANGE LX/2yE;->A0B(LX/2yl;LX/2yl;ZZZ)V
+342 GOTO offset 102
+343 INSTANCE_OF LX/Ga7; v0,v1
+345 IF_EQZ v0 offset 14
+347 MOVE_OBJECT v0,v1
+348 CHECK_CAST LX/Ga7; v0
+350 IF_EQZ v0 offset 9
+352 INVOKE_INTERFACE LX/Ga7;->EwD(Z)Z {0,7,0,0,0}x2
+355 MOVE_RESULT v0
+356 IF_NE v0,v5 offset 3
+358 GOTO offset 86
+359 INSTANCE_OF LX/GAz; v0,v1
+361 IF_EQZ v0 offset 16
+363 CHECK_CAST LX/GAz; v1
+365 IF_EQZ v1 offset 12
+367 INVOKE_INTERFACE LX/GAz;->getAnalyticsModule()LX/9PW; {1,0,0,0,0}x1
+370 MOVE_RESULT_OBJECT v0
+371 IF_EQZ v0 offset 6
+373 INVOKE_INTERFACE LX/9PW;->getModuleName()Ljava/lang/String; {0,0,0,0,0}x1
+376 MOVE_RESULT_OBJECT v3
+377 INVOKE_STATIC LX/1pA;->A00()LX/1pA; {0,0,0,0,0}x0
+380 MOVE_RESULT_OBJECT v2
+381 CONST_16 #4a v0
+383 INVOKE_STATIC LX/084;->A00(I)Ljava/lang/String; {0,0,0,0,0}x1
+386 MOVE_RESULT_OBJECT v0
+387 CONST #31ec1772 v1
+390 INVOKE_VIRTUAL LX/3r9;->markEventBuilder(ILjava/lang/String;)Lcom/facebook/quicklog/EventBuilder; {2,1,0,0,0}x3
+393 MOVE_RESULT_OBJECT v1
+394 CONST_STRING_JUMBO module v0
+397 INVOKE_INTERFACE Lcom/facebook/quicklog/EventBuilder;->annotate(Ljava/lang/String;Ljava/lang/String;)Lcom/facebook/quicklog/EventBuilder; {1,0,3,0,0}x3
+400 MOVE_RESULT_OBJECT v0
+401 INVOKE_INTERFACE Lcom/facebook/quicklog/EventBuilder;->report()V {0,0,0,0,0}x1
+404 SGET_OBJECT LX/4Na;->A00:LX/4My; v0
+406 INVOKE_STATIC LX/1ow;->A04(LX/4My;)LX/1ow; {0,0,0,0,0}x1
+409 MOVE_RESULT_OBJECT v4
+410 CONST_4 #0 v3
+411 CONST_STRING APP_TERMINATED v2
+413 CONST_STRING_JUMBO killed_by_back_button v1
+416 IGET_OBJECT LX/1ow;->A00:Lcom/facebook/quicklog/LightweightQuickPerformanceLogger; v0,v4
+418 INVOKE_VIRTUAL LX/1ow;->A0Y(Lcom/facebook/quicklog/LightweightQuickPerformanceLogger;Ljava/lang/String;Ljava/lang/String;)V {4,0,2,1,0}x4
+421 SGET_OBJECT LX/1ow;->A0P:LX/2bd; v1
+423 IGET_OBJECT LX/1ow;->A00:Lcom/facebook/quicklog/LightweightQuickPerformanceLogger; v0,v4
+425 INVOKE_VIRTUAL LX/1ow;->A0T(Lcom/facebook/quicklog/LightweightQuickPerformanceLogger;LX/2bd;Ljava/lang/Long;)V {4,0,1,3,0}x4
+428 GOTO offset 15
+429 MOVE_EXCEPTION v1
+430 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+433 MOVE_RESULT v0
+434 IF_EQZ v0 offset 8
+436 CONST #d1a04fea v0
+439 INVOKE_STATIC LX/0OO;->A00(I)V {0,0,0,0,0}x1
+442 THROW v1
+443 CONST_4 #0 v11
+444 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+447 MOVE_RESULT v0
+448 IF_EQZ v0 offset 8
+450 CONST #e0934859 v0
+453 INVOKE_STATIC LX/0OO;->A00(I)V {0,0,0,0,0}x1
+456 IF_EQZ v11 offset 3
+458 RETURN v5
+459 RETURN v6
+460 NEW_INSTANCE Ljava/lang/IllegalStateException; v0
+462 INVOKE_DIRECT Ljava/lang/IllegalStateException;-><init>(Ljava/lang/String;)V {0,1,0,0,0}x2
+465 THROW v0
+CLASS classes22.dex Lcom/instagram/base/activity/IgFragmentActivity; flags=1025 EXTENDS Landroidx/appcompat/app/AppCompatActivity; interfaces=[LX/Hai;, LX/pnV;, LX/Fck;]
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A00:LX/0wS; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A01:Ljava/lang/Boolean; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A02:Z flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A03:Z flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A04:LX/8nf; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A05:LX/GAb; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A06:LX/0kC; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A07:LX/4z3; flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A08:Z flags=1
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A09:LX/01a; flags=17
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A0A:LX/0EQ; flags=17
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A0B:Ljava/util/Set; flags=17
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A0C:LX/0EQ; flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;-><init>()V flags=65537
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A19(Lcom/instagram/common/session/UserSession;)I flags=25
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1A(Landroid/view/View;)Landroid/view/View; flags=18
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1B()V flags=18
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1C(Landroid/content/Context;Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1D(Landroid/content/Intent;Lcom/instagram/base/activity/IgFragmentActivity;II)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1E(Landroid/content/res/Configuration;Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1F(Landroid/os/Bundle;Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1G(Landroid/os/Bundle;Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1H(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1I(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1J(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1K(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1L(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1M(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1N(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1O(Lcom/instagram/base/activity/IgFragmentActivity;)V flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1P(Landroid/view/KeyEvent;Lcom/instagram/base/activity/IgFragmentActivity;I)Z flags=25
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1Q(Landroid/view/KeyEvent;Lcom/instagram/base/activity/IgFragmentActivity;I)Z flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1R(Landroid/view/KeyEvent;Lcom/instagram/base/activity/IgFragmentActivity;I)Z flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1S(Landroid/view/KeyEvent;Ljava/util/List;I)Z flags=18
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1T(Landroid/view/MotionEvent;Lcom/instagram/base/activity/IgFragmentActivity;)Z flags=4121
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1U(Ljava/lang/Exception;)Z flags=25
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1V(Ljava/lang/Throwable;[Ljava/lang/String;)Z flags=153
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1W([Ljava/lang/StackTraceElement;[Ljava/lang/String;)Z flags=153
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$onBackPressed()V flags=4098
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$terminal$0(Landroid/app/Activity;)V flags=4106
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1Z(Landroidx/fragment/app/Fragment;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1d()Landroid/view/View; flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1e()Landroidx/fragment/app/Fragment; flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1f()LX/9BC; flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1g()LX/1ok; flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1h()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1i()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1j()V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1k(I)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1l(I)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1m(Landroid/content/Intent;LX/4Jy;II)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1n(Landroid/content/res/Configuration;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1o(Landroid/os/Bundle;)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1p(Landroid/os/Bundle;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1q(Landroid/os/Bundle;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1r(Landroidx/fragment/app/Fragment;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1s(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1t(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1u(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1v(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1w(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1x(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1y(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A1z(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A20(LX/IAZ;)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A21(LX/IAZ;)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A22()Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A23()Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A24()Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->A25(Landroid/view/MotionEvent;LX/4Jy;)Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->BGG()Z flags=4097
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->BX0()LX/0wS; flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->attachBaseContext(Landroid/content/Context;)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->dispatchTouchEvent(Landroid/view/MotionEvent;)Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->dump(Ljava/lang/String;Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onActivityResult(IILandroid/content/Intent;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onBackPressed()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onConfigurationChanged(Landroid/content/res/Configuration;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onCreate(Landroid/os/Bundle;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onDestroy()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onKeyDown(ILandroid/view/KeyEvent;)Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onKeyUp(ILandroid/view/KeyEvent;)Z flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onPause()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onPictureInPictureModeChanged(ZLandroid/content/res/Configuration;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onPostResume()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onRestart()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onRestoreInstanceState(Landroid/os/Bundle;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onResume()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onSaveInstanceState(Landroid/os/Bundle;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onStart()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onStop()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onTrimMemory(I)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onUserLeaveHint()V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->onWindowFocusChanged(Z)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->schedule(LX/mpd;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->setContentView(I)V flags=17
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->setContentView(Landroid/view/View;)V flags=1
+DECLARED Lcom/instagram/base/activity/IgFragmentActivity;->setContentView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V flags=17
+METHOD Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$onBackPressed()V
+0 INVOKE_STATIC LX/3Li;->A00(Landroid/app/Activity;)V {7,0,0,0,0}x1
+3 IGET_OBJECT Lcom/instagram/base/activity/IgFragmentActivity;->A0C:LX/0EQ; v1,v7
+5 SGET_OBJECT LX/008;->A01:Ljava/lang/Integer; v2
+7 CONST_4 #6 v0
+8 NEW_INSTANCE LX/D79; v6
+10 INVOKE_DIRECT LX/D79;-><init>(Ljava/lang/Object;I)V {6,1,0,0,0}x3
+13 CONST_16 #11 v0
+15 NEW_INSTANCE LX/D4f; v5
+17 INVOKE_DIRECT LX/D4f;-><init>(Ljava/lang/Object;I)V {5,1,0,0,0}x3
+20 CONST_STRING onBackPressed v4
+22 SGET_OBJECT LX/008;->A00:Ljava/lang/Integer; v3
+24 INVOKE_STATIC_RANGE LX/0EQ;->A00(LX/0EQ;Ljava/lang/Integer;Ljava/lang/Integer;Ljava/lang/String;Lkotlin/jvm/functions/Function0;Lkotlin/jvm/functions/Function1;)Ljava/lang/Object;
+27 RETURN_VOID
+METHOD Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$terminal$0(Landroid/app/Activity;)V
+0 CONST_4 #1 v1
+1 CONST_4 #0 v2
+2 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z {3,1,2,0,0}x3
+5 MOVE_RESULT v0
+6 IF_EQZ v0 offset 3
+8 RETURN_VOID
+9 INVOKE_VIRTUAL Landroid/app/Activity;->finishAfterTransition()V {3,0,0,0,0}x1
+12 RETURN_VOID
+METHOD Lcom/instagram/base/activity/IgFragmentActivity;->A1s(LX/4Jy;)V
+0 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+3 MOVE_RESULT v0
+4 IF_EQZ v0 offset 10
+6 CONST #415df2c7 v1
+9 CONST_STRING IgFragmentActivity.onBackPressed v0
+11 INVOKE_STATIC LX/0OO;->A01(Ljava/lang/String;I)V {0,1,0,0,0}x2
+14 IGET_OBJECT Lcom/instagram/base/activity/IgFragmentActivity;->A00:LX/0wS; v0,v4
+16 IF_EQZ v0 offset 20
+18 INVOKE_VIRTUAL LX/0wS;->A0p()Z {0,0,0,0,0}x1
+21 MOVE_RESULT v1
+22 CONST_4 #1 v0
+23 IF_NE v1,v0 offset 13
+25 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+28 MOVE_RESULT v0
+29 IF_EQZ v0 offset 211
+31 CONST #c7084188 v0
+34 GOTO_16 offset 203
+36 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A1e()Landroidx/fragment/app/Fragment; {4,0,0,0,0}x1
+39 MOVE_RESULT_OBJECT v2
+40 INSTANCE_OF LX/Peq; v0,v2
+42 IF_EQZ v0 offset 13
+44 MOVE_OBJECT v0,v2
+45 CHECK_CAST LX/Peq; v0
+47 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z {0,0,0,0,0}x1
+50 MOVE_RESULT v0
+51 IF_EQZ v0 offset 4
+53 GOTO_16 offset 175
+55 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A1g()LX/1ok; {4,0,0,0,0}x1
+58 MOVE_RESULT_OBJECT v0
+59 IF_EQZ v0 offset 11
+61 INVOKE_STATIC LX/2xu;->A01(LX/4Nb;)LX/2xu; {0,0,0,0,0}x1
+64 MOVE_RESULT_OBJECT v1
+65 CONST_STRING back v0
+67 INVOKE_VIRTUAL LX/2xu;->A0D(Landroid/app/Activity;Ljava/lang/String;)V {1,4,0,0,0}x3
+70 SGET Landroid/os/Build$VERSION;->SDK_INT:I v1
+72 CONST_16 #1d v0
+74 IF_NE v1,v0 offset 39
+76 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {4,0,0,0,0}x1
+79 MOVE_RESULT_OBJECT v0
+80 INVOKE_VIRTUAL LX/0dj;->A0L()I {0,0,0,0,0}x1
+83 MOVE_RESULT v0
+84 IF_NEZ v0 offset 29
+86 INVOKE_VIRTUAL Landroid/app/Activity;->isTaskRoot()Z {4,0,0,0,0}x1
+89 MOVE_RESULT v0
+90 IF_EQZ v0 offset 23
+92 INVOKE_VIRTUAL Landroidx/activity/ComponentActivity;->CoN()LX/01h; {4,0,0,0,0}x1
+95 MOVE_RESULT_OBJECT v0
+96 IGET_BOOLEAN LX/01h;->A01:Z v0,v0
+98 IF_NEZ v0 offset 15
+100 INVOKE_STATIC Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$terminal$0(Landroid/app/Activity;)V {4,0,0,0,0}x1
+103 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+106 MOVE_RESULT v0
+107 IF_EQZ v0 offset 133
+109 CONST #4bb077e1 v0
+112 GOTO offset 125
+113 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A1g()LX/1ok; {4,0,0,0,0}x1
+116 MOVE_RESULT_OBJECT v0
+117 INVOKE_STATIC LX/1na;->A01(LX/4Nb;)LX/say; {0,0,0,0,0}x1
+120 MOVE_RESULT_OBJECT v3
+121 CONST_WIDE v0
+126 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v3
+128 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {3,0,1,0,0}x3
+131 MOVE_RESULT v0
+132 IF_EQZ v0 offset 51
+134 INVOKE_VIRTUAL Landroid/app/Activity;->getIntent()Landroid/content/Intent; {4,0,0,0,0}x1
+137 MOVE_RESULT_OBJECT v0
+138 IF_EQZ v0 offset 45
+140 INVOKE_VIRTUAL Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; {4,0,0,0,0}x1
+143 MOVE_RESULT_OBJECT v0
+144 INVOKE_VIRTUAL LX/0dj;->A0L()I {0,0,0,0,0}x1
+147 MOVE_RESULT v0
+148 IF_GTZ v0 offset 35
+150 INVOKE_VIRTUAL Landroid/app/Activity;->isTaskRoot()Z {4,0,0,0,0}x1
+153 MOVE_RESULT v0
+154 IF_EQZ v0 offset 29
+156 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A22()Z {4,0,0,0,0}x1
+159 MOVE_RESULT v0
+160 IF_EQZ v0 offset 23
+162 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A1g()LX/1ok; {4,0,0,0,0}x1
+165 MOVE_RESULT_OBJECT v0
+166 IF_EQZ v0 offset 17
+168 SGET_OBJECT LX/8dq;->A03:LX/8dr; v0
+170 INVOKE_VIRTUAL LX/8dr;->A00()LX/8dq; {0,0,0,0,0}x1
+173 MOVE_RESULT_OBJECT v1
+174 CONST_HIGH16 #10020000 v0
+176 INVOKE_VIRTUAL LX/8dq;->A01(Landroid/content/Context;I)Landroid/content/Intent; {1,4,0,0,0}x3
+179 MOVE_RESULT_OBJECT v0
+180 INVOKE_STATIC LX/7tz;->A0B(Landroid/content/Context;Landroid/content/Intent;)Z {4,0,0,0,0}x2
+183 IF_EQZ v2 offset 26
+185 IGET_OBJECT Landroidx/fragment/app/Fragment;->mLifecycleRegistry:LX/0iA; v0,v2
+187 INVOKE_VIRTUAL LX/0hp;->A04()LX/0ho; {0,0,0,0,0}x1
+190 MOVE_RESULT_OBJECT v1
+191 SGET_OBJECT LX/0ho;->A02:LX/0ho; v0
+193 INVOKE_VIRTUAL LX/0ho;->A00(LX/0ho;)Z {1,0,0,0,0}x2
+196 MOVE_RESULT v0
+197 IF_NEZ v0 offset 12
+199 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+202 MOVE_RESULT v0
+203 IF_EQZ v0 offset 37
+205 CONST #b86084d7 v0
+208 GOTO offset 29
+209 INVOKE_VIRTUAL Lcom/instagram/base/activity/IgFragmentActivity;->A23()Z {4,0,0,0,0}x1
+212 MOVE_RESULT v0
+213 IF_NEZ v0 offset 5
+215 INVOKE_VIRTUAL LX/4Jy;->A07(LX/4Jy;)V {5,5,0,0,0}x2
+218 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+221 MOVE_RESULT v0
+222 IF_EQZ v0 offset 18
+224 CONST #ddcf3d88 v0
+227 GOTO offset 10
+228 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+231 MOVE_RESULT v0
+232 IF_EQZ v0 offset 8
+234 CONST #2ed190ea v0
+237 INVOKE_STATIC LX/0OO;->A00(I)V {0,0,0,0,0}x1
+240 RETURN_VOID
+241 MOVE_EXCEPTION v1
+242 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z {0,0,0,0,0}x0
+245 MOVE_RESULT v0
+246 IF_EQZ v0 offset 8
+248 CONST #ab8ac8ff v0
+251 INVOKE_STATIC LX/0OO;->A00(I)V {0,0,0,0,0}x1
+254 THROW v1
+METHOD Lcom/instagram/base/activity/IgFragmentActivity;->onBackPressed()V
+0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z {2,0,0,0,0}x1
+3 MOVE_RESULT v0
+4 IF_EQZ v0 offset 3
+6 RETURN_VOID
+7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V {2,0,0,0,0}x1
+10 INVOKE_DIRECT Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$onBackPressed()V {2,0,0,0,0}x1
+13 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V {0,0,0,0,0}x0
+16 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V {0,0,0,0,0}x0
+19 RETURN_VOID
+20 MOVE_EXCEPTION v1
+21 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V {0,0,0,0,0}x0
+24 THROW v1
+CLASS classes22.dex Lcom/instagram/base/activity/BaseFragmentActivity; flags=1025 EXTENDS Lcom/instagram/base/activity/IgFragmentActivity; interfaces=[LX/OeF;, LX/HAZ;, LX/pnW;, LX/prA;, LX/Vhc;, LX/Zky;, LX/qok;]
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A00:I flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A01:Landroid/view/View; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A02:LX/3Bz; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A03:Lcom/instagram/ui/widget/edittext/AnimatedHintsTextLayout; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A04:LX/Esp; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A05:Z flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A06:Z flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A07:Z flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A08:Landroid/widget/TextView; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A09:Landroid/widget/TextView; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0A:Landroid/widget/TextView; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0B:Landroid/widget/TextView; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0C:LX/7zz; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0D:LX/7zz; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0E:LX/0kO; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0F:LX/0kM; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0G:LX/0kJ; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0H:LX/0kJ; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0I:LX/0lO; flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0J:Z flags=1
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0K:Landroid/view/View$OnClickListener; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0L:LX/0dd; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0M:LX/Esp; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0N:LX/Esp; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0O:LX/Esp; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0P:LX/Esp; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0Q:LX/Esp; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0R:Lcom/facebook/quicklog/QuickPerformanceLogger; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0S:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0T:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0U:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0V:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0W:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0X:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0Y:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0Z:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0a:LX/2gq; flags=17
+FIELD Lcom/instagram/base/activity/BaseFragmentActivity;->A0b:LX/2gq; flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;-><init>()V flags=65537
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A15()V flags=18
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A16(Landroid/content/res/Configuration;)V flags=18
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A17(Lcom/instagram/base/activity/BaseFragmentActivity;LX/4Wl;)V flags=25
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A18(LX/1ok;)V flags=18
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->hiroOneBack$terminal$0(Lcom/instagram/modal/ModalActivity;)V flags=4106
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1n(Landroid/content/res/Configuration;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1p(Landroid/os/Bundle;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1q(Landroid/os/Bundle;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1r(Landroidx/fragment/app/Fragment;LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1t(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1u(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1v(LX/4Jy;)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1x(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A1z(LX/4Jy;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A26()I flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A27()I flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A28(Landroid/os/Bundle;)Landroid/os/Bundle; flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A29(I)Landroid/view/View; flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2A()LX/Ga4; flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2B()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2C()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2D()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2E()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2F()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2G()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2H()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2I()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2J()V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2K(I)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2L(Landroid/os/Bundle;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2M(Landroid/view/View;I)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2N(LX/4Nb;)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2O(LX/4Wl;Z)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2P(Z)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2Q(Z)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2R()Z flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->A2S()Z flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->BJx()LX/3Bz; flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->BJy(Z)LX/3Bz; flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->BpK()Landroidx/fragment/app/Fragment; flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->CBX()I flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->DPO()LX/5pH; flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->Dqd()LX/7zz; flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->FAg(LX/4Wl;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->GKX(LX/4Wl;)V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->onAttachedToWindow()V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->onCreate(Landroid/os/Bundle;)V flags=1
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->onDetachedFromWindow()V flags=17
+DECLARED Lcom/instagram/base/activity/BaseFragmentActivity;->setBottomSearchContainer(Landroid/view/View;)V flags=17
+METHOD Lcom/instagram/base/activity/BaseFragmentActivity;->hiroOneBack$terminal$0(Lcom/instagram/modal/ModalActivity;)V
+0 CONST_4 #1 v1
+1 CONST_4 #0 v2
+2 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z {3,1,2,0,0}x3
+5 MOVE_RESULT v0
+6 IF_EQZ v0 offset 3
+8 RETURN_VOID
+9 INVOKE_VIRTUAL Lcom/instagram/modal/ModalActivity;->finish()V {3,0,0,0,0}x1
+12 RETURN_VOID
+CLASS classes3.dex LX/4Ka; flags=1025 EXTENDS LX/3Zl; interfaces=[LX/9PW;, LX/Vsm;, LX/GAz;, LX/Hbm;, LX/Fvl;, LX/GAT;, LX/GaP;, LX/Hbn;, LX/OfY;, LX/Gql;]
+FIELD LX/4Ka;->KEY_CONTENT_INSETS:Ljava/lang/String; flags=25
+FIELD LX/4Ka;->TAG:Ljava/lang/String; flags=25
+FIELD LX/4Ka;->__redex_internal_original_name:Ljava/lang/String; flags=25
+FIELD LX/4Ka;->_fragmentVisibilityDetector:LX/0jH; flags=1
+FIELD LX/4Ka;->analyticsModuleState$delegate:LX/Esp; flags=17
+FIELD LX/4Ka;->analyticsModuleV2Helper:LX/0NS; flags=17
+FIELD LX/4Ka;->baseAnalyticsModule$delegate:LX/Esp; flags=17
+FIELD LX/4Ka;->canShowVoiceMessageBar:Z flags=17
+FIELD LX/4Ka;->contentInsets:Landroid/graphics/Rect; flags=1
+FIELD LX/4Ka;->dayNightMode:LX/0NX; flags=1
+FIELD LX/4Ka;->eventDropIdleHandler:Landroid/os/MessageQueue$IdleHandler; flags=17
+FIELD LX/4Ka;->fragmentVisibilityListenerController:LX/0NM; flags=17
+FIELD LX/4Ka;->furyCreateScope:LX/0Fd; flags=1
+FIELD LX/4Ka;->furyResumeScope:LX/0Fd; flags=1
+FIELD LX/4Ka;->furyStartScope:LX/0Fd; flags=1
+FIELD LX/4Ka;->igFragmentDelegate:LX/0NR; flags=17
+FIELD LX/4Ka;->isContainerFragment:Z flags=17
+FIELD LX/4Ka;->lifecycleListenerSet:LX/0NL; flags=17
+FIELD LX/4Ka;->lifecycleLogger$delegate:LX/Esp; flags=17
+FIELD LX/4Ka;->statusBarType:LX/0NW; flags=17
+FIELD LX/4Ka;->themedContext$delegate:LX/Esp; flags=17
+FIELD LX/4Ka;->volumeKeyPressController:LX/0NT; flags=17
+DECLARED LX/4Ka;-><init>()V flags=65537
+DECLARED LX/4Ka;->access$afterOnResume$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$afterOnStart$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$beforeOnResume$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$beforeOnStart$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$getLifecycleListenerSet$p(LX/4Ka;)LX/0NL; flags=4121
+DECLARED LX/4Ka;->access$getLifecycleLogger(LX/4Ka;)LX/0OL; flags=4121
+DECLARED LX/4Ka;->access$onCreate$s-1177248511(LX/4Ka;Landroid/os/Bundle;)V flags=4121
+DECLARED LX/4Ka;->access$onResume$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$onStart$s-1177248511(LX/4Ka;)V flags=4121
+DECLARED LX/4Ka;->access$setContentInsets$p(LX/4Ka;Landroid/graphics/Rect;)V flags=4121
+DECLARED LX/4Ka;->getAnalyticsModuleState()LX/0NU; flags=18
+DECLARED LX/4Ka;->getLifecycleLogger()LX/0OL; flags=18
+DECLARED LX/4Ka;->getUserSessionOrNull()Lcom/instagram/common/session/UserSession; flags=18
+DECLARED LX/4Ka;->reportTransitionNavChainNode(LX/0OJ;)V flags=18
+DECLARED LX/4Ka;->addFragmentVisibilityListener(LX/Hbo;)V flags=1
+DECLARED LX/4Ka;->addLoggerListener(LX/EBH;)V flags=17
+DECLARED LX/4Ka;->afterOnCreate(Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->afterOnCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;Landroid/view/View;)V flags=1
+DECLARED LX/4Ka;->afterOnDestroy()V flags=1
+DECLARED LX/4Ka;->afterOnDestroyView()V flags=1
+DECLARED LX/4Ka;->afterOnPause()V flags=1
+DECLARED LX/4Ka;->afterOnResume()V flags=1
+DECLARED LX/4Ka;->afterOnStart()V flags=1
+DECLARED LX/4Ka;->afterOnStop()V flags=1
+DECLARED LX/4Ka;->applyLargeScreenPresentationMode(LX/Bdz;II)V flags=1
+DECLARED LX/4Ka;->beforeOnCreate(Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->beforeOnCreateView(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->beforeOnDestroyView()V flags=1
+DECLARED LX/4Ka;->beforeOnResume()V flags=1
+DECLARED LX/4Ka;->beforeOnStart()V flags=1
+DECLARED LX/4Ka;->createFragmentAnimation(IZI)Landroid/view/animation/Animation; flags=1
+DECLARED LX/4Ka;->getAnalyticsModule()LX/9PW; flags=1
+DECLARED LX/4Ka;->getBaseAnalyticsModule()LX/9PW; flags=17
+DECLARED LX/4Ka;->getCanShowVoiceMessageBar()Z flags=1
+DECLARED LX/4Ka;->getContextAs(Ljava/lang/Class;)Ljava/lang/Object; flags=17
+DECLARED LX/4Ka;->getDayNightMode()LX/0NX; flags=17
+DECLARED LX/4Ka;->getDelegateLogTag()Ljava/lang/String; flags=1
+DECLARED LX/4Ka;->getFragmentVisibilityDetector()LX/mol; flags=1
+DECLARED LX/4Ka;->getLargeScreenInsetContentRatio()Ljava/lang/Float; flags=4097
+DECLARED LX/4Ka;->getLargeScreenPresentationMode()LX/Bdz; flags=1
+DECLARED LX/4Ka;->getLargeScreenPresentationMode(Landroid/content/res/Configuration;)LX/Bdz; flags=1
+DECLARED LX/4Ka;->getLayoutInflater(Landroid/os/Bundle;)Landroid/view/LayoutInflater; flags=1
+DECLARED LX/4Ka;->getModuleClass()Ljava/lang/Class; flags=1
+DECLARED LX/4Ka;->getModuleNameV2()Ljava/lang/String; flags=1
+DECLARED LX/4Ka;->getRootActivity()Landroid/app/Activity; flags=1
+DECLARED LX/4Ka;->getSession()LX/1ok; flags=1025
+DECLARED LX/4Ka;->getStatusBarType()LX/0NW; flags=1
+DECLARED LX/4Ka;->getThemedContext()Landroid/content/Context; flags=1
+DECLARED LX/4Ka;->getViewsToInset()Ljava/util/List; flags=1
+DECLARED LX/4Ka;->getVolumeKeyPressController()LX/0NT; flags=1
+DECLARED LX/4Ka;->getZeroBannerSupport()LX/8g8; flags=4097
+DECLARED LX/4Ka;->internalAfterOnResume(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->internalAfterOnStart(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->internalBeforeOnResume(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->internalBeforeOnStart(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->internalOnResume(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->internalOnStart(LX/8Qg;)V flags=1
+DECLARED LX/4Ka;->isContainerFragment()Z flags=1
+DECLARED LX/4Ka;->onActivityResult(IILandroid/content/Intent;)V flags=1
+DECLARED LX/4Ka;->onConfigurationChanged(Landroid/content/res/Configuration;)V flags=1
+DECLARED LX/4Ka;->onCreate(Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->onCreateAnimation(IZI)Landroid/view/animation/Animation; flags=17
+DECLARED LX/4Ka;->onCreateAnimator(IZI)Landroid/animation/Animator; flags=1
+DECLARED LX/4Ka;->onDestroy()V flags=1
+DECLARED LX/4Ka;->onDestroyView()V flags=1
+DECLARED LX/4Ka;->onDetach()V flags=1
+DECLARED LX/4Ka;->onHiddenChanged(Z)V flags=1
+DECLARED LX/4Ka;->onResume()V flags=1
+DECLARED LX/4Ka;->onSaveInstanceState(Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->onSetUserVisibleHint(ZZ)V flags=1
+DECLARED LX/4Ka;->onStart()V flags=1
+DECLARED LX/4Ka;->onStop()V flags=1
+DECLARED LX/4Ka;->onViewCreated(Landroid/view/View;Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->onViewStateRestored(Landroid/os/Bundle;)V flags=1
+DECLARED LX/4Ka;->onVolumeKeyPressed(LX/5LZ;Landroid/view/KeyEvent;)Z flags=1
+DECLARED LX/4Ka;->registerLifecycleListener(LX/IAZ;)V flags=1
+DECLARED LX/4Ka;->registerLifecycleListenerSet(LX/0NL;)V flags=17
+DECLARED LX/4Ka;->removeFragmentVisibilityListener(LX/Hbo;)V flags=1
+DECLARED LX/4Ka;->requireContextAs(Ljava/lang/Class;)Ljava/lang/Object; flags=17
+DECLARED LX/4Ka;->requireWindow()Landroid/view/Window; flags=17
+DECLARED LX/4Ka;->schedule(LX/mpd;)V flags=1
+DECLARED LX/4Ka;->schedule(LX/mpd;IIZZLX/mkc;)V flags=1
+DECLARED LX/4Ka;->scheduleAndGetLoaderId(LX/mpd;)I flags=17
+DECLARED LX/4Ka;->setContentInset(IIII)V flags=17
+DECLARED LX/4Ka;->setDayNightMode(LX/0NX;)V flags=17
+DECLARED LX/4Ka;->setModuleNameV2(Ljava/lang/String;)Z flags=17
+DECLARED LX/4Ka;->stopLoader(I)V flags=17
+DECLARED LX/4Ka;->tryToApplyContentInset()V flags=17
+DECLARED LX/4Ka;->unregisterLifecycleListener(LX/IAZ;)V flags=1
+DECLARED LX/4Ka;->unregisterLifecycleListenerSet(LX/0NL;)V flags=17
+DECLARED LX/4Ka;->updateModuleNameV2_USE_WITH_CAUTION(Ljava/lang/String;)Z flags=17
+DECLARED LX/4Ka;->useTryFinallyForLifecycleMethods()Z flags=17
