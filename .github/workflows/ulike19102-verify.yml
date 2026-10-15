@@ -1,0 +1,122 @@
+name: ULike 1.9.102 candidate structural and policy verification
+on:
+  push:
+    branches: [ulike19102-gpu-admission-fixes]
+    paths:
+      - 'releases/ulike19102-admission/**'
+      - '.github/workflows/ulike19102-verify.yml'
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: ulike19102-candidate-verification
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 45
+    env:
+      ULIKE_RELEASE: releases/ulike19102-admission
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Reconstruct exact guarded source edits
+        run: python3 "$ULIKE_RELEASE/prepare.py"
+      - name: Run real queue and fingerprint regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$ULIKE_RELEASE/test.py" --phase queue --work .ci-ulike19102/queue --jdk "$JAVA_HOME"
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike19101-verified-public-artifacts
+          run-id: 38572664436
+          github-token: ${{ github.token }}
+          path: .ci-ulike19102/base101
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback114-bundle239-verification
+          run-id: 38666852560
+          github-token: ${{ github.token }}
+          path: .ci-ulike19102/base239
+      - uses: actions/download-artifact@v4
+        with:
+          name: ulike19102-pinned-application-tools
+          run-id: 38672312391
+          github-token: ${{ github.token }}
+          path: .ci-ulike19102/toolchain
+      - name: Verify exact baseline bytes and pinned native toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,shutil
+          root=Path('.ci-ulike19102');out=root/'input';out.mkdir()
+          rows=[('base101','ULike_HQ_Texture_Online_v1.9.101.mpp',1450415,'d0ee9a36d08cbcfaf5213b7a13459f2878f2c061fa5c8d8e8de0d49100de9aae'),('base239','Hiro_Morphe_Patches_v1.0.239.mpp',18123390,'accc1c5da74dde1e26f727d7b2c18855503e3bc54c4d0216042c878268cbfbd9')]
+          for folder,name,size,digest in rows:
+              candidates=list((root/folder).rglob(name));assert candidates,name
+              for p in candidates:assert p.stat().st_size==size and hashlib.sha256(p.read_bytes()).hexdigest()==digest,name
+              shutil.copyfile(candidates[0],out/name)
+          PY
+          native_sdk_root="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          native_ndk_path="$native_sdk_root/ndk/27.2.12479018"
+          if [[ ! -f "$native_ndk_path/source.properties" ]]; then
+            "$native_sdk_root/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018"
+          fi
+          printf 'ULIKE_NDK_HOME=%s\n' "$native_ndk_path" >> "$GITHUB_ENV"
+      - name: Fresh build and exact DEX ABI JNI native and other-app preservation checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$ULIKE_RELEASE/build.py" --input .ci-ulike19102/input --tools .ci-ulike19102/toolchain/tools --work .ci-ulike19102/build --output .ci-ulike19102/dist --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME"
+      - name: Execute compiled production memory and owned-probe tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 "$ULIKE_RELEASE/test.py" --phase production --work .ci-ulike19102/production --jdk "$JAVA_HOME" --helpers .ci-ulike19102/build/helper-classes --tools .ci-ulike19102/toolchain/tools
+      - name: Package candidate source evidence with honest pending gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import hashlib,json,zipfile
+          root=Path('.ci-ulike19102');release=Path('releases/ulike19102-admission');dist=root/'dist'
+          build=json.loads((dist/'build19102.json').read_text());queue=json.loads((root/'queue/result.json').read_text());production=json.loads((root/'production/result.json').read_text())
+          assert queue['status']==production['status']=='passed'
+          report={'schema':'ulike19102-candidate-qa-v1','status':'CANDIDATE_BUILT_FOCUSED_TESTS_PASSED_APPLICATION_PENDING','ulike_version':'1.9.102','bundle_version':'1.0.240','focused_assertions':queue['assertions']+production['assertions'],'queue_and_identity':queue,'compiled_production_policy':production,'build_artifacts':build['artifacts'],'native_inverse':build['gpu_native']['identity_delta'],'other_apps_preserved':build['other_apps_preserved'],'original_apks_application_tested':False,'full_host_suite_passed':False,'physical_android_tested':False,'device_speedup_verified':False,'release_published':False,'manager_feeds_updated':False}
+          (dist/'QA_ULike_v1.9.102_candidate.json').write_text(json.dumps(report,ensure_ascii=False,sort_keys=True,indent=2)+'\n')
+          with zipfile.ZipFile(dist/'ULike_v1.9.102_candidate_sources_and_QA.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(release.rglob('*')):
+                  if p.is_file() and '__pycache__' not in p.parts:z.write(p,p.relative_to(release))
+              z.write(dist/'QA_ULike_v1.9.102_candidate.json','QA_ULike_v1.9.102_candidate.json')
+          lines=[hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name for p in sorted(dist.iterdir()) if p.is_file() and p.name!='SHA256SUMS.txt']
+          (dist/'SHA256SUMS.txt').write_text('\n'.join(lines)+'\n')
+          print(json.dumps({'candidate':'built','focused_assertions':report['focused_assertions'],'release_published':False,'original_apks_application_tested':False},indent=2))
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike19102-candidate-evidence
+          path: |
+            .ci-ulike19102/dist/
+            .ci-ulike19102/queue/*.json
+            .ci-ulike19102/queue/*.log
+            .ci-ulike19102/production/*.json
+            .ci-ulike19102/production/*.log
+            .ci-ulike19102/build/*.log
+            .ci-ulike19102/build/*.txt
+            .ci-ulike19102/build/native-inverse19101/
+            releases/ulike19102-admission/generated/review/
+          include-hidden-files: true
+          compression-level: 1
+          retention-days: 30
