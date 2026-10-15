@@ -1,0 +1,102 @@
+name: Verify and publish Instagram Reels Back118 bundle245
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback118-publish.yml'
+      - 'releases/homeback118/src/**'
+      - 'releases/homeback118/publication/**'
+      - '!releases/homeback118/publication/manifest.json'
+      - 'releases/homeback118/evidence/**'
+      - 'releases/homeback118/README.md'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Verify reviewed source identity and active baseline without changing feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp .github/workflows/homeback118-publish.yml releases/homeback118/publication/workflow.yml
+          python3 - <<'PY'
+          import json,pathlib
+          root=pathlib.Path('releases/homeback118/publication')
+          cfg=json.loads((root/'manifest-template.json').read_text())
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version']==cfg['baseline_version']=='1.0.244','Baseline advanced; review before publishing'
+          assert feed['download_url']==cfg['baseline_url']
+          PY
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback110-build-inputs
+          run-id: 38606338782
+          github-token: ${{ github.token }}
+          path: .ci-homeback118/staged
+      - name: Fetch immutable baseline244 and verify its hash
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,hashlib,urllib.request,json
+          cfg=json.loads(pathlib.Path('releases/homeback118/publication/manifest-template.json').read_text())
+          with urllib.request.urlopen(cfg['baseline_url'],timeout=180) as response: raw=response.read()
+          assert hashlib.sha256(raw).hexdigest()==cfg['baseline_sha256']
+          pathlib.Path('.ci-homeback118/staged/baseline244.mpp').write_bytes(raw)
+          PY
+      - name: First fresh SDK build and all host DEX and synthetic APK tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback118/src/build.py --base .ci-homeback118/staged/baseline244.mpp --tools .ci-homeback118/staged/tools --legacy releases/oneback163/src --work .ci-homeback118/build-a --dist .ci-homeback118/dist-a 2>&1 | tee .ci-homeback118/build-a.log
+      - name: Second fresh SDK build and repeat all tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback118/src/build.py --base .ci-homeback118/staged/baseline244.mpp --tools .ci-homeback118/staged/tools --legacy releases/oneback163/src --work .ci-homeback118/build-b --dist .ci-homeback118/dist-b 2>&1 | tee .ci-homeback118/build-b.log
+      - name: Require exact local and two clean CI build bytes then package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback118/publication/verify_pair.py .ci-homeback118/dist-a .ci-homeback118/dist-b
+          python3 releases/homeback118/publication/package.py --dist .ci-homeback118/dist-a --legacy releases/oneback163/src
+          python3 releases/homeback118/publication/publish.py --dist .ci-homeback118/dist-a --repo . --base .ci-homeback118/staged/baseline244.mpp --local-only 2>&1 | tee .ci-homeback118/byte-verification.log
+          python3 releases/homeback118/publication/publish.py --dist .ci-homeback118/dist-a --repo . --base .ci-homeback118/staged/baseline244.mpp --preflight-only 2>&1 | tee .ci-homeback118/preflight.log
+      - name: Publish verified release and atomically update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback118/publication/publish.py --dist .ci-homeback118/dist-a --repo . --base .ci-homeback118/staged/baseline244.mpp 2>&1 | tee .ci-homeback118/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback118-bundle245-verification
+          path: |
+            .ci-homeback118/dist-a/
+            .ci-homeback118/dist-b/
+            .ci-homeback118/*.log
+            .ci-homeback118/build-a/*.txt
+            .ci-homeback118/build-a/*.log
+            .ci-homeback118/build-a/*.json
+            .ci-homeback118/build-b/*.txt
+            .ci-homeback118/build-b/*.log
+            .ci-homeback118/build-b/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1

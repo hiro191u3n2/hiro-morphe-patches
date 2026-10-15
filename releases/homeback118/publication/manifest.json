@@ -1,0 +1,40 @@
+{
+  "schema": "homeback118-publication-v1",
+  "patch_version": "1.1.8",
+  "bundle_version": "1.0.245",
+  "baseline_version": "1.0.244",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/607aaf38c0a5b003836fd307058cf6b8e0288e0a/downloads/Hiro_Morphe_Patches_v1.0.244.mpp",
+  "baseline_sha256": "e008f24e7e8b05fe3df40903ff26536e78f20f49db64025ca7256292b6d53205",
+  "release_title": "Instagram Reels Back correction v1.1.8 / Hiro Morphe Patches v1.0.245",
+  "summary": "リールのコメント案内欄と開いたコメントパネルを区別し、非表示の画面要素による終了妨害を修正。実機未確認。",
+  "validation_basis": "Provided already-patched APK static audits plus local full SDK/D8/Morphe build and host tests; two clean CI builds must match the frozen local MPP and QA. Synthetic application fixtures are separate from original APK validation; physical Android untested.",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.8.mpp": {
+      "bytes": 69147,
+      "sha256": "0b7fac5099e73f318c5f9eab3e5db179433f0178a07053880c6bd48d7d082c55"
+    },
+    "Hiro_Morphe_Patches_v1.0.245.mpp": {
+      "bytes": 18153828,
+      "sha256": "fe60075d9fb070330f5980a6ce945379be6d113996a986dea562763f2f9b9b25"
+    }
+  },
+  "local_expected_qa_sha256": "45354c4e3e449d36a75329eb197aa0da4a0f5535a4d2e61e3d61d816f24ff0ae",
+  "local_expected_host": "SUCCESS: 315 cases, 1476 assertions",
+  "local_expected_audit_sources": {
+    "evidence/BaselineRuntimeAbiAudit.java": "2f5e3f9b72119990f440f8fdbc8754777e85999267cc6d461bdad0700919a115",
+    "evidence/InstagramBackRouteAudit.java": "e70dd1bfbd2132f2a142aa580380ba37d6d44dd6bbc8ce9ad6b64345f868d06d",
+    "evidence/ProvidedApkHookAudit.java": "11dbe48c42c0145f71d6bdf9b221c8c00fdb09ba4864c58b9bb6a5c1d3aef527",
+    "evidence/summarize_provided_apk_audit.py": "cd9b77a0f6c09c8070e2cb15ce39e16bb4b0567c26b420e55f82e9a6452625c8"
+  },
+  "expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.8.mpp": {
+      "bytes": 69147,
+      "sha256": "0b7fac5099e73f318c5f9eab3e5db179433f0178a07053880c6bd48d7d082c55"
+    },
+    "Hiro_Morphe_Patches_v1.0.245.mpp": {
+      "bytes": 18153828,
+      "sha256": "fe60075d9fb070330f5980a6ce945379be6d113996a986dea562763f2f9b9b25"
+    }
+  },
+  "expected_qa_sha256": "45354c4e3e449d36a75329eb197aa0da4a0f5535a4d2e61e3d61d816f24ff0ae"
+}
