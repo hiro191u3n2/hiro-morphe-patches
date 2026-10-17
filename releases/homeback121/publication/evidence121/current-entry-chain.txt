@@ -1,0 +1,100 @@
+CLASS Lcom/instagram/mainactivity/InstagramMainActivity; extends Lcom/instagram/base/activity/BaseFragmentActivity;
+  ENTRY Lcom/instagram/mainactivity/InstagramMainActivity;->onNewIntent(Landroid/content/Intent;)V flags=17 registers=21
+    i=0 pc=0 INVOKE_STATIC_RANGE Lapp/hiro/oneback/runtime/OneBackExit;->onNewIntent(Landroid/app/Activity;Landroid/content/Intent;)V registers=[19, 20]
+    i=167 pc=352 INVOKE_SUPER Landroidx/activity/ComponentActivity;->onNewIntent(Landroid/content/Intent;)V registers=[8, 6]
+  ENTRY Lcom/instagram/mainactivity/InstagramMainActivity;->onUserLeaveHint()V flags=17 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V registers=[2]
+    i=2 pc=6 INVOKE_SUPER Lcom/instagram/base/activity/IgFragmentActivity;->onUserLeaveHint()V registers=[2]
+CLASS Lcom/instagram/base/activity/BaseFragmentActivity; extends Lcom/instagram/base/activity/IgFragmentActivity;
+  ENTRY Lcom/instagram/base/activity/BaseFragmentActivity;->onCreate(Landroid/os/Bundle;)V flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V registers=[2]
+    i=4 pc=10 INVOKE_SUPER Lcom/instagram/base/activity/IgFragmentActivity;->onCreate(Landroid/os/Bundle;)V registers=[2, 3]
+CLASS Lcom/instagram/base/activity/IgFragmentActivity; extends Landroidx/appcompat/app/AppCompatActivity;
+  ENTRY Lcom/instagram/base/activity/IgFragmentActivity;->onBackPressed()V flags=1 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z registers=[2]
+    i=4 pc=7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V registers=[2]
+    i=5 pc=10 INVOKE_DIRECT Lcom/instagram/base/activity/IgFragmentActivity;->hiroOneBack$onBackPressed()V registers=[2]
+    i=6 pc=13 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V registers=[]
+    i=7 pc=16 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+    i=10 pc=21 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+  ENTRY Lcom/instagram/base/activity/IgFragmentActivity;->onCreate(Landroid/os/Bundle;)V flags=1 registers=10
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V registers=[8]
+  ENTRY Lcom/instagram/base/activity/IgFragmentActivity;->onDestroy()V flags=1 registers=9
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V registers=[8]
+  ENTRY Lcom/instagram/base/activity/IgFragmentActivity;->onResume()V flags=1 registers=9
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V registers=[8]
+  ENTRY Lcom/instagram/base/activity/IgFragmentActivity;->onUserLeaveHint()V flags=1 registers=1
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V registers=[0]
+    i=2 pc=6 INVOKE_SUPER Landroidx/activity/ComponentActivity;->onUserLeaveHint()V registers=[0]
+CLASS Landroidx/appcompat/app/AppCompatActivity; extends Landroidx/fragment/app/FragmentActivity;
+  ENTRY Landroidx/appcompat/app/AppCompatActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->key(Landroid/app/Activity;Landroid/view/KeyEvent;)Z registers=[2, 3]
+    i=4 pc=7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterKey(Landroid/app/Activity;Landroid/view/KeyEvent;)V registers=[2, 3]
+    i=5 pc=10 INVOKE_DIRECT Landroidx/appcompat/app/AppCompatActivity;->hiroOneBack$dispatchKeyEvent(Landroid/view/KeyEvent;)Z registers=[2, 3]
+    i=7 pc=14 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V registers=[]
+    i=8 pc=17 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+    i=11 pc=22 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+  ENTRY Landroidx/appcompat/app/AppCompatActivity;->onDestroy()V flags=1 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V registers=[2]
+    i=4 pc=10 INVOKE_SUPER Landroidx/fragment/app/FragmentActivity;->onDestroy()V registers=[2]
+CLASS Landroidx/fragment/app/FragmentActivity; extends Landroidx/activity/ComponentActivity;
+  ENTRY Landroidx/fragment/app/FragmentActivity;->onCreate(Landroid/os/Bundle;)V flags=1 registers=6
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V registers=[4]
+    i=4 pc=10 INVOKE_SUPER Landroidx/activity/ComponentActivity;->onCreate(Landroid/os/Bundle;)V registers=[4, 5]
+  ENTRY Landroidx/fragment/app/FragmentActivity;->onDestroy()V flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V registers=[3]
+    i=4 pc=10 INVOKE_SUPER Landroid/app/Activity;->onDestroy()V registers=[3]
+  ENTRY Landroidx/fragment/app/FragmentActivity;->onResume()V flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V registers=[3]
+    i=8 pc=19 INVOKE_SUPER Landroid/app/Activity;->onResume()V registers=[3]
+CLASS Landroidx/activity/ComponentActivity; extends Landroidx/core/app/ComponentActivity;
+  ENTRY Landroidx/activity/ComponentActivity;->onBackPressed()V flags=1 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z registers=[2]
+    i=4 pc=7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V registers=[2]
+    i=5 pc=10 INVOKE_DIRECT Landroidx/activity/ComponentActivity;->hiroOneBack$onBackPressed()V registers=[2]
+    i=6 pc=13 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V registers=[]
+    i=7 pc=16 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+    i=10 pc=21 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+  ENTRY Landroidx/activity/ComponentActivity;->onCreate(Landroid/os/Bundle;)V flags=1 registers=5
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V registers=[3]
+    i=19 pc=41 INVOKE_SUPER Landroidx/core/app/ComponentActivity;->onCreate(Landroid/os/Bundle;)V registers=[3, 4]
+  ENTRY Landroidx/activity/ComponentActivity;->onNewIntent(Landroid/content/Intent;)V flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onNewIntent(Landroid/app/Activity;Landroid/content/Intent;)V registers=[2, 3]
+    i=3 pc=7 INVOKE_SUPER Landroid/app/Activity;->onNewIntent(Landroid/content/Intent;)V registers=[2, 3]
+  ENTRY Landroidx/activity/ComponentActivity;->onUserLeaveHint()V flags=1 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V registers=[2]
+    i=2 pc=6 INVOKE_SUPER Landroid/app/Activity;->onUserLeaveHint()V registers=[2]
+CLASS Landroidx/core/app/ComponentActivity; extends Landroid/app/Activity;
+  ENTRY Landroidx/core/app/ComponentActivity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->key(Landroid/app/Activity;Landroid/view/KeyEvent;)Z registers=[2, 3]
+    i=4 pc=7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterKey(Landroid/app/Activity;Landroid/view/KeyEvent;)V registers=[2, 3]
+    i=5 pc=10 INVOKE_DIRECT Landroidx/core/app/ComponentActivity;->hiroOneBack$dispatchKeyEvent(Landroid/view/KeyEvent;)Z registers=[2, 3]
+    i=7 pc=14 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V registers=[]
+    i=8 pc=17 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+    i=11 pc=22 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+  ENTRY Landroidx/core/app/ComponentActivity;->onBackPressed()V flags=1 registers=3
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z registers=[2]
+    i=4 pc=7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V registers=[2]
+    i=5 pc=10 INVOKE_DIRECT Landroidx/core/app/ComponentActivity;->hiroOneBack$terminal$0()V registers=[2]
+    i=6 pc=13 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V registers=[]
+    i=7 pc=16 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+    i=10 pc=21 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V registers=[]
+  ENTRY Landroidx/core/app/ComponentActivity;->onCreate(Landroid/os/Bundle;)V flags=1 registers=4
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V registers=[2]
+    i=5 pc=13 INVOKE_SUPER Landroid/app/Activity;->onCreate(Landroid/os/Bundle;)V registers=[2, 3]
+  ENTRY Landroidx/core/app/ComponentActivity;->onDestroy()V flags=4 registers=1
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onDestroy(Landroid/app/Activity;)V registers=[0]
+    i=1 pc=3 INVOKE_SUPER Landroid/app/Activity;->onDestroy()V registers=[0]
+  ENTRY Landroidx/core/app/ComponentActivity;->onNewIntent(Landroid/content/Intent;)V flags=4 registers=2
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onNewIntent(Landroid/app/Activity;Landroid/content/Intent;)V registers=[0, 1]
+    i=1 pc=3 INVOKE_SUPER Landroid/app/Activity;->onNewIntent(Landroid/content/Intent;)V registers=[0, 1]
+  ENTRY Landroidx/core/app/ComponentActivity;->onResume()V flags=4 registers=1
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onResume(Landroid/app/Activity;)V registers=[0]
+    i=1 pc=3 INVOKE_SUPER Landroid/app/Activity;->onResume()V registers=[0]
+  ENTRY Landroidx/core/app/ComponentActivity;->onUserInteraction()V flags=1 registers=1
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserInteraction(Landroid/app/Activity;)V registers=[0]
+    i=1 pc=3 INVOKE_SUPER Landroid/app/Activity;->onUserInteraction()V registers=[0]
+  ENTRY Landroidx/core/app/ComponentActivity;->onUserLeaveHint()V flags=4 registers=1
+    i=0 pc=0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserLeaveHint(Landroid/app/Activity;)V registers=[0]
+    i=1 pc=3 INVOKE_SUPER Landroid/app/Activity;->onUserLeaveHint()V registers=[0]
+PLATFORM_BOUNDARY Landroid/app/Activity;

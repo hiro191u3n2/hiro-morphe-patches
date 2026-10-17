@@ -1,0 +1,149 @@
+Native Activity guard contract from user-uploaded APK
+SHA256 d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7
+Instructions are read-only disassembly; this is not an Android execution test.
+
+METHOD LX/0wS;->A0p()Z flags=17 regs=10
+0 @0 MOVE_OBJECT v2,v9
+1 @1 CHECK_CAST LX/16z; v2
+2 @3 IGET_BOOLEAN LX/16z;->A0U:Z v1,v2
+3 @5 CONST_4 #0x0 v0
+4 @6 IF_EQZ v1 ->pc=28
+5 @8 INVOKE_VIRTUAL LX/0wS;->A0M()Landroidx/fragment/app/Fragment; [2]
+6 @11 MOVE_RESULT_OBJECT v1
+7 @12 IF_EQZ v1 ->pc=28
+8 @14 INSTANCE_OF LX/Peq; v0,v1
+9 @16 IF_EQZ v0 ->pc=29
+10 @18 MOVE_OBJECT v0,v1
+11 @19 CHECK_CAST LX/Peq; v0
+12 @21 INVOKE_INTERFACE LX/Peq;->onBackPressed()Z [0]
+13 @24 MOVE_RESULT v0
+14 @25 IF_EQZ v0 ->pc=29
+15 @27 CONST_4 #0x1 v0
+16 @28 RETURN v0
+17 @29 IGET_OBJECT LX/16z;->A0Q:LX/pxP; v3,v2
+18 @31 IF_EQZ v3 ->pc=42
+19 @33 SGET_OBJECT LX/RvW;->A06:LX/RvW; v4
+20 @35 CONST_WIDE_16 #0x0 v7
+21 @37 CONST_WIDE_16 #0x0 v5
+22 @39 INVOKE_INTERFACE_RANGE LX/pxP;->Edo(LX/RvW;DJ)V {v3..v8}
+23 @42 SGET_OBJECT LX/17A;->A04:LX/17A; v0
+24 @44 INVOKE_STATIC LX/16z;->A09(Landroidx/fragment/app/Fragment;LX/16z;LX/17A;)V [1, 2, 0]
+25 @47 GOTO ->pc=27
+
+METHOD LX/3MM;->A01(LX/3MM;)LX/9ld; flags=25 regs=1
+0 @0 IGET_OBJECT LX/3MM;->A02:Ljava/lang/ref/WeakReference; v0,v0
+1 @2 IF_EQZ v0 ->pc=11
+2 @4 INVOKE_VIRTUAL Ljava/lang/ref/Reference;->get()Ljava/lang/Object; [0]
+3 @7 MOVE_RESULT_OBJECT v0
+4 @8 CHECK_CAST LX/9ld; v0
+5 @10 RETURN_OBJECT v0
+6 @11 CONST_4 #0x0 v0
+7 @12 RETURN_OBJECT v0
+
+METHOD LX/3MM;->A09()Z flags=17 regs=4
+0 @0 INVOKE_STATIC LX/3MM;->A01(LX/3MM;)LX/9ld; [3]
+1 @3 MOVE_RESULT_OBJECT v2
+2 @4 IF_EQZ v2 ->pc=37
+3 @6 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->isAdded()Z [2]
+4 @9 MOVE_RESULT v0
+5 @10 CONST_4 #0x1 v1
+6 @11 IF_NE v0,v1 ->pc=37
+7 @13 INVOKE_VIRTUAL LX/9ld;->onBackPressed()Z [2]
+8 @16 MOVE_RESULT v0
+9 @17 IF_EQZ v0 ->pc=33
+10 @19 IGET_BOOLEAN LX/3MM;->A0C:Z v0,v3
+11 @21 IF_EQZ v0 ->pc=36
+12 @23 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/0dj; [2]
+13 @26 MOVE_RESULT_OBJECT v0
+14 @27 INVOKE_VIRTUAL LX/0dj;->A0L()I [0]
+15 @30 MOVE_RESULT v0
+16 @31 IF_NEZ v0 ->pc=36
+17 @33 INVOKE_VIRTUAL LX/3MM;->A07()V [3]
+18 @36 RETURN v1
+19 @37 CONST_4 #0x0 v1
+20 @38 RETURN v1
+
+METHOD LX/0wS;->A0M()Landroidx/fragment/app/Fragment; flags=17 regs=4
+0 @0 MOVE_OBJECT v2,v3
+1 @1 CHECK_CAST LX/16z; v2
+2 @3 IGET_OBJECT LX/16z;->A1Z:Ljava/lang/ref/WeakReference; v0,v2
+3 @5 INVOKE_VIRTUAL Ljava/lang/ref/Reference;->get()Ljava/lang/Object; [0]
+4 @8 MOVE_RESULT_OBJECT v1
+5 @9 CHECK_CAST LX/0dj; v1
+6 @11 IF_NEZ v1 ->pc=15
+7 @13 CONST_4 #0x0 v0
+8 @14 RETURN_OBJECT v0
+9 @15 IGET LX/16z;->A1R:I v0,v2
+10 @17 INVOKE_VIRTUAL LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; [1, 0]
+11 @20 MOVE_RESULT_OBJECT v0
+12 @21 RETURN_OBJECT v0
+
+METHOD Landroidx/fragment/app/Fragment;->isAdded()Z flags=17 regs=2
+0 @0 IGET_OBJECT Landroidx/fragment/app/Fragment;->mHost:LX/0cd; v0,v1
+1 @2 IF_EQZ v0 ->pc=10
+2 @4 IGET_BOOLEAN Landroidx/fragment/app/Fragment;->mAdded:Z v0,v1
+3 @6 IF_EQZ v0 ->pc=10
+4 @8 CONST_4 #0x1 v0
+5 @9 RETURN v0
+6 @10 CONST_4 #0x0 v0
+7 @11 RETURN v0
+
+METHOD Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj; flags=17 regs=2
+0 @0 IGET_OBJECT Landroidx/fragment/app/FragmentActivity;->A03:LX/0ck; v0,v1
+1 @2 IGET_OBJECT LX/0ck;->A00:LX/0cd; v0,v0
+2 @4 IGET_OBJECT LX/0cd;->A03:LX/0dj; v0,v0
+3 @6 RETURN_OBJECT v0
+
+METHOD LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment; flags=17 regs=7
+0 @0 IGET_OBJECT LX/0dj;->A0V:LX/0dw; v4,v5
+1 @2 IGET_OBJECT LX/0dw;->A01:Ljava/util/ArrayList; v3,v4
+2 @4 INVOKE_VIRTUAL Ljava/util/AbstractCollection;->size()I [3]
+3 @7 MOVE_RESULT v1
+4 @8 ADD_INT_LIT8 #0xffffffffffffffff v1,v1
+5 @10 IF_LTZ v1 ->pc=25
+6 @12 INVOKE_VIRTUAL Ljava/util/AbstractList;->get(I)Ljava/lang/Object; [3, 1]
+7 @15 MOVE_RESULT_OBJECT v2
+8 @16 CHECK_CAST Landroidx/fragment/app/Fragment; v2
+9 @18 IF_EQZ v2 ->pc=8
+10 @20 IGET Landroidx/fragment/app/Fragment;->mFragmentId:I v0,v2
+11 @22 IF_NE v0,v6 ->pc=8
+12 @24 RETURN_OBJECT v2
+13 @25 IGET_OBJECT LX/0dw;->A02:Ljava/util/HashMap; v0,v4
+14 @27 INVOKE_VIRTUAL Ljava/util/AbstractMap;->values()Ljava/util/Collection; [0]
+15 @30 MOVE_RESULT_OBJECT v0
+16 @31 INVOKE_INTERFACE Ljava/util/Collection;->iterator()Ljava/util/Iterator; [0]
+17 @34 MOVE_RESULT_OBJECT v1
+18 @35 INVOKE_INTERFACE Ljava/util/Iterator;->hasNext()Z [1]
+19 @38 MOVE_RESULT v0
+20 @39 IF_EQZ v0 ->pc=56
+21 @41 INVOKE_INTERFACE Ljava/util/Iterator;->next()Ljava/lang/Object; [1]
+22 @44 MOVE_RESULT_OBJECT v0
+23 @45 CHECK_CAST LX/0du; v0
+24 @47 IF_EQZ v0 ->pc=35
+25 @49 IGET_OBJECT LX/0du;->A02:Landroidx/fragment/app/Fragment; v2,v0
+26 @51 IGET Landroidx/fragment/app/Fragment;->mFragmentId:I v0,v2
+27 @53 IF_NE v0,v6 ->pc=35
+28 @55 RETURN_OBJECT v2
+29 @56 CONST_4 #0x0 v2
+30 @57 RETURN_OBJECT v2
+
+CLASS classes.dex LX/0dj; flags=1025 extends Ljava/lang/Object; interfaces=[]
+FIELD LX/0dj;->A0V:LX/0dw; flags=17
+CLASS classes2.dex LX/0wS; flags=1025 extends Ljava/lang/Object; interfaces=[]
+CLASS classes2.dex LX/9ld; flags=17 extends LX/Q84; interfaces=[LX/Peq;]
+CLASS classes22.dex LX/16z; flags=17 extends LX/0wS; interfaces=[LX/Hon;]
+FIELD LX/16z;->A0U:Z flags=1
+FIELD LX/16z;->A1R:I flags=17
+FIELD LX/16z;->A1Z:Ljava/lang/ref/WeakReference; flags=17
+CLASS classes22.dex Lcom/instagram/base/activity/IgFragmentActivity; flags=1025 extends Landroidx/appcompat/app/AppCompatActivity; interfaces=[LX/Hai;, LX/pnV;, LX/Fck;]
+FIELD Lcom/instagram/base/activity/IgFragmentActivity;->A00:LX/0wS; flags=1
+CLASS classes4.dex LX/3MM; flags=17 extends Ljava/lang/Object; interfaces=[]
+FIELD LX/3MM;->A02:Ljava/lang/ref/WeakReference; flags=1
+CLASS classes.dex LX/07d; flags=1025 extends Landroidx/fragment/app/Fragment; interfaces=[Landroid/content/DialogInterface$OnDismissListener;, Landroid/content/DialogInterface$OnCancelListener;]
+FIELD LX/07d;->A00:Landroid/app/Dialog; flags=1
+CLASS classes18.dex LX/RxR; flags=1025 extends LX/7Ap; interfaces=[LX/OfY;]
+FIELD LX/RxR;->A00:LX/8g8; flags=17
+CLASS classes.dex LX/0dw; flags=17 extends Ljava/lang/Object; interfaces=[]
+FIELD LX/0dw;->A01:Ljava/util/ArrayList; flags=17
+CLASS classes22.dex Lcom/instagram/mainactivity/InstagramMainActivity; flags=17 extends Lcom/instagram/base/activity/BaseFragmentActivity; interfaces=[LX/OdQ;, LX/OlT;, LX/iaL;, Lcom/instagram/modal/fragment/intf/ModalHost;, LX/Gkl;, LX/Ha0;, LX/GaM;, LX/Hvo;, LX/Mvs;, LX/Ewk;, LX/Glo;, LX/Gml;, LX/Gbn;, LX/Plp;, LX/Mxy;, LX/Ixn;, LX/EPl;, LX/Dq0;, LX/maz;, LX/Fhm;, LX/Fhn;, LX/Fho;, LX/Fil;, LX/Fim;, LX/Fko;]
+FIELD Lcom/instagram/mainactivity/InstagramMainActivity;->A08:LX/3MM; flags=1

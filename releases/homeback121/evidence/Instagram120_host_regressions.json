@@ -1,0 +1,52 @@
+{
+  "schema": "homeback120-instagram-host-regressions-v1",
+  "result": "PASS",
+  "patch_version": "1.1.10",
+  "physical_android_tested": false,
+  "scope": "Host-only Android stand-ins and exact-signature generated fragment fixtures. The same new 25-case retained-background/selected-fragment suite fails nine cases against previous v1.1.9 source and passes against final v1.1.10 source. Main dispatch tests include initial Back and predictive popup/sheet closure with same-gesture task preservation and next distinct Back task removal. These results do not establish physical Android or unmodified APK installation behavior.",
+  "previous_1_1_9_new_suite": {
+    "passed": 16,
+    "failed": 9,
+    "assertions_reached": 74
+  },
+  "final_1_1_10": {
+    "instagram120": {
+      "cases": 25,
+      "assertions": 92
+    },
+    "instagram120main": {
+      "cases": 16,
+      "assertions": 79
+    },
+    "host_existing": {
+      "cases": 315,
+      "assertions": 1476
+    },
+    "instagram119": {
+      "cases": 15,
+      "assertions": 48
+    },
+    "twitter119": {
+      "cases": 35,
+      "assertions": 104
+    }
+  },
+  "sources": {
+    "src/runtime/InstagramBack.java": "5687061ab1d408ba1df88f1c4689b3ff3e9c6076353a86cac824a415523edc3d",
+    "src/runtime/InstagramReels.java": "245afaee228777d9501f2ad9ea8557eecf31db834679903348b48e1b4bf4e480",
+    "src/runtime/InstagramNativeLayers.java": "70d62e58ad0954934d4c9a2126d7428318ccf5588f84839265ac031340116fdd",
+    "src/runtime/OneBackExit.java": "e128808009786de511b1f9037559ab743df0fc40f4fccb8f6dfc6361ca998d2e",
+    "src/runtime/ExitScreens.java": "47caef042c0160bcf7df4dcbbef35a1f8b2a29fe95bc254846f6bb2c1d0b0b94",
+    "src/test-runtime/Back120InstagramTest.java": "e611402c8ec47621035cb817b288baa3bcb7551a3c53d9fd58801e0ef0859670",
+    "src/test-runtime/Back120MainDispatchTest.java": "fb009532ecf7bd70f04fdb227a627a9e18d424d697970e1d0ba54e70904e7743",
+    "src/test-runtime/NativeReels120Fixture.java": "8837c235f1546b38da25444325c6fe7cce0471bcbd8df7b76c411cebfeebe7d4"
+  },
+  "logs": {
+    "Instagram120_regression_before119.txt": "0c10c1a46c0143a81931f113705db012f529e237ac58e84efa6c06aee3bb66e0",
+    "Instagram120_regression_after.txt": "b9c6f64b2b6514b3508d9b2aade840a5a13a11eb9094a30b3b3d45cafb585f2d",
+    "Instagram120_main_regression_after.txt": "3bb2822da4fd200b15a00671abff3fb11f757396a2bf60c96b430f031b06be1a",
+    "Instagram120_host_existing.txt": "4a3320b54cb0d694c3e469c71637f5628c258c42b71f34fe5248095a90817770",
+    "Instagram119_regression_after.txt": "bf54566ab7ca9c2a5c497ab89f8a128946f10364a87bccd827ee1558d80489ab",
+    "X_v119_regression_after.txt": "3324ac93ad38391df276a6da377f858b30b62934315d95d0d665b8ab8c0846bf"
+  }
+}

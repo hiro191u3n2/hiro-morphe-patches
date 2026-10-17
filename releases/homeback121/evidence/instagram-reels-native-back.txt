@@ -1,0 +1,409 @@
+METHOD LX/8Zv;->onBackPressed()Z
+0 IGET_OBJECT LX/8Zv;->A1Y:LX/21x; v1,v10
+2 CONST_4 #1 v3
+3 IF_EQZ v1 offset 10
+5 IGET_BOOLEAN LX/21x;->A05:Z v0,v1
+7 IF_EQZ v0 offset 6
+9 INVOKE_VIRTUAL LX/21x;->A09()V {1,0,0,0,0}x1
+12 RETURN v3
+13 IGET_OBJECT LX/8Zv;->A0L:LX/0wS; v1,v10
+15 IF_EQZ v1 offset 16
+17 MOVE_OBJECT v0,v1
+18 CHECK_CAST LX/16z; v0
+20 IGET_BOOLEAN LX/16z;->A15:Z v0,v0
+22 IF_EQZ v0 offset 9
+24 INVOKE_VIRTUAL LX/0wS;->A0p()Z {1,0,0,0,0}x1
+27 MOVE_RESULT v0
+28 IF_EQZ v0 offset 3
+30 RETURN v3
+31 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+34 MOVE_RESULT_OBJECT v0
+35 IGET_BOOLEAN Lcom/instagram/clips/intf/ClipsViewerConfig;->A2p:Z v0,v0
+37 IF_EQZ v0 offset 32
+39 IGET_OBJECT LX/8Zv;->A2R:LX/Esp; v0,v10
+41 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {0,0,0,0,0}x1
+44 MOVE_RESULT_OBJECT v0
+45 CHECK_CAST LX/Ndg; v0
+47 INVOKE_INTERFACE LX/Ndg;->ETJ()Z {0,0,0,0,0}x1
+50 MOVE_RESULT v0
+51 IF_NEZ v0 offset 18
+53 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+56 MOVE_RESULT_OBJECT v0
+57 INVOKE_STATIC LX/2qc;->A04(Lcom/instagram/common/session/UserSession;)Z {0,0,0,0,0}x1
+60 MOVE_RESULT v0
+61 IF_EQZ v0 offset 771
+63 CONST_STRING back_or_exit_button v0
+65 INVOKE_STATIC LX/8Zv;->A21(LX/8Zv;Ljava/lang/String;)V {10,0,0,0,0}x2
+68 RETURN v3
+69 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+72 MOVE_RESULT_OBJECT v0
+73 CONST_4 #0 v2
+74 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+77 INVOKE_STATIC LX/2xu;->A01(LX/4Nb;)LX/2xu; {0,0,0,0,0}x1
+80 MOVE_RESULT_OBJECT v0
+81 IGET_OBJECT LX/2xu;->A06:Ljava/lang/String; v1,v0
+83 SGET_OBJECT LX/2yl;->A08:LX/2yl; v0
+85 INVOKE_VIRTUAL Ljava/lang/Object;->toString()Ljava/lang/String; {0,0,0,0,0}x1
+88 MOVE_RESULT_OBJECT v0
+89 INVOKE_STATIC LX/5B5;->areEqual(Ljava/lang/Object;Ljava/lang/Object;)Z {1,0,0,0,0}x2
+92 MOVE_RESULT v0
+93 CONST_STRING clipsViewerFragmentController v9
+95 IF_EQZ v0 offset 106
+97 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+100 MOVE_RESULT_OBJECT v0
+101 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; v1,v0
+103 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+106 MOVE_RESULT_OBJECT v0
+107 INVOKE_VIRTUAL Lcom/instagram/clips/intf/ClipsViewerSource;->A0K(Lcom/instagram/common/session/UserSession;)Z {1,0,0,0,0}x2
+110 MOVE_RESULT v0
+111 IF_EQZ v0 offset 90
+113 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+116 MOVE_RESULT_OBJECT v0
+117 IGET_BOOLEAN Lcom/instagram/clips/intf/ClipsViewerConfig;->A2p:Z v0,v0
+119 IF_NEZ v0 offset 82
+121 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+124 MOVE_RESULT_OBJECT v0
+125 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+128 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {0,2,0,0,0}x2
+131 MOVE_RESULT_OBJECT v4
+132 CONST_WIDE v0
+137 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v4
+139 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {4,0,1,0,0}x3
+142 MOVE_RESULT v0
+143 IF_EQZ v0 offset 58
+145 IGET_OBJECT LX/8Zv;->A0T:LX/8z6; v0,v10
+147 IF_NEZ v0 offset 10
+149 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {9,0,0,0,0}x1
+152 INVOKE_STATIC LX/002;->createAndThrow()LX/002; {0,0,0,0,0}x0
+155 MOVE_RESULT_OBJECT v0
+156 THROW v0
+157 IGET_OBJECT LX/8z6;->A1E:LX/8s1; v0,v0
+159 IGET_OBJECT LX/BeN;->A06:LX/8s2; v0,v0
+161 IGET_OBJECT LX/8s2;->A03:LX/8s4; v4,v0
+163 IGET_OBJECT LX/8s4;->A04:Ljava/lang/Integer; v1,v4
+165 SGET_OBJECT LX/008;->A00:Ljava/lang/Integer; v0
+167 IF_NE v1,v0 offset 6
+169 IGET_OBJECT LX/8s4;->A02:LX/mpd; v0,v4
+171 IF_NEZ v0 offset 30
+173 IGET_OBJECT LX/8Zv;->A0v:LX/9q6; v0,v10
+175 CONST_STRING clipsViewerViewPager v4
+177 IF_NEZ v0 offset 6
+179 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {4,0,0,0,0}x1
+182 GOTO offset -30
+183 INVOKE_VIRTUAL LX/9q6;->A0I()I {0,0,0,0,0}x1
+186 MOVE_RESULT v0
+187 IF_EQZ v0 offset 14
+189 IGET_OBJECT LX/8Zv;->A0n:LX/1OS; v0,v10
+191 IF_EQZ v0 offset 10
+193 IGET_OBJECT LX/8Zv;->A0v:LX/9q6; v1,v10
+195 IF_NEZ v1 offset 621
+197 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {4,0,0,0,0}x1
+200 GOTO offset -48
+201 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+204 MOVE_RESULT_OBJECT v0
+205 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; v0,v0
+207 INVOKE_VIRTUAL Ljava/lang/Object;->toString()Ljava/lang/String; {0,0,0,0,0}x1
+210 MOVE_RESULT_OBJECT v1
+211 SGET_OBJECT Ljava/util/Locale;->ROOT:Ljava/util/Locale; v0
+213 INVOKE_VIRTUAL Ljava/lang/String;->toLowerCase(Ljava/util/Locale;)Ljava/lang/String; {1,0,0,0,0}x2
+216 MOVE_RESULT_OBJECT v1
+217 IGET_OBJECT LX/8Zv;->A0T:LX/8z6; v0,v10
+219 IF_NEZ v0 offset 6
+221 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {9,0,0,0,0}x1
+224 GOTO offset -72
+225 IGET_OBJECT LX/8z6;->A1P:LX/8t8; v4,v0
+227 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+230 MOVE_RESULT_OBJECT v0
+231 INVOKE_STATIC LX/0c9;->A02(Lcom/instagram/common/session/UserSession;Ljava/lang/String;)Z {0,1,0,0,0}x2
+234 MOVE_RESULT v0
+235 IF_EQZ v0 offset 38
+237 INVOKE_VIRTUAL LX/8t8;->A1D()Z {4,0,0,0,0}x1
+240 MOVE_RESULT v0
+241 IF_EQZ v0 offset 32
+243 CONST_STRING android_purge_26_q3_ClipsVideoPlayerController_setAllowReuseForCurrentPlayer v0
+245 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+248 INVOKE_VIRTUAL LX/8t8;->A0c()LX/9qQ; {4,0,0,0,0}x1
+251 MOVE_RESULT_OBJECT v1
+252 INVOKE_VIRTUAL LX/9qQ;->A00()I {1,0,0,0,0}x1
+255 MOVE_RESULT v0
+256 INVOKE_VIRTUAL LX/9qQ;->A03(I)LX/2BP; {1,0,0,0,0}x2
+259 MOVE_RESULT_OBJECT v1
+260 IF_EQZ v1 offset 13
+262 IGET_OBJECT LX/8t8;->A0Q:LX/8t9; v0,v4
+264 INVOKE_VIRTUAL LX/8t9;->A01(LX/2BP;)LX/2CU; {0,1,0,0,0}x2
+267 MOVE_RESULT_OBJECT v0
+268 IF_EQZ v0 offset 5
+270 INVOKE_INTERFACE LX/2CU;->GkS()V {0,0,0,0,0}x1
+273 IGET_OBJECT LX/8Zv;->A23:LX/Esp; v0,v10
+275 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {0,0,0,0,0}x1
+278 MOVE_RESULT_OBJECT v6
+279 CHECK_CAST LX/Jti; v6
+281 IGET_OBJECT LX/Jti;->A02:Lkotlin/jvm/functions/Function0; v4,v6
+283 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {4,0,0,0,0}x1
+286 MOVE_RESULT_OBJECT v1
+287 SGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerSource;->A2g:Lcom/instagram/clips/intf/ClipsViewerSource; v0
+289 IF_EQ v1,v0 offset 10
+291 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {4,0,0,0,0}x1
+294 MOVE_RESULT_OBJECT v1
+295 SGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerSource;->A34:Lcom/instagram/clips/intf/ClipsViewerSource; v0
+297 IF_NE v1,v0 offset 47
+299 IGET_OBJECT LX/Jti;->A08:Lkotlin/jvm/functions/Function0; v0,v6
+301 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+304 MOVE_RESULT_OBJECT v7
+305 IF_EQZ v7 offset 39
+307 IGET_OBJECT LX/Jti;->A01:Lkotlin/jvm/functions/Function0; v0,v6
+309 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+312 MOVE_RESULT_OBJECT v5
+313 CHECK_CAST LX/4qQ; v5
+315 IGET_OBJECT LX/Jti;->A05:Lkotlin/jvm/functions/Function0; v0,v6
+317 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+320 MOVE_RESULT_OBJECT v0
+321 CHECK_CAST Ljava/lang/Number; v0
+323 INVOKE_VIRTUAL Ljava/lang/Number;->intValue()I {0,0,0,0,0}x1
+326 MOVE_RESULT v1
+327 CONST_STRING android_purge_26_q2_ClipsGridItemsStore_setLastMediaPositionInViewer v0
+329 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+332 IGET_OBJECT LX/4qQ;->A02:Ljava/util/concurrent/ConcurrentMap; v0,v5
+334 INVOKE_INTERFACE Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object; {0,7,0,0,0}x2
+337 MOVE_RESULT_OBJECT v0
+338 CHECK_CAST LX/9B3; v0
+340 IF_EQZ v0 offset 4
+342 IPUT LX/9B3;->A00:I v1,v0
+344 IGET_OBJECT LX/Jti;->A07:Lkotlin/jvm/functions/Function0; v0,v6
+346 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+349 MOVE_RESULT_OBJECT v0
+350 CHECK_CAST Ljava/lang/Boolean; v0
+352 INVOKE_VIRTUAL Ljava/lang/Boolean;->booleanValue()Z {0,0,0,0,0}x1
+355 MOVE_RESULT v0
+356 IF_EQZ v0 offset 43
+358 IGET_OBJECT LX/Jti;->A08:Lkotlin/jvm/functions/Function0; v0,v6
+360 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+363 MOVE_RESULT_OBJECT v7
+364 IF_EQZ v7 offset 35
+366 IGET_OBJECT LX/Jti;->A01:Lkotlin/jvm/functions/Function0; v0,v6
+368 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+371 MOVE_RESULT_OBJECT v5
+372 CHECK_CAST LX/4qQ; v5
+374 IGET_OBJECT LX/Jti;->A04:Lkotlin/jvm/functions/Function0; v0,v6
+376 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+379 MOVE_RESULT_OBJECT v1
+380 CHECK_CAST Ljava/lang/String; v1
+382 CONST_STRING android_purge_26_q2_ClipsGridItemsStore_setLastMediaIdInViewer v0
+384 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+387 IGET_OBJECT LX/4qQ;->A02:Ljava/util/concurrent/ConcurrentMap; v0,v5
+389 INVOKE_INTERFACE Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object; {0,7,0,0,0}x2
+392 MOVE_RESULT_OBJECT v0
+393 CHECK_CAST LX/9B3; v0
+395 IF_EQZ v0 offset 4
+397 IPUT_OBJECT LX/9B3;->A03:Ljava/lang/String; v1,v0
+399 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {4,0,0,0,0}x1
+402 MOVE_RESULT_OBJECT v1
+403 SGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerSource;->A30:Lcom/instagram/clips/intf/ClipsViewerSource; v0
+405 CONST_4 #ffffffff v5
+406 IF_NE v1,v0 offset 50
+408 IGET_OBJECT LX/Jti;->A00:Lkotlin/jvm/functions/Function0; v0,v6
+410 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+413 MOVE_RESULT_OBJECT v8
+414 CHECK_CAST Landroid/app/Activity; v8
+416 NEW_INSTANCE Landroid/content/Intent; v7
+418 INVOKE_DIRECT Landroid/content/Intent;-><init>()V {7,0,0,0,0}x1
+421 IGET_OBJECT LX/Jti;->A05:Lkotlin/jvm/functions/Function0; v0,v6
+423 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+426 MOVE_RESULT_OBJECT v0
+427 CHECK_CAST Ljava/lang/Number; v0
+429 INVOKE_VIRTUAL Ljava/lang/Number;->intValue()I {0,0,0,0,0}x1
+432 MOVE_RESULT v1
+433 CONST_STRING_JUMBO rings_clips_media_position_in_clips_viewer v0
+436 INVOKE_VIRTUAL Landroid/content/Intent;->putExtra(Ljava/lang/String;I)Landroid/content/Intent; {7,0,1,0,0}x3
+439 IGET_OBJECT LX/Jti;->A03:Lkotlin/jvm/functions/Function0; v0,v6
+441 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+444 MOVE_RESULT_OBJECT v1
+445 CHECK_CAST Ljava/lang/String; v1
+447 CONST_STRING_JUMBO rings_clips_media_id_in_clips_viewer v0
+450 INVOKE_VIRTUAL Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent; {7,0,1,0,0}x3
+453 INVOKE_VIRTUAL Landroid/app/Activity;->setResult(ILandroid/content/Intent;)V {8,5,7,0,0}x3
+456 IGET_OBJECT LX/Jti;->A06:Lkotlin/jvm/functions/Function0; v0,v6
+458 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+461 MOVE_RESULT_OBJECT v1
+462 CHECK_CAST Landroid/content/Intent; v1
+464 IF_EQZ v1 offset 13
+466 IGET_OBJECT LX/Jti;->A00:Lkotlin/jvm/functions/Function0; v0,v6
+468 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+471 MOVE_RESULT_OBJECT v0
+472 CHECK_CAST Landroid/app/Activity; v0
+474 INVOKE_VIRTUAL Landroid/app/Activity;->setResult(ILandroid/content/Intent;)V {0,5,1,0,0}x3
+477 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {4,0,0,0,0}x1
+480 MOVE_RESULT_OBJECT v1
+481 SGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerSource;->A1C:Lcom/instagram/clips/intf/ClipsViewerSource; v0
+483 IF_NE v1,v0 offset 31
+485 NEW_INSTANCE Landroid/content/Intent; v4
+487 INVOKE_DIRECT Landroid/content/Intent;-><init>()V {4,0,0,0,0}x1
+490 IGET_OBJECT LX/Jti;->A04:Lkotlin/jvm/functions/Function0; v0,v6
+492 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+495 MOVE_RESULT_OBJECT v1
+496 CHECK_CAST Ljava/lang/String; v1
+498 CONST_STRING ClipsConstants.ARG_CLIPS_MEDIA_ID v0
+500 INVOKE_VIRTUAL Landroid/content/Intent;->putExtra(Ljava/lang/String;Ljava/lang/String;)Landroid/content/Intent; {4,0,1,0,0}x3
+503 IGET_OBJECT LX/Jti;->A00:Lkotlin/jvm/functions/Function0; v0,v6
+505 INVOKE_INTERFACE Lkotlin/jvm/functions/Function0;->invoke()Ljava/lang/Object; {0,0,0,0,0}x1
+508 MOVE_RESULT_OBJECT v0
+509 CHECK_CAST Landroid/app/Activity; v0
+511 INVOKE_VIRTUAL Landroid/app/Activity;->setResult(ILandroid/content/Intent;)V {0,5,4,0,0}x3
+514 IGET_OBJECT LX/8Zv;->clipsViewerSession:LX/8j0; v0,v10
+516 IF_NEZ v0 offset 9
+518 CONST_STRING clipsViewerSession v0
+520 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {0,0,0,0,0}x1
+523 GOTO_16 offset -371
+525 INVOKE_STATIC LX/9EE;->A00(LX/8j0;)LX/Esp; {0,0,0,0,0}x1
+528 MOVE_RESULT_OBJECT v0
+529 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {0,0,0,0,0}x1
+532 MOVE_RESULT_OBJECT v0
+533 CHECK_CAST LX/9EE; v0
+535 IGET_OBJECT LX/9EE;->A03:LX/Dgs; v0,v0
+537 CONST_4 #0 v5
+538 IF_EQZ v0 offset 9
+540 INVOKE_VIRTUAL LX/Dgs;->A0X()Z {0,0,0,0,0}x1
+543 MOVE_RESULT v0
+544 IF_NE v0,v3 offset 3
+546 CONST_4 #1 v5
+547 IF_NEZ v5 offset 90
+549 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+552 MOVE_RESULT_OBJECT v0
+553 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A01:Ljava/lang/String; v1,v0
+555 CONST_STRING clips_tab_short_url v0
+557 IF_EQZ v1 offset 8
+559 INVOKE_VIRTUAL Ljava/lang/String;->equals(Ljava/lang/Object;)Z {1,0,0,0,0}x2
+562 MOVE_RESULT v0
+563 IF_NEZ v0 offset 22
+565 CONST_STRING clips_tab_push_notif v0
+567 IF_EQZ v1 offset 8
+569 INVOKE_VIRTUAL Ljava/lang/String;->equals(Ljava/lang/Object;)Z {1,0,0,0,0}x2
+572 MOVE_RESULT v0
+573 IF_NEZ v0 offset 12
+575 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+578 MOVE_RESULT_OBJECT v0
+579 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; v1,v0
+581 SGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerSource;->A3S:Lcom/instagram/clips/intf/ClipsViewerSource; v0
+583 IF_NE v1,v0 offset 54
+585 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+588 MOVE_RESULT_OBJECT v0
+589 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+592 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {0,2,0,0,0}x2
+595 MOVE_RESULT_OBJECT v4
+596 CONST_WIDE v0
+601 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v4
+603 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {4,0,1,0,0}x3
+606 MOVE_RESULT v0
+607 IF_EQZ v0 offset 30
+609 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+612 MOVE_RESULT_OBJECT v4
+613 CONST_STRING  v1
+615 CONST_STRING android_purge_26_q2_ClipsViewerConfig_updateSourceModuleName v0
+617 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+620 IPUT_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A01:Ljava/lang/String; v1,v4
+622 INVOKE_STATIC LX/1Hz;->A00()LX/OlT; {0,0,0,0,0}x0
+625 MOVE_RESULT_OBJECT v0
+626 IF_EQZ v0 offset 161
+628 INVOKE_STATIC LX/1Hz;->A00()LX/OlT; {0,0,0,0,0}x0
+631 MOVE_RESULT_OBJECT v0
+632 IF_EQZ v0 offset 5
+634 INVOKE_INTERFACE LX/OlT;->GfT()V {0,0,0,0,0}x1
+637 INVOKE_VIRTUAL LX/8Zv;->A2K()LX/Nbi; {10,0,0,0,0}x1
+640 MOVE_RESULT_OBJECT v0
+641 INVOKE_INTERFACE LX/Nbi;->Bp7()LX/1lB; {0,0,0,0,0}x1
+644 MOVE_RESULT_OBJECT v0
+645 IF_EQZ v0 offset 205
+647 IGET_BOOLEAN LX/1lB;->A15:Z v0,v0
+649 IF_NE v0,v3 offset 201
+651 INVOKE_VIRTUAL LX/8Zv;->A2K()LX/Nbi; {10,0,0,0,0}x1
+654 MOVE_RESULT_OBJECT v0
+655 INVOKE_INTERFACE LX/Nbi;->Bp8()I {0,0,0,0,0}x1
+658 MOVE_RESULT v0
+659 IF_NEZ v0 offset 191
+661 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+664 MOVE_RESULT_OBJECT v0
+665 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+668 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {0,2,0,0,0}x2
+671 MOVE_RESULT_OBJECT v3
+672 CONST_WIDE v0
+677 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v3
+679 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {3,0,1,0,0}x3
+682 MOVE_RESULT v0
+683 IF_EQZ v0 offset 167
+685 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+688 MOVE_RESULT_OBJECT v0
+689 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; v0,v0
+691 INVOKE_VIRTUAL Lcom/instagram/clips/intf/ClipsViewerSource;->A0J()Z {0,0,0,0,0}x1
+694 MOVE_RESULT v0
+695 IF_EQZ v0 offset 77
+697 SGET_OBJECT LX/Jkt;->A03:LX/Jkt; v4
+699 SGET_OBJECT LX/Jkt;->A03:LX/Jkt; v0
+701 IF_NE v4,v0 offset 26
+703 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+706 MOVE_RESULT_OBJECT v0
+707 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+710 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {0,2,0,0,0}x2
+713 MOVE_RESULT_OBJECT v3
+714 CONST_WIDE v0
+719 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v3
+721 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {3,0,1,0,0}x3
+724 MOVE_RESULT v0
+725 IF_NEZ v0 offset 30
+727 SGET_OBJECT LX/Jkt;->A02:LX/Jkt; v0
+729 IF_NE v4,v0 offset 121
+731 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+734 MOVE_RESULT_OBJECT v0
+735 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {0,2,0,0,0}x2
+738 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {0,2,0,0,0}x2
+741 MOVE_RESULT_OBJECT v2
+742 CONST_WIDE v0
+747 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v2
+749 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {2,0,1,0,0}x3
+752 MOVE_RESULT v0
+753 IF_EQZ v0 offset 97
+755 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->requireContext()Landroid/content/Context; {10,0,0,0,0}x1
+758 MOVE_RESULT_OBJECT v3
+759 INVOKE_VIRTUAL LX/8Zv;->A2G()Lcom/instagram/common/session/UserSession; {10,0,0,0,0}x1
+762 MOVE_RESULT_OBJECT v2
+763 IGET_OBJECT LX/8Zv;->A0T:LX/8z6; v0,v10
+765 IF_NEZ v0 offset 78
+767 INVOKE_STATIC LX/5B5;->A0a(Ljava/lang/String;)V {9,0,0,0,0}x1
+770 GOTO_16 offset -618
+772 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; {10,0,0,0,0}x1
+775 MOVE_RESULT_OBJECT v0
+776 IGET_OBJECT Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; v0,v0
+778 INVOKE_VIRTUAL Lcom/instagram/clips/intf/ClipsViewerSource;->A0A()Z {0,0,0,0,0}x1
+781 MOVE_RESULT v0
+782 IF_EQZ v0 offset 68
+784 SGET_OBJECT LX/Jkt;->A02:LX/Jkt; v4
+786 GOTO offset -87
+787 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->getContext()Landroid/content/Context; {10,0,0,0,0}x1
+790 MOVE_RESULT_OBJECT v0
+791 IF_EQZ v0 offset -154
+793 SGET_OBJECT LX/8dq;->A03:LX/8dr; v0
+795 INVOKE_VIRTUAL LX/8dr;->A00()LX/8dq; {0,0,0,0,0}x1
+798 MOVE_RESULT_OBJECT v1
+799 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->requireContext()Landroid/content/Context; {10,0,0,0,0}x1
+802 MOVE_RESULT_OBJECT v0
+803 INVOKE_VIRTUAL LX/8dq;->A00(Landroid/content/Context;)Landroid/content/Intent; {1,0,0,0,0}x2
+806 MOVE_RESULT_OBJECT v1
+807 INVOKE_VIRTUAL Landroidx/fragment/app/Fragment;->requireContext()Landroid/content/Context; {10,0,0,0,0}x1
+810 MOVE_RESULT_OBJECT v0
+811 INVOKE_STATIC LX/7tz;->A0A(Landroid/content/Context;Landroid/content/Intent;)Z {0,1,0,0,0}x2
+814 GOTO_16 offset -177
+816 CONST_STRING android_purge_26_q3_ClipsViewPagerImpl_scrollToTop v0
+818 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+821 INVOKE_VIRTUAL LX/9q6;->A0a(IZ)V {1,2,3,0,0}x3
+824 IGET_OBJECT LX/8Zv;->A0m:LX/1OR; v0,v10
+826 IF_EQZ v0 offset -814
+828 INVOKE_VIRTUAL LX/1OR;->A00(Z)V {0,2,0,0,0}x2
+831 RETURN v3
+832 CONST_16 #26 v1
+834 NEW_INSTANCE LX/9yW; v0
+836 INVOKE_DIRECT LX/9yW;-><init>(Ljava/lang/Object;I)V {0,10,1,0,0}x3
+839 INVOKE_STATIC LX/8Zv;->A24(LX/8Zv;Lkotlin/jvm/functions/Function0;)V {10,0,0,0,0}x2
+842 RETURN v3
+843 IGET_OBJECT LX/8z6;->A1C:LX/8h0; v1,v0
+845 SGET_OBJECT LX/Jko;->A02:LX/Jko; v0
+847 INVOKE_STATIC LX/OOe;->A00(Landroid/content/Context;LX/Jko;LX/Jkt;LX/9PW;Lcom/instagram/common/session/UserSession;)V {3,0,4,1,2}x5
+850 RETURN v5

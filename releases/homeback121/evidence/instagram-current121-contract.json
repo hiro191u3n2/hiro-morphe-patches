@@ -1,0 +1,395 @@
+{
+  "schemaVersion": 1,
+  "apkPath": "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+  "apkSha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+  "runtimeHelperClasses": [
+    "Lapp/hiro/oneback/runtime/InstagramCurrent;",
+    "Lapp/hiro/oneback/runtime/InstagramCurrent$Result;",
+    "Lapp/hiro/oneback/runtime/InstagramCurrent$Frame;",
+    "Lapp/hiro/oneback/runtime/InstagramCurrent$Invalid;"
+  ],
+  "entryPoint": "Lapp/hiro/oneback/runtime/InstagramCurrent;->inspect(Landroid/app/Activity;)Lapp/hiro/oneback/runtime/InstagramCurrent$Result;",
+  "resultFields": [
+    "available",
+    "nativeRecognized",
+    "kind",
+    "activity",
+    "selected",
+    "target",
+    "selectedTab",
+    "view",
+    "stateClear",
+    "stackClear",
+    "path",
+    "frames",
+    "backgroundRoots"
+  ],
+  "kinds": {
+    "UNKNOWN": 0,
+    "HOME": 1,
+    "REELS": 2,
+    "OTHER": 3
+  },
+  "nativeMethods": [
+    {
+      "descriptor": "Lcom/instagram/mainactivity/InstagramMainActivity;->A1e()Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Navigation-read-only native selection; internal feature-flag and tab-key lazy reads may initialize caches; no promise of zero instrumentation/cache side effects."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads native support manager."
+    },
+    {
+      "descriptor": "LX/2yE;->A06()LX/2yl;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads Stack current entry tab; no push/pop."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->isAdded()Z",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads native host and added state."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->isVisible()Z",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads added/hidden/view/token/visibility state."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->isResumed()Z",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads mState >= 7."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads attached Activity owner."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->getParentFragment()Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads mParentFragment."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->getParentFragmentManager()LX/0dj;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads parent manager or throws if not associated."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/0dj;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads child manager or throws if not attached."
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->getView()Landroid/view/View;",
+      "shape": "public instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads mView."
+    },
+    {
+      "descriptor": "LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Find by native fragment ID in added/active store, no transaction."
+    },
+    {
+      "descriptor": "LX/0dj;->A0Q(Ljava/lang/String;)Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Find by native tag in added/active store, no transaction."
+    },
+    {
+      "descriptor": "LX/0dj;->A0L()I",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Native back stack count including non-null A05 record."
+    },
+    {
+      "descriptor": "LX/0dj;->A14()Z",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads A0J || A0K saved/stopped state."
+    },
+    {
+      "descriptor": "LX/0jG;->A03()Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "shape-only",
+      "readOnlyEvidence": "Native getter only reads base2275; adapter preserves main226f override explicitly."
+    },
+    {
+      "descriptor": "LX/3gY;->A03()Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "shape-only",
+      "readOnlyEvidence": "Native getter reads main226f child."
+    },
+    {
+      "descriptor": "LX/22c;->A07()Landroidx/fragment/app/Fragment;",
+      "shape": "public final instance",
+      "use": "shape-only",
+      "readOnlyEvidence": "Not invoked: may evaluate lazy fallback. Adapter requires cached A05."
+    },
+    {
+      "descriptor": "LX/eBE;->A04()I",
+      "shape": "public final instance",
+      "use": "invoked",
+      "readOnlyEvidence": "Maps cached selected feed type to native index0..4."
+    },
+    {
+      "descriptor": "Landroidx/viewpager2/widget/ViewPager2;->getAdapter()LX/8QJ;",
+      "shape": "public instance, declaring class final",
+      "use": "invoked",
+      "readOnlyEvidence": "Reads pager.A05 RecyclerView then RecyclerView.A0E adapter; exact identity checked against9sY.A05."
+    }
+  ],
+  "nativeFields": [
+    {
+      "descriptor": "Lcom/instagram/mainactivity/InstagramMainActivity;->A07:LX/2xZ;",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "LX/2xZ;->A02:LX/2yE;",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "LX/2yE;->A03:Landroidx/fragment/app/FragmentActivity;",
+      "shape": "public final instance"
+    },
+    {
+      "descriptor": "LX/2yl;->A0C:LX/2yl;",
+      "shape": "public static final enum FEED"
+    },
+    {
+      "descriptor": "LX/2yl;->A03:Ljava/lang/String;",
+      "shape": "public final instance; all enum constants checked for known tab keys"
+    },
+    {
+      "descriptor": "LX/0jG;->A07:LX/Esp;",
+      "shape": "public final instance"
+    },
+    {
+      "descriptor": "LX/4z8;->A00:Ljava/lang/Object;",
+      "shape": "public instance; exact final cache class; direct String cache only"
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->mFragmentId:I",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "Landroidx/fragment/app/Fragment;->mTag:Ljava/lang/String;",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "LX/0dj;->mExecutingActions:Z",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "LX/0dj;->A0W:Ljava/util/ArrayList;",
+      "shape": "public final instance; pending queue"
+    },
+    {
+      "descriptor": "LX/0dj;->A0V:LX/0dw;",
+      "shape": "public final instance"
+    },
+    {
+      "descriptor": "LX/0dw;->A01:Ljava/util/ArrayList;",
+      "shape": "public final instance; copied added list"
+    },
+    {
+      "descriptor": "LX/22c;->A05:LX/eBE;",
+      "shape": "public instance; cached non-null selection only"
+    },
+    {
+      "descriptor": "LX/9sY;->A00:Landroidx/viewpager2/widget/ViewPager2;",
+      "shape": "public instance"
+    },
+    {
+      "descriptor": "Landroidx/viewpager2/widget/ViewPager2;->A00:I",
+      "shape": "public instance; selected index"
+    },
+    {
+      "descriptor": "LX/9sY;->A05:LX/A9v;",
+      "shape": "public instance; cached adapter"
+    },
+    {
+      "descriptor": "LX/A9v;->A04:Ljava/util/List;",
+      "shape": "public instance; cached native page count"
+    }
+  ],
+  "nativeClassIdentity": {
+    "home": "LX/3mI; with current FEED enum",
+    "reelsBase": "LX/8Zv; including uploaded LX/Ze9; subclass",
+    "wrappers": [
+      "LX/0jG;",
+      "LX/3gY;",
+      "LX/22c;",
+      "LX/9sY;"
+    ],
+    "pager": "final Landroidx/viewpager2/widget/ViewPager2;",
+    "pagerAdapter": "final LX/A9v;"
+  },
+  "containerIds": {
+    "layout_container_main": "0x7f0b226f",
+    "layout_container_swipeable": "0x7f0b2275"
+  },
+  "sourceBindings": [
+    {
+      "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramCurrent.java",
+      "sha256": "9e2fe952573b1f2b91b73762739725239d997e8f328711272bdf76e6e89d1e68",
+      "bytes": 20698
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/InstagramCurrent121Fixture.java",
+      "sha256": "c2b2b0e95f306dd608fe24a24df92fe221caf396bce5b20cdb8e316352c96263",
+      "bytes": 19097
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramCurrentTest.java",
+      "sha256": "f6f0714a13524083f5c347f12b66422503e59591941dc82bd7433e15697ab2c8",
+      "bytes": 13144
+    }
+  ],
+  "evidenceBindings": [
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/INSTALLED_APK_API_AND_SCOPING_AUDIT.md",
+      "sha256": "10012558f79370d57f1c397fd32d9b4751c1d5319f231acd0afa040b7ac49b9e",
+      "bytes": 16245
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/actual-fragment-api.txt",
+      "sha256": "3f8277c61272cd3b8859ad770a2422b3f0eeef1d4f8bbf1ab6749be755ca03e6",
+      "bytes": 21613
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/actual-nav-api.txt",
+      "sha256": "57ec296a2ba03253d192cde8911d96ad0186602d46620b0459dd93d24daf9143",
+      "bytes": 10369
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/pure-content-getters.txt",
+      "sha256": "50340e5ee7777d11a52960b93355d6cb091c828c59102f62a4fe4c255725020d",
+      "bytes": 11716
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/fragment-ownership-and-pending.txt",
+      "sha256": "b0587782c56e33a28234f46ffb191b14bf2c2ff1be6576a73af29e9d0d5942f3",
+      "bytes": 3572
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/manager-pending-and-wrapper-view.txt",
+      "sha256": "84bb14eb05f8f96a14b636375ae4bd46e09d23e5b35ebdbda85906a496b1b672",
+      "bytes": 9603
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/native-tab-current-identity.txt",
+      "sha256": "62819c17e1176a8028c73461586aed133805739631391664ab12fd7230a9191a",
+      "bytes": 13026
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-wrapper-identity-source.txt",
+      "sha256": "777e913e3e14d3d15df16f45844a179581440b902bad81902b9ad0c8fce2afee",
+      "bytes": 14165
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-lazy-cache.txt",
+      "sha256": "96dee77be4572db7470529234eeadf03a4f863e8a01bb641b066449fcb5945b6",
+      "bytes": 2357
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-lazy-cache-implementation.txt",
+      "sha256": "9a9a3900bc5e5f768884975e1276cea4205389c15b4a27e05f4c2844a235f419",
+      "bytes": 1410
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/selected-home-getters.txt",
+      "sha256": "b023cf97aaba0f01f6ee10642fb6389b3d56b457c15f60cec9bfbf97454ca97b",
+      "bytes": 8137
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/home-tab-apis.txt",
+      "sha256": "e3c0f3040d978344c090b9b9fd74630a00e51f4b386ff0b99434c6adc9bb2273",
+      "bytes": 46429
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/resource-asset-hashes.json",
+      "sha256": "8e98bb1e2a44c91bba9444e7c7373bf570b223e8077715186a7606c734c6a9e2",
+      "bytes": 1552
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/current-adapter-test.log",
+      "sha256": "437425706d3c1e4027174dc34ed4e17a436ecae21c98a0d4a637e36f90941ff1",
+      "bytes": 1366
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-class-family.txt",
+      "sha256": "932393cce90b50f0ac1103675af407cb3d0ae715f9fe4c8f13cba2f80b66f113",
+      "bytes": 26729
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-factories-current.txt",
+      "sha256": "744f317560c2d2529e813e04304c1e05702370b094e55d3978f14e14eeb6023b",
+      "bytes": 7097
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-current.txt",
+      "sha256": "deb2ad70e97a9ac3f3e09d32270372cdab63c86422d51ea28cdf5941047ba2ff",
+      "bytes": 5407
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-field-contract.txt",
+      "sha256": "b20de34ffa7c166f1d6a58275fffb7425fc8629734573117dbd2fbc514681fc3",
+      "bytes": 9205
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-count.txt",
+      "sha256": "0359ade865c9805bb096d34741f30daf97b8222d266122e368165d49bddb7b9c",
+      "bytes": 1922
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-adapter-contract.txt",
+      "sha256": "cbedc3090127a04f646aefb4e7d90fc061536376b66c4b40c1f9fc3c6e960a06",
+      "bytes": 586
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-view-current.txt",
+      "sha256": "f86ca128ddd5cf544b0a4c8841826d5c3b80d3225bfaee6f0a7e4fbe4021700e",
+      "bytes": 8790
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-getAdapter.txt",
+      "sha256": "b2000debf2a7b6be8996e96211b9a44d4cfc5a75b5d151c381bd425097bbb86d",
+      "bytes": 297
+    },
+    {
+      "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/evidence/native-route121-review.json",
+      "sha256": "5b5b2c5da18b6a32eacc932735ae1540f29f0ed6eb6052455fac9b8f589983d7",
+      "bytes": 7934
+    }
+  ],
+  "verification": {
+    "suite": "Back121InstagramCurrentTest",
+    "cases": 23,
+    "assertions": 78,
+    "result": "PASS",
+    "deviceExecution": false,
+    "fullReleaseVerificationOwner": "root/full_patch_pipeline_audit"
+  },
+  "limits": [
+    "The uploaded native APIs and resource layout assets are static evidence, not a device tree or callback execution trace.",
+    "The retained-tree/footer counterexample proves a code defect and both modeled symptoms, not the exact device cause.",
+    "Current only reads routing/ownership/state and yields scope; shared action/gesture guards and actual task exit are integrated by root.",
+    "Main.A1e can cause native tab-key cache evaluation internally; added adapter scans do not invoke uninitialized lazy getters.",
+    "Unknown native-family API, missing or stale current selection, or missing cached pager/merged selection fail closed.",
+    "All code/tests frozen; this contract records them without changing runtime or fixtures."
+  ]
+}
