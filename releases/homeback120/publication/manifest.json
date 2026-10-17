@@ -1,0 +1,76 @@
+{
+  "schema": "homeback120-publication-v1",
+  "patch_version": "1.1.10",
+  "bundle_version": "1.0.249",
+  "baseline_version": "1.0.247",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/ab716a53b994609fd6aaa7fa41a17b590f7638a5/downloads/Hiro_Morphe_Patches_v1.0.247.mpp",
+  "baseline_sha256": "82e7bdca6288963465fb6cbc17d85ccdf827aa8ddbecb62faa48e65c3d926703",
+  "release_title": "Instagram Reels Back exit and no recent tasks v1.1.10 / Hiro Morphe Patches v1.0.249",
+  "summary": "Instagramでリール選択中の戻るボタンによる終了と履歴削除を修正。実機未確認。",
+  "validation_basis": "Provided already-patched APK static audits plus local full SDK/D8/Morphe build and host tests; two clean CI builds must match the frozen local MPP and QA. Synthetic application fixtures are separate from original APK validation; physical Android untested.",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.10.mpp": {
+      "bytes": 88043,
+      "sha256": "fc07c209f643fd3d834d63c792cabd903f6d2eedecde8fabce1b0e8876cc57f6"
+    },
+    "Hiro_Morphe_Patches_v1.0.249.mpp": {
+      "bytes": 18179415,
+      "sha256": "c10dda2839b733b54fab850b96f670bbf7cdd6ba687b120184a3103151bc2624"
+    }
+  },
+  "local_expected_qa_sha256": "0e921567cfe7fb19e6eeccce6038d6759706cb52ba837ef03b9190e93e3de66d",
+  "local_expected_host": "SUCCESS: 315 cases, 1476 assertions",
+  "local_expected_regressions": {
+    "twitter119": {
+      "test_class": "Back119TwitterTest",
+      "cases": 35,
+      "assertions": 104,
+      "summary": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+      "result": "PASS"
+    },
+    "instagram119": {
+      "test_class": "Back119InstagramTest",
+      "cases": 15,
+      "assertions": 48,
+      "summary": "PASS Back119InstagramTest: 15 cases, 48 assertions",
+      "result": "PASS"
+    },
+    "instagram120main": {
+      "test_class": "Back120MainDispatchTest",
+      "cases": 16,
+      "assertions": 79,
+      "summary": "PASS Back120MainDispatchTest: 16 cases, 79 assertions",
+      "result": "PASS"
+    },
+    "instagram120": {
+      "test_class": "Back120InstagramTest",
+      "cases": 25,
+      "assertions": 92,
+      "summary": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+      "result": "PASS"
+    }
+  },
+  "local_expected_audit_sources": {
+    "evidence/BaselineRuntimeAbiAudit.java": "150c3936b50770d38f2bb45dc44b50d64db37767c09bb59f35a502a9520e1455",
+    "evidence/Instagram119DexAudit.java": "6ea157038d515489d1f502240036fbd74434329d58a5b688a4633ffa7a0c4f6c",
+    "evidence/Instagram120DexAudit.java": "f9a82005ea4363c798dcce585041704e87827eabd2e5e156e01f2ffb2431d611",
+    "evidence/InstagramBackRouteAudit.java": "e70dd1bfbd2132f2a142aa580380ba37d6d44dd6bbc8ce9ad6b64345f868d06d",
+    "evidence/ProvidedApkHookAudit.java": "11dbe48c42c0145f71d6bdf9b221c8c00fdb09ba4864c58b9bb6a5c1d3aef527",
+    "evidence/XBackAudit.java": "f4629bd46fd888b5806b30cb644986e22f6b683fdd5262b09018b9e623061cc8",
+    "evidence/XLayoutAudit.java": "427527bb3297e15ecabc9555cf2b4c3a018236e3491e4e370bae27567cb3a215",
+    "evidence/XResourceAudit.java": "bef794facaf96a85eeb83bc77831f19d89555742743dc3a6a6a71c6547d424d2",
+    "evidence/XTargetScan.java": "81e64e546b4aeed8bc0cc2c3ee841d84a31ae3cf8e37295b54fcfcf5252b495d",
+    "evidence/summarize_provided_apk_audit.py": "c44cc656e3ac074b0847fd7e100790eabff081fdc99887c98f619d6b5b924977"
+  },
+  "expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.10.mpp": {
+      "bytes": 88043,
+      "sha256": "fc07c209f643fd3d834d63c792cabd903f6d2eedecde8fabce1b0e8876cc57f6"
+    },
+    "Hiro_Morphe_Patches_v1.0.249.mpp": {
+      "bytes": 18179415,
+      "sha256": "c10dda2839b733b54fab850b96f670bbf7cdd6ba687b120184a3103151bc2624"
+    }
+  },
+  "expected_qa_sha256": "0e921567cfe7fb19e6eeccce6038d6759706cb52ba837ef03b9190e93e3de66d"
+}

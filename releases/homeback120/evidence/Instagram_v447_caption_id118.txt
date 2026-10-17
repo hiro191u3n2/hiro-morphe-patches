@@ -1,0 +1,275 @@
+SOURCE caption-component118.txt lines 542-578
+METHOD LX/6YR;->A0l(LX/6zQ;)LX/3i0;
+0 CONST_4 #0 v5
+1 MOVE_OBJECT_FROM16 v1,v62
+3 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {1,5,0,0,0}x2
+6 CONST_STRING instagram_features_clips_viewer_adapter_organic_mediainfo_LegacyClipsVideoCaptionComponent v0
+8 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+11 MOVE_OBJECT_FROM16 v0,v61
+13 IGET_OBJECT LX/6YR;->A03:Lcom/instagram/common/session/UserSession; v2,v0
+15 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {2,5,0,0,0}x2
+18 INVOKE_STATIC LX/1na;->A02(LX/4Nb;Z)LX/say; {2,5,0,0,0}x2
+21 MOVE_RESULT_OBJECT v6
+22 CONST_WIDE v3
+27 CHECK_CAST Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext; v6
+29 INVOKE_INTERFACE Lcom/facebook/mobileconfig/factory/MobileConfigUnsafeContext;->BWM(J)Z {6,3,4,0,0}x3
+32 MOVE_RESULT v3
+33 CONST_16 #2 v31
+35 CONST_16 #1 v20
+37 IF_EQZ v3 offset 92
+39 IGET_OBJECT LX/6YR;->A05:LX/6oE; v3,v0
+41 IGET_BOOLEAN LX/6oE;->A2t:Z v3,v3
+43 INVOKE_STATIC Ljava/lang/String;->valueOf(Z)Ljava/lang/String; {3,0,0,0,0}x1
+46 MOVE_RESULT_OBJECT v4
+47 CONST_STRING is_reels_caption_expanded v3
+49 NEW_INSTANCE LX/4z3; v7
+51 INVOKE_DIRECT LX/4z3;-><init>(Ljava/lang/Object;Ljava/lang/Object;)V {7,3,4,0,0}x3
+54 CONST_16 #10 v4
+56 NEW_INSTANCE LX/DOo; v3
+58 INVOKE_DIRECT LX/DOo;-><init>(Ljava/lang/Object;I)V {3,0,4,0,0}x3
+61 NEW_INSTANCE LX/73f; v6
+63 INVOKE_DIRECT LX/73f;-><init>(Lkotlin/jvm/functions/Function1;)V {6,3,0,0,0}x2
+66 CONST_STRING on_click_action v4
+68 NEW_INSTANCE LX/4z3; v3
+70 INVOKE_DIRECT LX/4z3;-><init>(Ljava/lang/Object;Ljava/lang/Object;)V {3,4,6,0,0}x3
+73 FILLED_NEW_ARRAY [LX/4z3; {7,3,0,0,0}x2
+76 MOVE_RESULT_OBJECT v3
+77 INVOKE_STATIC LX/1oe;->A05([LX/4z3;)Ljava/util/LinkedHashMap; {3,0,0,0,0}x1
+80 MOVE_RESULT_OBJECT v14
+
+SOURCE caption-component118.txt lines 665-710
+255 IGET_OBJECT LX/2NP;->A00:LX/Msz; v9,v6
+257 INSTANCE_OF LX/2NJ; v8,v9
+259 IF_EQZ v8 offset 831
+261 MOVE_OBJECT v6,v9
+262 CHECK_CAST LX/2NJ; v6
+264 IF_EQZ v6 offset 826
+266 IGET_OBJECT LX/2NJ;->A08:Ljava/lang/String; v6,v6
+268 MOVE_OBJECT_FROM16 v30,v6
+270 CONST_STRING caption v13
+272 IF_EQZ v3 offset 10
+274 IGET_OBJECT LX/7gL;->A0X:Ljava/lang/String; v6,v3
+276 INVOKE_VIRTUAL Ljava/lang/String;->length()I {6,0,0,0,0}x1
+279 MOVE_RESULT v6
+280 IF_NEZ v6 offset 845
+282 IF_NEZ v30 offset 843
+284 SGET_OBJECT LX/09S;->A02:LX/7ZA; v17
+286 CONST #7f0b0b55 v6
+289 MOVE_OBJECT_FROM16 v3,v17
+291 INVOKE_STATIC LX/7oV;->A0G(LX/09S;I)LX/09S; {3,6,0,0,0}x2
+294 MOVE_RESULT_OBJECT v7
+295 IGET_OBJECT LX/6zQ;->A0C:LX/2gb; v3,v1
+297 MOVE_OBJECT_FROM16 v21,v3
+299 IGET_BOOLEAN LX/6YR;->A0M:Z v3,v0
+301 IF_EQZ v3 offset 3
+303 CONST_4 #0 v13
+304 SGET_OBJECT LX/7oN;->A02:LX/7oN; v6
+306 MOVE_OBJECT_FROM16 v3,v21
+308 INVOKE_STATIC LX/7oO;->A00(LX/2gb;LX/09S;LX/7oN;Ljava/lang/String;)LX/09S; {3,7,6,13,0}x4
+311 MOVE_RESULT_OBJECT v38
+312 NEW_INSTANCE LX/09u; v8
+314 INVOKE_DIRECT LX/09u;-><init>()V {8,0,0,0,0}x1
+317 IGET_BOOLEAN LX/6YR;->A0D:Z v3,v0
+319 IF_NEZ v3 offset 65
+321 INVOKE_VIRTUAL_RANGE Lcom/instagram/feed/media/Media;->A3u()Ljava/lang/Boolean;
+324 MOVE_RESULT_OBJECT v3
+325 INVOKE_STATIC_RANGE Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;
+328 MOVE_RESULT_OBJECT v9
+329 INVOKE_VIRTUAL Ljava/lang/Object;->equals(Ljava/lang/Object;)Z {9,3,0,0,0}x2
+332 MOVE_RESULT v3
+333 IF_EQZ v3 offset 76
+335 INVOKE_VIRTUAL_RANGE Lcom/instagram/feed/media/Media;->A3w()Ljava/lang/Boolean;
+338 MOVE_RESULT_OBJECT v3
+339 INVOKE_VIRTUAL Ljava/lang/Object;->equals(Ljava/lang/Object;)Z {9,3,0,0,0}x2
+342 MOVE_RESULT v3
+343 IF_NEZ v3 offset 66
+345 CONST_4 #0 v3
+
+SOURCE caption-component118.txt lines 1425-1447
+1824 MOVE_OBJECT_FROM16 v35,v8
+1826 MOVE_OBJECT_FROM16 v36,v8
+1828 MOVE_OBJECT_FROM16 v38,v8
+1830 MOVE_FROM16 v39,v31
+1832 MOVE_FROM16 v44,v5
+1834 MOVE_FROM16 v45,v5
+1836 MOVE_FROM16 v46,v20
+1838 MOVE_FROM16 v47,v5
+1840 INVOKE_DIRECT_RANGE LX/09O;-><init>(LX/3i0;LX/09S;LX/7VO;LX/YhE;LX/snk;Lkotlin/jvm/functions/Function3;IJJZZZZZ)V
+1843 CONST #7f0b0b55 v7
+1846 INVOKE_STATIC LX/7oV;->A0G(LX/09S;I)LX/09S; {4,7,0,0,0}x2
+1849 MOVE_RESULT_OBJECT v11
+1850 CONST_4 #7 v10
+1851 NEW_INSTANCE LX/DBW; v9
+1853 MOVE_OBJECT_FROM16 v7,v26
+1855 INVOKE_DIRECT LX/DBW;-><init>(ILjava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)V {9,10,7,0,1}x5
+1858 INVOKE_STATIC LX/7oV;->A0P(LX/09S;Lkotlin/jvm/functions/Function1;)LX/09S; {11,9,0,0,0}x2
+1861 MOVE_RESULT_OBJECT v9
+1862 IGET_OBJECT LX/6YR;->A0H:LX/04S; v7,v0
+1864 IF_EQZ v7 offset 6
+1866 INVOKE_STATIC LX/8fA;->A00(LX/04S;LX/09S;)LX/09S; {7,4,0,0,0}x2
+1869 MOVE_RESULT_OBJECT v8
+1870 INVOKE_VIRTUAL LX/09S;->A00(LX/09S;)LX/09S; {9,8,0,0,0}x2
+
+SOURCE caption-component118.txt lines 1613-1640
+METHOD LX/Ibv;->A0l(LX/6zQ;)LX/3i0;
+0 CONST_4 #0 v7
+1 MOVE_OBJECT_FROM16 v2,v57
+3 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {2,7,0,0,0}x2
+6 CONST_STRING android_purge_26_q3_ClipsVideoCaptionComponent_render v0
+8 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {0,0,0,0,0}x1
+11 MOVE_OBJECT_FROM16 v1,v56
+13 IGET_OBJECT LX/Ibv;->A01:Lcom/instagram/common/session/UserSession; v0,v1
+15 MOVE_OBJECT_FROM16 v55,v0
+17 INVOKE_STATIC LX/011;->A0K(LX/4Nb;Z)LX/say; {0,7,0,0,0}x2
+20 MOVE_RESULT_OBJECT v0
+21 CONST_WIDE v3
+26 INVOKE_STATIC LX/011;->A0y(Ljava/lang/Object;J)Z {0,3,4,0,0}x3
+29 MOVE_RESULT v0
+30 CONST_16 #2 v27
+32 CONST_16 #1 v23
+34 IF_EQZ v0 offset 83
+36 IGET_OBJECT LX/Ibv;->A03:LX/6oE; v0,v1
+38 IGET_BOOLEAN LX/6oE;->A2t:Z v0,v0
+40 INVOKE_STATIC Ljava/lang/String;->valueOf(Z)Ljava/lang/String; {0,0,0,0,0}x1
+43 MOVE_RESULT_OBJECT v3
+44 CONST_STRING is_reels_caption_expanded v0
+46 INVOKE_STATIC LX/011;->A0j(Ljava/lang/Object;Ljava/lang/Object;)LX/4z3; {0,3,0,0,0}x2
+49 MOVE_RESULT_OBJECT v4
+50 CONST_16 #2c v3
+52 NEW_INSTANCE LX/659; v0
+54 INVOKE_DIRECT LX/659;-><init>(Ljava/lang/Object;I)V {0,1,3,0,0}x3
+57 NEW_INSTANCE LX/73f; v3
+
+SOURCE caption-component118.txt lines 1912-1938
+617 MOVE_OBJECT_FROM16 v32,v31
+619 MOVE_OBJECT_FROM16 v34,v31
+621 MOVE_FROM16 v35,v27
+623 MOVE_FROM16 v40,v7
+625 MOVE_FROM16 v41,v7
+627 MOVE_FROM16 v42,v23
+629 MOVE_FROM16 v43,v7
+631 MOVE_FROM16 v44,v13
+633 INVOKE_DIRECT_RANGE LX/09O;-><init>(LX/3i0;LX/09S;LX/7VO;LX/YhE;LX/snk;Lkotlin/jvm/functions/Function3;IJJZZZZZ)V
+636 CONST #7f0b0b55 v6
+639 INVOKE_STATIC LX/7oV;->A0G(LX/09S;I)LX/09S; {3,6,0,0,0}x2
+642 MOVE_RESULT_OBJECT v8
+643 CONST_4 #4 v6
+644 NEW_INSTANCE LX/jek; v3
+646 INVOKE_DIRECT LX/jek;-><init>(ILjava/lang/Object;Ljava/lang/Object;)V {3,6,2,1,0}x4
+649 INVOKE_STATIC LX/7oV;->A0P(LX/09S;Lkotlin/jvm/functions/Function1;)LX/09S; {8,3,0,0,0}x2
+652 MOVE_RESULT_OBJECT v8
+653 CONST_16 #2f v6
+655 NEW_INSTANCE LX/DxF; v3
+657 INVOKE_DIRECT LX/DxF;-><init>(ILjava/lang/Object;Ljava/lang/Object;)V {3,6,5,1,0}x4
+660 INVOKE_STATIC LX/7qV;->A03(LX/09S;Lkotlin/jvm/functions/Function1;)LX/09S; {8,3,0,0,0}x2
+663 MOVE_RESULT_OBJECT v9
+664 NEW_INSTANCE LX/09u; v6
+666 INVOKE_DIRECT LX/09u;-><init>()V {6,0,0,0,0}x1
+669 INVOKE_VIRTUAL LX/09u;->A00(LX/3i0;)V {6,4,0,0,0}x2
+672 IF_EQZ v5 offset 36
+674 CONST_STRING android_purge_26_q3_ClipsVideoCaptionComponent_showSeeTranslationComponent v3
+
+SOURCE caption-component118.txt lines 400-425
+842 INVOKE_STATIC LX/3th;->A00(Ljava/lang/String;)V {4,0,0,0,0}x1
+845 INVOKE_VIRTUAL Ljava/lang/String;->hashCode()I {3,0,0,0,0}x1
+848 MOVE_RESULT v5
+849 CONST #f0a6d022 v4
+852 IF_EQ v5,v4 offset 256
+854 CONST #48eb4be6 v4
+857 IF_EQ v5,v4 offset 235
+859 CONST #533bfbe5 v4
+862 IF_NE v5,v4 offset 67
+864 CONST_STRING iab_card v4
+866 INVOKE_VIRTUAL Ljava/lang/String;->equals(Ljava/lang/Object;)Z {3,4,0,0,0}x2
+869 MOVE_RESULT v4
+870 IF_EQZ v4 offset 59
+872 CONST_STRING in_app_browser_v2 v26
+874 CONST #7f0b0b55 v4
+877 INVOKE_VIRTUAL Landroid/app/Activity;->findViewById(I)Landroid/view/View; {15,4,0,0,0}x2
+880 MOVE_RESULT_OBJECT v11
+881 IF_EQZ v11 offset 48
+883 IGET_OBJECT LX/17T;->A08:LX/Esp; v10,v2
+885 INVOKE_INTERFACE LX/Esp;->getValue()Ljava/lang/Object; {10,0,0,0,0}x1
+888 MOVE_RESULT_OBJECT v18
+889 CHECK_CAST LX/98A; v18
+891 IGET_OBJECT LX/8lm;->A0F:Lcom/instagram/feed/media/Media; v4,v9
+893 IF_EQZ v12 offset 195
+895 MOVE_OBJECT_FROM16 v20,v6
+897 MOVE_OBJECT_FROM16 v19,v11
+
+SOURCE caption-builder118.txt lines 538-575
+METHOD LX/7oV;->A0G(LX/09S;I)LX/09S;
+0 CONST_4 #0 v0
+1 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {5,0,0,0,0}x2
+4 SGET_OBJECT LX/8ke;->defaultInstance:LX/8ke; v0
+6 IGET_BOOLEAN LX/8ke;->A0f:Z v0,v0
+8 IF_EQZ v0 offset 44
+10 SGET_OBJECT LX/09S;->A02:LX/7ZA; v4
+12 CONST_16 #10 v0
+14 NEW_INSTANCE LX/Io2; v3
+16 INVOKE_DIRECT LX/Io2;-><init>(I)V {3,0,0,0,0}x2
+19 INVOKE_STATIC Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer; {6,0,0,0,0}x1
+22 MOVE_RESULT_OBJECT v0
+23 FILLED_NEW_ARRAY [Ljava/lang/Object; {0,0,0,0,0}x1
+26 MOVE_RESULT_OBJECT v1
+27 NEW_INSTANCE LX/moK; v0
+29 INVOKE_DIRECT LX/moK;-><init>(I)V {0,6,0,0,0}x2
+32 SGET_OBJECT LX/7qK;->A03:LX/7qK; v2
+34 INVOKE_STATIC LX/7rz;->A00(LX/HAK;Ljava/lang/Object;Lkotlin/jvm/functions/Function0;)LX/7qO; {0,1,3,0,0}x3
+37 MOVE_RESULT_OBJECT v1
+38 NEW_INSTANCE LX/Jj2; v0
+40 INVOKE_DIRECT LX/Jj2;-><init>(LX/7qK;Ljava/lang/Object;)V {0,2,1,0,0}x3
+43 INVOKE_VIRTUAL LX/09S;->A01(LX/09V;)LX/09S; {4,0,0,0,0}x2
+46 MOVE_RESULT_OBJECT v0
+47 INVOKE_VIRTUAL LX/09S;->A00(LX/09S;)LX/09S; {5,0,0,0,0}x2
+50 MOVE_RESULT_OBJECT v0
+51 RETURN_OBJECT v0
+52 SGET_OBJECT LX/7oW;->A0S:LX/7oW; v2
+54 INVOKE_STATIC Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer; {6,0,0,0,0}x1
+57 MOVE_RESULT_OBJECT v1
+58 NEW_INSTANCE LX/Jj2; v0
+60 INVOKE_DIRECT LX/Jj2;-><init>(LX/7oW;Ljava/lang/Object;)V {0,2,1,0,0}x3
+63 INVOKE_VIRTUAL LX/09S;->A01(LX/09V;)LX/09S; {5,0,0,0,0}x2
+66 MOVE_RESULT_OBJECT v0
+67 RETURN_OBJECT v0
+METHOD LX/7oV;->A0H(LX/09S;J)LX/09S;
+0 CONST_4 #0 v0
+1 INVOKE_STATIC LX/5B5;->A0U(Ljava/lang/Object;I)V {5,0,0,0,0}x2
+4 SGET_OBJECT LX/8ke;->defaultInstance:LX/8ke; v0
+
+SOURCE caption-property118.txt lines 1-20
+CLASS classes18.dex LX/moK; EXTENDS Ljava/lang/Object;
+METHOD LX/moK;-><init>(I)V
+0 IPUT LX/moK;->A00:I v1,v0
+2 INVOKE_DIRECT Ljava/lang/Object;-><init>()V {0,0,0,0,0}x1
+5 RETURN_VOID
+METHOD LX/moK;->AV8(LX/08E;Ljava/lang/Object;Ljava/lang/Object;)LX/7yX;
+0 INVOKE_STATIC LX/BRC;->A0L(Ljava/lang/Object;Ljava/lang/Object;)Landroid/view/View; {4,5,0,0,0}x2
+3 MOVE_RESULT_OBJECT v2
+4 IGET LX/moK;->A00:I v0,v3
+6 INVOKE_VIRTUAL Landroid/view/View;->setId(I)V {2,0,0,0,0}x2
+9 CONST_4 #1 v0
+10 NEW_INSTANCE LX/DXf; v1
+12 INVOKE_DIRECT LX/DXf;-><init>(Landroid/view/View;I)V {1,2,0,0,0}x3
+15 NEW_INSTANCE LX/7yX; v0
+17 INVOKE_DIRECT LX/7yX;-><init>(Lkotlin/jvm/functions/Function0;)V {0,1,0,0,0}x2
+20 RETURN_OBJECT v0
+METHOD LX/moK;->HJC(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Z
+0 INVOKE_STATIC LX/AuE;->A1a(Ljava/lang/Object;Ljava/lang/Object;)Z {2,3,0,0,0}x2
+3 MOVE_RESULT v0
+4 RETURN v0
+
+SOURCE caption-property118.txt lines 140-151
+246 CONST_STRING_JUMBO WRAP_IN_VIEW v1
+249 CONST_16 #14 v0
+251 NEW_INSTANCE LX/7oW; v12
+253 INVOKE_DIRECT LX/7oW;-><init>(Ljava/lang/String;I)V {12,1,0,0,0}x3
+256 SPUT_OBJECT LX/7oW;->A0V:LX/7oW; v12
+258 CONST_STRING VIEW_ID v1
+260 CONST_16 #15 v0
+262 NEW_INSTANCE LX/7oW; v11
+264 INVOKE_DIRECT LX/7oW;-><init>(Ljava/lang/String;I)V {11,1,0,0,0}x3
+267 SPUT_OBJECT LX/7oW;->A0S:LX/7oW; v11
+269 CONST_STRING VIEW_TAG v1
+271 CONST_16 #16 v0
+
