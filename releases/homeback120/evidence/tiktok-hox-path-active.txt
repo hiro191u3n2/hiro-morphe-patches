@@ -1,0 +1,26 @@
+classes25.dex Lcom/bytedance/hox/Hox; implements [] extends Landroidx/lifecycle/ViewModel; Lcom/bytedance/hox/Hox;->fU2(Ljava/lang/String;)Z
+registers 4
+0000 IGET_OBJECT v0,v2 Lcom/bytedance/hox/Hox;->LLILZ:LX/0rtH;
+0002 IF_EQZ v0 ->42
+0004 INVOKE_STATIC {0,0,0,0,0} count=1 Lcom/bytedance/hox/Hox;->XT2(LX/0rtH;)LX/0rtL;
+0007 MOVE_RESULT_OBJECT v0
+0008 IF_EQZ v0 ->42
+000a INVOKE_VIRTUAL {0,0,0,0,0} count=1 LX/0rtL;->LJIJI()Ljava/util/LinkedList;
+000d MOVE_RESULT_OBJECT v0
+000e INVOKE_VIRTUAL {0,0,0,0,0} count=1 Ljava/util/AbstractSequentialList;->iterator()Ljava/util/Iterator;
+0011 MOVE_RESULT_OBJECT v1
+0012 INVOKE_INTERFACE {1,0,0,0,0} count=1 Ljava/util/Iterator;->hasNext()Z
+0015 MOVE_RESULT v0
+0016 IF_EQZ v0 ->42
+0018 INVOKE_INTERFACE {1,0,0,0,0} count=1 Ljava/util/Iterator;->next()Ljava/lang/Object;
+001b MOVE_RESULT_OBJECT v0
+001c CHECK_CAST v0 LX/0rtL;
+001e INVOKE_VIRTUAL {0,0,0,0,0} count=1 LX/0rtL;->tag()Ljava/lang/String;
+0021 MOVE_RESULT_OBJECT v0
+0022 INVOKE_STATIC {0,3,0,0,0} count=2 Lkotlin/jvm/internal/Intrinsics;->LJFF(Ljava/lang/Object;Ljava/lang/Object;)Z
+0025 MOVE_RESULT v0
+0026 IF_EQZ v0 ->18
+0028 CONST_4 v0 #1
+0029 RETURN v0
+002a CONST_4 v0 #0
+002b RETURN v0
