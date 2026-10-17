@@ -1,0 +1,102 @@
+{
+  "schema": "homeback121-publication-v1",
+  "patch_version": "1.1.11",
+  "bundle_version": "1.0.250",
+  "baseline_version": "1.0.249",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/c7b6a687f5162c9ba0bae0a9fcb7614e77a152b2/downloads/Hiro_Morphe_Patches_v1.0.249.mpp",
+  "baseline_sha256": "c10dda2839b733b54fab850b96f670bbf7cdd6ba687b120184a3103151bc2624",
+  "release_title": "Instagram Reels Back exit and no recent tasks v1.1.11 / Hiro Morphe Patches v1.0.250",
+  "summary": "Instagramの現在画面と戻る操作の共通判定を修正。実機未確認。",
+  "validation_basis": "Newly uploaded already-patched APK canonical code and native-hook audit; fresh replacement ABI audits for all four supplied APKs and exact live baseline249. Full distributed single and bundle Morphe applications use an explicitly non-executable exact-method structural projection. Host checks and two fresh CI builds must match the locally frozen MPP and QA; no physical Android behavior is claimed.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "3f76e99d8de3956713a126a2142a11316499e33c",
+  "reviewed_dev_head": "778b2bd9670904bd23cef47df18461ec1186d5a5",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.11.mpp": {
+      "bytes": 95732,
+      "sha256": "747a09b8e045bfb8f7d59f455917e2395a6b2d1c1f741b07564a28d8636fc280"
+    },
+    "Hiro_Morphe_Patches_v1.0.250.mpp": {
+      "bytes": 18187082,
+      "sha256": "e4cb0c32bebdaa2de41eb510263d060aa89c06aac45a403580a66995f7269e6c"
+    }
+  },
+  "local_expected_qa_sha256": "8a00d45e298a963693cfbf0f0d196a0a9c7cfea6daabc0214142512a3262e572",
+  "local_expected_host": "SUCCESS: 315 cases, 1476 assertions",
+  "local_expected_regressions": {
+    "twitter119": {
+      "test_class": "Back119TwitterTest",
+      "cases": 35,
+      "assertions": 104,
+      "summary": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+      "result": "PASS"
+    },
+    "instagram119": {
+      "test_class": "Back119InstagramTest",
+      "cases": 15,
+      "assertions": 48,
+      "summary": "PASS Back119InstagramTest: 15 cases, 48 assertions",
+      "result": "PASS"
+    },
+    "instagram120main": {
+      "test_class": "Back120MainDispatchTest",
+      "cases": 16,
+      "assertions": 79,
+      "summary": "PASS Back120MainDispatchTest: 16 cases, 79 assertions",
+      "result": "PASS"
+    },
+    "instagram120": {
+      "test_class": "Back120InstagramTest",
+      "cases": 25,
+      "assertions": 92,
+      "summary": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+      "result": "PASS"
+    },
+    "instagram121layers": {
+      "test_class": "Back121InstagramActivityLayersTest",
+      "cases": 34,
+      "assertions": 60,
+      "summary": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+      "result": "PASS"
+    },
+    "instagram121scope": {
+      "test_class": "Back121InstagramScopeTest",
+      "cases": 9,
+      "assertions": 33,
+      "summary": "PASS Back121InstagramScopeTest: 9 cases, 33 assertions",
+      "result": "PASS"
+    },
+    "instagram121current": {
+      "test_class": "Back121InstagramCurrentTest",
+      "cases": 23,
+      "assertions": 78,
+      "summary": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+      "result": "PASS"
+    },
+    "instagram121dispatch": {
+      "test_class": "Back121InstagramDispatchTest",
+      "cases": 39,
+      "assertions": 204,
+      "summary": "PASS Back121InstagramDispatchTest: 39 cases, 204 assertions",
+      "result": "PASS"
+    }
+  },
+  "local_expected_audit_sources": {
+    "evidence/BaselineRuntimeAbiAudit.java": "150c3936b50770d38f2bb45dc44b50d64db37767c09bb59f35a502a9520e1455",
+    "evidence/Instagram119DexAudit.java": "6ea157038d515489d1f502240036fbd74434329d58a5b688a4633ffa7a0c4f6c",
+    "evidence/Instagram120DexAudit.java": "f9a82005ea4363c798dcce585041704e87827eabd2e5e156e01f2ffb2431d611",
+    "evidence/InstagramBackRouteAudit.java": "e70dd1bfbd2132f2a142aa580380ba37d6d44dd6bbc8ce9ad6b64345f868d06d",
+    "evidence/ProvidedApkHookAudit.java": "11dbe48c42c0145f71d6bdf9b221c8c00fdb09ba4864c58b9bb6a5c1d3aef527",
+    "evidence/XBackAudit.java": "f4629bd46fd888b5806b30cb644986e22f6b683fdd5262b09018b9e623061cc8",
+    "evidence/XLayoutAudit.java": "427527bb3297e15ecabc9555cf2b4c3a018236e3491e4e370bae27567cb3a215",
+    "evidence/XResourceAudit.java": "bef794facaf96a85eeb83bc77831f19d89555742743dc3a6a6a71c6547d424d2",
+    "evidence/XTargetScan.java": "81e64e546b4aeed8bc0cc2c3ee841d84a31ae3cf8e37295b54fcfcf5252b495d",
+    "evidence/summarize_provided_apk_audit.py": "c44cc656e3ac074b0847fd7e100790eabff081fdc99887c98f619d6b5b924977",
+    "publication/audit/BaselineRuntimeAbiAudit121.java": "714e71aa1137dd4d3127779a058facf0f4cff6db7bdfc7f94011913d374c7613",
+    "publication/audit/MainHierarchyAudit.java": "9dd6cb7ca0604aaf2db6c0139a5dd09da1f3de7378f9bacf9ef07844cd4e56d1",
+    "publication/audit/PipelineProbe.java": "de92f967a55df4e5587f63bb1e4071fe20bb3926d496f7de5b71ea519e71f4f4",
+    "publication/audit/ProvidedApkAbiAudit121.java": "541cbeaa9962736f2ba745e8171a403a1ca8af15c24e2ff2b6f8ea72a017b8b1",
+    "publication/audit/UploadIdentityAudit.java": "dbfbedd2274c81954f36c1c2bb649324f6908c952b31f12a3f71dee31bc675c7"
+  }
+}

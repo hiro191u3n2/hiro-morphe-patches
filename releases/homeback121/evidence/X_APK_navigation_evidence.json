@@ -1,0 +1,54 @@
+{
+  "apk": "Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+  "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "source": "supplied prepatched APK static code and resource inspection",
+  "device_tested": false,
+  "launch": {
+    "default_launcher": "com.twitter.android.StartActivity",
+    "main_activity": "com.twitter.app.main.MainActivity",
+    "alternate_disabled_launcher": "com.x.android.main.MainActivity",
+    "alternate_family": "x-lite"
+  },
+  "native_back_route": [
+    "com.twitter.app.common.inject.p.onBackPressed()V",
+    "DefaultViewSubgraph.k() -> com.twitter.app.common.z",
+    "com.twitter.app.common.navigation.b.goBack()V",
+    "com.twitter.app.common.w.goBack()Z",
+    "if false: com.twitter.app.common.inject.view.k.d()V",
+    "com.twitter.app.common.inject.p.d()V",
+    "com.twitter.app.common.base.i.onBackPressed()V",
+    "androidx.activity.ComponentActivity.onBackPressed()V"
+  ],
+  "home_route": {
+    "home_uri": "twitter://timeline/home",
+    "explicit_tab_extra": "page",
+    "extra_reader": "com.twitter.main.api.b.d()Landroid/net/Uri;",
+    "router": "com.twitter.app.main.l1.I3(Landroid/content/Intent;)V",
+    "selection": "I3 uses twitter scheme/timeline host for Home; otherwise uses explicit page extra; only null page falls back to remembered DB tab. H3(Uri) selects corresponding pager index.",
+    "new_intent": "l1.y3(Intent) stores intent then invokes I3",
+    "startup_callback": "com.twitter.app.main.x0.a(Object): either H3(HomeUri) directly or I3(captured launch Intent). Confirmed x0 created by l1 startup.",
+    "configuration": "com.twitter.app.main.n0 constructor also reads b.d() explicit page for initial tab config."
+  },
+  "remembered_tab": {
+    "db_store": "last_tab_used",
+    "entry_key": "tag",
+    "store_owner": "com.twitter.app.main.l",
+    "save": "l1.z3(): pager.p() Uri string -> lru.i0.a(tag,uri)",
+    "load": "l1.I3() -> lru.i0.get(tag)",
+    "warning": "Do not delete shared preferences or database; app-native explicit page bypass exists."
+  },
+  "resources": {
+    "bottom_navigation_bar": "0x7f0b0241",
+    "home_title": "0x7f150d24 / Japanese ホーム",
+    "main_activity_bottom_nav_view_pager": "0x7f0e02f1",
+    "pager_layout_class": "com.twitter.app.main.BottomNavViewPager",
+    "pager_layout_id": "pager",
+    "home_id": "0x7f0b08ec exists, but not proven to be bottom-nav Home button; do not rely on it alone"
+  },
+  "recommendation": {
+    "startup": "Prefer launcher-only injection of explicit page=twitter://timeline/home before presenter reads intent; preserve external deep links/notifications. Runtime integration and physical verification are parent responsibilities.",
+    "terminal": "Retain native child/modal handling and intercept only terminal platform fallback or p.d exact MainActivity path."
+  },
+  "evidence_file": "X_exact_navigation_excerpts.txt",
+  "raw_audit_scratch": "/workspace/scratch/827877861db7/x-apk-audit-raw"
+}

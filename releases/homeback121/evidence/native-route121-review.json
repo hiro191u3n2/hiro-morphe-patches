@@ -1,0 +1,116 @@
+{
+  "schema": "instagram-back-independent-review-v1",
+  "reviewer": "actual_back_path_audit",
+  "reviewed_at_utc": "2026-10-17T15:11:18.497914+00:00",
+  "candidate": "homeback121",
+  "native_input_apk": "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+  "native_input_sha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+  "reviewed_source_sha256": {
+    "src/runtime/BackNavigation.java": "b391cee7053b9d5884c59628200978b47fa0f0791432f1319bee3efad264866f",
+    "src/runtime/ExitScreens.java": "87803c09ab78515b18e97822808979c7566a55c2d63d694fc179eb0b28e07a8d",
+    "src/runtime/HomeScreen.java": "1a08bae615dc3a729bfb7ad32c284f91c8bf6175b20898e3d5f1443a57ca2d26",
+    "src/runtime/InstagramActivityLayers.java": "6695b8e6eed23d7161e71622dfc73163bba43e83f00c82c53a39b1c43be1401a",
+    "src/runtime/InstagramBack.java": "04775df8eda0f52543ec28b176f57aee9ce2785a9f28573cd3aeef97c50178ee",
+    "src/runtime/InstagramCurrent.java": "9e2fe952573b1f2b91b73762739725239d997e8f328711272bdf76e6e89d1e68",
+    "src/runtime/InstagramNativeLayers.java": "70d62e58ad0954934d4c9a2126d7428318ccf5588f84839265ac031340116fdd",
+    "src/runtime/InstagramReels.java": "c9fca07215f4d26b5eaeb8112684e7080bc8dfd4c111a1b3fcb252f30ebdca25",
+    "src/runtime/NativeBack.java": "5e4ed712984dd7629f53190b15ddcf5f33462450e88c6065b5e8e7a1c68e5868",
+    "src/runtime/OneBackExit.java": "c6fea0d4a3ad2c5237936616aa9e613401c2ee30682f0cf7d533b07145130cb2",
+    "src/runtime/TikTokBack.java": "8a0b6bc6d1a63a3097559c5ed4b288ef31311d818f7774d8a0b5f22f96dda823",
+    "src/runtime/TikTokHome.java": "311cce2354fa78171af53309748ca0905c660740c4c09eecb659440d8a87c95e",
+    "src/runtime/TikTokScreen.java": "00a54f6e2bc5b21c46cb22ee8d8eeac1969876cdeb1caddb1f51b5a19d6eb085",
+    "src/runtime/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+    "src/runtime/TwitterBack.java": "aca8b6a93009fc120027082d5a2f115befaf3605da4e178cec57064a52e61d29"
+  },
+  "reviewed_source_manifest_sha256": "e4ece78580b0a32b6c58499438ffdee2f34b4ee06110cddbdcceda7a150d408e",
+  "manifest_encoding": "UTF-8; one relative_path + space + lowercase_sha256 + LF per file; paths lexicographic",
+  "native_evidence_sha256": {
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-class-family.txt": "932393cce90b50f0ac1103675af407cb3d0ae715f9fe4c8f13cba2f80b66f113",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-factories-current.txt": "744f317560c2d2529e813e04304c1e05702370b094e55d3978f14e14eeb6023b",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-current.txt": "deb2ad70e97a9ac3f3e09d32270372cdab63c86422d51ea28cdf5941047ba2ff",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-field-contract.txt": "b20de34ffa7c166f1d6a58275fffb7425fc8629734573117dbd2fbc514681fc3",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-view-current.txt": "f86ca128ddd5cf544b0a4c8841826d5c3b80d3225bfaee6f0a7e4fbe4021700e",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-adapter-contract.txt": "cbedc3090127a04f646aefb4e7d90fc061536376b66c4b40c1f9fc3c6e960a06",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-count.txt": "0359ade865c9805bb096d34741f30daf97b8222d266122e368165d49bddb7b9c",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-getAdapter.txt": "b2000debf2a7b6be8996e96211b9a44d4cfc5a75b5d151c381bd425097bbb86d",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-method-comparison.json": "ca6a857ea900ccde517728023004a0cae729e1dc557094f0e1fcc9e817b0000f",
+    "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/injection-control-flow-check.json": "c749e1659cc5390bc10782bcc5752aac23abd14e99427b7b8ea3266d3470fb9b"
+  },
+  "reviewed_invariants": [
+    "Native AndroidX X.0ct direct-pop route can bypass both installed native Instagram hook boundaries while terminal scope remains intact.",
+    "Shared Current classification authorizes initial OS/root entry, requires native Main layer state, and retains unknown contract as native Back.",
+    "Main modal guard uses 3MM weak 9ld isAdded; Main layer uses 16z A0U plus observational 0wS A0M; Reels layer flag A15 is separate.",
+    "Dialog lookup resolves the 07d declaring Dialog field despite RxR A00 shadowing.",
+    "Origin is captured at outer native Back entry, preserved through nesting, and cleared only at matching outer cleanup.",
+    "Prediction action plus authorized target identity prevents transfer to a new Home/Reels object or from detail/unknown start.",
+    "Current native fast path retains explicit narrow editor/sheet vetoes and separate visible other-content vetoes.",
+    "Actual Reels subclass Ze9 uses 8Zv declaring owner; actual 9sY wrapper descends cached selected pager tag fN with exact adapter identity and in-range page count.",
+    "Pager/merged/tab retained exclusions require native ownership, nonresumed lifecycle, and owned view roots.",
+    "Non-Instagram handlers and helper source files remain byte-for-byte unchanged from homeback120, except the shared ExitScreens IG branch and outer OneBackExit IG cleanup."
+  ],
+  "findings_resolved_during_review": [
+    {
+      "id": "REVIEW-COMPILE-1",
+      "issue": "Nested local current name collision in InstagramReels.foreground",
+      "resolution": "Legacy local renamed."
+    },
+    {
+      "id": "REVIEW-LAYER-1",
+      "issue": "Native fast path initially omitted size-independent exact editor/sheet vetoes",
+      "resolution": "namedLayer checks restored; six narrow-layer dispatch scenarios added."
+    },
+    {
+      "id": "REVIEW-REELS-1",
+      "issue": "Exact 8Zv-only matching omitted real Ze9 factory output",
+      "resolution": "Verified 8Zv superclass matching added."
+    },
+    {
+      "id": "REVIEW-REELS-2",
+      "issue": "Authoritative OTHER on real 9sY wrapper masked current Reels child",
+      "resolution": "Verified cached pager route, tag, adapter identity, count bounds, and retained-page ownership implemented."
+    }
+  ],
+  "host_tests_run_by_this_reviewer": {
+    "suite": "Back121InstagramActivityLayersTest",
+    "cases_passed": 34,
+    "assertions_passed": 60,
+    "evidence": "evidence/native-activity121-host.txt"
+  },
+  "host_tests_reported_by_adapter_owner": {
+    "suite": "Back121InstagramCurrentTest",
+    "cases_passed": 23,
+    "assertions_passed": 78,
+    "note": "Reported after final pager contract bounds and identity changes by real_android_api_audit; combined execution is owned by root."
+  },
+  "remaining_concrete_review_blockers": [],
+  "physical_android_device_tested": false,
+  "user_gesture_runtime_trace_available": false,
+  "limitations": [
+    "Static APK bytecode and host fixtures establish reachable code paths and implementation behavior; the actual callback, selected configuration, and live view/fragment state for the user gesture remain unobserved.",
+    "No claim is made that one statically proven route is the uniquely established device cause.",
+    "Final combined compilation, D8, distribution pipeline and publication gates are owned by root/pipeline agent."
+  ],
+  "report": "evidence/native-route121-review.md",
+  "combined_host_tests_reported_by_root": {
+    "Back121InstagramDispatchTest": {
+      "cases_passed": 39,
+      "assertions_passed": 204
+    },
+    "Back121InstagramCurrentTest": {
+      "cases_passed": 23,
+      "assertions_passed": 78
+    },
+    "Back121InstagramScopeTest": {
+      "cases_passed": 9,
+      "assertions_passed": 33
+    },
+    "Back121InstagramActivityLayersTest": {
+      "cases_passed": 34,
+      "assertions_passed": 60
+    }
+  },
+  "compiled_runtime_reported_by_root": {
+    "sha256": "52e1817fdaa16591cb5eb7b0383aaa07f578a4a6799dad1cf5ef6e99d9a817d5",
+    "bytes": 112676
+  }
+}

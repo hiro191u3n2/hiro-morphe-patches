@@ -1,0 +1,1097 @@
+{
+  "schema": "oneback121-fresh-provided-input-evidence-v1",
+  "patch_version": "1.1.11",
+  "result": "PASS",
+  "baseline_bundle_sha256": "c10dda2839b733b54fab850b96f670bbf7cdd6ba687b120184a3103151bc2624",
+  "baseline_runtime_sha256": "d614e7ba8501af6ee65b3b237cf75034d3035a46c3556ef23365363b25955fc2",
+  "replacement_runtime_sha256": "52e1817fdaa16591cb5eb7b0383aaa07f578a4a6799dad1cf5ef6e99d9a817d5",
+  "physical_android_tested": false,
+  "original_apk_apply_tested": false,
+  "input_apks_modified": false,
+  "inputs_already_patched": true,
+  "historical_120_records_reused_as_fresh_runs": false,
+  "scope": "Read-only full DEX canonical identity, every existing external runtime hook ABI, actual current native guards, manifest and inherited input/bootstrap routes. This is neither a clean-original apply nor device execution. Runtime ABI compatibility does not assert in-place runtime replacement.",
+  "jdk": "openjdk 21.0.8 2025-07-15 LTS\nOpenJDK Runtime Environment Temurin-21.0.8+9 (build 21.0.8+9-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.8+9 (build 21.0.8+9-LTS, mixed mode, sharing)",
+  "sources": {
+    "evidence/ProvidedApkHookAudit.java": "11dbe48c42c0145f71d6bdf9b221c8c00fdb09ba4864c58b9bb6a5c1d3aef527",
+    "evidence/instagram-current121-contract.json": "81d2152d9445fec8e88aabd836bbf5fd89b2c8c0028ba556c52ffc2064c18357",
+    "evidence/instagram-current121-contract.md": "10012558f79370d57f1c397fd32d9b4751c1d5319f231acd0afa040b7ac49b9e",
+    "evidence/native-activity121-apk-contract.txt": "d1206597f6d79663b19d3fdf325c12f6fcd8e1a885db13bdc0d4dab6f416891d",
+    "evidence/native-activity121-audit.json": "58fd5912a7b3014baeb0b8efe9df59ab173861b014f965db2f90141094d2f353",
+    "evidence/native-activity121-host.txt": "8c131afe55580acb89e39a8c7c8ddcfde420ea5e95c94a11deb2feb494011527",
+    "evidence/native-route121-review.json": "5b5b2c5da18b6a32eacc932735ae1540f29f0ed6eb6052455fac9b8f589983d7",
+    "evidence/native-route121-review.md": "4b9bad31bb42b49d9005082eafec80b6db47d445ed94629b4222211ae24bc4c0",
+    "publication/audit/BaselineRuntimeAbiAudit121.java": "714e71aa1137dd4d3127779a058facf0f4cff6db7bdfc7f94011913d374c7613",
+    "publication/audit/MainHierarchyAudit.java": "9dd6cb7ca0604aaf2db6c0139a5dd09da1f3de7378f9bacf9ef07844cd4e56d1",
+    "publication/audit/PipelineProbe.java": "de92f967a55df4e5587f63bb1e4071fe20bb3926d496f7de5b71ea519e71f4f4",
+    "publication/audit/ProvidedApkAbiAudit121.java": "541cbeaa9962736f2ba745e8171a403a1ca8af15c24e2ff2b6f8ea72a017b8b1",
+    "publication/audit/UploadIdentityAudit.java": "dbfbedd2274c81954f36c1c2bb649324f6908c952b31f12a3f71dee31bc675c7",
+    "publication/native-projection.json": "e4464c9062a0d41c3da627f22f52dc1a26accddf2d9a58b631c8643dbad36e7f",
+    "publication/prepare_evidence.py": "3e6c75f6e3222f45650e97cb33703dc91c5bf403eacd419fc3ac8d88b874171f",
+    "publication/release_checks.py": "b7ec96d6946150a98642c55feaba403013cada92f4f6b53f24d27ac7c79e3eee",
+    "src/build.py": "10eb69293c793e422b545afecd7d217fea53ff43607bd2f262afa90cdb963e9a",
+    "src/patch/OneBackPatch.java": "600d8ca5808405317fe4bb77684e616664a7bf421a72c14e5713ad431721fcc2",
+    "src/runtime/BackNavigation.java": "b391cee7053b9d5884c59628200978b47fa0f0791432f1319bee3efad264866f",
+    "src/runtime/ExitScreens.java": "87803c09ab78515b18e97822808979c7566a55c2d63d694fc179eb0b28e07a8d",
+    "src/runtime/HomeScreen.java": "1a08bae615dc3a729bfb7ad32c284f91c8bf6175b20898e3d5f1443a57ca2d26",
+    "src/runtime/InstagramActivityLayers.java": "6695b8e6eed23d7161e71622dfc73163bba43e83f00c82c53a39b1c43be1401a",
+    "src/runtime/InstagramBack.java": "04775df8eda0f52543ec28b176f57aee9ce2785a9f28573cd3aeef97c50178ee",
+    "src/runtime/InstagramCurrent.java": "9e2fe952573b1f2b91b73762739725239d997e8f328711272bdf76e6e89d1e68",
+    "src/runtime/InstagramNativeLayers.java": "70d62e58ad0954934d4c9a2126d7428318ccf5588f84839265ac031340116fdd",
+    "src/runtime/InstagramReels.java": "c9fca07215f4d26b5eaeb8112684e7080bc8dfd4c111a1b3fcb252f30ebdca25",
+    "src/runtime/NativeBack.java": "5e4ed712984dd7629f53190b15ddcf5f33462450e88c6065b5e8e7a1c68e5868",
+    "src/runtime/OneBackExit.java": "c6fea0d4a3ad2c5237936616aa9e613401c2ee30682f0cf7d533b07145130cb2",
+    "src/runtime/TikTokBack.java": "8a0b6bc6d1a63a3097559c5ed4b288ef31311d818f7774d8a0b5f22f96dda823",
+    "src/runtime/TikTokHome.java": "311cce2354fa78171af53309748ca0905c660740c4c09eecb659440d8a87c95e",
+    "src/runtime/TikTokScreen.java": "00a54f6e2bc5b21c46cb22ee8d8eeac1969876cdeb1caddb1f51b5a19d6eb085",
+    "src/runtime/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+    "src/runtime/TwitterBack.java": "aca8b6a93009fc120027082d5a2f115befaf3605da4e178cec57064a52e61d29",
+    "src/test-dex/HomeBackAudit.java": "fbe25e8c14f6d7eb51848a5cc3a7bd6e1a35446e75375c3c2574a7dd98ccdf42",
+    "src/test-runtime/Back116Regression.java": "5bf3f79073c7a68c0c63094e02c07437979d3ac0a8b41359eecc3d1778301e83",
+    "src/test-runtime/Back117InstagramTest.java": "fad723d0ad3565834bf68af524209aa89d53235e4143f8573051c907df00df4e",
+    "src/test-runtime/Back117TikTokTest.java": "fd073d633a3797c245dc6905375df2978c13b026d9eb4edeb395e12485e55d89",
+    "src/test-runtime/Back118InstagramGuardTest.java": "6f96033fa6b3facfdaf2bf492634a1c910d6742720e85334472be3cada781dad",
+    "src/test-runtime/Back118InstagramTest.java": "679141d2f7ccf8c3896586ed90d57e12700426c9ad6e45d024e7bbf5ed6d1696",
+    "src/test-runtime/Back119InstagramTest.java": "7327907912ed8a9ff024fe51bcd563f07b0c738a8fda4f7c27fa936a806e3851",
+    "src/test-runtime/Back119TwitterTest.java": "247422afade166405f84466da21ec406258f3b876ab630e35cef061aa730a201",
+    "src/test-runtime/Back120InstagramTest.java": "e611402c8ec47621035cb817b288baa3bcb7551a3c53d9fd58801e0ef0859670",
+    "src/test-runtime/Back120MainDispatchTest.java": "fb009532ecf7bd70f04fdb227a627a9e18d424d697970e1d0ba54e70904e7743",
+    "src/test-runtime/Back121InstagramActivityLayersTest.java": "abe58ccc6444224936e939043c3ee094033e2f388f0f239593dac9b4c60e5d38",
+    "src/test-runtime/Back121InstagramCurrentTest.java": "f6f0714a13524083f5c347f12b66422503e59591941dc82bd7433e15697ab2c8",
+    "src/test-runtime/Back121InstagramDispatchTest.java": "c01da0317e1bdb994e48ea28ceace6d381ed1515cfdf44a6e4f3c379976bda68",
+    "src/test-runtime/Back121InstagramScopeTest.java": "597c39b23b14a0ae77827ccdee65660133c414df78e5458c944b4c3d2f2867d9",
+    "src/test-runtime/HomeBackHostTest.java": "44834cbff074c34c5031cd9295c9cda66d87f8ea14402414b26f821f1269d198",
+    "src/test-runtime/Instagram447Fixture.java": "f642f3f43a71e9682f7dca7cb7903de369e855b2d36deff2e607a927f079e581",
+    "src/test-runtime/InstagramCurrent121Fixture.java": "c2b2b0e95f306dd608fe24a24df92fe221caf396bce5b20cdb8e316352c96263",
+    "src/test-runtime/NativeActivity121Fixture.java": "d0880b11f3f16085b0296d403e3c14c6a3f49051c8eee807a8b1dc42df2dab97",
+    "src/test-runtime/NativeReels120Fixture.java": "8837c235f1546b38da25444325c6fe7cce0471bcbd8df7b76c411cebfeebe7d4",
+    "src/test-stubs/android/app/ActionBar.java": "c68b9e05b2529ce6ae1dd097705db7b7b4fe3f299690c5c670c09af87611e792",
+    "src/test-stubs/android/app/Activity.java": "88c3698e28a1c61b821db8fcb9fe00f98df6489791a48a8078384ed647f7e801",
+    "src/test-stubs/android/app/ActivityManager.java": "dc35b0da626d2b45791d48df699bdf5107df9ec8621de533f07c8ef840a8c60b",
+    "src/test-stubs/android/app/Application.java": "fcea9409e85a4f6bebee176ee6c66cdc3977cc9407793fb8b554d1f9bec1e205",
+    "src/test-stubs/android/app/Dialog.java": "b85901f2fbe7af9a4d2c3b6a01049479c0e7683ce4f440d78e054fd6d2b21c51",
+    "src/test-stubs/android/app/FragmentManager.java": "92d0b5d194a98fe0e92e94bb1ed97a9c0d0a0389e5324ced06018d94e716b858",
+    "src/test-stubs/android/app/KeyguardManager.java": "d9fb51994d69138fb186584114772f12fa23013c5de6c34106ebe1a22681b953",
+    "src/test-stubs/android/content/ComponentName.java": "59e43fd3b29bdb87045d402d15490a78ecba4810a597b8fb40146a4c0e294750",
+    "src/test-stubs/android/content/Context.java": "e6655007955d25a3c2eb322ad6e60307f03f7b66796dca6caedb94cda9a9c823",
+    "src/test-stubs/android/content/ContextWrapper.java": "9b3e67ec1e73c4921da2deec065163c47e7e76145e03f6c4d211cd228f600f0f",
+    "src/test-stubs/android/content/Intent.java": "439807d57fc18fd820301d45e665a77f6c62340d8d538bee9754cb72f00df5fb",
+    "src/test-stubs/android/content/SharedPreferences.java": "15da1b58c27acfe5372c6d03698dde90e183b1fc925d5c8148c1b2ed7f3410b0",
+    "src/test-stubs/android/content/res/Resources.java": "32b942a47765bc727d29bc7ebfef9bcb36d3b0568d4706910f59b78cd88eb4e8",
+    "src/test-stubs/android/graphics/Rect.java": "f5f25b83833fd7525df66c89d300ad8f55a8d03379e61d3934c0a51d7586c2bf",
+    "src/test-stubs/android/net/Uri.java": "a48b65e9833c7fcb2b989d721e6040cdd63eeb1145be6cf305af623ec43b1ed7",
+    "src/test-stubs/android/os/Build.java": "c874d38fc8241e643a3eeed95bf6d4517c503a3460aa9be321ff8bee7e05649f",
+    "src/test-stubs/android/os/Bundle.java": "279a7e06c007b20b9d07d820087d08169d5e86fd86d40a33741216413902a5cf",
+    "src/test-stubs/android/os/Handler.java": "72cf91a4a44f26e83a2c5f13e16fdc133bd31126e11c0d434a454a534bc0465d",
+    "src/test-stubs/android/os/Looper.java": "f931c2d5fe9c8536ed6b585e14c634b1239c22cf73cb1e00734c5d482ba97f04",
+    "src/test-stubs/android/os/PowerManager.java": "71a9432a4d0e2f66226589934870e34148383b8d29f410a9042ae570aa78923c",
+    "src/test-stubs/android/os/SystemClock.java": "4235acb89a054572bc1553b73ad59c5c0d2caafdf0c9df87c8123c0ea58bf3e4",
+    "src/test-stubs/android/util/Log.java": "83eb4b6afc3844fa512608962794f848e6e4707b0f5da96fb99dd57918ac5a0d",
+    "src/test-stubs/android/view/KeyEvent.java": "bb239e78bd2837acfd6d395000691858c04165278ce02b64692f67759f23827b",
+    "src/test-stubs/android/view/View.java": "e644744926f9e7400adfcd49aedd6068bb77b173b6410edf28fed624b3fe4ada",
+    "src/test-stubs/android/view/ViewGroup.java": "903fa6378e2feb9cb05ecab81efb9da368ceef54998198609b0a601fea07be60",
+    "src/test-stubs/android/view/ViewParent.java": "ec53c96e5c49ab494030f7ca7834b320db9d9c3cea32fd971fdfa8722b7c82ff",
+    "src/test-stubs/android/view/ViewTreeObserver.java": "8ff91719574ee2c8acac47f79d03461b2758449d6998f3471bd017bd11414771",
+    "src/test-stubs/android/view/Window.java": "8a23251385b6f470a14f33a2a92751a59aedba1a390c6b1ec353493e29d17e6f",
+    "src/test-stubs/android/view/WindowInsets.java": "647ff782111612168b44d580acd2bb1fb120260b2a1858e833264e060802b220",
+    "src/test-stubs/android/view/accessibility/AccessibilityNodeInfo.java": "b4f79c6ad8096e0df857ed76be7c26a988a6870e98c28dacd84449720a94f698",
+    "src/test-stubs/android/view/inspector/WindowInspector.java": "e3c51c74e568cc1a364bd0440be3f362dc52af984358158a4daadc9c89038189",
+    "src/test-stubs/android/widget/TextView.java": "b11a3f3defb0bf8e170f284cac4ae3e68210168e0d845217d6b962cc8046e905",
+    "src/test-stubs/android/window/BackEvent.java": "3a530857e1fb9d9fbbf821a24839362ea532032b121d2cd8c817ee618bbdb2b5",
+    "src/test-stubs/android/window/FakeDispatcher.java": "fad5a6d6a27d924775c3e81551f913845e07449089de97613e50c91139138a63",
+    "src/test-stubs/android/window/OnBackAnimationCallback.java": "e8ca3d75e5ed86840b53c7b4d998728fad18632d86a0efb1b55248502f1ef5da",
+    "src/test-stubs/android/window/OnBackInvokedCallback.java": "e4907fdb3e7873b798bb4d94d8417584acaaea92f298bacc543de91aa7709bf7",
+    "src/test-stubs/android/window/OnBackInvokedDispatcher.java": "6de7a05f5d36f5144e632c97514206cd6b1f96adc8dd0bd9e8b9cbf774f12368",
+    "src/test-stubs/com/bytedance/hox/Hox.java": "d11492889510f507f281a067df7680000b65a8beb0401e5d4fcdc25c21226f40",
+    "src/test-stubs/com/bytedance/tiktok/homepage/mainfragment/HomeTabAbility.java": "95d2b60dab54e15855114b2669682a7975af052e23a72a1d12acba01795f4272",
+    "src/test-stubs/com/ctrip/ibu/home/home/presentation/page/fragment/widget/HomeAppBarLayout.java": "8675dd3a510e7c4ded19490c7ead6a208f0dfd970dc4a19477c9fe7b4a8895af",
+    "src/test-stubs/com/instagram/mainactivity/InstagramMainActivity.java": "f7c65ab2a1d6a532536c36b66ddb70675996c3d808a31f7ef9c1247ef5436d3f",
+    "src/test-stubs/com/ss/android/ugc/aweme/main/MainActivity.java": "72fa937362fe3e0e866a18b59021c740aa1cc4b608b621d404dbec2f420f11c3",
+    "src/test-stubs/com/ss/android/ugc/aweme/main/assems/tabs/TabAbilityAssem.java": "736f1470ef21c278650f5f6da8de6b66de750265f37967a2f76878c339e4aa4c",
+    "src/test-stubs/com/twitter/android/HomeTimelineActivity.java": "9b81b0f03a5fa9678d24d1b970c6718f13ae99483c0accdc8eacce64668baf1b",
+    "src/test-stubs/com/twitter/android/StartActivity.java": "decc37d24e7c5d1571110f689f2339658b3a07f9a4476d7b453560c49878ee4f",
+    "src/test-stubs/instagram/features/clips/viewer/ui/ClipsSwipeRefreshLayout.java": "1bed4f0715f15fe76c27c1ba5ef996440144dcd3011f423e6515a952dfad41b7"
+  },
+  "native_contract_evidence": {
+    "records": {
+      "evidence/native-route121-review.json": {
+        "sha256": "5b5b2c5da18b6a32eacc932735ae1540f29f0ed6eb6052455fac9b8f589983d7",
+        "report": {
+          "schema": "instagram-back-independent-review-v1",
+          "reviewer": "actual_back_path_audit",
+          "reviewed_at_utc": "2026-10-17T15:11:18.497914+00:00",
+          "candidate": "homeback121",
+          "native_input_apk": "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+          "native_input_sha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+          "reviewed_source_sha256": {
+            "src/runtime/BackNavigation.java": "b391cee7053b9d5884c59628200978b47fa0f0791432f1319bee3efad264866f",
+            "src/runtime/ExitScreens.java": "87803c09ab78515b18e97822808979c7566a55c2d63d694fc179eb0b28e07a8d",
+            "src/runtime/HomeScreen.java": "1a08bae615dc3a729bfb7ad32c284f91c8bf6175b20898e3d5f1443a57ca2d26",
+            "src/runtime/InstagramActivityLayers.java": "6695b8e6eed23d7161e71622dfc73163bba43e83f00c82c53a39b1c43be1401a",
+            "src/runtime/InstagramBack.java": "04775df8eda0f52543ec28b176f57aee9ce2785a9f28573cd3aeef97c50178ee",
+            "src/runtime/InstagramCurrent.java": "9e2fe952573b1f2b91b73762739725239d997e8f328711272bdf76e6e89d1e68",
+            "src/runtime/InstagramNativeLayers.java": "70d62e58ad0954934d4c9a2126d7428318ccf5588f84839265ac031340116fdd",
+            "src/runtime/InstagramReels.java": "c9fca07215f4d26b5eaeb8112684e7080bc8dfd4c111a1b3fcb252f30ebdca25",
+            "src/runtime/NativeBack.java": "5e4ed712984dd7629f53190b15ddcf5f33462450e88c6065b5e8e7a1c68e5868",
+            "src/runtime/OneBackExit.java": "c6fea0d4a3ad2c5237936616aa9e613401c2ee30682f0cf7d533b07145130cb2",
+            "src/runtime/TikTokBack.java": "8a0b6bc6d1a63a3097559c5ed4b288ef31311d818f7774d8a0b5f22f96dda823",
+            "src/runtime/TikTokHome.java": "311cce2354fa78171af53309748ca0905c660740c4c09eecb659440d8a87c95e",
+            "src/runtime/TikTokScreen.java": "00a54f6e2bc5b21c46cb22ee8d8eeac1969876cdeb1caddb1f51b5a19d6eb085",
+            "src/runtime/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+            "src/runtime/TwitterBack.java": "aca8b6a93009fc120027082d5a2f115befaf3605da4e178cec57064a52e61d29"
+          },
+          "reviewed_source_manifest_sha256": "e4ece78580b0a32b6c58499438ffdee2f34b4ee06110cddbdcceda7a150d408e",
+          "manifest_encoding": "UTF-8; one relative_path + space + lowercase_sha256 + LF per file; paths lexicographic",
+          "native_evidence_sha256": {
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-class-family.txt": "932393cce90b50f0ac1103675af407cb3d0ae715f9fe4c8f13cba2f80b66f113",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-factories-current.txt": "744f317560c2d2529e813e04304c1e05702370b094e55d3978f14e14eeb6023b",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-current.txt": "deb2ad70e97a9ac3f3e09d32270372cdab63c86422d51ea28cdf5941047ba2ff",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-field-contract.txt": "b20de34ffa7c166f1d6a58275fffb7425fc8629734573117dbd2fbc514681fc3",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-view-current.txt": "f86ca128ddd5cf544b0a4c8841826d5c3b80d3225bfaee6f0a7e4fbe4021700e",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-adapter-contract.txt": "cbedc3090127a04f646aefb4e7d90fc061536376b66c4b40c1f9fc3c6e960a06",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-count.txt": "0359ade865c9805bb096d34741f30daf97b8222d266122e368165d49bddb7b9c",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-getAdapter.txt": "b2000debf2a7b6be8996e96211b9a44d4cfc5a75b5d151c381bd425097bbb86d",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-method-comparison.json": "ca6a857ea900ccde517728023004a0cae729e1dc557094f0e1fcc9e817b0000f",
+            "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/injection-control-flow-check.json": "c749e1659cc5390bc10782bcc5752aac23abd14e99427b7b8ea3266d3470fb9b"
+          },
+          "reviewed_invariants": [
+            "Native AndroidX X.0ct direct-pop route can bypass both installed native Instagram hook boundaries while terminal scope remains intact.",
+            "Shared Current classification authorizes initial OS/root entry, requires native Main layer state, and retains unknown contract as native Back.",
+            "Main modal guard uses 3MM weak 9ld isAdded; Main layer uses 16z A0U plus observational 0wS A0M; Reels layer flag A15 is separate.",
+            "Dialog lookup resolves the 07d declaring Dialog field despite RxR A00 shadowing.",
+            "Origin is captured at outer native Back entry, preserved through nesting, and cleared only at matching outer cleanup.",
+            "Prediction action plus authorized target identity prevents transfer to a new Home/Reels object or from detail/unknown start.",
+            "Current native fast path retains explicit narrow editor/sheet vetoes and separate visible other-content vetoes.",
+            "Actual Reels subclass Ze9 uses 8Zv declaring owner; actual 9sY wrapper descends cached selected pager tag fN with exact adapter identity and in-range page count.",
+            "Pager/merged/tab retained exclusions require native ownership, nonresumed lifecycle, and owned view roots.",
+            "Non-Instagram handlers and helper source files remain byte-for-byte unchanged from homeback120, except the shared ExitScreens IG branch and outer OneBackExit IG cleanup."
+          ],
+          "findings_resolved_during_review": [
+            {
+              "id": "REVIEW-COMPILE-1",
+              "issue": "Nested local current name collision in InstagramReels.foreground",
+              "resolution": "Legacy local renamed."
+            },
+            {
+              "id": "REVIEW-LAYER-1",
+              "issue": "Native fast path initially omitted size-independent exact editor/sheet vetoes",
+              "resolution": "namedLayer checks restored; six narrow-layer dispatch scenarios added."
+            },
+            {
+              "id": "REVIEW-REELS-1",
+              "issue": "Exact 8Zv-only matching omitted real Ze9 factory output",
+              "resolution": "Verified 8Zv superclass matching added."
+            },
+            {
+              "id": "REVIEW-REELS-2",
+              "issue": "Authoritative OTHER on real 9sY wrapper masked current Reels child",
+              "resolution": "Verified cached pager route, tag, adapter identity, count bounds, and retained-page ownership implemented."
+            }
+          ],
+          "host_tests_run_by_this_reviewer": {
+            "suite": "Back121InstagramActivityLayersTest",
+            "cases_passed": 34,
+            "assertions_passed": 60,
+            "evidence": "evidence/native-activity121-host.txt"
+          },
+          "host_tests_reported_by_adapter_owner": {
+            "suite": "Back121InstagramCurrentTest",
+            "cases_passed": 23,
+            "assertions_passed": 78,
+            "note": "Reported after final pager contract bounds and identity changes by real_android_api_audit; combined execution is owned by root."
+          },
+          "remaining_concrete_review_blockers": [],
+          "physical_android_device_tested": false,
+          "user_gesture_runtime_trace_available": false,
+          "limitations": [
+            "Static APK bytecode and host fixtures establish reachable code paths and implementation behavior; the actual callback, selected configuration, and live view/fragment state for the user gesture remain unobserved.",
+            "No claim is made that one statically proven route is the uniquely established device cause.",
+            "Final combined compilation, D8, distribution pipeline and publication gates are owned by root/pipeline agent."
+          ],
+          "report": "evidence/native-route121-review.md",
+          "combined_host_tests_reported_by_root": {
+            "Back121InstagramDispatchTest": {
+              "cases_passed": 39,
+              "assertions_passed": 204
+            },
+            "Back121InstagramCurrentTest": {
+              "cases_passed": 23,
+              "assertions_passed": 78
+            },
+            "Back121InstagramScopeTest": {
+              "cases_passed": 9,
+              "assertions_passed": 33
+            },
+            "Back121InstagramActivityLayersTest": {
+              "cases_passed": 34,
+              "assertions_passed": 60
+            }
+          },
+          "compiled_runtime_reported_by_root": {
+            "sha256": "52e1817fdaa16591cb5eb7b0383aaa07f578a4a6799dad1cf5ef6e99d9a817d5",
+            "bytes": 112676
+          }
+        }
+      },
+      "evidence/native-activity121-audit.json": {
+        "sha256": "58fd5912a7b3014baeb0b8efe9df59ab173861b014f965db2f90141094d2f353",
+        "report": {
+          "schema": "instagram-native-activity-layer-audit-v121",
+          "input_apk_sha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+          "host_cases": 34,
+          "host_assertions": 60,
+          "physical_android_tested": false,
+          "input_apk_modified": false,
+          "consuming_native_back_handlers_invoked_by_adapter": false,
+          "scope": "Read-only native Main guard mirror; distinct CLEAR/BLOCKED/UNKNOWN states. Host fixtures assert contract behavior; native descriptions are extracted from uploaded APK.",
+          "sha256": {
+            "src/runtime/InstagramActivityLayers.java": "6695b8e6eed23d7161e71622dfc73163bba43e83f00c82c53a39b1c43be1401a",
+            "src/test-runtime/NativeActivity121Fixture.java": "d0880b11f3f16085b0296d403e3c14c6a3f49051c8eee807a8b1dc42df2dab97",
+            "src/test-runtime/Back121InstagramActivityLayersTest.java": "abe58ccc6444224936e939043c3ee094033e2f388f0f239593dac9b4c60e5d38",
+            "src/test-stubs/android/app/Dialog.java": "b85901f2fbe7af9a4d2c3b6a01049479c0e7683ce4f440d78e054fd6d2b21c51",
+            "evidence/native-activity121-host.txt": "8c131afe55580acb89e39a8c7c8ddcfde420ea5e95c94a11deb2feb494011527",
+            "evidence/native-activity121-apk-contract.txt": "d1206597f6d79663b19d3fdf325c12f6fcd8e1a885db13bdc0d4dab6f416891d"
+          }
+        }
+      },
+      "evidence/instagram-current121-contract.json": {
+        "sha256": "81d2152d9445fec8e88aabd836bbf5fd89b2c8c0028ba556c52ffc2064c18357",
+        "report": {
+          "schemaVersion": 1,
+          "apkPath": "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+          "apkSha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+          "runtimeHelperClasses": [
+            "Lapp/hiro/oneback/runtime/InstagramCurrent;",
+            "Lapp/hiro/oneback/runtime/InstagramCurrent$Result;",
+            "Lapp/hiro/oneback/runtime/InstagramCurrent$Frame;",
+            "Lapp/hiro/oneback/runtime/InstagramCurrent$Invalid;"
+          ],
+          "entryPoint": "Lapp/hiro/oneback/runtime/InstagramCurrent;->inspect(Landroid/app/Activity;)Lapp/hiro/oneback/runtime/InstagramCurrent$Result;",
+          "resultFields": [
+            "available",
+            "nativeRecognized",
+            "kind",
+            "activity",
+            "selected",
+            "target",
+            "selectedTab",
+            "view",
+            "stateClear",
+            "stackClear",
+            "path",
+            "frames",
+            "backgroundRoots"
+          ],
+          "kinds": {
+            "UNKNOWN": 0,
+            "HOME": 1,
+            "REELS": 2,
+            "OTHER": 3
+          },
+          "nativeMethods": [
+            {
+              "descriptor": "Lcom/instagram/mainactivity/InstagramMainActivity;->A1e()Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Navigation-read-only native selection; internal feature-flag and tab-key lazy reads may initialize caches; no promise of zero instrumentation/cache side effects."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/FragmentActivity;->A1Y()LX/0dj;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads native support manager."
+            },
+            {
+              "descriptor": "LX/2yE;->A06()LX/2yl;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads Stack current entry tab; no push/pop."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->isAdded()Z",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads native host and added state."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->isVisible()Z",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads added/hidden/view/token/visibility state."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->isResumed()Z",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads mState >= 7."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads attached Activity owner."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->getParentFragment()Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads mParentFragment."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->getParentFragmentManager()LX/0dj;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads parent manager or throws if not associated."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/0dj;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads child manager or throws if not attached."
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->getView()Landroid/view/View;",
+              "shape": "public instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads mView."
+            },
+            {
+              "descriptor": "LX/0dj;->A0O(I)Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Find by native fragment ID in added/active store, no transaction."
+            },
+            {
+              "descriptor": "LX/0dj;->A0Q(Ljava/lang/String;)Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Find by native tag in added/active store, no transaction."
+            },
+            {
+              "descriptor": "LX/0dj;->A0L()I",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Native back stack count including non-null A05 record."
+            },
+            {
+              "descriptor": "LX/0dj;->A14()Z",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads A0J || A0K saved/stopped state."
+            },
+            {
+              "descriptor": "LX/0jG;->A03()Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "shape-only",
+              "readOnlyEvidence": "Native getter only reads base2275; adapter preserves main226f override explicitly."
+            },
+            {
+              "descriptor": "LX/3gY;->A03()Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "shape-only",
+              "readOnlyEvidence": "Native getter reads main226f child."
+            },
+            {
+              "descriptor": "LX/22c;->A07()Landroidx/fragment/app/Fragment;",
+              "shape": "public final instance",
+              "use": "shape-only",
+              "readOnlyEvidence": "Not invoked: may evaluate lazy fallback. Adapter requires cached A05."
+            },
+            {
+              "descriptor": "LX/eBE;->A04()I",
+              "shape": "public final instance",
+              "use": "invoked",
+              "readOnlyEvidence": "Maps cached selected feed type to native index0..4."
+            },
+            {
+              "descriptor": "Landroidx/viewpager2/widget/ViewPager2;->getAdapter()LX/8QJ;",
+              "shape": "public instance, declaring class final",
+              "use": "invoked",
+              "readOnlyEvidence": "Reads pager.A05 RecyclerView then RecyclerView.A0E adapter; exact identity checked against9sY.A05."
+            }
+          ],
+          "nativeFields": [
+            {
+              "descriptor": "Lcom/instagram/mainactivity/InstagramMainActivity;->A07:LX/2xZ;",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "LX/2xZ;->A02:LX/2yE;",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "LX/2yE;->A03:Landroidx/fragment/app/FragmentActivity;",
+              "shape": "public final instance"
+            },
+            {
+              "descriptor": "LX/2yl;->A0C:LX/2yl;",
+              "shape": "public static final enum FEED"
+            },
+            {
+              "descriptor": "LX/2yl;->A03:Ljava/lang/String;",
+              "shape": "public final instance; all enum constants checked for known tab keys"
+            },
+            {
+              "descriptor": "LX/0jG;->A07:LX/Esp;",
+              "shape": "public final instance"
+            },
+            {
+              "descriptor": "LX/4z8;->A00:Ljava/lang/Object;",
+              "shape": "public instance; exact final cache class; direct String cache only"
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->mFragmentId:I",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "Landroidx/fragment/app/Fragment;->mTag:Ljava/lang/String;",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "LX/0dj;->mExecutingActions:Z",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "LX/0dj;->A0W:Ljava/util/ArrayList;",
+              "shape": "public final instance; pending queue"
+            },
+            {
+              "descriptor": "LX/0dj;->A0V:LX/0dw;",
+              "shape": "public final instance"
+            },
+            {
+              "descriptor": "LX/0dw;->A01:Ljava/util/ArrayList;",
+              "shape": "public final instance; copied added list"
+            },
+            {
+              "descriptor": "LX/22c;->A05:LX/eBE;",
+              "shape": "public instance; cached non-null selection only"
+            },
+            {
+              "descriptor": "LX/9sY;->A00:Landroidx/viewpager2/widget/ViewPager2;",
+              "shape": "public instance"
+            },
+            {
+              "descriptor": "Landroidx/viewpager2/widget/ViewPager2;->A00:I",
+              "shape": "public instance; selected index"
+            },
+            {
+              "descriptor": "LX/9sY;->A05:LX/A9v;",
+              "shape": "public instance; cached adapter"
+            },
+            {
+              "descriptor": "LX/A9v;->A04:Ljava/util/List;",
+              "shape": "public instance; cached native page count"
+            }
+          ],
+          "nativeClassIdentity": {
+            "home": "LX/3mI; with current FEED enum",
+            "reelsBase": "LX/8Zv; including uploaded LX/Ze9; subclass",
+            "wrappers": [
+              "LX/0jG;",
+              "LX/3gY;",
+              "LX/22c;",
+              "LX/9sY;"
+            ],
+            "pager": "final Landroidx/viewpager2/widget/ViewPager2;",
+            "pagerAdapter": "final LX/A9v;"
+          },
+          "containerIds": {
+            "layout_container_main": "0x7f0b226f",
+            "layout_container_swipeable": "0x7f0b2275"
+          },
+          "sourceBindings": [
+            {
+              "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramCurrent.java",
+              "sha256": "9e2fe952573b1f2b91b73762739725239d997e8f328711272bdf76e6e89d1e68",
+              "bytes": 20698
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/InstagramCurrent121Fixture.java",
+              "sha256": "c2b2b0e95f306dd608fe24a24df92fe221caf396bce5b20cdb8e316352c96263",
+              "bytes": 19097
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramCurrentTest.java",
+              "sha256": "f6f0714a13524083f5c347f12b66422503e59591941dc82bd7433e15697ab2c8",
+              "bytes": 13144
+            }
+          ],
+          "evidenceBindings": [
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/INSTALLED_APK_API_AND_SCOPING_AUDIT.md",
+              "sha256": "10012558f79370d57f1c397fd32d9b4751c1d5319f231acd0afa040b7ac49b9e",
+              "bytes": 16245
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/actual-fragment-api.txt",
+              "sha256": "3f8277c61272cd3b8859ad770a2422b3f0eeef1d4f8bbf1ab6749be755ca03e6",
+              "bytes": 21613
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/actual-nav-api.txt",
+              "sha256": "57ec296a2ba03253d192cde8911d96ad0186602d46620b0459dd93d24daf9143",
+              "bytes": 10369
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/pure-content-getters.txt",
+              "sha256": "50340e5ee7777d11a52960b93355d6cb091c828c59102f62a4fe4c255725020d",
+              "bytes": 11716
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/fragment-ownership-and-pending.txt",
+              "sha256": "b0587782c56e33a28234f46ffb191b14bf2c2ff1be6576a73af29e9d0d5942f3",
+              "bytes": 3572
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/manager-pending-and-wrapper-view.txt",
+              "sha256": "84bb14eb05f8f96a14b636375ae4bd46e09d23e5b35ebdbda85906a496b1b672",
+              "bytes": 9603
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/native-tab-current-identity.txt",
+              "sha256": "62819c17e1176a8028c73461586aed133805739631391664ab12fd7230a9191a",
+              "bytes": 13026
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-wrapper-identity-source.txt",
+              "sha256": "777e913e3e14d3d15df16f45844a179581440b902bad81902b9ad0c8fce2afee",
+              "bytes": 14165
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-lazy-cache.txt",
+              "sha256": "96dee77be4572db7470529234eeadf03a4f863e8a01bb641b066449fcb5945b6",
+              "bytes": 2357
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/tab-lazy-cache-implementation.txt",
+              "sha256": "9a9a3900bc5e5f768884975e1276cea4205389c15b4a27e05f4c2844a235f419",
+              "bytes": 1410
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/selected-home-getters.txt",
+              "sha256": "b023cf97aaba0f01f6ee10642fb6389b3d56b457c15f60cec9bfbf97454ca97b",
+              "bytes": 8137
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/home-tab-apis.txt",
+              "sha256": "e3c0f3040d978344c090b9b9fd74630a00e51f4b386ff0b99434c6adc9bb2273",
+              "bytes": 46429
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/resource-asset-hashes.json",
+              "sha256": "8e98bb1e2a44c91bba9444e7c7373bf570b223e8077715186a7606c734c6a9e2",
+              "bytes": 1552
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/runtime-api-audit/upload/current-adapter-test.log",
+              "sha256": "437425706d3c1e4027174dc34ed4e17a436ecae21c98a0d4a637e36f90941ff1",
+              "bytes": 1366
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-class-family.txt",
+              "sha256": "932393cce90b50f0ac1103675af407cb3d0ae715f9fe4c8f13cba2f80b66f113",
+              "bytes": 26729
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-factories-current.txt",
+              "sha256": "744f317560c2d2529e813e04304c1e05702370b094e55d3978f14e14eeb6023b",
+              "bytes": 7097
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-current.txt",
+              "sha256": "deb2ad70e97a9ac3f3e09d32270372cdab63c86422d51ea28cdf5941047ba2ff",
+              "bytes": 5407
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-field-contract.txt",
+              "sha256": "b20de34ffa7c166f1d6a58275fffb7425fc8629734573117dbd2fbc514681fc3",
+              "bytes": 9205
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-count.txt",
+              "sha256": "0359ade865c9805bb096d34741f30daf97b8222d266122e368165d49bddb7b9c",
+              "bytes": 1922
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-adapter-contract.txt",
+              "sha256": "cbedc3090127a04f646aefb4e7d90fc061536376b66c4b40c1f9fc3c6e960a06",
+              "bytes": 586
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-9sY-view-current.txt",
+              "sha256": "f86ca128ddd5cf544b0a4c8841826d5c3b80d3225bfaee6f0a7e4fbe4021700e",
+              "bytes": 8790
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/apk-audit/upload-back-path/native-reels-pager-getAdapter.txt",
+              "sha256": "b2000debf2a7b6be8996e96211b9a44d4cfc5a75b5d151c381bd425097bbb86d",
+              "bytes": 297
+            },
+            {
+              "path": "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/evidence/native-route121-review.json",
+              "sha256": "5b5b2c5da18b6a32eacc932735ae1540f29f0ed6eb6052455fac9b8f589983d7",
+              "bytes": 7934
+            }
+          ],
+          "verification": {
+            "suite": "Back121InstagramCurrentTest",
+            "cases": 23,
+            "assertions": 78,
+            "result": "PASS",
+            "deviceExecution": false,
+            "fullReleaseVerificationOwner": "root/full_patch_pipeline_audit"
+          },
+          "limits": [
+            "The uploaded native APIs and resource layout assets are static evidence, not a device tree or callback execution trace.",
+            "The retained-tree/footer counterexample proves a code defect and both modeled symptoms, not the exact device cause.",
+            "Current only reads routing/ownership/state and yields scope; shared action/gesture guards and actual task exit are integrated by root.",
+            "Main.A1e can cause native tab-key cache evaluation internally; added adapter scans do not invoke uninitialized lazy getters.",
+            "Unknown native-family API, missing or stale current selection, or missing cached pager/merged selection fail closed.",
+            "All code/tests frozen; this contract records them without changing runtime or fixtures."
+          ]
+        }
+      }
+    },
+    "text_sha256": {
+      "evidence/native-route121-review.md": "4b9bad31bb42b49d9005082eafec80b6db47d445ed94629b4222211ae24bc4c0",
+      "evidence/native-activity121-apk-contract.txt": "d1206597f6d79663b19d3fdf325c12f6fcd8e1a885db13bdc0d4dab6f416891d",
+      "evidence/native-activity121-host.txt": "8c131afe55580acb89e39a8c7c8ddcfde420ea5e95c94a11deb2feb494011527",
+      "evidence/instagram-current121-contract.md": "10012558f79370d57f1c397fd32d9b4751c1d5319f231acd0afa040b7ac49b9e"
+    }
+  },
+  "inputs": {
+    "current_instagram": {
+      "sha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7",
+      "report": "current_instagram-abi.json"
+    },
+    "old_instagram_a": {
+      "sha256": "b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670",
+      "report": "old_instagram_a-abi.json"
+    },
+    "old_instagram_b": {
+      "sha256": "7207028231d71567ec7235f36800f7297bf8376054f4fc3d6f11ada5b9f020a8",
+      "report": "old_instagram_b-abi.json"
+    },
+    "old_tiktok": {
+      "sha256": "243231abe5c1f201b7d306bc3b9c086c60b183de790005f2acd22ea4f3325f7c",
+      "report": "old_tiktok-abi.json"
+    }
+  },
+  "files": {
+    "audit-javac.txt": "686fbe6364d7a84fbc7752686343ca6fb18b83ee6332f482de289c6cb6f09b1b",
+    "baseline249-abi.json": "061ee45f546006fd0fc40c11e0f4eb0863a149a417262b7d2666e7743969d7e6",
+    "baseline249-abi.txt": "e9db1b7eeddf7e3f1eefd93d865e6acd1dcfd5cd1fa6e208dd5c6a7ea12dc24e",
+    "current-code-identity.json": "f72091ac71f8cff9f2d808ff6441a4d6c5e8b44b0b3a6cbd19f4af641eb735bf",
+    "current-code-identity.txt": "2fb75263de2334e78d50fe9814db7cc0dde3aa04131fc51a8f20f779a1dbd292",
+    "current-entry-chain.txt": "022a6027ccc6c6de4355071f93b437b236aed19cb79bc2295827a7e7f57ded5c",
+    "current-external-callsites.json": "22d6f28ee759d80d6b0fa4a54332b1ba43d4b52b47cdf30b38dc68bd996e6811",
+    "current-manifest.txt": "a5103648c51bec11686152458fa01dc4335877eb39d5913367408fa6e23d1e53",
+    "current-native-verification.txt": "8fc9c5772cd0c542f6fbd4ec42129634872763939d8620bd12fde2ef4c4d3b79",
+    "current-runtime-class-hashes.json": "8246570523eb49d56eb14215cebdebd3176796194a82e724965062ff0b3d4c2b",
+    "current_instagram-abi.json": "35ceff52337bdd3b63fa639d44e536bd0dfe8f37aff4aaeabbe29a35968a18f5",
+    "current_instagram-abi.txt": "804fe7b76a8fa16164e3ed01a7f935bbfc8d5b20548504e7d39c0e5f730e35af",
+    "dispatch-model-differential.json": "b6c61a5bc2c417fc75f45c0962f6a15ee91b3e2989a3be3af347ba16077d0b23",
+    "dispatch-published120.txt": "e58cee156b9839c416b0ad051a3b4001a78e4b6b782bb3d56e797bd5569b1dd2",
+    "dispatch-replacement121.txt": "44f33273f94157733ec368f5795c96d8fb9539f678e016cd20b2b2bc36e9af9d",
+    "model-host-javac.txt": "84bfe47de00a206743b3599ec9b6d571800b509cb197e49e5901d251f7a93a45",
+    "model-runtime120-d8.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "model-runtime120-javac.txt": "565773c6c6ed8cdcde85b8368f813f8ab867dbd5e85d821baa1f6ee0ccbbccdf",
+    "model-runtime121-d8.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "model-runtime121-javac.txt": "565773c6c6ed8cdcde85b8368f813f8ab867dbd5e85d821baa1f6ee0ccbbccdf",
+    "old_instagram_a-abi.json": "afaaa18f80917a39e0536270060d616d97da8098e15990d9074d9dec947672e1",
+    "old_instagram_a-abi.txt": "3e545cc5d6833f0204b2b2d5f885db320aa85580e24c621472fcbd154bd8475e",
+    "old_instagram_b-abi.json": "c2d9630967c12f3cc8aec38b71c8a057dd1a7bf006fe7300413864b9f08f1b19",
+    "old_instagram_b-abi.txt": "8542ac3b3bc936f9df39cd5826d8b70e98414c9cc969c890f5811ac603bea14f",
+    "old_tiktok-abi.json": "cfae0755ea14083097f144aeabc85e7ccae25bc54f73be489eba32e67ea8d301",
+    "old_tiktok-abi.txt": "69704f6d12ba8418bf44fab9d9687c3e9b9cf8c47ac0a4a6cd6af6bf4050c3fe",
+    "scope-model-differential.json": "69bcd6fdfcbfb6270bac7269cff8804f66630b2e141cb8ef4c51e9819763db5f",
+    "scope-published120.txt": "d0b39ecacf9b32bcf76ee26cd9b243d2b97f7735af1d83328b119b32c52c0e51",
+    "scope-replacement121.txt": "860999e7bb6434916d7fa7d00cbd23bfd1da521e0e077f68d6637adf60271d5c"
+  },
+  "commands": [
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/javac",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "-d",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/oneback163/src/test-dex/DexAudit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/oneback163/src/test-dex/Fixtures.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-dex/HomeBackAudit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/evidence/ProvidedApkHookAudit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/publication/audit/BaselineRuntimeAbiAudit121.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/publication/audit/MainHierarchyAudit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/publication/audit/PipelineProbe.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/publication/audit/ProvidedApkAbiAudit121.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/publication/audit/UploadIdentityAudit.java"
+      ],
+      "stdout_stderr": "audit-javac.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/javac",
+        "--release",
+        "8",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "-d",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime120",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/BackNavigation.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/ExitScreens.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/HomeScreen.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/InstagramBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/InstagramNativeLayers.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/InstagramReels.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/NativeBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/OneBackExit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/TikTokBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/TikTokHome.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/TikTokScreen.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/TripBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback120/src/runtime/TwitterBack.java"
+      ],
+      "stdout_stderr": "model-runtime120-javac.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/d8.jar",
+        "com.android.tools.r8.D8",
+        "--release",
+        "--min-api",
+        "29",
+        "--lib",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "--classpath",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "--output",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/dex120",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime120.jar"
+      ],
+      "stdout_stderr": "model-runtime120-d8.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/javac",
+        "--release",
+        "8",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "-d",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime121",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/BackNavigation.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/ExitScreens.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/HomeScreen.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramActivityLayers.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramCurrent.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramNativeLayers.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/InstagramReels.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/NativeBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/OneBackExit.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/TikTokBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/TikTokHome.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/TikTokScreen.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/TripBack.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/runtime/TwitterBack.java"
+      ],
+      "stdout_stderr": "model-runtime121-javac.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/d8.jar",
+        "com.android.tools.r8.D8",
+        "--release",
+        "--min-api",
+        "29",
+        "--lib",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "--classpath",
+        "/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "--output",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/dex121",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime121.jar"
+      ],
+      "stdout_stderr": "model-runtime121-d8.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/javac",
+        "--release",
+        "8",
+        "-encoding",
+        "UTF-8",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests:/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime121:/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "-d",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/ActionBar.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/Activity.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/ActivityManager.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/Application.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/Dialog.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/FragmentManager.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/app/KeyguardManager.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/ComponentName.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/Context.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/ContextWrapper.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/Intent.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/SharedPreferences.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/content/res/Resources.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/graphics/Rect.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/net/Uri.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/Build.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/Bundle.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/Handler.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/Looper.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/PowerManager.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/os/SystemClock.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/util/Log.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/KeyEvent.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/View.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/ViewGroup.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/ViewParent.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/ViewTreeObserver.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/Window.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/WindowInsets.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/accessibility/AccessibilityNodeInfo.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/view/inspector/WindowInspector.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/widget/TextView.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/window/BackEvent.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/window/FakeDispatcher.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/window/OnBackAnimationCallback.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/window/OnBackInvokedCallback.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/android/window/OnBackInvokedDispatcher.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/bytedance/hox/Hox.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/bytedance/tiktok/homepage/mainfragment/HomeTabAbility.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/ctrip/ibu/home/home/presentation/page/fragment/widget/HomeAppBarLayout.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/instagram/mainactivity/InstagramMainActivity.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/ss/android/ugc/aweme/main/MainActivity.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/ss/android/ugc/aweme/main/assems/tabs/TabAbilityAssem.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/twitter/android/HomeTimelineActivity.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/com/twitter/android/StartActivity.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-stubs/instagram/features/clips/viewer/ui/ClipsSwipeRefreshLayout.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back116Regression.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back117InstagramTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back117TikTokTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back118InstagramGuardTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back118InstagramTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back119InstagramTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back119TwitterTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back120InstagramTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back120MainDispatchTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramActivityLayersTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramCurrentTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramDispatchTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Back121InstagramScopeTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/HomeBackHostTest.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/Instagram447Fixture.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/InstagramCurrent121Fixture.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/NativeActivity121Fixture.java",
+        "/workspace/scratch/075f7970e1d9/hiro-morphe-patches/releases/homeback121/src/test-runtime/NativeReels120Fixture.java"
+      ],
+      "stdout_stderr": "model-host-javac.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests:/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime120:/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "app.hiro.oneback.runtime.Back121InstagramScopeTest"
+      ],
+      "stdout_stderr": "scope-published120.txt",
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests:/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime121:/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "app.hiro.oneback.runtime.Back121InstagramScopeTest"
+      ],
+      "stdout_stderr": "scope-replacement121.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests:/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime120:/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "app.hiro.oneback.runtime.Back121InstagramDispatchTest"
+      ],
+      "stdout_stderr": "dispatch-published120.txt",
+      "exit_code": 1
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/models/tests:/workspace/scratch/075f7970e1d9/evidence121-final2/models/runtime121:/workspace/scratch/075f7970e1d9/build-inputs/tools/android.jar",
+        "app.hiro.oneback.runtime.Back121InstagramDispatchTest"
+      ],
+      "stdout_stderr": "dispatch-replacement121.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx1800m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "BaselineRuntimeAbiAudit121",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/baseline120.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/replacement121.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/evidence/baseline249-abi.json"
+      ],
+      "stdout_stderr": "baseline249-abi.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx2200m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "ProvidedApkAbiAudit121",
+        "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/baseline120.dex",
+        "1.1.10",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/replacement121.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/evidence/current_instagram-abi.json"
+      ],
+      "stdout_stderr": "current_instagram-abi.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx2200m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "ProvidedApkAbiAudit121",
+        "/workspace/scratch/075f7970e1d9/inputs/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+        "/workspace/scratch/075f7970e1d9/build-inputs/reference116-runtime.dex",
+        "1.1.6",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/replacement121.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/evidence/old_instagram_a-abi.json"
+      ],
+      "stdout_stderr": "old_instagram_a-abi.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx2200m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "ProvidedApkAbiAudit121",
+        "/workspace/scratch/075f7970e1d9/inputs/Instagram_v447.0.0.55.81(2147483647).apk",
+        "/workspace/scratch/075f7970e1d9/build-inputs/reference116-runtime.dex",
+        "1.1.6",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/replacement121.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/evidence/old_instagram_b-abi.json"
+      ],
+      "stdout_stderr": "old_instagram_b-abi.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx2200m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "ProvidedApkAbiAudit121",
+        "/workspace/scratch/075f7970e1d9/inputs/TikTok_v46.2.3(2147483647).apk",
+        "/workspace/scratch/075f7970e1d9/build-inputs/reference116-runtime.dex",
+        "1.1.6",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/replacement121.dex",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/evidence/old_tiktok-abi.json"
+      ],
+      "stdout_stderr": "old_tiktok-abi.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx1800m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "UploadIdentityAudit",
+        "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+        "/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp",
+        "/workspace/scratch/075f7970e1d9/inputs/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/current-identity"
+      ],
+      "stdout_stderr": "current-code-identity.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx2200m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "PipelineProbe",
+        "verify",
+        "/workspace/scratch/075f7970e1d9/inputs/Instagram-v447.0.0.55.81-patches-v3.10.0.apk",
+        "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk"
+      ],
+      "stdout_stderr": "current-native-verification.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-Xmx1800m",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "MainHierarchyAudit",
+        "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk"
+      ],
+      "stdout_stderr": "current-entry-chain.txt",
+      "exit_code": 0
+    },
+    {
+      "argv": [
+        "/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-cp",
+        "/workspace/scratch/075f7970e1d9/evidence121-final2/classes:/workspace/scratch/075f7970e1d9/dist120-final/Hiro_Morphe_Patches_v1.0.249.mpp:/workspace/scratch/075f7970e1d9/build-inputs/tools/morphe.jar",
+        "PipelineProbe",
+        "manifest",
+        "/workspace/scratch/075f7970e1d9/upload/Instagram-v447.0.0.55.81-patches-v3.10.0.apk"
+      ],
+      "stdout_stderr": "current-manifest.txt",
+      "exit_code": 0
+    }
+  ]
+}
