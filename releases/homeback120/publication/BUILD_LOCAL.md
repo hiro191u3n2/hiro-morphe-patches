@@ -6,7 +6,7 @@ The exact baseline URL and SHA-256 are in `manifest-template.json`. The download
 
 ## Toolchain
 
-Local tools live in `/workspace/scratch/075f7970e1d9/build-inputs/tools`. Use Temurin JDK 21.0.8+9 from `/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9`. CI selects the same release. The Morphe, Android SDK and D8 hashes remain fixed in `src/build.py`. The workflow downloads public upstream archives and verifies archive and extracted file hashes; it does not depend on expiring Actions artifacts.
+Local tools live in `/workspace/scratch/075f7970e1d9/build-inputs/tools`. Use Temurin JDK 21.0.8+9 from `/workspace/scratch/075f7970e1d9/build-inputs/jdk-21.0.8+9`. CI selects the same release using the setup-java catalog spelling `21.0.8+9.0.LTS`; the shorter `21.0.8+9` selector does not match that catalog entry. The Morphe, Android SDK and D8 hashes remain fixed in `src/build.py`. The workflow downloads public upstream archives and verifies archive and extracted file hashes; it does not depend on expiring Actions artifacts.
 
 ## Required evidence before final build
 
