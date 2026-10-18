@@ -7,6 +7,7 @@ localWork with Strong: its identical rounded luma quotient/square is now reused.
 The exported raw maps/evidence are compared byte-for-byte, not only by hashes.
 """
 from pathlib import Path
+from legacy_shader19106 import production_text
 import argparse,hashlib,importlib.util,json,os,subprocess
 
 def module(name,path):
@@ -17,10 +18,10 @@ def test(source,work,jdk=None,ndk=None):
     source,work=Path(source).resolve(),Path(work).resolve();work.mkdir(parents=True,exist_ok=True)
     jdk=Path(jdk or os.environ['ULIKE_JDK_HOME']);android=Path(os.environ['ULIKE_ANDROID_JAR']);native=source/'native1960'
     harness=source/'tests19100/model/ModelPreparation19100Bench.java';reference=source/'tests19100/strong/reference99/strong1960.comp'
-    tracked=[source/'GpuAnalysis1961.java',source/'StrongNoise1958.java',harness,reference,source/'host_model19100.py',source/'host_strong_math19100.py',native/'engine1960.c']+list(native.glob('*.comp'))
+    tracked=[source/'GpuAnalysis1961.java',source/'StrongNoise1958.java',harness,reference,source/'host_model19100.py',source/'host_strong_math19100.py',source/'legacy_shader19106.py',native/'engine1960.c']+list(native.glob('*.comp'))
     pins={str(p.relative_to(source)):sha(p) for p in tracked}
     strict=module('model100_strict',source/'host_strong_math19100.py')
-    if sha(reference)!=strict.REFERENCE99 or (native/'strong1960.comp').read_text()!=strict.extend19100(reference.read_text()):raise AssertionError('Model shader exceeds reviewed exact scalar sharing delta')
+    if sha(reference)!=strict.REFERENCE99 or production_text((native/'strong1960.comp').read_text())!=production_text(strict.extend19100(reference.read_text())):raise AssertionError('Model shader exceeds reviewed exact scalar sharing delta')
     base=module('model100_base',source/'host_model_math1990.py');retained=base.test(source,work/'model',jdk,ndk)
     cp=str(work/'model/classes')+os.pathsep+str(android);env=dict(os.environ,EGL_PLATFORM='surfaceless',LIBGL_ALWAYS_SOFTWARE='1')
     commands=[]
