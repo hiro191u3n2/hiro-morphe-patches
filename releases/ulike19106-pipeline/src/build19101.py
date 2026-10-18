@@ -10,13 +10,14 @@ import build1945 as common
 import build19100 as previous
 import native_identity19101
 ROOT=Path(__file__).resolve().parent
-VERSION, BUNDLE_VERSION='1.9.106','1.0.248'
-BASE_VERSION, BASE_BUNDLE_VERSION='1.9.105','1.0.247'
+VERSION, BUNDLE_VERSION='1.9.106','1.0.251'
+BASE_VERSION, BASE_BUNDLE_VERSION='1.9.105','1.0.250'
 SINGLE='ULike_HQ_Texture_Online_v1.9.106.mpp'
-BUNDLE='Hiro_Morphe_Patches_v1.0.248.mpp'
+BUNDLE='Hiro_Morphe_Patches_v1.0.251.mpp'
 BASE_SINGLE='ULike_HQ_Texture_Online_v1.9.105.mpp'
-BASE_BUNDLE='Hiro_Morphe_Patches_v1.0.247.mpp'
-BASE_PINS={'ULike_HQ_Texture_Online_v1.9.105.mpp': {'bytes': 1479315, 'sha256': 'f384779056ac97912639bc3561f68a332025edbf84bcda7f508a68f5ac0911ed'}, 'Hiro_Morphe_Patches_v1.0.247.mpp': {'bytes': 18170134, 'sha256': '82e7bdca6288963465fb6cbc17d85ccdf827aa8ddbecb62faa48e65c3d926703'}}
+BASE_BUNDLE='Hiro_Morphe_Patches_v1.0.250.mpp'
+BASE_PINS={'ULike_HQ_Texture_Online_v1.9.105.mpp': {'bytes': 1479315, 'sha256': 'f384779056ac97912639bc3561f68a332025edbf84bcda7f508a68f5ac0911ed'}, 'Hiro_Morphe_Patches_v1.0.250.mpp': {'bytes': 18187082, 'sha256': 'e4cb0c32bebdaa2de41eb510263d060aa89c06aac45a403580a66995f7269e6c'}}
+BASE_REFS={BASE_SINGLE:'ab716a53b994609fd6aaa7fa41a17b590f7638a5', BASE_BUNDLE:'15b8ce4e2b13f8e4ea5c3c2c7b43664b3589f750'}
 GPU_ENTRY='ulike1960/runtime/libulike_gpu1960.so'
 NR_ENTRY='ulike1955/runtime/libulike_nr1955.so'
 INSTALLER='app/hiro/ulike/patches/IntegrationPayload186.class'

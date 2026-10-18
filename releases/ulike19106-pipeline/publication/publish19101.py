@@ -24,19 +24,19 @@ import zipfile
 
 
 REPO="hiro191u3n2/hiro-morphe-patches"
-VERSION,BUNDLE,PREVIOUS_APP,PREVIOUS="1.9.106","1.0.248","1.9.105","1.0.247"
+VERSION,BUNDLE,PREVIOUS_APP,PREVIOUS="1.9.106","1.0.251","1.9.105","1.0.250"
 TAG="ulike-v1.9.106"
 PAGE=f"https://github.com/{REPO}/releases/tag/{TAG}"
 RAW_BRANCH="ulike19106-pipeline-downloads"
 RELEASE_ROOT="releases/ulike19106-pipeline"
 POLICY_PATH="releases/ULike_ACTIVE.json"
 SINGLE="ULike_HQ_Texture_Online_v1.9.106.mpp"
-COMBINED="Hiro_Morphe_Patches_v1.0.248.mpp"
+COMBINED="Hiro_Morphe_Patches_v1.0.251.mpp"
 QA_NAME="QA_ULike_v1.9.106.json"
 SOURCE_ZIP="ULike_v1.9.106_sources_and_QA.zip"
 RECEIPT_NAME="publication_ULike_v1.9.106.json"
 ASSETS=(SINGLE,COMBINED,QA_NAME,SOURCE_ZIP,"RELEASE_NOTES.txt","SHA256SUMS.txt")
-BASE_SHA256="82e7bdca6288963465fb6cbc17d85ccdf827aa8ddbecb62faa48e65c3d926703"
+BASE_SHA256="e4cb0c32bebdaa2de41eb510263d060aa89c06aac45a403580a66995f7269e6c"
 SINGLE_BASE_SHA256="f384779056ac97912639bc3561f68a332025edbf84bcda7f508a68f5ac0911ed"
 INVENTORY=re.compile(r"(?m)^(ULike：)v(1\.9\.105)(（5\.6\.2／740）)\r?$")
 HEADING = re.compile(r"^#{1,3}\s+(?:\S+\s+)?(?:\[([^]]+)]\([^)]*\)|([^\s\[(]+))\s+\((\d{4}-\d{2}-\d{2})\)", re.I)
@@ -319,7 +319,7 @@ def new_policy(raw,qa,expected):
     policy.update(ulike_version=VERSION,bundle_version=BUNDLE,source_filename=SINGLE,source_sha256=expected[SINGLE]['sha256'],source_release=TAG,active_release=TAG,
         base_ulike_version=PREVIOUS_APP,base_bundle_version=PREVIOUS,base_source_sha256=SINGLE_BASE_SHA256,
         inherited_release_evidence19101={'ulike_version':PREVIOUS_APP,'source_sha256':SINGLE_BASE_SHA256,'historical_only':True,'evidence':historical},
-        release_status='pipeline105_host_original_apks_verified_device_unverified',current_fix_scope=qa.get('selected_candidates',[]),
+        release_status='pipeline106_host_original_apks_verified_device_unverified',current_fix_scope=qa.get('selected_candidates',[]),
         selected_candidates=qa.get('selected_candidates',[]),current_validation=qa,
         gpu_native_library_sha256=qa['gpu_native']['sha256'],gpu_native_library_bytes=qa['gpu_native']['bytes'],
         nr_native_library_sha256=qa['nr_native']['sha256'],nr_native_library_bytes=qa['nr_native']['bytes'],
@@ -329,7 +329,7 @@ def new_policy(raw,qa,expected):
         gpu_execution_on_physical_android=False,samsung_gpu_failure_root_cause_confirmed=False,
         capture_fusion_enabled=False,single_image_only=True,
         reason='.106 traces intermediate float bits for the fixed Strong mismatch pixel in a diagnostic-only GPU program and CPU replay. Production program arithmetic and strict quality/speed gates remain unchanged. Device mismatch resolution and speed remain unverified.',
-        future_ulike_base='Use .106/.248 source and exact artifact hashes. Preserve complete quality checks, actual GPU-output telemetry, bounded memory, camera/save contracts and other apps. Do not infer device speed or numerical equivalence from host-only or cached results.')
+        future_ulike_base='Use .106/.251 source and exact artifact hashes. Preserve complete quality checks, actual GPU-output telemetry, bounded memory, camera/save contracts and other apps. Do not infer device speed or numerical equivalence from host-only or cached results.')
     return policy
 
 def publication(args):
@@ -359,7 +359,7 @@ def publication(args):
         api(f"repos/{REPO}/releases/{release['id']}",{'draft':False,'prerelease':True,'make_latest':'false'},'PATCH')
         verify_assets(release['id'],expected,True);checkpoint('release_bytes_verified');check_heads(states)
         git(args.repo,'fetch','--no-tags',f'https://github.com/{REPO}.git',states['main']['head'])
-        raw=prepare_commit(args.repo,{**states['main'],'branch':RAW_BRANCH},{'downloads/'+n:payloads[n] for n in (SINGLE,COMBINED)},'release: immutable ULike19106 and bundle248 packages')
+        raw=prepare_commit(args.repo,{**states['main'],'branch':RAW_BRANCH},{'downloads/'+n:payloads[n] for n in (SINGLE,COMBINED)},'release: immutable ULike19106 and bundle251 packages')
         git(args.repo,'push',f'--force-with-lease=refs/heads/{RAW_BRANCH}:',f'https://github.com/{REPO}.git',f"{raw['head']}:refs/heads/{RAW_BRANCH}")
         require(head(RAW_BRANCH)==raw['head'],'Distribution branch changed')
         urls={n:f"https://raw.githubusercontent.com/{REPO}/{raw['head']}/downloads/{n}" for n in (SINGLE,COMBINED)}
@@ -371,7 +371,7 @@ def publication(args):
             updates[b]={'patches-bundle.json':json_bytes(feed),'CHANGELOG.md':log.encode(),POLICY_PATH:json_bytes(policies[b])}
             if b=='main':
                 for name in (QA_NAME,'RELEASE_NOTES.txt','SHA256SUMS.txt'):updates[b][RELEASE_ROOT+'/'+name]=payloads[name]
-        active=commit_feeds_atomically(args.repo,states,updates,'release: ULike19106 Strong comparison fixes and bundle248 Manager feeds')
+        active=commit_feeds_atomically(args.repo,states,updates,'release: ULike19106 Strong comparison fixes and bundle251 Manager feeds')
         for b,s in active.items():
             feed,log=metadata_out[b]
             require(json.loads(content('patches-bundle.json',s['head']))==feed,'Feed bytes differ')

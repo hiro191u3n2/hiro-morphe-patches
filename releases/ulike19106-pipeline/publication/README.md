@@ -1,6 +1,6 @@
-# ULike v1.9.106 / Hiro Morphe Patches v1.0.248
+# ULike v1.9.106 / Hiro Morphe Patches v1.0.251
 
-公開済み単体v1.9.105と総合版v1.0.247を固定ハッシュで取得する。他アプリの変更はバイト単位で保持する。
+公開済み単体v1.9.105と総合版v1.0.250を固定ハッシュで取得する。他アプリの変更はバイト単位で保持する。
 
 ## 変更範囲
 
@@ -17,7 +17,7 @@ Temurin21.0.8+9、Android NDK r27c、Morphe Desktop1.16.0、Android35/D8の固�
 3. `src/host_audit19101.py`で現在ソースの既存試験と今回追加した診断試験を実行する。
 4. `src/apply_original19101.py`で私有の未改造ULike5.6.2(740)APKSへ完成MPPを実際に適用し、FULL DEXとリソース再構築、arm64、元native保持、適用後メソッドを確認する。
 5. `src/finalize19101.py`と`src/validate19101.py`で今回の実行証拠を配布MPPのSHA-256へ結び付ける。
-6. `publication/publish19101.py --local-only`、`--preflight-only`の後に公開する。既存互換のためスクリプト名とschema名に19101が残るが、版値は1.9.106/1.0.248で照合する。
+6. `publication/publish19101.py --local-only`、`--preflight-only`の後に公開する。既存互換のためスクリプト名とschema名に19101が残るが、版値は1.9.106/1.0.251で照合する。
 
 この版は差分演算の特定を進める診断追加であり、Android実機での±1階調差解消・速度短縮は未確認。ホスト一致やAPK適用成功をGalaxyでの解消・保存2,000ms以下達成の証拠にしない。
 

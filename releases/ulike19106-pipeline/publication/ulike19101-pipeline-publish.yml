@@ -54,7 +54,7 @@ jobs:
           def get(url):
               with urllib.request.urlopen(url,timeout=240) as response:return response.read()
           for name,pin in build.BASE_PINS.items():
-              ref='ab716a53b994609fd6aaa7fa41a17b590f7638a5'
+              ref=build.BASE_REFS[name]
               url='https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/'+ref+'/downloads/'+name
               raw=get(url)
               assert len(raw)==pin['bytes'] and hashlib.sha256(raw).hexdigest()==pin['sha256']

@@ -1,4 +1,4 @@
-"""Narrow .102/.103 API compatibility for controlled Strong transport fixtures.
+"""Narrow .102/.103/.106 API compatibility for controlled Strong fixtures.
 
 Only generated fixture copies gain these APIs. Production admission, shaders,
 historical fixture files, test inputs and existing assertions remain untouched.
@@ -11,6 +11,15 @@ def once(body,old,new):
     return body.replace(old,new)
 
 def transport(body):
+    if 'class ResidentStages19104' in body:
+        raise AssertionError('Unexpected post-save diagnostic peer in foreground fixture')
+    # The retained foreground routing tests do not establish a post-save replay
+    # context. Satisfy only the new diagnostic wrapper's compiler dependency;
+    # accidentally entering that wrapper must fail immediately.
+    body+='''\nfinal class ResidentStages19104 {
+    static void checkFixed19105(){throw new AssertionError("post-save Strong diagnostic entered foreground fixture");}
+}
+'''
     body=once(body,'final class GpuResident1976 {','final class GpuResident1976 {\n    static boolean deployedProbe19102(){return benchmarking()&&!cpuOracle();}')
     method='''        Lease1971 reserveCapacity1983(int[] slots,long[] targets,long[] uploadBytes,long javaBytes){
             if(slots==null||targets==null||uploadBytes==null||slots.length!=targets.length||uploadBytes.length!=targets.length)

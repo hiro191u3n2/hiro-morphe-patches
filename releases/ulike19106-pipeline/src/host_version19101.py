@@ -8,7 +8,7 @@ def test(source,work,jdk=None,ndk=None):
  sys.path.insert(0,str(source))
  spec=importlib.util.spec_from_file_location('version_builder1997',source/'build19101.py');builder=importlib.util.module_from_spec(spec);spec.loader.exec_module(builder)
  assertions=0
- assert builder.VERSION=='1.9.106' and builder.BUNDLE_VERSION=='1.0.248';assertions+=1
+ assert builder.VERSION=='1.9.106' and builder.BUNDLE_VERSION=='1.0.251';assertions+=1
  assert builder.runtime_source_version()=='1.9.106';assertions+=1
  fixture=work/'TimingVersion.java'
  good='public static final String VERSION = "1.9.106";'
