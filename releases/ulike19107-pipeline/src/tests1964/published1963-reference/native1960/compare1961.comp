@@ -1,0 +1,13 @@
+#version 310 es
+precision highp int;
+#ifndef GX_LOCAL_SIZE
+#define GX_LOCAL_SIZE 64
+#endif
+layout(local_size_x=GX_LOCAL_SIZE) in;
+layout(std430,binding=0) readonly buffer Expected { int value[]; } expected;
+layout(std430,binding=1) readonly buffer Actual { int value[]; } actual;
+layout(std430,binding=2) buffer Verdict { uint mismatch[]; } verdict;
+uniform highp int u[32];
+// All words are compared. No lossy checksum and no floating-point reduction.
+// Verdict must be initialized to zero in the same bank before dispatch.
+void main(){uint at=uint(u[31])+gl_GlobalInvocationID.x;if(at>=uint(u[0]))return;if(expected.value[at]!=actual.value[at])atomicOr(verdict.mismatch[0],1u);}
