@@ -1,0 +1,110 @@
+{
+  "schema": "fossify-gallery101-publication-receipt-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.258",
+  "baseline_bundle_version": "1.0.257",
+  "baseline_bundle_sha256": "69143101c1700a144e5a447948f4e7f6a68dab0653fa77b7fae9688da4bcadd7",
+  "source_commit": "ca0980f2059273b879e5e0bf91a9e9475bef6353",
+  "publication_manifest_sha256": "95d9e81fcf7b97c10f2a6afaa64d110af8eb3be9c5f4c47d85cca58999556c51",
+  "assets": {
+    "Fossify_Gallery_NoRecents_v1.0.1.mpp": {
+      "bytes": 17593,
+      "sha256": "fcc967df0a36f903bd24ebd7f97fe704b0bc9281482ec1ee0b886de0e3ebcd28"
+    },
+    "Hiro_Morphe_Patches_v1.0.258.mpp": {
+      "bytes": 18459555,
+      "sha256": "819ac9522cbe163acbb95839915ccf503618cbc95a528ed0892ed727732eea5d"
+    },
+    "QA_Fossify_Gallery_v1.0.1.json": {
+      "bytes": 5177,
+      "sha256": "195db9f6a229d6e9195e88a856eca46d5f40ca2cd6a1069d93ad722244d3368c"
+    },
+    "Fossify_Gallery_v1.0.1_sources_and_QA.zip": {
+      "bytes": 43882,
+      "sha256": "f5355dafd217a560acd1ef1f40c321fefa9630ebbf981e2938ffa065f040b43f"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2699,
+      "sha256": "6fe8f444c5b09a1856a0afd3026f464ea916c47bfd0a91619bb65ce2e0647832"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 491,
+      "sha256": "5f51db5e4bbb4f2dda16e02b7136b5435cb74739acbc36d0485c6fa56351e0eb"
+    }
+  },
+  "validation": {
+    "baseline_bundle_version": "1.0.257",
+    "baseline_bundle_sha256": "69143101c1700a144e5a447948f4e7f6a68dab0653fa77b7fae9688da4bcadd7",
+    "android_device_tested": false,
+    "official_apk_sha256": "cfa321d7467b116741689f8f118b46011c882a4c2359b9320111f87c998af373",
+    "official_apk_apply_tested": true,
+    "official_apk_apply_cases": 4,
+    "compatibility_patcher2_apply": [
+      {
+        "bundle": "Fossify_Gallery_NoRecents_v1.0.1.mpp",
+        "package": "org.fossify.gallery",
+        "version": "1.14.0",
+        "result": "PASS",
+        "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+        "preserved_original_resources": 1883,
+        "patcher_version": "2.0.0-dev.12",
+        "desktop_version": "1.19.0-dev.4"
+      },
+      {
+        "bundle": "Hiro_Morphe_Patches_v1.0.258.mpp",
+        "package": "org.fossify.gallery",
+        "version": "1.14.0",
+        "result": "PASS",
+        "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+        "preserved_original_resources": 1883,
+        "patcher_version": "2.0.0-dev.12",
+        "desktop_version": "1.19.0-dev.4"
+      }
+    ],
+    "original_back_reference_sha256": "0f8e468e56f659e5ada449ad29bf5a16a576fa4981240e3aab1ec80624351bb0",
+    "host_tests": "PASS GalleryExit host assertions=15; root/nested/caller/null/failure boundaries. Android device behavior NOT tested.",
+    "loader_preservation": "PASS loader merge: every class outside Fossify loader unchanged=255; previous Fossify loader classes removed=3; replacement Fossify loader classes=3; assertions=1302",
+    "unrelated_loader_classes_preserved": 255,
+    "unrelated_resource_entries_byte_identical": 84,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "qa_sha256": "195db9f6a229d6e9195e88a856eca46d5f40ca2cd6a1069d93ad722244d3368c"
+  },
+  "android_device_tested": false,
+  "manager_parser_sources": [
+    "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+    "https://github.com/MorpheApp/morphe-manager/blob/da8545c92c94b83e23adf7b573b46b282fa2b062/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt"
+  ],
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "575f3151991657140342ee73c9177ba69ba25062",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "4465029e95742029ca345de9596f3c50aa957067",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 417130981,
+  "raw_commit": "9aa9259c3eaaf518964fc5a491042a7154dc16b9",
+  "download_urls": {
+    "Fossify_Gallery_NoRecents_v1.0.1.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/9aa9259c3eaaf518964fc5a491042a7154dc16b9/downloads/Fossify_Gallery_NoRecents_v1.0.1.mpp",
+    "Hiro_Morphe_Patches_v1.0.258.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/9aa9259c3eaaf518964fc5a491042a7154dc16b9/downloads/Hiro_Morphe_Patches_v1.0.258.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/fossify-gallery-v1.0.1",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "Fossify Gallery",
+    "Gallery"
+  ],
+  "all_non_gallery_bundle_classes_and_resources_preserved": true
+}
