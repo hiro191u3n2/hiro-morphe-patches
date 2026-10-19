@@ -1,0 +1,42 @@
+name: Reverify Back125 published release and Manager feeds
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/homeback125-reverify.yml', 'tools/homeback125_reverify.py']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  reverify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/download-artifact@v4
+        with:
+          name: homeback125-bundle259-verification
+          run-id: 39233695544
+          github-token: ${{ github.token }}
+          path: .ci-homeback125-reverify
+      - name: Reverify existing assets and feeds then save only the recovered receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 tools/homeback125_reverify.py 2>&1 | tee .ci-homeback125-reverify/reverification.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback125-publication-reverification
+          path: |
+            .ci-homeback125-reverify/reverification.log
+            .ci-homeback125-reverify/dist-a/publication_HomeBack_v1.1.15.json
+          include-hidden-files: true
+          retention-days: 14
