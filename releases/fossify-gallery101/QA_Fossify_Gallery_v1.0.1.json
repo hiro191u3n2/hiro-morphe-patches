@@ -1,0 +1,88 @@
+{
+  "schema": "fossify-gallery101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.258",
+  "baseline_version": "1.0.257",
+  "baseline_sha256": "69143101c1700a144e5a447948f4e7f6a68dab0653fa77b7fae9688da4bcadd7",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5",
+    "morphe2.jar": "67479a00dba2de387e5115b73960267325e544cedf44a709416cdfb70c82e7f2"
+  },
+  "sources": {
+    "build.py": "72b51ed62472ff1ba3c03420efe425890877702baa95e3c63fabd38c647e2c82",
+    "patch/FossifyGalleryExitPatch.java": "16db83779c1b7957a96e1e9c1ced5a82a30dac948eb354885ce466ff5af71bd4",
+    "runtime/GalleryExit.java": "82d5c7b60c479c37308b5edbfefc9b995a9453c5429eebe4a6e68199550e45d4",
+    "test/FossifyAudit.java": "b020f5cf9a39786e1d2801c568676a9b7978cdb0c00c49015aea0579ca613f0c",
+    "test/FossifyCompatibilityTest.java": "651cb0c950bdc8b74c60c4cf57cfe5eff12bccd144498908fb148014812cc81d",
+    "test-host/android/app/Activity.java": "4615dcfa65c728dc8088cc183678050dd9a317b246508e61a27cf4b222aa0a71",
+    "test-host/app/hiro/fossifygallery/runtime/GalleryExitTest.java": "0a0f8bdc90c72cbf2894284625bc325340a848546506e2180b10812b775c9f8a"
+  },
+  "artifacts": {
+    "Fossify_Gallery_NoRecents_v1.0.1.mpp": {
+      "bytes": 17593,
+      "sha256": "fcc967df0a36f903bd24ebd7f97fe704b0bc9281482ec1ee0b886de0e3ebcd28"
+    },
+    "Hiro_Morphe_Patches_v1.0.258.mpp": {
+      "bytes": 18459555,
+      "sha256": "819ac9522cbe163acbb95839915ccf503618cbc95a528ed0892ed727732eea5d"
+    }
+  },
+  "loader_preservation": "PASS loader merge: every class outside Fossify loader unchanged=255; previous Fossify loader classes removed=3; replacement Fossify loader classes=3; assertions=1302",
+  "preserved_unrelated_entries": 84,
+  "runtime_sha256": "0bc538de8977794492b2b8e622598ba8f79b698caafbd7ebb6bb7efed57096dc",
+  "host_tests": "PASS GalleryExit host assertions=15; root/nested/caller/null/failure boundaries. Android device behavior NOT tested.",
+  "apk_application": [
+    {
+      "bundle": "Fossify_Gallery_NoRecents_v1.0.1.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.258.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883
+    }
+  ],
+  "official_apk_sha256": "cfa321d7467b116741689f8f118b46011c882a4c2359b9320111f87c998af373",
+  "compatibility_patcher2_apply": [
+    {
+      "bundle": "Fossify_Gallery_NoRecents_v1.0.1.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883,
+      "patcher_version": "2.0.0-dev.12",
+      "desktop_version": "1.19.0-dev.4"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.258.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883,
+      "patcher_version": "2.0.0-dev.12",
+      "desktop_version": "1.19.0-dev.4"
+    }
+  ],
+  "compatibility_tests": {
+    "stable": "PASS Fossify compatibility assertions=7273; original/debug-normalized methods accepted with active writer; opcode/literal/branch/receiver/handler/register/metadata/method/package/version/reference tampering rejected.",
+    "patcher2": "PASS Fossify compatibility assertions=7273; original/debug-normalized methods accepted with active writer; opcode/literal/branch/receiver/handler/register/metadata/method/package/version/reference tampering rejected."
+  },
+  "original_back_reference_sha256": "0f8e468e56f659e5ada449ad29bf5a16a576fa4981240e3aab1ec80624351bb0",
+  "gallery_runtime_unchanged": true,
+  "patcher2_writer_equivalent_to_user_dev13": true,
+  "official_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
