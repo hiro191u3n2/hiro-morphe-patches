@@ -25,10 +25,10 @@ def test(source,work,jdk=None,ndk=None):
     timing_stub=work/'ProcessingTiming1947.java'
     stub_body=fixtures[timing_key].read_text()
     assert 'class ProcessingTiming1947 {' in stub_body
-    timing_stub.write_text(stub_body.replace('class ProcessingTiming1947 {','class ProcessingTiming1947 { public static final String VERSION=\"1.9.107\";'))
+    timing_stub.write_text(stub_body.replace('class ProcessingTiming1947 {','class ProcessingTiming1947 { public static final String VERSION=\"1.9.108\";'))
     fixtures[timing_key]=timing_stub
     copy_case=work/'CopyLogs1993Test.java'
-    copy_case.write_text((source/'tests1993/logcopy/CopyLogs1993Test.java').read_text().replace('1.9.93','1.9.107'))
+    copy_case.write_text((source/'tests1993/logcopy/CopyLogs1993Test.java').read_text().replace('1.9.93','1.9.108'))
     cases=[copy_case,source/'camera69testfixtures/com/hiro/ulike/CameraDetails1969Test.java']
     def run(name,args):
         result=subprocess.run(list(map(str,args)),text=True,capture_output=True,timeout=60)
