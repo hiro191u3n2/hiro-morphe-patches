@@ -1,0 +1,57 @@
+{
+  "schema": "fossify-gallery100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.257",
+  "baseline_version": "1.0.256",
+  "baseline_sha256": "04fc11889fd22670dff5613f75a6bd4cb04fc254ab57fd877ca51a955d5f9b33",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "sources": {
+    "build.py": "27ca1337079cbfa9e293288f59563571ced6fd4091d05ec70944f3c1e2efc43a",
+    "patch/FossifyGalleryExitPatch.java": "9aa35661a2629c9d5768b4cdbe05f2d6d9d1897fc35239aa034d6cfade8e9fd7",
+    "runtime/GalleryExit.java": "82d5c7b60c479c37308b5edbfefc9b995a9453c5429eebe4a6e68199550e45d4",
+    "test/FossifyAudit.java": "d26a282614bd279479a7056fd4047d2a7ffecd9faa79910224f2cc0f1c61ca66",
+    "test-host/android/app/Activity.java": "4615dcfa65c728dc8088cc183678050dd9a317b246508e61a27cf4b222aa0a71",
+    "test-host/app/hiro/fossifygallery/runtime/GalleryExitTest.java": "0a0f8bdc90c72cbf2894284625bc325340a848546506e2180b10812b775c9f8a"
+  },
+  "artifacts": {
+    "Fossify_Gallery_NoRecents_v1.0.0.mpp": {
+      "bytes": 13595,
+      "sha256": "57b91a127411b9a043908e83a5fa76c5d2c681a8916b8e6959a9f4bbc7f80b6d"
+    },
+    "Hiro_Morphe_Patches_v1.0.257.mpp": {
+      "bytes": 18455884,
+      "sha256": "69143101c1700a144e5a447948f4e7f6a68dab0653fa77b7fae9688da4bcadd7"
+    }
+  },
+  "loader_preservation": "PASS loader merge: every existing class unchanged=255; Fossify loader classes added=3; assertions=1298",
+  "preserved_unrelated_entries": 83,
+  "runtime_sha256": "0bc538de8977794492b2b8e622598ba8f79b698caafbd7ebb6bb7efed57096dc",
+  "host_tests": "PASS GalleryExit host assertions=15; root/nested/caller/null/failure boundaries. Android device behavior NOT tested.",
+  "apk_application": [
+    {
+      "bundle": "Fossify_Gallery_NoRecents_v1.0.0.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.257.mpp",
+      "package": "org.fossify.gallery",
+      "version": "1.14.0",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=7236; three callbacks preserve their exact native bodies and guard only native false results; compiled runtime classes exact=1; assertions=37218; physical Android behavior not tested.",
+      "preserved_original_resources": 1883
+    }
+  ],
+  "official_apk_sha256": "cfa321d7467b116741689f8f118b46011c882a4c2359b9320111f87c998af373",
+  "official_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
