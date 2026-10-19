@@ -1,0 +1,184 @@
+{
+  "schema": "homeback124-publication-receipt-v1",
+  "patch_version": "1.1.14",
+  "bundle_version": "1.0.256",
+  "baseline_bundle_version": "1.0.255",
+  "baseline_bundle_sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47",
+  "source_commit": "06f0043e931dbc07820e9250ede54f45e443b49a",
+  "publication_manifest_sha256": "7e1214f1745f16b474343ac8f58d6284ef8773fd84e7d02d7638a317f722698e",
+  "assets": {
+    "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+      "bytes": 336173,
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+    },
+    "Hiro_Morphe_Patches_v1.0.256.mpp": {
+      "bytes": 18446079,
+      "sha256": "04fc11889fd22670dff5613f75a6bd4cb04fc254ab57fd877ca51a955d5f9b33"
+    },
+    "QA_HomeBack_v1.1.14.json": {
+      "bytes": 15912,
+      "sha256": "c3c20ab38982d0121e257b581714e71bb39d15363a894b1bb80d7d599df03fa1"
+    },
+    "HomeBack_v1.1.14_sources_and_QA.zip": {
+      "bytes": 543327,
+      "sha256": "eb4e8fccac1465cce8f13e086adee417cedba3abe58d01737eec8968b0773375"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3032,
+      "sha256": "8eca6b1ded238385dc2bdff23a8b0e4cbdf860593860d0e93ff024273a843698"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 477,
+      "sha256": "c98ce22e7ad5210e2e5f66b43a2eb2bb6283e10b85d5af1eb1dcd11967a1c78d"
+    }
+  },
+  "local_validation": {
+    "baseline_bundle_version": "1.0.255",
+    "baseline_bundle_sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47",
+    "android_device_tested": false,
+    "original_apk_apply_tested": false,
+    "unrelated_resource_entries_byte_identical": 69,
+    "unrelated_loader_classes_unchanged": 246,
+    "two_fresh_ci_builds_required": true,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "local_sdk_build": true,
+    "local_host_tested": true,
+    "validation_coverage": {
+      "host_cases": 315,
+      "host_assertions": 1476,
+      "host_suites": {
+        "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+        "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+        "Back117TikTokTest": "PASS Back117TikTokTest",
+        "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+        "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+        "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 51 assertions",
+        "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+        "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+        "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 76 assertions",
+        "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+        "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+        "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 202 assertions",
+        "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 34 assertions",
+        "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+        "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+        "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+        "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+        "HomeBackHostTest": "SUCCESS: 315 cases, 1476 assertions"
+      },
+      "synthetic_apk_apply_cases": 10,
+      "supplied_already_patched_apk_apply_cases": 2
+    },
+    "local_supplied_apk_validation": {
+      "schema": "homeback124-local-apk-validation-v1",
+      "result": "PASS",
+      "package_name": "com.twitter.android",
+      "version_name": "12.19.1-release.0",
+      "input_apk_sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+      "input_already_patched": true,
+      "input_has_prior_oneback": false,
+      "physical_android_tested": false,
+      "artifacts": {
+        "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+          "bytes": 336173,
+          "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+        },
+        "Hiro_Morphe_Patches_v1.0.256.mpp": {
+          "bytes": 18446079,
+          "sha256": "04fc11889fd22670dff5613f75a6bd4cb04fc254ab57fd877ca51a955d5f9b33"
+        }
+      },
+      "runtime_sha256": "559d89a6e7c3008cfb14b1e2c5e46285cf3a48365725d87524195a466c02b07f",
+      "outputs": {
+        "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+          "result": "PASS",
+          "output_apk_sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+          "four_tab_exit_hook_verified": true,
+          "normal_launch_home_hook_verified": true,
+          "runtime_classes_match": true,
+          "full_semantic_audit": true
+        },
+        "Hiro_Morphe_Patches_v1.0.256.mpp": {
+          "result": "PASS",
+          "output_apk_sha256": "db0314d764f5553948bb8c96ff0bd9d22e3e380b6138ca0c3d1291d83fdc5aee",
+          "four_tab_exit_hook_verified": true,
+          "normal_launch_home_hook_verified": true,
+          "runtime_classes_match": true,
+          "full_semantic_audit": true
+        }
+      },
+      "audits": {
+        "native_root": {
+          "result": "PASS",
+          "log_path": "evidence/native-x/root-hook124-final-audit.txt",
+          "log_sha256": "c97bc2e4b26efc42b93da8acf2c045010f9847b0487f8b741f9d4133f472e77e"
+        },
+        "known123_upgrade": {
+          "result": "PASS",
+          "log_path": "evidence/actual-x/known123-upgrade124-audit.txt",
+          "log_sha256": "4ca7132144a168081d451b86127df42aa9b8c34f18d21d090bf62075a68b8d83"
+        },
+        "all_executable_code": {
+          "result": "PASS",
+          "log_path": "evidence/actual-apk/whole-x-semantics-audit.txt",
+          "log_sha256": "a7e1a865b5e14e017a8f2c98a0b9e915af058f5b31175d3615d1d66363ecac2c"
+        },
+        "resources": {
+          "result": "PASS",
+          "log_path": "evidence/actual-apk/resource-audit.json",
+          "log_sha256": "80b594b9c4658bf208ba4631cc0913e8f04068726d1aa9ce01874a4e964ed903"
+        }
+      },
+      "single_bundle_all_zip_entry_bytes_equal": true,
+      "rebuild_matches_actual_applied_mpp_bytes": true,
+      "all_code_audit_source_sha256": "ab00258c8cda71cec66e67650c41d741f75a33d4d395bf8211db17ea3e520360",
+      "all_code_comparison": {
+        "app_classes": 241847,
+        "app_methods": 893509,
+        "runtime_classes": 75,
+        "assertions": 29401924
+      },
+      "limitations": "Static APK and host validation only; no physical Android execution. Bundle output is covered by exact equality of every ZIP entry with the fully audited standalone output."
+    },
+    "qa_sha256": "c3c20ab38982d0121e257b581714e71bb39d15363a894b1bb80d7d599df03fa1"
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "ac82afa79226a1d846482f6fbbf320469611940c",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "5d5e5d0c1464af80af2e37a1eb79ab1e83998ff4",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 417084493,
+  "raw_commit": "fd46b278bbc23d09cd966b6ac69d4f5a4e98b9bb",
+  "download_urls": {
+    "OneBack_Exit_NoRecents_v1.1.14.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/fd46b278bbc23d09cd966b6ac69d4f5a4e98b9bb/downloads/OneBack_Exit_NoRecents_v1.1.14.mpp",
+    "Hiro_Morphe_Patches_v1.0.256.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/fd46b278bbc23d09cd966b6ac69d4f5a4e98b9bb/downloads/Hiro_Morphe_Patches_v1.0.256.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/oneback-v1.1.14",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "X",
+    "Twitter"
+  ],
+  "other_apps_false_updates": false,
+  "all_unrelated_patch_resources_preserved": true,
+  "fixed_chatgpt_site_updated": false
+}
