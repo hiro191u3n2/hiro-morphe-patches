@@ -1,0 +1,228 @@
+CHAIN Lcom/twitter/app/main/l1; flags=17 super=Lcom/twitter/app/legacy/m;
+CHAIN Lcom/twitter/app/legacy/m; flags=1025 super=Lcom/twitter/app/legacy/r;
+CHAIN Lcom/twitter/app/legacy/r; flags=1 super=Lcom/twitter/app/legacy/h;
+CHAIN Lcom/twitter/app/legacy/h; flags=1025 super=Ljava/lang/Object;
+CHAIN Lcom/twitter/app/main/MainActivity; flags=1 super=Lcom/twitter/app/common/inject/p;
+CHAIN Lcom/twitter/app/common/inject/p; flags=1 super=Lcom/twitter/app/common/base/i;
+CHAIN Lcom/twitter/app/common/base/i; flags=1 super=Landroidx/appcompat/app/g;
+CHAIN Landroidx/appcompat/app/g; flags=1 super=Landroidx/fragment/app/x;
+CHAIN Landroidx/fragment/app/x; flags=1 super=Landroidx/activity/ComponentActivity;
+CHAIN Landroidx/activity/ComponentActivity; flags=1 super=Landroidx/core/app/h;
+CHAIN Landroidx/core/app/h; flags=1 super=Landroid/app/Activity;
+CHAIN Landroidx/fragment/app/x; flags=1 super=Landroidx/activity/ComponentActivity;
+CHAIN Landroidx/activity/ComponentActivity; flags=1 super=Landroidx/core/app/h;
+CHAIN Landroidx/core/app/h; flags=1 super=Landroid/app/Activity;
+PAGER Lcom/twitter/app/main/viewpager/a; flags=1537 super=Ljava/lang/Object; interfaces=[Lcom/twitter/ui/viewpager/h;]
+PAGER Lcom/twitter/app/main/x; flags=17 super=Lcom/twitter/ui/viewpager/a; interfaces=[Lcom/twitter/app/main/viewpager/a;]
+METHOD Lcom/twitter/ui/viewpager/a;->p()Landroid/net/Uri; flags=17 registers=4
+digest=29b22619b9e8778d2e8ea6b48efb2e2c4ab45c75eaaa444b3a3638c5ef4c7c65
+0 IGET_OBJECT Lcom/twitter/ui/viewpager/a;->h:Landroidx/viewpager/widget/ViewPager; v0,v3
+2 INVOKE_VIRTUAL Landroidx/viewpager/widget/ViewPager;->getCurrentItem()I args=[0]
+5 MOVE_RESULT v0
+6 IGET_OBJECT Lcom/twitter/ui/viewpager/a;->j:Ljava/util/List; v1,v3
+8 INVOKE_INTERFACE Ljava/util/List;->size()I args=[1]
+11 MOVE_RESULT v1
+12 CONST_4 v2
+13 IF_GE v0,v1
+15 IGET_OBJECT Lcom/twitter/ui/viewpager/a;->j:Ljava/util/List; v1,v3
+17 INVOKE_INTERFACE Ljava/util/List;->get(I)Ljava/lang/Object; args=[1, 0]
+20 MOVE_RESULT_OBJECT v0
+21 CHECK_CAST Lcom/twitter/ui/util/l; v0
+23 GOTO
+24 MOVE_OBJECT v0,v2
+25 IF_EQZ v0
+27 IGET_OBJECT Lcom/twitter/ui/util/l;->a:Landroid/net/Uri; v0,v0
+29 RETURN_OBJECT v0
+30 RETURN_OBJECT v2
+METHOD Lcom/twitter/app/main/l1;->goBack()Z flags=17 registers=11
+digest=a213880a9ad8bb57e0882ffccdc87e1c6fbf3bd448c38db07c491ddf6dca48e7
+0 IGET_OBJECT Lcom/twitter/app/main/l1;->n1:Ldagger/a; v0,v10
+2 INVOKE_INTERFACE Ldagger/a;->get()Ljava/lang/Object; args=[0]
+5 MOVE_RESULT_OBJECT v0
+6 CHECK_CAST Lcom/twitter/ui/fab/p; v0
+8 CONST_4 v1
+9 IF_EQZ v0
+11 INVOKE_INTERFACE Lcom/twitter/ui/fab/p;->h()Z args=[0]
+14 MOVE_RESULT v2
+15 IF_EQZ v2
+17 INVOKE_INTERFACE Lcom/twitter/ui/fab/p;->c()V args=[0]
+20 RETURN v1
+21 INVOKE_VIRTUAL Lcom/twitter/app/legacy/h;->q3()Lcom/twitter/ui/navigation/d; args=[10]
+24 MOVE_RESULT_OBJECT v0
+25 INVOKE_INTERFACE Lcom/twitter/ui/navigation/d;->c()Z args=[0]
+28 MOVE_RESULT v0
+29 IF_EQZ v0
+31 INVOKE_VIRTUAL Lcom/twitter/app/legacy/h;->q3()Lcom/twitter/ui/navigation/d; args=[10]
+34 MOVE_RESULT_OBJECT v0
+35 INVOKE_INTERFACE Lcom/twitter/ui/navigation/d;->d()Z args=[0]
+38 RETURN v1
+39 IGET_OBJECT Lcom/twitter/app/legacy/r;->q:Lcom/twitter/search/typeahead/suggestion/l; v0,v10
+41 INVOKE_INTERFACE Lcom/twitter/search/typeahead/suggestion/l;->b()Z args=[0]
+44 MOVE_RESULT v0
+45 IF_NEZ v0
+47 IGET_OBJECT Lcom/twitter/app/main/l1;->y1:Lcom/twitter/onboarding/gating/a; v0,v10
+49 INVOKE_INTERFACE Lcom/twitter/onboarding/gating/a;->A()Z args=[0]
+52 MOVE_RESULT v0
+53 IF_NEZ v0
+55 IGET_OBJECT Lcom/twitter/app/main/l1;->B:Lcom/twitter/app/main/viewpager/a; v0,v10
+57 INVOKE_INTERFACE Lcom/twitter/ui/viewpager/h;->s()Lcom/twitter/ui/util/l; args=[0]
+60 MOVE_RESULT_OBJECT v2
+61 IF_NEZ v2
+63 CONST_4 v2
+64 GOTO
+65 INVOKE_INTERFACE Lcom/twitter/ui/viewpager/h;->l(Lcom/twitter/ui/util/l;)Lcom/twitter/app/common/base/BaseFragment; args=[0, 2]
+68 MOVE_RESULT_OBJECT v2
+69 CONST_CLASS Lcom/twitter/ui/navigation/b; v3
+71 INVOKE_STATIC Lcom/twitter/app/common/util/h0;->c(Landroidx/fragment/app/Fragment;Ljava/lang/Class;)Ljava/lang/Object; args=[2, 3]
+74 MOVE_RESULT_OBJECT v2
+75 CHECK_CAST Lcom/twitter/ui/navigation/b; v2
+77 IF_EQZ v2
+79 INVOKE_INTERFACE Lcom/twitter/ui/navigation/b;->goBack()Z args=[2]
+82 MOVE_RESULT v2
+83 IF_EQZ v2
+85 GOTO_16
+87 SGET_OBJECT Lcom/twitter/main/api/b;->a:Landroid/net/Uri; v2
+89 INVOKE_INTERFACE Lcom/twitter/ui/viewpager/h;->e(Landroid/net/Uri;)I args=[0, 2]
+92 MOVE_RESULT v0
+93 IGET_OBJECT Lcom/twitter/app/main/l1;->A:Lcom/twitter/ui/navigation/viewpager/b; v3,v10
+95 INVOKE_INTERFACE Lcom/twitter/ui/navigation/viewpager/b;->c()I args=[3]
+98 MOVE_RESULT v3
+99 IF_EQ v3,v0
+101 INVOKE_VIRTUAL Lcom/twitter/app/main/l1;->H3(Landroid/net/Uri;)V args=[10, 2]
+104 RETURN v1
+105 SGET_OBJECT Lcom/twitter/util/d;->a:Lcom/twitter/util/d; v0
+107 IGET_OBJECT Lcom/twitter/app/legacy/h;->b:Landroidx/fragment/app/x; v0,v10
+109 CONST_STRING activity v2
+111 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 2]
+114 INVOKE_VIRTUAL Landroid/content/Context;->getResources()Landroid/content/res/Resources; args=[0]
+117 MOVE_RESULT_OBJECT v2
+118 INVOKE_VIRTUAL Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration; args=[2]
+121 MOVE_RESULT_OBJECT v2
+122 IGET Landroid/content/res/Configuration;->keyboard:I v2,v2
+124 CONST_4 v3
+125 CONST_4 v4
+126 IF_NE v2,v3
+128 INVOKE_VIRTUAL Landroid/content/Context;->getResources()Landroid/content/res/Resources; args=[0]
+131 MOVE_RESULT_OBJECT v2
+132 INVOKE_VIRTUAL Landroid/content/res/Resources;->getConfiguration()Landroid/content/res/Configuration; args=[2]
+135 MOVE_RESULT_OBJECT v2
+136 IGET Landroid/content/res/Configuration;->hardKeyboardHidden:I v2,v2
+138 IF_NE v2,v1
+140 MOVE v2,v1
+141 GOTO
+142 MOVE v2,v4
+143 INVOKE_VIRTUAL Landroid/app/Activity;->isInMultiWindowMode()Z args=[0]
+146 MOVE_RESULT v3
+147 CONST_STRING input v5
+149 INVOKE_VIRTUAL Landroid/app/Activity;->getSystemService(Ljava/lang/String;)Ljava/lang/Object; args=[0, 5]
+152 MOVE_RESULT_OBJECT v0
+153 CONST_STRING null cannot be cast to non-null type android.hardware.input.InputManager v5
+155 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->i(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 5]
+158 CHECK_CAST Landroid/hardware/input/InputManager; v0
+160 IF_EQZ v2
+162 IF_EQZ v3
+164 INVOKE_VIRTUAL Landroid/hardware/input/InputManager;->getInputDeviceIds()[I args=[0]
+167 MOVE_RESULT_OBJECT v2
+168 CONST_STRING getInputDeviceIds(...) v3
+170 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[2, 3]
+173 ARRAY_LENGTH v3,v2
+174 MOVE v5,v4
+175 IF_GE v5,v3
+177 AGET v6,v2
+179 INVOKE_VIRTUAL Landroid/hardware/input/InputManager;->getInputDevice(I)Landroid/view/InputDevice; args=[0, 6]
+182 MOVE_RESULT_OBJECT v6
+183 IF_EQZ v6
+185 INVOKE_VIRTUAL Landroid/view/InputDevice;->getName()Ljava/lang/String; args=[6]
+188 MOVE_RESULT_OBJECT v6
+189 CONST_STRING getName(...) v7
+191 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[6, 7]
+194 SGET_OBJECT Ljava/util/Locale;->ENGLISH:Ljava/util/Locale; v7
+196 CONST_STRING ENGLISH v8
+198 CONST_STRING toLowerCase(...) v9
+200 INVOKE_STATIC Lcom/braze/enums/m;->a(Ljava/util/Locale;Ljava/lang/String;Ljava/lang/String;Ljava/util/Locale;Ljava/lang/String;)Ljava/lang/String; args=[7, 8, 6, 7, 9]
+203 MOVE_RESULT_OBJECT v6
+204 CONST_STRING mouse v7
+206 INVOKE_STATIC Lkotlin/text/r;->G(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z args=[6, 7, 4]
+209 MOVE_RESULT v7
+210 IF_NEZ v7
+212 CONST_STRING touchpad v7
+214 INVOKE_STATIC Lkotlin/text/r;->G(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z args=[6, 7, 4]
+217 MOVE_RESULT v7
+218 IF_NEZ v7
+220 CONST_STRING trackball v7
+222 INVOKE_STATIC Lkotlin/text/r;->G(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Z)Z args=[6, 7, 4]
+225 MOVE_RESULT v6
+226 IF_EQZ v6
+228 RETURN v1
+229 ADD_INT_2ADDR v5,v1
+230 GOTO
+231 INVOKE_SUPER Lcom/twitter/app/legacy/r;->goBack()Z args=[10]
+234 MOVE_RESULT v0
+235 RETURN v0
+METHOD Lcom/twitter/main/api/b;-><clinit>()V flags=65544 registers=2
+digest=d57468df55ce439b0ace68e9af975897ece9b221c55f8ed7df4c2ae340f22443
+0 NEW_INSTANCE Lcom/twitter/main/api/b$b; v0
+2 INVOKE_DIRECT Ljava/lang/Object;-><init>()V args=[0]
+5 SPUT_OBJECT Lcom/twitter/main/api/b;->Companion:Lcom/twitter/main/api/b$b; v0
+7 CONST_STRING twitter://timeline/home v0
+9 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+12 MOVE_RESULT_OBJECT v0
+13 CONST_STRING parse(...) v1
+15 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+18 SPUT_OBJECT Lcom/twitter/main/api/b;->a:Landroid/net/Uri; v0
+20 CONST_STRING twitter://notifications v0
+22 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+25 MOVE_RESULT_OBJECT v0
+26 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+29 SPUT_OBJECT Lcom/twitter/main/api/b;->b:Landroid/net/Uri; v0
+31 CONST_STRING twitter://connect v0
+33 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+36 MOVE_RESULT_OBJECT v0
+37 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+40 SPUT_OBJECT Lcom/twitter/main/api/b;->c:Landroid/net/Uri; v0
+42 CONST_STRING twitter://dms v0
+44 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+47 MOVE_RESULT_OBJECT v0
+48 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+51 SPUT_OBJECT Lcom/twitter/main/api/b;->d:Landroid/net/Uri; v0
+53 CONST_STRING twitter://moments v0
+55 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+58 MOVE_RESULT_OBJECT v0
+59 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+62 SPUT_OBJECT Lcom/twitter/main/api/b;->e:Landroid/net/Uri; v0
+64 CONST_STRING twitter://communities v0
+66 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+69 MOVE_RESULT_OBJECT v0
+70 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+73 SPUT_OBJECT Lcom/twitter/main/api/b;->f:Landroid/net/Uri; v0
+75 CONST_STRING twitter://conferences v0
+77 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+80 MOVE_RESULT_OBJECT v0
+81 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+84 SPUT_OBJECT Lcom/twitter/main/api/b;->g:Landroid/net/Uri; v0
+86 CONST_STRING twitter://spaces v0
+88 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+91 MOVE_RESULT_OBJECT v0
+92 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+95 SPUT_OBJECT Lcom/twitter/main/api/b;->h:Landroid/net/Uri; v0
+97 CONST_STRING twitter://bookmarks v0
+99 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+102 MOVE_RESULT_OBJECT v0
+103 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+106 SPUT_OBJECT Lcom/twitter/main/api/b;->i:Landroid/net/Uri; v0
+108 CONST_STRING twitter://community_notes v0
+110 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+113 MOVE_RESULT_OBJECT v0
+114 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+117 SPUT_OBJECT Lcom/twitter/main/api/b;->j:Landroid/net/Uri; v0
+119 CONST_STRING twitter://grok v0
+121 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+124 MOVE_RESULT_OBJECT v0
+125 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+128 SPUT_OBJECT Lcom/twitter/main/api/b;->k:Landroid/net/Uri; v0
+130 CONST_STRING twitter://xchat v0
+132 INVOKE_STATIC Landroid/net/Uri;->parse(Ljava/lang/String;)Landroid/net/Uri; args=[0]
+135 MOVE_RESULT_OBJECT v0
+136 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V args=[0, 1]
+139 SPUT_OBJECT Lcom/twitter/main/api/b;->l:Landroid/net/Uri; v0
+141 RETURN_VOID

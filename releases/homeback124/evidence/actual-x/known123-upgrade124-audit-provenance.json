@@ -1,0 +1,51 @@
+{
+  "schema": "twitter-known123-upgrade124-audit-v1",
+  "status": "PASS",
+  "heap_limit": "2g",
+  "classpath": [
+    "/workspace/scratch/102008d926fb/build124-final2/audit",
+    "/workspace/scratch/102008d926fb/build124-final2/patch",
+    "/workspace/scratch/102008d926fb/output/dist124-final/OneBack_Exit_NoRecents_v1.1.14.mpp",
+    "/workspace/scratch/102008d926fb/build-tools/morphe.jar"
+  ],
+  "files": {
+    "input_apk": {
+      "path": "/workspace/scratch/102008d926fb/upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+      "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae"
+    },
+    "historical_mpp": {
+      "path": "/workspace/scratch/102008d926fb/output/dist123-final/OneBack_Exit_NoRecents_v1.1.13.mpp",
+      "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+    },
+    "current_mpp": {
+      "path": "/workspace/scratch/102008d926fb/output/dist124-final/OneBack_Exit_NoRecents_v1.1.14.mpp",
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+    },
+    "current_runtime": {
+      "path": "/workspace/scratch/102008d926fb/build124-final2/runtime-dex/classes.dex",
+      "sha256": "559d89a6e7c3008cfb14b1e2c5e46285cf3a48365725d87524195a466c02b07f"
+    },
+    "audit_class": {
+      "path": "/workspace/scratch/102008d926fb/build124-final2/audit/TwitterUpgradeAudit.class",
+      "sha256": "93bc7b212d57308ab07d8b8701f05d593f52bc4d94a1bcabe1fd8470d21cf16d"
+    },
+    "audit_log": {
+      "path": "/workspace/scratch/102008d926fb/work/x124-native/known123-upgrade124-audit.txt",
+      "sha256": "4ca7132144a168081d451b86127df42aa9b8c34f18d21d090bf62075a68b8d83"
+    }
+  },
+  "source_hashes_match_final_build_qa": {
+    "test-dex/TwitterUpgradeAudit.java": "cbc04cc029194531de888a301e85ea241660084b4b82ad527c0c5fe0fa5224d8",
+    "patch/OneBackPatch.java": "266c4cf6119ccb45ed766552cdd21cdd0b8d06363656579c34b0d89fa896308c",
+    "patch/InstagramUpgrade.java": "d5329c286d09d988b3e3b210ddf5a9b1b09323c7f196a8de4708a3fe5455462e"
+  },
+  "executed_patch_classes_identical_to_final_mpp": 9,
+  "runtime_identical_to_final_mpp_extension": true,
+  "historical_model": "Actual supplied fresh X APK processed by isolated pinned released 1.1.13 production applyAll; not a previously OneBack-patched user upload.",
+  "runtime_classes": 75,
+  "preserved_generic_helpers": 303,
+  "new_native_root_gates": 1,
+  "negative_pre_mutation_rejections": 9,
+  "assertions": 969342,
+  "physical_android_tested": false
+}

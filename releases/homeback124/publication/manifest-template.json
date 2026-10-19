@@ -1,0 +1,47 @@
+{
+  "schema": "homeback124-publication-v1",
+  "patch_version": "1.1.14",
+  "bundle_version": "1.0.256",
+  "baseline_version": "1.0.255",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/352c9cad934054ed3d1a1f626610881bd1b5c3c2/downloads/Hiro_Morphe_Patches_v1.0.255.mpp",
+  "baseline_sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47",
+  "release_title": "X four-tab Back exit and Home launch v1.1.14 / Hiro Morphe Patches v1.0.256",
+  "summary": "X のホーム・検索・通知・チャットのトップ画面で戻る操作から終了し、最近使ったアプリのタスクを削除。通常の次回起動はホームへ戻します。実機未確認。",
+  "validation_basis": "Production Android SDK compilation, retained and new X host regressions, DEX structure and semantic loader preservation, and actual Morphe applications to synthetic fixtures. Both final MPPs must be applied locally to the supplied com.twitter.android APK and audited for four-tab exit, normal-launch Home routing, runtime identity and preservation outside reviewed edits. Two clean CI builds must exactly match locally frozen MPP/QA. These checks do not establish Android device behavior.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "96c7031317f01670f35533b82a35abbe742ff091",
+  "reviewed_dev_head": "54d8e025cf859a0671891f1bf89c2ccfd79e5ea4",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+      "bytes": 336173,
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+    },
+    "Hiro_Morphe_Patches_v1.0.256.mpp": {
+      "bytes": 18446079,
+      "sha256": "04fc11889fd22670dff5613f75a6bd4cb04fc254ab57fd877ca51a955d5f9b33"
+    }
+  },
+  "local_expected_qa_sha256": "c3c20ab38982d0121e257b581714e71bb39d15363a894b1bb80d7d599df03fa1",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 51 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 76 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 202 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 34 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1476 assertions"
+  },
+  "local_apk_evidence_sha256": "0d87c7d2bb2339cfa314dd54791b6a693efec4016f0a7de8479df91cf3aa514c"
+}

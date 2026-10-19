@@ -1,0 +1,11 @@
+CALLER Lcom/twitter/app/common/navigation/b;->goBack()V extends Ljava/lang/Object; interfaces=[Lcom/twitter/app/common/z;]
+0 IGET_OBJECT Lcom/twitter/app/common/navigation/b;->b:Ldagger/a;
+1 INVOKE_INTERFACE Ldagger/a;->get()Ljava/lang/Object;
+2 MOVE_RESULT_OBJECT
+3 CHECK_CAST Lcom/twitter/app/common/w;
+4 INVOKE_INTERFACE Lcom/twitter/app/common/w;->goBack()Z
+5 MOVE_RESULT
+6 IF_NEZ offset=7
+7 IGET_OBJECT Lcom/twitter/app/common/navigation/b;->c:Lcom/twitter/app/common/inject/view/k;
+8 INVOKE_INTERFACE Lcom/twitter/app/common/inject/view/k;->d()V
+9 RETURN_VOID
