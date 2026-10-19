@@ -1,0 +1,58 @@
+{
+  "schema": "fossify-gallery101-publication-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.258",
+  "baseline_version": "1.0.257",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/a150fe5e5f937534e64e32fab6756db93101e76e/downloads/Hiro_Morphe_Patches_v1.0.257.mpp",
+  "baseline_sha256": "69143101c1700a144e5a447948f4e7f6a68dab0653fa77b7fae9688da4bcadd7",
+  "release_title": "Fossify Gallery No Recents v1.0.1 / Hiro Morphe Patches v1.0.258",
+  "summary": "Fossify Gallery 1.14.0 の公式 APK への適用が新しいパッチャーで失敗する問題を修正。原本確認を維持し、従来の戻る終了・履歴削除処理を保持。実機未確認。",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "d51b146c37eea37cf275c5d3f0428b562eff687e",
+  "reviewed_dev_head": "0e3fb1695fc6bafdac872ba1513493c938ffdba4",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "official_apk_url": "https://github.com/FossifyOrg/Gallery/releases/download/1.14.0/gallery-29-foss-release.apk",
+  "official_apk_version": "1.14.0",
+  "official_apk_sha256": "cfa321d7467b116741689f8f118b46011c882a4c2359b9320111f87c998af373",
+  "source_sha256": {
+    "src/build.py": "72b51ed62472ff1ba3c03420efe425890877702baa95e3c63fabd38c647e2c82",
+    "src/patch/FossifyGalleryExitPatch.java": "16db83779c1b7957a96e1e9c1ced5a82a30dac948eb354885ce466ff5af71bd4",
+    "src/runtime/GalleryExit.java": "82d5c7b60c479c37308b5edbfefc9b995a9453c5429eebe4a6e68199550e45d4",
+    "src/test/FossifyAudit.java": "b020f5cf9a39786e1d2801c568676a9b7978cdb0c00c49015aea0579ca613f0c",
+    "src/test/FossifyCompatibilityTest.java": "651cb0c950bdc8b74c60c4cf57cfe5eff12bccd144498908fb148014812cc81d",
+    "src/test-host/android/app/Activity.java": "4615dcfa65c728dc8088cc183678050dd9a317b246508e61a27cf4b222aa0a71",
+    "src/test-host/app/hiro/fossifygallery/runtime/GalleryExitTest.java": "0a0f8bdc90c72cbf2894284625bc325340a848546506e2180b10812b775c9f8a",
+    "publication/RELEASE_NOTES.txt": "6fe8f444c5b09a1856a0afd3026f464ea916c47bfd0a91619bb65ce2e0647832",
+    "publication/freeze_local.py": "e162aaf83bbdc231bee6e905304f42358076bccd10bfe8bc973a84b13b3666d2",
+    "publication/package.py": "ea7a55bd8697d97eb0f6739cc90003863e87f4984244a5540327b5e54234f775",
+    "publication/publish.py": "c072ed72742b8e9b2b794656bab04f89d50a6fefe762174c07be9120fc08bb86",
+    "publication/verify_pair.py": "30580db661fb75d24285a58bcbf06282d71a37d2829020d630db6db8f5a972f1",
+    "publication/workflow.yml": "b79631a853a8aa8e3c1941c0715bf2be8653cadc6b2bbdbba828b8b894a51d9c",
+    "README.md": "1026150d26300738efe52bc3f0c4b58752853ee2135128568ccf783f50b4a42f"
+  },
+  "local_expected_mpp": {
+    "Fossify_Gallery_NoRecents_v1.0.1.mpp": {
+      "bytes": 17593,
+      "sha256": "fcc967df0a36f903bd24ebd7f97fe704b0bc9281482ec1ee0b886de0e3ebcd28"
+    },
+    "Hiro_Morphe_Patches_v1.0.258.mpp": {
+      "bytes": 18459555,
+      "sha256": "819ac9522cbe163acbb95839915ccf503618cbc95a528ed0892ed727732eea5d"
+    }
+  },
+  "expected_mpp": {
+    "Fossify_Gallery_NoRecents_v1.0.1.mpp": {
+      "bytes": 17593,
+      "sha256": "fcc967df0a36f903bd24ebd7f97fe704b0bc9281482ec1ee0b886de0e3ebcd28"
+    },
+    "Hiro_Morphe_Patches_v1.0.258.mpp": {
+      "bytes": 18459555,
+      "sha256": "819ac9522cbe163acbb95839915ccf503618cbc95a528ed0892ed727732eea5d"
+    }
+  },
+  "local_expected_qa_sha256": "195db9f6a229d6e9195e88a856eca46d5f40ca2cd6a1069d93ad722244d3368c",
+  "expected_qa_sha256": "195db9f6a229d6e9195e88a856eca46d5f40ca2cd6a1069d93ad722244d3368c",
+  "ci_build_pair_verified": true,
+  "ci_run_id": "39232479619",
+  "ci_source_commit": "ca0980f2059273b879e5e0bf91a9e9475bef6353"
+}
