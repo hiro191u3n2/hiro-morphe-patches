@@ -21,6 +21,18 @@ def test(source,work,jdk=None,ndk=None,runners=('host_chain1978','host_resident_
                 values=['-l:libGL.so.1' if v=='-l:libGLESv2.so.2' else v for v in values]
             if not values or Path(values[0]).name!='javac':return values
             paths=[Path(v).resolve() for v in values if v.endswith('.java') and Path(v).is_file()]
+            # The old renderer adapter generated a workspace-only memory peer.
+            # Current resident Finish now calls the carried-owner admission API;
+            # compile the actual helper rather than inventing a passing stub.
+            # This substitution is restricted to current GpuChain compilation
+            # and the exact historical peer text; published oracles are untouched.
+            if source/'GpuChain1961.java' in paths:
+                for path in paths:
+                    if path.name=='FinishMemory1989.java' and path.parent!=source:
+                        old='package com.hiro.ulike; final class FinishMemory1989 {static boolean fits(long extra){return GpuNoise1960.workspaceFits(extra);}}\n'
+                        if path.read_text()!=old:raise AssertionError('Unreviewed controlled-memory peer shape')
+                        values=[str(source/'FinishMemory1989.java') if v==str(path) else v for v in values]
+                paths=[Path(v).resolve() for v in values if v.endswith('.java') and Path(v).is_file()]
             # Only current source compiles may gain helpers. Frozen published
             # oracle compiles do not reference them and remain untouched.
             alltext='\n'.join(p.read_text() for p in paths)
@@ -51,13 +63,6 @@ def test(source,work,jdk=None,ndk=None,runners=('host_chain1978','host_resident_
                         names=sorted(set(re.findall(r'event.invoke\(null,"([^"]+)"',(source/'GpuQualification1961.java').read_text())))
                         reject='||'.join('n.equals('+json.dumps(n)+')' for n in names)
                         updated=body.replace('events++;','if(!('+reject+'))events++;')
-                    if path.name=='FinishMemory1989.java' and path.parent!=source:
-                        old='package com.hiro.ulike; final class FinishMemory1989 {static boolean fits(long extra){return GpuNoise1960.workspaceFits(extra);}}\n'
-                        if body!=old:raise AssertionError('Unreviewed controlled-memory peer shape')
-                        # This renderer fixture has no native scratch owner.
-                        # Preserve its injected verdict; memory97 separately
-                        # executes the real recovery with JNI/GL ownership.
-                        updated=body.replace('static boolean fits(', 'static final int COUNT=33;static boolean recheckForeground1997(long extra,long[] report){return GpuNoise1960.workspaceFits(extra);}static boolean fits(')
                     if path.name=='Bitmap.java' and 'getGenerationId(' not in body:
                         updated=body.replace('public final class Bitmap {','public final class Bitmap {public int getGenerationId(){return 1;}')
                     if updated!=body:
