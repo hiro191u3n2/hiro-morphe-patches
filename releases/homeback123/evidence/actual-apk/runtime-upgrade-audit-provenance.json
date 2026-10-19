@@ -1,0 +1,55 @@
+{
+  "audit": "InstagramUpgradeAudit",
+  "status": "PASS",
+  "files": {
+    "current_supplied_apk": {
+      "path": "upload/Instagram-v447.0.0.55.81-patches-v3.10.0 (1).apk",
+      "sha256": "153f84f6700fc5ebe29f918b4d59540dbd299e896fc6d04e4ca9b5d6014e7dd2"
+    },
+    "prior120_apk": {
+      "path": "inputs/Instagram-v447.0.0.55.81-patches-v3.10.0(1).apk",
+      "sha256": "d5291dcb5f3f5252dff05b98b4fefba121369d3a1c74635190cb8ed8047757a7"
+    },
+    "production_mpp": {
+      "path": "output/dist123/OneBack_Exit_NoRecents_v1.1.13.mpp",
+      "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+    },
+    "replacement_runtime_dex": {
+      "path": "work/build123/runtime-dex/classes.dex",
+      "sha256": "cea6c6519bd9c6c70776cddd3e6a26f28709a77d0fed7a8335a7baad7be28a0e"
+    },
+    "audit_source": {
+      "path": "work/hiro-morphe-patches/releases/homeback123/src/test-dex/InstagramUpgradeAudit.java",
+      "sha256": "5d55398cb00b1ecf5edce57409746aa79464f789ab867f9d88489b1227d324b2"
+    },
+    "current_log": {
+      "path": "work/hiro-morphe-patches/releases/homeback123/evidence/actual-apk/runtime-upgrade-audit.txt",
+      "sha256": "ca92bd7524eec91fd9cd29e60edf34fa575fe42fc4c60500f3c9b3698784aaca"
+    },
+    "prior120_log": {
+      "path": "work/hiro-morphe-patches/releases/homeback123/evidence/actual-apk/runtime-upgrade-from120-audit.txt",
+      "sha256": "a0a9054d43d1aefe776131711ce943035c3a0863d1be1d00529c7847c1fde558"
+    }
+  },
+  "java_heap": "1024m",
+  "classpath": [
+    "work/dispatch-proposal/upgrade-audit123-only",
+    "work/build123/audit",
+    "work/build123/patch",
+    "output/dist123/OneBack_Exit_NoRecents_v1.1.13.mpp",
+    "build-tools/morphe.jar"
+  ],
+  "actual_input_versions": [
+    "1.1.12",
+    "1.1.10"
+  ],
+  "replacement_version": "1.1.13",
+  "runtime_classes": 75,
+  "modeled_versions": [
+    "1.1.10",
+    "1.1.11",
+    "1.1.12"
+  ],
+  "historical_models": "For 120/121 only, remove the five verified 122 dispatcher gates from four methods if present, then require each complete restored method fingerprint to match the actual pre-122 native body. Actual input upgrade runs on untouched native input.",
+  "scope": "Static production runtime upgrade validation; no Android device execution."
+}

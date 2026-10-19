@@ -1,0 +1,46 @@
+{
+  "schema": "homeback123-publication-v1",
+  "patch_version": "1.1.13",
+  "bundle_version": "1.0.255",
+  "baseline_version": "1.0.253",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/27e2a06e0b245ce57bb948b520fd732ee4f92ab6/downloads/Hiro_Morphe_Patches_v1.0.253.mpp",
+  "baseline_sha256": "de8337918698ee2db220a43664ef3a0c73abd56e16a2dbae717c2be2ce212287",
+  "release_title": "Instagram native Reels Back exit v1.1.13 / Hiro Morphe Patches v1.0.255",
+  "summary": "Instagram のリール終了を妨げる推定判定を見直し、アプリ本来のリールタブ履歴を戻す直前へ終了処理を追加。実機未確認。",
+  "validation_basis": "Production Android SDK compilation, existing and new host regressions, DEX structure and semantic preservation, and actual Morphe applications to synthetic fixtures. Before publication, local artifacts must exactly match two clean CI builds. Separate local applications of both final MPPs to the currently supplied v1.1.12 APK and verification of the new CLIPS tab-pop hook are required; these do not establish Android device behavior.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "c02b6c1ce067b87cf547244253d303d771f5afea",
+  "reviewed_dev_head": "add2930b4ac2c63acf3159ee8955a3136a480e5d",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.13.mpp": {
+      "bytes": 276188,
+      "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+    },
+    "Hiro_Morphe_Patches_v1.0.255.mpp": {
+      "bytes": 18385945,
+      "sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47"
+    }
+  },
+  "local_expected_qa_sha256": "5570464c72d68207d1f04d07baaf04a3f4290b400f33772e13c03dcb181c2393",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 51 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 76 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 202 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 34 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1476 assertions"
+  },
+  "local_apk_evidence_sha256": "f4d2410b70879a3e35418c6ab234c566c5bdbfc69ff35b721d81bba39a81cb52"
+}

@@ -1,0 +1,64 @@
+PASS: supplied122 and emitted123 X.8Zv.onBackPressed entire executable body/branch targets/try regions identical.
+0 IGET_OBJECT LX/8Zv;->A1Y:LX/21x; v1,v10
+2 CONST_4  v3
+3 IF_EQZ  v1 targetPC=13
+5 IGET_BOOLEAN LX/21x;->A05:Z v0,v1
+7 IF_EQZ  v0 targetPC=13
+9 INVOKE_VIRTUAL LX/21x;->A09()V args=[1]
+12 RETURN  v3
+13 IGET_OBJECT LX/8Zv;->A0L:LX/0wS; v1,v10
+15 IF_EQZ  v1 targetPC=31
+17 MOVE_OBJECT  v0,v1
+18 CHECK_CAST LX/16z; v0
+20 IGET_BOOLEAN LX/16z;->A15:Z v0,v0
+22 IF_EQZ  v0 targetPC=31
+24 INVOKE_VIRTUAL LX/0wS;->A0p()Z args=[1]
+27 MOVE_RESULT  v0
+28 IF_EQZ  v0 targetPC=31
+30 RETURN  v3
+31 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryInstagramReelsBack(Ljava/lang/Object;)Z args=[10]
+34 MOVE_RESULT  v0
+35 IF_EQZ  v0 targetPC=38
+37 RETURN  v0
+38 INVOKE_VIRTUAL LX/8Zv;->A2F()Lcom/instagram/clips/intf/ClipsViewerConfig; args=[10]
+Native popup A1Y.A05 closes and returns true at PC12; native layer A0L/A15 invokes A0p and returns true at PC30 when consumed. Existing runtime hook remains PC31 with actual this receiver v10. It precedes A21/GfT/native child-navigation branches.
+PASS: new A0V gate has exact owner/receiver registers, false pop continuation, true shared systrace epilogue, unchanged registers, and native try coverage. Stripping only these four instructions exactly restores supplied native executable and exception regions.
+312 MOVE_RESULT  v0
+313 IF_LE  v0,v5 targetPC=351
+315 IGET_OBJECT LX/2yE;->A03:Landroidx/fragment/app/FragmentActivity; v0,v4
+317 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryInstagramTabBack(Landroid/app/Activity;Ljava/lang/Object;Ljava/lang/Object;)Z args=[0, 4, 1]
+320 MOVE_RESULT  v0
+321 IF_NEZ  v0 targetPC=452
+323 INVOKE_VIRTUAL Ljava/util/Stack;->pop()Ljava/lang/Object; args=[2]
+452 INVOKE_STATIC Lcom/facebook/systrace/Systrace;->A0E()Z args=[]
+455 MOVE_RESULT  v0
+456 IF_EQZ  v0 targetPC=464
+458 CONST  v0
+461 INVOKE_STATIC LX/0OO;->A00(I)V args=[0]
+464 IF_EQZ  v11 targetPC=467
+466 RETURN  v5
+467 RETURN  v6
+Supplied A0V try ranges:
+  [173,429) -> null @429
+Emitted A0V try ranges:
+  [173,437) -> null @437
+Emitted authoritative Reels bridge calls:
+  Landroid/os/Looper;->myLooper()Landroid/os/Looper;
+  Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;
+  Ljava/lang/Object;->getClass()Ljava/lang/Class;
+  X.8Zv
+  Lapp/hiro/oneback/runtime/InstagramReelsExit;->named(Ljava/lang/Class;Ljava/lang/String;)Ljava/lang/Class;
+  getActivity
+  Lapp/hiro/oneback/runtime/BackNavigation;->invoke(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+  Landroid/app/Activity;
+  Landroid/app/Activity;
+  Lapp/hiro/oneback/runtime/InstagramBack;->owns(Landroid/app/Activity;)Z
+  Landroid/app/Activity;->isDestroyed()Z
+  Landroid/app/Activity;->isFinishing()Z
+  HiroBack123
+  Instagram native Reels Back: receiver after native guards, task exit
+  Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+  Lapp/hiro/oneback/runtime/InstagramBack;->predictionEnd(Landroid/app/Activity;)V
+  Lapp/hiro/oneback/runtime/OneBackExit;->backNow(Landroid/app/Activity;)V
+PASS: emitted Reels bridge no longer reads TERMINAL_DEPTH or nativeReelsTarget; actual receiver owner, live Activity, and main-thread checks precede predictionEnd/backNow. Source frozen123 reviewed separately.
+Review limits: static supplied/emitted APK inspection; no Android device execution. Native guards get first refusal; this does not claim all possible server-configured UI paths were executed.
