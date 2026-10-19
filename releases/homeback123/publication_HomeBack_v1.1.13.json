@@ -1,0 +1,261 @@
+{
+  "schema": "homeback123-publication-receipt-v1",
+  "patch_version": "1.1.13",
+  "bundle_version": "1.0.255",
+  "baseline_bundle_version": "1.0.253",
+  "baseline_bundle_sha256": "de8337918698ee2db220a43664ef3a0c73abd56e16a2dbae717c2be2ce212287",
+  "source_commit": "b604753b535f65ee1fd226725c38499fb7f9a14f",
+  "publication_manifest_sha256": "5f6ef672c55078adea0c85009f918645716217132726102bc5295c6069aa12c9",
+  "assets": {
+    "OneBack_Exit_NoRecents_v1.1.13.mpp": {
+      "bytes": 276188,
+      "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+    },
+    "Hiro_Morphe_Patches_v1.0.255.mpp": {
+      "bytes": 18385945,
+      "sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47"
+    },
+    "QA_HomeBack_v1.1.13.json": {
+      "bytes": 15165,
+      "sha256": "5570464c72d68207d1f04d07baaf04a3f4290b400f33772e13c03dcb181c2393"
+    },
+    "HomeBack_v1.1.13_sources_and_QA.zip": {
+      "bytes": 459520,
+      "sha256": "5a120c8f8261c96b94965c17a878c6159d0bd445702c01ad5581634240609f4f"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3499,
+      "sha256": "c7f73fab7761e917a8f19984e0710c990f2e5882de2673ae43cfb1061bfc6e90"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 477,
+      "sha256": "84dd4bb10d039e51ef73082a46259563b765537d8ce051a8a8725b60d0d73f4c"
+    }
+  },
+  "local_validation": {
+    "baseline_bundle_version": "1.0.253",
+    "baseline_bundle_sha256": "de8337918698ee2db220a43664ef3a0c73abd56e16a2dbae717c2be2ce212287",
+    "android_device_tested": false,
+    "original_apk_apply_tested": false,
+    "unrelated_resource_entries_byte_identical": 69,
+    "unrelated_loader_classes_unchanged": 246,
+    "two_fresh_ci_builds_required": true,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "local_sdk_build": true,
+    "local_host_tested": true,
+    "validation_coverage": {
+      "host_cases": 315,
+      "host_assertions": 1476,
+      "host_suites": {
+        "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+        "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+        "Back117TikTokTest": "PASS Back117TikTokTest",
+        "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+        "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+        "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 51 assertions",
+        "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+        "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+        "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 76 assertions",
+        "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+        "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+        "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 202 assertions",
+        "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 34 assertions",
+        "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+        "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+        "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+        "HomeBackHostTest": "SUCCESS: 315 cases, 1476 assertions"
+      },
+      "synthetic_apk_apply_cases": 10,
+      "supplied_already_patched_apk_apply_cases": 2
+    },
+    "local_supplied_apk_validation": {
+      "schema": "homeback123-local-apk-validation-v1",
+      "result": "PASS",
+      "input_apk_sha256": "153f84f6700fc5ebe29f918b4d59540dbd299e896fc6d04e4ca9b5d6014e7dd2",
+      "input_already_patched": true,
+      "input_runtime_version": "1.1.12",
+      "physical_android_tested": false,
+      "artifacts": {
+        "OneBack_Exit_NoRecents_v1.1.13.mpp": {
+          "bytes": 276188,
+          "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+        },
+        "Hiro_Morphe_Patches_v1.0.255.mpp": {
+          "bytes": 18385945,
+          "sha256": "691ffd8de4f330f79a08e62942bbb4186be03b31258f9c6bf6eceedb454adb47"
+        }
+      },
+      "runtime_sha256": "cea6c6519bd9c6c70776cddd3e6a26f28709a77d0fed7a8335a7baad7be28a0e",
+      "outputs": {
+        "OneBack_Exit_NoRecents_v1.1.13.mpp": {
+          "result": "PASS",
+          "output_apk_sha256": "ff84fb8fda95318226fb3f03f3cbf5d6a009d93d840886954502169f2a31a52b",
+          "native_entry_hook_verified": true,
+          "native_tab_pop_hook_verified": true,
+          "runtime_classes_match": true,
+          "unsigned": true,
+          "full_semantic_audit": true,
+          "semantic_proof": "All native/runtime code audited on single output; every bundle ZIP entry byte-identical to single output."
+        },
+        "Hiro_Morphe_Patches_v1.0.255.mpp": {
+          "result": "PASS",
+          "output_apk_sha256": "ea867360ae9224d3f843e2727a87ca6975f03fe3d64f2b4fb2f48caf1a254931",
+          "native_entry_hook_verified": true,
+          "native_tab_pop_hook_verified": true,
+          "runtime_classes_match": true,
+          "unsigned": true,
+          "full_semantic_audit": true,
+          "semantic_proof": "All native/runtime code audited on single output; every bundle ZIP entry byte-identical to single output."
+        }
+      },
+      "app_classes_compared": 200688,
+      "app_methods_compared": 826366,
+      "native_method_changes": 1,
+      "existing_androidx_hooks_preserved": 5,
+      "existing_reels_bridge_preserved": true,
+      "runtime_classes": 75,
+      "single_and_bundle_all_zip_entries_equal": true,
+      "resource_audit": {
+        "result": "PASS",
+        "physical_android_tested": false,
+        "input_sha256": "153f84f6700fc5ebe29f918b4d59540dbd299e896fc6d04e4ca9b5d6014e7dd2",
+        "single_output_sha256": "ff84fb8fda95318226fb3f03f3cbf5d6a009d93d840886954502169f2a31a52b",
+        "bundle_output_sha256": "ea867360ae9224d3f843e2727a87ca6975f03fe3d64f2b4fb2f48caf1a254931",
+        "all_single_bundle_zip_entry_bytes_equal": true,
+        "byte_exact_noncode_entries": 17052,
+        "resource_table": {
+          "aapt_public_flags_added": 21092,
+          "other_deltas": [
+            {
+              "resource": "attr/colorOnBackground",
+              "before": "() (attr) type=any",
+              "after": "() (attr) type=reference|string|integer|boolean|color|float|dimension|fraction"
+            },
+            {
+              "resource": "attr/comment_downvote_selected_state_color",
+              "before": "() (attr) type=any",
+              "after": "() (attr) type=reference|string|integer|boolean|color|float|dimension|fraction"
+            },
+            {
+              "resource": "attr/igds_color_form_field_right_add_on_button_tint_color",
+              "before": "() (attr) type=any",
+              "after": "() (attr) type=reference|string|integer|boolean|color|float|dimension|fraction"
+            },
+            {
+              "resource": "attr/mediaSegmentedButtonStyle",
+              "before": "() (attr) type=enum",
+              "after": "() (attr) type="
+            },
+            {
+              "resource": "dimen/intent_aware_ad_rifu_card_large_height",
+              "before": "() 275.273438dp",
+              "after": "() 275.265625dp"
+            }
+          ],
+          "all_other_decoded_values_equal": true
+        },
+        "manifest": {
+          "input_application_back_flag_already_true": true,
+          "only_changes_besides_line_numbers": "Seven explicit activity flags equal to existing inherited application value",
+          "activities": [
+            "app.morphe.extension.instagram.patches.dm.DeletedMessagesActivity",
+            "app.morphe.extension.instagram.patches.instants.InstantsVaultActivity",
+            "app.morphe.extension.instagram.settings.SettingsActivity",
+            "app.morphe.extension.instagram.settings.preference.fragments.BackupPrefActivity",
+            "app.morphe.extension.instagram.settings.preference.fragments.RestorePrefActivity",
+            "app.morphe.extension.crimera.downloader.FolderPickerActivity",
+            "app.morphe.extension.instagram.settings.SettingsShortcutActivity"
+          ]
+        },
+        "aapt2_sha256": "d1096e11aba9c974644369ee3c50d239acac3f3428ffa928e5b9c14dfb7a57de"
+      },
+      "local_rebuild_mpp_byte_identical": true,
+      "test_model_correction": {
+        "changed_source": "test-dex/InstagramUpgradeAudit.java",
+        "reason": "Historical runtime models now carry their corresponding fully fingerprint-verified historical native dispatcher ABI. Production MPP bytes unchanged."
+      },
+      "evidence_sha256": {
+        "evidence/CurrentApkIdentity.java": "b30877904d010b6f36163aaf1569d10ac702520826d5f4db84c50758e3b1b233",
+        "evidence/CurrentNativeIdentity.java": "a0d5a6f9757300603e59c94a47af36579434d1559d169bcb6d49d165cba47407",
+        "evidence/actual-apk/bundle-apply.log.txt": "f92109e9c87767893870043de4abf3c5246140e5d45ceeacb6e6118f612294c5",
+        "evidence/actual-apk/bundle-patcher-report.json": "c6cf4f90292b95480463b5d6176a03250d7c5730a081b22d15f29860f64443d7",
+        "evidence/actual-apk/full-executable-audit.txt": "03dd0514b4c212c83aa3a23036eed922ac1086d86de751f71cc6820c2e2c67ea",
+        "evidence/actual-apk/native-boundary-review.txt": "f7f71568e502adbfa46e6b508233039c8446ba5007927f87971fbdc9fc4e8014",
+        "evidence/actual-apk/resource-audit.json": "11ae2543ed1673a65f3ed03a511a7877263de356c3b3b699108e2a8a35b51b42",
+        "evidence/actual-apk/resource_audit.py": "5ae37c9ad7db6759a3b1ab97faf82177ce966fddceac5e823a0de4132f08ecfc",
+        "evidence/actual-apk/runtime-upgrade-audit-provenance.json": "3bcedcbd2b58324a400717c4800f784ba40848935158e09f9051c41097c6912e",
+        "evidence/actual-apk/runtime-upgrade-audit.txt": "ca92bd7524eec91fd9cd29e60edf34fa575fe42fc4c60500f3c9b3698784aaca",
+        "evidence/actual-apk/runtime-upgrade-from120-audit.txt": "a0a9054d43d1aefe776131711ce943035c3a0863d1be1d00529c7847c1fde558",
+        "evidence/actual-apk/single-apply.log.txt": "21220f523073d6b022979df7b0581439e7edc40696c76312593cd5994686fc74",
+        "evidence/actual-apk/single-patcher-report.json": "c6cf4f90292b95480463b5d6176a03250d7c5730a081b22d15f29860f64443d7",
+        "evidence/current-apk-identity.txt": "b298a7802bd5c7be6197d4720950cce87d903e88a1b8f8ac3996cc1504bf03dd",
+        "evidence/current-native-identity.txt": "a77a929016ccd57066f2f2743869a26c67a701a0baa3d560f45f56b0433464f2",
+        "evidence/host/Back116Regression.txt": "e194cbe3791a20bcaeee89f4094a1437e2809998b6d5f9d9ce63ff7abeea19e7",
+        "evidence/host/Back117InstagramTest.txt": "6da945532896faccd6674f952fc6de5b88bbe2809a23b1e81cf50ba15daa1704",
+        "evidence/host/Back117TikTokTest.txt": "7b5bea8470ec25b81420d9eb5c245bab0968e6aa698f902d52b5bdccfa7ef9c1",
+        "evidence/host/Back118InstagramGuardTest.txt": "0a07edadd5cf3f1dbc3eeb7d35cbbbb39a54710373b1e010bbecf757fa649d0b",
+        "evidence/host/Back118InstagramTest.txt": "d98d70ee18f309f857dd0cf3f665068c768cbe99a7b7db08a8c168f58747a491",
+        "evidence/host/Back119InstagramTest.txt": "e787d9f4c71a9b92abf330cae828fc7f44cc37ee71a04294513dff6ec0232032",
+        "evidence/host/Back119TwitterTest.txt": "3324ac93ad38391df276a6da377f858b30b62934315d95d0d665b8ab8c0846bf",
+        "evidence/host/Back120InstagramTest.txt": "b9c6f64b2b6514b3508d9b2aade840a5a13a11eb9094a30b3b3d45cafb585f2d",
+        "evidence/host/Back120MainDispatchTest.txt": "f78a25757db02403ea37108a73e54e04b60b3dccea9d6c2e4475e5a7d0855d81",
+        "evidence/host/Back121InstagramActivityLayersTest.txt": "8c131afe55580acb89e39a8c7c8ddcfde420ea5e95c94a11deb2feb494011527",
+        "evidence/host/Back121InstagramCurrentTest.txt": "437425706d3c1e4027174dc34ed4e17a436ecae21c98a0d4a637e36f90941ff1",
+        "evidence/host/Back121InstagramDispatchTest.txt": "8fdaffc145d4afb46ed0f43871827ed97ce849e4ad1acec379e005add5547b93",
+        "evidence/host/Back121InstagramScopeTest.txt": "f0c3a2cd6117b0fe92a51957f93dc4f1b633751d07d5fc5511bea3d4d5007aae",
+        "evidence/host/Back122InstagramDispatcherTest.txt": "fd5c02e574bcdb742948edfe9d73b5805c2abf51da2cfc45759023f839acd144",
+        "evidence/host/Back123InstagramTabBackTest.txt": "672affc5ab45b31a1c4d3d4208cfc4c2435d2d0b86e8b746142e0b6e76af2e13",
+        "evidence/host/Back123NativeReelsTest.txt": "15a72cc5e1c6b2c99236d064be372d1b105f3ea91cca380e9f1d72951aade9af",
+        "evidence/host/HomeBackHostTest.txt": "4a3320b54cb0d694c3e469c71637f5628c258c42b71f34fe5248095a90817770",
+        "evidence/host/merge.txt": "545ae92ea2afee1fed0b42b076db06ece8343f45fc0c8e83bc4f60e9e58d22d4",
+        "evidence/host/structure.txt": "8ee353c00f9466561dcffa380932a7bba56bed03e0a30a2ce53e767577eab5a3",
+        "evidence/native-architecture.md": "18e078f4b017cb8b3350b6b659f11cb12ab151c943d7fb240859bdf18b1515e7",
+        "evidence/native-tab/current-nav-fingerprint.txt": "f3656eb3392e107ab8aa5a3da4df76e419ebf876eb8f0bbf878451a6bc88b35e",
+        "evidence/native-tab/current-tab-getters.txt": "26a735700ea6614cc96fe261501b04aa5fd84d87e09e22686518f12f88698eab",
+        "evidence/native-tab/current-tab.txt": "fdffa3505afb81733df5c5b2a44211ed08d48cdb1eebce40b69c24240377ea56",
+        "evidence/native-tab/native-tab120-to123.txt": "12b0a00b815b2657e383aee8c94072c149317474816ab40c353a96c202737a01",
+        "evidence/native-tab/native-tab123.txt": "8fca955d5ff4be3836f1d3cc9ed4fc6e015633ab6956205b445a285435472728",
+        "evidence/native-tab/prior-nav-fingerprint.txt": "f3656eb3392e107ab8aa5a3da4df76e419ebf876eb8f0bbf878451a6bc88b35e"
+      }
+    },
+    "qa_sha256": "5570464c72d68207d1f04d07baaf04a3f4290b400f33772e13c03dcb181c2393"
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "a8871d18b4192f839588b02603df5fee9ec92d0f",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "1dc980e803555dbe9041c10215fd1269488011fb",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 417026558,
+  "raw_commit": "352c9cad934054ed3d1a1f626610881bd1b5c3c2",
+  "download_urls": {
+    "OneBack_Exit_NoRecents_v1.1.13.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/352c9cad934054ed3d1a1f626610881bd1b5c3c2/downloads/OneBack_Exit_NoRecents_v1.1.13.mpp",
+    "Hiro_Morphe_Patches_v1.0.255.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/352c9cad934054ed3d1a1f626610881bd1b5c3c2/downloads/Hiro_Morphe_Patches_v1.0.255.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/oneback-v1.1.13",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "Instagram"
+  ],
+  "other_apps_false_updates": false,
+  "all_unrelated_patch_resources_preserved": true,
+  "fixed_chatgpt_site_updated": false
+}
