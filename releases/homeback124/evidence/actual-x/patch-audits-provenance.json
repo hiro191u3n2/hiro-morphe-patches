@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "source_frozen": true,
+  "classpath": [
+    "build124-final2/audit",
+    "build124-final2/patch",
+    "output/dist124-final/OneBack_Exit_NoRecents_v1.1.14.mpp",
+    "build-tools/morphe.jar"
+  ],
+  "java_heap": "1024m",
+  "files": {
+    "mpp": {
+      "path": "output/dist124-final/OneBack_Exit_NoRecents_v1.1.14.mpp",
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+    },
+    "runtime": {
+      "path": "build124-final2/runtime-dex/classes.dex",
+      "sha256": "559d89a6e7c3008cfb14b1e2c5e46285cf3a48365725d87524195a466c02b07f"
+    },
+    "x_input": {
+      "path": "upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+      "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae"
+    },
+    "instagram_input": {
+      "path": "upload/Instagram-v447.0.0.55.81-patches-v3.10.0 (1).apk",
+      "sha256": "153f84f6700fc5ebe29f918b4d59540dbd299e896fc6d04e4ca9b5d6014e7dd2"
+    },
+    "native_audit_log": {
+      "path": "work/x124-native/root-hook124-final-audit.txt",
+      "sha256": "c97bc2e4b26efc42b93da8acf2c045010f9847b0487f8b741f9d4133f472e77e"
+    },
+    "instagram_audit_log": {
+      "path": "work/x124-native/instagram-upgrade124-audit.txt",
+      "sha256": "e32373f84b28b07be20e76c4ba6f245451041de9de007c7dfcc7ed556f9d7f35"
+    },
+    "native_audit_source": {
+      "path": "work/publish124/releases/homeback124/src/test-dex/TwitterRootAudit.java",
+      "sha256": "b46c6c925e1e3c0f17d7fabedd71c955f0cea8aecf63c04e8b70d46692b38a48"
+    },
+    "instagram_audit_source": {
+      "path": "work/publish124/releases/homeback124/src/test-dex/InstagramUpgradeAudit.java",
+      "sha256": "8df5b27a17869bcf0c3054fb82d6d159ad00fb1fdef15d5d7b4d8f81f027447b"
+    }
+  },
+  "native_audit": {
+    "assertions": 45,
+    "unrelated_methods_preserved": 22,
+    "original_executable_body_restored": true,
+    "incoming_child_branches_validated": 2
+  },
+  "instagram_regression": {
+    "actual_prior_version": "1.1.12",
+    "modeled_prior_versions": [
+      "1.1.10",
+      "1.1.11",
+      "1.1.12"
+    ],
+    "replacement_version": "1.1.14",
+    "canonical_runtime_classes": 75,
+    "native_classes_unmodified": true
+  },
+  "physical_android_tested": false
+}

@@ -1,0 +1,71 @@
+{
+  "schema": "homeback124-local-apk-validation-v1",
+  "result": "PASS",
+  "package_name": "com.twitter.android",
+  "version_name": "12.19.1-release.0",
+  "input_apk_sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "input_already_patched": true,
+  "input_has_prior_oneback": false,
+  "physical_android_tested": false,
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+      "bytes": 336173,
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271"
+    },
+    "Hiro_Morphe_Patches_v1.0.256.mpp": {
+      "bytes": 18446079,
+      "sha256": "04fc11889fd22670dff5613f75a6bd4cb04fc254ab57fd877ca51a955d5f9b33"
+    }
+  },
+  "runtime_sha256": "559d89a6e7c3008cfb14b1e2c5e46285cf3a48365725d87524195a466c02b07f",
+  "outputs": {
+    "OneBack_Exit_NoRecents_v1.1.14.mpp": {
+      "result": "PASS",
+      "output_apk_sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+      "four_tab_exit_hook_verified": true,
+      "normal_launch_home_hook_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true
+    },
+    "Hiro_Morphe_Patches_v1.0.256.mpp": {
+      "result": "PASS",
+      "output_apk_sha256": "db0314d764f5553948bb8c96ff0bd9d22e3e380b6138ca0c3d1291d83fdc5aee",
+      "four_tab_exit_hook_verified": true,
+      "normal_launch_home_hook_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true
+    }
+  },
+  "audits": {
+    "native_root": {
+      "result": "PASS",
+      "log_path": "evidence/native-x/root-hook124-final-audit.txt",
+      "log_sha256": "c97bc2e4b26efc42b93da8acf2c045010f9847b0487f8b741f9d4133f472e77e"
+    },
+    "known123_upgrade": {
+      "result": "PASS",
+      "log_path": "evidence/actual-x/known123-upgrade124-audit.txt",
+      "log_sha256": "4ca7132144a168081d451b86127df42aa9b8c34f18d21d090bf62075a68b8d83"
+    },
+    "all_executable_code": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/whole-x-semantics-audit.txt",
+      "log_sha256": "a7e1a865b5e14e017a8f2c98a0b9e915af058f5b31175d3615d1d66363ecac2c"
+    },
+    "resources": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/resource-audit.json",
+      "log_sha256": "80b594b9c4658bf208ba4631cc0913e8f04068726d1aa9ce01874a4e964ed903"
+    }
+  },
+  "single_bundle_all_zip_entry_bytes_equal": true,
+  "rebuild_matches_actual_applied_mpp_bytes": true,
+  "all_code_audit_source_sha256": "ab00258c8cda71cec66e67650c41d741f75a33d4d395bf8211db17ea3e520360",
+  "all_code_comparison": {
+    "app_classes": 241847,
+    "app_methods": 893509,
+    "runtime_classes": 75,
+    "assertions": 29401924
+  },
+  "limitations": "Static APK and host validation only; no physical Android execution. Bundle output is covered by exact equality of every ZIP entry with the fully audited standalone output."
+}

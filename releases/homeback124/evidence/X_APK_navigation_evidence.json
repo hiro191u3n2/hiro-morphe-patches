@@ -1,0 +1,70 @@
+{
+  "apk": "Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+  "source_path": "upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+  "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "package": "com.twitter.android",
+  "version": "12.19.1-release.0",
+  "device_tested": false,
+  "source": "Actual supplied APK DEX, inspected read-only",
+  "boundary": {
+    "method": "Lcom/twitter/app/main/l1;->goBack()Z",
+    "registers": 11,
+    "instructions_before": 123,
+    "try_regions": 0,
+    "insert_before_original_pc": 87,
+    "insert_before_original_index": 45,
+    "retarget_original_pcs": [
+      77,
+      83
+    ],
+    "preceding_native_handlers": [
+      "FAB close",
+      "drawer close",
+      "typeahead bypass",
+      "onboarding bypass",
+      "selected child ui.navigation.b.goBack consumed return"
+    ],
+    "success": "return original v1 true",
+    "fallback": "original sget Home URI and native tab routing",
+    "preserved_live_pager_register": 0,
+    "owner_register": 10,
+    "scratch_registers": [
+      2,
+      3
+    ]
+  },
+  "typed_inputs": {
+    "activity_field": "Lcom/twitter/app/legacy/h;->b:Landroidx/fragment/app/x;",
+    "activity_field_flags": 17,
+    "selected_uri_getter": "Lcom/twitter/ui/viewpager/h;->p()Landroid/net/Uri;",
+    "implementation": "Lcom/twitter/ui/viewpager/a;->p()Landroid/net/Uri;",
+    "selection_contract": "ViewPager.getCurrentItem -> list element ui.util.l -> a Uri"
+  },
+  "tab_uris": {
+    "home": "twitter://timeline/home",
+    "search": "twitter://moments",
+    "notifications": "twitter://notifications",
+    "chat": "twitter://xchat"
+  },
+  "excluded_distinct_legacy_uri": "twitter://dms",
+  "fingerprints": {
+    "l1.goBack": "a213880a9ad8bb57e0882ffccdc87e1c6fbf3bd448c38db07c491ddf6dca48e7",
+    "ui.viewpager.a.p": "29b22619b9e8778d2e8ea6b48efb2e2c4ab45c75eaaa444b3a3638c5ef4c7c65",
+    "main.api.b.<clinit>": "d57468df55ce439b0ace68e9af975897ece9b221c55f8ed7df4c2ae340f22443"
+  },
+  "provenance_guard": "Same live MainActivity and session epoch of a currently committed Android Back; do not reuse Attempt.eligible",
+  "internal_callers": "common.z.goBack also has toolbar, settings, chat and onboarding callers; navigator alone is not physical Back provenance",
+  "launch": {
+    "entry_extra": "page",
+    "home_uri": "twitter://timeline/home",
+    "router": "l1.I3(Intent)",
+    "native_order": "explicit page before last_tab_used/tag database fallback",
+    "entry_hook": "before existing onCreate and onNewIntent body"
+  },
+  "safe_excerpt_files": [
+    "work/x124-native/exact-contract-digests.txt",
+    "work/x124-native/native-tab-contract.txt",
+    "work/x124-native/tab-uri-consumers.txt",
+    "work/x124-native/navigator-back-callers.txt"
+  ]
+}

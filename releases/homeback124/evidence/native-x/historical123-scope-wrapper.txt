@@ -1,0 +1,25 @@
+Historical released123 applyAll counts={dialog_show_hooks=120, activity_lifecycle_entry=182, new_intent_entry=19, back_wrapped=16, activity_classes=414, terminal_bridges=277, terminal_calls=387, native_callback_register=6, native_callback_unregister=4, key_guard_added=34, dialog_classes=21, key_guard_wrapped=10, preime_classes=75, new_intent_added=15, activity_lifecycle_added=53, back_added=17, dialog_builder_hooks=2}, nativeEditedClasses=775
+CLASS Lcom/twitter/app/common/inject/p; flags=1 super=Lcom/twitter/app/common/base/i; interfaces=[Lcom/twitter/app/common/inject/u;, Lcom/twitter/app/common/inject/view/k;]
+METHOD Lcom/twitter/app/common/inject/p;->onBackPressed()V flags=17 registers=3 digest=df90eb5bf08ac67b0490193d1fcbca0fe853cb315295b93f0d4271744215ccdb
+registers=3
+INVOKE_STATIC ARGS[2] REF72:Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z
+MOVE_RESULT A0
+IF_EQZ A0 TARGET4
+RETURN_VOID
+INVOKE_STATIC ARGS[2] REF74:Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V
+INVOKE_DIRECT ARGS[2] REF63:Lcom/twitter/app/common/inject/p;->hiroOneBack$onBackPressed()V
+INVOKE_STATIC ARGS[] REF54:Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V
+INVOKE_STATIC ARGS[] REF54:Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V
+RETURN_VOID
+MOVE_EXCEPTION A1
+INVOKE_STATIC ARGS[] REF54:Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V
+THROW A1
+TRY 5:6 CATCH null:9
+METHOD Lcom/twitter/app/common/inject/p;->hiroOneBack$onBackPressed()V flags=4098 registers=2 digest=610fdf9b44c641b3e5fc51f2e22f1768887320888854f035ff26e2c1d09c1809
+registers=2
+INVOKE_INTERFACE ARGS[1] REF94:Lcom/twitter/app/common/inject/m;->N()Lcom/twitter/app/common/inject/view/DefaultViewSubgraph;
+MOVE_RESULT_OBJECT A0
+INVOKE_INTERFACE ARGS[0] REF87:Lcom/twitter/app/common/inject/view/DefaultViewSubgraph;->k()Lcom/twitter/app/common/z;
+MOVE_RESULT_OBJECT A0
+INVOKE_INTERFACE ARGS[0] REF37:Lcom/twitter/app/common/z;->goBack()V
+RETURN_VOID
