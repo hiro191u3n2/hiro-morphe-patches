@@ -1,0 +1,14 @@
+METHOD Landroidx/activity/ComponentActivity;->access$onBackPressed$s1027565324(Landroidx/activity/ComponentActivity;)V
+0 INVOKE_SUPER Landroid/app/Activity;->onBackPressed()V {0,0,0,0,0}x1
+3 RETURN_VOID
+METHOD Landroidx/activity/ComponentActivity;->onBackPressed()V
+0 INVOKE_VIRTUAL Landroidx/activity/ComponentActivity;->getOnBackPressedDispatcher()Landroidx/activity/l0; {1,0,0,0,0}x1
+3 MOVE_RESULT_OBJECT v0
+4 INVOKE_VIRTUAL Landroidx/activity/l0;->d()V {0,0,0,0,0}x1
+7 RETURN_VOID
+METHOD Lcom/twitter/app/common/base/i;->onBackPressed()V
+0 IGET_OBJECT Lcom/twitter/app/common/base/i;->l:Lcom/twitter/util/rx/r; v0,v2
+2 SGET_OBJECT Lcom/twitter/app/common/inject/view/b;->a:Lcom/twitter/app/common/inject/view/b; v1
+4 INVOKE_VIRTUAL Lcom/twitter/util/rx/r;->i(Ljava/lang/Object;)V {0,1,0,0,0}x2
+7 INVOKE_SUPER Landroidx/activity/ComponentActivity;->onBackPressed()V {2,0,0,0,0}x1
+10 RETURN_VOID

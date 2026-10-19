@@ -1,0 +1,104 @@
+{
+  "schema": "homeback125-local-apk-validation-v1",
+  "result": "PASS",
+  "package_name": "com.twitter.android",
+  "version_name": "12.19.1-release.0",
+  "input_apk_sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "input_already_patched": true,
+  "input_has_prior_oneback": false,
+  "physical_android_tested": false,
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+      "bytes": 394644,
+      "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+    },
+    "Hiro_Morphe_Patches_v1.0.259.mpp": {
+      "bytes": 18518089,
+      "sha256": "f3c4d969464e46edec8facba4f7a4ef9b25fb225fa045bca4c8a83f9d73d6ad1"
+    }
+  },
+  "runtime_sha256": "f6ba029c8d68954d42e76a8fbda8ae8f9d7ce1b22be29e37719636b7254d8b5f",
+  "final_qa_sha256": "2c6e2433a10711aa4148fef5d212cbe606f326f319d6bacb7211a3723c00b1c2",
+  "outputs": {
+    "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+      "result": "PASS",
+      "output_apk_sha256": "f7b5e751db41b7b5fa13c029f5f8dc41d84bf18c82f86f403eaeb6860b70e998",
+      "four_tab_exit_hook_verified": true,
+      "normal_launch_home_hook_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true
+    },
+    "Hiro_Morphe_Patches_v1.0.259.mpp": {
+      "result": "PASS",
+      "output_apk_sha256": "a89b60333696673944a9a2a2973b8e38f00b313cfabf3f6c837d5e80ffe1dab9",
+      "four_tab_exit_hook_verified": true,
+      "normal_launch_home_hook_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true
+    }
+  },
+  "audits": {
+    "known123_124_upgrade": {
+      "result": "PASS",
+      "log_path": "evidence/actual-x/known123-124-upgrade125-audit.txt",
+      "log_sha256": "67006368e5ecc41587a82f953e4450a967bd4a7c6de7727ea42856b9fa3428ac"
+    },
+    "all_executable_code": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/whole-x-semantics-audit.txt",
+      "log_sha256": "06bbae68d569c6118e96b7400490dd42e81163e82027a897104dbea90356bcbc"
+    },
+    "resources": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/resource-audit.json",
+      "log_sha256": "cb2356859cf9a4006700527683601cf59fd3f76ff5b38678e49667b876ffced6"
+    },
+    "real124_upgrade_all_executable_code": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/upgrade124-whole-x-semantics-audit.txt",
+      "log_sha256": "06bbae68d569c6118e96b7400490dd42e81163e82027a897104dbea90356bcbc"
+    },
+    "real124_upgrade_resources": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/upgrade124-resource-audit.json",
+      "log_sha256": "2fab46f8f8bf059705256fe54d6f3bd8f73b2f489270d149ab06a2dbfb235648"
+    }
+  },
+  "single_bundle_all_zip_entry_bytes_equal": true,
+  "rebuild_matches_actual_applied_mpp_bytes": true,
+  "all_code_audit_source_sha256": "87050ff43586c0b76368144f09df62d80abb5adebe8f3647efd160c545ff44cf",
+  "all_code_comparison": {
+    "app_classes": 241847,
+    "app_methods": 893509,
+    "runtime_classes": 76,
+    "assertions": 29402113,
+    "native_root_hooks": 1,
+    "twitter_native_scope_entries": 1
+  },
+  "real124_to125_cli_upgrade": {
+    "result": "PASS",
+    "input_apk_sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+    "applied_mpp_sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061",
+    "output_apk_sha256": "117622a19787440697fa58a6961c15ac0c216342812277cc3a117fa34609873d",
+    "runtime_sha256": "f6ba029c8d68954d42e76a8fbda8ae8f9d7ce1b22be29e37719636b7254d8b5f",
+    "full_semantic_audit": true,
+    "all_original_noncode_entries_byte_exact": 7385,
+    "existing_generic_helpers_preserved": 303,
+    "native_root_hook_count": 1,
+    "twitter_native_scope_entry_count": 1,
+    "native_scope_change_count": 1,
+    "native_change": "Only the validated p.onBackPressed entry call changes from enterBack(Activity) to enterTwitterBack(Activity).",
+    "dex_entries": 19,
+    "fresh_dex_entries": 18,
+    "dex_layout_note": "Whole executable semantics verified independently against the same original X APK and final runtime; byte equality of fresh and upgraded containers is not assumed.",
+    "all_code_comparison": {
+      "app_classes": 241847,
+      "app_methods": 893509,
+      "runtime_classes": 76,
+      "assertions": 29402113,
+      "native_root_hooks": 1,
+      "twitter_native_scope_entries": 1
+    }
+  },
+  "limitations": "Static APK and host validation only; no physical Android execution. Bundle259 output is covered by exact equality of every ZIP entry with the independently audited standalone output. The real124 upgrade output is separately audited in full because its DEX layout differs."
+}

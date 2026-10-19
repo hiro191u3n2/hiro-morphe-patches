@@ -1,0 +1,293 @@
+METHOD Landroidx/activity/ComponentActivity$h;-><init>(Landroidx/activity/ComponentActivity;)V
+0 IPUT_OBJECT Landroidx/activity/ComponentActivity$h;->h:Landroidx/activity/ComponentActivity; v1,v0
+2 CONST_4 #0 v1
+3 INVOKE_DIRECT Lkotlin/jvm/internal/Lambda;-><init>(I)V {0,1,0,0,0}x2
+6 RETURN_VOID
+METHOD Landroidx/activity/ComponentActivity$h;->invoke()Ljava/lang/Object;
+0 NEW_INSTANCE Landroidx/lifecycle/p1; v0
+2 IGET_OBJECT Landroidx/activity/ComponentActivity$h;->h:Landroidx/activity/ComponentActivity; v1,v4
+4 INVOKE_VIRTUAL Landroid/app/Activity;->getApplication()Landroid/app/Application; {1,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v2
+8 INVOKE_VIRTUAL Landroid/app/Activity;->getIntent()Landroid/content/Intent; {1,0,0,0,0}x1
+11 MOVE_RESULT_OBJECT v3
+12 IF_EQZ v3 offset 11
+14 INVOKE_VIRTUAL Landroid/app/Activity;->getIntent()Landroid/content/Intent; {1,0,0,0,0}x1
+17 MOVE_RESULT_OBJECT v3
+18 INVOKE_VIRTUAL Landroid/content/Intent;->getExtras()Landroid/os/Bundle; {3,0,0,0,0}x1
+21 MOVE_RESULT_OBJECT v3
+22 GOTO offset 2
+23 CONST_4 #0 v3
+24 INVOKE_DIRECT Landroidx/lifecycle/p1;-><init>(Landroid/app/Application;Landroidx/savedstate/f;Landroid/os/Bundle;)V {0,2,1,3,0}x4
+27 RETURN_OBJECT v0
+METHOD Landroidx/activity/f0;-><init>(Landroidx/activity/l0;)V
+0 IPUT_OBJECT Landroidx/activity/f0;->h:Landroidx/activity/l0; v1,v0
+2 CONST_4 #1 v1
+3 INVOKE_DIRECT Lkotlin/jvm/internal/Lambda;-><init>(I)V {0,1,0,0,0}x2
+6 RETURN_VOID
+METHOD Landroidx/activity/f0;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+0 CHECK_CAST Landroidx/activity/c; v5
+2 CONST_STRING backEvent v0
+4 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {5,0,0,0,0}x2
+7 IGET_OBJECT Landroidx/activity/f0;->h:Landroidx/activity/l0; v0,v4
+9 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v1,v0
+11 INVOKE_INTERFACE Ljava/util/List;->size()I {1,0,0,0,0}x1
+14 MOVE_RESULT v2
+15 INVOKE_VIRTUAL Ljava/util/AbstractList;->listIterator(I)Ljava/util/ListIterator; {1,2,0,0,0}x2
+18 MOVE_RESULT_OBJECT v1
+19 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {1,0,0,0,0}x1
+22 MOVE_RESULT v2
+23 IF_EQZ v2 offset 16
+25 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {1,0,0,0,0}x1
+28 MOVE_RESULT_OBJECT v2
+29 MOVE_OBJECT v3,v2
+30 CHECK_CAST Landroidx/activity/e0; v3
+32 INVOKE_VIRTUAL Landroidx/activity/e0;->isEnabled()Z {3,0,0,0,0}x1
+35 MOVE_RESULT v3
+36 IF_EQZ v3 offset -17
+38 GOTO offset 2
+39 CONST_4 #0 v2
+40 CHECK_CAST Landroidx/activity/e0; v2
+42 IGET_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v1,v0
+44 IF_EQZ v1 offset 5
+46 INVOKE_VIRTUAL Landroidx/activity/l0;->c()V {0,0,0,0,0}x1
+49 IPUT_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v2,v0
+51 IF_EQZ v2 offset 5
+53 INVOKE_VIRTUAL Landroidx/activity/e0;->handleOnBackStarted(Landroidx/activity/c;)V {2,5,0,0,0}x2
+56 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v5
+58 RETURN_OBJECT v5
+METHOD Landroidx/activity/g0;-><init>(Landroidx/activity/l0;)V
+0 IPUT_OBJECT Landroidx/activity/g0;->h:Landroidx/activity/l0; v1,v0
+2 CONST_4 #1 v1
+3 INVOKE_DIRECT Lkotlin/jvm/internal/Lambda;-><init>(I)V {0,1,0,0,0}x2
+6 RETURN_VOID
+METHOD Landroidx/activity/g0;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
+0 CHECK_CAST Landroidx/activity/c; v4
+2 CONST_STRING backEvent v0
+4 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {4,0,0,0,0}x2
+7 IGET_OBJECT Landroidx/activity/g0;->h:Landroidx/activity/l0; v0,v3
+9 IGET_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v1,v0
+11 IF_NEZ v1 offset 35
+13 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v0,v0
+15 INVOKE_INTERFACE Ljava/util/List;->size()I {0,0,0,0,0}x1
+18 MOVE_RESULT v1
+19 INVOKE_VIRTUAL Ljava/util/AbstractList;->listIterator(I)Ljava/util/ListIterator; {0,1,0,0,0}x2
+22 MOVE_RESULT_OBJECT v0
+23 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {0,0,0,0,0}x1
+26 MOVE_RESULT v1
+27 IF_EQZ v1 offset 16
+29 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {0,0,0,0,0}x1
+32 MOVE_RESULT_OBJECT v1
+33 MOVE_OBJECT v2,v1
+34 CHECK_CAST Landroidx/activity/e0; v2
+36 INVOKE_VIRTUAL Landroidx/activity/e0;->isEnabled()Z {2,0,0,0,0}x1
+39 MOVE_RESULT v2
+40 IF_EQZ v2 offset -17
+42 GOTO offset 2
+43 CONST_4 #0 v1
+44 CHECK_CAST Landroidx/activity/e0; v1
+46 IF_EQZ v1 offset 5
+48 INVOKE_VIRTUAL Landroidx/activity/e0;->handleOnBackProgressed(Landroidx/activity/c;)V {1,4,0,0,0}x2
+51 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v4
+53 RETURN_OBJECT v4
+METHOD Landroidx/activity/h0;-><init>(Landroidx/activity/l0;)V
+0 IPUT_OBJECT Landroidx/activity/h0;->h:Landroidx/activity/l0; v1,v0
+2 CONST_4 #0 v1
+3 INVOKE_DIRECT Lkotlin/jvm/internal/Lambda;-><init>(I)V {0,1,0,0,0}x2
+6 RETURN_VOID
+METHOD Landroidx/activity/h0;->invoke()Ljava/lang/Object;
+0 IGET_OBJECT Landroidx/activity/h0;->h:Landroidx/activity/l0; v0,v1
+2 INVOKE_VIRTUAL Landroidx/activity/l0;->d()V {0,0,0,0,0}x1
+5 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v0
+7 RETURN_OBJECT v0
+METHOD Landroidx/activity/i0;-><init>(Landroidx/activity/l0;)V
+0 IPUT_OBJECT Landroidx/activity/i0;->h:Landroidx/activity/l0; v1,v0
+2 CONST_4 #0 v1
+3 INVOKE_DIRECT Lkotlin/jvm/internal/Lambda;-><init>(I)V {0,1,0,0,0}x2
+6 RETURN_VOID
+METHOD Landroidx/activity/i0;->invoke()Ljava/lang/Object;
+0 IGET_OBJECT Landroidx/activity/i0;->h:Landroidx/activity/l0; v0,v1
+2 INVOKE_VIRTUAL Landroidx/activity/l0;->c()V {0,0,0,0,0}x1
+5 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v0
+7 RETURN_OBJECT v0
+METHOD Landroidx/activity/l0;-><init>()V
+0 CONST_4 #0 v0
+1 INVOKE_DIRECT Landroidx/activity/l0;-><init>(Ljava/lang/Runnable;)V {1,0,0,0,0}x2
+4 RETURN_VOID
+METHOD Landroidx/activity/l0;-><init>(Ljava/lang/Runnable;)V
+0 INVOKE_DIRECT Ljava/lang/Object;-><init>()V {4,0,0,0,0}x1
+3 IPUT_OBJECT Landroidx/activity/l0;->a:Ljava/lang/Runnable; v5,v4
+5 NEW_INSTANCE Lkotlin/collections/ArrayDeque; v5
+7 INVOKE_DIRECT Lkotlin/collections/ArrayDeque;-><init>()V {5,0,0,0,0}x1
+10 IPUT_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v5,v4
+12 SGET Landroid/os/Build$VERSION;->SDK_INT:I v5
+14 CONST_16 #21 v0
+16 IF_LT v5,v0 offset 44
+18 CONST_16 #22 v0
+20 IF_LT v5,v0 offset 28
+22 NEW_INSTANCE Landroidx/activity/f0; v5
+24 INVOKE_DIRECT Landroidx/activity/f0;-><init>(Landroidx/activity/l0;)V {5,4,0,0,0}x2
+27 NEW_INSTANCE Landroidx/activity/g0; v0
+29 INVOKE_DIRECT Landroidx/activity/g0;-><init>(Landroidx/activity/l0;)V {0,4,0,0,0}x2
+32 NEW_INSTANCE Landroidx/activity/h0; v1
+34 INVOKE_DIRECT Landroidx/activity/h0;-><init>(Landroidx/activity/l0;)V {1,4,0,0,0}x2
+37 NEW_INSTANCE Landroidx/activity/i0; v2
+39 INVOKE_DIRECT Landroidx/activity/i0;-><init>(Landroidx/activity/l0;)V {2,4,0,0,0}x2
+42 NEW_INSTANCE Landroidx/activity/m0; v3
+44 INVOKE_DIRECT Landroidx/activity/m0;-><init>(Landroidx/activity/f0;Landroidx/activity/g0;Landroidx/activity/h0;Landroidx/activity/i0;)V {3,5,0,1,2}x5
+47 GOTO offset 11
+48 NEW_INSTANCE Landroidx/activity/j0; v5
+50 INVOKE_DIRECT Landroidx/activity/j0;-><init>(Landroidx/activity/l0;)V {5,4,0,0,0}x2
+53 NEW_INSTANCE Landroidx/activity/k0; v3
+55 INVOKE_DIRECT Landroidx/activity/k0;-><init>(Landroidx/activity/j0;)V {3,5,0,0,0}x2
+58 IPUT_OBJECT Landroidx/activity/l0;->d:Landroid/window/OnBackInvokedCallback; v3,v4
+60 RETURN_VOID
+METHOD Landroidx/activity/l0;->a(Landroidx/lifecycle/k0;Landroidx/activity/e0;)V
+0 CONST_STRING owner v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {9,0,0,0,0}x2
+5 CONST_STRING onBackPressedCallback v0
+7 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {10,0,0,0,0}x2
+10 INVOKE_INTERFACE Landroidx/lifecycle/k0;->getLifecycle()Landroidx/lifecycle/y; {9,0,0,0,0}x1
+13 MOVE_RESULT_OBJECT v9
+14 INVOKE_VIRTUAL Landroidx/lifecycle/y;->b()Landroidx/lifecycle/y$b; {9,0,0,0,0}x1
+17 MOVE_RESULT_OBJECT v0
+18 SGET_OBJECT Landroidx/lifecycle/y$b;->DESTROYED:Landroidx/lifecycle/y$b; v1
+20 IF_NE v0,v1 offset 3
+22 RETURN_VOID
+23 NEW_INSTANCE Landroidx/activity/l0$c; v0
+25 INVOKE_DIRECT Landroidx/activity/l0$c;-><init>(Landroidx/activity/l0;Landroidx/lifecycle/y;Landroidx/activity/e0;)V {0,8,9,10,0}x4
+28 INVOKE_VIRTUAL Landroidx/activity/e0;->addCancellable(Landroidx/activity/d;)V {10,0,0,0,0}x2
+31 INVOKE_VIRTUAL Landroidx/activity/l0;->f()V {8,0,0,0,0}x1
+34 NEW_INSTANCE Landroidx/activity/l0$e; v1
+36 CONST_STRING updateEnabledCallbacks()V v6
+38 CONST_4 #0 v7
+39 CONST_4 #0 v2
+40 CONST_CLASS Landroidx/activity/l0; v4
+42 CONST_STRING updateEnabledCallbacks v5
+44 MOVE_OBJECT v3,v8
+45 INVOKE_DIRECT_RANGE Lkotlin/jvm/internal/FunctionReferenceImpl;-><init>(ILjava/lang/Object;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+48 INVOKE_VIRTUAL Landroidx/activity/e0;->setEnabledChangedCallback$activity_release(Lkotlin/jvm/functions/Function0;)V {10,1,0,0,0}x2
+51 RETURN_VOID
+METHOD Landroidx/activity/l0;->b(Landroidx/activity/e0;)Landroidx/activity/l0$d;
+0 CONST_STRING onBackPressedCallback v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {9,0,0,0,0}x2
+5 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v0,v8
+7 INVOKE_VIRTUAL Lkotlin/collections/ArrayDeque;->addLast(Ljava/lang/Object;)V {0,9,0,0,0}x2
+10 NEW_INSTANCE Landroidx/activity/l0$d; v0
+12 INVOKE_DIRECT Landroidx/activity/l0$d;-><init>(Landroidx/activity/l0;Landroidx/activity/e0;)V {0,8,9,0,0}x3
+15 INVOKE_VIRTUAL Landroidx/activity/e0;->addCancellable(Landroidx/activity/d;)V {9,0,0,0,0}x2
+18 INVOKE_VIRTUAL Landroidx/activity/l0;->f()V {8,0,0,0,0}x1
+21 NEW_INSTANCE Landroidx/activity/n0; v1
+23 CONST_STRING updateEnabledCallbacks()V v6
+25 CONST_4 #0 v7
+26 CONST_4 #0 v2
+27 CONST_CLASS Landroidx/activity/l0; v4
+29 CONST_STRING updateEnabledCallbacks v5
+31 MOVE_OBJECT v3,v8
+32 INVOKE_DIRECT_RANGE Lkotlin/jvm/internal/FunctionReferenceImpl;-><init>(ILjava/lang/Object;Ljava/lang/Class;Ljava/lang/String;Ljava/lang/String;I)V
+35 INVOKE_VIRTUAL Landroidx/activity/e0;->setEnabledChangedCallback$activity_release(Lkotlin/jvm/functions/Function0;)V {9,1,0,0,0}x2
+38 RETURN_OBJECT v0
+METHOD Landroidx/activity/l0;->c()V
+0 IGET_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v0,v4
+2 CONST_4 #0 v1
+3 IF_NEZ v0 offset 36
+5 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v0,v4
+7 INVOKE_INTERFACE Ljava/util/List;->size()I {0,0,0,0,0}x1
+10 MOVE_RESULT v2
+11 INVOKE_INTERFACE Ljava/util/List;->listIterator(I)Ljava/util/ListIterator; {0,2,0,0,0}x2
+14 MOVE_RESULT_OBJECT v0
+15 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {0,0,0,0,0}x1
+18 MOVE_RESULT v2
+19 IF_EQZ v2 offset 16
+21 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {0,0,0,0,0}x1
+24 MOVE_RESULT_OBJECT v2
+25 MOVE_OBJECT v3,v2
+26 CHECK_CAST Landroidx/activity/e0; v3
+28 INVOKE_VIRTUAL Landroidx/activity/e0;->isEnabled()Z {3,0,0,0,0}x1
+31 MOVE_RESULT v3
+32 IF_EQZ v3 offset -17
+34 GOTO offset 2
+35 MOVE_OBJECT v2,v1
+36 MOVE_OBJECT v0,v2
+37 CHECK_CAST Landroidx/activity/e0; v0
+39 IPUT_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v1,v4
+41 IF_EQZ v0 offset 5
+43 INVOKE_VIRTUAL Landroidx/activity/e0;->handleOnBackCancelled()V {0,0,0,0,0}x1
+46 RETURN_VOID
+METHOD Landroidx/activity/l0;->d()V
+0 IGET_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v0,v4
+2 CONST_4 #0 v1
+3 IF_NEZ v0 offset 36
+5 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v0,v4
+7 INVOKE_INTERFACE Ljava/util/List;->size()I {0,0,0,0,0}x1
+10 MOVE_RESULT v2
+11 INVOKE_VIRTUAL Ljava/util/AbstractList;->listIterator(I)Ljava/util/ListIterator; {0,2,0,0,0}x2
+14 MOVE_RESULT_OBJECT v0
+15 INVOKE_INTERFACE Ljava/util/ListIterator;->hasPrevious()Z {0,0,0,0,0}x1
+18 MOVE_RESULT v2
+19 IF_EQZ v2 offset 16
+21 INVOKE_INTERFACE Ljava/util/ListIterator;->previous()Ljava/lang/Object; {0,0,0,0,0}x1
+24 MOVE_RESULT_OBJECT v2
+25 MOVE_OBJECT v3,v2
+26 CHECK_CAST Landroidx/activity/e0; v3
+28 INVOKE_VIRTUAL Landroidx/activity/e0;->isEnabled()Z {3,0,0,0,0}x1
+31 MOVE_RESULT v3
+32 IF_EQZ v3 offset -17
+34 GOTO offset 2
+35 MOVE_OBJECT v2,v1
+36 MOVE_OBJECT v0,v2
+37 CHECK_CAST Landroidx/activity/e0; v0
+39 IPUT_OBJECT Landroidx/activity/l0;->c:Landroidx/activity/e0; v1,v4
+41 IF_EQZ v0 offset 6
+43 INVOKE_VIRTUAL Landroidx/activity/e0;->handleOnBackPressed()V {0,0,0,0,0}x1
+46 RETURN_VOID
+47 IGET_OBJECT Landroidx/activity/l0;->a:Ljava/lang/Runnable; v0,v4
+49 IF_EQZ v0 offset 5
+51 INVOKE_INTERFACE Ljava/lang/Runnable;->run()V {0,0,0,0,0}x1
+54 RETURN_VOID
+METHOD Landroidx/activity/l0;->e(Z)V
+0 IGET_OBJECT Landroidx/activity/l0;->e:Landroid/window/OnBackInvokedDispatcher; v0,v3
+2 IGET_OBJECT Landroidx/activity/l0;->d:Landroid/window/OnBackInvokedCallback; v1,v3
+4 IF_EQZ v0 offset 29
+6 IF_EQZ v1 offset 27
+8 IF_EQZ v4 offset 13
+10 IGET_BOOLEAN Landroidx/activity/l0;->f:Z v2,v3
+12 IF_NEZ v2 offset 9
+14 INVOKE_STATIC Landroidx/activity/l0$a;->a(Ljava/lang/Object;Ljava/lang/Object;)V {0,1,0,0,0}x2
+17 CONST_4 #1 v4
+18 IPUT_BOOLEAN Landroidx/activity/l0;->f:Z v4,v3
+20 RETURN_VOID
+21 IF_NEZ v4 offset 12
+23 IGET_BOOLEAN Landroidx/activity/l0;->f:Z v4,v3
+25 IF_EQZ v4 offset 8
+27 INVOKE_STATIC Landroidx/activity/l0$a;->b(Ljava/lang/Object;Ljava/lang/Object;)V {0,1,0,0,0}x2
+30 CONST_4 #0 v4
+31 IPUT_BOOLEAN Landroidx/activity/l0;->f:Z v4,v3
+33 RETURN_VOID
+METHOD Landroidx/activity/l0;->f()V
+0 IGET_BOOLEAN Landroidx/activity/l0;->g:Z v0,v4
+2 CONST_4 #0 v1
+3 IGET_OBJECT Landroidx/activity/l0;->b:Lkotlin/collections/ArrayDeque; v2,v4
+5 IF_EQZ v2 offset 9
+7 INVOKE_VIRTUAL Lkotlin/collections/ArrayDeque;->isEmpty()Z {2,0,0,0,0}x1
+10 MOVE_RESULT v3
+11 IF_EQZ v3 offset 3
+13 GOTO offset 24
+14 INVOKE_VIRTUAL Ljava/util/AbstractList;->iterator()Ljava/util/Iterator; {2,0,0,0,0}x1
+17 MOVE_RESULT_OBJECT v2
+18 INVOKE_INTERFACE Ljava/util/Iterator;->hasNext()Z {2,0,0,0,0}x1
+21 MOVE_RESULT v3
+22 IF_EQZ v3 offset 15
+24 INVOKE_INTERFACE Ljava/util/Iterator;->next()Ljava/lang/Object; {2,0,0,0,0}x1
+27 MOVE_RESULT_OBJECT v3
+28 CHECK_CAST Landroidx/activity/e0; v3
+30 INVOKE_VIRTUAL Landroidx/activity/e0;->isEnabled()Z {3,0,0,0,0}x1
+33 MOVE_RESULT v3
+34 IF_EQZ v3 offset -16
+36 CONST_4 #1 v1
+37 IPUT_BOOLEAN Landroidx/activity/l0;->g:Z v1,v4
+39 IF_EQ v1,v0 offset 11
+41 SGET Landroid/os/Build$VERSION;->SDK_INT:I v0
+43 CONST_16 #21 v2
+45 IF_LT v0,v2 offset 5
+47 INVOKE_VIRTUAL Landroidx/activity/l0;->e(Z)V {4,1,0,0,0}x2
+50 RETURN_VOID

@@ -1,0 +1,57 @@
+{
+  "baseline_version": "1.1.14 (homeback124)",
+  "input_files": {
+    "upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk": {
+      "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+      "bytes": 186795155
+    },
+    "actual124-single/patched.apk": {
+      "sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+      "bytes": 186841277
+    },
+    "output/dist124-release/OneBack_Exit_NoRecents_v1.1.14.mpp": {
+      "sha256": "d770c24197ebd6b323ab9abe234428b025ac9a24ae936c0816facd40813a1271",
+      "bytes": 336173
+    },
+    "build124-release/patch.jar": {
+      "sha256": "eff965860182b74115928f9fca184499f70f256b5299d7308c2cbe535f707f2b",
+      "bytes": 37602
+    },
+    "build-tools/morphe.jar": {
+      "sha256": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+      "bytes": 44512111
+    },
+    "build-tools/android.jar": {
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "bytes": 27092450
+    },
+    "published124-source/src/runtime/OneBackExit.java": {
+      "sha256": "15cfe2f482067e728b3bae92918913c9d38b604ebcc26eebf4fc1ded2fd9d33b",
+      "bytes": 48128
+    },
+    "published124-source/src/runtime/NativeBack.java": {
+      "sha256": "5e4ed712984dd7629f53190b15ddcf5f33462450e88c6065b5e8e7a1c68e5868",
+      "bytes": 5888
+    },
+    "published124-source/src/runtime/TwitterBack.java": {
+      "sha256": "821345a8f673c764f3a083899bdb36881b3b91c3b09d47947a8f35b50640e076",
+      "bytes": 18206
+    },
+    "published124-source/src/test-runtime/Back124TwitterTest.java": {
+      "sha256": "8f0de0d9a6642271d348c6c21631fc9476cf8640dcb4ca5d33b083d0391c79c3",
+      "bytes": 15649
+    }
+  },
+  "baseline_class_manifest_sha256": "f6263aba8ff5d44ad8e71d50ca8c92b53317662321e4cfec00199acd36ad92ff",
+  "jdk": "21.0.8+9",
+  "apk_method_digest": "OneBackPatch.instagramNavigationDigest; exact method implementation contract, not whole-DEX SHA",
+  "framework_source": {
+    "url": "https://android.googlesource.com/platform/frameworks/base/+/android16-release/core/java/android/app/Activity.java",
+    "git_blob": "c129fde3f81916e3ed4e2e67b77bfeac2288a1dc"
+  },
+  "limitations": [
+    "Host probes use published124 compiled runtime and matching host stubs, not a physical device.",
+    "No user-device trace establishes which Back entry occurred.",
+    "Missing-observer host probe models framework terminal behavior with Activity.finish; real Android16 may move the task to background. Both bypass the app hooks."
+  ]
+}
