@@ -1,0 +1,26 @@
+METHOD Landroidx/core/app/h;->onUserInteraction()V
+0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->onUserInteraction(Landroid/app/Activity;)V {0,0,0,0,0}x1
+3 INVOKE_SUPER Landroid/app/Activity;->onUserInteraction()V {0,0,0,0,0}x1
+6 RETURN_VOID
+METHOD Landroidx/activity/o;->run()V
+0 IGET_OBJECT Landroidx/activity/o;->a:Landroidx/activity/ComponentActivity; v0,v3
+2 INVOKE_STATIC Landroidx/activity/ComponentActivity;->access$onBackPressed$s1027565324(Landroidx/activity/ComponentActivity;)V {0,0,0,0,0}x1
+5 RETURN_VOID
+6 MOVE_EXCEPTION v0
+7 INVOKE_VIRTUAL Ljava/lang/Throwable;->getMessage()Ljava/lang/String; {0,0,0,0,0}x1
+10 MOVE_RESULT_OBJECT v1
+11 CONST_STRING Attempt to invoke virtual method 'android.os.Handler android.app.FragmentHostCallback.getHandler()' on a null object reference v2
+13 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->f(Ljava/lang/Object;Ljava/lang/Object;)Z {1,2,0,0,0}x2
+16 MOVE_RESULT v1
+17 IF_EQZ v1 offset 3
+19 GOTO offset 15
+20 THROW v0
+21 MOVE_EXCEPTION v0
+22 INVOKE_VIRTUAL Ljava/lang/Throwable;->getMessage()Ljava/lang/String; {0,0,0,0,0}x1
+25 MOVE_RESULT_OBJECT v1
+26 CONST_STRING Can not perform this action after onSaveInstanceState v2
+28 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->f(Ljava/lang/Object;Ljava/lang/Object;)Z {1,2,0,0,0}x2
+31 MOVE_RESULT v1
+32 IF_EQZ v1 offset 3
+34 RETURN_VOID
+35 THROW v0

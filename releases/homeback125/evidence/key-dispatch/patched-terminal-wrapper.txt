@@ -1,0 +1,22 @@
+METHOD Lcom/twitter/app/common/inject/p;->onBackPressed()V
+0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryBack(Landroid/app/Activity;)Z {2,0,0,0,0}x1
+3 MOVE_RESULT v0
+4 IF_EQZ v0 offset 3
+6 RETURN_VOID
+7 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->enterBack(Landroid/app/Activity;)V {2,0,0,0,0}x1
+10 INVOKE_DIRECT Lcom/twitter/app/common/inject/p;->hiroOneBack$onBackPressed()V {2,0,0,0,0}x1
+13 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->afterNative()V {0,0,0,0,0}x0
+16 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V {0,0,0,0,0}x0
+19 RETURN_VOID
+20 MOVE_EXCEPTION v1
+21 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->leaveNative()V {0,0,0,0,0}x0
+24 THROW v1
+METHOD Landroidx/activity/ComponentActivity;->hiroOneBack$terminal$0()V
+0 CONST_4 #0 v1
+1 CONST_4 #0 v2
+2 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->tryTerminalBack(Landroid/app/Activity;IZ)Z {3,1,2,0,0}x3
+5 MOVE_RESULT v0
+6 IF_EQZ v0 offset 3
+8 RETURN_VOID
+9 INVOKE_SUPER Landroid/app/Activity;->onBackPressed()V {3,0,0,0,0}x1
+12 RETURN_VOID

@@ -1,0 +1,141 @@
+{
+  "schema": "homeback125-actual-x-apk-provenance-v1",
+  "result": "PASS",
+  "physical_android_tested": false,
+  "final_qa_sha256": "2c6e2433a10711aa4148fef5d212cbe606f326f319d6bacb7211a3723c00b1c2",
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+      "bytes": 394644,
+      "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+    },
+    "Hiro_Morphe_Patches_v1.0.259.mpp": {
+      "bytes": 18518089,
+      "sha256": "f3c4d969464e46edec8facba4f7a4ef9b25fb225fa045bca4c8a83f9d73d6ad1"
+    }
+  },
+  "runtime_sha256": "f6ba029c8d68954d42e76a8fbda8ae8f9d7ce1b22be29e37719636b7254d8b5f",
+  "input_apk_sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "prior124_apk_sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+  "outputs": {
+    "single": {
+      "sha256": "f7b5e751db41b7b5fa13c029f5f8dc41d84bf18c82f86f403eaeb6860b70e998",
+      "bytes": 186841897
+    },
+    "bundle": {
+      "sha256": "a89b60333696673944a9a2a2973b8e38f00b313cfabf3f6c837d5e80ffe1dab9",
+      "bytes": 186841897
+    },
+    "upgrade124": {
+      "sha256": "117622a19787440697fa58a6961c15ac0c216342812277cc3a117fa34609873d",
+      "bytes": 186901155
+    }
+  },
+  "single_bundle_exact_entry_count": 7408,
+  "single_bundle_all_zip_entry_bytes_equal": true,
+  "all_code_comparison": {
+    "app_classes": 241847,
+    "app_methods": 893509,
+    "runtime_classes": 76,
+    "assertions": 29402113,
+    "native_root_hooks": 1,
+    "twitter_native_scope_entries": 1
+  },
+  "audits": {
+    "known123_124_upgrade": {
+      "result": "PASS",
+      "log_path": "evidence/actual-x/known123-124-upgrade125-audit.txt",
+      "log_sha256": "67006368e5ecc41587a82f953e4450a967bd4a7c6de7727ea42856b9fa3428ac"
+    },
+    "all_executable_code": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/whole-x-semantics-audit.txt",
+      "log_sha256": "06bbae68d569c6118e96b7400490dd42e81163e82027a897104dbea90356bcbc"
+    },
+    "resources": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/resource-audit.json",
+      "log_sha256": "cb2356859cf9a4006700527683601cf59fd3f76ff5b38678e49667b876ffced6"
+    },
+    "real124_upgrade_all_executable_code": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/upgrade124-whole-x-semantics-audit.txt",
+      "log_sha256": "06bbae68d569c6118e96b7400490dd42e81163e82027a897104dbea90356bcbc"
+    },
+    "real124_upgrade_resources": {
+      "result": "PASS",
+      "log_path": "evidence/actual-apk/upgrade124-resource-audit.json",
+      "log_sha256": "2fab46f8f8bf059705256fe54d6f3bd8f73b2f489270d149ab06a2dbfb235648"
+    }
+  },
+  "toolchain": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "aapt2": "d1096e11aba9c974644369ee3c50d239acac3f3428ffa928e5b9c14dfb7a57de",
+    "java": "Temurin21.0.8+9"
+  },
+  "apply_flags": [
+    "--exclusive",
+    "-e",
+    "戻る1回で終了・履歴削除",
+    "--unsigned",
+    "--bytecode-mode",
+    "FULL",
+    "--striplibs",
+    "arm64-v8a"
+  ],
+  "executions": {
+    "fresh_single": {
+      "source_apk": "/workspace/scratch/102008d926fb/upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+      "mpp": "/workspace/scratch/102008d926fb/output/dist125-final/OneBack_Exit_NoRecents_v1.1.15.mpp",
+      "output_apk": "/workspace/scratch/102008d926fb/actual125-single/patched.apk",
+      "audit_classpath_build": "build125-final"
+    },
+    "upgrade124": {
+      "source_apk": "/workspace/scratch/102008d926fb/actual124-single/patched.apk",
+      "mpp": "/workspace/scratch/102008d926fb/output/dist125-final/OneBack_Exit_NoRecents_v1.1.15.mpp",
+      "output_apk": "/workspace/scratch/102008d926fb/actual125-upgrade124/patched.apk",
+      "audit_classpath_build": "build125-final2"
+    },
+    "fresh_bundle259": {
+      "source_apk": "/workspace/scratch/102008d926fb/upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+      "mpp": "/workspace/scratch/102008d926fb/output/dist125-final259/Hiro_Morphe_Patches_v1.0.259.mpp",
+      "output_apk": "/workspace/scratch/102008d926fb/actual125-bundle259/patched.apk",
+      "proof": "All7408 ZIP entry bytes equal the fully audited fresh single output."
+    }
+  },
+  "source_sha256": {
+    "test-dex/ActualXAudit.java": "87050ff43586c0b76368144f09df62d80abb5adebe8f3647efd160c545ff44cf",
+    "test-dex/RealUpgradeAudit.java": "14acaa5f23fe24d303bd9c1a93ab315d319acdd053a7ab0a2925cab29e3f48b9",
+    "test-dex/TwitterRootAudit.java": "b46c6c925e1e3c0f17d7fabedd71c955f0cea8aecf63c04e8b70d46692b38a48",
+    "patch/OneBackPatch.java": "f2e678de0601c2e73a581f64c7844565d7ea045d332f5b3c46228f90617cdcd6"
+  },
+  "resource_audit_source_sha256": "29ce1e0d3ac13fb65c6f7f1378e38db4a5446883abbcdfc19e5a74d5882b98d9",
+  "upgrade_resource_audit_source_sha256": "ee49b097aed790f5d3bfec408eb25c468789ffad1fde718f8ab4da80599024e3",
+  "local_validation_sha256": "edd89709ceff2f945eb342d5b742b0e9db212f7b20d4b88ba1da99984d42dcdb",
+  "notes": "Original input and three final validated output APKs remain local and are excluded from publication. Preliminary bundle257 and258 applications are superseded by a separate final259 application; all final records bind259.",
+  "executed_single_mpp_identical_to_final259_single": true,
+  "executed_audit_and_patch_class_bytes_identical_to_final259_build": true,
+  "publication_rebinding": {
+    "reason": "A concurrent Gallery101 publication advanced the baseline to258 before publication. The same OneBack125 production code was rebuilt into bundle259, then that final259 MPP was actually applied to original X and all7408 output ZIP entry bytes matched the independently audited single.",
+    "previous_binding": {
+      "bundle_version": "1.0.258",
+      "artifacts": {
+        "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+          "bytes": 394644,
+          "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+        },
+        "Hiro_Morphe_Patches_v1.0.258.mpp": {
+          "bytes": 18514474,
+          "sha256": "deefb75947a07064b238dd6b0dc3c099da6c191b2cad86c0376ced895fca2a20"
+        }
+      },
+      "qa_sha256": "b2138ce1d63d83aaf7e3b9c946b8548a5151f5672da4c7ed873ad5893c8e9ace",
+      "local_validation_sha256": "2eb4b73e21c6af780ca3568d04f65fde4aa3055baa304de0279cde259881ac8a",
+      "provenance_sha256": "d8b847bbe60a1edf86d86bd44871c73248b32d4984bbe9e2baadfb60bc307850"
+    },
+    "new_bundle_applied": true,
+    "new_bundle_full_entry_equality": true,
+    "production_and_audit_class_bytes_identical": true,
+    "standalone_full_dex_audit_repeated": false,
+    "real124_upgrade_full_dex_audit_repeated": false
+  }
+}

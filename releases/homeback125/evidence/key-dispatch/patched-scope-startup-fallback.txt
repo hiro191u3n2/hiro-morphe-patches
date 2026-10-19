@@ -1,0 +1,13 @@
+METHOD Lcom/twitter/app/common/inject/p;->onCreate(Landroid/os/Bundle;)V
+0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V {1,0,0,0,0}x1
+3 INVOKE_STATIC Lapp/morphe/extension/twitter/patches/Changelogs;->showChangelog(Landroid/app/Activity;)V {1,0,0,0,0}x1
+6 INVOKE_SUPER Lcom/twitter/app/common/base/i;->onCreate(Landroid/os/Bundle;)V {1,2,0,0,0}x2
+9 IGET_OBJECT Lcom/twitter/app/common/inject/p;->y:Lcom/twitter/app/common/inject/b; v0,v1
+11 INVOKE_VIRTUAL Lcom/twitter/app/common/inject/b;->e(Landroid/app/Activity;Lcom/twitter/app/common/base/l;Landroid/os/Bundle;)V {0,1,1,2,0}x4
+14 CONST_4 #0 v2
+15 CONST_4 #3 v0
+16 INVOKE_STATIC Landroidx/activity/t;->b(Landroidx/fragment/app/x;Landroidx/activity/s0;I)V {1,2,0,0,0}x3
+19 RETURN_VOID
+METHOD Landroidx/activity/ComponentActivity;->access$onBackPressed$s1027565324(Landroidx/activity/ComponentActivity;)V
+0 INVOKE_DIRECT Landroidx/activity/ComponentActivity;->hiroOneBack$terminal$0()V {0,0,0,0,0}x1
+3 RETURN_VOID

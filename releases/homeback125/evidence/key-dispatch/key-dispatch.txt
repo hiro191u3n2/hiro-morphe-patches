@@ -1,0 +1,35 @@
+METHOD Landroidx/core/app/h;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z
+0 CONST_STRING event v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {3,0,0,0,0}x2
+5 INVOKE_VIRTUAL Landroid/app/Activity;->getWindow()Landroid/view/Window; {2,0,0,0,0}x1
+8 MOVE_RESULT_OBJECT v0
+9 INVOKE_VIRTUAL Landroid/view/Window;->getDecorView()Landroid/view/View; {0,0,0,0,0}x1
+12 MOVE_RESULT_OBJECT v0
+13 CONST_STRING getDecorView(...) v1
+15 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V {0,1,0,0,0}x2
+18 SGET_OBJECT Landroidx/core/view/y0;->a:Ljava/util/WeakHashMap; v0
+20 INVOKE_INTERFACE Landroidx/core/view/q;->superDispatchKeyEvent(Landroid/view/KeyEvent;)Z {2,3,0,0,0}x2
+23 MOVE_RESULT v3
+24 RETURN v3
+METHOD Landroidx/core/app/h;->superDispatchKeyEvent(Landroid/view/KeyEvent;)Z
+0 CONST_STRING event v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {2,0,0,0,0}x2
+5 INVOKE_SUPER Landroid/app/Activity;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z {1,2,0,0,0}x2
+8 MOVE_RESULT v2
+9 RETURN v2
+METHOD Landroidx/appcompat/app/g;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z
+0 INVOKE_VIRTUAL Landroid/view/KeyEvent;->getKeyCode()I {4,0,0,0,0}x1
+3 MOVE_RESULT v0
+4 INVOKE_VIRTUAL Landroidx/appcompat/app/g;->getSupportActionBar()Landroidx/appcompat/app/a; {3,0,0,0,0}x1
+7 MOVE_RESULT_OBJECT v1
+8 CONST_16 #52 v2
+10 IF_NE v0,v2 offset 12
+12 IF_EQZ v1 offset 10
+14 INVOKE_VIRTUAL Landroidx/appcompat/app/a;->k(Landroid/view/KeyEvent;)Z {1,4,0,0,0}x2
+17 MOVE_RESULT v0
+18 IF_EQZ v0 offset 4
+20 CONST_4 #1 v4
+21 RETURN v4
+22 INVOKE_SUPER Landroidx/core/app/h;->dispatchKeyEvent(Landroid/view/KeyEvent;)Z {3,4,0,0,0}x2
+25 MOVE_RESULT v4
+26 RETURN v4

@@ -1,0 +1,147 @@
+{
+  "schema": "twitter-known123-124-upgrade125-audit-v1",
+  "result": "PASS",
+  "status": "PASS",
+  "runtime_sha256": "f6ba029c8d68954d42e76a8fbda8ae8f9d7ce1b22be29e37719636b7254d8b5f",
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+      "bytes": 394644,
+      "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+    },
+    "Hiro_Morphe_Patches_v1.0.259.mpp": {
+      "bytes": 18518089,
+      "sha256": "f3c4d969464e46edec8facba4f7a4ef9b25fb225fa045bca4c8a83f9d73d6ad1"
+    }
+  },
+  "audit_source_sha256": "3437958e4f7eb307d3468fdd267abf34fea0350fe4759c6739795b0e929eeb23",
+  "audit_log_sha256": "67006368e5ecc41587a82f953e4450a967bd4a7c6de7727ea42856b9fa3428ac",
+  "audit_log_file": "known123-124-upgrade125-audit.txt",
+  "known123_model_source_apk_sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae",
+  "known124_input_apk_sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75",
+  "source_hashes_match_final_build_qa": true,
+  "source_sha256": {
+    "patch/OneBackPatch.java": "f2e678de0601c2e73a581f64c7844565d7ea045d332f5b3c46228f90617cdcd6",
+    "patch/InstagramUpgrade.java": "9d18ce077db806c76ce582fb9227b5824ade4ccbfe2b31e983d48c513aa22aa3",
+    "test-dex/TwitterUpgradeAudit.java": "3437958e4f7eb307d3468fdd267abf34fea0350fe4759c6739795b0e929eeb23",
+    "test-dex/ActualXAudit.java": "87050ff43586c0b76368144f09df62d80abb5adebe8f3647efd160c545ff44cf",
+    "test-dex/TwitterRootAudit.java": "b46c6c925e1e3c0f17d7fabedd71c955f0cea8aecf63c04e8b70d46692b38a48",
+    "test-dex/RealUpgradeAudit.java": "14acaa5f23fe24d303bd9c1a93ab315d319acdd053a7ab0a2925cab29e3f48b9",
+    "test-dex/InstagramDispatcherAudit.java": "597c18c778154ab5e2a64468643f21acf6324ac56a4536c0e961b833faf2af51",
+    "test-dex/InstagramTabAudit.java": "445cfce21ac8b777888aa5bb842de3b85b4e298dddc53878a60a6729d65ebedf"
+  },
+  "final_qa_sha256": "2c6e2433a10711aa4148fef5d212cbe606f326f319d6bacb7211a3723c00b1c2",
+  "files": {
+    "known123_model_source_apk": {
+      "path": "/workspace/scratch/102008d926fb/upload/x124/Twitter-v12.19.1-release.0-patches-v3.10.0-dev.4.apk",
+      "sha256": "f6792d27f18ecb7e37fddcd1f67cf6f65f4d667fd3a8941e09c7ac266058e1ae"
+    },
+    "known123_historical_mpp": {
+      "path": "/workspace/scratch/102008d926fb/output/dist123-final/OneBack_Exit_NoRecents_v1.1.13.mpp",
+      "sha256": "47a4da428d7cd18fb4e58833043b92a07e17973e45539c367929fb2e7e8e3a96"
+    },
+    "known124_input_apk": {
+      "path": "/workspace/scratch/102008d926fb/actual124-single/patched.apk",
+      "sha256": "558b030fe5bfacb9e3d4e60ca454d1b936742f9a86e2692da44a668cf084ca75"
+    },
+    "current_mpp": {
+      "path": "/workspace/scratch/102008d926fb/output/dist125-final259/OneBack_Exit_NoRecents_v1.1.15.mpp",
+      "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+    },
+    "current_runtime": {
+      "path": "/workspace/scratch/102008d926fb/build125-final259/runtime-dex/classes.dex",
+      "sha256": "f6ba029c8d68954d42e76a8fbda8ae8f9d7ce1b22be29e37719636b7254d8b5f"
+    },
+    "audit_class": {
+      "path": "/workspace/scratch/102008d926fb/build125-final/audit/TwitterUpgradeAudit.class",
+      "sha256": "a5747e875cc12c00ca9a92a790f375b7c1b2c0b274b2a8f26e4828cb33a38a6d"
+    },
+    "audit_log": {
+      "path": "/workspace/scratch/102008d926fb/work/release125/releases/homeback125/evidence/actual-x/known123-124-upgrade125-audit.txt",
+      "sha256": "67006368e5ecc41587a82f953e4450a967bd4a7c6de7727ea42856b9fa3428ac"
+    },
+    "final_qa": {
+      "path": "/workspace/scratch/102008d926fb/output/dist125-final259/QA_HomeBack_v1.1.15.json",
+      "sha256": "2c6e2433a10711aa4148fef5d212cbe606f326f319d6bacb7211a3723c00b1c2"
+    }
+  },
+  "executed_classpath": [
+    "/workspace/scratch/102008d926fb/build125-final/audit",
+    "/workspace/scratch/102008d926fb/build125-final/patch",
+    "/workspace/scratch/102008d926fb/output/dist125-final/OneBack_Exit_NoRecents_v1.1.15.mpp",
+    "/workspace/scratch/102008d926fb/build-tools/morphe.jar"
+  ],
+  "executed_patch_classes_identical_to_final_mpp": 9,
+  "executed_audit_classes_identical_to_final_build": true,
+  "runtime_identical_to_final_mpp_extension": true,
+  "final2_mpp_and_runtime_byte_identical_to_executed_build": true,
+  "known123_input_kind": "Historical model: original supplied X APK processed by pinned released 1.1.13 applyAll; no claim of a user-uploaded OneBack123 APK.",
+  "known124_input_kind": "Actual prior CLI output produced by released 1.1.14 applied to the supplied X APK; APK kept local.",
+  "runtime_classes": 76,
+  "preserved_generic_helpers": 303,
+  "known123_new_native_root_gates": 1,
+  "known124_new_native_root_gates": 0,
+  "known124_existing_native_root_gates_preserved": 1,
+  "native_scope_call_changes_per_upgrade": 1,
+  "native_scope_change": "Only p.onBackPressed instruction4 enterBack(Activity) -> enterTwitterBack(Activity); reversing this reference recovers the complete old wrapper; native helper body unchanged.",
+  "known_native_helper_digest": "610fdf9b44c641b3e5fc51f2e22f1768887320888854f035ff26e2c1d09c1809",
+  "negative_pre_mutation_rejections": 17,
+  "assertions": 1695534,
+  "physical_android_tested": false,
+  "final_bundle_version": "1.0.259",
+  "publication_rebinding": {
+    "reason": "A second concurrent Fossify Gallery publication advanced the baseline to 1.0.258; unchanged OneBack 1.1.15 was rebuilt into bundle 1.0.259.",
+    "prior_binding": {
+      "artifacts": {
+        "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+          "bytes": 394644,
+          "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+        },
+        "Hiro_Morphe_Patches_v1.0.258.mpp": {
+          "bytes": 18514474,
+          "sha256": "deefb75947a07064b238dd6b0dc3c099da6c191b2cad86c0376ced895fca2a20"
+        }
+      },
+      "final_qa_sha256": "b2138ce1d63d83aaf7e3b9c946b8548a5151f5672da4c7ed873ad5893c8e9ace",
+      "bundle_version": "1.0.258",
+      "provenance_sha256": "297852405e04683d35934c2cff82edb1dd5626ff940919bc6c304e088d2334c5"
+    },
+    "audited_source_hashes_unchanged": 8,
+    "executed_patch_classes_byte_identical": 9,
+    "executed_audit_classes_byte_identical": 17,
+    "single_mpp_byte_identical": true,
+    "runtime_byte_identical": true,
+    "final_bundle_patch_class_entries_and_runtime_identical_to_audited_single": true,
+    "audit_log_unchanged": true,
+    "audit_rerun": false,
+    "derivation": "The original audit execution and classpath above are retained. Final259 production and audit class bytes, standalone MPP, and runtime were compared directly with that executed build; the final259 QA binds the same eight audited source hashes. Only bundle composition and build metadata changed."
+  },
+  "publication_rebinding_history": [
+    {
+      "reason": "Concurrent Fossify Gallery publication advanced the bundle baseline to 1.0.257; unchanged OneBack 1.1.15 was rebuilt into bundle 1.0.258.",
+      "prior_binding": {
+        "artifacts": {
+          "OneBack_Exit_NoRecents_v1.1.15.mpp": {
+            "bytes": 394644,
+            "sha256": "7af77b8752f7ad3238412ff6cfb97cdd9a583c2ef01cb83ee3868dc4e6f8d061"
+          },
+          "Hiro_Morphe_Patches_v1.0.257.mpp": {
+            "bytes": 18504688,
+            "sha256": "e975bae248bfbb033dedf17e4a310392039c3fd4c97e92ef7a14e27c82cdb70b"
+          }
+        },
+        "final_qa_sha256": "f8140439fc4424fdd81e5b052fe23b7cb58af1dada22c92583aaa20739a46b8d",
+        "bundle_version": "1.0.257",
+        "provenance_sha256": "2d984a84205d0f22e6d3b922048975db2d11fb62a147dc1272280b2e48744502"
+      },
+      "audited_source_hashes_unchanged": 8,
+      "executed_patch_classes_byte_identical": 9,
+      "executed_audit_classes_byte_identical": 17,
+      "single_mpp_byte_identical": true,
+      "runtime_byte_identical": true,
+      "final_bundle_patch_class_entries_and_runtime_identical_to_audited_single": true,
+      "audit_log_unchanged": true,
+      "audit_rerun": false,
+      "derivation": "The original audit execution and classpath above are retained. Final258 production and audit class bytes, standalone MPP, and runtime were compared directly with that executed build; the final258 QA binds the same eight audited source hashes. Only bundle composition and build metadata changed."
+    }
+  ]
+}

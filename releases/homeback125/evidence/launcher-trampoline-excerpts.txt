@@ -1,0 +1,200 @@
+Read-only input APK DEX excerpts; PCs are code-unit offsets. Last p.onCreate excerpt comes from the verified v1.1.14 applied APK and demonstrates the lifecycle hook retained by v1.1.15.
+
+METHOD Lcom/twitter/android/StartActivity$a;->invokeSuspend(Ljava/lang/Object;)Ljava/lang/Object;
+21 INVOKE_STATIC Lkotlin/ResultKt;->b(Ljava/lang/Object;)V {4,0,0,0,0}x1
+24 NEW_INSTANCE Landroid/content/Intent; v4
+26 INVOKE_DIRECT Landroid/content/Intent;-><init>()V {4,0,0,0,0}x1
+29 IPUT Lcom/twitter/android/StartActivity$a;->n:I v2,v3
+31 IGET_OBJECT Lcom/twitter/android/StartActivity$a;->o:Lcom/twitter/dispatch/api/a; v1,v3
+33 INVOKE_INTERFACE Lcom/twitter/dispatch/api/a;->a(Landroid/content/Intent;)Ljava/lang/Boolean; {1,4,0,0,0}x2
+36 MOVE_RESULT_OBJECT v4
+37 IF_NE v4,v0 offset 3
+39 RETURN_OBJECT v0
+
+METHOD Lcom/twitter/dispatch/c;->a(Landroid/content/Intent;)Ljava/lang/Boolean;
+0 IGET_OBJECT Lcom/twitter/dispatch/c;->c:Lcom/twitter/account/phone/api/a; v0,v10
+2 INVOKE_INTERFACE Lcom/twitter/account/phone/api/a;->b()V {0,0,0,0,0}x1
+5 SGET_OBJECT Lcom/twitter/util/user/UserIdentifier;->Companion:Lcom/twitter/util/user/UserIdentifier$Companion; v0
+7 INVOKE_VIRTUAL Ljava/lang/Object;->getClass()Ljava/lang/Class; {0,0,0,0,0}x1
+10 INVOKE_STATIC Lcom/twitter/util/user/UserIdentifier$Companion;->c()Lcom/twitter/util/user/UserIdentifier; {0,0,0,0,0}x0
+13 MOVE_RESULT_OBJECT v0
+14 INVOKE_VIRTUAL Lcom/twitter/util/user/UserIdentifier;->isRegularUser()Z {0,0,0,0,0}x1
+17 MOVE_RESULT v0
+18 IGET_OBJECT Lcom/twitter/dispatch/c;->a:Landroid/app/Activity; v1,v10
+20 IGET_OBJECT Lcom/twitter/dispatch/c;->b:Lcom/twitter/app/common/z; v2,v10
+22 IF_EQZ v0 offset 21
+24 CONST_STRING android.intent.extra.INTENT v0
+26 INVOKE_VIRTUAL Landroid/content/Intent;->getParcelableExtra(Ljava/lang/String;)Landroid/os/Parcelable; {11,0,0,0,0}x2
+29 MOVE_RESULT_OBJECT v11
+30 CHECK_CAST Landroid/content/Intent; v11
+32 IF_NEZ v11 offset 8
+34 INVOKE_STATIC Lcom/twitter/dispatch/d;->a(Landroid/app/Activity;Lcom/twitter/app/common/z;)V {1,2,0,0,0}x2
+37 SGET_OBJECT Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean; v11
+39 RETURN_OBJECT v11
+40 SGET_OBJECT Ljava/lang/Boolean;->FALSE:Ljava/lang/Boolean; v11
+42 RETURN_OBJECT v11
+
+METHOD Lcom/twitter/dispatch/d;->a(Landroid/app/Activity;Lcom/twitter/app/common/z;)V
+0 SGET_OBJECT Lcom/twitter/main/api/b;->Companion:Lcom/twitter/main/api/b$b; v0
+2 INVOKE_VIRTUAL Ljava/lang/Object;->getClass()Ljava/lang/Class; {0,0,0,0,0}x1
+5 CONST_4 #0 v0
+6 INVOKE_STATIC Lcom/twitter/main/api/b$b;->b(Landroid/net/Uri;)Lcom/twitter/main/api/b; {0,0,0,0,0}x1
+9 MOVE_RESULT_OBJECT v0
+10 INVOKE_INTERFACE Lcom/twitter/app/common/z;->e(Lcom/twitter/app/common/a;)V {2,0,0,0,0}x2
+13 INVOKE_VIRTUAL Landroid/app/Activity;->finish()V {1,0,0,0,0}x1
+16 RETURN_VOID
+
+METHOD Lcom/twitter/main/api/b$b;->b(Landroid/net/Uri;)Lcom/twitter/main/api/b;
+0 NEW_INSTANCE Lcom/twitter/main/api/b$a; v0
+2 INVOKE_DIRECT Lcom/twitter/main/api/b$a;-><init>()V {0,0,0,0,0}x1
+5 IPUT_OBJECT Lcom/twitter/main/api/b$a;->b:Landroid/net/Uri; v1,v0
+7 INVOKE_VIRTUAL Lcom/twitter/util/object/o;->j()Ljava/lang/Object; {0,0,0,0,0}x1
+10 MOVE_RESULT_OBJECT v1
+11 CHECK_CAST Lcom/twitter/main/api/b; v1
+13 RETURN_OBJECT v1
+
+METHOD Lcom/twitter/app/common/l$a;-><init>()V
+0 INVOKE_DIRECT Lcom/twitter/util/object/o;-><init>()V {1,0,0,0,0}x1
+3 NEW_INSTANCE Landroid/content/Intent; v0
+5 INVOKE_DIRECT Landroid/content/Intent;-><init>()V {0,0,0,0,0}x1
+8 IPUT_OBJECT Lcom/twitter/app/common/l$a;->a:Landroid/content/Intent; v0,v1
+10 RETURN_VOID
+
+METHOD Lcom/twitter/main/api/b$a;->k()Ljava/lang/Object;
+13 IGET_OBJECT Lcom/twitter/main/api/b$a;->b:Landroid/net/Uri; v0,v4
+15 IF_EQZ v0 offset 7
+17 INVOKE_STATIC Ljava/lang/String;->valueOf(Ljava/lang/Object;)Ljava/lang/String; {0,0,0,0,0}x1
+20 MOVE_RESULT_OBJECT v0
+21 GOTO offset 2
+22 CONST_4 #0 v0
+23 SGET_OBJECT Lcom/twitter/util/serialization/serializer/b;->f:Lcom/twitter/util/serialization/serializer/b$r; v2
+25 CONST_STRING page v3
+27 INVOKE_STATIC Lcom/twitter/util/android/w;->c(Landroid/content/Intent;Ljava/lang/String;Ljava/lang/Object;Lcom/twitter/util/serialization/serializer/j;)V {1,3,0,2,0}x4
+30 CONST_STRING extra_suppress_tooltips v0
+32 IGET_BOOLEAN Lcom/twitter/main/api/b$a;->f:Z v3,v4
+34 INVOKE_VIRTUAL Landroid/content/Intent;->putExtra(Ljava/lang/String;Z)Landroid/content/Intent; {1,0,3,0,0}x3
+
+METHOD Lcom/twitter/main/api/b$a;->k()Ljava/lang/Object;
+60 IGET_BOOLEAN Lcom/twitter/main/api/b$a;->g:Z v0,v4
+62 IF_EQZ v0 offset 7
+64 CONST_HIGH16 #4000000 v0
+66 INVOKE_VIRTUAL Landroid/content/Intent;->addFlags(I)Landroid/content/Intent; {1,0,0,0,0}x2
+69 NEW_INSTANCE Lcom/twitter/main/api/b; v0
+71 INVOKE_DIRECT Lcom/twitter/app/common/l;-><init>(Landroid/content/Intent;)V {0,1,0,0,0}x2
+74 RETURN_OBJECT v0
+
+METHOD Lcom/twitter/app/common/z;->e(Lcom/twitter/app/common/a;)V
+0 CONST_STRING args v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {4,0,0,0,0}x2
+5 NEW_INSTANCE Lcom/twitter/app/common/x; v0
+7 CONST_4 #3 v1
+8 CONST_4 #0 v2
+9 INVOKE_DIRECT Lcom/twitter/app/common/x;-><init>(Lcom/twitter/app/common/x$a;I)V {0,2,1,0,0}x3
+12 INVOKE_INTERFACE Lcom/twitter/app/common/z;->d(Lcom/twitter/app/common/a;Lcom/twitter/app/common/x;)V {3,4,0,0,0}x3
+15 RETURN_VOID
+
+METHOD Lcom/twitter/app/common/x;-><init>(Lcom/twitter/app/common/x$a;I)V
+0 AND_INT_LIT8 #1 v2,v2
+2 IF_EQZ v2 offset 4
+4 SGET_OBJECT Lcom/twitter/app/common/x$a;->NONE:Lcom/twitter/app/common/x$a; v1
+6 CONST_STRING popTo v2
+8 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {1,2,0,0,0}x2
+11 INVOKE_DIRECT Ljava/lang/Object;-><init>()V {0,0,0,0,0}x1
+14 IPUT_OBJECT Lcom/twitter/app/common/x;->a:Lcom/twitter/app/common/x$a; v1,v0
+16 RETURN_VOID
+
+METHOD Lcom/twitter/app/common/args/b;->a(Landroid/content/Context;Lcom/twitter/app/common/a;)Landroid/content/Intent;
+10 INVOKE_VIRTUAL Ljava/lang/Object;->getClass()Ljava/lang/Class; {4,0,0,0,0}x1
+13 MOVE_RESULT_OBJECT v0
+14 IGET_OBJECT Lcom/twitter/app/common/args/b;->a:Lcom/google/common/collect/x0; v1,v2
+16 INVOKE_VIRTUAL Lcom/google/common/collect/x0;->get(Ljava/lang/Object;)Ljava/lang/Object; {1,0,0,0,0}x2
+19 MOVE_RESULT_OBJECT v1
+20 CHECK_CAST Ljavax/inject/a; v1
+22 IF_EQZ v1 offset 19
+24 INVOKE_INTERFACE Ljavax/inject/a;->get()Ljava/lang/Object; {1,0,0,0,0}x1
+27 MOVE_RESULT_OBJECT v0
+28 CHECK_CAST Ljava/lang/Class; v0
+30 INVOKE_INTERFACE Lcom/twitter/app/common/a;->toIntent(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent; {4,3,0,0,0}x3
+33 MOVE_RESULT_OBJECT v3
+34 CONST_STRING_JUMBO toIntent(...) v4
+37 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->j(Ljava/lang/Object;Ljava/lang/String;)V {3,4,0,0,0}x2
+40 RETURN_OBJECT v3
+
+METHOD Lcom/twitter/app/common/l;->toIntent(Landroid/content/Context;Ljava/lang/Class;)Landroid/content/Intent;
+0 IF_NEZ v4 offset 5
+2 IGET_OBJECT Lcom/twitter/app/common/l;->mIntent:Landroid/content/Intent; v3,v2
+4 RETURN_OBJECT v3
+5 IGET_OBJECT Lcom/twitter/app/common/l;->mIntent:Landroid/content/Intent; v0,v2
+7 NEW_INSTANCE Landroid/content/ComponentName; v1
+9 INVOKE_DIRECT Landroid/content/ComponentName;-><init>(Landroid/content/Context;Ljava/lang/Class;)V {1,3,4,0,0}x3
+12 INVOKE_VIRTUAL Landroid/content/Intent;->setComponent(Landroid/content/ComponentName;)Landroid/content/Intent; {0,1,0,0,0}x2
+15 MOVE_RESULT_OBJECT v3
+16 RETURN_OBJECT v3
+
+METHOD Lcom/twitter/app/common/y;->a(Landroid/content/Intent;Lcom/twitter/app/common/x;)V
+0 CONST_STRING <this> v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {1,0,0,0,0}x2
+5 CONST_STRING navigationOptions v0
+7 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {2,0,0,0,0}x2
+10 SGET_OBJECT Lcom/twitter/app/common/y$a;->a:[I v0
+12 IGET_OBJECT Lcom/twitter/app/common/x;->a:Lcom/twitter/app/common/x$a; v2,v2
+14 INVOKE_VIRTUAL Ljava/lang/Enum;->ordinal()I {2,0,0,0,0}x1
+17 MOVE_RESULT v2
+18 AGET v2,v0,v2
+20 CONST_4 #1 v0
+21 IF_EQ v2,v0 offset 15
+23 CONST_4 #2 v0
+24 IF_EQ v2,v0 offset 5
+26 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v1
+28 RETURN_VOID
+29 CONST #10008000 v2
+32 INVOKE_VIRTUAL Landroid/content/Intent;->addFlags(I)Landroid/content/Intent; {1,2,0,0,0}x2
+35 RETURN_VOID
+36 CONST_HIGH16 #4000000 v2
+38 INVOKE_VIRTUAL Landroid/content/Intent;->addFlags(I)Landroid/content/Intent; {1,2,0,0,0}x2
+41 RETURN_VOID
+
+METHOD Lcom/twitter/app/common/activity/l;->d(Lcom/twitter/app/common/a;Lcom/twitter/app/common/x;)V
+0 CONST_STRING args v0
+2 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->k(Ljava/lang/Object;Ljava/lang/String;)V {3,0,0,0,0}x2
+5 INVOKE_STATIC Lcom/twitter/util/f;->f()V {0,0,0,0,0}x0
+8 IGET_OBJECT Lcom/twitter/app/common/activity/l;->g:Lcom/twitter/app/common/activity/e; v0,v2
+10 CONST_4 #0 v1
+11 INVOKE_VIRTUAL Lcom/twitter/app/common/activity/e;->invoke(Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object; {0,3,1,4,0}x4
+14 MOVE_RESULT_OBJECT v3
+15 CHECK_CAST Landroid/content/Intent; v3
+17 IGET_OBJECT Lcom/twitter/app/common/activity/l;->f:Landroid/content/Context; v4,v2
+19 INVOKE_VIRTUAL Landroid/content/Context;->startActivity(Landroid/content/Intent;)V {4,3,0,0,0}x2
+22 RETURN_VOID
+
+METHOD Lcom/twitter/app/main/x0;->a(Ljava/lang/Object;)V
+7 IGET_BOOLEAN Lcom/twitter/app/main/x0;->b:Z v0,v3
+9 IF_NEZ v0 offset 14
+11 IGET_BOOLEAN Lcom/twitter/app/main/x0;->c:Z v0,v3
+13 IF_NEZ v0 offset 3
+15 GOTO offset 8
+16 SGET_OBJECT Lcom/twitter/main/api/b;->a:Landroid/net/Uri; v0
+18 INVOKE_VIRTUAL Lcom/twitter/app/main/l1;->H3(Landroid/net/Uri;)V {4,0,0,0,0}x2
+21 CONST_4 #1 v0
+22 GOTO offset 18
+23 IGET_OBJECT Lcom/twitter/app/main/x0;->d:Landroid/content/Intent; v0,v3
+25 INVOKE_VIRTUAL Lcom/twitter/app/main/l1;->I3(Landroid/content/Intent;)V {4,0,0,0,0}x2
+28 SGET_OBJECT Lcom/twitter/main/api/b;->a:Landroid/net/Uri; v0
+30 IGET_OBJECT Lcom/twitter/app/main/l1;->B:Lcom/twitter/app/main/viewpager/a; v1,v4
+32 INVOKE_INTERFACE Lcom/twitter/ui/viewpager/h;->p()Landroid/net/Uri; {1,0,0,0,0}x1
+35 MOVE_RESULT_OBJECT v1
+36 INVOKE_VIRTUAL Landroid/net/Uri;->equals(Ljava/lang/Object;)Z {0,1,0,0,0}x2
+39 MOVE_RESULT v0
+40 IGET_OBJECT Lcom/twitter/app/main/x0;->e:Landroid/os/Bundle; v1,v3
+42 IF_NEZ v1 offset 21
+
+METHOD Lcom/twitter/app/common/inject/p;->onCreate(Landroid/os/Bundle;)V
+0 INVOKE_STATIC Lapp/hiro/oneback/runtime/OneBackExit;->install(Landroid/app/Activity;)V {1,0,0,0,0}x1
+3 INVOKE_STATIC Lapp/morphe/extension/twitter/patches/Changelogs;->showChangelog(Landroid/app/Activity;)V {1,0,0,0,0}x1
+6 INVOKE_SUPER Lcom/twitter/app/common/base/i;->onCreate(Landroid/os/Bundle;)V {1,2,0,0,0}x2
+9 IGET_OBJECT Lcom/twitter/app/common/inject/p;->y:Lcom/twitter/app/common/inject/b; v0,v1
+11 INVOKE_VIRTUAL Lcom/twitter/app/common/inject/b;->e(Landroid/app/Activity;Lcom/twitter/app/common/base/l;Landroid/os/Bundle;)V {0,1,1,2,0}x4
+14 CONST_4 #0 v2
+15 CONST_4 #3 v0
+16 INVOKE_STATIC Landroidx/activity/t;->b(Landroidx/fragment/app/x;Landroidx/activity/s0;I)V {1,2,0,0,0}x3
+19 RETURN_VOID

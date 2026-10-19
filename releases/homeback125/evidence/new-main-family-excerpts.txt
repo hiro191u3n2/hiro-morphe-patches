@@ -1,0 +1,84 @@
+Read-only DEX excerpts from the input APK. PCs are code-unit offsets.
+
+METHOD Lcom/twitter/x/lite/featureswitches/p;->a()Z
+0 IGET_OBJECT Lcom/twitter/x/lite/featureswitches/p;->a:Lcom/twitter/util/config/c0; v0,v5
+2 CONST_STRING_JUMBO x_lite_in_tfa_for_existing_users_enabled v1
+5 CONST_4 #0 v2
+6 INVOKE_VIRTUAL Lcom/twitter/util/config/c0;->a(Ljava/lang/String;Z)Z {0,1,2,0,0}x3
+9 MOVE_RESULT v1
+10 CONST_STRING existing_user_redirected_to_x_lite v3
+12 IGET_OBJECT Lcom/twitter/x/lite/featureswitches/p;->d:Landroid/content/SharedPreferences; v4,v5
+14 IF_EQZ v1 offset 18
+16 CONST_STRING_JUMBO x_lite_in_tfa_for_existing_users_exit_enabled v1
+19 INVOKE_VIRTUAL Lcom/twitter/util/config/c0;->a(Ljava/lang/String;Z)Z {0,1,2,0,0}x3
+22 MOVE_RESULT v0
+23 IF_NEZ v0 offset 9
+25 INVOKE_INTERFACE Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z {4,3,2,0,0}x3
+28 MOVE_RESULT v0
+29 IF_NEZ v0 offset 3
+31 CONST_4 #1 v2
+32 INVOKE_INTERFACE Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor; {4,0,0,0,0}x1
+35 MOVE_RESULT_OBJECT v0
+36 CONST #0 v2
+39 INVOKE_INTERFACE Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor; {0,3,2,0,0}x3
+42 INVOKE_INTERFACE Landroid/content/SharedPreferences$Editor;->commit()Z {0,0,0,0,0}x1
+45 RETURN v2
+
+METHOD Lcom/twitter/app/main/c2;-><init>(Lcom/twitter/x/lite/featureswitches/n;Ljavax/inject/a;Lkotlinx/coroutines/l0;Ljavax/inject/a;Lcom/twitter/util/user/UserIdentifier;)V
+45 INVOKE_INTERFACE Lcom/twitter/x/lite/featureswitches/n;->a()Z {8,0,0,0,0}x1
+48 MOVE_RESULT v8
+49 IF_EQZ v8 offset 58
+51 INVOKE_INTERFACE Ljavax/inject/a;->get()Ljava/lang/Object; {11,0,0,0,0}x1
+
+METHOD Lcom/twitter/x/lite/featureswitches/q$b;->emit(Ljava/lang/Object;Lkotlin/coroutines/Continuation;)Ljava/lang/Object;
+0 CHECK_CAST Lkotlin/Pair; v2
+2 IGET_OBJECT Lkotlin/Pair;->a:Ljava/lang/Object; v3,v2
+4 CHECK_CAST Ljava/lang/Boolean; v3
+6 IGET_OBJECT Lkotlin/Pair;->b:Ljava/lang/Object; v2,v2
+8 CHECK_CAST Lcom/twitter/util/user/UserIdentifier; v2
+10 INVOKE_VIRTUAL Ljava/lang/Boolean;->booleanValue()Z {3,0,0,0,0}x1
+13 MOVE_RESULT v3
+14 IF_EQZ v3 offset 21
+16 IGET_OBJECT Lcom/twitter/x/lite/featureswitches/q$b;->a:Lcom/twitter/x/lite/featureswitches/r; v3,v1
+18 IGET_OBJECT Lcom/twitter/x/lite/featureswitches/r;->d:Lcom/twitter/util/user/UserIdentifier; v0,v3
+20 INVOKE_STATIC Lkotlin/jvm/internal/Intrinsics;->f(Ljava/lang/Object;Ljava/lang/Object;)Z {2,0,0,0,0}x2
+23 MOVE_RESULT v2
+24 IF_EQZ v2 offset 11
+26 CONST_STRING_JUMBO x_lite_in_tfa_existing_users_enabled_warm_start v2
+29 CONST_4 #0 v0
+30 IGET_OBJECT Lcom/twitter/x/lite/featureswitches/r;->a:Lcom/twitter/util/config/c0; v3,v3
+32 INVOKE_VIRTUAL Lcom/twitter/util/config/c0;->a(Ljava/lang/String;Z)Z {3,2,0,0,0}x3
+35 SGET_OBJECT Lkotlin/Unit;->a:Lkotlin/Unit; v2
+37 RETURN_OBJECT v2
+
+METHOD Lcom/twitter/x/lite/stack/f0;->invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+1165 INSTANCE_OF Lcom/x/navigation/MainLandingArgs; v1,v0
+1167 IF_NEZ v1 offset 273
+
+METHOD Lcom/twitter/x/lite/stack/f0;->invoke(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;
+1440 NEW_INSTANCE Ljava/lang/Exception; v1
+1442 NEW_INSTANCE Ljava/lang/StringBuilder; v2
+1444 CONST_STRING Unsupported navigation args:  v3
+1446 INVOKE_DIRECT Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V {2,3,0,0,0}x2
+1449 INVOKE_VIRTUAL Ljava/lang/StringBuilder;->append(Ljava/lang/Object;)Ljava/lang/StringBuilder; {2,0,0,0,0}x2
+1452 INVOKE_VIRTUAL Ljava/lang/StringBuilder;->toString()Ljava/lang/String; {2,0,0,0,0}x1
+1455 MOVE_RESULT_OBJECT v0
+1456 INVOKE_DIRECT Ljava/lang/Exception;-><init>(Ljava/lang/String;)V {1,0,0,0,0}x2
+1459 THROW v1
+
+METHOD Lcom/twitter/x/lite/stack/z;->i(Lcom/x/navigation/z1;Z)V
+1233 IF_EQZ v3 offset 32
+1235 NEW_INSTANCE Lcom/twitter/x/lite/stack/z$b; v1
+1237 NEW_INSTANCE Lcom/twitter/main/api/b$a; v3
+1239 INVOKE_DIRECT Lcom/twitter/main/api/b$a;-><init>()V {3,0,0,0,0}x1
+1242 CHECK_CAST Lcom/x/navigation/MainLandingArgs; v2
+1244 INVOKE_VIRTUAL Lcom/x/navigation/MainLandingArgs;->getInitialTab()Lcom/x/navigation/MainLandingArgs$TabType; {2,0,0,0,0}x1
+1247 MOVE_RESULT_OBJECT v2
+1248 INVOKE_STATIC Lcom/twitter/x/lite/stack/g0;->a(Lcom/x/navigation/MainLandingArgs$TabType;)Landroid/net/Uri; {2,0,0,0,0}x1
+1251 MOVE_RESULT_OBJECT v2
+1252 IPUT_OBJECT Lcom/twitter/main/api/b$a;->b:Landroid/net/Uri; v2,v3
+1254 INVOKE_VIRTUAL Lcom/twitter/util/object/o;->j()Ljava/lang/Object; {3,0,0,0,0}x1
+1257 MOVE_RESULT_OBJECT v2
+1258 CHECK_CAST Lcom/twitter/app/common/a; v2
+1260 INVOKE_DIRECT Lcom/twitter/x/lite/stack/z$b;-><init>(Lcom/twitter/app/common/a;)V {1,2,0,0,0}x2
+1263 GOTO_16 offset 1289
