@@ -79,6 +79,19 @@ def test(source,work,jdk=None,ndk=None):
     children['finish_memory92'].update(**{key:True for key in ('retained_finish_memory1992_gate', 'strict_standard1999_baseline_identity')})
     children['pipeline_gate'].update(**{key:True for key in ('retained_pipeline_gate1992', 'strict_narrow_baseline_metadata1999', 'readiness_peer_pixels_forbidden1999')})
     for group,keys in gate.CURRENT_PROOF_KEYS.items():children[group].update(device_speedup_verified=False,**{key:True for key in keys})
+    children['finish_memory92'].update(assertions=297,
+        queue=dict(status='passed',assertions=29,actual_qualification_queue=True,physical_android_tested=False),
+        finish=dict(status='passed',assertions=114,actual_finish_graph=True,full_pixel_comparator=True,native_transport_mocked=True,physical_android_tested=False),
+        route=dict(status='passed',assertions=40,actual_route_control=True,native_transport_mocked=True,physical_android_tested=False),
+        historical_finish111=dict(status='passed',assertions=114,actual_finish_graph=True,full_pixel_comparator=True,native_transport_mocked=True,physical_android_tested=False),
+        restored_chain111_sha256='8da03b9ae3d770133f22e75defd555d8696e31ceac53955bfb86fa54063c4847',
+        historical_source_sha256={
+            'tests1992/finish_memory/FinishRoute1992Test.java':'64c598d2f79cdeb07f602f926062c8deb5398de1b5359a23b01f1fed5909b982',
+            'tests1992/finish_memory/FinishMemory1992Test.java':'471b7e4ae164abf9c702dfe1e4b460dcc7e0f881e053a4698e36dc1675d16f6b',
+            'host_finish_memory1992.py':'a63e177685a3a39d603f4003466df80cf4677ddb7e3f06a61549df8f9a6cd7c5'})
+    children['memory97'].update(assertions=1268,device_speedup_verified=False,tests=[
+        dict(status='passed',assertions=832),dict(status='passed',assertions=100),dict(status='passed',assertions=10),
+        copy.deepcopy(children['finish_memory92']),dict(status='passed',assertions=29)])
     children['resident_finish19112'].update(assertions=432,cases=17,compared_pixels=1384202,
         source_inverse=dict(status='passed',assertions=28,negative_controls=26,
             original_source_sha256={'GpuChain1961.java':'8da03b9ae3d770133f22e75defd555d8696e31ceac53955bfb86fa54063c4847',
@@ -287,7 +300,9 @@ def test(source,work,jdk=None,ndk=None):
     def changed105(path,value):
         edited=copy.deepcopy(children);row=edited
         for key in path[:-1]:row=row[key]
-        if value is remove105:row.pop(path[-1],None)
+        if value is remove105:
+            if type(row) is list:row.pop(path[-1])
+            else:row.pop(path[-1],None)
         else:row[path[-1]]=value
         totals=[r.get('assertions') if type(r) is dict else None for r in edited.values()]
         # Let malformed counters reach the real parser; do not fail in the
@@ -299,11 +314,11 @@ def test(source,work,jdk=None,ndk=None):
     # The .111 observer, dispatcher and persistence evidence must be present
     # down to each executed subtest. Numeric booleans are never evidence.
     def proof_paths111(row,prefix):
-        for key,value in row.items():
+        for key,value in (enumerate(row) if type(row) is list else row.items()):
             path=prefix+(key,)
             yield path,value
-            if type(value) is dict:yield from proof_paths111(value,path)
-    for group in ('resident_timing111','strong_counts111','diagnostics111','resident_plan19112','strong_cancellation19112','resident_finish19112'):
+            if type(value) in (dict,list):yield from proof_paths111(value,path)
+    for group in ('resident_timing111','strong_counts111','diagnostics111','resident_plan19112','strong_cancellation19112','resident_finish19112','finish_memory92','memory97'):
         rejected(lambda group=group:changed105((group,),remove105))
         for path,value in proof_paths111(children[group],(group,)):
             rejected(lambda path=path:changed105(path,remove105))
@@ -324,6 +339,10 @@ def test(source,work,jdk=None,ndk=None):
             (('strong_counts111','original_regression_assertions'),266)]:
         rejected(lambda path=path,value=value:changed105(path,value))
     for path,value in [
+            (('finish_memory92','assertions'),296),(('finish_memory92','queue','assertions'),28),
+            (('finish_memory92','finish','assertions'),113),(('finish_memory92','route','assertions'),39),
+            (('finish_memory92','historical_finish111','assertions'),113),
+            (('memory97','assertions'),1267),(('memory97','tests',3,'historical_finish111','assertions'),113),
             (('resident_plan19112','assertions'),9607),(('resident_plan19112','planner_cases'),3999),
             (('resident_plan19112','source_inverse','assertions'),5),(('resident_plan19112','source_inverse','negative_controls'),4),
             (('resident_finish19112','assertions'),431),(('resident_finish19112','cases'),16),

@@ -23,6 +23,7 @@ REQUIRED_HOST_GROUPS=frozenset(('logcopy95','shutter94','front94','queue95','run
     'finish_memory92','chain','finish_domain','pipeline_gate','failure92','finish_recovery95','model_parallel96','cpu_copy96','front_timing96','memory97','front_plan97','mask_rows98','front99','chain99','capture99','memory108','resident_memory108'))
 
 CURRENT_PROOF_KEYS={
+    'finish_memory92':('current_phase_owned_contract19112','retained_finish_phase111'),
     'resident_finish19112':('resident128_exact_pixels','resident_profile_key_bound','resident_phase_budget_verified','resident_failure_ownership_verified','actual_jni','resident_finish_source_inverse19112','foreground_profile_toctou_rejected','faulty_guard_removal_reproduces_128','stable_profiles_preserved','preflight_closed_on_all_paths'),
     'resident_plan19112':('current_resident_planner_executed19112','accepted_degraded_resident_reclaimed19112','same_budget_replan19112','cpu_lease_cancel_preserved19112','published111_plan_equivalence19112','resident_plan_source_inverse19112','published111_anonymous_abi_preserved19112'),
     'strong_cancellation19112':('fixture_corpus_bit_exact','old_unchecked_map_interrupt_reproduced','exact_comparison_unchanged','full_256_row_speed_trials_preserved','partial_certificate_writes_zero','diagnostic_failure_nonfatal','checkpoints_outside_timed_gpu_calls','native_and_gpu_drain_unchanged','published111_restored_exactly'),
@@ -306,7 +307,47 @@ def positive_host111(tests):
         and counts.get('actual_jni') is False and counts.get('physical_android_tested') is False,
         'Strong counts .111 accounting, retained regressions or scope differs')
 
+def positive_finish_phases112(phases):
+    require(type(phases) is dict and phases.get('status')=='passed','Finish phase evidence missing')
+    for flag in ('retained_finish_memory1992_gate','strict_standard1999_baseline_identity',
+            'current_phase_owned_contract19112','retained_finish_phase111'):
+        require(phases.get(flag) is True,'Current/historical finish phase proof missing: '+flag)
+    require(type(phases.get('assertions')) is int and phases['assertions']==297
+        and phases.get('physical_android_tested') is False and phases.get('device_speedup_verified') is False,
+        'Current/historical finish phase coverage differs')
+    for name,count,flags in (('queue',29,('actual_qualification_queue',)),
+            ('finish',114,('actual_finish_graph','full_pixel_comparator','native_transport_mocked')),
+            ('route',40,('actual_route_control','native_transport_mocked')),
+            ('historical_finish111',114,('actual_finish_graph','full_pixel_comparator','native_transport_mocked'))):
+        row=phases.get(name)
+        require(type(row) is dict and row.get('status')=='passed' and type(row.get('assertions')) is int
+            and row['assertions']==count and row.get('physical_android_tested') is False,
+            'Executed finish phase child incomplete: '+name)
+        for flag in flags:require(row.get(flag) is True,'Executed finish phase proof missing: '+name+'/'+flag)
+    require(phases['assertions']==sum(phases[name]['assertions'] for name in ('queue','finish','route','historical_finish111')),
+        'Current/historical finish phase assertion accounting differs')
+    require(phases.get('restored_chain111_sha256')=='8da03b9ae3d770133f22e75defd555d8696e31ceac53955bfb86fa54063c4847',
+        'Historical finish phase did not restore the exact published .111 graph')
+    historical=phases.get('historical_source_sha256')
+    require(type(historical) is dict,'Original finish phase fixture identities missing')
+    for name,digest in {
+            'tests1992/finish_memory/FinishRoute1992Test.java':'64c598d2f79cdeb07f602f926062c8deb5398de1b5359a23b01f1fed5909b982',
+            'tests1992/finish_memory/FinishMemory1992Test.java':'471b7e4ae164abf9c702dfe1e4b460dcc7e0f881e053a4698e36dc1675d16f6b',
+            'host_finish_memory1992.py':'a63e177685a3a39d603f4003466df80cf4677ddb7e3f06a61549df8f9a6cd7c5'}.items():
+        require(historical.get(name)==digest,'Original finish phase fixture changed: '+name)
+
 def positive_host112(tests):
+    positive_finish_phases112(tests['finish_memory92'])
+    memory=tests['memory97'];children=memory.get('tests')
+    require(type(children) is list and len(children)==5,'Nested foreground memory proof inventory differs')
+    for row,count in zip(children,(832,100,10,297,29)):
+        require(type(row) is dict and row.get('status')=='passed' and type(row.get('assertions')) is int
+            and row['assertions']==count,'Nested foreground memory execution coverage differs')
+    positive_finish_phases112(children[3])
+    require(type(memory.get('assertions')) is int and memory['assertions']==1268
+        and memory['assertions']==sum(row['assertions'] for row in children)
+        and memory.get('physical_android_tested') is False and memory.get('device_speedup_verified') is False,
+        'Nested foreground memory assertion accounting or scope differs')
     finish=tests['resident_finish19112']
     for key,value in (('assertions',432),('cases',17),('compared_pixels',1384202)):
         require(type(finish.get(key)) is int and finish[key]==value,'Resident finish .112 actual JNI coverage incomplete: '+key)

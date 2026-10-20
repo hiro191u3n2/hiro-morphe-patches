@@ -5,7 +5,9 @@ The explicit readiness peer now reports its known narrow (32-row) schedule as
 scalar metadata. Certificate queries and actual finish/pixel execution still
 raise; no GPU result or photograph qualification is fabricated. All historical
 harness assertions remain unchanged and three narrow-metadata assertions are
-added. The historical runner/fixtures and production sources are not edited.
+added. The .112 resident key also reads this scalar profile once when the
+independent finish proof is absent; that read grants no execution permission.
+The historical runner/fixtures and production sources are not edited.
 """
 from pathlib import Path
 import argparse, hashlib, importlib.util, json
@@ -48,7 +50,7 @@ def test(source,work,classes,native,jdk):
  retained.HARNESS=retained.HARNESS.replace(anchor,'  int beforeMissingQueries1999=GpuFinishDefault1990.narrowQueries1999;\n'+anchor)
  anchor='  check(value==null,"missing independent finish proof never exposes an uncertified resident result");'
  if retained.HARNESS.count(anchor)!=1:raise AssertionError('Retained uncertified-result assertion changed')
- retained.HARNESS=retained.HARNESS.replace(anchor,anchor+'\n  check(GpuFinishDefault1990.narrowQueries1999==beforeMissingQueries1999,"missing finish readiness never queries a deployed schedule");')
+ retained.HARNESS=retained.HARNESS.replace(anchor,anchor+'\n  check(GpuFinishDefault1990.narrowQueries1999==beforeMissingQueries1999+1,"missing finish readiness permits exactly one scalar resident-profile key read without execution");')
  result=retained.test(source,work/'retained92',classes,native,jdk)
  if sha(old)!=before:raise AssertionError('Historical pipeline gate modified')
  if not result.get('actual_pipeline_resident_code') or not result.get('controlled_admission_peers'):raise AssertionError('Retained production gate missing')
