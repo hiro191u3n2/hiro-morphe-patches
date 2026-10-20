@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run current .108 timing with retained boundary tests and publication-latency regression.
+"""Run current .110 timing with retained boundary tests and publication-latency regression.
 Only release literals and the invalid upper bound after new queue reason24 are adapted."""
 from pathlib import Path
 import argparse, hashlib, importlib.util, json, re
@@ -13,7 +13,7 @@ def module(name,path):
 def test(source,work,jdk=None,ndk=None):
     source,work=Path(source).resolve(),Path(work).resolve();work.mkdir(parents=True,exist_ok=True)
     version=re.search(r'VERSION = "([^\"]+)"',(source/'ProcessingTiming1947.java').read_text()).group(1)
-    assert version=="1.9.108", "Runtime diagnostic version must match this release target"
+    assert version=="1.9.110", "Runtime diagnostic version must match this release target"
     retained=module('timing92old',source/'host_timing1986.py')
     old=module('timing92base',source/'host_timing1982.py')
     prior=module('timing92prior',source/'host_timing1985.py')
@@ -46,7 +46,7 @@ final class GpuStartup1990 {
     for p in ['tests1984/timing/QueueTiming1984Test.java','tests1985/timing/QueueTiming1985Test.java','tests1986/timing/ForecastTiming1986Test.java','tests1990/timing/SaveTiming1990Test.java','tests1991/timing/CaptureTimeline1991Test.java','tests1992/timing/Timing1992Test.java','tests1993/timing/Timing1993Test.java','tests1994/timing/Timing1994Test.java','tests1995/timing/Timing1995Test.java','tests1996/timing/FrontTiming1996Test.java','tests1997/timing/MemoryTiming1997Test.java','tests1998/timing/RecentCapture1998Test.java']:
         path=source/p
         body=path.read_text()
-        if path.name=='Timing1992Test.java':body=body.replace('1.9.92','1.9.108').replace('finishWork1992(t,10,1,1)','finishWork1992(t,11,1,1)')
+        if path.name=='Timing1992Test.java':body=body.replace('1.9.92','1.9.110').replace('finishWork1992(t,10,1,1)','finishWork1992(t,11,1,1)')
         if path.name=='QueueTiming1985Test.java':body=body.replace('residentExit1983(other,0,6,22,0,0,0,0,0,0)', 'residentExit1983(other,0,6,25,0,0,0,0,0,0)')
         if path.name=='Timing1994Test.java':body=body.replace('3*24+23','3*25+23').replace('回（枠解放待ち・ロック再取得を含む）','回（撮影内ワーカーの枠解放待ち・ロック再取得を含む。背景検証の待機時間ではありません）')
         if path.name=='Timing1993Test.java':body=body.replace('11*23','11*25').replace('9*23+22','9*25+22').replace('1024,0,-1,23,0,0,1,0,1024','1024,0,-1,25,0,0,1,0,1024')
