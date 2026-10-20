@@ -1,0 +1,1 @@
+package android.os;public final class Looper {private static final Thread owner=Thread.currentThread();private static final Looper main=new Looper();public static Looper getMainLooper(){return main;}public static Looper myLooper(){return Thread.currentThread()==owner?main:null;}public static boolean isMain(){return Thread.currentThread()==owner;}}
