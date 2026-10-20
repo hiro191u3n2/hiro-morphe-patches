@@ -1,0 +1,70 @@
+{
+  "original_sha256": "27fc632074e7adaf45e6f55422167ed25b383d3a3695a5f8895a3d212ab429e5",
+  "changes": [
+    {
+      "old": "",
+      "new": "    // Scalar evidence for the precise reserve/revalidation decision. Unknown\n    // transport or owner failure never becomes a recoverable memory refusal.\n    private static final ThreadLocal<long[]> CAPACITY_FAILURE19110=new ThreadLocal<long[]>();\n    static void clearCapacityFailure19110(){CAPACITY_FAILURE19110.remove();}\n    static long[] capacityFailure19110(){long[] value=CAPACITY_FAILURE19110.get();return value==null?null:value.clone();}\n    private static void capacityFailure19110(int reason,long required,long budget){\n        if(reason==0){CAPACITY_FAILURE19110.remove();return;}\n        try{CAPACITY_FAILURE19110.set(new long[]{reason,required,budget});}catch(Throwable optional){CAPACITY_FAILURE19110.remove();}\n    }\n    // 1=physical budget, 2=native ceiling, 3=input, 4=SSBO limit,\n    // 5=lease count, 6=capacity snapshot, 7=session, 8=owner/unknown.\n\n",
+      "new_line": 34
+    },
+    {
+      "old": "",
+      "new": "        return available;\n    }\n    /** The same owner order, byte accounting and reserve as the original\n     * non-reservation budget. Unknown owner bytes still refuse admission at\n     * zero, but cannot be evidence that reclaiming an idle cache will help. */\n    private static long capacityBudget19110(){\n        Runtime r=Runtime.getRuntime();\n        long available=r.maxMemory()-(r.totalMemory()-r.freeMemory());\n        long[] owners={retained,WholeRoute1953.retainedBytes(),GpuFinish1953.retainedBytes(),\n            SpeedWorkers1935.nativeRetainedBytes1956(),64L*1024*1024,0};\n        if(available<0)return -1;\n        for(long bytes:owners)if(bytes<0||bytes==Long.MAX_VALUE)return -1;\n        for(long bytes:owners){if(bytes>available)return 0;available-=bytes;}\n",
+      "new_line": 92
+    },
+    {
+      "old": "",
+      "new": "\n",
+      "new_line": 206
+    },
+    {
+      "old": "        boolean revalidate1971(){\n            if(closed||Thread.currentThread().isInterrupted())return false;\n            return owner(new Callable<Boolean>(){public Boolean call(){\n                if(closed||!leases1971.contains(Lease1971.this))return Boolean.FALSE;\n",
+      "new": "        private long[] capacityDecision19110;\n        synchronized boolean revalidate1971(){\n            clearCapacityFailure19110();\n            if(closed||Thread.currentThread().isInterrupted()){capacityFailure19110(7,-1,-1);return false;}\n            // Preserve the published Callable<Boolean> and its constructor\n            // captures. This lease monitor covers submit, completed Future.get\n            // and caller-local publication, so another recheck cannot replace\n            // this operation's tuple before the caller has consumed it.\n            capacityDecision19110=null;\n            boolean accepted=owner(new Callable<Boolean>(){public Boolean call(){\n                if(closed||!leases1971.contains(Lease1971.this)){capacityDecision19110=new long[]{7,-1,-1};return Boolean.FALSE;}\n",
+      "new_line": 252
+    },
+    {
+      "old": "                if(debt==null){reserved1971=Long.MAX_VALUE;return Boolean.FALSE;}\n",
+      "new": "                if(debt==null){reserved1971=Long.MAX_VALUE;capacityDecision19110=new long[]{6,-1,-1};return Boolean.FALSE;}\n",
+      "new_line": 264
+    },
+    {
+      "old": "                return debt[0]<=MAX_BYTES-retained&&debt[1]<=physicalBudget1971(false);\n",
+      "new": "                if(debt[0]>MAX_BYTES-retained){capacityDecision19110=new long[]{2,debt[0],MAX_BYTES-retained};return Boolean.FALSE;}\n                long budget=capacityBudget19110();\n                int reason=debt[1]>Math.max(0,budget)?(budget<0?6:1):0;\n                capacityDecision19110=new long[]{reason,debt[1],budget};return reason==0?Boolean.TRUE:Boolean.FALSE;\n",
+      "new_line": 266
+    },
+    {
+      "old": "",
+      "new": "            long[] decision=capacityDecision19110;capacityDecision19110=null;\n            if(decision==null){capacityFailure19110(8,-1,-1);return false;}\n            capacityFailure19110((int)decision[0],decision[1],decision[2]);return accepted;\n",
+      "new_line": 271
+    },
+    {
+      "old": "",
+      "new": "        private volatile int capacityReason19110;\n        private volatile long capacityNeed19110,capacityBudget19110;\n",
+      "new_line": 435
+    },
+    {
+      "old": "            if(!usable()||slots==null||targetBytes==null||uploadBytes==null||slots.length<1||slots.length>STORAGE_SLOTS1976||\n                    slots.length!=targetBytes.length||slots.length!=uploadBytes.length||javaReadbackBytes<0||javaReadbackBytes>MAX_BYTES)return null;\n",
+      "new": "            clearCapacityFailure19110();capacityReason19110=8;capacityNeed19110=capacityBudget19110=-1;\n            if(!usable()){capacityFailure19110(7,-1,-1);return null;}\n            if(slots==null||targetBytes==null||uploadBytes==null||slots.length<1||slots.length>STORAGE_SLOTS1976||\n                    slots.length!=targetBytes.length||slots.length!=uploadBytes.length||javaReadbackBytes<0||javaReadbackBytes>MAX_BYTES){capacityFailure19110(3,-1,-1);return null;}\n",
+      "new_line": 488
+    },
+    {
+      "old": "            return owner(new Callable<Lease1971>(){public Lease1971 call(){\n                if(leases1971.size()>=3)return null;\n                long[] actual=capacities1971(token);if(actual==null)return null;\n",
+      "new": "            Lease1971 result=owner(new Callable<Lease1971>(){public Lease1971 call(){\n                if(leases1971.size()>=3){capacityReason19110=5;return null;}\n                long[] actual=capacities1971(token);if(actual==null){capacityReason19110=6;return null;}\n",
+      "new_line": 499
+    },
+    {
+      "old": "                    if(slot<0||slot>=STORAGE_SLOTS1976||seen[slot]||bytes<1||bytes>MAX_BYTES||bytes>actual[26]||upload<0||upload>bytes)return null;\n",
+      "new": "                    if(slot<0||slot>=STORAGE_SLOTS1976||seen[slot]||bytes<1||bytes>MAX_BYTES||upload<0||upload>bytes){capacityReason19110=3;return null;}\n                    if(bytes>actual[26]){capacityReason19110=4;capacityNeed19110=bytes;capacityBudget19110=actual[26];return null;}\n",
+      "new_line": 505
+    },
+    {
+      "old": "                    if(debt==null||debt[0]>MAX_BYTES-retained||debt[1]>physicalBudget1971(false))return null;\n                    reserved1971=debt[1];admitted=true;return lease;\n",
+      "new": "                    if(debt==null){capacityReason19110=6;return null;}\n                    if(debt[0]>MAX_BYTES-retained){capacityReason19110=2;capacityNeed19110=debt[0];capacityBudget19110=MAX_BYTES-retained;return null;}\n                    capacityNeed19110=debt[1];capacityBudget19110=capacityBudget19110();\n                    if(debt[1]>Math.max(0,capacityBudget19110)){capacityReason19110=capacityBudget19110<0?6:1;return null;}\n                    reserved1971=debt[1];admitted=true;capacityReason19110=0;return lease;\n",
+      "new_line": 520
+    },
+    {
+      "old": "",
+      "new": "            capacityFailure19110(result==null?capacityReason19110:0,capacityNeed19110,capacityBudget19110);return result;\n",
+      "new_line": 534
+    }
+  ]
+}

@@ -1,0 +1,38 @@
+{
+  "schema": "ulike112-resident-plan-source-inverse-v1",
+  "original_release": "1.9.111",
+  "reviewed": true,
+  "files": {
+    "QualityPipeline1932.java": {
+      "original_sha256": "a10406bc6f19255decf3426aafb46254229d2d73e309502a44348898a7744368",
+      "changes": [
+        {
+          "new_line": 1190,
+          "old": "            final long budget = Math.max(0,availableMemory()-RESERVE);\n",
+          "new": ""
+        },
+        {
+          "new_line": 1191,
+          "old": "            int selected = Math.min(256,Scheduling1944.coreRows(width,height,halo,upper,budget));\n            selected=GpuStrongLayout1976.selectRows(width,height,level,shadows,captureSmooth,plan==null?0:plan.beautyQ8,plan==null?0:plan.shadowBudgetQ8,selected);\n            long perWorker;\n            while (true) {\n                perWorker = (long)width*Math.min(height,selected+2*halo)*8\n                    + StrongNoise1958.workspaceBytes(width,Math.min(height,selected));\n                if (perWorker <= Math.max(0,budget-shared) || selected <= 16) break;\n                selected = Math.max(16,selected/2);\n            }\n            final int core = selected;\n            final int maximum = Math.max(1,(int)Math.min(SpeedWorkers1935.availableWorkers1944(),\n                Math.min(upper,Math.max(0,budget-shared)/Math.max(1,perWorker))));\n            final int count = Math.max(1,Math.min(maximum,(height+core-1)/core));\n",
+          "new": "            final StrongPlan19112 chosen19112=strongPlan19112(width,height,halo,upper,resident!=null,\n                new StrongMemoryOwner19112(width,height,halo,upper,level,shadows,captureSmooth,plan));\n            final long budget=chosen19112.budget,perWorker=chosen19112.workerBytes;\n            final int core=chosen19112.rows,count=chosen19112.workers;\n"
+        },
+        {
+          "new_line": 1222,
+          "old": "",
+          "new": "\n    // resident plan19112 BEGIN: pixel-independent admission only.\n    interface StrongMemory19112 {\n        long budget();int workers();int rows(long bytes);long retained();int trim();void check();\n    }\n    /** Named owner preserves the published anonymous-class ABI identities. */\n    private static final class StrongMemoryOwner19112 implements StrongMemory19112 {\n        final int width,height,halo,upper,level;final boolean shadows,captureSmooth;\n        final QualityPixels1932.Plan plan;\n        StrongMemoryOwner19112(int width,int height,int halo,int upper,int level,boolean shadows,boolean captureSmooth,QualityPixels1932.Plan plan){\n            this.width=width;this.height=height;this.halo=halo;this.upper=upper;this.level=level;\n            this.shadows=shadows;this.captureSmooth=captureSmooth;this.plan=plan;\n        }\n        public long budget(){return Math.max(0,availableMemory()-RESERVE);}\n        public int workers(){return SpeedWorkers1935.availableWorkers1944();}\n        public int rows(long bytes){int rows=Math.min(256,Scheduling1944.coreRows(width,height,halo,upper,bytes));\n            return GpuStrongLayout1976.selectRows(width,height,level,shadows,captureSmooth,plan==null?0:plan.beautyQ8,plan==null?0:plan.shadowBudgetQ8,rows);}\n        public long retained(){return SpeedWorkers1935.nativeRetainedBytes1956();}\n        public int trim(){return SpeedWorkers1935.trimNativeIdle1989();}\n        public void check(){if(Thread.currentThread().isInterrupted()||GpuQualification1961.cancelled())\n            throw new java.util.concurrent.CancellationException(\"resident Strong plan cancelled\");}\n    }\n    static final class StrongPlan19112 {\n        final int rows,workers;final long workerBytes,budget;\n        StrongPlan19112(int rows,int workers,long bytes,long budget){this.rows=rows;this.workers=workers;workerBytes=bytes;this.budget=budget;}\n    }\n    /** This is the existing conservative CPU-fallback reservation. GPU use\n     * never permits smaller source, output, policy or native workspaces. */\n    static StrongPlan19112 chooseStrong19112(int width,int height,int halo,int selected,int upper,int available,long budget){\n        if(width<1||height<1||halo<0||selected<16||selected>256||(selected&(selected-1))!=0||\n                upper<1||upper>4||available<1||available>4||budget<0)throw new IllegalArgumentException(\"Strong plan input\");\n        long shared=(long)width*halo*4,perWorker;\n        while(true){\n            perWorker=(long)width*Math.min((long)height,selected+2L*halo)*8\n                +StrongNoise1958.workspaceBytes(width,Math.min(height,selected));\n            if(perWorker<=Math.max(0,budget-shared)||selected<=16)break;\n            selected=Math.max(16,selected/2);\n        }\n        int maximum=Math.max(1,(int)Math.min(available,Math.min(upper,Math.max(0,budget-shared)/Math.max(1,perWorker))));\n        int count=Math.max(1,Math.min(maximum,1+(height-1)/selected));\n        return new StrongPlan19112(selected,count,perWorker,budget);\n    }\n    /** Resident image/model capacities have already been charged by the live\n     * GPU owner. Reclaim idle CPU capacity only when it constrains this plan.\n     * The trim return code and observed retained bytes never become a budget;\n     * the ordinary live accounting and CPU permits are read again afterwards.\n     * Active native owners retain their leases through their release barrier. */\n    static StrongPlan19112 strongPlan19112(int width,int height,int halo,int upper,boolean resident,StrongMemory19112 memory){\n        long before=memory.budget();int initialRows=memory.rows(before),available=memory.workers();\n        StrongPlan19112 chosen=chooseStrong19112(width,height,halo,initialRows,upper,available,before);\n        if(!resident)return chosen;\n        memory.check();\n        int preferred=memory.rows(Long.MAX_VALUE);\n        int maximum=Math.min(Math.min(upper,available),1+(height-1)/preferred);\n        if(chosen.rows<preferred||chosen.workers<maximum){\n            long retained=memory.retained();\n            if(retained>0&&retained<Long.MAX_VALUE){\n                memory.check();memory.trim();memory.check();\n                long after=memory.budget();int currentRows=memory.rows(after),currentWorkers=memory.workers();\n                chosen=chooseStrong19112(width,height,halo,currentRows,upper,currentWorkers,after);\n            }\n        }\n        return chosen;\n    }\n    // resident plan19112 END\n"
+        },
+        {
+          "new_line": 1371,
+          "old": "",
+          "new": "                final int residentRows19112=GpuChain1961.residentRows19112();\n"
+        },
+        {
+          "new_line": 1373,
+          "old": "                return GpuChain1961.compareResidentFinish19108(source,rotation,width,height,plan,!identity,expected,64,true,transfer,identity,cancellation);\n",
+          "new": "                return GpuChain1961.compareResidentFinish19108(source,rotation,width,height,plan,!identity,expected,residentRows19112,true,transfer,identity,cancellation);\n"
+        }
+      ]
+    }
+  },
+  "reviewer": "independent resident-plan source and named-owner ABI review"
+}
