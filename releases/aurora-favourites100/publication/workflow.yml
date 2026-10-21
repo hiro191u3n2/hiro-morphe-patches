@@ -1,0 +1,124 @@
+name: Verify and publish Aurora Store favourite startup v1.0.0 bundle265
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/aurora-favourites100/src/**'
+      - 'releases/aurora-favourites100/publication/**'
+      - 'releases/aurora-favourites100/README.md'
+      - '.github/workflows/aurora-favourites100-publish.yml'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Confirm active reviewed baseline and pinned JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,subprocess
+          spec=importlib.util.spec_from_file_location('aurora_publish',pathlib.Path('releases/aurora-favourites100/publication/publish.py'))
+          pub=importlib.util.module_from_spec(spec);spec.loader.exec_module(pub)
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          pub.require(feed['version']==pub.BASE_VERSION and feed['download_url']==pub.BASE_URL,'Active baseline advanced')
+          pub.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.8','JDK differs')
+          spec2=importlib.util.spec_from_file_location('aurora_freeze',pathlib.Path('releases/aurora-favourites100/publication/freeze.py'))
+          freeze=importlib.util.module_from_spec(spec2);spec2.loader.exec_module(freeze)
+          expected=json.loads(pathlib.Path('releases/aurora-favourites100/publication/expected.json').read_text())
+          sources,identity=freeze.source_identity()
+          pub.require(expected['sources']==sources and expected['source_sha256']==identity,'Source changed after local validation')
+          PY
+      - name: Stage pinned baseline and build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,importlib.util,io,json,pathlib,urllib.request,zipfile
+          spec=importlib.util.spec_from_file_location('aurora_publish',pathlib.Path('releases/aurora-favourites100/publication/publish.py'))
+          pub=importlib.util.module_from_spec(spec);spec.loader.exec_module(pub)
+          root=pathlib.Path('.ci-aurora-favourites100/staged');(root/'tools').mkdir(parents=True)
+          def get(url):
+              request=urllib.request.Request(url,headers={'User-Agent':'Hiro-AuroraFavourites100-CI'})
+              with urllib.request.urlopen(request,timeout=180) as response:
+                  assert response.status==200
+                  return response.read()
+          rows={
+            'morphe.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar',None,None,'82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c'),
+            'morphe2.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.0-dev.4/morphe-desktop-1.19.0-dev.4-all.jar',None,None,'67479a00dba2de387e5115b73960267325e544cedf44a709416cdfb70c82e7f2'),
+            'android.jar':('https://dl.google.com/android/repository/platform-35_r02.zip','0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0','android-35/android.jar','4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b'),
+            'd8.jar':('https://dl.google.com/android/repository/build-tools_r35_linux.zip','bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88','android-15/lib/d8.jar','305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5')}
+          for name,(url,archive_pin,entry,pin) in rows.items():
+              raw=get(url)
+              if archive_pin:assert hashlib.sha256(raw).hexdigest()==archive_pin,'Tool archive differs: '+name
+              if entry:
+                  with zipfile.ZipFile(io.BytesIO(raw)) as archive:raw=archive.read(entry)
+              assert hashlib.sha256(raw).hexdigest()==pin,'Tool differs: '+name
+              (root/'tools'/name).write_bytes(raw)
+          raw=get(pub.BASE_URL);assert hashlib.sha256(raw).hexdigest()==pub.BASE_SHA
+          (root/'baseline264.mpp').write_bytes(raw)
+          cfg=json.loads(pathlib.Path('releases/aurora-favourites100/publication/input.json').read_bytes())
+          raw=get(cfg['official_apk_url']);assert hashlib.sha256(raw).hexdigest()==cfg['official_apk_sha256'],'Official Aurora APK differs'
+          (root/'aurora.apk').write_bytes(raw)
+          raw=get(cfg['upstream_apk_url']);assert hashlib.sha256(raw).hexdigest()==cfg['upstream_apk_sha256'],'Official-signed Aurora APK differs'
+          (root/'official-aurora.apk').write_bytes(raw)
+          PY
+      - name: First clean SDK build and resource DEX regression checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/aurora-favourites100/src/build.py --base .ci-aurora-favourites100/staged/baseline264.mpp --tools .ci-aurora-favourites100/staged/tools --apk .ci-aurora-favourites100/staged/aurora.apk --official-apk .ci-aurora-favourites100/staged/official-aurora.apk --work .ci-aurora-favourites100/build-a --dist .ci-aurora-favourites100/dist-a 2>&1 | tee .ci-aurora-favourites100/build-a.log
+      - name: Second clean build and exact artifact comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/aurora-favourites100/src/build.py --base .ci-aurora-favourites100/staged/baseline264.mpp --tools .ci-aurora-favourites100/staged/tools --apk .ci-aurora-favourites100/staged/aurora.apk --official-apk .ci-aurora-favourites100/staged/official-aurora.apk --work .ci-aurora-favourites100/build-b --dist .ci-aurora-favourites100/dist-b 2>&1 | tee .ci-aurora-favourites100/build-b.log
+          python3 - <<'PY'
+          import pathlib
+          root=pathlib.Path('.ci-aurora-favourites100')
+          for name in ('Aurora_Store_Favourites_v1.0.0.mpp','Hiro_Morphe_Patches_v1.0.265.mpp','QA_Aurora_Store_v1.0.0.json'):
+              assert (root/'dist-a'/name).read_bytes()==(root/'dist-b'/name).read_bytes(),'Independent builds differ: '+name
+          print('PASS two clean builds produce identical MPP and QA')
+          PY
+      - name: Package public source and verify reviewed artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/aurora-favourites100/publication/package.py --dist .ci-aurora-favourites100/dist-a
+          python3 releases/aurora-favourites100/publication/publish.py --dist .ci-aurora-favourites100/dist-a --base .ci-aurora-favourites100/staged/baseline264.mpp --repo . --local-only
+          python3 releases/aurora-favourites100/publication/publish.py --dist .ci-aurora-favourites100/dist-a --base .ci-aurora-favourites100/staged/baseline264.mpp --repo . --preflight-only
+      - name: Publish exact release and atomic main dev Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/aurora-favourites100/publication/publish.py --dist .ci-aurora-favourites100/dist-a --base .ci-aurora-favourites100/staged/baseline264.mpp --repo . 2>&1 | tee .ci-aurora-favourites100/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: aurora-favourites100-bundle265-verification
+          path: |
+            .ci-aurora-favourites100/dist-a/
+            .ci-aurora-favourites100/dist-b/
+            .ci-aurora-favourites100/*.log
+            .ci-aurora-favourites100/build-a/*.txt
+            .ci-aurora-favourites100/build-a/*.log
+            .ci-aurora-favourites100/build-b/*.txt
+            .ci-aurora-favourites100/build-b/*.log
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
