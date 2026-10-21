@@ -1,0 +1,154 @@
+{
+  "schema": "aurora-favourites101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.266",
+  "result": "PASS",
+  "baseline_version": "1.0.265",
+  "baseline_sha256": "57f06381c5c4690036e3fcaa9c6102986f773475ac1619723842c0f436cf0359",
+  "production_android_sdk_compile": true,
+  "sdk_compile": true,
+  "bundle_sha256": "53a15626f838be663496e71fe837d4a9d3819836d41f0f88432c77af09c147a3",
+  "standalone_sha256": "a1237e5f0638e445b8bb1a6ed42cd847777dfc62b813141cd71aa15128e12e0a",
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5",
+    "morphe2.jar": "67479a00dba2de387e5115b73960267325e544cedf44a709416cdfb70c82e7f2"
+  },
+  "sources": {
+    "build.py": "17d7baf43d04dc87fcd08b9ec496d0a88fb76b9791d6bf2bed13f0ca207622e2",
+    "patch/AuroraFavouritesPatch.java": "512d310e43d2ec20d7b2b39892f421c037e7d80f4d5b6971cd5342f51d7c4c15",
+    "runtime/AuroraFavourites.java": "0b8f0abdf9bf47479a4d8a3343017ff42eed56ba5f362242b1ea3915ee8de7f8",
+    "test/AuroraAudit.java": "099f45077b0d1a761084421b32242665c53f714568cbbef652fc11072562d44b",
+    "test-host/android/app/Activity.java": "cdbda4a36632cefcb1d5671f73416340ec28c4999264c9179ec4e48d6f3459d6",
+    "test-host/android/content/Context.java": "9882e3137451d2662faaf1df525b7642b69158c2c1f2971da3bd67172d5eab59",
+    "test-host/android/content/ContextWrapper.java": "d59bf6e00a337709fc3b69997c16ea8b9863065457a1ce67db082a0db8798a00",
+    "test-host/android/content/Intent.java": "0b854897807bc1c36f84448db61e9d1e506f943945c5fe1049498fde0be5f335",
+    "test-host/android/net/Uri.java": "0cfb835ecf6d188dbd46faacd1420bae6e2ab7dfb2379416bd4aba072ed3beda",
+    "test-host/android/os/Bundle.java": "5e3dd11773b5e52f1f966777b2498606bf7a06ba0586f003c99b55c4a119ae9e",
+    "test-host/app/hiro/aurora/runtime/FavouriteStartTest.java": "e20e84c1775d532f2fcfabc86aa042cb60597b78a543dc41749ce7be87cf5aa3",
+    "test-host/com/aurora/store/compose/navigation/Screen.java": "8fab7a507b9438e0c55d48260e40622de6a4164e2547090589756e122c65f1be",
+    "test-legacy100/AuroraFavourites.java": "2832b2001facb15cb4c7d45c2c6bc93918d6ab0d2215f76f32b47a9703fac3e1"
+  },
+  "artifacts": {
+    "Aurora_Store_Favourites_v1.0.1.mpp": {
+      "bytes": 20684,
+      "sha256": "a1237e5f0638e445b8bb1a6ed42cd847777dfc62b813141cd71aa15128e12e0a"
+    },
+    "Hiro_Morphe_Patches_v1.0.266.mpp": {
+      "bytes": 18548227,
+      "sha256": "53a15626f838be663496e71fe837d4a9d3819836d41f0f88432c77af09c147a3"
+    }
+  },
+  "loader_preservation": "PASS loader replacement merge: every unrelated class unchanged=258; exact Aurora loader classes replaced=3; assertions=1317",
+  "preserved_unrelated_entries": 89,
+  "runtime_sha256": "ae8e6d62859e934ba1f654feaaa2abdaa1b7fc8aed8b4f615802e95b87a0105c",
+  "host_tests": "PASS Aurora favourite startup host tests: scenarios=9; assertions=156; covers Favourite-to-Main Back, cold/warm, auth/onboarding, explicit targets, external returns, configuration and ownership; physical Android not tested.",
+  "legacy100_back_regression": "PASS legacy100 regression reproduced: Favourite was the sole root and native Back cannot return to Main; assertions=2",
+  "original_invalid_override_reproduced": true,
+  "patched_final_method_hierarchy_verified": true,
+  "apk_application": [
+    {
+      "patcher_generation": "stable",
+      "input": "fdroid",
+      "input_sha256": "fd9c75d90d0f4a7c132b9b4a5a2cf1992a45e03b8d8ff988b7dcfbc0db2c4d11",
+      "bundle": "Aurora_Store_Favourites_v1.0.1.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "full_semantic_class_and_method_audit",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "patcher2",
+      "input": "fdroid",
+      "input_sha256": "fd9c75d90d0f4a7c132b9b4a5a2cf1992a45e03b8d8ff988b7dcfbc0db2c4d11",
+      "bundle": "Aurora_Store_Favourites_v1.0.1.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "full_semantic_class_and_method_audit",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "stable",
+      "input": "upstream",
+      "input_sha256": "8a1ed9aa09631290da91cb793e0517b0f20dc70239ac94ae6682cd94f91a4bad",
+      "bundle": "Aurora_Store_Favourites_v1.0.1.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "patcher2",
+      "input": "upstream",
+      "input_sha256": "8a1ed9aa09631290da91cb793e0517b0f20dc70239ac94ae6682cd94f91a4bad",
+      "bundle": "Aurora_Store_Favourites_v1.0.1.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "stable",
+      "input": "fdroid",
+      "input_sha256": "fd9c75d90d0f4a7c132b9b4a5a2cf1992a45e03b8d8ff988b7dcfbc0db2c4d11",
+      "bundle": "Hiro_Morphe_Patches_v1.0.266.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "patcher2",
+      "input": "fdroid",
+      "input_sha256": "fd9c75d90d0f4a7c132b9b4a5a2cf1992a45e03b8d8ff988b7dcfbc0db2c4d11",
+      "bundle": "Hiro_Morphe_Patches_v1.0.266.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "stable",
+      "input": "upstream",
+      "input_sha256": "8a1ed9aa09631290da91cb793e0517b0f20dc70239ac94ae6682cd94f91a4bad",
+      "bundle": "Hiro_Morphe_Patches_v1.0.266.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    },
+    {
+      "patcher_generation": "patcher2",
+      "input": "upstream",
+      "input_sha256": "8a1ed9aa09631290da91cb793e0517b0f20dc70239ac94ae6682cd94f91a4bad",
+      "bundle": "Hiro_Morphe_Patches_v1.0.266.mpp",
+      "package": "com.aurora.store",
+      "version": "4.8.4",
+      "result": "PASS",
+      "audit_mode": "exact_non_signature_entry_identity_with_fully_audited_output",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=16447; exact navigation/lifecycle modifications=6; superclass access-only changes=3; ART final/visibility hierarchy=PASS; compiled runtime classes=3; assertions=82725; physical Android behavior not tested.",
+      "preserved_original_resources": 1074
+    }
+  ],
+  "official_apk_sha256": "fd9c75d90d0f4a7c132b9b4a5a2cf1992a45e03b8d8ff988b7dcfbc0db2c4d11",
+  "upstream_apk_sha256": "8a1ed9aa09631290da91cb793e0517b0f20dc70239ac94ae6682cd94f91a4bad",
+  "official_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true,
+  "cross_distribution_non_signature_entry_contents_equal": true
+}
