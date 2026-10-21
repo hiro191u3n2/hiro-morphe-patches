@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Minimal authored search topology from NearMeLayoutTest.xml(), with valid dimensions. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:tag="layout/fragment_search_result_list_0"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <jp.co.yahoo.android.apps.transit.ui.view.navi.list.SearchResultListView
+        android:id="@+id/results"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/ordinary_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/normal_content" />
+    <jp.co.yahoo.android.apps.transit.ui.compose.components.nearme.NearMeView
+        android:id="@+id/near_me"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <jp.co.yahoo.android.apps.transit.ui.view.navi.SearchBtnView
+        android:id="@+id/buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
