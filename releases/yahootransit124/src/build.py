@@ -98,7 +98,7 @@ def write_zip(path, entries):
 
 
 def json_bytes(value):
-    return (json.dumps(value, ensure_ascii=False, indent=2) + '\n').encode()
+    return (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + '\n').encode()
 
 
 def real_resource_evidence(dex_sha):
