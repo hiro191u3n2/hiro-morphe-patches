@@ -1,0 +1,43 @@
+{
+  "schema": "yahootransit121-qa-v1",
+  "result": "PASS",
+  "patch_version": "1.2.1",
+  "bundle_version": "1.0.264",
+  "baseline_version": "1.0.263",
+  "baseline_sha256": "6a4e1cce1f2398c098d8bfdb54477b9ef7a7e4e2124fa691a3a9e60ec14eb343",
+  "bundle_sha256": "329e05444d41066a7af795672b1f672ef2954d3461e6098398f3ddb976f14fb0",
+  "physical_android_tested": false,
+  "production_morphe_sdk_compile": true,
+  "host_tests": "PASS NearMeLayoutTest: 174 assertions; versions 8.4.1/8.5.0/8.6.0, renamed IDs, 3 layout configurations, idempotence, persistence, sibling preservation and invalid-input preflight. Directory-backed ResourceCoder; real Morphe ResourcePatchContext and Document. No physical Android test.",
+  "dex_preservation": "PASS LoaderAudit: replaced exactly one patch-time helper; 257 other DEX classes preserved canonically; exact class inventory.",
+  "preserved_archive_entries": 89,
+  "changed_archive_entries": [
+    "META-INF/MANIFEST.MF",
+    "classes.dex"
+  ],
+  "shipped_helper_class": "Lapp/hiro/yahootransit/patches/NearMeLayout;",
+  "scope": "Search-result NearMeView only; no startup/runtime hooks or network changes.",
+  "limitations": [
+    "No physical Android display verification.",
+    "No complete integrated Yahoo APK application claim: provided historical APKs lack original DEX.",
+    "Version8.6.0 is a generated regression fixture, not a claim about a current installed version.",
+    "Tests use actual Morphe ResourcePatchContext and Document with a test-only directory ResourceCoder."
+  ],
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "sources": {
+    "NearMeLayout.java": "b6f7e80a7ec53a007a15b26a646ed78e54ff32b31ebf4fffe255cf906a1e93a2",
+    "build.py": "35b167441873344fc831e692d1cb977bf66ea880479a9feb036b7223dcc4fcf3",
+    "tests/LoaderAudit.java": "88e6d127c0bedee0e93d9287fa3b22a4d23165e30338f70186de85f8468e6b43",
+    "tests/NearMeLayoutTest.java": "1df9dc0cdcc92395518c5778c2f03e80306674b321c57bed7592c4e0820983e5"
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.264.mpp": {
+      "bytes": 18532007,
+      "sha256": "329e05444d41066a7af795672b1f672ef2954d3461e6098398f3ddb976f14fb0"
+    }
+  }
+}
