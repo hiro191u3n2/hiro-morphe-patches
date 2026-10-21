@@ -1,0 +1,120 @@
+name: Verify and publish Yahoo Transit ad regression fix v1.2.3 bundle268
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/yahootransit123/src/**'
+      - 'releases/yahootransit123/publication/**'
+      - 'releases/yahootransit123/README.md'
+      - '.github/workflows/yahootransit123-publish.yml'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Confirm active reviewed baseline and pinned JDK
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,subprocess
+          spec=importlib.util.spec_from_file_location('yahoo_publish',pathlib.Path('releases/yahootransit123/publication/publish.py'))
+          pub=importlib.util.module_from_spec(spec);spec.loader.exec_module(pub)
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          pub.require(feed['version']==pub.BASE_VERSION and feed['download_url']==pub.BASE_URL,'Active baseline advanced')
+          pub.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.8','JDK differs')
+          spec2=importlib.util.spec_from_file_location('yahoo_freeze',pathlib.Path('releases/yahootransit123/publication/freeze.py'))
+          freeze=importlib.util.module_from_spec(spec2);spec2.loader.exec_module(freeze)
+          expected=json.loads(pathlib.Path('releases/yahootransit123/publication/expected.json').read_text())
+          sources,identity=freeze.source_identity()
+          pub.require(expected['sources']==sources and expected['source_sha256']==identity,'Source changed after local validation')
+          PY
+      - name: Stage pinned baseline and build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,importlib.util,io,json,pathlib,urllib.request,zipfile
+          spec=importlib.util.spec_from_file_location('yahoo_publish',pathlib.Path('releases/yahootransit123/publication/publish.py'))
+          pub=importlib.util.module_from_spec(spec);spec.loader.exec_module(pub)
+          root=pathlib.Path('.ci-yahootransit123/staged');(root/'tools').mkdir(parents=True)
+          def get(url):
+              request=urllib.request.Request(url,headers={'User-Agent':'Hiro-YahooTransit123-CI'})
+              with urllib.request.urlopen(request,timeout=180) as response:
+                  assert response.status==200
+                  return response.read()
+          rows=json.loads(pathlib.Path('releases/yahootransit123/src/tool-sources.json').read_text())
+          spec2=importlib.util.spec_from_file_location('yahoo_build',pathlib.Path('releases/yahootransit123/src/build.py'))
+          build=importlib.util.module_from_spec(spec2);spec2.loader.exec_module(build)
+          assert {n:r['sha256'] for n,r in rows.items()}==build.TOOLS,'Pinned tool inventory differs'
+          for name,row in rows.items():
+              raw=get(row['url'])
+              if row.get('archive_sha256'):assert hashlib.sha256(raw).hexdigest()==row['archive_sha256'],'Tool archive differs: '+name
+              if row.get('entry'):
+                  with zipfile.ZipFile(io.BytesIO(raw)) as archive:raw=archive.read(row['entry'])
+              assert hashlib.sha256(raw).hexdigest()==row['sha256'],'Tool differs: '+name
+              (root/'tools'/name).write_bytes(raw)
+          raw=get(pub.BASE_URL);assert hashlib.sha256(raw).hexdigest()==pub.BASE_SHA
+          (root/'baseline267.mpp').write_bytes(raw)
+          PY
+      - name: First clean build, two-SDK execution and official binding runtime checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/yahootransit123/src/build.py --base .ci-yahootransit123/staged/baseline267.mpp --tools .ci-yahootransit123/staged/tools --work .ci-yahootransit123/build-a --dist .ci-yahootransit123/dist-a 2>&1 | tee .ci-yahootransit123/build-a.log
+      - name: Second clean build and exact artifact comparison
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/yahootransit123/src/build.py --base .ci-yahootransit123/staged/baseline267.mpp --tools .ci-yahootransit123/staged/tools --work .ci-yahootransit123/build-b --dist .ci-yahootransit123/dist-b 2>&1 | tee .ci-yahootransit123/build-b.log
+          python3 - <<'PY'
+          import pathlib
+          root=pathlib.Path('.ci-yahootransit123')
+          for name in ('Hiro_Morphe_Patches_v1.0.268.mpp','QA_YahooTransit_v1.2.3.json'):
+              assert (root/'dist-a'/name).read_bytes()==(root/'dist-b'/name).read_bytes(),'Independent builds differ: '+name
+          print('PASS two clean builds produce identical MPP and QA')
+          PY
+      - name: Package public source and verify reviewed artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/yahootransit123/publication/package.py --dist .ci-yahootransit123/dist-a
+          python3 releases/yahootransit123/publication/publish.py --dist .ci-yahootransit123/dist-a --base .ci-yahootransit123/staged/baseline267.mpp --repo . --local-only
+          python3 releases/yahootransit123/publication/publish.py --dist .ci-yahootransit123/dist-a --base .ci-yahootransit123/staged/baseline267.mpp --repo . --preflight-only
+      - name: Publish exact release and atomic main dev Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/yahootransit123/publication/publish.py --dist .ci-yahootransit123/dist-a --base .ci-yahootransit123/staged/baseline267.mpp --repo . 2>&1 | tee .ci-yahootransit123/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: yahootransit123-bundle268-verification
+          path: |
+            .ci-yahootransit123/dist-a/
+            .ci-yahootransit123/dist-b/
+            .ci-yahootransit123/*.log
+            .ci-yahootransit123/build-a/*.txt
+            .ci-yahootransit123/build-a/*.log
+            .ci-yahootransit123/build-b/*.txt
+            .ci-yahootransit123/build-b/*.log
+            .ci-yahootransit123/build-a/*binding-fixtures/*.json
+            .ci-yahootransit123/build-b/*binding-fixtures/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
