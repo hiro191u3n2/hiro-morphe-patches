@@ -1,0 +1,58 @@
+{
+  "schema": "yahootransit122-qa-v1",
+  "result": "PASS",
+  "patch_version": "1.2.2",
+  "bundle_version": "1.0.267",
+  "baseline_version": "1.0.266",
+  "baseline_sha256": "53a15626f838be663496e71fe837d4a9d3819836d41f0f88432c77af09c147a3",
+  "bundle_sha256": "01d5fb87e2550fad55f7acc81a2733377a8ab6a7d03503f95bfafe43cf353327",
+  "physical_android_tested": false,
+  "production_morphe_sdk_compile": true,
+  "original_apk_available": false,
+  "original_apk_applied": false,
+  "host_tests": "PASS NearMeLayoutTest: 174 assertions; versions 8.4.1/8.5.0/8.6.0, renamed IDs, 3 layout configurations, idempotence, persistence, sibling preservation and invalid-input preflight. Directory-backed ResourceCoder; real Morphe ResourcePatchContext and Document. No physical Android test.",
+  "ad_regression_tests": "PASS AdSlotsTest: 640 assertions; home custom ad/include/ID slots, ordinary search and informational banners preserved, all/land/night configurations, persisted hidden ancestors after simulated child redisplay, root types, repeat application, legacy NearMe parent, sibling-reference layouts retain hierarchy, and invalid-layout preflight. Real Morphe ResourcePatchContext/Document with directory ResourceCoder. Resource DOM visibility model; no Android device test.",
+  "dex_preservation": "PASS LoaderAudit: replaced exactly one patch-time helper; 260 other DEX classes preserved canonically; exact class inventory.",
+  "shipped_dex_tests": {
+    "method": "Exact merged DEX converted with pinned dex2jar v2.4; test classpath excludes source classes.",
+    "dex_sha256": "42ea4d66d72f64deee03c9c23abf67799c7d3d3e174036b2415536c9365bbd28",
+    "yahoo_jvm_classes": 29,
+    "host_tests": "PASS NearMeLayoutTest: 174 assertions; versions 8.4.1/8.5.0/8.6.0, renamed IDs, 3 layout configurations, idempotence, persistence, sibling preservation and invalid-input preflight. Directory-backed ResourceCoder; real Morphe ResourcePatchContext and Document. No physical Android test.",
+    "ad_regression_tests": "PASS AdSlotsTest: 640 assertions; home custom ad/include/ID slots, ordinary search and informational banners preserved, all/land/night configurations, persisted hidden ancestors after simulated child redisplay, root types, repeat application, legacy NearMe parent, sibling-reference layouts retain hierarchy, and invalid-layout preflight. Real Morphe ResourcePatchContext/Document with directory ResourceCoder. Resource DOM visibility model; no Android device test.",
+    "full_patch_execution": "PASS FullPatchExecutionTest: 50 assertions; actual shipped resource entrypoint, legacy collapse plus new home/NearMe protection, original search form and IDs, persisted redisplay protection and repeat execution. Generated resource fixtures; no APK or Android device test.",
+    "source_results_match": true
+  },
+  "preserved_archive_entries": 93,
+  "changed_archive_entries": [
+    "META-INF/MANIFEST.MF",
+    "classes.dex"
+  ],
+  "shipped_helper_class": "Lapp/hiro/yahootransit/patches/NearMeLayout;",
+  "scope": "Ad IDs, ad includes and concrete ad View names across layout configurations, plus verified search-result NearMe topology. No startup hooks or network changes.",
+  "limitations": [
+    "No physical Android display verification.",
+    "No original Yahoo APK was available in this run; host resource fixtures do not verify an installed app.",
+    "Version8.6.0 is a generated regression fixture, not a claim about a current installed version.",
+    "Tests use actual Morphe ResourcePatchContext and Document with a test-only directory ResourceCoder."
+  ],
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5",
+    "dex-tools-v2.4.zip": "ee7c45eb3c1d2474a6145d8d447e651a736a22d9664b6d3d3be5a5a817dda23a"
+  },
+  "sources": {
+    "NearMeLayout.java": "e4f6538984167e87f1851fced18318a5103b319552b438cbee116d8d4f655ec0",
+    "build.py": "c3dbc92d62b16d09f844043214d56b0ba8070099e19b41f9c82762c5945c5c73",
+    "tests/AdSlotsTest.java": "1a78b501a88d1b72cfcbf47268aaa1c7dde4b25c71997be462ba4eee8b6ed642",
+    "tests/FullPatchExecutionTest.java": "abf0b5c7a6cf518051efa271564be7ff05f1bd573b9421c78f248af2ed2a567c",
+    "tests/LoaderAudit.java": "88e6d127c0bedee0e93d9287fa3b22a4d23165e30338f70186de85f8468e6b43",
+    "tests/NearMeLayoutTest.java": "97a71aa5fd861ad55ada4587f89729814355a5105f52a846094b887c90ecb1ed"
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.267.mpp": {
+      "bytes": 18550063,
+      "sha256": "01d5fb87e2550fad55f7acc81a2733377a8ab6a7d03503f95bfafe43cf353327"
+    }
+  }
+}
