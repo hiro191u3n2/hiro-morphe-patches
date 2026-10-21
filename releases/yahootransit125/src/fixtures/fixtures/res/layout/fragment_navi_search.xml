@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Minimal authored home topology, derived from the generated Java test fixtures. -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/home"
+    android:tag="layout/fragment_navi_search_0"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <jp.co.yahoo.android.apps.transit.ad.NaviSearchTopAdView
+        android:id="@+id/top_ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="90dp" />
+    <LinearLayout
+        android:id="@+id/search_form"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <EditText
+            android:id="@+id/departure"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <EditText
+            android:id="@+id/destination"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Button
+            android:id="@+id/search_button"
+            android:tag="binding_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search" />
+    </LinearLayout>
+    <jp.co.yahoo.android.apps.transit.ad.NaviSearchBottomAdView
+        android:id="@+id/bottom_ad_view"
+        android:layout_width="match_parent"
+        android:layout_height="250dp" />
+</LinearLayout>
