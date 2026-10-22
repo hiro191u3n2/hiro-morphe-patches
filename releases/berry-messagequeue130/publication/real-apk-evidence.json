@@ -1,0 +1,747 @@
+{
+  "actual_queue_selection_verified": false,
+  "bundle_sha256": "83ffc3416c99cef5d0464a147633f3d064a8b1856282715031176d2bb3cdbf7a",
+  "input_apk_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+  "input_apks_sha256": "71e52ebe4ab0ad493e5c058cbf7bc361f9300652223c9abe44a7b3ae7e19b1b9",
+  "input_min_sdk": 32,
+  "input_target_sdk": 37,
+  "package_name": "jp.ejimax.berrybrowser",
+  "performance_measured": false,
+  "physical_android_tested": false,
+  "result": "PASS",
+  "runs": [
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22188,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "queue",
+        "original_classes_canonically_preserved": 8895,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 8900,
+        "output_sha256": "7487af958f70bb8c98de8a2cba6360192aed5c9709029eb0f16f9f97c34c1ce7",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "16b90ad70bd10a64bf3abf7447227e83aa4c8230934a49b7c0482d6f4712bdeb"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2181,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "LHiroBerryBrowserChooser$Session$1;",
+          "LHiroBerryBrowserChooser$Session$2;",
+          "LHiroBerryBrowserChooser$Session$3;",
+          "LHiroBerryBrowserChooser$Session;",
+          "LHiroBerryBrowserChooser;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;",
+          "Lhiro/berry/PreviewScheduler$Pending;",
+          "Lhiro/berry/PreviewScheduler;",
+          "Lhiro/berry/TabPriority$1;",
+          "Lhiro/berry/TabPriority$Request;",
+          "Lhiro/berry/TabPriority$State;",
+          "Lhiro/berry/TabPriority;",
+          "Lhiro/berryzoom/OneHandZoom$State;",
+          "Lhiro/berryzoom/OneHandZoom;",
+          "Lhiro/berryzoom/ZoomGesture;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22223,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "all",
+        "original_classes_canonically_preserved": 8888,
+        "original_classes_changed": [
+          "Lb03;",
+          "Lc41;",
+          "Lc70;",
+          "Lcx;",
+          "Lg60;",
+          "Lj8;",
+          "Lz31;"
+        ],
+        "original_classes_removed": 0,
+        "output_classes": 8914,
+        "output_sha256": "295c8bfbb5a595c274f4bd6da106a7e69c39fc7140969dba181d6204c46b6c7a",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "res/xml/pref_action.xml",
+            "input_sha256": "1ca2aad8936b5cc03f692b514f3b385d09701484fb6ad49fde98c44aff05eae8",
+            "output_sha256": "1fca55aaa8f6501d06bdca1a9564095864a6867dbbbbca13b59928e7239d5cd5"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "16b90ad70bd10a64bf3abf7447227e83aa4c8230934a49b7c0482d6f4712bdeb"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2180,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ]
+    },
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22188,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "queue",
+        "original_classes_canonically_preserved": 8895,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 8900,
+        "output_sha256": "cd1b21daac34acced20cd6422fec00f968f5547b5e4fd1b6a9bb74919dd80880",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "17b8cf68111268097e211e35ac937bad01c19fa230c7fad1cb64e6c6ad21b27a"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2181,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "LHiroBerryBrowserChooser$Session$1;",
+          "LHiroBerryBrowserChooser$Session$2;",
+          "LHiroBerryBrowserChooser$Session$3;",
+          "LHiroBerryBrowserChooser$Session;",
+          "LHiroBerryBrowserChooser;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;",
+          "Lhiro/berry/PreviewScheduler$Pending;",
+          "Lhiro/berry/PreviewScheduler;",
+          "Lhiro/berry/TabPriority$1;",
+          "Lhiro/berry/TabPriority$Request;",
+          "Lhiro/berry/TabPriority$State;",
+          "Lhiro/berry/TabPriority;",
+          "Lhiro/berryzoom/OneHandZoom$State;",
+          "Lhiro/berryzoom/OneHandZoom;",
+          "Lhiro/berryzoom/ZoomGesture;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22223,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "all",
+        "original_classes_canonically_preserved": 8888,
+        "original_classes_changed": [
+          "Lb03;",
+          "Lc41;",
+          "Lc70;",
+          "Lcx;",
+          "Lg60;",
+          "Lj8;",
+          "Lz31;"
+        ],
+        "original_classes_removed": 0,
+        "output_classes": 8914,
+        "output_sha256": "9ae00ae2eef46a090633398e0ec09e8fcb5451e66fc9aafed1ccb4e1776a8099",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "res/xml/pref_action.xml",
+            "input_sha256": "1ca2aad8936b5cc03f692b514f3b385d09701484fb6ad49fde98c44aff05eae8",
+            "output_sha256": "1fca55aaa8f6501d06bdca1a9564095864a6867dbbbbca13b59928e7239d5cd5"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "17b8cf68111268097e211e35ac937bad01c19fa230c7fad1cb64e6c6ad21b27a"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2180,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22188,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "queue",
+        "original_classes_canonically_preserved": 8895,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 8900,
+        "output_sha256": "38a328a172b593784fb3a5b492ef6390fb7391749c3575486e37217ef649cb6a",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "16b90ad70bd10a64bf3abf7447227e83aa4c8230934a49b7c0482d6f4712bdeb"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2181,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "LHiroBerryBrowserChooser$Session$1;",
+          "LHiroBerryBrowserChooser$Session$2;",
+          "LHiroBerryBrowserChooser$Session$3;",
+          "LHiroBerryBrowserChooser$Session;",
+          "LHiroBerryBrowserChooser;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;",
+          "Lhiro/berry/PreviewScheduler$Pending;",
+          "Lhiro/berry/PreviewScheduler;",
+          "Lhiro/berry/TabPriority$1;",
+          "Lhiro/berry/TabPriority$Request;",
+          "Lhiro/berry/TabPriority$State;",
+          "Lhiro/berry/TabPriority;",
+          "Lhiro/berryzoom/OneHandZoom$State;",
+          "Lhiro/berryzoom/OneHandZoom;",
+          "Lhiro/berryzoom/ZoomGesture;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22223,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "all",
+        "original_classes_canonically_preserved": 8888,
+        "original_classes_changed": [
+          "Lb03;",
+          "Lc41;",
+          "Lc70;",
+          "Lcx;",
+          "Lg60;",
+          "Lj8;",
+          "Lz31;"
+        ],
+        "original_classes_removed": 0,
+        "output_classes": 8914,
+        "output_sha256": "fbf1daaf089b1cbce6c4ead7b1dda153b5ffbae3f332d8f1b36f3d4b006e8d27",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "res/xml/pref_action.xml",
+            "input_sha256": "1ca2aad8936b5cc03f692b514f3b385d09701484fb6ad49fde98c44aff05eae8",
+            "output_sha256": "1fca55aaa8f6501d06bdca1a9564095864a6867dbbbbca13b59928e7239d5cd5"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "16b90ad70bd10a64bf3abf7447227e83aa4c8230934a49b7c0482d6f4712bdeb"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2180,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22188,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "queue",
+        "original_classes_canonically_preserved": 8895,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 8900,
+        "output_sha256": "244eb5536a3989b7a54599085995c7fe9d85cd385d2f95d29b3523e8af2cc7dd",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "17b8cf68111268097e211e35ac937bad01c19fa230c7fad1cb64e6c6ad21b27a"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2181,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "LHiroBerryBrowserChooser$Session$1;",
+          "LHiroBerryBrowserChooser$Session$2;",
+          "LHiroBerryBrowserChooser$Session$3;",
+          "LHiroBerryBrowserChooser$Session;",
+          "LHiroBerryBrowserChooser;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;",
+          "Lhiro/berry/PreviewScheduler$Pending;",
+          "Lhiro/berry/PreviewScheduler;",
+          "Lhiro/berry/TabPriority$1;",
+          "Lhiro/berry/TabPriority$Request;",
+          "Lhiro/berry/TabPriority$State;",
+          "Lhiro/berry/TabPriority;",
+          "Lhiro/berryzoom/OneHandZoom$State;",
+          "Lhiro/berryzoom/OneHandZoom;",
+          "Lhiro/berryzoom/ZoomGesture;"
+        ],
+        "android_device_execution": false,
+        "assertions": 22223,
+        "input_classes": 8895,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [
+            {
+              "class": "Lq70;",
+              "instruction_index": 394,
+              "method": "Lq70;->queueIdle()Z",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lsm2;",
+              "instruction_index": 437,
+              "method": "Lsm2;->v(Ltt5;)V",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            },
+            {
+              "class": "Lv70;",
+              "instruction_index": 427,
+              "method": "Lv70;->q(Ljava/lang/Object;)Ljava/lang/Object;",
+              "reference": "Landroid/os/MessageQueue;->addIdleHandler(Landroid/os/MessageQueue$IdleHandler;)V"
+            }
+          ],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 1113422,
+          "scanned_methods": 40671,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "mode": "all",
+        "original_classes_canonically_preserved": 8888,
+        "original_classes_changed": [
+          "Lb03;",
+          "Lc41;",
+          "Lc70;",
+          "Lcx;",
+          "Lg60;",
+          "Lj8;",
+          "Lz31;"
+        ],
+        "original_classes_removed": 0,
+        "output_classes": 8914,
+        "output_sha256": "a7275f0226ec7d52f6d46cbba3f7cf1cb73f22f416ee1a3026777113d9cfe8b7",
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "c929aa9162d1594b287bdef067775bddc6c4e057de24ccb31c9a37639175e301",
+            "output_sha256": "d5f34fe4fea09df784f74713713c9cc0bed8cbcaa80572dcc4e096cc58d15e4c"
+          },
+          {
+            "entry": "res/xml/pref_action.xml",
+            "input_sha256": "1ca2aad8936b5cc03f692b514f3b385d09701484fb6ad49fde98c44aff05eae8",
+            "output_sha256": "1fca55aaa8f6501d06bdca1a9564095864a6867dbbbbca13b59928e7239d5cd5"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "b34cb715398bd813cecac770806d62f7befe7c7baebfaacddbc5af689c3e4e83",
+            "output_sha256": "17b8cf68111268097e211e35ac937bad01c19fa230c7fad1cb64e6c6ad21b27a"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 2180,
+        "resource_entries_compared_excluding_dex_and_signatures": 2183,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ]
+    }
+  ],
+  "schema": "berry-messagequeue130-private-apk-evidence-v1",
+  "scope": "Saved user-provided base APK. Split install/runtime and Android17 device not tested.",
+  "standalone_sha256": "2e107e057f7d758645dbfbdc19933bee56f90b2772bcb82841bf7d66745b249c",
+  "version_code": "383740",
+  "version_name": "3.83.74"
+}

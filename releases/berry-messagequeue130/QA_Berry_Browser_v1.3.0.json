@@ -1,0 +1,339 @@
+{
+  "actual_queue_selection_verified": false,
+  "baseline_sha256": "05064b69f2965146de6461d7cbcf25318e61f17a2f099b25d6c15c2a205c821e",
+  "baseline_version": "1.0.270",
+  "bundle_sha256": "83ffc3416c99cef5d0464a147633f3d064a8b1856282715031176d2bb3cdbf7a",
+  "bundle_version": "1.0.271",
+  "dex_preservation": "{\"status\":\"PASS\",\"baseline_classes\":261,\"changed_existing_initializers\":3,\"preserved_other_classes\":258,\"existing_berry_classes\":27,\"added_queue_classes\":5,\"combined_classes\":266,\"berry_subset_classes\":32,\"existing_runtime_guards_preserved\":true,\"assertions\":1192}",
+  "host_runtime_tests": "PASS Berry runtime host behavior: 62 checks",
+  "jvm_class_count": 32,
+  "manager_selection": {
+    "android_art_execution_in_this_test": false,
+    "apk_execution_in_this_test": false,
+    "assertions": 187,
+    "candidate_271": {
+      "implementations": [
+        {
+          "execute_handler": "app.hiro.berryzoom.patches.OneHandZoomPatch$$ExternalSyntheticLambda0",
+          "execute_handler_from_candidate_mpp": true,
+          "name": "ダブルタップから指を離さず片手ズーム",
+          "reachable_execution_nodes": 3,
+          "type": "app.morphe.patcher.patch.ResourcePatch",
+          "unrestricted_app_versions": true
+        },
+        {
+          "execute_handler": "app.hiro.berry.patches.ForegroundTabsPatch$$ExternalSyntheticLambda6",
+          "execute_handler_from_candidate_mpp": true,
+          "name": "プレビュー作成を後回しにして表示中タブを優先",
+          "reachable_execution_nodes": 2,
+          "type": "app.morphe.patcher.patch.BytecodePatch",
+          "unrestricted_app_versions": true
+        },
+        {
+          "execute_handler": "app.hiro.berryqueue.patches.BerryMessageQueuePatch$3",
+          "execute_handler_from_candidate_mpp": true,
+          "name": "ロックフリーMessageQueueを有効化",
+          "reachable_execution_nodes": 2,
+          "type": "app.morphe.patcher.patch.ResourcePatch",
+          "unrestricted_app_versions": true
+        },
+        {
+          "execute_handler": "app.hiro.berryshare.patches.BrowserVisibilityPatch$$ExternalSyntheticLambda4",
+          "execute_handler_from_candidate_mpp": true,
+          "name": "共有先ブラウザの表示を個別に切替",
+          "reachable_execution_nodes": 2,
+          "type": "app.morphe.patcher.patch.BytecodePatch",
+          "unrestricted_app_versions": true
+        }
+      ],
+      "jvm_discovered_patches": 12,
+      "manager_loading_steps": 1,
+      "manager_requested_count": 4,
+      "manager_selected_count": 4,
+      "mpp_sha256": "83ffc3416c99cef5d0464a147633f3d064a8b1856282715031176d2bb3cdbf7a",
+      "package_compatible_keys": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ],
+      "selection_logs": []
+    },
+    "external_berry_bridge": false,
+    "host_sha256": "17c30bcbbb7bb51fe0c89e878d56fcb968c8d248abaaa372d0e1137d4543d044",
+    "isolated_runtime_classpath": true,
+    "manager_version": "2.0.0-dev.15",
+    "method": "Official Manager PatchPipeline.selectedPatches + HostMain loadPatchesFromJar",
+    "package_name": "jp.ejimax.berrybrowser",
+    "packaged_berry_jvm_classes": 32,
+    "patcher_version": "2.0.0-dev.22",
+    "published_270": {
+      "implementations": [],
+      "jvm_discovered_patches": 8,
+      "manager_loading_steps": 1,
+      "manager_requested_count": 4,
+      "manager_selected_count": 0,
+      "mpp_sha256": "05064b69f2965146de6461d7cbcf25318e61f17a2f099b25d6c15c2a205c821e",
+      "package_compatible_keys": [],
+      "selection_logs": []
+    },
+    "requested_selection": [
+      "プレビュー作成を後回しにして表示中タブを優先",
+      "共有先ブラウザの表示を個別に切替",
+      "ダブルタップから指を離さず片手ズーム",
+      "ロックフリーMessageQueueを有効化"
+    ],
+    "status": "PASS",
+    "unrelated_jvm_patch_names_preserved": true
+  },
+  "manifest_contracts": "PASS ManifestContractTest: 209 assertions; SDK upgrade/no downgrade, original settings, LAN/provider, idempotence, atomic invalid-input rejection",
+  "metadata": {
+    "Berry_Browser_v1.3.0.mpp:manager-dev15-host.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation.",
+    "Berry_Browser_v1.3.0.mpp:morphe.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation.",
+    "Berry_Browser_v1.3.0.mpp:morphe22.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation.",
+    "Hiro_Morphe_Patches_v1.0.271.mpp:manager-dev15-host.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation.",
+    "Hiro_Morphe_Patches_v1.0.271.mpp:morphe.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation.",
+    "Hiro_Morphe_Patches_v1.0.271.mpp:morphe22.jar": "PASS BerryMetadataAudit: 4 Berry patches; all versions metadata; shipped JVM implementation."
+  },
+  "notes": "Saved3.83.74 already targets37; all-version display does not bypass existing3 runtime guards; no Android16 backport.",
+  "patch_version": "1.3.0",
+  "performance_measured": false,
+  "physical_android_tested": false,
+  "private_apk_runs": 8,
+  "real_apk_evidence_sha256": "727e6dba9ec21fbb3640ac7e1b75fa951ee191340bf4df6fbdb0366bf8932efe",
+  "result": "PASS",
+  "schema": "berry-messagequeue130-qa-v1",
+  "standalone_sha256": "2e107e057f7d758645dbfbdc19933bee56f90b2772bcb82841bf7d66745b249c",
+  "synthetic_apk_tests": [
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 23,
+        "input_classes": 1,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 2,
+          "scanned_methods": 1,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "mode": "queue",
+        "original_classes_canonically_preserved": 1,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 6,
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "a0bc714102c71695f48ce71bb12436fb860eef62e81cbd5ec46d5cc118c245e2",
+            "output_sha256": "4db2939f648c94c0745ebd6a56b64d6c42e2ed9d5f7d6e97c8bb76922bd67a23"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "47597a13d6c4499c345e079175068e678ab352706c33c079ad65d7acd99f870a",
+            "output_sha256": "7724e6ef02889472df29945ee2a8a13d47a21fce516b4f6ad058e243a8e7f586"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 0,
+        "resource_entries_compared_excluding_dex_and_signatures": 2,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Berry_Browser_v1.3.0.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 23,
+        "input_classes": 1,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 2,
+          "scanned_methods": 1,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "mode": "queue",
+        "original_classes_canonically_preserved": 1,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 6,
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "a0bc714102c71695f48ce71bb12436fb860eef62e81cbd5ec46d5cc118c245e2",
+            "output_sha256": "4db2939f648c94c0745ebd6a56b64d6c42e2ed9d5f7d6e97c8bb76922bd67a23"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "47597a13d6c4499c345e079175068e678ab352706c33c079ad65d7acd99f870a",
+            "output_sha256": "6ffecb28d9a69494bde0bdc0f650d9a3971603ad70767debb51807c9526d52b0"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 0,
+        "resource_entries_compared_excluding_dex_and_signatures": 2,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 23,
+        "input_classes": 1,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 2,
+          "scanned_methods": 1,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "mode": "queue",
+        "original_classes_canonically_preserved": 1,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 6,
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "a0bc714102c71695f48ce71bb12436fb860eef62e81cbd5ec46d5cc118c245e2",
+            "output_sha256": "4db2939f648c94c0745ebd6a56b64d6c42e2ed9d5f7d6e97c8bb76922bd67a23"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "47597a13d6c4499c345e079175068e678ab352706c33c079ad65d7acd99f870a",
+            "output_sha256": "7724e6ef02889472df29945ee2a8a13d47a21fce516b4f6ad058e243a8e7f586"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 0,
+        "resource_entries_compared_excluding_dex_and_signatures": 2,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.271.mpp",
+      "dex_audit": {
+        "added_classes": [
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueDiagnostics;",
+          "Lapp/hiro/berry/runtime/BerryQueueInit;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle$1;",
+          "Lapp/hiro/berry/runtime/BerryQueueLifecycle;"
+        ],
+        "android_device_execution": false,
+        "assertions": 23,
+        "input_classes": 1,
+        "input_messagequeue_scan": {
+          "direct_messagequeue_fields": [],
+          "direct_messagequeue_methods": [],
+          "exhaustive_reflection_analysis": false,
+          "limitations": "No findings does not prove runtime compatibility: dynamically assembled/encrypted field names, interprocedural reflection, native code and externally loaded code are not resolved.",
+          "messagequeue_related_strings": [],
+          "native_or_downloaded_code_scanned": false,
+          "nearby_reflection_candidates": [],
+          "nonpublic_messagequeue_method_candidates": [],
+          "scanned_instructions": 2,
+          "scanned_methods": 1,
+          "scope": "Original APK DEX instruction references and selected string constants only"
+        },
+        "mode": "queue",
+        "original_classes_canonically_preserved": 1,
+        "original_classes_changed": [],
+        "original_classes_removed": 0,
+        "output_classes": 6,
+        "resource_changes": [
+          {
+            "entry": "AndroidManifest.xml",
+            "input_sha256": "a0bc714102c71695f48ce71bb12436fb860eef62e81cbd5ec46d5cc118c245e2",
+            "output_sha256": "4db2939f648c94c0745ebd6a56b64d6c42e2ed9d5f7d6e97c8bb76922bd67a23"
+          },
+          {
+            "entry": "resources.arsc",
+            "input_sha256": "47597a13d6c4499c345e079175068e678ab352706c33c079ad65d7acd99f870a",
+            "output_sha256": "6ffecb28d9a69494bde0bdc0f650d9a3971603ad70767debb51807c9526d52b0"
+          }
+        ],
+        "resource_changes_are_reported_not_semantically_verified": true,
+        "resource_entries_byte_identical": 0,
+        "resource_entries_compared_excluding_dex_and_signatures": 2,
+        "status": "PASS"
+      },
+      "encoded_target_sdk": 37,
+      "result": "PASS",
+      "sdk": "morphe22.jar",
+      "selected": [
+        "ロックフリーMessageQueueを有効化"
+      ]
+    }
+  ],
+  "tools": {
+    "aapt2": "d1096e11aba9c974644369ee3c50d239acac3f3428ffa928e5b9c14dfb7a57de",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5",
+    "dex-tools-v2.4.zip": "ee7c45eb3c1d2474a6145d8d447e651a736a22d9664b6d3d3be5a5a817dda23a",
+    "manager-dev15-frameworks.jar": "5bb489e6db867c21dd953705669e80f093dde3e6adb4a5b7465068ab9fb23cfe",
+    "manager-dev15-host.jar": "17c30bcbbb7bb51fe0c89e878d56fcb968c8d248abaaa372d0e1137d4543d044",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "morphe22.jar": "fe4bc92815bb14976150e4ec83e4985932b46d1d47edec75d37604481572e864"
+  }
+}
