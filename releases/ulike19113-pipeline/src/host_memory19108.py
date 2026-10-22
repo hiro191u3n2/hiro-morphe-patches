@@ -23,12 +23,30 @@ def test(source,work,jdk=None,ndk=None):
  jdk=Path(jdk or os.environ['ULIKE_JDK_HOME']);ndk=Path(ndk or os.environ['ULIKE_NDK_HOME'])
  jar=Path(os.environ.get('ULIKE_ANDROID_JAR',str(jdk.parent/'android.jar')))
  local=source/'tests19108/memory';pins=json.loads((local/'unchanged-native107.json').read_text())
+ # Only the reviewed optional-profile6 arithmetic delta is inverted for this
+ # historical source guard. All allocation, transport and ownership bytes are
+ # still checked directly, and the actual current shader is compiled below.
+ inverse=module('memory108_shader_inverse113',source/'strong_delta19113.py')
+ def original_shader113(text):
+  raw=inverse.restore_shader19113(text,required=True).encode()
+  if hashlib.sha256(raw).hexdigest()!=pins['native1960/strong1960.comp']:
+   raise AssertionError('Strong .113 inverse exceeded reviewed .112 source')
+  return raw
+ shader_text=(source/'native1960/strong1960.comp').read_text()
+ shader_original=original_shader113(shader_text);shader_negatives=0
+ for mutated in (shader_text+'\n',shader_text.replace('GX_FULL_RATIO19113','GX_FULL_RATIO_UNREVIEWED',1),shader_text.replace('GX_STRONG_MODE == 3','GX_STRONG_MODE == 2',1)):
+  if mutated==shader_text:raise AssertionError('Missing shader source negative-control anchor')
+  try:original_shader113(mutated)
+  except (AssertionError,RuntimeError,ValueError):shader_negatives+=1
+  else:raise AssertionError('Unreviewed Strong source edit accepted by historical memory guard')
  for name,digest in pins.items():
   if name=='GpuNoise1960.java' and (source/'capacity_inverse19110.py').exists():
    original=module('memory108_capacity_inverse',source/'capacity_inverse19110.py').restore(source)
    if hashlib.sha256(original).hexdigest()!=digest:raise AssertionError('Original budget/native ownership changed: '+name)
+  elif name=='native1960/strong1960.comp':
+   if hashlib.sha256(shader_original).hexdigest()!=digest:raise AssertionError('Reviewed shader inverse differs: '+name)
   elif sha(source/name)!=digest:raise AssertionError('Original budget/native ownership changed: '+name)
- tracked=[source/n for n in ['FinishMemory1989.java','GpuChain1961.java','GpuNoise1960.java','SpeedWorkers1935.java']]+list(local.glob('*'))+[Path(__file__).resolve()]
+ tracked=[source/n for n in sorted(set(['FinishMemory1989.java','GpuChain1961.java','GpuNoise1960.java','SpeedWorkers1935.java','strong_delta19113.py',*pins]))]+list(local.glob('*'))+[Path(__file__).resolve()]
  before={str(p.relative_to(source)):sha(p) for p in tracked};commands=[]
  def run(label,args,env=None):
   args=list(map(str,args));commands.append({'label':label,'argv':args})
@@ -67,7 +85,7 @@ def test(source,work,jdk=None,ndk=None):
  run('graph-compile',[jdk/'bin/javac','--release','8','-encoding','UTF-8','-cp',os.pathsep.join(map(str,[production,jar])),'-d',graphclasses,*graphfiles])
  tests['resident_graph']=result('resident-graph',[jdk/'bin/java','-ea','-Xmx768m','-cp',os.pathsep.join(map(str,[graphclasses,production,jar])),'com.hiro.ulike.ResidentFinish19108Test'])
  if before!={str(p.relative_to(source)):sha(p) for p in tracked}:raise AssertionError('Memory source/fixtures changed during execution')
- evidence=dict(status='passed',assertions=sum(t['assertions'] for t in tests.values()),tests=tests,source_sha256=before,unchanged_native107_sha256=pins,commands=commands,physical_android_tested=False,device_speedup_verified=False)
+ evidence=dict(status='passed',assertions=sum(t['assertions'] for t in tests.values())+shader_negatives+1,tests=tests,source_sha256=before,historical_native107_sha256=pins,shader_source_inverse19113_sha256=hashlib.sha256(shader_original).hexdigest(),shader_source_inverse19113_negative_controls=shader_negatives,current_shader_compiled19113=True,memory_transport_source_unchanged19113=True,commands=commands,physical_android_tested=False,device_speedup_verified=False)
  for flag in FLAGS:
   if not any(t.get(flag) is True for t in tests.values()):raise AssertionError('Missing executed memory proof '+flag)
   evidence[flag]=True

@@ -131,11 +131,11 @@ def test(source,work,jdk=None,ndk=None):
             **{k:True for k in ('production_dispatcher_executed','actual_commit_counts','foreground_trace_isolated','cpu_oracle_excluded','optional_sink_failures_preserved','ownership_preserved')}),
         'absent':dict(status='passed',assertions=3,missing_optional_sink_preserved=True),
         'incompatible':dict(status='passed',assertions=3,missing_optional_sink_preserved=True)})
-    children['strong_admission110'].update(assertions=263,pixel_equivalence_tested=False,tests={
+    children['strong_admission110'].update(assertions=266,pixel_equivalence_tested=False,tests={
         'strong_native':dict(status='passed',assertions=252,cases=19,rounds=2,physical_android_tested=False,pixel_equivalence_tested=False,
             actual_strong_java_executed=True,actual_memory_java_executed=True,actual_native_pools_executed=True,actual_gpu_lease_executed=True,
             **{key:True for key in gate.CURRENT_PROOF_KEYS['strong_admission110'] if key!='strong_admission_original_budget19110'}),
-        'original_budget':dict(status='passed',assertions=10,original_sha256='27fc632074e7adaf45e6f55422167ed25b383d3a3695a5f8895a3d212ab429e5',
+        'original_budget':dict(status='passed',assertions=13,shader_source_inverse19113_sha256='4f1bb151e3e49636d71db2abb6dad1b89d1a8572317af525069c306515605e36',shader_source_inverse19113_negative_controls=3,memory_transport_source_unchanged19113=True,original_sha256='27fc632074e7adaf45e6f55422167ed25b383d3a3695a5f8895a3d212ab429e5',
             reviewed_inverse=True,current_source_executed_separately=True,strong_admission_original_budget19110=True),
         'published108_regression':dict(status='passed',assertions=1,reproduced=True,source_sha256={
             'GpuNoise1960.java':'27fc632074e7adaf45e6f55422167ed25b383d3a3695a5f8895a3d212ab429e5',
@@ -147,7 +147,7 @@ def test(source,work,jdk=None,ndk=None):
             ('current',2195,dict(cases=27,native_transport_mocked=True)),('copy_rotation',13,{}),
             ('source_inverse',5,dict(negative_controls=3,original_sha256='8bd4269eb0222f86388c71af034bca0657e8fffc0b563c77a0d1f5832d781ac4',
                 resident_source_inverse19110=True,current_source_executed_separately=True)))})
-    children['memory108'].update(assertions=1000)
+    children['memory108'].update(assertions=1000,shader_source_inverse19113_sha256='4f1bb151e3e49636d71db2abb6dad1b89d1a8572317af525069c306515605e36',shader_source_inverse19113_negative_controls=3)
     children['resident_memory108'].update(assertions=400,cases=26)
     children['gpu_math']['all_60_legacy_programs_unchanged']=False
     children['regional107'].update(assertions=1380012,arithmetic_negative_controls=4,device_mismatch_reproduced=False,
@@ -439,9 +439,9 @@ def test(source,work,jdk=None,ndk=None):
             (('regional107','gles','regional_groups',9,'variants'),1),(('regional107','gles','regional_groups',8,'first_grid_y'),0),
             (('regional107','gles','regional_groups',0,'points'),True)]:
         rejected(lambda path=path,value=value:changed105(path,value))
-    for group,key,bad108 in [('memory108','assertions',999),('memory108','assertions',True),('resident_memory108','assertions',399),('resident_memory108','cases',25),('resident_memory108','cases',True),('release_gate','native_optimization113_provenance_verified',False),('release_gate','native_optimization113_negative_assertions',0)]:
+    for group,key,bad108 in [('memory108','shader_source_inverse19113_negative_controls',2),('memory108','shader_source_inverse19113_sha256','0'*64),('memory108','assertions',999),('memory108','assertions',True),('resident_memory108','assertions',399),('resident_memory108','cases',25),('resident_memory108','cases',True),('release_gate','native_optimization113_provenance_verified',False),('release_gate','native_optimization113_negative_assertions',0)]:
         rejected(lambda group=group,key=key,bad108=bad108:changed105((group,key),bad108))
-    for path,value in [(('strong_opt113','whole_output_differences'),1),(('strong_opt113','confidence_differences'),False),(('strong_opt113','trace_intermediate_differences'),1),(('strong_opt113','negative_controls'),2),(('strong_opt113','optimized_profile'),4),(('strong_opt113','unchanged_preprocessed_programs'),116),(('strong_opt113','adaptive_gpu_speed_gate_percent'),5),
+    for path,value in [(('strong_admission110','tests','original_budget','shader_source_inverse19113_negative_controls'),2),(('strong_admission110','tests','original_budget','shader_source_inverse19113_sha256'),'0'*64),(('strong_admission110','tests','original_budget','memory_transport_source_unchanged19113'),False),(('strong_opt113','whole_output_differences'),1),(('strong_opt113','confidence_differences'),False),(('strong_opt113','trace_intermediate_differences'),1),(('strong_opt113','negative_controls'),2),(('strong_opt113','optimized_profile'),4),(('strong_opt113','unchanged_preprocessed_programs'),116),(('strong_opt113','adaptive_gpu_speed_gate_percent'),5),
             (('front_opt113','architectures','host','exact_output'),False),(('front_opt113','architectures','arm64','cases','pixels','pixel_cases'),319),
             (('front_opt113','architectures','arm64','cases','safeguards','safeguard_cases'),32767),(('front_opt113','architectures','arm64','cases','pairs','pair_cases'),511),
             (('front_opt113','architectures','host','negative_controls'),['lag-numerator']),(('front_opt113','target_device_gain_claimed'),True)]:

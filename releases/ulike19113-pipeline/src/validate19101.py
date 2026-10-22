@@ -36,7 +36,7 @@ CURRENT_PROOF_KEYS={
     'copy_admission110':('resident_strong_typed_classification19110','resident_incomplete_gate_preserved19110','finish_pressure_order_reproduced19110','next_capture_resident_rotation_verified19110','copy_ownership_and_limits_preserved19110','actual_resident_queue_executed19110','actual_finish_pressure_and_copy_budget_executed19110','published108_strong_generic_exception_reproduced19110','resident_source_inverse19110'),
     'strong_diagnostics110':('strong_admission_scalar_scope','strong_admission_vj7_restart','legacy_vj1_vj6_preserved','diagnostic_history_cannot_grant_admission'),
     'resident_memory108':('resident_memory_classified', 'resident_memory_retry_not_exact_or_speed', 'resident_memory_scalar_scope', 'resident_memory_vj6_restart', 'resident_memory_history_no_admission', 'resident_two_exact_two_speed_gates', 'actual_resident_producer_queue_journal'),
-    'memory108':('resident_memory_same_budget_retry19108', 'resident_memory_active_gpu_preserved19108', 'resident_memory_busy_cpu_preserved19108', 'resident_memory_cancellation_preserved19108', 'resident_memory_original_paths_preserved19108', 'resident_memory_actual_jni19108', 'resident_memory_bounded_report19108', 'resident_memory_typed_refusal19108', 'resident_memory_carried_scope19108'),
+    'memory108':('current_shader_compiled19113','memory_transport_source_unchanged19113','resident_memory_same_budget_retry19108', 'resident_memory_active_gpu_preserved19108', 'resident_memory_busy_cpu_preserved19108', 'resident_memory_cancellation_preserved19108', 'resident_memory_original_paths_preserved19108', 'resident_memory_actual_jni19108', 'resident_memory_bounded_report19108', 'resident_memory_typed_refusal19108', 'resident_memory_carried_scope19108'),
     'cache107':('cache_fingerprint_isolation_verified','all_cache_families_covered','regional_evidence_domain_verified','invalid_ingress_rejected_before_gpu','generated_regional_evidence_accepted'),
     'regional107':('actual_gles_execution','independent_rational_oracle','independent_java_oracle','exact_round_to_nearest_even','all_dyadic_weights_0_to_128','regional_coordinate_sampling_verified'),
     'diagnostics106':('journal_v1_v2_v3_v4_v5_compatible','trace_scope_bound','trace_scalar_snapshot_immutable','strict_mismatch_preserved'),
@@ -222,9 +222,10 @@ def positive_host110(tests):
     require(executed.get('physical_android_tested') is False and executed.get('pixel_equivalence_tested') is False,
         'Strong admission .110 native scope differs')
     require(type(inverse) is dict and inverse.get('status')=='passed' and type(inverse.get('assertions')) is int
-        and inverse['assertions']==10 and inverse.get('reviewed_inverse') is True and inverse.get('current_source_executed_separately') is True
+        and inverse['assertions']==13 and inverse.get('reviewed_inverse') is True and inverse.get('current_source_executed_separately') is True
         and inverse.get('original_sha256')=='27fc632074e7adaf45e6f55422167ed25b383d3a3695a5f8895a3d212ab429e5',
         'Strong admission .110 original capacity/ownership proof missing')
+    require(inverse.get('shader_source_inverse19113_sha256')=='4f1bb151e3e49636d71db2abb6dad1b89d1a8572317af525069c306515605e36' and type(inverse.get('shader_source_inverse19113_negative_controls')) is int and inverse['shader_source_inverse19113_negative_controls']==3 and inverse.get('memory_transport_source_unchanged19113') is True,'Strong admission original capacity requires exact .113 shader inverse and unchanged transport proof')
     for key in CURRENT_PROOF_KEYS['strong_admission110']:
         row=inverse if key=='strong_admission_original_budget19110' else executed
         require(row.get(key) is True,'Strong admission .110 proof is not backed by executed subtest: '+key)
@@ -461,6 +462,7 @@ def positive_host(report):
         require(set(row.get('benchmarks',{}))=={'uncached','cached'},'Front .113 paired same-process benchmarks missing')
     require(front113.get('target_device_gain_claimed') is False,'Native host/emulator result overclaims device gain')
     require(type(tests['memory108'].get('assertions')) is int and tests['memory108']['assertions']>=1000,'Resident memory .108 executed coverage incomplete')
+    require(tests['memory108'].get('shader_source_inverse19113_sha256')=='4f1bb151e3e49636d71db2abb6dad1b89d1a8572317af525069c306515605e36' and type(tests['memory108'].get('shader_source_inverse19113_negative_controls')) is int and tests['memory108']['shader_source_inverse19113_negative_controls']>=3,'Memory historical shader inverse or mutation controls absent')
     require(type(tests['resident_memory108'].get('assertions')) is int and tests['resident_memory108']['assertions']>=400 and type(tests['resident_memory108'].get('cases')) is int and tests['resident_memory108']['cases']>=26,'Resident memory .108 diagnostic coverage incomplete')
     require(tests['gpu_math'].get('all_60_legacy_programs_unchanged') is False,'Current regional shader change mislabeled as unchanged')
     positive_host105(tests)
