@@ -1,0 +1,128 @@
+name: ULike 1.9.113 Exact Strong GPU and native front optimization release
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/ulike19113-pipeline/src/**'
+      - 'releases/ulike19113-pipeline/publication/**'
+      - 'releases/ulike19113-pipeline/manifest.json'
+      - 'releases/ulike19113-pipeline/evidence/original-application19101.json'
+      - '.github/workflows/ulike19113-pipeline-publish.yml'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: Publish validated exact artifacts and update Manager feeds
+        required: true
+        default: false
+        type: boolean
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    env:
+      ULIKE_RELEASE: releases/ulike19113-pipeline
+      ULIKE_ANDROID_JAR: ${{ github.workspace }}/.ci-ulike19113/tools/android.jar
+      ULIKE_TOOLS_DIR: ${{ github.workspace }}/.ci-ulike19113/tools
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Prepare explicit shader-proof Python dependency
+        run: python3 -m pip install --disable-pip-version-check numpy==2.3.5
+      - name: Prepare pinned input packages and Java tooling
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import sys,os,pathlib,urllib.request,hashlib,zipfile,io
+          root=pathlib.Path(os.environ['ULIKE_RELEASE'])
+          sys.path.insert(0,str(root/'src'))
+          import build19101 as build
+          target=pathlib.Path('.ci-ulike19113')
+          for name in ('input','tools'): (target/name).mkdir(parents=True,exist_ok=True)
+          def get(url):
+              with urllib.request.urlopen(url,timeout=240) as response:return response.read()
+          for name,pin in build.BASE_PINS.items():
+              ref=build.BASE_REFS[name]
+              url='https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/'+ref+'/downloads/'+name
+              raw=get(url)
+              assert len(raw)==pin['bytes'] and hashlib.sha256(raw).hexdigest()==pin['sha256']
+              (target/'input'/name).write_bytes(raw)
+          rows={
+            'morphe.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar',None,None),
+            'android.jar':('https://dl.google.com/android/repository/platform-35_r02.zip','0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0','android-35/android.jar'),
+            'd8.jar':('https://dl.google.com/android/repository/build-tools_r35_linux.zip','bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88','android-15/lib/d8.jar')}
+          for name,(url,digest,entry) in rows.items():
+              raw=get(url)
+              if entry:
+                  assert hashlib.sha256(raw).hexdigest()==digest
+                  with zipfile.ZipFile(io.BytesIO(raw)) as archive:raw=archive.read(entry)
+              assert hashlib.sha256(raw).hexdigest()==build.TOOL_PINS[name]
+              (target/'tools'/name).write_bytes(raw)
+          assert (root/'publication/ulike19101-pipeline-publish.yml').read_bytes()==pathlib.Path('.github/workflows/ulike19113-pipeline-publish.yml').read_bytes()
+          PY
+      - name: Prepare pinned native and host GL dependencies
+        shell: bash
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y libegl1-mesa-dev libgles2-mesa-dev libgl1 gcc-aarch64-linux-gnu qemu-user
+          native_sdk_root="${ANDROID_HOME:-/usr/local/lib/android/sdk}"
+          native_ndk_path="$native_sdk_root/ndk/27.2.12479018"
+          if [[ ! -f "$native_ndk_path/source.properties" ]]; then
+            "$native_sdk_root/cmdline-tools/latest/bin/sdkmanager" "ndk;27.2.12479018"
+          fi
+          printf 'ULIKE_NDK_HOME=%s\n' "$native_ndk_path" >> "$GITHUB_ENV"
+      - name: Rebuild current source and verify immutable package pins
+        shell: bash
+        run: |
+          python3 "$ULIKE_RELEASE/src/build19101.py" --input .ci-ulike19113/input --tools .ci-ulike19113/tools --work .ci-ulike19113/build --output "$ULIKE_RELEASE/dist" --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME" --declaration "$ULIKE_RELEASE/manifest.json"
+      - name: Execute current host regressions
+        shell: bash
+        env:
+          EGL_PLATFORM: surfaceless
+          LIBGL_ALWAYS_SOFTWARE: '1'
+        run: |
+          python3 "$ULIKE_RELEASE/src/host_audit19101.py" --source "$ULIKE_RELEASE/src" --work .ci-ulike19113/host --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME"
+      - name: Bind actual original-APKS proof to identical rebuilt package and create assets
+        shell: bash
+        run: |
+          python3 "$ULIKE_RELEASE/src/finalize19101.py" --dist "$ULIKE_RELEASE/dist" --declaration "$ULIKE_RELEASE/manifest.json" --host-report .ci-ulike19113/host/result.json --application-report "$ULIKE_RELEASE/evidence/original-application19101.json" --notes "$ULIKE_RELEASE/RELEASE_NOTES.txt"
+          python3 "$ULIKE_RELEASE/src/validate19101.py" --root "$ULIKE_RELEASE" --host-report .ci-ulike19113/host/result.json --application-report "$ULIKE_RELEASE/evidence/original-application19101.json" --output .ci-ulike19113/validation19101.json
+          python3 "$ULIKE_RELEASE/publication/publish19101.py" --dist "$ULIKE_RELEASE/dist" --repo . --validation .ci-ulike19113/validation19101.json --local-only
+      - name: Preflight exact active baseline and feed branches
+        if: github.event_name == 'push' || inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 "$ULIKE_RELEASE/publication/publish19101.py" --dist "$ULIKE_RELEASE/dist" --repo . --validation .ci-ulike19113/validation19101.json --preflight-only
+      - name: Publish verified assets and atomic Manager feeds
+        if: github.event_name == 'push' || inputs.publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          python3 "$ULIKE_RELEASE/publication/publish19101.py" --dist "$ULIKE_RELEASE/dist" --repo . --validation .ci-ulike19113/validation19101.json
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike19113-verified-public-artifacts
+          path: |
+            releases/ulike19113-pipeline/dist/*.mpp
+            releases/ulike19113-pipeline/dist/QA_ULike_v1.9.113.json
+            releases/ulike19113-pipeline/dist/ULike_v1.9.113_sources_and_QA.zip
+            releases/ulike19113-pipeline/dist/SHA256SUMS.txt
+            releases/ulike19113-pipeline/dist/RELEASE_NOTES.txt
+            releases/ulike19113-pipeline/dist/publication_ULike_v1.9.113.json
+            .ci-ulike19113/validation19101.json
