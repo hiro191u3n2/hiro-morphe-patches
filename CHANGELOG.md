@@ -1,3 +1,31 @@
+# 1.0.279 (2026-10-23)
+
+* **TikTok:** 日本語化パッチ v1.0.0：icysymmetra版TikTokパッチ v0.9.0-dev.1が追加するMetra設定の2,181項目に日本語辞書を追加します。「TikTok設定を日本語化」を上流のSettingsと一緒に選択すると、日本語の端末／アプリ設定で表示します。既定では未選択です。国名・変更履歴・ライセンス原文・診断の生データは対象外。TikTok 47.4.3実APK・端末動作は未確認。
+
+TikTok 設定の日本語化 v1.0.0 / Hiro Morphe Patches v1.0.279
+
+icysymmetra版 TikTok パッチ v0.9.0-dev.1 が追加する Metra 設定に、日本語辞書を追加します。設定名、説明、ダイアログ、各種メニュー、メッセージの計2,181項目を収録しています。
+
+使い方:
+1. Morphe Manager の Hiro Morphe Patches を v1.0.279 に更新するか、単体の TikTok_Settings_Japanese_v1.0.0.mpp を読み込みます。
+2. icysymmetra版 TikTok パッチ v0.9.0-dev.1 の Settings と「TikTok設定を日本語化」を一緒に選択し、TikTok APK に適用します。日本語化パッチは既定では未選択です。
+3. 端末または TikTok アプリの言語を日本語に設定すると、Metra 設定が日本語で表示されます。ソースを更新するだけではインストール済みアプリは変わりません。
+
+日本語辞書は上流の多言語表示機構に接続します。ソースの読み込み順に依存しないよう、全パッチの実行後に接続します。すでに対応する Metra 拡張が組み込まれた入力にも対応します。対応する多言語機構がない入力では、Settings の選択を案内して停止します。上流 v0.8.1 は対応対象ではありません。
+
+日本語以外の言語、設定値、機能ゲートの値、通信処理、動画の内容は変更しません。SIM プリセットの国名、変更履歴本文、ライセンス原文、診断の生データは翻訳対象外です。TikTok、Metra、形式名などの固有名・技術表記は必要に応じて原文を維持します。
+
+検証:
+英語・日本語2,181項目のキー、書式指定子、改行を照合します。37分割の初期化処理、ホスト上での日本語選択・既存言語へのフォールバック、再適用、対象機構がない場合の停止を検査します。公開済み Metra 拡張の実DEXを合成APKに組み込み、単体版／総合版、TikTok の2パッケージ、既存拡張／上流先行／日本語化先行の12通りを検証します。旧総合版の全ローダークラスは意味的に同一、既存の配布資源はバイト単位で同一であることを確認します。
+
+TikTok 47.4.3 の実APK適用、実機での表示、Android 17、123パッチ同時適用は未確認です。合成APKとホストでの検証を実機確認として扱いません。公開前にローカル2回とCI2回を新規ビルドし、MPPとQAの完全一致を要求します。ULike_ACTIVE と既存の配布履歴を保持し、Manager の更新通知対象は TikTok のみです。
+
+単体版: TikTok_Settings_Japanese_v1.0.0.mpp
+総合版: Hiro_Morphe_Patches_v1.0.279.mpp
+上流: https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/tag/v0.9.0-dev.1
+公開先: https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/tiktok-japanese-v1.0.0
+ソース・翻訳CSV・QA・LICENSE・NOTICEを同梱します。
+
 # 1.0.278 (2026-10-23)
 
 * **TikTok:** 共通パッチ v1.1.19：TikTokへの適用時にInstagram専用の内部クラス検査が実行され、「Instagram 452 Reels Back method missing」で停止する不具合を修正します。対象パッケージで専用処理を分岐し、別アプリの同名クラスとの衝突を防ぎます。組み込む戻る処理は前版と同一。TikTok 47.4.3実APK・端末動作は未確認。
