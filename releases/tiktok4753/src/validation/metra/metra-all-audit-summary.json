@@ -1,0 +1,65 @@
+{
+  "input_package": "com.zhiliaoapp.musically",
+  "input_version": "47.5.3",
+  "input_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+  "bundle": "icysymmetra/tiktok-patches-for-morphe v0.9.0-dev.1",
+  "bundle_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "selected_count": 136,
+  "applied_count": 124,
+  "failed_count": 12,
+  "failed_patches": [
+    {
+      "name": "AMOLED dark theme",
+      "reason": "app.morphe.patcher.patch.PatchException: The patch \"AMOLED dark theme\" depends on \"BytecodePatch@431947365\", which raised an exception:\napp.morphe.patcher.patch.PatchException: AMOLED dark theme hasn't read the dark palette of TikTok 47.5.3, so nothing was changed. TikTok renames its colors from one build to the next, and a name taken from another build can paint an accent or an overlay black. The palette is known for TikTok 47.4.3."
+    },
+    {
+      "name": "Block P2P video relay",
+      "reason": "app.morphe.patcher.patch.PatchException: P2P Relay Blocker: target resources do not match a reviewed TikTok build. Nothing was removed. This patch only empties files it has checked byte for byte against a known TikTok APK, and this one carries a different set. A split bundle (an .apkm file) can do this. Untick the patch, or patch the full APK from APKMirror instead."
+    },
+    {
+      "name": "Comment tools",
+      "reason": "app.morphe.patcher.patch.PatchException: Failed to match the fingerprint: app.morphe.patches.tiktok.misc.commenttools.CommentMenuItemsFingerprint@74d5c152"
+    },
+    {
+      "name": "Feed text sizes",
+      "reason": "app.morphe.patcher.patch.PatchException: Feed text sizes: expected one description component bind, found 0"
+    },
+    {
+      "name": "Hide Play Store update offer",
+      "reason": "app.morphe.patcher.patch.PatchException: Unexpected TikTok version code 2024705030; refusing to change it"
+    },
+    {
+      "name": "Hide inbox items",
+      "reason": "app.morphe.patcher.patch.PatchException: Failed to match the fingerprint: app.morphe.patches.tiktok.misc.inbox.InboxNotificationNormalBind@50b45fb"
+    },
+    {
+      "name": "Hide search suggestions",
+      "reason": "app.morphe.patcher.patch.PatchException: Failed to match the fingerprint: app.morphe.patches.tiktok.interaction.searchsuggestions.SearchReentryFingerprint@497e4f93"
+    },
+    {
+      "name": "Lift text length limits",
+      "reason": "app.morphe.patcher.patch.PatchException: The bio editor compares with 160 at 4 places, not 3"
+    },
+    {
+      "name": "Mute feed videos",
+      "reason": "app.morphe.patcher.patch.PatchException: Mute feed videos: the player session's focus request in LX/03Mn;: expected exactly one match, found 0."
+    },
+    {
+      "name": "Remove LIVE extras",
+      "reason": "app.morphe.patcher.patch.PatchException: LIVE Stream Suite Optimizer: target resources do not match a reviewed TikTok build. Nothing was removed. This patch only empties files it has checked byte for byte against a known TikTok APK, and this one carries a different set. A split bundle (an .apkm file) can do this. Untick the patch, or patch the full APK from APKMirror instead."
+    },
+    {
+      "name": "Remove unused language packs",
+      "reason": "app.morphe.patcher.patch.PatchException: Language Pack Purger: language resources do not match a reviewed TikTok build. Nothing was removed. This patch only empties files it has checked byte for byte against a known TikTok APK, and this one carries a different set. A split bundle (an .apkm file) can do this. Untick the patch, or patch the full APK from APKMirror instead."
+    },
+    {
+      "name": "Show follow status",
+      "reason": "app.morphe.patcher.patch.PatchException: Local profile appearance: missing older native badge decision"
+    }
+  ],
+  "exploratory_only": true,
+  "force_compatibility": true,
+  "continue_on_error": true,
+  "valid_for_release": false,
+  "note": "CLI process returned0/result success=true because rebuildcompleted; stepResultsPATCHING=false and12failedPatches remain. A patch appearingApplied doesnot proveUI/runtimefunctionalcompatibility. Do notpublishthispartialoutputAPK."
+}
