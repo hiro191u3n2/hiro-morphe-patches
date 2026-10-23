@@ -1,0 +1,187 @@
+{
+  "schema": "homeback128-local-apk-validation-v1",
+  "result": "PASS",
+  "package_name": "com.instagram.android",
+  "input_version": "452.1.0.53.64",
+  "input_apk_sha256": "fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61",
+  "input_already_patched": false,
+  "physical_android_tested": false,
+  "input_apkm_sha256": "8575bb673c5a26ee4e7ab63f852be2f2f0faed40a73d8a373316d057425351a9",
+  "input_preparation": "Original supplied arm64-v8a APKM locally merged before OneBack application; original unpatched app code. APK and split bytes are not published.",
+  "patcher_version": "2.0.0",
+  "desktop_version": "1.19.0",
+  "artifacts": {
+    "OneBack_Exit_NoRecents_v1.1.18.mpp": {
+      "bytes": 540519,
+      "sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167"
+    },
+    "Hiro_Morphe_Patches_v1.0.277.mpp": {
+      "bytes": 18800594,
+      "sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a"
+    }
+  },
+  "runtime_sha256": "cc450f59660f445a87c007ff799ad77a36561fc08d12c6d148b7cc393df8c4e0",
+  "outputs": {
+    "OneBack_Exit_NoRecents_v1.1.18.mpp": {
+      "result": "PASS",
+      "mpp_sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167",
+      "unsigned_output_apk_sha256": "ee50affdb6b03e8b9f2a7ffb8a85336f08dacfad6f0b67e25fcfdf6b1a3b75ae",
+      "output_apk_sha256": "d845128a78169d87e083984438ba5b33dc035cf0953b4d38e1c4298ad6f52d5d",
+      "signature_verified": true,
+      "alignment_verified": true,
+      "signature_verification": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): false\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\n",
+      "alignment_check": "zipalign -c -P 16 4 signed.apk; exit=0",
+      "physical_android_tested": false,
+      "signed_payload_entries_identical_to_audited_unsigned": 24542,
+      "signing_identity": "Ephemeral local validation key; never a distribution APK",
+      "native_back_boundaries_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true,
+      "noncode_preservation_audited": true,
+      "resource_preservation_scope": "Numeric resource IDs, values, configurations and noncode payload bytes verified; resource entry names may change during rebuild. See fresh452-summary.json for counts and dynamic lookup limitation."
+    },
+    "Hiro_Morphe_Patches_v1.0.277.mpp": {
+      "result": "PASS",
+      "mpp_sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a",
+      "unsigned_output_apk_sha256": "6ed37f4706d8df8cbb05c7800f46d7656f308752a202b19a9fcd2c16f17acaa6",
+      "output_apk_sha256": "c541db8a6d4ab997f8fc153eaf2aed676031914fea9e4cb882efba3e01a3ed92",
+      "signature_verified": true,
+      "alignment_verified": true,
+      "signature_verification": "Verifies\nVerified using v1 scheme (JAR signing): false\nVerified using v2 scheme (APK Signature Scheme v2): false\nVerified using v3 scheme (APK Signature Scheme v3): true\nVerified using v3.1 scheme (APK Signature Scheme v3.1): false\nVerified using v4 scheme (APK Signature Scheme v4): false\nVerified for SourceStamp: false\nNumber of signers: 1\n",
+      "alignment_check": "zipalign -c -P 16 4 signed.apk; exit=0",
+      "physical_android_tested": false,
+      "signed_payload_entries_identical_to_audited_unsigned": 24542,
+      "signing_identity": "Ephemeral local validation key; never a distribution APK",
+      "native_back_boundaries_verified": true,
+      "runtime_classes_match": true,
+      "full_semantic_audit": true,
+      "noncode_preservation_audited": true,
+      "resource_preservation_scope": "Numeric resource IDs, values, configurations and noncode payload bytes verified; resource entry names may change during rebuild. See fresh452-summary.json for counts and dynamic lookup limitation."
+    }
+  },
+  "fresh_executable_audit": {
+    "appClasses": 213950,
+    "appMethods": 867113,
+    "wrappers": 176,
+    "preservedHelpers": 55,
+    "addedCallbacks": 213,
+    "lifecycleEntryHooks": 386,
+    "dialogHooks": 10,
+    "systemCallbackHooks": 10,
+    "terminalCallsites": 1137,
+    "terminalBridges": 887,
+    "nativeInstagramHooks": 7,
+    "twitterNativeScopes": 0,
+    "emittedRuntimeClasses": 85,
+    "assertions": 36331443
+  },
+  "gate_coverage": {
+    "methods": 7,
+    "gates": 8,
+    "injected_instructions": 27,
+    "exception_routes_match_native_continuation": true,
+    "unapproved_branch_handler_entries": 0,
+    "rejected_negative_mutations": 2
+  },
+  "resource_preservation": {
+    "numeric_values_references_configs_preserved": true,
+    "resource_table_byte_identical": false,
+    "entry_name_changes": {
+      "existing_drawable_names_renamed": 114,
+      "unnamed_string_entries_named": 576
+    },
+    "noncode_byte_exact_count": 24519,
+    "limits": [
+      "Static APK/DEX/resource verification only; user device installation and UI navigation have not been executed.",
+      "Resource recompilation changes entry names; equivalence of dynamic lookup using prior names is not claimed.",
+      "Fresh input path verified; old447 host regressions are separate."
+    ]
+  },
+  "upgrade127_validation": {
+    "result": "PASS",
+    "input_version": "452.1.0.53.64",
+    "input_apk_sha256": "90ba40e23410369520b79d3db38ee415ccdd1d7896d6a93a90bbe744c8468930",
+    "prior_runtime_sha256": "818800fec2272345ac6ff60d5fc86ef769b83746aa89544638f7a6ad44a0231c",
+    "output_apk_sha256": "1ca151435c7e18d47029143e9dc6d9a30cdc5881bd7ce3adea5f78cd6b170aa8",
+    "mpp_name": "OneBack_Exit_NoRecents_v1.1.18.mpp",
+    "mpp_sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167",
+    "runtime_sha256": "cc450f59660f445a87c007ff799ad77a36561fc08d12c6d148b7cc393df8c4e0",
+    "native_back_boundaries_verified": true,
+    "runtime_classes_match": true,
+    "unrelated_app_code_unchanged": true,
+    "noncode_entries_byte_identical": 24521,
+    "physical_android_tested": false,
+    "signed_output": false,
+    "evidence_sha256": {
+      "upgrade127-admission-audit.txt": "6bc68e261d33e49cf81992adccec4af87a543e1bd85524573bcf45979a5d54ce",
+      "upgrade127-output-audit.txt": "3258a5dea31c20d83ea0ece015f5ec86bd116d764fa5c2001c891c55f25ca241",
+      "upgrade127-apply.txt": "b6a55eccdbe807e40c4a79074c5a752356d0a40e7b8b0ed79d5c8725ad1e93f0",
+      "upgrade127-report.json": "428a843ff9e483d11572c651d686edd77cfc971bf61066048667ed6ce4240762"
+    }
+  },
+  "piko_coapplication_this_release": false,
+  "piko_existing_apk_upgrade_validation": {
+    "result": "PASS",
+    "input_version": "452.1.0.53.64",
+    "input_apk_sha256": "5f0b5bdbba4e45ec989309d51c3821458d930608c8875565f2433094a81fa2dc",
+    "prior_runtime_sha256": "818800fec2272345ac6ff60d5fc86ef769b83746aa89544638f7a6ad44a0231c",
+    "output_apk_sha256": "3347e58fee55b29fe0e22bb71a90a8fb0d498d36ea445ce47892cf39046d01c8",
+    "mpp_name": "OneBack_Exit_NoRecents_v1.1.18.mpp",
+    "mpp_sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167",
+    "runtime_sha256": "cc450f59660f445a87c007ff799ad77a36561fc08d12c6d148b7cc393df8c4e0",
+    "native_back_boundaries_verified": true,
+    "runtime_classes_match": true,
+    "unrelated_app_code_unchanged": true,
+    "noncode_entries_byte_identical": 24530,
+    "noncode_byte_identical_except": [
+      "AndroidManifest.xml"
+    ],
+    "manifest_change_scope": "Seven Piko-added activities get explicit enableOnBackInvokedCallback=true through the existing OneBack manifest policy. All other manifest elements/attributes/numeric references, and all other noncode bytes unchanged.",
+    "physical_android_tested": false,
+    "signed_output": false,
+    "scope": "Only new OneBack applied to previously-built Piko3.11.0-dev.1 all-nonclone65+OneBack127 APK. Piko patches were not newly applied; unknown user64 selections not asserted.",
+    "evidence_sha256": {
+      "upgrade127-piko-admission-audit.txt": "6bc68e261d33e49cf81992adccec4af87a543e1bd85524573bcf45979a5d54ce",
+      "upgrade127-piko-output-audit.txt": "b92ec87ff20e6e1314efc602634c038919fd013ffab461c1c6a1b16541aa8a61",
+      "upgrade127-piko-apply.txt": "183151715129d1ec7ddd5e0d1aae5013d69590c45fca83897c068b7afc47de2b",
+      "upgrade127-piko-report.json": "3cb5307392c7207ee0d5510787da0307cc568d91177798163de83be797b72016",
+      "upgrade127-piko-resources.json": "1f16a8b2ab65ba409ef8505c79ca4ff762be1e498b51ec0528dee5244171545b"
+    }
+  },
+  "evidence_sha256": {
+    "evidence/runtime128/profile-modal-contracts.txt": "f4f9cb8d33c2b06aa5f836efe10b8c73069cd060c9e0128b31b0eb2272d7c8e1",
+    "evidence/runtime128/profile-regression-after.txt": "dc767a38e71d6aee65618c7a64f3aae77261568db6d117771f0403d6e0eac43a",
+    "evidence/runtime128/profile-regression-before.txt": "e23096efa5b6f2ea208a75b64e8f6b268df7150c781db8dddabcf7ea6eb3f35d",
+    "evidence/runtime128/profile-regression.json": "5379f6b3f907fe29625109b025b541d76579c39de402aad728b99b274b836a0b",
+    "evidence/runtime128/root-contracts.txt": "845d51b8032025600c1d71bc6235f05b140909d2c62ad9e20359d9a6f00ccff2",
+    "evidence/instagram452-release/bundle-apply.txt": "ce999072b41640fad28860bb7633c3de538466759e2110132e6ac413cb8dba6e",
+    "evidence/instagram452-release/bundle-patch-report.json": "7ebd961776b689b199dfa8e15777a711807a3998c15bf00d85dc87c34a1a45b7",
+    "evidence/instagram452-release/bundle-signature.txt": "f547c9997cf9a7861e67d231e9162e2584d32d45c768902e42a03d65efed7a8d",
+    "evidence/instagram452-release/fresh452-gate-coverage.txt": "2ba27312d868e439d5f56ce5871f26e9acdaceffe72c87819370ee353e60e070",
+    "evidence/instagram452-release/fresh452-resource-values.json": "cf87c237abb5116e2f55700f238e6644766dcc4167a8c36eba3605e4184ee280",
+    "evidence/instagram452-release/fresh452-resources.json": "80e95cfbbf8a72b65180f7aefe74635e12cc157e2924d527e48d2cb8ced603c6",
+    "evidence/instagram452-release/fresh452-semantic.txt": "9d024826535bb1149a8eeaef590eb7fb0a01d6ab5c142c5d1c6dcfb32ce94bf9",
+    "evidence/instagram452-release/fresh452-summary.json": "f5db300437d67a4d829d96666798ec387a163e22d64d48dee5ed4d3d603929d0",
+    "evidence/instagram452-release/signing-alignment.json": "ea521cf3c434b951566365bcac006989f4527385b0238c487160ca22e4720f69",
+    "evidence/instagram452-release/single-apply.txt": "0d9c89150dd672170d5f950b0244f1137fb6f2c136188f7799d807591cebb5f3",
+    "evidence/instagram452-release/single-patch-report.json": "1dc2e683a798f4da3f2cde3754fd56c946c186920817d3e88970d47f105f7253",
+    "evidence/instagram452-release/single-signature.txt": "f547c9997cf9a7861e67d231e9162e2584d32d45c768902e42a03d65efed7a8d",
+    "evidence/instagram452-release/upgrade127-admission-audit.txt": "6bc68e261d33e49cf81992adccec4af87a543e1bd85524573bcf45979a5d54ce",
+    "evidence/instagram452-release/upgrade127-apply.txt": "b6a55eccdbe807e40c4a79074c5a752356d0a40e7b8b0ed79d5c8725ad1e93f0",
+    "evidence/instagram452-release/upgrade127-output-audit.txt": "3258a5dea31c20d83ea0ece015f5ec86bd116d764fa5c2001c891c55f25ca241",
+    "evidence/instagram452-release/upgrade127-piko-admission-audit.txt": "6bc68e261d33e49cf81992adccec4af87a543e1bd85524573bcf45979a5d54ce",
+    "evidence/instagram452-release/upgrade127-piko-apply.txt": "183151715129d1ec7ddd5e0d1aae5013d69590c45fca83897c068b7afc47de2b",
+    "evidence/instagram452-release/upgrade127-piko-output-audit.txt": "b92ec87ff20e6e1314efc602634c038919fd013ffab461c1c6a1b16541aa8a61",
+    "evidence/instagram452-release/upgrade127-piko-report.json": "3cb5307392c7207ee0d5510787da0307cc568d91177798163de83be797b72016",
+    "evidence/instagram452-release/upgrade127-piko-resources.json": "1f16a8b2ab65ba409ef8505c79ca4ff762be1e498b51ec0528dee5244171545b",
+    "evidence/instagram452-release/upgrade127-piko-summary.json": "ab1f49e5011ac8b57d3587696193e0da886aef3442e9f1d11dedfdb891b2f616",
+    "evidence/instagram452-release/upgrade127-report.json": "428a843ff9e483d11572c651d686edd77cfc971bf61066048667ed6ce4240762",
+    "evidence/instagram452-release/upgrade127-summary.json": "5420c0bbc246dcc7fc41dbb2ae93abbc6f16a1649e9362d292392a8cc158c045"
+  },
+  "limitations": [
+    "No physical Android installation, app screen operation or task-card verification.",
+    "Signed APK tests used an ephemeral local key; compatibility with the installed app signing identity is not asserted.",
+    "Resource entry-name changes are counted in fresh452-summary.json; original name-based dynamic resource lookup equivalence is not asserted.",
+    "Only current OneBack was applied to a previously-built Piko3.11.0-dev.1 all-nonclone65+OneBack127 APK. The update preserves existing app/Piko code and adds explicit enableOnBackInvokedCallback=true to seven Piko-added activities under the existing manifest policy; all other manifest content and 24,530 other noncode entries are unchanged. Piko patches were not newly coapplied, and the unknown user64 selection was not recreated. Upgrade outputs were unsigned; fresh standalone/aggregate outputs were separately signed and verified."
+  ]
+}

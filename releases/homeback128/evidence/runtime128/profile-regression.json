@@ -1,0 +1,24 @@
+{
+  "schema": "homeback128-profile-host-regression-v1",
+  "physical_android_tested": false,
+  "scope": "Host navigation models using447/452 descriptors. Native pops and modal finish are simulated; not device UI replay.",
+  "baseline_published_patch": "1.1.17",
+  "baseline_runtime_sha256": "818800fec2272345ac6ff60d5fc86ef769b83746aa89544638f7a6ad44a0231c",
+  "baseline_source_commit": "11f7b1293fb076d4c92c276c4f9a77f03b0213ca",
+  "baseline_failed_scenarios": 37,
+  "current_passed_scenarios": 55,
+  "current_assertions": 249,
+  "same_test_file_sha256": "d8d6b5a4b67432b4461ff0b8d607fb842927f8077a90b83e03eb3e102d5526c8",
+  "fixture452_sha256": "e9274371abff42e3cefde0ab7cb907de4b81aeb6257a5cb758d1c78d27998f4f",
+  "evidence": {
+    "profile-regression-before.txt": "e23096efa5b6f2ea208a75b64e8f6b268df7150c781db8dddabcf7ea6eb3f35d",
+    "profile-regression-after.txt": "dc767a38e71d6aee65618c7a64f3aae77261568db6d117771f0403d6e0eac43a"
+  },
+  "coverage": [
+    "ModalActivity452 uses inheritedA1Z:X.00fk without MainA1f/A08; native ordinaryBack,keys,AndroidX,prediction preserved",
+    "Profile/main overlay with CLIPS_TAB or unknown origin remains native under retainedCLIPS",
+    "Selected parent or child backstack cannot authorize task exit",
+    "Exact current root identity, CLIPS selection, five root wrapper shapes tested447/452",
+    "Native simulated pop reveals existing exact profile instance; modal finish does not remove task"
+  ]
+}

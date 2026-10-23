@@ -1,0 +1,50 @@
+Instagram 452 profile-video ModalActivity navigation contracts
+
+Input: supplied Instagram 452.1.0.53.64 arm64 APKM, locally merged original APK.
+Input SHA-256: fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61
+The input bytes were hashed again for this evidence. APK bytes and user data are not included.
+
+Scope: static DEX inspection of an actual app navigation pathway. This is not a
+physical observation of the user's failing execution, nor a device UI replay.
+
+Findings:
+- The ClipsProfileTabFragment class X.0BdU launches a video through FF0. Its
+  source enum is PROFILE (A2j), SELF_PROFILE (A37), or GROUP_PROFILE (A28).
+- FF0 calls X.0Xoc.A02. Under its native launch-mode conditions, A02 calls A05,
+  which calls X.04kE.A0C with the modal-launch flag. A0C creates a launcher for
+  com.instagram.modal.ModalActivity with the route clips_feed_viewer.
+- ModalActivity extends BaseFragmentActivity, which extends IgFragmentActivity.
+  IgFragmentActivity extends androidx.appcompat.app.AppCompatActivity, which
+  extends androidx.fragment.app.FragmentActivity. ModalActivity does not inherit
+  InstagramMainActivity and does not provide its A1f/A08 current-tab contract.
+- The shared FragmentActivity manager getter in this actual version is public
+  final A1Z():X.00fk. It applies to ModalActivity as well as MainActivity.
+- ModalActivity.finish calls android.app.Activity.finish. It does not call
+  finishAndRemoveTask from that method. Closing this secondary Activity can
+  reveal the underlying profile without removing the application's task.
+- The native in-Activity wrapper return X.00ZX.A03 first checks its current MAIN
+  content, then invokes the selected fragment Back handler. If not consumed,
+  its manager stack count A0L and native A0c/A16 pop routes handle the return.
+
+Missed runtime assumption:
+The prior helper chose the shared manager's version using Instagram452.supports,
+which requires MainActivity A1f/A08. A 452 ModalActivity therefore fell through to
+the older A1Y():X.0dj lookup and lost its fragment source. Generic full-screen
+viewer evidence could then request task exit before the exact fragment hook
+could observe PROFILE. A non-Main video host must retain native navigation;
+only a verified main CLIPS root may authorize Reels task removal.
+
+Instruction fingerprint algorithm:
+For each listed method, SHA-256 of the UTF-8 concatenation of DexDump.op(i) plus
+one LF for every instruction in method order. DexDump.op records opcode, register
+operands, literals, relative branch offsets and DEX references; it excludes line
+indices, addresses and exception-object identities. Flags are listed separately.
+These are analysis fingerprints, not the patcher's existing boundary hashes.
+
+Landroidx/fragment/app/FragmentActivity;->A1Z()LX/00fk; flags=17 instruction_sha256=bf28857a5351aabc94c76e9216b23b010cf22e94696f586db785e3711fc7d791
+LX/00ZX;->A03(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;LX/00fk;Lcom/instagram/common/session/UserSession;)Z flags=25 instruction_sha256=65803a9669eaf983100671faddc1a6cbd1f3c9ec5204797beb9d77541ccf2e20
+LX/04kE;->A0C(Landroid/view/View;Landroidx/fragment/app/FragmentActivity;Lcom/instagram/clips/intf/ClipsViewerConfig;Lcom/instagram/common/session/UserSession;ZZZ)V flags=25 instruction_sha256=ec0edbbae68ba3d08130b5ddf8ec25b40202a5bc128257cbafc81dbd2f62eb21
+Lcom/instagram/modal/ModalActivity;->finish()V flags=1 instruction_sha256=02753760bae1883a257e537ccc7dadd2dc4072ba42b608cca6f6f1e6c46f7693
+LX/0BdU;->FF0(LX/07bF;I)V flags=17 instruction_sha256=6c3293e727a74947b79b50fa7dbe3f95f8284629c7db49c8999ad1f5c3b45623
+LX/0Xoc;->A02(Landroid/view/View;Landroidx/fragment/app/FragmentActivity;LX/02FQ;Lcom/instagram/common/session/UserSession;Lcom/instagram/feed/media/Media;LX/0gnN;Ljava/lang/Long;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IZZZ)V flags=17 instruction_sha256=5293822b8b1c3f23da7da30d751689c243837e07dfd55a34036e67f3d744aa20
+LX/0Xoc;->A05(Landroidx/fragment/app/FragmentActivity;LX/02FQ;Lcom/instagram/common/session/UserSession;ZZ)V flags=17 instruction_sha256=3a9d65313a5269750a716ba1d4b2631e7bc612d5e56229b2d435e9d184a76374
