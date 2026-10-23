@@ -1,0 +1,393 @@
+{
+  "schema": "homeback129-publication-receipt-v1",
+  "patch_version": "1.1.19",
+  "bundle_version": "1.0.278",
+  "baseline_bundle_version": "1.0.277",
+  "baseline_bundle_sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a",
+  "source_commit": "68274f5fbd9c49fabc6dc37bec4f09d0e2f220f8",
+  "publication_manifest_sha256": "3e9deb37d8f0ec85e9866c84f9af1422021f88520e8c1ba62e3166848b629c53",
+  "assets": {
+    "OneBack_Exit_NoRecents_v1.1.19.mpp": {
+      "bytes": 540815,
+      "sha256": "01d737de3ef22a91f59fcefdb8e9a729d0692609864f1571ee7377da542ac947"
+    },
+    "Hiro_Morphe_Patches_v1.0.278.mpp": {
+      "bytes": 18800843,
+      "sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419"
+    },
+    "QA_HomeBack_v1.1.19.json": {
+      "bytes": 26383,
+      "sha256": "2cbb9e6a63aa12d2d8f5e7a176402f5e9eecaaa74521040dc06315e105f7f2e3"
+    },
+    "HomeBack_v1.1.19_sources_and_QA.zip": {
+      "bytes": 791699,
+      "sha256": "17944e57c8d5a3b54ebd0f909bd2d33e9a9e7fb1a653d3fc9a64c8d38982afd1"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2285,
+      "sha256": "e7e37632cd96efb6908783fca83a409a951a00727d10eb0ec49581e1fd63f01a"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 477,
+      "sha256": "99d1b05ddfd87e77fc0cbb3d80a208b09e60c6e08eae60901bc6f1f9598c3532"
+    }
+  },
+  "local_validation": {
+    "baseline_bundle_version": "1.0.277",
+    "baseline_bundle_sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a",
+    "android_device_tested": false,
+    "original_apk_apply_tested": false,
+    "unrelated_resource_entries_byte_identical": 150,
+    "unrelated_loader_classes_unchanged": 267,
+    "two_fresh_ci_builds_required": true,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "local_sdk_build": true,
+    "local_host_tested": true,
+    "validation_coverage": {
+      "host_cases": 315,
+      "host_assertions": 1498,
+      "host_suites": {
+        "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+        "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+        "Back117TikTokTest": "PASS Back117TikTokTest",
+        "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+        "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+        "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+        "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+        "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+        "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+        "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+        "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+        "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+        "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+        "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+        "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+        "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+        "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+        "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+        "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+        "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+        "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+        "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+        "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+        "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions"
+      },
+      "synthetic_apk_apply_cases": 30,
+      "local_real_apk_apply_cases": 0,
+      "app_scope": {
+        "result": "PASS",
+        "summary": "PASS AppScopeAudit: old277 exact error reproduced; four non-Instagram packages preserve collision classes with/without Instagram marker; package-scoped Instagram/X routing; missing and changed Instagram452 boundaries rejected; assertions=281",
+        "old_repro": {
+          "result": "REPRODUCED",
+          "error": "Instagram 452 Reels Back method missing"
+        },
+        "packages": [
+          "com.zhiliaoapp.musically",
+          "com.ss.android.ugc.trill",
+          "com.twitter.android",
+          "ctrip.english"
+        ],
+        "instagram_malformed_rejected": true,
+        "colliding_classes_unchanged": true
+      },
+      "runtime_preserved": true
+    },
+    "local_synthetic_scope_validation": {
+      "schema": "homeback129-local-scope-validation-v1",
+      "result": "PASS",
+      "reported_package": "com.zhiliaoapp.musically",
+      "reported_version": "47.4.3",
+      "original_apk_apply_tested": false,
+      "physical_android_tested": false,
+      "baseline_version": "1.0.277",
+      "baseline_sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a",
+      "artifacts": {
+        "OneBack_Exit_NoRecents_v1.1.19.mpp": {
+          "bytes": 540815,
+          "sha256": "01d737de3ef22a91f59fcefdb8e9a729d0692609864f1571ee7377da542ac947"
+        },
+        "Hiro_Morphe_Patches_v1.0.278.mpp": {
+          "bytes": 18800843,
+          "sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419"
+        }
+      },
+      "qa_sha256": "2cbb9e6a63aa12d2d8f5e7a176402f5e9eecaaa74521040dc06315e105f7f2e3",
+      "runtime_sha256": "cc450f59660f445a87c007ff799ad77a36561fc08d12c6d148b7cc393df8c4e0",
+      "baseline_runtime_sha256": "cc450f59660f445a87c007ff799ad77a36561fc08d12c6d148b7cc393df8c4e0",
+      "runtime_preserved": true,
+      "app_scope": {
+        "result": "PASS",
+        "summary": "PASS AppScopeAudit: old277 exact error reproduced; four non-Instagram packages preserve collision classes with/without Instagram marker; package-scoped Instagram/X routing; missing and changed Instagram452 boundaries rejected; assertions=281",
+        "old_repro": {
+          "result": "REPRODUCED",
+          "error": "Instagram 452 Reels Back method missing"
+        },
+        "packages": [
+          "com.zhiliaoapp.musically",
+          "com.ss.android.ugc.trill",
+          "com.twitter.android",
+          "ctrip.english"
+        ],
+        "instagram_malformed_rejected": true,
+        "colliding_classes_unchanged": true
+      },
+      "synthetic": [
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "OneBack_Exit_NoRecents_v1.1.19.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.twitter.android",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.instagram.android",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": false
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.zhiliaoapp.musically",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "com.ss.android.ugc.trill",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe22.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        },
+        {
+          "bundle": "Hiro_Morphe_Patches_v1.0.278.mpp",
+          "package": "ctrip.english",
+          "sdk": "morphe200.jar",
+          "result": "PASS",
+          "collision_fixture": true
+        }
+      ],
+      "limitations": [
+        "TikTok 47.4.3 original APK was unavailable; no actual TikTok APK application or installation was performed.",
+        "The reported exception was reproduced with a purpose-built DEX collision fixture and the prior published patch.",
+        "The user selection of 123 patches across three patch sources was not recreated.",
+        "No Android 17 device navigation, process exit or recent-task-card behavior was tested."
+      ]
+    },
+    "qa_sha256": "2cbb9e6a63aa12d2d8f5e7a176402f5e9eecaaa74521040dc06315e105f7f2e3"
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "9966a5208193671112a03a4865879e3a57cdd9fe",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "58e750c76b6385997eb13e9fd30accd078026c5e",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 421975329,
+  "raw_commit": "6b80aedf0502e3aa2fce4c5b2f1d44114a4c53a5",
+  "download_urls": {
+    "OneBack_Exit_NoRecents_v1.1.19.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/6b80aedf0502e3aa2fce4c5b2f1d44114a4c53a5/downloads/OneBack_Exit_NoRecents_v1.1.19.mpp",
+    "Hiro_Morphe_Patches_v1.0.278.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/6b80aedf0502e3aa2fce4c5b2f1d44114a4c53a5/downloads/Hiro_Morphe_Patches_v1.0.278.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/oneback-v1.1.19",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "TikTok"
+  ],
+  "other_apps_false_updates": false,
+  "all_unrelated_patch_resources_preserved": true,
+  "fixed_chatgpt_site_updated": false
+}
