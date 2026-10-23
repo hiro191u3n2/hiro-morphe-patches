@@ -1,0 +1,108 @@
+Instagram root-Reels contract review for OneBack 1.1.18
+
+Scope
+- Static verification of the supplied Instagram 452.1.0.53.64 merged original APK.
+- Fresh production-SDK compilation of the new helper and integrated runtime.
+- This report contains authored findings, public signatures and hashes, not APK
+  contents, account data, media, credentials or disassembly instructions.
+- Physical Android screen navigation has not been executed by this review.
+
+Observed weakness in the previous runtime
+- Its exact Reels boundary could exit any Reels receiver when the profile-source
+  exception did not positively identify that receiver.
+- Its tab boundary could exit an unchanged CLIPS controller root without proving
+  that the selected leaf was root Reels or that its parent stack was empty.
+- The generic visual fallback did not require InstagramMainActivity. A separate
+  video-host Activity must retain native finish so that the existing profile
+  Activity underneath becomes visible, rather than removing the whole task.
+- These are code-level paths. The exact path taken on the user's device is not
+  asserted from a static audit, and no claim is made that the PROFILE enum was
+  lost or changed on that device.
+
+Verified native 452 structure
+- InstagramMainActivity.A1f delegates through its navigation object to the
+  controller's A05 current root. A06 supplies the selected tab enum.
+- The native tab-host return helper selects a MAIN overlay before its base child.
+  It offers Back to that child before checking the child FragmentManager's A0L
+  count and performing the existing queued or immediate pop.
+- Consequently a nested video must decline the custom exit gate so that this
+  native parent continuation can reveal its prior screen.
+
+New helper invariants
+- Only InstagramMainActivity with verified owning controller and CLIPS tab is
+  eligible. A separate ModalActivity is not eligible, regardless of video source.
+- Main and controller current-root identities must agree. Non-swipeable roots
+  must be the MAIN-container fragment.
+- Only the selected wrapper/manager chain is examined. Each fragment must have
+  the expected Activity, parent fragment and parent FragmentManager.
+- Every examined selected parent/child manager must have A0L()==0. A swipeable
+  host's MAIN overlay disqualifies exit even if its count is zero.
+- Known BASE, MAIN, merged-page and pager children are followed. Null selection,
+  missing manager, wrong owner, cycle, excess depth, unknown shape and failed
+  reflection return false. The leaf must be the exact Reels family and, when
+  supplied, the exact callback receiver. A null receiver means inspect the
+  current selected leaf; it never makes a null selected leaf eligible.
+- No retained unrelated tab manager, view/lifecycle heuristic, pending-action
+  flag or analytics source is sufficient to authorize exit.
+
+Integration and return-transaction review
+- Generic exit, native Reels, Main's early boundary and native tab boundary all
+  require the positive root predicate. Existing known profile origins remain
+  an additional veto.
+- A known nested selection with CLIPS behind it retains the same native Back
+  policy through a synchronous pop, including ordinary non-Reels profile/media
+  content. Revealing root Reels during that Back does not authorize a second
+  exit within the same transaction.
+- NATIVE is set at the outer terminal scope and removed on leaving that scope.
+  Prediction state is removed at gesture completion/cancellation. Native-return
+  tokens are confined to the main-loop dispatch and removed by their own posted
+  cleanup token. A later token cannot be removed by an earlier cleanup.
+- Native ModalActivity finish is not converted to task removal. Existing
+  comment/layer terminal guards remain separate and unchanged.
+
+Fresh 452 member audit
+APK_SHA256=fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61
+PASS Lcom/instagram/mainactivity/InstagramMainActivity;->A1f()Landroidx/fragment/app/Fragment; flags=17
+PASS Lcom/instagram/mainactivity/InstagramMainActivity;->A08:LX/00M2; flags=1
+PASS LX/00M2;->A02:LX/004K; flags=1
+PASS LX/004K;->A03:Landroidx/fragment/app/FragmentActivity; flags=17
+PASS LX/004K;->A05()Landroidx/fragment/app/Fragment; flags=17
+PASS LX/004K;->A06()LX/08kM; flags=17
+PASS Landroidx/fragment/app/FragmentActivity;->A1Z()LX/00fk; flags=17
+PASS Landroidx/fragment/app/Fragment;->getActivity()Landroidx/fragment/app/FragmentActivity; flags=17
+PASS Landroidx/fragment/app/Fragment;->getParentFragment()Landroidx/fragment/app/Fragment; flags=17
+PASS Landroidx/fragment/app/Fragment;->getParentFragmentManager()LX/00fk; flags=17
+PASS Landroidx/fragment/app/Fragment;->getChildFragmentManager()LX/00fk; flags=17
+PASS LX/00fk;->A0L()I flags=17
+PASS LX/00fk;->A0O(I)Landroidx/fragment/app/Fragment; flags=17
+PASS LX/00fk;->A0Q(Ljava/lang/String;)Landroidx/fragment/app/Fragment; flags=17
+PASS LX/052y;->A06:LX/0mBs; flags=1
+PASS LX/0mBs;->A05()I flags=17
+PASS LX/04Bv;->A00:Landroidx/viewpager2/widget/ViewPager2; flags=1
+PASS Landroidx/viewpager2/widget/ViewPager2;->A00:I flags=1
+PASS LX/02Hr;->A0o()Lcom/instagram/clips/intf/ClipsViewerConfig; flags=17
+PASS Lcom/instagram/clips/intf/ClipsViewerConfig;->A00:Lcom/instagram/clips/intf/ClipsViewerSource; flags=1
+BODY Lcom/instagram/mainactivity/InstagramMainActivity;->A1f()Landroidx/fragment/app/Fragment; canonical_instruction_sha256=90026fa6c7664c953d7fc50c5cf9633bb046a66455de9d0b9efb9f8d58095128
+BODY LX/004K;->A05()Landroidx/fragment/app/Fragment; canonical_instruction_sha256=03a3534574e13b729d42c71a206b553c2a55120ee7fdaff1db461b45a13aca06
+BODY LX/004K;->A06()LX/08kM; canonical_instruction_sha256=19fe276409cd21d6808c471aefd684a6f13afb41b8416c6be5f380a70d098574
+BODY LX/00fk;->A0L()I canonical_instruction_sha256=272b7941a557e0a1655d88cd72cf3796d88a148f25e8e5269eb3293ef192bdb8
+BODY LX/00ZX;->A03(Landroidx/fragment/app/Fragment;Landroidx/fragment/app/FragmentActivity;LX/00fk;Lcom/instagram/common/session/UserSession;)Z canonical_instruction_sha256=65803a9669eaf983100671faddc1a6cbd1f3c9ec5204797beb9d77541ccf2e20
+PASS reflection_contract_members=20; physical_device_tested=false
+
+447 compatibility scope
+- The 447 family names are retained from the existing reviewed adapter:
+  Main A1e/A07 -> X.2xZ.A02 -> X.2yE, tab X.2yl, FragmentActivity.A1Y,
+  manager X.0dj, wrappers X.0jG/X.3gY/X.22c/X.9sY, leaf X.8Zv,
+  selected model X.eBE.A04, merged model field A05, pager A00.
+- Fresh host regressions use these exact descriptors, but the original 447 APK
+  is not available in this checkout. This turn does not claim a new full 447
+  APK reflection audit or a new 447 APK application.
+- Retained prior profile-origin evidence identified original 447 APK SHA-256
+  b2b4254d7fc2ffb4a6e08b41488e0def0dca8918f4159573a03887f7e2927670 and
+  supplied 447 APK SHA-256
+  153f84f6700fc5ebe29f918b4d59540dbd299e896fc6d04e4ca9b5d6014e7dd2.
+  That evidence verifies the profile enum and native parent-return helper; it is
+  not relabeled as a fresh 128 run.
+
+Reviewed helper SHA-256: ff0f7afc91b7fe18a21d90cde7b109643818832d0c7302dcd3534af0493167a2
+Retained 447 profile-contract evidence SHA-256: 483060dd1a3a34712eb1928697d27f58551efed73f4796a89f441e443ccc134b

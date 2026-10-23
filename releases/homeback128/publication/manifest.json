@@ -1,0 +1,69 @@
+{
+  "schema": "homeback128-publication-v1",
+  "patch_version": "1.1.18",
+  "bundle_version": "1.0.277",
+  "baseline_version": "1.0.276",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/ac0b19e3827e0e168f8b85c9bd5a8777a2a16207/downloads/Hiro_Morphe_Patches_v1.0.276.mpp",
+  "baseline_sha256": "2e5ad5f87f38eb0bfedb65307f6f9c717ca26b7bf903557227713309f0c27a46",
+  "release_title": "Instagram profile video Back return v1.1.18 / Hiro Morphe Patches v1.0.277",
+  "summary": "Instagram452でプロフィールから別画面に開いた動画が終了判定へ流れる条件を修正します。終了は実際のメイン画面のリールタブで、手前の画面や戻り先の階層がない場合に限定します。同じ戻る操作内の非終了判断も保持します。実機未確認。",
+  "validation_basis": "Production Android SDK compilation; retained host regression suites plus current profile-return regressions; independent DEX structure and unrelated-loader preservation; both MPPs applied to five synthetic application fixtures with three pinned Morphe Desktop versions. Fresh local Instagram452 applications bind input, current MPP/runtime and audited output identities. Exact published127 and previously built Piko3.11.0-dev.1 all-nonclone65+OneBack127 inputs were updated by applying only current OneBack. Existing application/Piko code and native boundaries are preserved; the Piko upgrade adds only explicit enableOnBackInvokedCallback=true to seven Piko-added activities under the existing manifest policy, preserving every other manifest item and 24,530 other noncode entries. Piko patches were not newly coapplied, and the unknown user64 selection was not recreated. Two fresh CI builds must match frozen local MPP and QA bytes. Physical Android behavior remains untested.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "19cfbf7383683f9a988d3ff61c720722c6f024a2",
+  "reviewed_dev_head": "5bdf466a9528948b3dd9bf6275b6d8e3ed51c060",
+  "reviewed_input_apk_sha256": "fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "ci_build_pair_verified": false,
+  "reviewed_input_version": "452.1.0.53.64",
+  "reviewed_input_apkm_sha256": "8575bb673c5a26ee4e7ab63f852be2f2f0faed40a73d8a373316d057425351a9",
+  "reviewed_upgrade_input_apk_sha256": "90ba40e23410369520b79d3db38ee415ccdd1d7896d6a93a90bbe744c8468930",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.18.mpp": {
+      "bytes": 540519,
+      "sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167"
+    },
+    "Hiro_Morphe_Patches_v1.0.277.mpp": {
+      "bytes": 18800594,
+      "sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a"
+    }
+  },
+  "local_expected_qa_sha256": "b81f362a686e48711cca22385b826c615bada89ad62c021bad7618bf3f019621",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions"
+  },
+  "local_apk_evidence_sha256": "f39793dc35b1fbd69bb02e164ff88862855f0d1a7235f0eb38bc713674cc0793",
+  "expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.18.mpp": {
+      "bytes": 540519,
+      "sha256": "fad393a0194a9cc92ad51445de3476b7b605ca691ec56fbab7ff255ba64d4167"
+    },
+    "Hiro_Morphe_Patches_v1.0.277.mpp": {
+      "bytes": 18800594,
+      "sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a"
+    }
+  },
+  "expected_qa_sha256": "b81f362a686e48711cca22385b826c615bada89ad62c021bad7618bf3f019621"
+}
