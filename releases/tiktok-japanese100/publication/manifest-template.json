@@ -1,0 +1,37 @@
+{
+  "schema": "tiktok-japanese100-publication-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.279",
+  "baseline_version": "1.0.278",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/6b80aedf0502e3aa2fce4c5b2f1d44114a4c53a5/downloads/Hiro_Morphe_Patches_v1.0.278.mpp",
+  "baseline_sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419",
+  "upstream_url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/download/v0.9.0-dev.1/patches-0.9.0-dev.1.mpp",
+  "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_version": "0.9.0-dev.1",
+  "release_title": "TikTok Japanese settings v1.0.0 / Hiro Morphe Patches v1.0.279",
+  "summary": "icysymmetra版TikTokパッチ v0.9.0-dev.1が追加するMetra設定の2,181項目に日本語辞書を追加します。「TikTok設定を日本語化」を上流のSettingsと一緒に選択すると、日本語の端末／アプリ設定で表示します。既定では未選択です。国名・変更履歴・ライセンス原文・診断の生データは対象外。TikTok 47.4.3実APK・端末動作は未確認。",
+  "validation_basis": "Complete 2,181-entry English/Japanese catalog key, placeholder and newline audit; bounded 37-chunk initializer generation; host locale/fallback/format checks using the actual upstream localization source; registry selftest against the real published Metra extension DEX; 12 synthetic APK cases covering standalone/aggregate MPP, both TikTok packages, and existing-extension/import-first/Japanese-first order. Missing-extension rejection and repeat application are checked. The entire previous bundle loader is preserved semantically and every existing non-manifest/non-loader-DEX resource is byte-identical. Two fresh local and two fresh CI builds must produce identical MPP and QA bytes. Original TikTok APK, physical device, and all 123 patches together are not tested.",
+  "freeze_state": "frozen",
+  "local_build_pair_verified": true,
+  "reviewed_main_head": "1312eecbe473d272bf7534efec3e3808a8a19dda",
+  "reviewed_dev_head": "002dac793f5d3cfd9573be1733d875ba39b10d91",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "ci_build_pair_verified": false,
+  "reported_package": "com.zhiliaoapp.musically",
+  "reported_version": "47.4.3",
+  "original_apk_apply_tested": false,
+  "physical_android_tested": false,
+  "patch_default": false,
+  "local_expected_mpp": {
+    "TikTok_Settings_Japanese_v1.0.0.mpp": {
+      "bytes": 134341,
+      "sha256": "b3e226db0bf87c7f7c9ff2c2eaa5d03ee9f2080c1dc457fb8cc82fddd49ed572"
+    },
+    "Hiro_Morphe_Patches_v1.0.279.mpp": {
+      "bytes": 18931794,
+      "sha256": "18dd2c2d186acf7e976211f9d46db991a07ddca40e2f92f7e828b8a5750eca02"
+    }
+  },
+  "local_expected_qa_sha256": "7d829d35820f22200152007b12e22e9e6452e826719e5fa4fae906e78f98e900",
+  "local_expected_host": "PASS localization host: 2181 entries through real upstream L10n; locale order/cache; null/styled/unknown fallback; formatting/plurals; assertions=4392"
+}

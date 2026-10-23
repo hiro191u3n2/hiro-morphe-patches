@@ -1,0 +1,187 @@
+{
+  "schema": "tiktok-japanese100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.279",
+  "baseline_version": "1.0.278",
+  "baseline_sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419",
+  "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_version": "0.9.0-dev.1",
+  "upstream_commit": "b582c984f50aeacbc812761e082354efa3fc0c28",
+  "upstream_extension_sha256": "0ffc719121dd4e5cc5579a22e9b76208544b47c2c990582c898dff16549f2f21",
+  "physical_android_tested": false,
+  "original_apk_apply_tested": false,
+  "catalog": {
+    "entries": 2181,
+    "initializer_chunks": 37,
+    "retained_technical_or_brand_entries": [
+      "%1$s (%2$s)",
+      "%1$s dp",
+      "%1$s%%",
+      "%1$s: %2$s",
+      "AI Self",
+      "Amazon Appstore",
+      "AppGallery",
+      "GIF",
+      "Galaxy Store",
+      "HTTP",
+      "LIVE",
+      "Metra",
+      "OK",
+      "SOCKS5",
+      "STEM"
+    ],
+    "placeholder_integrity": true,
+    "newline_integrity": true
+  },
+  "host": "PASS localization host: 2181 entries through real upstream L10n; locale order/cache; null/styled/unknown fallback; formatting/plurals; assertions=4392",
+  "registry_selftest": "PASS registry selftest: real upstream API; idempotence; exact original preservation; wrong-app and unsupported-API rejection; assertions=2855",
+  "loader_preservation": "PASS merge: preserved=280, added=4",
+  "preserved_unrelated_entries": 171,
+  "artifacts": {
+    "TikTok_Settings_Japanese_v1.0.0.mpp": {
+      "bytes": 134341,
+      "sha256": "b3e226db0bf87c7f7c9ff2c2eaa5d03ee9f2080c1dc457fb8cc82fddd49ed572"
+    },
+    "Hiro_Morphe_Patches_v1.0.279.mpp": {
+      "bytes": 18931794,
+      "sha256": "18dd2c2d186acf7e976211f9d46db991a07ddca40e2f92f7e828b8a5750eca02"
+    }
+  },
+  "sources": {
+    "build.py": "b1f42e8cd8d871e9171d4a0b79f91bec69f23d5064fb40213d6d22fbb2e7ff51",
+    "generate.py": "36b68b381cde5f06eed8e310d3835a29f00813df000b80b5069c506020246ee1",
+    "l10n/en.csv": "d9b47cc4fc46e0581cc0bacf03fd41b1e18b0b3255a78c2df946a1f46fb42bb9",
+    "l10n/ja.csv": "386709415a0387e932ac5d7c0fba3b6c46468febf50b05490ec9647e7bbb3d72",
+    "make_host.py": "829d5b799086937f30082d2e6655b327f89dca882b9377587a06d6768fab336c",
+    "patch/TikTokJapanesePatch.java": "612e7de9809ae707eb83930c4df67283a2401c5bd984db75343b4b2b8048a38f",
+    "test/ImportMetraFixture.java": "a4383eb523310736e364b91921c51702f7f88e001c626705c18dd86423c6b1d1",
+    "test/LocalizationAudit.java": "8c295dc07b05912ff482d8178282e36c721fd502d6fde8c8a4375ccb0a59bda5",
+    "test/MetadataAudit.java": "dcc35aa8040a32479d5a417868cab7ae7241c72c05120115f879e2038f50b2fb",
+    "upstream/L10n.java": "9b272cf467f05f06837206842c6d3bf8a45d7772c5e39d59ac43d858c71255f1",
+    "upstream/L10nTranslations.java": "feb9fc14d78d3e71ff804fea2f0835b411582467fd1f46289b5abbf6b8b3d350",
+    "upstream/L10nTranslationsDe.java": "3dd2e89796ce9f472caee353541965c61222e695f28ce1d6cac1b49be94a2e4d"
+  },
+  "toolchain_sha256": {
+    "morphe200.jar": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "morphe22.jar": "fe4bc92815bb14976150e4ec83e4985932b46d1d47edec75d37604481572e864",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "runtime_sha256": "b3631caa5b7b9682594bf9f9aa5a1c7af0a9be4e61255076641ae925b59294de",
+  "fixture_cases": [
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "preexisting",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "import-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "japanese-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "preexisting",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "import-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "japanese-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "preexisting",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "import-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.zhiliaoapp.musically",
+      "mode": "japanese-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "preexisting",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "import-first",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "package": "com.ss.android.ugc.trill",
+      "mode": "japanese-first",
+      "result": "PASS"
+    }
+  ],
+  "negative_missing_extension": true,
+  "repeat_apply": true,
+  "both_source_execution_orders": true,
+  "metadata": [
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "sdk": "morphe.jar",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "sdk": "morphe22.jar",
+      "result": "PASS"
+    },
+    {
+      "artifact": "TikTok_Settings_Japanese_v1.0.0.mpp",
+      "sdk": "morphe200.jar",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "sdk": "morphe.jar",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "sdk": "morphe22.jar",
+      "result": "PASS"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.279.mpp",
+      "sdk": "morphe200.jar",
+      "result": "PASS"
+    }
+  ],
+  "default_selected": false,
+  "production_android_sdk_compile": true,
+  "limitations": [
+    "Synthetic APK containers with the exact published Metra extension DEX; original TikTok 47.4.3 APK and physical Android device not tested.",
+    "Upstream release-note prose, license text, SIM preset country names and raw diagnostic values are not translated."
+  ]
+}
