@@ -1,0 +1,69 @@
+{
+  "schema": "homeback129-publication-v1",
+  "patch_version": "1.1.19",
+  "bundle_version": "1.0.278",
+  "baseline_version": "1.0.277",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/0cac9cc15a075444cd6a462b41b479dab1d0a6aa/downloads/Hiro_Morphe_Patches_v1.0.277.mpp",
+  "baseline_sha256": "797e102352dfb46fc38f0ffb4a8d65066a843079d5089be8f390306ac3c4281a",
+  "release_title": "TikTok patch application collision fix v1.1.19 / Hiro Morphe Patches v1.0.278",
+  "summary": "TikTokへの適用時にInstagram専用の内部クラス検査が実行され、「Instagram 452 Reels Back method missing」で停止する不具合を修正します。対象パッケージで専用処理を分岐し、別アプリの同名クラスとの衝突を防ぎます。組み込む戻る処理は前版と同一。TikTok 47.4.3実APK・端末動作は未確認。",
+  "validation_basis": "Production Android SDK compilation; all existing runtime host regressions; prior published patch failure reproduced with obfuscated-name collision fixtures; package-scoped patcher regression and malformed Instagram fail-closed checks; standalone and aggregate MPPs applied and rebuilt with five synthetic application fixtures across three pinned Morphe Desktop versions. All 24 non-Instagram full-patcher cases include collision fixtures. Runtime DEX bytes must match the published baseline exactly. Unrelated loader and resource entries are preserved. Two fresh CI builds must match frozen local MPP and QA bytes. No TikTok 47.4.3 original APK, Android device or combined 123-patch execution is claimed.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "cb901596532d0566716fc1ae00577e198c4d1c91",
+  "reviewed_dev_head": "84d2b166de8f470bb81d87f41239ed494dcb038e",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "ci_build_pair_verified": false,
+  "reported_package": "com.zhiliaoapp.musically",
+  "reported_version": "47.4.3",
+  "original_apk_apply_tested": false,
+  "physical_android_tested": false,
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.19.mpp": {
+      "bytes": 540815,
+      "sha256": "01d737de3ef22a91f59fcefdb8e9a729d0692609864f1571ee7377da542ac947"
+    },
+    "Hiro_Morphe_Patches_v1.0.278.mpp": {
+      "bytes": 18800843,
+      "sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419"
+    }
+  },
+  "local_expected_qa_sha256": "2cbb9e6a63aa12d2d8f5e7a176402f5e9eecaaa74521040dc06315e105f7f2e3",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions"
+  },
+  "local_scope_evidence_sha256": "f7f511464787f8fa636f821fca14b5150e3a02a9e2657baca7b48007e4be7529",
+  "expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.19.mpp": {
+      "bytes": 540815,
+      "sha256": "01d737de3ef22a91f59fcefdb8e9a729d0692609864f1571ee7377da542ac947"
+    },
+    "Hiro_Morphe_Patches_v1.0.278.mpp": {
+      "bytes": 18800843,
+      "sha256": "8811761b21adf9bf80859e4598a975e82e1a3fed9f16cf74b9a8b0a7ac95c419"
+    }
+  },
+  "expected_qa_sha256": "2cbb9e6a63aa12d2d8f5e7a176402f5e9eecaaa74521040dc06315e105f7f2e3"
+}
