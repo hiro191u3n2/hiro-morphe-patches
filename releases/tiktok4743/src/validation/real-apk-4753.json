@@ -1,0 +1,102 @@
+{
+  "schema": "tiktok4743-real-apk-part-v1",
+  "version": "47.5.3",
+  "input": {
+    "package": "com.zhiliaoapp.musically",
+    "version_name": "47.5.3",
+    "version_code": 2024705030,
+    "bytes": 476733983,
+    "sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+    "signature_verified": true,
+    "signer_certificate_sha256": "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+  },
+  "physical_android_tested": false,
+  "patcher_sdk_sha256": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+  "original_preflight": {
+    "native": "PASS LegacyNativeAudit original version=47.5.3 assertions=781; real DEX contracts and branch behavior checked; device UI not asserted",
+    "oneback": "PASS TikTok4753ContractAudit original: assertions=37; version=47.5.3; real native API verified; device behavior not asserted"
+  },
+  "cases": [
+    {
+      "id": "4753_standalone_native",
+      "version": "47.5.3",
+      "artifact": "TikTok_47.4.3_Hiro_v4.1.0.mpp",
+      "artifact_sha256": "42da5b42478498bdd1b8905cbf256241220718ecae92ed7ed3543660ace2bea3",
+      "input_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+      "selected_patches": [
+        "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）",
+        "フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3・47.5.3）",
+        "動画のシークバーを常時表示（TikTok 47.4.3・47.5.3）",
+        "シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3・47.5.3）",
+        "フォロー中のストーリーズ件数を非表示（TikTok 47.4.3・47.5.3）",
+        "戻る1回で終了・履歴削除"
+      ],
+      "applied_patches": [
+        "戻る1回で終了・履歴削除",
+        "動画のシークバーを常時表示（TikTok 47.4.3・47.5.3）",
+        "フォロー中のストーリーズ件数を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3・47.5.3）",
+        "シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3・47.5.3）",
+        "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "result": "PASS",
+      "output_apk_sha256": "a6ce1215c0549c3639b931ae1c56cf1176c42dbb5a4789b83138c34494e7195c",
+      "output_apk_bytes": 511057148,
+      "audits": {
+        "native": "PASS LegacyNativeAudit output version=47.5.3 assertions=1529; real DEX contracts and branch behavior checked; device UI not asserted",
+        "oneback": "PASS TikTok4753ContractAudit output: assertions=480735; version=47.5.3; real native API verified; device behavior not asserted",
+        "integrity": "PASS APK inventory: original classes=480524; emitted=480611; added=87; classes with added members=1188; no original classes/members removed; exact package/version/SDK retained; no permissions added",
+        "privacy": "PRIVACY_APK_AUDIT_PASSED"
+      },
+      "evidence_directory": "validation/real-apk/4753"
+    },
+    {
+      "id": "4753_aggregate_settings_ja",
+      "version": "47.5.3",
+      "artifact": "Hiro_Morphe_Patches_v1.0.281.mpp",
+      "artifact_sha256": "22020c9ecfa22aaaf5ec089e30f266f1f77bf9384d129105459bde23cc4d4dab",
+      "input_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+      "selected_patches": [
+        "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）",
+        "フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3・47.5.3）",
+        "動画のシークバーを常時表示（TikTok 47.4.3・47.5.3）",
+        "シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3・47.5.3）",
+        "フォロー中のストーリーズ件数を非表示（TikTok 47.4.3・47.5.3）",
+        "戻る1回で終了・履歴削除",
+        "TikTok設定を日本語化",
+        "Settings"
+      ],
+      "applied_patches": [
+        "Settings",
+        "戻る1回で終了・履歴削除",
+        "動画のシークバーを常時表示（TikTok 47.4.3・47.5.3）",
+        "フォロー中のストーリーズ件数を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3・47.5.3）",
+        "フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3・47.5.3）",
+        "シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3・47.5.3）",
+        "TikTok設定を日本語化",
+        "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "result": "PASS",
+      "output_apk_sha256": "02c878e228ea212533ee5002bd999e3d6fdb12dc99ae8e17ecaa77bcb5c7d132",
+      "output_apk_bytes": 514682855,
+      "audits": {
+        "native": "PASS LegacyNativeAudit output version=47.5.3 assertions=1529; real DEX contracts and branch behavior checked; device UI not asserted",
+        "oneback": "PASS TikTok4753ContractAudit output: assertions=483785; version=47.5.3; real native API verified; device behavior not asserted",
+        "integrity": "PASS APK inventory: original classes=480524; emitted=483661; added=3137; classes with added members=1188; no original classes/members removed; exact package/version/SDK retained; no permissions added",
+        "privacy": "PRIVACY_APK_AUDIT_PASSED",
+        "settings_japanese": "NATIVE_SETTINGS_HOOK_AUDIT_PASSED"
+      },
+      "evidence_directory": "validation/real-apk/4753",
+      "upstream_version": "0.9.0-dev.1",
+      "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd"
+    }
+  ]
+}

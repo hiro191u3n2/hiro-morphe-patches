@@ -1,0 +1,136 @@
+name: Verify and publish real-APK-tested TikTok 47.4.3 and 47.5.3 bundle281
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/tiktok4743-publish.yml'
+      - 'releases/tiktok4743/src/**'
+      - 'releases/tiktok4743/publication/**'
+      - '!releases/tiktok4743/publication/manifest.json'
+      - 'releases/tiktok4743/LICENSE'
+      - 'releases/tiktok4743/NOTICE'
+      - 'releases/tiktok4743/README.md'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Verify source identity and active baseline without changing feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmp .github/workflows/tiktok4743-publish.yml releases/tiktok4743/publication/workflow.yml
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,subprocess
+          root=pathlib.Path('releases/tiktok4743/publication')
+          cfg=json.loads((root/'manifest-template.json').read_text())
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version']==cfg['baseline_version']=='1.0.280','Baseline advanced; review before publishing'
+          assert feed['download_url']==cfg['baseline_url']
+          assert cfg['patch_version']=='4.1.0' and cfg['bundle_version']=='1.0.281'
+          assert cfg.get('freeze_state')=='frozen' and cfg.get('local_build_pair_verified') is True,'Two local build identities not frozen'
+          spec=importlib.util.spec_from_file_location('publication',root/'publish.py')
+          pub=importlib.util.module_from_spec(spec);spec.loader.exec_module(pub)
+          proof_raw=(pub.SOURCE_ROOT/'src/validation/real-apk.json').read_bytes()
+          assert pub.sha(proof_raw)==cfg['local_expected_real_apk_sha256'],'Original-APK proof changed after freeze'
+          pub.validate_real_apk(json.loads(proof_raw),cfg['local_expected_mpp'])
+          assert pub.inherited_source_ids(pathlib.Path('.'))==cfg['inherited_source_sha256'],'Corresponding source changed'
+          parents=[line.split(' ',1)[1] for line in subprocess.check_output(['git','cat-file','-p','HEAD'],text=True).splitlines() if line.startswith('parent ')]
+          assert parents==[cfg['reviewed_main_head']],'Source commit does not descend from the reviewed live main head'
+          for branch,expected in [('main',subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()),('dev',cfg['reviewed_dev_head'])]:
+              live=json.loads(subprocess.check_output(['gh','api',f'repos/hiro191u3n2/hiro-morphe-patches/git/ref/heads/{branch}'],text=True))
+              assert live['object']['sha']==expected,'Remote branch advanced after source review: '+branch
+          assert subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.8'
+          PY
+      - name: Stage immutable baseline280, published Metra Settings dependency and exact pinned build tools
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import hashlib,importlib.util,io,json,pathlib,urllib.request,zipfile
+          release=pathlib.Path('releases/tiktok4743')
+          spec=importlib.util.spec_from_file_location('tiktok4743_publication',release/'publication/publish.py')
+          build=importlib.util.module_from_spec(spec);spec.loader.exec_module(build)
+          cfg=json.loads((release/'publication/manifest-template.json').read_text())
+          root=pathlib.Path('.ci-tiktok4743/staged');(root/'tools').mkdir(parents=True)
+          def get(url):
+              with urllib.request.urlopen(url,timeout=180) as response:
+                  assert response.status==200
+                  return response.read()
+          rows={
+            'morphe.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar',None,None),
+            'morphe22.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.0-dev.19/morphe-desktop-1.19.0-dev.19-all.jar',None,None),
+            'morphe200.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.0/morphe-desktop-1.19.0-all.jar',None,None),
+            'android.jar':('https://dl.google.com/android/repository/platform-35_r02.zip','0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0','android-35/android.jar'),
+            'd8.jar':('https://dl.google.com/android/repository/build-tools_r35_linux.zip','bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88','android-15/lib/d8.jar')}
+          for name,(url,pin,entry) in rows.items():
+              raw=get(url)
+              if pin:assert hashlib.sha256(raw).hexdigest()==pin,'Archive tool pin differs: '+name
+              if entry:
+                  with zipfile.ZipFile(io.BytesIO(raw)) as z:raw=z.read(entry)
+              assert hashlib.sha256(raw).hexdigest()==build.TOOLS[name],'Extracted tool pin differs: '+name
+              (root/'tools'/name).write_bytes(raw)
+          raw=get(cfg['baseline_url'])
+          assert hashlib.sha256(raw).hexdigest()==cfg['baseline_sha256']==build.BASE_SHA256
+          (root/'baseline280.mpp').write_bytes(raw)
+          raw=get(cfg['upstream_url'])
+          assert hashlib.sha256(raw).hexdigest()==cfg['upstream_sha256']==build.UPSTREAM_SHA256
+          (root/'metra-0.9.0-dev.1.mpp').write_bytes(raw)
+          PY
+      - name: First fresh SDK build with native host and preservation gates
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/tiktok4743/src/build.py --base .ci-tiktok4743/staged/baseline280.mpp --tools .ci-tiktok4743/staged/tools --work .ci-tiktok4743/build-a --dist .ci-tiktok4743/dist-a 2>&1 | tee .ci-tiktok4743/build-a.log
+      - name: Second fresh SDK build and repeat every gate
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/tiktok4743/src/build.py --base .ci-tiktok4743/staged/baseline280.mpp --tools .ci-tiktok4743/staged/tools --work .ci-tiktok4743/build-b --dist .ci-tiktok4743/dist-b 2>&1 | tee .ci-tiktok4743/build-b.log
+      - name: Require exact local and two clean CI build bytes then package
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/tiktok4743/publication/verify_pair.py .ci-tiktok4743/dist-a .ci-tiktok4743/dist-b --repo .
+          python3 releases/tiktok4743/publication/selftest.py --dist .ci-tiktok4743/dist-a 2>&1 | tee .ci-tiktok4743/publication-gate-tests.log
+          python3 releases/tiktok4743/publication/package.py --dist .ci-tiktok4743/dist-a --repo .
+          python3 releases/tiktok4743/publication/publish.py --dist .ci-tiktok4743/dist-a --repo . --base .ci-tiktok4743/staged/baseline280.mpp --upstream .ci-tiktok4743/staged/metra-0.9.0-dev.1.mpp --local-only 2>&1 | tee .ci-tiktok4743/byte-verification.log
+          python3 releases/tiktok4743/publication/publish.py --dist .ci-tiktok4743/dist-a --repo . --base .ci-tiktok4743/staged/baseline280.mpp --upstream .ci-tiktok4743/staged/metra-0.9.0-dev.1.mpp --preflight-only 2>&1 | tee .ci-tiktok4743/preflight.log
+      - name: Publish verified release and atomically update main and dev
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/tiktok4743/publication/publish.py --dist .ci-tiktok4743/dist-a --repo . --base .ci-tiktok4743/staged/baseline280.mpp --upstream .ci-tiktok4743/staged/metra-0.9.0-dev.1.mpp 2>&1 | tee .ci-tiktok4743/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: tiktok4743-bundle281-verification
+          path: |
+            .ci-tiktok4743/dist-a/
+            .ci-tiktok4743/dist-b/
+            .ci-tiktok4743/*.log
+            .ci-tiktok4743/build-a/*.txt
+            .ci-tiktok4743/build-a/*.log
+            .ci-tiktok4743/build-a/*.json
+            .ci-tiktok4743/build-b/*.txt
+            .ci-tiktok4743/build-b/*.log
+            .ci-tiktok4743/build-b/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1

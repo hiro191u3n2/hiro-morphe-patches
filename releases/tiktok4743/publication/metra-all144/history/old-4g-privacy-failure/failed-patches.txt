@@ -1,0 +1,53 @@
+[Hiro] TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）
+app.morphe.patcher.patch.PatchException: The patch "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）" raised an exception: app.morphe.patcher.patch.PatchException: TikTok 47.4.3/47.5.3 privacy: native entry outside reviewed scan bounds lib/arm64-v8a/libEffectCreatorJni.so bytes=0
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:170)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)
+	at kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)
+	at app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: java.lang.IllegalStateException: TikTok 47.4.3/47.5.3 privacy: native entry outside reviewed scan bounds lib/arm64-v8a/libEffectCreatorJni.so bytes=0
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.require(LegacyPrivacy.java:70)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.hardenNativeLibraries(LegacyPrivacy.java:265)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$4.invoke(LegacyPrivacy.java:96)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$4.invoke(LegacyPrivacy.java:89)
+	at app.morphe.patcher.patch.Patch.finalize(Patch.kt:164)
+	at app.morphe.patcher.patch.ResourcePatch.finalize$morphe_patcher(Patch.kt:433)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:164)
+	... 13 more
+
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:177)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)
+	at kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)
+	at app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: app.morphe.patcher.patch.PatchException: TikTok 47.4.3/47.5.3 privacy: native entry outside reviewed scan bounds lib/arm64-v8a/libEffectCreatorJni.so bytes=0
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:170)
+	... 13 more
+Caused by: java.lang.IllegalStateException: TikTok 47.4.3/47.5.3 privacy: native entry outside reviewed scan bounds lib/arm64-v8a/libEffectCreatorJni.so bytes=0
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.require(LegacyPrivacy.java:70)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.hardenNativeLibraries(LegacyPrivacy.java:265)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$4.invoke(LegacyPrivacy.java:96)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$4.invoke(LegacyPrivacy.java:89)
+	at app.morphe.patcher.patch.Patch.finalize(Patch.kt:164)
+	at app.morphe.patcher.patch.ResourcePatch.finalize$morphe_patcher(Patch.kt:433)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:164)
+	... 13 more
+
