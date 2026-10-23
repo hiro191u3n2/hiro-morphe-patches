@@ -1,0 +1,51 @@
+{
+  "schema": "tiktok4753-bundled-module-loader-audit-v1",
+  "input_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+  "scope": [
+    "lib/{arm64-v8a,armeabi-v7a}/libdex_df_live_cast.so",
+    "lib/{arm64-v8a,armeabi-v7a}/libdex_df_pitaya.so",
+    "lib/{arm64-v8a,armeabi-v7a}/libdex_df_ship.so"
+  ],
+  "findings": [
+    {
+      "code": "classes2.dex LX/032T.LJIIJJI(String,boolean)",
+      "finding": "Builds libdex_<module>.so paths; selects existing files; makes them read-only; passes them to LJII. No archive content digest or fixed size check in this method."
+    },
+    {
+      "code": "classes2.dex LX/032T.LJII(ClassLoader,List,File,boolean)",
+      "finding": "Uses preloaded elements or calls LX/02nV.LIZ; appends returned elements to DexPathList.dexElements."
+    },
+    {
+      "code": "classes.dex LX/02nV.LIZ(Object,ArrayList,File,ArrayList)",
+      "finding": "Reflectively invokes makePathElements or makeDexElements using file paths. No module checksum argument or content pin."
+    },
+    {
+      "code": "classes2.dex LX/032T.LJIIJ(File)",
+      "finding": "Recovery sanity check only tests isFile, length >=4, then first two bytes 0x50 0x4b (PK)."
+    },
+    {
+      "code": "classes.dex NativeLibDexPathElementPreloader",
+      "finding": "Cached path-elements-v23.txt stores optimized-directory and file absolute paths. readStoredDexPaths checks path existence; sameFile/sameFiles compare paths. No byte-length, last-modified, digest, signature, or CRC validation."
+    },
+    {
+      "code": "assets/dynamic_feature_install/df_{live_cast,pitaya,ship}.json and classes21.dex LX/0iU7.LIZ/LIZJ",
+      "finding": "Metadata fields are module/project/package/probe class/representative SO/provider projects/service keys. Verification uses Class.forName(probe) and BaseDexClassLoader.findLibrary(representative SO)+exists. No size/digest fields."
+    },
+    {
+      "code": "classes2.dex LX/033c.<clinit> / LX/032U.invoke",
+      "finding": "Lists df_ship, df_live_cast and df_pitaya among the libdex modules passed to this loader."
+    },
+    {
+      "code": "Whole original APK decompressed-entry byte search",
+      "finding": "MD5/SHA1/SHA256 of each of three original module ZIPs and their four DEX payloads searched as raw digest, ASCII hex and base64. Only matches are six SHA256 entries in ordinary APK v1 META-INF/MANIFEST.MF (two ABIs). No matching embedded digest elsewhere. See digest-references.json."
+    }
+  ],
+  "conclusion": "No external original-content/size pin found in the reviewed bundled-module loader path. Valid ZIP and DEX rebuilding is supported by this code evidence, provided entry names, class inventory, identifiers, semantics except intended tracking string replacements, original ZIP metadata/alignment, DEX tables/checksums and ZIP CRC are validated. It is unnecessary to leave these exact bundled modules untouched solely because of a hypothetical extra digest pin.",
+  "limits": [
+    "Static original-APK review; no Android runtime execution.",
+    "Does not prove absence of every obfuscated/native or remotely supplied integrity policy.",
+    "Downloaded Play splits and unknown modules/builds are outside this conclusion.",
+    "Re-signing the rebuilt parent APK is still required; the original META-INF/MANIFEST.MF digests do not survive signing."
+  ],
+  "production_source_changes": false
+}

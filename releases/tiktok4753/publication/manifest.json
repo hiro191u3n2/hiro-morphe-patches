@@ -1,0 +1,98 @@
+{
+  "schema": "tiktok4753-publication-v1",
+  "patch_version": "4.0.0",
+  "bundle_version": "1.0.280",
+  "baseline_version": "1.0.279",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/6f5f49a26b6938d1c0e320344a0680e63673a59f/downloads/Hiro_Morphe_Patches_v1.0.279.mpp",
+  "baseline_sha256": "18dd2c2d186acf7e976211f9d46db991a07ddca40e2f92f7e828b8a5750eca02",
+  "upstream_url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/download/v0.9.0-dev.1/patches-0.9.0-dev.1.mpp",
+  "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_version": "0.9.0-dev.1",
+  "release_title": "Hiro TikTok 47.5.3 v4.0.0 / aggregate v1.0.280",
+  "summary": "47.5.3 の実APKに合わせて Hiro 製のネイティブ機能6個と戻る処理を更新し、上流 Settings と日本語化の接続を検証します。公開時は検証済み MPP とローカル・CI の各2ビルドが完全一致したものだけを配布します。Android 実機の操作は未確認。上流全136パッチの調査で失敗した12件は今回の修正対象外です。",
+  "validation_basis": "Signed original global TikTok APK 47.5.3, exact SHA-256 and signer certificate. Two complete application cases: standalone native six plus OneBack; aggregate authored eight plus upstream Settings. Exact selected/applied sets, no failed patches, all pipeline steps successful, output native/OneBack/privacy/integrity audits and aggregate Japanese settings dispatch audit. Two distinct local and two distinct CI builds must reproduce the exact MPP and build QA bytes; proof MPP identities must match. Unrelated loader semantics and resource bytes, unchanged Japanese companion and all other OneBack runtime classes are preserved. Physical Android execution is not claimed. The external 136-patch exploratory probe with 12 failures is documented as non-release evidence, not fixed by this release.",
+  "freeze_state": "frozen",
+  "local_build_pair_verified": true,
+  "reviewed_main_head": "d6516bfb4f7df07775da08c4d33d3f3591afde37",
+  "reviewed_dev_head": "1170a0de4f0643dc2048d0ca85ad6811afe2ac25",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "ci_build_pair_verified": false,
+  "reported_package": "com.zhiliaoapp.musically",
+  "reported_version": "47.5.3",
+  "original_apk_apply_tested": true,
+  "physical_android_tested": false,
+  "japanese_patch_default": false,
+  "japanese_source_commit": "efb5937ddea4fe29abdfe33027cfc0e5d397ae93",
+  "inherited_source_sha256": {
+    "inherited/japanese/src/build.py": "b1f42e8cd8d871e9171d4a0b79f91bec69f23d5064fb40213d6d22fbb2e7ff51",
+    "inherited/japanese/src/generate.py": "36b68b381cde5f06eed8e310d3835a29f00813df000b80b5069c506020246ee1",
+    "inherited/japanese/src/l10n/en.csv": "d9b47cc4fc46e0581cc0bacf03fd41b1e18b0b3255a78c2df946a1f46fb42bb9",
+    "inherited/japanese/src/l10n/ja.csv": "386709415a0387e932ac5d7c0fba3b6c46468febf50b05490ec9647e7bbb3d72",
+    "inherited/japanese/src/make_host.py": "829d5b799086937f30082d2e6655b327f89dca882b9377587a06d6768fab336c",
+    "inherited/japanese/src/patch/TikTokJapanesePatch.java": "612e7de9809ae707eb83930c4df67283a2401c5bd984db75343b4b2b8048a38f",
+    "inherited/japanese/src/test/ImportMetraFixture.java": "a4383eb523310736e364b91921c51702f7f88e001c626705c18dd86423c6b1d1",
+    "inherited/japanese/src/test/LocalizationAudit.java": "8c295dc07b05912ff482d8178282e36c721fd502d6fde8c8a4375ccb0a59bda5",
+    "inherited/japanese/src/test/MetadataAudit.java": "dcc35aa8040a32479d5a417868cab7ae7241c72c05120115f879e2038f50b2fb",
+    "inherited/japanese/src/upstream/L10n.java": "9b272cf467f05f06837206842c6d3bf8a45d7772c5e39d59ac43d858c71255f1",
+    "inherited/japanese/src/upstream/L10nTranslations.java": "feb9fc14d78d3e71ff804fea2f0835b411582467fd1f46289b5abbf6b8b3d350",
+    "inherited/japanese/src/upstream/L10nTranslationsDe.java": "3dd2e89796ce9f472caee353541965c61222e695f28ce1d6cac1b49be94a2e4d",
+    "inherited/japanese/README.md": "055eba90ea3a6dcf3cca318ca6cb4b23600a06958db87fdc79f4c7862015f28f",
+    "inherited/japanese/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "inherited/japanese/NOTICE": "5b15899ac655f4017486f65466539d42dcd22a1624bba1d86c16c212fca663ba",
+    "inherited/japanese/legacy/build.py": "baa8fe2a52c357a67c8ca5e3abcde4fb35a6ecaa8790f3b91ce790ed9feee141",
+    "inherited/japanese/legacy/test-dex/Fixtures.java": "8d9701fe2cc4530d6ebd2652d678682221df2ed5a19d0d1d764beff07603e052"
+  },
+  "local_expected_mpp": {
+    "TikTok_47.5.3_Hiro_v4.0.0.mpp": {
+      "bytes": 763267,
+      "sha256": "55b0c2ade67050efc94c2445158b81f168977b6dc1d0306d570429b454737e2a"
+    },
+    "Hiro_Morphe_Patches_v1.0.280.mpp": {
+      "bytes": 19003093,
+      "sha256": "56de1bb340b5454aa10605da7275f98ca3e8b2130549a08213b2b4b632826a24"
+    }
+  },
+  "local_expected_qa_sha256": "75caea6966b1674603def38bac8a0ca43081f8fed0c8698ff78990051108bb1e",
+  "local_expected_real_apk_sha256": "5f1419dba771f643cac1a15ce1361f818a00aae777af4c1466824d6ed549044a",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions",
+    "Back4753TikTokTest": "PASS Back4753TikTokTest: 47.5.3-only native ABI; profile/Home/back/layer regressions; host simulation, not Android device"
+  },
+  "expected_mpp": {
+    "TikTok_47.5.3_Hiro_v4.0.0.mpp": {
+      "bytes": 763267,
+      "sha256": "55b0c2ade67050efc94c2445158b81f168977b6dc1d0306d570429b454737e2a"
+    },
+    "Hiro_Morphe_Patches_v1.0.280.mpp": {
+      "bytes": 19003093,
+      "sha256": "56de1bb340b5454aa10605da7275f98ca3e8b2130549a08213b2b4b632826a24"
+    }
+  },
+  "expected_qa_sha256": "75caea6966b1674603def38bac8a0ca43081f8fed0c8698ff78990051108bb1e",
+  "expected_real_apk_sha256": "5f1419dba771f643cac1a15ce1361f818a00aae777af4c1466824d6ed549044a",
+  "ci_run_id": null,
+  "ci_source_commit": null
+}
