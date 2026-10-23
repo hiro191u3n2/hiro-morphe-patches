@@ -1,0 +1,56 @@
+{
+  "schema": "homeback127-publication-v1",
+  "patch_version": "1.1.17",
+  "bundle_version": "1.0.275",
+  "baseline_version": "1.0.274",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/7e0c9d17f17231bada1db440edd21bf650471442/downloads/Hiro_Morphe_Patches_v1.0.274.mpp",
+  "baseline_sha256": "940253bb01ae17dacaab0ff0239544b1a5fcb539202d8bee324c4c7191064fd8",
+  "release_title": "Instagram 452 compatibility and profile Back return v1.1.17 / Hiro Morphe Patches v1.0.275",
+  "summary": "Instagram 452.1.0.53.64で戻るパッチ適用が停止する旧447向け内部参照を更新。プロフィールから開いた動画はプロフィールへ戻り、リールタブでは戻るで終了・履歴削除します。コメント等は先に閉じます。実機未確認。",
+  "validation_basis": "Production Android SDK compilation; retained host and profile-return regressions plus Instagram452 regression; DEX structure and unrelated-loader preservation; both shipped MPPs applied to five synthetic application fixtures by pinned Desktop1.16.0,1.19.0-dev.19 and1.19.0 (patcher2.0.0). Official loader all-version metadata and distributed JVM origin are checked. Local Instagram452 applications, signed APK verification and alignment audits bind the input, final MPP/runtime/output identities. Two fresh CI builds must match local frozen MPP/QA. Physical Android behavior is not asserted.",
+  "freeze_state": "frozen",
+  "reviewed_main_head": "4dc769b006da242a60f5dee50c3585b3e6e3af36",
+  "reviewed_dev_head": "6dffd2b150c60af9af70272f46ec3fb22f0ad36c",
+  "reviewed_input_apk_sha256": "fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "ci_build_pair_verified": false,
+  "reviewed_input_version": "452.1.0.53.64",
+  "reviewed_input_apkm_sha256": "8575bb673c5a26ee4e7ab63f852be2f2f0faed40a73d8a373316d057425351a9",
+  "local_expected_mpp": {
+    "OneBack_Exit_NoRecents_v1.1.17.mpp": {
+      "bytes": 472715,
+      "sha256": "ba287febacfa2d1e4be86e68f768cfbe94a8ec1b280567f7cba645401e143015"
+    },
+    "Hiro_Morphe_Patches_v1.0.275.mpp": {
+      "bytes": 18732077,
+      "sha256": "358454074998ae51fd1b0cb06cb868136ea1ced9a2e40e78f8a4d977dd470ee5"
+    }
+  },
+  "local_expected_qa_sha256": "2af79abbd604452f5780432779c8067908600dd07e07ccb86ed42b25a2945434",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 51 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 92 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 76 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 202 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 34 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1477 assertions"
+  },
+  "local_apk_evidence_sha256": "3ef0da28708154d20f5a65f73cab69c198cade0845dea6d7bfdaca365b998f3b"
+}

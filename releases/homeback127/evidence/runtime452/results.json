@@ -1,0 +1,63 @@
+{
+  "schema": "hiro.oneback.runtime-contract-audit.v1",
+  "version": "Instagram 452.1.0.53.64 / OneBack 1.1.17",
+  "scope": "DEX metadata and reflection shapes; host model behavior; no device installation or UI execution",
+  "inputs": [
+    {
+      "name": "original base.apk",
+      "sha256": "22f20062d16997e26009e73b0425974efef8ac69c76dd8912ee8a091213c39e2",
+      "reflection_contract_assertions": 111,
+      "status": "PASS"
+    },
+    {
+      "name": "Piko all non-clone output",
+      "sha256": "9677be9051579208f906c77e297307a9740ee31cb1e7392ac696b6ee603c2364",
+      "reflection_contract_assertions": 111,
+      "status": "PASS"
+    }
+  ],
+  "resource_table": {
+    "command": "aapt2 dump resources base.apk",
+    "ids": {
+      "id/layout_container_main": "0x7f0b22da",
+      "id/layout_container_swipeable": "0x7f0b22e0"
+    },
+    "status": "PASS"
+  },
+  "host_model": {
+    "suite": "Back127Instagram452Test",
+    "cases": 18,
+    "assertions": 160,
+    "status": "PASS",
+    "log": "Back127Instagram452Test.txt"
+  },
+  "runtime_policy": [
+    "452 Reel ordinary/AndroidX/predictive/Main entry delegates to the original native guard.",
+    "The verified Reel post-guard and CLIPS tab-pop boundaries may exit the owned task.",
+    "An unresolved selected wrapper/cache delegates to native; no early Reel authorization.",
+    "Profile config enum remains authoritative and persists through the same native dispatch.",
+    "Verified HOME state retains its previous explicit exit behavior.",
+    "Unmapped X.0A4c wrapper delegates to native. No speculative wrapper implementation."
+  ],
+  "source_sha256": {
+    "Instagram452.java": "a14693dd3962f5cc202062eec751b27131e51b14da1ecfd0fadc6e85e531a54c",
+    "InstagramActivityLayers.java": "efd076fa810f316d707d6d483ce410a63b2cb58131ab2cdba70443c46976a7bf",
+    "InstagramActivityLayers452.java": "94923b1ba92e7468c20217d66592821f14af489e7092aba592c067b32140cba6",
+    "InstagramBack.java": "4c80804fece4e612840a3b165d21be4e9630a4a60047ca66811ca94c281745e1",
+    "InstagramCurrent.java": "479ef1971f1ee4efd754247353bec001920aea44473e63b97addb4ed57fb4974",
+    "InstagramCurrent452.java": "6c3b522cee3c14bfbf35bcf0752281ea42bb2d5905f6ed6246fe6e9a141c5109",
+    "InstagramDispatcherBack.java": "43ad1446e1a8e3be2b860dc3fcf16a2aa8f25857a200a63c8812aa82decf88b7",
+    "InstagramNativeLayers.java": "3a3d6de01848fefee9530c4e33a3867191221766a884cb9e3e1801ec805f579c",
+    "InstagramProfileBack.java": "4bd95d5375c02ace7e488e3ccc1c8c78930a78018314ae2a67db8de3a7de1371",
+    "InstagramReels.java": "2b7b0d9e8833014c01855d660404174b1c2d8127340f2def6d36bdacaef5c7bc",
+    "InstagramReelsExit.java": "b2fcd8ff415e52419b6040804e59d52da4fc75b3e7859c0f24e336f1a6a13080",
+    "InstagramReelsExit452.java": "82ddb070aa0a7d6ff2e7b9f09110175834995eb6cb9a2c3b5b0aec252c2aa659",
+    "InstagramTabBack.java": "c526f8021bcaad54db003b7c2a6c75f0848d44fafc9945592755a4e6d2652c05"
+  },
+  "limits": [
+    "Host fixture route transitions and comments dismissal are explicit model inputs, not app execution.",
+    "No Android 17 device or emulator run in this audit.",
+    "Method-body hook integrity is covered separately by the patch-boundary DEX audits.",
+    "No application decompilation or APK bytes are included in these public metadata results."
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "resource_ids": {
+    "layout_container_main": "0x7f0b22da",
+    "layout_container_swipeable": "0x7f0b22e0"
+  },
+  "classes": {
+    "X.0jG": {
+      "new": "X.00VS",
+      "redex_name": "IgSwipeableTabHostFragment",
+      "base_getter": "A05()Landroidx/fragment/app/Fragment;",
+      "lazy_field": "A07:LX/0JWL;",
+      "lazy_concrete": "X.0072",
+      "lazy_cached_field": "A00:Ljava/lang/Object;",
+      "overlay_priority": "Read MAIN first; if absent BASE. Native LX/00ZX;->A03 chooses MAIN before passed BASE."
+    },
+    "X.3gY": {
+      "new": "X.02Wh",
+      "redex_name": "IgTabHostFragment",
+      "getter": "A03()Landroidx/fragment/app/Fragment;",
+      "semantics": "isAdded then child manager find by MAIN resource id"
+    },
+    "X.22c": {
+      "new": "X.052y",
+      "redex_name": "MergedFeedTabHostFragment",
+      "getter": "A07()Landroidx/fragment/app/Fragment;",
+      "selected_field": "A06:LX/0mBs;",
+      "index_getter": "LX/0mBs;->A05()I",
+      "tag": "merged_feed_tab_{index}",
+      "warning": "A07 initializes A06 if absent; read cached field before using index getter."
+    },
+    "X.9sY": {
+      "new": "X.04Bv",
+      "redex_name": "ClipsTabFragment",
+      "getter": "A00(LX/04Bv;)Landroidx/fragment/app/Fragment; [static public final]",
+      "pager_field": "A00:Landroidx/viewpager2/widget/ViewPager2;",
+      "pager_index": "A00:I",
+      "adapter_field": "A05:LX/0IBl;",
+      "adapter_pages": "LX/0IBl;->A04:Ljava/util/List;",
+      "adapter_getter": "ViewPager2.getAdapter()LX/04b8;",
+      "tag": "f{index}"
+    },
+    "X.3mI": {
+      "new": "X.00nV",
+      "redex_name": "MainFeedFragment",
+      "evidence": "452 class original-name marker and native getModuleName/home behavior; old447 role from existing current121 contract"
+    }
+  },
+  "tab_enum": {
+    "class": "X.08kM",
+    "key": "A03:Ljava/lang/String;",
+    "feed": "A0C",
+    "clips": "A08"
+  },
+  "notes": [
+    "Static metadata and instructions verified; no physical Android execution.",
+    "Do not initialize lazy values while inspecting inactive root tabs.",
+    "HomeTabFragment X.0dfS is a subclass of Reels viewer X.02Hr in this version."
+  ],
+  "additional_contracts": {
+    "main_current": "InstagramMainActivity.A1f()Fragment",
+    "support_manager": "FragmentActivity.A1Z()X.00fk",
+    "manager_state": "X.00fk.A15()boolean, A0W:ArrayList, A0V:X.00fz, X.00fz.A01:ArrayList",
+    "main_modal": "InstagramMainActivity.A09:X.0A4v, A06:WeakReference<X.03CG>",
+    "activity_layer": "IgFragmentActivity.A00:X.00i6, concrete X.00i7, A0W:boolean, A0N()Fragment",
+    "dialog": "X.007r.A00:android.app.Dialog",
+    "profile_origin": "X.02Hr.A0o()ClipsViewerConfig, A00:ClipsViewerSource",
+    "navigation": "X.00M2.A02:X.004K; A03:FragmentActivity, A05()Fragment, A06()X.08kM"
+  }
+}
