@@ -1,0 +1,74 @@
+{
+  "result": "PASS",
+  "application": "com.instagram.android",
+  "version": "452.1.0.53.64",
+  "input_sha256": "fbfeec57e2415478cbbd4941d33d0563bce071daba236539403790366903aa61",
+  "single_patched_sha256": "90ba40e23410369520b79d3db38ee415ccdd1d7896d6a93a90bbe744c8468930",
+  "bundle_patched_sha256": "5763b2da78909fb41a18a7777f2b2f3937b048d69c5ac066fa8a330596461b0a",
+  "single_mpp_sha256": "ba287febacfa2d1e4be86e68f768cfbe94a8ec1b280567f7cba645401e143015",
+  "bundle_mpp_sha256": "358454074998ae51fd1b0cb06cb868136ea1ced9a2e40e78f8a4d977dd470ee5",
+  "audit": "Independent validation and reversal of emitted hooks; every original app executable body compared after reversal; runtime matches distributed MPP. Patch applyAll is not called by this audit.",
+  "executable_counts": {
+    "appClasses": 213950,
+    "appMethods": 867113,
+    "wrappers": 176,
+    "preservedHelpers": 55,
+    "addedCallbacks": 213,
+    "lifecycleEntryHooks": 386,
+    "dialogHooks": 10,
+    "systemCallbackHooks": 10,
+    "terminalCallsites": 1137,
+    "terminalBridges": 887,
+    "nativeInstagramHooks": 7,
+    "twitterNativeScopes": 0,
+    "emittedRuntimeClasses": 84,
+    "assertions": 36331090
+  },
+  "gate_coverage": {
+    "methods": 7,
+    "gates": 8,
+    "injected_instructions": 27,
+    "exception_routes_match_native_continuation": true,
+    "unapproved_branch_handler_entries": 0,
+    "rejected_negative_mutations": 2
+  },
+  "single_bundle_all_nonsignature_entry_bytes_identical": true,
+  "manifest_changes": "Only 541 application/activity enableOnBackInvokedCallback attributes set true.",
+  "noncode_byte_identical_except": [
+    "AndroidManifest.xml",
+    "resources.arsc"
+  ],
+  "noncode_byte_exact_count": 24519,
+  "resource_table_values_numeric_references_configs_preserved": true,
+  "resource_table_byte_identical": false,
+  "resource_entry_name_changes": {
+    "existing_drawable_names_renamed": 114,
+    "unnamed_string_entries_named": 576
+  },
+  "physical_android_execution": false,
+  "limitations": [
+    "Static APK/DEX/resource verification only; user device installation and UI navigation have not been executed.",
+    "Resource recompilation changes 114 existing drawable names and assigns names to 576 unnamed string entries; equivalence of dynamic lookup using prior names is not claimed.",
+    "Fresh input path verified; legacy 447 paths covered by separate release tests."
+  ],
+  "evidence_files": {
+    "fresh452-resource-values.json": "8754271c47d1e5d63b0f4f1a5775d95437163a68874434495875f9de4577b47b",
+    "fresh452-resources.json": "eaef9ecf02643d288f678c7a4ed15072c3f000165ae82236362dbb3261629578",
+    "Instagram452ResourceValues.java": "f227dd9dd81996cb8cde0f500f66267dac70d1257f7e7393cea8a06d76d3080c",
+    "instagram452_resources.py": "56d49ed9d66d945c7dc72748f9b45d11ee02c4e888d6369ddfbd34dca83089bd",
+    "Instagram452GateCoverage.java": "54fecc4a333c9aa898d87ff64c43f1a9dd753fd2ce4ead133684f56c54b40e00",
+    "fresh452-semantic.txt": "8dffb18dff5254c0fda89360b8203e1dca7176edcd6e5d8d3c475a1b6f538743",
+    "fresh452-gate-coverage.txt": "2ba27312d868e439d5f56ce5871f26e9acdaceffe72c87819370ee353e60e070"
+  },
+  "release_qa_sha256": "2af79abbd604452f5780432779c8067908600dd07e07ccb86ed42b25a2945434",
+  "single_signed_apk_sha256": "9640ff4a0f76dd94bcb164e635dd860f5c505152a9c3dad31ff6fd2807f94866",
+  "bundle_signed_apk_sha256": "56502f7c70389a933ea2dcb0bdc7bacac8d30c622733db9f62bcd098c90ad5c1",
+  "audited_to_signed_nonsignature_entry_bytes_identical": true,
+  "audited_to_signed_entry_counts": [
+    24542,
+    24542
+  ],
+  "signing_metadata_deltas": [
+    "Removed original stamp-cert-sha256; added local signing META-INF/MANIFEST.MF, LOCALTES.SF and LOCALTES.RSA."
+  ]
+}
