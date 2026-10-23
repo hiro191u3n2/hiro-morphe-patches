@@ -1,0 +1,134 @@
+{
+  "schema": "tiktok4753-publication-receipt-v1",
+  "patch_version": "4.0.0",
+  "bundle_version": "1.0.280",
+  "baseline_bundle_version": "1.0.279",
+  "baseline_bundle_sha256": "18dd2c2d186acf7e976211f9d46db991a07ddca40e2f92f7e828b8a5750eca02",
+  "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/download/v0.9.0-dev.1/patches-0.9.0-dev.1.mpp",
+  "source_commit": "9a836216ae08a57743a514ffaefcf5946f60f961",
+  "publication_manifest_sha256": "064f3c6c10f548f8efa0b7c8e6056fba3e3e3463bca0cd7f1bb97d26f4156fc0",
+  "assets": {
+    "TikTok_47.5.3_Hiro_v4.0.0.mpp": {
+      "bytes": 763267,
+      "sha256": "55b0c2ade67050efc94c2445158b81f168977b6dc1d0306d570429b454737e2a"
+    },
+    "Hiro_Morphe_Patches_v1.0.280.mpp": {
+      "bytes": 19003093,
+      "sha256": "56de1bb340b5454aa10605da7275f98ca3e8b2130549a08213b2b4b632826a24"
+    },
+    "QA_TikTok_47.5.3_v4.0.0.json": {
+      "bytes": 28645,
+      "sha256": "75caea6966b1674603def38bac8a0ca43081f8fed0c8698ff78990051108bb1e"
+    },
+    "QA_TikTok_47.5.3_real_APK.json": {
+      "bytes": 6149,
+      "sha256": "5f1419dba771f643cac1a15ce1361f818a00aae777af4c1466824d6ed549044a"
+    },
+    "TikTok_47.5.3_Hiro_v4.0.0_sources_and_QA.zip": {
+      "bytes": 788564,
+      "sha256": "6bbff268dc35da3408dad664b23748a2b6e0489cfe70f6c648c58350bdb67e9e"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 5306,
+      "sha256": "01e483de2c30a032ffde49d6df01ea623cec557b0ff2291ca553a8660c3d2ee4"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 582,
+      "sha256": "98054291075851dfbd5ebaef6e4aefaccb1c74e96ebcbc6c4e036bfd14ce6154"
+    }
+  },
+  "local_validation": {
+    "baseline_bundle_version": "1.0.279",
+    "baseline_bundle_sha256": "18dd2c2d186acf7e976211f9d46db991a07ddca40e2f92f7e828b8a5750eca02",
+    "upstream_version": "0.9.0-dev.1",
+    "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+    "android_device_tested": false,
+    "original_apk_apply_tested": true,
+    "original_apk_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+    "unrelated_resource_entries_byte_identical": 165,
+    "unrelated_loader_classes_unchanged": 232,
+    "oneback_runtime_classes_unchanged": 84,
+    "oneback_changed_runtime_class": "TikTokHome",
+    "japanese_runtime_byte_identical": true,
+    "two_fresh_local_builds_mpp_qa_byte_identical": true,
+    "two_fresh_ci_builds_required": true,
+    "two_fresh_ci_builds_mpp_qa_byte_identical": true,
+    "local_sdk_build": true,
+    "local_host_tested": true,
+    "validation_coverage": {
+      "oneback_host_suites": 25,
+      "legacy_and_4753_abi_regressions": true,
+      "official_loader_cases": 6
+    },
+    "real_apk_validation": {
+      "original_apk_apply_tested": true,
+      "input_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+      "cases": [
+        "standalone_native",
+        "aggregate_settings_ja"
+      ],
+      "exact_tested_mpp_identity_required": true,
+      "external_upstream_all_patch_limitations": {
+        "selected": 136,
+        "applied": 124,
+        "failed": 12,
+        "failed_patches": [
+          "AMOLED dark theme",
+          "Block P2P video relay",
+          "Comment tools",
+          "Feed text sizes",
+          "Hide Play Store update offer",
+          "Hide inbox items",
+          "Hide search suggestions",
+          "Lift text length limits",
+          "Mute feed videos",
+          "Remove LIVE extras",
+          "Remove unused language packs",
+          "Show follow status"
+        ],
+        "fixed_by_this_release": false
+      }
+    },
+    "qa_sha256": "75caea6966b1674603def38bac8a0ca43081f8fed0c8698ff78990051108bb1e",
+    "real_apk_qa_sha256": "5f1419dba771f643cac1a15ce1361f818a00aae777af4c1466824d6ed549044a"
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": true,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_device_update_badge_observed": false,
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "d717a2aea1a80a9dc9611c1d2d2a2c87a149e42a",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    },
+    {
+      "branch": "dev",
+      "commit": "55118773cf40db0db55b0e292e2ff009058ae9e1",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_unchanged": true,
+      "manager_download_verified": true
+    }
+  ],
+  "status": "published_and_verified",
+  "release_id": 422107336,
+  "raw_commit": "8f2f78a1acd99ddc533a58c7e1d518c35771eb91",
+  "download_urls": {
+    "TikTok_47.5.3_Hiro_v4.0.0.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/8f2f78a1acd99ddc533a58c7e1d518c35771eb91/downloads/TikTok_47.5.3_Hiro_v4.0.0.mpp",
+    "Hiro_Morphe_Patches_v1.0.280.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/8f2f78a1acd99ddc533a58c7e1d518c35771eb91/downloads/Hiro_Morphe_Patches_v1.0.280.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/tiktok-v4.0.0",
+  "manager_main_dev_updated_atomically": true,
+  "manager_app_scopes_verified": [
+    "TikTok"
+  ],
+  "other_apps_false_updates": false,
+  "all_unrelated_patch_resources_preserved": true,
+  "fixed_chatgpt_site_updated": false
+}
