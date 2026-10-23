@@ -1,0 +1,87 @@
+{
+  "baseline_version": "1.1.20",
+  "new_version": "1.1.21",
+  "runtime_classes": 85,
+  "byte_identical_other_runtime_classes": 84,
+  "changed_runtime_classes": [
+    "app/hiro/oneback/runtime/TikTokHome.class"
+  ],
+  "host": {
+    "Back4743TikTokTest": {
+      "result": "PASS Back4743TikTokTest: 47.4.3-only native ABI; profile/Home/back/layer regressions; host simulation, not Android device",
+      "scenarios": 17
+    },
+    "Back4753TikTokTest": {
+      "result": "PASS Back4753TikTokTest: 47.5.3-only native ABI; profile/Home/back/layer regressions; host simulation, not Android device",
+      "scenarios": 17
+    },
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions"
+  },
+  "baseline120_fails_4743": "AssertionError: one verified native Home selection",
+  "original_audits": {
+    "47.4.3": "PASS TikTok4753ContractAudit original: assertions=37; version=47.4.3; real native API verified; device behavior not asserted",
+    "47.5.3": "PASS TikTok4753ContractAudit original: assertions=37; version=47.5.3; real native API verified; device behavior not asserted"
+  },
+  "physical_android_tested": false,
+  "schema": "tiktok4743-oneback-native-audit-v1",
+  "original_package": "com.zhiliaoapp.musically",
+  "native_profiles": {
+    "47.4.3": {
+      "original_apk_sha256": "af7cbe2b00d33ff1339730f6abb8ed7e387a83b27ff2b16748b8f41e6fc87e0b",
+      "route": [
+        "HomeTabAbility.tB0(Bundle,String)",
+        "HomeTabAbility.tv2()String",
+        "HomeTabAbility.jI0()Hox",
+        "Hox.w33(String)boolean"
+      ],
+      "back_key_owner": "LX/03uJ;",
+      "strict_native_body_fingerprints": 8
+    },
+    "47.5.3": {
+      "original_apk_sha256": "6670ca3f93bfea379658cad3c27f05d3a380b23a0d82569cce684b7453e8ff3e",
+      "route": [
+        "HomeTabAbility.IA0(Bundle,String)",
+        "HomeTabAbility.Nu2()String",
+        "HomeTabAbility.EH0()Hox",
+        "Hox.i33(String)boolean"
+      ],
+      "back_key_owner": "LX/03dx;",
+      "strict_native_body_fingerprints": 8
+    }
+  },
+  "back_key_native_fallback_fingerprints": {
+    "47.4.3": {
+      "onBackPressed": "1f821718d7f8c4aad2552eff60e0281495efa1506aa8b8391124d862f54c5cac",
+      "dispatchKeyEvent": "e2845f5ce2b7040a25c7fe59dfc8b97a060149e2ef871eee244e13752bb9bccb"
+    },
+    "47.5.3": {
+      "onBackPressed": "dc2d2cc04d536d14a4f86957b7a10976b6eac1800af8dce2e84bdf3dad7ab48d",
+      "dispatchKeyEvent": "9cef2e8d7233ef24f9da0f8102e7e46f1dbe2b9d4769d93477d66181461dc9aa"
+    }
+  },
+  "output_apk_evidence": "See the release src/validation/real-apk.json; original and host results here do not claim an output pipeline run.",
+  "prior_evidence": "prior-1.1.20 contains preserved evidence from the previous release, not new 1.1.21 test runs."
+}

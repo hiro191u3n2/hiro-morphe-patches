@@ -1,0 +1,82 @@
+{
+  "schema": "hiro-metra-empty-native-interaction-v1",
+  "upstream_version": "0.9.0-dev.1",
+  "upstream_commit": "b582c984f50aeacbc812761e082354efa3fc0c28",
+  "upstream_mpp_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_sources": {
+    "ResourceOptimizerPatches.kt": {
+      "url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/blob/b582c984f50aeacbc812761e082354efa3fc0c28/patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/ResourceOptimizerPatches.kt",
+      "sha256": "bbab4a6023104f36143444221eccfe23c2d2aaf091db6c4cd9f59fc9d30d3540"
+    },
+    "VerifiedResourceStripper.kt": {
+      "url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/blob/b582c984f50aeacbc812761e082354efa3fc0c28/patches/src/main/kotlin/app/morphe/patches/tiktok/misc/optimizer/VerifiedResourceStripper.kt",
+      "sha256": "1d5872555b32179c3b39b708e11132dcbc006408f838cf20a26c17013c4e976c"
+    }
+  },
+  "empty_placeholder_paths": [
+    "lib/arm64-v8a/libEffectCreatorJni.so",
+    "lib/arm64-v8a/libartlog_monitor.so",
+    "lib/arm64-v8a/libavmdlp2pv2.so",
+    "lib/arm64-v8a/libeffect_plugin.so",
+    "lib/arm64-v8a/liblink_mic_sdk.so",
+    "lib/arm64-v8a/libp2plivevdp.so",
+    "lib/arm64-v8a/libtt_c2pa_sdk.so",
+    "lib/arm64-v8a/libtt_c2pa_sdk_d.so",
+    "lib/arm64-v8a/libttvesdk_plugin.so",
+    "lib/armeabi-v7a/libEffectCreatorJni.so",
+    "lib/armeabi-v7a/libartlog_monitor.so",
+    "lib/armeabi-v7a/libavmdlp2pv2.so",
+    "lib/armeabi-v7a/libeffect_plugin.so",
+    "lib/armeabi-v7a/liblink_mic_sdk.so",
+    "lib/armeabi-v7a/libp2plivevdp.so",
+    "lib/armeabi-v7a/libtt_c2pa_sdk.so",
+    "lib/armeabi-v7a/libtt_c2pa_sdk_d.so",
+    "lib/armeabi-v7a/libttvesdk_plugin.so"
+  ],
+  "path_count": 18,
+  "paths_match_shipped_upstream_class_constants": true,
+  "discovery_probe": {
+    "version": "47.4.3",
+    "heap_mib": 4096,
+    "selected_patches": 144,
+    "applied_patches": 143,
+    "failed_patch": "TikTok 怪しい通信だけ遮断（TikTok 47.4.3・47.5.3）",
+    "failure": "native entry outside reviewed scan bounds lib/arm64-v8a/libEffectCreatorJni.so bytes=0",
+    "observed_empty_paths_match_allowlist_exactly": true,
+    "counts_as_fixed_release_evidence": false
+  },
+  "behavior": {
+    "upstream": "Four exact path/hash resource groups are validated, then each target is replaced by a zero-byte file; startup libdex_*.so entries cannot be stripped.",
+    "hiro": "Existing empty files on exactly these 18 paths are preserved without extraction, restoration or rewriting. Each preserved path and the total count are logged. Other native files still use the existing format-aware host policy.",
+    "strict_rejections": [
+      "unknown empty path",
+      "unlisted ABI or filename spelling",
+      "missing or non-file materialization",
+      "native file larger than 128 MiB"
+    ],
+    "primary_audit": "The existing exact-original 593-entry native/ELF/ZIP/DEX audit remains unchanged; the original 47.4.3 and 47.5.3 inputs contain no empty native entries."
+  },
+  "host_regressions": {
+    "morphe.jar": {
+      "assertions": 367,
+      "result": "PASS LegacyPrivacyTest assertions=367 (host boundaries, native offsets, DOM namespace modes)",
+      "file": "host-morphe.log"
+    },
+    "morphe22.jar": {
+      "assertions": 367,
+      "result": "PASS LegacyPrivacyTest assertions=367 (host boundaries, native offsets, DOM namespace modes)",
+      "file": "host-morphe22.log"
+    },
+    "morphe200.jar": {
+      "assertions": 367,
+      "result": "PASS LegacyPrivacyTest assertions=367 (host boundaries, native offsets, DOM namespace modes)",
+      "file": "host-morphe200.log"
+    }
+  },
+  "production_source_sha256": {
+    "patch/LegacyPrivacy.java": "6fb714f4633fc351bed062f8db152cfe06e33a9797fe85e01bd9c8c5c57ea6be",
+    "test/LegacyPrivacyTest.java": "1c022722d0a3e4182d41f770220e9456a866edc6a2bf3cfdc83366340b8259ec"
+  },
+  "scope": "Source provenance and host regressions only. Final rebuilt-APK proofs are separate and must use the new MPP bytes.",
+  "physical_android_tested": false
+}

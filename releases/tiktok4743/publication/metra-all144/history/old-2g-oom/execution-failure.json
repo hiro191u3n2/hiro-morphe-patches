@@ -1,0 +1,21 @@
+{
+  "schema": "tiktok4743-all144-execution-failure-v1",
+  "max_heap": "2g",
+  "outcome": "FAIL",
+  "exception": "java.lang.OutOfMemoryError: Java heap space",
+  "observed_stack_scope": "Hiro OneBack applyAll -> terminalCalls -> dexlib2 MutableMethodImplementation/conditional label expansion",
+  "root_cause_limit": "Total heap includes the 136 earlier Metra patches; no isolated production defect established. A same-input 4g retry is a separate resource condition.",
+  "process_exit_code": 1,
+  "result_json_present": false,
+  "output_apk_present": false,
+  "logged_applied_count": 136,
+  "reported_applied_count": null,
+  "reported_failed_count": null,
+  "requested_count": 144,
+  "hiro_artifact_sha256": "a2e7152d3514bbbb67ec382bb66c3903726c6b37e092101db62b3beec21a3bb8",
+  "stacktrace": "Exception in thread \"main\" java.lang.OutOfMemoryError: Java heap space\n\tat com.android.tools.smali.dexlib2.builder.LocatedItems.addItem(LocatedItems.java:108)\n\tat com.android.tools.smali.dexlib2.builder.LocatedItems.access$100(LocatedItems.java:42)\n\tat com.android.tools.smali.dexlib2.builder.LocatedItems$1.add(LocatedItems.java:100)\n\tat com.android.tools.smali.dexlib2.builder.LocatedItems$1.add(LocatedItems.java:58)\n\tat com.android.tools.smali.dexlib2.builder.MethodLocation.addNewLabel(MethodLocation.java:91)\n\tat com.android.tools.smali.dexlib2.builder.MutableMethodImplementation.newLabel(MutableMethodImplementation.java:621)\n\tat com.android.tools.smali.dexlib2.builder.MutableMethodImplementation.newBuilderInstruction21t(MutableMethodImplementation.java:863)\n\tat com.android.tools.smali.dexlib2.builder.MutableMethodImplementation.convertAndSetInstruction(MutableMethodImplementation.java:684)\n\tat com.android.tools.smali.dexlib2.builder.MutableMethodImplementation.<init>(MutableMethodImplementation.java:178)\n\tat app.morphe.patcher.util.proxy.mutableTypes.MutableMethod$Implementation.<init>(MutableMethod.kt:75)\n\tat app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.implementationDelegate$lambda$0(MutableMethod.kt:29)\n\tat app.morphe.patcher.util.proxy.mutableTypes.MutableMethod$$Lambda/0x00007fcc28334e70.invoke(Unknown Source)\n\tat kotlin.SynchronizedLazyImpl.getValue(LazyJVM.kt:86)\n\tat app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.get_implementation(MutableMethod.kt:30)\n\tat app.morphe.patcher.util.proxy.mutableTypes.MutableMethod.getImplementation(MutableMethod.kt:135)\n\tat app.hiro.oneback.patches.OneBackPatch.terminalCalls(OneBackPatch.java:435)\n\tat app.hiro.oneback.patches.OneBackPatch.applyAll(OneBackPatch.java:990)\n\tat app.hiro.oneback.patches.OneBackPatch$3.invoke(OneBackPatch.java:162)\n\tat app.hiro.oneback.patches.OneBackPatch$3.invoke(OneBackPatch.java:112)\n\tat app.morphe.patcher.patch.Patch.execute(Patch.kt:141)\n\tat app.morphe.patcher.patch.BytecodePatch.execute$morphe_patcher(Patch.kt:292)\n\tat app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:122)\n\tat app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:147)\n\tat app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)\n\tat app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)\n\tat kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)\n\tat kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)\n\tat app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)\n\tat kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)\n\tat kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)\n\tat kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)\n\tat kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)\n",
+  "user_128_selection_reproduced": false,
+  "physical_android_tested": false,
+  "exploratory_only": true,
+  "valid_for_release": false
+}

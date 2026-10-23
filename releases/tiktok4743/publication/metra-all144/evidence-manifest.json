@@ -1,0 +1,298 @@
+{
+  "schema": "tiktok4743-metra-all144-evidence-v1",
+  "scope": "Supplementary exact 144-name patch application/rebuild and narrow native placeholder coexistence evidence; not physical Android verification or a stand-alone release gate.",
+  "physical_android_tested": false,
+  "user_128_selection_reproduced": false,
+  "valid_for_release": false,
+  "current": {
+    "directory": "current-3g",
+    "max_heap": "3g",
+    "outcome": "PASS_PIPELINE_ONLY",
+    "artifact": "TikTok_47.4.3_Hiro_v4.1.0.mpp",
+    "artifact_bytes": 768881,
+    "artifact_sha256": "42da5b42478498bdd1b8905cbf256241220718ecae92ed7ed3543660ace2bea3",
+    "requested_metra_count": 136,
+    "requested_hiro_count": 8,
+    "applied_count": 144,
+    "failed_count": 0,
+    "steps_all_success": true,
+    "inputs_unchanged": true,
+    "output_apk_bytes": 457337031,
+    "output_apk_sha256": "914308cbc5c858d3ddf33043669385cc91d02489c038b366817bb27dcb27638d",
+    "output_apk_included": false,
+    "narrow_native_audit": {
+      "path": "empty-native-audit.json",
+      "status": "PASS",
+      "original_native_paths": 593,
+      "preserved_empty": 18,
+      "verified_nonempty_rewrites": 16
+    }
+  },
+  "historical_artifact_sha256": "a2e7152d3514bbbb67ec382bb66c3903726c6b37e092101db62b3beec21a3bb8",
+  "history": [
+    {
+      "directory": "history/old-2g-oom",
+      "max_heap": "2g",
+      "outcome": "FAIL",
+      "authoritative_failure": "execution-failure.json",
+      "logged_applied_count": 136,
+      "reported_applied_count": null,
+      "reported_failed_count": null,
+      "sdk_result_present": false,
+      "output_apk_present": false
+    },
+    {
+      "directory": "history/old-4g-privacy-failure",
+      "max_heap": "4g",
+      "outcome": "FAIL",
+      "applied_count": 143,
+      "failed_count": 1,
+      "failure_source": "Hiro privacy",
+      "patching_success": false,
+      "rebuilding_success": true
+    },
+    {
+      "directory": "history/old-3g-interrupted",
+      "max_heap": "3g",
+      "outcome": "INTERRUPTED",
+      "session_exit_code": 130,
+      "logged_applied_count": 52,
+      "sdk_result_present": false,
+      "output_apk_present": false
+    }
+  ],
+  "files": {
+    "PatchSelectionCatalog.java": {
+      "bytes": 1622,
+      "sha256": "21aa0a094d0b874c1cea68482dc8f5050768af035e7060f3fdf389dbe0fd837b"
+    },
+    "README.md": {
+      "bytes": 8671,
+      "sha256": "798add8422c99099301ef1f7720b00a3f5dfbd9d0fbd6cdc0d16a69f980f2dba"
+    },
+    "current-3g/apply.log": {
+      "bytes": 19041,
+      "sha256": "94b3fc98d7654fe3abb04c537e695aa27523807742bc1f0a5c1f788d8a96f64e"
+    },
+    "current-3g/audit-summary.json": {
+      "bytes": 11187,
+      "sha256": "df18905f525fcf8c2c3bf6035a7974acd350a8b7470db4e9f66bd6d4eec2b6e4"
+    },
+    "current-3g/catalog-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "current-3g/command.json": {
+      "bytes": 6321,
+      "sha256": "5026529c61a1a074bc4a0c5f9da9cef3c0311604d99ac5ef9bab5c2604cda532"
+    },
+    "current-3g/command.sh": {
+      "bytes": 5064,
+      "sha256": "35f9ec45da295d3bb4ea8e58bfe743268d4cde4155aa2f6821e4bcd455559ec6"
+    },
+    "current-3g/failed-patches.txt": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "current-3g/hiro-catalog-names.txt": {
+      "bytes": 547,
+      "sha256": "c9c13d93ef3a862528180fedac082e03ce134421a77ab3f0184dd20cd0c66cc0"
+    },
+    "current-3g/hiro-catalog.log": {
+      "bytes": 82,
+      "sha256": "7a6eac5a2823ea4c8015fb6017c747009434f484301c9ff0ba3aaccd294f2423"
+    },
+    "current-3g/provenance.json": {
+      "bytes": 5940,
+      "sha256": "dada9f5e5d76eb7d024c4c645f37c17146b65bb2d11d5f6387b58d4cc610ed60"
+    },
+    "current-3g/result.json": {
+      "bytes": 4197,
+      "sha256": "af19e31ec008d0a440512b913dc640192253953fba26789073ae0809c06b525e"
+    },
+    "current-3g/selected-patches.json": {
+      "bytes": 4322,
+      "sha256": "f93ddf3d3beba9242c082564f68e6248cb17bbc8910039c74f80f5b066ba60da"
+    },
+    "current-3g/upstream-catalog-names.txt": {
+      "bytes": 3052,
+      "sha256": "89c5e6d6cff82e60dfbf322af3e7e0d87c7f48d1b096cb65f8bc96335f16d794"
+    },
+    "current-3g/upstream-catalog.log": {
+      "bytes": 84,
+      "sha256": "390dc9ca2f21d01bc0b651b7b0b6f3bf2e1423906f7501a127719c18c1bb8764"
+    },
+    "empty-native-audit.json": {
+      "bytes": 11106,
+      "sha256": "de88b40755a13b30e0e77bed9bf8edaa946ee11004725f3084f19d6d6be64f77"
+    },
+    "empty-native-audit.py": {
+      "bytes": 11850,
+      "sha256": "e869b402cdfae01ddb32052c49865d2c63698308855df4494e18628a60eefcda"
+    },
+    "hiro-selected.json": {
+      "bytes": 590,
+      "sha256": "f69be5f40ac11322ae99d33275431c84b255f83efb38eb07c567377a2b51c5fc"
+    },
+    "history/old-2g-oom/apply.log": {
+      "bytes": 10090,
+      "sha256": "ca8cc6ff7877e88d43682c7418fc2ad696b820781f93e643061b06412da8f9fc"
+    },
+    "history/old-2g-oom/audit-summary.json": {
+      "bytes": 6235,
+      "sha256": "6b7b4151a3dac84eb363f55ad02211cd884fe9c8366b7aab7c3ff3b6b8ebb706"
+    },
+    "history/old-2g-oom/catalog-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history/old-2g-oom/command.json": {
+      "bytes": 6282,
+      "sha256": "39debcbf148490f50a2c2ebb78b013c29cbdd9d6c0b7774e216511d07d38007b"
+    },
+    "history/old-2g-oom/command.sh": {
+      "bytes": 5025,
+      "sha256": "22f7091b10d8475c9da35fce50c0b1f65ce80b3e4ec2b7cf596ae1d43ef6af97"
+    },
+    "history/old-2g-oom/execution-failure.json": {
+      "bytes": 3820,
+      "sha256": "a17153967172f570097787b2da940b837e889b79de3ac11ad514bcac0b42c128"
+    },
+    "history/old-2g-oom/failed-patches.txt": {
+      "bytes": 1,
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    "history/old-2g-oom/hiro-catalog-names.txt": {
+      "bytes": 547,
+      "sha256": "c9c13d93ef3a862528180fedac082e03ce134421a77ab3f0184dd20cd0c66cc0"
+    },
+    "history/old-2g-oom/hiro-catalog.log": {
+      "bytes": 82,
+      "sha256": "7a6eac5a2823ea4c8015fb6017c747009434f484301c9ff0ba3aaccd294f2423"
+    },
+    "history/old-2g-oom/provenance.json": {
+      "bytes": 5920,
+      "sha256": "c05f04dc71a4caa237d7a42d373f1d5283b7015f78e4554be04308f9b4a0ba73"
+    },
+    "history/old-2g-oom/selected-patches.json": {
+      "bytes": 4322,
+      "sha256": "f93ddf3d3beba9242c082564f68e6248cb17bbc8910039c74f80f5b066ba60da"
+    },
+    "history/old-2g-oom/upstream-catalog-names.txt": {
+      "bytes": 3052,
+      "sha256": "89c5e6d6cff82e60dfbf322af3e7e0d87c7f48d1b096cb65f8bc96335f16d794"
+    },
+    "history/old-2g-oom/upstream-catalog.log": {
+      "bytes": 84,
+      "sha256": "390dc9ca2f21d01bc0b651b7b0b6f3bf2e1423906f7501a127719c18c1bb8764"
+    },
+    "history/old-3g-interrupted/apply.log": {
+      "bytes": 3182,
+      "sha256": "da53886cb84c4bb988aa027a8185d98f79ddfa3e4796e3e6321e24593655a29a"
+    },
+    "history/old-3g-interrupted/catalog-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history/old-3g-interrupted/command.json": {
+      "bytes": 6294,
+      "sha256": "2fa338215941000a533bce71a21e50073d6cf54cc27204dcf42307efa17a7f70"
+    },
+    "history/old-3g-interrupted/command.sh": {
+      "bytes": 5037,
+      "sha256": "b7cedf1a454aa3f510dece95afb8a87cb25cc800d3bb3014a2d29eb5eabddb45"
+    },
+    "history/old-3g-interrupted/hiro-catalog-names.txt": {
+      "bytes": 547,
+      "sha256": "c9c13d93ef3a862528180fedac082e03ce134421a77ab3f0184dd20cd0c66cc0"
+    },
+    "history/old-3g-interrupted/hiro-catalog.log": {
+      "bytes": 82,
+      "sha256": "7a6eac5a2823ea4c8015fb6017c747009434f484301c9ff0ba3aaccd294f2423"
+    },
+    "history/old-3g-interrupted/interruption.json": {
+      "bytes": 669,
+      "sha256": "38387ce100b4bb0ad4cec02be925d5dc4e311f7b18a794da3587990db37e2ded"
+    },
+    "history/old-3g-interrupted/provenance.json": {
+      "bytes": 5940,
+      "sha256": "6eda8ed862164cea9a70a9b875001ca07ff7535b109cb93d782839e15d580919"
+    },
+    "history/old-3g-interrupted/selected-patches.json": {
+      "bytes": 4322,
+      "sha256": "f93ddf3d3beba9242c082564f68e6248cb17bbc8910039c74f80f5b066ba60da"
+    },
+    "history/old-3g-interrupted/upstream-catalog-names.txt": {
+      "bytes": 3052,
+      "sha256": "89c5e6d6cff82e60dfbf322af3e7e0d87c7f48d1b096cb65f8bc96335f16d794"
+    },
+    "history/old-3g-interrupted/upstream-catalog.log": {
+      "bytes": 84,
+      "sha256": "390dc9ca2f21d01bc0b651b7b0b6f3bf2e1423906f7501a127719c18c1bb8764"
+    },
+    "history/old-4g-privacy-failure/apply.log": {
+      "bytes": 11630,
+      "sha256": "26c809acba299508eaa158c0f4630cc59e14cabf6b534094be2578075f596771"
+    },
+    "history/old-4g-privacy-failure/audit-summary.json": {
+      "bytes": 19615,
+      "sha256": "dad16d8c9b327d8532e7c8f1ba7f3629d4a9bbc5049de39d2c3e144ab6b68957"
+    },
+    "history/old-4g-privacy-failure/catalog-compile.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history/old-4g-privacy-failure/command.json": {
+      "bytes": 6294,
+      "sha256": "06cf6d26c242c6037df6ce9faf293645e4890f5fa0381ad53376513f48f783b9"
+    },
+    "history/old-4g-privacy-failure/command.sh": {
+      "bytes": 5037,
+      "sha256": "9d361ef37d1b05fc70644c142d593d1ca5751f0330bc177efea57a34630bf421"
+    },
+    "history/old-4g-privacy-failure/failed-patches.txt": {
+      "bytes": 4181,
+      "sha256": "8e29eca22b25cacc6a1b3e71ffbb211ac50019c1a6ddb64d95014ef3c7f70f89"
+    },
+    "history/old-4g-privacy-failure/hiro-catalog-names.txt": {
+      "bytes": 547,
+      "sha256": "c9c13d93ef3a862528180fedac082e03ce134421a77ab3f0184dd20cd0c66cc0"
+    },
+    "history/old-4g-privacy-failure/hiro-catalog.log": {
+      "bytes": 82,
+      "sha256": "7a6eac5a2823ea4c8015fb6017c747009434f484301c9ff0ba3aaccd294f2423"
+    },
+    "history/old-4g-privacy-failure/provenance.json": {
+      "bytes": 5940,
+      "sha256": "24e149c547b676fbb7565c5c7ec3ef5750025dcfdd7ce76897b306526af21a72"
+    },
+    "history/old-4g-privacy-failure/result.json": {
+      "bytes": 8420,
+      "sha256": "0346b07a9e7e5fe70e867a64be0978fd40b975e0bba63d191611b245c86affe1"
+    },
+    "history/old-4g-privacy-failure/selected-patches.json": {
+      "bytes": 4322,
+      "sha256": "f93ddf3d3beba9242c082564f68e6248cb17bbc8910039c74f80f5b066ba60da"
+    },
+    "history/old-4g-privacy-failure/upstream-catalog-names.txt": {
+      "bytes": 3052,
+      "sha256": "89c5e6d6cff82e60dfbf322af3e7e0d87c7f48d1b096cb65f8bc96335f16d794"
+    },
+    "history/old-4g-privacy-failure/upstream-catalog.log": {
+      "bytes": 84,
+      "sha256": "390dc9ca2f21d01bc0b651b7b0b6f3bf2e1423906f7501a127719c18c1bb8764"
+    },
+    "run_all144.py": {
+      "bytes": 10777,
+      "sha256": "00357967feb6731fab04a6761e7cd03ddf3fcb896a02a6fc1fdb8f24ffb33f80"
+    },
+    "selected-patches.json": {
+      "bytes": 4322,
+      "sha256": "f93ddf3d3beba9242c082564f68e6248cb17bbc8910039c74f80f5b066ba60da"
+    },
+    "upstream-selected.json": {
+      "bytes": 3735,
+      "sha256": "8f4e7d6590faab0f6c8c264cbc911bae401d03524212811c186b3d89de41819a"
+    }
+  }
+}
