@@ -1,0 +1,127 @@
+{
+  "schema": "ulike112-resident-finish-source-inverse-v1",
+  "original_release": "1.9.111",
+  "reviewed": true,
+  "files": {
+    "GpuChain1961.java": {
+      "original_sha256": "8da03b9ae3d770133f22e75defd555d8696e31ceac53955bfb86fa54063c4847",
+      "changes": [
+        {
+          "new_line": 27,
+          "old": "     * reserves the finish capacities before starting any NR strip, and the CPU\n     * producer subtracts that outstanding debt from its own worker allowance.\n     * No source pixel or quality proof is changed by admission. */\n",
+          "new": "     * reserves the live joined source before starting any NR strip. Future\n     * finish capacity is checked separately because all Strong banks retire\n     * before its leases begin. No source pixel or quality proof is changed. */\n"
+        },
+        {
+          "new_line": 31,
+          "old": "        final Bitmap source;final int rotation,width,height,geometryRows;\n",
+          "new": "        final Bitmap source;final int rotation,width,height,geometryRows,finishRows19112;\n"
+        },
+        {
+          "new_line": 42,
+          "old": "            this.source=source;this.rotation=rotation;this.width=width;this.height=height;geometryRows=rows;\n",
+          "new": "            this(source,rotation,width,height,rows,64,data,slots,capacities,uploadBytes,javaPeak);\n        }\n        Preflight1981(Bitmap source,int rotation,int width,int height,int rows,int finishRows,\n                GpuPolicy1960.GeometryData data,int[] slots,long[] capacities,long[] uploadBytes,long javaPeak){\n            this.source=source;this.rotation=rotation;this.width=width;this.height=height;geometryRows=rows;finishRows19112=finishRows;\n"
+        },
+        {
+          "new_line": 62,
+          "old": "            // Strong workers have joined. Transfer the forecast back to the\n            // unchanged finish image/band leases, which immediately revalidate\n            // actual capacities and heap use before their first dispatch.\n",
+          "new": "            // Strong workers have joined. Release only this plan's live\n            // source reservation; the unchanged finish leases immediately\n            // revalidate actual capacities and heap use before dispatch.\n"
+        },
+        {
+          "new_line": 73,
+          "old": "",
+          "new": "    /** The independent128-row suite only selects a candidate schedule. The\n     * whole resident key and both exact/speed trials still gate its adoption. */\n    static int preferredResidentRows19112(){return GpuFinishDefault1990.wideReady1993()?128:64;}\n    static int residentRows19112(){\n        Preflight1981 plan=PREFLIGHT1981.get();\n        int rows=plan==null?preferredResidentRows19112():plan.finishRows19112;\n        if(rows!=64&&rows!=128||rows==128&&!GpuFinishDefault1990.wideReady1993())throw new DeferredChain();\n        return rows;\n    }\n"
+        },
+        {
+          "new_line": 83,
+          "old": "",
+          "new": "        return preflightResident19112(source,rotation,width,height,halfLength,false);\n    }\n    static Preflight1981 preflightResident19112(Bitmap source,int rotation,int width,int height,int halfLength,boolean comparison){\n"
+        },
+        {
+          "new_line": 95,
+          "old": "            // source after moire and moire after geometry, so one scalar debt\n            // reserves the largest future phase instead of all phase buffers.\n            for(int rows=32;rows>=1;rows/=2){\n",
+          "new": "            // source after moire and moire after geometry. Forecast the largest\n            // future phase, while reserving only the source that is live now.\n            final int finishRows=preferredResidentRows19112();\n            for(int rows=finishRows;rows>=1;rows/=2){\n"
+        },
+        {
+          "new_line": 101,
+          "old": "                long peak=finishPeak1991(n,out,width,64,0,tableBytes,intermediate,data!=null,true);\n",
+          "new": "                long peak=finishPeak1991(n,out,width,finishRows,0,tableBytes,intermediate,data!=null,!comparison);\n                if(comparison)peak+=4L*width*Math.min(32,height)+height+256L;\n"
+        },
+        {
+          "new_line": 105,
+          "old": "                // This lease is future capacity debt, not an allocated Java\n                // image. Source24 is charged separately and never twice.\n                long javaPeak=Math.max(0,peak-4L*n);\n",
+          "new": "                // Only source24 survives Strong. Model/strip banks are fenced\n                // and released before finish, whose full peak and actual leases\n                // are revalidated again. Future phase bytes are a forecast,\n                // never simultaneous debt deducted from Strong worker capacity.\n                long javaPeak=0;\n"
+        },
+        {
+          "new_line": 111,
+          "old": "                Preflight1981 result=new Preflight1981(source,rotation,width,height,rows,data,slots,capacities,uploads,javaPeak);\n",
+          "new": "                Preflight1981 result=new Preflight1981(source,rotation,width,height,rows,finishRows,data,slots,capacities,uploads,javaPeak);\n"
+        },
+        {
+          "new_line": 748,
+          "old": "        try {result=runFinishStages(source,rotation,width,height,plan,refresh,timing,64,session,true);}\n",
+          "new": "        int rows=0;\n        try {rows=residentRows19112();result=runFinishStages(source,rotation,width,height,plan,refresh,timing,rows,session,true);}\n"
+        },
+        {
+          "new_line": 751,
+          "old": "        if(result!=null){detailRows1994(trace,64);if(selected1982!=null)try{PipelineDiagnostics1982.selected(selected1982,2,1,1,System.nanoTime()-started1982);}catch(Throwable optional){}}\n",
+          "new": "        if(result!=null){detailRows1994(trace,rows);if(selected1982!=null)try{PipelineDiagnostics1982.selected(selected1982,2,1,1,System.nanoTime()-started1982);}catch(Throwable optional){}}\n"
+        },
+        {
+          "new_line": 760,
+          "old": "        try {result=runFinishStages(source,rotation,width,height,plan,!identity,timing,64,session,true,null,identity);}\n",
+          "new": "        int rows=0;\n        try {rows=residentRows19112();result=runFinishStages(source,rotation,width,height,plan,!identity,timing,rows,session,true,null,identity);}\n"
+        },
+        {
+          "new_line": 763,
+          "old": "        if(result!=null){detailRows1994(trace,64);if(selected1982!=null)try{PipelineDiagnostics1982.selected(selected1982,2,1,1,System.nanoTime()-started1982);}catch(Throwable optional){}}\n",
+          "new": "        if(result!=null){detailRows1994(trace,rows);if(selected1982!=null)try{PipelineDiagnostics1982.selected(selected1982,2,1,1,System.nanoTime()-started1982);}catch(Throwable optional){}}\n"
+        },
+        {
+          "new_line": 823,
+          "old": "        if(planned!=null&&carried!=null&&comparison==null){\n            if(!planned.matches(source,rotation,width,height))throw new DeferredChain();\n",
+          "new": "        if(planned!=null&&carried!=null){\n            if(!planned.matches(source,rotation,width,height)||tileRows!=residentRows19112())throw new DeferredChain();\n"
+        }
+      ]
+    },
+    "GpuResident1976.java": {
+      "original_sha256": "c7d367ed3cf20fae706807d8d1801405213b2c6d41da2d655e1a700f83fe5f9e",
+      "changes": [
+        {
+          "new_line": 34,
+          "old": "            \";model=\"+(GpuStartup1990.modelDomainReady19102()?GpuModelDefault1990.variant1994():-1);\n",
+          "new": "            \";model=\"+(GpuStartup1990.modelDomainReady19102()?GpuModelDefault1990.variant1994():-1)+\n            \";resident-finish=\"+GpuChain1961.preferredResidentRows19112();\n"
+        },
+        {
+          "new_line": 43,
+          "old": "",
+          "new": "    }\n    private static int rowsFromKey19112(String key){\n        String routes=routesFromKey19102(key);\n        if(routes.endsWith(\";resident-finish=128\"))return 128;\n        if(routes.endsWith(\";resident-finish=64\"))return 64;\n        throw new IllegalArgumentException(\"resident row profile key\");\n"
+        },
+        {
+          "new_line": 104,
+          "old": "",
+          "new": "                // Wide readiness can change while geometry is prepared. Never\n                // use a newly preferred schedule under another whole proof.\n                if(preflight.finishRows19112!=rowsFromKey19112(base)||\n                        !routesFromKey19102(base).equals(deployedRoutes19102())){terminal1982=13;return null;}\n"
+        },
+        {
+          "new_line": 216,
+          "old": "                                    try {comparison=QualityPipeline1932.compareStrongFinish1978(owned,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,candidate==1,identity,oracle,cancellation);returned=true;}\n                                    finally {BENCHMARK.remove();\n",
+          "new": "                                    GpuChain1961.Preflight1981 prepared19112=null;\n                                    try {\n                                        if(candidate==1){\n                                            prepared19112=GpuChain1961.preflightResident19112(owned,rotation,width,height,frozenHalf.length,true);\n                                            if(prepared19112==null){returned=true;GpuQualification1961.rejectNonSpeed1988(scheduledKey,\"execution_unavailable\");outcome1984(\"execution_unavailable\");return;}\n                                            if(prepared19112.finishRows19112!=rowsFromKey19112(base)||!observedRoutes.equals(deployedRoutes19102())){returned=true;outcome1984(\"reference_unstable\");return;}\n                                        }\n                                        comparison=QualityPipeline1932.compareStrongFinish1978(owned,frozenPlan,level,shadows,frozenHalf,rotation,width,height,frozenOutput,candidate==1,identity,oracle,cancellation);returned=true;\n                                    }\n                                    finally {if(prepared19112!=null)prepared19112.close();BENCHMARK.remove();\n"
+        },
+        {
+          "new_line": 265,
+          "old": "",
+          "new": "                                GpuChain1961.Preflight1981 prepared19112=null;\n"
+        },
+        {
+          "new_line": 273,
+          "old": "",
+          "new": "                                    if(candidate==1){\n                                        prepared19112=GpuChain1961.preflightResident19112(owned,rotation,width,height,frozenHalf.length,false);\n                                        if(prepared19112==null){GpuQualification1961.rejectNonSpeed1988(scheduledKey,\"execution_unavailable\");outcome1984(\"execution_unavailable\");return;}\n                                        if(prepared19112.finishRows19112!=rowsFromKey19112(base)||!observedRoutes.equals(deployedRoutes19102())){outcome1984(\"reference_unstable\");return;}\n                                    }\n"
+        },
+        {
+          "new_line": 291,
+          "old": "                                    BENCHMARK.remove();if(result!=null)result.recycle();if(ordinaryInput!=null&&!ordinaryInput.isRecycled())ordinaryInput.recycle();}\n",
+          "new": "                                    if(prepared19112!=null)prepared19112.close();BENCHMARK.remove();if(result!=null)result.recycle();if(ordinaryInput!=null&&!ordinaryInput.isRecycled())ordinaryInput.recycle();}\n"
+        }
+      ]
+    }
+  }
+}
