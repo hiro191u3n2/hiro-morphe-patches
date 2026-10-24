@@ -1,0 +1,72 @@
+{
+  "schema": "tiktok4743-back-reproduction-v1",
+  "physical_android_execution": false,
+  "old_provenance": "Java sources corresponding to released 1.1.21; not extracted DEX and not asserted byte-identical to published MPE",
+  "old_source_root": "hiro-morphe-patches/releases/tiktok4743/src/oneback/runtime",
+  "same_scenario": "Back4743NativeBackTest --reproduce-root; no visible feed/tab labels, native HOME and page_feed, original native guards then timer/root boundaries",
+  "results": {
+    "1.1.21-corresponding-source": {
+      "exit_code": 1,
+      "log": "1.1.21-corresponding-source.log"
+    },
+    "1.1.22-source": {
+      "exit_code": 0,
+      "log": "1.1.22-source.log"
+    }
+  },
+  "new_host_summary": [
+    "DETAIL Back4743NativeBackTest: 31 cases, 189 assertions",
+    "PASS Back4743NativeBackTest: native-guarded single Back; label-independent; host simulation, not Android device"
+  ],
+  "sources": {
+    "old/BackNavigation.java": "b391cee7053b9d5884c59628200978b47fa0f0791432f1319bee3efad264866f",
+    "old/ExitScreens.java": "70a808d4229de928c0cf7edf172b770914c1ed39268d7ef00faad6892ffdda88",
+    "old/HomeScreen.java": "85fc818b60f42b6d6b4990c280310deb878941aad0288d3b257c581609659a4e",
+    "old/Instagram452.java": "a14693dd3962f5cc202062eec751b27131e51b14da1ecfd0fadc6e85e531a54c",
+    "old/InstagramActivityLayers.java": "efd076fa810f316d707d6d483ce410a63b2cb58131ab2cdba70443c46976a7bf",
+    "old/InstagramActivityLayers452.java": "94923b1ba92e7468c20217d66592821f14af489e7092aba592c067b32140cba6",
+    "old/InstagramBack.java": "5901efd2fd54214a83f4c06e714ea417e430d1a7b3be5482dab9bac47c1c21e2",
+    "old/InstagramCurrent.java": "479ef1971f1ee4efd754247353bec001920aea44473e63b97addb4ed57fb4974",
+    "old/InstagramCurrent452.java": "6c3b522cee3c14bfbf35bcf0752281ea42bb2d5905f6ed6246fe6e9a141c5109",
+    "old/InstagramDispatcherBack.java": "43ad1446e1a8e3be2b860dc3fcf16a2aa8f25857a200a63c8812aa82decf88b7",
+    "old/InstagramNativeLayers.java": "3a3d6de01848fefee9530c4e33a3867191221766a884cb9e3e1801ec805f579c",
+    "old/InstagramProfileBack.java": "e5b51ed9a8f8fdceb062c1cda544575142eac25a7de38057a6ab941d33bcbee4",
+    "old/InstagramReels.java": "2b7b0d9e8833014c01855d660404174b1c2d8127340f2def6d36bdacaef5c7bc",
+    "old/InstagramReelsExit.java": "b2fcd8ff415e52419b6040804e59d52da4fc75b3e7859c0f24e336f1a6a13080",
+    "old/InstagramReelsExit452.java": "82ddb070aa0a7d6ff2e7b9f09110175834995eb6cb9a2c3b5b0aec252c2aa659",
+    "old/InstagramRootReels.java": "ff0f7afc91b7fe18a21d90cde7b109643818832d0c7302dcd3534af0493167a2",
+    "old/InstagramTabBack.java": "7b7b0feb2813f278ba4680d10b15d14f343dc3b6411f3f84c7c5bb144e29726c",
+    "old/NativeBack.java": "36035bb2a454b4d367a74b7f514e76913f735889e49a9118baa8246b83643b86",
+    "old/OneBackExit.java": "0559f9b7f261b798e1a3eec7422525fdd0aeed03f93cbcdcbf0bcf860f491e33",
+    "old/TikTokBack.java": "8a0b6bc6d1a63a3097559c5ed4b288ef31311d818f7774d8a0b5f22f96dda823",
+    "old/TikTokHome.java": "5295697608b8a065dc60e606c743dcae3b1972a6b79b309840d8413da28f4d69",
+    "old/TikTokScreen.java": "00a54f6e2bc5b21c46cb22ee8d8eeac1969876cdeb1caddb1f51b5a19d6eb085",
+    "old/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+    "old/TwitterBack.java": "b660f062593cf29c850333ac7c54a7e28004fd8cb2b928c8ce6bb9e58d417213",
+    "new/BackNavigation.java": "b391cee7053b9d5884c59628200978b47fa0f0791432f1319bee3efad264866f",
+    "new/ExitScreens.java": "70a808d4229de928c0cf7edf172b770914c1ed39268d7ef00faad6892ffdda88",
+    "new/HomeScreen.java": "8bb687501e48573ec4ee1f4b70c819800bc940d8401e06555dbe1f3d7f55b17b",
+    "new/Instagram452.java": "a14693dd3962f5cc202062eec751b27131e51b14da1ecfd0fadc6e85e531a54c",
+    "new/InstagramActivityLayers.java": "efd076fa810f316d707d6d483ce410a63b2cb58131ab2cdba70443c46976a7bf",
+    "new/InstagramActivityLayers452.java": "94923b1ba92e7468c20217d66592821f14af489e7092aba592c067b32140cba6",
+    "new/InstagramBack.java": "5901efd2fd54214a83f4c06e714ea417e430d1a7b3be5482dab9bac47c1c21e2",
+    "new/InstagramCurrent.java": "479ef1971f1ee4efd754247353bec001920aea44473e63b97addb4ed57fb4974",
+    "new/InstagramCurrent452.java": "6c3b522cee3c14bfbf35bcf0752281ea42bb2d5905f6ed6246fe6e9a141c5109",
+    "new/InstagramDispatcherBack.java": "43ad1446e1a8e3be2b860dc3fcf16a2aa8f25857a200a63c8812aa82decf88b7",
+    "new/InstagramNativeLayers.java": "3a3d6de01848fefee9530c4e33a3867191221766a884cb9e3e1801ec805f579c",
+    "new/InstagramProfileBack.java": "e5b51ed9a8f8fdceb062c1cda544575142eac25a7de38057a6ab941d33bcbee4",
+    "new/InstagramReels.java": "2b7b0d9e8833014c01855d660404174b1c2d8127340f2def6d36bdacaef5c7bc",
+    "new/InstagramReelsExit.java": "b2fcd8ff415e52419b6040804e59d52da4fc75b3e7859c0f24e336f1a6a13080",
+    "new/InstagramReelsExit452.java": "82ddb070aa0a7d6ff2e7b9f09110175834995eb6cb9a2c3b5b0aec252c2aa659",
+    "new/InstagramRootReels.java": "ff0f7afc91b7fe18a21d90cde7b109643818832d0c7302dcd3534af0493167a2",
+    "new/InstagramTabBack.java": "7b7b0feb2813f278ba4680d10b15d14f343dc3b6411f3f84c7c5bb144e29726c",
+    "new/NativeBack.java": "36035bb2a454b4d367a74b7f514e76913f735889e49a9118baa8246b83643b86",
+    "new/OneBackExit.java": "0132c8bde6f05c2339378e8ac66beb43b7e74fb40876f9c269e8c0fc67246577",
+    "new/TikTokBack.java": "b2dbe9ba09a6f492cdc55d344ceece06b85a782183f559c3965f0ddf1ff0d60d",
+    "new/TikTokHome.java": "dcb08fa8e74c7d98679478b7c976f18ad50b1648b86e70fe1a0af7d5dbce35d0",
+    "new/TikTokScreen.java": "00a54f6e2bc5b21c46cb22ee8d8eeac1969876cdeb1caddb1f51b5a19d6eb085",
+    "new/TripBack.java": "2b117b67e7ac2fb8a22dea9ae85eb903bbe44a6c75b41090fe57b1fcee29fdd1",
+    "new/TwitterBack.java": "b660f062593cf29c850333ac7c54a7e28004fd8cb2b928c8ce6bb9e58d417213"
+  },
+  "fixture_sha256": "388c9d1a331883bc6e3c3e2e369642e5166fb91de7db6388220c6c55517e48bf"
+}

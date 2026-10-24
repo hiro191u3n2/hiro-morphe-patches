@@ -1,0 +1,92 @@
+{
+  "scope": "Read-only primary-source audit; no Android device execution. Official tag refs fetched from GitHub API.",
+  "commits": {
+    "2.1.0-dev.2": "d8ceac809082ff23da0a0956f16ead11ac995ae8",
+    "2.1.0": "fb8d86aee8c5ae90038f4a062bc36975b1bd217c"
+  },
+  "heap": {
+    "embedded_jvm_default_enabled": true,
+    "calculation": "floor(totalMem in MiB / 3), clamped to 1024..3072 MiB; 32-bit additionally capped at 1024 MiB",
+    "minimum_mib": 1024,
+    "maximum_mib": 3072,
+    "maximum_32bit_mib": 1024,
+    "uses_available_ram_for_calculation": false,
+    "service_launch_option": "-Xmx${fittedHeapLimitMb}m",
+    "64bit_fitting": "unchanged requested limit",
+    "32bit_fitting": "min(requested limit, largest contiguous reservable block minus 128 MiB); below 512 MiB rejects JVM start",
+    "art_limit": "Runtime.getRuntime().maxMemory(), inherited from Android process; no fixed 3 GiB claim",
+    "user_numeric_heap_setting": false,
+    "development_override": "jvm-options.txt only read when BuildConfig.DEBUG; not a normal UI feature"
+  },
+  "japanese_labels": {
+    "2.1.0-dev.2": "組み込み VM を使用",
+    "2.1.0": "内蔵の実行環境を使用する"
+  },
+  "logging": "Runtime: name=jvm memoryLimit=<MiB>; actual host logs Patcher process: ... heap=<MiB>MB bits=<32|64>",
+  "implication": "For a normal 64-bit embedded JVM on the reported ~16GB device the code requests a 3072 MiB maximum heap. Do not instruct the user to select 4GB. A 4GB Desktop CLI success does not prove all-patch operation in this Manager or physical Android operation.",
+  "sources": {
+    "calculation_and_cap": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/app/src/main/java/app/morphe/manager/patcher/runtime/PatcherProcesses.kt#L89-L108",
+    "cap_constants": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/app/src/main/java/app/morphe/manager/patcher/runtime/PatcherProcesses.kt#L483-L494",
+    "actual_launch": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/app/src/main/java/app/morphe/manager/patcher/runtime/PatcherService.kt#L34-L51",
+    "default": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/app/src/main/java/app/morphe/manager/domain/manager/PreferencesManager.kt#L142-L146",
+    "ui": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/app/src/main/java/app/morphe/manager/ui/screen/settings/advanced/PatcherSettings.kt#L74-L86",
+    "art": "https://github.com/MorpheApp/morphe-manager/blob/fb8d86aee8c5ae90038f4a062bc36975b1bd217c/patcher-core/src/main/kotlin/app/morphe/manager/patcher/runtime/ResourceMonitor.kt#L16"
+  },
+  "downloaded_source_comparison": {
+    "app/src/main/AndroidManifest.xml": {
+      "dev2_sha256": "ab2141f6fc6d67f9da4335d93198ec2d2358af0e211d342afe2f9d6ca056d37d",
+      "stable_sha256": "ab2141f6fc6d67f9da4335d93198ec2d2358af0e211d342afe2f9d6ca056d37d",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/domain/manager/PreferencesManager.kt": {
+      "dev2_sha256": "4e812d7afff34c8eb8de90dd08c8679db2b3b2823bd2663d5d921575d0667bea",
+      "stable_sha256": "4e812d7afff34c8eb8de90dd08c8679db2b3b2823bd2663d5d921575d0667bea",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/runtime/PatcherProcesses.kt": {
+      "dev2_sha256": "85f283a24e6bc773a689f895052a613914a15c5c313a348315b111ac5aa9364f",
+      "stable_sha256": "85f283a24e6bc773a689f895052a613914a15c5c313a348315b111ac5aa9364f",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/runtime/PatcherService.kt": {
+      "dev2_sha256": "27d0b28a8a15461be3288fa74a2e13047687bffe70fdd78b79247060eed1705e",
+      "stable_sha256": "27d0b28a8a15461be3288fa74a2e13047687bffe70fdd78b79247060eed1705e",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/runtime/jvm/EmbeddedJvm.kt": {
+      "dev2_sha256": "e42680d27e3c139bd827b86720ef7b98209cee1a3696231554510839fbd89859",
+      "stable_sha256": "e42680d27e3c139bd827b86720ef7b98209cee1a3696231554510839fbd89859",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/runtime/jvm/JvmInstallation.kt": {
+      "dev2_sha256": "97621717cc26400f669bc6c0dddc6ed1c83cca71e5030565762c67c3cb65cb55",
+      "stable_sha256": "97621717cc26400f669bc6c0dddc6ed1c83cca71e5030565762c67c3cb65cb55",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/runtime/jvm/JvmLaunch.kt": {
+      "dev2_sha256": "0dcec8b1c3aa5554c552b4a06d9edd1ae1428548a561fae8411a1f27f3f2fada",
+      "stable_sha256": "0dcec8b1c3aa5554c552b4a06d9edd1ae1428548a561fae8411a1f27f3f2fada",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/patcher/worker/PatcherWorker.kt": {
+      "dev2_sha256": "beaa9212b962fa7d36996c3c42b35b5a009b980f80b8888040294d94509b3086",
+      "stable_sha256": "beaa9212b962fa7d36996c3c42b35b5a009b980f80b8888040294d94509b3086",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/ui/screen/settings/SettingsPage.kt": {
+      "dev2_sha256": "64bd73fa6e3dc86227a45b11836100e8e27b45cc102ad8fa7b3ef3370f52994e",
+      "stable_sha256": "64bd73fa6e3dc86227a45b11836100e8e27b45cc102ad8fa7b3ef3370f52994e",
+      "byte_identical": true
+    },
+    "app/src/main/java/app/morphe/manager/ui/screen/settings/advanced/PatcherSettings.kt": {
+      "dev2_sha256": "cfde879285bcda3024e31cef1ce7721c571dc995750361cbac603928d342b675",
+      "stable_sha256": "cfde879285bcda3024e31cef1ce7721c571dc995750361cbac603928d342b675",
+      "byte_identical": true
+    },
+    "app/src/main/res/values-ja-rJP/strings.xml": {
+      "dev2_sha256": "d1929d185aa38587c38f1a93bea0ae0153867a21ec0f4b33b6b417d4488a34a1",
+      "stable_sha256": "d8f10f23d5c0bec9d499f0c96502d9766bed77b3c255f34edc19b87b95c71c2d",
+      "byte_identical": false
+    }
+  }
+}
