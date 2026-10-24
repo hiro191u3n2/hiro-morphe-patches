@@ -1,0 +1,95 @@
+INFO: Morphe data root: /workspace/scratch/8c8af4b2000f/tiktok-backfix-work/rejection-4753/tools/morphe-data (JAR-adjacent)
+DEBUG: Could not check for CLI update: java.net.SocketException: Operation not permitted
+INFO: Initializing patcher...
+INFO: Loading patches from 1 bundle(s)...
+INFO: Filtering patches for com.zhiliaoapp.musically v47.5.3...
+INFO: Skipping disabled: 戻る1回で終了・履歴削除 (default)
+INFO: Skipping disabled: フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3） (default)
+INFO: Skipping disabled: フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3） (default)
+INFO: Skipping disabled: 動画のシークバーを常時表示（TikTok 47.4.3） (default)
+INFO: Skipping disabled: シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3） (default)
+INFO: Skipping disabled: フォロー中のストーリーズ件数を非表示（TikTok 47.4.3） (default)
+INFO: Skipping disabled: TikTok設定を日本語化 (default)
+INFO: Applying 1 patches...
+INFO: Deleting existing temporary files directory
+INFO: Decoding all resources
+INFO: Leaving 650 native library files in the input APK
+INFO: Sanitizing unpatched strings
+INFO: Escaping strings
+INFO: Executing patches
+ERROR: FAILED: TikTok 怪しい通信だけ遮断（TikTok 47.4.3）
+INFO: Patching took 16.1 seconds
+INFO: Patching result saved to /workspace/scratch/8c8af4b2000f/tiktok-backfix-work/rejection-4753/aggregate-1/result.json
+ERROR: Patching aborted: Patching failed: Patch "TikTok 怪しい通信だけ遮断（TikTok 47.4.3）" failed: The patch "TikTok 怪しい通信だけ遮断（TikTok 47.4.3）" depends on "BytecodePatch@2124459952", which raised an exception:
+app.morphe.patcher.patch.PatchException: TikTok 47.4.3 privacy: requires the original global TikTok 47.4.3
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:129)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:100)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:147)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)
+	at kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)
+	at app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: java.lang.IllegalStateException: TikTok 47.4.3 privacy: requires the original global TikTok 47.4.3
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.require(LegacyPrivacy.java:83)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.validate(LegacyPrivacy.java:86)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$1.invoke(LegacyPrivacy.java:93)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$1.invoke(LegacyPrivacy.java:92)
+	at app.morphe.patcher.patch.Patch.execute(Patch.kt:141)
+	at app.morphe.patcher.patch.BytecodePatch.execute$morphe_patcher(Patch.kt:292)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:122)
+	... 15 more
+
+ERROR: app.morphe.patcher.patch.PatchException: The patch "TikTok 怪しい通信だけ遮断（TikTok 47.4.3）" depends on "BytecodePatch@2124459952", which raised an exception:
+app.morphe.patcher.patch.PatchException: TikTok 47.4.3 privacy: requires the original global TikTok 47.4.3
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:129)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:100)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:147)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)
+	at kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)
+	at app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+Caused by: java.lang.IllegalStateException: TikTok 47.4.3 privacy: requires the original global TikTok 47.4.3
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.require(LegacyPrivacy.java:83)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy.validate(LegacyPrivacy.java:86)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$1.invoke(LegacyPrivacy.java:93)
+	at app.hiro.tiktok4753.patches.LegacyPrivacy$1.invoke(LegacyPrivacy.java:92)
+	at app.morphe.patcher.patch.Patch.execute(Patch.kt:141)
+	at app.morphe.patcher.patch.BytecodePatch.execute$morphe_patcher(Patch.kt:292)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:122)
+	... 15 more
+
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend$execute(Patcher.kt:103)
+	at app.morphe.patcher.Patcher$invoke$1.invokeSuspend(Patcher.kt:147)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at app.morphe.patcher.Patcher$invoke$1.invoke(Patcher.kt)
+	at kotlinx.coroutines.flow.SafeFlow.collectSafely(Builders.kt:57)
+	at kotlinx.coroutines.flow.AbstractFlow.collect(Flow.kt:226)
+	at app.morphe.engine.PatchEngine$patch$3.invokeSuspend(PatchEngine.kt:491)
+	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:34)
+	at kotlinx.coroutines.DispatchedTask.run(DispatchedTask.kt:100)
+	at kotlinx.coroutines.internal.LimitedDispatcher$Worker.run(LimitedDispatcher.kt:124)
+	at kotlinx.coroutines.scheduling.TaskImpl.run(Tasks.kt:89)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:586)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.executeTask(CoroutineScheduler.kt:798)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.runWorker(CoroutineScheduler.kt:717)
+	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:704)
+
+INFO: Use --continue-on-error to skip failed patches and continue patching

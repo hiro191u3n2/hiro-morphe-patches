@@ -1,0 +1,109 @@
+{
+  "schema": "tiktok4743-backfix-publication-v1",
+  "patch_version": "4.2.0",
+  "bundle_version": "1.0.282",
+  "baseline_version": "1.0.281",
+  "baseline_url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/736cca92f1c0825dd0f0ef3a22d6a495f024fbe8/downloads/Hiro_Morphe_Patches_v1.0.281.mpp",
+  "baseline_sha256": "22020c9ecfa22aaaf5ec089e30f266f1f77bf9384d129105459bde23cc4d4dab",
+  "upstream_url": "https://github.com/icysymmetra/tiktok-patches-for-morphe/releases/download/v0.9.0-dev.1/patches-0.9.0-dev.1.mpp",
+  "upstream_sha256": "45dc0c2244f8cf6973de18542d2d9a0cc25512f5b1de52438c685b82edb7c4cd",
+  "upstream_version": "0.9.0-dev.1",
+  "release_title": "Hiro TikTok 47.4.3 戻る修正 v4.2.0 / aggregate v1.0.282",
+  "summary": "TikTok 47.4.3 の戻る処理を、画面ラベルに依存した判定から、アプリ本来の一時画面の処理を通った後の境界へ接続。ホームで1回の戻るによる終了・履歴削除を修正し、47.5.3はHiro製8項目すべての対応対象から削除。実APKの適用・出力監査と、47.5.3の強制選択拒否を検証し、同じMPPバイトを配布します。Android実機の操作は未確認。",
+  "validation_basis": "Two complete signed/pinned 47.4.3 original-APK cases: standalone seven and aggregate authored eight plus external Settings. Both exact MPPs must also reject each of all eight authored entries in 16 individual fail-fast forced selections on the signed/pinned removed 47.5.3 input, each with nonzero exit and no emitted APK. Native Back host regressions, emitted native/OneBack/privacy/inventory/Settings audits, official loader/dependency admission on three SDKs, and two local plus two CI byte-identical builds are mandatory. Physical Android execution is not claimed. A separate mandatory 139-patch integration uses all 136 upstream entries plus the three user-selected Hiro entries with 3GB heap, default options, no compatibility override, and emitted OneBack/Settings/Japanese audits; the unknown exact user upstream selection is not claimed.",
+  "freeze_state": "frozen",
+  "local_build_pair_verified": true,
+  "reviewed_main_head": "222e8db61a6cae7caa6e9138e56adf73d0bd8e27",
+  "reviewed_dev_head": "e051df256037d28e087a768ad2c25bd9a99bf24e",
+  "required_jdk": "21.0.8+9.0.LTS",
+  "reported_package": "com.zhiliaoapp.musically",
+  "reported_version": "47.4.3",
+  "original_apk_apply_tested": true,
+  "physical_android_tested": false,
+  "japanese_patch_default": false,
+  "japanese_source_commit": "efb5937ddea4fe29abdfe33027cfc0e5d397ae93",
+  "supported_versions": [
+    "47.4.3"
+  ],
+  "removed_versions": [
+    "47.5.3"
+  ],
+  "oneback_version": "1.1.22",
+  "original_apk_rejection_tested": true,
+  "integration_139_verified": true,
+  "local_expected_mpp": {
+    "TikTok_47.4.3_Hiro_v4.2.0.mpp": {
+      "bytes": 780481,
+      "sha256": "9749332c7878510b03d23d7c62a4919453fb0ff2be06962811f857e15b483c2f"
+    },
+    "Hiro_Morphe_Patches_v1.0.282.mpp": {
+      "bytes": 19050673,
+      "sha256": "b30217a6daa8dff127732f4e7f71b06a5e38d0ab2e021601f913c7f350cc5864"
+    }
+  },
+  "local_expected_qa_sha256": "8811d8077dc07ae25201d0a1cc1e4e5003b7fc271d3708d7bda7f5e5a94f606a",
+  "local_expected_real_apk_sha256": "210f50b6fb3f3a22ce2520436bf6d2b142551461fddd6ff9231baf07cbf5cf57",
+  "local_expected_host": {
+    "Back116Regression": "REGRESSION: 30 cases, 0 failed",
+    "Back117InstagramTest": "REGRESSION Instagram: 16 cases, 0 failed",
+    "Back117TikTokTest": "PASS Back117TikTokTest",
+    "Back118InstagramGuardTest": "REGRESSION Instagram guards: 14 cases, 0 failed",
+    "Back118InstagramTest": "REGRESSION Instagram118 layout: 9 cases, 0 failed",
+    "Back119InstagramTest": "PASS Back119InstagramTest: 15 cases, 53 assertions",
+    "Back119TwitterTest": "PASS Back119TwitterTest: 35 cases, 104 assertions",
+    "Back120InstagramTest": "PASS Back120InstagramTest: 25 cases, 98 assertions",
+    "Back120MainDispatchTest": "PASS Back120MainDispatchTest: 16 cases, 85 assertions",
+    "Back121InstagramActivityLayersTest": "PASS Back121InstagramActivityLayersTest: 34 cases, 60 assertions",
+    "Back121InstagramCurrentTest": "PASS Back121InstagramCurrentTest: 23 cases, 78 assertions",
+    "Back121InstagramDispatchTest": "PASS Back121InstagramDispatchTest: 39 cases, 199 assertions",
+    "Back121InstagramScopeTest": "PASS Back121InstagramScopeTest: 9 cases, 41 assertions",
+    "Back122InstagramDispatcherTest": "PASS Back122InstagramDispatcherTest: 22 cases, 119 assertions",
+    "Back123InstagramTabBackTest": "PASS Back123InstagramTabBackTest: 14 cases, 64 assertions",
+    "Back123NativeReelsTest": "PASS Back123NativeReelsTest: 10 cases, 56 assertions",
+    "Back124TwitterTest": "PASS Back124TwitterTest: 24 cases, 147 assertions",
+    "Back125TwitterKeyTest": "PASS Back125TwitterKeyTest: 19 cases, 126 assertions",
+    "Back125TwitterSystemTest": "PASS Back125TwitterSystemTest: 43 cases, 321 assertions",
+    "Back125TwitterTerminalTest": "PASS Back125TwitterTerminalTest: 24 cases, 234 assertions",
+    "Back126InstagramProfileTest": "PASS Back126InstagramProfileTest: 22 cases, 206 assertions",
+    "Back127Instagram452Test": "PASS Back127Instagram452Test: 18 cases, 160 assertions",
+    "Back128InstagramProfileTest": "PASS Back128InstagramProfileTest: 55 cases, 249 assertions",
+    "HomeBackHostTest": "SUCCESS: 315 cases, 1498 assertions",
+    "Back4743NativeBackTest": "PASS Back4743NativeBackTest: native-guarded single Back; label-independent; host simulation, not Android device",
+    "Back4743TikTokTest": "PASS Back4743TikTokTest: 47.4.3-only ABI descriptors; native behavior is covered separately",
+    "Back4753RejectedTest": "PASS Back4753RejectedTest: retired 47.5.3 ABI is not recognized"
+  },
+  "inherited_source_sha256": {
+    "inherited/japanese/src/build.py": "b1f42e8cd8d871e9171d4a0b79f91bec69f23d5064fb40213d6d22fbb2e7ff51",
+    "inherited/japanese/src/generate.py": "36b68b381cde5f06eed8e310d3835a29f00813df000b80b5069c506020246ee1",
+    "inherited/japanese/src/l10n/en.csv": "d9b47cc4fc46e0581cc0bacf03fd41b1e18b0b3255a78c2df946a1f46fb42bb9",
+    "inherited/japanese/src/l10n/ja.csv": "386709415a0387e932ac5d7c0fba3b6c46468febf50b05490ec9647e7bbb3d72",
+    "inherited/japanese/src/make_host.py": "829d5b799086937f30082d2e6655b327f89dca882b9377587a06d6768fab336c",
+    "inherited/japanese/src/patch/TikTokJapanesePatch.java": "612e7de9809ae707eb83930c4df67283a2401c5bd984db75343b4b2b8048a38f",
+    "inherited/japanese/src/test/ImportMetraFixture.java": "a4383eb523310736e364b91921c51702f7f88e001c626705c18dd86423c6b1d1",
+    "inherited/japanese/src/test/LocalizationAudit.java": "8c295dc07b05912ff482d8178282e36c721fd502d6fde8c8a4375ccb0a59bda5",
+    "inherited/japanese/src/test/MetadataAudit.java": "dcc35aa8040a32479d5a417868cab7ae7241c72c05120115f879e2038f50b2fb",
+    "inherited/japanese/src/upstream/L10n.java": "9b272cf467f05f06837206842c6d3bf8a45d7772c5e39d59ac43d858c71255f1",
+    "inherited/japanese/src/upstream/L10nTranslations.java": "feb9fc14d78d3e71ff804fea2f0835b411582467fd1f46289b5abbf6b8b3d350",
+    "inherited/japanese/src/upstream/L10nTranslationsDe.java": "3dd2e89796ce9f472caee353541965c61222e695f28ce1d6cac1b49be94a2e4d",
+    "inherited/japanese/README.md": "055eba90ea3a6dcf3cca318ca6cb4b23600a06958db87fdc79f4c7862015f28f",
+    "inherited/japanese/LICENSE": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
+    "inherited/japanese/NOTICE": "5b15899ac655f4017486f65466539d42dcd22a1624bba1d86c16c212fca663ba",
+    "inherited/japanese/legacy/build.py": "baa8fe2a52c357a67c8ca5e3abcde4fb35a6ecaa8790f3b91ce790ed9feee141",
+    "inherited/japanese/legacy/test-dex/Fixtures.java": "8d9701fe2cc4530d6ebd2652d678682221df2ed5a19d0d1d764beff07603e052"
+  },
+  "ci_build_pair_verified": true,
+  "expected_mpp": {
+    "TikTok_47.4.3_Hiro_v4.2.0.mpp": {
+      "bytes": 780481,
+      "sha256": "9749332c7878510b03d23d7c62a4919453fb0ff2be06962811f857e15b483c2f"
+    },
+    "Hiro_Morphe_Patches_v1.0.282.mpp": {
+      "bytes": 19050673,
+      "sha256": "b30217a6daa8dff127732f4e7f71b06a5e38d0ab2e021601f913c7f350cc5864"
+    }
+  },
+  "expected_qa_sha256": "8811d8077dc07ae25201d0a1cc1e4e5003b7fc271d3708d7bda7f5e5a94f606a",
+  "expected_real_apk_sha256": "210f50b6fb3f3a22ce2520436bf6d2b142551461fddd6ff9231baf07cbf5cf57",
+  "ci_run_id": "40050860352",
+  "ci_source_commit": "318c2ef00fa28f2263cb3a0efec22dc1811c2921"
+}
