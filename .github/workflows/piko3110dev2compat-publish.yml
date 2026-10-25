@@ -1,0 +1,82 @@
+name: Build and publish Piko Hide feed posts compatibility fix
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/piko3110dev2compat-publish.yml'
+      - 'releases/piko3110dev2compat/**'
+permissions:
+  contents: write
+concurrency:
+  group: piko3110dev2compat-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Rebuild pinned original and verify locally tested artifact identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/piko3110dev2compat/build.py --output "$PWD/dist/Piko_3.11.0-dev.2.hiro.1.mpp"
+          python3 - <<'PY'
+          import hashlib,json,pathlib
+          root=pathlib.Path('releases/piko3110dev2compat')
+          qa=json.loads((root/'evidence/QA.json').read_text())
+          report=json.loads((root/'out/build-report.json').read_text())
+          expected='3bb54315e6c3649f8a841527f0e4024eb00494bf2c544866c47f62dee8ae6395'
+          assert report['output_sha256']==qa['corrected_mpp_sha256']==expected
+          assert hashlib.sha256(pathlib.Path('dist/Piko_3.11.0-dev.2.hiro.1.mpp').read_bytes()).hexdigest()==expected
+          assert qa['original_reproduction']['success'] is False
+          assert qa['fixed_single']['success'] is True
+          assert qa['piko67_plus_hiro1']['success'] is True
+          assert qa['piko67_plus_hiro1']['applied_count']==68
+          assert qa['emitted_app_dex_audit']=='PASS'
+          assert qa['physical_android_tested'] is False
+          PY
+      - name: Package complete upstream source and corresponding fix
+        shell: bash
+        run: |
+          set -euo pipefail
+          git clone --depth 1 --branch v3.11.0-dev.2 https://github.com/crimera/piko.git .upstream-piko
+          test "$(git -C .upstream-piko rev-parse HEAD)" = '6f0673fd7c19acb92f3d124b0b5e39c2edbfb4bd'
+          git -C .upstream-piko apply "$PWD/releases/piko3110dev2compat/source-fix.diff"
+          python3 - <<'PY'
+          import hashlib,pathlib,zipfile
+          root=pathlib.Path('releases/piko3110dev2compat')
+          dist=pathlib.Path('dist')
+          with zipfile.ZipFile(dist/'Piko_3.11.0-dev.2.hiro.1_sources.zip','w',zipfile.ZIP_DEFLATED) as z:
+              for p in sorted(pathlib.Path('.upstream-piko').rglob('*')):
+                  if p.is_file() and '.git' not in p.parts:
+                      z.write(p,'upstream-piko/'+str(p.relative_to('.upstream-piko')))
+              for p in sorted(root.rglob('*')):
+                  rel=p.relative_to(root)
+                  if p.is_file() and not set(rel.parts).intersection({'input','tools','out','__pycache__'}):
+                      z.write(p,'hiro-builder/'+str(rel))
+          for name,source in [('README.md',root/'README.md'),('QA.json',root/'evidence/QA.json'),('build-report.json',root/'out/build-report.json')]:
+              (dist/name).write_bytes(source.read_bytes())
+          paths=sorted(p for p in dist.iterdir() if p.is_file())
+          (dist/'SHA256SUMS.txt').write_text(''.join(hashlib.sha256(p.read_bytes()).hexdigest()+'  '+p.name+'\n' for p in paths))
+          PY
+      - name: Publish separately from Hiro aggregate and official Piko feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag='piko-feed-fix-v3.11.0-dev.2.hiro.1'
+          gh release create "$tag" --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" --title 'Piko 3.11.0-dev.2.hiro.1 — Hide feed posts修正' --notes-file releases/piko3110dev2compat/README.md dist/Piko_3.11.0-dev.2.hiro.1.mpp dist/Piko_3.11.0-dev.2.hiro.1_sources.zip dist/README.md dist/QA.json dist/build-report.json dist/SHA256SUMS.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: piko3110dev2compat-build
+          path: dist/
+          retention-days: 14
