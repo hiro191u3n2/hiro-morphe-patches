@@ -9,7 +9,7 @@ import argparse, hashlib, json, re, stat, zipfile
 from build19101 import (ROOT, VERSION, BUNDLE_VERSION, SINGLE, BUNDLE, BASE_PINS,
     GPU_ENTRY, NR_ENTRY, SMOOTH_ENTRY, GPU119_ENTRY, FRONT119_ENTRY, ADDED, CHANGED, TOOL_PINS, source_pins, publication_pins, production_path,
     headers, dex_integrity, sha, require, json_bytes, runtime_source_version)
-from finalize19101 import QA_NAME, SOURCE_ZIP, SELECTED
+from finalize19101 import QA_NAME, SOURCE_ZIP, SELECTED, BASELINE_REPORT, historical_baseline_report
 import application_evidence19101
 import native_identity19101
 import native_provenance19115
@@ -721,7 +721,7 @@ def positive_host119(report,source):
     require(legacy.get('current_source_sha256')==published['reviewed_source_sha256']==report.get('baseline_source_sha256') and legacy.get('current_publication_sha256')==published['reviewed_publication_sha256'],'Baseline host source/publication pins differ')
     require({k:{a:b for a,b in v.items() if a!='regression_source_scope'} for k,v in inherited.items()}==legacy.get('tests'),'Inherited host result differs from executed baseline')
     require(report.get('baseline_host_report_sha256')==sha(json_bytes(legacy)),'Embedded immutable baseline report hash differs')
-    require(type(report.get('candidate_evidence_negative_controls')) is int and report['candidate_evidence_negative_controls']==16,'Candidate evidence rejection controls absent')
+    require(type(report.get('candidate_evidence_negative_controls')) is int and report['candidate_evidence_negative_controls']==21,'Candidate evidence rejection controls absent')
     # Every inherited proof and count remains checked, without relabeling it as
     # current-source proof. Separate groups below execute all changed code.
     positive_host({**report,'tests':inherited,'assertions':sum(v['assertions'] for v in inherited.values())})
@@ -829,9 +829,10 @@ def validate(args):
     require((dist/'SHA256SUMS.txt').read_text()==expected_sums,'SHA256SUMS incomplete or inconsistent')
     require(json.loads((dist/'release-artifacts19101.json').read_text())==artifacts,'Finalizer release inventory differs')
     archive=checked_archive(dist/SOURCE_ZIP)
+    historical=historical_baseline_report(root,host)
     expected={'DESIGN_REVIEW.md':(root/'DESIGN_REVIEW.md').read_bytes(),'production-roots19115.json':(root/'production-roots19115.json').read_bytes(),'manifest.json':(root/'manifest.json').read_bytes(),QA_NAME:(dist/QA_NAME).read_bytes(),
         'RELEASE_NOTES.txt':(dist/'RELEASE_NOTES.txt').read_bytes(),'evidence/host-audit19101.json':args.host_report.read_bytes(),
-        'evidence/original-application19101.json':args.application_report.read_bytes(),'evidence/build19101.json':(dist/'build19101.json').read_bytes()}
+        'evidence/original-application19101.json':args.application_report.read_bytes(),'evidence/build19101.json':(dist/'build19101.json').read_bytes(),BASELINE_REPORT:historical}
     expected.update({'src/'+name:(source/name).read_bytes() for name in pins})
     expected.update({'publication/'+name:(root/'publication'/name).read_bytes() for name in pubpins})
     require(set(archive)==set(expected),'Source ZIP has missing/unexpected/private members')

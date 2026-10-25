@@ -49,7 +49,7 @@ def positive(tests,source,require):
  bound({'CpuFrontOptimized19119.java':front['candidate_java_sha256'],'native19119/front/front19119.c':front['candidate_wrapper_sha256'],'native19119/front/front_core19119.c':front['candidate_core_sha256']})
  minimum(rows['capture_timing'],'assertions',12)
  owner=rows['gpu_owner'];flags(owner,'actual_jni_gles','independent_native_contexts','global_second_open_refused','per_engine_capacity_and_failure_routing','combined_retained_counted','trim_both_engines','wrong_owner_negative_control_detected');check(owner,'negative_controls',3);minimum(owner,'positive_assertions',233);bound(owner['source_sha256'])
- stage=rows['gpu_foreground'];flags(stage,'actual_foreground_begin_process_end','actual_jni_gles','actual_native_cpu','test_only_certificate_preseed','certificate_evidence_is_test_only');check(stage,'direct_cases',8);check(stage,'candidate_cases',4);minimum(stage,'compared_pixels',800001);check(stage,'negative_controls',2);bound(stage['source_sha256'])
+ stage=rows['gpu_foreground'];flags(stage,'actual_foreground_begin_process_end','actual_jni_gles','actual_native_cpu','test_only_certificate_preseed','certificate_evidence_is_test_only','real_fingerprint_keys_seeded','queued_probe_interleaving_exercised','queued_probe_after_certificate_seed_verified');check(stage,'queued_probe_count',1);check(stage,'direct_cases',8);check(stage,'candidate_cases',4);minimum(stage,'compared_pixels',800001);check(stage,'negative_controls',2);bound(stage['source_sha256'])
  workload=rows['gpu_workload'];flags(workload,'actual_jni_gles','actual_native_cpu','all_origins_and_tails','two_mutable_banks','one_candidate_model_upload','closed_and_refused_no_speed_evidence','benchmark_scope_is_actual_full_photo','two_submitted_ticket_cancel');check(workload,'runtime_certificates_written',False);check(workload,'complete_workloads',4);check(workload,'candidate_workloads',2);check(workload,'compared_pixels',49939200);check(workload,'cancellation_controls',4);check(workload,'quality_negative_controls',4);bound(workload['source_sha256'])
  gate=rows['gpu_gate'];check(gate,'positive_controls',10);check(gate,'negative_controls',18);minimum(gate,'assertions',28);bound(gate['sources']);bound({'GpuStrongOptimized19119.java':gate['candidate_helper_sha256']})
  require(a['assertions']==sum(r['assertions'] for r in a['tests'].values())+1,'Arithmetic assertion sum differs')
@@ -65,7 +65,9 @@ def negative_controls(tests,source):
   ('noise_integration119','current_production_java_executed'),('noise_integration119','tests','strong_transport','actual_jni'),
   ('noise_integration119','tests','model_parallel','model_ticket_joined_before_handoff'),('noise_integration119','tests','front_gate','production_hook_inverse_verified'),
   ('noise_integration119','tests','gpu_owner','combined_retained_counted'),('noise_integration119','tests','gpu_owner','negative_controls'),
-  ('noise_integration119','tests','gpu_gate','negative_controls'),('noise_integration119','tests','capture_timing','assertions')]
+  ('noise_integration119','tests','gpu_gate','negative_controls'),('noise_integration119','tests','capture_timing','assertions'),
+  ('noise_integration119','tests','gpu_foreground','real_fingerprint_keys_seeded'),('noise_integration119','tests','gpu_foreground','queued_probe_interleaving_exercised'),
+  ('noise_integration119','tests','gpu_foreground','queued_probe_after_certificate_seed_verified'),('noise_integration119','tests','gpu_foreground','queued_probe_count')]
  def need(ok,message):
   if not ok:raise AssertionError(message)
  for path in paths:
@@ -75,4 +77,8 @@ def negative_controls(tests,source):
   try:positive(bad,source,need)
   except AssertionError:continue
   raise AssertionError('Incomplete candidate evidence admitted: '+str(path))
- return len(paths)
+ missing=deepcopy(tests)
+ del missing['noise_integration119']['tests']['gpu_foreground']['queued_probe_after_certificate_seed_verified']
+ try:positive(missing,source,need)
+ except AssertionError:return len(paths)+1
+ raise AssertionError('Missing queued-probe interleaving proof admitted')

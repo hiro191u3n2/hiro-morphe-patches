@@ -26,6 +26,7 @@ def test(source,work,jdk=None,ndk=None,native_dir=None):
  run(['cc','-O3','-std=c11','-Wall','-Wextra','-Werror','-ffp-contract=off','-fno-fast-math','-fPIC','-shared','-Wl,--no-undefined','-I'+str(jdk/'include'),'-I'+str(jdk/'include/linux'),source/'native1958/smooth_noise1958.c','-lm','-pthread','-o',work/'libulike_smooth1958.so'],'real-cpu-native')
  output=run([jdk/'bin/java','-Xcheck:jni','-XX:ActiveProcessorCount=4','-Xmx1g','-Djava.library.path='+str(native)+os.pathsep+str(work),'-cp',str(classes)+os.pathsep+str(android),'com.hiro.ulike.StrongForeground19119Test'],'actual-foreground-stage')
  result=json.loads(output.split('RESULT ',1)[1]);assert result['direct_cases']==8 and result['candidate_cases']==4 and result['compared_pixels']>800000
+ assert result.get('real_fingerprint_keys_seeded') is True and result.get('queued_probe_interleaving_exercised') is True and result.get('queued_probe_count')==1
  assert pins=={str(p.relative_to(source)):sha(p) for p in tracked},'Sources changed during actual foreground test'
  result.update(source_sha256=pins,native_library_sha256={n:sha(native/n) for n in ('libulike_gpu1960.so','libulike_gpu19119.so')},positive_controls=8,certificate_evidence_is_test_only=True)
  (work/'result.json').write_text(json.dumps(result,indent=2)+'\n');return result

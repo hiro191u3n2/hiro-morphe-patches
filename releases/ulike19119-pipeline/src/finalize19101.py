@@ -6,6 +6,16 @@ from build19101 import ROOT,VERSION,BUNDLE_VERSION,SINGLE,BUNDLE,BASE_PINS,sourc
 import application_evidence19101
 QA_NAME='QA_ULike_v1.9.119.json'
 SOURCE_ZIP='ULike_v1.9.119_sources_and_QA.zip'
+BASELINE_REPORT='evidence/immutable118-host-audit.json'
+BASELINE_REPORT_SHA256='59d8a40b0a588291e879545823cba9a197bdd593752336cf0652f5289faa4ddc'
+BASELINE_REPORT_BYTES=1260766
+
+def historical_baseline_report(release_root,host):
+ raw=(release_root/BASELINE_REPORT).read_bytes()
+ require(len(raw)==BASELINE_REPORT_BYTES and sha(raw)==BASELINE_REPORT_SHA256,'Pinned historical baseline report differs')
+ require(host.get('baseline_host_report_sha256')==BASELINE_REPORT_SHA256 and json.loads(raw)==host.get('baseline_host_report'),'Historical input differs from embedded executed baseline evidence')
+ return raw
+
 SELECTED=['NOISE119_STRONG_QUOTIENT_SHARING_EXACT_DIVIDER','NOISE119_PROTECTED_FRONT_BLOCK_SKIP','NOISE119_IMMUTABLE_LEGACY_ROUTE_AND_SEPARATE_CANDIDATE_PROOF']
 
 def finalize(args):
@@ -17,6 +27,7 @@ def finalize(args):
  artifacts={n:{'sha256':sha((args.dist/n).read_bytes()),'bytes':(args.dist/n).stat().st_size} for n in (SINGLE,BUNDLE)}
  require(artifacts==build['artifacts'],'MPP bytes changed after audited build')
  application=application_evidence19101.read(ROOT,artifacts,report_path=args.application_report)
+ historical=historical_baseline_report(ROOT.parent,host)
  qa={**build,'schema':'ulike19101-pipeline-release-qa-v1','status':'HOST_AND_ORIGINAL_APKS_VERIFIED_DEVICE_UNVERIFIED','selected_candidates':SELECTED,
      'regional_positive_proofs_scope':'research_only_not_distributed_adoption',
      'host_tests_passed':True,'host_evidence':host,'host_report_sha256':sha(args.host_report.read_bytes()),
@@ -29,7 +40,7 @@ def finalize(args):
  (args.dist/QA_NAME).write_bytes(json_bytes(qa));(args.dist/'RELEASE_NOTES.txt').write_bytes(args.notes.read_bytes())
  source={'DESIGN_REVIEW.md':(ROOT.parent/'DESIGN_REVIEW.md').read_bytes(),'production-roots19115.json':(ROOT.parent/'production-roots19115.json').read_bytes(),'manifest.json':args.declaration.read_bytes(),QA_NAME:json_bytes(qa),'RELEASE_NOTES.txt':args.notes.read_bytes(),
          'evidence/host-audit19101.json':args.host_report.read_bytes(),'evidence/original-application19101.json':args.application_report.read_bytes(),
-         'evidence/build19101.json':(args.dist/'build19101.json').read_bytes()}
+         'evidence/build19101.json':(args.dist/'build19101.json').read_bytes(),BASELINE_REPORT:historical}
  for name,digest in declaration['reviewed_source_sha256'].items():
   raw=(ROOT/name).read_bytes();require(sha(raw)==digest,'Source changed '+name);source['src/'+name]=raw
  publication=ROOT.parent/'publication'

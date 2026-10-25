@@ -7,6 +7,7 @@ on:
       - 'releases/ulike19119-pipeline/publication/**'
       - 'releases/ulike19119-pipeline/manifest.json'
       - 'releases/ulike19119-pipeline/evidence/original-application19101.json'
+      - 'releases/ulike19119-pipeline/evidence/immutable118-host-audit.json'
       - '.github/workflows/ulike19119-pipeline-publish.yml'
   workflow_dispatch:
     inputs:
@@ -87,13 +88,36 @@ jobs:
         shell: bash
         run: |
           python3 "$ULIKE_RELEASE/src/build19101.py" --input .ci-ulike19119/input --tools .ci-ulike19119/tools --work .ci-ulike19119/build --output "$ULIKE_RELEASE/dist" --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME" --declaration "$ULIKE_RELEASE/manifest.json"
-      - name: Execute current host regressions
+      - name: Verify pinned immutable v1.9.118 historical host evidence
+        shell: bash
+        run: |
+          python3 - <<'PYCODE'
+          import hashlib,json,os,pathlib,sys
+          root=pathlib.Path(os.environ['ULIKE_RELEASE'])
+          source=root/'src'
+          raw=(root/'evidence/immutable118-host-audit.json').read_bytes()
+          assert len(raw)==1260766
+          assert hashlib.sha256(raw).hexdigest()=='59d8a40b0a588291e879545823cba9a197bdd593752336cf0652f5289faa4ddc'
+          report=json.loads(raw)
+          sys.path.insert(0,str(source))
+          import baseline_identity19119,validate19101
+          baseline_identity19119.verify(source)
+          published=json.loads((source/'baseline19118/published-manifest19118.json').read_text())
+          assert report['schema']=='ulike19101-host-audit-v1'
+          assert report['status']=='passed' and report['source_stability_verified'] is True
+          assert report['current_source_sha256']==published['reviewed_source_sha256']
+          assert report['current_publication_sha256']==published['reviewed_publication_sha256']
+          validate19101.positive_host(report)
+          print('Verified historical v1.9.118 evidence: 89 immutable-baseline groups, 434186779 assertions; not rerun by this CI job.')
+          PYCODE
+      - name: Execute fresh v1.9.119 host regressions
         shell: bash
         env:
+          PYTHONUNBUFFERED: '1'
           EGL_PLATFORM: surfaceless
           LIBGL_ALWAYS_SOFTWARE: '1'
         run: |
-          python3 "$ULIKE_RELEASE/src/host_audit19101.py" --source "$ULIKE_RELEASE/src" --work .ci-ulike19119/host --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME"
+          python3 "$ULIKE_RELEASE/src/host_audit19101.py" --source "$ULIKE_RELEASE/src" --work .ci-ulike19119/host --jdk "$JAVA_HOME" --ndk "$ULIKE_NDK_HOME" --baseline-report "$ULIKE_RELEASE/evidence/immutable118-host-audit.json"
       - name: Bind actual original-APKS proof to identical rebuilt package and create assets
         shell: bash
         run: |
@@ -114,6 +138,19 @@ jobs:
         shell: bash
         run: |
           python3 "$ULIKE_RELEASE/publication/publish19101.py" --dist "$ULIKE_RELEASE/dist" --repo . --validation .ci-ulike19119/validation19101.json
+      - name: Preserve public-safe host audit diagnostics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ulike19119-public-host-diagnostics
+          if-no-files-found: ignore
+          retention-days: 14
+          path: |
+            .ci-ulike19119/host/baseline-inputs.json
+            .ci-ulike19119/host/baseline-execution.log
+            .ci-ulike19119/host/immutable118-result.json
+            .ci-ulike19119/host/**/result.json
+            .ci-ulike19119/host/**/*.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
