@@ -309,7 +309,7 @@ def metadata(state,url,created,notes):
     require(len(list(INVENTORY.finditer(old['description'])))==1,"Exact ULike inventory missing")
     description=INVENTORY.sub(lambda m:m[1]+'v'+VERSION+m[3],old['description'],count=1)
     feed={**old,'version':BUNDLE,'created_at':created,'download_url':url,'page_url':PAGE,'signature_download_url':'','description':notes.strip()+'\n\n'+description}
-    changelog=f"# {BUNDLE} ({created[:10]})\n\n* **ULike:** v{VERSION}：起動時の標準GPU準備とtile8の静穏待ちを重ね、同一処理指紋・端末・ドライバの認定を復元して初回から採用しやすくします。未認定なら全70例・縦横の速度比較を完了するまで標準経路を使います。画素一致とtile8の10%以上短縮、連結の5%以上短縮という既存条件を維持し、実機で初回の高速化と保存2,000ms達成は未確認です。\n\n"+notes.strip()+'\n\n'+state['log']
+    changelog=f"# {BUNDLE} ({created[:10]})\n\n* **ULike:** v{VERSION}：起動時の標準GPU準備とtile8のアイドル待ちを重ね、同一処理指紋・端末・ドライバの認定を復元して初回から採用しやすくします。未認定なら全70例・縦横の速度比較を完了するまで標準経路を使います。画素一致とtile8の10%以上短縮、連結の5%以上短縮という既存条件を維持し、実機で初回の高速化と保存2,000ms達成は未確認です。\n\n"+notes.strip()+'\n\n'+state['log']
     require(changelog.endswith(state['log']) and feed['description'].endswith(description),'Previous history lost')
     require(has_changes_for(changelog,PREVIOUS,['ULike']) and not has_changes_for(changelog,BUNDLE,['ULike']),'Manager update eligibility wrong')
     scopes={scope for entry in parsed_entries(state['log']) for scope,_ in entry['bullets']}
