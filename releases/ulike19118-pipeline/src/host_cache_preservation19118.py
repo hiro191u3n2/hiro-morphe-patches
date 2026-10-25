@@ -248,6 +248,7 @@ def test(reference: Path, source: Path, work: Path, jdk: Path | None, native_so:
         "expected_gpu_native_sha256": expected_native, "built_native_checked": native_so is not None,
         "assertions": 2 + sum(row.get("write", {}).get("assertions", 0) + row["restore"]["assertions"] for row in cases),
         "cases": cases, "physical_android_tested": False, "device_save_speed_verified": False,
+        "device_speedup_verified": False,
     }
     (work / "result.json").write_text(json.dumps(result, indent=2) + "\n")
     return result
