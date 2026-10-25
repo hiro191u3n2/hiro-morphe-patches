@@ -1,0 +1,62 @@
+{
+  "methods": {
+    "GpuQualification1961": [
+      "<clinit>",
+      "captureChanged",
+      "emitAttempt1984",
+      "loop",
+      "reserveOwned1984"
+    ],
+    "GpuQualification1961$2": [
+      "run"
+    ],
+    "GpuQualification1961$Attempt1984": [
+      "<init>"
+    ],
+    "GpuQualification1961$Job": [
+      "<init>"
+    ],
+    "GpuQualification1961$Reservation1984": [
+      "<init>",
+      "commit"
+    ],
+    "GpuResident1976": [
+      "finish1978"
+    ],
+    "GpuSnapshotBudget1981": [
+      "refresh",
+      "tryCopy"
+    ],
+    "GpuSnapshotBudget1981$Copy": [
+      "begin",
+      "close",
+      "current"
+    ],
+    "GpuStrongTuning1975": [
+      "schedule1978"
+    ],
+    "GpuStrongTuning1975$Proof": [
+      "checkpoint1984",
+      "run"
+    ],
+    "ProcessingTiming1947": [
+      "<clinit>",
+      "liveSummary1979",
+      "render"
+    ],
+    "ProcessingTiming1947$Trace": [
+      "<init>"
+    ]
+  },
+  "review_basis": "Published .84 runtime versus pinned Java 8/D8 .85 production closure, with retained TimingCameraHooks1980 applied. Existing non-version method changes are limited to the listed scalar diagnostics, qualification selection/copy ownership and inherited private compiler call-site updates. Eight exact shipped static synthetic bridges remain present. Pixel kernels, shader/native payloads, saved exact/speed identities and camera/save helpers are verified separately without method exemptions.",
+  "review_complete": true,
+  "reviewed_production_sha256": {
+    "CameraTrace1965.java": "2390caa394159f414442f483619d73b81aa8ccc4e19b80ac0fbfaaff8d3f0e3c",
+    "GpuQualification1961.java": "f04426e4ded796d14d76c56a62e87ea9e873efaa2f041a9808f35f59c001782d",
+    "GpuResident1976.java": "8bd949e4fb1624dde9ca8b3a76a6c2814418e47c260629f7142f7390979400ec",
+    "GpuSnapshotBudget1981.java": "b6c77c713bca34b893eb46886449a8062d65eee0dc81eb60a21707a0c214861b",
+    "GpuStrongTuning1975.java": "bc3a72b6ad1e1177b39d379c990fb8c1d4007b2a29b5055297124eadc9e56896",
+    "ProcessingTiming1947.java": "3259add4a72de78e0bd6bd7675a0aac94eff096c22008f9e969f703cb6f0c0a6"
+  },
+  "schema": "ulike1985-instrumented-methods-v1"
+}

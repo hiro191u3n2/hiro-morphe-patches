@@ -1,0 +1,218 @@
+#version 310 es
+// Exact .53 photo-session final correction. All Java float/mask policy is supplied
+// as integers. Source pixels remain immutable through periodic/long-wave/sharp.
+precision highp int;
+layout(local_size_x=8,local_size_y=8,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint src[]; };
+layout(std430,binding=1) readonly buffer Corrected { uint correctedPixels[]; };
+layout(std430,binding=2) writeonly buffer Output { uint outputPixels[]; };
+layout(std430,binding=3) readonly buffer Policy { int policy[]; };
+uniform int uWidth,uRows,uOrigin,uBegin,uEnd,uOutputOrigin,uPolicyOrigin;
+uniform int uMoire,uSharp,uGain,uFloor,uLimit,uTexture,uHalo,uSequential,uPolicyMode;
+// All four exact Java-rounded policy integers are decoded losslessly.
+// RAW4 and CONSTANT4 retain arbitrary signed-mask values unchanged.
+int policyValue(int pixel,int component) {
+ if(uPolicyMode==2)return policy[component];
+ if(uPolicyMode==0)return policy[pixel*4+component];
+ uint word=uint(policy[pixel*2+component/2]);
+ return int((word>>uint((component&1)*16))&65535u);
+}
+int mx(int a,int b){return a>b?a:b;}
+int mn(int a,int b){return a<b?a:b;}
+int ab(int a){return a<0?-a:a;}
+int clamp_i(int a,int lo,int hi){return mn(hi,mx(lo,a));}
+int r(uint p){return int((p>>16)&255u);}
+int g(uint p){return int((p>>8)&255u);}
+int b(uint p){return int(p&255u);}
+int yy(uint p){return (77*r(p)+150*g(p)+29*b(p)+128)>>8;}
+int u(uint p){return b(p)-g(p);}
+int v(uint p){return r(p)-g(p);}
+int rounddiv(int n,int d){return n>=0?(n+d/2)/d:-((-n+d/2)/d);}
+int chromaDistance(int au,int av,int bu,int bv){return mx(ab(au-bu),ab(av-bv));}
+
+/* Literal integer translation of QualityPixels1932.removePeriodicChroma.
+ * The tests/branch order, negative / rounding and best-direction ties match Java. */
+uint periodic(int at,int width,uint center){
+    int cu=u(center),cv=v(center),l=yy(center);
+    if(mx(ab(cu),ab(cv))>104)return center;
+    int best=0,bu=cu,bv=cv;
+    for(int direction=0;direction<4;direction++){
+        int step=direction==0?1:direction==1?width:direction==2?width+1:width-1;
+        uint m1=src[at-step],p1=src[at+step];
+        if((m1>>24)!=255u || (p1>>24)!=255u)continue;
+        uint m2=src[at-2*step],p2=src[at+2*step];
+        if((m2>>24)!=255u || (p2>>24)!=255u)continue;
+        int m1u=u(m1),p1u=u(p1),m1v=v(m1),p1v=v(p1);
+        int m2u=u(m2),p2u=u(p2),m2v=v(m2),p2v=v(p2);
+        int amp1=mx(ab(2*cu-m1u-p1u),ab(2*cv-m1v-p1v))/2;
+        int amp2=mx(ab(2*cu-m2u-p2u),ab(2*cv-m2v-p2v))/2;
+        if(amp1<8 && amp2<8)continue;
+        uint m4=src[at-4*step],p4=src[at+4*step];
+        if((m4>>24)!=255u || (p4>>24)!=255u)continue;
+        int y1m=yy(m1),y1p=yy(p1),y2m=yy(m2),y2p=yy(p2);
+        for(int period=2;period<=4;period+=2){
+            int amp=period==2?amp1:amp2;
+            if(amp<8 || amp>112)continue;
+            int repeat=period==2?
+                mx(ab(cu-m2u)+ab(cu-p2u),ab(cv-m2v)+ab(cv-p2v))/2:
+                mx(ab(cu-u(m4))+ab(cu-u(p4)),ab(cv-v(m4))+ab(cv-v(p4)))/2;
+            if(repeat>2+amp/5)continue;
+            int opposition=period==2?mx(ab(m1u-p1u),ab(m1v-p1v)):
+                mx(ab(m2u-p2u),ab(m2v-p2v));
+            if(opposition>3+amp/4)continue;
+            int lumaPattern=period==2?ab(2*l-y1m-y1p)/2:ab(2*l-y2m-y2p)/2;
+            if(lumaPattern>3+amp/5)continue;
+            int meanU=period==2?(2*cu+m1u+p1u)/4:
+                (m2u+p2u+2*(m1u+cu+p1u))/8;
+            int meanV=period==2?(2*cv+m1v+p1v)/4:
+                (m2v+p2v+2*(m1v+cv+p1v))/8;
+            if(mx(ab(meanU),ab(meanV))>76)continue;
+            int amount=clamp_i((amp-6)*12,0,216);
+            amount=amount*(amp+2-mn(amp,repeat*2))/(amp+2);
+            amount=amount*(amp+4-mn(amp,lumaPattern*3))/(amp+4);
+            if(amount>best){best=amount;bu=meanU;bv=meanV;}
+        }
+    }
+    if(best<=0)return center;
+    int ou=cu+rounddiv((bu-cu)*best,256),ov=cv+rounddiv((bv-cv)*best,256);
+    int green=rounddiv(256*l-77*ov-29*ou,256),red=green+ov,blue=green+ou;
+    if(red<0 || red>255 || green<0 || green>255 || blue<0 || blue>255)return center;
+    return (center&0xff000000u)|(uint(red)<<16)|(uint(green)<<8)|uint(blue);
+}
+
+/* Literal integer translation of LongMoire1934.correct. */
+uint long_wave(int at,int width,uint center){
+    const int periods[4]=int[4](6,8,12,16);
+    int cu=u(center),cv=v(center),cy=yy(center);
+    if(mx(ab(cu),ab(cv))>90)return center;
+    int best=0,bu=cu,bv=cv;
+    for(int direction=0;direction<4;direction++){
+        int step=direction==0?1:direction==1?width:direction==2?width+1:width-1;
+        uint cm=src[at-step],cp=src[at+step];
+        if((cm>>24)!=255u || (cp>>24)!=255u)continue;
+        if(chromaDistance(u(cm),v(cm),u(cp),v(cp))>46)continue;
+        for(int k=0;k<4;k++){
+            int period=periods[k],halfPeriod=period/2;
+            uint m=src[at-halfPeriod*step],p=src[at+halfPeriod*step];
+            if((m>>24)!=255u || (p>>24)!=255u)continue;
+            int mu=u(m),mv=v(m),pu=u(p),pv=v(p);
+            int amp=chromaDistance(cu*2,cv*2,mu+pu,mv+pv)/2;
+            if(amp<10 || amp>96)continue;
+            int opposition=chromaDistance(mu,mv,pu,pv);
+            if(opposition>3+amp/6)continue;
+            int lumaPattern=mx(ab(cy-yy(m)),ab(cy-yy(p)));
+            if(lumaPattern>2+amp/10)continue;
+            int repeat=0,valid=1;
+            for(int sign=-1;sign<=1;sign+=2)for(int cycle=1;cycle<=2;cycle++){
+                uint q=src[at+sign*period*cycle*step];
+                if((q>>24)!=255u){valid=0;break;}
+                repeat=mx(repeat,chromaDistance(cu,cv,u(q),v(q)));
+                if(ab(cy-yy(q))>3+amp/10)valid=0;
+            }
+            if(valid==0 || repeat>2+amp/6)continue;
+            int quarter=mx(1,period/4);
+            uint qm=src[at-quarter*step],qp=src[at+quarter*step];
+            if((qm>>24)!=255u || (qp>>24)!=255u)continue;
+            int meanU=(2*cu+mu+pu)/4,meanV=(2*cv+mv+pv)/4;
+            if(mx(ab(meanU),ab(meanV))>36)continue;
+            int midpointError=chromaDistance(u(qm)+u(qp),v(qm)+v(qp),meanU*2,meanV*2)/2;
+            if(midpointError>4+amp/4)continue;
+            int nearChange=chromaDistance(u(cm)+u(cp),v(cm)+v(cp),cu*2,cv*2)/2;
+            if(nearChange<1 || nearChange>3+amp*14/(period*period))continue;
+            int lumaRange=mx(mx(yy(qm),yy(qp)),cy)-mn(mn(yy(qm),yy(qp)),cy);
+            if(lumaRange>3+amp/10)continue;
+            int amount=mn(176,(amp-7)*8);
+            amount=amount*(amp+2-repeat)/(amp+2);
+            if(amount>best){best=amount;bu=meanU;bv=meanV;}
+        }
+    }
+    if(best==0)return center;
+    int ou=cu+rounddiv((bu-cu)*best,256),ov=cv+rounddiv((bv-cv)*best,256);
+    int green=rounddiv(256*cy-77*ov-29*ou,256),red=green+ov,blue=green+ou;
+    if(red<0 || red>255 || green<0 || green>255 || blue<0 || blue>255)return center;
+    return (center&0xff000000u)|(uint(red)<<16)|(uint(green)<<8)|uint(blue);
+}
+
+/* Exact QualityShadow1932.textureQ8 luma-neighbourhood test. */
+int texture_q8(int width,int rows,int x,int row,int threshold) {
+    const int support=4,length=9;
+    if(x<support || x>=width-support || row<support || row>=rows-support)return 0;
+    int best=0,at=(row-uOrigin)*width+x; int samples[9];
+    for(int direction=0;direction<4;direction++) {
+        int step=direction==0?1:direction==1?width:direction==2?width+1:width-1;
+        int opaque=1,low=255,high=0,adjacent=0;
+        for(int i=0;i<length;i++) {
+            uint p=src[at+(i-support)*step];
+            if((p>>24)!=255u){opaque=0;break;}
+            int value=samples[i]=yy(p);low=mn(low,value);high=mx(high,value);
+            if(i>0)adjacent+=ab(value-samples[i-1]);
+        }
+        if(opaque==0 || high-low<threshold*2 || adjacent<(length-1)*threshold)continue;
+        int average=(adjacent+(length-2)/2)/(length-1);
+        for(int period=2;period<=4;period++) {
+            int error=0,count=length-period;
+            for(int i=0;i<count;i++)error+=ab(samples[i]-samples[i+period]);
+            error=(error+count/2)/count;
+            int confidence=clamp_i((average*4-error*9)*256/mx(1,average*4),0,256);
+            confidence=confidence*confidence>>8;
+            best=mx(best,confidence);
+        }
+    }
+    return best;
+}
+uint sharpen(int at,int width,int rows,
+        int x,int row,uint corrected,int policyPixel,
+        int gain,int base_floor,int limit,int texture_priority,int halo) {
+    int center=yy(src[at]),left=yy(src[at-1]),right=yy(src[at+1]);
+    int up=yy(src[at-width]),down=yy(src[at+width]);
+    if((src[at-1]>>24)!=255u || (src[at+1]>>24)!=255u ||
+       (src[at-width]>>24)!=255u || (src[at+width]>>24)!=255u ||
+       (src[at-width-1]>>24)!=255u || (src[at-width+1]>>24)!=255u ||
+       (src[at+width-1]>>24)!=255u || (src[at+width+1]>>24)!=255u)return corrected;
+    int nw=yy(src[at-width-1]),ne=yy(src[at-width+1]);
+    int sw=yy(src[at+width-1]),se=yy(src[at+width+1]);
+    int detail_q8=(center*12-(left+right+up+down)*2-nw-ne-sw-se)*16;
+    /* Identical result-bound gate: do not change noise/mask policy or quality. */
+    if(ab(detail_q8)<=base_floor)return corrected;
+    int edge=mx(ab(nw+2*left+sw-ne-2*right-se),ab(nw+2*up+ne-sw-2*down-se))/4;
+    int tolerance=policyValue(policyPixel,0),texture=texture_q8(width,rows,x,row,policyValue(policyPixel,1));
+    int flatQ8=clamp_i((tolerance*2-edge)*256/mx(1,tolerance*2),0,256);
+    flatQ8=flatQ8*(256-texture)>>8;
+    int floor=base_floor+((policyValue(policyPixel,2)-base_floor)*flatQ8>>8);
+    int magnitude=ab(detail_q8)-floor;
+    if(magnitude<=0)return corrected;
+    gain=gain*(256-(flatQ8*176>>8))>>8;
+    if(center<64)gain=gain*(96+center*160/64)>>8;
+    if(texture_priority!=0)gain=int(uint(gain)*uint(policyValue(policyPixel,3)))>>8;
+    int high64; int low64; imulExtended(magnitude,gain,high64,low64);
+    uint before=uint(low64);uint sum=before+32768u;high64+=sum<before?1:0;
+    int shifted=int((uint(high64)<<16)|(sum>>16));
+    int delta=high64<0?shifted:(high64!=0 || (sum>>16)>uint(limit)?limit:shifted);
+    if(delta==0)return corrected;
+    if(detail_q8<0)delta=-delta;
+    int low=mn(center,mn(mn(left,right),mn(up,down)));
+    int high=mx(center,mx(mx(left,right),mx(up,down)));
+    if(halo!=0)delta=clamp_i(delta,low-center,high-center);
+    int red=r(corrected),green=g(corrected),blue=b(corrected);
+    delta=clamp_i(delta,-mn(red,mn(green,blue)),255-mx(red,mx(green,blue)));
+    return (corrected&0xff000000u)|(uint((red+delta))<<16)|
+        (uint((green+delta))<<8)|uint((blue+delta));
+}
+
+void main() {
+ int x=int(gl_GlobalInvocationID.x),row=uBegin+int(gl_GlobalInvocationID.y);
+ if(x>=uWidth || row>=uEnd)return;
+ int at=(row-uOrigin)*uWidth+x;
+ uint original=src[at],p=uSequential!=0?correctedPixels[(row-uOutputOrigin)*uWidth+x]:original;
+ if((original>>24)==255u) {
+  if(uMoire!=0 && row>=4 && row<uRows-4 && x>=4 && x<uWidth-4) {
+   p=periodic(at,uWidth,p);
+   if(p==original && row>=32 && row<uRows-32 && x>=32 && x<uWidth-32)
+    p=long_wave(at,uWidth,p);
+  }
+  if(uSharp!=0 && row>0 && row<uRows-1 && x>0 && x<uWidth-1)
+   p=sharpen(at,uWidth,uRows,x,row,p,(row-uPolicyOrigin)*uWidth+x,
+      uGain,uFloor,uLimit,uTexture,uHalo);
+ }
+ outputPixels[(row-uOutputOrigin)*uWidth+x]=p;
+}
