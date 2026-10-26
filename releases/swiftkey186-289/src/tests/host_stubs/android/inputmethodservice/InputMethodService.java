@@ -1,0 +1,1 @@
+package android.inputmethodservice;import android.content.Context;public class InputMethodService extends Context {private SoftInputWindow window;public InputMethodService(SoftInputWindow w){window=w;}public SoftInputWindow getWindow(){return window;}public void setWindow(SoftInputWindow w){window=w;}}

@@ -1,0 +1,1 @@
+package android.view;public class Window {private View decor;public Window(View v){decor=v;}public View getDecorView(){return decor;}public View peekDecorView(){return decor;}public void setDecorView(View v){decor=v;}}

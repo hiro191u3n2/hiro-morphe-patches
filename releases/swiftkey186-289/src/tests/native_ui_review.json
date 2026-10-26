@@ -1,0 +1,160 @@
+{
+  "apk": "base.apk",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_is_previously_modified": true,
+  "native_targets": {
+    "toolbar": "md0.i",
+    "search": "md0.h",
+    "legacy_search": "pe0.a"
+  },
+  "resource_ids": {
+    "action_button": "0x7f0a0048",
+    "hub_bottom_row": "0x7f0a020d",
+    "hub_items_wrapper": "0x7f0a0210",
+    "hub_top_row": "0x7f0a0212",
+    "keyboard_text_field_edit_text": "0x7f0a0261",
+    "keyboard_text_field_search_button": "0x7f0a0265",
+    "keyboard_text_field_with_suggestions_root": "0x7f0a0266",
+    "ai_creations_button_label": "0x7f14003f",
+    "emoji_search_box_edit_text_hint": "0x7f1401e8"
+  },
+  "search_scope": "hub_bottom_row containing keyboard_text_field_edit_text with getHint() equal to localized emoji_search_box_edit_text_hint",
+  "ai_scope": "action_button under md0.i hub_top_row with getText() equal to localized ai_creations_button_label",
+  "collapse": "Set hub_bottom_row GONE, including arrow; do not hide only EditText. GONE bypasses native minimumHeight on bottom row. Set only action_button GONE; ConstraintLayout gives width back to tab wrapper.",
+  "lifecycle": "md0.i.d(q0) initializes AI text/visibility and adds md0.h; md0.i.g()/onResume() sizes row; onDestroy removes child search. Reapply on layout/pre-draw and attach/reinflation.",
+  "avoid": [
+    "Do not target action_button globally (shared id)",
+    "Do not hide Copilot label variant",
+    "Do not hide all keyboard_text_field roots; GIF/image/sticker searches use same layout",
+    "Do not alter emoji tab, pager, categories, back, or insertion handlers",
+    "Preserve original visibility for option OFF; release stored view references on detach",
+    "Do not force state/model/clear focus solely for UI hiding; native focus callback changes feature state"
+  ],
+  "device_tested": false,
+  "schema": "swiftkey186-native-ui-review-v1",
+  "source_package": "com.touchtype.swiftkey.beta",
+  "source_version": "9.13.16.4",
+  "source_version_code": 1236271168,
+  "clean_apk_apply_tested": false,
+  "replayed_in_ci": false,
+  "review_scope": "Read-only local native APK analysis; no original APK or full native source is distributed.",
+  "native_methods": [
+    {
+      "class": "Lma0/i;",
+      "name": "a",
+      "descriptor": "(Landroid/view/LayoutInflater;Landroid/widget/FrameLayout;)Lma0/i;",
+      "instruction_bytes": 286,
+      "instruction_sha256": "8debfceb63f178debd8f861d95b86bea0f77297bc4de008f855ef9a0ed08c775"
+    },
+    {
+      "class": "Lmd0/h;",
+      "name": "<init>",
+      "descriptor": "(Landroid/content/Context;Lwa0/r0;Lgd0/i;Lnd0/d;Landroidx/lifecycle/q0;Lui0/k;Lxd0/b1;Lrd0/k;La50/a;Lmj0/q;Lmd0/b;Lfb0/t1;Lbb0/g;ZZ)V",
+      "instruction_bytes": 988,
+      "instruction_sha256": "22d21748bcfaf3ddd7715953c88752487875b3c40763ff1c677f12b3fab9db0a"
+    },
+    {
+      "class": "Lmd0/h;",
+      "name": "g",
+      "descriptor": "()V",
+      "instruction_bytes": 102,
+      "instruction_sha256": "34bb4637791f4c25915a3312674f32da40060cf10f284f4699f1920721ab1f43"
+    },
+    {
+      "class": "Lmd0/h;",
+      "name": "h",
+      "descriptor": "(Z)V",
+      "instruction_bytes": 220,
+      "instruction_sha256": "a7b92836456ef9336dcea1f1b9755a2ab4b78d1da274a0d466ec86604ab7ee87"
+    },
+    {
+      "class": "Lmd0/h;",
+      "name": "onPause",
+      "descriptor": "(Landroidx/lifecycle/q0;)V",
+      "instruction_bytes": 152,
+      "instruction_sha256": "470b0a70ccbbd48550dfe3ef28cf86b1aecf580b55190cee54377e51e0775fdb"
+    },
+    {
+      "class": "Lmd0/h;",
+      "name": "onResume",
+      "descriptor": "(Landroidx/lifecycle/q0;)V",
+      "instruction_bytes": 204,
+      "instruction_sha256": "9f8062abf7b37a85a637bac4a2ae65f6e5a1cdf1a9b6e2e8b83248c13625d528"
+    },
+    {
+      "class": "Lmd0/i;",
+      "name": "<init>",
+      "descriptor": "(Landroid/view/ContextThemeWrapper;Lwa0/f0;Lmd0/j;Lgd0/i;Lqd0/a1;Lkd0/k2;Lwa0/r0;Lmj0/q;Lui0/k;Lfb0/t1;Lxd0/b1;Lrd0/k;La50/a;Lnd0/d;Lk10/e;La0/a;Ls20/a;Lbb0/g;Landroidx/room/p0;Lah0/w0;)V",
+      "instruction_bytes": 1458,
+      "instruction_sha256": "c445095dcac8bdcad698d262958b2c5406cf0ead5a21133beba52922bd61ea9c"
+    },
+    {
+      "class": "Lmd0/i;",
+      "name": "d",
+      "descriptor": "(Landroidx/lifecycle/q0;)V",
+      "instruction_bytes": 578,
+      "instruction_sha256": "04ad57fcafc383b53e09c30be76733ce593dbef8d14674ec6cf463584aede550"
+    },
+    {
+      "class": "Lmd0/i;",
+      "name": "g",
+      "descriptor": "()V",
+      "instruction_bytes": 166,
+      "instruction_sha256": "9a47d87b9a644ef71e68b6bc89fa9623e28a546da17bcac47a634e01c2f8f9e9"
+    },
+    {
+      "class": "Lmd0/i;",
+      "name": "onDestroy",
+      "descriptor": "(Landroidx/lifecycle/q0;)V",
+      "instruction_bytes": 20,
+      "instruction_sha256": "cea9d4dc01b3b7e6b743cdd004e73516c338064d732a2e818d437f25983d1808"
+    },
+    {
+      "class": "Lmd0/i;",
+      "name": "onResume",
+      "descriptor": "(Landroidx/lifecycle/q0;)V",
+      "instruction_bytes": 58,
+      "instruction_sha256": "1291955203e0923717bc5681c55349bea4bf6312edf91c0142144b0faf175fcc"
+    },
+    {
+      "class": "Lqd0/a1;",
+      "name": "b",
+      "descriptor": "(ILcm0/a;)Lmd0/a;",
+      "instruction_bytes": 860,
+      "instruction_sha256": "0b99042a4d191093fabb5ae900b3a739d96517b251b608a6c49363130edaa14f"
+    }
+  ],
+  "layouts": {
+    "hub_view.xml": {
+      "apk_binary_sha256": "91d2008e75aec9812e32269375f5a17f3151e8eb61383ccce78eebb7c6086690",
+      "apk_binary_bytes": 2776,
+      "decoded_xml_sha256": "33c3fdbadca532abdb80702194076aeec751b976be6bab26366e29962b70c916"
+    },
+    "keyboard_text_field_layout.xml": {
+      "apk_binary_sha256": "39936f36ea0be0d39625e8bd43238d85a73b795f302324a8bff357c8f116244a",
+      "apk_binary_bytes": 4204,
+      "decoded_xml_sha256": "57874e8f83c585a7fb445e4e827124e44bd24fcc3ac67b47eefd84b77958f36c"
+    },
+    "rich_content_emoji_panel.xml": {
+      "apk_binary_sha256": "2a9b1dad57d10020ecbdb32bd0e9878bfe49f92d5a017cfb16fc322db4f66880",
+      "apk_binary_bytes": 1008,
+      "decoded_xml_sha256": "0668d74ba0ed723d284dba97dc511e68603c7908329b158557a3adb32678049d"
+    }
+  },
+  "status": "PASSED",
+  "original_apk_apply_tested": false,
+  "selectors": {
+    "emoji_search": {
+      "container_id": "hub_bottom_row",
+      "qualifier_id": "keyboard_text_field_edit_text",
+      "qualifier_kind": "hint",
+      "qualifier_string": "emoji_search_box_edit_text_hint"
+    },
+    "ai_creations": {
+      "container_id": "hub_top_row",
+      "target_id": "action_button",
+      "qualifier_kind": "text",
+      "qualifier_string": "ai_creations_button_label"
+    }
+  }
+}

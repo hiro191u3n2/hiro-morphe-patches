@@ -1,0 +1,1 @@
+package android.content;import android.content.res.Resources;public class Context {private final Resources resources=new Resources();public Resources getResources(){return resources;}public String getString(int id){return resources.getString(id);}public String getPackageName(){return "com.touchtype.swiftkey.beta";}public Context getApplicationContext(){return this;}}

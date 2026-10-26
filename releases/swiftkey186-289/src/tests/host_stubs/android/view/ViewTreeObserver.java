@@ -1,0 +1,6 @@
+package android.view;import java.util.ArrayList;import java.util.List;public class ViewTreeObserver {
+ public interface OnPreDrawListener{boolean onPreDraw();}public interface OnGlobalLayoutListener{void onGlobalLayout();}
+ private boolean alive=true;private final List<OnPreDrawListener> pre=new ArrayList<OnPreDrawListener>();private final List<OnGlobalLayoutListener> global=new ArrayList<OnGlobalLayoutListener>();
+ public boolean isAlive(){return alive;}public void addOnPreDrawListener(OnPreDrawListener l){if(!alive)throw new IllegalStateException();pre.add(l);}public void removeOnPreDrawListener(OnPreDrawListener l){pre.remove(l);}public void addOnGlobalLayoutListener(OnGlobalLayoutListener l){if(!alive)throw new IllegalStateException();global.add(l);}public void removeOnGlobalLayoutListener(OnGlobalLayoutListener l){global.remove(l);}public int listeners(){return pre.size()+global.size();}public int preDrawListeners(){return pre.size();}public int globalLayoutListeners(){return global.size();}
+ public boolean draw(){boolean result=true;for(OnPreDrawListener l:new ArrayList<OnPreDrawListener>(pre))result=l.onPreDraw()&&result;return result;}public void layout(){for(OnGlobalLayoutListener l:new ArrayList<OnGlobalLayoutListener>(global))l.onGlobalLayout();}public void kill(){alive=false;pre.clear();global.clear();}
+}

@@ -1,0 +1,1 @@
+package androidx.preference;import android.content.Context;import android.util.AttributeSet;import oa.j;public class Preference {public final Context a;public String l;public boolean s=true,q=true;public j e;public CharSequence title,summary;public Preference(Context c,AttributeSet attrs){a=c;}public void B(CharSequence v){title=v;}public void A(CharSequence v){summary=v;}}

@@ -1,0 +1,91 @@
+name: Verify and publish SwiftKey186 emoji panel display options
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey186-289-publish.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - uses: actions/setup-java@v4
+        id: morphe_java
+        with:
+          distribution: temurin
+          java-version: '21'
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Verify source pins and unchanged active baseline
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-swiftkey186
+          python - <<'PY'
+          import importlib.util, json, pathlib
+          root = pathlib.Path('releases/swiftkey186-289/src').resolve()
+          spec = importlib.util.spec_from_file_location('publish186', root / 'publish186.py')
+          p = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(p)
+          expected = p.load_expected(root.parent / 'manifest.json')
+          count = p.verify_source_files(root, expected)
+          feed = json.loads(pathlib.Path('patches-bundle.json').read_text())
+          assert feed['version'] == p.PREVIOUS, 'Active bundle advanced; preserve the newer publication'
+          assert feed['download_url'] == p.BASE_URL, 'Active bundle input changed'
+          assert pathlib.Path('.github/workflows/swiftkey186-289-publish.yml').read_bytes() == (root / 'workflow.yml').read_bytes()
+          print('PASS', count, 'reviewed source files and current Manager baseline')
+          PY
+          python releases/swiftkey186-289/src/publisher_tests.py 2>&1 | tee .ci-swiftkey186/publisher-tests.log
+      - name: Build first MPPs from pinned inputs and run regression tests
+        shell: bash
+        env:
+          MORPHE_JAVA: ${{ steps.morphe_java.outputs.path }}/bin/java
+        run: |
+          set -euo pipefail
+          java -version
+          "$MORPHE_JAVA" -version
+          python releases/swiftkey186-289/src/build186.py --download --input-dir .ci-swiftkey186/input --tools .ci-swiftkey186/tools --work .ci-swiftkey186/build-one --output .ci-swiftkey186/dist-one 2>&1 | tee .ci-swiftkey186/build-one.log
+      - name: Independently rebuild and rerun regression tests
+        shell: bash
+        env:
+          MORPHE_JAVA: ${{ steps.morphe_java.outputs.path }}/bin/java
+        run: |
+          set -euo pipefail
+          python releases/swiftkey186-289/src/build186.py --input-dir .ci-swiftkey186/input --tools .ci-swiftkey186/tools --work .ci-swiftkey186/build-two --output .ci-swiftkey186/dist-two 2>&1 | tee .ci-swiftkey186/build-two.log
+      - name: Match both builds to reviewed artifacts and preservation contract
+        shell: bash
+        run: |
+          set -euo pipefail
+          for build in one two; do
+            python releases/swiftkey186-289/src/publish186.py --local-only --dist ".ci-swiftkey186/dist-${build}" --repo . --expected releases/swiftkey186-289/manifest.json --baseline .ci-swiftkey186/input/Hiro_Morphe_Patches_v1.0.288.mpp --standalone-baseline .ci-swiftkey186/input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.5.mpp 2>&1 | tee ".ci-swiftkey186/local-verification-${build}.log"
+          done
+      - name: Publish verified MPPs and atomically advance both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey186-289/src/publish186.py --dist .ci-swiftkey186/dist-one --repo . --expected releases/swiftkey186-289/manifest.json --baseline .ci-swiftkey186/input/Hiro_Morphe_Patches_v1.0.288.mpp --standalone-baseline .ci-swiftkey186/input/SwiftKeyBeta_v2_SamsungEmoji_v1.8.5.mpp 2>&1 | tee .ci-swiftkey186/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey186-bundle289-verified-publication
+          path: |
+            .ci-swiftkey186/dist-one/
+            .ci-swiftkey186/dist-two/
+            .ci-swiftkey186/*.log
+            .ci-swiftkey186/build-one/*.txt
+            .ci-swiftkey186/build-two/*.txt
+          retention-days: 14
+          compression-level: 1
+          include-hidden-files: true

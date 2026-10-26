@@ -1,0 +1,4 @@
+package android.content.res;
+import java.util.HashMap;import java.util.Map;
+public class Resources {public static class NotFoundException extends RuntimeException{} private final Map<Integer,String> text=new HashMap<Integer,String>();public Resources(){text.put(0x7f1401e8,"絵文字を検索します");text.put(0x7f14003f,"AI の作成");}public String getString(int id){if(!text.containsKey(id))throw new NotFoundException();return text.get(id);}public void setString(int id,String s){text.put(id,s);} public String getResourceEntryName(int id){return Integer.toHexString(id);}public int getIdentifier(String name,String type,String pkg){if(name.equals("hub_bottom_row"))return 0x7f0a020d;if(name.equals("keyboard_text_field_edit_text"))return 0x7f0a0261;if(name.equals("action_button"))return 0x7f0a0048;if(name.equals("hub_top_row"))return 0x7f0a0212;if(name.equals("emoji_search_box_edit_text_hint"))return 0x7f1401e8;if(name.equals("ai_creations_button_label"))return 0x7f14003f;return 0;}}
+
