@@ -1,14 +1,15 @@
 {
-  "version": "1.9.0",
-  "versionCode": 12,
+  "version": "1.10.0",
+  "versionCode": 13,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.9.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.9.0.apk",
-  "sha256": "0b67299cb113e8d5990130014316bd5054fd8155a4320fe16fb1682318a5f226",
+  "apk": "Hiro_RecentsClear_v1.10.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.10.0.apk",
+  "sha256": "a5c2c3b01957482d0299b294d8c8881b7fd9c65b2f6011d33fc42193273b1296",
   "bytes": 29091,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "change": "Prepare learned launcher IDs before opening Recents on boot, allow one initial lightweight root across the SystemUI-to-launcher transition, and retain both boot and icon diagnostics. Device visible duration is unverified.",
-  "hostServiceScenarios": 137,
-  "bootPreparationScenarios": 14
+  "hostServiceScenarios": 149,
+  "recoveryScenarios": 12,
+  "archivedV19FailuresRecovered": 4,
+  "change": "Recover immediately with standard roots after unusable lightweight data; retry explicitly rejected clicks within the existing five-second deadline; never repeat accepted or ambiguous clicks. Device recovery is unverified."
 }
