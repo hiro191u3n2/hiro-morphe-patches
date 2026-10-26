@@ -1,14 +1,16 @@
 {
-  "version": "1.16.0",
-  "versionCode": 19,
+  "version": "1.17.0",
+  "versionCode": 20,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.16.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.16.0.apk",
-  "sha256": "141800b2da692ab1a6d040218e96b771d605cf897ea9fe81ac2b55356e99f9c0",
+  "apk": "Hiro_RecentsClear_v1.17.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.17.0.apk",
+  "sha256": "4bc6e3086ead33d0fe4e44f629527a32e76e75de35516f8140e25fbfca5bd785",
   "bytes": 37283,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 220,
-  "delayAttributionScenarios": 8,
-  "change": "Preload button preferences before UI work for both origins. After successful Recents return, recycle old nodes and perform one fresh inspection inline. Use an async inspection handler and measure API, guard, cache, queue and suspend time separately. Preserve boot preparation and once-per-boot attempts. Actual device cause and visual timing remain unverified."
+  "hostServiceScenarios": 221,
+  "automaticClearMode": "1.12 queued inspection",
+  "manualClearMode": "1.16 prewarm and inline inspection",
+  "bootReliability": "Retain readiness/count retries, unclaimed preparation recovery and once-per-boot action claim",
+  "change": "Restore v1.12 automatic clearing queue and discovery behavior, excluding v1.16 automatic prewarm/inline/async changes. Keep later repeated-boot reliability fixes and v1.16 manual icon mode. Three consecutive boots including delayed readiness and pre-UI recovery pass host tests."
 }
