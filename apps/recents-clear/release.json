@@ -1,14 +1,15 @@
 {
-  "version": "1.11.0",
-  "versionCode": 14,
+  "version": "1.12.0",
+  "versionCode": 15,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.11.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.11.0.apk",
-  "sha256": "993a111e7ef37e008df616e6c989deeca5d5d5a9c354c50d8180a883755753c6",
+  "apk": "Hiro_RecentsClear_v1.12.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.12.0.apk",
+  "sha256": "4de379863c2f987c4038da50ae0fa416b4de7d463bf74d2d6ff140a0f2246970",
   "bytes": 33187,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 162,
+  "hostServiceScenarios": 173,
   "actualActivityLifecycleScenarios": 23,
-  "change": "Boot automation launches the same MainActivity and uses the same finish-and-clear path as the icon. Remove boot-only preload/hint. Keep once-per-boot safety and bounded one-use launch handoff; no direct clear on blocked launch."
+  "bootRecoveryScenarios": 11,
+  "change": "Keep the icon Activity as primary entry; recover absent or failed handoff through the shared clear engine, claim boot only at actual dispatch, and recover Activity destruction without duplicate clearing. Preserve unlock/OFF guards."
 }
