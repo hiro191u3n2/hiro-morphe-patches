@@ -1,0 +1,107 @@
+{
+  "schema": "swiftkey185-publication-v1",
+  "swiftkey_version": "1.8.5",
+  "bundle_version": "1.0.288",
+  "baseline_bundle_version": "1.0.287",
+  "baseline_bundle_sha256": "566fd0ce0f736648341b566aa96eaa05bb59fd9cca5a12a47a819f29d3e14ff3",
+  "baseline_swiftkey_version": "1.8.4",
+  "baseline_swiftkey_sha256": "45af2d9b7a1c7878b0bceb79ad814d92bdeed48ff757f7568a8a30a39ad37def",
+  "artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.5.mpp": {
+      "bytes": 16098077,
+      "sha256": "fd5c3eed07ff86a5b169bbffc237bb2dd835ab77afe357a8e75c6a72589010b4"
+    },
+    "Hiro_Morphe_Patches_v1.0.288.mpp": {
+      "bytes": 19195480,
+      "sha256": "9421cd1efa035f1186331e8a1adadc595d2f69a344b2c1d0ee53013e118b4ec8"
+    },
+    "QA_SwiftKey_v1.8.5.json": {
+      "bytes": 8166,
+      "sha256": "3ef15e5823e125ee5ab220a7fd86daec8efbe04329e26a115814d74bc7d99679"
+    },
+    "SwiftKeyBeta_v1.8.5_sources_and_QA.zip": {
+      "bytes": 33568,
+      "sha256": "bfcc50ccc836cdf3e1ce7984cca432dd5a8572442d670411e0058cb71f858003"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3182,
+      "sha256": "b8205342bc874b2da5806487663ca072f2a20fe2e400b90e61cb015bd789a6bf"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 484,
+      "sha256": "6168bf24bb61ac4bf020bf57833e5de5a05f82fea0b132d6a9b62bfb38fa7d98"
+    }
+  },
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "qa_required_values": {
+    "device_tested": false,
+    "original_apk_apply_tested": false,
+    "runtime_byte_identical": true,
+    "all_dictionary_resources_preserved": true,
+    "other_apps_byte_identical": true,
+    "standalone_and_bundle_runtime_equal": true,
+    "android_loader_byte_identical": true,
+    "jvm_swiftkey_loader_restored": true,
+    "jvm_swiftkey_loader_matches_standalone": true,
+    "combined_jvm_swiftkey_discovered": true,
+    "previous_jvm_patches_preserved": true,
+    "all_static_checks_passed": true,
+    "host_tests_passed": true,
+    "current_manager_patcher_selection_verified": true,
+    "two_loader_sdks_agree": true
+  },
+  "source_files": {
+    "README.txt": {
+      "bytes": 2690,
+      "sha256": "36e2647699a7f8e9931817ee9369e92c50f7856927c97ab9944af8debbb9c2a5"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3182,
+      "sha256": "b8205342bc874b2da5806487663ca072f2a20fe2e400b90e61cb015bd789a6bf"
+    },
+    "build185.py": {
+      "bytes": 12283,
+      "sha256": "2052079115cc2844613e1799e27521423d722e72ff1757e2080245ed6bc4e5f1"
+    },
+    "publish185.py": {
+      "bytes": 33299,
+      "sha256": "d271b34d5ccddca2d5f4b19166fb260628da38f3cae84a3145ffe72bac98b46d"
+    },
+    "publisher_tests.py": {
+      "bytes": 11306,
+      "sha256": "1f052ffff2bb2a79e8f8f9f4dcdf0e8489d0939089561dd34b1c1d4e2039b594"
+    },
+    "tests/LoaderParityProbe.java": {
+      "bytes": 8234,
+      "sha256": "ebaa8d1000609701f5ba7972269e677b333e9020f2f1eff138f3af81e9e9acd7"
+    },
+    "tests/original_guard_negative_review.json": {
+      "bytes": 1055,
+      "sha256": "9b78d328d975c2075024d968163dd46f8e73e5c28289fb8c490ff84439a44744"
+    },
+    "workflow.yml": {
+      "bytes": 4435,
+      "sha256": "9dc690745e05930677c36dbd5243730a46e80fd4ae928baf10fb8e100690e7c4"
+    }
+  },
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF"
+  ],
+  "allowed_added_bundle_entries": [
+    "app/hiro/swiftkey/patches/DeleteProtectionPatch.class",
+    "app/hiro/swiftkey/patches/DictionarySupplementPatch.class",
+    "app/hiro/swiftkey/patches/InputLearningPatch.class",
+    "app/hiro/swiftkey/patches/JapaneseGlidePatch.class",
+    "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+    "app/hiro/swiftkey/patches/KeySwapPatch.class",
+    "app/hiro/swiftkey/patches/MethodContract.class",
+    "app/hiro/swiftkey/patches/PasteProtectionPatch.class"
+  ],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF"
+  ],
+  "allowed_added_standalone_entries": []
+}
