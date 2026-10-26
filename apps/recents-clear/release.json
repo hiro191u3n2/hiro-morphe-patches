@@ -1,14 +1,14 @@
 {
-  "version": "1.15.0",
-  "versionCode": 18,
+  "version": "1.16.0",
+  "versionCode": 19,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.15.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.15.0.apk",
-  "sha256": "d1451d66548383a77930a80f2daf7525ae0d6dfcc5e51101525021b7530012f6",
+  "apk": "Hiro_RecentsClear_v1.16.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.16.0.apk",
+  "sha256": "141800b2da692ab1a6d040218e96b771d605cf897ea9fe81ac2b55356e99f9c0",
   "bytes": 37283,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "change": "Remove the repeated automatic guard between validated button discovery and clicking. Read credential state once per guard. Preserve the previous icon action sequence, immediate post-Recents inspection, fresh root/search checks, first-effect boot claim and pending preparation recovery.",
-  "hostServiceScenarios": 212,
-  "commonFastPathScenarios": 4
+  "hostServiceScenarios": 220,
+  "delayAttributionScenarios": 8,
+  "change": "Preload button preferences before UI work for both origins. After successful Recents return, recycle old nodes and perform one fresh inspection inline. Use an async inspection handler and measure API, guard, cache, queue and suspend time separately. Preserve boot preparation and once-per-boot attempts. Actual device cause and visual timing remain unverified."
 }
