@@ -1,0 +1,173 @@
+{
+  "status": "PACKAGING_RESTORED_HOST_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.5",
+  "bundle_version": "1.0.288",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_cause_confirmed": false,
+  "device_fix_confirmed": false,
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "runtime_byte_identical": true,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "standalone_and_bundle_runtime_equal": true,
+  "android_loader_byte_identical": true,
+  "jvm_swiftkey_loader_restored": true,
+  "jvm_swiftkey_loader_matches_standalone": true,
+  "combined_jvm_swiftkey_discovered": true,
+  "previous_jvm_patches_preserved": true,
+  "host_tests_passed": true,
+  "all_static_checks_passed": true,
+  "loader_sdk_versions_tested": [
+    "morphe-desktop1.17.0-dev.6",
+    "morphe-desktop1.19.1/patcher2.0.1"
+  ],
+  "current_manager_patcher_selection_verified": true,
+  "two_loader_sdks_agree": true,
+  "android_loader_class_count": 275,
+  "runtime_sha256": "1f88dff32491bbed606026166b81fe45abdda482e690f25c4f9f7eff8d29bd7f",
+  "root_cause": "Combined bundle omitted all eight SwiftKey JVM loader classfiles; actual Morphe JVM loader selected zero SwiftKey patches despite Android DEX metadata being present.",
+  "restored_classes": {
+    "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": {
+      "bytes": 21798,
+      "sha256": "2c7b866c3632cc7ae6ca83170fb0e7e101904eacc1d94fc03032636abef58215"
+    },
+    "app/hiro/swiftkey/patches/MethodContract.class": {
+      "bytes": 10221,
+      "sha256": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6"
+    },
+    "app/hiro/swiftkey/patches/InputLearningPatch.class": {
+      "bytes": 9254,
+      "sha256": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01"
+    },
+    "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": {
+      "bytes": 3793,
+      "sha256": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4"
+    },
+    "app/hiro/swiftkey/patches/KeySwapPatch.class": {
+      "bytes": 8649,
+      "sha256": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c"
+    },
+    "app/hiro/swiftkey/patches/PasteProtectionPatch.class": {
+      "bytes": 8300,
+      "sha256": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113"
+    },
+    "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": {
+      "bytes": 11247,
+      "sha256": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479"
+    },
+    "app/hiro/swiftkey/patches/DeleteProtectionPatch.class": {
+      "bytes": 7065,
+      "sha256": "c0d0dc76b55af04ee77e805e8ee2007745df162978d4d16aabf79e65148c35b9"
+    }
+  },
+  "loader_parity": {
+    "baseline_loaded_named_patches": 19,
+    "baseline_selected_swiftkey": 0,
+    "clean_apk_apply_tested": false,
+    "dependency_types": [
+      "BytecodePatch",
+      "BytecodePatch",
+      "RawResourcePatch"
+    ],
+    "device_tested": false,
+    "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+    "previous_patch_metadata_unchanged": 19,
+    "requested_swiftkey_keys": 1,
+    "restored_loaded_named_patches": 20,
+    "restored_selected_swiftkey": 1,
+    "standalone_combined_dependency_graph_equal": true,
+    "standalone_selected_swiftkey": 1,
+    "status": "PASSED",
+    "swiftkey_dependency_graph": {
+      "compatibility": {
+        "com.touchtype.swiftkey.beta": [
+          "9.13.16.4"
+        ]
+      },
+      "default": true,
+      "dependencies": [
+        {
+          "compatibility": {
+            "com.touchtype.swiftkey.beta": [
+              "9.13.16.4"
+            ]
+          },
+          "default": false,
+          "dependencies": [
+            {
+              "compatibility": {
+                "com.touchtype.swiftkey.beta": [
+                  "9.13.16.4"
+                ]
+              },
+              "default": false,
+              "dependencies": [],
+              "description": null,
+              "name": null,
+              "option_keys": [],
+              "type": "app.morphe.patcher.patch.BytecodePatch"
+            }
+          ],
+          "description": null,
+          "name": null,
+          "option_keys": [],
+          "type": "app.morphe.patcher.patch.RawResourcePatch"
+        }
+      ],
+      "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+      "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+      "option_keys": [],
+      "type": "app.morphe.patcher.patch.BytecodePatch"
+    }
+  },
+  "single": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 18,
+    "bytes": 16098077,
+    "sha256": "fd5c3eed07ff86a5b169bbffc237bb2dd835ab77afe357a8e75c6a72589010b4",
+    "all_previous_payload_entries_byte_identical": true
+  },
+  "bundle": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF"
+    ],
+    "added_entries": [
+      "app/hiro/swiftkey/patches/DeleteProtectionPatch.class",
+      "app/hiro/swiftkey/patches/DictionarySupplementPatch.class",
+      "app/hiro/swiftkey/patches/InputLearningPatch.class",
+      "app/hiro/swiftkey/patches/JapaneseGlidePatch.class",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+      "app/hiro/swiftkey/patches/KeySwapPatch.class",
+      "app/hiro/swiftkey/patches/MethodContract.class",
+      "app/hiro/swiftkey/patches/PasteProtectionPatch.class"
+    ],
+    "unchanged_entries": 222,
+    "bytes": 19195480,
+    "sha256": "9421cd1efa035f1186331e8a1adadc595d2f69a344b2c1d0ee53013e118b4ec8",
+    "all_previous_payload_entries_byte_identical": true
+  },
+  "inputs": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.4.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/d851881fc048bcd28f0eb5a18eef08cca10c5aa1/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.4.mpp",
+      "sha256": "45af2d9b7a1c7878b0bceb79ad814d92bdeed48ff757f7568a8a30a39ad37def"
+    },
+    "Hiro_Morphe_Patches_v1.0.287.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/d851881fc048bcd28f0eb5a18eef08cca10c5aa1/downloads/Hiro_Morphe_Patches_v1.0.287.mpp",
+      "sha256": "566fd0ce0f736648341b566aa96eaa05bb59fd9cca5a12a47a819f29d3e14ff3"
+    },
+    "morphe.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar",
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-current.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar",
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+    }
+  }
+}
