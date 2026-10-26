@@ -1,16 +1,16 @@
 {
-  "version": "1.18.0",
-  "versionCode": 21,
+  "version": "1.19.0",
+  "versionCode": 22,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.18.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.18.0.apk",
-  "sha256": "ed47cf210ed8a84d1cebd67e4e8cfee40c2f0a5725330b4622648c11a1f875d0",
+  "apk": "Hiro_RecentsClear_v1.19.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.19.0.apk",
+  "sha256": "c12b0d8e251f92edab6d3a81feb82659bcd69d01db2952f7c9ccf73df3fcde0d",
   "bytes": 41379,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 235,
-  "automaticClearMode": "1.12 queued inspection",
-  "manualClearMode": "1.16 prewarm and inline inspection",
-  "bootReliability": "Protected SystemUI unlock delivery, continuing slow readiness fallback, bounded preparation bursts, feedback interruptions retained, known-zero-UI owned claim release.",
-  "change": "Fix dropped SystemUI unlock broadcasts and terminal readiness wait assumptions. Recover late readiness and missing signals without duplicate same-boot actions. Preserve v1.12 automatic clearing."
+  "hostServiceScenarios": 236,
+  "automaticClearMode": "preload before UI, one fresh inline inspection after Recents, async inspection Handler",
+  "manualClearMode": "Existing prewarm and inline inspection retained",
+  "bootReliability": "v1.18 readiness, handoff, pending recovery and once-per-boot claim logic retained",
+  "change": "Apply immediate post-Recents inspection to automatic clears, removing its extra queued continuation. Move cold locator preferences before opening Recents. No guarantee of instantaneous OS rendering or shorter total startup."
 }
