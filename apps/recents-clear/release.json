@@ -1,14 +1,14 @@
 {
-  "version": "1.14.0",
-  "versionCode": 17,
+  "version": "1.15.0",
+  "versionCode": 18,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.14.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.14.0.apk",
-  "sha256": "1bb6998d1e98f7785752f8cbcf3950a81705c79adac59f0372a5322dc2172ab6",
+  "apk": "Hiro_RecentsClear_v1.15.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.15.0.apk",
+  "sha256": "d1451d66548383a77930a80f2daf7525ae0d6dfcc5e51101525021b7530012f6",
   "bytes": 37283,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 208,
-  "preUiOperationScenarios": 20,
-  "change": "Claim each boot only immediately before the first Recents/Home/Click request. Pause unclaimed root preparation on screen loss and resume fresh preparation without relaunching Activity. Preserve bounded waits and the existing action deadline; report claim and actual UI request separately."
+  "change": "Remove the repeated automatic guard between validated button discovery and clicking. Read credential state once per guard. Preserve the previous icon action sequence, immediate post-Recents inspection, fresh root/search checks, first-effect boot claim and pending preparation recovery.",
+  "hostServiceScenarios": 212,
+  "commonFastPathScenarios": 4
 }
