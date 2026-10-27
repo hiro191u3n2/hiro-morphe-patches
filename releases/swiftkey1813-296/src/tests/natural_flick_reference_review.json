@@ -1,0 +1,38 @@
+{
+  "scope": "Read-only primary-source gesture research; original adaptation for a SwiftKey helper, not a copy or runtime/device validation of the reference applications.",
+  "sources": [
+    {
+      "url": "https://github.com/Julow/Unexpected-Keyboard/blob/68ebaa1e3912741e3de138c7f0543412fefe119e/srcs/juloo.keyboard2/Pointers.java",
+      "source_sha256": "abb53169a74a9e26a596b9a7b583bbaf1bbf121534340eb770cc9e05ff96978f",
+      "finding": "Uses angular sectors and nearest available secondary-key selection after a movement threshold."
+    },
+    {
+      "url": "https://github.com/Julow/Unexpected-Keyboard/blob/68ebaa1e3912741e3de138c7f0543412fefe119e/srcs/juloo.keyboard2/Keyboard2View.java",
+      "source_sha256": "e4910f9c0d4894bd102a1a2b8f2bea0b2e10a6227111dd73f3f4143c571966e2",
+      "finding": "ACTION_UP sends pointer identity rather than its endpoint coordinates to onTouchUp; MOVE updates direction selection."
+    },
+    {
+      "url": "https://github.com/nightkr/flickboard/blob/00c4109bfbc5ed08285cdfffeb11a1d5c37939f9/app/src/main/java/se/nullable/flickboard/ui/Key.kt",
+      "source_sha256": "2b56428e4a54084886d7ab0b8aee4c35d2b1fa96f88f23bf38e7ea565c087fd0",
+      "finding": "The archived GitHub recognizer tracks the farthest displacement and releases the selected gesture on pointer-up; dragging follows a distance threshold."
+    }
+  ],
+  "reference_limitations": [
+    "FlickBoard reference is the archived 2024 GitHub snapshot, not a claim about its current Codeberg version.",
+    "Other per-key gesture keyboards do not establish compatibility with SwiftKey Japanese glide. Early native cancellation and an irreversible upward ownership decision are a local adaptation, not a copy of their input routing."
+  ],
+  "adaptation": {
+    "version": "1.8.12",
+    "entry_half_angle_degrees": 67.5,
+    "minimum_distance": "Euclidean distance with existing max(6px,0.24*shorterKeySide).",
+    "initial_direction_gate": "Delay non-upward handoff within max(2*minimum,2*bounded Android touch tolerance); recognize an eligible upward sample as soon as minimum is reached.",
+    "selection_and_release": "Capture on the first eligible sample, cancel native handling once, keep the original actor, commit once at UP. Later path shape does not revoke the captured selection.",
+    "max_duration_ms_before_capture": 500,
+    "post_capture_duration_ceiling": null,
+    "tradeoff": "Upward-start motion has flick priority, including a later horizontal or return segment. Horizontal-start glides keep the pre-capture native/glide route.",
+    "kept": "Native actor, popup/editor/context/pointer restrictions and UP-only character insertion. Post-capture context failures drain rather than replaying native input.",
+    "time_scope": "The current event time is checked before reading history while uncaptured; delayed history does not bypass the500ms ceiling.",
+    "minimum_upward_component": "Also require max(0.5*minimum,0.5*bounded Android touch tolerance) upward displacement before capture. The wide cone alone does not admit shallow sideways contact jitter."
+  },
+  "evidence_limits": "The 67.5-degree merged upper sector, 500ms uncaptured ceiling and native ownership protocol are local design choices, not claimed constants or standards shared by reference apps. Physical-device feel and native engine behavior remain unverified."
+}
