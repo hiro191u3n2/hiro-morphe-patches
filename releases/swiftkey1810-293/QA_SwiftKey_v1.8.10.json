@@ -1,0 +1,192 @@
+{
+  "status": "FLICK_PATH_TOLERANCE_HOST_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.10",
+  "bundle_version": "1.0.293",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_fix_confirmed": false,
+  "runtime_unrelated_classes_unchanged": true,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "standalone_and_bundle_runtime_equal": true,
+  "loader_entries_byte_identical": true,
+  "jvm_swiftkey_loader_matches_standalone": true,
+  "combined_jvm_swiftkey_discovered": true,
+  "previous_jvm_patches_preserved": true,
+  "all_static_checks_passed": true,
+  "host_tests_passed": true,
+  "current_manager_patcher_selection_verified": true,
+  "two_loader_sdks_agree": true,
+  "runtime_only_flick_family_changed": true,
+  "existing_hooks_unchanged": true,
+  "runtime_class_inventory_unchanged": true,
+  "native_flick_review_verified": true,
+  "native_flick_review_replayed_in_ci": false,
+  "native_flick_review": {
+    "source": "tests/native_flick_review.json",
+    "sha256": "ddac43fc88d0e1c3af9a69c895839d203126a814538fce080290c6341511eb05",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7"
+  },
+  "native_abi_review_verified": true,
+  "native_abi_replayed_in_ci": false,
+  "native_abi_review": {
+    "source": "tests/native_abi_review.json",
+    "sha256": "480f9c4fb8d11669a46ba1bb2cca5fdf55b5a336f5228c9288abe86028b0f0ec",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "extension_sha256": "e04e89a0187b4f20aeb381d88fa9217d512601f23091b4999095798c3cbcc3b7",
+    "native_and_extension_reference_count": 259,
+    "unresolved": [],
+    "inaccessible": []
+  },
+  "host_test_report": {
+    "android_instrumentation_tested": false,
+    "assertions": 762,
+    "device_tested": false,
+    "existing_glide_assertions": 65,
+    "integrated_glide_source_sha256": "4f15b36f399c9deaffad827cdc8b72d13105cd62eb9e29a642158e133c2fdea8",
+    "production_source_sha256": "e2afe32bcf69445d961bb60f7594b57ca46f477b413a2dc3648db15d8c865c72",
+    "scenarios": 151,
+    "scope": "Production FlickSymbols with explicit host Android/native fakes plus existing JapaneseGlide Java control flow with the same hook semantics; not ART/device or native-engine execution",
+    "status": "PASSED"
+  },
+  "runtime": {
+    "before_classes": 59,
+    "after_classes": 59,
+    "unchanged_existing_classes": 57,
+    "changed": [
+      "hiro/swiftkey/FlickSymbols$Stroke.smali",
+      "hiro/swiftkey/FlickSymbols.smali"
+    ],
+    "added": [],
+    "removed": [],
+    "inserted_flick_calls": 0,
+    "unchanged_non_flick_classes": 56,
+    "extension_sha256": "e04e89a0187b4f20aeb381d88fa9217d512601f23091b4999095798c3cbcc3b7",
+    "canonical_smali_equality_verified": true,
+    "existing_hooks_unchanged": true
+  },
+  "runtime_sha256": "e04e89a0187b4f20aeb381d88fa9217d512601f23091b4999095798c3cbcc3b7",
+  "android_loader_class_count": 275,
+  "loader_sdk_versions_tested": [
+    "morphe-desktop1.17.0-dev.6",
+    "morphe-desktop1.19.1/patcher2.0.1"
+  ],
+  "loader_parity": {
+    "baseline_loaded_named_patches": 20,
+    "baseline_selected_swiftkey": 1,
+    "baseline_updated_dependency_graph_equal": true,
+    "clean_apk_apply_tested": false,
+    "dependency_types": [
+      "BytecodePatch",
+      "BytecodePatch",
+      "RawResourcePatch"
+    ],
+    "device_tested": false,
+    "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+    "previous_patch_metadata_unchanged": 20,
+    "requested_swiftkey_keys": 1,
+    "restored_loaded_named_patches": 20,
+    "restored_selected_swiftkey": 1,
+    "standalone_combined_dependency_graph_equal": true,
+    "standalone_selected_swiftkey": 1,
+    "status": "PASSED",
+    "swiftkey_dependency_graph": {
+      "compatibility": {
+        "com.touchtype.swiftkey.beta": [
+          "9.13.16.4"
+        ]
+      },
+      "default": true,
+      "dependencies": [
+        {
+          "compatibility": {
+            "com.touchtype.swiftkey.beta": [
+              "9.13.16.4"
+            ]
+          },
+          "default": false,
+          "dependencies": [
+            {
+              "compatibility": {
+                "com.touchtype.swiftkey.beta": [
+                  "9.13.16.4"
+                ]
+              },
+              "default": false,
+              "dependencies": [],
+              "description": null,
+              "name": null,
+              "option_keys": [],
+              "type": "app.morphe.patcher.patch.BytecodePatch"
+            }
+          ],
+          "description": null,
+          "name": null,
+          "option_keys": [],
+          "type": "app.morphe.patcher.patch.RawResourcePatch"
+        }
+      ],
+      "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+      "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+      "option_keys": [],
+      "type": "app.morphe.patcher.patch.BytecodePatch"
+    }
+  },
+  "single": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 17,
+    "bytes": 16107994,
+    "sha256": "71149f10787d0bb7e2cb91a0451fb02fbf5d24fdfe36a972283a0f22d8dfd6ce",
+    "extension_sha256": "e04e89a0187b4f20aeb381d88fa9217d512601f23091b4999095798c3cbcc3b7",
+    "all_other_entries_byte_identical": true
+  },
+  "bundle": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 229,
+    "bytes": 19205422,
+    "sha256": "559ddcfc2555c1fdff0ec231aeb76491a9ce830823f63f8358e3177caf908b87",
+    "extension_sha256": "e04e89a0187b4f20aeb381d88fa9217d512601f23091b4999095798c3cbcc3b7",
+    "all_other_entries_byte_identical": true
+  },
+  "inputs": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.9.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/e250d42dd018b7e2bfe8cf172d74ac086cbd893d/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.9.mpp",
+      "sha256": "e85c3b831d374386a28ac6aa8a9632bea12707df788ce7036747edb3ca2756f0"
+    },
+    "Hiro_Morphe_Patches_v1.0.292.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/e250d42dd018b7e2bfe8cf172d74ac086cbd893d/downloads/Hiro_Morphe_Patches_v1.0.292.mpp",
+      "sha256": "bae5a69518060733f128a834e1d8477fca491b77716453465a29114e80d011b9"
+    },
+    "apktool.jar": {
+      "url": "https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar",
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423"
+    },
+    "morphe.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar",
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-current.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar",
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+    },
+    "r8.jar": {
+      "url": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar",
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    },
+    "android.jar": {
+      "url": "https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar",
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b"
+    }
+  }
+}
