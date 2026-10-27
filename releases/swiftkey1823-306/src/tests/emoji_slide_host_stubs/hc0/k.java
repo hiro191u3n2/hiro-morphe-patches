@@ -1,0 +1,1 @@
+package hc0;public class k {public int a;public java.util.ArrayList b=new java.util.ArrayList();public java.util.ArrayList c=new java.util.ArrayList();public java.util.ArrayList d=new java.util.ArrayList();public k(){}public k(int timeout){a=timeout;}}

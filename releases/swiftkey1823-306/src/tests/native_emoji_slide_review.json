@@ -1,0 +1,279 @@
+{
+  "review": "SwiftKey Beta 1.8.23 recent emoji native bridge static contract review",
+  "scope": {
+    "reference_apk": "gesture_native/base.apk",
+    "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "reference_apk_is_previously_modified": true,
+    "native_method_and_field_contracts_only": true,
+    "clean_original_full_patch_apply_claim": false,
+    "physical_device_runtime_claim": false,
+    "host_runtime_tests": "Independent tests supplied separately; this report is static source review."
+  },
+  "production_sources": {
+    "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+    "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+  },
+  "emoji_toolbar": {
+    "only_additive_method": "emojiHoldMillis(Lfc0/n2;)I",
+    "prior_source_byte_equal_after_removing_added_method": true,
+    "new_fields": [],
+    "native_path": "fc0.n2.b (oc0.m) -> b (hc0.a) -> c (hc0.k)",
+    "identity": "Existing installed(hc0.k) recognizes the private EmojiToolbar.LongPress actor installed only by the dedicated emoji-key factory.",
+    "timeout": "Returns the exact positive hc0.k.a native configurable hold timeout; otherwise 0.",
+    "label_coordinate_or_text_heuristics": false
+  },
+  "current_native_model_route": [
+    "a60.s creates fb0.b0(ne0.f0, ah0.j0, i70.g1, f40.a, a20.d) in v47.",
+    "a60.s invokes wb0.z1.b with v24..v69; v47 is static parameter p23.",
+    "wb0.z1.b passes p23 in constructor argument register v20.",
+    "wb0.x constructor assigns p20 to field t.",
+    "The emoji fb0.b0 constructor stores its ne0.f0 argument in field a.",
+    "Bridge receives the current wb0.x from the active gesture context and follows x.t.a; no global singleton, service lookup, or reflection."
+  ],
+  "recents": {
+    "native_method": "ne0.e0.b()Ljava/util/ArrayList;",
+    "native_order": "ArrayList of LinkedHashMap values followed by Collections.reverse; newest native live item first.",
+    "bridge_order": "Preserved, without another reverse or sort.",
+    "maximum_visible_items": 12,
+    "text_handling": "Each valid ne0.g0.getContent() is kept as the complete String. No code point extraction, normalization, truncation, or splitting is applied by the bridge.",
+    "empty_history": "An empty immutable snapshot; no substituted stock emoji.",
+    "invalid_native_graph": "Returns null without intercepting a native emoji action.",
+    "persistent_native_history": "xc.d.m writes emoji_recent_tab_keys through the native ne0.f0.b -> uf.p.b -> ah0.w0 provider; the bridge never opens a preference file.",
+    "native_capacity": 32
+  },
+  "insertion_and_history": {
+    "selected_location": "oz.j2.a = RECENTS",
+    "first": "wb0.x.G(lh0.a, full String, oz.j2.a)",
+    "second": "new xc.d(current ne0.f0, 14).l(new ne0.p0(full String), 1)",
+    "precedent": "Native i70.p1.invoke branch for ne0.g0 calls wb0.x.G, then new xc.d(model,14).l(pushable,1). The bridge uses RECENTS instead of that branch's ALL_TAB location.",
+    "native_history_dispatch": "xc.d.l calls m(recency), o(usage weighting), then c20.a.f(1, native recents model).",
+    "privacy": "Both xc.d.m and xc.d.o invoke vb0.c.b() before history/usage mutation. b() is false only for INCOGNITO_OFF; ON, PENDING_OFF and TEMPORARILY_ON suppress changes. The bridge delegates to these native guards unchanged.",
+    "composition": "G routes RECENTS through the native yb0.l emoji action; no direct InputConnection.commitText fallback.",
+    "attempt_limit": "Snapshot.commit is synchronized and marks used before validation/native calls, so repeated release callbacks or exceptions cannot trigger a second native insertion.",
+    "stale_graph": "Checks identity of sender.t, provider.a, and history.f before insertion; runtime separately guards the editor/session/layout.",
+    "history_failure": "After G returns normally, a history exception is swallowed and no insertion retry is made.",
+    "diagnostic_text_or_logs": false
+  },
+  "native_contract_sources": [
+    {
+      "path": "smali_classes2/fc0/n2.smali",
+      "sha256": "621fc7c2cffbb054ae6ad1747a6d2e7acee747dd5a9878bb5c6a8c06a7606a5b",
+      "methods": [],
+      "required_fields": [
+        "b:Loc0/l;"
+      ]
+    },
+    {
+      "path": "smali_classes2/oc0/m.smali",
+      "sha256": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+      "methods": [],
+      "required_fields": [
+        "b:Lhc0/a;"
+      ]
+    },
+    {
+      "path": "smali_classes2/hc0/a.smali",
+      "sha256": "7ae4e451603a2658c170938aa64a6f46ae8694d6fa920b5466ef4ff496f5feb2",
+      "methods": [],
+      "required_fields": [
+        "c:Lhc0/k;"
+      ]
+    },
+    {
+      "path": "smali_classes2/hc0/k.smali",
+      "sha256": "b0801dddbbe9791e20cc611356a9aa9a79e9ad0d86b8ab09e8377ea0ca69d901",
+      "methods": [],
+      "required_fields": [
+        "a:I",
+        "b:Ljava/util/ArrayList;"
+      ]
+    },
+    {
+      "path": "smali_classes2/wb0/x.smali",
+      "sha256": "00dc36b2109e1a868b4618ac8ccec982bf116ac9bca025ee6ba41b50d202ae07",
+      "methods": [
+        {
+          "signature": "public final G(Llh0/a;Ljava/lang/String;Loz/j2;)V",
+          "sha256": "60149bdd558bcc8a29cbafcef66761b7a8a7c5e654fd6281f9382f8cb7720c99"
+        }
+      ],
+      "required_fields": [
+        "t:Lfb0/b0;"
+      ]
+    },
+    {
+      "path": "smali_classes2/wb0/z1.smali",
+      "sha256": "505ba27cbfa29847b2ca947f84d0fac41acf59d6223150ec1e8a9485c803d575",
+      "methods": [
+        {
+          "signature": "public static final b(Lwb0/q;La20/d;Lwf/h;Lib0/p;Lcom/microsoft/tokenshare/m;Lwb0/t1;Lwb0/z0;Lcom/touchtype/report/TouchTypeStats;Lln0/y;Lwb0/p1;Lcom/touchtype_fluency/service/s;Landroid/os/Handler;Lfb0/r0;Lxc/d;Lp40/w;Ls90/o;Lb90/d;Lfb0/e2;Ln50/a;Lfb0/b0;Ls50/b;La40/n;Lnb0/n;Lfb0/b0;Lah0/b0;Lbd0/s;Llb0/a;Lrc0/g;Lft/c;Lfz/h;Lal0/c;Lwb0/r0;Lag0/c;Lub0/a;Lho/h;Lzb0/e;Lah0/w0;Ld4/a0;Lah0/z;Lai0/b;Landroidx/lifecycle/l0;Lta0/x;Lcom/touchtype/common/languagepacks/f0;Luf/j;Ll30/a;Lah0/n0;)Lwb0/x;",
+          "sha256": "ace1510daa97a7742def3fbf372a2cb30820057652b37e10a6608c8c32986850"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/fb0/b0.smali",
+      "sha256": "fc5832708346583c8f5fdbcf3bfdfbebf4bb18e5bdd816ff2f2bd03834ba796c",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Lne0/f0;Lah0/j0;Li70/g1;Lf40/a;La20/d;)V",
+          "sha256": "21a956e5f6230fe60f9500be78afc79c1cf655efdd47916ece4c1a41896f93d7"
+        }
+      ],
+      "required_fields": [
+        "a:Ljava/lang/Object;"
+      ]
+    },
+    {
+      "path": "smali_classes2/ne0/f0.smali",
+      "sha256": "4c1c5ab1061f5524285c637245f06b45f9986ba36c865bfa31a409620c46ca57",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Luf/p;Lho/h;Lvb0/b;Lf40/a;)V",
+          "sha256": "af9a6b6813a3a009e86d216bbc22618e4d29f09249aee29fd9261879c53a776f"
+        }
+      ],
+      "required_fields": [
+        "f:Lne0/e0;"
+      ]
+    },
+    {
+      "path": "smali_classes2/ne0/e0.smali",
+      "sha256": "95b0253c2a1300c595ef7c683828ce4e67a0373a182a4027e43b3e649881d6ff",
+      "methods": [
+        {
+          "signature": "public final a()Ljava/util/LinkedHashMap;",
+          "sha256": "039c442618a277cb95d7aeebce1d3e5ea23e06e0ad4c5d45008c3fa54fcde069"
+        },
+        {
+          "signature": "public final b()Ljava/util/ArrayList;",
+          "sha256": "fb7025ea97ec5536602b87818ce4f8ef430557f8dc7e2438dc8497c7e4c5203e"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/ne0/g0.smali",
+      "sha256": "b95929f950f5d85307f361ba9ac36656aaab7010c43c39fe469fe826d8714952",
+      "methods": [
+        {
+          "signature": "public abstract getContent()Ljava/lang/String;",
+          "sha256": "4ee6e691de9cbae9b8e610739926a56775e1b92b9e568c42755d8f1afe3ff18f"
+        },
+        {
+          "signature": "public abstract getView()Landroid/view/View;",
+          "sha256": "d88f2d276fd1c453ea6b24105fafbe923fbb515a8c8becae76a0ca6ffef53be0"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/ne0/p0.smali",
+      "sha256": "c8795da85dbbd56e5f981f98ce0d99738f5e5ab33e27d071c77552d65b979972",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Ljava/lang/String;)V",
+          "sha256": "2826c90ff53b85ad4835cd7bc90ecdfb1087aa4798bb8082f883ca2135badd49"
+        },
+        {
+          "signature": "public final getContent()Ljava/lang/String;",
+          "sha256": "034c2fd3284be077b6f5ce56ab79661dcf8edeeb9ff0668c51e8dff9bc77d2f4"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali/xc/d.smali",
+      "sha256": "e0776020c51fbba0a0500bece07be7660b5156008c935cb4e43444cd814ec76b",
+      "methods": [
+        {
+          "signature": "public synthetic constructor <init>(Ljava/lang/Object;I)V",
+          "sha256": "0bd7d04b66d8d372a6919e9859bd99573ab19d45848c3fbeab71e0072e9f4c60"
+        },
+        {
+          "signature": "public l(Lne0/g0;I)V",
+          "sha256": "20f4e7dbec271afd71978f6cffd6c3733f390cd412c9827f70acce4f94703cee"
+        },
+        {
+          "signature": "public m(Lne0/g0;)V",
+          "sha256": "28c2b7197e609066f2e67ac5fbb2c732b1f37843922e2e98dbdace5d6b7033b4"
+        },
+        {
+          "signature": "public o(Ljava/lang/String;)V",
+          "sha256": "894a1dab1d799c402bf66429d496d4a43f3b2c74ee236747933988afc4be7df6"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/vb0/c.smali",
+      "sha256": "b8f3bf782ae9234f30be4bd023200be06664a6b8343afb42568e624aff410451",
+      "methods": [
+        {
+          "signature": "public final b()Z",
+          "sha256": "c0ae55b78712db6482f762a0e80c168f0a634ab51c644e2ded8d7f7712677b5b"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/i70/p1.smali",
+      "sha256": "f0fa50d0507cb1b975c83a90089442373fd5c4fed6d4c4cae43f11f8712613e5",
+      "methods": [
+        {
+          "signature": "public final invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "sha256": "99b60c2fa4639c18c8aa2cbe2e985db6f9c4736968ed54f44b0e215f96abbac1"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/oz/j2.smali",
+      "sha256": "413688a97283a736972630ebaec7ade45bd1a90f5530e277e424af8026c384c4",
+      "methods": [
+        {
+          "signature": "static constructor <clinit>()V",
+          "sha256": "0e93cadb7421d453f43e4770f152388ba02a70e4c9c6acdd3e34e64b0a4c1f5c"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/ah0/w0.smali",
+      "sha256": "43452315c744a8d846883a99269c7a235d659fe362b2382f0cbd685227a4287b",
+      "methods": [
+        {
+          "signature": "public final b0()Ljava/util/List;",
+          "sha256": "8171fe8896886def86628c0afa1ea57e5d4c2ec7090ae8323436ca9788fcc91a"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/i70/u.smali",
+      "sha256": "e393beef47f16b936cc4677d7d5a1dc778ed019b6a7ac4d8d3b46ed70bda3546",
+      "methods": [
+        {
+          "signature": "public final get()Ljava/lang/Object;",
+          "sha256": "3dbe8bf5d34f0b6263c6d09eab2f2e7cdc6afb3b01a7c39f8271c09b901954fa"
+        }
+      ],
+      "required_fields": []
+    },
+    {
+      "path": "smali_classes2/a60/s.smali",
+      "sha256": "fcf3b49edfad2cab433a2078128e28d9d6c3c624b3b254536ecb684a83407155",
+      "methods": [],
+      "required_fields": []
+    }
+  ],
+  "status": "PASSED",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "source_sha256": {
+    "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+    "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+  }
+}

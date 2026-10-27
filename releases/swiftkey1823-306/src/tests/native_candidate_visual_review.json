@@ -1,0 +1,290 @@
+{
+  "status": "STATIC_NATIVE_REVIEW_PASSED",
+  "release": "SwiftKey 1.8.16 / bundle 1.0.299",
+  "scope": "Review of archived modified SwiftKey Beta 9.13.16.4 native pipeline and production 1.8.15 loader transformations. No Android execution, frame rendering, or fresh original APK patch/install test is claimed.",
+  "device_tested": false,
+  "visual_fix_confirmed_on_device": false,
+  "original_apk_apply_tested": false,
+  "runtime_source": {
+    "path": "src/hiro/swiftkey/CandidateScroll.java",
+    "sha256": "9bd1cfd812fc63f7d779b10a42aa10aeab851e7397a0293341bdce965d3d9c2b"
+  },
+  "target": {
+    "version": "9.13.16.4",
+    "local_input_name": "archived-target-base.apk",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "provenance": "Previously modified archived target APK; exact candidate native methods still match production patch fingerprints. Native source paths below are relative to its decoded tree. The APK and decoded tree are external validation inputs, not release source files."
+  },
+  "observation_and_inference": {
+    "observation": "During candidate expansion, cells with newly measured narrower widths can temporarily appear at previous wider-grid positions before the final grid settles.",
+    "inference": "This is consistent with native move/change item animations retaining a translation from previous geometry while candidate views have already been measured to new widths. It does not prove a specific on-device execution branch."
+  },
+  "recommended_change": {
+    "surface": "CandidateScroll runtime helper only; reuse all four existing native hooks.",
+    "behavior": "Disable candidate-owned RecyclerView item animations in snapshot before geometry-read guards and in tryAppend before append/fallback guards.",
+    "ownership_guard": "Require view.getAdapter() == adapter and view.getLayoutManager() == adapter.l.",
+    "additional_native_hook_required": false,
+    "baseline_loader_policy": "Keep every JVM patch class and each package classes.dex byte-identical to its corresponding 1.8.15/1.0.298 baseline; final output parity remains a separate release-build check.",
+    "ordering_condition": "Helper executes synchronously on the native UI update call stack; animator removal is not posted or deferred."
+  },
+  "hook_path_proof": {
+    "append_handled": "rb0.h.d(false) invokes tryAppend before native H. Helper disables animations before G(), prefix payload rebind and suffix insertion notifications.",
+    "append_fallback": "rb0.h.d(false) invokes tryAppend and falls through to original H if unhandled. H calls G(), full notify, then snapshot immediately after notify and before return.",
+    "reset_true": "Production loader deliberately bypasses tryAppend for reset=true. Original reset field writes and H() remain. H invokes snapshot immediately after full notify. Reset does not call tryAppend and this path does not remove the animator before notify.",
+    "attachment": "rb0.k.onAttachedToWindow invokes adapter.G(), full notify, then snapshot with live v1 adapter before continuing attachment work.",
+    "reopen_or_resize": "rb0.k.a() and onSizeChanged reset adapter state and call H(), using the same snapshot route.",
+    "post_notify_timing": "Full-change observer androidx.recyclerview.widget.a.a marks state/holders dirty and requests future layout. Range observers queue operations; h() requests layout or posts update processing with View.postOnAnimation. The synchronous notification returns to H/onAttached snapshot before that future rendering. These methods do not invoke inline layout/draw or start item animations.",
+    "pending_animation_cleanup": "RecyclerView.setItemAnimator invokes old animator d() (endAnimations) before clearing its callback and replacing M, draining existing translations through native completion handling.",
+    "layout_animation_gate": "RecyclerView.l0 checks M != null when choosing adapter pre-processing and when setting state.j (simple animations) and state.k (predictive animations). Null M disables both flags for the next layout. Zero durations alone still permit h()/g() to apply translations before pending animation execution."
+  },
+  "accessibility_proof": {
+    "synchronous_layout_callbacks": "LayoutManagerProvider e0/g0/h0/i0 route through ra.z0.m. m invokes the native layout callback synchronously, then posts accessibility-focus restoration. It does not defer native geometry/cache callbacks.",
+    "posted_focus_task": "cs.q.run discriminator 1 returns when no previously focused index was captured. Otherwise it finds that child, scrolls to its index, requests focus and performs accessibility action 0x40. This task remains unchanged.",
+    "observer_retained": "AccessibilityEmptyRecyclerView.setAdapter registers oi0.b independently of ItemAnimator. oi0.b calls K0 on full change, insertion and removal. setItemAnimator does not replace adapter, layout manager, observer or accessibility delegate.",
+    "removed_animator_callbacks": "oi0.a extends ra.y and adds only o/p completion callbacks calling K0. Native candidate rb0.k does not set an empty view; K0 returns when K1 is null. The independent adapter observer remains registered. This does not claim a TalkBack device session was tested.",
+    "native_focus_logic_unchanged": true
+  },
+  "baseline_artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.15.mpp": {
+      "sha256": "beccbfb172a84ea198f6ed80c1c498e90cd6b2f18ed653fc1924a70329848993",
+      "loader_entries_sha256": {
+        "classes.dex": "080d47c2677157cba588cec7cea771ceda94fcce7c8f7802fffd35a20d9b9a84",
+        "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": "88260a1e02655293f7b75ad7aa1adee30ff7b70c327db52b6cd8aaa90458ad5f",
+        "app/hiro/swiftkey/patches/MethodContract.class": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6",
+        "app/hiro/swiftkey/patches/InputLearningPatch.class": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01",
+        "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4",
+        "app/hiro/swiftkey/patches/KeySwapPatch.class": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c",
+        "app/hiro/swiftkey/patches/PasteProtectionPatch.class": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113",
+        "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479",
+        "app/hiro/swiftkey/patches/DeleteProtectionPatch.class": "c0d0dc76b55af04ee77e805e8ee2007745df162978d4d16aabf79e65148c35b9",
+        "app/hiro/swiftkey/patches/CandidateScrollPatch.class": "f7a91d2438dff681b8489d02e0bb1f3dd0545ad725ca37ff2aabd9f88ef4a7a0",
+        "app/hiro/swiftkey/patches/CandidateToolbarPatch.class": "e2b47b9cd4a06caf67082cf7977bd6699e470674d8e57fc6ec73596cd57fd366"
+      }
+    },
+    "Hiro_Morphe_Patches_v1.0.298.mpp": {
+      "sha256": "e0968dee147887d730f5f50775aa78b4c6c5e8fbefb08015bfd47c5aad3aa09a",
+      "loader_entries_sha256": {
+        "classes.dex": "ab1dc67fb92e738b89aa1cc505bf0b6a98d2d0d87bf27241f4428b91f3bf7e67",
+        "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": "88260a1e02655293f7b75ad7aa1adee30ff7b70c327db52b6cd8aaa90458ad5f",
+        "app/hiro/swiftkey/patches/MethodContract.class": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6",
+        "app/hiro/swiftkey/patches/InputLearningPatch.class": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01",
+        "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4",
+        "app/hiro/swiftkey/patches/KeySwapPatch.class": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c",
+        "app/hiro/swiftkey/patches/PasteProtectionPatch.class": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113",
+        "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479",
+        "app/hiro/swiftkey/patches/DeleteProtectionPatch.class": "c0d0dc76b55af04ee77e805e8ee2007745df162978d4d16aabf79e65148c35b9",
+        "app/hiro/swiftkey/patches/CandidateScrollPatch.class": "f7a91d2438dff681b8489d02e0bb1f3dd0545ad725ca37ff2aabd9f88ef4a7a0",
+        "app/hiro/swiftkey/patches/CandidateToolbarPatch.class": "e2b47b9cd4a06caf67082cf7977bd6699e470674d8e57fc6ec73596cd57fd366"
+      }
+    }
+  },
+  "production_hook_regression": {
+    "probe_source": "tests/CandidateScrollPatchProbe.java",
+    "probe_sha256": "695170d0cfb9bf693e8c6dc61399c23586b57665e814716ab7859b67eac58ea6",
+    "loaded_patch": "Published 1.8.15 MPP CandidateScrollPatch.class; no candidate patch class was rebuilt.",
+    "class_path_order": [
+      "newly compiled probe classes",
+      "selected Morphe SDK jar",
+      "published SwiftKey 1.8.15 MPP"
+    ],
+    "inputs": [
+      "external archived-target-base.apk",
+      "tests/native_candidate_fixture"
+    ],
+    "sdk_names": {
+      "archived-sdk": "morphe.jar (1.17.0-dev.6)",
+      "current-sdk": "morphe-current.jar (1.19.1 / Patcher 2.0.1)"
+    },
+    "checks": "Four native hook positions/signatures, original bodies recovered by removing only added hooks, correct registers, snapshots immediately after notify, reset field writes and H calls preserved, four dispatch scenarios, duplicate application rejection and fingerprint drift rejection before mutation.",
+    "results": {
+      "archived-sdk": {
+        "native-archived": {
+          "report_sha256": "2eefb9d945aa92d2329f826e2b4285b4e90811c4eb3a9b95422f2bdf64c07326",
+          "result": {
+            "status": "PASSED",
+            "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+            "native_fixture": false,
+            "native_methods": 4,
+            "dispatch_scenarios": 4,
+            "assertions": 74,
+            "device_tested": false,
+            "original_apk_apply_tested": false,
+            "original_method_bodies_preserved": true,
+            "method_fingerprint_drift_rejected": true
+          }
+        },
+        "native-fixture": {
+          "report_sha256": "a1cff48b8c68192595cfbb95241dfa2df79a8c0c87e1a85eb0a956da29aa3ea7",
+          "result": {
+            "status": "PASSED",
+            "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+            "native_fixture": true,
+            "native_methods": 4,
+            "dispatch_scenarios": 4,
+            "assertions": 75,
+            "device_tested": false,
+            "original_apk_apply_tested": false,
+            "original_method_bodies_preserved": true,
+            "method_fingerprint_drift_rejected": true
+          }
+        }
+      },
+      "current-sdk": {
+        "native-archived": {
+          "report_sha256": "2eefb9d945aa92d2329f826e2b4285b4e90811c4eb3a9b95422f2bdf64c07326",
+          "result": {
+            "status": "PASSED",
+            "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+            "native_fixture": false,
+            "native_methods": 4,
+            "dispatch_scenarios": 4,
+            "assertions": 74,
+            "device_tested": false,
+            "original_apk_apply_tested": false,
+            "original_method_bodies_preserved": true,
+            "method_fingerprint_drift_rejected": true
+          }
+        },
+        "native-fixture": {
+          "report_sha256": "a1cff48b8c68192595cfbb95241dfa2df79a8c0c87e1a85eb0a956da29aa3ea7",
+          "result": {
+            "status": "PASSED",
+            "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+            "native_fixture": true,
+            "native_methods": 4,
+            "dispatch_scenarios": 4,
+            "assertions": 75,
+            "device_tested": false,
+            "original_apk_apply_tested": false,
+            "original_method_bodies_preserved": true,
+            "method_fingerprint_drift_rejected": true
+          }
+        }
+      }
+    }
+  },
+  "native_source_evidence": {
+    "smali_classes2/rb0/h.smali": {
+      "sha256": "088fd87185284a6c9c0fec7c8c8e2cb09a0ff05eb1f380c2673c1eff37f41210",
+      "reviewed_method_smali_sha256": {
+        "G()V": "9a991e1c7dd42c6ec0488741626786020c61bb6a2fc0f0d121d74fdd0c7fba83",
+        "H()V": "2845d3a8dcc1b5ece344dce7eadb369785d0b634faaa458ec75e296df1a9a306",
+        "d(Z)V": "e8536d6e3bec607ab649e52bea2a152d32dd6a47e530b0d936f4ed8ce7ca7134"
+      }
+    },
+    "smali_classes2/rb0/k.smali": {
+      "sha256": "710ef2b2dc71569f2171a0f0361c07b81aaef3050571e412ce2c10b3fb705c1d",
+      "reviewed_method_smali_sha256": {
+        "a()V": "b697d023cf4046755da0911f7ef401fa3a4bf67bd177fcd858432c2d7d452149",
+        "onAttachedToWindow()V": "cb34a7e90ef92bba04cef183d58b024ce5d69dd2ef1d199db6d004cb9a3c56ab",
+        "onSizeChanged(IIII)V": "91bb98d3e14cbaa9a3d4d9e2a5079631704ac776a1efbc5a9d971742e0e51814"
+      }
+    },
+    "smali/ra/q1.smali": {
+      "sha256": "140456cdd039296377ddcc147b855a04b899264faf225c1d885484636e883b2f",
+      "reviewed_method_smali_sha256": {
+        "n()V": "987b7c1730cfc86d57b96624f4086aa30957a46576f244764c709c1000a0f0af",
+        "q(II)V": "49c54b2513daba3cfe29156d837217c8fe435904f9398ea6995e6d5f8975ad94"
+      }
+    },
+    "smali/ra/r1.smali": {
+      "sha256": "303a3a0a1db3ba51b1c7d79b246b77c623cf772812858c0e812df3890e1223cf",
+      "reviewed_method_smali_sha256": {
+        "b()V": "45c216649a042b6b77bd6104d1a0b99d8f6e83c00f4ea92ad6072b412552b42c",
+        "d(IILjava/lang/Object;)V": "1225074b76f6c43fe1a8708e450af671210cffd4e8e16835b1c8e6568525ed01",
+        "e(II)V": "fc8a7c532a19f82be769330576e7e8b6c5fe027d5166cdf32aa978a736ae8221"
+      }
+    },
+    "smali/androidx/recyclerview/widget/a.smali": {
+      "sha256": "8d47f001fb769fab0b25e256f5a65513a5fc537c5d8e3754988c644ac330d8df",
+      "reviewed_method_smali_sha256": {
+        "a()V": "46d53a58021127810aa07def08ba3a3b4fb0627ed1d6a3e4098a9e3e4caba3b0",
+        "c(IILjava/lang/Object;)V": "f37e4d4f7f0d650d2db8e7786fe61a9071d626e45b819949e482761da32d7a00",
+        "d(II)V": "995e0e56ba0830988d4a9ed937560e9968447029e34606c17bb2084df9bc64cb",
+        "h()V": "51eb1369757363750817cc34ea5963819407d2887e9c3666344d3c5353749a5f"
+      }
+    },
+    "smali/androidx/recyclerview/widget/RecyclerView.smali": {
+      "sha256": "d9ed40cb77cd2f0bda184224b334945467b02c24f6973ab13959de640b3fc990",
+      "reviewed_method_smali_sha256": {
+        "l0()V": "9c428ea7a90e79219441972f2180fff9b1e93c1f04c211b9fda42ff36634bf44",
+        "m0(Z)V": "f16bd33096e3f700543cca4a3373d29a92710fdce3b1a26502936efe2e72b7d8",
+        "requestLayout()V": "2940232b396f50f4110be3cb270f6bf97abd180aac2420a44e888abe7e42af3b",
+        "setItemAnimator(Lra/x1;)V": "2822d60f5535d483a7e1097a1eb12f7e2419cba757d09564f508db432b788628"
+      }
+    },
+    "smali/ra/y.smali": {
+      "sha256": "5693241aded43367959c29836d1e8d37a67cfde7553d355f5a627044d9ab1953",
+      "reviewed_method_smali_sha256": {
+        "<init>()V": "678ce7f975ae3da307fc5984d5f8039325940335a96a971c143f79d8d2e451ae",
+        "d()V": "ccf7d0312f0df1840c08a1c06f4059d075f965f927590132cb74fb5b0c13eff1",
+        "g(Lra/q2;Lra/q2;IIII)Z": "41360edae3d777f715a00f3197df099563b6cd61148554d7ee03f15e914bf5fa",
+        "h(Lra/q2;IIII)Z": "dfea9e7d402259a2edf289895bf469107904c27dcf00c3b295f907ec7daeb375"
+      }
+    },
+    "smali/ra/x1.smali": {
+      "sha256": "01d5004c24002919f7c1034f98541b77fa5015c648caf62bfc89acd26c1ca828",
+      "reviewed_method_smali_sha256": {
+        "b(Lra/q2;)V": "4c70cc436d6245e367c92b59fd10b2dc8a315bea10d1c5f8fc8b9538dbfe7b4e"
+      }
+    },
+    "smali_classes2/oi0/a.smali": {
+      "sha256": "5caab57cfea31b6a10532901365122e3d84084d6c66235760dff9f8ce1d50ee3",
+      "reviewed_method_smali_sha256": {
+        "<init>(Lcom/touchtype/ui/AccessibilityEmptyRecyclerView;)V": "c4a1ee76021e0509ba2a25b715ac2d0c7059794f9f0a39383799d75389df0f14",
+        "o(Lra/q2;)V": "7fb4577e3b5933fc025b7f0b18cce24c53cb3cb160e3601898bf75568917acdd",
+        "p(Lra/q2;)V": "823060d2ba0bb93f2fd6bf21546932ef5984f8d291ba8e9c4bf94cb731c708cd"
+      }
+    },
+    "smali_classes2/oi0/b.smali": {
+      "sha256": "69be680f2c5da32bf1f68283d794d63f8eb54eb83b243fd25e04c69cda19c459",
+      "reviewed_method_smali_sha256": {
+        "a()V": "1e368086d3d1cea261da7f7e46462eab438a32c794b99857dea25b8d0a54afe9",
+        "d(II)V": "5ff79255355e5f08f42d97a447184b1ed6061c525adf166ea9050cb9c0ddd9be",
+        "f(II)V": "e2211cefda7da892b7392c589df76cf5cf1022e301c5e42001bc346c78866ec2"
+      }
+    },
+    "smali_classes2/com/touchtype/ui/AccessibilityEmptyRecyclerView.smali": {
+      "sha256": "4b513d868def8cced8126dd50107da3c84c7eb779ab06eab6f65180e8c777b7c",
+      "reviewed_method_smali_sha256": {
+        "G0(Landroid/view/View;Z)V": "21d0e3f562593330e3c0e2d4afffea8df111fb26b62bfb0cf10bfc2c850e4034",
+        "K0()V": "88bc786d76d164a63aaee04a5de1cc8bb8ec3bcf80760484212662869a0a447b",
+        "setAdapter(Lra/q1;)V": "7f246f02f46bbe57e68039f5a7e6d6b15dac0484ab801326ccfb35b31103553c",
+        "setEmptyView(Landroid/view/View;)V": "7c1fc285625660380479b57a8ec30bf520e67a4d3c3927e3ff19dc37fd749cfb"
+      }
+    },
+    "smali/androidx/recyclerview/widget/LayoutManagerProvider$Companion$getGridLayoutManager$1.smali": {
+      "sha256": "d4733c32e80e1ad88386a3718537a5ab58c03a9490aa2da981cc08e1224e497d",
+      "reviewed_method_smali_sha256": {
+        "e0(Landroidx/recyclerview/widget/RecyclerView;)V": "f11ce1b79d86b8564a0320f3de6c7da9b9e5bd4ed62e3aed1b3264550b067cc3",
+        "g0(Landroidx/recyclerview/widget/RecyclerView;II)V": "ce9d2960f55783353cd1ee8f11856cb5877d3a829fb7df28b6ca167508bdc22a",
+        "h0(Landroidx/recyclerview/widget/RecyclerView;II)V": "deb96a6273be88141f921e14f11e00f8d8e37834ca6e586eb6bee731ea1f8146",
+        "i0(Landroidx/recyclerview/widget/RecyclerView;IILjava/lang/Object;)V": "6493a36fe3b9d9799395dcfacda41b90d11c5c0238f482fea08c5819620ff9f9"
+      }
+    },
+    "smali/ra/z0.smali": {
+      "sha256": "2ab6ab772ee508c654611ae0d75c3cfe6e74eae517214d317f1827b0e79c0679",
+      "reviewed_method_smali_sha256": {
+        "m(Lra/a2;Landroidx/recyclerview/widget/RecyclerView;IILcm0/a;)V": "97cd3f1abaa088deda6efb0687ee218d9f3259e9e08d039adeb6e24bddf003e1"
+      }
+    },
+    "smali/cs/q.smali": {
+      "sha256": "bdf6f1a4f8e26d4f5dda2858ce4fb46717324b3e4c0e7f5f55a75d1d76b4869a",
+      "reviewed_method_smali_sha256": {
+        "run()V": "033a8f84978de026022e3c819aeba5674cf6daad21dda6b07fd653429620aa50"
+      }
+    },
+    "smali_classes2/l50/m.smali": {
+      "sha256": "093796fdc4057efc91b5469997e51a36a232bb4d4dd92033a9c31e2d5f26cf5c",
+      "reviewed_method_smali_sha256": {
+        "f(Landroid/view/View;)Landroid/view/View;": "5a107fcf23fe98aa80f43bc656bc2ed449d482bd5407d4b3ea6f99cc8f7623a8"
+      }
+    }
+  },
+  "limitations": [
+    "Static ordering relies on the Android UI-thread layout scheduling contract used by native RecyclerView; no physical display or accessibility session was exercised.",
+    "The observed symptom narrows the failure surface without proving every animation/relayout branch.",
+    "Valid final candidate reflow can still change geometry; the change addresses drawing intermediate old/new geometry.",
+    "Final package parity, runtime helper host tests and actual ABI validation are separate build checks."
+  ]
+}

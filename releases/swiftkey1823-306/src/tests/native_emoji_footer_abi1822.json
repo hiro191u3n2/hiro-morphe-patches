@@ -1,0 +1,1533 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+    "Lhiro/swiftkey/EmojiFooter$Row;",
+    "Lhiro/swiftkey/EmojiFooter;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Landroid/content/res/ColorStateList;->valueOf(I)Landroid/content/res/ColorStateList;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Landroid/content/res/ColorStateList;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/res/Resources;->getDisplayMetrics()Landroid/util/DisplayMetrics;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/content/res/Resources;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Canvas;->drawLine(FFFFLandroid/graphics/Paint;)V",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Canvas;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint$Cap;->ROUND:Landroid/graphics/Paint$Cap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint$Cap;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint$Join;->ROUND:Landroid/graphics/Paint$Join;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint$Join;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint$Style;->STROKE:Landroid/graphics/Paint$Style;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint$Style;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;->setColor(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;->setStrokeCap(Landroid/graphics/Paint$Cap;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;->setStrokeJoin(Landroid/graphics/Paint$Join;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;->setStrokeWidth(F)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/Paint;->setStyle(Landroid/graphics/Paint$Style;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/Paint;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/drawable/ColorDrawable;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/drawable/ColorDrawable;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/drawable/RippleDrawable;-><init>(Landroid/content/res/ColorStateList;Landroid/graphics/drawable/Drawable;Landroid/graphics/drawable/Drawable;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/graphics/drawable/RippleDrawable;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/drawable/RippleDrawable;->setColor(Landroid/content/res/ColorStateList;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Landroid/graphics/drawable/RippleDrawable;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/DisplayMetrics;->density:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/util/DisplayMetrics;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View$MeasureSpec;->getMode(I)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View$MeasureSpec;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View$MeasureSpec;->getSize(I)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View$MeasureSpec;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View$MeasureSpec;->makeMeasureSpec(II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View$MeasureSpec;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;-><init>(Landroid/content/Context;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getId()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter;->restore(Landroid/view/ViewGroup;Lhiro/swiftkey/EmojiFooter$Row;[Landroid/view/View;[Landroid/view/ViewGroup$LayoutParams;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getVisibility()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onLayout(ZIIII)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->layout(IIII)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onLayout(ZIIII)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->measure(II)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->onAttachedToWindow()V",
+      "opcode": "invoke-super",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onAttachedToWindow()V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "protected",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->onDetachedFromWindow()V",
+      "opcode": "invoke-super",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDetachedFromWindow()V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "protected",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->onDraw(Landroid/graphics/Canvas;)V",
+      "opcode": "invoke-super",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "protected",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup$LayoutParams;-><init>(II)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->fill()Landroid/view/ViewGroup$LayoutParams;"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;-><init>(Landroid/content/Context;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->addView(Landroid/view/View;ILandroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->restore(Landroid/view/ViewGroup;Lhiro/swiftkey/EmojiFooter$Row;[Landroid/view/View;[Landroid/view/ViewGroup$LayoutParams;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->getChildCount()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->removeView(Landroid/view/View;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter;->restore(Landroid/view/ViewGroup;Lhiro/swiftkey/EmojiFooter$Row;[Landroid/view/View;[Landroid/view/ViewGroup$LayoutParams;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewTreeObserver;->addOnPreDrawListener(Landroid/view/ViewTreeObserver$OnPreDrawListener;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onAttachedToWindow()V"
+      ],
+      "defined_owner": "Landroid/view/ViewTreeObserver;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewTreeObserver;->isAlive()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDetachedFromWindow()V"
+      ],
+      "defined_owner": "Landroid/view/ViewTreeObserver;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewTreeObserver;->removeOnPreDrawListener(Landroid/view/ViewTreeObserver$OnPreDrawListener;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDetachedFromWindow()V"
+      ],
+      "defined_owner": "Landroid/view/ViewTreeObserver;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/widget/TextView;->getContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/TextView;->getCurrentTextColor()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Landroid/widget/TextView;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/widget/TextView;->getId()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/TextView;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lf50/d;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lf50/d;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lf50/d;->c:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lf50/d;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lf50/d;->d:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lf50/d;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->abc:Landroid/widget/TextView;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->abc:Landroid/widget/TextView;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->color:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->color:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->getHeight()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->getViewTreeObserver()Landroid/view/ViewTreeObserver;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onAttachedToWindow()V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->getWidth()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->invalidate()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->observer:Landroid/view/ViewTreeObserver;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDetachedFromWindow()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->observer:Landroid/view/ViewTreeObserver;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onAttachedToWindow()V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDetachedFromWindow()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->paint:Landroid/graphics/Paint;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->paint:Landroid/graphics/Paint;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->ripple:Landroid/graphics/drawable/RippleDrawable;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->ripple:Landroid/graphics/drawable/RippleDrawable;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->rippleColor(I)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->sender:Lwb0/x;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onClick(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->sender:Lwb0/x;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->setBackground(Landroid/graphics/drawable/Drawable;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->setContentDescription(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->setFocusable(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->setOnClickListener(Landroid/view/View$OnClickListener;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;-><init>(Landroid/content/Context;Landroid/widget/TextView;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;->syncColor()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onPreDraw()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->abc:Landroid/widget/TextView;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->abc:Landroid/widget/TextView;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->addView(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->delete:Landroid/view/View;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->delete:Landroid/view/View;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->enter:Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->enter:Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->getChildAt(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onLayout(ZIIII)V",
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->getChildCount()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onLayout(ZIIII)V",
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->restore(Landroid/view/ViewGroup;Lhiro/swiftkey/EmojiFooter$Row;[Landroid/view/View;[Landroid/view/ViewGroup$LayoutParams;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->getResources()Landroid/content/res/Resources;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->setMeasuredDimension(II)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "protected",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->setWillNotDraw(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->tabs:Landroid/view/View;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->tabs:Landroid/view/View;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->widths:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onLayout(ZIIII)V",
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;->widths:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;-><init>(Landroid/content/Context;Landroid/widget/TextView;Landroid/view/View;Landroid/view/View;Lwb0/x;)V",
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter;->access$000()Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->generateDefaultLayoutParams()Landroid/view/ViewGroup$LayoutParams;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter;->fill()Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->access$000()Landroid/view/ViewGroup$LayoutParams;",
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter;->restore(Landroid/view/ViewGroup;Lhiro/swiftkey/EmojiFooter$Row;[Landroid/view/View;[Landroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter;->widths(II)[I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->max(FF)F",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->max(II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->widths(II)[I"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->min(II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onDraw(Landroid/graphics/Canvas;)V",
+        "Lhiro/swiftkey/EmojiFooter;->widths(II)[I"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->round(F)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$Row;->onMeasure(II)V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lje0/c;->c:Lgg/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lje0/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lje0/c;->l:Lf50/d;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lje0/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Llh0/a;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onClick(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Llh0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lwa0/p;->c:Lwa0/p;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter;->install(Lje0/c;Lwb0/x;)V"
+      ],
+      "defined_owner": "Lwa0/p;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lwb0/x;->y(Llh0/a;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;->onClick(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lwb0/x;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroid/content/Context;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/Canvas;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/Paint;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/Paint;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/drawable/ColorDrawable;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/drawable/RippleDrawable;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/drawable/RippleDrawable;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View$OnClickListener;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewTreeObserver$OnPreDrawListener;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewTreeObserver;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/TextView;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/TextView;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/TextView;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/TextView;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiFooter$Row;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Ljava/lang/CharSequence;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/LinkageError;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/RuntimeException;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lje0/c;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Llh0/a;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "[Landroid/view/View;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Landroid/view/View;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    }
+  ],
+  "interface_callback_implementations": [
+    {
+      "class": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "interface": "Landroid/view/View$OnClickListener;",
+      "method": "onClick(Landroid/view/View;)V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "interface": "Landroid/view/ViewTreeObserver$OnPreDrawListener;",
+      "method": "onPreDraw()Z",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "access": "public"
+    }
+  ],
+  "interface_callbacks_checked": true,
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "994724c8186712d0031e9cb327df6ac4f3c3154cf8599c9f31dee39029fa9f71",
+  "wrapper_source_sha256": "c9f049323673e6b40cd13a50eee67bd10c4147febbb21d820a5ff8e2a710d6b1"
+}

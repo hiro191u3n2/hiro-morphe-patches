@@ -1,0 +1,2 @@
+package android.graphics;
+public class Paint { public static final int ANTI_ALIAS_FLAG=1; public enum Style { STROKE,FILL } public enum Cap { ROUND,BUTT,SQUARE } public enum Join { ROUND,MITER,BEVEL } public int color;public float strokeWidth;public Paint(){} public Paint(int flags){} public void setColor(int value){color=value;}public int getColor(){return color;}public void setStrokeWidth(float value){strokeWidth=value;}public void setStyle(Style value){}public void setStrokeCap(Cap value){}public void setStrokeJoin(Join value){}public void setAlpha(int value){} }

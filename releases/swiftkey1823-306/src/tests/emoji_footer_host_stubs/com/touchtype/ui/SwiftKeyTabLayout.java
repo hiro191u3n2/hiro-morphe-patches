@@ -1,0 +1,1 @@
+package com.touchtype.ui;import android.content.Context;public class SwiftKeyTabLayout extends android.view.ViewGroup {public int selectedTab=7,scrollX=123,tabMode=0;public final Object nativePager=new Object();public SwiftKeyTabLayout(Context c){super(c);}protected void onLayout(boolean changed,int l,int t,int r,int b){} }

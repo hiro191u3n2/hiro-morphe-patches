@@ -1,0 +1,2 @@
+package android.content;
+public class Context { public final android.content.res.Resources resources = new android.content.res.Resources(); public android.content.res.Resources getResources(){ return resources; } }

@@ -1,0 +1,2134 @@
+{
+  "schema": "swiftkey1823-publication-v1",
+  "swiftkey_version": "1.8.23",
+  "bundle_version": "1.0.306",
+  "baseline_bundle_version": "1.0.305",
+  "baseline_bundle_sha256": "52fe856d66e6b4b89a2280ccc237448905c1b1f2f67c2fea715b0a6d5acaf29d",
+  "baseline_swiftkey_version": "1.8.22",
+  "baseline_swiftkey_sha256": "322f2ba927a4c53861e23197155e46af32e6e37017a7b6518f081a01ff8a9052",
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "extensions/swiftkey_japanese.mpe"
+  ],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "extensions/swiftkey_japanese.mpe"
+  ],
+  "allowed_added_bundle_entries": [],
+  "allowed_added_standalone_entries": [],
+  "qa_required_values": {
+    "status": "EMOJI_RECENT_SLIDE_HOST_AND_ABI_VERIFIED_DEVICE_UNVERIFIED",
+    "swiftkey_version": "1.8.23",
+    "bundle_version": "1.0.306",
+    "baseline_swiftkey_version": "1.8.22",
+    "baseline_bundle_version": "1.0.305",
+    "target_package": "com.touchtype.swiftkey.beta",
+    "target_version": "9.13.16.4",
+    "target_version_code": 1236271168,
+    "device_tested": false,
+    "original_apk_apply_tested": false,
+    "device_fix_confirmed": false,
+    "runtime_unrelated_classes_unchanged": true,
+    "all_original_runtime_method_bodies_preserved": true,
+    "all_dictionary_resources_preserved": true,
+    "other_apps_byte_identical": true,
+    "standalone_and_bundle_runtime_equal": true,
+    "loader_entries_byte_identical": true,
+    "unrelated_loader_classes_unchanged": true,
+    "diagnostic_function_removed": true,
+    "jvm_swiftkey_loader_matches_standalone": true,
+    "combined_jvm_swiftkey_discovered": true,
+    "previous_jvm_patches_preserved": true,
+    "all_static_checks_passed": true,
+    "host_tests_passed": true,
+    "current_manager_patcher_selection_verified": true,
+    "two_loader_sdks_agree": true,
+    "selected_extension_stream_verified": true,
+    "loader_selected_extension_matches_packaged_runtime": true,
+    "candidate_scroll_1822_byte_identical": true,
+    "japanese_start_1822_byte_identical": true,
+    "candidate_toolbar_1822_byte_identical": true,
+    "emoji_footer_1822_byte_identical": true,
+    "punctuation_1822_byte_identical": true,
+    "flick_sensitivity_1822_byte_identical": true,
+    "ordinary_emoji_tap_and_hold_preserved": true,
+    "native_abi_review_verified": true,
+    "native_abi_replayed_in_ci": false,
+    "native_history_review_verified": true,
+    "recent_emoji_limit": 12,
+    "recent_emoji_columns": 4,
+    "native_history_and_input_used": true,
+    "continuous_slide_selection_on_release": true,
+    "outside_release_cancels": true,
+    "sensitivity_setting_reused": true,
+    "android_loader_class_count": 280,
+    "runtime.before_classes": 84,
+    "runtime.after_classes": 91,
+    "runtime.unchanged_existing_classes": 82,
+    "runtime.changed": [
+      "hiro/swiftkey/EmojiToolbar.smali",
+      "hiro/swiftkey/JapaneseGlide.smali"
+    ],
+    "runtime.added": [
+      "hiro/swiftkey/EmojiRecentsBridge$1.smali",
+      "hiro/swiftkey/EmojiRecentsBridge$Snapshot.smali",
+      "hiro/swiftkey/EmojiRecentsBridge.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Drain.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Picker.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Stroke.smali",
+      "hiro/swiftkey/EmojiRecentsSlide.smali"
+    ],
+    "runtime.removed": [],
+    "runtime_integration.status": "PASSED",
+    "runtime_integration.baseline_classes": 84,
+    "runtime_integration.runtime_after_classes": 91,
+    "runtime_integration.unchanged_existing_classes": 82,
+    "runtime_integration.device_tested": false,
+    "runtime_integration.original_apk_apply_tested": false,
+    "native_history_review.report.status": "PASSED",
+    "native_history_review.report.device_tested": false,
+    "native_history_review.report.original_apk_apply_tested": false,
+    "emoji_slide_test_report.status": "PASSED",
+    "emoji_slide_test_report.device_tested": false,
+    "emoji_slide_test_report.android_instrumentation_tested": false,
+    "loader_parity.status": "PASSED",
+    "loader_parity.selected_extension_stream_verified": true,
+    "loader_parity.baseline_updated_dependency_graph_equal": true,
+    "loader_parity.standalone_combined_dependency_graph_equal": true,
+    "loader_parity.clean_apk_apply_tested": false,
+    "loader_parity.device_tested": false,
+    "runtime_integration.unrelated_existing_classes_byte_identical": true,
+    "runtime_integration.all_original_method_bodies_preserved": true,
+    "runtime_integration.original_glide_restored_byte_identical": true,
+    "runtime_integration.original_toolbar_restored_byte_identical": true,
+    "runtime_integration.touch_dispatch_calls_helper_once": true,
+    "runtime_integration.original_dispatch_called_only_when_not_consumed": true,
+    "runtime_integration.init_and_reset_call_original_and_helper_once": true,
+    "runtime_integration.wrapper_arguments_and_branch_verified": true,
+    "runtime_integration.compiled_new_helpers_preserved": true,
+    "runtime_integration.emoji_key_helper_matches_compiled_source": true,
+    "emoji_slide_test_report.native_emoji_key_identity_verified": true,
+    "emoji_slide_test_report.recent_order_limit_and_graphemes_verified": true,
+    "emoji_slide_test_report.native_input_and_history_delegation_verified": true,
+    "emoji_slide_test_report.private_history_guard_delegation_verified": true,
+    "emoji_slide_test_report.input_once_and_failure_no_retry_verified": true,
+    "emoji_slide_test_report.upward_sensitivity_verified": true,
+    "emoji_slide_test_report.ordinary_tap_and_hold_preserved": true,
+    "emoji_slide_test_report.continuous_slide_release_selection_verified": true,
+    "emoji_slide_test_report.outside_release_and_cancel_verified": true,
+    "emoji_slide_test_report.lifecycle_and_multitouch_drain_verified": true,
+    "emoji_slide_test_report.popup_geometry_and_no_focus_steal_verified": true,
+    "emoji_slide_test_report.scenarios": 75,
+    "emoji_slide_test_report.assertions": 2114,
+    "emoji_slide_test_report.production_source_sha256": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3",
+    "emoji_slide_test_report.production_source_sha256_by_file": {
+      "src/hiro/swiftkey/EmojiRecentsSlide.java": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3",
+      "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+      "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+    },
+    "emoji_slide_test_report.original_apk_apply_tested": false,
+    "emoji_slide_test_report.native_input_engine_executed": false,
+    "emoji_slide_test_report.native_history_guard_executed_on_android": false,
+    "emoji_slide_test_report.native_timer_executed": false,
+    "emoji_slide_test_report.reentrant_cancel_and_error_drain_verified": true,
+    "emoji_slide_test_report.repeated_gestures_and_listener_cleanup_verified": true,
+    "runtime_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+    "loader_parity.previous_patch_metadata_unchanged": 20
+  },
+  "artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.23.mpp": {
+      "bytes": 16159329,
+      "sha256": "714d66b2cc5367346927fd8a766577640d4d1c3bc61829671f888ee13cc6bbdc"
+    },
+    "Hiro_Morphe_Patches_v1.0.306.mpp": {
+      "bytes": 19256124,
+      "sha256": "04592a32d4475e7af7df6d115d8f611c7f5dc58006da57d0a73c8ae772fa086c"
+    },
+    "QA_SwiftKey_v1.8.23.json": {
+      "bytes": 40440,
+      "sha256": "85248a6bd6ab317b6730a5076fc822dc9fb6caf04c25436d5f9f24ae8c8c0669"
+    },
+    "SwiftKeyBeta_v1.8.23_sources_and_QA.zip": {
+      "bytes": 654373,
+      "sha256": "cef641d91bda86292ee3f6a2dc86ada6886ff510e3aec86b66e62104c8f7bda4"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3862,
+      "sha256": "72380959b11371eeefd8665d2cfe6d800004d7143ef946cee4f73c0082784d70"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 487,
+      "sha256": "6ad69fe2081cadfe87f1d7ed7eb88870102154edefd1a44e677248191adc2318"
+    }
+  },
+  "source_files": {
+    "README.txt": {
+      "bytes": 6200,
+      "sha256": "c1ba43a895a3ec754fc16893e42a2d30337a3492eb746bc8dca0d15281e6e06b"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3862,
+      "sha256": "72380959b11371eeefd8665d2cfe6d800004d7143ef946cee4f73c0082784d70"
+    },
+    "audit_runtime_abi.py": {
+      "bytes": 5088,
+      "sha256": "11d6a84f9233a113ab77ab91581e1e432fa7ca46cbc973d4c286e6fe06808d5f"
+    },
+    "build1823.py": {
+      "bytes": 21521,
+      "sha256": "a7e64add8d3c131d9dcb72e8235a0f6fe010c410b051f1639e085ad52b21f0b5"
+    },
+    "patch_java/app/hiro/swiftkey/patches/CandidateScrollPatch.java": {
+      "bytes": 15018,
+      "sha256": "0ae0f7275d435c813b51bd3fe1f625601c2be0c9b2511a111063469cee9ce736"
+    },
+    "patch_java/app/hiro/swiftkey/patches/CandidateToolbarPatch.java": {
+      "bytes": 8580,
+      "sha256": "da836d77923bf8cee24f67b6e8bd51165b1baf726c2f6570120a0b4229773fe7"
+    },
+    "patch_java/app/hiro/swiftkey/patches/EmojiFooterPatch.java": {
+      "bytes": 5548,
+      "sha256": "feb7fd0560cd6abef4228c29084849240fb205195c7c7d2ca95890f84ca18bef"
+    },
+    "patch_java/app/hiro/swiftkey/patches/JapaneseStartPatch.java": {
+      "bytes": 6988,
+      "sha256": "06016405187ff531c2a593bcb556e97db0937f4cbb9b58e168007d02d0dee0e6"
+    },
+    "patch_java/app/hiro/swiftkey/patches/PunctuationPatch.java": {
+      "bytes": 4068,
+      "sha256": "2bf88f1b5cf95e54a215f23c69ea3e30c7b428e941fee40df2099a31236fa9de"
+    },
+    "publish1823.py": {
+      "bytes": 39927,
+      "sha256": "46af474ea29b5988e9a54c3442e891aba852623d7dc67085980cf455e66c929d"
+    },
+    "publisher_tests.py": {
+      "bytes": 15586,
+      "sha256": "a87abc7fac8218b6c52fa96a2733a0b769ffc27a0eb612027cb4d515005d40c3"
+    },
+    "src/hiro/swiftkey/CandidateScroll.java": {
+      "bytes": 39945,
+      "sha256": "f7a46f2b12b23f2780a0696f7a81cdaf7867efc48e25c4875d44dbdab3f49861"
+    },
+    "src/hiro/swiftkey/CandidateToolbar.java": {
+      "bytes": 14187,
+      "sha256": "7c9b70908d90ae34abae29a884ceeafed4a34c9207fbf61a409e7ec5fac0620b"
+    },
+    "src/hiro/swiftkey/EmojiFooter.java": {
+      "bytes": 10227,
+      "sha256": "e496f3a3a8cc37906a17d9e4b34785b68cad904190c6aa8bd4effdb3970eb288"
+    },
+    "src/hiro/swiftkey/EmojiRecentsBridge.java": {
+      "bytes": 4311,
+      "sha256": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85"
+    },
+    "src/hiro/swiftkey/EmojiRecentsSlide.java": {
+      "bytes": 25403,
+      "sha256": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3"
+    },
+    "src/hiro/swiftkey/EmojiToolbar.java": {
+      "bytes": 7767,
+      "sha256": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+    },
+    "src/hiro/swiftkey/FlickSymbols.java": {
+      "bytes": 26199,
+      "sha256": "cfc6f79b370d1fda3dc89ca6f5cb61d8b05c1d93a062b12312cac86258172c61"
+    },
+    "src/hiro/swiftkey/JapaneseStart.java": {
+      "bytes": 3436,
+      "sha256": "869944bfc357c0be813ff2c1684c02d68e8c4809c1430b0e22537df8ca1d8a47"
+    },
+    "src/hiro/swiftkey/PunctuationKeys.java": {
+      "bytes": 16981,
+      "sha256": "3023cb1dac25cb2967fdbd062c757ac73d79c586ea64b07eafdda7a43106297c"
+    },
+    "stubs/ah0/b0.java": {
+      "bytes": 76,
+      "sha256": "973bb45c9df658e7bd1691959238888d761662d8da85152c90d54a4a8b450f99"
+    },
+    "stubs/ah0/w0.java": {
+      "bytes": 186,
+      "sha256": "eb1a07c7506383f007534a1244178cf65a18e60f0d49fdd968ec1dedc872b173"
+    },
+    "stubs/androidx/lifecycle/h.java": {
+      "bytes": 84,
+      "sha256": "edf9b1a25aa2b71d16f53ecd688f994b42c9ab4d6ded46f7d258a0d7adc3ad4a"
+    },
+    "stubs/androidx/preference/Preference.java": {
+      "bytes": 386,
+      "sha256": "8b6bc146d37420ca1bdbfadd4016ffc8b7959dadc65956fc11919785e22f007e"
+    },
+    "stubs/androidx/preference/PreferenceScreen.java": {
+      "bytes": 343,
+      "sha256": "572a800b78400d662efaa47f756fa1e7e16d1a52b2c60ecc1d2b117124a50f93"
+    },
+    "stubs/androidx/preference/SwitchPreferenceCompat.java": {
+      "bytes": 288,
+      "sha256": "e3ed180383a6cc53a3c85d9786afa4653351d864aee2756e749dfd05677f51e7"
+    },
+    "stubs/androidx/recyclerview/widget/GridLayoutManager.java": {
+      "bytes": 131,
+      "sha256": "5cbb792161a5343c863b3d97f967cad312688de8050384e991b9a94b90b3aecc"
+    },
+    "stubs/androidx/recyclerview/widget/LinearLayoutManager.java": {
+      "bytes": 310,
+      "sha256": "5931c878ff4ccc7bd539f21dadae248930a97f3853b41524c873a62a024073e6"
+    },
+    "stubs/androidx/recyclerview/widget/RecyclerView.java": {
+      "bytes": 452,
+      "sha256": "b2cfb84f777bf8122db09269cd00e1cf052d2ff43efaea1fd85f63b7584a6349"
+    },
+    "stubs/bf0/g.java": {
+      "bytes": 67,
+      "sha256": "410f27007a3984f94a43f31584313ed175862b9df070611f6ff6b3a346b3d339"
+    },
+    "stubs/ce0/a.java": {
+      "bytes": 40,
+      "sha256": "c0aedb5e212e908cc66cb593e314e3b4603a3add26a5388c849d5da182135deb"
+    },
+    "stubs/cm0/d.java": {
+      "bytes": 65,
+      "sha256": "58ce81176d41b8b3861d559c09e737a700e80256ed85cf2fb10f270ee9c104c6"
+    },
+    "stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 119,
+      "sha256": "6f84e8162197197e6433e6a6d49e21d23641526cbfa45ab0d3850c3111215ad6"
+    },
+    "stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 201,
+      "sha256": "7a1dbaf809c34ba316045c2d9ec9d05b6c7b99983be923e3eed3c1cc34338da9"
+    },
+    "stubs/com/microsoft/fluency/Sequence.java": {
+      "bytes": 62,
+      "sha256": "51b534de868f3eabebd4588755985686b29fd23919524e186ef24351e8a327a8"
+    },
+    "stubs/com/microsoft/fluency/TouchHistory.java": {
+      "bytes": 66,
+      "sha256": "c278bc6bd176036f3bb109a5fd68c5b0046164cbba17bc784a304c61ad589554"
+    },
+    "stubs/com/microsoft/tokenshare/m.java": {
+      "bytes": 70,
+      "sha256": "4fdfbdea44f1070034781de28824ff785b94506f6a7aec204da186572847777e"
+    },
+    "stubs/com/touchtype/KeyboardService.java": {
+      "bytes": 207,
+      "sha256": "01665d268414956bbaf8ed65cda4717eee5b70c64432d261de7f2625f7449b76"
+    },
+    "stubs/com/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton.java": {
+      "bytes": 211,
+      "sha256": "15ed27740bb6eb04f3621dba70785d76495df92a48088881026f3c6b21f78fc8"
+    },
+    "stubs/com/touchtype/ui/AccessibilityEmptyRecyclerView.java": {
+      "bytes": 219,
+      "sha256": "3b9cfa8b6dd2f13cc5bca257ae54efe72803bc10600c8e9a816eafb90df6949f"
+    },
+    "stubs/com/touchtype_fluency/service/j0.java": {
+      "bytes": 91,
+      "sha256": "55dd2148879fffcb9b0bba46438101cb5f1c85b2bbec6a8753d09ecfd69aff28"
+    },
+    "stubs/dc0/a.java": {
+      "bytes": 106,
+      "sha256": "9bc76f1fcaf38bb31fcd5251335befcecf6818088af3016bafe5e56aad931fa6"
+    },
+    "stubs/dd0/e0.java": {
+      "bytes": 32,
+      "sha256": "387ace8eb35902e3add0e29a06032896bd9a4de826d92b2b08fa030095fc72a8"
+    },
+    "stubs/e60/b.java": {
+      "bytes": 51,
+      "sha256": "69a3f60cba548cb020431be33cd6281773e8632f7422e434ca409603bc660dbf"
+    },
+    "stubs/ec0/m.java": {
+      "bytes": 32,
+      "sha256": "8192d614a0a2a9692b9a2bf489e3994454c71468c37c3670806b51fc7d109394"
+    },
+    "stubs/f50/d.java": {
+      "bytes": 108,
+      "sha256": "bbf3520e5ed776daa4b01fe72ac7e7568985c39e920c8984f1fb410fe6b6f0ac"
+    },
+    "stubs/fb0/b0.java": {
+      "bytes": 56,
+      "sha256": "c3a6ef73ef9f2e0db47d9b02dc43d5dd45aedfe60b1ebee1dfafd8a0820e6b19"
+    },
+    "stubs/fb0/f0.java": {
+      "bytes": 83,
+      "sha256": "c9a527e14a16475705135fa8e97d67347272f9663f60b2b48eeacb1c1df5d90b"
+    },
+    "stubs/fb0/f2.java": {
+      "bytes": 67,
+      "sha256": "ebe2a94dd7226f68b11989045f41b2c0f4f9c3cdac3c4ee36d50c45117c25eee"
+    },
+    "stubs/fb0/f5.java": {
+      "bytes": 248,
+      "sha256": "331bf06e6971d7974680f2d580fa18b4da7b06fe2f3960583cdfc9195135363f"
+    },
+    "stubs/fb0/h2.java": {
+      "bytes": 135,
+      "sha256": "0ab8668432b44b387947064f6113227d3ef8f9146b5346609dd1fb9a3efdf10e"
+    },
+    "stubs/fb0/i0.java": {
+      "bytes": 154,
+      "sha256": "0bfba94b8f46d1fdd54177d5b3b9646d8169488b7b729dbcb72e9a104cef6b4d"
+    },
+    "stubs/fb0/l2.java": {
+      "bytes": 137,
+      "sha256": "6ff772eecad5db29e182d37932d9b731b69fbe2b3281b86824bf1999eec9696a"
+    },
+    "stubs/fb0/n2.java": {
+      "bytes": 56,
+      "sha256": "34b957b3935c43d190288993a88a3b7f79790c78e6e33157e1583b4ab1cf08e3"
+    },
+    "stubs/fb0/q0.java": {
+      "bytes": 49,
+      "sha256": "600cc14aef968046709bd7514c8dbae0c4d4882d652f298574a8e50a59584dc0"
+    },
+    "stubs/fb0/q1.java": {
+      "bytes": 102,
+      "sha256": "24c9f51932227a2c8ecaa64fa8a885b6e888971cbcd643804b6dd1d88dc109e9"
+    },
+    "stubs/fb0/t0.java": {
+      "bytes": 87,
+      "sha256": "54850b6444b1d16ac329bba0718fcca5495628de466bb7110eb13feaf42c0354"
+    },
+    "stubs/fb0/u.java": {
+      "bytes": 82,
+      "sha256": "819d3f059fc7f5cea89f49349d115927af49936229a2c52b881bedacd2030703"
+    },
+    "stubs/fb0/v.java": {
+      "bytes": 45,
+      "sha256": "7f412d1a73f104580142b15222cdb3d5b773945f6c6380dc33aabe56e5addcac"
+    },
+    "stubs/fc0/b1.java": {
+      "bytes": 116,
+      "sha256": "bc144dcacd0ac9331e86604e2df1bd0265c05b82eb0ee2e7e1b62dfbe6a32564"
+    },
+    "stubs/fc0/d1.java": {
+      "bytes": 135,
+      "sha256": "937cd17d0e4dfa4ebc67377f51588f89e9f0464a4f71ab5eaff4ded509b10d86"
+    },
+    "stubs/fc0/d2.java": {
+      "bytes": 36,
+      "sha256": "487a1db1ac260fa65c07173a56e6d91829e9694956c1628c4f4d0272a222f317"
+    },
+    "stubs/fc0/h.java": {
+      "bytes": 65,
+      "sha256": "f6286a7c2dc1f4f26905a71478958885c317275a6701f6f1a28055a95d707b58"
+    },
+    "stubs/fc0/k1.java": {
+      "bytes": 110,
+      "sha256": "218f714cfed70950c023586fd3612d539c1a0a2507a8e7dfb234a99d2f691c91"
+    },
+    "stubs/fc0/m1.java": {
+      "bytes": 86,
+      "sha256": "4cb14f6750530645dc12370ceb79b18e95916010f1748e476a320f8a787e3107"
+    },
+    "stubs/fc0/n2.java": {
+      "bytes": 124,
+      "sha256": "fdf2fecf27ddad0ea0d12f3b1c5405a28d95ec99e9f3d56029b54904f8b87fc5"
+    },
+    "stubs/fc0/s1.java": {
+      "bytes": 120,
+      "sha256": "7a9d736eae39fb9f3d3ed164bdbc97da9c55c5b7cddd117cae4158b5266480aa"
+    },
+    "stubs/fc0/v1.java": {
+      "bytes": 199,
+      "sha256": "6cdfb46ce2d8154e935a751107bb82e3affefc1e15ce67e2080fb76ab985b430"
+    },
+    "stubs/fz/h.java": {
+      "bytes": 87,
+      "sha256": "a507045cc9008d05761a3a9fccc2249c72bdfbd10ec0819c5e008280eec07e7c"
+    },
+    "stubs/gd0/b.java": {
+      "bytes": 48,
+      "sha256": "5412d6b354672518929b84d66957b1130a012dd967102e2cd61c0bdd03baa483"
+    },
+    "stubs/gg/a.java": {
+      "bytes": 40,
+      "sha256": "cc6e3b0386bda9c160c43f621b31607bdeca513886522d0253d62aef8926da23"
+    },
+    "stubs/hc0/a.java": {
+      "bytes": 83,
+      "sha256": "1cd0bd64542333a6da322c187045c042f11713940227803907df50e0ee496dba"
+    },
+    "stubs/hc0/b.java": {
+      "bytes": 93,
+      "sha256": "3ce06b8b5fc77414fdec6dee73585b00f84f2a085deaaf9dad6a10382ad6df57"
+    },
+    "stubs/hc0/k.java": {
+      "bytes": 111,
+      "sha256": "804913858f5bfc24aa6f431d7572ee8ec392e398cc344edfeeec1165593c481d"
+    },
+    "stubs/hc0/o.java": {
+      "bytes": 202,
+      "sha256": "5d6286954578eb590e0fdc780d73d38de6b8874a6a790829c0d032917596d2d1"
+    },
+    "stubs/hiro/swiftkey/CandidateToolbar.java": {
+      "bytes": 348,
+      "sha256": "ca24e650520bfad27384e4e78a5b903642e10861e243761b1a5258c243668cff"
+    },
+    "stubs/hiro/swiftkey/KeySwap.java": {
+      "bytes": 335,
+      "sha256": "3eee8bbccfa3e7d30ce20fd5f8e8aa2a7036b6b3bc86df8c12c83659ebecddd9"
+    },
+    "stubs/hiro/swiftkey/LineEnter.java": {
+      "bytes": 212,
+      "sha256": "a401f9dc0d10a3d3b6d6a7b0fff1c04666e7054268712811c274a63195d66d2e"
+    },
+    "stubs/ib0/a.java": {
+      "bytes": 203,
+      "sha256": "c702d4ceeb9a96391c663ee117d62488b01c3f4a24f7313e82d48ab375c7e49e"
+    },
+    "stubs/ib0/m.java": {
+      "bytes": 33,
+      "sha256": "252e721a478c97230f3b1714790476666cf13a55c92236c4e065ed21fdb1c32f"
+    },
+    "stubs/ic0/a.java": {
+      "bytes": 57,
+      "sha256": "a4849da1ff27d3e5cbafc64b8257b82dc10fd06c1cea53495aa4de8875b4cc1a"
+    },
+    "stubs/ic0/a0.java": {
+      "bytes": 98,
+      "sha256": "b76a67ebe422e28915c90553fecce41d6e7e294bedbdf2f50b76280353c222eb"
+    },
+    "stubs/ic0/e.java": {
+      "bytes": 71,
+      "sha256": "0df771ed368e909791d0588594b8cebc6580b80ce8efae23aabfa00d10e4119d"
+    },
+    "stubs/je0/c.java": {
+      "bytes": 103,
+      "sha256": "2809d41ad902a643d02e84d9c19d01fff58a91d27e350bfc740487c4de56a18b"
+    },
+    "stubs/k40/l.java": {
+      "bytes": 40,
+      "sha256": "7d7c2e6619497359378a7521d56dd42b86bd966a404a142c52816818ec26276e"
+    },
+    "stubs/kd0/d0.java": {
+      "bytes": 65,
+      "sha256": "e7056d9e0021e257822bfedba3931941c4ae748d3d4f7701267d07f2028f9ea3"
+    },
+    "stubs/kd0/e0.java": {
+      "bytes": 108,
+      "sha256": "dd8156a8ef3f57d44b9fe1d0afed057caacb9af5369404be9e7bc285847d22dd"
+    },
+    "stubs/l40/c.java": {
+      "bytes": 464,
+      "sha256": "844f79c3d067b9418a9f46ba1bcb94476a68cb66dcc84d845f9a7f61d17da990"
+    },
+    "stubs/lh0/a.java": {
+      "bytes": 32,
+      "sha256": "25212a452163fd0fa686ecd34088cbf3bfacf309a141f4b0295566db4d6d83e5"
+    },
+    "stubs/m40/b.java": {
+      "bytes": 195,
+      "sha256": "7053b3534a1fcf900e50e49b8383bbb528735408d1245e6cce11e2ebd4f1b1f1"
+    },
+    "stubs/ne0/e0.java": {
+      "bytes": 87,
+      "sha256": "c8ab777e47a8c9dbd84e0df7f82ee6ab6a1f2eb77443b4567e40dfe0c0cbf341"
+    },
+    "stubs/ne0/f0.java": {
+      "bytes": 52,
+      "sha256": "51905dbe129878494a3c5d73d13214fa2b03d3b21754c020082a42438534a9a2"
+    },
+    "stubs/ne0/g0.java": {
+      "bytes": 87,
+      "sha256": "d6a0797410aa2efa20397bb0d4287b93c362467ae899ad5b9bb566bd2c002239"
+    },
+    "stubs/ne0/p0.java": {
+      "bytes": 178,
+      "sha256": "638f34faaf1afdd7b742c4f8c4dbc7205fa694676cb9989197254b91e04ced1d"
+    },
+    "stubs/oa/j.java": {
+      "bytes": 122,
+      "sha256": "fdf57968984b15b72b5890a845d16b14ff0562a8665ea67a44cf0520e5c5c0e7"
+    },
+    "stubs/oa/k.java": {
+      "bytes": 105,
+      "sha256": "0033b7ac56b94dc757c3bd59f780a9fe144355d26a85b057ba3d1c32bb76e207"
+    },
+    "stubs/ob0/b1.java": {
+      "bytes": 140,
+      "sha256": "c8f175525388fa57cf6b32f0c29ca7cef8a5fe56dbd753dd7ed6a96479d55626"
+    },
+    "stubs/ob0/d1.java": {
+      "bytes": 216,
+      "sha256": "e53b0115612eba3e5debba81d8ff9737a2e51f71c73f3679c5f7e582d524c104"
+    },
+    "stubs/oc0/l.java": {
+      "bytes": 35,
+      "sha256": "b319b50c8bc4c797d4bf7008e579a766b295b080375f8c41656a8c8f495249a0"
+    },
+    "stubs/oc0/m.java": {
+      "bytes": 67,
+      "sha256": "20cd2b12e83f2032ff3367065401389571c07625002a608dd693198e13ddd564"
+    },
+    "stubs/oz/i6.java": {
+      "bytes": 33,
+      "sha256": "409d75ca26e04cdcdee2e5c79b40cc794e2681cef19b70b78dc0f52478f9da04"
+    },
+    "stubs/oz/j2.java": {
+      "bytes": 33,
+      "sha256": "e9cb5a3754d5ca148584351265ee26371e6b22d87cc8e44c21640121b54f8749"
+    },
+    "stubs/oz/q3.java": {
+      "bytes": 37,
+      "sha256": "4fee2d0b26fc51a10c33278776a57fb872cec8500ebfc67714ed9259638eb71a"
+    },
+    "stubs/q40/a.java": {
+      "bytes": 37,
+      "sha256": "782ae70b5afc1c4f621459efb7528d300645b01080f8151af09ca5b5ccf3f051"
+    },
+    "stubs/qj0/a.java": {
+      "bytes": 45,
+      "sha256": "93d48a28e9c8567f72cb960d313f7a3c9c0ff93f10f37dcbc405e27123af3ece"
+    },
+    "stubs/r40/a.java": {
+      "bytes": 37,
+      "sha256": "caa573120f712eaffe8b38efd7ea622e3caeb9e44d1dd9b1378dff9f4ca9aaa5"
+    },
+    "stubs/ra/a2.java": {
+      "bytes": 93,
+      "sha256": "d4b1ac37b0d40e675a5b5dafc90a99218972d51107942f7cd175a9a34b3e82e5"
+    },
+    "stubs/ra/n1.java": {
+      "bytes": 122,
+      "sha256": "22144221156b9ee497164cbf85a691cb5e6496ba275c07f018a0758d6a7d5dc1"
+    },
+    "stubs/ra/q1.java": {
+      "bytes": 93,
+      "sha256": "a90ed112dfa7be351bda6989c2e79dbe2328f43760d0bba8313bd016f0567c1b"
+    },
+    "stubs/ra/r1.java": {
+      "bytes": 93,
+      "sha256": "3659e8865f4c396528d12f93359245b7cb3a8ad62729e11e89105fdb8636b329"
+    },
+    "stubs/ra/x1.java": {
+      "bytes": 104,
+      "sha256": "a40997f1cce848490443fe2e79f702efe9b3ecafdcf02e8d010d67c194d53d0e"
+    },
+    "stubs/rb0/g.java": {
+      "bytes": 82,
+      "sha256": "09e2790434974a5d190b1d1cdfa176e5db8eaec8dbcc3b57791ad96666312d41"
+    },
+    "stubs/rb0/h.java": {
+      "bytes": 243,
+      "sha256": "6cb88b4b7e0242bfc5afaf9eef42d607d4337a6b33c1080f6437cf24f06fd999"
+    },
+    "stubs/rb0/j.java": {
+      "bytes": 137,
+      "sha256": "5d1cb53dc81970ab0d1c521f4c570a82477d42630622258932adcdcf62b19fe4"
+    },
+    "stubs/rb0/k.java": {
+      "bytes": 140,
+      "sha256": "057b081a4fab6982f08f6848ea69922641a8ca42318b4e269d8de264fb9316e1"
+    },
+    "stubs/rb0/l.java": {
+      "bytes": 117,
+      "sha256": "985eec88e97f416baa83248cac4354fc46a69521620db046645e39c4452e4590"
+    },
+    "stubs/sc0/c.java": {
+      "bytes": 109,
+      "sha256": "53325f4ae5380e0e45466c61e9d43e1e0c8d7efd768420b66c8fd5c0d8f6e8a0"
+    },
+    "stubs/t40/d.java": {
+      "bytes": 96,
+      "sha256": "8df75f454862cee5d114c79bd5e1d5e00561f1d1e49f10588df84246dab50f66"
+    },
+    "stubs/ui0/k.java": {
+      "bytes": 61,
+      "sha256": "cc38306796e4438a49bcdf6d2b9464f5cd3b8617aa6ca765ae5a9cc659e70e8d"
+    },
+    "stubs/vb0/b.java": {
+      "bytes": 48,
+      "sha256": "c308bd0e2c5d8668c7a2834bdf77bb4d239a95be86ac39855cd55c8d68cae2c8"
+    },
+    "stubs/vb0/c.java": {
+      "bytes": 140,
+      "sha256": "4f7ffc747eaa7a45d1cdfa1e94430a11006b4df87356a6f8272ae503b1a373ab"
+    },
+    "stubs/wa0/p.java": {
+      "bytes": 87,
+      "sha256": "ef44b095ddb4246f3c827f3ff019343f7147a57f55b027190cc27b4ca39813dd"
+    },
+    "stubs/wb0/n0.java": {
+      "bytes": 85,
+      "sha256": "dc8efe67628f1ebe3f24f39aa4ad7671715295dcca4f97e3fc1871d79289135b"
+    },
+    "stubs/wb0/t0.java": {
+      "bytes": 37,
+      "sha256": "01c8823513d60e3a9592660c4786865efa3deee6b0952dedc5cd2f98f8476f3c"
+    },
+    "stubs/wb0/x.java": {
+      "bytes": 271,
+      "sha256": "4f3d8e8619821adc2b98b32751f489ce30136b6886b49105b902d803520fe96c"
+    },
+    "stubs/wb0/x0.java": {
+      "bytes": 130,
+      "sha256": "052c27fb310d6387cfff445dcb7b93852fa9d274162bfe8428cdaed2a73b6b24"
+    },
+    "stubs/wb0/z0.java": {
+      "bytes": 88,
+      "sha256": "9eed219f730e6f22f85921a295fa8870db298923034beed59354daf55a913b93"
+    },
+    "stubs/xc/d.java": {
+      "bytes": 121,
+      "sha256": "fcf1b51db30cfa60516580dadef283924c156099dd493569c11b935386c5c1c4"
+    },
+    "stubs/xc0/a.java": {
+      "bytes": 139,
+      "sha256": "dbc54b5bdd9955ca4527f13670d2d34c2c544b3a8b59b84a13f6b9faf4ba28b5"
+    },
+    "stubs/xc0/f.java": {
+      "bytes": 55,
+      "sha256": "b5de6b7b544e8aeb09b7db00eb732ad4e9e56384d9a818724e8c7eb5c2a2c5ca"
+    },
+    "stubs/xc0/h.java": {
+      "bytes": 63,
+      "sha256": "9d7348de823533a795fca8de0348f23fa06f285a29bf3c17fe11330b47981978"
+    },
+    "stubs/xd0/d1.java": {
+      "bytes": 192,
+      "sha256": "b2a60c76c97927790ead8fb3f37afdd199187072d1db91778efa720a278540b0"
+    },
+    "stubs/xd0/f0.java": {
+      "bytes": 158,
+      "sha256": "4ca69fd48ddc33be8e1e281f606e2d8c0d36f15c894ebd25969a9d0b028c30c3"
+    },
+    "stubs/xd0/q.java": {
+      "bytes": 108,
+      "sha256": "732fd6453b60ccbe028298fb95f611ff908d69c0db3768d6524b10324ae5264e"
+    },
+    "stubs/z20/c.java": {
+      "bytes": 57,
+      "sha256": "a362ac8d3620890253137eb101dbe7bb9fdbe78192273b1484732a551ab28dfe"
+    },
+    "tests/CandidateArrivalHostTest.java": {
+      "bytes": 13698,
+      "sha256": "f451fa3dc62c8710fc3613b2d8467130b71471266273590c5881d69c8fbe9ce0"
+    },
+    "tests/CandidateScrollPatchProbe.java": {
+      "bytes": 20131,
+      "sha256": "eba16dacc7474a47c209481da2c19adbfa24ca8ccbebc3b3207da849f29fa8bb"
+    },
+    "tests/CandidateToolbarPatchProbe.java": {
+      "bytes": 12414,
+      "sha256": "1c031d72ca8254b86c86fa1d8d06b98a20ae5ab85a62bcd50c20b3e21bb90509"
+    },
+    "tests/EmojiFooterPatchProbe.java": {
+      "bytes": 10274,
+      "sha256": "6085209b12983e26cda190acf892612a9bd0628c93c5d904333ca0f957b57cd1"
+    },
+    "tests/JapaneseStartPatchProbe.java": {
+      "bytes": 11136,
+      "sha256": "42b24e27b4a194e5d40445d4e39802028b98f8e73b9c69579a68dae1ca0398d6"
+    },
+    "tests/LoaderParityProbe.java": {
+      "bytes": 10930,
+      "sha256": "5dbf570a32da6e161dc02527049f215c5cc2ce96e4866d23f7e146b493a25841"
+    },
+    "tests/PunctuationPatchProbe.java": {
+      "bytes": 10238,
+      "sha256": "d9c59a098ca7dfd5542a8b82198e0ad1aa188e5ee50a74aaed0c7d5faed246b4"
+    },
+    "tests/audit_candidate_visual_abi.py": {
+      "bytes": 2556,
+      "sha256": "39947e92bcc47c2010e016698dfa3c440c44174fb4ef4b0eebe29553163a72dd"
+    },
+    "tests/audit_emoji_footer_abi1822.py": {
+      "bytes": 2541,
+      "sha256": "c9f049323673e6b40cd13a50eee67bd10c4147febbb21d820a5ff8e2a710d6b1"
+    },
+    "tests/audit_emoji_slide_abi1823.py": {
+      "bytes": 2537,
+      "sha256": "474bb69da13e5124ae55d9c46f9156c02dcc8cd990751d3fe1f12462ef489243"
+    },
+    "tests/audit_japanese_start_abi.py": {
+      "bytes": 2552,
+      "sha256": "5768bb096dcf1820ef3064ec9ef05af191b7a54c56bb12dbb3db936c3ce2ad61"
+    },
+    "tests/audit_punctuation_abi.py": {
+      "bytes": 2543,
+      "sha256": "dd18a549c6f3d670fd4f39d327ca3f238e1eecc3bc650c3f1651ce542d73308e"
+    },
+    "tests/audit_sensitivity_abi.py": {
+      "bytes": 2556,
+      "sha256": "41725f0bf67cc509fd6da520a1b5b00792f8ce42a49fc616c594bb130ebc2ee5"
+    },
+    "tests/audit_sensitivity_abi1821.py": {
+      "bytes": 2552,
+      "sha256": "a7089da14fdc2e49e25dcbc466f9d896a26bf784a7c81ac569bf8477d462d6e0"
+    },
+    "tests/audit_toolbar_abi.py": {
+      "bytes": 2531,
+      "sha256": "c26b99ec7cedd1d30110b5428eed6fcad49a2571a395e29291695969486f7e4b"
+    },
+    "tests/build_candidate_loader.py": {
+      "bytes": 11027,
+      "sha256": "20ebe4c32479a28fe41efd0a5b9d8afc7a67e6da8e19d56245707baa699c04ad"
+    },
+    "tests/build_emoji_footer_loader.py": {
+      "bytes": 10505,
+      "sha256": "271d0e398a93a35e24333eeb2b0753984fb8b90e883926642bad4955bb1d583d"
+    },
+    "tests/build_japanese_start_loader.py": {
+      "bytes": 13273,
+      "sha256": "991049b26037d5b00d6e1b2f5f09f17ef7265e59947f75b487090961986e3057"
+    },
+    "tests/build_punctuation_loader.py": {
+      "bytes": 8695,
+      "sha256": "ff0116617b6348e0ed9de06a67e93eab6aea744ae324e495140771159dd0446b"
+    },
+    "tests/build_toolbar_loader.py": {
+      "bytes": 8679,
+      "sha256": "273ded27622caf973e33db8eec0cd2342add5d38bf3291ab1f85a63b4ff19a30"
+    },
+    "tests/candidate1819_negative_control.json": {
+      "bytes": 1661,
+      "sha256": "850f58fe0ecc5595c2ae986ac4ff62445298a8c8934af194bc15f89aadd961ce"
+    },
+    "tests/diagnostic_removal_parity.json": {
+      "bytes": 679,
+      "sha256": "732d2246360a5f82bd930dc163e90213c9903500f3a5955ddc7356736edee1e1"
+    },
+    "tests/emoji_footer_host_stubs/android/content/Context.java": {
+      "bytes": 215,
+      "sha256": "632db8b4e1fbe7ec943c713c8f23c6b80ab73aab8d7e9ad8755d0d0e7c7e8412"
+    },
+    "tests/emoji_footer_host_stubs/android/content/res/ColorStateList.java": {
+      "bytes": 266,
+      "sha256": "570248052a7f0a5765fcbb6d5f756f59f341b7d4f64011e5ede30497315671bb"
+    },
+    "tests/emoji_footer_host_stubs/android/content/res/Resources.java": {
+      "bytes": 215,
+      "sha256": "f6db696cd96d21326eca00bd475590833606b2761f2e57000e26922d84ccc763"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/Canvas.java": {
+      "bytes": 178,
+      "sha256": "913797c9557c42a54ef9e1b154e7252da9b2a002b2543a0352d08c8473b3f645"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/Color.java": {
+      "bytes": 112,
+      "sha256": "9f928b6ef24fbab9f39bf8c62d7f20031b48cb235d04f7cbb353f5e472ecf739"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/Paint.java": {
+      "bytes": 573,
+      "sha256": "869ada075e722bb2002527a1a61893d5ec2e96a1928a04120c5639d1324b64b6"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/drawable/ColorDrawable.java": {
+      "bytes": 117,
+      "sha256": "f2ec1605d66a01a699c3d0975007e12f8fcf1c055f6a26af85d3238d3e0f40e8"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/drawable/Drawable.java": {
+      "bytes": 61,
+      "sha256": "f80d421cc9c707b7183d5e8fc6c7665f23868dfddc653bfdcf8101d1b386f79e"
+    },
+    "tests/emoji_footer_host_stubs/android/graphics/drawable/RippleDrawable.java": {
+      "bytes": 310,
+      "sha256": "b227b2ad37220f94dc25345a7554fa293505e87ebfead6c143945373af51b0c7"
+    },
+    "tests/emoji_footer_host_stubs/android/util/DisplayMetrics.java": {
+      "bytes": 110,
+      "sha256": "78d317809896fb660442bf4d717c7c26337ec39bb9ef4ae9e6f169696650e553"
+    },
+    "tests/emoji_footer_host_stubs/android/view/MotionEvent.java": {
+      "bytes": 251,
+      "sha256": "ff801db2bd8892f7a57f25125c1872da3c22a7b8269411b998411b6b9b3594b5"
+    },
+    "tests/emoji_footer_host_stubs/android/view/View.java": {
+      "bytes": 5306,
+      "sha256": "cd54897f27c1e28b6cc5296e6018c814033fb44da8932984e20d91247849eed0"
+    },
+    "tests/emoji_footer_host_stubs/android/view/ViewGroup.java": {
+      "bytes": 2346,
+      "sha256": "7e5857fbd861e5ffc87f4ac8abc09b89c1c2b4c4392a6457b91a67bdeaf0b8cd"
+    },
+    "tests/emoji_footer_host_stubs/android/view/ViewParent.java": {
+      "bytes": 52,
+      "sha256": "ec53c96e5c49ab494030f7ca7834b320db9d9c3cea32fd971fdfa8722b7c82ff"
+    },
+    "tests/emoji_footer_host_stubs/android/view/ViewTreeObserver.java": {
+      "bytes": 657,
+      "sha256": "5ef9cc17d0a9ab8475662922ae283562bb2b094aff3065844ccf71c0054540c0"
+    },
+    "tests/emoji_footer_host_stubs/android/widget/TextView.java": {
+      "bytes": 505,
+      "sha256": "2c31baa9a38e3f3ccdaf89130ac5637941e3df6372ca3a1301824bf2940497da"
+    },
+    "tests/emoji_footer_host_stubs/androidx/constraintlayout/widget/ConstraintLayout.java": {
+      "bytes": 264,
+      "sha256": "e41429d6439b5279589f5e8fed6b0ee252935ac54eb6fff7147b78762168e407"
+    },
+    "tests/emoji_footer_host_stubs/com/google/android/material/button/MaterialButton.java": {
+      "bytes": 181,
+      "sha256": "d1871af9deca3c8bc286cb7ad44ce0fdc3a143f121151be0dff624244563bade"
+    },
+    "tests/emoji_footer_host_stubs/com/touchtype/keyboard/view/DeleteKeyButton.java": {
+      "bytes": 252,
+      "sha256": "e7d6b6b55f019853e8626a4bc072788242e0f1f639ca8a7318ee3d6af47150af"
+    },
+    "tests/emoji_footer_host_stubs/com/touchtype/ui/SwiftKeyTabLayout.java": {
+      "bytes": 326,
+      "sha256": "e5c70b93cc074b2bc54b74a762cabc50cfbc3fcab600bb187af17157f1136071"
+    },
+    "tests/emoji_footer_host_stubs/f50/d.java": {
+      "bytes": 155,
+      "sha256": "458205532d8c86779b639c1ec84a5cc53580d03b04d5e44ceddd1b4442a2c7ee"
+    },
+    "tests/emoji_footer_host_stubs/gg/a.java": {
+      "bytes": 30,
+      "sha256": "b72226e55b67f87f0f1cb9126369af2b1e7b3f5f2772396bc404a0569dbadcd4"
+    },
+    "tests/emoji_footer_host_stubs/je0/c.java": {
+      "bytes": 126,
+      "sha256": "24a76b038bc38f41356b6e222df228234785bcf31079fe2f3c2432f063a105b1"
+    },
+    "tests/emoji_footer_host_stubs/lh0/a.java": {
+      "bytes": 49,
+      "sha256": "647328cb0b54b91242eca4d2833cb5e6f0bbb607d205ee369dbc1cbab13b3c31"
+    },
+    "tests/emoji_footer_host_stubs/wa0/p.java": {
+      "bytes": 95,
+      "sha256": "31eb02b406c8cd618bbbea6697e5ab374cbf71f20edfdcda7c08c88c646ede68"
+    },
+    "tests/emoji_footer_host_stubs/wb0/x.java": {
+      "bytes": 242,
+      "sha256": "f16a61af055c758ba9fe45a629cca12764794ae095d0ac4bcc13dee0a366b32a"
+    },
+    "tests/emoji_slide_host/EmojiSlideHostTest.java": {
+      "bytes": 38524,
+      "sha256": "68cf6d5c92a13dec47642ccbe3a97bb67911f33a3a15759bf16d9354c917ca23"
+    },
+    "tests/emoji_slide_host_stubs/ah0/w0.java": {
+      "bytes": 153,
+      "sha256": "55b1fb3b51ef4532012c156719c7a43a535eddf918b8b0dcd9f4560bf1772886"
+    },
+    "tests/emoji_slide_host_stubs/android/app/AlertDialog.java": {
+      "bytes": 1597,
+      "sha256": "2da3e97eb60750119b88f7a3b102b447ef919a75746afa46109293393b8a04c1"
+    },
+    "tests/emoji_slide_host_stubs/android/content/ClipData.java": {
+      "bytes": 556,
+      "sha256": "12626c6bfa3fb892561d41e053850c0560dd7ecf37c7174e268f6746161c3fbb"
+    },
+    "tests/emoji_slide_host_stubs/android/content/ClipboardManager.java": {
+      "bytes": 327,
+      "sha256": "f2d92b7a4575d8674b3d906dba1154ef9277d3cab486df0506ec38e7fc22600c"
+    },
+    "tests/emoji_slide_host_stubs/android/content/Context.java": {
+      "bytes": 590,
+      "sha256": "45bcd14e8a91a10b27c8830c38f6521f817d7a58b71d71899514d2cce2cbf73d"
+    },
+    "tests/emoji_slide_host_stubs/android/content/ContextWrapper.java": {
+      "bytes": 177,
+      "sha256": "7342da64e7f7e961de0aa35c1109d61183ec658c7466dfa8b4d6c2383dea0258"
+    },
+    "tests/emoji_slide_host_stubs/android/content/DialogInterface.java": {
+      "bytes": 224,
+      "sha256": "5a9f2443c76937dee0978a01cba96e0c33b985eeba438f4df4aeeae19abec19f"
+    },
+    "tests/emoji_slide_host_stubs/android/content/SharedPreferences.java": {
+      "bytes": 430,
+      "sha256": "136bbb8758dc2c2d62f2489649105ad3a36d36220460defc112118385e11e160"
+    },
+    "tests/emoji_slide_host_stubs/android/content/res/AssetManager.java": {
+      "bytes": 182,
+      "sha256": "7877993e3c99cc08e44019c46837b904073bd04ae6409fc2906c255353ef006d"
+    },
+    "tests/emoji_slide_host_stubs/android/content/res/Resources.java": {
+      "bytes": 215,
+      "sha256": "f6db696cd96d21326eca00bd475590833606b2761f2e57000e26922d84ccc763"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Canvas.java": {
+      "bytes": 1504,
+      "sha256": "7036ccb1dff808d8d963383572df8a4181403d962a54246b4db5a5f0ba5dd20d"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Color.java": {
+      "bytes": 112,
+      "sha256": "9f928b6ef24fbab9f39bf8c62d7f20031b48cb235d04f7cbb353f5e472ecf739"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/ColorFilter.java": {
+      "bytes": 54,
+      "sha256": "a3c2308cde657750def05d22f569f8e54a1dc5baaab7f3cf7d4bef8d112c8204"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Matrix.java": {
+      "bytes": 49,
+      "sha256": "c65b96b99eaa6f93db8c817dc343196cb9fd51b7a00e676a323047760cbe6397"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Paint.java": {
+      "bytes": 1396,
+      "sha256": "fca3855900383deae8d4ab8ac66636ec468ca69ec90b28395d2dd128a84749ed"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/PixelFormat.java": {
+      "bytes": 93,
+      "sha256": "d93a0c24e0685f00b47dfbf35c6ba494c90d02f67c7f7572b847d3fb732a10d6"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Rect.java": {
+      "bytes": 375,
+      "sha256": "b38d142cd09669d4d3dbe0fe5322be40658988c3bdd53a5a577d35e230c087d3"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/RectF.java": {
+      "bytes": 717,
+      "sha256": "483010d0cd468deb0fb818ebec5f0c6e15b3e1d6290cb8773d4726b6fd6b51a0"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/Typeface.java": {
+      "bytes": 266,
+      "sha256": "550bcfd39c8b7c81811571d395f66aa3e82945e0b5c9aed6cdcc8262a2586899"
+    },
+    "tests/emoji_slide_host_stubs/android/graphics/drawable/Drawable.java": {
+      "bytes": 649,
+      "sha256": "5ee896b1d8c98bb77479397d87185f31d810afdd0e61a2ecf0365911348c5668"
+    },
+    "tests/emoji_slide_host_stubs/android/inputmethodservice/InputMethodService.java": {
+      "bytes": 251,
+      "sha256": "7c74dc42b585f3bcba7b8530e525ba675d9abc093444c1a9c098fb7804ae07f8"
+    },
+    "tests/emoji_slide_host_stubs/android/os/Handler.java": {
+      "bytes": 405,
+      "sha256": "ed578a9324836a47d64530d32e9920da53dd90ff644668ea8b27aa09a0f11ea7"
+    },
+    "tests/emoji_slide_host_stubs/android/os/IBinder.java": {
+      "bytes": 48,
+      "sha256": "69bbed3cad4b074ec6dd57ebd388f647f909149565c2a24cd8241533d3a1980e"
+    },
+    "tests/emoji_slide_host_stubs/android/os/Looper.java": {
+      "bytes": 101,
+      "sha256": "44b0f855568d6242ea4cb63e622f1b59186ab872f49ef9adffa2ff8ca030cc51"
+    },
+    "tests/emoji_slide_host_stubs/android/os/SystemClock.java": {
+      "bytes": 123,
+      "sha256": "b3ccd6fa6046366f3f285c7bf9d95f65fe2663d1f35ebff2d73de49a60a42b9d"
+    },
+    "tests/emoji_slide_host_stubs/android/util/AttributeSet.java": {
+      "bytes": 55,
+      "sha256": "2b16f3eeb08ad7bd9d30858c1b33e303249967861f07d5af57d9d4a96a14f8fd"
+    },
+    "tests/emoji_slide_host_stubs/android/util/DisplayMetrics.java": {
+      "bytes": 110,
+      "sha256": "78d317809896fb660442bf4d717c7c26337ec39bb9ef4ae9e6f169696650e553"
+    },
+    "tests/emoji_slide_host_stubs/android/util/SparseArray.java": {
+      "bytes": 99,
+      "sha256": "3d29f57c3fefb7956ffa61eaf0d1ce3e40270ef211d2323e21337f81720da0e8"
+    },
+    "tests/emoji_slide_host_stubs/android/view/MotionEvent.java": {
+      "bytes": 1450,
+      "sha256": "04a2ae17b5be5c3b0ed85c839e50aa7500e957c9705bb744c02a27944e13cb58"
+    },
+    "tests/emoji_slide_host_stubs/android/view/View.java": {
+      "bytes": 1794,
+      "sha256": "77f46b28876ecd97a9c44fcbed269ca95b2198c3dd7745540235e646d3b62de6"
+    },
+    "tests/emoji_slide_host_stubs/android/view/ViewConfiguration.java": {
+      "bytes": 736,
+      "sha256": "2cb048dab2cdf47c556a7992690d73837dfbbf1405eca61c9314f5b456f3a144"
+    },
+    "tests/emoji_slide_host_stubs/android/view/ViewOverlay.java": {
+      "bytes": 676,
+      "sha256": "957cdcb788ba09ac37307eca2ecf9e395a02b1f98707cdb43a91dae6e46a1967"
+    },
+    "tests/emoji_slide_host_stubs/android/view/ViewParent.java": {
+      "bytes": 110,
+      "sha256": "ba6fd5e5ed862cde22586c8a75d8c03370187ccf272eafa647feb4ccad091b77"
+    },
+    "tests/emoji_slide_host_stubs/android/view/ViewTreeObserver.java": {
+      "bytes": 657,
+      "sha256": "5ef9cc17d0a9ab8475662922ae283562bb2b094aff3065844ccf71c0054540c0"
+    },
+    "tests/emoji_slide_host_stubs/android/view/inputmethod/EditorInfo.java": {
+      "bytes": 95,
+      "sha256": "f2f65802f77267ce333ced0fcc6e1bca8971c50c4979db4409152803014072f7"
+    },
+    "tests/emoji_slide_host_stubs/android/view/inputmethod/InputConnection.java": {
+      "bytes": 207,
+      "sha256": "0070938bdf139a285e75e77e6d31f9756d5918c81a44a239793d652efa68d2e8"
+    },
+    "tests/emoji_slide_host_stubs/android/widget/Toast.java": {
+      "bytes": 362,
+      "sha256": "9b313031d64cde84457a44e81e89089814b338743c89d739455df148de470ce0"
+    },
+    "tests/emoji_slide_host_stubs/androidx/lifecycle/h.java": {
+      "bytes": 195,
+      "sha256": "f82ae6c3a3d8365f019fc3723767709354e8073fea57d0ea8b8675eeb879b3fc"
+    },
+    "tests/emoji_slide_host_stubs/androidx/preference/Preference.java": {
+      "bytes": 544,
+      "sha256": "bf0555e4dd1eb7ffc4691697e4e7c254fd3155e8d48c93693558a438fd36a8fa"
+    },
+    "tests/emoji_slide_host_stubs/androidx/preference/PreferenceScreen.java": {
+      "bytes": 378,
+      "sha256": "a5b19d08a362de59b78f96a8b40616edc457280fb1183513f62b264d2a42a1f3"
+    },
+    "tests/emoji_slide_host_stubs/androidx/preference/SwitchPreferenceCompat.java": {
+      "bytes": 243,
+      "sha256": "89a5a374b6321ffb20150c3bf486ff9b293ec076a0ea3e61c85447e6c781412e"
+    },
+    "tests/emoji_slide_host_stubs/bf0/g.java": {
+      "bytes": 58,
+      "sha256": "8ffb97afcec87a57f63cfcb3284030bd00f61b65942b4b1739df58be5472e3f8"
+    },
+    "tests/emoji_slide_host_stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 120,
+      "sha256": "0cc364205f381be233d9075bfb46a7a18000b8a9fc111199029af3370030cc3c"
+    },
+    "tests/emoji_slide_host_stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 116,
+      "sha256": "9de97a7994f6116911a50e88474352fde7d6d3a826adb74f19af75465a14cc1b"
+    },
+    "tests/emoji_slide_host_stubs/com/microsoft/tokenshare/m.java": {
+      "bytes": 71,
+      "sha256": "8a0da6b7df4fce89ddd95f200e680b7bced40bab2e248307c5a9569a4562b93c"
+    },
+    "tests/emoji_slide_host_stubs/com/touchtype/KeyboardService.java": {
+      "bytes": 208,
+      "sha256": "b51109ab4e6e18c39c9156ec8d63ee62cd504f58d29d5d5bd1dc59281a408e0f"
+    },
+    "tests/emoji_slide_host_stubs/com/touchtype_fluency/service/j0.java": {
+      "bytes": 92,
+      "sha256": "d36110c6eaee82f2e5c63fb5dd67264a2b3efde82fa436306e40386beb336726"
+    },
+    "tests/emoji_slide_host_stubs/dc0/a.java": {
+      "bytes": 107,
+      "sha256": "8f0e104917e8f172b6124fe9cb5134a86d90eef120f3422fa52e39ab463b0cea"
+    },
+    "tests/emoji_slide_host_stubs/e60/b.java": {
+      "bytes": 48,
+      "sha256": "8d75bb98940da9346af30ede2fb5e397e2f746d5953b96950cf72c96e3920caa"
+    },
+    "tests/emoji_slide_host_stubs/ec0/m.java": {
+      "bytes": 33,
+      "sha256": "75f3da556ad24700e2b729a9c5523b207e0b3f57c742794b95836a5f10c28976"
+    },
+    "tests/emoji_slide_host_stubs/fb0/b0.java": {
+      "bytes": 47,
+      "sha256": "763c465d987bd1c85d9fa52c850ec2758cba8aafc14e4401988d61f62baede33"
+    },
+    "tests/emoji_slide_host_stubs/fb0/f0.java": {
+      "bytes": 148,
+      "sha256": "4b4f9df632c9ff2e6c85825050d1404ab036348d3f7daae0d99ee43fd1acfbdb"
+    },
+    "tests/emoji_slide_host_stubs/fb0/f2.java": {
+      "bytes": 59,
+      "sha256": "1cead2ea658acebc9121358e62a885d9486e7783e460416426202b67bdadf9b7"
+    },
+    "tests/emoji_slide_host_stubs/fb0/l2.java": {
+      "bytes": 348,
+      "sha256": "47f0263ac016d1d42ac34e24306cf6fe93823dbfdca202ebe8b307659c7628ec"
+    },
+    "tests/emoji_slide_host_stubs/fb0/n2.java": {
+      "bytes": 47,
+      "sha256": "78c06c092693ef4091da08b2a6aab5cea62fad2125e7249bdc482f87599c9699"
+    },
+    "tests/emoji_slide_host_stubs/fb0/q0.java": {
+      "bytes": 50,
+      "sha256": "cd9f797361b3e7f96d9417dc9a2d50227d6689d0fa3058e3412adde9f37a9d56"
+    },
+    "tests/emoji_slide_host_stubs/fb0/t0.java": {
+      "bytes": 105,
+      "sha256": "0341b40e664d4207ad60511ea5a9d62eb86e28c021483caa2ed0632f938d9151"
+    },
+    "tests/emoji_slide_host_stubs/fc0/b1.java": {
+      "bytes": 208,
+      "sha256": "7d7484d7a816a9060e8d9f8293bef8a9ea931fbb871e30c693ef4bb4682f3e66"
+    },
+    "tests/emoji_slide_host_stubs/fc0/d1.java": {
+      "bytes": 321,
+      "sha256": "2374cb503bd82ac4a6e02e7169942242bf10e9a6daec297ff2ecdcc614bb99aa"
+    },
+    "tests/emoji_slide_host_stubs/fc0/d2.java": {
+      "bytes": 35,
+      "sha256": "17be760a2b835c677622f498d0a618bfe90b831756b62836afca61f793a60ba2"
+    },
+    "tests/emoji_slide_host_stubs/fc0/m1.java": {
+      "bytes": 63,
+      "sha256": "03c9a3dd662b8eb6e1acb7a101c777894815eb16199e934d04294059f5e2e5ac"
+    },
+    "tests/emoji_slide_host_stubs/fc0/n2.java": {
+      "bytes": 78,
+      "sha256": "8c7b86a28037c950ff6ff58443b463b61e37b2913a8c8c6337a52bd091f3f891"
+    },
+    "tests/emoji_slide_host_stubs/fz/h.java": {
+      "bytes": 88,
+      "sha256": "7ca4cfff8e7a7d88b574b0860bc0a087f5a661ab8c8824d0b592c4b46a4a7200"
+    },
+    "tests/emoji_slide_host_stubs/hc0/a.java": {
+      "bytes": 60,
+      "sha256": "1998ec75b6a28d6353068af59a5d037897f85dd7e53cc657805dcca18542c60b"
+    },
+    "tests/emoji_slide_host_stubs/hc0/k.java": {
+      "bytes": 253,
+      "sha256": "1d82c5370efc2aee9ccab5d6f151c0f0f81a5c787040d9f6ce0bedda9902ab3b"
+    },
+    "tests/emoji_slide_host_stubs/hc0/o.java": {
+      "bytes": 485,
+      "sha256": "ebd136f854b075b2ba4a0f13c08fb9c67703b4f32a51dbe60af5c2804ea19eaf"
+    },
+    "tests/emoji_slide_host_stubs/hiro/swiftkey/CandidateToolbar.java": {
+      "bytes": 423,
+      "sha256": "c989c1dc2c90dd98a79ce114536bc581250f31156a3b228a378e75ce077d7f9c"
+    },
+    "tests/emoji_slide_host_stubs/hiro/swiftkey/EmojiPanelUi.java": {
+      "bytes": 132,
+      "sha256": "250251d848c497778ac60364d3ac63a91f7ebef17985c7dfcde72abca3e023a1"
+    },
+    "tests/emoji_slide_host_stubs/hiro/swiftkey/JapaneseGlideCandidates.java": {
+      "bytes": 609,
+      "sha256": "5fcb04ecc30fc808dae4d1447286abbb09e6b2c98808d3a64bd0a3272e335713"
+    },
+    "tests/emoji_slide_host_stubs/hiro/swiftkey/JapaneseGlideDecoder.java": {
+      "bytes": 1011,
+      "sha256": "0f0947cfbed1f66c0ca5a8b4461c94ec4203a9916005491aa8c96762b3f36b6b"
+    },
+    "tests/emoji_slide_host_stubs/hiro/swiftkey/LineEnter.java": {
+      "bytes": 213,
+      "sha256": "c7a74d957af25375b6d1f010d93e7f36f4c23de7c5e9abe8d3730d606af30adc"
+    },
+    "tests/emoji_slide_host_stubs/ic0/a.java": {
+      "bytes": 54,
+      "sha256": "119184c7b17f9527797d265f31783eae2999075cb982dc54d684d97284a9b6e0"
+    },
+    "tests/emoji_slide_host_stubs/ic0/a0.java": {
+      "bytes": 112,
+      "sha256": "3298f509886b5679bc310a8544f456bce338aa8dd0e3fe33f88eba569e1a0017"
+    },
+    "tests/emoji_slide_host_stubs/ic0/e.java": {
+      "bytes": 88,
+      "sha256": "80abe4ceaa61b0a4477c785a0bde09fd7aaefa8fadb0875a56b49dfb9b056ddf"
+    },
+    "tests/emoji_slide_host_stubs/k40/l.java": {
+      "bytes": 41,
+      "sha256": "43431a4fd21e555e5992a093aa204d9b54385edec3a7a19b812e455068309e8c"
+    },
+    "tests/emoji_slide_host_stubs/lh0/a.java": {
+      "bytes": 33,
+      "sha256": "8bf44cd153dd4e17f85a6c260fdb1d9346df2268c81c73f20a0a9ac26a4a958b"
+    },
+    "tests/emoji_slide_host_stubs/ne0/e0.java": {
+      "bytes": 476,
+      "sha256": "c6e1d9faa3cfa92b51d368d85fd71b0cb0cd06ba8d89067fcbc20a96a2a55f0e"
+    },
+    "tests/emoji_slide_host_stubs/ne0/f0.java": {
+      "bytes": 104,
+      "sha256": "064fd99f453539f3c39692176c24a9618db062c0a9eb38cd4d13d99adbca880d"
+    },
+    "tests/emoji_slide_host_stubs/ne0/g0.java": {
+      "bytes": 55,
+      "sha256": "11018f2a837c6e820572ad21652abf08b36c94b5326d2d09c503304d4a51ec75"
+    },
+    "tests/emoji_slide_host_stubs/ne0/p0.java": {
+      "bytes": 155,
+      "sha256": "4411dd26946a54fe983261457390aa6b0c29a3b4ba551c38fac4d7683fa35ed6"
+    },
+    "tests/emoji_slide_host_stubs/oa/j.java": {
+      "bytes": 104,
+      "sha256": "6d03009861f827dfe10df0dfeb16eb00cd4c4ac56a0c0a2cdf176c68c3296789"
+    },
+    "tests/emoji_slide_host_stubs/oa/k.java": {
+      "bytes": 83,
+      "sha256": "60e5dc334c20213c72915f9ae73c2cd7effb0336afa9c7e71bcdad58f3701fe0"
+    },
+    "tests/emoji_slide_host_stubs/oc0/l.java": {
+      "bytes": 34,
+      "sha256": "459d2d8de16dbded5f3fbbf21dc8f4595ed8adbd6fc4a89188ee9690ec54d721"
+    },
+    "tests/emoji_slide_host_stubs/oc0/m.java": {
+      "bytes": 58,
+      "sha256": "708f64e9681be6c39b25472243780fb081b69c21046cf3fb2c1bf5b358b6c71a"
+    },
+    "tests/emoji_slide_host_stubs/oz/j2.java": {
+      "bytes": 34,
+      "sha256": "85d243a30df5188b846f5808e6b2e69746d21b8a57b8406c9868ea782bbef538"
+    },
+    "tests/emoji_slide_host_stubs/qj0/a.java": {
+      "bytes": 42,
+      "sha256": "f49a49d91f49fd7b4f8f595aeb926c201d52a04e35c3bfa3ef9dff7ea5fb420e"
+    },
+    "tests/emoji_slide_host_stubs/t40/d.java": {
+      "bytes": 97,
+      "sha256": "621896194239b7e2395ff0172a1520bb713a7dbd810ae721cd232360a6213f29"
+    },
+    "tests/emoji_slide_host_stubs/vb0/b.java": {
+      "bytes": 49,
+      "sha256": "b853b462ff2d93669b69e903d9806ab0400853d2de4e5cfd48208ac7c88b3e1c"
+    },
+    "tests/emoji_slide_host_stubs/vb0/c.java": {
+      "bytes": 182,
+      "sha256": "45c2c8c1a11c9d246a1b638bef9a77b22201999c8fef0d081053b1553a0c1ad7"
+    },
+    "tests/emoji_slide_host_stubs/wb0/n0.java": {
+      "bytes": 86,
+      "sha256": "3e05f1b7ced24f47613b846a02ecc73cdbb93b90b6171ebe07f7c384861f1fd9"
+    },
+    "tests/emoji_slide_host_stubs/wb0/t0.java": {
+      "bytes": 38,
+      "sha256": "4ee8b4890e272038da05999adc358d835317c4405b1b4b8143753614d7394052"
+    },
+    "tests/emoji_slide_host_stubs/wb0/x.java": {
+      "bytes": 777,
+      "sha256": "09c902824dc9fc2f39ac0209d516cacd2cad8b63b3b8c1ecd802675a5da5389f"
+    },
+    "tests/emoji_slide_host_stubs/wb0/x0.java": {
+      "bytes": 131,
+      "sha256": "2defa670fd01d4d13660df2d3f111e17181779bcba9973ac9aa6735189057401"
+    },
+    "tests/emoji_slide_host_stubs/wb0/z0.java": {
+      "bytes": 89,
+      "sha256": "2395452c701b832dd027aeb9f333657b400ae721fd6b8858439653852deae566"
+    },
+    "tests/emoji_slide_host_stubs/xc/d.java": {
+      "bytes": 827,
+      "sha256": "865954519445624dbc6e6e6094b9d2fcda91f0bfec68e0c6320fcb178a5dd476"
+    },
+    "tests/emoji_slide_host_stubs/xc0/f.java": {
+      "bytes": 46,
+      "sha256": "6df6e7866249f2243ba2324c033e06fef143b5d1958f613e57dfdeb9d8ab8ab7"
+    },
+    "tests/emoji_slide_host_stubs/xd0/d1.java": {
+      "bytes": 193,
+      "sha256": "1a97cee1ad4a1c923720c21962c03db55d9c82edb4c4168d71297fca5f732821"
+    },
+    "tests/emoji_slide_host_stubs/xd0/f0.java": {
+      "bytes": 159,
+      "sha256": "f3db74afc30ae5b86a64de0321cb811d85ec23f2a89f7951f7183947daec7f8f"
+    },
+    "tests/emoji_slide_host_stubs/xd0/q.java": {
+      "bytes": 109,
+      "sha256": "61829c06ec77fe2d4388501fc6cf42121a8773cebec58304932b5fd924dd3f78"
+    },
+    "tests/emoji_slide_host_stubs/z20/c.java": {
+      "bytes": 58,
+      "sha256": "82352c96adfb67c3b34e7e11f83f03198fdad1e6203a63be3832fdacaf17a79f"
+    },
+    "tests/host/EmojiFooterHostTest.java": {
+      "bytes": 12533,
+      "sha256": "f094ce1b2b710f29e5415c5a640d267296809758d82322f645162795c518cc12"
+    },
+    "tests/host/FlickSymbolsHostTest.java": {
+      "bytes": 66963,
+      "sha256": "ae11f355742dcfccf354313f09fc22a13a40893c8debe3af3bb1b332e37fdd29"
+    },
+    "tests/host/JapaneseGlide.java": {
+      "bytes": 24975,
+      "sha256": "4f15b36f399c9deaffad827cdc8b72d13105cd62eb9e29a642158e133c2fdea8"
+    },
+    "tests/host/JapaneseGlideRuntimeTest.java": {
+      "bytes": 12666,
+      "sha256": "ceeba27f68237a91fb438c940970df65e29c6276b4d6c1370db305ee64d3f9cb"
+    },
+    "tests/host/SensitivityFloorRegressionTest.java": {
+      "bytes": 5490,
+      "sha256": "1163f065677c66ae5c8554504f913a48e7aed9dfae7fc91c7e621a521370b6c1"
+    },
+    "tests/host/SensitivityHostTest.java": {
+      "bytes": 15610,
+      "sha256": "58de90aa5d5cf9fad02f858eda5851f7a717c46dc672b20f2fcc34d9731b2574"
+    },
+    "tests/host/SensitivityTraceProbe.java": {
+      "bytes": 1487,
+      "sha256": "2872e38f591ad0d68523fd60bad2c5b1a6c0f290654b2b9f8737e908f1245fa2"
+    },
+    "tests/host_stubs/ah0/w0.java": {
+      "bytes": 153,
+      "sha256": "55b1fb3b51ef4532012c156719c7a43a535eddf918b8b0dcd9f4560bf1772886"
+    },
+    "tests/host_stubs/android/app/AlertDialog.java": {
+      "bytes": 1597,
+      "sha256": "2da3e97eb60750119b88f7a3b102b447ef919a75746afa46109293393b8a04c1"
+    },
+    "tests/host_stubs/android/content/ClipData.java": {
+      "bytes": 556,
+      "sha256": "12626c6bfa3fb892561d41e053850c0560dd7ecf37c7174e268f6746161c3fbb"
+    },
+    "tests/host_stubs/android/content/ClipboardManager.java": {
+      "bytes": 327,
+      "sha256": "f2d92b7a4575d8674b3d906dba1154ef9277d3cab486df0506ec38e7fc22600c"
+    },
+    "tests/host_stubs/android/content/Context.java": {
+      "bytes": 442,
+      "sha256": "2e874f83d41c3d247d5a989694a43023f3ca6f085fe5de3ce975e0946af61164"
+    },
+    "tests/host_stubs/android/content/ContextWrapper.java": {
+      "bytes": 177,
+      "sha256": "7342da64e7f7e961de0aa35c1109d61183ec658c7466dfa8b4d6c2383dea0258"
+    },
+    "tests/host_stubs/android/content/DialogInterface.java": {
+      "bytes": 224,
+      "sha256": "5a9f2443c76937dee0978a01cba96e0c33b985eeba438f4df4aeeae19abec19f"
+    },
+    "tests/host_stubs/android/content/SharedPreferences.java": {
+      "bytes": 430,
+      "sha256": "136bbb8758dc2c2d62f2489649105ad3a36d36220460defc112118385e11e160"
+    },
+    "tests/host_stubs/android/content/res/AssetManager.java": {
+      "bytes": 182,
+      "sha256": "7877993e3c99cc08e44019c46837b904073bd04ae6409fc2906c255353ef006d"
+    },
+    "tests/host_stubs/android/graphics/Matrix.java": {
+      "bytes": 49,
+      "sha256": "c65b96b99eaa6f93db8c817dc343196cb9fd51b7a00e676a323047760cbe6397"
+    },
+    "tests/host_stubs/android/graphics/RectF.java": {
+      "bytes": 415,
+      "sha256": "1658f67d41b41f359c71da96e11e11f857a3150997a5f5bfddf1423791545330"
+    },
+    "tests/host_stubs/android/inputmethodservice/InputMethodService.java": {
+      "bytes": 251,
+      "sha256": "7c74dc42b585f3bcba7b8530e525ba675d9abc093444c1a9c098fb7804ae07f8"
+    },
+    "tests/host_stubs/android/os/Handler.java": {
+      "bytes": 405,
+      "sha256": "ed578a9324836a47d64530d32e9920da53dd90ff644668ea8b27aa09a0f11ea7"
+    },
+    "tests/host_stubs/android/os/IBinder.java": {
+      "bytes": 48,
+      "sha256": "69bbed3cad4b074ec6dd57ebd388f647f909149565c2a24cd8241533d3a1980e"
+    },
+    "tests/host_stubs/android/os/Looper.java": {
+      "bytes": 101,
+      "sha256": "44b0f855568d6242ea4cb63e622f1b59186ab872f49ef9adffa2ff8ca030cc51"
+    },
+    "tests/host_stubs/android/os/SystemClock.java": {
+      "bytes": 123,
+      "sha256": "b3ccd6fa6046366f3f285c7bf9d95f65fe2663d1f35ebff2d73de49a60a42b9d"
+    },
+    "tests/host_stubs/android/util/AttributeSet.java": {
+      "bytes": 55,
+      "sha256": "2b16f3eeb08ad7bd9d30858c1b33e303249967861f07d5af57d9d4a96a14f8fd"
+    },
+    "tests/host_stubs/android/util/SparseArray.java": {
+      "bytes": 99,
+      "sha256": "3d29f57c3fefb7956ffa61eaf0d1ce3e40270ef211d2323e21337f81720da0e8"
+    },
+    "tests/host_stubs/android/view/MotionEvent.java": {
+      "bytes": 1284,
+      "sha256": "a06e9b724331456264dd94eee05dccc0b83b8754db25eba60d7cc33e07c4eaeb"
+    },
+    "tests/host_stubs/android/view/View.java": {
+      "bytes": 549,
+      "sha256": "4fc8509e11deb47fe5931bf982b4486a349e23c2c161a025a8ba6c0069a91d72"
+    },
+    "tests/host_stubs/android/view/ViewConfiguration.java": {
+      "bytes": 736,
+      "sha256": "2cb048dab2cdf47c556a7992690d73837dfbbf1405eca61c9314f5b456f3a144"
+    },
+    "tests/host_stubs/android/view/inputmethod/EditorInfo.java": {
+      "bytes": 95,
+      "sha256": "f2f65802f77267ce333ced0fcc6e1bca8971c50c4979db4409152803014072f7"
+    },
+    "tests/host_stubs/android/view/inputmethod/InputConnection.java": {
+      "bytes": 207,
+      "sha256": "0070938bdf139a285e75e77e6d31f9756d5918c81a44a239793d652efa68d2e8"
+    },
+    "tests/host_stubs/android/widget/Toast.java": {
+      "bytes": 362,
+      "sha256": "9b313031d64cde84457a44e81e89089814b338743c89d739455df148de470ce0"
+    },
+    "tests/host_stubs/androidx/lifecycle/h.java": {
+      "bytes": 195,
+      "sha256": "f82ae6c3a3d8365f019fc3723767709354e8073fea57d0ea8b8675eeb879b3fc"
+    },
+    "tests/host_stubs/androidx/preference/Preference.java": {
+      "bytes": 544,
+      "sha256": "bf0555e4dd1eb7ffc4691697e4e7c254fd3155e8d48c93693558a438fd36a8fa"
+    },
+    "tests/host_stubs/androidx/preference/PreferenceScreen.java": {
+      "bytes": 378,
+      "sha256": "a5b19d08a362de59b78f96a8b40616edc457280fb1183513f62b264d2a42a1f3"
+    },
+    "tests/host_stubs/androidx/preference/SwitchPreferenceCompat.java": {
+      "bytes": 243,
+      "sha256": "89a5a374b6321ffb20150c3bf486ff9b293ec076a0ea3e61c85447e6c781412e"
+    },
+    "tests/host_stubs/bf0/g.java": {
+      "bytes": 46,
+      "sha256": "efa9376fbf885f8b51fe245c3589717fda380f7c4281c3ecc2d2ddb89eb4e0c9"
+    },
+    "tests/host_stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 120,
+      "sha256": "0cc364205f381be233d9075bfb46a7a18000b8a9fc111199029af3370030cc3c"
+    },
+    "tests/host_stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 116,
+      "sha256": "9de97a7994f6116911a50e88474352fde7d6d3a826adb74f19af75465a14cc1b"
+    },
+    "tests/host_stubs/com/microsoft/tokenshare/m.java": {
+      "bytes": 71,
+      "sha256": "8a0da6b7df4fce89ddd95f200e680b7bced40bab2e248307c5a9569a4562b93c"
+    },
+    "tests/host_stubs/com/touchtype/KeyboardService.java": {
+      "bytes": 208,
+      "sha256": "b51109ab4e6e18c39c9156ec8d63ee62cd504f58d29d5d5bd1dc59281a408e0f"
+    },
+    "tests/host_stubs/com/touchtype_fluency/service/j0.java": {
+      "bytes": 92,
+      "sha256": "d36110c6eaee82f2e5c63fb5dd67264a2b3efde82fa436306e40386beb336726"
+    },
+    "tests/host_stubs/dc0/a.java": {
+      "bytes": 107,
+      "sha256": "8f0e104917e8f172b6124fe9cb5134a86d90eef120f3422fa52e39ab463b0cea"
+    },
+    "tests/host_stubs/e60/b.java": {
+      "bytes": 48,
+      "sha256": "8d75bb98940da9346af30ede2fb5e397e2f746d5953b96950cf72c96e3920caa"
+    },
+    "tests/host_stubs/ec0/m.java": {
+      "bytes": 33,
+      "sha256": "75f3da556ad24700e2b729a9c5523b207e0b3f57c742794b95836a5f10c28976"
+    },
+    "tests/host_stubs/fb0/f0.java": {
+      "bytes": 148,
+      "sha256": "4b4f9df632c9ff2e6c85825050d1404ab036348d3f7daae0d99ee43fd1acfbdb"
+    },
+    "tests/host_stubs/fb0/f2.java": {
+      "bytes": 59,
+      "sha256": "1cead2ea658acebc9121358e62a885d9486e7783e460416426202b67bdadf9b7"
+    },
+    "tests/host_stubs/fb0/l2.java": {
+      "bytes": 348,
+      "sha256": "47f0263ac016d1d42ac34e24306cf6fe93823dbfdca202ebe8b307659c7628ec"
+    },
+    "tests/host_stubs/fb0/n2.java": {
+      "bytes": 47,
+      "sha256": "78c06c092693ef4091da08b2a6aab5cea62fad2125e7249bdc482f87599c9699"
+    },
+    "tests/host_stubs/fb0/q0.java": {
+      "bytes": 50,
+      "sha256": "cd9f797361b3e7f96d9417dc9a2d50227d6689d0fa3058e3412adde9f37a9d56"
+    },
+    "tests/host_stubs/fb0/t0.java": {
+      "bytes": 105,
+      "sha256": "0341b40e664d4207ad60511ea5a9d62eb86e28c021483caa2ed0632f938d9151"
+    },
+    "tests/host_stubs/fc0/b1.java": {
+      "bytes": 208,
+      "sha256": "7d7484d7a816a9060e8d9f8293bef8a9ea931fbb871e30c693ef4bb4682f3e66"
+    },
+    "tests/host_stubs/fc0/d1.java": {
+      "bytes": 321,
+      "sha256": "2374cb503bd82ac4a6e02e7169942242bf10e9a6daec297ff2ecdcc614bb99aa"
+    },
+    "tests/host_stubs/fc0/d2.java": {
+      "bytes": 35,
+      "sha256": "17be760a2b835c677622f498d0a618bfe90b831756b62836afca61f793a60ba2"
+    },
+    "tests/host_stubs/fc0/m1.java": {
+      "bytes": 63,
+      "sha256": "03c9a3dd662b8eb6e1acb7a101c777894815eb16199e934d04294059f5e2e5ac"
+    },
+    "tests/host_stubs/fc0/n2.java": {
+      "bytes": 78,
+      "sha256": "8c7b86a28037c950ff6ff58443b463b61e37b2913a8c8c6337a52bd091f3f891"
+    },
+    "tests/host_stubs/fz/h.java": {
+      "bytes": 88,
+      "sha256": "7ca4cfff8e7a7d88b574b0860bc0a087f5a661ab8c8824d0b592c4b46a4a7200"
+    },
+    "tests/host_stubs/hc0/a.java": {
+      "bytes": 60,
+      "sha256": "1998ec75b6a28d6353068af59a5d037897f85dd7e53cc657805dcca18542c60b"
+    },
+    "tests/host_stubs/hc0/k.java": {
+      "bytes": 140,
+      "sha256": "4a98585d715000e0c3b09a88cb9b4e164a08ffceb8cede3d9676b91753a925ac"
+    },
+    "tests/host_stubs/hc0/o.java": {
+      "bytes": 295,
+      "sha256": "d4d9099b0fdb81013af33b214d8efb0204476e8797d18b5d5b2ca0b9d269cb68"
+    },
+    "tests/host_stubs/hiro/swiftkey/EmojiPanelUi.java": {
+      "bytes": 132,
+      "sha256": "250251d848c497778ac60364d3ac63a91f7ebef17985c7dfcde72abca3e023a1"
+    },
+    "tests/host_stubs/hiro/swiftkey/JapaneseGlideCandidates.java": {
+      "bytes": 609,
+      "sha256": "5fcb04ecc30fc808dae4d1447286abbb09e6b2c98808d3a64bd0a3272e335713"
+    },
+    "tests/host_stubs/hiro/swiftkey/JapaneseGlideDecoder.java": {
+      "bytes": 1011,
+      "sha256": "0f0947cfbed1f66c0ca5a8b4461c94ec4203a9916005491aa8c96762b3f36b6b"
+    },
+    "tests/host_stubs/hiro/swiftkey/LineEnter.java": {
+      "bytes": 213,
+      "sha256": "c7a74d957af25375b6d1f010d93e7f36f4c23de7c5e9abe8d3730d606af30adc"
+    },
+    "tests/host_stubs/ic0/a.java": {
+      "bytes": 54,
+      "sha256": "119184c7b17f9527797d265f31783eae2999075cb982dc54d684d97284a9b6e0"
+    },
+    "tests/host_stubs/ic0/e.java": {
+      "bytes": 45,
+      "sha256": "a436943551e4d362b48bb901ac24ce52bab3a28b56797616fc9e7e6e4cd794aa"
+    },
+    "tests/host_stubs/k40/l.java": {
+      "bytes": 41,
+      "sha256": "43431a4fd21e555e5992a093aa204d9b54385edec3a7a19b812e455068309e8c"
+    },
+    "tests/host_stubs/lh0/a.java": {
+      "bytes": 33,
+      "sha256": "8bf44cd153dd4e17f85a6c260fdb1d9346df2268c81c73f20a0a9ac26a4a958b"
+    },
+    "tests/host_stubs/oa/j.java": {
+      "bytes": 104,
+      "sha256": "6d03009861f827dfe10df0dfeb16eb00cd4c4ac56a0c0a2cdf176c68c3296789"
+    },
+    "tests/host_stubs/oa/k.java": {
+      "bytes": 83,
+      "sha256": "60e5dc334c20213c72915f9ae73c2cd7effb0336afa9c7e71bcdad58f3701fe0"
+    },
+    "tests/host_stubs/oc0/l.java": {
+      "bytes": 34,
+      "sha256": "459d2d8de16dbded5f3fbbf21dc8f4595ed8adbd6fc4a89188ee9690ec54d721"
+    },
+    "tests/host_stubs/oc0/m.java": {
+      "bytes": 58,
+      "sha256": "708f64e9681be6c39b25472243780fb081b69c21046cf3fb2c1bf5b358b6c71a"
+    },
+    "tests/host_stubs/qj0/a.java": {
+      "bytes": 42,
+      "sha256": "f49a49d91f49fd7b4f8f595aeb926c201d52a04e35c3bfa3ef9dff7ea5fb420e"
+    },
+    "tests/host_stubs/t40/d.java": {
+      "bytes": 97,
+      "sha256": "621896194239b7e2395ff0172a1520bb713a7dbd810ae721cd232360a6213f29"
+    },
+    "tests/host_stubs/vb0/b.java": {
+      "bytes": 49,
+      "sha256": "b853b462ff2d93669b69e903d9806ab0400853d2de4e5cfd48208ac7c88b3e1c"
+    },
+    "tests/host_stubs/vb0/c.java": {
+      "bytes": 141,
+      "sha256": "e2cca37fd1e98292fdeab5af6a459e68d7dd4ab7d5085304fbfd9af50934bd4e"
+    },
+    "tests/host_stubs/wb0/n0.java": {
+      "bytes": 86,
+      "sha256": "3e05f1b7ced24f47613b846a02ecc73cdbb93b90b6171ebe07f7c384861f1fd9"
+    },
+    "tests/host_stubs/wb0/t0.java": {
+      "bytes": 38,
+      "sha256": "4ee8b4890e272038da05999adc358d835317c4405b1b4b8143753614d7394052"
+    },
+    "tests/host_stubs/wb0/x.java": {
+      "bytes": 181,
+      "sha256": "f551390f0cdce9fe24a749039f9c4407e600741628ea3680609c0c4ab2b953cf"
+    },
+    "tests/host_stubs/wb0/x0.java": {
+      "bytes": 131,
+      "sha256": "2defa670fd01d4d13660df2d3f111e17181779bcba9973ac9aa6735189057401"
+    },
+    "tests/host_stubs/wb0/z0.java": {
+      "bytes": 89,
+      "sha256": "2395452c701b832dd027aeb9f333657b400ae721fd6b8858439653852deae566"
+    },
+    "tests/host_stubs/xc0/f.java": {
+      "bytes": 46,
+      "sha256": "6df6e7866249f2243ba2324c033e06fef143b5d1958f613e57dfdeb9d8ab8ab7"
+    },
+    "tests/host_stubs/xd0/d1.java": {
+      "bytes": 193,
+      "sha256": "1a97cee1ad4a1c923720c21962c03db55d9c82edb4c4168d71297fca5f732821"
+    },
+    "tests/host_stubs/xd0/f0.java": {
+      "bytes": 159,
+      "sha256": "f3db74afc30ae5b86a64de0321cb811d85ec23f2a89f7951f7183947daec7f8f"
+    },
+    "tests/host_stubs/xd0/q.java": {
+      "bytes": 109,
+      "sha256": "61829c06ec77fe2d4388501fc6cf42121a8773cebec58304932b5fd924dd3f78"
+    },
+    "tests/host_stubs/z20/c.java": {
+      "bytes": 58,
+      "sha256": "82352c96adfb67c3b34e7e11f83f03198fdad1e6203a63be3832fdacaf17a79f"
+    },
+    "tests/japanese_start_host/JapaneseStartHostTest.java": {
+      "bytes": 9705,
+      "sha256": "a57ec549ec63b8740f61de57fe96f4bb91a3560d656c91f9ac3d872636096271"
+    },
+    "tests/japanese_start_stubs/android/os/Looper.java": {
+      "bytes": 237,
+      "sha256": "b18de8ebfcf39593acb47ef607c719f0b7e1f2c64c1a14cbac527bf97be950b0"
+    },
+    "tests/japanese_start_stubs/android/view/inputmethod/EditorInfo.java": {
+      "bytes": 109,
+      "sha256": "839939cc3e9f0965de3f2e1379358501fe2f956fd0d2560788baee9a2ce30caf"
+    },
+    "tests/japanese_start_stubs/com/touchtype/KeyboardService.java": {
+      "bytes": 55,
+      "sha256": "3e23337121326580e956534d02c04694eabdbf8dea1c97020442c80e494c3635"
+    },
+    "tests/japanese_start_stubs/fb0/f5.java": {
+      "bytes": 708,
+      "sha256": "88a7d6ba8cfba3ac0cdf832218f33e115b8fb0162534aa0f151e12c969b68717"
+    },
+    "tests/japanese_start_stubs/fb0/i0.java": {
+      "bytes": 155,
+      "sha256": "5bf5d203315d707010b7aa4e59b3d6a16acac9e3319b6eadf6e15509b5490f67"
+    },
+    "tests/japanese_start_stubs/fb0/q1.java": {
+      "bytes": 49,
+      "sha256": "dc5d2d0b40db6341a019350dfe54817e34a16a763883d2ca72817538dbe967ff"
+    },
+    "tests/japanese_start_stubs/qj0/a.java": {
+      "bytes": 43,
+      "sha256": "2fce5e5ef3896353fa1c6fe7fa5e9027a41269fc770dc320d107128fed6a464c"
+    },
+    "tests/native_abi_review.json": {
+      "bytes": 78499,
+      "sha256": "25370c583fd402c921563ea146001175bf6b25635390663489e3f7437fc8c856"
+    },
+    "tests/native_abi_review1815.json": {
+      "bytes": 85499,
+      "sha256": "1d45621deb68623cc4e9c9806e37aff1113d513f9821989f3909c7e332c8ccc7"
+    },
+    "tests/native_abi_review1816.json": {
+      "bytes": 61481,
+      "sha256": "b5028d6751d8fc5ddd339a3e6d6e68304b2d2c2b1ba2ea50bdae3665db560086"
+    },
+    "tests/native_abi_review1817.json": {
+      "bytes": 71431,
+      "sha256": "1891875cd423f7d705bfc8d4bf3b579d577aa35f390f868bb6cf42409703aec8"
+    },
+    "tests/native_abi_review1818.json": {
+      "bytes": 137331,
+      "sha256": "775eefcbbda5406e22df11155c2bfa312ffbd74cdf2efa63963d731db32ec107"
+    },
+    "tests/native_abi_review1819.json": {
+      "bytes": 151862,
+      "sha256": "01e706504e5088709852ce2735dc362dacc01dea8b6fdb50701e551620992622"
+    },
+    "tests/native_candidate_anchor_review.json": {
+      "bytes": 27316,
+      "sha256": "81c199ced36ff65d4cc64cdd10f1855d4e8c273ea7f7392dca090dee15c608ee"
+    },
+    "tests/native_candidate_arrival_fixture.json": {
+      "bytes": 16815,
+      "sha256": "e8c02f103ee055567dc2c2425bec9e73a5106eba28cfdad4ab8a0b7e05ce913d"
+    },
+    "tests/native_candidate_arrival_review.json": {
+      "bytes": 1427,
+      "sha256": "43f74576c4507298e4b5a6698f65ec044446402ef2f0506fab0bb7d85011ccee"
+    },
+    "tests/native_candidate_fixture/rb0/h.smali": {
+      "bytes": 1440,
+      "sha256": "b8dd16bc44bbc1a3bd7e992c0245beed688d78d14fb58413d29c382dd3276f31"
+    },
+    "tests/native_candidate_fixture/rb0/j.smali": {
+      "bytes": 3230,
+      "sha256": "dd56f31418040ab894e7843aee1123d9f4b870d8bacaf5465d118a96ac0181ff"
+    },
+    "tests/native_candidate_fixture/rb0/k.smali": {
+      "bytes": 1662,
+      "sha256": "30441882ade79b49db8668f3acec53eda28dbc7d7a772c661c166d8db7f9f15f"
+    },
+    "tests/native_candidate_fixture/rb0/l.smali": {
+      "bytes": 1355,
+      "sha256": "64afa2a3a4b36a038a35912e0f3d34e1201ce632adc4bf8a7934fab48e9fc68d"
+    },
+    "tests/native_candidate_visual_review.json": {
+      "bytes": 19517,
+      "sha256": "7b621dbdb7a0760c103d39e4b14cd823a8f285088ff58c35b1dd301433aa21fe"
+    },
+    "tests/native_emoji_footer_abi1822.json": {
+      "bytes": 52692,
+      "sha256": "0943b0e910c8f235c0e7492406358fff9012aca64dd889aee01f4b1cc2287bbc"
+    },
+    "tests/native_emoji_footer_archive_review.json": {
+      "bytes": 4583,
+      "sha256": "33875a9b34411162f30d91e87f843c32fa416276a26c0463f92e2eae8e4072f2"
+    },
+    "tests/native_emoji_footer_fixture/je0/c.smali": {
+      "bytes": 18428,
+      "sha256": "db8b13bc8387d1671591c57238ef5b32053baa9d3390b66516e2509a79f7d1d4"
+    },
+    "tests/native_emoji_footer_fixture/manifest.json": {
+      "bytes": 544,
+      "sha256": "3a9312dc10a308271cfadaa0f678e8006bfc2b4dd752ef38e64e36592a57dd6d"
+    },
+    "tests/native_emoji_footer_fixture/wb0/x.smali": {
+      "bytes": 2180,
+      "sha256": "21627cee9ba4d2e54b5709d736bbbe84e726796e8a9eb64d89cdce2326945498"
+    },
+    "tests/native_emoji_slide_abi1823.json": {
+      "bytes": 284395,
+      "sha256": "6b436b00fe39a9b27dd4df26c924e9df86b7fb1b5811429f32667264302a634b"
+    },
+    "tests/native_emoji_slide_review.json": {
+      "bytes": 12033,
+      "sha256": "e7b4ceb50bdc1ee1b37da6eba1e3982655a3721a9c4fefab4f4420582ead3c48"
+    },
+    "tests/native_flick_review.json": {
+      "bytes": 11696,
+      "sha256": "4f5d492f5aedbac3e9d611ce5dc0db9c48c06f5d3f2b49e73422656ca346552f"
+    },
+    "tests/native_japanese_start_abi1819.json": {
+      "bytes": 16123,
+      "sha256": "2176134e549d10286b78c54ed968688894ace6fd19fc10cb1f9479b61f9787dc"
+    },
+    "tests/native_japanese_start_fixture/com/touchtype/KeyboardService.smali": {
+      "bytes": 2533,
+      "sha256": "5cd8d21f7909d08d1bb6a2a89d38e79c5545c1aafc2cc565ea84187e53c9747c"
+    },
+    "tests/native_japanese_start_fixture/fb0/g0.smali": {
+      "bytes": 3894,
+      "sha256": "fcafc81edc41cc06182638105d6ebd597f368696b9ebd755eee62944b7fba253"
+    },
+    "tests/native_japanese_start_fixture/xd0/d1.smali": {
+      "bytes": 951,
+      "sha256": "61d4fe474a4d34f0a672ae546edaa75f6ea24b89f976056005c6013e78d60fdd"
+    },
+    "tests/native_japanese_start_review.json": {
+      "bytes": 18738,
+      "sha256": "7633cd45fc26a7bc71da3e2f7ab397a489cc8b401be427f46b23c87def5b13a8"
+    },
+    "tests/native_popup_review.json": {
+      "bytes": 14761,
+      "sha256": "c25ed5aa5442dcf8a239e76cdd913e6276cc2a2e966c27dcaa0ed0b02818f4a3"
+    },
+    "tests/native_punctuation_hook_fixture/fc0/s1.smali": {
+      "bytes": 3992,
+      "sha256": "990284ce5a4ee3f494347e4ec36e3630555a4cbb253001f35764e38c7760f462"
+    },
+    "tests/native_punctuation_review.json": {
+      "bytes": 19557,
+      "sha256": "0787374c51117435de7314f4124e915874917d381c0a04f00998fe49e3e813e6"
+    },
+    "tests/native_query1819_review.json": {
+      "bytes": 10316,
+      "sha256": "3582e73b9ddd65f22ea36ee41ecd663b5b6bb9b944c5a343c0fa5e492c3de249"
+    },
+    "tests/native_sensitivity_abi1820.json": {
+      "bytes": 150322,
+      "sha256": "540a9a37cc7b5d7a5226fb421158ccfdf87787842397c1dbb7cb35e76cc71b05"
+    },
+    "tests/native_sensitivity_abi1821.json": {
+      "bytes": 150322,
+      "sha256": "7f15e6d2915e4ca44cd0d6e697970f1b3543e8b9c76c4886b197a3a71d9cea16"
+    },
+    "tests/native_toolbar_fixture/com/touchtype/keyboard/candidates/view/SequentialCandidateBarLayoutWithECWButton.smali": {
+      "bytes": 2819,
+      "sha256": "102fa430095f08eb815e52dff82aa4e331ff52c8f154ee4798199e72e360deee"
+    },
+    "tests/native_toolbar_fixture/com/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton.smali": {
+      "bytes": 1853,
+      "sha256": "7c462e44ad7182535626175be20f6351e7bbe7be9d4d6bea242938ddb1491806"
+    },
+    "tests/native_toolbar_fixture/fc0/h.smali": {
+      "bytes": 4875,
+      "sha256": "9449ca9ecce1aee573f998687059808dccd820362b3641b49262496b3fa8dda4"
+    },
+    "tests/native_toolbar_fixture/ob0/d1.smali": {
+      "bytes": 1627,
+      "sha256": "66aa92dfcb988ff97fb0a7f075a1fda524eef90b7eaa9926261875bb3f06ade2"
+    },
+    "tests/native_toolbar_fixture/ob0/e.smali": {
+      "bytes": 3336,
+      "sha256": "4ba353c53ef7b3f833acee95b033efc248bc2e3c9cb63420e77caa3e859ec3eb"
+    },
+    "tests/native_toolbar_gesture_review.json": {
+      "bytes": 3180,
+      "sha256": "4a68c444b75ce3619b61e652d6335c0c7ce0359a072e0d165a66acaca435afa3"
+    },
+    "tests/natural_flick_reference_review.json": {
+      "bytes": 3357,
+      "sha256": "533dda9c332265e31fdff49b73df6622cd89d7cdcc3e56118555d64d66a8e8de"
+    },
+    "tests/ownership_rethink_review.json": {
+      "bytes": 15360,
+      "sha256": "95e0183c879b6f4d61ccc53e6c381215b09244f6abcbb40b1be08dcc18aa4271"
+    },
+    "tests/probes/NativePopupDigitRowProbe.java": {
+      "bytes": 1109,
+      "sha256": "2773454f28669398137f23540143e07cb58a46bb821417b70b1ad84ec6ab6f11"
+    },
+    "tests/probes/native-popup-digit-comparison1812-1813.json": {
+      "bytes": 2035,
+      "sha256": "9fe3559b1980bce3c5cf7c674a06b58e395e8625e5845fa342f2ae72ea025187"
+    },
+    "tests/punctuation_fixtures/baseline/KeySwap.smali": {
+      "bytes": 26619,
+      "sha256": "1433b646397952717da4cd00f594167046960635fbddc30dc451478000165f9c"
+    },
+    "tests/punctuation_fixtures/baseline/KeySwapBinary.smali": {
+      "bytes": 27816,
+      "sha256": "c133bc2e1883ca7bcf209225e41109ab99fcfcb0ac40bfc153bad19f0ce176cf"
+    },
+    "tests/punctuation_fixtures/layouts/keyboard_layout_standard_qwerty.b64": {
+      "bytes": 1345,
+      "sha256": "2d9c3f0a446395e62cb532c35368a27dd94b1eb10ea2e21e1ec60ad6148cb401"
+    },
+    "tests/punctuation_fixtures/layouts/keyboard_layout_standard_romaji.b64": {
+      "bytes": 1357,
+      "sha256": "40a9d771d5aa81c7d2d4cc8b1d9bc247c92ce929737e42c32b69eafa0f0e8daf"
+    },
+    "tests/punctuation_fixtures/layouts/keyboard_layout_standard_romaji_compact.b64": {
+      "bytes": 1357,
+      "sha256": "40a9d771d5aa81c7d2d4cc8b1d9bc247c92ce929737e42c32b69eafa0f0e8daf"
+    },
+    "tests/punctuation_fixtures/layouts/keyboard_layout_standard_romaji_pc.b64": {
+      "bytes": 1337,
+      "sha256": "e6691e7b9e65fedd1a7a1443e8230232365b7a13127a78fa16f9d576c1306255"
+    },
+    "tests/punctuation_fixtures/manifest.json": {
+      "bytes": 2175,
+      "sha256": "21f264763ee8999eb09387d36e4f39454c0c0b9c785cdc399a2fc32165a43e1b"
+    },
+    "tests/punctuation_fixtures.py": {
+      "bytes": 10003,
+      "sha256": "93bedcd4530104ce9324a250c3c20641ab506d2db129f64fc838fc5384b4e7ae"
+    },
+    "tests/punctuation_host/PunctuationKeysHostTest.java": {
+      "bytes": 25044,
+      "sha256": "f2eaae5cf8589ee09ac5614b5b82d880f50621b6866a078a331a7fb3189826c2"
+    },
+    "tests/punctuation_host/PunctuationTransformProbe.java": {
+      "bytes": 1676,
+      "sha256": "3f30e5449f859604831953b08af99b1a2a2c40144a50cf480fa8789af3c2b679"
+    },
+    "tests/punctuation_stubs/android/content/res/Resources.java": {
+      "bytes": 1003,
+      "sha256": "cfaa51eaa13502ed20f550ecb6b39886817cbab281e0738b25478f6c441ea2bc"
+    },
+    "tests/punctuation_stubs/fb0/h2.java": {
+      "bytes": 1611,
+      "sha256": "8493b990935c3db9a8f1cc359d1be714bf19c86191e080e3a902cdef3e03e0d9"
+    },
+    "tests/punctuation_stubs/fc0/s1.java": {
+      "bytes": 853,
+      "sha256": "9e135f74d437ec501e98079c4fa031ccdf24d492f23cef558371a448a5207f79"
+    },
+    "tests/punctuation_stubs/fc0/v1.java": {
+      "bytes": 355,
+      "sha256": "90c0bc5a2a995233d37d6bc534d0de8c3ceb15bf2cacdd01b0fd089354c5a398"
+    },
+    "tests/punctuation_stubs/hiro/swiftkey/KeySwap.java": {
+      "bytes": 417,
+      "sha256": "8f145aadb62f58110c44124e409ed3bf1a778815cbbb11124ca6390da73487b8"
+    },
+    "tests/punctuation_stubs/sc0/c.java": {
+      "bytes": 240,
+      "sha256": "8ab934a415a84db64dbadd61ccb497c23e761e605353b20bee85ace644d4017e"
+    },
+    "tests/punctuation_stubs/xc0/a.java": {
+      "bytes": 284,
+      "sha256": "16c27662d099789ac802c3ae1dedd9b0f4043269590bc517bf231f9d728367dc"
+    },
+    "tests/punctuation_stubs/xc0/d.java": {
+      "bytes": 158,
+      "sha256": "61aa3b589be4e074102203e0b0255321cecbc871ba30d18a1b174a87df9de56b"
+    },
+    "tests/punctuation_stubs/xc0/f.java": {
+      "bytes": 574,
+      "sha256": "1760484d99691891b913081589a549c8db5d18b96310024acc153a58104ec96c"
+    },
+    "tests/punctuation_stubs/xc0/h.java": {
+      "bytes": 55,
+      "sha256": "c654ac66a4db8a3fb0c54810d57ab4370868d7f64decf8be0753bc442a0afb12"
+    },
+    "tests/punctuation_stubs/xc0/i.java": {
+      "bytes": 197,
+      "sha256": "0754f3f06f6c4609c6422927bd2a5719a99952379f3bfdee6d199d4695f864b2"
+    },
+    "tests/run_candidate_arrival_negative.py": {
+      "bytes": 3433,
+      "sha256": "672bbbcda87f7d895532ecd90b4c688d7b4a4675c67f1a86685949aa83d08a6e"
+    },
+    "tests/run_candidate_tests.py": {
+      "bytes": 57101,
+      "sha256": "e027957ca2444e0f5929cdccfe9ef241b132b12f7e49ba7e449f8bb97c680966"
+    },
+    "tests/run_emoji_footer_tests.py": {
+      "bytes": 4162,
+      "sha256": "8fb368a939ac16a6b54d6223048d159e00ee2f57cf3ad0fd0ce0648928155ded"
+    },
+    "tests/run_emoji_slide_tests.py": {
+      "bytes": 5604,
+      "sha256": "e9c62b22bf2ebed6ac31534adb14b89cce9c24a917f0c4d61210caeb6581a21a"
+    },
+    "tests/run_japanese_start_tests.py": {
+      "bytes": 2197,
+      "sha256": "cedeec5b3b832757ada055be96b933839ab213202f71cfcceaa9d47012b557a4"
+    },
+    "tests/run_punctuation_tests.py": {
+      "bytes": 14915,
+      "sha256": "13c2e80c8eda3a6d9ecb404716f474bcda45887b49ba64568b95aaa28ff02b8b"
+    },
+    "tests/run_sensitivity_tests.py": {
+      "bytes": 9807,
+      "sha256": "ecbd44f5f4621df2b84f5688817c45db3110133d59783a49f3b3bc674f77a66f"
+    },
+    "tests/run_tests.py": {
+      "bytes": 2315,
+      "sha256": "a926899213a5867c2d02513a20c8dd5b8c0cd1538d4ffe15532b05c7602b5ec1"
+    },
+    "tests/run_toolbar_gesture_tests.py": {
+      "bytes": 14298,
+      "sha256": "7aba5b7f12ba98fd47b2ca06213b33ad4f8eeec11996576b9e5ef2e927d9b179"
+    },
+    "tests/run_toolbar_layout_tests.py": {
+      "bytes": 16863,
+      "sha256": "e0c50e4389a25623ae763cd514fd7a08b0b782f19eda33382352883d32466ac3"
+    },
+    "tests/sensitivity1820_baseline/FlickSymbols.java": {
+      "bytes": 25859,
+      "sha256": "68715438ac2d43fbe4533001412af5a5ace807df4a282c4d2ff12f444db7f069"
+    },
+    "tests/sensitivity1820_baseline/manifest.json": {
+      "bytes": 210,
+      "sha256": "aae032bd89bd621d8cafee57efd4c46b7fcc2e9459ca238ceb46a20a3727ca8a"
+    },
+    "tests/sensitivity_baseline/FlickSymbols.java": {
+      "bytes": 22452,
+      "sha256": "8b3d3822c68259687ddbced9c5bb4b95d5f1957f7bc67b86d0a0f630965c27ab"
+    },
+    "tests/sensitivity_baseline/manifest.json": {
+      "bytes": 273,
+      "sha256": "e014b6e09ea1d132ed74e399ac811385fb093afb6120000ce9e33a13484fd56d"
+    },
+    "tests/verify_candidate_arrival_contract.py": {
+      "bytes": 4181,
+      "sha256": "39ea3818fb72017a8fcffe367079e88afd3e21585940ede998b1dc0cce311d21"
+    },
+    "tests/verify_punctuation_merge.py": {
+      "bytes": 4963,
+      "sha256": "c3d617cdbc428c1a8a68afc8e5f508299d8f3f9ba58e263b96dcfe9f7f95a0c2"
+    },
+    "tools_java/AuditCandidateVisualAbi.java": {
+      "bytes": 20314,
+      "sha256": "81017d564852bf27e95fcd157c691f66cf81e02c971b1dce2dabee155c1ac288"
+    },
+    "tools_java/AuditEmojiFooterAbi.java": {
+      "bytes": 21308,
+      "sha256": "994724c8186712d0031e9cb327df6ac4f3c3154cf8599c9f31dee39029fa9f71"
+    },
+    "tools_java/AuditEmojiSlideAbi.java": {
+      "bytes": 21434,
+      "sha256": "9f331f9a2b59d3b3f67b26473e14a97ab2230ed41ec7cd764e7a22b22fff7400"
+    },
+    "tools_java/AuditJapaneseStartAbi.java": {
+      "bytes": 20111,
+      "sha256": "2b1c5c9acd2447b88ec61a7d1187766847e416e436c53f1b04280baa39d76a5a"
+    },
+    "tools_java/AuditPunctuationAbi.java": {
+      "bytes": 18500,
+      "sha256": "e071233c77e1bc5fe40fdd643288c2631232af8126145ef27b1db8876634e300"
+    },
+    "tools_java/AuditSensitivityAbi.java": {
+      "bytes": 21311,
+      "sha256": "be78113a59cc8b4ec3e9b143f09025da28104467011f3d66cfcdf002104eaaf3"
+    },
+    "tools_java/AuditToolbarAbi.java": {
+      "bytes": 18423,
+      "sha256": "c82482ce481a4426abaf1263b8bb6f6b33487eaa6a66557fe17c4cf702e6fb63"
+    },
+    "tools_java/Dump1810.java": {
+      "bytes": 1385,
+      "sha256": "3608f5f0fe61efdfc5a13c57340ffa532fc02093e5c4bc4a59a0be5db5ef460a"
+    },
+    "tools_java/Dump1811.java": {
+      "bytes": 1385,
+      "sha256": "c87408efb6f154b93fe5a8e318790cad273a3c316c35025e74f1c8a60dcbfa06"
+    },
+    "tools_java/Dump1812.java": {
+      "bytes": 1385,
+      "sha256": "d384b4e8495e0c3bcc52fa8b6b56c8795e3fe75c7ed3d7a71009258f9dd51a06"
+    },
+    "tools_java/Dump1813.java": {
+      "bytes": 1385,
+      "sha256": "44b0d1704d5ac2262a11d933cd0a19370b58241b6ee8d835691d497fbef954b8"
+    },
+    "tools_java/Dump1814.java": {
+      "bytes": 1385,
+      "sha256": "ebd4652798ef59eebd563a21baf05cfbed9dec6923f27e3971f0b5c304d0b48f"
+    },
+    "tools_java/Dump189.java": {
+      "bytes": 1384,
+      "sha256": "76d5bd3f20628186d2efcbbb4236c053bdb3d239a58beb1669c6e35595b7f9c3"
+    },
+    "tools_java/Merge1810.java": {
+      "bytes": 2471,
+      "sha256": "32915185f8e0b708ab99ce433d1dbeb612221a473ee3f5aaab52aaf32444169c"
+    },
+    "tools_java/Merge1811.java": {
+      "bytes": 2471,
+      "sha256": "1b35d80b5cef61f1e783ba391cf029576a1790f854f5c1cce805d0d2439bc99c"
+    },
+    "tools_java/Merge1812.java": {
+      "bytes": 2471,
+      "sha256": "576ee8b0602aa8260a08e09aa51aa4afe01e9060d9e7aaa9536f07b03e717128"
+    },
+    "tools_java/Merge1813.java": {
+      "bytes": 2471,
+      "sha256": "8db0336106883070e6441ca3cf8ccd7c9b212edcd4fdf8d1fa6fdd8483ee97a0"
+    },
+    "tools_java/Merge1814.java": {
+      "bytes": 2707,
+      "sha256": "3a5f27ab880485bc71527137750d6ab3265dcb480ee3188ae8bbb52fe6aece71"
+    },
+    "tools_java/Merge1815.java": {
+      "bytes": 2355,
+      "sha256": "8b0711de948ba7649792a75f8480e36ff86006446b1700e5df80499e18b316e8"
+    },
+    "tools_java/Merge1816.java": {
+      "bytes": 2458,
+      "sha256": "637708507bfc45bbbdcad121f2401e55d330d59400e7183b2356d8b01b09c846"
+    },
+    "tools_java/Merge1817.java": {
+      "bytes": 13168,
+      "sha256": "542f30583cee4fa61d9f169ace0081850122ec516ed11f90a3b5966c38ef4b5e"
+    },
+    "tools_java/Merge1818.java": {
+      "bytes": 2529,
+      "sha256": "a91270bff332241dad3a80fd4b15b912ccd2a1af8edfe662e060457cee096598"
+    },
+    "tools_java/Merge1819.java": {
+      "bytes": 2659,
+      "sha256": "1466c841ee05e31dd93deef74f4b901dafd707e8941c209cf798722716224168"
+    },
+    "tools_java/Merge1820.java": {
+      "bytes": 15765,
+      "sha256": "07f0c6fe122d15e406284e0bfe4b64c686e2e489e6aa35dd9ff7fd2be80bd62e"
+    },
+    "tools_java/Merge1821.java": {
+      "bytes": 15797,
+      "sha256": "a87602d48ede0a8ad6347889c0bc9b1f981c8e5258f527b3cc2a99aa94cc1b43"
+    },
+    "tools_java/Merge1822.java": {
+      "bytes": 5443,
+      "sha256": "8f01bbd0fcee4e853ac047747c0b9185f23d7f89edf5d892bdd9c6d8b50d56c1"
+    },
+    "tools_java/Merge1823.java": {
+      "bytes": 15272,
+      "sha256": "017f8b47d370075fe6d810847ed3ce8809ea33756727c1b2a19d6412dd5f27e9"
+    },
+    "tools_java/Merge189.java": {
+      "bytes": 2470,
+      "sha256": "c51acb3e5c7ac10ca02df2f0afeae490aca74b273d7846beb9efd9d5600c9dc8"
+    },
+    "tools_java/UpdateCandidateLoader.java": {
+      "bytes": 7125,
+      "sha256": "df7c917ecb34086e6159b4c2e4c3e9fd0b17ff05c5fb9c6c60cd53f7f050f538"
+    },
+    "tools_java/UpdateEmojiFooterLoader.java": {
+      "bytes": 12328,
+      "sha256": "708bb3faac941095037a8ce2e879d0b1c430870ced69fead7c46b95abb18fafa"
+    },
+    "tools_java/UpdateJapaneseStartLoader.java": {
+      "bytes": 12344,
+      "sha256": "0dbf278969c98d3d028516d8a49c4fbc0a2f08b6fe848737c24c7ba331b66025"
+    },
+    "tools_java/UpdatePunctuationLoader.java": {
+      "bytes": 12328,
+      "sha256": "8092454aa73cef4d404ccf1a941c7f953071d1cf9fc0829d7eb33d937d61d251"
+    },
+    "tools_java/UpdateToolbarLoader.java": {
+      "bytes": 12312,
+      "sha256": "60d98a322b99187b6726fdc5d8facc6c48079edb26be7ee50be023df69f45725"
+    },
+    "workflow.yml": {
+      "bytes": 4573,
+      "sha256": "45b39d656847186eefc9c16da924883fbfd79012284119e7431f8dbe3d8a0e06"
+    }
+  }
+}

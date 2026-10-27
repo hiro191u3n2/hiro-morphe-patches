@@ -1,0 +1,1 @@
+package wb0;public class x {public int enterCalls;public boolean throwOnEnter;public lh0.a lastBreadcrumb;public void y(lh0.a crumb){enterCalls++;lastBreadcrumb=crumb;if(throwOnEnter)throw new IllegalStateException("Native Enter failed");} }

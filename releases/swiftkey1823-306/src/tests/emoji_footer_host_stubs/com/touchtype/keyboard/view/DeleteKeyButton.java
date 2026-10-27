@@ -1,0 +1,1 @@
+package com.touchtype.keyboard.view;import android.content.Context;public class DeleteKeyButton extends com.google.android.material.button.MaterialButton {public Object nativeRepeatController=new Object();public DeleteKeyButton(Context c){super(c);} }
