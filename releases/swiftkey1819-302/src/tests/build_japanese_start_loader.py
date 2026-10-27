@@ -142,7 +142,7 @@ def build(root, tools, work, standalone, bundle, apk=None, candidate_loader_dir=
     require((work / 'single-after' / (HELPER + '.smali')).read_bytes() ==
             (work / 'bundle-after' / (HELPER + '.smali')).read_bytes(), 'Startup Android helper differs between loaders')
     staged = work / 'japanese-start-loader-check.mpp'
-    replacements = {p.relative_to(work / 'jvm').as_posix(): p.read_bytes() for p in (work / 'jvm').rglob('*.class')}
+    replacements = {p.relative_to(work / 'jvm').as_posix(): p.read_bytes() for p in sorted((work / 'jvm').rglob('*.class'))}
     replacements['classes.dex'] = (work / 'single.dex').read_bytes()
     stage(standalone, staged, replacements)
     after_jvm = patch_classes(staged)
