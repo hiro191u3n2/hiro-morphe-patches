@@ -1,0 +1,661 @@
+{
+  "status": "EMOJI_RECENT_SLIDE_HOST_AND_ABI_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.23",
+  "bundle_version": "1.0.306",
+  "baseline_swiftkey_version": "1.8.22",
+  "baseline_bundle_version": "1.0.305",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_fix_confirmed": false,
+  "runtime_unrelated_classes_unchanged": true,
+  "all_original_runtime_method_bodies_preserved": true,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "standalone_and_bundle_runtime_equal": true,
+  "loader_entries_byte_identical": true,
+  "unrelated_loader_classes_unchanged": true,
+  "jvm_swiftkey_loader_matches_standalone": true,
+  "combined_jvm_swiftkey_discovered": true,
+  "previous_jvm_patches_preserved": true,
+  "all_static_checks_passed": true,
+  "host_tests_passed": true,
+  "current_manager_patcher_selection_verified": true,
+  "two_loader_sdks_agree": true,
+  "selected_extension_stream_verified": true,
+  "loader_selected_extension_matches_packaged_runtime": true,
+  "diagnostic_function_removed": true,
+  "candidate_scroll_1822_byte_identical": true,
+  "japanese_start_1822_byte_identical": true,
+  "candidate_toolbar_1822_byte_identical": true,
+  "emoji_footer_1822_byte_identical": true,
+  "punctuation_1822_byte_identical": true,
+  "flick_sensitivity_1822_byte_identical": true,
+  "ordinary_emoji_tap_and_hold_preserved": true,
+  "native_abi_review_verified": true,
+  "native_abi_replayed_in_ci": false,
+  "native_history_review_verified": true,
+  "recent_emoji_limit": 12,
+  "recent_emoji_columns": 4,
+  "native_history_and_input_used": true,
+  "continuous_slide_selection_on_release": true,
+  "outside_release_cancels": true,
+  "sensitivity_setting_reused": true,
+  "native_abi_review": {
+    "source": "tests/native_emoji_slide_abi1823.json",
+    "sha256": "6b436b00fe39a9b27dd4df26c924e9df86b7fb1b5811429f32667264302a634b",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a"
+  },
+  "native_history_review": {
+    "source": "tests/native_emoji_slide_review.json",
+    "sha256": "e7b4ceb50bdc1ee1b37da6eba1e3982655a3721a9c4fefab4f4420582ead3c48",
+    "report": {
+      "review": "SwiftKey Beta 1.8.23 recent emoji native bridge static contract review",
+      "scope": {
+        "reference_apk": "gesture_native/base.apk",
+        "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+        "reference_apk_is_previously_modified": true,
+        "native_method_and_field_contracts_only": true,
+        "clean_original_full_patch_apply_claim": false,
+        "physical_device_runtime_claim": false,
+        "host_runtime_tests": "Independent tests supplied separately; this report is static source review."
+      },
+      "production_sources": {
+        "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+        "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+      },
+      "emoji_toolbar": {
+        "only_additive_method": "emojiHoldMillis(Lfc0/n2;)I",
+        "prior_source_byte_equal_after_removing_added_method": true,
+        "new_fields": [],
+        "native_path": "fc0.n2.b (oc0.m) -> b (hc0.a) -> c (hc0.k)",
+        "identity": "Existing installed(hc0.k) recognizes the private EmojiToolbar.LongPress actor installed only by the dedicated emoji-key factory.",
+        "timeout": "Returns the exact positive hc0.k.a native configurable hold timeout; otherwise 0.",
+        "label_coordinate_or_text_heuristics": false
+      },
+      "current_native_model_route": [
+        "a60.s creates fb0.b0(ne0.f0, ah0.j0, i70.g1, f40.a, a20.d) in v47.",
+        "a60.s invokes wb0.z1.b with v24..v69; v47 is static parameter p23.",
+        "wb0.z1.b passes p23 in constructor argument register v20.",
+        "wb0.x constructor assigns p20 to field t.",
+        "The emoji fb0.b0 constructor stores its ne0.f0 argument in field a.",
+        "Bridge receives the current wb0.x from the active gesture context and follows x.t.a; no global singleton, service lookup, or reflection."
+      ],
+      "recents": {
+        "native_method": "ne0.e0.b()Ljava/util/ArrayList;",
+        "native_order": "ArrayList of LinkedHashMap values followed by Collections.reverse; newest native live item first.",
+        "bridge_order": "Preserved, without another reverse or sort.",
+        "maximum_visible_items": 12,
+        "text_handling": "Each valid ne0.g0.getContent() is kept as the complete String. No code point extraction, normalization, truncation, or splitting is applied by the bridge.",
+        "empty_history": "An empty immutable snapshot; no substituted stock emoji.",
+        "invalid_native_graph": "Returns null without intercepting a native emoji action.",
+        "persistent_native_history": "xc.d.m writes emoji_recent_tab_keys through the native ne0.f0.b -> uf.p.b -> ah0.w0 provider; the bridge never opens a preference file.",
+        "native_capacity": 32
+      },
+      "insertion_and_history": {
+        "selected_location": "oz.j2.a = RECENTS",
+        "first": "wb0.x.G(lh0.a, full String, oz.j2.a)",
+        "second": "new xc.d(current ne0.f0, 14).l(new ne0.p0(full String), 1)",
+        "precedent": "Native i70.p1.invoke branch for ne0.g0 calls wb0.x.G, then new xc.d(model,14).l(pushable,1). The bridge uses RECENTS instead of that branch's ALL_TAB location.",
+        "native_history_dispatch": "xc.d.l calls m(recency), o(usage weighting), then c20.a.f(1, native recents model).",
+        "privacy": "Both xc.d.m and xc.d.o invoke vb0.c.b() before history/usage mutation. b() is false only for INCOGNITO_OFF; ON, PENDING_OFF and TEMPORARILY_ON suppress changes. The bridge delegates to these native guards unchanged.",
+        "composition": "G routes RECENTS through the native yb0.l emoji action; no direct InputConnection.commitText fallback.",
+        "attempt_limit": "Snapshot.commit is synchronized and marks used before validation/native calls, so repeated release callbacks or exceptions cannot trigger a second native insertion.",
+        "stale_graph": "Checks identity of sender.t, provider.a, and history.f before insertion; runtime separately guards the editor/session/layout.",
+        "history_failure": "After G returns normally, a history exception is swallowed and no insertion retry is made.",
+        "diagnostic_text_or_logs": false
+      },
+      "native_contract_sources": [
+        {
+          "path": "smali_classes2/fc0/n2.smali",
+          "sha256": "621fc7c2cffbb054ae6ad1747a6d2e7acee747dd5a9878bb5c6a8c06a7606a5b",
+          "methods": [],
+          "required_fields": [
+            "b:Loc0/l;"
+          ]
+        },
+        {
+          "path": "smali_classes2/oc0/m.smali",
+          "sha256": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+          "methods": [],
+          "required_fields": [
+            "b:Lhc0/a;"
+          ]
+        },
+        {
+          "path": "smali_classes2/hc0/a.smali",
+          "sha256": "7ae4e451603a2658c170938aa64a6f46ae8694d6fa920b5466ef4ff496f5feb2",
+          "methods": [],
+          "required_fields": [
+            "c:Lhc0/k;"
+          ]
+        },
+        {
+          "path": "smali_classes2/hc0/k.smali",
+          "sha256": "b0801dddbbe9791e20cc611356a9aa9a79e9ad0d86b8ab09e8377ea0ca69d901",
+          "methods": [],
+          "required_fields": [
+            "a:I",
+            "b:Ljava/util/ArrayList;"
+          ]
+        },
+        {
+          "path": "smali_classes2/wb0/x.smali",
+          "sha256": "00dc36b2109e1a868b4618ac8ccec982bf116ac9bca025ee6ba41b50d202ae07",
+          "methods": [
+            {
+              "signature": "public final G(Llh0/a;Ljava/lang/String;Loz/j2;)V",
+              "sha256": "60149bdd558bcc8a29cbafcef66761b7a8a7c5e654fd6281f9382f8cb7720c99"
+            }
+          ],
+          "required_fields": [
+            "t:Lfb0/b0;"
+          ]
+        },
+        {
+          "path": "smali_classes2/wb0/z1.smali",
+          "sha256": "505ba27cbfa29847b2ca947f84d0fac41acf59d6223150ec1e8a9485c803d575",
+          "methods": [
+            {
+              "signature": "public static final b(Lwb0/q;La20/d;Lwf/h;Lib0/p;Lcom/microsoft/tokenshare/m;Lwb0/t1;Lwb0/z0;Lcom/touchtype/report/TouchTypeStats;Lln0/y;Lwb0/p1;Lcom/touchtype_fluency/service/s;Landroid/os/Handler;Lfb0/r0;Lxc/d;Lp40/w;Ls90/o;Lb90/d;Lfb0/e2;Ln50/a;Lfb0/b0;Ls50/b;La40/n;Lnb0/n;Lfb0/b0;Lah0/b0;Lbd0/s;Llb0/a;Lrc0/g;Lft/c;Lfz/h;Lal0/c;Lwb0/r0;Lag0/c;Lub0/a;Lho/h;Lzb0/e;Lah0/w0;Ld4/a0;Lah0/z;Lai0/b;Landroidx/lifecycle/l0;Lta0/x;Lcom/touchtype/common/languagepacks/f0;Luf/j;Ll30/a;Lah0/n0;)Lwb0/x;",
+              "sha256": "ace1510daa97a7742def3fbf372a2cb30820057652b37e10a6608c8c32986850"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/fb0/b0.smali",
+          "sha256": "fc5832708346583c8f5fdbcf3bfdfbebf4bb18e5bdd816ff2f2bd03834ba796c",
+          "methods": [
+            {
+              "signature": "public constructor <init>(Lne0/f0;Lah0/j0;Li70/g1;Lf40/a;La20/d;)V",
+              "sha256": "21a956e5f6230fe60f9500be78afc79c1cf655efdd47916ece4c1a41896f93d7"
+            }
+          ],
+          "required_fields": [
+            "a:Ljava/lang/Object;"
+          ]
+        },
+        {
+          "path": "smali_classes2/ne0/f0.smali",
+          "sha256": "4c1c5ab1061f5524285c637245f06b45f9986ba36c865bfa31a409620c46ca57",
+          "methods": [
+            {
+              "signature": "public constructor <init>(Luf/p;Lho/h;Lvb0/b;Lf40/a;)V",
+              "sha256": "af9a6b6813a3a009e86d216bbc22618e4d29f09249aee29fd9261879c53a776f"
+            }
+          ],
+          "required_fields": [
+            "f:Lne0/e0;"
+          ]
+        },
+        {
+          "path": "smali_classes2/ne0/e0.smali",
+          "sha256": "95b0253c2a1300c595ef7c683828ce4e67a0373a182a4027e43b3e649881d6ff",
+          "methods": [
+            {
+              "signature": "public final a()Ljava/util/LinkedHashMap;",
+              "sha256": "039c442618a277cb95d7aeebce1d3e5ea23e06e0ad4c5d45008c3fa54fcde069"
+            },
+            {
+              "signature": "public final b()Ljava/util/ArrayList;",
+              "sha256": "fb7025ea97ec5536602b87818ce4f8ef430557f8dc7e2438dc8497c7e4c5203e"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/ne0/g0.smali",
+          "sha256": "b95929f950f5d85307f361ba9ac36656aaab7010c43c39fe469fe826d8714952",
+          "methods": [
+            {
+              "signature": "public abstract getContent()Ljava/lang/String;",
+              "sha256": "4ee6e691de9cbae9b8e610739926a56775e1b92b9e568c42755d8f1afe3ff18f"
+            },
+            {
+              "signature": "public abstract getView()Landroid/view/View;",
+              "sha256": "d88f2d276fd1c453ea6b24105fafbe923fbb515a8c8becae76a0ca6ffef53be0"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/ne0/p0.smali",
+          "sha256": "c8795da85dbbd56e5f981f98ce0d99738f5e5ab33e27d071c77552d65b979972",
+          "methods": [
+            {
+              "signature": "public constructor <init>(Ljava/lang/String;)V",
+              "sha256": "2826c90ff53b85ad4835cd7bc90ecdfb1087aa4798bb8082f883ca2135badd49"
+            },
+            {
+              "signature": "public final getContent()Ljava/lang/String;",
+              "sha256": "034c2fd3284be077b6f5ce56ab79661dcf8edeeb9ff0668c51e8dff9bc77d2f4"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali/xc/d.smali",
+          "sha256": "e0776020c51fbba0a0500bece07be7660b5156008c935cb4e43444cd814ec76b",
+          "methods": [
+            {
+              "signature": "public synthetic constructor <init>(Ljava/lang/Object;I)V",
+              "sha256": "0bd7d04b66d8d372a6919e9859bd99573ab19d45848c3fbeab71e0072e9f4c60"
+            },
+            {
+              "signature": "public l(Lne0/g0;I)V",
+              "sha256": "20f4e7dbec271afd71978f6cffd6c3733f390cd412c9827f70acce4f94703cee"
+            },
+            {
+              "signature": "public m(Lne0/g0;)V",
+              "sha256": "28c2b7197e609066f2e67ac5fbb2c732b1f37843922e2e98dbdace5d6b7033b4"
+            },
+            {
+              "signature": "public o(Ljava/lang/String;)V",
+              "sha256": "894a1dab1d799c402bf66429d496d4a43f3b2c74ee236747933988afc4be7df6"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/vb0/c.smali",
+          "sha256": "b8f3bf782ae9234f30be4bd023200be06664a6b8343afb42568e624aff410451",
+          "methods": [
+            {
+              "signature": "public final b()Z",
+              "sha256": "c0ae55b78712db6482f762a0e80c168f0a634ab51c644e2ded8d7f7712677b5b"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/i70/p1.smali",
+          "sha256": "f0fa50d0507cb1b975c83a90089442373fd5c4fed6d4c4cae43f11f8712613e5",
+          "methods": [
+            {
+              "signature": "public final invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+              "sha256": "99b60c2fa4639c18c8aa2cbe2e985db6f9c4736968ed54f44b0e215f96abbac1"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/oz/j2.smali",
+          "sha256": "413688a97283a736972630ebaec7ade45bd1a90f5530e277e424af8026c384c4",
+          "methods": [
+            {
+              "signature": "static constructor <clinit>()V",
+              "sha256": "0e93cadb7421d453f43e4770f152388ba02a70e4c9c6acdd3e34e64b0a4c1f5c"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/ah0/w0.smali",
+          "sha256": "43452315c744a8d846883a99269c7a235d659fe362b2382f0cbd685227a4287b",
+          "methods": [
+            {
+              "signature": "public final b0()Ljava/util/List;",
+              "sha256": "8171fe8896886def86628c0afa1ea57e5d4c2ec7090ae8323436ca9788fcc91a"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/i70/u.smali",
+          "sha256": "e393beef47f16b936cc4677d7d5a1dc778ed019b6a7ac4d8d3b46ed70bda3546",
+          "methods": [
+            {
+              "signature": "public final get()Ljava/lang/Object;",
+              "sha256": "3dbe8bf5d34f0b6263c6d09eab2f2e7cdc6afb3b01a7c39f8271c09b901954fa"
+            }
+          ],
+          "required_fields": []
+        },
+        {
+          "path": "smali_classes2/a60/s.smali",
+          "sha256": "fcf3b49edfad2cab433a2078128e28d9d6c3c624b3b254536ecb684a83407155",
+          "methods": [],
+          "required_fields": []
+        }
+      ],
+      "status": "PASSED",
+      "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+      "device_tested": false,
+      "original_apk_apply_tested": false,
+      "source_sha256": {
+        "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+        "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+      }
+    }
+  },
+  "emoji_slide_test_report": {
+    "status": "PASSED",
+    "scope": "Unchanged production EmojiRecentsSlide, EmojiRecentsBridge and EmojiToolbar Java with isolated JVM Android/native fakes",
+    "scenarios": 75,
+    "assertions": 2114,
+    "production_source_sha256": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3",
+    "production_source_sha256_by_file": {
+      "src/hiro/swiftkey/EmojiRecentsSlide.java": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3",
+      "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+      "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4"
+    },
+    "device_tested": false,
+    "android_instrumentation_tested": false,
+    "original_apk_apply_tested": false,
+    "native_emoji_key_identity_verified": true,
+    "recent_order_limit_and_graphemes_verified": true,
+    "native_input_and_history_delegation_verified": true,
+    "private_history_guard_delegation_verified": true,
+    "input_once_and_failure_no_retry_verified": true,
+    "upward_sensitivity_verified": true,
+    "ordinary_tap_and_hold_preserved": true,
+    "continuous_slide_release_selection_verified": true,
+    "outside_release_and_cancel_verified": true,
+    "lifecycle_and_multitouch_drain_verified": true,
+    "popup_geometry_and_no_focus_steal_verified": true,
+    "reentrant_cancel_and_error_drain_verified": true,
+    "repeated_gestures_and_listener_cleanup_verified": true,
+    "native_input_engine_executed": false,
+    "native_history_guard_executed_on_android": false,
+    "native_timer_executed": false,
+    "test_sources": {
+      "src/hiro/swiftkey/EmojiRecentsBridge.java": "0a841946f658e9a8d118bfc4b41fd46a344160fac48e085fa3dce2c0868abc85",
+      "src/hiro/swiftkey/EmojiRecentsSlide.java": "35de2bdbaa491e79c0dca51b234a2114caaa6423ecfc2751789c64f3eebeb9a3",
+      "src/hiro/swiftkey/EmojiToolbar.java": "a634ffe493b2cedcba802717a41c623032ed8094063c2c43382a665c912f97b4",
+      "stubs/cm0/d.java": "58ce81176d41b8b3861d559c09e737a700e80256ed85cf2fb10f270ee9c104c6",
+      "stubs/fc0/h.java": "f6286a7c2dc1f4f26905a71478958885c317275a6701f6f1a28055a95d707b58",
+      "stubs/fc0/k1.java": "218f714cfed70950c023586fd3612d539c1a0a2507a8e7dfb234a99d2f691c91",
+      "stubs/hc0/b.java": "3ce06b8b5fc77414fdec6dee73585b00f84f2a085deaaf9dad6a10382ad6df57",
+      "stubs/oz/i6.java": "409d75ca26e04cdcdee2e5c79b40cc794e2681cef19b70b78dc0f52478f9da04",
+      "tests/emoji_slide_host/EmojiSlideHostTest.java": "68cf6d5c92a13dec47642ccbe3a97bb67911f33a3a15759bf16d9354c917ca23",
+      "tests/emoji_slide_host_stubs/ah0/w0.java": "55b1fb3b51ef4532012c156719c7a43a535eddf918b8b0dcd9f4560bf1772886",
+      "tests/emoji_slide_host_stubs/android/app/AlertDialog.java": "2da3e97eb60750119b88f7a3b102b447ef919a75746afa46109293393b8a04c1",
+      "tests/emoji_slide_host_stubs/android/content/ClipData.java": "12626c6bfa3fb892561d41e053850c0560dd7ecf37c7174e268f6746161c3fbb",
+      "tests/emoji_slide_host_stubs/android/content/ClipboardManager.java": "f2d92b7a4575d8674b3d906dba1154ef9277d3cab486df0506ec38e7fc22600c",
+      "tests/emoji_slide_host_stubs/android/content/Context.java": "45bcd14e8a91a10b27c8830c38f6521f817d7a58b71d71899514d2cce2cbf73d",
+      "tests/emoji_slide_host_stubs/android/content/ContextWrapper.java": "7342da64e7f7e961de0aa35c1109d61183ec658c7466dfa8b4d6c2383dea0258",
+      "tests/emoji_slide_host_stubs/android/content/DialogInterface.java": "5a9f2443c76937dee0978a01cba96e0c33b985eeba438f4df4aeeae19abec19f",
+      "tests/emoji_slide_host_stubs/android/content/SharedPreferences.java": "136bbb8758dc2c2d62f2489649105ad3a36d36220460defc112118385e11e160",
+      "tests/emoji_slide_host_stubs/android/content/res/AssetManager.java": "7877993e3c99cc08e44019c46837b904073bd04ae6409fc2906c255353ef006d",
+      "tests/emoji_slide_host_stubs/android/content/res/Resources.java": "f6db696cd96d21326eca00bd475590833606b2761f2e57000e26922d84ccc763",
+      "tests/emoji_slide_host_stubs/android/graphics/Canvas.java": "7036ccb1dff808d8d963383572df8a4181403d962a54246b4db5a5f0ba5dd20d",
+      "tests/emoji_slide_host_stubs/android/graphics/Color.java": "9f928b6ef24fbab9f39bf8c62d7f20031b48cb235d04f7cbb353f5e472ecf739",
+      "tests/emoji_slide_host_stubs/android/graphics/ColorFilter.java": "a3c2308cde657750def05d22f569f8e54a1dc5baaab7f3cf7d4bef8d112c8204",
+      "tests/emoji_slide_host_stubs/android/graphics/Matrix.java": "c65b96b99eaa6f93db8c817dc343196cb9fd51b7a00e676a323047760cbe6397",
+      "tests/emoji_slide_host_stubs/android/graphics/Paint.java": "fca3855900383deae8d4ab8ac66636ec468ca69ec90b28395d2dd128a84749ed",
+      "tests/emoji_slide_host_stubs/android/graphics/PixelFormat.java": "d93a0c24e0685f00b47dfbf35c6ba494c90d02f67c7f7572b847d3fb732a10d6",
+      "tests/emoji_slide_host_stubs/android/graphics/Rect.java": "b38d142cd09669d4d3dbe0fe5322be40658988c3bdd53a5a577d35e230c087d3",
+      "tests/emoji_slide_host_stubs/android/graphics/RectF.java": "483010d0cd468deb0fb818ebec5f0c6e15b3e1d6290cb8773d4726b6fd6b51a0",
+      "tests/emoji_slide_host_stubs/android/graphics/Typeface.java": "550bcfd39c8b7c81811571d395f66aa3e82945e0b5c9aed6cdcc8262a2586899",
+      "tests/emoji_slide_host_stubs/android/graphics/drawable/Drawable.java": "5ee896b1d8c98bb77479397d87185f31d810afdd0e61a2ecf0365911348c5668",
+      "tests/emoji_slide_host_stubs/android/inputmethodservice/InputMethodService.java": "7c74dc42b585f3bcba7b8530e525ba675d9abc093444c1a9c098fb7804ae07f8",
+      "tests/emoji_slide_host_stubs/android/os/Handler.java": "ed578a9324836a47d64530d32e9920da53dd90ff644668ea8b27aa09a0f11ea7",
+      "tests/emoji_slide_host_stubs/android/os/IBinder.java": "69bbed3cad4b074ec6dd57ebd388f647f909149565c2a24cd8241533d3a1980e",
+      "tests/emoji_slide_host_stubs/android/os/Looper.java": "44b0f855568d6242ea4cb63e622f1b59186ab872f49ef9adffa2ff8ca030cc51",
+      "tests/emoji_slide_host_stubs/android/os/SystemClock.java": "b3ccd6fa6046366f3f285c7bf9d95f65fe2663d1f35ebff2d73de49a60a42b9d",
+      "tests/emoji_slide_host_stubs/android/util/AttributeSet.java": "2b16f3eeb08ad7bd9d30858c1b33e303249967861f07d5af57d9d4a96a14f8fd",
+      "tests/emoji_slide_host_stubs/android/util/DisplayMetrics.java": "78d317809896fb660442bf4d717c7c26337ec39bb9ef4ae9e6f169696650e553",
+      "tests/emoji_slide_host_stubs/android/util/SparseArray.java": "3d29f57c3fefb7956ffa61eaf0d1ce3e40270ef211d2323e21337f81720da0e8",
+      "tests/emoji_slide_host_stubs/android/view/MotionEvent.java": "04a2ae17b5be5c3b0ed85c839e50aa7500e957c9705bb744c02a27944e13cb58",
+      "tests/emoji_slide_host_stubs/android/view/View.java": "77f46b28876ecd97a9c44fcbed269ca95b2198c3dd7745540235e646d3b62de6",
+      "tests/emoji_slide_host_stubs/android/view/ViewConfiguration.java": "2cb048dab2cdf47c556a7992690d73837dfbbf1405eca61c9314f5b456f3a144",
+      "tests/emoji_slide_host_stubs/android/view/ViewOverlay.java": "957cdcb788ba09ac37307eca2ecf9e395a02b1f98707cdb43a91dae6e46a1967",
+      "tests/emoji_slide_host_stubs/android/view/ViewParent.java": "ba6fd5e5ed862cde22586c8a75d8c03370187ccf272eafa647feb4ccad091b77",
+      "tests/emoji_slide_host_stubs/android/view/ViewTreeObserver.java": "5ef9cc17d0a9ab8475662922ae283562bb2b094aff3065844ccf71c0054540c0",
+      "tests/emoji_slide_host_stubs/android/view/inputmethod/EditorInfo.java": "f2f65802f77267ce333ced0fcc6e1bca8971c50c4979db4409152803014072f7",
+      "tests/emoji_slide_host_stubs/android/view/inputmethod/InputConnection.java": "0070938bdf139a285e75e77e6d31f9756d5918c81a44a239793d652efa68d2e8",
+      "tests/emoji_slide_host_stubs/android/widget/Toast.java": "9b313031d64cde84457a44e81e89089814b338743c89d739455df148de470ce0",
+      "tests/emoji_slide_host_stubs/androidx/lifecycle/h.java": "f82ae6c3a3d8365f019fc3723767709354e8073fea57d0ea8b8675eeb879b3fc",
+      "tests/emoji_slide_host_stubs/androidx/preference/Preference.java": "bf0555e4dd1eb7ffc4691697e4e7c254fd3155e8d48c93693558a438fd36a8fa",
+      "tests/emoji_slide_host_stubs/androidx/preference/PreferenceScreen.java": "a5b19d08a362de59b78f96a8b40616edc457280fb1183513f62b264d2a42a1f3",
+      "tests/emoji_slide_host_stubs/androidx/preference/SwitchPreferenceCompat.java": "89a5a374b6321ffb20150c3bf486ff9b293ec076a0ea3e61c85447e6c781412e",
+      "tests/emoji_slide_host_stubs/bf0/g.java": "8ffb97afcec87a57f63cfcb3284030bd00f61b65942b4b1739df58be5472e3f8",
+      "tests/emoji_slide_host_stubs/com/microsoft/fluency/Japanese.java": "0cc364205f381be233d9075bfb46a7a18000b8a9fc111199029af3370030cc3c",
+      "tests/emoji_slide_host_stubs/com/microsoft/fluency/ResultsFilter.java": "9de97a7994f6116911a50e88474352fde7d6d3a826adb74f19af75465a14cc1b",
+      "tests/emoji_slide_host_stubs/com/microsoft/tokenshare/m.java": "8a0da6b7df4fce89ddd95f200e680b7bced40bab2e248307c5a9569a4562b93c",
+      "tests/emoji_slide_host_stubs/com/touchtype/KeyboardService.java": "b51109ab4e6e18c39c9156ec8d63ee62cd504f58d29d5d5bd1dc59281a408e0f",
+      "tests/emoji_slide_host_stubs/com/touchtype_fluency/service/j0.java": "d36110c6eaee82f2e5c63fb5dd67264a2b3efde82fa436306e40386beb336726",
+      "tests/emoji_slide_host_stubs/dc0/a.java": "8f0e104917e8f172b6124fe9cb5134a86d90eef120f3422fa52e39ab463b0cea",
+      "tests/emoji_slide_host_stubs/e60/b.java": "8d75bb98940da9346af30ede2fb5e397e2f746d5953b96950cf72c96e3920caa",
+      "tests/emoji_slide_host_stubs/ec0/m.java": "75f3da556ad24700e2b729a9c5523b207e0b3f57c742794b95836a5f10c28976",
+      "tests/emoji_slide_host_stubs/fb0/b0.java": "763c465d987bd1c85d9fa52c850ec2758cba8aafc14e4401988d61f62baede33",
+      "tests/emoji_slide_host_stubs/fb0/f0.java": "4b4f9df632c9ff2e6c85825050d1404ab036348d3f7daae0d99ee43fd1acfbdb",
+      "tests/emoji_slide_host_stubs/fb0/f2.java": "1cead2ea658acebc9121358e62a885d9486e7783e460416426202b67bdadf9b7",
+      "tests/emoji_slide_host_stubs/fb0/l2.java": "47f0263ac016d1d42ac34e24306cf6fe93823dbfdca202ebe8b307659c7628ec",
+      "tests/emoji_slide_host_stubs/fb0/n2.java": "78c06c092693ef4091da08b2a6aab5cea62fad2125e7249bdc482f87599c9699",
+      "tests/emoji_slide_host_stubs/fb0/q0.java": "cd9f797361b3e7f96d9417dc9a2d50227d6689d0fa3058e3412adde9f37a9d56",
+      "tests/emoji_slide_host_stubs/fb0/t0.java": "0341b40e664d4207ad60511ea5a9d62eb86e28c021483caa2ed0632f938d9151",
+      "tests/emoji_slide_host_stubs/fc0/b1.java": "7d7484d7a816a9060e8d9f8293bef8a9ea931fbb871e30c693ef4bb4682f3e66",
+      "tests/emoji_slide_host_stubs/fc0/d1.java": "2374cb503bd82ac4a6e02e7169942242bf10e9a6daec297ff2ecdcc614bb99aa",
+      "tests/emoji_slide_host_stubs/fc0/d2.java": "17be760a2b835c677622f498d0a618bfe90b831756b62836afca61f793a60ba2",
+      "tests/emoji_slide_host_stubs/fc0/m1.java": "03c9a3dd662b8eb6e1acb7a101c777894815eb16199e934d04294059f5e2e5ac",
+      "tests/emoji_slide_host_stubs/fc0/n2.java": "8c7b86a28037c950ff6ff58443b463b61e37b2913a8c8c6337a52bd091f3f891",
+      "tests/emoji_slide_host_stubs/fz/h.java": "7ca4cfff8e7a7d88b574b0860bc0a087f5a661ab8c8824d0b592c4b46a4a7200",
+      "tests/emoji_slide_host_stubs/hc0/a.java": "1998ec75b6a28d6353068af59a5d037897f85dd7e53cc657805dcca18542c60b",
+      "tests/emoji_slide_host_stubs/hc0/k.java": "1d82c5370efc2aee9ccab5d6f151c0f0f81a5c787040d9f6ce0bedda9902ab3b",
+      "tests/emoji_slide_host_stubs/hc0/o.java": "ebd136f854b075b2ba4a0f13c08fb9c67703b4f32a51dbe60af5c2804ea19eaf",
+      "tests/emoji_slide_host_stubs/hiro/swiftkey/CandidateToolbar.java": "c989c1dc2c90dd98a79ce114536bc581250f31156a3b228a378e75ce077d7f9c",
+      "tests/emoji_slide_host_stubs/hiro/swiftkey/EmojiPanelUi.java": "250251d848c497778ac60364d3ac63a91f7ebef17985c7dfcde72abca3e023a1",
+      "tests/emoji_slide_host_stubs/hiro/swiftkey/JapaneseGlideCandidates.java": "5fcb04ecc30fc808dae4d1447286abbb09e6b2c98808d3a64bd0a3272e335713",
+      "tests/emoji_slide_host_stubs/hiro/swiftkey/JapaneseGlideDecoder.java": "0f0947cfbed1f66c0ca5a8b4461c94ec4203a9916005491aa8c96762b3f36b6b",
+      "tests/emoji_slide_host_stubs/hiro/swiftkey/LineEnter.java": "c7a74d957af25375b6d1f010d93e7f36f4c23de7c5e9abe8d3730d606af30adc",
+      "tests/emoji_slide_host_stubs/ic0/a.java": "119184c7b17f9527797d265f31783eae2999075cb982dc54d684d97284a9b6e0",
+      "tests/emoji_slide_host_stubs/ic0/a0.java": "3298f509886b5679bc310a8544f456bce338aa8dd0e3fe33f88eba569e1a0017",
+      "tests/emoji_slide_host_stubs/ic0/e.java": "80abe4ceaa61b0a4477c785a0bde09fd7aaefa8fadb0875a56b49dfb9b056ddf",
+      "tests/emoji_slide_host_stubs/k40/l.java": "43431a4fd21e555e5992a093aa204d9b54385edec3a7a19b812e455068309e8c",
+      "tests/emoji_slide_host_stubs/lh0/a.java": "8bf44cd153dd4e17f85a6c260fdb1d9346df2268c81c73f20a0a9ac26a4a958b",
+      "tests/emoji_slide_host_stubs/ne0/e0.java": "c6e1d9faa3cfa92b51d368d85fd71b0cb0cd06ba8d89067fcbc20a96a2a55f0e",
+      "tests/emoji_slide_host_stubs/ne0/f0.java": "064fd99f453539f3c39692176c24a9618db062c0a9eb38cd4d13d99adbca880d",
+      "tests/emoji_slide_host_stubs/ne0/g0.java": "11018f2a837c6e820572ad21652abf08b36c94b5326d2d09c503304d4a51ec75",
+      "tests/emoji_slide_host_stubs/ne0/p0.java": "4411dd26946a54fe983261457390aa6b0c29a3b4ba551c38fac4d7683fa35ed6",
+      "tests/emoji_slide_host_stubs/oa/j.java": "6d03009861f827dfe10df0dfeb16eb00cd4c4ac56a0c0a2cdf176c68c3296789",
+      "tests/emoji_slide_host_stubs/oa/k.java": "60e5dc334c20213c72915f9ae73c2cd7effb0336afa9c7e71bcdad58f3701fe0",
+      "tests/emoji_slide_host_stubs/oc0/l.java": "459d2d8de16dbded5f3fbbf21dc8f4595ed8adbd6fc4a89188ee9690ec54d721",
+      "tests/emoji_slide_host_stubs/oc0/m.java": "708f64e9681be6c39b25472243780fb081b69c21046cf3fb2c1bf5b358b6c71a",
+      "tests/emoji_slide_host_stubs/oz/j2.java": "85d243a30df5188b846f5808e6b2e69746d21b8a57b8406c9868ea782bbef538",
+      "tests/emoji_slide_host_stubs/qj0/a.java": "f49a49d91f49fd7b4f8f595aeb926c201d52a04e35c3bfa3ef9dff7ea5fb420e",
+      "tests/emoji_slide_host_stubs/t40/d.java": "621896194239b7e2395ff0172a1520bb713a7dbd810ae721cd232360a6213f29",
+      "tests/emoji_slide_host_stubs/vb0/b.java": "b853b462ff2d93669b69e903d9806ab0400853d2de4e5cfd48208ac7c88b3e1c",
+      "tests/emoji_slide_host_stubs/vb0/c.java": "45c2c8c1a11c9d246a1b638bef9a77b22201999c8fef0d081053b1553a0c1ad7",
+      "tests/emoji_slide_host_stubs/wb0/n0.java": "3e05f1b7ced24f47613b846a02ecc73cdbb93b90b6171ebe07f7c384861f1fd9",
+      "tests/emoji_slide_host_stubs/wb0/t0.java": "4ee8b4890e272038da05999adc358d835317c4405b1b4b8143753614d7394052",
+      "tests/emoji_slide_host_stubs/wb0/x.java": "09c902824dc9fc2f39ac0209d516cacd2cad8b63b3b8c1ecd802675a5da5389f",
+      "tests/emoji_slide_host_stubs/wb0/x0.java": "2defa670fd01d4d13660df2d3f111e17181779bcba9973ac9aa6735189057401",
+      "tests/emoji_slide_host_stubs/wb0/z0.java": "2395452c701b832dd027aeb9f333657b400ae721fd6b8858439653852deae566",
+      "tests/emoji_slide_host_stubs/xc/d.java": "865954519445624dbc6e6e6094b9d2fcda91f0bfec68e0c6320fcb178a5dd476",
+      "tests/emoji_slide_host_stubs/xc0/f.java": "6df6e7866249f2243ba2324c033e06fef143b5d1958f613e57dfdeb9d8ab8ab7",
+      "tests/emoji_slide_host_stubs/xd0/d1.java": "1a97cee1ad4a1c923720c21962c03db55d9c82edb4c4168d71297fca5f732821",
+      "tests/emoji_slide_host_stubs/xd0/f0.java": "f3db74afc30ae5b86a64de0321cb811d85ec23f2a89f7951f7183947daec7f8f",
+      "tests/emoji_slide_host_stubs/xd0/q.java": "61829c06ec77fe2d4388501fc6cf42121a8773cebec58304932b5fd924dd3f78",
+      "tests/emoji_slide_host_stubs/z20/c.java": "82352c96adfb67c3b34e7e11f83f03198fdad1e6203a63be3832fdacaf17a79f",
+      "tests/run_emoji_slide_tests.py": "e9c62b22bf2ebed6ac31534adb14b89cce9c24a917f0c4d61210caeb6581a21a"
+    },
+    "limitations": [
+      "Host fakes record native input and history callback delegation; the native IME input engine and real editor composition are not executed.",
+      "The callback fake follows the separately reviewed native private-history guard; its behavior is not evidence of Android execution.",
+      "Overlay geometry, complete text draw calls and pointer ownership are exercised; Android glyph shaping, rendering and real touch dispatch are not executed.",
+      "Native long-press actor identity and deadline preservation are checked; Android native timer scheduling is not executed.",
+      "No handset, ART verifier, screen reader or clean-original-APK application was executed."
+    ]
+  },
+  "runtime_integration": {
+    "status": "PASSED",
+    "scope": "Lossless original gesture/lifecycle bodies; additive exact emoji-key identity and slide helpers",
+    "baseline_extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "overlay_sha256": "8b54d2ecbc1ef32de9c4c9c5b6b6ba452bcd082962d36275d5151c911145535d",
+    "extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+    "baseline_classes": 84,
+    "runtime_after_classes": 91,
+    "unchanged_existing_classes": 82,
+    "changed_existing_classes": [
+      "Lhiro/swiftkey/EmojiToolbar;",
+      "Lhiro/swiftkey/JapaneseGlide;"
+    ],
+    "added_classes": [
+      "Lhiro/swiftkey/EmojiRecentsBridge$1;",
+      "Lhiro/swiftkey/EmojiRecentsBridge$Snapshot;",
+      "Lhiro/swiftkey/EmojiRecentsBridge;",
+      "Lhiro/swiftkey/EmojiRecentsSlide$Drain;",
+      "Lhiro/swiftkey/EmojiRecentsSlide$Picker;",
+      "Lhiro/swiftkey/EmojiRecentsSlide$Stroke;",
+      "Lhiro/swiftkey/EmojiRecentsSlide;"
+    ],
+    "unrelated_existing_classes_byte_identical": true,
+    "all_original_method_bodies_preserved": true,
+    "original_glide_restored_byte_identical": true,
+    "original_toolbar_restored_byte_identical": true,
+    "touch_dispatch_calls_helper_once": true,
+    "original_dispatch_called_only_when_not_consumed": true,
+    "init_and_reset_call_original_and_helper_once": true,
+    "wrapper_arguments_and_branch_verified": true,
+    "compiled_new_helpers_preserved": true,
+    "emoji_key_helper_matches_compiled_source": true,
+    "device_tested": false,
+    "original_apk_apply_tested": false
+  },
+  "runtime": {
+    "before_classes": 84,
+    "after_classes": 91,
+    "unchanged_existing_classes": 82,
+    "changed": [
+      "hiro/swiftkey/EmojiToolbar.smali",
+      "hiro/swiftkey/JapaneseGlide.smali"
+    ],
+    "added": [
+      "hiro/swiftkey/EmojiRecentsBridge$1.smali",
+      "hiro/swiftkey/EmojiRecentsBridge$Snapshot.smali",
+      "hiro/swiftkey/EmojiRecentsBridge.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Drain.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Picker.smali",
+      "hiro/swiftkey/EmojiRecentsSlide$Stroke.smali",
+      "hiro/swiftkey/EmojiRecentsSlide.smali"
+    ],
+    "removed": [],
+    "extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a"
+  },
+  "runtime_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+  "android_loader_class_count": 280,
+  "loader_parity": {
+    "baseline_extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "baseline_loaded_named_patches": 20,
+    "baseline_selected_swiftkey": 1,
+    "baseline_updated_dependency_graph_equal": true,
+    "clean_apk_apply_tested": false,
+    "dependency_types": [
+      "BytecodePatch",
+      "BytecodePatch",
+      "RawResourcePatch"
+    ],
+    "device_tested": false,
+    "loader_selected_extension_matches_packaged_runtime": true,
+    "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+    "previous_patch_metadata_unchanged": 20,
+    "requested_swiftkey_keys": 1,
+    "restored_loaded_named_patches": 20,
+    "restored_selected_swiftkey": 1,
+    "selected_extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+    "selected_extension_stream_verified": true,
+    "standalone_combined_dependency_graph_equal": true,
+    "standalone_selected_swiftkey": 1,
+    "status": "PASSED",
+    "swiftkey_dependency_graph": {
+      "compatibility": {
+        "com.touchtype.swiftkey.beta": [
+          "9.13.16.4"
+        ]
+      },
+      "default": true,
+      "dependencies": [
+        {
+          "compatibility": {
+            "com.touchtype.swiftkey.beta": [
+              "9.13.16.4"
+            ]
+          },
+          "default": false,
+          "dependencies": [
+            {
+              "compatibility": {
+                "com.touchtype.swiftkey.beta": [
+                  "9.13.16.4"
+                ]
+              },
+              "default": false,
+              "dependencies": [],
+              "description": null,
+              "name": null,
+              "option_keys": [],
+              "type": "app.morphe.patcher.patch.BytecodePatch"
+            }
+          ],
+          "description": null,
+          "name": null,
+          "option_keys": [],
+          "type": "app.morphe.patcher.patch.RawResourcePatch"
+        }
+      ],
+      "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+      "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+      "option_keys": [],
+      "type": "app.morphe.patcher.patch.BytecodePatch"
+    }
+  },
+  "single": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 22,
+    "bytes": 16159329,
+    "sha256": "714d66b2cc5367346927fd8a766577640d4d1c3bc61829671f888ee13cc6bbdc",
+    "extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+    "all_other_entries_byte_identical": true
+  },
+  "bundle": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 234,
+    "bytes": 19256124,
+    "sha256": "04592a32d4475e7af7df6d115d8f611c7f5dc58006da57d0a73c8ae772fa086c",
+    "extension_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+    "all_other_entries_byte_identical": true
+  },
+  "inputs": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.22.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/eea97cb240c4306a3b1700c4ef4ce27cf14897f4/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.22.mpp",
+      "sha256": "322f2ba927a4c53861e23197155e46af32e6e37017a7b6518f081a01ff8a9052"
+    },
+    "Hiro_Morphe_Patches_v1.0.305.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/eea97cb240c4306a3b1700c4ef4ce27cf14897f4/downloads/Hiro_Morphe_Patches_v1.0.305.mpp",
+      "sha256": "52fe856d66e6b4b89a2280ccc237448905c1b1f2f67c2fea715b0a6d5acaf29d"
+    },
+    "apktool.jar": {
+      "url": "https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar",
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423"
+    },
+    "morphe.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar",
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-current.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar",
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+    },
+    "r8.jar": {
+      "url": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar",
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    },
+    "android.jar": {
+      "url": "https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar",
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b"
+    }
+  }
+}
