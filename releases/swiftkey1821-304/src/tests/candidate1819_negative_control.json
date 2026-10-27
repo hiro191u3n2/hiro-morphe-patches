@@ -1,0 +1,36 @@
+{
+  "status": "PASSED",
+  "old_production_source_sha256": "cf7fe470701fdd932f8aec28ea1b8a668096a575ec23ee7821e608eae90614ec",
+  "old_production_compiles_with_same_fakes": true,
+  "negative_cases": {
+    "nonexpanded": {
+      "behavioral_failure_detected": true,
+      "exit_code": 1,
+      "failure": "Exception in thread \"main\" java.lang.AssertionError: A queued non-EXPANDED result reset the visible expanded grid"
+    },
+    "smaller": {
+      "behavioral_failure_detected": true,
+      "exit_code": 1,
+      "failure": "Exception in thread \"main\" java.lang.AssertionError: Late smaller-limit result replaced an already-scrolled expanded result"
+    },
+    "survivors": {
+      "behavioral_failure_detected": true,
+      "exit_code": 1,
+      "failure": "Exception in thread \"main\" java.lang.AssertionError: Survivor order changed: [Z, L, C, A, D, F, G, H, I, J, K, N, O, P]"
+    },
+    "samesize": {
+      "behavioral_failure_detected": true,
+      "exit_code": 1,
+      "failure": "Exception in thread \"main\" java.lang.AssertionError: Survivor order changed: [C, L, A, B, D, E, F, G, H, I, J, K]"
+    },
+    "collision": {
+      "behavioral_failure_detected": true,
+      "exit_code": 1,
+      "failure": "Exception in thread \"main\" java.lang.AssertionError: Survivor order changed: [A, B, C]"
+    }
+  },
+  "new_production_source_sha256": "f7a46f2b12b23f2780a0696f7a81cdaf7867efc48e25c4875d44dbdab3f49861",
+  "regression_source_sha256": "f451fa3dc62c8710fc3613b2d8467130b71471266273590c5881d69c8fbe9ce0",
+  "scope": "Five behavioral host negative controls against exact published 1.8.18 runtime; no device execution",
+  "device_tested": false
+}
