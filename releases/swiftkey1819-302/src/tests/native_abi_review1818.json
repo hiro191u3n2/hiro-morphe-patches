@@ -1,0 +1,3403 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "6e042bf39b88348d79feda819816590c1038048f58593e83d5609e2c8d373f2c",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+    "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+    "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+    "Lhiro/swiftkey/CandidateScroll$Viewport;",
+    "Lhiro/swiftkey/CandidateScroll;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Lah0/b0;->get()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->keyHeight(Lrb0/h;)I"
+      ],
+      "defined_owner": "Lah0/b0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->onMainThread()Z"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Looper;->myLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->onMainThread()Z"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->G:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/GridLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->L:Lce0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/GridLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->V0()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->W0()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->b:Landroidx/recyclerview/widget/RecyclerView;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lra/a2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->l1(II)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->q(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->r:Lra/n1;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->x:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;->y:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/LinearLayoutManager;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->c0()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->getAdapter()Lra/q1;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->getHeight()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->getItemAnimator()Lra/x1;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->getLayoutManager()Lra/a2;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->getWidth()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->isAttachedToWindow()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->isShown()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->setItemAnimator(Lra/x1;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;->w0(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Landroidx/recyclerview/widget/RecyclerView;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;->JAPANESE:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/u;->d:Lfb0/v;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lfb0/u;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/u;->h(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V"
+      ],
+      "defined_owner": "Lfb0/u;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/v;->d()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lfb0/v;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lgd0/b;->b()Ldd0/e0;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lgd0/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->commit:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->equals(Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->hashCode()I",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->valid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->commit:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->display:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->equals(Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->hashCode()I",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->valid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->display:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->input:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->equals(Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->hashCode()I",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->valid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->input:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->separator:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->equals(Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->hashCode()I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->separator:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;->valid()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->columns:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->columns:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->height:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->height:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->keyHeight:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->keyHeight:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->layout:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->layout:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->lookup:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->lookup:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->spans:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->spans:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->theme:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->theme:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->view:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->view:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->width:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;->width:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->adapter:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->adapter:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->applied:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->applied:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->carried:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->carried:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->epoch:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->epoch:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->fresh:[Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->fresh:[Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->notifier:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->notifier:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->pendingOffset:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->pendingOffset:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->pendingPosition:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->pendingPosition:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->viewport:Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->viewport:Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->columns:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->columns:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->epoch:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->epoch:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->height:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->height:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->keyHeight:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->keyHeight:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->layout:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->layout:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->list:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->list:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->listener:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->listener:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->offsets:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->offsets:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->positions:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->positions:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->provider:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->theme:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->theme:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->view:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->view:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->width:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;->width:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->CANDIDATES_UPDATED:Ljava/lang/Object;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->CANDIDATES_UPDATED:Ljava/lang/Object;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->access$000(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->access$100(Lrb0/h;)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->access$200()Ljava/util/WeakHashMap;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->activeUpdate:Ljava/lang/ThreadLocal;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->activeUpdate:Ljava/lang/ThreadLocal;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->finishUpdate(Lrb0/j;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->integers(Ljava/util/List;)[I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+      "opcode": "invoke-static-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->keyHeight(Lrb0/h;)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->access$100(Lrb0/h;)I",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->lastRowStart([II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->onMainThread()Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->pendingViewports:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->pendingViewports:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->preparedUpdates:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;",
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->finishUpdate(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->preparedUpdates:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->sameCommitPrefix(Ljava/util/List;Ljava/util/List;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->snapshots:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->snapshots:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->updateEpochs:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->access$200()Ljava/util/WeakHashMap;",
+        "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->updateEpochs:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->usable(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->access$000(Lrb0/h;Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateScroll;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/a;-><init>(Llh0/a;Ljava/util/List;Lib0/m;Ll40/c;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/a;->a:Ljava/util/List;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/a;->b:Lib0/m;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/a;->c:Ll40/c;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/a;->d:Llh0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lib0/m;->g:Lib0/m;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lib0/m;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Integer;->intValue()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->integers(Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/lang/Integer;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/lang/Integer;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Number;->intValue()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->keyHeight(Lrb0/h;)I"
+      ],
+      "defined_owner": "Ljava/lang/Number;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V",
+        "Lhiro/swiftkey/CandidateScroll;-><init>()V",
+        "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ThreadLocal;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Ljava/lang/ThreadLocal;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Ljava/lang/ThreadLocal;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ThreadLocal;->remove()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V"
+      ],
+      "defined_owner": "Ljava/lang/ThreadLocal;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V"
+      ],
+      "defined_owner": "Ljava/lang/ThreadLocal;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;IIII[I)V",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;-><init>(Landroidx/recyclerview/widget/GridLayoutManager;Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/Object;Ljava/lang/Object;Ljava/util/List;IIII[I[ILjava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Ljava/lang/ref/WeakReference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->rebase(Ljava/util/List;Ljava/lang/Object;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->remap(Ljava/util/List;[I[I)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameEnvironment(Lhiro/swiftkey/CandidateScroll$Snapshot;Lhiro/swiftkey/CandidateScroll$Snapshot;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Ljava/lang/ref/Reference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayDeque;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;->addLast(Ljava/lang/Object;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayDeque;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayDeque;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;->removeFirst()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayDeque;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->get(I)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Arrays;->equals([Ljava/lang/Object;[Ljava/lang/Object;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ljava/util/Arrays;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Arrays;->fill([II)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I"
+      ],
+      "defined_owner": "Ljava/util/Arrays;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Collection;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/Collection;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->remove()V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->get(I)Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->integers(Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCommitPrefix(Ljava/util/List;Ljava/util/List;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->isEmpty()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->size()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;-><init>(Lrb0/j;Lfb0/u;Lrb0/h;Lhiro/swiftkey/CandidateScroll$Viewport;Ljava/util/List;Ljava/lang/Object;ZII)V",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->candidateMapping(Ljava/util/List;Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->integers(Ljava/util/List;)[I",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCommitPrefix(Ljava/util/List;Ljava/util/List;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->size()I",
+      "opcode": "invoke-interface-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/Map$Entry;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;->setValue(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/Map$Entry;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Objects;->equals(Ljava/lang/Object;Ljava/lang/Object;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->equals(Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->sameCommitPrefix(Ljava/util/List;Ljava/util/List;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ljava/util/Objects;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Objects;->hash([Ljava/lang/Object;)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;->hashCode()I"
+      ],
+      "defined_owner": "Ljava/util/Objects;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;-><clinit>()V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->entrySet()Ljava/util/Set;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->keySet()Ljava/util/Set;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->beginUpdate(Lrb0/j;)Ljava/lang/Object;",
+        "Lhiro/swiftkey/CandidateScroll;->discardViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)V",
+        "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "Lhiro/swiftkey/CandidateScroll;->finishUpdate(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V",
+        "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->values()Ljava/util/Collection;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->invalidateViewports(Lrb0/j;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->a:Lcom/microsoft/fluency/TouchHistory;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->b:Lcom/microsoft/fluency/ResultsFilter$CapitalizationHint;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->c:Lcom/microsoft/fluency/Sequence;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->d:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->e:Lcom/microsoft/fluency/ResultsFilter$VerbatimMode;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->f:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->h:Lq40/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->i:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->j:[Lr40/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->k:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->l:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->m:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->n:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->p:Loz/q3;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->sameQuery(Ll40/c;Ll40/c;)Z"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->getCorrectionSpanReplacementText()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->sameCommitPrefix(Ljava/util/List;Ljava/util/List;)Z"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->getPredictionInput()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->getTrailingSeparator()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->getUserFacingText()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;-><init>(Lm40/b;)V",
+        "Lhiro/swiftkey/CandidateScroll;->sameCandidate(Lm40/b;Lm40/b;)Z"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->subrequest()Ll40/c;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lra/n1;->e(Landroid/view/View;)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lra/n1;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lra/n1;->k()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;"
+      ],
+      "defined_owner": "Lra/n1;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lra/r1;->d(IILjava/lang/Object;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lra/r1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/g;->e:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;"
+      ],
+      "defined_owner": "Lrb0/g;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->G()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->a:Lra/r1;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lra/q1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->e:Lgd0/b;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->g:Lfb0/u;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->h:Lah0/b0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->keyHeight(Lrb0/h;)I"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->j()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->l:Landroidx/recyclerview/widget/GridLayoutManager;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->captureViewport(Lrb0/h;Lrb0/j;Ljava/util/List;)Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;->disableItemAnimations(Lrb0/h;)V",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->o:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->q(II)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lra/q1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/h;->r:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$Viewport;->matches(Lrb0/h;Lrb0/j;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->read(Lrb0/h;)Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z"
+      ],
+      "defined_owner": "Lrb0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/j;->b:Ljava/util/List;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->applyViewport(Lhiro/swiftkey/CandidateScroll$UpdatePlan;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->stabilizeOrder(Lrb0/j;Lib0/a;)Lib0/a;"
+      ],
+      "defined_owner": "Lrb0/j;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/j;->d:Lfb0/u;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;->matches(Lrb0/j;Lfb0/u;)Z",
+        "Lhiro/swiftkey/CandidateScroll;->prepareUpdate(Lrb0/j;Lib0/a;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lrb0/j;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/k;->l:Lcom/touchtype/ui/AccessibilityEmptyRecyclerView;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lrb0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/k;->m:Lrb0/h;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lrb0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/k;->n:Lrb0/l;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lrb0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/l;->b:Landroidx/recyclerview/widget/GridLayoutManager;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V"
+      ],
+      "defined_owner": "Lrb0/l;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lrb0/l;->c:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V"
+      ],
+      "defined_owner": "Lrb0/l;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroidx/recyclerview/widget/GridLayoutManager;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/u;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lib0/a;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Ljava/lang/Integer;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Integer;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Number;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Number;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ThreadLocal;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayDeque;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/HashMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lm40/b;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lm40/b;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/g;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/g;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/h;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/h;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/j;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lrb0/j;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "[Ljava/lang/Object;",
+      "opcode": "filled-new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/ref/WeakReference;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    }
+  ],
+  "native_hook_entrypoints": [
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->finishUpdate(Lrb0/j;)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+      "public_static_concrete": true
+    }
+  ],
+  "native_hook_contract_verified": true,
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "523653e8f45238eb0f990c3e432e8a457ab2f6fae2afc958b22990a7cc16ab21",
+  "wrapper_source_sha256": "39947e92bcc47c2010e016698dfa3c440c44174fb4ef4b0eebe29553163a72dd"
+}

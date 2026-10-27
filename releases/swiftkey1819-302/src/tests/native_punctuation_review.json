@@ -1,0 +1,331 @@
+{
+  "status": "STATIC_NATIVE_REVIEW_PASSED",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "production_source_sha256": "3023cb1dac25cb2967fdbd062c757ac73d79c586ea64b07eafdda7a43106297c",
+  "flick_source_sha256": "8b3d3822c68259687ddbced9c5bb4b95d5f1957f7bc67b86d0a0f630965c27ab",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "android_instrumentation_tested": false,
+  "scope": "Independent static review of archived native APK methods and runtime source. Loader apply tests and host behavior are separate reports; no device or ART trace is claimed.",
+  "checks": [
+    {
+      "id": "binary_schema",
+      "native_file": "smali/gg/a.smali",
+      "source_sha256": "999146556135f176b501b0a8c74ac76e7228ae1b007ea0aa661ac50fbcbfa894",
+      "methods": [
+        {
+          "signature": "public static z(Ljava/io/DataInputStream;)Lzi0/e;",
+          "sha256": "8dba848e8a2054d8c54a0ad81d9929e2a2cc31223e895502b845199453efca16"
+        }
+      ],
+      "finding": "The real raw layouts are zlib-compressed Java data-stream type-3 layouts. All 17 rows and key variants are retained.",
+      "evidence": "z reads header ints, layout fields, row counts, key attributes, six UTF strings, width, cycle flag, nullable topLabel, bounds and common suffix. zi0/f maps q,r,s,t,u,v to cycle,tags,multicontent,bottomText,bottomLabel,popupCharacters and y to optional topLabel."
+    },
+    {
+      "id": "resource_to_fields",
+      "native_file": "smali_classes2/fc0/l1.smali",
+      "source_sha256": "bef520d6c531864172c51759089f80d86fe564fd2369bbd6c0d07304ac9af63c",
+      "methods": [
+        {
+          "signature": "public static d(Lzi0/f;Lfc0/w1;Ljava/util/Locale;Ljava/util/function/Supplier;)Lfc0/v1;",
+          "sha256": "c88068f70afd4065b52e31327f836a9b5f9e57c8aa3c693255bac9eb649eccb4"
+        }
+      ],
+      "finding": "Private extra tag enters fields.g; the configured sole popup enters fields.o; visible hint enters fields.a; primary stays in fields.b.",
+      "evidence": "The method reads y through l1.g/f into t1.a; u into t1.b through w1.c; v through w1.e into t1.o; r is comma-split into t1.i, copied by v1 constructor into g. The target bottomText t is empty, so v1.c stays null."
+    },
+    {
+      "id": "field_copy_and_primary",
+      "native_file": "smali_classes2/fc0/v1.smali",
+      "source_sha256": "8e68cf0622834cfb1c9d2738e55bcf6100a15688879a7fd75f550a44e0b60cb2",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Lfc0/t1;)V",
+          "sha256": "e920a12db11911eb1f11ca86f5ce5976a1c43f6d57aa629ae2780dc27be6f693"
+        },
+        {
+          "signature": "public final b()Ljava/lang/String;",
+          "sha256": "5b8f1fac2dc8c5184c271866290a8fb9566bb87c957a4f998d222e10d4206cdc"
+        }
+      ],
+      "finding": "Normal tap output remains the original primary because bottomText is unchanged and empty.",
+      "evidence": "v1 constructor copies t1.a/b/c/o and i to corresponding a/b/c/o/g. b() returns c when nonnull, else b, else empty string."
+    },
+    {
+      "id": "native_label_resolution",
+      "native_file": "smali_classes2/fc0/w1.smali",
+      "source_sha256": "b6e15d65b0140ab9431401871f98f3da3f193396389abe056c9433c0ca18929e",
+      "methods": [
+        {
+          "signature": "public final c(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+          "sha256": "4f6bbcbb7e3a72da0218414bc0b14f344f7ec5870fbf3ec99f7f451061d8a28b"
+        },
+        {
+          "signature": "public final d(Ljava/lang/String;)Ljava/lang/String;",
+          "sha256": "8c1ab3e9a13162600e9c7ae376b9da31c76cfc0b00892a73317de802621343ba"
+        },
+        {
+          "signature": "public final e(Ljava/lang/String;)Ljava/util/ArrayList;",
+          "sha256": "cf9d43be3287e2729658d22fcfdaf3d1767045ac97e8d5bc4451aaf2cd6b751f"
+        }
+      ],
+      "finding": "Literal fullwidth 。,ー,？,！ survive native label and popup token resolution.",
+      "evidence": "c handles label_ tokens only. d substitutes label_ and numeric tokens; literal punctuation passes through. e splits configured popup text by spaces then resolves tokens, so one fullwidth literal remains exactly one entry."
+    },
+    {
+      "id": "label_visibility",
+      "native_file": "smali_classes2/fb0/h1.smali",
+      "source_sha256": "b075ac1a2fd72d7268e0ecbfae052df8dc495284a1025547651818a5b9b5b6ad",
+      "methods": [
+        {
+          "signature": "public static c(Lzi0/f;ZLzi0/c;)Lzi0/f;",
+          "sha256": "be21bb826bbdbb58157addff061d60412da5f7f3880cf4ac7a223170c43a9e67"
+        }
+      ],
+      "finding": "Native secondary-label settings can hide the long-vowel hint while retaining its marker and candidate. The helper accepts this null hint.",
+      "evidence": "For generic type e=0, when both visibility flags are false, c reconstructs zi0/f preserving r extraTags and v popupCharacters, with v26=0 passed as topLabel. Type4 period is returned unchanged by this branch."
+    },
+    {
+      "id": "period_dispatch_preserved",
+      "native_file": "smali_classes2/fb0/g1.smali",
+      "source_sha256": "6deba5467d369b3ec3b54e607ab8b39d8cd428ff36615ec58ff89228fdaaefc9",
+      "methods": [
+        {
+          "signature": "public static a(Lzi0/f;Lfc0/s1;Lfc0/m1;Lfc0/v1;Lfb0/a1;Ld30/e;)Lfc0/n2;",
+          "sha256": "fce3aa137a4dc2a14820e7a1b05bcd5202fb1e635c0ef695b12d5f788f4e3f77"
+        }
+      ],
+      "finding": "The period remains native type4 and long vowel remains type0; only the two popup construction methods are hooked.",
+      "evidence": "packed-switch starts at 2; its third entry :pswitch_31 (value4) calls s1.x. Type0 branches to s1.p with zi0/f.p false. No resource attribute type is modified."
+    },
+    {
+      "id": "period_slider_and_primary_prepend",
+      "native_file": "smali_classes2/fc0/s1.smali",
+      "source_sha256": "66abef79db10dca6ed77f06a2af0dbd5dcd3ef0dfbeeb372116d9605553a381f",
+      "methods": [
+        {
+          "signature": "public final q(Ljava/util/List;Ljava/lang/String;Ljava/lang/String;Lfc0/m1;Lfc0/v1;)Lfb0/f2;",
+          "sha256": "fc619ac113a30f78c6e1e0843ff01ab678e43d476c8454ae66282ccd216a305f"
+        },
+        {
+          "signature": "public final x(Lfc0/m1;Lfc0/v1;)Lfc0/n2;",
+          "sha256": "5cdc0fe2ca49f35ecf2c21c13a72e60bce4209e7e87846f4ec0ecc7bf64b3676"
+        }
+      ],
+      "finding": "The old period path prepends the primary to candidates; the marked hook bypasses exactly this candidate factory while preserving the surrounding slider/tap graph.",
+      "evidence": "x calls q(fields.o, fields.a(), fields.a(), geometry,fields), then wraps its fb0.f2 in xc0.f and passes the same popup to fc0.i. Original q starts a list with p3 primary, appends configured candidates and variants. New periodPopup instead calls existing factory.i.a(singleton fullwidth question,fields,geometry)."
+    },
+    {
+      "id": "period_native_tap",
+      "native_file": "smali_classes2/fc0/i.smali",
+      "source_sha256": "ed8bd427f6d3b00f91c4fca80c82cbdc71948e455eb77a677e790de531ba4aa0",
+      "methods": [
+        {
+          "signature": "public final invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "sha256": "1406c4be6ec012918b2ca85747becd804e4467b0594c1df8a663ec7c0a3b2602"
+        }
+      ],
+      "finding": "Normal period tap stays a native fc0.z actor with original primary, independent of popup default.",
+      "evidence": "invoke reads fields.b(), creates fc0.z(factory,primary,primary,false), registers it through hc0/b.i for normal CLICK and corresponding accessibility variants. The new hook does not alter this method or actor construction."
+    },
+    {
+      "id": "period_tap_backend",
+      "native_file": "smali_classes2/fc0/z.smali",
+      "source_sha256": "1fe7e9fc3bb0f7f227000482e9fbd3939dd12aa12c1c40ceeb207a7a49000619",
+      "methods": [
+        {
+          "signature": "public final b(Llh0/a;)V",
+          "sha256": "6d8d9679126b174aa6c2716a3a19a8f044ad175b739c129016c93357aebd4cbd"
+        }
+      ],
+      "finding": "Period tap delegates unchanged primary text and flags to the original native input model.",
+      "evidence": "fc0.z.b reads its b,c,d and factory.d then invokes wb0/t0.P(token,b,c,null,d,null)."
+    },
+    {
+      "id": "long_vowel_variant_bypass",
+      "native_file": "smali_classes2/fc0/s1.smali",
+      "source_sha256": "66abef79db10dca6ed77f06a2af0dbd5dcd3ef0dfbeeb372116d9605553a381f",
+      "methods": [
+        {
+          "signature": "public final H(Lfc0/m1;Lfc0/v1;)Lxc0/h;",
+          "sha256": "98afd23fd3b4292c5670241bb3c868c70e5cc6a53ecb031e233f25c91ecf0ef3"
+        },
+        {
+          "signature": "public final O(Ljava/lang/String;Ljava/util/List;ZZ)Ljava/util/ArrayList;",
+          "sha256": "a0a10be289243c5f0ddc85a29243a4defa3eb8c710e7cd595d83c8be517c3f5e"
+        },
+        {
+          "signature": "public final c(Lfc0/m1;Lfc0/v1;)Lxc0/a;",
+          "sha256": "321c5d66b46d169cbf53d76eefff468fd1c15b5332624e82f5e969f7ed6a1139"
+        }
+      ],
+      "finding": "The long-vowel hook avoids language-variant additions using the existing singleton H route.",
+      "evidence": "Original c calls O for lower and upper states, and O appends languageSpecificLayoutInformation.h results. H reads fields.o directly: empty gives xc0.d, one candidate with touch exploration off gives xc0.i, otherwise builds xc0.f through h2.a. New helper uses H only for marked exact target and returns xc0.a(h,h)."
+    },
+    {
+      "id": "popup_singleton_index",
+      "native_file": "smali_classes2/fb0/x4.smali",
+      "source_sha256": "3c8d80153f37e57cca88674d8ec605df5685f579cfd5da5f47a9920e35a52c7d",
+      "methods": [
+        {
+          "signature": "public static c(Ljava/util/List;FFZLfb0/a1;IZ)Lfb0/g2;",
+          "sha256": "7ba73dc0199cf81af0172862bbdf009ab85a0b3e367b187471b35b79b8ac6244"
+        }
+      ],
+      "finding": "For a singleton input, the actual native default index is 0.",
+      "evidence": "c creates empty left/right lists and starts candidate loop at index1. For size1 it skips the loop, appends only input[0], computes ceil(left.size/p5)=ceil(0/1)=0 and passes that as the first int to fb0/g2."
+    },
+    {
+      "id": "popup_singleton_actor_flags",
+      "native_file": "smali_classes2/fb0/h2.smali",
+      "source_sha256": "dc3f29ea4367dee17dd82630acffc110588779dad2b910ddbbd3276b9c04c5fe",
+      "methods": [
+        {
+          "signature": "public final a(Ljava/util/List;Lfc0/v1;Lfc0/m1;)Lfb0/f2;",
+          "sha256": "bea098ac1eac542f5e94bb3726fb068fde58baafab38e76da5733c4354e51c5f"
+        },
+        {
+          "signature": "public final b(Lfb0/g2;Lfc0/v1;Landroid/graphics/RectF;IIFZZZLdd0/s;ZZZ)Lfb0/f2;",
+          "sha256": "3fe2393543fcc9abf7b150aa607d3b43b09f1d4d3eaa54d915e679d63c8902d8"
+        }
+      ],
+      "finding": "The ordinary singleton popup contains a raw fb0.l2 release actor with d=true and e=true, satisfying existing FlickSymbols checks.",
+      "evidence": "h2.a passes v13=1 and v14=1 as p11 and p12 of h2.b. In b ordinary :cond_11, v10=p11 and v11=p12 are passed to new fb0.l2(factory,input,punctuation,v10,v11), then registered via hc0/b.x under aa0/f discriminator16. b reads g2.b, p13=false prevents adjustment, and passes it as fb0.f2 constructor default index."
+    },
+    {
+      "id": "popup_default_storage",
+      "native_file": "smali_classes2/fb0/f2.smali",
+      "source_sha256": "06f5542d7999f4a27139df123f44f301164fa26a3c76fa12b1a338635c1c4e21",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Ljava/util/ArrayList;ILfc0/n2;ILjava/util/HashSet;Lfz/h;Lfb0/t1;Landroid/graphics/RectF;Lf40/a;)V",
+          "sha256": "6cd8bafd8204a35c8f5050e454e4d4a9cfa66023e9b29c563cfd0dfa33b2ca12"
+        }
+      ],
+      "finding": "The constructor stores the computed default index in the field read by FlickSymbols.",
+      "evidence": "fb0.f2 constructor stores p2 directly in public final l; candidate list p1 is passed into fb0.f0 superclass d collection."
+    },
+    {
+      "id": "popup_actor_storage",
+      "native_file": "smali_classes2/fb0/l2.smali",
+      "source_sha256": "6f01051324022fba3e46a01e2c7866d5421eac4d81e087b2211b6a7fd33a2ca0",
+      "methods": [
+        {
+          "signature": "public synthetic constructor <init>(Lfb0/n2;Ljava/lang/String;Ljava/lang/String;ZZ)V",
+          "sha256": "da9a6aa8743f537110cb3410c10fc2cfc213453fbfe4bf193e8d0797f018dd20"
+        },
+        {
+          "signature": "public final b(Llh0/a;)V",
+          "sha256": "6ca752a54ed965bb31dc5fa2c1a93a3bfe5f391dbe97e9eca0b24e626f045138"
+        }
+      ],
+      "finding": "The native popup actor stores the original model factory and both true flags; invocation follows its own native backend.",
+      "evidence": "Constructor iput p1 to a, p2 to b, p3 to c, p4 to d, p5 to e. b invokes a.a:wb0/t0.b0(token,b,c,d,e). Host fake insertion side effects are not claimed to execute this backend."
+    },
+    {
+      "id": "same_native_model_owner",
+      "native_file": "smali_classes2/tj0/e.smali",
+      "source_sha256": "d5af46178a424471f934bb6dc8ebfab92be6b2d49adbed9cbef82486d5e8b5cf",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Lfb0/t1;Lfz/h;Lcom/touchtype/KeyboardService;Lrd0/e;Lwb0/t0;Lpc0/d;Lbd0/s;Lfb0/r1;Ljava/util/function/Supplier;Lfb0/r2;Lk30/c;Lfb0/t2;Lf40/a;Lwb0/b2;Lw50/i0;Lyc0/b;Lwa0/u;)V",
+          "sha256": "6cf7045a7da9793557069152878ad452ef00c5e61f9b1a0a3464e0167a4a605e"
+        }
+      ],
+      "finding": "The native main-key action factory and popup factory share the same input model.",
+      "evidence": "tj0.e constructor takes model p5; moves it into v11 for fc0/k1 constructor model argument and into v4 for fb0/n2 first constructor argument. fb0/n2 is then passed to h2. No extra model is constructed by the helper."
+    },
+    {
+      "id": "popup_model_field",
+      "native_file": "smali_classes2/fb0/n2.smali",
+      "source_sha256": "5082b5a33e894e17aef03b0654a8fd9956685f0039aa0fc5bc7843f08320fc61",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Lwb0/t0;Lfz/h;Lsb/q;Lwb0/b2;Lfb0/t1;)V",
+          "sha256": "fd5ed90bb2086d19d81eb785e1235882fea095d5b41fb3aad25b34b4167388e0"
+        }
+      ],
+      "finding": "The popup actor model comparison used by FlickSymbols matches the inspected ABI.",
+      "evidence": "fb0/n2(wb0/t0,...) stores model p1 in Object field a. FlickSymbols checks fb0.l2.a.a against view.z/model."
+    },
+    {
+      "id": "view_model_field",
+      "native_file": "smali_classes2/xd0/f0.smali",
+      "source_sha256": "ecc79e888e98316dbe77dfb29e2a8e61401b209e5ce9e170a6350013d4c50236",
+      "methods": [
+        {
+          "signature": "public constructor <init>(Landroid/content/Context;Lgd0/b;Lfb0/r1;Lg40/c;Lfb0/f0;Lwb0/t0;Lef0/n;Lfb0/j;Lc5/m;Lui0/k;Lfz/h;Lpc0/c;Lgf0/b;Lfb0/d;)V",
+          "sha256": "682cf2fb095bac1878d526eace6e7f6dad8b7c7184a516b43fc409c18e5f8299"
+        }
+      ],
+      "finding": "The keyboard view retains its native model in z.",
+      "evidence": "Constructor receives wb0/t0 p6, moves it to p2, then iput-object p2 to z:Lwb0/t0. The popup owner and view model are the shared native keyboard model."
+    },
+    {
+      "id": "long_vowel_single_actor",
+      "native_file": "smali_classes2/fc0/k1.smali",
+      "source_sha256": "e18e38c45978df990112489fd1cb9d43086d3c60cce9985194846e0c3ebafed6",
+      "methods": [
+        {
+          "signature": "public final b(Lhc0/b;Lfc0/d2;Lfc0/v1;Lxc0/a;)V",
+          "sha256": "72061ab1f85dd03b91bf9b9102144f6e30587b54ec3012b5825f953679f01a6f"
+        },
+        {
+          "signature": "public final m(Lhc0/b;Lcm0/d;Lfc0/d2;Lfc0/v1;Lxc0/h;)V",
+          "sha256": "be43f5dc52d8078a9e320eb4a10ccbb499e939ca4d9d25c5765b0cc8bb778a71"
+        }
+      ],
+      "finding": "Native H singleton becomes a fc0.d1 release actor with d=true, selected under native shift restrictions.",
+      "evidence": "m sets const/4 v3,0x1, branches on xc0/i, reads its b, and in normal :cond_1 constructs fc0.d1(p0,v0,p4,v3). It calls hc0/b.p(timeout,restriction,[reset,d1,telemetry]). b calls m for both shift states with b40/c tag4 and bf0/d1 tag5 restrictions; helper gives both states the same singleton descriptor."
+    },
+    {
+      "id": "long_vowel_release_collection",
+      "native_file": "smali_classes2/hc0/b.smali",
+      "source_sha256": "6757dde6de8f521895f69f819076b799a37e9f0248c23f65b758077386066c32",
+      "methods": [
+        {
+          "signature": "public static varargs d(Ljava/util/ArrayList;Lcm0/d;[Lic0/a;)V",
+          "sha256": "de225f34591217a983f64cf422927a92702233a6803e8665c5c362cc90d82fac"
+        },
+        {
+          "signature": "public final varargs p(ILcm0/d;[Lic0/a;)V",
+          "sha256": "342251539094e4fd12d46df467bc65a7d5d56eeee548e142322189765906711f"
+        }
+      ],
+      "finding": "Existing FlickSymbols resolves the native longpress-release collection, rather than a manufactured alternate mapping.",
+      "evidence": "hc0/b.p calls B(timeout), gets f:hc0/k, reads its d ArrayList, then passes original actors and restriction to static d which wraps each ic0.a in ic0.e inside hc0.o."
+    },
+    {
+      "id": "direct_actor_flag_storage",
+      "native_file": "smali_classes2/fc0/d1.smali",
+      "source_sha256": "466e58950d976c99f7d5c186cb412f8ba47b1351e46dc24852f83f8a7a7c6ce7",
+      "methods": [
+        {
+          "signature": "public synthetic constructor <init>(Lfc0/k1;Ljava/lang/String;Ljava/lang/String;Z)V",
+          "sha256": "8f5d8501d05b9aa6018577166f2eaf703cbaaaae4b2af6d71486291c3d08633f"
+        },
+        {
+          "signature": "public final b(Llh0/a;)V",
+          "sha256": "b00435b90c4023ed2c2e2a296a5e620f26e9713ba67e632e0e25d3a811dadce6"
+        }
+      ],
+      "finding": "fc0.d1 preserves the constructor true flag in d and invokes the native P backend.",
+      "evidence": "Constructor assigns p2/p3 to b/c and p4 boolean to d. b reads these same fields and invokes factory.d:wb0/t0.P. Fullwidth exclamation is not a bracket, so a2 punctuation normalization does not change it."
+    }
+  ],
+  "reviewed_decisions": [
+    "Keep period type4 native tap/slider graph; bypass only its q popup construction for tagged exact singleton question.",
+    "Keep long-vowel type0 native tap and case restrictions; bypass only c language-variant merge using native H singleton construction.",
+    "Only marker plus matching primary/effective primary and one fullwidth alternate activates hooks. Native hidden secondary labels are accepted; other nonnull hints are rejected.",
+    "Binary edit occurs after preserved KeySwap logic and changes only extra tag, candidate list and optional hint UTF payloads. No geometry, native type, key position or unrelated key byte is edited.",
+    "FlickSymbols source is byte-identical; existing native popup and direct-release actor routes handle the two keys with unchanged angle, distance, acquisition deadline and canceled-stream ownership."
+  ],
+  "blocking_findings": [],
+  "limitations": [
+    "Native resource fixtures and smali methods are real; host builders/actors are explicit models, not executions of the Android application.",
+    "No device screenshot, actual touch sample, rendering or fluency-engine output is claimed.",
+    "Normal tap routing and popup candidate selection are justified by native static construction; host tests do not simulate the full Android longpress timer/window dispatch."
+  ]
+}

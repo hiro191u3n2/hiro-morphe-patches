@@ -1,0 +1,1 @@
+package ob0; public class d1 extends android.view.ViewGroup { public d1(android.content.Context c) { super(c); } public b1 getButton() { return null; } protected void onLayout(boolean c,int l,int t,int r,int b) {} }
