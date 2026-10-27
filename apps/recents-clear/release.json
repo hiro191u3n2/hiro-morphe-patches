@@ -1,17 +1,17 @@
 {
-  "version": "1.20.0",
-  "versionCode": 23,
+  "version": "1.21.0",
+  "versionCode": 24,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.20.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.20.0.apk",
-  "sha256": "07c2b8da42ea0bdc8305caff79cdebf2d52c519f64b605a81853f01410dda8ef",
+  "apk": "Hiro_RecentsClear_v1.21.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.21.0.apk",
+  "sha256": "af08ca35af717195e36431f7948f393adceb9df5a7d692afb29797d31d3ac157",
   "bytes": 41379,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 249,
+  "hostServiceScenarios": 272,
   "matcherChecks": 57,
-  "automaticClearMode": "Shared bounded inline post-Recents inspection and light-to-standard recovery",
-  "manualClearMode": "Same bounded recovery; valid lightweight fast path retained",
-  "bootReliability": "Readiness, Activity handoff/recovery and once-per-boot claims retained",
-  "change": "Remove the extra queue boundary after an incomplete learned-ID lightweight snapshot. Recycle nodes and recheck fresh guards before one inline standard-root recovery. First and subsequent runs share the path; OS rendering latency remains device-dependent."
+  "automaticClearMode": "Wait for startup SystemUI readiness;15s budget fromfirstUI; fresh standard-root completion checks and bounded same-target retries",
+  "manualClearMode": "Immediate accepted action and original5s budget preserved",
+  "bootReliability": "Once-per-boot claim retained; Recents requested atmostonce; never reclaim after UI",
+  "change": "Fix cold-start expiry and accepted-but-unreflected clear. Observe actual overview/home/empty state, retry samehost/window/id only, stop on foreground departure, lock, off or disabled. No device timing guarantee."
 }
