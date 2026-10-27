@@ -1,0 +1,613 @@
+{
+  "status": "EMOJI_FOOTER_HOST_AND_NATIVE_HOOK_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.22",
+  "bundle_version": "1.0.305",
+  "baseline_swiftkey_version": "1.8.21",
+  "baseline_bundle_version": "1.0.304",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_fix_confirmed": false,
+  "runtime_unrelated_classes_unchanged": true,
+  "all_existing_runtime_classes_byte_identical": true,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "standalone_and_bundle_runtime_equal": true,
+  "loader_entries_byte_identical": false,
+  "unrelated_loader_classes_unchanged": true,
+  "jvm_swiftkey_loader_matches_standalone": true,
+  "combined_jvm_swiftkey_discovered": true,
+  "previous_jvm_patches_preserved": true,
+  "all_static_checks_passed": true,
+  "host_tests_passed": true,
+  "current_manager_patcher_selection_verified": true,
+  "two_loader_sdks_agree": true,
+  "selected_extension_stream_verified": true,
+  "loader_selected_extension_matches_packaged_runtime": true,
+  "diagnostic_function_removed": true,
+  "candidate_scroll_1821_byte_identical": true,
+  "japanese_start_1821_byte_identical": true,
+  "candidate_toolbar_1821_byte_identical": true,
+  "emoji_toolbar_1821_byte_identical": true,
+  "punctuation_1821_byte_identical": true,
+  "flick_sensitivity_1821_byte_identical": true,
+  "native_abi_review_verified": true,
+  "native_abi_replayed_in_ci": false,
+  "native_archive_hook_review_verified": true,
+  "native_archive_hook_replayed_in_ci": false,
+  "emoji_footer_order": [
+    "abc",
+    "enter",
+    "delete",
+    "categories"
+  ],
+  "emoji_footer_only": true,
+  "native_enter_pipeline_used": true,
+  "native_delete_widget_preserved": true,
+  "native_scrollable_categories_preserved": true,
+  "native_abi_review": {
+    "source": "tests/native_emoji_footer_abi1822.json",
+    "sha256": "0943b0e910c8f235c0e7492406358fff9012aca64dd889aee01f4b1cc2287bbc",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06"
+  },
+  "native_archive_hook_review": {
+    "source": "tests/native_emoji_footer_archive_review.json",
+    "sha256": "33875a9b34411162f30d91e87f843c32fa416276a26c0463f92e2eae8e4072f2",
+    "report": {
+      "status": "PASSED",
+      "scope": "Actual archived APK native footer constructor transformation through the packaged MPP helper on two Morphe SDKs. This archive was previously modified; this is not a clean-original full patch application or device execution.",
+      "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+      "baseline_mpp_sha256": {
+        "single": "000076673c9253acb1edb3a11ebf9889396c4977d8ea7788e52275b16190d774",
+        "bundle": "1523f42ee8597475c8d4d8b1625820fd874408090881c88f9e0107583fc00d7f"
+      },
+      "source_sha256": {
+        "patch_java/app/hiro/swiftkey/patches/EmojiFooterPatch.java": "feb7fd0560cd6abef4228c29084849240fb205195c7c7d2ca95890f84ca18bef",
+        "tools_java/UpdateEmojiFooterLoader.java": "708bb3faac941095037a8ce2e879d0b1c430870ced69fead7c46b95abb18fafa",
+        "tests/EmojiFooterPatchProbe.java": "6085209b12983e26cda190acf892612a9bd0628c93c5d904333ca0f957b57cd1",
+        "tests/build_emoji_footer_loader.py": "271d0e398a93a35e24333eeb2b0753984fb8b90e883926642bad4955bb1d583d"
+      },
+      "loader_helper_sha256": "7cb968262e198b6731127b03de97e394ec4fb3256a8f57f60787b41c05969bec",
+      "native_hook_sdks_tested": [
+        "morphe-desktop1.17.0-dev.6",
+        "morphe-desktop1.19.1/patcher2.0.1"
+      ],
+      "native_hook_sdks_agree": true,
+      "native_archive_hook_tests": {
+        "archived_sdk": {
+          "status": "PASSED",
+          "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+          "native_fixture": false,
+          "native_methods": 2,
+          "native_methods_changed": 1,
+          "native_hook_sites": 1,
+          "inserted_runtime_calls": 1,
+          "inserted_native_instructions": 3,
+          "assertions": 204,
+          "all_target_drift_rejected_before_mutation": true,
+          "owner_and_native_enter_sender_forwarded": true,
+          "installation_after_native_delete_handler": true,
+          "native_enter_method_byte_identical": true,
+          "existing_native_body_preserved": true,
+          "unchanged_other_native_methods": 85,
+          "serialized_dex_roundtrip_verified": true,
+          "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+          "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+          "device_tested": false,
+          "original_apk_apply_tested": false
+        },
+        "current_sdk": {
+          "status": "PASSED",
+          "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+          "native_fixture": false,
+          "native_methods": 2,
+          "native_methods_changed": 1,
+          "native_hook_sites": 1,
+          "inserted_runtime_calls": 1,
+          "inserted_native_instructions": 3,
+          "assertions": 204,
+          "all_target_drift_rejected_before_mutation": true,
+          "owner_and_native_enter_sender_forwarded": true,
+          "installation_after_native_delete_handler": true,
+          "native_enter_method_byte_identical": true,
+          "existing_native_body_preserved": true,
+          "unchanged_other_native_methods": 85,
+          "serialized_dex_roundtrip_verified": true,
+          "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+          "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+          "device_tested": false,
+          "original_apk_apply_tested": false
+        }
+      },
+      "native_layout_consumer_review": {
+        "scope": "Read-only native footer binding, theme updates, category setup, lifecycle cleanup, click/delete feedback; no child ConstraintLayout layout-param assumptions found in these exact paths.",
+        "reviewed_paths": [
+          "je0.c constructor, U(dd0.e0), onDestroy(androidx.lifecycle.q0)",
+          "aa0.h0 invoke case12: abc text color, delete icon/ripple",
+          "ae0.w invoke case11: delete icon drawable",
+          "ae0.d onClick case2: abc feedback and keyboard return",
+          "ne0.t constructor: tabs visibility, setupWithViewPager and category content",
+          "ne0.t U(dd0.e0): SwiftKeyTabLayout.q",
+          "androidx.credentials.playservices.j.a(int): native delete feedback",
+          "SwiftKeyTabLayout.q/r: colors, drawable, child tab strip only",
+          "fb0.d.a/b: feedback using view, no layout-parent access"
+        ],
+        "native_binding_view_identities_retained": true,
+        "native_parent_or_constraint_layout_params_cast_found": false,
+        "emoji_panel_discriminator": "je0.c.c == wa0.p.c; maps to oz.o1.a EMOJI_PANEL and oz.a3.a EMOJI"
+      },
+      "device_tested": false,
+      "original_apk_apply_tested": false,
+      "native_archive_replayed_in_ci": false
+    }
+  },
+  "emoji_footer_test_report": {
+    "status": "PASSED",
+    "scope": "Unchanged production EmojiFooter Java with isolated JVM Android/native fakes",
+    "scenarios": 245,
+    "assertions": 4059,
+    "production_source_sha256": "e496f3a3a8cc37906a17d9e4b34785b68cad904190c6aa8bd4effdb3970eb288",
+    "device_tested": false,
+    "android_instrumentation_tested": false,
+    "original_apk_apply_tested": false,
+    "native_view_identity_preserved": true,
+    "native_listener_identity_preserved": true,
+    "native_delete_repeat_actor_identity_preserved": true,
+    "native_category_selection_and_scroll_state_preserved": true,
+    "layout_order_verified": true,
+    "emoji_scope_verified": true,
+    "repeated_install_idempotent": true,
+    "narrow_width_verified": true,
+    "physical_left_to_right_under_rtl_verified": true,
+    "native_enter_dispatch_verified": true,
+    "failure_guards_verified": true,
+    "transaction_rollback_verified": true,
+    "theme_following_verified": true,
+    "enter_accessibility_verified": true,
+    "input_engine_editor_action_execution_tested": false,
+    "native_delete_repeat_timing_executed": false,
+    "android_constraintlayout_solver_executed": false,
+    "test_sources": {
+      "src/hiro/swiftkey/EmojiFooter.java": "e496f3a3a8cc37906a17d9e4b34785b68cad904190c6aa8bd4effdb3970eb288",
+      "tests/emoji_footer_host_stubs/android/content/Context.java": "632db8b4e1fbe7ec943c713c8f23c6b80ab73aab8d7e9ad8755d0d0e7c7e8412",
+      "tests/emoji_footer_host_stubs/android/content/res/ColorStateList.java": "570248052a7f0a5765fcbb6d5f756f59f341b7d4f64011e5ede30497315671bb",
+      "tests/emoji_footer_host_stubs/android/content/res/Resources.java": "f6db696cd96d21326eca00bd475590833606b2761f2e57000e26922d84ccc763",
+      "tests/emoji_footer_host_stubs/android/graphics/Canvas.java": "913797c9557c42a54ef9e1b154e7252da9b2a002b2543a0352d08c8473b3f645",
+      "tests/emoji_footer_host_stubs/android/graphics/Color.java": "9f928b6ef24fbab9f39bf8c62d7f20031b48cb235d04f7cbb353f5e472ecf739",
+      "tests/emoji_footer_host_stubs/android/graphics/Paint.java": "869ada075e722bb2002527a1a61893d5ec2e96a1928a04120c5639d1324b64b6",
+      "tests/emoji_footer_host_stubs/android/graphics/drawable/ColorDrawable.java": "f2ec1605d66a01a699c3d0975007e12f8fcf1c055f6a26af85d3238d3e0f40e8",
+      "tests/emoji_footer_host_stubs/android/graphics/drawable/Drawable.java": "f80d421cc9c707b7183d5e8fc6c7665f23868dfddc653bfdcf8101d1b386f79e",
+      "tests/emoji_footer_host_stubs/android/graphics/drawable/RippleDrawable.java": "b227b2ad37220f94dc25345a7554fa293505e87ebfead6c143945373af51b0c7",
+      "tests/emoji_footer_host_stubs/android/util/DisplayMetrics.java": "78d317809896fb660442bf4d717c7c26337ec39bb9ef4ae9e6f169696650e553",
+      "tests/emoji_footer_host_stubs/android/view/MotionEvent.java": "ff801db2bd8892f7a57f25125c1872da3c22a7b8269411b998411b6b9b3594b5",
+      "tests/emoji_footer_host_stubs/android/view/View.java": "cd54897f27c1e28b6cc5296e6018c814033fb44da8932984e20d91247849eed0",
+      "tests/emoji_footer_host_stubs/android/view/ViewGroup.java": "7e5857fbd861e5ffc87f4ac8abc09b89c1c2b4c4392a6457b91a67bdeaf0b8cd",
+      "tests/emoji_footer_host_stubs/android/view/ViewParent.java": "ec53c96e5c49ab494030f7ca7834b320db9d9c3cea32fd971fdfa8722b7c82ff",
+      "tests/emoji_footer_host_stubs/android/view/ViewTreeObserver.java": "5ef9cc17d0a9ab8475662922ae283562bb2b094aff3065844ccf71c0054540c0",
+      "tests/emoji_footer_host_stubs/android/widget/TextView.java": "2c31baa9a38e3f3ccdaf89130ac5637941e3df6372ca3a1301824bf2940497da",
+      "tests/emoji_footer_host_stubs/androidx/constraintlayout/widget/ConstraintLayout.java": "e41429d6439b5279589f5e8fed6b0ee252935ac54eb6fff7147b78762168e407",
+      "tests/emoji_footer_host_stubs/com/google/android/material/button/MaterialButton.java": "d1871af9deca3c8bc286cb7ad44ce0fdc3a143f121151be0dff624244563bade",
+      "tests/emoji_footer_host_stubs/com/touchtype/keyboard/view/DeleteKeyButton.java": "e7d6b6b55f019853e8626a4bc072788242e0f1f639ca8a7318ee3d6af47150af",
+      "tests/emoji_footer_host_stubs/com/touchtype/ui/SwiftKeyTabLayout.java": "e5c70b93cc074b2bc54b74a762cabc50cfbc3fcab600bb187af17157f1136071",
+      "tests/emoji_footer_host_stubs/f50/d.java": "458205532d8c86779b639c1ec84a5cc53580d03b04d5e44ceddd1b4442a2c7ee",
+      "tests/emoji_footer_host_stubs/gg/a.java": "b72226e55b67f87f0f1cb9126369af2b1e7b3f5f2772396bc404a0569dbadcd4",
+      "tests/emoji_footer_host_stubs/je0/c.java": "24a76b038bc38f41356b6e222df228234785bcf31079fe2f3c2432f063a105b1",
+      "tests/emoji_footer_host_stubs/lh0/a.java": "647328cb0b54b91242eca4d2833cb5e6f0bbb607d205ee369dbc1cbab13b3c31",
+      "tests/emoji_footer_host_stubs/wa0/p.java": "31eb02b406c8cd618bbbea6697e5ab374cbf71f20edfdcda7c08c88c646ede68",
+      "tests/emoji_footer_host_stubs/wb0/x.java": "f16a61af055c758ba9fe45a629cca12764794ae095d0ac4bcc13dee0a366b32a",
+      "tests/host/EmojiFooterHostTest.java": "f094ce1b2b710f29e5415c5a640d267296809758d82322f645162795c518cc12",
+      "tests/run_emoji_footer_tests.py": "8fb368a939ac16a6b54d6223048d159e00ee2f57cf3ad0fd0ce0648928155ded"
+    },
+    "limitations": [
+      "Host fakes model view parentage, measurement, listener dispatch and draw calls; not Android rendering.",
+      "Native Enter sender is a recording fake. Exact native action routing is reviewed separately against APK bytecode.",
+      "Preserved native DeleteKeyButton actor/listener identity is verified; its actual repeat timer is not executed.",
+      "No handset touch, screen reader, native IME composition or clean-original-APK application was executed."
+    ]
+  },
+  "runtime_integration": {
+    "status": "PASSED",
+    "scope": "Add EmojiFooter only; canonical preservation of all existing runtime classes",
+    "baseline_extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "overlay_sha256": "09bc793c0caa6c4f4131e587743803056082a027972a31d15dc43e7cf2a408ae",
+    "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "baseline_classes": 81,
+    "runtime_after_classes": 84,
+    "unchanged_existing_classes": 81,
+    "unchanged_existing_class_paths": [
+      "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "Lhiro/swiftkey/CandidateScroll;",
+      "Lhiro/swiftkey/CandidateToolbar$1;",
+      "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "Lhiro/swiftkey/CandidateToolbar;",
+      "Lhiro/swiftkey/CursorLatinBoundary;",
+      "Lhiro/swiftkey/DeleteLatinBoundary;",
+      "Lhiro/swiftkey/EmojiCandidates$1;",
+      "Lhiro/swiftkey/EmojiCandidates;",
+      "Lhiro/swiftkey/EmojiPanelUi$1;",
+      "Lhiro/swiftkey/EmojiPanelUi$2$1;",
+      "Lhiro/swiftkey/EmojiPanelUi$2;",
+      "Lhiro/swiftkey/EmojiPanelUi$3;",
+      "Lhiro/swiftkey/EmojiPanelUi$OptionChange;",
+      "Lhiro/swiftkey/EmojiPanelUi$Watcher;",
+      "Lhiro/swiftkey/EmojiPanelUi;",
+      "Lhiro/swiftkey/EmojiToolbar$1;",
+      "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "Lhiro/swiftkey/EmojiToolbar;",
+      "Lhiro/swiftkey/FlickSymbols$1;",
+      "Lhiro/swiftkey/FlickSymbols$2;",
+      "Lhiro/swiftkey/FlickSymbols$3;",
+      "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "Lhiro/swiftkey/FlickSymbols;",
+      "Lhiro/swiftkey/FrequencyLearning$1;",
+      "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "Lhiro/swiftkey/FrequencyLearning;",
+      "Lhiro/swiftkey/JapaneseGlide$1$1;",
+      "Lhiro/swiftkey/JapaneseGlide$1;",
+      "Lhiro/swiftkey/JapaneseGlide$2$1;",
+      "Lhiro/swiftkey/JapaneseGlide$2;",
+      "Lhiro/swiftkey/JapaneseGlide$3;",
+      "Lhiro/swiftkey/JapaneseGlide$Snapshot;",
+      "Lhiro/swiftkey/JapaneseGlide$Stroke;",
+      "Lhiro/swiftkey/JapaneseGlide;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$1;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$2;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$3;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$Choice;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$Listener;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$1;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Index;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Result;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Scored;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder;",
+      "Lhiro/swiftkey/JapaneseStart$1;",
+      "Lhiro/swiftkey/JapaneseStart$Session;",
+      "Lhiro/swiftkey/JapaneseStart;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "Lhiro/swiftkey/KatakanaGlossCleanup$Holder;",
+      "Lhiro/swiftkey/KatakanaGlossCleanup;",
+      "Lhiro/swiftkey/KeySwap$ChangeListener;",
+      "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "Lhiro/swiftkey/KeySwap;",
+      "Lhiro/swiftkey/KeySwapBinary;",
+      "Lhiro/swiftkey/LatinBoundary;",
+      "Lhiro/swiftkey/LineEnter$Session;",
+      "Lhiro/swiftkey/LineEnter;",
+      "Lhiro/swiftkey/LineEnterGesture$Callbacks;",
+      "Lhiro/swiftkey/LineEnterGesture;",
+      "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "Lhiro/swiftkey/PunctuationKeys;",
+      "Lhiro/swiftkey/UnicodeLatinToken;",
+      "Lhiro/swiftkey/UsageBridge$Session;",
+      "Lhiro/swiftkey/UsageBridge;",
+      "Lhiro/swiftkey/WordCandidates$1;",
+      "Lhiro/swiftkey/WordCandidates$Index;",
+      "Lhiro/swiftkey/WordCandidates;"
+    ],
+    "added_classes": [
+      "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+      "Lhiro/swiftkey/EmojiFooter$Row;",
+      "Lhiro/swiftkey/EmojiFooter;"
+    ],
+    "changed_existing_classes": [],
+    "existing_entrypoints_preserved": true,
+    "unrelated_existing_classes_byte_identical": true,
+    "all_existing_runtime_classes_byte_identical": true,
+    "serialized_overlay_matches_compiled_helper": true,
+    "device_tested": false,
+    "original_apk_apply_tested": false
+  },
+  "emoji_footer_loader_report": {
+    "status": "PASSED",
+    "scope": "Additive footer loader hooks; actual pinned native constructor transformation; native Enter action preserved",
+    "baseline_mpp_sha256": {
+      "single": "000076673c9253acb1edb3a11ebf9889396c4977d8ea7788e52275b16190d774",
+      "bundle": "1523f42ee8597475c8d4d8b1625820fd874408090881c88f9e0107583fc00d7f"
+    },
+    "baseline_jvm_patch_classes": 12,
+    "final_jvm_patch_classes": 13,
+    "jvm_main_only_two_calls_added": true,
+    "jvm_original_normalized_class_content_preserved": true,
+    "existing_named_patch_registration_unchanged": true,
+    "changed_jvm_classes": [
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class"
+    ],
+    "added_jvm_classes": [
+      "app/hiro/swiftkey/patches/EmojiFooterPatch.class"
+    ],
+    "unchanged_jvm_classes": {
+      "app/hiro/swiftkey/patches/MethodContract.class": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6",
+      "app/hiro/swiftkey/patches/InputLearningPatch.class": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01",
+      "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4",
+      "app/hiro/swiftkey/patches/KeySwapPatch.class": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c",
+      "app/hiro/swiftkey/patches/PasteProtectionPatch.class": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113",
+      "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479",
+      "app/hiro/swiftkey/patches/DeleteProtectionPatch.class": "c0d0dc76b55af04ee77e805e8ee2007745df162978d4d16aabf79e65148c35b9",
+      "app/hiro/swiftkey/patches/CandidateScrollPatch.class": "c127be1a9ff5374d155821190e32324092332fb762a65aab5bc6673e44684b1a",
+      "app/hiro/swiftkey/patches/CandidateToolbarPatch.class": "e2b47b9cd4a06caf67082cf7977bd6699e470674d8e57fc6ec73596cd57fd366",
+      "app/hiro/swiftkey/patches/PunctuationPatch.class": "45cb65cc8e18090d0f8ec8373ec566c3183d383c9548aea52021184a762bd38f",
+      "app/hiro/swiftkey/patches/JapaneseStartPatch.class": "240c7a0b0ce5172479cea4c49beda84ded45ddd64a08ba8351eb67106d088bfb"
+    },
+    "native_hook_tests": {
+      "status": "PASSED",
+      "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+      "native_fixture": true,
+      "native_methods": 2,
+      "native_methods_changed": 1,
+      "native_hook_sites": 1,
+      "inserted_runtime_calls": 1,
+      "inserted_native_instructions": 3,
+      "assertions": 53,
+      "all_target_drift_rejected_before_mutation": true,
+      "owner_and_native_enter_sender_forwarded": true,
+      "installation_after_native_delete_handler": true,
+      "native_enter_method_byte_identical": true,
+      "existing_native_body_preserved": true,
+      "unchanged_other_native_methods": 9,
+      "serialized_dex_roundtrip_verified": true,
+      "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+      "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+      "device_tested": false,
+      "original_apk_apply_tested": false
+    },
+    "native_hook_tests_by_sdk": {
+      "archived_sdk": {
+        "status": "PASSED",
+        "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+        "native_fixture": true,
+        "native_methods": 2,
+        "native_methods_changed": 1,
+        "native_hook_sites": 1,
+        "inserted_runtime_calls": 1,
+        "inserted_native_instructions": 3,
+        "assertions": 53,
+        "all_target_drift_rejected_before_mutation": true,
+        "owner_and_native_enter_sender_forwarded": true,
+        "installation_after_native_delete_handler": true,
+        "native_enter_method_byte_identical": true,
+        "existing_native_body_preserved": true,
+        "unchanged_other_native_methods": 9,
+        "serialized_dex_roundtrip_verified": true,
+        "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+        "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+        "device_tested": false,
+        "original_apk_apply_tested": false
+      },
+      "current_sdk": {
+        "status": "PASSED",
+        "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+        "native_fixture": true,
+        "native_methods": 2,
+        "native_methods_changed": 1,
+        "native_hook_sites": 1,
+        "inserted_runtime_calls": 1,
+        "inserted_native_instructions": 3,
+        "assertions": 53,
+        "all_target_drift_rejected_before_mutation": true,
+        "owner_and_native_enter_sender_forwarded": true,
+        "installation_after_native_delete_handler": true,
+        "native_enter_method_byte_identical": true,
+        "existing_native_body_preserved": true,
+        "unchanged_other_native_methods": 9,
+        "serialized_dex_roundtrip_verified": true,
+        "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+        "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+        "device_tested": false,
+        "original_apk_apply_tested": false
+      }
+    },
+    "native_archive_hook_tests": {},
+    "native_hook_sdks_agree": true,
+    "native_hook_sdks_tested": [
+      "morphe-desktop1.17.0-dev.6",
+      "morphe-desktop1.19.1/patcher2.0.1"
+    ],
+    "native_probe_loader": "Pinned published1.8.21 MPP with only main bridge/helper changed; no loose helper classpath",
+    "native_enter_method_preserved": true,
+    "prior_emoji_toolbar_preserved": true,
+    "prior_sensitivity_preserved": true,
+    "android": {
+      "single": {
+        "before_classes": 20,
+        "after_classes": 21,
+        "unchanged_existing_classes": 19,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.smali"
+        ],
+        "added_classes": [
+          "app/hiro/swiftkey/patches/EmojiFooterPatch.smali"
+        ],
+        "only_two_main_bridge_calls_added": true,
+        "sha256": "a16e8eb8bebfc86d25aaec7411f71e519315cb4423e21a0cb514fefc7652a42d"
+      },
+      "bundle": {
+        "before_classes": 279,
+        "after_classes": 280,
+        "unchanged_existing_classes": 278,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.smali"
+        ],
+        "added_classes": [
+          "app/hiro/swiftkey/patches/EmojiFooterPatch.smali"
+        ],
+        "only_two_main_bridge_calls_added": true,
+        "sha256": "87236981bdd168254ecfc5078241662ab1657d34b983fbe5c819f7dc1793d85e"
+      }
+    },
+    "jvm": {
+      "app/hiro/swiftkey/patches/EmojiFooterPatch.class": {
+        "bytes": 6040,
+        "sha256": "7cb968262e198b6731127b03de97e394ec4fb3256a8f57f60787b41c05969bec"
+      },
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": {
+        "bytes": 22139,
+        "sha256": "b21d978c7e9b6543b8208acd2e6ada4521732a3370650ed40a34d02eba942a95"
+      }
+    },
+    "source_sha256": {
+      "patch_java/app/hiro/swiftkey/patches/EmojiFooterPatch.java": "feb7fd0560cd6abef4228c29084849240fb205195c7c7d2ca95890f84ca18bef",
+      "tests/EmojiFooterPatchProbe.java": "6085209b12983e26cda190acf892612a9bd0628c93c5d904333ca0f957b57cd1"
+    },
+    "apk_sha256": null,
+    "device_tested": false,
+    "original_apk_apply_tested": false
+  },
+  "runtime": {
+    "before_classes": 81,
+    "after_classes": 84,
+    "unchanged_existing_classes": 81,
+    "changed": [],
+    "added": [
+      "hiro/swiftkey/EmojiFooter$EnterKey.smali",
+      "hiro/swiftkey/EmojiFooter$Row.smali",
+      "hiro/swiftkey/EmojiFooter.smali"
+    ],
+    "removed": [],
+    "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06"
+  },
+  "runtime_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+  "android_loader_class_count": 280,
+  "loader_parity": {
+    "baseline_extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "baseline_loaded_named_patches": 20,
+    "baseline_selected_swiftkey": 1,
+    "baseline_updated_dependency_graph_equal": true,
+    "clean_apk_apply_tested": false,
+    "dependency_types": [
+      "BytecodePatch",
+      "BytecodePatch",
+      "RawResourcePatch"
+    ],
+    "device_tested": false,
+    "loader_selected_extension_matches_packaged_runtime": true,
+    "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+    "previous_patch_metadata_unchanged": 20,
+    "requested_swiftkey_keys": 1,
+    "restored_loaded_named_patches": 20,
+    "restored_selected_swiftkey": 1,
+    "selected_extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "selected_extension_stream_verified": true,
+    "standalone_combined_dependency_graph_equal": true,
+    "standalone_selected_swiftkey": 1,
+    "status": "PASSED",
+    "swiftkey_dependency_graph": {
+      "compatibility": {
+        "com.touchtype.swiftkey.beta": [
+          "9.13.16.4"
+        ]
+      },
+      "default": true,
+      "dependencies": [
+        {
+          "compatibility": {
+            "com.touchtype.swiftkey.beta": [
+              "9.13.16.4"
+            ]
+          },
+          "default": false,
+          "dependencies": [
+            {
+              "compatibility": {
+                "com.touchtype.swiftkey.beta": [
+                  "9.13.16.4"
+                ]
+              },
+              "default": false,
+              "dependencies": [],
+              "description": null,
+              "name": null,
+              "option_keys": [],
+              "type": "app.morphe.patcher.patch.BytecodePatch"
+            }
+          ],
+          "description": null,
+          "name": null,
+          "option_keys": [],
+          "type": "app.morphe.patcher.patch.RawResourcePatch"
+        }
+      ],
+      "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+      "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+      "option_keys": [],
+      "type": "app.morphe.patcher.patch.BytecodePatch"
+    }
+  },
+  "single": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [
+      "app/hiro/swiftkey/patches/EmojiFooterPatch.class"
+    ],
+    "unchanged_entries": 19,
+    "bytes": 16153344,
+    "sha256": "322f2ba927a4c53861e23197155e46af32e6e37017a7b6518f081a01ff8a9052",
+    "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "all_other_entries_byte_identical": true
+  },
+  "bundle": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [
+      "app/hiro/swiftkey/patches/EmojiFooterPatch.class"
+    ],
+    "unchanged_entries": 231,
+    "bytes": 19250133,
+    "sha256": "52fe856d66e6b4b89a2280ccc237448905c1b1f2f67c2fea715b0a6d5acaf29d",
+    "extension_sha256": "eef461b0d8825be2c36d88ef694f62c7f8ec0d756bd8500022738206c0abcf06",
+    "all_other_entries_byte_identical": true
+  },
+  "inputs": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.21.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/ece0bf5740027de096681fd51223a1adc416bf4f/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.21.mpp",
+      "sha256": "000076673c9253acb1edb3a11ebf9889396c4977d8ea7788e52275b16190d774"
+    },
+    "Hiro_Morphe_Patches_v1.0.304.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/ece0bf5740027de096681fd51223a1adc416bf4f/downloads/Hiro_Morphe_Patches_v1.0.304.mpp",
+      "sha256": "1523f42ee8597475c8d4d8b1625820fd874408090881c88f9e0107583fc00d7f"
+    },
+    "apktool.jar": {
+      "url": "https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar",
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423"
+    },
+    "morphe.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar",
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-current.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar",
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+    },
+    "r8.jar": {
+      "url": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar",
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    },
+    "android.jar": {
+      "url": "https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar",
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b"
+    }
+  }
+}
