@@ -1,16 +1,17 @@
 {
-  "version": "1.19.0",
-  "versionCode": 22,
+  "version": "1.20.0",
+  "versionCode": 23,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.19.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.19.0.apk",
-  "sha256": "c12b0d8e251f92edab6d3a81feb82659bcd69d01db2952f7c9ccf73df3fcde0d",
+  "apk": "Hiro_RecentsClear_v1.20.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.20.0.apk",
+  "sha256": "07c2b8da42ea0bdc8305caff79cdebf2d52c519f64b605a81853f01410dda8ef",
   "bytes": 41379,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 236,
-  "automaticClearMode": "preload before UI, one fresh inline inspection after Recents, async inspection Handler",
-  "manualClearMode": "Existing prewarm and inline inspection retained",
-  "bootReliability": "v1.18 readiness, handoff, pending recovery and once-per-boot claim logic retained",
-  "change": "Apply immediate post-Recents inspection to automatic clears, removing its extra queued continuation. Move cold locator preferences before opening Recents. No guarantee of instantaneous OS rendering or shorter total startup."
+  "hostServiceScenarios": 249,
+  "matcherChecks": 57,
+  "automaticClearMode": "Shared bounded inline post-Recents inspection and light-to-standard recovery",
+  "manualClearMode": "Same bounded recovery; valid lightweight fast path retained",
+  "bootReliability": "Readiness, Activity handoff/recovery and once-per-boot claims retained",
+  "change": "Remove the extra queue boundary after an incomplete learned-ID lightweight snapshot. Recycle nodes and recheck fresh guards before one inline standard-root recovery. First and subsequent runs share the path; OS rendering latency remains device-dependent."
 }
