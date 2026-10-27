@@ -1,0 +1,142 @@
+{
+  "status": "PASSED",
+  "scope": "Static review of archived target native geometry, touch guards, preference click ABI and secondary-character route; reported device-wide failure is unresolved",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "checks": [
+    {
+      "id": "coordinates",
+      "native_file": "xd0/q.smali",
+      "line": 771,
+      "sha256": "0aa63cbd97522a6871919aab7ec9651f1d692680fabc924d62687c912f8887c6",
+      "finding": "onSizeChanged scales touch coordinates by 1/width and 1/height; native key geometry is normalized."
+    },
+    {
+      "id": "hit_test",
+      "native_file": "fc0/n2.smali",
+      "line": 190,
+      "sha256": "621fc7c2cffbb054ae6ad1747a6d2e7acee747dd5a9878bb5c6a8c06a7606a5b",
+      "finding": "n(float,float) tests e.a RectF, applying edge-extension flags e.c. Root helper should require finite coordinates and unique hit; optional strict e.a.contains avoids edge capture."
+    },
+    {
+      "id": "native_key_list",
+      "native_file": "fb0/f0.smali",
+      "line": 10,
+      "sha256": "0b8a5a88b35370c82ee4f000a526d184ec7edeabd3d8c3bcbabe752864c83c58",
+      "finding": "d:ArrayList holds fc0.f instances; concrete fc0.n2 has behavior b:oc0.l, state d:fc0.d2 and geometry e:fc0.m1."
+    },
+    {
+      "id": "long_press_actions",
+      "native_file": "oc0/m.smali",
+      "line": 97,
+      "sha256": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+      "finding": "oc0.m.b:hc0.a owns c:hc0.k. Native long-press handler uses its configured timeout c.a and action lists."
+    },
+    {
+      "id": "release_actions",
+      "native_file": "hc0/a.smali",
+      "line": 420,
+      "sha256": "7ae4e451603a2658c170938aa64a6f46ae8694d6fa920b5466ef4ff496f5feb2",
+      "finding": "n(ef0.p) invokes j(event,c.d), the native long-press release action collection."
+    },
+    {
+      "id": "native_conditions",
+      "native_file": "hc0/o.smali",
+      "line": 25,
+      "sha256": "9ec744e597799f4bcf605d213751bf646c5d902a97492c7a8abf200502ba2a54",
+      "finding": "static a(Collection,fc0.d2) evaluates each restriction against live key state and returns active actions."
+    },
+    {
+      "id": "action_wrapper",
+      "native_file": "hc0/b.smali",
+      "line": 119,
+      "sha256": "6757dde6de8f521895f69f819076b799a37e9f0248c23f65b758077386066c32",
+      "finding": "Long-press action registration wraps ic0.a with ic0.e through ic0.d.a and stores under hc0.o condition."
+    },
+    {
+      "id": "secondary_registration",
+      "native_file": "fc0/k1.smali",
+      "line": 2556,
+      "sha256": "e18e38c45978df990112489fd1cb9d43086d3c60cce9985194846e0c3ebafed6",
+      "finding": "m(...) handles xc0.i secondary popup keyText b, computes optional output normalization, creates fc0.d1 with d=true and registers through hc0.b.p into hc0.k.d."
+    },
+    {
+      "id": "native_commit",
+      "native_file": "fc0/d1.smali",
+      "line": 42,
+      "sha256": "466e58950d976c99f7d5c186cb412f8ba47b1351e46dc24852f83f8a7a7c6ce7",
+      "finding": "b(lh0.a) calls its fc0.k1.d native wb0.t0.P(token,b,c,null,d,null). Reusing this actor keeps native composition and output behavior."
+    },
+    {
+      "id": "shift_conditions",
+      "native_file": "fc0/k1.smali",
+      "line": 253,
+      "sha256": "e18e38c45978df990112489fd1cb9d43086d3c60cce9985194846e0c3ebafed6",
+      "finding": "b(...) creates shift-specific conditional long-press action branches using native restrictions; hc0.o.a selection must be repeated before release."
+    },
+    {
+      "id": "cancel_dispatch",
+      "native_file": "xd0/f0.smali",
+      "line": 306,
+      "sha256": "ecc79e888e98316dbe77dfb29e2a8e61401b209e5ce9e170a6350013d4c50236",
+      "finding": "f(token,MotionEvent) forwards events into native ef0.d touch dispatch. A synthetic CANCEL calls native path directly without reentering JapaneseGlide onTouch hook."
+    },
+    {
+      "id": "float_geometry",
+      "native_file": "smali_classes2/fb0/b.smali",
+      "line": 225,
+      "sha256": "f70dbb3833a905c93250e1e17aa371ffeb88ae1735bffe724c1b5d4b7f7ba275",
+      "finding": "Native row layout cumulatively adds float widths and padding without clamping to 1; ten float32 0.1 widths sum to 1.0000001192092896. Strict right<=1 incorrectly rejects that edge key. A finite 1e-4 normalized epsilon allows only rounding-scale boundary drift."
+    },
+    {
+      "id": "float_rect_copy",
+      "native_file": "smali_classes2/fb0/g1.smali",
+      "line": 4912,
+      "sha256": "6deba5467d369b3ec3b54e607ab8b39d8cd428ff36615ec58ff89228fdaaefc9",
+      "finding": "Native RectF receives SizedKey b/c/d/e coordinates directly."
+    },
+    {
+      "id": "touch_exploration_guard",
+      "native_file": "smali_classes2/fz/h.smali",
+      "line": 53,
+      "sha256": "7925763a91cb71ee1b0fcb3eacf43f7c6b0dcb1214de5f926079fd0496362016",
+      "finding": "b() is AccessibilityManager.isEnabled() && isTouchExplorationEnabled(), not a popup-state check. Existing exclusion is retained."
+    },
+    {
+      "id": "diagnostic_preference_click",
+      "native_file": "smali/oa/k.smali",
+      "line": 7,
+      "sha256": "90cbf76035885fd023bd19ebdbf061fe5b118f52e414379ebbe777323fe78c88",
+      "finding": "Preference.f uses oa.k whose k(Preference) returns void. Diagnostic listener implements this exact interface."
+    },
+    {
+      "id": "diagnostic_preference_field",
+      "native_file": "smali/androidx/preference/Preference.smali",
+      "line": 65,
+      "sha256": "3b9c4c90e7a3989d3b06bb9f91a050ba9408c75835837a9f1c81ca80f8b88f7e",
+      "finding": "Public f:oa.k is the preference click listener; diagnostic only copies on explicit click."
+    }
+  ],
+  "required_runtime_guards": [
+    "Japanese QWERTY layout and JAPANESE search type",
+    "single eligible pointer, valid view/window/layout/editor/connection across stroke",
+    "native popup routing map empty and accessibility touch exploration disabled",
+    "unique native secondary fc0.d1 actor with d=true and exactly one printable output character",
+    "resolve active long-release actor using native restrictions at DOWN and UP and require same identity",
+    "native CANCEL once before actor.b(token), consume UP even after cancellation failure to avoid duplicate native commit",
+    "yield nonqualifying paths to existing native/glide handling",
+    "do not assume every popup key has a single secondary action"
+  ],
+  "device_wide_failure_cause": "Not established. Diagnostic refusal stages and counts are needed from the actual device.",
+  "diagnostic_scope": "In-memory event counts and constant refusal stages; version and enabled flag; exception class only; never text/key label/editor content/app name. Clipboard write only on explicit diagnostic preference click.",
+  "path_tolerance_update": {
+    "version": "1.8.10",
+    "behavior": "Only the existing downward/reverse limits gain bounded getScaledTouchSlop floor; fallback preserves prior limits. All other gesture acceptance and commit ownership guards retained.",
+    "android_api_reference": "https://developer.android.com/reference/android/view/ViewConfiguration#getScaledTouchSlop()",
+    "scoped_inference": "A PATH_CURRENT report establishes a failed path sample, not which one of five limits fired or a confirmed device-level cause.",
+    "diagnostic_data": "Fixed reason codes and rounded relative movement/limits from last failed path sample; never absolute coordinates or input content."
+  }
+}

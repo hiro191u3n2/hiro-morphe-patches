@@ -1,0 +1,1 @@
+package hc0;public class o {public boolean allowed=true;public Object action;public static java.util.List a(java.util.Collection list,fc0.d2 state){java.util.List out=new java.util.ArrayList();for(Object object:list){o wrapper=(o)object;if(wrapper.allowed)out.add(wrapper.action);}return out;}}
