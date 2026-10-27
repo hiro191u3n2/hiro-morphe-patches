@@ -1,0 +1,2421 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "275c40aa520a88f1e9d14db0a6f77283b3ec48a14a041e53a4734718dced8a13",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/CandidateToolbar$1;",
+    "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+    "Lhiro/swiftkey/CandidateToolbar;",
+    "Lhiro/swiftkey/EmojiToolbar$1;",
+    "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+    "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+    "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+    "Lhiro/swiftkey/EmojiToolbar$Tap;",
+    "Lhiro/swiftkey/EmojiToolbar;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Lah0/w0;->G()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lah0/w0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/ContextWrapper;->getBaseContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->serviceOf(Landroid/content/Context;)Lcom/touchtype/KeyboardService;"
+      ],
+      "defined_owner": "Landroid/content/ContextWrapper;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Handler;-><init>(Landroid/os/Looper;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Landroid/os/Handler;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Handler;->post(Ljava/lang/Runnable;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Landroid/os/Handler;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Looper;->myLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->findViewById(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getLayoutDirection()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getMeasuredWidth()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->getVisibility()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/View;->setVisibility(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->getChildAt(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;->getChildCount()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewParent;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewParent;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->getMarginEnd()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->getMarginStart()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->gravity:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/widget/FrameLayout$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->gravity:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/widget/FrameLayout$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->height:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->height:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->leftMargin:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->leftMargin:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->rightMargin:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->rightMargin:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->setMarginEnd(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->setMarginStart(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$MarginLayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->width:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;->width:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup$LayoutParams;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout;->getChildAt(I)Landroid/view/View;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout;->getChildCount()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewGroup;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lbf0/g;->f:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lbf0/g;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lbf0/g;->f:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lbf0/g;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;->a:Lui0/k;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;->getLayoutParams()Landroid/view/ViewGroup$LayoutParams;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;->getMeasuredWidth()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;->setLayoutParams(Landroid/view/ViewGroup$LayoutParams;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lfc0/h;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lfc0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/h;->b:Lfc0/k1;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lfc0/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/k1;->a:Lcom/touchtype/KeyboardService;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lfc0/k1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/k1;->w:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lfc0/k1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->a:Lbf0/g;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->d:Ljava/util/List;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->d:Ljava/util/List;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->e:Ljava/util/List;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->e:Ljava/util/List;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->f:Lhc0/k;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/b;->f:Lhc0/k;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/k;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/k;->b:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z"
+      ],
+      "defined_owner": "Lhc0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/k;->d:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhc0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/o;-><init>(Lcm0/d;Ljava/lang/Object;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lhc0/o;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/o;->a:Lcm0/d;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lhc0/o;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/o;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lhc0/o;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$1;-><init>(Ljava/lang/ref/WeakReference;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$1;->val$serviceRef:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$1;->val$serviceRef:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$1;-><init>(Ljava/lang/ref/WeakReference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->accessibility:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->accessibility:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->alpha:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->alpha:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->buttonEnabled:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->buttonEnabled:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->slot:Ljava/lang/ref/WeakReference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->slot:Ljava/lang/ref/WeakReference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->slotVisibility:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->slotVisibility:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->wrapperEnabled:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;->wrapperEnabled:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->access$000(Lcom/touchtype/KeyboardService;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->bindings:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->bindings:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->closeIfOpen(Lcom/touchtype/KeyboardService;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Tap;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->closeIfOpen(Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->toggle(Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->emojiAccess:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->emojiAccess:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->hidden:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->hidden:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->access$000(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->serviceOf(Landroid/content/Context;)Lcom/touchtype/KeyboardService;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->disable(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->setHorizontalMargins(Landroid/view/View;II)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->setState(Lkd0/e0;I)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->closeIfOpen(Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->toggle(Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar;->toggle(Lcom/touchtype/KeyboardService;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/CandidateToolbar;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$1;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->fallback:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->fallback:Lic0/a;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->fallbackOnRelease:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->fallbackOnRelease:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;->b(Llh0/a;)V",
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongRelease;-><init>(Lhiro/swiftkey/EmojiToolbar$LongPress;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongRelease;->hold:Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongRelease;->hold:Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;-><init>(Lhiro/swiftkey/EmojiToolbar$LongPress;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;-><init>(Ljava/util/ArrayList;ILic0/a;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->count:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->count:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Prepared;-><init>(Ljava/util/ArrayList;ILic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->original:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->original:Lic0/a;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Prepared;-><init>(Ljava/util/ArrayList;ILic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->values:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;->values:Ljava/util/ArrayList;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Prepared;-><init>(Ljava/util/ArrayList;ILic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;->original:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Tap;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;->original:Lic0/a;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Tap;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Tap;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$Tap;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar;->ALWAYS:Lcm0/d;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar;->ALWAYS:Lcm0/d;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar;->disable(Lcom/touchtype/KeyboardService;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiToolbar;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/a0;->a:Loz/i6;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lic0/a0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/a;->b(Llh0/a;)V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;->b(Llh0/a;)V",
+        "Lhiro/swiftkey/EmojiToolbar$Tap;->b(Llh0/a;)V"
+      ],
+      "defined_owner": "Lic0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/e;-><init>(Lic0/a;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lic0/e;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/e;->a:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Lic0/e;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/EmojiToolbar$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;"
+      ],
+      "defined_owner": "Ljava/lang/Boolean;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Boolean;->equals(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Boolean;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Boolean;->valueOf(Z)Ljava/lang/Boolean;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Ljava/lang/Boolean;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->max(II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutCollapsed(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$1;-><init>(Ljava/lang/ref/WeakReference;)V",
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;-><init>()V",
+        "Lhiro/swiftkey/EmojiToolbar$1;-><init>()V",
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V",
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;-><init>(Lhiro/swiftkey/EmojiToolbar$LongPress;)V",
+        "Lhiro/swiftkey/EmojiToolbar$Prepared;-><init>(Ljava/util/ArrayList;ILic0/a;)V",
+        "Lhiro/swiftkey/EmojiToolbar$Tap;-><init>(Lcom/touchtype/KeyboardService;Lic0/a;)V",
+        "Lhiro/swiftkey/EmojiToolbar;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Ljava/lang/ref/WeakReference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$1;->run()V",
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Ljava/lang/ref/Reference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->configure(Lfc0/h;Ljava/lang/Object;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->get(I)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->remove(I)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/EmojiToolbar;->installed(Lhc0/k;)Z",
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->size()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;-><clinit>()V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->setEmojiAccess(Lcom/touchtype/KeyboardService;Z)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lkd0/d0;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->closeIfOpen(Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->setState(Lkd0/e0;I)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->toggle(Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lkd0/d0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lkd0/e0;->b:Lah0/w0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lkd0/e0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lkd0/e0;->g:Lkd0/d0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->closeIfOpen(Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->setState(Lkd0/e0;I)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->toggle(Lcom/touchtype/KeyboardService;)Z"
+      ],
+      "defined_owner": "Lkd0/e0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lkd0/e0;->n(Lkd0/e0;I)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->setState(Lkd0/e0;I)Z"
+      ],
+      "defined_owner": "Lkd0/e0;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lob0/b1;->c:Lkd0/e0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Lob0/b1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lob0/b1;->isEnabled()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/b1;->setEnabled(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/widget/TextView;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->getAlpha()F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->getButton()Lob0/b1;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->canHide(Lob0/d1;Lcom/touchtype/KeyboardService;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Lob0/d1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lob0/d1;->getContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->bindToolbar(Lob0/d1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->bound(Lob0/d1;)Z",
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;",
+        "Lhiro/swiftkey/CandidateToolbar;->layoutContainer(Landroid/view/View;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->getImportantForAccessibility()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->getParent()Landroid/view/ViewParent;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->refresh(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->isAttachedToWindow()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->controller(Lcom/touchtype/KeyboardService;)Lkd0/e0;"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->isEnabled()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;-><init>(Lob0/d1;Lob0/b1;)V",
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->setAlpha(F)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->setEnabled(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lob0/d1;->setImportantForAccessibility(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->applyHidden(Lob0/d1;Z)V"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Loz/i6;->b:Loz/i6;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiToolbar;->prepare(Ljava/lang/Object;Lcom/touchtype/KeyboardService;)Lhiro/swiftkey/EmojiToolbar$Prepared;"
+      ],
+      "defined_owner": "Loz/i6;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lui0/k;->d()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/CandidateToolbar;->layoutExpandedClose(Lcom/touchtype/keyboard/expandedcandidate/ExpandedResultsCloseButton;)V"
+      ],
+      "defined_owner": "Lui0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroid/content/ContextWrapper;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/ContextWrapper;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/os/Handler;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/View;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/ViewGroup;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout$LayoutParams;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/widget/FrameLayout;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroidx/recyclerview/widget/RecyclerView;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcm0/d;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/b;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/b;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/k;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/o;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/o;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhc0/o;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lic0/a0;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a0;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/e;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/e;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/e;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Runnable;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/List;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lob0/d1;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lob0/d1;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    }
+  ],
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "c82482ce481a4426abaf1263b8bb6f6b33487eaa6a66557fe17c4cf702e6fb63",
+  "wrapper_source_sha256": "c26b99ec7cedd1d30110b5428eed6fcad49a2571a395e29291695969486f7e4b"
+}

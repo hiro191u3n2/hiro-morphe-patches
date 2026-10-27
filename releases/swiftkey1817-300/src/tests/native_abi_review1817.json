@@ -1,0 +1,1988 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "915ffef2d11d4ef145d0222d56402e564947946a1c38b7285e9c7c784f70453b",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/KeySwap;",
+    "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+    "Lhiro/swiftkey/PunctuationKeys$Edit;",
+    "Lhiro/swiftkey/PunctuationKeys;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/res/Resources;->getResourceEntryName(I)Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Landroid/content/res/Resources;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/res/Resources;->openRawResource(I)Ljava/io/InputStream;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Landroid/content/res/Resources;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->A(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->B(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->l:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->q:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->s:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->G(Landroidx/preference/Preference;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/PreferenceGroup;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->H(Ljava/lang/CharSequence;)Landroidx/preference/Preference;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/PreferenceGroup;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->a:Landroid/content/Context;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/SwitchPreferenceCompat;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->A(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->B(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->G(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/TwoStatePreference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->e:Loa/j;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->l:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->s:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/h2;->a(Ljava/util/List;Lfc0/v1;Lfc0/m1;)Lfb0/f2;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->periodPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lfb0/f2;"
+      ],
+      "defined_owner": "Lfb0/h2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/s1;->H(Lfc0/m1;Lfc0/v1;)Lxc0/h;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;"
+      ],
+      "defined_owner": "Lfc0/s1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/s1;->i:Lfb0/h2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->periodPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lfb0/f2;"
+      ],
+      "defined_owner": "Lfc0/s1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/v1;->a:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lfc0/v1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/v1;->b()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lfc0/v1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/v1;->b:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lfc0/v1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/v1;->g:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lfc0/v1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/v1;->o:Ljava/util/List;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lfc0/v1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiPanelUi;->init(Landroid/content/SharedPreferences;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiPanelUi;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiPanelUi;->install(Landroidx/preference/PreferenceScreen;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiPanelUi;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->init(Landroid/content/SharedPreferences;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseGlide;->init(Landroid/content/SharedPreferences;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseGlide;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$ChangeListener;-><init>(Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap$ChangeListener;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$Wrapped;-><init>(Ljava/io/InputStream;J)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$Wrapped;->cacheKey:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$Wrapped;->stream:Ljava/io/InputStream;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->addDictionarySources(Landroidx/preference/PreferenceScreen;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->isLayoutOption(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->isOption(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KeySwap;->layoutPreferenceKey(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->isOption(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->access$100(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->preferences:Landroid/content/SharedPreferences;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->access$000()Landroid/content/SharedPreferences;",
+        "Lhiro/swiftkey/KeySwap;->addOption(Landroidx/preference/PreferenceScreen;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/KeySwap;->install(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->preferences:Landroid/content/SharedPreferences;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->replacements:[[[B",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->replacements:[[[B",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->resourceIndex(Ljava/lang/String;)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrap(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwap;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwapBinary;->read(Ljava/io/InputStream;I)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwapBinary;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwapBinary;->transform([BI)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KeySwapBinary;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->bool()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->bool()Z",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->bytes:Ljava/io/ByteArrayInputStream;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->position()I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->bytes:Ljava/io/ByteArrayInputStream;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->input:Ljava/io/DataInputStream;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->bool()Z",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->integer()I",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->small()I",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->utf()Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->input:Ljava/io/DataInputStream;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->integer()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->length:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->position()I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->length:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->position()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->position()I",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->small()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->small()I",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->utf()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;->utf()Ljava/lang/String;",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;-><init>(IILjava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->end:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->end:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Edit;-><init>(IILjava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->start:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->start:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Edit;-><init>(IILjava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->text:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;->text:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Edit;-><init>(IILjava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->PC_KEYS:[I",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->PC_KEYS:[I",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->ROW_TYPES:[I",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->ROW_TYPES:[I",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->STANDARD_KEYS:[I",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->STANDARD_KEYS:[I",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->access$000(Z)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->bool()Z",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->closeQuietly(Ljava/io/InputStream;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->layoutKind(Ljava/lang/String;)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;",
+        "Lhiro/swiftkey/PunctuationKeys;->periodPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lfb0/f2;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->require(Z)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->access$000(Z)V",
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrap(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/PunctuationKeys;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayInputStream;-><init>([B)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayInputStream;->available()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->position()I"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;->toByteArray()[B",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;->write([BII)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B"
+      ],
+      "defined_owner": "Ljava/io/ByteArrayOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;-><init>(Ljava/io/InputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readDouble()D",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readInt()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->integer()I"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readUTF()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->utf()Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readUnsignedByte()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->bool()Z"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readUnsignedShort()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->small()I"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;-><init>(Ljava/io/OutputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->flush()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->write([BII)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->writeUTF(Ljava/lang/String;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/IOException;-><init>(Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->require(Z)V"
+      ],
+      "defined_owner": "Ljava/io/IOException;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->close()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->closeQuietly(Ljava/io/InputStream;)V",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->mark(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->read([B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->readBounded(Ljava/io/InputStream;I)[B"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->reset()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Double;->isInfinite(D)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D"
+      ],
+      "defined_owner": "Ljava/lang/Double;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Double;->isNaN(D)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;->number()D"
+      ],
+      "defined_owner": "Ljava/lang/Double;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;-><init>()V",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;-><init>([B)V",
+        "Lhiro/swiftkey/PunctuationKeys$Edit;-><init>(IILjava/lang/String;)V",
+        "Lhiro/swiftkey/PunctuationKeys;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;->getClass()Ljava/lang/Class;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->equals(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->isLayoutOption(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KeySwap;->isOption(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KeySwap;->resourceIndex(Ljava/lang/String;)I",
+        "Lhiro/swiftkey/PunctuationKeys;->layoutKind(Ljava/lang/String;)I",
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->toCharArray()[C",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->toString()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Throwable;->addSuppressed(Ljava/lang/Throwable;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Ljava/lang/Throwable;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/security/MessageDigest;->digest([B)[B",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/security/MessageDigest;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/security/MessageDigest;->getInstance(Ljava/lang/String;)Ljava/security/MessageDigest;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->sha256([B)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/security/MessageDigest;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Collections;->singletonList(Ljava/lang/Object;)Ljava/util/List;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->periodPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lfb0/f2;"
+      ],
+      "defined_owner": "Ljava/util/Collections;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transformExpanded([BI)[B"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->get(I)Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->size()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->matches(Lfc0/v1;Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->contains(Ljava/lang/Object;)Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->size()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/DeflaterOutputStream;-><init>(Ljava/io/OutputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/DeflaterOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/DeflaterOutputStream;->close()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/DeflaterOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/DeflaterOutputStream;->write([B)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->transform([BLjava/lang/String;)[B"
+      ],
+      "defined_owner": "Ljava/io/FilterOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;->end()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;->finished()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;->getRemaining()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;->inflate([B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;->setInput([B)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->inflate([B)[B"
+      ],
+      "defined_owner": "Ljava/util/zip/Inflater;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lsc0/c;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lsc0/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lsc0/c;->b:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lsc0/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lsc0/c;->c:Ljava/io/InputStream;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KeySwap;->wrapBeforePunctuation1817(Lsc0/c;Landroid/content/res/Resources;)Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/PunctuationKeys;->wrap(Lsc0/c;Landroid/content/res/Resources;Lhiro/swiftkey/KeySwap$Wrapped;)Lhiro/swiftkey/KeySwap$Wrapped;"
+      ],
+      "defined_owner": "Lsc0/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxc0/a;-><init>(Lxc0/h;Lxc0/h;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;"
+      ],
+      "defined_owner": "Lxc0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxc0/h;->c()Ljava/util/Set;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/PunctuationKeys;->longVowelPopup(Lfc0/s1;Lfc0/m1;Lfc0/v1;)Lxc0/a;"
+      ],
+      "defined_owner": "Lxc0/h;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroidx/preference/Preference;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$ChangeListener;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KeySwap;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Ljava/io/ByteArrayInputStream;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/ByteArrayInputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/ByteArrayOutputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/IOException;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/zip/DeflaterOutputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/zip/Inflater;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lxc0/a;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    }
+  ],
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "e071233c77e1bc5fe40fdd643288c2631232af8126145ef27b1db8876634e300",
+  "wrapper_source_sha256": "dd18a549c6f3d670fd4f39d327ca3f238e1eecc3bc650c3f1651ce542d73308e"
+}

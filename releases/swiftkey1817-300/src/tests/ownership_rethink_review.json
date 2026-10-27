@@ -1,0 +1,223 @@
+{
+  "schema": "swiftkey-ownership-rethink-review-v1",
+  "status": "STATIC_REVIEW_AND_INDEPENDENT_HOST_PROBES_PASSED",
+  "target_version": "1.8.12",
+  "scope": "Read-only analysis of archived target APK native touch ownership and published 1.8.11 helper/host fixture. Supports redesign; does not prove the device-specific cause of unchanged feel.",
+  "device_tested": false,
+  "native_engine_executed": false,
+  "original_apk_apply_tested": false,
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version_name": "9.13.16.4",
+  "prior_helper": {
+    "path": "releases/swiftkey1811-294/src/src/hiro/swiftkey/FlickSymbols.java",
+    "sha256": "918ba246632efe128d003870bf109be30fe896bd142157baac41f01284b9ab17",
+    "finding": "All accepted ACTION_MOVE events return false and continue to the native handler. Only ACTION_UP sends native CANCEL. Per-sample rejection permanently discards active candidate; widening geometry alone does not change native ownership."
+  },
+  "checks": [
+    {
+      "id": "move_dispatch",
+      "native_file": "smali_classes2/xd0/f0.smali",
+      "method": "f(Llh0/a;Landroid/view/MotionEvent;)Z",
+      "line": 306,
+      "sha256": "ecc79e888e98316dbe77dfb29e2a8e61401b209e5ce9e170a6350013d4c50236",
+      "finding": "Builds the normalized native touch wrapper, resolves a key for each pointer, and calls ef0/d.l. This is the direct native route used by the helper for synthetic CANCEL."
+    },
+    {
+      "id": "native_move_and_cancel",
+      "native_file": "smali_classes2/ef0/d.smali",
+      "method": "l(ILfc0/f;Lkj0/f;)V",
+      "line": 1894,
+      "sha256": "cc40762df5a5810061203576b3143a78683e966ea9effc54ee9489c7ed1eefee",
+      "finding": "ACTION_MOVE may call tj0/e.U for key tracking. ACTION_CANCEL iterates tracked pointers through tj0/e.E, calls D for the current pointer, then invokes pointerFinished ef0/n.f. Cancellation is more than a timer-only operation."
+    },
+    {
+      "id": "native_key_transition",
+      "native_file": "smali_classes2/gf0/c.smali",
+      "method": "d(Lfc0/f;Lef0/p;)Lgf0/g;",
+      "line": 35,
+      "sha256": "c0415cc2bd9bb01a26c2e037612292854631935bc2bccc3690e1dccc7a440a86",
+      "finding": "Keeps current key if oc0/l.g retains it or hit key is identical; otherwise switches pointer state. The slide branch calls the old key k (slide out) and new key h (slide in). Another configured branch calls old c and new d. Native MOVE is not an inert observation."
+    },
+    {
+      "id": "native_key_retention",
+      "native_file": "smali_classes2/oc0/m.smali",
+      "method": "g(Lef0/p;)Z",
+      "line": 489,
+      "sha256": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+      "finding": "Native key retention compares distance from its own DOWN point against its configured radius and combines delegate results. This is separate from FlickSymbols acceptance thresholds."
+    },
+    {
+      "id": "native_longpress_schedule",
+      "native_file": "smali_classes2/oc0/p.smali",
+      "method": "d(Lef0/p;)V",
+      "line": 205,
+      "sha256": "880509a3485e52212ca209daf4e17eb90ce1885d9c568500aba55fa113314505",
+      "finding": "On native DOWN, resets long-press flags and schedules a delayed Runnable using the timeout stored in field b. The timeout originates in hc0/k.a via the oc0/m constructor. Independent FlickSymbols qualification does not cancel this Runnable."
+    },
+    {
+      "id": "native_slide_longpress_schedule",
+      "native_file": "smali_classes2/oc0/p.smali",
+      "method": "h(Lef0/p;)V",
+      "line": 273,
+      "sha256": "880509a3485e52212ca209daf4e17eb90ce1885d9c568500aba55fa113314505",
+      "finding": "After slide-in, schedules a new delayed Runnable (or delegates to d under touch exploration). Leaving a native key does not mean the helper owns the remaining gesture."
+    },
+    {
+      "id": "native_cancel_delegate",
+      "native_file": "smali_classes2/oc0/m.smali",
+      "method": "b(Llh0/a;)V",
+      "line": 262,
+      "sha256": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+      "finding": "Clears pressed/drag state; if native interceptor does not consume cancel, dispatches native cancel actions and calls b(token) on behavior delegates, including long press."
+    },
+    {
+      "id": "native_longpress_cancel",
+      "native_file": "smali_classes2/oc0/p.smali",
+      "method": "b(Llh0/a;)V",
+      "line": 120,
+      "sha256": "880509a3485e52212ca209daf4e17eb90ce1885d9c568500aba55fa113314505",
+      "finding": "Clears long-press flags and removes the stored Runnable through n50/b.c, then nulls the Runnable reference."
+    },
+    {
+      "id": "native_pointer_finish_side_effect",
+      "native_file": "smali_classes2/ah0/z.smali",
+      "method": "f(Llh0/a;)V",
+      "line": 520,
+      "sha256": "30335c3d34796fa2dbc1780bc2b413ece4818aba1f29bd581d4d245338c9ae81",
+      "finding": "The pointer-finished implementation inspects wb0/j1. OFF returns. Transient SYMBOL calls fb0/g0.g and sets OFF; transient SHIFT sets OFF and calls wb0/p1.f. A synthetic CANCEL can therefore alter layout/shift state; existing post-cancel actor/layout/editor validation must not be bypassed."
+    },
+    {
+      "id": "native_coordinate_scale",
+      "native_file": "smali_classes2/xd0/q.smali",
+      "method": "onSizeChanged(IIII)V",
+      "line": 771,
+      "sha256": "0aa63cbd97522a6871919aab7ec9651f1d692680fabc924d62687c912f8887c6",
+      "finding": "Sets the native touch matrix scale to 1/width and 1/height. No coordinate-normalization defect was established."
+    },
+    {
+      "id": "native_down_hit_test",
+      "native_file": "smali_classes2/fb0/k0.smali",
+      "method": "a(Ljava/util/ArrayList;Lkj0/f;ILandroidx/lifecycle/a2;)Lfc0/f;",
+      "line": 76,
+      "sha256": "13b2fba061f974186b1b1930f9d0916ed510d0a22cbe7cea2ba2b565e2051900",
+      "finding": "DOWN probabilistic key correction is gated by a prediction-type set initialized to NORMAL. JAPANESE bypasses that correction branch and falls back to geometric hit testing. Non-DOWN also uses geometric hit testing."
+    },
+    {
+      "id": "native_edge_hit_test",
+      "native_file": "smali_classes2/fc0/n2.smali",
+      "method": "n(FF)Z",
+      "line": 190,
+      "sha256": "621fc7c2cffbb054ae6ad1747a6d2e7acee747dd5a9878bb5c6a8c06a7606a5b",
+      "finding": "Native geometry applies edge-extension bits from e.c before RectF.contains. The helper uses the finite unextended rectangle, so edge eligibility differs, but this review does not establish that as the user-reported cause."
+    }
+  ],
+  "verified_native_cancel_chain": [
+    "xd0/f0.f",
+    "ef0/d.l ACTION_CANCEL",
+    "tj0/e.E -> gf0/g.b",
+    "gf0/a.b -> fc0/n2.b",
+    "oc0/m.b -> delegate b when interceptor permits",
+    "oc0/p.b -> n50/b.c removes Runnable"
+  ],
+  "published_hook_review": {
+    "artifact": "SwiftKeyBeta_v2_SamsungEmoji_v1.8.11.mpp",
+    "class": "app/hiro/swiftkey/patches/JapaneseGlidePatch.class",
+    "inspection": "java com.sun.tools.javap.Main -c -p against actual published local MPP",
+    "reset_hooks": [
+      "KeyboardService.onStartInput via JapaneseGlide.start",
+      "KeyboardService.onFinishInput",
+      "KeyboardService.onFinishInputView"
+    ],
+    "finding": "No per-MOVE or onUpdateSelection reset hook was observed. The hook calls JapaneseGlide.handle before native d1.f. JapaneseGlide true branch clears only its active/pending state and returns true; it does not invoke FlickSymbols.reset."
+  },
+  "prior_fixture_limit": {
+    "path": "releases/swiftkey1811-294/src/tests/host/FlickSymbolsHostTest.java",
+    "sha256": "76fc3f8e083fbf7e1e1f78d153e9ca351fed906e20dbfa97874fee07f22216ba",
+    "method": "View.f(lh0.a, MotionEvent)",
+    "finding": "Records action numbers and counts CANCEL/UP with optional cancel callback. DOWN/MOVE do not arm a timer, change the current native key, run native delegates, or open a popup. Previous host assertion totals therefore do not validate competition with native long press or key sliding."
+  },
+  "redesign_requirements": [
+    "Once an eligible upward gesture qualifies, establish ownership before native CANCEL and consume remaining events until terminal UP/CANCEL or a fresh DOWN boundary.",
+    "Commit a character only on UP after retained editor/layout/key/actor/snapshot guards. Do not insert on MOVE.",
+    "A reset, settings change, exception, pointer mismatch or model change after native cancellation invalidates insertion while retaining drain ownership; never return a trailing UP to the canceled native stream.",
+    "Keep ownership and commit-validity separate, so lifecycle or reentrant CANCEL callbacks cannot erase the drain marker.",
+    "Keep native cancellation as one operation for the captured stream. Do not inject a new native DOWN or reconstruct a glide when the user later curves after capture.",
+    "Post-cancel layout/actor validation remains required because native pointer-finished callbacks can clear transient SHIFT/SYMBOL.",
+    "Expand host fixtures with explicit modeled native timer/key/popup effects and verify cancellation occurs before a qualifying MOVE reaches them; label these as fakes, not native execution."
+  ],
+  "conclusions": {
+    "established": "The previous recognizer and native keyboard both continue processing eligible upward MOVE events until UP. The actual native route has independent key transition and delayed long-press behavior. The prior host fixture omitted those effects.",
+    "inference": "Capturing on qualifying MOVE should stop native competition and make acceptance persist through ordinary trailing movement. This is a materially different design from changing thresholds.",
+    "not_established": "The current device build, exact user gesture samples, active refusal branch, and whether native competition caused this particular report. Physical feel and ART/native behavior remain untested."
+  },
+  "baseline_host_reproduction": {
+    "source_version": "1.8.11",
+    "source_sha256": "918ba246632efe128d003870bf109be30fe896bd142157baac41f01284b9ab17",
+    "probe_java_sha256": "c9748dd3e17c830c0226d484366f33037c8d1711f719aecf02fb10fb0e4df42a",
+    "command": "java -ea -cp swiftkey-work/host1811-natural-agent-final/classes RethinkGestureProbe",
+    "key_height_px": 80,
+    "touch_slop_px": 24,
+    "scope": "Reran unmodified production 1.8.11 helper with existing explicit Android/native host fakes. Establishes detector behavior and sampling sensitivity; does not establish physical device cause or native-engine behavior.",
+    "observed_output": [
+      "A1 straight 99px: symbols=1 cancels=1 最後の段階: SUCCESS",
+      "A2 same straight 101px: symbols=0 cancels=0 最後の段階: PATH_CURRENT_UP_LIMIT",
+      "B1 initial sideways23 then final45deg: symbols=1 cancels=1 最後の段階: SUCCESS",
+      "B2 initial sideways25 then final45deg: symbols=0 cancels=0 最後の段階: PATH_CURRENT_HORIZONTAL",
+      "C1 final45deg without sampled shallow curve: symbols=1 cancels=1 最後の段階: SUCCESS",
+      "C2 final45deg with sampled shallow curve: symbols=0 cancels=0 最後の段階: PATH_CURRENT_HORIZONTAL",
+      "D1 final small reversal arrives as UP: symbols=1 cancels=1 最後の段階: SUCCESS",
+      "D2 same path final point sampled as MOVE: symbols=0 cancels=0 最後の段階: PATH_CURRENT_REVERSE",
+      "D3 same path batched as history: symbols=0 cancels=0 最後の段階: PATH_HISTORY_REVERSE"
+    ],
+    "findings": [
+      "After a valid 40px upward MOVE, final upward 99px succeeds while 101px is rejected by UP_LIMIT.",
+      "Identical 35px right/35px up endpoints differ after an initial sideways23px accepted sample versus sideways25px rejected sample.",
+      "Identical45-degree50px/50px endpoints differ if an earlier25px right/10px up sample is present.",
+      "Up50 -> up30 -> up25 final endpoint succeeds when25px appears only as UP, but fails when25px also arrives as MOVE or history. Sampling/batching changes recognition because release tolerance is UP-only."
+    ]
+  },
+  "implementation_review": {
+    "source": "src/hiro/swiftkey/FlickSymbols.java",
+    "source_sha256": "ad72e30ed1d7944a5f864aefeee8340d819eb57e5874defb96651d567eac22d9",
+    "status": "PASSED",
+    "blocking_findings": [],
+    "reviewed_invariants": [
+      "Capture installs independent weak view/downTime drain marker and captured flag before invoking native CANCEL.",
+      "Reset invalidates insertion and increments generation while leaving the independent drain marker intact.",
+      "Cancellation exceptions and post-cancel state changes consume the current event and retain drain ownership until terminal.",
+      "Captured MOVE and history no longer apply distance, direction, reversal or elapsed-time veto; finite-coordinate and runtime-identity guards remain.",
+      "Actor insertion occurs only once on UP after retained connection/editor/model/layout/actor checks.",
+      "No synthetic replacement DOWN, duplicate native CANCEL, or replay into native/glide after capture.",
+      "Fresh DOWN clears stale stream state; pointer count/id, mismatched downTime, system CANCEL and model changes abort insertion and retain appropriate canceled-stream consumption.",
+      "Existing JapaneseGlide helper-true path clears Glide active/pending and returns true without resetting FlickSymbols."
+    ],
+    "activation_risk_review": {
+      "finding": "With 80px keys and 24px touch slop, a radial-only 19.2px minimum plus67.5-degree cone could permanently capture18px sideways/8px upward tap jitter.",
+      "correction": "Capture additionally requires upward distance >= max(minimum*0.5, jitterSlop*0.5). This preserves the specific18/8px jitter sample as an undecided tap while retaining14/14px and40/17px diagonals.",
+      "limitation": "The selected thresholds are an implementation tradeoff, not measured device error rates or proof that all accidental capture is eliminated."
+    },
+    "independent_host_verification": {
+      "scope": "Compiled the final production Java source into an isolated classpath against existing explicit1811 Android/native fakes; no ART/device/native-engine execution.",
+      "baseline_contrasts_rerun": 9,
+      "baseline_contrasts_result": "All nine RethinkGestureProbe cases now insert exactly one symbol with one native CANCEL, including101px straight path, initial sideways25px, shallow intermediate25/10px, and identical UP/MOVE/history endpoint variants.",
+      "ownership_assertions": 45,
+      "ownership_result": "PASSED",
+      "ownership_cases": [
+        "captured reset then drain and next fresh native tap",
+        "reentrant reset during native CANCEL",
+        "native CANCEL exception",
+        "mismatched downTime then original UP drain",
+        "external model state change",
+        "long hold and return-to-origin after capture",
+        "null final token",
+        "system CANCEL",
+        "18/8px shallow jitter remains native tap",
+        "14/14px short diagonal remains one symbol",
+        "40/17px shallow diagonal remains one symbol"
+      ],
+      "ownership_probe_java_sha256": "a55bb64941306dc6e03bf332dd761ebcfe1886827916a82fd5246bcfc22033d5",
+      "note": "These supplemental assertions are separate from the release main-suite count and must not be represented as real native execution."
+    }
+  }
+}
