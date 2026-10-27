@@ -1,17 +1,17 @@
 {
-  "version": "1.21.0",
-  "versionCode": 24,
+  "version": "1.22.0",
+  "versionCode": 25,
   "package": "jp.hiro.recentsclear",
-  "apk": "Hiro_RecentsClear_v1.21.0.apk",
-  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.21.0.apk",
-  "sha256": "af08ca35af717195e36431f7948f393adceb9df5a7d692afb29797d31d3ac157",
+  "apk": "Hiro_RecentsClear_v1.22.0.apk",
+  "downloadUrl": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/apps/recents-clear/Hiro_RecentsClear_v1.22.0.apk",
+  "sha256": "8b8ad8af93aff8339db27bf122adf1b48ad47602683c3e7629eaba104f46790e",
   "bytes": 41379,
   "signatureCertificateSha256": "0ff89e2a7dbec62901c5e8eb10153a8e735e4142dbcd68d6fe142406d7732001",
   "deviceTested": false,
-  "hostServiceScenarios": 272,
+  "hostServiceScenarios": 291,
   "matcherChecks": 57,
-  "automaticClearMode": "Wait for startup SystemUI readiness;15s budget fromfirstUI; fresh standard-root completion checks and bounded same-target retries",
-  "manualClearMode": "Immediate accepted action and original5s budget preserved",
-  "bootReliability": "Once-per-boot claim retained; Recents requested atmostonce; never reclaim after UI",
-  "change": "Fix cold-start expiry and accepted-but-unreflected clear. Observe actual overview/home/empty state, retry samehost/window/id only, stop on foreground departure, lock, off or disabled. No device timing guarantee."
+  "automaticClearMode": "10s grace from first observed credential unlock before Activity or Overview; same immediate clearing engine afterward. Retain1.21 completion and bounded retry.",
+  "manualClearMode": "Immediate; bypass startup grace and cancel pending automatic run.",
+  "bootReliability": "Once-per-boot claim and one-use Activity ticket retained.1s Activity delivery fallback; sleep-aware grace scheduling.",
+  "change": "Move cold-start headroom before visible Overview.10s is a heuristic, not proof of launcher readiness or invisible UI."
 }
