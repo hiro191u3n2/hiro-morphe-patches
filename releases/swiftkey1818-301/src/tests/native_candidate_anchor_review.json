@@ -1,0 +1,271 @@
+{
+  "status": "STATIC_NATIVE_REVIEW_PASSED",
+  "scope": "Static target-native pipeline review, exact native hook transformations on two Morphe SDKs, and symbolic ABI verification. No Android runtime or clean original APK full apply is claimed.",
+  "release": "SwiftKey 1.8.18 / bundle 1.0.301",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK. All six hook methods still match exact target native fingerprints.",
+  "production_source_path": "src/hiro/swiftkey/CandidateScroll.java",
+  "production_source_sha256": "cf7fe470701fdd932f8aec28ea1b8a668096a575ec23ee7821e608eae90614ec",
+  "patch_source_path": "patch_java/app/hiro/swiftkey/patches/CandidateScrollPatch.java",
+  "patch_source_sha256": "68b6cde7b964a26021e19fc401c0c1673097bc7dc1d0c51d487d6c177e3ff410",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "visual_fix_confirmed_on_device": false,
+  "blocking_findings": [],
+  "listener_order_unspecified": true,
+  "provider_dispatch_finally_scoped": true,
+  "panel_reset_and_stop_scroll_bypassed_for_same_query_only": true,
+  "panel_bookkeeping_and_original_adapter_notification_preserved": true,
+  "watermark_zero_delta_after_completed_layout_only": true,
+  "native_layout_counter_cleared_before_zero_delta_scroll_callback": true,
+  "normal_nonzero_scroll_fetch_preserved": true,
+  "native_methods": 6,
+  "native_hook_sites": 8,
+  "runtime_native_entrypoints": 7,
+  "native_reset_chain": {
+    "classification": "rb0/j.a compares commit-text prefixes and selects reset=true for a non-prefix replacement (rb0/j:145-184). Existing stabilization retains only fresh incoming objects and falls back when old candidates are absent.",
+    "fanout": "fb0/u.h calls d(reset) on every observer (fb0/u:209-236). p10/a is WeakHashMap.keySet iteration (p10/a:60-70), so panel/adapter order is not guaranteed.",
+    "panel": "rb0/d.d(true) invokes virtual a() (rb0/d:52-59), reaching rb0/k.a. Original a resets n/o/p/q, refreshes H, clears rb0/l.c, and then calls RecyclerView.w0(0) (rb0/k:287-312).",
+    "stop_scroll": "RecyclerView.w0 first calls F0, which sets idle, removes the flinger callback and aborts OverScroller (RecyclerView:12982-13009 and 3984-3999). Merely restoring the position later would not restore momentum.",
+    "fix_surface": "Only the panel scroll-to-zero invocation is conditionally delegated. All preceding bookkeeping, H/notify, and all adapter notifications remain. The provider original notifier call is delegated once through a synchronous try/finally scope; outside that scope the helper forwards the exact original view.w0(position)."
+  },
+  "anchor_semantics": {
+    "same_query_guard": "Only EXPANDED Japanese updates with the established sameQuery context comparison qualify. Changed input/context, unavailable views, changed ownership/theme/size/key height, unknown pending scroll and missing surviving anchors fall back to native behavior.",
+    "fresh_identity": "A duplicate-aware mapping uses fresh candidates matched by display, commit, prediction-input and separator. Old candidates absent from fresh results are not retained. The first surviving visible candidate is preferred, with its own recorded offset.",
+    "decorated_offset": "capture uses layout.r.e(child)-layout.r.k(). Vertical ra/m1.e is child top minus item-decoration top inset minus topMargin (m1:93-116,a2:175-194); k is RecyclerView paddingTop (m1:187-198,a2:992-1003). Raw child.getTop alone would be incorrect.",
+    "restore": "LinearLayoutManager.l1(position,offset) is public final and sets public x/y before requestLayout, without RecyclerView.stopScroll (LinearLayoutManager:3925-3943). GridLayoutManager.g1 normalizes the anchor to its row boundary (GridLayoutManager:2402-2484).",
+    "repeated_before_layout": "Weak viewport/list identity and geometry are carried only while native public x/y equal the helper-issued pending anchor. Native k0 clears x=-1 and y=Integer.MIN_VALUE after layout (LinearLayoutManager:3790-3803). Once cleared, a new visible snapshot is captured rather than using stale child positions.",
+    "early_no_dispatch": "The native same-count/same-commit early return preserves an already pending anchor epoch but clears dormant preparation via finishUpdate. Exact native branch-target checks ensure early-return branches land on finishUpdate rather than jumping over it."
+  },
+  "watermark_semantics": {
+    "risk": "rb0/l.b ignores dx/dy, and when W0()>c it requests EXPANDED candidates before assigning c=W0 (rb0/l:33-58). Keeping c=0 after a preserved reset could cause layout-only updates to request again.",
+    "zero_delta_native_path": "RecyclerView completes layout.k0 at 2638-2640, exits the layout counter through i0 at 2644, then calls F(0,0) when the visible range changed at 2660-2690. F forwards to scroll listeners (3917-3968). c0 checks only F>0 (5452 onward); i0 decrements and resets F to zero (7495 onward). Thus the ordinary post-layout callback passes the helper !c0 guard.",
+    "fetch_path": "wb0/x.Y forwards through wb0/h1.b/c to ib0/p.b, which creates a GetPredictionFluencyTask and submits it to the service (x:1240-1265,h1:103-137,p:231-243). The request is substantive, not an inert observer update.",
+    "fix": "The added rb0/l.b entry hook consumes a token bound to panel.n, view, adapter, layout, provider, fresh-list identity and epoch. Only dx=dy=0 after x/y are cleared rebases c to actual post-layout W0. Original b runs next, sees equality and makes no request. Nonzero motion consumes the token without changing c and continues the original request-more behavior.",
+    "ordering": "Original adapter notifications schedule future layout. The scoped panel helper records the token synchronously before returning from native notification, and both listener orders are covered by runtime tests. Nested/unknown computing-layout states fail closed."
+  },
+  "lifecycle_and_accessibility": {
+    "active_scope": "dispatchUpdate installs eligibility only for its synchronous original notifier call and restores/removes the previous ThreadLocal in finally, including nested/throwing callbacks.",
+    "normal_return": "finishUpdate is reached on every normal provider return, including equal-result and no-notifier paths. Replacing the original labeled return with finishUpdate before adding return-void keeps branch targets correct.",
+    "pre_dispatch_exception_limit": "A native exception before dispatch can leave a dormant weak plan until the next update or provider collection. It has weak candidate/view/provider references and geometry only, installs no active ThreadLocal, and cannot suppress any panel scroll outside dispatch. This is not an Android exception execution test.",
+    "accessibility": "Native LayoutManagerProvider/ra.z0.m focus restoration, RecyclerView accessibility dispatch, and AccessibilityEmptyRecyclerView adapter observer oi0/b are unchanged. The change does not intercept arbitrary scroll or accessibility actions.",
+    "layout_policy": "Native candidate width calculation and grid packing remain. Existing candidate-only ItemAnimator suppression and append/payload behavior are retained."
+  },
+  "loader_verification": {
+    "baseline_mpp_sha256": {
+      "single": "d67006d5b338765a256518e6e2a2363d74de30afa6e593bdd0eb9a740f4b5f14",
+      "bundle": "f3fd6bdec26620497a13fb840419c02713357f80f624ac902f3063acb70ac69a"
+    },
+    "baseline_jvm_patch_classes": 11,
+    "changed_jvm_classes": [
+      "app/hiro/swiftkey/patches/CandidateScrollPatch.class"
+    ],
+    "jvm_main_unchanged": true,
+    "punctuation_patch_unchanged": true,
+    "android": {
+      "single": {
+        "before_classes": 19,
+        "after_classes": 19,
+        "inventory_identical": true,
+        "unchanged_existing_classes": 18,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/CandidateScrollPatch.smali"
+        ],
+        "added_classes": [],
+        "main_smali_unchanged": true,
+        "punctuation_smali_unchanged": true,
+        "sha256": "839b4ae13403f2231aa105ffd1eb389ef254e621c580036c6f0a028da2261379"
+      },
+      "bundle": {
+        "before_classes": 278,
+        "after_classes": 278,
+        "inventory_identical": true,
+        "unchanged_existing_classes": 277,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/CandidateScrollPatch.smali"
+        ],
+        "added_classes": [],
+        "main_smali_unchanged": true,
+        "punctuation_smali_unchanged": true,
+        "sha256": "073a7f752e443c744bbec1aa8d580f1e924e0ea9b0a50739b59f6d35c8990d26"
+      }
+    },
+    "jvm": {
+      "app/hiro/swiftkey/patches/CandidateScrollPatch.class": {
+        "bytes": 9503,
+        "sha256": "0dd2a0742b7337c3010ce4cf509746ea3a2739fb5fde4a96913c58ef7f442c66"
+      }
+    },
+    "loader_report_sha256": "89b7b5ab9bc3154de8ad4d5af57ad4a14a8560c74991ae4d82af68642de07ebd",
+    "probe_source": "tests/CandidateScrollPatchProbe.java",
+    "probe_source_sha256": "6841ce9d7af4ae2a961003ed53ab9368d2d7c87cc652b3269854108cc58cf147",
+    "probe_loader": "Verified published 1.8.17 MPP with only CandidateScrollPatch.class and classes.dex replaced; no loose helper classpath",
+    "fixture_results_by_sdk": {
+      "archived_sdk": {
+        "status": "PASSED",
+        "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+        "native_fixture": true,
+        "native_methods": 6,
+        "native_hook_sites": 8,
+        "dispatch_scenarios": 4,
+        "assertions": 230,
+        "device_tested": false,
+        "original_apk_apply_tested": false,
+        "original_method_bodies_preserved": true,
+        "method_fingerprint_drift_rejected": true
+      },
+      "current_sdk": {
+        "status": "PASSED",
+        "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+        "native_fixture": true,
+        "native_methods": 6,
+        "native_hook_sites": 8,
+        "dispatch_scenarios": 4,
+        "assertions": 230,
+        "device_tested": false,
+        "original_apk_apply_tested": false,
+        "original_method_bodies_preserved": true,
+        "method_fingerprint_drift_rejected": true
+      }
+    },
+    "actual_archive_results_by_sdk": {
+      "archived_sdk": {
+        "status": "PASSED",
+        "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+        "native_fixture": false,
+        "native_methods": 6,
+        "native_hook_sites": 8,
+        "dispatch_scenarios": 4,
+        "assertions": 229,
+        "device_tested": false,
+        "original_apk_apply_tested": false,
+        "original_method_bodies_preserved": true,
+        "method_fingerprint_drift_rejected": true
+      },
+      "current_sdk": {
+        "status": "PASSED",
+        "scope": "Production patch transforms exact native method bodies; modeled event dispatch, not Android execution",
+        "native_fixture": false,
+        "native_methods": 6,
+        "native_hook_sites": 8,
+        "dispatch_scenarios": 4,
+        "assertions": 229,
+        "device_tested": false,
+        "original_apk_apply_tested": false,
+        "original_method_bodies_preserved": true,
+        "method_fingerprint_drift_rejected": true
+      }
+    },
+    "sdks_agree": true
+  },
+  "abi_verification": {
+    "report_path": "tests/native_abi_review1818.json",
+    "report_sha256": "775eefcbbda5406e22df11155c2bfa312ffbd74cdf2efa63963d731db32ec107",
+    "extension_sha256": "6e042bf39b88348d79feda819816590c1038048f58593e83d5609e2c8d373f2c",
+    "native_hook_contract_verified": true,
+    "native_hook_entrypoints": [
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->stabilize(Lrb0/j;Lib0/a;)Lib0/a;",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->tryAppend(Lrb0/h;Z)Z",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->snapshot(Lrb0/h;)V",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->dispatchUpdate(Lrb0/j;Lfb0/u;Z)V",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->scrollPanelToStart(Lrb0/k;Landroidx/recyclerview/widget/RecyclerView;I)V",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->finishUpdate(Lrb0/j;)V",
+        "public_static_concrete": true
+      },
+      {
+        "reference": "Lhiro/swiftkey/CandidateScroll;->rebaseScrollWatermark(Lrb0/l;Landroidx/recyclerview/widget/RecyclerView;II)V",
+        "public_static_concrete": true
+      }
+    ],
+    "audited_classes": [
+      "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "Lhiro/swiftkey/CandidateScroll;"
+    ],
+    "unresolved": [],
+    "inaccessible": [],
+    "incompatible_opcodes": []
+  },
+  "native_source_evidence": {
+    "paths_relative_to": "Decoded archived target APK tree; external validation input, not bundled source",
+    "sha256": {
+      "smali_classes2/rb0/h.smali": "088fd87185284a6c9c0fec7c8c8e2cb09a0ff05eb1f380c2673c1eff37f41210",
+      "smali_classes2/rb0/j.smali": "4ccf49fcd9432cfddd335acc812a33933299c67a626c8b7a3f6b5fbb09131be2",
+      "smali_classes2/rb0/k.smali": "710ef2b2dc71569f2171a0f0361c07b81aaef3050571e412ce2c10b3fb705c1d",
+      "smali_classes2/rb0/d.smali": "98ef29b35985cf559a81d441b34736769413368ddc88bf288da851b0a912fc71",
+      "smali_classes2/rb0/l.smali": "64afa2a3a4b36a038a35912e0f3d34e1201ce632adc4bf8a7934fab48e9fc68d",
+      "smali_classes2/rb0/p.smali": "e314a35a6f961f713eed2031392262e272819ab0e629db44fa6ec1bcf7bf394b",
+      "smali_classes2/fb0/u.smali": "1e09f7ce326ff1b035c67b5cb8ecaaeb340938e91aaf0ac9f3ecbe8b73293f37",
+      "smali_classes2/p10/a.smali": "b92b3095071b8c25e597c872a58dde486077193d0f2c1eef9e54b3255ae1615b",
+      "smali/androidx/recyclerview/widget/RecyclerView.smali": "d9ed40cb77cd2f0bda184224b334945467b02c24f6973ab13959de640b3fc990",
+      "smali/androidx/recyclerview/widget/LinearLayoutManager.smali": "8f7f35d924ff4f261938f73778d23174d41ccf46ed581ca7956b212df9302256",
+      "smali/androidx/recyclerview/widget/GridLayoutManager.smali": "165826ede8e68672cc304bc9e61708c8dfc4ec3861d8e624f4dbc4df6b6cf9f5",
+      "smali/androidx/recyclerview/widget/a.smali": "8d47f001fb769fab0b25e256f5a65513a5fc537c5d8e3754988c644ac330d8df",
+      "smali/ra/a2.smali": "b5da427b3732399fa0c688bc8b18b2e331af1bab5e4537b7c40ef51d677bdee7",
+      "smali/ra/n1.smali": "a81b13a53dcfa24cf1861e1285ef0ddba79a01bef056d0a8dcfd36adce136bfb",
+      "smali/ra/m1.smali": "a79414155068b769a75f3fd91ef3ba0eedfd01adc3f5c47a6dd82500d46548f8",
+      "smali/ra/z0.smali": "2ab6ab772ee508c654611ae0d75c3cfe6e74eae517214d317f1827b0e79c0679",
+      "smali/cs/q.smali": "bdf6f1a4f8e26d4f5dda2858ce4fb46717324b3e4c0e7f5f55a75d1d76b4869a",
+      "smali_classes2/com/touchtype/ui/AccessibilityEmptyRecyclerView.smali": "4b513d868def8cced8126dd50107da3c84c7eb779ab06eab6f65180e8c777b7c",
+      "smali_classes2/oi0/b.smali": "69be680f2c5da32bf1f68283d794d63f8eb54eb83b243fd25e04c69cda19c459",
+      "smali_classes2/wb0/x.smali": "00dc36b2109e1a868b4618ac8ccec982bf116ac9bca025ee6ba41b50d202ae07",
+      "smali_classes2/wb0/h1.smali": "9d911ea2d454a128cb9f2f9a8a0cd3824c4fd4137c6def91f14e37ff0b188b6b",
+      "smali_classes2/ib0/p.smali": "8b799fc7a3669765877458a457717de9d7e70a796be7612800f44216756f0d4b"
+    }
+  },
+  "limitations": [
+    "No physical-device frame, fling or accessibility test was performed.",
+    "Native content-boundary clamping and valid final reflow can constrain pixel preservation; when no visible candidate survives the helper keeps native reset behavior.",
+    "The implementation addresses verified reset/stop-scroll and layout-only fetch mechanisms; a video alone does not prove the exact on-device branch."
+  ],
+  "runtime_host_verification": {
+    "source": "tests/run_candidate_tests.py",
+    "report_sha256": "f97d2da853135637284d4b371aa20b3c212b35d2f3301f4eeeb2d4136fb8c561",
+    "result": {
+      "active_item_animations_ended_before_append": true,
+      "actual_ai_dictionary_emoji_tail_reproduced": true,
+      "android_instrumentation_tested": false,
+      "assertions": 5650,
+      "candidate_fresh_commit_metadata_preserved": true,
+      "candidate_layout_refresh_does_not_refetch": true,
+      "candidate_listener_orders_verified": true,
+      "candidate_only_item_animations_disabled": true,
+      "candidate_reset_does_not_stop_scroll": true,
+      "candidate_same_query_scroll_position_preserved": true,
+      "device_tested": false,
+      "expanded_same_query_order_stabilized_using_fresh_native_candidates": true,
+      "full_width_measurement_preserved": true,
+      "native_candidate_mapping_preserved": true,
+      "native_reset_hook_bypasses_append_helper": true,
+      "native_scroll_state_and_fresh_commit_metadata_preserved": true,
+      "nested_and_throwing_dispatch_cleanup_verified": true,
+      "production_source_sha256": "cf7fe470701fdd932f8aec28ea1b8a668096a575ec23ee7821e608eae90614ec",
+      "repeated_pre_layout_results_verified": true,
+      "reset_and_geometry_fallback_animation_policy_verified": true,
+      "reset_full_refresh_preserved": true,
+      "reset_post_notify_snapshot_precedes_deferred_layout": true,
+      "scenarios": 300,
+      "scope": "Production CandidateScroll with explicit host native-grid, adapter-observer and deferred-layout fakes; reset hook bypass matches native loader, native G row packing replayed, no ART/device/FPS measurement",
+      "snapshot_contains_no_input_text": true,
+      "status": "PASSED"
+    }
+  }
+}

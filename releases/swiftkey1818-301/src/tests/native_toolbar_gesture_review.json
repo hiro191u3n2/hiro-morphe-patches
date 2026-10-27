@@ -1,0 +1,30 @@
+{
+  "status": "REVIEWED",
+  "scope": "Static review of archived modified SwiftKey Beta 9.13.16.4 native smali; no Android device execution",
+  "hook": "Lfc0/h;->invoke(Ljava/lang/Object;)Ljava/lang/Object; tail on each return, discriminator a == 0",
+  "discriminator_0": "Dedicated emoji key: fc0.s1.g or the dedicated branch of fb0.g1.a",
+  "discriminator_1": "Combined microphone/emoji key: action graph left unchanged; restores original toolbar access",
+  "timer": "fc0.k1.w is copied from native fb0.r1.m(); hc0.k.a owns the timeout and oc0.p schedules it",
+  "long_press": "androidx.fragment.app.u.run case 3 marks oc0.p.d=true BEFORE invoking hc0.k.b actors; original CLICK delegate oc0.b.c refuses when LONGPRESS is active",
+  "cancellation": "oc0.p.b clears long-press/long-click flags and cancels its Runnable; oc0.p.k removes pending callback on slide-out; no external timer is introduced",
+  "fallback": "LongPress stores only fallbackOnRelease boolean if toolbar cannot toggle. oc0.p.c only dispatches hc0.k.d on valid held release. Successful toggle needs no fallback.",
+  "short_action_routes": {
+    "ordinary": "fc0.h discriminator0 with fz.h.b()==false puts one ic0.a0 feature-opening actor into hc0.b.d (via builder.i). Native click path hc0.a.l invokes only this list.",
+    "accessibility_action": "With fz.h.b()==true, fc0.h puts one direct ic0.a0 into hc0.b.a.f (via builder.f). oc0.m.e invokes hc0.a.e, which invokes a.f; it does not call UP or click delegates.",
+    "accessibility_slide_in_release": "In the accessibility factory branch, builder.e receives the one wrapped ic0.a0 via builder.y. Native oc0.v only arms on slide-in h(), while its d() clears its armed flag. It invokes builder.e on UP if no LONGCLICK occurred.",
+    "no_duplicate_native_short_route": "Normal branch has opening actor only in d. Accessibility direct action uses a.f separately from touch UP. Accessibility d only contains reset helper(s); opening actor is in e. Therefore a single native short route does not close toolbar and then reopen emoji through a second wrapped action."
+  },
+  "native_source_sha256": {
+    "smali_classes2/fc0/h.smali": "9d0b4b0fe4064cb70733dac48ce3550da77afa5c440f3eafb9d44aa11683d603",
+    "smali_classes2/fc0/k1.smali": "e18e38c45978df990112489fd1cb9d43086d3c60cce9985194846e0c3ebafed6",
+    "smali_classes2/fc0/s1.smali": "66abef79db10dca6ed77f06a2af0dbd5dcd3ef0dfbeeb372116d9605553a381f",
+    "smali_classes2/hc0/b.smali": "6757dde6de8f521895f69f819076b799a37e9f0248c23f65b758077386066c32",
+    "smali_classes2/hc0/a.smali": "7ae4e451603a2658c170938aa64a6f46ae8694d6fa920b5466ef4ff496f5feb2",
+    "smali_classes2/oc0/m.smali": "0202f36873aa68cc313af0942f3c02ee2b2e37288d27243ba3838ff006425220",
+    "smali_classes2/oc0/p.smali": "880509a3485e52212ca209daf4e17eb90ce1885d9c568500aba55fa113314505",
+    "smali_classes2/oc0/b.smali": "0e449a4548b7e1199a51569427a8d10fffd7b513e8a67da8993902bfdb829652",
+    "smali_classes2/oc0/v.smali": "facadffea918197f34096bc5f0788dbef2be53a3abc89bcd9d8a16b54f285f44",
+    "smali/androidx/fragment/app/u.smali": "b9d8b1d1729105938a6b4587d08bf284a969f5f33c5f2a36ae952b675c9bfa90"
+  },
+  "device_tested": false
+}
