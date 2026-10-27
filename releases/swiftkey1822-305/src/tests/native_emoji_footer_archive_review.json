@@ -1,0 +1,87 @@
+{
+  "status": "PASSED",
+  "scope": "Actual archived APK native footer constructor transformation through the packaged MPP helper on two Morphe SDKs. This archive was previously modified; this is not a clean-original full patch application or device execution.",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "baseline_mpp_sha256": {
+    "single": "000076673c9253acb1edb3a11ebf9889396c4977d8ea7788e52275b16190d774",
+    "bundle": "1523f42ee8597475c8d4d8b1625820fd874408090881c88f9e0107583fc00d7f"
+  },
+  "source_sha256": {
+    "patch_java/app/hiro/swiftkey/patches/EmojiFooterPatch.java": "feb7fd0560cd6abef4228c29084849240fb205195c7c7d2ca95890f84ca18bef",
+    "tools_java/UpdateEmojiFooterLoader.java": "708bb3faac941095037a8ce2e879d0b1c430870ced69fead7c46b95abb18fafa",
+    "tests/EmojiFooterPatchProbe.java": "6085209b12983e26cda190acf892612a9bd0628c93c5d904333ca0f957b57cd1",
+    "tests/build_emoji_footer_loader.py": "271d0e398a93a35e24333eeb2b0753984fb8b90e883926642bad4955bb1d583d"
+  },
+  "loader_helper_sha256": "7cb968262e198b6731127b03de97e394ec4fb3256a8f57f60787b41c05969bec",
+  "native_hook_sdks_tested": [
+    "morphe-desktop1.17.0-dev.6",
+    "morphe-desktop1.19.1/patcher2.0.1"
+  ],
+  "native_hook_sdks_agree": true,
+  "native_archive_hook_tests": {
+    "archived_sdk": {
+      "status": "PASSED",
+      "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+      "native_fixture": false,
+      "native_methods": 2,
+      "native_methods_changed": 1,
+      "native_hook_sites": 1,
+      "inserted_runtime_calls": 1,
+      "inserted_native_instructions": 3,
+      "assertions": 204,
+      "all_target_drift_rejected_before_mutation": true,
+      "owner_and_native_enter_sender_forwarded": true,
+      "installation_after_native_delete_handler": true,
+      "native_enter_method_byte_identical": true,
+      "existing_native_body_preserved": true,
+      "unchanged_other_native_methods": 85,
+      "serialized_dex_roundtrip_verified": true,
+      "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+      "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+      "device_tested": false,
+      "original_apk_apply_tested": false
+    },
+    "current_sdk": {
+      "status": "PASSED",
+      "scope": "Exact native footer constructor transform and native Enter method preservation; no Android execution",
+      "native_fixture": false,
+      "native_methods": 2,
+      "native_methods_changed": 1,
+      "native_hook_sites": 1,
+      "inserted_runtime_calls": 1,
+      "inserted_native_instructions": 3,
+      "assertions": 204,
+      "all_target_drift_rejected_before_mutation": true,
+      "owner_and_native_enter_sender_forwarded": true,
+      "installation_after_native_delete_handler": true,
+      "native_enter_method_byte_identical": true,
+      "existing_native_body_preserved": true,
+      "unchanged_other_native_methods": 85,
+      "serialized_dex_roundtrip_verified": true,
+      "constructor_source_method_sha256": "1b508b8cadce20a0bb958251ded2e9f72fa91dc18468475822ecfe8ed5c481cd",
+      "native_enter_method_sha256": "3e81ac39e6b36dad25818f1a424a3de5230400f857722f9c994cbd6b17a81019",
+      "device_tested": false,
+      "original_apk_apply_tested": false
+    }
+  },
+  "native_layout_consumer_review": {
+    "scope": "Read-only native footer binding, theme updates, category setup, lifecycle cleanup, click/delete feedback; no child ConstraintLayout layout-param assumptions found in these exact paths.",
+    "reviewed_paths": [
+      "je0.c constructor, U(dd0.e0), onDestroy(androidx.lifecycle.q0)",
+      "aa0.h0 invoke case12: abc text color, delete icon/ripple",
+      "ae0.w invoke case11: delete icon drawable",
+      "ae0.d onClick case2: abc feedback and keyboard return",
+      "ne0.t constructor: tabs visibility, setupWithViewPager and category content",
+      "ne0.t U(dd0.e0): SwiftKeyTabLayout.q",
+      "androidx.credentials.playservices.j.a(int): native delete feedback",
+      "SwiftKeyTabLayout.q/r: colors, drawable, child tab strip only",
+      "fb0.d.a/b: feedback using view, no layout-parent access"
+    ],
+    "native_binding_view_identities_retained": true,
+    "native_parent_or_constraint_layout_params_cast_found": false,
+    "emoji_panel_discriminator": "je0.c.c == wa0.p.c; maps to oz.o1.a EMOJI_PANEL and oz.a3.a EMOJI"
+  },
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "native_archive_replayed_in_ci": false
+}

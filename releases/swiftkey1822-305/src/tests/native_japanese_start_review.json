@@ -1,0 +1,382 @@
+{
+  "status": "STATIC_NATIVE_REVIEW_PASSED",
+  "scope": "Static target-native lifecycle/selection inspection, exact DEX method transforms and Java host fakes. No device/ART run or clean-original full APK apply.",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_description": "Archived previously modified SwiftKey Beta 9.13.16.4 target; relevant pinned native methods are preserved in the archive.",
+  "production_source_sha256": "869944bfc357c0be813ff2c1684c02d68e8c4809c1430b0e22537df8ca1d8a47",
+  "patch_source_sha256": "06016405187ff531c2a593bcb556e97db0937f4cbb9b58e168007d02d0dee0e6",
+  "production_source": "src/hiro/swiftkey/JapaneseStart.java",
+  "patch_source": "patch_java/app/hiro/swiftkey/patches/JapaneseStartPatch.java",
+  "native_methods": 4,
+  "native_hook_sites": 4,
+  "runtime_entrypoints": 3,
+  "baseline_mpp_sha256": {
+    "single": "35251f48280adc69108d0218b3a8f464686deeb44314f59195698bc6bc8583ef",
+    "bundle": "3fbc234e9248d0e2682ee996a31cd37d5b0b079a080ad2b8fc2b65ce6e65f163"
+  },
+  "baseline_main_jvm_sha256": "869a3b153738f8694dad9e0fba6b134a9cf094ad3fef888896bf71bae947c5fe",
+  "baseline_other_jvm_classes": {
+    "app/hiro/swiftkey/patches/MethodContract.class": "6590f0bc9a19d029d9d53551c257b1660b795721d22ccc718c3307c8d7af3fe6",
+    "app/hiro/swiftkey/patches/InputLearningPatch.class": "d896c5f94ee03f4a1fa223e926d7fb403ec867855600543b5d055bcd2b5d3b01",
+    "app/hiro/swiftkey/patches/DictionarySupplementPatch.class": "e756a081b802c88cae4dba1e15d7df8098864d0096c99f3144106302bc6697a4",
+    "app/hiro/swiftkey/patches/KeySwapPatch.class": "2b9cb90f4617982daeb3774794bddac1c674073261e4e3ffcdceb5920ed8554c",
+    "app/hiro/swiftkey/patches/PasteProtectionPatch.class": "50a9b49126823bc4fc426de943bfc561c5f62a72848d27d5d1aec1b377209113",
+    "app/hiro/swiftkey/patches/JapaneseGlidePatch.class": "4fc8ef86d742595c50ef6aecd1b9f24813e03f7e86cfd337ff1352c3f0690479",
+    "app/hiro/swiftkey/patches/DeleteProtectionPatch.class": "c0d0dc76b55af04ee77e805e8ee2007745df162978d4d16aabf79e65148c35b9",
+    "app/hiro/swiftkey/patches/CandidateScrollPatch.class": "0dd2a0742b7337c3010ce4cf509746ea3a2739fb5fde4a96913c58ef7f442c66",
+    "app/hiro/swiftkey/patches/CandidateToolbarPatch.class": "e2b47b9cd4a06caf67082cf7977bd6699e470674d8e57fc6ec73596cd57fd366",
+    "app/hiro/swiftkey/patches/PunctuationPatch.class": "45cb65cc8e18090d0f8ec8373ec566c3183d383c9548aea52021184a762bd38f"
+  },
+  "native_method_fingerprints": [
+    {
+      "method": "Lcom/touchtype/KeyboardService;->onStartInputView(Landroid/view/inputmethod/EditorInfo;Z)V",
+      "method_contract_sha256": "673b9624b1a2d2e82e79878c82fa0532b88a5d644ea6c2f2c41c0ad315088b3c",
+      "registers": 4,
+      "access_flags": 17
+    },
+    {
+      "method": "Lcom/touchtype/KeyboardService;->onFinishInputView(Z)V",
+      "method_contract_sha256": "a84c52a9c1547ae38f4e5d7308cb33b939cf4b11bf60d81a88753a3db2b4150e",
+      "registers": 3,
+      "access_flags": 17
+    },
+    {
+      "method": "Lcom/touchtype/KeyboardService;->onWindowHidden()V",
+      "method_contract_sha256": "df0f75a2f4ac6a634cc4ffc16737444a12106598dbf907872b09bf82d405754b",
+      "registers": 2,
+      "access_flags": 17
+    },
+    {
+      "method": "Lfb0/g0;->b(Llh0/a;Lfb0/q1;)V",
+      "method_contract_sha256": "ffa0732fd7ebc28072ee8020b91d91a63fa5cd874e5b9de15de0be4fd3dc06b0",
+      "registers": 12,
+      "access_flags": 17
+    }
+  ],
+  "existing_patch_coexistence": {
+    "all_baseline_jvm_patch_classes_inspected": 11,
+    "earlier_shared_target": "JapaneseGlidePatch.applyToMethods -> KeyboardService.onFinishInputView(Z)V",
+    "original_check_phase": "checkOriginal verifies the native fingerprint before any patch applies.",
+    "apply_check_phase": "apply verifies the exact post-JapaneseGlide fingerprint before any JapaneseStart mutation; all other target fingerprints remain native.",
+    "expected_post_glide_finish_method_sha256": "ca65b77e13855ce200961ff1aaafdaf40466057136d32d5cea84d2feba0e3a85",
+    "actual_published_glide_transform_executed": true,
+    "prior_glide_reset_preserved": true,
+    "other_targets_overlap": false,
+    "key_swap_controller_target": "KeySwapPatch targets fb0/g0.onSharedPreferenceChanged, not initial-layout b(lh0.a,fb0.q1).",
+    "native_probe_scope": "Runs the real published Glide transform on all four native Glide inputs, then composes the shared finish method into the four startup targets. Does not execute the entire main APK patch pipeline."
+  },
+  "reviewed_conditions": {
+    "startup_hook_before_normal_native_delegate": true,
+    "reopen_restarting_true_rearmed_by_finish_or_window_hidden": true,
+    "active_restart_preserves_manual_language_selection": true,
+    "selection_consumed_before_native_reentrant_calls": true,
+    "native_editor_policy_checked_before_selection": true,
+    "selection_after_native_pending_layout_restore": true,
+    "enabled_configured_layout_and_nonempty_pack_required": true,
+    "romaji_and_hiragana_preferences_preserved": true,
+    "native_primary_mode_reset_and_layout_rebuild_retained": true,
+    "native_numeric_password_uri_email_date_handling_retained": true,
+    "explicit_ascii_editor_request_retained": true,
+    "native_language_selection_method_used": true,
+    "no_keyevent_or_text_injection": true,
+    "no_new_diagnostic_logging": true,
+    "weak_service_owners_and_boolean_only_session_state": true,
+    "all_target_drift_rejected_before_mutation": true,
+    "manual_switch_preservation_scope": "Selected language; no extra force during an active restart. Existing native ABC_SECONDARY reset remains unchanged.",
+    "before_selection_restart_retains_unconsumed_start_marker_host_tested": true
+  },
+  "native_evidence": [
+    {
+      "file": "classes2.dex / com/touchtype/KeyboardService.smali",
+      "decoded_file_sha256": "52f9872e38cf87c22794ded1b4725fead6da98cf70264a771a14ec96f91e44d4",
+      "lines": [
+        671,
+        690,
+        844,
+        867,
+        948,
+        967
+      ],
+      "finding": "Public service methods delegate startup and finish/hide events. Startup is marked before delegation; either finish/hide removes only this service state."
+    },
+    {
+      "file": "classes2.dex / i70/x3.smali",
+      "decoded_file_sha256": "983febd3d8f6390d903cb647b7193f01d358b63b243b6404defd6b2417f58f65",
+      "lines": [
+        353,
+        372
+      ],
+      "finding": "onStartInputView delegator forwards EditorInfo and restarting flag to the selected service delegate."
+    },
+    {
+      "file": "classes2.dex / i70/d0.smali",
+      "decoded_file_sha256": "aa0c704d17cf339246af31bcfbc7274851bf05b6f54bd2b0df6682b60d2e323a",
+      "lines": [
+        4025,
+        4508,
+        4407,
+        4413
+      ],
+      "finding": "Normal service builds native q1 input policy and invokes g0.b for initial visible layout."
+    },
+    {
+      "file": "classes2.dex / fb0/g0.smali",
+      "decoded_file_sha256": "5d8ed75234d6eca26bd62414b62153310abba5ef1af1018392b7740fd1e07966",
+      "lines": [
+        66,
+        273,
+        131,
+        158,
+        160,
+        269
+      ],
+      "finding": "Restores pending temporary layout before the unique f5.i getter. The new selection is inserted after that getter; existing input-type switches, m assignment, q=false primary-mode reset, i0.e rebuild and x1.u notification stay intact."
+    },
+    {
+      "file": "classes2.dex / fb0/f5.smali",
+      "decoded_file_sha256": "0b621d84e1e38705ece820d0a3b6561655ae0ecb652c780c543425a759a2459e",
+      "lines": [
+        988,
+        1031,
+        1306,
+        1334
+      ],
+      "finding": "i returns the current configured enum, k returns language packs for the configured layout, q selects its index and updates the native last-layout preference."
+    },
+    {
+      "file": "classes2.dex / fb0/q1.smali",
+      "decoded_file_sha256": "244c575a74dfa2b07d8de82a882bcdc3e0927b87f43f744ff7ec337c11b15a79",
+      "lines": [
+        33,
+        355
+      ],
+      "finding": "Native policy separates ordinary/message fields from email, URI, password, numeric, telephone and date layouts. Startup helper permits only native policy kinds 1/2 plus Android text class and no force-ASCII flag."
+    },
+    {
+      "file": "classes2.dex / qj0/a.smali",
+      "decoded_file_sha256": "6be7b54dc318baf627b5e55f08be1e28e978550b0a08c4f1cae1114694c102cd",
+      "lines": [
+        8096,
+        8204
+      ],
+      "finding": "x4 is ROMAJI and y4 is HIRAGANA, both bound to Japanese locale. Only entries already present in configured layout inventory with nonempty packs are considered."
+    },
+    {
+      "file": "classes2.dex / fb0/i0.smali",
+      "decoded_file_sha256": "f1b850b30e1637d13ac1678a42e5d66e5743ea0e44d8071967eca5e7dc74c8c4",
+      "lines": [
+        587,
+        810,
+        2253,
+        2262,
+        2371,
+        2378
+      ],
+      "finding": "Native layout reconstruction chooses primary/secondary resource IDs from m and q, detects resource changes and preserves its normal rebuild path. ABC_SECONDARY uses q=true; startup g0.b resets q=false."
+    },
+    {
+      "file": "classes2.dex / fb0/x0.smali",
+      "decoded_file_sha256": "cf5eec80ed092f83146e8302abd6fa874a1b1ba8a0c0477c5602402c252fb21b",
+      "lines": [
+        408,
+        442
+      ],
+      "finding": "Native ROMAJI/HIRAGANA layout configuration maps to Japanese prediction mode, as distinct from an English language layout."
+    }
+  ],
+  "fixture_source_hashes": {
+    "tests/native_japanese_start_fixture/com/touchtype/KeyboardService.smali": "5cd8d21f7909d08d1bb6a2a89d38e79c5545c1aafc2cc565ea84187e53c9747c",
+    "tests/native_japanese_start_fixture/fb0/g0.smali": "fcafc81edc41cc06182638105d6ebd597f368696b9ebd755eee62944b7fba253",
+    "tests/native_japanese_start_fixture/xd0/d1.smali": "61d4fe474a4d34f0a672ae546edaa75f6ea24b89f976056005c6013e78d60fdd"
+  },
+  "native_hook_tests": {
+    "status": "PASSED",
+    "scope": "Exact native lifecycle and layout-selection transforms; no Android execution",
+    "native_fixture": true,
+    "native_methods": 4,
+    "native_hook_sites": 4,
+    "runtime_entrypoints": 3,
+    "assertions": 88,
+    "all_target_drift_rejected_before_mutation": true,
+    "existing_native_body_preserved": true,
+    "unchanged_other_native_methods": 3,
+    "published_prior_glide_transform_executed": true,
+    "shared_lifecycle_glide_hook_preserved": true,
+    "selection_after_pending_layout_restore": true,
+    "native_input_type_policy_retained": true,
+    "serialized_dex_roundtrip_verified": true,
+    "device_tested": false,
+    "original_apk_apply_tested": false
+  },
+  "native_archive_hook_tests": {
+    "archived_sdk": {
+      "status": "PASSED",
+      "scope": "Exact native lifecycle and layout-selection transforms; no Android execution",
+      "native_fixture": false,
+      "native_methods": 4,
+      "native_hook_sites": 4,
+      "runtime_entrypoints": 3,
+      "assertions": 202,
+      "all_target_drift_rejected_before_mutation": true,
+      "existing_native_body_preserved": true,
+      "unchanged_other_native_methods": 61,
+      "published_prior_glide_transform_executed": true,
+      "shared_lifecycle_glide_hook_preserved": true,
+      "selection_after_pending_layout_restore": true,
+      "native_input_type_policy_retained": true,
+      "serialized_dex_roundtrip_verified": true,
+      "device_tested": false,
+      "original_apk_apply_tested": false
+    },
+    "current_sdk": {
+      "status": "PASSED",
+      "scope": "Exact native lifecycle and layout-selection transforms; no Android execution",
+      "native_fixture": false,
+      "native_methods": 4,
+      "native_hook_sites": 4,
+      "runtime_entrypoints": 3,
+      "assertions": 202,
+      "all_target_drift_rejected_before_mutation": true,
+      "existing_native_body_preserved": true,
+      "unchanged_other_native_methods": 61,
+      "published_prior_glide_transform_executed": true,
+      "shared_lifecycle_glide_hook_preserved": true,
+      "selection_after_pending_layout_restore": true,
+      "native_input_type_policy_retained": true,
+      "serialized_dex_roundtrip_verified": true,
+      "device_tested": false,
+      "original_apk_apply_tested": false
+    }
+  },
+  "native_hook_sdks_agree": true,
+  "standalone_startup_loader_report_sha256": "44fc12d7b61377a56d492d42ec03abd73013edd065ab17811c53de2b6551ea03",
+  "native_probe_source_sha256": "42b24e27b4a194e5d40445d4e39802028b98f8e73b9c69579a68dae1ca0398d6",
+  "loader_update_source_sha256": "0dbf278969c98d3d028516d8a49c4fbc0a2f08b6fe848737c24c7ba331b66025",
+  "host_tests": {
+    "status": "PASSED",
+    "scenarios": 44,
+    "assertions": 70,
+    "device_tested": false,
+    "scope": "Production Java lifecycle/selection logic on host fakes; not Android execution",
+    "production_source_sha256": "869944bfc357c0be813ff2c1684c02d68e8c4809c1430b0e22537df8ca1d8a47",
+    "original_apk_apply_tested": false,
+    "japanese_start_on_normal_text_input": true,
+    "japanese_start_on_reopen": true,
+    "japanese_manual_switch_preserved_within_session": true,
+    "japanese_configured_layout_preserved": true,
+    "japanese_special_input_requirements_preserved": true,
+    "japanese_start_uses_native_language_selection": true,
+    "japanese_start_no_text_injection": true
+  },
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "limitations": [
+    "Lifecycle and selection semantics are modeled in host tests and traced statically; this report does not claim on-device startup behavior or timing.",
+    "If Japanese is not enabled/configured or its packs are not ready when startup selects, native behavior is retained; there is no delayed override that could undo a manual switch.",
+    "An active restarting=true callback does not force Japanese. A new nonrestarting callback is treated as a new input session; a finish/hide followed by any startup is fresh.",
+    "Manual-switch preservation refers to the selected language and to ordinary continued typing. On an active onStartInputView restart, the original g0.b already resets ABC_SECONDARY (q=true) to primary (q=false), even when no JapaneseStart selection occurs. This patch leaves that existing native mode reset intact; it does not promise to preserve every secondary Latin mode across a framework restart.",
+    "Host tests also cover repeated restarting=true callbacks before the first native selection, preserving the unconsumed start marker. This is a modeled reentry boundary, not an observed on-device callback sequence."
+  ],
+  "blocking_findings": [],
+  "composed_loader_verification": {
+    "status": "PASSED",
+    "candidate_loader_composed": true,
+    "composed_loader_report_sha256": "57887a9e7510283a5fcd206d490dcfda97c6cee8b68f973c3b512c1773cde5aa",
+    "candidate_loader_report_sha256": "700eaa9a02d6e2d28a43973486293a12cefd4d86eb309ddcfcacf9fe67ed18e9",
+    "changed_jvm_classes": [
+      "app/hiro/swiftkey/patches/CandidateScrollPatch.class",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class"
+    ],
+    "added_jvm_classes": [
+      "app/hiro/swiftkey/patches/JapaneseStartPatch.class"
+    ],
+    "jvm": {
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class": {
+        "bytes": 22073,
+        "sha256": "663305a4a555a1372a6c78651980d2cbf7b86738ccbdc8321368da1866ebd139"
+      },
+      "app/hiro/swiftkey/patches/JapaneseStartPatch.class": {
+        "bytes": 7244,
+        "sha256": "240c7a0b0ce5172479cea4c49beda84ded45ddd64a08ba8351eb67106d088bfb"
+      },
+      "app/hiro/swiftkey/patches/CandidateScrollPatch.class": {
+        "bytes": 11367,
+        "sha256": "c127be1a9ff5374d155821190e32324092332fb762a65aab5bc6673e44684b1a"
+      }
+    },
+    "android": {
+      "single": {
+        "before_classes": 19,
+        "after_classes": 20,
+        "unchanged_existing_classes": 17,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/CandidateScrollPatch.smali",
+          "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.smali"
+        ],
+        "added_classes": [
+          "app/hiro/swiftkey/patches/JapaneseStartPatch.smali"
+        ],
+        "only_two_main_bridge_calls_added": true,
+        "punctuation_patch_unchanged": true,
+        "sha256": "196b21f7d8a2a50beeaa4c4d374c11cb0b8c17ef1b14ef74f47093d471acd54e"
+      },
+      "bundle": {
+        "before_classes": 278,
+        "after_classes": 279,
+        "unchanged_existing_classes": 276,
+        "changed_existing_classes": [
+          "app/hiro/swiftkey/patches/CandidateScrollPatch.smali",
+          "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.smali"
+        ],
+        "added_classes": [
+          "app/hiro/swiftkey/patches/JapaneseStartPatch.smali"
+        ],
+        "only_two_main_bridge_calls_added": true,
+        "punctuation_patch_unchanged": true,
+        "sha256": "351f0a32efae58486b9482f4620781910c7f7c26b7778358ea9e18133675bcde"
+      }
+    },
+    "native_archive_hook_tests": {
+      "archived_sdk": {
+        "status": "PASSED",
+        "scope": "Exact native lifecycle and layout-selection transforms; no Android execution",
+        "native_fixture": false,
+        "native_methods": 4,
+        "native_hook_sites": 4,
+        "runtime_entrypoints": 3,
+        "assertions": 202,
+        "all_target_drift_rejected_before_mutation": true,
+        "existing_native_body_preserved": true,
+        "unchanged_other_native_methods": 61,
+        "published_prior_glide_transform_executed": true,
+        "shared_lifecycle_glide_hook_preserved": true,
+        "selection_after_pending_layout_restore": true,
+        "native_input_type_policy_retained": true,
+        "serialized_dex_roundtrip_verified": true,
+        "device_tested": false,
+        "original_apk_apply_tested": false
+      },
+      "current_sdk": {
+        "status": "PASSED",
+        "scope": "Exact native lifecycle and layout-selection transforms; no Android execution",
+        "native_fixture": false,
+        "native_methods": 4,
+        "native_hook_sites": 4,
+        "runtime_entrypoints": 3,
+        "assertions": 202,
+        "all_target_drift_rejected_before_mutation": true,
+        "existing_native_body_preserved": true,
+        "unchanged_other_native_methods": 61,
+        "published_prior_glide_transform_executed": true,
+        "shared_lifecycle_glide_hook_preserved": true,
+        "selection_after_pending_layout_restore": true,
+        "native_input_type_policy_retained": true,
+        "serialized_dex_roundtrip_verified": true,
+        "device_tested": false,
+        "original_apk_apply_tested": false
+      }
+    },
+    "native_hook_sdks_agree": true,
+    "scope": "Startup probes executed from the combined staged MPP; candidate JVM/Android class bytes match its independently verified output. No device or full original-APK apply."
+  }
+}

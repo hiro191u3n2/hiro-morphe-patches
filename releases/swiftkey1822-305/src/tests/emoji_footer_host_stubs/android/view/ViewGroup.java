@@ -1,0 +1,11 @@
+package android.view;
+import android.content.Context;import java.util.*;
+public abstract class ViewGroup extends View implements ViewParent {
+ public static class LayoutParams {public static final int MATCH_PARENT=-1,WRAP_CONTENT=-2;public int width,height;public LayoutParams(int w,int h){width=w;height=h;}public LayoutParams(LayoutParams p){this(p.width,p.height);}}
+ public static class MarginLayoutParams extends LayoutParams {public int leftMargin,rightMargin,topMargin,bottomMargin;public MarginLayoutParams(int w,int h){super(w,h);}public MarginLayoutParams(LayoutParams p){super(p);}}
+ private final ArrayList<View> children=new ArrayList<View>();public boolean failNextAdd;public boolean failNextRemove;
+ public ViewGroup(Context c){super(c);}public int getChildCount(){return children.size();}public View getChildAt(int i){return i<0||i>=children.size()?null:children.get(i);}public int indexOfChild(View v){return children.indexOf(v);}
+ public void addView(View v){addView(v,children.size(),v.getLayoutParams()==null?generateDefaultLayoutParams():v.getLayoutParams());}public void addView(View v,LayoutParams p){addView(v,children.size(),p);}public void addView(View v,int i){addView(v,i,v.getLayoutParams()==null?generateDefaultLayoutParams():v.getLayoutParams());}public void addView(View v,int i,LayoutParams p){if(failNextAdd){failNextAdd=false;throw new IllegalStateException("Injected parent insertion failure");}if(v.getParent()!=null)throw new IllegalStateException("Already parented");if(p==null)throw new IllegalArgumentException("Null params");v.setLayoutParams(p);children.add(i<0?children.size():i,v);v.setParent(this);}
+ public void removeView(View v){if(failNextRemove){failNextRemove=false;throw new IllegalStateException("Injected parent removal failure");}if(children.remove(v))v.setParent(null);}public void removeAllViews(){for(View v:new ArrayList<View>(children))removeView(v);}public void removeViewAt(int i){removeView(children.get(i));}
+ protected LayoutParams generateDefaultLayoutParams(){return new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);}protected boolean checkLayoutParams(LayoutParams p){return p!=null;}protected LayoutParams generateLayoutParams(LayoutParams p){return new LayoutParams(p);}public void setClipChildren(boolean c){}public void setClipToPadding(boolean c){}
+}

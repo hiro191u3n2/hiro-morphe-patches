@@ -1,0 +1,188 @@
+{
+  "status": "STATIC_NATIVE_QUERY_REVIEW_COMPLETED",
+  "release": "SwiftKey 1.8.19 / bundle 1.0.302",
+  "scope": "Read-only inspection of the target native request construction and equality semantics. This review investigates whether ordinary same-input Japanese expanded paging necessarily fails the existing sameQuery guard; it does not establish the cause of the reported device jump or prove the new release fixes it.",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK, decoded in the existing native-rethink-decoded workspace.",
+  "reviewed_baseline_candidate_source": {
+    "release": "1.8.18",
+    "path": "src/hiro/swiftkey/CandidateScroll.java",
+    "sha256": "cf7fe470701fdd932f8aec28ea1b8a668096a575ec23ee7821e608eae90614ec"
+  },
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_root_cause_confirmed": false,
+  "conclusion": "No native evidence supports weakening the existing query comparison for ordinary ROMAJI/HIRAGANA same-input expanded paging. The actual on-device request values and the first displayed candidate subrequest provenance remain unobserved in this static-only review.",
+  "findings": {
+    "ordinary_japanese_layout_search_type": "ROMAJI 0xca and HIRAGANA 0xcb both select JAPANESE in fb0.x0; wb0.x copies the result to wb0.m.l, used directly by wb0.m.b.",
+    "normal_constructor_exception": "l40.c forces NORMAL only if p6 is true, initial touch history is empty, and trailing context terms are Japanese. p6 comes from x0.R, which is false for ROMAJI and HIRAGANA. This branch is therefore not a counterexample for the ordinary Japanese layouts under review.",
+    "paging_dispatch": "rb0.l submits EXPANDED through wb0.x.Y -> wb0.h1.b/c -> wb0.m.b -> ib0.p.b. The submission itself does not rewrite l40.c fields.",
+    "request_count": "The request size g is derived from result-count listeners and can grow during paging; CandidateScroll already intentionally excludes g.",
+    "equality": "CandidateScroll matches the fields used by native l40.c.equals except g and adds the existing nonempty composing/JAPANESE eligibility checks. Native equals ignores o and q; there is no basis here to add or remove further compared fields.",
+    "history_equality": "ec0.y.o makes a copied TouchHistory. TouchHistory.equals delegates to native areEqual; a new wrapper is not by itself evidence of inequality.",
+    "sequence_equality": "ec0.f caches the context Sequence and Sequence.equals delegates to native equalTo. Wrapper identity is not the comparison semantics.",
+    "filter_equality": "q40.a.equals compares text and boundary values. A fresh filter wrapper does not by itself invalidate equality.",
+    "other_constructors": "The only other l40.c constructor callers found are ec0.h, vj0.w, and m40.z. These are separate synthetic/history/sentinel requests, not the normal wb0.m request construction. Whether such a request can become the prior first displayed candidate is outside this narrowed construction review.",
+    "expanded_view_accepts_multiple_result_types": "rb0.d.j registers rb0.c for EnumSet.allOf(ib0.m), then forwards the cached lb0.a.e result without a result-type check. Therefore an expanded panel is not natively restricted to EXPANDED result containers. This is a separate eligibility limitation from semantic query equality; this review did not observe its timing on the user device.",
+    "default_request_entrypoints": "wb0.x.r submits DEFAULT on shift-state notification; W submits DEFAULT when Q permits. These entrypoints show that DEFAULT requests exist alongside explicit EXPANDED paging. Static inspection alone does not prove their request values are equal to the displayed list in the reported failure."
+  },
+  "constructor_field_sources": {
+    "a": "ec0.y.o touch-history snapshot",
+    "b": "wb0.p1 capitalization or existing correction candidate capitalization",
+    "c": "ec0.j.a context Sequence",
+    "d": "wb0.m.l search type from fb0.x0.v",
+    "e": "verbatim policy derived from input state and autocorrection settings",
+    "f": "wb0.m.m from fb0.x0.R, normalized by empty initial touch history",
+    "g": "candidate-count listeners and count policy",
+    "h": "ec0.j.d filter",
+    "i": "ec0.j.e string",
+    "j": "ec0.y.n array snapshot",
+    "k": "ec0.y.l composing string",
+    "l": "ec0.j.b snapshot string",
+    "m": "locale-normalized ec0.j.b string",
+    "n": "wb0.z0.c (w || x)",
+    "o": "ec0.y.e, ignored by native equals",
+    "p": "ec0.y.g input-mode enum",
+    "q": "constructor-derived trailing-context text, ignored by native equals"
+  },
+  "limitations": [
+    "Static method inspection cannot establish the exact values seen during the user-reported video.",
+    "Native implementations of Sequence.equalTo and TouchHistory.areEqual were not executed by this review.",
+    "CandidateScroll compares the previous first candidate subrequest with the incoming result-container request; this review does not prove those have identical provenance for every postprocessor or candidate kind.",
+    "No query guard relaxation or production logging was added based on this review."
+  ],
+  "native_sources": {
+    "smali_classes2/qj0/a.smali": {
+      "sha256": "6be7b54dc318baf627b5e55f08be1e28e978550b0a08c4f1cae1114694c102cd",
+      "references": [
+        "8100-8156: ROMAJI ordinal 0xca, field x4",
+        "8160-8225: HIRAGANA ordinal 0xcb, field y4"
+      ]
+    },
+    "smali_classes2/fb0/x0.smali": {
+      "sha256": "cf5eec80ed092f83146e8302abd6fa874a1b1ba8a0c0477c5602402c252fb21b",
+      "references": [
+        "412-425 and 3716-3734: both Japanese layouts select PredictionSearchType.JAPANESE",
+        "2213-2237 and 3907-3923: R is true for 0xbc through 0xc9 or a/a.N, excluding x4/y4"
+      ]
+    },
+    "smali/a/a.smali": {
+      "sha256": "dce6acfca80063eae1bab4f2df1305b4e7b1948e8706d93299e3b6b0b513fccb",
+      "references": [
+        "353-415: N/P accept only I1,K1,M1,L1,H1,J1, not Japanese x4/y4"
+      ]
+    },
+    "smali_classes2/wb0/x.smali": {
+      "sha256": "00dc36b2109e1a868b4618ac8ccec982bf116ac9bca025ee6ba41b50d202ae07",
+      "references": [
+        "1240-1265: Y snapshots editor state then calls h1.b",
+        "4110-4172: x0.v and x0.R are passed into m.l and m.m",
+        "1159-1198: W may request DEFAULT",
+        "3229-3246: r requests DEFAULT on shift notification"
+      ]
+    },
+    "smali_classes2/wb0/h1.smali": {
+      "sha256": "9d911ea2d454a128cb9f2f9a8a0cd3824c4fd4137c6def91f14e37ff0b188b6b",
+      "references": [
+        "103-137: request builder m.b then prediction submission p.b"
+      ]
+    },
+    "smali_classes2/wb0/m.smali": {
+      "sha256": "20d537914391df9f9a80010eeaae117a060af61cfed6581d07e2468bf0232b44",
+      "references": [
+        "167-610: request builder and l40.c constructor arguments"
+      ]
+    },
+    "smali_classes2/wb0/z0.smali": {
+      "sha256": "9840abf0fd9929cac7c1e78ea6ce9e785f206023c3305d12809b4ad9a9f6fb88",
+      "references": [
+        "305-320: c() returns w || x for the request n flag"
+      ]
+    },
+    "smali_classes2/ib0/p.smali": {
+      "sha256": "8b799fc7a3669765877458a457717de9d7e70a796be7612800f44216756f0d4b",
+      "references": [
+        "174-243: schedules GetPredictionFluencyTask with the built request"
+      ]
+    },
+    "smali_classes2/l40/c.smali": {
+      "sha256": "97aaf4f2f16ce1cbc835b65f64e604dc8a728652f0fa1fd366408da40dafd10a",
+      "references": [
+        "43-309: constructor including conditional NORMAL conversion",
+        "310-455: equals compares a,b,c,d,e,f,g,h,n,j,l,m,k,p,i; not o/q"
+      ]
+    },
+    "smali_classes2/ec0/y.smali": {
+      "sha256": "313c989bac4045f382816e7e9d7c12c3ea6118cfa28a7b1c18928acf977e207f",
+      "references": [
+        "1528-1541: o() copies touch history via appendHistory"
+      ]
+    },
+    "smali_classes2/ec0/f.smali": {
+      "sha256": "81ca40b8fbce0165e35e77009355984cf9ea335a634204c1902e515765e68fe6",
+      "references": [
+        "2637-2769: getContext caches/rebuilds Sequence from editor state"
+      ]
+    },
+    "smali_classes2/ec0/x.smali": {
+      "sha256": "d6149e9e34b27b33bea9f24c118c6eaadd3e759f102c10c97717606e82f32883",
+      "references": [
+        "1260 onward: e() snapshots context and input state"
+      ]
+    },
+    "smali/com/microsoft/fluency/Sequence.smali": {
+      "sha256": "f8b0cdc51f6cc6454a86f257a180fc46fb02e41325a0cef97b122decb62a0bb5",
+      "references": [
+        "109 onward: equals calls native equalTo"
+      ]
+    },
+    "smali/com/microsoft/fluency/TouchHistory.smali": {
+      "sha256": "79580154e9e9c823ba159f8fb4164c8e2c8a9e85d0b4ffb4a02cbfe826f66d60",
+      "references": [
+        "271 onward: equals calls native areEqual"
+      ]
+    },
+    "smali_classes2/q40/a.smali": {
+      "sha256": "d8538ee76edcfb74ad5c4f241d6738a0b7286a071c85ae4f42a1efce3eb5d30b",
+      "references": [
+        "equals compares text a and boundary b, excluding c"
+      ]
+    },
+    "smali_classes2/rb0/l.smali": {
+      "sha256": "64afa2a3a4b36a038a35912e0f3d34e1201ce632adc4bf8a7934fab48e9fc68d",
+      "references": [
+        "33-58: W0 watermark triggers Y(..., true, EXPANDED)"
+      ]
+    },
+    "smali_classes2/ec0/h.smali": {
+      "sha256": "127ef17ef48f99a5033eec67b4b58496b1c831381256ee7d1477ce23d82db554",
+      "references": [
+        "206: separate synthetic NORMAL request constructor"
+      ]
+    },
+    "smali_classes2/vj0/w.smali": {
+      "sha256": "5b2565d104682111cff94fe44ec8977b1ae5caf751783dd9bfc8be4ed390c91b",
+      "references": [
+        "520: separate service/history NORMAL request constructor"
+      ]
+    },
+    "smali_classes2/m40/z.smali": {
+      "sha256": "c45045dc4b624465d04717fda77a58db15e942e09ed66686751bf3aa15de9f50",
+      "references": [
+        "69: empty sentinel request constructor"
+      ]
+    },
+    "smali_classes2/rb0/d.smali": {
+      "sha256": "98ef29b35985cf559a81d441b34736769413368ddc88bf288da851b0a912fc71",
+      "references": [
+        "67-112: j subscribes to all result kinds and forwards cached result"
+      ]
+    },
+    "smali_classes2/ib0/m.smali": {
+      "sha256": "17cae4d9349b0a023b9da1b6568246d27cffa1970809f57e279ace99b3d70ace",
+      "references": [
+        "enum labels map a=DEFAULT and g=EXPANDED"
+      ]
+    }
+  }
+}
