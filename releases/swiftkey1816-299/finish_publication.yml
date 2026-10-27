@@ -1,0 +1,37 @@
+name: Verify completed SwiftKey1816 publication and save receipt
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey1816-299-finish-publication.yml']
+permissions:
+  actions: read
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  finish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify existing publication and save only its missing receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-swiftkey1816-finish
+          python releases/swiftkey1816-299/finish_publication.py --repo . --output .ci-swiftkey1816-finish/dist 2>&1 | tee .ci-swiftkey1816-finish/finish.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey1816-publication-receipt-recovery
+          path: |
+            .ci-swiftkey1816-finish/finish.log
+            .ci-swiftkey1816-finish/dist/publication_SwiftKey_v1.8.16.json
+          retention-days: 14
+          include-hidden-files: true
