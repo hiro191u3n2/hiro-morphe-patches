@@ -1,0 +1,465 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "20ff4b578fa05c0c6be545c0f23680f9cc2df1f12bb380a7f1a25e392f6ef864",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/JapaneseStart$1;",
+    "Lhiro/swiftkey/JapaneseStart$Session;",
+    "Lhiro/swiftkey/JapaneseStart;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->mainThread()Z"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/os/Looper;->myLooper()Landroid/os/Looper;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->mainThread()Z"
+      ],
+      "defined_owner": "Landroid/os/Looper;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/EditorInfo;->imeOptions:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/EditorInfo;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/EditorInfo;->inputType:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/EditorInfo;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f5;->b:Ljava/lang/Iterable;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/f5;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f5;->i()Lqj0/a;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/f5;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f5;->k(Lqj0/a;)Ljava/util/Set;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/f5;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f5;->q(Lqj0/a;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/f5;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/i0;->E:Lfb0/f5;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/i0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/i0;->a:Lcom/touchtype/KeyboardService;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/i0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/i0;->k:Lfb0/q1;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/i0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/q1;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lfb0/q1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart$Session;-><init>(Lhiro/swiftkey/JapaneseStart$1;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;-><init>(Lhiro/swiftkey/JapaneseStart$1;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;->pending:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;->pending:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;->selecting:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;->selecting:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->SESSIONS:Ljava/util/WeakHashMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->finish(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->SESSIONS:Ljava/util/WeakHashMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->mainThread()Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->finish(Lcom/touchtype/KeyboardService;)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/JapaneseStart;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Iterable;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Ljava/lang/Iterable;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart$Session;-><init>()V",
+        "Lhiro/swiftkey/JapaneseStart;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->isEmpty()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;-><clinit>()V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->finish(Lcom/touchtype/KeyboardService;)V"
+      ],
+      "defined_owner": "Ljava/util/WeakHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lqj0/a;->x4:Lqj0/a;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lqj0/a;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lqj0/a;->y4:Lqj0/a;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;"
+      ],
+      "defined_owner": "Lqj0/a;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart$Session;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/WeakHashMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lqj0/a;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    }
+  ],
+  "native_hook_entrypoints": [
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->begin(Lcom/touchtype/KeyboardService;Landroid/view/inputmethod/EditorInfo;Z)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->finish(Lcom/touchtype/KeyboardService;)V",
+      "public_static_concrete": true
+    },
+    {
+      "reference": "Lhiro/swiftkey/JapaneseStart;->select(Lfb0/i0;Lfb0/f5;Lqj0/a;)Lqj0/a;",
+      "public_static_concrete": true
+    }
+  ],
+  "native_hook_contract_verified": true,
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "2b1c5c9acd2447b88ec61a7d1187766847e416e436c53f1b04280baa39d76a5a",
+  "wrapper_source_sha256": "5768bb096dcf1820ef3064ec9ef05af191b7a54c56bb12dbb3db936c3ce2ad61"
+}

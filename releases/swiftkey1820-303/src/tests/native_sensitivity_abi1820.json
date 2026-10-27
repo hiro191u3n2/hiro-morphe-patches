@@ -1,0 +1,4137 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "b0868d571db1108afef5ab321d9431b308b89de44fe2a3dfac345264715e47e2",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/FlickSymbols$1;",
+    "Lhiro/swiftkey/FlickSymbols$2;",
+    "Lhiro/swiftkey/FlickSymbols$3;",
+    "Lhiro/swiftkey/FlickSymbols$Stroke;",
+    "Lhiro/swiftkey/FlickSymbols;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;-><init>(Landroid/content/Context;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroid/app/AlertDialog$Builder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;->setNegativeButton(Ljava/lang/CharSequence;Landroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroid/app/AlertDialog$Builder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;->setSingleChoiceItems([Ljava/lang/CharSequence;ILandroid/content/DialogInterface$OnClickListener;)Landroid/app/AlertDialog$Builder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroid/app/AlertDialog$Builder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;->setTitle(Ljava/lang/CharSequence;)Landroid/app/AlertDialog$Builder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroid/app/AlertDialog$Builder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;->show()Landroid/app/AlertDialog;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroid/app/AlertDialog$Builder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/ContextWrapper;->getBaseContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->service(Landroid/content/Context;)Lcom/touchtype/KeyboardService;"
+      ],
+      "defined_owner": "Landroid/content/ContextWrapper;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/DialogInterface;->dismiss()V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Landroid/content/DialogInterface;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences$Editor;->apply()V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences$Editor;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences$Editor;->putBoolean(Ljava/lang/String;Z)Landroid/content/SharedPreferences$Editor;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences$Editor;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences$Editor;->putInt(Ljava/lang/String;I)Landroid/content/SharedPreferences$Editor;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences$Editor;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;->edit()Landroid/content/SharedPreferences$Editor;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;->getBoolean(Ljava/lang/String;Z)Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->enabled()Z",
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;->getInt(Ljava/lang/String;I)I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->sensitivity()I"
+      ],
+      "defined_owner": "Landroid/content/SharedPreferences;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->bottom:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->contains(FF)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->height()F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->left:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->right:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->top:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/graphics/RectF;->width()F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z"
+      ],
+      "defined_owner": "Landroid/graphics/RectF;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/SparseArray;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Landroid/util/SparseArray;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getActionMasked()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->finishDrain(Lxd0/d1;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getDownTime()J",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->drains(Lxd0/d1;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getEventTime()J",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getHistoricalX(II)F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getHistoricalY(II)F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getHistorySize()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getPointerCount()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getPointerId(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getToolType(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getX()F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->getY()F",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->obtain(Landroid/view/MotionEvent;)Landroid/view/MotionEvent;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->recycle()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;->setAction(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Landroid/view/MotionEvent;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewConfiguration;->get(Landroid/content/Context;)Landroid/view/ViewConfiguration;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewConfiguration;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/ViewConfiguration;->getScaledTouchSlop()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Landroid/view/ViewConfiguration;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/EditorInfo;->imeOptions:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/EditorInfo;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/EditorInfo;->inputType:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/EditorInfo;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/InputConnection;->getTextAfterCursor(II)Ljava/lang/CharSequence;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/InputConnection;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/view/inputmethod/InputConnection;->getTextBeforeCursor(II)Ljava/lang/CharSequence;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z"
+      ],
+      "defined_owner": "Landroid/view/inputmethod/InputConnection;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/lifecycle/h;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Landroidx/lifecycle/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/lifecycle/h;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Landroidx/lifecycle/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->A(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V",
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->B(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->a:Landroid/content/Context;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->f:Loa/k;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->l:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/Preference;->s:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->G(Landroidx/preference/Preference;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/PreferenceGroup;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->H(Ljava/lang/CharSequence;)Landroidx/preference/Preference;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/PreferenceGroup;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;->a:Landroid/content/Context;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;-><init>(Landroid/content/Context;Landroid/util/AttributeSet;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/SwitchPreferenceCompat;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->A(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->B(Ljava/lang/CharSequence;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->G(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/TwoStatePreference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->e:Loa/j;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->l:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;->s:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Landroidx/preference/Preference;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lbf0/g;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lbf0/g;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;->JAPANESE:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;->getCurrentInputConnection()Landroid/view/inputmethod/InputConnection;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->connection(Lcom/touchtype/KeyboardService;)Landroid/view/inputmethod/InputConnection;"
+      ],
+      "defined_owner": "Landroid/inputmethodservice/InputMethodService;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;->h:Landroid/view/inputmethod/InputConnection;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->connection(Lcom/touchtype/KeyboardService;)Landroid/view/inputmethod/InputConnection;"
+      ],
+      "defined_owner": "Lcom/touchtype/KeyboardService;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;->i:Landroid/view/inputmethod/EditorInfo;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lcom/touchtype/KeyboardService;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ldc0/a;->G()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z"
+      ],
+      "defined_owner": "Ldc0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ldc0/a;->S()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z"
+      ],
+      "defined_owner": "Ldc0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ldc0/a;->k()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z"
+      ],
+      "defined_owner": "Ldc0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ldc0/a;->s()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z"
+      ],
+      "defined_owner": "Ldc0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Le60/b;->a:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Le60/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Le60/b;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Le60/b;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f0;->d:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lfb0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f2;->d:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/f2;->l:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/f2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/l2;->a:Lfb0/n2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/l2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/l2;->b:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/l2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/l2;->c:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/l2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/l2;->d:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/l2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/l2;->e:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/l2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/n2;->a:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfb0/n2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/q0;->c:Lqj0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lfb0/q0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/t0;->c()Lwb0/x0;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lfb0/t0;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfb0/t0;->c:Lfb0/q0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lfb0/t0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/b1;->a:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/b1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/b1;->b:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/b1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/d1;->b:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/d1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/d1;->c:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/d1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/d1;->d:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/d1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/m1;->a:Landroid/graphics/RectF;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lfc0/m1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/n2;->b:Loc0/l;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/n2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/n2;->d:Lfc0/d2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lfc0/n2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfc0/n2;->e:Lfc0/m1;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lfc0/n2;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lfz/h;->b()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Lfz/h;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/a;->b:Lbf0/g;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhc0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/a;->c:Lhc0/k;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhc0/a;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/k;->b:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhc0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/k;->d:Ljava/util/ArrayList;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhc0/k;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhc0/o;->a(Ljava/util/Collection;Lfc0/d2;)Ljava/util/List;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhc0/o;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$1;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$2;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$2;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;-><init>(Landroid/content/SharedPreferences;Landroidx/preference/Preference;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;->val$option:Landroidx/preference/Preference;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;->val$option:Landroidx/preference/Preference;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;-><init>(Landroid/content/SharedPreferences;Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;->val$source:Landroid/content/SharedPreferences;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;->val$source:Landroid/content/SharedPreferences;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;-><init>(Landroid/content/SharedPreferences;Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->actor:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->actor:Lic0/a;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->after:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->after:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->alternateBound:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->alternateBound:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->before:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->before:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->bottom:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->bottom:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->captured:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z",
+        "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->captured:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->composition:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->snapshotValid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->composition:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->connection:Landroid/view/inputmethod/InputConnection;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->connection:Landroid/view/inputmethod/InputConnection;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->directionSlop:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->directionSlop:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->downTime:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->downTime:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->editor:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->editor:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->end:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->snapshotValid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->end:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->generation:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->generation:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->height:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->height:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->imeOptions:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->imeOptions:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->inputType:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->inputType:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->jitterSlop:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->key:Lfc0/n2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->key:Lfc0/n2;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->layout:Lfb0/t0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->layout:Lfb0/t0;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->left:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->left:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->minimum:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->minimum:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->minimumUp:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->minimumUp:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->model:Lwb0/x;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->model:Lwb0/x;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->pointer:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->pointer:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popup:Lfb0/f2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popup:Lfb0/f2;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupBinding:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupBinding:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupIndex:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupIndex:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupKey:Lfc0/n2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupKey:Lfc0/n2;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupOpening:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupOpening:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupProvider:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->popupProvider:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->qualified:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->qualified:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->raw:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->snapshotValid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->raw:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->right:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->right:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->service:Lcom/touchtype/KeyboardService;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->snapshotValid()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->start:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->snapshotValid()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->start:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->startX:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->startX:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->startY:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->startY:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->top:F",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->geometryMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->top:F",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->view:Lxd0/f0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->pending(Lxd0/d1;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->view:Lxd0/f0;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->width:I",
+      "opcode": "iget",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->width:I",
+      "opcode": "iput",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->window:Ljava/lang/Object;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;->window:Ljava/lang/Object;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->SENSITIVITY_LABELS:[Ljava/lang/String;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$200()[Ljava/lang/String;",
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V",
+        "Lhiro/swiftkey/FlickSymbols;->sensitivity()I",
+        "Lhiro/swiftkey/FlickSymbols;->sensitivitySummary(I)Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->SENSITIVITY_LABELS:[Ljava/lang/String;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$000()Landroid/content/SharedPreferences;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$100(Landroidx/preference/Preference;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$2;->k(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$200()[Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$300(I)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$400(Lcom/touchtype/KeyboardService;)Landroid/view/inputmethod/InputConnection;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$500()J",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$600()F",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$700(Ljava/lang/CharSequence;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->access$800(Ljava/lang/String;Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->editorMatches()Z",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->matches(Ldc0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->active:Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->pending(Lxd0/d1;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->active:Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->reset()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->bindAlternate(Lic0/a;Lhiro/swiftkey/FlickSymbols$Stroke;Ljava/lang/Object;Ljava/lang/Object;Ljava/lang/Object;Lfb0/f2;Lfc0/n2;I)Lic0/a;",
+      "opcode": "invoke-static-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->cancelling:Z",
+      "opcode": "sget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->cancelling:Z",
+      "opcode": "sput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$100(Landroidx/preference/Preference;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->connection(Lcom/touchtype/KeyboardService;)Landroid/view/inputmethod/InputConnection;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$400(Lcom/touchtype/KeyboardService;)Landroid/view/inputmethod/InputConnection;",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->draining:Ljava/lang/ref/WeakReference;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->drains(Lxd0/d1;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->draining:Ljava/lang/ref/WeakReference;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->finishDrain(Lxd0/d1;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->drainingDownTime:J",
+      "opcode": "sget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->drains(Lxd0/d1;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->drainingDownTime:J",
+      "opcode": "sput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->drains(Lxd0/d1;Landroid/view/MotionEvent;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->finishDrain(Lxd0/d1;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->enabled()Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+        "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->equal(Ljava/lang/String;Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$800(Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->finishDrain(Lxd0/d1;Landroid/view/MotionEvent;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->abandon(Lhiro/swiftkey/FlickSymbols$Stroke;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->generation:J",
+      "opcode": "sget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$500()J",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->reset()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->generation:J",
+      "opcode": "sput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->reset()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->insertionValid(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->preferences:Landroid/content/SharedPreferences;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$000()Landroid/content/SharedPreferences;",
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V",
+        "Lhiro/swiftkey/FlickSymbols;->enabled()Z",
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/FlickSymbols;->sensitivity()I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->preferences:Landroid/content/SharedPreferences;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->reset()V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+        "Lhiro/swiftkey/FlickSymbols;->init(Landroid/content/SharedPreferences;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "public static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->sensitivity()I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->chooseSensitivity(Landroidx/preference/Preference;)V",
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V",
+        "Lhiro/swiftkey/FlickSymbols;->sensitivityMultiplier()F"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->sensitivityMultiplier()F",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$600()F"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->sensitivitySummary(I)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$300(I)Ljava/lang/String;",
+        "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->service(Landroid/content/Context;)Lcom/touchtype/KeyboardService;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->terminal(I)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->finishDrain(Lxd0/d1;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->text(Ljava/lang/CharSequence;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->access$700(Ljava/lang/CharSequence;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols;->validRect(Landroid/graphics/RectF;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/a;->b(Llh0/a;)V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z"
+      ],
+      "defined_owner": "Lic0/a;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lic0/e;->a:Lic0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lic0/e;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Boolean;->booleanValue()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Boolean;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/CharSequence;->toString()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->text(Ljava/lang/CharSequence;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/CharSequence;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Character;->isISOControl(I)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Character;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Float;->isInfinite(F)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Ljava/lang/Float;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Float;->isNaN(F)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Ljava/lang/Float;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->abs(D)D",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;->add(FF)Z"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->max(FF)F",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->min(FF)F",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$1;-><init>()V",
+        "Lhiro/swiftkey/FlickSymbols$2;-><init>()V",
+        "Lhiro/swiftkey/FlickSymbols$3;-><init>(Landroid/content/SharedPreferences;Landroidx/preference/Preference;)V",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->codePointAt(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->codePointCount(II)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->equals(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->equal(Ljava/lang/String;Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->length()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->singleCharacter(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->sensitivitySummary(I)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->sensitivitySummary(I)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->toString()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->sensitivitySummary(I)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;-><init>(Ljava/lang/Object;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Ljava/lang/ref/WeakReference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->drains(Lxd0/d1;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Ljava/lang/ref/Reference;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->contains(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->get(I)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Loc0/m;->b:Lhc0/a;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Loc0/m;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lqj0/a;->x4:Lqj0/a;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lqj0/a;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lwb0/n0;->C()Ldc0/a;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lwb0/n0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lwb0/x0;->b:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lwb0/x0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lwb0/x;->c:Lwb0/n0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lwb0/x;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxc0/f;->a:Lfb0/f2;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->alternate(Lfc0/n2;Lwb0/x;Lhiro/swiftkey/FlickSymbols$Stroke;)Lic0/a;"
+      ],
+      "defined_owner": "Lxc0/f;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->A:Lfz/h;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Lxd0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->I:Landroid/util/SparseArray;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Lxd0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->a:Lfb0/t0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lxd0/d1;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->f(Llh0/a;Landroid/view/MotionEvent;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->capture(Lhiro/swiftkey/FlickSymbols$Stroke;Llh0/a;Landroid/view/MotionEvent;)Z"
+      ],
+      "defined_owner": "Lxd0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->getContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->getHeight()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->getWidth()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->getWindowToken()Landroid/os/IBinder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols$Stroke;-><init>(Lxd0/f0;Lcom/touchtype/KeyboardService;Lwb0/x;Lfc0/n2;Lic0/a;Landroid/view/MotionEvent;)V",
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->isAttachedToWindow()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->isShown()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Landroid/view/View;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Lxd0/f0;->j:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->ready(Lxd0/f0;)Z"
+      ],
+      "defined_owner": "Lxd0/q;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lxd0/f0;->z:Lwb0/t0;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FlickSymbols;->begin(Lxd0/f0;Landroid/view/MotionEvent;)Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;->changed(Lhiro/swiftkey/FlickSymbols$Stroke;)Z"
+      ],
+      "defined_owner": "Lxd0/f0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroid/app/AlertDialog$Builder;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/Context;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/ContextWrapper;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/ContextWrapper;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/DialogInterface$OnClickListener;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/DialogInterface;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/SharedPreferences;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/graphics/RectF;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/util/AttributeSet;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/MotionEvent;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/inputmethod/InputConnection;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/view/inputmethod/InputConnection;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroidx/lifecycle/h;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/lifecycle/h;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/Preference;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/Preference;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/Preference;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/PreferenceScreen;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Landroidx/preference/SwitchPreferenceCompat;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lcom/touchtype/KeyboardService;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Ldc0/a;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Le60/b;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Le60/b;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/f0;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/f0;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/f2;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/f2;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/l2;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/l2;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfb0/t0;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/b1;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/b1;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/d1;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/d1;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/n2;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/n2;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/n2;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lfc0/n2;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$2;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$3;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/a;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/e;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lic0/e;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Ljava/lang/Boolean;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Boolean;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/CharSequence;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Exception;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/LinkageError;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/OutOfMemoryError;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/RuntimeException;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/ref/WeakReference;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Collection;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Collection;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Llh0/a;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Loa/j;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Loa/k;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Loc0/m;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Loc0/m;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lwb0/x;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxc0/f;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxc0/f;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxd0/d1;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxd0/f0;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxd0/f0;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxd0/f0;",
+      "opcode": "instance-of",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lxd0/f0;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "filled-new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    }
+  ],
+  "interface_callback_implementations": [
+    {
+      "class": "Lhiro/swiftkey/FlickSymbols$1;",
+      "interface": "Loa/j;",
+      "method": "i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$1;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FlickSymbols$2;",
+      "interface": "Loa/k;",
+      "method": "k(Landroidx/preference/Preference;)V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$2;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FlickSymbols$3;",
+      "interface": "Landroid/content/DialogInterface$OnClickListener;",
+      "method": "onClick(Landroid/content/DialogInterface;I)V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FlickSymbols$3;",
+      "access": "public"
+    }
+  ],
+  "interface_callbacks_checked": true,
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "be78113a59cc8b4ec3e9b143f09025da28104467011f3d66cfcdf002104eaaf3",
+  "wrapper_source_sha256": "41725f0bf67cc509fd6da520a1b5b00792f8ce42a49fc616c594bb130ebc2ee5"
+}
