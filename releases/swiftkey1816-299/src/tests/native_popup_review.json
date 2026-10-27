@@ -1,0 +1,198 @@
+{
+  "status": "PASSED",
+  "scope": "Static native object-graph review for the archived target APK. Structural explanation and implementation eligibility design; not a device trace.",
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "checks": [
+    {
+      "id": "variant_merge",
+      "native_file": "smali_classes2/fc0/s1.smali",
+      "sha256": "66abef79db10dca6ed77f06a2af0dbd5dcd3ef0dfbeeb372116d9605553a381f",
+      "method": "O(String,List,boolean,boolean)",
+      "finding": "Copies configured popup characters, then appends nonduplicate language-specific variants obtained through jc0/b.h(primary label), preserving configured characters before appended variants."
+    },
+    {
+      "id": "popup_type_branch",
+      "native_file": "smali_classes2/fc0/s1.smali",
+      "sha256": "66abef79db10dca6ed77f06a2af0dbd5dcd3ef0dfbeeb372116d9605553a381f",
+      "method": "P(List,boolean,fc0/m1,fc0/v1)",
+      "finding": "An empty candidate list becomes xc0/d. One candidate without touch exploration becomes xc0/i. Multiple candidates become xc0/f wrapping a fully built fb0/f2 popup keyboard."
+    },
+    {
+      "id": "single_actor_only",
+      "native_file": "smali_classes2/fc0/k1.smali",
+      "sha256": "e18e38c45978df990112489fd1cb9d43086d3c60cce9985194846e0c3ebafed6",
+      "method": "m(hc0/b,cm0/d,fc0/d2,fc0/v1,xc0/h)",
+      "finding": "Only xc0/i enters the branch that creates fc0/d1 with d=true and registers it through hc0/b.p. The common nonempty-popup branch creates e60/b(original key state, androidx/lifecycle/h(popup,7)); its fc0/b1 opener is registered through hc0/b.q."
+    },
+    {
+      "id": "longpress_collection_fields",
+      "native_file": "smali_classes2/hc0/b.smali",
+      "sha256": "6757dde6de8f521895f69f819076b799a37e9f0248c23f65b758077386066c32",
+      "method": "p / q / d / x",
+      "finding": "p registers wrapped actors in hc0/k.d (long-press release). q registers wrapped actors in hc0/k.b (long-press activation). d wraps ic0/a in ic0/e. x instead stores raw ic0/a in bf0/g.b with hc0/o restrictions."
+    },
+    {
+      "id": "popup_opener_tag",
+      "native_file": "smali_classes2/fc0/b1.smali",
+      "sha256": "777765dfaa96dddc81e4cc54ec0028a0a64c290503989aef37a50f529d7cf133",
+      "method": "b(lh0/a)",
+      "finding": "Tag a=1 identifies the e60/b-bound opener; b stores its e60/b owner. Calling it would open the popup, so the new resolver should inspect fields only."
+    },
+    {
+      "id": "popup_binding",
+      "native_file": "smali_classes2/e60/b.smali",
+      "sha256": "ab3ee0975b9a25abc41b3e0d3bd803dcd4dd773e2493c0a9eb83dc2541c34f0e",
+      "method": "constructor(fc0/d2,cm0/a) / m()",
+      "finding": "The popup-specific constructor stores original key state in b and constant provider in a, creates fc0/b1(this,1) in c, and ic0/w(this) in d. m invokes provider then key-state.n(popup); resolver must not call it."
+    },
+    {
+      "id": "constant_popup_provider",
+      "native_file": "smali/androidx/lifecycle/h.smali",
+      "sha256": "79ff5ab75101732ab3c59a5ce1c29931dd28d25bc5a06ab0c27eb7481a570e88",
+      "method": "constructor(Object,int) / invoke() tag 7",
+      "finding": "Tag a=7 returns b cast to xc0/h without constructing a new popup. Inspecting a and b directly avoids invoking arbitrary provider code and preserves existing popup identity."
+    },
+    {
+      "id": "popup_layout_payload",
+      "native_file": "smali_classes2/xc0/f.smali",
+      "sha256": "8d1f4d53abc43e83865bcbd4bdbdf0289d9df63c3f6428dc870097334eef1195",
+      "method": "field a / constructor(fb0/f2)",
+      "finding": "Public final a stores the already-built native popup keyboard fb0/f2."
+    },
+    {
+      "id": "popup_default_index",
+      "native_file": "smali_classes2/fb0/f2.smali",
+      "sha256": "06f5542d7999f4a27139df123f44f301164fa26a3c76fa12b1a338635c1c4e21",
+      "method": "constructor(ArrayList,int,fc0/n2,...)",
+      "finding": "Public final l is the native default candidate index; inherited fb0/f0.d contains actual popup keys. Inherited fb0/t0.b is a dummy fallback key, not the configured default candidate."
+    },
+    {
+      "id": "native_default_selection_ui",
+      "native_file": "smali_classes2/xd0/g1.smali",
+      "sha256": "a274574394f3fd00e48e0e8ab76392a8a4755c2ffc30c50555065452e5c195fa",
+      "method": "popup initialization around line 520",
+      "finding": "The actual popup initialization obtains the key as v.d.get(v.l). This establishes the default-selection meaning of fb0/f2.l."
+    },
+    {
+      "id": "native_default_selection_actor",
+      "native_file": "smali_classes2/ic0/q.smali",
+      "sha256": "b62ef4680631890285e6c10bb65eed4b2fa9a83dc9947064b3ef7fd1f9077491",
+      "method": "b(lh0/a,float)",
+      "finding": "Native zero-displacement popup selection also starts from fb0/f2.d[fb0/f2.l], then synthesizes its own down/up. The flick resolver need not execute this actor or synthesize events; it can reuse the selected child insertion actor."
+    },
+    {
+      "id": "single_row_ordering",
+      "native_file": "smali_classes2/fb0/x4.smali",
+      "sha256": "3c8d80153f37e57cca88674d8ec605df5685f579cfd5da5f47a9920e35a52c7d",
+      "method": "c(List,float,float,boolean,fb0/a1,int,boolean)",
+      "finding": "For one row, reorders candidates as left-list + original input[0] + right-list and returns default index equal to left-list size, so the first configured character remains the selected default despite a nonzero index."
+    },
+    {
+      "id": "default_column_limit",
+      "native_file": "smali_classes2/fc0/t1.smali",
+      "sha256": "1c0585ac9c0c398be6d4c0abe581c660e87e87dac2f6f2967ccdd61662008b12",
+      "method": "constructor()",
+      "finding": "Default horizontal popup column limit k is Integer.MAX_VALUE. fc0/v1 constructor copies k to i, which controls the single-row versus multirow branch in fc0/s1.P. Custom limited layouts may use another native default placement; do not assume list index zero or all default characters always equal the visible hint."
+    },
+    {
+      "id": "popup_child_insertion",
+      "native_file": "smali_classes2/fb0/h2.smali",
+      "sha256": "dc3f29ea4367dee17dd82630acffc110588779dad2b910ddbbd3276b9c04c5fe",
+      "method": "a / c / b",
+      "finding": "Builds actual popup fc0/n2 keys with oc0/m handlers. Ordinary character insertion uses raw fb0/l2, registered with hc0/b.x into child handler.b:bf0/g.b. Both ordinary a and c paths pass true,true to the actor flags d/e. Label and textForPunctuation are required nonnull; text normalization is performed before actor construction."
+    },
+    {
+      "id": "native_popup_commit",
+      "native_file": "smali_classes2/fb0/l2.smali",
+      "sha256": "6f01051324022fba3e46a01e2c7866d5421eac4d81e087b2211b6a7fd33a2ca0",
+      "method": "b(lh0/a)",
+      "finding": "Actor fields a=fb0/n2 factory, b=input string, c=punctuation string, d/e=native flags. Invokes factory.a:wb0/t0.b0(token,b,c,d,e). Reuse this actor rather than manufacturing fc0/d1 or committing through InputConnection."
+    },
+    {
+      "id": "popup_model_constructor",
+      "native_file": "smali_classes2/tj0/e.smali",
+      "sha256": "d5af46178a424471f934bb6dc8ebfab92be6b2d49adbed9cbef82486d5e8b5cf",
+      "method": "keyboard factory constructor around lines 340-425",
+      "finding": "Passes the same input-model argument p5 into fc0/k1 and fb0/n2. A resolved popup actor can be checked against the current keyboard model through fb0/l2.a.a."
+    },
+    {
+      "id": "view_model_field",
+      "native_file": "smali_classes2/xd0/f0.smali",
+      "sha256": "ecc79e888e98316dbe77dfb29e2a8e61401b209e5ce9e170a6350013d4c50236",
+      "method": "constructor around lines 130-133",
+      "finding": "Stores its input-model constructor argument in public z:wb0/t0, the model already snapshotted by FlickSymbols."
+    },
+    {
+      "id": "restricted_action_lookup",
+      "native_file": "smali_classes2/hc0/o.smali",
+      "sha256": "9ec744e597799f4bcf605d213751bf646c5d902a97492c7a8abf200502ba2a54",
+      "method": "a(Collection,fc0/d2)",
+      "finding": "Evaluates each hc0/o restriction against the supplied current key state and returns active actor objects. Apply first to original long-press opener list, then to selected popup child release list; do not skip restrictions."
+    },
+    {
+      "id": "native_popup_backend",
+      "native_file": "smali_classes2/wb0/x.smali",
+      "sha256": "00dc36b2109e1a868b4618ac8ccec982bf116ac9bca025ee6ba41b50d202ae07",
+      "method": "b0(lh0/a,String,String,boolean,boolean)",
+      "finding": "The native mini-keyboard backend clears native pending state, prepares keyboard state, and enqueues a yb0/o0 input event. It is distinct from the fc0/d1 wb0/t0.P route and should retain its own actor/flags."
+    },
+    {
+      "id": "popup_release_eligible_before_open",
+      "native_file": "smali_classes2/aa0/f.smali",
+      "sha256": "d087629128d4da6038dcb6ea329ed780eab37f851f6ffdca1e0814cd40dd718c",
+      "method": "invoke(Object) discriminator 16 / pswitch_c",
+      "finding": "fb0/h2.b registers the ordinary raw fb0/l2 release actor together with its telemetry actor via hc0/b.x under aa0/f(16). This branch checks nonnull fc0/d2 and returns Boolean.TRUE, so release actor eligibility does not require opening or pressing the popup first. Production still reevaluates hc0/o restrictions."
+    }
+  ],
+  "resolver_chain": [
+    "original fc0/n2.b -> oc0/m.b -> hc0/a.c -> hc0/k.b",
+    "hc0/o.a(activation list, original key.d) -> ic0/e.a -> fc0/b1 with tag a=1",
+    "fc0/b1.b -> e60/b; require binding.b == original key.d",
+    "e60/b.a -> androidx/lifecycle/h with tag a=7; read b without invoke",
+    "androidx/lifecycle/h.b -> xc0/f.a -> fb0/f2",
+    "native default child = popup.d.get(popup.l), with bounds and type validation",
+    "child fc0/n2.b -> oc0/m.b -> hc0/a.b -> bf0/g.b restricted with child.d",
+    "raw fb0/l2 insertion actor; verify one printable character in b and c, known flags and same model owner",
+    "call retained native ic0/a.b(token) only at existing validated UP commit point"
+  ],
+  "required_invariants": [
+    "Preserve the existing direct single-character fc0/d1 path.",
+    "Do not create or display a popup, call a supplier or opener, synthesize DOWN/UP, or bypass the native insertion backend.",
+    "Reject unknown wrappers, wrong discriminators, wrong original-key binding, invalid default index/key, ambiguous insertion actors, invalid single-character output and foreign input-model ownership.",
+    "Preserve starting native opener/binding/provider/popup/index/child/actor identity across the gesture; re-resolve restrictions and native default selection before and after CANCEL and before UP insertion.",
+    "Retain existing gesture capture timing, movement thresholds, editor/layout/window/model protections and canceled-stream drain semantics.",
+    "Do not report key characters, popup text, surrounding text, absolute touch position or editor identity in diagnostics."
+  ],
+  "limitations": [
+    "No actual runtime per-key objects or user device gesture samples were captured. The q/w/p versus e/r/t/y/u/i/o pattern is consistent with the single-versus-multiple-popup structural defect; this review alone does not prove the installed language-variant map for each user key.",
+    "The default popup selection is the native configured default, not an arbitrary first list entry or a hardcoded qwerty-to-digit mapping. Custom layouts or multirow popups can choose another default.",
+    "Single-row ordering proves the configured initial popup character survives reordering as the native default. Device-specific language/settings/layout behavior and insertion side effects still require device confirmation."
+  ],
+  "implementation_review": {
+    "status": "PASSED",
+    "reviewed_source": "src/hiro/swiftkey/FlickSymbols.java",
+    "source_sha256": "94b78cb5b31c2ee6eacafc79b670f22cc84e45ab858b0a395d13c2b56fe0fe2c",
+    "review_method": "Independent source diff against 1.8.12 and actual decoded native object-graph/actor/backend inspection; final production source hash pinned.",
+    "blocking_findings": [],
+    "checks": [
+      "Existing direct fc0/d1 long-press route is preserved; fallback starts only when that restricted list contains no fc0/d1. Invalid or ambiguous direct actors are rejected instead of silently switching routes.",
+      "Fallback matches the actual ic0/e -> fc0/b1(tag 1) -> e60/b(original key state) -> androidx/lifecycle/h(tag 7) -> xc0/f -> fb0/f2 route using read-only field access. No provider or popup opener is invoked.",
+      "Native default selection is popup.d[popup.l] with null, bounds, child-type and handler checks. It does not assume first list entry, copy key labels, or hardcode letters or digits.",
+      "Child release lookup reevaluates hc0/o restrictions against child.d and resolves the actual raw fb0/l2 actor. Multiple insertion actors, wrong input-model ownership, unexpected flags, and non-single-character b/c outputs are rejected.",
+      "The fb0/l2 d/e true,true requirement matches ordinary native single-row and multirow construction. The factory input-model identity guard matches shared model construction and xd0/f0.z.",
+      "The original opener, binding, provider, popup, default index, child key and insertion actor identities are snapshotted and required to remain stable. Re-resolution runs before native CANCEL, after CANCEL and immediately before UP insertion.",
+      "Invocation remains the retained native ic0/a.b(token) at the existing validated UP point. No new insertion actor, InputConnection.commitText call, popup display or synthetic native child DOWN/UP is introduced.",
+      "Gesture distance, direction, capture timing and pointer ownership/drain behavior are unchanged from 1.8.12; only native alternate eligibility, actor interface and non-text diagnostics are extended.",
+      "Added diagnostics are counters and fixed route/rejection identifiers. No key character, popup candidate, surrounding text, absolute touch position or editor identity is added to diagnostics."
+    ],
+    "limitations": [
+      "This is a static source/native audit, not execution on the user device. No actual per-key runtime candidate objects or language-variant lists were captured.",
+      "The selected output follows the native configured popup default; custom layouts with another default are not forced to match a displayed secondary hint.",
+      "Host regression tests, compiled DEX ABI verification and publishing checks are separately recorded by their owning build/test reports."
+    ]
+  }
+}
