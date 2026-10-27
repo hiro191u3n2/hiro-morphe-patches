@@ -1,0 +1,1 @@
+package androidx.preference;public class Preference {public android.content.Context a;public String l;public boolean s=true;public oa.j e;public String title,summary;public Preference(android.content.Context c){a=c;}public void B(CharSequence v){title=v.toString();}public void A(CharSequence v){summary=v.toString();}}
