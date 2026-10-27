@@ -1,0 +1,458 @@
+{
+  "status": "SENSITIVITY_FLOOR_REGRESSION_HOST_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.21",
+  "bundle_version": "1.0.304",
+  "baseline_swiftkey_version": "1.8.20",
+  "baseline_bundle_version": "1.0.303",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "device_fix_confirmed": false,
+  "runtime_unrelated_classes_unchanged": true,
+  "existing_non_flick_runtime_classes_unchanged": true,
+  "all_dictionary_resources_preserved": true,
+  "other_apps_byte_identical": true,
+  "standalone_and_bundle_runtime_equal": true,
+  "loader_entries_byte_identical": true,
+  "unrelated_loader_classes_unchanged": true,
+  "jvm_swiftkey_loader_matches_standalone": true,
+  "combined_jvm_swiftkey_discovered": true,
+  "previous_jvm_patches_preserved": true,
+  "all_static_checks_passed": true,
+  "host_tests_passed": true,
+  "current_manager_patcher_selection_verified": true,
+  "two_loader_sdks_agree": true,
+  "selected_extension_stream_verified": true,
+  "loader_selected_extension_matches_packaged_runtime": true,
+  "diagnostic_function_removed": true,
+  "candidate_scroll_1820_byte_identical": true,
+  "japanese_start_1820_byte_identical": true,
+  "candidate_toolbar_1820_byte_identical": true,
+  "emoji_toolbar_1820_byte_identical": true,
+  "punctuation_1820_byte_identical": true,
+  "standard_sensitivity_preserved": true,
+  "five_sensitivity_levels_verified": true,
+  "preference_persistence_verified": true,
+  "invalid_preference_fallback_verified": true,
+  "next_gesture_uses_updated_sensitivity": true,
+  "gesture_regressions_verified": true,
+  "native_abi_review_verified": true,
+  "native_abi_replayed_in_ci": false,
+  "sensitivity_floor_scaling_verified": true,
+  "low_high_diagonal_separation_verified": true,
+  "prior_1820_negative_control_verified": true,
+  "sensitivity": {
+    "preference_key": "hiro_up_flick_sensitivity",
+    "default_level": 2,
+    "labels": [
+      "とても低い",
+      "低い",
+      "標準",
+      "高い",
+      "とても高い"
+    ],
+    "distance_multipliers": [
+      2.0,
+      1.5,
+      1.0,
+      0.8,
+      0.65
+    ]
+  },
+  "native_abi_review": {
+    "source": "tests/native_sensitivity_abi1821.json",
+    "sha256": "7f15e6d2915e4ca44cd0d6e697970f1b3543e8b9c76c4886b197a3a71d9cea16",
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593"
+  },
+  "sensitivity_test_report": {
+    "android_instrumentation_tested": false,
+    "assertions": 7547,
+    "baseline_fixture_source_matches_published_1819": true,
+    "baseline_source_commit": "17d6c49521cb88cff518ade888a5c7532623a5ab",
+    "baseline_source_sha256": "8b3d3822c68259687ddbced9c5bb4b95d5f1957f7bc67b86d0a0f630965c27ab",
+    "baseline_source_version": "1.8.19",
+    "default_level": 2,
+    "device_tested": false,
+    "existing_flick_report": {
+      "android_instrumentation_tested": false,
+      "assertions": 2909,
+      "device_tested": false,
+      "scenarios": 459,
+      "status": "PASSED"
+    },
+    "existing_glide_assertions": 65,
+    "five_sensitivity_levels_verified": true,
+    "fullwidth_native_alternates_verified": true,
+    "gesture_regressions_verified": true,
+    "integrated_glide_source_sha256": "4f15b36f399c9deaffad827cdc8b72d13105cd62eb9e29a642158e133c2fdea8",
+    "invalid_preference_fallback_verified": true,
+    "levels": [
+      {
+        "distance_multiplier": 2.0,
+        "index": 0,
+        "label": "とても低い"
+      },
+      {
+        "distance_multiplier": 1.5,
+        "index": 1,
+        "label": "低い"
+      },
+      {
+        "distance_multiplier": 1.0,
+        "index": 2,
+        "label": "標準"
+      },
+      {
+        "distance_multiplier": 0.8,
+        "index": 3,
+        "label": "高い"
+      },
+      {
+        "distance_multiplier": 0.65,
+        "index": 4,
+        "label": "とても高い"
+      }
+    ],
+    "low_high_diagonal_separation_verified": true,
+    "low_sensitivity_wide_diagonal_reachable": true,
+    "native_long_press_precedence_verified": true,
+    "next_gesture_uses_updated_sensitivity": true,
+    "no_diagnostic_setting_reintroduced": true,
+    "original_apk_apply_tested": false,
+    "preference_changes_keep_in_flight_snapshot": true,
+    "preference_persistence_verified": true,
+    "prior_1820_negative_control": {
+      "angle_degrees_from_up": 65,
+      "behavioral_failure_detected": true,
+      "configured_touch_slop_px": 40,
+      "device_tested": false,
+      "failure_marker": "LOW_LEVEL_MUST_REJECT_CAPPED_SLOP_DIAGONAL",
+      "first_capture_path_distance_px_current": [
+        95,
+        71,
+        48,
+        38,
+        31
+      ],
+      "first_capture_path_distance_px_prior1820": [
+        48,
+        48,
+        48,
+        48,
+        48
+      ],
+      "host_key_shorter_side_px": 80,
+      "old_production_compiles_with_same_fakes": true,
+      "old_production_source_sha256": "68715438ac2d43fbe4533001412af5a5ace807df4a282c4d2ff12f444db7f069",
+      "old_production_version": "1.8.20",
+      "sampling": "progressive MOVE events with three intermediate historical coordinates per event, followed by a short release rebound",
+      "status": "PASSED"
+    },
+    "prior_1820_negative_control_verified": true,
+    "production_source_sha256": "cfc6f79b370d1fda3dc89ca6f5cb61d8b05c1d93a062b12312cac86258172c61",
+    "sampling_and_history_consistency_verified": true,
+    "scenarios": 1892,
+    "scope": "Production FlickSymbols and its settings callbacks run on host Java fakes, plus existing JapaneseGlide Java control flow. Default/Standard are compared to pinned published 1.8.19 source with identical physical event sequences. A capped-touch-slop floor collapse is reproduced against published 1.8.20 using the same host fakes and an expected behavioral assertion failure. SharedPreferences fakes test roundtrips and reinitialization; Android disk persistence, dialog rendering, ART, native engine/timers, handset feel, and clean APK patching are not executed.",
+    "sensitivity_floor_report": {
+      "android_instrumentation_tested": false,
+      "assertions": 1248,
+      "device_tested": false,
+      "scenarios": 208,
+      "status": "PASSED"
+    },
+    "sensitivity_floor_scaling_verified": true,
+    "sensitivity_report": {
+      "android_instrumentation_tested": false,
+      "assertions": 1981,
+      "device_tested": false,
+      "scenarios": 553,
+      "status": "PASSED"
+    },
+    "settings_dialog_cancel_and_failure_verified": true,
+    "standard_differential_cases": 672,
+    "standard_differential_modes": [
+      "missing preference (default)",
+      "explicit Standard"
+    ],
+    "standard_differential_trace_sha256": "6294683f458ab02fa554723fcd959243c7e5e4dc59af2c7d7b5df37f065e26e0",
+    "standard_sensitivity_preserved": true,
+    "status": "PASSED"
+  },
+  "runtime_integration": {
+    "status": "PASSED",
+    "scope": "FlickSymbols-only replacement; canonical DEX preservation and unchanged runtime consumer ABI",
+    "baseline_extension_sha256": "b0868d571db1108afef5ab321d9431b308b89de44fe2a3dfac345264715e47e2",
+    "overlay_sha256": "40915880b5154eccba8ba3d85199a555fbe66b98c8e745bb95a74e2d85fb7056",
+    "extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "runtime_before_classes": 81,
+    "runtime_after_classes": 81,
+    "baseline_classes": 81,
+    "unchanged_non_flick_classes": 76,
+    "previous_family_classes": [
+      "Lhiro/swiftkey/FlickSymbols$1;",
+      "Lhiro/swiftkey/FlickSymbols$2;",
+      "Lhiro/swiftkey/FlickSymbols$3;",
+      "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "Lhiro/swiftkey/FlickSymbols;"
+    ],
+    "replacement_family_classes": [
+      "Lhiro/swiftkey/FlickSymbols$1;",
+      "Lhiro/swiftkey/FlickSymbols$2;",
+      "Lhiro/swiftkey/FlickSymbols$3;",
+      "Lhiro/swiftkey/FlickSymbols$Stroke;",
+      "Lhiro/swiftkey/FlickSymbols;"
+    ],
+    "unrelated_existing_classes": 76,
+    "unrelated_existing_classes_byte_identical": true,
+    "unchanged_existing_classes": 80,
+    "unchanged_existing_class_paths": [
+      "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+      "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+      "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+      "Lhiro/swiftkey/CandidateScroll$Viewport;",
+      "Lhiro/swiftkey/CandidateScroll;",
+      "Lhiro/swiftkey/CandidateToolbar$1;",
+      "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+      "Lhiro/swiftkey/CandidateToolbar;",
+      "Lhiro/swiftkey/CursorLatinBoundary;",
+      "Lhiro/swiftkey/DeleteLatinBoundary;",
+      "Lhiro/swiftkey/EmojiCandidates$1;",
+      "Lhiro/swiftkey/EmojiCandidates;",
+      "Lhiro/swiftkey/EmojiPanelUi$1;",
+      "Lhiro/swiftkey/EmojiPanelUi$2$1;",
+      "Lhiro/swiftkey/EmojiPanelUi$2;",
+      "Lhiro/swiftkey/EmojiPanelUi$3;",
+      "Lhiro/swiftkey/EmojiPanelUi$OptionChange;",
+      "Lhiro/swiftkey/EmojiPanelUi$Watcher;",
+      "Lhiro/swiftkey/EmojiPanelUi;",
+      "Lhiro/swiftkey/EmojiToolbar$1;",
+      "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+      "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+      "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+      "Lhiro/swiftkey/EmojiToolbar$Tap;",
+      "Lhiro/swiftkey/EmojiToolbar;",
+      "Lhiro/swiftkey/FlickSymbols$1;",
+      "Lhiro/swiftkey/FlickSymbols$2;",
+      "Lhiro/swiftkey/FlickSymbols$3;",
+      "Lhiro/swiftkey/FlickSymbols;",
+      "Lhiro/swiftkey/FrequencyLearning$1;",
+      "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "Lhiro/swiftkey/FrequencyLearning;",
+      "Lhiro/swiftkey/JapaneseGlide$1$1;",
+      "Lhiro/swiftkey/JapaneseGlide$1;",
+      "Lhiro/swiftkey/JapaneseGlide$2$1;",
+      "Lhiro/swiftkey/JapaneseGlide$2;",
+      "Lhiro/swiftkey/JapaneseGlide$3;",
+      "Lhiro/swiftkey/JapaneseGlide$Snapshot;",
+      "Lhiro/swiftkey/JapaneseGlide$Stroke;",
+      "Lhiro/swiftkey/JapaneseGlide;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$1;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$2;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$3;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$Choice;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates$Listener;",
+      "Lhiro/swiftkey/JapaneseGlideCandidates;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$1;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Index;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Result;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder$Scored;",
+      "Lhiro/swiftkey/JapaneseGlideDecoder;",
+      "Lhiro/swiftkey/JapaneseStart$1;",
+      "Lhiro/swiftkey/JapaneseStart$Session;",
+      "Lhiro/swiftkey/JapaneseStart;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "Lhiro/swiftkey/KatakanaGlossCleanup$Holder;",
+      "Lhiro/swiftkey/KatakanaGlossCleanup;",
+      "Lhiro/swiftkey/KeySwap$ChangeListener;",
+      "Lhiro/swiftkey/KeySwap$Wrapped;",
+      "Lhiro/swiftkey/KeySwap;",
+      "Lhiro/swiftkey/KeySwapBinary;",
+      "Lhiro/swiftkey/LatinBoundary;",
+      "Lhiro/swiftkey/LineEnter$Session;",
+      "Lhiro/swiftkey/LineEnter;",
+      "Lhiro/swiftkey/LineEnterGesture$Callbacks;",
+      "Lhiro/swiftkey/LineEnterGesture;",
+      "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+      "Lhiro/swiftkey/PunctuationKeys$Edit;",
+      "Lhiro/swiftkey/PunctuationKeys;",
+      "Lhiro/swiftkey/UnicodeLatinToken;",
+      "Lhiro/swiftkey/UsageBridge$Session;",
+      "Lhiro/swiftkey/UsageBridge;",
+      "Lhiro/swiftkey/WordCandidates$1;",
+      "Lhiro/swiftkey/WordCandidates$Index;",
+      "Lhiro/swiftkey/WordCandidates;"
+    ],
+    "changed_existing_classes": [
+      "Lhiro/swiftkey/FlickSymbols$Stroke;"
+    ],
+    "added_classes": [],
+    "existing_class_paths_preserved": true,
+    "old_public_api_preserved": true,
+    "existing_entrypoints_preserved": true,
+    "verified_public_api": [
+      "Lhiro/swiftkey/FlickSymbols$1;->i(Landroidx/preference/Preference;Ljava/lang/Object;)Z",
+      "Lhiro/swiftkey/FlickSymbols$2;->k(Landroidx/preference/Preference;)V",
+      "Lhiro/swiftkey/FlickSymbols$3;->onClick(Landroid/content/DialogInterface;I)V",
+      "Lhiro/swiftkey/FlickSymbols;->KEY:Ljava/lang/String;",
+      "Lhiro/swiftkey/FlickSymbols;->SENSITIVITY_KEY:Ljava/lang/String;",
+      "Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+      "Lhiro/swiftkey/FlickSymbols;->init(Landroid/content/SharedPreferences;)V",
+      "Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V",
+      "Lhiro/swiftkey/FlickSymbols;->pending(Lxd0/d1;)Z",
+      "Lhiro/swiftkey/FlickSymbols;->reset()V"
+    ],
+    "existing_runtime_references_resolved": true,
+    "existing_external_references_resolve": true,
+    "verified_existing_runtime_references": [
+      "Lhiro/swiftkey/JapaneseGlide; | invoke-static | Lhiro/swiftkey/FlickSymbols;->handle(Lxd0/d1;Llh0/a;Landroid/view/MotionEvent;Z)Z",
+      "Lhiro/swiftkey/JapaneseGlide; | invoke-static | Lhiro/swiftkey/FlickSymbols;->pending(Lxd0/d1;)Z",
+      "Lhiro/swiftkey/JapaneseGlide; | invoke-static | Lhiro/swiftkey/FlickSymbols;->reset()V",
+      "Lhiro/swiftkey/KeySwap; | invoke-static | Lhiro/swiftkey/FlickSymbols;->init(Landroid/content/SharedPreferences;)V",
+      "Lhiro/swiftkey/KeySwap; | invoke-static | Lhiro/swiftkey/FlickSymbols;->install(Landroidx/preference/PreferenceScreen;)V"
+    ],
+    "compiled_helper_classes_preserved": true,
+    "device_tested": false,
+    "original_apk_apply_tested": false
+  },
+  "runtime": {
+    "before_classes": 81,
+    "after_classes": 81,
+    "unchanged_existing_classes": 80,
+    "unchanged_non_flick_classes": 76,
+    "changed": [
+      "hiro/swiftkey/FlickSymbols$Stroke.smali"
+    ],
+    "added": [],
+    "removed": [],
+    "extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593"
+  },
+  "runtime_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+  "android_loader_class_count": 279,
+  "loader_parity": {
+    "baseline_extension_sha256": "b0868d571db1108afef5ab321d9431b308b89de44fe2a3dfac345264715e47e2",
+    "baseline_loaded_named_patches": 20,
+    "baseline_selected_swiftkey": 1,
+    "baseline_updated_dependency_graph_equal": true,
+    "clean_apk_apply_tested": false,
+    "dependency_types": [
+      "BytecodePatch",
+      "BytecodePatch",
+      "RawResourcePatch"
+    ],
+    "device_tested": false,
+    "loader_selected_extension_matches_packaged_runtime": true,
+    "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+    "previous_patch_metadata_unchanged": 20,
+    "requested_swiftkey_keys": 1,
+    "restored_loaded_named_patches": 20,
+    "restored_selected_swiftkey": 1,
+    "selected_extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "selected_extension_stream_verified": true,
+    "standalone_combined_dependency_graph_equal": true,
+    "standalone_selected_swiftkey": 1,
+    "status": "PASSED",
+    "swiftkey_dependency_graph": {
+      "compatibility": {
+        "com.touchtype.swiftkey.beta": [
+          "9.13.16.4"
+        ]
+      },
+      "default": true,
+      "dependencies": [
+        {
+          "compatibility": {
+            "com.touchtype.swiftkey.beta": [
+              "9.13.16.4"
+            ]
+          },
+          "default": false,
+          "dependencies": [
+            {
+              "compatibility": {
+                "com.touchtype.swiftkey.beta": [
+                  "9.13.16.4"
+                ]
+              },
+              "default": false,
+              "dependencies": [],
+              "description": null,
+              "name": null,
+              "option_keys": [],
+              "type": "app.morphe.patcher.patch.BytecodePatch"
+            }
+          ],
+          "description": null,
+          "name": null,
+          "option_keys": [],
+          "type": "app.morphe.patcher.patch.RawResourcePatch"
+        }
+      ],
+      "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+      "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+      "option_keys": [],
+      "type": "app.morphe.patcher.patch.BytecodePatch"
+    }
+  },
+  "single": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 21,
+    "bytes": 16146886,
+    "sha256": "000076673c9253acb1edb3a11ebf9889396c4977d8ea7788e52275b16190d774",
+    "extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "all_other_entries_byte_identical": true
+  },
+  "bundle": {
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "added_entries": [],
+    "unchanged_entries": 233,
+    "bytes": 19243536,
+    "sha256": "1523f42ee8597475c8d4d8b1625820fd874408090881c88f9e0107583fc00d7f",
+    "extension_sha256": "e436cdc71432ed7066335d9516d5ac2d233f4a39f4014ab7ce3787ba7d3a9593",
+    "all_other_entries_byte_identical": true
+  },
+  "inputs": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.20.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/4bc8fd083b51375d200a39258f6ee7122a73f5c4/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.20.mpp",
+      "sha256": "9d61a9f1c97c339ba77ce3f3fdbc48a2471e8eb5fb0bdbf7736faa103bf53eec"
+    },
+    "Hiro_Morphe_Patches_v1.0.303.mpp": {
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/4bc8fd083b51375d200a39258f6ee7122a73f5c4/downloads/Hiro_Morphe_Patches_v1.0.303.mpp",
+      "sha256": "a09531a801a03db597cd8243e1a3ae5d7050b652313a1e6d16c0fdfedaf13d30"
+    },
+    "apktool.jar": {
+      "url": "https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar",
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423"
+    },
+    "morphe.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar",
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-current.jar": {
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar",
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+    },
+    "r8.jar": {
+      "url": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar",
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    },
+    "android.jar": {
+      "url": "https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar",
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b"
+    }
+  }
+}
