@@ -1,0 +1,1 @@
+package fc0;public class b1 implements ic0.a {public int a;public Object b;public int calls;public void b(lh0.a token){calls++;throw new AssertionError("Native popup opener must never be called by flick");}}
