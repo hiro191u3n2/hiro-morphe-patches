@@ -1,0 +1,1 @@
+package com.ss.android.ugc.aweme.main;public class MainActivity extends android.app.Activity { public com.bytedance.tiktok.homepage.mainfragment.HomeTabAbility communication_gen_field_com_bytedance_tiktok_homepage_mainfragment_HomeTabAbility; public MainActivity(android.app.Application a,int id,boolean root){super(a,id,root);}}
