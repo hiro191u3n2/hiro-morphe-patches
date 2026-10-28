@@ -1,0 +1,31 @@
+Hiro TikTok Link Direct v1.0.1
+Copyright 2026 Hiro contributors.
+SPDX-License-Identifier: GPL-3.0-only
+
+This release upgrades the existing patch under app.hiro.tiktoklink.patches.
+It replaces the two explicitly inventoried JVM loader entries of Link Direct 1.0.0
+and the corresponding owned DEX loader definitions. All unrelated loader definitions,
+JVM entries, runtime extensions, resources and prior notices are preserved.
+The new notice is added at META-INF/hiro-tiktok-link-direct101/.
+
+Corresponding new source, build tooling, actual-APK validation evidence and publication
+procedures are included in the sources_and_QA archive and at:
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/tiktok-link-v1.0.1/releases/tiktok-link-direct101
+
+The exact baseline is Hiro Morphe Patches v1.0.307:
+https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/a2c40d4bc698acab741431475273e0b0bb8a444b/downloads/Hiro_Morphe_Patches_v1.0.307.mpp
+SHA-256: 6c9210cc6edf52078e2d12883a1dcd66d47f64870b108b7d858fbddc3c052119
+
+The prior own-loader JVM entry pins are:
+app/hiro/tiktoklink/patches/TikTokLinkDirectPatch.class
+096f79d2c459aa343015723e3e2f677fb207563d3784c325daba57e71491c1dd
+app/hiro/tiktoklink/patches/TikTokLinkDirectPatch$1.class
+f5e6209db798adf66a463810fbb765d5598f143056ae7108031d960bff4281fe
+
+Corresponding inherited source remains at immutable commit:
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/1bd617412197bd3a60b16223450633bbe0fd6568/releases
+The original Link Direct 1.0.0 source and preserved notices remain available there.
+
+Official Morphe and Android build tools are external pinned dependencies and are not
+included in the source archive. TikTok itself and its APKs are not distributed.
+No physical Android device validation is claimed.
