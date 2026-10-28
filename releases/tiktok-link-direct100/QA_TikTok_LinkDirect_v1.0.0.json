@@ -1,0 +1,63 @@
+{
+  "schema": "tiktok-link-direct-build-v1",
+  "version": "1.0.0",
+  "bundle_version": "1.0.307",
+  "baseline_version": "1.0.306",
+  "baseline_sha256": "04592a32d4475e7af7df6d115d8f611c7f5dc58006da57d0a73c8ae772fa086c",
+  "target_package": "com.zhiliaoapp.musically",
+  "target_version": "47.4.3",
+  "physical_android_tested": false,
+  "sources": {
+    "build.py": "f9b21232a02102218738aae8771cfd05c4e5af839cf4a73f4babe7c1232c2ff0",
+    "patch/TikTokLinkDirectPatch.java": "6fd1f87b129fd5ce91da0abda35fef7de27459b439be471664215993aa65172e",
+    "test/BundleMergeAudit.java": "163aab7f6d241dd37a38e5d1f139542446e0334297a0b7d4352b132b15a7990d",
+    "test/LinkBranchAudit.java": "76039959d85812789d65e5636e70a1436747ab083a4fdb2bcdcaaccd7f6cff20",
+    "test/MetadataAudit.java": "1b3fedad24aa4f37c88ab256bcfdbcd867ced83b5b5e15cd9bc249f4edd04fb4",
+    "test/OriginalIdentity.java": "8596cb17aa512088c870ab3c90145b3e2068bd6f95e4468969a771b66a407a4c",
+    "test/TargetAdmissionTest.java": "ea5a46df6bd14c1d17c038a5dddea1beac32ccd31b65ab7d79489ddf3ecbc05c",
+    "validate_apk.py": "fe71a0b7f83a476e762075faa3f70c0ca510e75f892250043889893d4773ca0d",
+    "validation/logs/admission-morphe.jar.log": "2aa7247b4ee558234ef388a1a26f0d7e5853033163fd84fbc45eabee067e0d82",
+    "validation/logs/admission-morphe200.jar.log": "2aa7247b4ee558234ef388a1a26f0d7e5853033163fd84fbc45eabee067e0d82",
+    "validation/logs/aggregate-apply.log": "6f02ef733e677d5959e364004d6e196edf95b1a281ecc5a146c416a65f9f7248",
+    "validation/logs/aggregate-link-audit.log": "479bc37c9b8e6b580a1c36c27cb0cc9bfdef4c1f1119ed300670b28e4e4868bc",
+    "validation/logs/aggregate-result.json": "4dd893fbcaa3e5d0815651439cb381f0a48b7499a448b21066a908db78b41cc4",
+    "validation/logs/audit-compile.log": "312e9bd919c699a2f8409f70240177012720c94095f0f4374d44152defc50f7e",
+    "validation/logs/original-link-contract.log": "d7b3dbb574a049862cf3ff1bdb40c2f35a8cd078db54805f5c572c36ec7bb378",
+    "validation/logs/original-signature.log": "d5cdc180b3e12e08403ead704281309a7e784dc27b3eaaf37d2a4d38ddde391a",
+    "validation/logs/standalone-apply.log": "6b6e13f8427170c3135057def1169113aaf4c2eefde42eba028ea5aa84ad83fd",
+    "validation/logs/standalone-link-audit.log": "479bc37c9b8e6b580a1c36c27cb0cc9bfdef4c1f1119ed300670b28e4e4868bc",
+    "validation/logs/standalone-result.json": "81effc9ae4438d7f56c9b4610d2a86ae11de684538f36fdb8f5bcab86c508815",
+    "validation/real-apk.json": "80aa01478c83d52f7155283a2bfd80e66b39e3a68fe848ea583de2c5516c9729"
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "morphe200.jar": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "loader_preservation": "PASS BundleMergeAudit baseline=280 added=2 combined=282 every_existing_definition_preserved=true",
+  "metadata": {
+    "morphe.jar": "PASS MetadataAudit baseline=20 added=1 combined=21 exact_target=47.4.3 existing_metadata_preserved=true",
+    "morphe200.jar": "PASS MetadataAudit baseline=20 added=1 combined=21 exact_target=47.4.3 existing_metadata_preserved=true"
+  },
+  "all_existing_loader_definitions_preserved": true,
+  "all_existing_zip_entries_preserved_except_manifest_and_loader_dex": true,
+  "preserved_entries": 234,
+  "added_entries": [
+    "META-INF/hiro-tiktok-link-direct/LICENSE",
+    "META-INF/hiro-tiktok-link-direct/NOTICE",
+    "app/hiro/tiktoklink/patches/TikTokLinkDirectPatch$1.class",
+    "app/hiro/tiktoklink/patches/TikTokLinkDirectPatch.class"
+  ],
+  "runtime_added": false,
+  "artifacts": {
+    "TikTok_LinkDirect_v1.0.0.mpp": {
+      "bytes": 24710,
+      "sha256": "6a389a9e195513694570b0679897fd20fd278f2fa59ee21f3f58746bd429581d"
+    },
+    "Hiro_Morphe_Patches_v1.0.307.mpp": {
+      "bytes": 19277410,
+      "sha256": "6c9210cc6edf52078e2d12883a1dcd66d47f64870b108b7d858fbddc3c052119"
+    }
+  }
+}
