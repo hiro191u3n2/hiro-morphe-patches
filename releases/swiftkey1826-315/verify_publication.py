@@ -58,7 +58,8 @@ def inspect_prior_run(helper):
                 'Original build/verification did not succeed: ' + name)
     require(steps[9]['name'] == FAILURE_STEP and steps[9]['conclusion'] == 'failure',
             'Original failed step differs')
-    logs = subprocess.check_output(['gh', 'api', f'repos/{REPO}/actions/jobs/{JOB_ID}/logs']).decode('utf-8-sig').replace('\r\n', '\n')
+    logs = subprocess.check_output(['gh', 'api', '--allow-escape-sequences', f'repos/{REPO}/actions/jobs/{JOB_ID}/logs']).decode('utf-8-sig').replace('\r\n', '\n')
+    logs = re.sub(r'\x1b\[[0-?]*[ -/]*[@-~]', '', logs)
     logs = re.sub(r'(?m)^\d{4}-\d\d-\d\dT[0-9:.]+Z ', '', logs)
     published = logs.find('\npublished_and_verified\n')
     failed = logs.find('\nfailed_requires_inspection\n', published)
