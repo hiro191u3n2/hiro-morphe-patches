@@ -1,0 +1,94 @@
+name: Verify and publish Instagram profile-link Back 1.1.23 bundle309
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback130-publish.yml'
+      - 'releases/homeback130/src/**'
+      - 'releases/homeback130/publication/**'
+      - 'releases/homeback130/README.md'
+      - 'releases/homeback130/LICENSE'
+      - 'releases/homeback130/NOTICE'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.8+9.0.LTS'
+      - name: Require reviewed baseline, source and branch identities
+        shell: bash
+        run: |
+          set -euo pipefail
+          cmp .github/workflows/homeback130-publish.yml releases/homeback130/publication/workflow.yml
+          python3 - <<'PY'
+          import json,pathlib,subprocess,sys
+          sys.path.insert(0,'releases/homeback130/publication')
+          import publish as pub
+          cfg=json.loads((pub.HERE/'expected.json').read_text())
+          pub.require(cfg['two_local_builds_identical'] is True,'Local build pair not frozen')
+          pub.require(pub.source_hashes()==cfg['source_sha256'],'Sources changed after local verification')
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          pub.require(feed['version']==pub.PREVIOUS and feed['download_url']==pub.BASE_URL,'Baseline advanced')
+          parent=subprocess.check_output(['git','show','-s','--format=%P','HEAD'],text=True).strip()
+          pub.require(parent==cfg['reviewed_main_head'],'Source commit parent differs')
+          current=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()
+          pub.require(pub.head('main')==current and pub.head('dev')==cfg['reviewed_dev_head'],'Reviewed branches moved')
+          real=json.loads((pub.SOURCE_ROOT/'src/validation/real-apk.json').read_text())
+          pub.validate_real_apk(real,cfg['artifacts'])
+          PY
+      - name: Stage pinned official tools and immutable baseline308
+        run: python3 releases/homeback130/publication/stage.py --root .ci-homeback130/staged
+      - name: First independent build and preservation audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback130/src/build.py --base .ci-homeback130/staged/baseline308.mpp --tools .ci-homeback130/staged/tools --work .ci-homeback130/build-a --dist .ci-homeback130/dist-a 2>&1 | tee .ci-homeback130/build-a.log
+      - name: Second independent build and preservation audits
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback130/src/build.py --base .ci-homeback130/staged/baseline308.mpp --tools .ci-homeback130/staged/tools --work .ci-homeback130/build-b --dist .ci-homeback130/dist-b 2>&1 | tee .ci-homeback130/build-b.log
+      - name: Require reviewed bytes and package exact source and evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback130/publication/verify_pair.py .ci-homeback130/dist-a .ci-homeback130/dist-b --base .ci-homeback130/staged/baseline308.mpp --ci
+          python3 releases/homeback130/publication/selftest.py --dist .ci-homeback130/dist-a
+          python3 releases/homeback130/publication/package.py --dist .ci-homeback130/dist-a --base .ci-homeback130/staged/baseline308.mpp
+          python3 releases/homeback130/publication/publish.py --dist .ci-homeback130/dist-a --base .ci-homeback130/staged/baseline308.mpp --repo . --local-only
+          python3 releases/homeback130/publication/publish.py --dist .ci-homeback130/dist-a --base .ci-homeback130/staged/baseline308.mpp --repo . --preflight-only
+      - name: Publish verified assets and atomically advance both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback130/publication/publish.py --dist .ci-homeback130/dist-a --base .ci-homeback130/staged/baseline308.mpp --repo . 2>&1 | tee .ci-homeback130/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback130-bundle309-verification
+          path: |
+            .ci-homeback130/dist-a/
+            .ci-homeback130/dist-b/
+            .ci-homeback130/*.log
+            .ci-homeback130/build-a/*.txt
+            .ci-homeback130/build-a/*.log
+            .ci-homeback130/build-b/*.txt
+            .ci-homeback130/build-b/*.log
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
