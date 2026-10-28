@@ -1,0 +1,48 @@
+name: Resume verified SwiftKey1825 publication with Git pack transfer
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey1825-314-resume-publish.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  resume:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Test recovery boundaries and original publisher
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey1825-314/resume_tests.py
+          python releases/swiftkey1825-314/src/publisher_tests.py
+      - name: Download exact original two-build evidence artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .ci-swiftkey1825-resume
+          gh api repos/hiro191u3n2/hiro-morphe-patches/actions/artifacts/12831338695/zip > .ci-swiftkey1825-resume/original-artifact.zip
+      - name: Reverify published bytes and resume immutable downloads and atomic feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python releases/swiftkey1825-314/resume_publication.py --repo . --artifact-zip .ci-swiftkey1825-resume/original-artifact.zip --work .ci-swiftkey1825-resume/recovery 2>&1 | tee .ci-swiftkey1825-resume/recovery.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey1825-bundle314-publication-recovery
+          path: |
+            .ci-swiftkey1825-resume/recovery/publication_SwiftKey_v1.8.25.json
+            .ci-swiftkey1825-resume/*.log
+          retention-days: 14
+          include-hidden-files: true
