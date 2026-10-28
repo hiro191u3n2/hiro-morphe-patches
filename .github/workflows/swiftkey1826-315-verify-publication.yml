@@ -1,0 +1,35 @@
+name: Verify published SwiftKey1826 and attach committed receipt
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey1826-315-verify-publication.yml']
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Verify published assets and both feeds; attach exact committed receipt
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .verify-swiftkey1826
+          python releases/swiftkey1826-315/verify_publication.py --repo . --output .verify-swiftkey1826 2>&1 | tee .verify-swiftkey1826/verification.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey1826-publication-receipt-verification
+          path: .verify-swiftkey1826/
+          retention-days: 14
+          include-hidden-files: true
