@@ -1,0 +1,43 @@
+Hiro TikTok Link Direct v1.0.2
+Copyright 2026 Hiro contributors.
+SPDX-License-Identifier: GPL-3.0-only
+
+This release upgrades the existing patch under app.hiro.tiktoklink.patches.
+It replaces the five explicitly inventoried JVM loader entries of Link Direct 1.0.1
+and the corresponding owned DEX loader definitions. All unrelated loader definitions,
+JVM entries, runtime extensions, resources and prior notices are preserved.
+The new notice is added at META-INF/hiro-tiktok-link-direct102/.
+The new extension extensions/hiro_tiktok_link_direct.mpe contains only the
+app.hiro.tiktoklink.runtime namespace. It does not replace the inherited OneBack
+runtime. Its corresponding source is included under src/runtime/.
+
+Corresponding new source, build tooling, actual-APK validation evidence and publication
+procedures are included in the sources_and_QA archive and at:
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/tiktok-link-v1.0.2/releases/tiktok-link-direct102
+
+The exact baseline is Hiro Morphe Patches v1.0.309:
+https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/827e3eac3c04069714d34089804015c21166f195/downloads/Hiro_Morphe_Patches_v1.0.309.mpp
+SHA-256: a4b9523f3ecc89899590f5fab4f7bb7622bdd5535e72c24373206a0fdc3e34c0
+
+The prior own-loader JVM entry pins are:
+app/hiro/tiktoklink/patches/FastRoutePatch$1.class
+a699a6426943ceccda57193bf1e4a7d4e6828178a00d8571348b054905d612cf
+app/hiro/tiktoklink/patches/FastRoutePatch$Plan.class
+24712660c4143d238fcdc9cc3727c038687fb3d95c9c591a80e439952720928d
+app/hiro/tiktoklink/patches/FastRoutePatch.class
+51d1346dd8fa99be5ea2ea7d40cdbc1b23f4db68732d842cccc80c1384a87119
+app/hiro/tiktoklink/patches/TikTokLinkDirectPatch$1.class
+f5e6209db798adf66a463810fbb765d5598f143056ae7108031d960bff4281fe
+app/hiro/tiktoklink/patches/TikTokLinkDirectPatch.class
+b3e76fc14cfb11c6fa186374c17fb0483fdbddfbfa462232220b46ae5cf0b0a3
+
+Corresponding inherited source remains at immutable commit:
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/e9d23e04980b047063694cf67383c1b73ca229bb/releases
+The original Link Direct 1.0.0 source and preserved notices remain available there.
+The inherited OneBack v1.1.23 source is releases/homeback130. Its extension is
+preserved exactly: extensions/oneback_exit.mpe, 166028 bytes,
+SHA-256 43a0d988f1f11e0ccfd91a5a0562f386ea4a932d8d1419d5cf401b46b8865965.
+
+Official Morphe and Android build tools are external pinned dependencies and are not
+included in the source archive. TikTok itself and its APKs are not distributed.
+No physical Android device validation is claimed.
