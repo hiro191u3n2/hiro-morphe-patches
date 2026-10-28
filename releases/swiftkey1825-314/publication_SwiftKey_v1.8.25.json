@@ -1,0 +1,136 @@
+{
+  "schema": "swiftkey1825-publication-receipt-v1",
+  "swiftkey_version": "1.8.25",
+  "bundle_version": "1.0.314",
+  "baseline_bundle_version": "1.0.313",
+  "baseline_bundle_sha256": "49ddb5c310f20d94bea430198e75a6a64bd9a76af5b7f0cbb2c2efec03709f22",
+  "baseline_swiftkey_version": "1.8.24",
+  "baseline_swiftkey_sha256": "aa119501a94938f3d26b53802eed3f1a010b70a4d49dfb79531658855184e301",
+  "assets": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.25.mpp": {
+      "bytes": 44696783,
+      "sha256": "b6cfb2362dffe42468c8ba795dabd801153b9ed10581b10ba4fab438518165ab"
+    },
+    "Hiro_Morphe_Patches_v1.0.314.mpp": {
+      "bytes": 47962559,
+      "sha256": "cdc309a2b8a4b4f22cfec05a63d73d53089a6e0d9950ed6a835f457ca8541b5a"
+    },
+    "QA_SwiftKey_v1.8.25.json": {
+      "bytes": 223351,
+      "sha256": "04f3161be87a75690224f3d273265d52c108d56c3d85b474dc67be60a4ad3728"
+    },
+    "SwiftKeyBeta_v1.8.25_sources_and_QA.zip": {
+      "bytes": 102717,
+      "sha256": "add7f1822b4cccc2de3b20f817172440fbb8a1414ab9ae93c599e679f9d5c862"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3551,
+      "sha256": "59887a9fc0a20c6393ce5817d1db2ea6af465c3cfb337805ab490c6bc49a2b4d"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 487,
+      "sha256": "44fcee56721aa5e96eb8159ac3ded3bb3c5670f387ca99f8e01092e0b246d1a6"
+    }
+  },
+  "local_validation": {
+    "two_independent_builds_byte_identical": true,
+    "integrated_changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe",
+      "swiftkey/words_LICENSE.txt",
+      "swiftkey/words_ja.tsv"
+    ],
+    "standalone_changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe",
+      "swiftkey/words_LICENSE.txt",
+      "swiftkey/words_ja.tsv"
+    ],
+    "integrated_added_entries": [],
+    "standalone_added_entries": [],
+    "integrated_unchanged_entries": 262,
+    "standalone_unchanged_entries": 18,
+    "all_non_target_archive_entries_byte_identical": true,
+    "existing_dictionary_pairs_and_order_preserved": true,
+    "dictionary": {
+      "old_readings": 638044,
+      "old_candidates": 847642,
+      "readings": 2786924,
+      "candidates": 3793828,
+      "added_candidates": 2946186,
+      "maximum_candidates_per_reading": 324,
+      "old_pairs_preserved": true,
+      "order_preserved": true,
+      "duplicates_absent": true,
+      "sha256": "b809c88601494e3ac0ca0a491bba88575e7bf48e3b0c9957861296f5b65e1180"
+    },
+    "unrelated_jvm_loaders_byte_identical": true,
+    "runtime_sha256": "94e7af5056df941fc935ff8876663fe5003584ab0e38f8e71f9c8d195f907755",
+    "host_runtime_and_dictionary_bound": true,
+    "two_loader_sdks_bound": true
+  },
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "manager_parser_source": "https://github.com/MorpheApp/morphe-manager/blob/0ed521a8fddd1b8d72c70ac2faa0c9658ba7a3ff/app/src/main/java/app/morphe/manager/util/ChangelogParser.kt",
+  "manager_app_names": [
+    "Microsoft SwiftKey Beta",
+    "SwiftKey Beta"
+  ],
+  "operations": [
+    {
+      "branch": "main",
+      "commit": "bfabb49b3596728804b3894ffcf100587aecdd42",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_byte_identical": true,
+      "manager_download_verified": true,
+      "public_verification_attempts": 1
+    },
+    {
+      "branch": "dev",
+      "commit": "9ac63e54b5d0e594180e1d1f36e98e8547908dd4",
+      "feed_verified": true,
+      "changelog_verified": true,
+      "ulike_policy_byte_identical": true,
+      "manager_download_verified": true,
+      "public_verification_attempts": 1
+    }
+  ],
+  "release_id": 426903702,
+  "recovery": {
+    "reason": "GitHub JSON blob API rejected large MPP; resume with leased Git pack push",
+    "source_commit": "e708aa8f72320c2753b8b3a0bfc4ea364ae5cd76",
+    "recovery_commit": "d70af0942a9b47c469e0730c02d83e53b02a6483",
+    "original_run_id": 40723427107,
+    "original_job_id": 122940194872,
+    "original_artifact_id": 12831338695,
+    "original_artifact_sha256": "9677569eeca7bdacd479de484549faeb7097d2014422bdd165880063bdf99cb1",
+    "original_failed_receipt_sha256": "ef9aa1de8a02df8671b6423ac7daa54bb0590a4e3e83601c380058213c6e5c40",
+    "original_successful_validation_steps": {
+      "5": "Verify source pins and unchanged active baseline",
+      "6": "Build first MPPs from pinned inputs and run regression tests",
+      "7": "Independently rebuild and rerun regression tests",
+      "8": "Match both builds to reviewed artifacts and preservation contract"
+    },
+    "source_files_verified": 30,
+    "existing_six_assets_replaced": false,
+    "raw_transfer": "git-private-index-and-leased-push"
+  },
+  "status": "published_and_verified",
+  "raw_commit": "8a7eeea4821b7bd14f55aa32e1c8d8c36f0f3f91",
+  "download_urls": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.25.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/8a7eeea4821b7bd14f55aa32e1c8d8c36f0f3f91/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.25.mpp",
+    "Hiro_Morphe_Patches_v1.0.314.mpp": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/8a7eeea4821b7bd14f55aa32e1c8d8c36f0f3f91/downloads/Hiro_Morphe_Patches_v1.0.314.mpp"
+  },
+  "published": true,
+  "release_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/swiftkey-v1.8.25",
+  "manager_main_dev_updated_atomically": true,
+  "manager_update_eligible_for_both_app_names": true,
+  "manager_device_update_badge_observed": false,
+  "other_apps_false_updates": false,
+  "fixed_chatgpt_site_updated": false
+}
