@@ -1,0 +1,79 @@
+{
+  "schema": "tiktok-link-direct-build-v2",
+  "version": "1.0.1",
+  "bundle_version": "1.0.308",
+  "baseline_version": "1.0.307",
+  "baseline_sha256": "6c9210cc6edf52078e2d12883a1dcd66d47f64870b108b7d858fbddc3c052119",
+  "target_package": "com.zhiliaoapp.musically",
+  "target_version": "47.4.3",
+  "physical_android_tested": false,
+  "sources": {
+    "build.py": "faebf215505491581cc53f179c8efe049b9929e62c3c0cc1d7f88b88ad2056f0",
+    "patch/FastRoutePatch.java": "64e098653e58b71cd81adeb59413af14128b4353247ceeffc570171c5bb13814",
+    "patch/TikTokLinkDirectPatch.java": "dc57e96cf2febf6864656c79232be8cf25d4b25fe2ee209d5d927217f33e77ad",
+    "test/BundleMergeAudit.java": "048346486ca1e867835649e21419835c119cb95500502297e5760ca1cc708f83",
+    "test/LinkBranchAudit.java": "76039959d85812789d65e5636e70a1436747ab083a4fdb2bcdcaaccd7f6cff20",
+    "test/LinkFastRouteAudit.java": "8d9b5416838c68edee5cb0974d46ef9eb6c47208579d02fc755a608248249a19",
+    "test/MetadataAudit.java": "39431adf93861554f10c762af23812a40a392a665029ab87154671a0a01acadc",
+    "test/OriginalIdentity.java": "8596cb17aa512088c870ab3c90145b3e2068bd6f95e4468969a771b66a407a4c",
+    "test/TargetAdmissionTest.java": "ea5a46df6bd14c1d17c038a5dddea1beac32ccd31b65ab7d79489ddf3ecbc05c",
+    "validate_apk.py": "4f09c66d0051c58dc348880ce0c18abcaed7f12b7ce599d98be48683525f65c2",
+    "validation/logs/admission-morphe.jar.log": "2aa7247b4ee558234ef388a1a26f0d7e5853033163fd84fbc45eabee067e0d82",
+    "validation/logs/admission-morphe200.jar.log": "2aa7247b4ee558234ef388a1a26f0d7e5853033163fd84fbc45eabee067e0d82",
+    "validation/logs/aggregate-apply.log": "ecc3994916b369c03488f8a9a45b02078b56fff4179fc4ab3e93139649ee774f",
+    "validation/logs/aggregate-fast-route-audit.log": "d048c6b33bc2818b7515fc5b7338c865a2a4f40ef94fc0aeb979a7e6cd8eadfa",
+    "validation/logs/aggregate-link-audit.log": "479bc37c9b8e6b580a1c36c27cb0cc9bfdef4c1f1119ed300670b28e4e4868bc",
+    "validation/logs/aggregate-result.json": "7a6aaab5e9a35dc846e1789348316e4bcc053e8f97b8610dc3572c19e4d6f982",
+    "validation/logs/audit-compile.log": "312e9bd919c699a2f8409f70240177012720c94095f0f4374d44152defc50f7e",
+    "validation/logs/original-fast-route-contract.log": "f3bfa34da7e58a78b844709c5220e8f1c43498894e52c62a8c7738e0bdec10fd",
+    "validation/logs/original-link-contract.log": "d7b3dbb574a049862cf3ff1bdb40c2f35a8cd078db54805f5c572c36ec7bb378",
+    "validation/logs/original-signature.log": "d5cdc180b3e12e08403ead704281309a7e784dc27b3eaaf37d2a4d38ddde391a",
+    "validation/logs/standalone-apply.log": "665160bbacdf69f5be94ece2abedb25e69d7720209817e07440d43ff2ecdede7",
+    "validation/logs/standalone-fast-route-audit.log": "d048c6b33bc2818b7515fc5b7338c865a2a4f40ef94fc0aeb979a7e6cd8eadfa",
+    "validation/logs/standalone-link-audit.log": "479bc37c9b8e6b580a1c36c27cb0cc9bfdef4c1f1119ed300670b28e4e4868bc",
+    "validation/logs/standalone-result.json": "a1e87021ebc2f9bf521f182acd1618772a916776a0c8b68ea738b58a256d1a23",
+    "validation/real-apk.json": "98589bca5d8458ce29c32fcc2b79b643792853f861b9b7506e69869aa2c1da4d"
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c",
+    "morphe200.jar": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "d8.jar": "305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5"
+  },
+  "loader_preservation": "PASS BundleMergeAudit baseline=282 preserved=280 replaced_owned=2 new_owned=5 combined=285 every_nonowned_definition_preserved=true",
+  "metadata": {
+    "morphe.jar": "PASS MetadataAudit baseline=21 replaced_owned=1 combined=21 exact_target=47.4.3 nonowned_metadata_preserved=true duplicate_owned_patch=false",
+    "morphe200.jar": "PASS MetadataAudit baseline=21 replaced_owned=1 combined=21 exact_target=47.4.3 nonowned_metadata_preserved=true duplicate_owned_patch=false"
+  },
+  "all_nonowned_loader_definitions_preserved": true,
+  "all_nonowned_zip_entries_preserved_except_manifest_and_loader_dex": true,
+  "preserved_entries": 236,
+  "replaced_baseline_jvm_sha256": {
+    "app/hiro/tiktoklink/patches/TikTokLinkDirectPatch.class": "096f79d2c459aa343015723e3e2f677fb207563d3784c325daba57e71491c1dd",
+    "app/hiro/tiktoklink/patches/TikTokLinkDirectPatch$1.class": "f5e6209db798adf66a463810fbb765d5598f143056ae7108031d960bff4281fe"
+  },
+  "changed_existing_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/tiktoklink/patches/TikTokLinkDirectPatch.class",
+    "classes.dex"
+  ],
+  "removed_owned_entries": [],
+  "added_entries": [
+    "META-INF/hiro-tiktok-link-direct101/LICENSE",
+    "META-INF/hiro-tiktok-link-direct101/NOTICE",
+    "app/hiro/tiktoklink/patches/FastRoutePatch$1.class",
+    "app/hiro/tiktoklink/patches/FastRoutePatch$Plan.class",
+    "app/hiro/tiktoklink/patches/FastRoutePatch.class"
+  ],
+  "runtime_added": false,
+  "artifacts": {
+    "TikTok_LinkDirect_v1.0.1.mpp": {
+      "bytes": 42446,
+      "sha256": "f725570e38af8418d52eb6919464a75e43636d4eac898c50c27be130c53a030c"
+    },
+    "Hiro_Morphe_Patches_v1.0.308.mpp": {
+      "bytes": 19306292,
+      "sha256": "a7f9fd4c88c2f794fade005df7bd327f40dccedcdfee9f012271da9cfb568e34"
+    }
+  }
+}

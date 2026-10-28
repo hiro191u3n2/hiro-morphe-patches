@@ -1,0 +1,70 @@
+{
+  "schema": "tiktok-link-direct-real-apk-v2",
+  "input": {
+    "package": "com.zhiliaoapp.musically",
+    "version_name": "47.4.3",
+    "version_code": 2024704030,
+    "bytes": 474921201,
+    "sha256": "af7cbe2b00d33ff1339730f6abb8ed7e387a83b27ff2b16748b8f41e6fc87e0b",
+    "signature_verified": true,
+    "signer_certificate_sha256": "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+  },
+  "physical_android_tested": false,
+  "artifacts": {
+    "TikTok_LinkDirect_v1.0.1.mpp": {
+      "bytes": 42446,
+      "sha256": "f725570e38af8418d52eb6919464a75e43636d4eac898c50c27be130c53a030c"
+    },
+    "Hiro_Morphe_Patches_v1.0.308.mpp": {
+      "bytes": 19306292,
+      "sha256": "a7f9fd4c88c2f794fade005df7bd327f40dccedcdfee9f012271da9cfb568e34"
+    }
+  },
+  "patcher_sdk_sha256": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+  "original_signature": "PASS OriginalIdentity verified=true signer_certificate_sha256=9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba v1=true v2=true v3=true",
+  "original_contract": "PASS LinkBranchAudit original: exact input digest; dedicated factory0ICN style==4 predicate; all three consumers verified; true can reach popup and false reaches native video paths; not an Android device test",
+  "original_fast_route_contract": "PASS LinkFastRouteAudit original: exact input identity; native shared-link selectors reproduce HOME insertion including nested insert_feed=1; native detail intent and push/type/comment guards verified; 392 actual DEX selector executions; not an Android device test",
+  "forced_target_admission": {
+    "morphe.jar": "PASS TargetAdmissionTest forced_rejections=6 no_dex_access=true accepted_target=47.4.3",
+    "morphe200.jar": "PASS TargetAdmissionTest forced_rejections=6 no_dex_access=true accepted_target=47.4.3"
+  },
+  "cases": [
+    {
+      "artifact": "TikTok_LinkDirect_v1.0.1.mpp",
+      "artifact_sha256": "f725570e38af8418d52eb6919464a75e43636d4eac898c50c27be130c53a030c",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "d98afe371d95ef3a78a606b0949a0924ef41490771045cc68b16516432f0b473",
+      "output_apk_bytes": 503704249,
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5530; not an Android device test",
+      "fast_route_audit": "PASS LinkFastRouteAudit output: one speculative-start branch; two guarded selector insertions; two pure synthetic helpers interpreted from output DEX; original detail intent preserved for scoped client_share links; nested/excluded/invalid routes and native notification/type/comment guards audited; 28 native classes and 328 original methods compared; 392 actual DEX selector executions; checks=81019; not an Android device test",
+      "patcher_result": "logs/standalone-result.json"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.308.mpp",
+      "artifact_sha256": "a7f9fd4c88c2f794fade005df7bd327f40dccedcdfee9f012271da9cfb568e34",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "6935e4d963ae6e19fb8bada6c203da71c8e771591899bfacceb89f930c5a60b3",
+      "output_apk_bytes": 503704249,
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5530; not an Android device test",
+      "fast_route_audit": "PASS LinkFastRouteAudit output: one speculative-start branch; two guarded selector insertions; two pure synthetic helpers interpreted from output DEX; original detail intent preserved for scoped client_share links; nested/excluded/invalid routes and native notification/type/comment guards audited; 28 native classes and 328 original methods compared; 392 actual DEX selector executions; checks=81019; not an Android device test",
+      "patcher_result": "logs/aggregate-result.json"
+    }
+  ],
+  "configuration": "Updated Link Direct 1.0.1 patch exclusively selected from standalone and bundle308; unrelated features preserved in the aggregate but not selected in these APK cases. Both emitted popup-regression and target-first routing audits are required."
+}
