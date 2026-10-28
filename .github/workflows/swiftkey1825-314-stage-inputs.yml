@@ -1,0 +1,33 @@
+name: Snapshot reviewed SwiftKey1825 public dictionary inputs
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/swiftkey1825-314-stage-inputs.yml']
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+          sparse-checkout: |
+            .github
+            releases/swiftkey1825-314
+      - name: Verify public source pins and save on dedicated input branch only
+        run: python releases/swiftkey1825-314/src/stage_inputs.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: swiftkey1825-input-snapshot-receipt
+          path: .stage-swiftkey1825/snapshot-receipt.json
+          include-hidden-files: true
+          retention-days: 30
