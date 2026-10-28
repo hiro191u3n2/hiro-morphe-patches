@@ -1,0 +1,100 @@
+{
+  "status": "PASSED",
+  "whole_long_mark_examples_verified": false,
+  "baseline_negative_examples_verified": true,
+  "scope": "Actual MPE dictionary DEX converted to JVM; native conversion and candidate ABI are boundary stubs; no Android device test",
+  "dependency": {
+    "url": "https://github.com/pxb1988/dex2jar/releases/download/v2.4/dex-tools-v2.4.zip",
+    "sha256": "ee7c45eb3c1d2474a6145d8d447e651a736a22d9664b6d3d3be5a5a817dda23a"
+  },
+  "baseline_mpe_sha256": "dea2051af47cd8e2106437dbf7b3bc4f9ac2e6d496a334462700d7d2584e405a",
+  "dictionary_sha256": "895eb9d40c12bda31b77d9992adc38add46cd06819857e73ebe3785d34e9b074",
+  "observations": {
+    "baseline": {
+      "status": "PASSED",
+      "mode": "baseline",
+      "runtime": "released DEX converted to JVM classfiles with dex2jar",
+      "native_boundary": "stubbed; Android JNI and handset UI not executed",
+      "assertions": 37929,
+      "dictionary_readings": 37832,
+      "dictionary_entries": 45581,
+      "readings_with_more_than_12_entries": 0,
+      "whole_long_mark_examples_verified": false,
+      "baseline_negative_examples_verified": true,
+      "cases": [
+        {
+          "raw": "airabuyuー",
+          "expected": "I love you",
+          "added": false,
+          "native_calls": 0
+        },
+        {
+          "raw": "あいらぶゆー",
+          "expected": "I love you",
+          "added": true,
+          "native_calls": 0
+        },
+        {
+          "raw": "airabuyu-",
+          "expected": "I love you",
+          "added": true,
+          "native_calls": 1
+        },
+        {
+          "raw": "sankyuー",
+          "expected": "thank you",
+          "added": false,
+          "native_calls": 0
+        },
+        {
+          "raw": "さんきゅー",
+          "expected": "thank you",
+          "added": true,
+          "native_calls": 0
+        },
+        {
+          "raw": "sankyu-",
+          "expected": "thank you",
+          "added": true,
+          "native_calls": 1
+        },
+        {
+          "raw": "guddomoーningu",
+          "expected": "good morning",
+          "added": false,
+          "native_calls": 0
+        },
+        {
+          "raw": "ぐっどもーにんぐ",
+          "expected": "good morning",
+          "added": true,
+          "native_calls": 0
+        },
+        {
+          "raw": "guddomo-ningu",
+          "expected": "good morning",
+          "added": true,
+          "native_calls": 1
+        },
+        {
+          "raw": "kamera",
+          "expected": "camera",
+          "added": true,
+          "native_calls": 1
+        },
+        {
+          "raw": "カメラ",
+          "expected": "camera",
+          "added": true,
+          "native_calls": 0
+        },
+        {
+          "raw": "ｶﾒﾗ",
+          "expected": "camera",
+          "added": true,
+          "native_calls": 0
+        }
+      ]
+    }
+  }
+}

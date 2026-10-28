@@ -1,0 +1,4141 @@
+{
+  "status": "PASSED",
+  "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+  "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+  "extension_sha256": "494565fcceffcdbcb6df0e5885cf537bd5e7b8ffa6d53f4b78f603b3ef38ca55",
+  "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+  "audited_classes": [
+    "Lhiro/swiftkey/EmojiCandidates$1;",
+    "Lhiro/swiftkey/EmojiCandidates;",
+    "Lhiro/swiftkey/FrequencyLearning$1;",
+    "Lhiro/swiftkey/FrequencyLearning$Entry;",
+    "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+    "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+    "Lhiro/swiftkey/FrequencyLearning$Store;",
+    "Lhiro/swiftkey/FrequencyLearning;",
+    "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+    "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+    "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+    "Lhiro/swiftkey/WordCandidates$1;",
+    "Lhiro/swiftkey/WordCandidates$Index;",
+    "Lhiro/swiftkey/WordCandidates;"
+  ],
+  "native_and_extension_references": [
+    {
+      "reference": "Landroid/content/Context;->getApplicationContext()Landroid/content/Context;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Landroid/content/Context;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/Context;->getAssets()Landroid/content/res/AssetManager;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Landroid/content/Context;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/Context;->getFilesDir()Ljava/io/File;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Landroid/content/Context;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/content/res/AssetManager;->open(Ljava/lang/String;)Ljava/io/InputStream;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Landroid/content/res/AssetManager;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;-><init>(Ljava/io/File;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Landroid/util/AtomicFile;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;->failWrite(Ljava/io/FileOutputStream;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Landroid/util/AtomicFile;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;->finishWrite(Ljava/io/FileOutputStream;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Landroid/util/AtomicFile;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;->openRead()Ljava/io/FileInputStream;",
+      "opcode": "invoke-virtual-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Landroid/util/AtomicFile;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;->startWrite()Ljava/io/FileOutputStream;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Landroid/util/AtomicFile;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/microsoft/fluency/Japanese;->romajiToHiragana(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lcom/microsoft/fluency/Japanese;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;->JAPANESE:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "access": "public static",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;-><init>(Landroid/content/res/AssetManager;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->access$002(Ljava/util/TreeMap;)Ljava/util/TreeMap;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->candidate(Ljava/lang/String;Ljava/lang/String;Ll40/c;)Lm40/h0;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->dictionary:Ljava/util/TreeMap;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->dictionary:Ljava/util/TreeMap;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->access$002(Ljava/util/TreeMap;)Ljava/util/TreeMap;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->hasJapanese(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V",
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->started:Z",
+      "opcode": "sget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;->started:Z",
+      "opcode": "sput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$1;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$1;->compare(Ljava/lang/Object;Ljava/lang/Object;)I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V",
+      "opcode": "invoke-direct-range",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->count:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->count:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->reading:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->reading:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->recent:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->recent:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->surface:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->copy()Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;->surface:Ljava/lang/String;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$1;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;->compare(Ljava/lang/Object;Ljava/lang/Object;)I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$1;->this$0:Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$2;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$2;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;->compare(Ljava/lang/Object;Ljava/lang/Object;)I"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "access": "public",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$2;->this$0:Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->context:Landroid/content/Context;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->context:Landroid/content/Context;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->dirty:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->dirty:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->discardDiskBeforeLoad:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->discardDiskBeforeLoad:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->entries:Ljava/util/LinkedHashMap;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->entries:Ljava/util/LinkedHashMap;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->forget(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->forgottenBeforeLoad:Ljava/util/HashSet;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->forgottenBeforeLoad:Ljava/util/HashSet;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->loaded:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->loaded:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->nextRecent()J",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->nextRecent()J"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->record(Ljava/lang/String;Ljava/lang/String;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->saveAt:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->saveAt:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->sequence:J",
+      "opcode": "iget-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->nextRecent()J",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->sequence:J",
+      "opcode": "iput-wide",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->nextRecent()J",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->worker:Ljava/lang/Thread;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->worker:Ljava/lang/Thread;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;->writing:Z",
+      "opcode": "iput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->BEST_FIRST:Ljava/util/Comparator;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->access$100()Ljava/util/Comparator;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->BEST_FIRST:Ljava/util/Comparator;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;-><clinit>()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->access$000(JJ)J",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->access$100()Ljava/util/Comparator;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->access$200(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->access$300(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->plus(JJ)J",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->access$000(JJ)J"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->access$200(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->record(Ljava/lang/String;Ljava/lang/String;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->store:Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->record(Ljava/lang/String;Ljava/lang/String;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->store:Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->access$300(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/FrequencyLearning;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->record(Ljava/lang/String;Ljava/lang/String;Z)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;-><init>(Landroid/content/res/AssetManager;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;-><init>([B[I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->bytes:[B",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lineEnd(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->bytes:[B",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;-><init>([B[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareKey(I[B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lowerBound([B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareRows(II)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyBytes(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyEnd(I)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyBytes(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lineEnd(I)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lowerBound([B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->starts:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyBytes(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lineEnd(I)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->lowerBound([B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->starts:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;-><init>([B[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->startsWith(I[B)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->access$002(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->dictionary:Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->dictionary:Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->access$002(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->isJapanese(C)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isReading(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->isKanaReading(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->isReading(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->isRomaji(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->started:Z",
+      "opcode": "sget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;->started:Z",
+      "opcode": "sput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaGlossCleanup;->clean(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaGlossCleanup;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaGlossCleanup;->cleanCandidates(Ljava/util/List;Ll40/c;Ljava/lang/String;)Ljava/util/List;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaGlossCleanup;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaGlossCleanup;->prepare()V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/KatakanaGlossCleanup;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$1;->val$assets:Landroid/content/res/AssetManager;",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$1;-><init>(Landroid/content/res/AssetManager;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$1;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;-><init>([B[I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->bytes:[B",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->lineEnd(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->bytes:[B",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;-><init>([B[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->compareKey(I[B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->lowerBound([B)I",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->compareRows(II)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->keyBytes(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->keyEnd(I)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;",
+        "Lhiro/swiftkey/WordCandidates$Index;->keyBytes(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->lineEnd(I)I",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;",
+        "Lhiro/swiftkey/WordCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "private",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->lowerBound([B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->starts:[I",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->keyBytes(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->keyEnd(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->lineEnd(I)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->lowerBound([B)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->startsWith(I[B)Z",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->starts:[I",
+      "opcode": "iput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$Index;-><init>([B[I)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->startsWith(I[B)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$Index;",
+      "access": "",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->access$002(Lhiro/swiftkey/WordCandidates$Index;)Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->dictionary:Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->dictionary:Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "sput-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->access$002(Lhiro/swiftkey/WordCandidates$Index;)Lhiro/swiftkey/WordCandidates$Index;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->isReading(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->isRomaji(Ljava/lang/String;)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->started:Z",
+      "opcode": "sget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;->started:Z",
+      "opcode": "sput-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+      "access": "private static",
+      "resolution_source": "extension",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/BufferedInputStream;-><init>(Ljava/io/InputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/BufferedInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/BufferedOutputStream;-><init>(Ljava/io/OutputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/BufferedOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/BufferedReader;-><init>(Ljava/io/Reader;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/BufferedReader;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/BufferedReader;->close()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/BufferedReader;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/BufferedReader;->readLine()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/BufferedReader;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;-><init>(Ljava/io/InputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->read()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/FilterInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readInt()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readLong()J",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;->readUTF()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/DataInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;-><init>(Ljava/io/OutputStream;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->flush()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->writeInt(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->writeLong(J)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;->writeUTF(Ljava/lang/String;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/io/DataOutputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/File;-><init>(Ljava/io/File;Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/io/File;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/FileInputStream;->close()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/FileInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/FileInputStream;->getChannel()Ljava/nio/channels/FileChannel;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/io/FileInputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/IOException;-><init>(Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$Index;->fromBytes([B)Lhiro/swiftkey/WordCandidates$Index;"
+      ],
+      "defined_owner": "Ljava/io/IOException;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->close()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->read()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->read([B)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStream;->read([BII)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;->run()V",
+        "Lhiro/swiftkey/WordCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/InputStream;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/io/InputStreamReader;-><init>(Ljava/io/InputStream;Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/io/InputStreamReader;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Character;->charCount(I)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->hasJapanese(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Character;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Character;->isHighSurrogate(C)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Character;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Character;->isISOControl(C)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Character;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Character;->isLowSurrogate(C)Z",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/Character;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Integer;->intValue()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/lang/Integer;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/lang/Integer;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Long;->compare(JJ)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I",
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;->compare(Lhiro/swiftkey/FrequencyLearning$Entry;Lhiro/swiftkey/FrequencyLearning$Entry;)I"
+      ],
+      "defined_owner": "Ljava/lang/Long;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->max(JJ)J",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Math;->min(II)I",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates$Index;->compareKey(I[B)I",
+        "Lhiro/swiftkey/WordCandidates$Index;->compareRows(II)I",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/lang/Math;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+        "Lhiro/swiftkey/EmojiCandidates;-><init>()V",
+        "Lhiro/swiftkey/FrequencyLearning$1;-><init>()V",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;-><init>(Ljava/lang/String;Ljava/lang/String;JJ)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;-><init>(Lhiro/swiftkey/FrequencyLearning$Store;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning;-><init>()V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;-><init>([B[I)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;-><init>()V",
+        "Lhiro/swiftkey/WordCandidates$1;-><init>(Landroid/content/res/AssetManager;)V",
+        "Lhiro/swiftkey/WordCandidates$Index;-><init>([B[I)V",
+        "Lhiro/swiftkey/WordCandidates;-><init>()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;->notifyAll()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;->wait()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Object;->wait(J)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;-><init>([BIILjava/nio/charset/Charset;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->charAt(I)C",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V",
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isKanaReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isRomaji(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->isReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/WordCandidates;->isRomaji(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->codePointAt(I)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->hasJapanese(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->codePointCount(II)I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->equals(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->getBytes(Ljava/nio/charset/Charset;)[B",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->length()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V",
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/EmojiCandidates;->hasJapanese(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->cleanEntry(Lhiro/swiftkey/FrequencyLearning$Entry;)Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isKanaReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->isRomaji(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->isReading(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/WordCandidates;->isRomaji(Ljava/lang/String;)Z",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->split(Ljava/lang/String;)[Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->startsWith(Ljava/lang/String;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->toLowerCase(Ljava/util/Locale;)Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/String;->trim()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->validSurface(Ljava/lang/String;)Z"
+      ],
+      "defined_owner": "Ljava/lang/String;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->append(C)Ljava/lang/StringBuilder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;->toString()Ljava/lang/String;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;->key()Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/lang/StringBuilder;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/System;->arraycopy(Ljava/lang/Object;ILjava/lang/Object;II)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/System;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/System;->nanoTime()J",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->changed()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/lang/System;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Thread;-><init>(Ljava/lang/Runnable;Ljava/lang/String;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Ljava/lang/Thread;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Thread;->setDaemon(Z)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Ljava/lang/Thread;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Thread;->setPriority(I)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Ljava/lang/Thread;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/lang/Thread;->start()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->init(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/WordCandidates;->init(Landroid/content/Context;)V"
+      ],
+      "defined_owner": "Ljava/lang/Thread;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/nio/channels/FileChannel;->size()J",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/nio/channels/FileChannel;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/nio/charset/StandardCharsets;->UTF_8:Ljava/nio/charset/Charset;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->fromBytes([B)Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/nio/charset/StandardCharsets;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/text/Normalizer$Form;->NFKC:Ljava/text/Normalizer$Form;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/text/Normalizer$Form;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/text/Normalizer;->normalize(Ljava/lang/CharSequence;Ljava/text/Normalizer$Form;)Ljava/lang/String;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/text/Normalizer;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>(I)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;-><init>(Ljava/util/Collection;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->addAll(Ljava/util/Collection;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/ArrayList;->toArray([Ljava/lang/Object;)[Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;->words(I)[Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates$Index;->words(I)[Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/util/ArrayList;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Collection;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/util/Collection;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Collections;->emptyList()Ljava/util/List;",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/util/Collections;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Collections;->sort(Ljava/util/List;Ljava/util/Comparator;)V",
+      "opcode": "invoke-static",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V"
+      ],
+      "defined_owner": "Ljava/util/Collections;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Comparator;->compare(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/util/Comparator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashSet;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashSet;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashSet;->clear()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashSet;->contains(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/HashSet;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->hasNext()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->next()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Iterator;->remove()V",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/util/Iterator;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;-><init>(Landroid/content/Context;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->clear()V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->containsKey(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->keySet()Ljava/util/Set;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->read(Landroid/util/AtomicFile;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->record(Ljava/lang/String;Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->remove(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/util/HashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;->values()Ljava/util/Collection;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ensureRoom(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->forget(Ljava/lang/String;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->rebase()V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->run()V"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/LinkedHashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;->isEmpty()Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;->removeAll(Ljava/util/Collection;)Z",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/AbstractSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;->size()I",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/HashSet;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": true
+    },
+    {
+      "reference": "Ljava/util/List;->isEmpty()Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->merge(Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->size()I",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->write(Landroid/util/AtomicFile;Ljava/util/List;)V",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/List;->subList(II)Ljava/util/List;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/List;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Locale;->ROOT:Ljava/util/Locale;",
+      "opcode": "sget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/FrequencyLearning;->reading(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+        "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;"
+      ],
+      "defined_owner": "Ljava/util/Locale;",
+      "access": "public static",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;->getKey()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/Map$Entry;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;->getValue()Ljava/lang/Object;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/Map$Entry;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->add(Ljava/lang/Object;)Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->contains(Ljava/lang/Object;)Z",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->lookup(Lhiro/swiftkey/KatakanaEnglishCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/WordCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+        "Lhiro/swiftkey/WordCandidates;->lookup(Lhiro/swiftkey/WordCandidates$Index;Ljava/lang/String;Ljava/util/Set;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/Set;->iterator()Ljava/util/Iterator;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;->ranked(Ljava/lang/String;Ljava/util/Set;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ljava/util/Set;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/SortedMap;->entrySet()Ljava/util/Set;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/SortedMap;",
+      "access": "public abstract",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/TreeMap;-><init>()V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/util/TreeMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/TreeMap;->get(Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/TreeMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/TreeMap;->put(Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates$1;->run()V"
+      ],
+      "defined_owner": "Ljava/util/TreeMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ljava/util/TreeMap;->tailMap(Ljava/lang/Object;)Ljava/util/SortedMap;",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->lookup(Ljava/util/TreeMap;Ljava/lang/String;)Ljava/util/LinkedHashSet;"
+      ],
+      "defined_owner": "Ljava/util/TreeMap;",
+      "access": "public",
+      "resolution_source": "android_api35",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->d:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->f:Z",
+      "opcode": "iget-boolean",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Ll40/c;->k:Ljava/lang/String;",
+      "opcode": "iget-object",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Ll40/c;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/b;->getUserFacingText()Ljava/lang/String;",
+      "opcode": "invoke-interface",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lm40/b;",
+      "access": "public abstract",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/h0;-><init>(Ljava/lang/String;Ljava/lang/String;Ll40/c;)V",
+      "opcode": "invoke-direct",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->candidate(Ljava/lang/String;Ljava/lang/String;Ll40/c;)Lm40/h0;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lm40/h0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    },
+    {
+      "reference": "Lm40/h0;->setTrailingSeparator(Ljava/lang/String;)V",
+      "opcode": "invoke-virtual",
+      "resolved": true,
+      "callers": [
+        "Lhiro/swiftkey/EmojiCandidates;->candidate(Ljava/lang/String;Ljava/lang/String;Ll40/c;)Lm40/h0;",
+        "Lhiro/swiftkey/FrequencyLearning;->rank(Ljava/util/List;Ll40/c;Z)Ljava/util/List;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;",
+        "Lhiro/swiftkey/WordCandidates;->enhance(Ljava/util/List;Ll40/c;)Ljava/util/List;"
+      ],
+      "defined_owner": "Lm40/h0;",
+      "access": "public",
+      "resolution_source": "native_apk",
+      "android_inherited": false
+    }
+  ],
+  "type_references": [
+    {
+      "reference": "Landroid/content/Context;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/Context;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/res/AssetManager;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/content/res/AssetManager;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Landroid/util/AtomicFile;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/EmojiCandidates;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Entry;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/FrequencyLearning;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$1;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates$Index;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Lhiro/swiftkey/WordCandidates;",
+      "opcode": "const-class",
+      "resolved": true,
+      "resolution_source": "extension"
+    },
+    {
+      "reference": "Ljava/io/BufferedInputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/BufferedOutputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/BufferedReader;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/DataInputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/DataOutputStream;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/File;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/IOException;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/IOException;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/io/InputStreamReader;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Exception;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Integer;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/InterruptedException;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/LinkageError;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "extends",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Object;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Runnable;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/RuntimeException;",
+      "opcode": "catch",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/String;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/StringBuilder;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Thread;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/lang/Thread;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/ArrayList;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Comparator;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Comparator;",
+      "opcode": "implements",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Comparator;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/HashSet;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/HashSet;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/LinkedHashMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/LinkedHashSet;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/List;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/List;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Map$Entry;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/Set;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/TreeMap;",
+      "opcode": "field-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/TreeMap;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/TreeMap;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ljava/util/TreeMap;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "Ll40/c;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lm40/b;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lm40/h0;",
+      "opcode": "new-instance",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "Lm40/h0;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "native_apk"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "check-cast",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "parameter-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[Ljava/lang/String;",
+      "opcode": "return-declaration",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    },
+    {
+      "reference": "[[Ljava/lang/String;",
+      "opcode": "new-array",
+      "resolved": true,
+      "resolution_source": "android_api35"
+    }
+  ],
+  "interface_callback_implementations": [
+    {
+      "class": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "interface": "Ljava/lang/Runnable;",
+      "method": "run()V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/EmojiCandidates$1;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "compare(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$1;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "equals(Ljava/lang/Object;)Z",
+      "implemented": true,
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "compare(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "equals(Ljava/lang/Object;)Z",
+      "implemented": true,
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "compare(Ljava/lang/Object;Ljava/lang/Object;)I",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+      "interface": "Ljava/util/Comparator;",
+      "method": "equals(Ljava/lang/Object;)Z",
+      "implemented": true,
+      "defined_owner": "Ljava/lang/Object;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "interface": "Ljava/lang/Runnable;",
+      "method": "run()V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/FrequencyLearning$Store;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "interface": "Ljava/lang/Runnable;",
+      "method": "run()V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+      "access": "public"
+    },
+    {
+      "class": "Lhiro/swiftkey/WordCandidates$1;",
+      "interface": "Ljava/lang/Runnable;",
+      "method": "run()V",
+      "implemented": true,
+      "defined_owner": "Lhiro/swiftkey/WordCandidates$1;",
+      "access": "public"
+    }
+  ],
+  "interface_callbacks_checked": true,
+  "unresolved": [],
+  "inaccessible": [],
+  "incompatible_opcodes": [],
+  "platform_members_checked": true,
+  "platform_inherited_members_resolved": true,
+  "each_caller_access_checked": true,
+  "device_tested": false,
+  "original_apk_apply_tested": false,
+  "verifier_source_sha256": "b94cd3f2d20561823d43747b6810e8f4b51d83f452316777513d501bfc91743d"
+}

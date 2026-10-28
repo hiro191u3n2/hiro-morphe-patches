@@ -1,0 +1,224 @@
+{
+  "schema": "swiftkey1824-publication-v1",
+  "swiftkey_version": "1.8.24",
+  "bundle_version": "1.0.313",
+  "baseline_swiftkey_version": "1.8.23",
+  "baseline_bundle_version": "1.0.312",
+  "baseline_swiftkey_sha256": "714d66b2cc5367346927fd8a766577640d4d1c3bc61829671f888ee13cc6bbdc",
+  "baseline_bundle_sha256": "5381f9b8038c847f244275b3e2c90a09869c235cc5492c8b59aa832570ad5a3e",
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "extensions/swiftkey_japanese.mpe"
+  ],
+  "allowed_added_bundle_entries": [],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "extensions/swiftkey_japanese.mpe"
+  ],
+  "allowed_added_standalone_entries": [],
+  "qa_required_values": {
+    "status": "DICTIONARY_LOOKUP_HOST_AND_ABI_VERIFIED_DEVICE_UNVERIFIED",
+    "swiftkey_version": "1.8.24",
+    "bundle_version": "1.0.313",
+    "baseline_swiftkey_version": "1.8.23",
+    "baseline_bundle_version": "1.0.312",
+    "target_package": "com.touchtype.swiftkey.beta",
+    "target_version": "9.13.16.4",
+    "target_version_code": 1236271168,
+    "device_tested": false,
+    "original_apk_apply_tested": false,
+    "all_dictionary_resources_preserved": true,
+    "other_apps_byte_identical": true,
+    "loader_entries_byte_identical": true,
+    "standalone_and_bundle_runtime_equal": true,
+    "runtime_before_classes": 91,
+    "runtime_after_classes": 91,
+    "runtime_changed_classes": [
+      "hiro/swiftkey/KatakanaEnglishCandidates.smali",
+      "hiro/swiftkey/WordCandidates.smali"
+    ],
+    "runtime_changed_methods": [
+      "Lhiro/swiftkey/KatakanaEnglishCandidates;->isRomaji(Ljava/lang/String;)Z",
+      "Lhiro/swiftkey/WordCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+      "Lhiro/swiftkey/WordCandidates;->isRomaji(Ljava/lang/String;)Z"
+    ],
+    "host_tests_passed": true,
+    "native_abi_verified": true,
+    "two_loader_sdks_agree": true,
+    "host_report.status": "PASSED",
+    "host_report.negative_control_verified": true,
+    "host_report.compiled_word_baseline_parity": true,
+    "host_report.english_regression.whole_long_mark_examples_verified": true,
+    "host_report.word_coverage.all_exact_entries_reachable": true,
+    "abi_report.replayed_in_ci": false,
+    "host_report.word_coverage.baseline.rows": 638044,
+    "host_report.word_coverage.baseline.candidates": 847642,
+    "host_report.word_coverage.baseline.missing_candidates": 9411,
+    "host_report.word_coverage.baseline.incomplete_readings": 2175,
+    "host_report.word_coverage.fixed.rows": 638044,
+    "host_report.word_coverage.fixed.candidates": 847642,
+    "host_report.word_coverage.fixed.returned": 847642,
+    "host_report.word_coverage.fixed.missing_candidates": 0,
+    "host_report.word_coverage.fixed.unexpected_candidates": 0,
+    "host_report.english_regression.baseline_negative_examples_verified": true,
+    "runtime_preservation.baseline_classes": 91,
+    "runtime_preservation.runtime_after_classes": 91,
+    "runtime_preservation.changed_methods": [
+      "Lhiro/swiftkey/KatakanaEnglishCandidates;->isRomaji(Ljava/lang/String;)Z",
+      "Lhiro/swiftkey/WordCandidates;->addWords(Ljava/util/LinkedHashSet;[Ljava/lang/String;Ljava/util/Set;)V",
+      "Lhiro/swiftkey/WordCandidates;->isRomaji(Ljava/lang/String;)Z"
+    ],
+    "runtime_preservation.all_other_method_bodies_preserved": true,
+    "runtime_preservation.all_class_and_method_metadata_preserved": true,
+    "runtime_preservation.compiled_implementations_preserved": true,
+    "runtime_preservation.romaji_no_self_references": true
+  },
+  "artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.24.mpp": {
+      "bytes": 16159298,
+      "sha256": "aa119501a94938f3d26b53802eed3f1a010b70a4d49dfb79531658855184e301"
+    },
+    "Hiro_Morphe_Patches_v1.0.313.mpp": {
+      "bytes": 19425259,
+      "sha256": "49ddb5c310f20d94bea430198e75a6a64bd9a76af5b7f0cbb2c2efec03709f22"
+    },
+    "QA_SwiftKey_v1.8.24.json": {
+      "bytes": 204146,
+      "sha256": "8128c5f343b8d29737cb67ae2c1ee6a57fa7427820cd59fd8845871beb653bd2"
+    },
+    "SwiftKeyBeta_v1.8.24_sources_and_QA.zip": {
+      "bytes": 89752,
+      "sha256": "1bc37ddd344d128629367a23a5344651050284ba2b651ecfdf947a4c58560d54"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2286,
+      "sha256": "9fab8301f0838ebe21edea2bf8c56e4f5ab8cfab5b4ae185b8acf1b5b2f9a456"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 487,
+      "sha256": "bb59c0ad85c37df3406fe9d09a16759e83dae75c52b3b1b3392f5b27debcb0a6"
+    }
+  },
+  "source_files": {
+    "README.txt": {
+      "bytes": 4020,
+      "sha256": "ebced0f43fa8e49a1e87c27568f164db9be891ab50ad3dc3440667a1b2b60f33"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 2286,
+      "sha256": "9fab8301f0838ebe21edea2bf8c56e4f5ab8cfab5b4ae185b8acf1b5b2f9a456"
+    },
+    "baseline/hiro/swiftkey/WordCandidates.java": {
+      "bytes": 13602,
+      "sha256": "5a9b44d0c2e90bed8ecda845317e652cd3aa376a9af5ce9b66fe06f7e8e2d1e8"
+    },
+    "build1824.py": {
+      "bytes": 20181,
+      "sha256": "2587be398fc2c62d386dc9b204986fec12894aeef8534d0dbe78ee8d5f030666"
+    },
+    "publish1824.py": {
+      "bytes": 35900,
+      "sha256": "8bd1bbdb6312691309f126918b58ff10fc9937371a7a1bdd2dafb066a7dabce5"
+    },
+    "publisher_tests.py": {
+      "bytes": 13008,
+      "sha256": "6cf294d90569ef918179ab2f316f07aef571359265bc01dac528a8e3d5063657"
+    },
+    "src/hiro/swiftkey/WordCandidates.java": {
+      "bytes": 13558,
+      "sha256": "cab0ff8b2f66f408558d7c21b5d75335d84f95e90c0418d783b92ece4cebb02c"
+    },
+    "stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 356,
+      "sha256": "8952f2bee4a822c3efcc26dee2a0f4c7e16f38a8d21ae2176ae47e0c86ca542c"
+    },
+    "stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 116,
+      "sha256": "3069468f884669c8b15a8a6c70ed729f9cfc12b32bea4f8ab4a36365214242dc"
+    },
+    "stubs/l40/c.java": {
+      "bytes": 142,
+      "sha256": "d9a257b23bdf7cb92390a9d7079439bc25433a091848058c639b94e97380cf80"
+    },
+    "stubs/m40/b.java": {
+      "bytes": 64,
+      "sha256": "7e0ebfd5ad6a919a3f3e14943ee50782445a8a475e0f6536c7a8461d47655366"
+    },
+    "stubs/m40/h0.java": {
+      "bytes": 331,
+      "sha256": "68c52f583209aa4bf9557bfffcc3f90b1b84c7aaeff3cac3bb7aac439625758a"
+    },
+    "tests/AuditDictionaryAbi.java": {
+      "bytes": 21445,
+      "sha256": "b94cd3f2d20561823d43747b6810e8f4b51d83f452316777513d501bfc91743d"
+    },
+    "tests/LoaderParityProbe.java": {
+      "bytes": 10938,
+      "sha256": "2f77072b00e06332228e155f64bdd01fdb8ef2a861a4849c620b3c1cf1efd97c"
+    },
+    "tests/WordCandidatesCoverageTest.java": {
+      "bytes": 7536,
+      "sha256": "dbffcd46e89f0284b2288b32a1521b36dccb90a5c9f149ee411ee8ddb2e7b2b3"
+    },
+    "tests/english_regression/EnglishDictionaryRegressionTest.java": {
+      "bytes": 7382,
+      "sha256": "e1c0b607ae9624e9d6c802270997b8ec2ed82578beedf4e6123c13277e7d3ad4"
+    },
+    "tests/english_regression/baseline.json": {
+      "bytes": 1300,
+      "sha256": "7e0dba428f393ca19593852a3d889b9f7020fa9311afba88b1e3bd6685714ab7"
+    },
+    "tests/english_regression/baseline_as_fixed_negative.json": {
+      "bytes": 154,
+      "sha256": "88fb096658ac6b6f4700b564ebd64bee182778b5d099c826695f6496eafe8874"
+    },
+    "tests/english_regression/host_baseline_report.json": {
+      "bytes": 2867,
+      "sha256": "99ed22123a8476a9b42e98dcaa489aad29c1cae7977ca8eddc5c537d4d9a1894"
+    },
+    "tests/english_regression/run_english_tests.py": {
+      "bytes": 5515,
+      "sha256": "676cedd1cf95b7ad8e4c470f868679c1e45e4c0373c7732ee3cf0a304b3aa50d"
+    },
+    "tests/english_regression/stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 803,
+      "sha256": "8f69f9e94ae8eeadecce8567215c5558a79bedbfb810d16d4464db7a26ebdca1"
+    },
+    "tests/english_regression/stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 116,
+      "sha256": "3069468f884669c8b15a8a6c70ed729f9cfc12b32bea4f8ab4a36365214242dc"
+    },
+    "tests/english_regression/stubs/l40/c.java": {
+      "bytes": 142,
+      "sha256": "d9a257b23bdf7cb92390a9d7079439bc25433a091848058c639b94e97380cf80"
+    },
+    "tests/english_regression/stubs/m40/b.java": {
+      "bytes": 64,
+      "sha256": "7e0ebfd5ad6a919a3f3e14943ee50782445a8a475e0f6536c7a8461d47655366"
+    },
+    "tests/english_regression/stubs/m40/h0.java": {
+      "bytes": 331,
+      "sha256": "68c52f583209aa4bf9557bfffcc3f90b1b84c7aaeff3cac3bb7aac439625758a"
+    },
+    "tests/runtime-abi.json": {
+      "bytes": 164559,
+      "sha256": "9905d0ac99553fd0918b3d915a18327db6de5e2fc9110f448bc9ca7e357fadc4"
+    },
+    "tools_java/Dump1814.java": {
+      "bytes": 1385,
+      "sha256": "ebd4652798ef59eebd563a21baf05cfbed9dec6923f27e3971f0b5c304d0b48f"
+    },
+    "tools_java/MergeDictionaries.java": {
+      "bytes": 8309,
+      "sha256": "f6d4ef4cf089662096065b14ba8864d4b552a0f9b1da53d0704ed5a31a976351"
+    },
+    "workflow.yml": {
+      "bytes": 4594,
+      "sha256": "dd91ba7b755618a5b200870f542e67c0548a75a5bcfd86d36c4bcce4a8aea1ef"
+    }
+  }
+}
