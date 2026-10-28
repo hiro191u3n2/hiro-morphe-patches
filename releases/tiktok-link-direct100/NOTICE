@@ -1,0 +1,25 @@
+Hiro TikTok Link Direct v1.0.0
+Copyright 2026 Hiro contributors.
+SPDX-License-Identifier: GPL-3.0-only
+
+This release adds an independent patch implementation under app.hiro.tiktoklink.patches.
+Its corresponding source, build tooling, actual-APK validation evidence and publication
+procedures are included in the sources_and_QA archive and at:
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/tiktok-link-v1.0.0/releases/tiktok-link-direct100
+
+The aggregate preserves all existing entries from Hiro Morphe Patches v1.0.306
+except the aggregate manifest and the DEX container encoding needed to add new
+loader definitions. Existing class definitions, all JVM loaders, extensions,
+resources, licenses and notices are preserved. The exact baseline is:
+https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/72a7fdd39a0ce9d4f4531c3509e90fab6300fe41/downloads/Hiro_Morphe_Patches_v1.0.306.mpp
+SHA-256: 04592a32d4475e7af7df6d115d8f611c7f5dc58006da57d0a73c8ae772fa086c
+
+Corresponding inherited source and its notices remain available in this repository
+at source commit e79b4084a2821f80b4fa11c9a112728ad07089f3 and the earlier immutable
+release source archives referenced by the preserved baseline notices.
+https://github.com/hiro191u3n2/hiro-morphe-patches/tree/e79b4084a2821f80b4fa11c9a112728ad07089f3/releases
+
+Morphe and Android build tools are external build dependencies. They are obtained
+from their official release locations, verified by SHA-256, and not shipped in
+the source archive. TikTok itself and its APKs are not distributed by this release.
+No physical Android device validation is claimed.

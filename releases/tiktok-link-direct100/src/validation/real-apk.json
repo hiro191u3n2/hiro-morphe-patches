@@ -1,0 +1,67 @@
+{
+  "schema": "tiktok-link-direct-real-apk-v1",
+  "input": {
+    "package": "com.zhiliaoapp.musically",
+    "version_name": "47.4.3",
+    "version_code": 2024704030,
+    "bytes": 474921201,
+    "sha256": "af7cbe2b00d33ff1339730f6abb8ed7e387a83b27ff2b16748b8f41e6fc87e0b",
+    "signature_verified": true,
+    "signer_certificate_sha256": "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+  },
+  "physical_android_tested": false,
+  "artifacts": {
+    "TikTok_LinkDirect_v1.0.0.mpp": {
+      "bytes": 24710,
+      "sha256": "6a389a9e195513694570b0679897fd20fd278f2fa59ee21f3f58746bd429581d"
+    },
+    "Hiro_Morphe_Patches_v1.0.307.mpp": {
+      "bytes": 19277410,
+      "sha256": "6c9210cc6edf52078e2d12883a1dcd66d47f64870b108b7d858fbddc3c052119"
+    }
+  },
+  "patcher_sdk_sha256": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+  "original_signature": "PASS OriginalIdentity verified=true signer_certificate_sha256=9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba v1=true v2=true v3=true",
+  "original_contract": "PASS LinkBranchAudit original: exact input digest; dedicated factory0ICN style==4 predicate; all three consumers verified; true can reach popup and false reaches native video paths; not an Android device test",
+  "forced_target_admission": {
+    "morphe.jar": "PASS TargetAdmissionTest forced_rejections=6 no_dex_access=true accepted_target=47.4.3",
+    "morphe200.jar": "PASS TargetAdmissionTest forced_rejections=6 no_dex_access=true accepted_target=47.4.3"
+  },
+  "cases": [
+    {
+      "artifact": "TikTok_LinkDirect_v1.0.0.mpp",
+      "artifact_sha256": "6a389a9e195513694570b0679897fd20fd278f2fa59ee21f3f58746bd429581d",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "7a3b7a0662b2d3dd7e7db70a64aaf237d4ab0a14546a2198c28378cf11a52022",
+      "output_apk_bytes": 503702997,
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5530; not an Android device test",
+      "patcher_result": "logs/standalone-result.json"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.307.mpp",
+      "artifact_sha256": "6c9210cc6edf52078e2d12883a1dcd66d47f64870b108b7d858fbddc3c052119",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "a2bb36846486e9711b17f6f70539e4e96da4af63bfbaa1848d2c03b4bf20d3ce",
+      "output_apk_bytes": 503702997,
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5530; not an Android device test",
+      "patcher_result": "logs/aggregate-result.json"
+    }
+  ],
+  "configuration": "New direct-link patch exclusively selected from standalone and aggregate; other features preserved byte-for-byte in aggregate but not selected in these APK cases."
+}
