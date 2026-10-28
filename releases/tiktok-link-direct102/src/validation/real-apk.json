@@ -1,0 +1,131 @@
+{
+  "schema": "tiktok-link-direct-real-apk-v3",
+  "input": {
+    "package": "com.zhiliaoapp.musically",
+    "version_name": "47.4.3",
+    "version_code": 2024704030,
+    "bytes": 474921201,
+    "sha256": "af7cbe2b00d33ff1339730f6abb8ed7e387a83b27ff2b16748b8f41e6fc87e0b",
+    "signature_verified": true,
+    "signer_certificate_sha256": "9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba"
+  },
+  "physical_android_tested": false,
+  "artifacts": {
+    "TikTok_LinkDirect_v1.0.2.mpp": {
+      "bytes": 73688,
+      "sha256": "23af095475363ebb2bcbcba87b98d9ee41ba20d8af2380014c5bf2528a21ae4f"
+    },
+    "Hiro_Morphe_Patches_v1.0.310.mpp": {
+      "bytes": 19391992,
+      "sha256": "89313cab0ea94173b350900b59bb3eb0b36ef16b9d327a9d20dbbf227327b796"
+    }
+  },
+  "baseline": {
+    "artifact": "Hiro_Morphe_Patches_v1.0.309.mpp",
+    "bytes": 19348490,
+    "sha256": "a4b9523f3ecc89899590f5fab4f7bb7622bdd5535e72c24373206a0fdc3e34c0"
+  },
+  "baseline_oneback_extension": {
+    "path": "extensions/oneback_exit.mpe",
+    "bytes": 166028,
+    "sha256": "43a0d988f1f11e0ccfd91a5a0562f386ea4a932d8d1419d5cf401b46b8865965"
+  },
+  "runtime_extension": {
+    "path": "extensions/hiro_tiktok_link_direct.mpe",
+    "bytes": 15092,
+    "sha256": "9d4e92fdad60c9aef7547a9eddbe02d1bde33341735f42c5f7022acdaa00594a"
+  },
+  "runtime_host_test": "PASS SharedLinkExitHostTest cases=64 assertions=384 isolated_production_runtime=true; issued Intent authority, native-host variants, stale/replayed/new routes, foreground/IME/editor guards, foreign-task preservation, cleanup-before-own-PID kill and new-entry cancellation; native Back branches audited separately; not an Android device test",
+  "patcher_sdk_sha256": "deb5d931f3899b20a119637473d338c52585f0c561b5d8b2856b916fe90163b5",
+  "original_signature": "PASS OriginalIdentity verified=true signer_certificate_sha256=9041803e91bcb814b4b4399fb5c85a91640b755e5e8ba76813814bf4cf2ab5ba v1=true v2=true v3=true",
+  "original_contract": "PASS LinkBranchAudit original: exact input digest; dedicated factory0ICN style==4 predicate; all three consumers verified; true can reach popup and false reaches native video paths; not an Android device test",
+  "original_fast_route_contract": "PASS LinkFastRouteAudit original: exact input identity; native shared-link selectors reproduce HOME insertion including nested insert_feed=1; native detail intent and push/type/comment guards verified; 392 actual DEX selector executions; not an Android device test",
+  "original_back_contract": "PASS LinkBackAudit original: exact input; native Back guards and consumed navigation interpreted; C/E/G temporary Intent provenance and dedicated/SAF route access verified; 14 actual DEX Back executions; not an Android device test",
+  "forced_target_admission": {
+    "morphe.jar": "PASS TargetAdmissionTest forced_rejections=6 prerequisite_count=1 unnamed_guard=true guard_extension_absent=true no_dex_access=true accepted_target=47.4.3",
+    "morphe200.jar": "PASS TargetAdmissionTest forced_rejections=6 prerequisite_count=1 unnamed_guard=true guard_extension_absent=true no_dex_access=true accepted_target=47.4.3"
+  },
+  "baseline_oneback": {
+    "case": "baseline_oneback",
+    "artifact": "Hiro_Morphe_Patches_v1.0.309.mpp",
+    "artifact_sha256": "a4b9523f3ecc89899590f5fab4f7bb7622bdd5535e72c24373206a0fdc3e34c0",
+    "result": "PASS",
+    "selected_patches": [
+      "戻る1回で終了・履歴削除"
+    ],
+    "applied_patches": [
+      "戻る1回で終了・履歴削除"
+    ],
+    "failed_patches": [],
+    "steps_all_success": true,
+    "output_apk_sha256": "739958391bb8a3da3fb8c7d64571c12bee77ff1c0cc0eb54aec298871bb9926d",
+    "output_apk_bytes": 504741668,
+    "patcher_result": "logs/baseline_oneback-result.json"
+  },
+  "cases": [
+    {
+      "case": "standalone_link",
+      "artifact": "TikTok_LinkDirect_v1.0.2.mpp",
+      "artifact_sha256": "23af095475363ebb2bcbcba87b98d9ee41ba20d8af2380014c5bf2528a21ae4f",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "205ffcbb5591fcb5578078f5e7bba03ffdb15e372dd06e8ce7c0554d5f7c4b5d",
+      "output_apk_bytes": 503714557,
+      "patcher_result": "logs/standalone_link-result.json",
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5646; not an Android device test",
+      "fast_route_audit": "PASS LinkFastRouteAudit output: one speculative-start branch; two guarded selector insertions; two pure synthetic helpers interpreted from output DEX; original detail intent preserved for scoped client_share links; nested/excluded/invalid routes and native notification/type/comment guards audited; 28 native classes and 328 original methods compared; 392 actual DEX selector executions; checks=82686; not an Android device test",
+      "back_exit_audit": "PASS LinkBackAudit output: exact C/E/G final-Intent transfer; positive-only animation; all native resume arrivals bind; destroy revokes; one native Back gate after key/comment/child consumers; owned return suppression; native fallbacks and preexisting OneBack/runtime preserved; 328 original methods compared; 42 actual DEX Back executions; checks=4900; not an Android device test"
+    },
+    {
+      "case": "aggregate_link",
+      "artifact": "Hiro_Morphe_Patches_v1.0.310.mpp",
+      "artifact_sha256": "89313cab0ea94173b350900b59bb3eb0b36ef16b9d327a9d20dbbf227327b796",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "45bcd160cc32ea68a64e4e3b239ea176c5f6b7cf3b197f153f20c7d074a5e3da",
+      "output_apk_bytes": 503714557,
+      "patcher_result": "logs/aggregate_link-result.json",
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5646; not an Android device test",
+      "fast_route_audit": "PASS LinkFastRouteAudit output: one speculative-start branch; two guarded selector insertions; two pure synthetic helpers interpreted from output DEX; original detail intent preserved for scoped client_share links; nested/excluded/invalid routes and native notification/type/comment guards audited; 28 native classes and 328 original methods compared; 392 actual DEX selector executions; checks=82686; not an Android device test",
+      "back_exit_audit": "PASS LinkBackAudit output: exact C/E/G final-Intent transfer; positive-only animation; all native resume arrivals bind; destroy revokes; one native Back gate after key/comment/child consumers; owned return suppression; native fallbacks and preexisting OneBack/runtime preserved; 328 original methods compared; 42 actual DEX Back executions; checks=4900; not an Android device test"
+    },
+    {
+      "case": "aggregate_link_oneback",
+      "artifact": "Hiro_Morphe_Patches_v1.0.310.mpp",
+      "artifact_sha256": "89313cab0ea94173b350900b59bb3eb0b36ef16b9d327a9d20dbbf227327b796",
+      "result": "PASS",
+      "selected_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）",
+        "戻る1回で終了・履歴削除"
+      ],
+      "applied_patches": [
+        "共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）",
+        "戻る1回で終了・履歴削除"
+      ],
+      "failed_patches": [],
+      "steps_all_success": true,
+      "output_apk_sha256": "f6e4cb0d14489ff339e23230dee2575e9f5522b6a0fd445542e7ff8b3b5e4513",
+      "output_apk_bytes": 504748199,
+      "patcher_result": "logs/aggregate_link_oneback-result.json",
+      "direct_link_audit": "PASS LinkBranchAudit output: one CONST_4 1->0 in dedicated popup factory; 12 native classes and 51 methods audited; all three consumers, helper pause lifecycle, raw style and unrelated invite factory preserved; popup paths unreachable under false eligibility; native direct paths reachable; checks=5662; not an Android device test",
+      "fast_route_audit": "PASS LinkFastRouteAudit output: one speculative-start branch; two guarded selector insertions; two pure synthetic helpers interpreted from output DEX; original detail intent preserved for scoped client_share links; nested/excluded/invalid routes and native notification/type/comment guards audited; 28 native classes and 335 original methods compared; 392 actual DEX selector executions; checks=82805; not an Android device test",
+      "back_exit_audit": "PASS LinkBackAudit output: exact C/E/G final-Intent transfer; positive-only animation; all native resume arrivals bind; destroy revokes; one native Back gate after key/comment/child consumers; owned return suppression; native fallbacks and preexisting OneBack/runtime preserved; 335 original methods compared; 42 actual DEX Back executions; checks=5121; not an Android device test",
+      "baseline_reference_apk_sha256": "739958391bb8a3da3fb8c7d64571c12bee77ff1c0cc0eb54aec298871bb9926d"
+    }
+  ],
+  "configuration": "Four exact original-APK applies: baseline309 OneBack only; Link Direct 1.0.2 alone from standalone and bundle310; bundle310 Link Direct plus current OneBack. All three new outputs require popup, fast-route and Back audits; the combined case compares against the actual baseline OneBack-only output. Android device not tested."
+}

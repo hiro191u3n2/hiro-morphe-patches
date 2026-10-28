@@ -1,0 +1,64 @@
+#!/usr/bin/env python3
+"""Mutate copies of actual evidence to check publication rejects incomplete/wrong results."""
+import argparse, copy, json
+from pathlib import Path
+import publish as pub
+
+def main():
+    p = argparse.ArgumentParser(description=__doc__); p.add_argument('--dist',type=Path,required=True); a=p.parse_args()
+    proof=json.loads((pub.SOURCE_ROOT/'src/validation/real-apk.json').read_text()); artifacts=pub.artifacts_at(a.dist)
+    pub.validate_real_apk(proof,artifacts)
+    changes=[
+        ('old release evidence schema',lambda q:q.__setitem__('schema','tiktok-link-direct-real-apk-v1')),
+        ('previous fast-route evidence schema',lambda q:q.__setitem__('schema','tiktok-link-direct-real-apk-v2')),
+        ('wrong version',lambda q:q['input'].__setitem__('version_name','47.5.3')),
+        ('wrong original bytes',lambda q:q['input'].__setitem__('sha256','0'*64)),
+        ('signature not verified',lambda q:q['input'].__setitem__('signature_verified',False)),
+        ('signature output absent',lambda q:q.pop('original_signature',None)),
+        ('wrong signer output',lambda q:q.__setitem__('original_signature','PASS OriginalIdentity verified=true signer_certificate_sha256='+'0'*64)),
+        ('unsupported device claim',lambda q:q.__setitem__('physical_android_tested',True)),
+        ('different MPP',lambda q:q['cases'][0].__setitem__('artifact_sha256','0'*64)),
+        ('failed patch',lambda q:q['cases'][0].__setitem__('failed_patches',['failure'])),
+        ('failed pipeline',lambda q:q['cases'][0].__setitem__('steps_all_success',False)),
+        ('missing output audit',lambda q:q['cases'][0].__setitem__('direct_link_audit','')),
+        ('unrelated output audit',lambda q:q['cases'][0].__setitem__('direct_link_audit','PASS DifferentAudit')),
+        ('original audit used as output',lambda q:q['cases'][0].__setitem__('direct_link_audit','PASS LinkBranchAudit original: original input only')),
+        ('missing target-first routing audit',lambda q:q['cases'][0].pop('fast_route_audit',None)),
+        ('unrelated routing audit',lambda q:q['cases'][0].__setitem__('fast_route_audit','PASS DifferentAudit output:')),
+        ('original routing audit used as output',lambda q:q['cases'][0].__setitem__('fast_route_audit','PASS LinkFastRouteAudit original: original input only')),
+        ('missing Back output audit',lambda q:q['cases'][0].pop('back_exit_audit',None)),
+        ('unrelated Back output audit',lambda q:q['cases'][0].__setitem__('back_exit_audit','PASS DifferentAudit output:')),
+        ('original Back audit used as output',lambda q:q['cases'][0].__setitem__('back_exit_audit','PASS LinkBackAudit original: original input only')),
+        ('missing runtime host tests',lambda q:q.pop('runtime_host_test',None)),
+        ('missing runtime identity',lambda q:q.pop('runtime_extension',None)),
+        ('wrong existing OneBack pin',lambda q:q['baseline_oneback_extension'].__setitem__('sha256','0'*64)),
+        ('wrong baseline MPP',lambda q:q['baseline'].__setitem__('sha256','0'*64)),
+        ('baseline OneBack-only run missing',lambda q:q.pop('baseline_oneback',None)),
+        ('baseline run applied no OneBack',lambda q:q['baseline_oneback'].__setitem__('applied_patches',[])),
+        ('baseline run failed',lambda q:q['baseline_oneback'].__setitem__('steps_all_success',False)),
+        ('combined case missing',lambda q:q.__setitem__('cases',[c for c in q['cases'] if c['case']!='aggregate_link_oneback'])),
+        ('combined case wrong reference',lambda q:next(c for c in q['cases'] if c['case']=='aggregate_link_oneback').__setitem__('baseline_reference_apk_sha256','0'*64)),
+        ('combined case omitted OneBack',lambda q:next(c for c in q['cases'] if c['case']=='aggregate_link_oneback').__setitem__('applied_patches',[pub.PATCH_NAME])),
+        ('duplicate named case',lambda q:q['cases'][1].__setitem__('case',q['cases'][0]['case'])),
+        ('original Back preflight missing',lambda q:q.pop('original_back_contract',None)),
+        ('forced-version rejection missing',lambda q:q.pop('forced_target_admission',None)),
+        ('wrong patcher SDK',lambda q:q.__setitem__('patcher_sdk_sha256','0'*64)),
+        ('missing output hash',lambda q:q['cases'][0].__setitem__('output_apk_sha256','')),
+        ('missing selected patches',lambda q:q['cases'][0].__setitem__('selected_patches',[])),
+        ('missing aggregate or single',lambda q:q.__setitem__('cases',q['cases'][:1])),
+    ]
+    for name,change in changes:
+        mutated=copy.deepcopy(proof);change(mutated)
+        try:pub.validate_real_apk(mutated,artifacts)
+        except RuntimeError:continue
+        raise AssertionError('Publication incorrectly accepted '+name)
+    mutated=copy.deepcopy(proof)
+    for case in mutated['cases']:
+        case['selected_patches']=['A different patch']
+        case['applied_patches']=['A different patch']
+    try:pub.validate_real_apk(mutated,artifacts)
+    except RuntimeError:pass
+    else:raise AssertionError('Publication accepted success without the new direct-link patch')
+    print('PASS publication evidence rejection checks='+str(len(changes)+1)+'; tested actual evidence copies, no fabricated success proof')
+
+if __name__ == '__main__':main()
