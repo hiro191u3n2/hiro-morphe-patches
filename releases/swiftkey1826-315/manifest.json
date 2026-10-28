@@ -1,0 +1,219 @@
+{
+  "schema": "swiftkey1826-publication-v1",
+  "swiftkey_version": "1.8.26",
+  "bundle_version": "1.0.315",
+  "baseline_bundle_version": "1.0.314",
+  "baseline_bundle_sha256": "cdc309a2b8a4b4f22cfec05a63d73d53089a6e0d9950ed6a835f457ca8541b5a",
+  "baseline_swiftkey_version": "1.8.25",
+  "baseline_swiftkey_sha256": "b6cfb2362dffe42468c8ba795dabd801153b9ed10581b10ba4fab438518165ab",
+  "change_plan_reviewed": true,
+  "qa_contract_reviewed": true,
+  "android_device_tested": false,
+  "original_apk_apply_tested": false,
+  "allowed_changed_bundle_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+    "classes.dex",
+    "swiftkey/emoji_ja.tsv"
+  ],
+  "allowed_changed_standalone_entries": [
+    "META-INF/MANIFEST.MF",
+    "app/hiro/swiftkey/patches/JapaneseSamsungEmojiPatch.class",
+    "classes.dex",
+    "swiftkey/emoji_ja.tsv"
+  ],
+  "allowed_added_bundle_entries": [
+    "app/hiro/swiftkey/patches/ShiftLockPatch.class"
+  ],
+  "allowed_added_standalone_entries": [
+    "app/hiro/swiftkey/patches/ShiftLockPatch.class"
+  ],
+  "qa_required_values": {
+    "status": "SHIFT_EMOJI_HOST_AND_NATIVE_VERIFIED_DEVICE_UNVERIFIED",
+    "swiftkey_version": "1.8.26",
+    "bundle_version": "1.0.315",
+    "baseline_swiftkey_version": "1.8.25",
+    "baseline_bundle_version": "1.0.314",
+    "target_package": "com.touchtype.swiftkey.beta",
+    "target_version": "9.13.16.4",
+    "target_version_code": 1236271168,
+    "device_tested": false,
+    "original_apk_apply_tested": false,
+    "other_apps_byte_identical": true,
+    "unrelated_loader_entries_byte_identical": true,
+    "loader_changes_verified": true,
+    "standalone_and_bundle_runtime_equal": true,
+    "host_tests_passed": true,
+    "native_hook_verified": true,
+    "runtime_byte_identical": true,
+    "two_loader_sdks_agree": true,
+    "all_non_emoji_dictionary_resources_preserved": true,
+    "emoji_dictionary.old_pairs_preserved": true,
+    "emoji_dictionary.order_preserved": true,
+    "emoji_dictionary.duplicates_absent": true
+  },
+  "source_files": {
+    "README.txt": {
+      "bytes": 2215,
+      "sha256": "bbab3998996da9dbee54413c8c684c4b9c7b24617bec0623a99c31885c3e6c49"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3157,
+      "sha256": "918c19144b8b08355bfdd221e03f0d5f997c32b32bb5802f8ac9b3ccb050ea4b"
+    },
+    "build1826.py": {
+      "bytes": 13113,
+      "sha256": "eefc00eb6081fd9ead709390333ac0ec405e23244d94d3c943288e183f929efa"
+    },
+    "emoji/Dump1814.java": {
+      "bytes": 1385,
+      "sha256": "ebd4652798ef59eebd563a21baf05cfbed9dec6923f27e3971f0b5c304d0b48f"
+    },
+    "emoji/EmojiCandidates.java": {
+      "bytes": 6521,
+      "sha256": "4def08270587bfc3afd8410f40955c74a1a71180f49392ff4f6e371838fd2183"
+    },
+    "emoji/README.txt": {
+      "bytes": 2416,
+      "sha256": "2679269bfcc3b44963b5f4f21c8d2a95fea307c777fedcca340807913d0312f0"
+    },
+    "emoji/build_emoji.py": {
+      "bytes": 6354,
+      "sha256": "4a84468172fee84bcbadfa26a1d0b21600ffae0fad95bfbc5b238ca5dc31834b"
+    },
+    "emoji/related_terms.tsv": {
+      "bytes": 47825,
+      "sha256": "a54f8990a3ad377ff0e119635404cdbe328d3a85ce1be6ac73e4d8b8493a7634"
+    },
+    "emoji/stubs/com/microsoft/fluency/Japanese.java": {
+      "bytes": 470,
+      "sha256": "b540a3a21810b3b1885488a8a1656200c27dafb8367599c56e0224f1a3ad45f3"
+    },
+    "emoji/stubs/com/microsoft/fluency/ResultsFilter.java": {
+      "bytes": 116,
+      "sha256": "3069468f884669c8b15a8a6c70ed729f9cfc12b32bea4f8ab4a36365214242dc"
+    },
+    "emoji/stubs/l40/c.java": {
+      "bytes": 142,
+      "sha256": "d9a257b23bdf7cb92390a9d7079439bc25433a091848058c639b94e97380cf80"
+    },
+    "emoji/stubs/m40/b.java": {
+      "bytes": 64,
+      "sha256": "7e0ebfd5ad6a919a3f3e14943ee50782445a8a475e0f6536c7a8461d47655366"
+    },
+    "emoji/stubs/m40/h0.java": {
+      "bytes": 331,
+      "sha256": "68c52f583209aa4bf9557bfffcc3f90b1b84c7aaeff3cac3bb7aac439625758a"
+    },
+    "emoji/tests/android/content/Context.java": {
+      "bytes": 205,
+      "sha256": "33c17e14cec6b1f271b002ff15d6cf0b05ffbededa26ad8ea21b3dd264d820ff"
+    },
+    "emoji/tests/android/content/res/AssetManager.java": {
+      "bytes": 308,
+      "sha256": "bd8bfe554fb5f7aa3eab5670ec4e024c31c3e875f8362e755b4c9fc8df4e0e46"
+    },
+    "emoji/tests/hiro/swiftkey/EmojiExpansionTest.java": {
+      "bytes": 7950,
+      "sha256": "ad02884887e843c596df0c6133053f3370963fb66133164a32897e4dca010b4d"
+    },
+    "loader/LoaderResourceProbe.java": {
+      "bytes": 3132,
+      "sha256": "7617d4b983d58b97cbcfce269f3fbb96340b3f9e02b9a814bd429683a8712bbc"
+    },
+    "loader/PatchEmojiLoader.java": {
+      "bytes": 7262,
+      "sha256": "7474ca5f1743055148948cd22894039f2a351d9c14715af2328b5d91eb25dbcf"
+    },
+    "loader/build_loaders.py": {
+      "bytes": 7293,
+      "sha256": "01eb69ac593d74284dbc6c892860a86286210f93041f859cbd875602e8d1af99"
+    },
+    "publish1826.py": {
+      "bytes": 42580,
+      "sha256": "4a8ad8e6f3d288e9b6edf717771c9fdeecbd5f83f41151601edfb50781acff03"
+    },
+    "publisher_tests.py": {
+      "bytes": 11040,
+      "sha256": "75cbfbd8899749b528e8c6225f13ee4f7eb3efffdfb4260ea9be2ae74e35bb2c"
+    },
+    "shift/NativeHash.java": {
+      "bytes": 586,
+      "sha256": "10463108b68ae5cb5eb95f79da149617baf74560fe4a0b23b566c9ad3da7901f"
+    },
+    "shift/UpdateShiftLoader.java": {
+      "bytes": 12945,
+      "sha256": "608dad2bd8d1f157b20516a2f3b0c4a41412df2f87439394a4aa8eddd6391322"
+    },
+    "shift/app/hiro/swiftkey/patches/NativeShiftProbe.java": {
+      "bytes": 13548,
+      "sha256": "28bf1e903f547e1051bc39c030d74e642c8af355cd5a528e8d963714c42267bd"
+    },
+    "shift/app/hiro/swiftkey/patches/ShiftLockPatch.java": {
+      "bytes": 4112,
+      "sha256": "75eae3dd2a297c09faa6c240a4861898da9dc0a9dcae1121708bcc1009acfaaf"
+    },
+    "shift/build_shift_loader.py": {
+      "bytes": 4983,
+      "sha256": "d084d304cca0adfdde4f210d73e9a116eeabaea64b10a7b73b9e1d97a2edc116"
+    },
+    "shift/tests/fixtures/tj0/e.smali": {
+      "bytes": 3659,
+      "sha256": "e0d526633542c3ab4ec376814f3c00292a5b331c829b5a58e2bb63e030be0b4f"
+    },
+    "shift/tests/fixtures/wb0/p1.smali": {
+      "bytes": 18608,
+      "sha256": "fb273cae19805fee555356822fb5610a09f621c889793c7ed804e47dc4fae522"
+    },
+    "shift/tests/fixtures/wb0/r1.smali": {
+      "bytes": 1671,
+      "sha256": "e53a9c4a1e4991b4efab5a9827a43aab82f407a34dc25f31f0201fb72f17d3b8"
+    },
+    "shift/tests/fixtures/wb0/x.smali": {
+      "bytes": 3471,
+      "sha256": "00acb97327386bbcfe70036d8720ad81e02f256a253f837b1bdfb22fb7e773d7"
+    },
+    "tests/AuditDictionaryAbi.java": {
+      "bytes": 21445,
+      "sha256": "b94cd3f2d20561823d43747b6810e8f4b51d83f452316777513d501bfc91743d"
+    },
+    "tests/LoaderParityProbe.java": {
+      "bytes": 10936,
+      "sha256": "92acee0f11f3f0cc5eeccff9ab1e949a731291d6b1d08f584efcf0bcf1b45f62"
+    },
+    "tools_java/Dump1814.java": {
+      "bytes": 1385,
+      "sha256": "ebd4652798ef59eebd563a21baf05cfbed9dec6923f27e3971f0b5c304d0b48f"
+    },
+    "workflow.yml": {
+      "bytes": 4593,
+      "sha256": "a6a822cb49b48d6190389311601edfd6b9ad91743a3796a91789f5387717c4fa"
+    }
+  },
+  "artifacts": {
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.26.mpp": {
+      "bytes": 44720218,
+      "sha256": "733d39a89503f56991cdd18e1d7e335dd0dac2afd9380c7cb1f14cff048bea5e"
+    },
+    "Hiro_Morphe_Patches_v1.0.315.mpp": {
+      "bytes": 47985901,
+      "sha256": "57b0a24c3f628ad312d1fad7ea82a4678b4d5081b1af655d477c760cc5c07613"
+    },
+    "QA_SwiftKey_v1.8.26.json": {
+      "bytes": 30031,
+      "sha256": "bf508e3512bc2f0d6d357f02c3feffabd632147aa90c69ae21ed6c674908fbfd"
+    },
+    "SwiftKeyBeta_v1.8.26_sources_and_QA.zip": {
+      "bytes": 97398,
+      "sha256": "f031d86e7975271decb83e35e21820b6ed2f1f7f2b664ec990fc4d32b467a63a"
+    },
+    "RELEASE_NOTES.txt": {
+      "bytes": 3157,
+      "sha256": "918c19144b8b08355bfdd221e03f0d5f997c32b32bb5802f8ac9b3ccb050ea4b"
+    },
+    "SHA256SUMS.txt": {
+      "bytes": 487,
+      "sha256": "be08c7c22f2009896c505a3488c4295baee1c111fbb2d811c5d777e6b92934b5"
+    }
+  }
+}
