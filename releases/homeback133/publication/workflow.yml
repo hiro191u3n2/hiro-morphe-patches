@@ -1,0 +1,57 @@
+name: Verify and publish preserved Instagram Back fix bundle317
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback133-publish.yml'
+      - 'releases/homeback133/publication/**'
+      - 'releases/homeback133/src/**'
+      - 'releases/homeback133/verification/**'
+      - 'releases/homeback133/README.md'
+      - 'releases/homeback133/LICENSE'
+      - 'releases/homeback133/NOTICE'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Restore exact saved bundle bytes from pinned baseline and delta
+        run: python3 releases/homeback133/publication/restore_saved.py
+      - name: Verify preserved artifact and bound recovery evidence
+        run: >-
+          python3 releases/homeback133/publication/check.py
+          --bundle downloads/Hiro_Morphe_Patches_v1.0.317.mpp
+          --report releases/homeback133/verification/verified.json
+      - name: Package recovery sources and exact saved artifact
+        run: >-
+          python3 releases/homeback133/publication/publish.py
+          --repo . --dist .ci-homeback133/dist --local-only
+      - name: Require reviewed branch heads and unpublished version
+        run: >-
+          python3 releases/homeback133/publication/publish.py
+          --repo . --dist .ci-homeback133/dist --preflight-only
+      - name: Publish verified preserved assets and atomically advance both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback133/publication/publish.py --repo . --dist .ci-homeback133/dist 2>&1 | tee .ci-homeback133/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback133-bundle317-recovery-publication
+          path: .ci-homeback133/
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
