@@ -1,0 +1,2 @@
+package androidx.preference;public class PreferenceScreen extends Preference {public java.util.Map<String,Preference> children=new java.util.LinkedHashMap<String,Preference>();public PreferenceScreen(android.content.Context c){super(c);}public Preference H(CharSequence key){return children.get(key.toString());}public boolean G(Preference p){children.put(p.l,p);return true;}}
+

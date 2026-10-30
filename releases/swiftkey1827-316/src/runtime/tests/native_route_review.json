@@ -1,0 +1,96 @@
+{
+  "blockers": [],
+  "checks": [
+    {
+      "finding": "Native enum initializer constructs QWERTY and assigns N1 (offset0x929), constructs ROMAJI and assigns x4 (offset0x2128). PredictionSearchType.NORMAL is a native public enum value verified by the runtime owner.",
+      "id": "layout_enums",
+      "method": "Lqj0/a;-><clinit>()V"
+    },
+    {
+      "finding": "Existing JapaneseGlidePatch inserts its handler immediately before virtual f(token,event). The native xd0/f0 class inherits onTouchEvent; hook routing contains no layout/language filter before the handler. Reusing this hook admits English through the same path.",
+      "id": "touch_hook_before_native_dispatch",
+      "method": "Lxd0/d1;->onTouchEvent(Landroid/view/MotionEvent;)Z"
+    },
+    {
+      "finding": "ACTION_CANCEL is a separate branch at offset 0x22: iterates native pointer keys and calls tj0/e.E, then tj0/e.D and ef0/n.f. It does not take the ordinary UP branch at 0x1d7. FlickSymbols sends CANCEL through f0.f directly and keeps swallowing the owned stream.",
+      "id": "native_cancel",
+      "method": "Lef0/d;->l(ILfc0/f;Lkj0/f;)V"
+    },
+    {
+      "finding": "History API is shared: ec0/x.G selects composing ec0/f or noncomposing ec0/o. Both ec0/o text methods return the empty string. ec0/f initializes text to empty string and exposes composition/raw text; the snapshot is not a Japanese-only API.",
+      "id": "history_text_api",
+      "methods": [
+        "Lwb0/n0;->C()Ldc0/a;",
+        "Lec0/x;->G()Lec0/n;",
+        "Lec0/f;->s()Ljava/lang/String;",
+        "Lec0/f;->G()Ljava/lang/String;",
+        "Lec0/o;->s()Ljava/lang/String;",
+        "Lec0/o;->G()Ljava/lang/String;"
+      ]
+    },
+    {
+      "finding": "No layout or PredictionSearchType gate. xc0/i creates fc0/d1 with the single-character flag true and registers the native long-press release action. Popup path creates e60/b with provider tag 7 and registers fc0/b1 activation. English can reuse exactly the existing resolver.",
+      "id": "shared_native_alternate_factory",
+      "method": "Lfc0/k1;->m(Lhc0/b;Lcm0/d;Lfc0/d2;Lfc0/v1;Lxc0/h;)V"
+    },
+    {
+      "finding": "Configured popup characters are copied before nonduplicate language-specific variants are appended. The common popup builder decides direct vs multi-choice based on candidate count and native settings. The repair must reuse native popup default index, not hardcode symbols or the first accent.",
+      "id": "language_variants_preserve_default",
+      "methods": [
+        "Lfc0/s1;->O(Ljava/lang/String;Ljava/util/List;ZZ)Ljava/util/ArrayList;",
+        "Lfc0/s1;->P(Ljava/util/List;ZLfc0/m1;Lfc0/v1;)Lxc0/h;"
+      ]
+    },
+    {
+      "finding": "Both ordinary character popup entry points pass true,true for the two booleans used to construct fb0/l2. Those flags are shared across languages and match the existing resolver checks.",
+      "id": "popup_actor_flags",
+      "methods": [
+        "Lfb0/h2;->a(Ljava/util/List;Lfc0/v1;Lfc0/m1;)Lfb0/f2;",
+        "Lfb0/h2;->c(Ljava/util/List;Lfc0/v1;Lfc0/m1;IZ)Lfb0/f2;",
+        "Lfb0/h2;->b(Lfb0/g2;Lfc0/v1;Landroid/graphics/RectF;IIFZZZLdd0/s;ZZZ)Lfb0/f2;"
+      ]
+    },
+    {
+      "finding": "Production diff admits QWERTY+NORMAL and ROMAJI+NORMAL while retaining ROMAJI+JAPANESE. Each stroke snapshots exact enum identities, so switching between two supported modes also abandons insertion. Password/numeric, selection, tool type, geometry, popup, actor identity, editor and connection exclusions are unchanged.",
+      "id": "narrow_admission_and_lifecycle"
+    }
+  ],
+  "clean_apk_apply_tested": false,
+  "device_tested": false,
+  "enum_mapping": {
+    "com.microsoft.fluency.ResultsFilter.PredictionSearchType.NORMAL": "NORMAL",
+    "qj0.a.N1": "QWERTY",
+    "qj0.a.x4": "ROMAJI"
+  },
+  "limitations": [
+    "Live English Flow recognition timing and UI are not exercised by the host doubles.",
+    "ROMAJI+NORMAL is intentionally accepted for alphabetic-mode transitions; no claim that every target configuration emits this combination.",
+    "Direct actor and popup defaults remain controlled by the installed native layout and settings."
+  ],
+  "native_flow_engine_executed": false,
+  "native_layout_resources": [
+    {
+      "compressed_sha256": "1a0aff577848210025cf4ceedae2b395957a5e0ec558a974980bd54a119b90c8",
+      "expanded_bytes": 12304,
+      "expanded_sha256": "0f98463990d4b9b57ae6a57d0aac380e85abf8e58d228079ec48b260972d3205",
+      "path": "res/raw/keyboard_layout_standard_qwerty.json"
+    },
+    {
+      "compressed_sha256": "681a6141e3e71a5e07e9b406ec38e9388d080cee428ed7927936a2a3521fa2f9",
+      "expanded_bytes": 12408,
+      "expanded_sha256": "f0829dd148143a88ffde518b3c7b87e890836c9271989507530d0b483574b7e4",
+      "path": "res/raw/keyboard_layout_standard_romaji.json"
+    },
+    {
+      "common_prefix_bytes": 2801,
+      "finding": "The serialized native layout resources share 2801 leading bytes, including q/1 and a/@ label/alternate fields. This is corroborating byte-level evidence, not a full layout parser or a live keyboard trace."
+    }
+  ],
+  "production_source_sha256": "998cf34d0363e45a1b6cf6c44ab0f947dde5a33fa60b8ac72a547ea61c5a1a6c",
+  "reference_apk_previously_modified": true,
+  "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+  "scope": "Independent source and native DEX/resource inspection; native execution remains unverified.",
+  "status": "STATIC_REVIEW_PASSED",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4"
+}

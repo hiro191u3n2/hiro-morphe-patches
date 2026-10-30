@@ -1,0 +1,2 @@
+package android.view; public class View {public android.content.Context context;public boolean shown=true,attached=true;public int width=1000,height=400;public android.os.IBinder window=new android.os.IBinder(){};public View(android.content.Context c){context=c;}public android.content.Context getContext(){return context;}public boolean isShown(){return shown;}public boolean isAttachedToWindow(){return attached;}public int getWidth(){return width;}public int getHeight(){return height;}public android.os.IBinder getWindowToken(){return window;}}
+

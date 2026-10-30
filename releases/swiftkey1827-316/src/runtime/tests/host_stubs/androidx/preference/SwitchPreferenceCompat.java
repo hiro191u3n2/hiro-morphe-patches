@@ -1,0 +1,2 @@
+package androidx.preference;public class SwitchPreferenceCompat extends Preference {public boolean checked;public SwitchPreferenceCompat(android.content.Context c,android.util.AttributeSet attr){super(c);}public void G(boolean b){checked=b;}}
+

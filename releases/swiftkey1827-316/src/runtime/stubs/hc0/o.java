@@ -1,0 +1,2 @@
+package hc0; public final class o { public cm0.d a; public Object b; public o(cm0.d restriction,Object actor) {} public static java.util.List a(java.util.Collection values,fc0.d2 state){return null;} }
+

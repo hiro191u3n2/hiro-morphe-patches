@@ -1,0 +1,2 @@
+package android.os; public class Handler {public static final java.util.concurrent.ConcurrentLinkedQueue<Runnable> queue=new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();public Handler(Looper l){}public boolean post(Runnable r){queue.add(r);return true;}public static void drain(){Runnable r;int n=0;while((r=queue.poll())!=null){r.run();if(++n>1000)throw new AssertionError("handler loop");}}}
+
