@@ -1,0 +1,41 @@
+name: Restore pinned SwiftKey build tools for English flick investigation
+on:
+  push:
+    branches: [codex/swiftkey1827-tools]
+    paths: ['.github/workflows/swiftkey1827-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: releases/swiftkey1826-315/src
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Download and verify exact tool versions
+        run: |
+          python - <<'PY'
+          import hashlib, importlib.util, pathlib, urllib.request, shutil, os
+          p=pathlib.Path('releases/swiftkey1826-315/src/build1826.py')
+          spec=importlib.util.spec_from_file_location('build',p);m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          out=pathlib.Path('swiftkey-tools');out.mkdir()
+          for name,pin in m.PINS.items():
+              if name.endswith('.mpp'): continue
+              raw=urllib.request.urlopen(m.URLS[name],timeout=120).read()
+              assert hashlib.sha256(raw).hexdigest()==pin,name
+              (out/name).write_bytes(raw)
+              print(name,pin,len(raw))
+          shutil.make_archive('swiftkey-tools/jdk21','gztar',os.environ['JAVA_HOME'])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: swiftkey1827-pinned-tools
+          path: swiftkey-tools/
+          retention-days: 7
+          compression-level: 1
