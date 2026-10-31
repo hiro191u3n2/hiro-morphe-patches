@@ -1,3 +1,8 @@
+# [1.0.323](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/fossify-calendar-v1.0.1) (2026-11-01)
+
+* **Fossify Calendar:** 1.12.1 の1か月ウィジェットとアプリ内1か月表示で土曜日を青、祝日を赤に統一。今日の丸印の文字は黒に変更。
+* **Fossify Calendar:** 元APKへの適用と再構築を検証済み。実機表示は未確認。
+
 # [1.0.322](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/fossify-calendar-v1.0.0) (2026-11-01)
 
 * **Fossify Calendar:** 1.12.1 の1か月ウィジェットで土曜日の曜日・日付を青、祝日の日付を赤に変更。
