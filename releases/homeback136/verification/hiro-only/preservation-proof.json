@@ -1,0 +1,229 @@
+{
+  "application": {
+    "applied_patch_names": [
+      "戻る1回で終了・履歴削除"
+    ],
+    "events": {
+      "bytes": 5497,
+      "sha256": "90416f1ccdde4f5a6a308d9e75ad3d5229c0eb45ed0fda4985f432004bad7a28"
+    },
+    "finished": [
+      {
+        "failure": null,
+        "type": "finished"
+      }
+    ],
+    "output": {
+      "bytes": 155430177,
+      "sha256": "83823b87cbfaa6ecf5543061287cb06c54010edc2526e0e31869153e91ebec33"
+    },
+    "patch_failures": [],
+    "patches_done_counts": [
+      1
+    ],
+    "physical_android_tested": false,
+    "process_exit_code": 0,
+    "request": {
+      "bytes": 899,
+      "sha256": "547907c8ccbe1ab109ac9145ad85e080e426e00584404b39fe23e127810459e7"
+    },
+    "requested_patch_names": [
+      "戻る1回で終了・履歴削除"
+    ],
+    "requested_source_bundle_order": [
+      "Hiro_Morphe_Patches_v1.0.320.mpp"
+    ],
+    "selected_bundles": [
+      {
+        "artifact": "Hiro_Morphe_Patches_v1.0.320.mpp",
+        "bytes": 48069357,
+        "option_defaults": {
+          "戻る1回で終了・履歴削除": {}
+        },
+        "option_overrides": {},
+        "selected_keys": [
+          "戻る1回で終了・履歴削除"
+        ],
+        "sha256": "aae60ca12e38990ad0ecec4cb71a224e3b25f4da51159ec94daa2076c5299745"
+      }
+    ],
+    "selected_count": 1,
+    "success": true
+  },
+  "audits": {
+    "initial-profile": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/audit:/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram135InitialProfileAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk"
+      ],
+      "log": {
+        "bytes": 189,
+        "sha256": "db7d0626919f91b73b7f8fb209f8ff051b4851bb1d2c86e92678d0a42fdef1fc"
+      },
+      "required_markers": [
+        "PASS Instagram135InitialProfileAudit:"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram135InitialProfileAudit: 59 assertions; native root fallback and read-only selection verified; four mutated-body negatives rejected; static DEX validation, no device execution"
+      ]
+    },
+    "manifest": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/resource-audit-classes:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "InstagramManifestAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk"
+      ],
+      "log": {
+        "bytes": 122,
+        "sha256": "8a7b34d7a15de2eb860a273d93cd25bb9c75f80f660c88f3e82fb92504bd0d1d"
+      },
+      "required_markers": [
+        "PASS InstagramManifestAudit"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS InstagramManifestAudit activities=540; package/version/SDK/permissions/components/intent filters/task flags retained"
+      ]
+    },
+    "native-home": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/audit:/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram134NativeHomeAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/native-home-synthetic.dex",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk"
+      ],
+      "log": {
+        "bytes": 233,
+        "sha256": "bc35081aa73222be546dd03c30b3121f2653443923dfda02b1c4359b2ed78ce7"
+      },
+      "required_markers": [
+        "PASS Instagram134NativeHomeAudit:"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram134NativeHomeAudit: 379 assertions; both native executable bodies restored byte-exact, unrelated Home methods unchanged, three changed-body negatives rejected before mutation; static DEX validation, no device execution"
+      ]
+    },
+    "profile-link": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/audit:/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram130ProfileLinkAudit",
+        "output",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk"
+      ],
+      "log": {
+        "bytes": 169,
+        "sha256": "a79c1e3e235e8c9a9a89e1238ae2e3f5960a5756ae6d7fc0180bf85aeb1cd29c"
+      },
+      "required_markers": [
+        "PASS Instagram130ProfileLinkAudit output:"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram130ProfileLinkAudit output: assertions=129, rejectedMutations=0; exact native dataflow, guards, result and all return edges preserved; no device execution"
+      ]
+    },
+    "resources": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/resource-audit-classes:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "InstagramResourcesAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro-only/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk"
+      ],
+      "log": {
+        "bytes": 232,
+        "sha256": "56b889f0c483729c43fa66cb9a6dc0f0a7adeeab0b6a945d9fc0b13ee4bb1771"
+      },
+      "required_markers": [
+        "PASS InstagramResourcesAudit"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS InstagramResourcesAudit entries=57543; IDs/types/flags/configurations/values and string/style pools retained; baseline semantics identical; existing SDK name normalization=18503 (string=18389, drawable=114); id names unchanged"
+      ]
+    },
+    "whole-apk": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx3g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/audit:/workspace/scratch/b9475c2b1ec5/build136-diagnostic-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "ActualInstagram452Audit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA136/final320/hiro-only/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/dist136-diagnostic-first/Hiro_Morphe_Patches_v1.0.320.mpp"
+      ],
+      "log": {
+        "bytes": 1929,
+        "sha256": "eb287b87e84763db267c919b13807531674aafc6ff17edfd51972b02ea16b952"
+      },
+      "required_markers": [
+        "PASS whole fresh Instagram 452 APK semantics:",
+        "nativeInstagramHooks=12,",
+        "emittedRuntimeClasses=101,"
+      ],
+      "result": "PASS",
+      "summary": [
+        "PASS whole fresh Instagram 452 APK semantics: appClasses=213950, appMethods=867113, wrappers=176, preservedHelpers=55, addedCallbacks=213, lifecycleEntryHooks=386, dialogHooks=10, systemCallbackHooks=10, terminalCallsites=1137, terminalBridges=887, nativeInstagramHooks=12, twitterNativeScopes=0, emittedRuntimeClasses=101, assertions=36335900"
+      ]
+    }
+  },
+  "case": "hiro-only",
+  "input_baseline": {
+    "bytes": 143237227,
+    "sha256": "22f20062d16997e26009e73b0425974efef8ac69c76dd8912ee8a091213c39e2"
+  },
+  "input_output_artifact_source_hashes_checked_after_each_audit": true,
+  "mpp": {
+    "bytes": 48069357,
+    "sha256": "aae60ca12e38990ad0ecec4cb71a224e3b25f4da51159ec94daa2076c5299745"
+  },
+  "native_libraries_byte_identical": true,
+  "output": {
+    "bytes": 155430177,
+    "sha256": "83823b87cbfaa6ecf5543061287cb06c54010edc2526e0e31869153e91ebec33"
+  },
+  "physical_android_tested": false,
+  "result": "PASS",
+  "unchanged_zip_entries": 10649,
+  "zip_entry_exclusions": [
+    "DEX",
+    "AndroidManifest.xml",
+    "resources.arsc",
+    "signature metadata"
+  ]
+}
