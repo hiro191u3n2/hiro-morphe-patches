@@ -1,0 +1,143 @@
+{
+  "cases": [
+    {
+      "audits": {
+        "manifest-audit": [
+          "PASS InstagramManifestAudit preserve-baseline: activities=540; package/version/SDK/permissions/components/intent filters/task flags retained"
+        ],
+        "native-home-audit": [
+          "PASS Instagram134NativeHomeAudit: 379 assertions; both native executable bodies restored byte-exact, unrelated Home methods unchanged, three changed-body negatives rejected before mutation; static DEX validation, no device execution"
+        ],
+        "profile-link-audit": [
+          "PASS Instagram130ProfileLinkAudit output: assertions=129, rejectedMutations=0; exact native dataflow, guards, result and all return edges preserved; no device execution"
+        ],
+        "resources-audit": [
+          "PASS InstagramResourcesAudit preserve-baseline: packages=1, configurations=318, entries=64635, globalStrings=37464, styles=0; resource names/IDs/types/flags/configurations/values and string/style pools retained; no resource-name or resolved-value differences accepted; unstyled global string index order normalized; swapped referenced values rejected"
+        ],
+        "whole-apk-audit": [
+          "PASS whole fresh Instagram 452 APK semantics: appClasses=217567, appMethods=892044, wrappers=183, preservedHelpers=56, addedCallbacks=219, lifecycleEntryHooks=387, dialogHooks=23, systemCallbackHooks=11, terminalCallsites=1150, terminalBridges=899, nativeInstagramHooks=12, twitterNativeScopes=0, emittedRuntimeClasses=98, assertions=36841797"
+        ]
+      },
+      "case": "piko64-hiro318-final",
+      "evidence_file": "QA134/piko64-hiro318-final/preservation-proof.json",
+      "evidence_identity": {
+        "bytes": 16304,
+        "sha256": "aa03d1347b8e6354eb42f0f879b8dac4b0ae1bad44ed0ec7db0a0659afb1630f"
+      },
+      "inputs_hash_unchanged_after_each_audit": true,
+      "manager_apply_selected": 65,
+      "manager_finished": [
+        {
+          "failure": null,
+          "type": "finished"
+        }
+      ],
+      "manager_patch_failures": [],
+      "manager_patches_done": [
+        65
+      ],
+      "native_libraries_byte_identical": true,
+      "output": {
+        "bytes": 159008876,
+        "sha256": "90381ec18675b716196817d89b50f081a65ae54033849d7b24d9d9abf1ef2321"
+      },
+      "requested_source_bundle_order": "piko-first",
+      "unchanged_zip_entries": 10659
+    },
+    {
+      "audits": {
+        "manifest-audit": [
+          "PASS InstagramManifestAudit preserve-baseline: activities=540; package/version/SDK/permissions/components/intent filters/task flags retained"
+        ],
+        "native-home-audit": [
+          "PASS Instagram134NativeHomeAudit: 379 assertions; both native executable bodies restored byte-exact, unrelated Home methods unchanged, three changed-body negatives rejected before mutation; static DEX validation, no device execution"
+        ],
+        "profile-link-audit": [
+          "PASS Instagram130ProfileLinkAudit output: assertions=129, rejectedMutations=0; exact native dataflow, guards, result and all return edges preserved; no device execution"
+        ],
+        "resources-audit": [
+          "PASS InstagramResourcesAudit preserve-baseline: packages=1, configurations=318, entries=64635, globalStrings=37464, styles=0; resource names/IDs/types/flags/configurations/values and string/style pools retained; no resource-name or resolved-value differences accepted; unstyled global string index order normalized; swapped referenced values rejected"
+        ],
+        "whole-apk-audit": [
+          "PASS whole fresh Instagram 452 APK semantics: appClasses=217567, appMethods=892044, wrappers=183, preservedHelpers=56, addedCallbacks=219, lifecycleEntryHooks=387, dialogHooks=23, systemCallbackHooks=11, terminalCallsites=1150, terminalBridges=899, nativeInstagramHooks=12, twitterNativeScopes=0, emittedRuntimeClasses=98, assertions=36841797"
+        ]
+      },
+      "case": "hiro318-piko64-final",
+      "evidence_file": "QA134/hiro318-piko64-final/preservation-proof.json",
+      "evidence_identity": {
+        "bytes": 16304,
+        "sha256": "92a3860ff96b36d61d02f447d89d415e0f2159d8a1c959ecb734e02c541ee2b9"
+      },
+      "inputs_hash_unchanged_after_each_audit": true,
+      "manager_apply_selected": 65,
+      "manager_finished": [
+        {
+          "failure": null,
+          "type": "finished"
+        }
+      ],
+      "manager_patch_failures": [],
+      "manager_patches_done": [
+        65
+      ],
+      "native_libraries_byte_identical": true,
+      "output": {
+        "bytes": 159008876,
+        "sha256": "90381ec18675b716196817d89b50f081a65ae54033849d7b24d9d9abf1ef2321"
+      },
+      "requested_source_bundle_order": "hiro-first",
+      "unchanged_zip_entries": 10659
+    }
+  ],
+  "host": {
+    "bytes": 19926006,
+    "sha256": "4ffa8ccabcc475a18781fcc8642c721eed35ede7d43f967c4f0bd0f51a964a29"
+  },
+  "limitations": [
+    "Manager request source-bundle order was reversed; Manager actual patch event sequence is sorted identically in both cases.",
+    "Official Piko default 64 selections tested, not an unknown custom 68-selection configuration.",
+    "No physical handset execution; this proves application, emitted native hooks/runtime, and preservation only."
+  ],
+  "manager": {
+    "bytes": 41222610,
+    "sha256": "3df9064c5648e0ea0a2d5df4394616bc2320c7bd950ab530dde3d93be6906300"
+  },
+  "mpp": {
+    "bytes": 48032024,
+    "sha256": "170367733645b3ae3391a5d58f9426d7c43c01e02b6091b8c5cfc6948d1309af"
+  },
+  "original_apk": {
+    "bytes": 143237227,
+    "sha256": "22f20062d16997e26009e73b0425974efef8ac69c76dd8912ee8a091213c39e2"
+  },
+  "physical_android_tested": false,
+  "piko": {
+    "bytes": 8529170,
+    "sha256": "a7658d042676d750ff68b782ff02e65d077c011d6a6f09031c05b39e80fcc7a3"
+  },
+  "piko_baseline": {
+    "failure": null,
+    "output": {
+      "bytes": 156624198,
+      "sha256": "7b0992b62299806d33fd8fb6be9410075d50d12152c841d868062b64bda98866"
+    },
+    "patches_done_counts": [
+      64
+    ],
+    "proof": {
+      "bytes": 8513,
+      "sha256": "a16b763b8809e0d878f507330471e6e0c0b82e72f9fce5875f5f1f288c309d71"
+    },
+    "selection_count": 64
+  },
+  "result": "PASS",
+  "schema": "homeback134-piko-final-summary-v1",
+  "source_freeze": {
+    "build_proof": {
+      "bytes": 29417,
+      "sha256": "a8e00319610969142872fa16742d1954406c441a5a9fd5d4dda66eb92c123118"
+    },
+    "matching_files": 183
+  },
+  "source_order_outputs_byte_identical": true
+}

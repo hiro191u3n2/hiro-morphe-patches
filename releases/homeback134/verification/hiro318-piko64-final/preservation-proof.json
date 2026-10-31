@@ -1,0 +1,465 @@
+{
+  "audits": {
+    "manifest-audit": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/QA134/audit-resources:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "InstagramManifestAudit",
+        "--preserve-baseline",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/patched.apk"
+      ],
+      "log": {
+        "bytes": 141,
+        "sha256": "2ed6217c20ac66a0d734a3dc32ec8ed1a3698d3ee978c48e33462148c4f1453b"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS InstagramManifestAudit preserve-baseline: activities=540; package/version/SDK/permissions/components/intent filters/task flags retained"
+      ]
+    },
+    "native-home-audit": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build134-first/audit:/workspace/scratch/b9475c2b1ec5/build134-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram134NativeHomeAudit",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/native-synthetic.dex",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/patched.apk"
+      ],
+      "log": {
+        "bytes": 233,
+        "sha256": "bc35081aa73222be546dd03c30b3121f2653443923dfda02b1c4359b2ed78ce7"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram134NativeHomeAudit: 379 assertions; both native executable bodies restored byte-exact, unrelated Home methods unchanged, three changed-body negatives rejected before mutation; static DEX validation, no device execution"
+      ]
+    },
+    "profile-link-audit": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build134-first/audit:/workspace/scratch/b9475c2b1ec5/build134-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram130ProfileLinkAudit",
+        "output",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/patched.apk"
+      ],
+      "log": {
+        "bytes": 169,
+        "sha256": "a79c1e3e235e8c9a9a89e1238ae2e3f5960a5756ae6d7fc0180bf85aeb1cd29c"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram130ProfileLinkAudit output: assertions=129, rejectedMutations=0; exact native dataflow, guards, result and all return edges preserved; no device execution"
+      ]
+    },
+    "resources-audit": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-Xmx2g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/QA134/audit-resources:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "InstagramResourcesAudit",
+        "--preserve-baseline",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/patched.apk"
+      ],
+      "log": {
+        "bytes": 351,
+        "sha256": "8f404e38f8dc14b8ed53c69e8a4b9f54fc0521035deba3572bee2d8864a0772e"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS InstagramResourcesAudit preserve-baseline: packages=1, configurations=318, entries=64635, globalStrings=37464, styles=0; resource names/IDs/types/flags/configurations/values and string/style pools retained; no resource-name or resolved-value differences accepted; unstyled global string index order normalized; swapped referenced values rejected"
+      ]
+    },
+    "whole-apk-audit": {
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-ea",
+        "-Xmx3g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build134-first/audit:/workspace/scratch/b9475c2b1ec5/build134-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "ActualInstagram452Audit",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/hiro318-piko64-final/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/dist134-first/Hiro_Morphe_Patches_v1.0.318.mpp"
+      ],
+      "log": {
+        "bytes": 1928,
+        "sha256": "b84d66b95459aca82c449b5e66dd37470d2084884db4eb0dc1b714d5388511e9"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS whole fresh Instagram 452 APK semantics: appClasses=217567, appMethods=892044, wrappers=183, preservedHelpers=56, addedCallbacks=219, lifecycleEntryHooks=387, dialogHooks=23, systemCallbackHooks=11, terminalCallsites=1150, terminalBridges=899, nativeInstagramHooks=12, twitterNativeScopes=0, emittedRuntimeClasses=98, assertions=36841797"
+      ]
+    }
+  },
+  "case": "hiro318-piko64-final",
+  "input_piko_baseline": {
+    "bytes": 156624198,
+    "sha256": "7b0992b62299806d33fd8fb6be9410075d50d12152c841d868062b64bda98866"
+  },
+  "inputs_hash_unchanged_after_each_audit": true,
+  "manager_apply": {
+    "applied_patch_names": [
+      "Add settings",
+      "Change like animation",
+      "Change version code",
+      "Copy comment",
+      "Custom font",
+      "Custom sharing domain",
+      "Customise story ring size",
+      "Customise story timestamp",
+      "Customize navigation bar",
+      "Disable Reels scrolling",
+      "Disable ads",
+      "Disable analytics",
+      "Disable comments",
+      "Disable discover people",
+      "Disable double tap like",
+      "Disable explore",
+      "Disable highlights",
+      "Disable screenshot detection",
+      "Disable stories",
+      "Disable story flipping",
+      "Disable swipe to create",
+      "Disable telemetry",
+      "Disable typing status",
+      "Disable video autoplay",
+      "Download media",
+      "Download voice message",
+      "External downloader",
+      "Filter stories",
+      "Focus Lock",
+      "Friendship status indicator",
+      "Hidden chats",
+      "Hide Reels follow button",
+      "Hide feed posts",
+      "Hide group creation button on sharesheet",
+      "Hide hidden requests",
+      "Hide notes tray",
+      "Hide reshare button",
+      "Hide save buttons",
+      "Hide share button",
+      "Hide stories tray",
+      "Hide story follow button",
+      "Hide suggested content",
+      "Improve image viewing",
+      "Inbox lock",
+      "Limit feed to following profiles",
+      "Loop story",
+      "Make ephemeral media permanent",
+      "Mark as read after reply",
+      "Mark chat as read manually",
+      "More options on post",
+      "More options on profile",
+      "Open links externally",
+      "Recommended flags",
+      "Remove empty bottom space",
+      "Sanitize share links",
+      "Save Instants",
+      "Save deleted messages",
+      "Save media comment",
+      "Theme",
+      "Unlock developer options",
+      "View DMs anonymously",
+      "View live anonymously",
+      "View stories anonymously",
+      "View story mentions",
+      "戻る1回で終了・履歴削除"
+    ],
+    "events": {
+      "bytes": 15709,
+      "sha256": "eb97312dd3f0dc24c45f1ade913ec95d0ece13d715173e69fcc2e5f90462f4b8"
+    },
+    "finished": [
+      {
+        "failure": null,
+        "type": "finished"
+      }
+    ],
+    "host": {
+      "bytes": 19926006,
+      "sha256": "4ffa8ccabcc475a18781fcc8642c721eed35ede7d43f967c4f0bd0f51a964a29"
+    },
+    "input": {
+      "bytes": 143237227,
+      "sha256": "22f20062d16997e26009e73b0425974efef8ac69c76dd8912ee8a091213c39e2"
+    },
+    "manager": {
+      "bytes": 41222610,
+      "sha256": "3df9064c5648e0ea0a2d5df4394616bc2320c7bd950ab530dde3d93be6906300"
+    },
+    "order": "hiro-first",
+    "output": {
+      "bytes": 159008876,
+      "sha256": "90381ec18675b716196817d89b50f081a65ae54033849d7b24d9d9abf1ef2321"
+    },
+    "patch_failures": [],
+    "patches_done_counts": [
+      65
+    ],
+    "physical_android_tested": false,
+    "request": {
+      "bytes": 3080,
+      "sha256": "54f83029915efb66d996e972aed381e0200ff04fc0d87c4f1c9d32fbcb9f59e3"
+    },
+    "requested_patch_names": [
+      "戻る1回で終了・履歴削除",
+      "Disable ads",
+      "Hide suggested content",
+      "Filter stories",
+      "Custom sharing domain",
+      "Open links externally",
+      "Disable comments",
+      "Disable explore",
+      "Disable highlights",
+      "Disable stories",
+      "Disable analytics",
+      "Disable discover people",
+      "Hide reshare button",
+      "Hide save buttons",
+      "Hide share button",
+      "Disable typing status",
+      "View live anonymously",
+      "View stories anonymously",
+      "Sanitize share links",
+      "Change like animation",
+      "Copy comment",
+      "Save media comment",
+      "Custom font",
+      "Download voice message",
+      "Make ephemeral media permanent",
+      "Mark chat as read manually",
+      "Disable video autoplay",
+      "Disable swipe to create",
+      "Hide feed posts",
+      "Hide group creation button on sharesheet",
+      "Hide hidden requests",
+      "Hide notes tray",
+      "Hide stories tray",
+      "Limit feed to following profiles",
+      "Disable double tap like",
+      "Focus Lock",
+      "Hidden chats",
+      "Inbox lock",
+      "Save deleted messages",
+      "Download media",
+      "External downloader",
+      "Mark as read after reply",
+      "View DMs anonymously",
+      "Improve image viewing",
+      "Save Instants",
+      "Recommended flags",
+      "Unlock developer options",
+      "More options on post",
+      "Customize navigation bar",
+      "Disable screenshot detection",
+      "Disable Reels scrolling",
+      "Hide Reels follow button",
+      "Remove empty bottom space",
+      "Add settings",
+      "Hide story follow button",
+      "Customise story ring size",
+      "Customise story timestamp",
+      "Disable story flipping",
+      "Loop story",
+      "View story mentions",
+      "Disable telemetry",
+      "Theme",
+      "Friendship status indicator",
+      "More options on profile",
+      "Change version code"
+    ],
+    "selected_bundles": [
+      {
+        "artifact": "Hiro_Morphe_Patches_v1.0.318.mpp",
+        "bytes": 48032024,
+        "option_defaults": {
+          "戻る1回で終了・履歴削除": {}
+        },
+        "option_overrides": {},
+        "selected_keys": [
+          "戻る1回で終了・履歴削除"
+        ],
+        "sha256": "170367733645b3ae3391a5d58f9426d7c43c01e02b6091b8c5cfc6948d1309af"
+      },
+      {
+        "artifact": "piko-3.11.0-dev.3.mpp",
+        "bytes": 8529170,
+        "option_defaults": {
+          "Add settings": {},
+          "Change like animation": {},
+          "Change version code": {
+            "versionCode": 2147483647
+          },
+          "Copy comment": {},
+          "Custom font": {},
+          "Custom sharing domain": {},
+          "Customise story ring size": {},
+          "Customise story timestamp": {},
+          "Customize navigation bar": {},
+          "Disable Reels scrolling": {},
+          "Disable ads": {},
+          "Disable analytics": {},
+          "Disable comments": {},
+          "Disable discover people": {},
+          "Disable double tap like": {},
+          "Disable explore": {},
+          "Disable highlights": {},
+          "Disable screenshot detection": {},
+          "Disable stories": {},
+          "Disable story flipping": {},
+          "Disable swipe to create": {},
+          "Disable telemetry": {},
+          "Disable typing status": {},
+          "Disable video autoplay": {},
+          "Download media": {},
+          "Download voice message": {},
+          "External downloader": {},
+          "Filter stories": {},
+          "Focus Lock": {},
+          "Friendship status indicator": {},
+          "Hidden chats": {},
+          "Hide Reels follow button": {},
+          "Hide feed posts": {},
+          "Hide group creation button on sharesheet": {},
+          "Hide hidden requests": {},
+          "Hide notes tray": {},
+          "Hide reshare button": {},
+          "Hide save buttons": {},
+          "Hide share button": {},
+          "Hide stories tray": {},
+          "Hide story follow button": {},
+          "Hide suggested content": {},
+          "Improve image viewing": {},
+          "Inbox lock": {},
+          "Limit feed to following profiles": {},
+          "Loop story": {},
+          "Make ephemeral media permanent": {},
+          "Mark as read after reply": {},
+          "Mark chat as read manually": {},
+          "More options on post": {},
+          "More options on profile": {},
+          "Open links externally": {},
+          "Recommended flags": {},
+          "Remove empty bottom space": {},
+          "Sanitize share links": {},
+          "Save Instants": {},
+          "Save deleted messages": {},
+          "Save media comment": {},
+          "Theme": {
+            "amoled": false
+          },
+          "Unlock developer options": {},
+          "View DMs anonymously": {},
+          "View live anonymously": {},
+          "View stories anonymously": {},
+          "View story mentions": {}
+        },
+        "option_overrides": {},
+        "selected_keys": [
+          "Disable ads",
+          "Hide suggested content",
+          "Filter stories",
+          "Custom sharing domain",
+          "Open links externally",
+          "Disable comments",
+          "Disable explore",
+          "Disable highlights",
+          "Disable stories",
+          "Disable analytics",
+          "Disable discover people",
+          "Hide reshare button",
+          "Hide save buttons",
+          "Hide share button",
+          "Disable typing status",
+          "View live anonymously",
+          "View stories anonymously",
+          "Sanitize share links",
+          "Change like animation",
+          "Copy comment",
+          "Save media comment",
+          "Custom font",
+          "Download voice message",
+          "Make ephemeral media permanent",
+          "Mark chat as read manually",
+          "Disable video autoplay",
+          "Disable swipe to create",
+          "Hide feed posts",
+          "Hide group creation button on sharesheet",
+          "Hide hidden requests",
+          "Hide notes tray",
+          "Hide stories tray",
+          "Limit feed to following profiles",
+          "Disable double tap like",
+          "Focus Lock",
+          "Hidden chats",
+          "Inbox lock",
+          "Save deleted messages",
+          "Download media",
+          "External downloader",
+          "Mark as read after reply",
+          "View DMs anonymously",
+          "Improve image viewing",
+          "Save Instants",
+          "Recommended flags",
+          "Unlock developer options",
+          "More options on post",
+          "Customize navigation bar",
+          "Disable screenshot detection",
+          "Disable Reels scrolling",
+          "Hide Reels follow button",
+          "Remove empty bottom space",
+          "Add settings",
+          "Hide story follow button",
+          "Customise story ring size",
+          "Customise story timestamp",
+          "Disable story flipping",
+          "Loop story",
+          "View story mentions",
+          "Disable telemetry",
+          "Theme",
+          "Friendship status indicator",
+          "More options on profile",
+          "Change version code"
+        ],
+        "sha256": "a7658d042676d750ff68b782ff02e65d077c011d6a6f09031c05b39e80fcc7a3"
+      }
+    ],
+    "selected_count": 65,
+    "success": true
+  },
+  "mpp": {
+    "bytes": 48032024,
+    "sha256": "170367733645b3ae3391a5d58f9426d7c43c01e02b6091b8c5cfc6948d1309af"
+  },
+  "native_libraries_byte_identical": true,
+  "order": "hiro-first",
+  "output": {
+    "bytes": 159008876,
+    "sha256": "90381ec18675b716196817d89b50f081a65ae54033849d7b24d9d9abf1ef2321"
+  },
+  "physical_android_tested": false,
+  "result": "PASS",
+  "schema": "homeback134-piko-preservation-v1",
+  "unchanged_zip_entries": 10659,
+  "zip_entry_exclusions": [
+    "DEX",
+    "AndroidManifest.xml",
+    "resources.arsc",
+    "signature metadata"
+  ]
+}
