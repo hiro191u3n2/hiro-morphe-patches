@@ -1,0 +1,57 @@
+name: Verify and publish Instagram profile-to-Reels bundle321
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback137-publish.yml'
+      - 'releases/homeback137/publication/**'
+      - 'releases/homeback137/src/**'
+      - 'releases/homeback137/verification/**'
+      - 'releases/homeback137/README.md'
+      - 'releases/homeback137/LICENSE'
+      - 'releases/homeback137/NOTICE'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Restore exact verified bundle from pinned baseline and delta
+        run: python3 releases/homeback137/publication/restore_saved.py
+      - name: Verify final artifact and fresh source build APK evidence
+        run: >-
+          python3 releases/homeback137/publication/check.py
+          --bundle downloads/Hiro_Morphe_Patches_v1.0.321.mpp
+          --report releases/homeback137/verification/verified.json
+      - name: Package complete sources and exact verified artifact
+        run: >-
+          python3 releases/homeback137/publication/publish.py
+          --repo . --dist .ci-homeback137/dist --local-only
+      - name: Require reviewed branch heads and unpublished version
+        run: >-
+          python3 releases/homeback137/publication/publish.py
+          --repo . --dist .ci-homeback137/dist --preflight-only
+      - name: Publish verified assets and atomically advance both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback137/publication/publish.py --repo . --dist .ci-homeback137/dist 2>&1 | tee .ci-homeback137/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback137-bundle321-publication
+          path: .ci-homeback137/
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1

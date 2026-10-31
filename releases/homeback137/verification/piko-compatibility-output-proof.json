@@ -1,0 +1,87 @@
+{
+  "all_inputs_and_outputs_unchanged": true,
+  "cases": {
+    "hiro321-piko64": {
+      "all_inputs_and_output_unchanged": true,
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx3g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build137-live-first/audit:/workspace/scratch/b9475c2b1ec5/build137-live-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram137PikoContractAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA137/final321-live/hiro321-piko64/patched.apk"
+      ],
+      "log": {
+        "bytes": 324,
+        "sha256": "903176ce78f7a1dee7854dfac29e8887bc0a2cda01e798a3a5b0878b34ba1c82"
+      },
+      "output": {
+        "bytes": 159012988,
+        "sha256": "24b80afd347cf9bf942eff5d1f7fbb3b3624d4bdd592d22d98b5786c1da159d0"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram137PikoContractAudit: 173 assertions; exact two Piko additions independently reversed to original bytes, native Reels selection/reset preserved, serialized and actual live append-catch contracts accepted without edits, eight corrupt variants rejected before mutation; all inputs read-only, no device execution"
+      ]
+    },
+    "piko64-hiro321": {
+      "all_inputs_and_output_unchanged": true,
+      "command": [
+        "/workspace/scratch/b9475c2b1ec5/jdk134/jdk-21.0.8+9/bin/java",
+        "-XX:-UsePerfData",
+        "-ea",
+        "-Xmx3g",
+        "-cp",
+        "/workspace/scratch/b9475c2b1ec5/build137-live-first/audit:/workspace/scratch/b9475c2b1ec5/build137-live-first/patch:/workspace/scratch/b9475c2b1ec5/tools134/tools/morphe.jar",
+        "Instagram137PikoContractAudit",
+        "/workspace/scratch/b9475c2b1ec5/inputs134/instagram452-original.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA134/piko64-baseline/patched.apk",
+        "/workspace/scratch/b9475c2b1ec5/QA137/final321-live/piko64-hiro321/patched.apk"
+      ],
+      "log": {
+        "bytes": 324,
+        "sha256": "903176ce78f7a1dee7854dfac29e8887bc0a2cda01e798a3a5b0878b34ba1c82"
+      },
+      "output": {
+        "bytes": 159012988,
+        "sha256": "f5b11912569882593d3eafaabb09248ca3e12b1301bd539fa99514c0bb1991d5"
+      },
+      "result": "PASS",
+      "summary": [
+        "PASS Instagram137PikoContractAudit: 173 assertions; exact two Piko additions independently reversed to original bytes, native Reels selection/reset preserved, serialized and actual live append-catch contracts accepted without edits, eight corrupt variants rejected before mutation; all inputs read-only, no device execution"
+      ]
+    }
+  },
+  "compiled_audit_and_patch_class_count": 65,
+  "compiled_classes_frozen_to_manager_summary": true,
+  "driver": {
+    "bytes": 5519,
+    "path": "QA137/verify_piko_compatibility_outputs.py",
+    "sha256": "d923c3c0f951f48acf7faf127ba89117c67ae67d336dca898dca24afe3a7fbc0"
+  },
+  "frozen_source_files": 192,
+  "manager_summary": {
+    "bytes": 68572,
+    "sha256": "0d27ca266cd7e246a194f66c67cc9529007f1cb043679ebdd198850bd24d8792"
+  },
+  "mpp": {
+    "bytes": 48067555,
+    "sha256": "b466108dcb72831986be9a9292cbbdb3432ebd7a44bf63065740a2ff69646901"
+  },
+  "original_apk": {
+    "bytes": 143237227,
+    "sha256": "22f20062d16997e26009e73b0425974efef8ac69c76dd8912ee8a091213c39e2"
+  },
+  "physical_android_tested": false,
+  "piko_baseline": {
+    "bytes": 156624198,
+    "sha256": "7b0992b62299806d33fd8fb6be9410075d50d12152c841d868062b64bda98866"
+  },
+  "result": "PASS",
+  "schema": "homeback137-piko-output-compatibility-v1",
+  "source_build_proof_and_mpp_unchanged": true
+}
