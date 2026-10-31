@@ -1,0 +1,30 @@
+{
+  "bundle": {
+    "bytes": 48069357,
+    "sha256": "aae60ca12e38990ad0ecec4cb71a224e3b25f4da51159ec94daa2076c5299745"
+  },
+  "diagnostic_checks": {
+    "behavior": {
+      "pass_line": "PASS independent diagnostic-only source AST inverse: baselineFiles=28, standaloneTraceCalls=33, identityWrappers=15; all original executable source decisions retained; new trace helper reviewed separately",
+      "path": "verification/diagnostic/source-inverse.log"
+    },
+    "privacy": {
+      "pass_line": "PASS diagnostic privacy: bounded HB320 codes only; no URL, username, profile text or native class name enters the new display/log/state; no new reflective, lazy or current-screen reads",
+      "path": "verification/diagnostic/privacy.log"
+    }
+  },
+  "host_suites": {
+    "count": 36,
+    "new_required": [
+      "Back136InstagramDiagnosticTest"
+    ]
+  },
+  "ready": true,
+  "reviewed_dev": "76d42b3d90a41d7a22d4d0a5b08506a4f6bef773",
+  "reviewed_main": "14f00b372c33bdd2d17fa618d87b7976dd593b8f",
+  "runtime_scope": {
+    "classes": 101,
+    "preservation": "PASS Bundle136Audit runtime: preserved=95; changed=[Lapp/hiro/oneback/runtime/InstagramDispatcherBack;, Lapp/hiro/oneback/runtime/InstagramExternalProfile;, Lapp/hiro/oneback/runtime/OneBackExit;]; added=[Lapp/hiro/oneback/runtime/InstagramBackTrace$1;, Lapp/hiro/oneback/runtime/InstagramBackTrace$State;, Lapp/hiro/oneback/runtime/InstagramBackTrace;]"
+  },
+  "schema": "homeback136-publication-pins-v1"
+}

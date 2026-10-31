@@ -1,0 +1,26 @@
+{
+  "result": "PASS",
+  "rejected_mutations": 4,
+  "mutations": [
+    {
+      "case": "original_decision_changed",
+      "result": "REJECTED",
+      "reason": "Non-diagnostic AST delta"
+    },
+    {
+      "case": "additional_native_read",
+      "result": "REJECTED",
+      "reason": "Additional getter/callback"
+    },
+    {
+      "case": "literal_changed",
+      "result": "REJECTED",
+      "reason": "Non-diagnostic AST delta"
+    },
+    {
+      "case": "unreviewed_observer",
+      "result": "REJECTED",
+      "reason": "Unreviewed identity observer"
+    }
+  ]
+}
