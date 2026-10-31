@@ -1,0 +1,57 @@
+name: Verify and publish native Instagram Back fix bundle319
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback135-publish.yml'
+      - 'releases/homeback135/publication/**'
+      - 'releases/homeback135/src/**'
+      - 'releases/homeback135/verification/**'
+      - 'releases/homeback135/README.md'
+      - 'releases/homeback135/LICENSE'
+      - 'releases/homeback135/NOTICE'
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Restore exact verified bundle from pinned baseline and delta
+        run: python3 releases/homeback135/publication/restore_saved.py
+      - name: Verify final artifact and fresh source build APK evidence
+        run: >-
+          python3 releases/homeback135/publication/check.py
+          --bundle downloads/Hiro_Morphe_Patches_v1.0.319.mpp
+          --report releases/homeback135/verification/verified.json
+      - name: Package complete sources and exact verified artifact
+        run: >-
+          python3 releases/homeback135/publication/publish.py
+          --repo . --dist .ci-homeback135/dist --local-only
+      - name: Require reviewed branch heads and unpublished version
+        run: >-
+          python3 releases/homeback135/publication/publish.py
+          --repo . --dist .ci-homeback135/dist --preflight-only
+      - name: Publish verified assets and atomically advance both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/homeback135/publication/publish.py --repo . --dist .ci-homeback135/dist 2>&1 | tee .ci-homeback135/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: homeback135-bundle319-publication
+          path: .ci-homeback135/
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1

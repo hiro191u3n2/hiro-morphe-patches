@@ -1,0 +1,38 @@
+FAIL first_root_profile_native_back_with_null_tab: java.lang.AssertionError: first direct-root profile exits after native false result
+FAIL first_root_profile_dispatch_with_null_tab: java.lang.AssertionError: root transaction independently authorizes native profile dispatch
+FAIL first_root_profile_without_selected_tab_enum: java.lang.AssertionError: startup tab stack can be empty
+FAIL first_root_profile_before_navigation_controller: java.lang.AssertionError: root profile does not depend on navigation initialization
+FAIL first_root_profile_with_retained_uncached_tab: java.lang.AssertionError: root MAIN profile remains current above an uncreated retained tab
+FAIL first_root_profile_does_not_call_throwing_main_getter: java.lang.AssertionError: root transaction needs no Main getter
+FAIL later_root_profile_with_initialized_tab_still_exits: java.lang.AssertionError: root profile also exits with a real initialized tab wrapper
+FAIL initial_root_failed_guard_does_not_read_tab_selector: java.lang.AssertionError: failed root guard never falls through to Main getter
+FAIL initial_root_profile_native_consumption_preserved: java.lang.AssertionError: later independent false result exits
+PASS initial_root_profile_requires_registration
+PASS initial_root_wrong_manager
+PASS initial_root_wrong_container
+PASS initial_root_different_profile_selected
+PASS initial_root_profile_not_added
+PASS initial_root_profile_not_visible
+PASS initial_root_profile_not_resumed
+PASS initial_root_saved
+PASS initial_root_executing
+PASS initial_root_pending
+PASS initial_root_visible_other_sibling
+PASS initial_root_visible_retained_tab
+PASS initial_root_child_stack
+PASS initial_root_child_pending
+PASS initial_root_ime
+PASS initial_root_comments_sheet
+PASS initial_root_live_modal_service
+PASS initial_root_native_activity_layer
+PASS initial_root_dialog_preserved
+PASS initial_root_parented_profile_stays_on_existing_route
+FAIL initial_root_popup_close_then_next_back: java.lang.AssertionError: native popup closure consumes this Back
+FAIL initial_root_ime_close_then_next_back: java.lang.AssertionError: IME closure cannot become same-Back exit
+FAIL initial_root_child_return_requires_next_back: java.lang.AssertionError: same child-return Back is consumed without exit
+FAIL initial_root_profile_video_return_requires_next_back: java.lang.AssertionError: same video-return Back cannot exit profile
+PASS initial_root_target_changes_inside_native_handler
+FAIL initial_root_physical_back: java.lang.AssertionError: first physical Back exits at native profile boundary
+FAIL initial_root_predictive_cancel: java.lang.AssertionError: first root profile prediction suppresses pop
+FAIL initial_root_predictive_commit: java.lang.AssertionError: first root prediction starts
+FAIL initial_root_canceled_key_preserved: java.lang.AssertionError: canceled key cannot authorize exit
