@@ -1,0 +1,104 @@
+name: Verify and publish Fossify Calendar month colors bundle322
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fossify-calendar100-publish.yml'
+      - 'releases/fossify-calendar100/src/**'
+      - 'releases/fossify-calendar100/publication/**'
+      - 'releases/fossify-calendar100/verification/**'
+      - 'releases/fossify-calendar100/README.md'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.13+9'
+      - name: Verify reviewed source and current baseline
+        run: |
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,subprocess
+          path=pathlib.Path('releases/fossify-calendar100/publication/publish.py')
+          spec=importlib.util.spec_from_file_location('publisher',path);p=importlib.util.module_from_spec(spec);spec.loader.exec_module(p)
+          cfg=json.loads((path.parent/'manifest.json').read_text())
+          p.require(cfg['ready'] is True,'Reviewed local outputs are not frozen')
+          p.require(cfg['source_sha256']=={n:p.sha(v) for n,v in p.source_files(pathlib.Path('.')).items()},'Source changed after local verification')
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          p.require(feed['version']==p.PREVIOUS and feed['download_url']==p.BASE_URL,'Active baseline advanced')
+          p.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.13','JDK differs from local build')
+          PY
+      - name: Download exact pinned public tools and bundle321
+        run: |
+          python3 - <<'PY'
+          import hashlib,pathlib,urllib.request
+          out=pathlib.Path('.ci-calendar100');(out/'tools').mkdir(parents=True)
+          rows={
+            'morphe.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar','b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58'),
+            'morphe-current.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar','a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573'),
+            'r8.jar':('https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar','badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa'),
+            'android.jar':('https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar','4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b')}
+          for name,(url,pin) in rows.items():
+              with urllib.request.urlopen(url,timeout=180) as response:raw=response.read()
+              assert hashlib.sha256(raw).hexdigest()==pin,'Tool differs: '+name
+              (out/'tools'/name).write_bytes(raw)
+          url='https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/94ca06d62b6a9536f0cd0e8d7186f7f269e74a09/downloads/Hiro_Morphe_Patches_v1.0.321.mpp'
+          with urllib.request.urlopen(url,timeout=180) as response:raw=response.read()
+          assert hashlib.sha256(raw).hexdigest()=='b466108dcb72831986be9a9292cbbdb3432ebd7a44bf63065740a2ff69646901'
+          (out/'baseline321.mpp').write_bytes(raw)
+          PY
+      - name: First clean build and regression checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/fossify-calendar100/src/build.py --base .ci-calendar100/baseline321.mpp --tools .ci-calendar100/tools --work .ci-calendar100/build-a --dist .ci-calendar100/dist-a 2>&1 | tee .ci-calendar100/build-a.log
+      - name: Second clean build and regression checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/fossify-calendar100/src/build.py --base .ci-calendar100/baseline321.mpp --tools .ci-calendar100/tools --work .ci-calendar100/build-b --dist .ci-calendar100/dist-b 2>&1 | tee .ci-calendar100/build-b.log
+      - name: Match both CI builds to local APK-verified artifacts
+        run: >-
+          python3 releases/fossify-calendar100/publication/publish.py
+          --repo . --dist .ci-calendar100/dist-a --second-dist .ci-calendar100/dist-b
+          --baseline .ci-calendar100/baseline321.mpp --local-only
+      - name: Require current branch heads and unused version
+        run: >-
+          python3 releases/fossify-calendar100/publication/publish.py
+          --repo . --dist .ci-calendar100/dist-a --second-dist .ci-calendar100/dist-b
+          --baseline .ci-calendar100/baseline321.mpp --preflight-only
+      - name: Publish verified MPPs and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/fossify-calendar100/publication/publish.py --repo . --dist .ci-calendar100/dist-a --second-dist .ci-calendar100/dist-b --baseline .ci-calendar100/baseline321.mpp 2>&1 | tee .ci-calendar100/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fossify-calendar100-bundle322-verification
+          path: |
+            .ci-calendar100/dist-a/
+            .ci-calendar100/dist-b/
+            .ci-calendar100/*.log
+            .ci-calendar100/build-a/*.log
+            .ci-calendar100/build-a/*.txt
+            .ci-calendar100/build-a/*.json
+            .ci-calendar100/build-b/*.log
+            .ci-calendar100/build-b/*.txt
+            .ci-calendar100/build-b/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1
