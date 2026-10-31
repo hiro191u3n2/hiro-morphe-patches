@@ -27,7 +27,7 @@ jobs:
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '21.0.23+9'
+          java-version: '21.0.13+9'
       - name: Verify reviewed source and current baseline
         run: |
           python3 - <<'PY'
@@ -39,7 +39,7 @@ jobs:
           p.require(cfg['source_sha256']=={n:p.sha(v) for n,v in p.source_files(pathlib.Path('.')).items()},'Source changed after local verification')
           feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
           p.require(feed['version']==p.PREVIOUS and feed['download_url']==p.BASE_URL,'Active baseline advanced')
-          p.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.23','JDK differs from local build')
+          p.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.13','JDK differs from local build')
           PY
       - name: Download exact pinned public tools and bundle323
         run: |
