@@ -1,0 +1,70 @@
+{
+  "bundle": {
+    "bytes": 48067555,
+    "sha256": "b466108dcb72831986be9a9292cbbdb3432ebd7a44bf63065740a2ff69646901"
+  },
+  "host_suites": {
+    "count": 35,
+    "new_required": [
+      "Back137InstagramProfileReelsTest"
+    ],
+    "required": [
+      "Back116Regression",
+      "Back117InstagramTest",
+      "Back117TikTokTest",
+      "Back118InstagramGuardTest",
+      "Back118InstagramTest",
+      "Back119InstagramTest",
+      "Back119TwitterTest",
+      "Back120InstagramTest",
+      "Back120MainDispatchTest",
+      "Back121InstagramActivityLayersTest",
+      "Back121InstagramCurrentTest",
+      "Back121InstagramDispatchTest",
+      "Back121InstagramScopeTest",
+      "Back122InstagramDispatcherTest",
+      "Back123InstagramTabBackTest",
+      "Back123NativeReelsTest",
+      "Back124TwitterTest",
+      "Back125TwitterKeyTest",
+      "Back125TwitterSystemTest",
+      "Back125TwitterTerminalTest",
+      "Back126InstagramProfileTest",
+      "Back127Instagram452Test",
+      "Back128InstagramProfileTest",
+      "Back130InstagramProfileLinkTest",
+      "Back131InstagramProfileIdentityTest",
+      "Back131InstagramProfileRouteTest",
+      "Back133InstagramDispatcherProfileTest",
+      "Back134InstagramFeedSwitcherTest",
+      "Back134InstagramLocaleProfileTest",
+      "Back134InstagramNativeHomeTest",
+      "Back137InstagramProfileReelsTest",
+      "Back4743NativeBackTest",
+      "Back4743TikTokTest",
+      "Back4753RejectedTest",
+      "HomeBackHostTest"
+    ]
+  },
+  "piko_contract_native_audit": "PASS Instagram137PikoContractAudit: 120 assertions; exact two Piko additions independently reversed to original bytes, native Reels selection/reset preserved, serialized and actual live append-catch contracts accepted without edits, eight corrupt variants rejected before mutation; all inputs read-only, no device execution",
+  "preservation": {
+    "jvm_added": [
+      "app/hiro/oneback/patches/InstagramProfileReelsContract.class",
+      "app/hiro/oneback/patches/InstagramProfileReelsPikoContract.class"
+    ],
+    "jvm_changed": [
+      "app/hiro/oneback/patches/Instagram452Patch.class",
+      "app/hiro/oneback/patches/InstagramExternalProfilePatch.class",
+      "app/hiro/oneback/patches/OneBackPatch.class"
+    ],
+    "loader": "PASS Bundle137Audit loader: preserved=282; replaced=20; new=22; standalone=22; preserved_owned=17; changed=[Lapp/hiro/oneback/patches/Instagram452Patch;, Lapp/hiro/oneback/patches/InstagramExternalProfilePatch;, Lapp/hiro/oneback/patches/OneBackPatch;]; added=[Lapp/hiro/oneback/patches/InstagramProfileReelsContract;, Lapp/hiro/oneback/patches/InstagramProfileReelsPikoContract;]",
+    "native_hooks": 12,
+    "runtime": "PASS Bundle137Audit runtime: preserved=93; changed=[Lapp/hiro/oneback/runtime/InstagramDispatcherBack$Gesture;, Lapp/hiro/oneback/runtime/InstagramDispatcherBack;, Lapp/hiro/oneback/runtime/InstagramExternalProfile;, Lapp/hiro/oneback/runtime/OneBackExit$Root$2;, Lapp/hiro/oneback/runtime/OneBackExit;]; added=[Lapp/hiro/oneback/runtime/InstagramProfileReels$1;, Lapp/hiro/oneback/runtime/InstagramProfileReels$2;, Lapp/hiro/oneback/runtime/InstagramProfileReels$Attempt;, Lapp/hiro/oneback/runtime/InstagramProfileReels$Entry;, Lapp/hiro/oneback/runtime/InstagramProfileReels$Pending;, Lapp/hiro/oneback/runtime/InstagramProfileReels;]",
+    "runtime_classes": 104
+  },
+  "profile_reels_native_audit": "PASS Instagram137ProfileReelsAudit: 57 assertions; exact committed-Back body restored, all three normal returns complete, no predictive/cancel completion, native contract changes rejected before mutation; static DEX validation, no device execution",
+  "ready": true,
+  "reviewed_dev": "5c3acfd1298ebebe575b6aa24a86e63abc89434a",
+  "reviewed_main": "6b38ebd4fc2498cb8fbc833688952a3bea0eb078",
+  "schema": "homeback137-publication-pins-v1"
+}
