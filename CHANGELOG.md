@@ -1,3 +1,8 @@
+# [1.0.322](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/fossify-calendar-v1.0.0) (2026-11-01)
+
+* **Fossify Calendar:** 1.12.1 の1か月ウィジェットで土曜日の曜日・日付を青、祝日の日付を赤に変更。
+* **Fossify Calendar:** 元APKへの適用と再構築を検証済み。実機表示は未確認。
+
 # 1.0.321 (2026-10-31)
 
 * **Instagram:** 外部リンクのプロフィールから戻るとリールへ移動（OneBack v1.1.30）。元APKとPiko併用で適用・保持検証済み。実機未確認。
