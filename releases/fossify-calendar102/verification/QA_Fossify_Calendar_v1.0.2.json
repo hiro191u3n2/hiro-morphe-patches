@@ -1,0 +1,63 @@
+{
+  "schema": "fossify-calendar102-qa-v1",
+  "patch_version": "1.0.2",
+  "bundle_version": "1.0.324",
+  "baseline_version": "1.0.323",
+  "baseline_sha256": "df9c718225878840463a211911f9a62698df38af6291f84800b257fb79689810",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+    "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+  },
+  "sources": {
+    "build.py": "c6a9d511fb93121773ab3e280747068ede1f9067770e7ba19fe5478eee695f12",
+    "patch/CalendarMonthColorsPatch.java": "7bcd9421e48cfabef44b5f0ff74042d29d761ec86af1f7050e5165f0aba75a2a",
+    "runtime/MonthColors.java": "a16172393d09a89f88a5d4d3035c8764e806d7f85ca97dcbc1b1433a65b6a84e",
+    "test/CalendarAudit.java": "e16aaf5290dfa570041660a349a6b5f6554ce541a91da45a9a301d3adee1f19a",
+    "test-host/MonthColorsTest.java": "cf880f9f53516507a35cf30cafad9f2fd22e2ee6cf506bd501c3f722fae0201a",
+    "test-host/android/content/Context.java": "9882e3137451d2662faaf1df525b7642b69158c2c1f2971da3bd67172d5eab59",
+    "test-host/android/graphics/Paint.java": "f677341338fe3de161c17f21685c983d83a405acd226ea5c4e96248993bd59c2",
+    "test-host/android/os/Looper.java": "149dac4969229287c5ea1fbf6ce5ffd5beb06703b3fc69210e616c28efcd4861",
+    "test-host/android/view/View.java": "7c5c7d03a59e7f8116f95423d4d04d83db2e292c7552b67e44e8c5e37f56d67b",
+    "test-host/q50.java": "a6c4f1cb0ce2b04cd1ba9c26446f34b003c5f914ab794556322a5a739274a418"
+  },
+  "artifacts": {
+    "Fossify_Calendar_MonthColors_v1.0.2.mpp": {
+      "bytes": 22801,
+      "sha256": "731fd09ff2af8fe76992d3728ba27d07faf2768f2e337cd9f4766609762656c0"
+    },
+    "Hiro_Morphe_Patches_v1.0.324.mpp": {
+      "bytes": 48085541,
+      "sha256": "773df4e61c1c413fd47ad181ca1fc50595ee139ec29452fe3d6407d9a67011c9"
+    }
+  },
+  "loader_preservation": "PASS loader merge: unrelated existing classes unchanged=304; old Calendar loader classes replaced=3; new Calendar loader classes=3; assertions=1547",
+  "preserved_unrelated_entries": 277,
+  "runtime_sha256": "8cb6990848bd5bd6e573d942b58ab7ab9b99214033e0436f6bfc0c1e958e719b",
+  "host_tests": "PASS MonthColorsTest: 267 assertions",
+  "guard_tests": "PASS guards: wrong package/version/code, missing class, reviewed native transform, modified and repatched bodies; assertions=5253\nPASS guards: wrong package/version/code, missing class, reviewed native transform, modified and repatched bodies; assertions=5253",
+  "apk_application": [
+    {
+      "bundle": "Fossify_Calendar_MonthColors_v1.0.2.mpp",
+      "package": "org.fossify.calendar",
+      "version": "1.12.1",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=5176; exact reviewed methods=3; runtime hooks=8; widget today black constant=1; runtime classes=1; assertions=26004; physical Android behavior not tested.",
+      "preserved_original_resources": 1835
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.324.mpp",
+      "package": "org.fossify.calendar",
+      "version": "1.12.1",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged non-target classes=5176; exact reviewed methods=3; runtime hooks=8; widget today black constant=1; runtime classes=1; assertions=26004; physical Android behavior not tested.",
+      "preserved_original_resources": 1835
+    }
+  ],
+  "supplied_apk_sha256": "4d0aae1abca915d5509edc36f2c1724ae7856484b5d56b76a01cc360bd82b885",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
