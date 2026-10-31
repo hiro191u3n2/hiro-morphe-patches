@@ -1,0 +1,25 @@
+name: Restore exact requested OneBack bundle318
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/homeback318-rollback.yml'
+      - 'releases/homeback318-rollback/rollback.py'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  rollback:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - name: Verify318 bytes and atomically restore main and dev feeds
+        run: python3 releases/homeback318-rollback/rollback.py
