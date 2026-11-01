@@ -1,0 +1,100 @@
+{
+  "baseline_runtime_sha256": "65d0e8e09f107d508794426969505679c178d931dbdf526cc6bfb46e512f2715",
+  "compiled_helper_dex_sha256": "16b7bddc44d279a5ff4b773ff09bcb4be903ebd29179954745f98422df117b8b",
+  "compiled_replaced_class_count": 97,
+  "diagnostic_orchestration_methods1988": [
+    "Lcom/hiro/ulike/GpuChain1961;->collectBand1978(Lcom/hiro/ulike/GpuNoise1960$Session;Lcom/hiro/ulike/GpuNoise1960$Ticket;II[ILandroid/graphics/Bitmap;IILcom/hiro/ulike/ResidentProof1978;)Z",
+    "Lcom/hiro/ulike/GpuChain1961;->compareFinish1978(Landroid/graphics/Bitmap;IIILcom/hiro/ulike/QualityPixels1932$Plan;ZLandroid/graphics/Bitmap;IZLcom/hiro/ulike/GpuNoise1960$Session;ZLcom/hiro/ulike/GpuQualification1961$Cancellation;)I",
+    "Lcom/hiro/ulike/GpuChain1961;->finishBands1978(Lcom/hiro/ulike/GpuNoise1960$Session;IIILcom/hiro/ulike/QualityPixels1932$Plan;Landroid/graphics/Bitmap;ILcom/hiro/ulike/ResidentProof1978;)Z",
+    "Lcom/hiro/ulike/GpuChain1961;->finishBandsLegacy1978(Lcom/hiro/ulike/GpuNoise1960$Session;IIILcom/hiro/ulike/QualityPixels1932$Plan;Landroid/graphics/Bitmap;Lcom/hiro/ulike/ResidentProof1978;)Z",
+    "Lcom/hiro/ulike/GpuChain1961;->finishRows1978(Landroid/graphics/Bitmap;Lcom/hiro/ulike/ResidentProof1978;[IIII)Z",
+    "Lcom/hiro/ulike/GpuChain1961;->runFinishStages(Landroid/graphics/Bitmap;IIILcom/hiro/ulike/QualityPixels1932$Plan;ZLcom/hiro/ulike/GpuChain1961$Timing1962;ILcom/hiro/ulike/GpuNoise1960$Session;ZLcom/hiro/ulike/ResidentProof1978;Z)Landroid/graphics/Bitmap;"
+  ],
+  "methods": {
+    "FastResize1933": [
+      "resample1982"
+    ],
+    "GpuAnalysis1961": [
+      "capture1987",
+      "regions1982",
+      "residentIfQualified",
+      "spatial"
+    ],
+    "GpuChain1961": [
+      "collectBand1978",
+      "compareFinish1978",
+      "finishBands1978",
+      "finishBandsLegacy1978",
+      "finishRows1978",
+      "qualifyFinish1978",
+      "runFinishStages"
+    ],
+    "GpuChain1961$DeferredChain": [
+      "<init>"
+    ],
+    "GpuProtection1961": [
+      "evaluate",
+      "finishBand"
+    ],
+    "GpuQualification1961": [
+      "<clinit>",
+      "attemptSummary1986",
+      "emitFinish1986",
+      "finishAttempt1984",
+      "rejectReason"
+    ],
+    "GpuQualification1961$Attempt1984": [
+      "<init>"
+    ],
+    "ProcessingTiming1947": [
+      "<clinit>",
+      "init",
+      "publish",
+      "render",
+      "summary"
+    ],
+    "ProcessingTiming1947$Trace": [
+      "<init>"
+    ],
+    "QualityPipeline1932": [
+      "finishRoute1954",
+      "singleNoiseInPlace1955"
+    ],
+    "QualityPipeline1932$Strips": [
+      "write"
+    ],
+    "StrongNoise1958": [
+      "estimateRegions1982",
+      "prepareInternal1982"
+    ],
+    "StrongNoise1958$Preparation1982": [
+      "<init>"
+    ]
+  },
+  "raw_method_differences": {
+    "added": 35,
+    "changed": 35,
+    "missing_before_bridge_retention": 4
+  },
+  "retained_compiler_bridges1988": [
+    "Lcom/hiro/ulike/GpuQualification1961$Reservation1984;->access$2302(Lcom/hiro/ulike/GpuQualification1961$Reservation1984;Z)Z",
+    "Lcom/hiro/ulike/GpuQualification1961$Reservation1984;->access$2400(Lcom/hiro/ulike/GpuQualification1961$Reservation1984;)J",
+    "Lcom/hiro/ulike/GpuQualification1961;->access$100()V",
+    "Lcom/hiro/ulike/GpuQualification1961;->access$2500()V"
+  ],
+  "review_complete": true,
+  "review_scope": "Exact current source and actual Java8/D8 output. Six existing Finish orchestration signatures gain scalar stage observations and preserve arithmetic through strict source inverses. All other critical numerical/policy/timing methods retain byte identity. The four pre-existing synthetic ABI bridges are retained with their exact shipped87 bodies. No native, shader, wait or memory-limit change.",
+  "reviewed_production_sha256": {
+    "CameraTrace1965.java": "9dcc42bdb98b3a00de116e40911bb7f2eb3454149280c1a591560875a935712b",
+    "FastResize1933.java": "92dc85522fd06ef8a543642e884f7a9cb4ca4cd85a1cb894ab81ee727c418e17",
+    "GpuAnalysis1961.java": "ce3d53c20b2a804f458b400e4080f7d4b52a2d57f0a775302e1b0e71c84d6537",
+    "GpuChain1961.java": "ee4c2da3ff453e50f23fc256002ea0d9c5644907aa9cd8e8378fd08bf26541d4",
+    "GpuProtection1961.java": "db5d651d4b028fa40fcd8685ae0eba8213a33805cd27c7bdabfc58930afbe950",
+    "GpuQualification1961.java": "ae51bce549f4efca7f75e8d72e380e5a42e3fc1ede5646a16c23994cdb6ad001",
+    "PipelineDetail1988.java": "e003a261544a6280ddd3d4fdee90ef3a7ddc0ad208645f447ee06620b7962b7c",
+    "ProcessingTiming1947.java": "856d4d67ee20ba0c6dd5c37b0c3f22957e818eb75b800856cb9a616f922e87ca",
+    "QualityPipeline1932.java": "6aece3e1e44d5aa7ad79f3606daa712688a269c3203801ac51b1bb6df3ad0372",
+    "StrongNoise1958.java": "44e3910a377fe6541d57a41c46c3c70bf64e7a7f5292a3890bc129880f9345a1"
+  },
+  "schema": "ulike1988-instrumented-methods-v1"
+}

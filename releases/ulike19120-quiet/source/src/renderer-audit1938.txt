@@ -1,0 +1,59 @@
+ULike 1.9.38 output-renderer lifecycle audit
+Input: /workspace/scratch/3be9b88a67b3/validate1937-s2/single/patched.apk
+Disassembly: /workspace/scratch/5134228216e7/render-audit/{runtime,native-render,video-recorder,recorder,te-render,veinfo}.txt
+
+Concrete gap:
+The existing front startup watchdog observes camera input at TECapturePipeline.
+TECameraVideoRecorder$36.onFrameCaptured immediately returns while native recorder
+mCurRecordStatus == 0. Thus input receipt is not output rendering success.
+The output SurfaceView/GL renderer has a separate start/stop state machine that
+was not supervised by the camera-only handshake. Native startRecordPreview
+accepts state 0 (initializes) or 1 (initialized/stopped); state 2 is preview,
+state 3 recording. Starting another active renderer is explicitly rejected
+by the native method and must not be used as generic black-frame recovery.
+
+Audited native path:
+- TECameraVideoRecorder.surfaceCreated records output surface g1, clears a1,
+  and ordinarily calls startPreviewAsync. Optimized k1 path waits for changed.
+- startPreviewAsync sets r1=true and submits native $11 to executeSafeSubmit.
+- $11.run calls startRecordPreview(c), then listener j.onDone(result).
+- Native onOpenGLCreate callback sets mRenderEnvActive and emits code 1000.
+- Native onOpenGLDestroy clears mRenderEnvActive and emits code 1001.
+  Code 1001 is not a first-frame callback.
+- Explicit stopPreview/stopPreviewAsync, surfaceDestroyed, onPause and onDestroy
+  stop or invalidate work. The output surface is not camera input texture.
+
+Implemented boundary:
+RenderStartup1938 starts one bounded ticket per native output-start request.
+It runs ownership/layout checks on MAIN, requires exact foreground front capture,
+current render view + Surface + SurfaceHolder, attachment, visibility, focus,
+positive dimensions and valid Surface. It waits through early binding.
+After 1800 ms it can replay once only if mCurRecordStatus is 0 or 1 AND
+mRenderEnvActive is false. It does not restart active preview, recording, or
+an existing GL environment. Ticket expires after 8000 ms. No image brightness
+threshold, guessed device access, fabricated Surface or direct GL operations.
+
+Native startPreviewAsync is used with a helper-only VECallListener marker.
+An added guard in the real $11.run checks this marker's pending identity,
+8-second deadline, captureBusy(false), foreground/epoch, exact capture/render
+surface identity, valid Surface, front facing and stopped native state on the
+SDK command thread immediately before startRecordPreview. Ordinary SDK tasks
+with null/other listeners pass immediately. Cancellation after submission
+therefore wins over a blocked native command queue. requestedAsync ignores the
+marker so a cancellation racing native API entry cannot arm a new ticket.
+Busy-state reads precede the helper lock to avoid nesting the capture locks.
+
+Validation:
+52 deterministic production-helper assertions (host-renderer1938.txt), including
+successful stopped replay, healthy/active/rear/video non-interference, explicit
+stop, invalid/detached/replaced surface, capture/epoch replacement, held native
+queue with subsequent pause/stop/busy/expiry and cancel-at-native-entry races.
+Host models do not execute Android ART, camera HAL, EGL or a physical screen.
+No physical Android device or actual end-to-end on-screen success was tested.
+Native hook exact inverse, runtime member ABI and APK application are separate
+release gates owned by the root build and independent reviewer.
+
+Rejected unrelated change:
+VERenderView.surfaceChanged contains a native width/height comparison typo.
+It ordinarily causes redundant notification for a nonsquare viewport and does
+not explain the reported full-black center. No speculative change was made.
