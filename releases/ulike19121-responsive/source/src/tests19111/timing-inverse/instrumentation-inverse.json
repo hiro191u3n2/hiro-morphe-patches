@@ -1,0 +1,219 @@
+{
+  "schema": "ulike111-resident-timing-source-inverse-v1",
+  "original_release": "1.9.110",
+  "reviewed": true,
+  "files": {
+    "GpuResident1976.java": {
+      "original_sha256": "972971abc70b62c9f9016d1b1c8dae6ef8e7e6dd3505557caada55a0164def1b",
+      "changes": [
+        {
+          "old_line": 11,
+          "new_line": 11,
+          "old": "",
+          "new": "    // resident timing19111 BEGIN: optional private benchmark observation only.\n    static void residentTiming19111(String operation,long first,long second,long third) {\n        try {\n            if(!GpuQualification1961.background())return;\n            Class.forName(\"com.hiro.ulike.ResidentTiming19111\").getMethod(\"dispatch\",String.class,long[].class)\n                .invoke(null,operation,new long[]{first,second,third});\n        } catch(Throwable optional) {}\n    }\n    // resident timing19111 END\n"
+        },
+        {
+          "old_line": 240,
+          "new_line": 249,
+          "old": "",
+          "new": "                                residentTiming19111(\"begin\",candidate,trial,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 241,
+          "new_line": 251,
+          "old": "",
+          "new": "                                residentTiming19111(\"start\",started,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 245,
+          "new_line": 256,
+          "old": "",
+          "new": "                                    residentTiming19111(\"stop\",started+elapsed,result==null?2:1,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 252,
+          "new_line": 264,
+          "old": "                                } finally {BENCHMARK.remove();if(result!=null)result.recycle();if(ordinaryInput!=null&&!ordinaryInput.isRecycled())ordinaryInput.recycle();}\n",
+          "new": "                                } finally {\n                                    residentTiming19111(\"publish\",0,0,0); // resident timing19111\n                                    BENCHMARK.remove();if(result!=null)result.recycle();if(ordinaryInput!=null&&!ordinaryInput.isRecycled())ordinaryInput.recycle();}\n"
+        }
+      ]
+    },
+    "QualityPipeline1932.java": {
+      "original_sha256": "6590b305a35d65808db0e0c163cbed2c71fb321fb262c14817c93512616425bd",
+      "changes": [
+        {
+          "old_line": 21,
+          "new_line": 21,
+          "old": "",
+          "new": "    // resident timing19111 BEGIN: optional private benchmark observation only.\n    private static void residentTiming19111(String operation,long first,long second,long third) {\n        try {\n            if(!GpuQualification1961.background())return;\n            Class.forName(\"com.hiro.ulike.ResidentTiming19111\").getMethod(\"dispatch\",String.class,long[].class)\n                .invoke(null,operation,new long[]{first,second,third});\n        } catch(Throwable optional) {}\n    }\n    // resident timing19111 END\n"
+        },
+        {
+          "old_line": 1136,
+          "new_line": 1145,
+          "old": "",
+          "new": "        residentTiming19111(\"phase\",0,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1147,
+          "new_line": 1157,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",1,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1168,
+          "new_line": 1179,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",2,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1193,
+          "new_line": 1205,
+          "old": "",
+          "new": "            residentTiming19111(\"strongPlan\",count,core,budget); // resident timing19111\n"
+        },
+        {
+          "old_line": 1199,
+          "new_line": 1212,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",3,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1201,
+          "new_line": 1215,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",4,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1235,
+          "new_line": 1250,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",5,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1236,
+          "new_line": 1252,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",6,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1239,
+          "new_line": 1256,
+          "old": "        } finally {if(session[0]!=null)session[0].close();}\n",
+          "new": "        } finally {\n            residentTiming19111(\"phase\",13,0,0); // resident timing19111\n            if(session[0]!=null)session[0].close();}\n"
+        },
+        {
+          "old_line": 1253,
+          "new_line": 1272,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",5,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1254,
+          "new_line": 1274,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",6,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1257,
+          "new_line": 1278,
+          "old": "        } finally {if(owned!=result&&!owned.isRecycled())owned.recycle();}\n",
+          "new": "        } finally {\n            residentTiming19111(\"phase\",13,0,0); // resident timing19111\n            if(owned!=result&&!owned.isRecycled())owned.recycle();}\n"
+        }
+      ]
+    },
+    "GpuChain1961.java": {
+      "original_sha256": "c99ef40ed8e3b6755a88d6c293f8c39b88808d9812204546a8952cc174126ead",
+      "changes": [
+        {
+          "old_line": 14,
+          "new_line": 14,
+          "old": "",
+          "new": "    // resident timing19111 BEGIN: optional private benchmark observation only.\n    private static void residentTiming19111(String operation,long first,long second,long third) {\n        try {\n            if(!GpuQualification1961.background())return;\n            Class.forName(\"com.hiro.ulike.ResidentTiming19111\").getMethod(\"dispatch\",String.class,long[].class)\n                .invoke(null,operation,new long[]{first,second,third});\n        } catch(Throwable optional) {}\n    }\n    // resident timing19111 END\n"
+        },
+        {
+          "old_line": 785,
+          "new_line": 794,
+          "old": "",
+          "new": "        residentTiming19111(\"phase\",6,0,0); // resident timing19111\n        residentTiming19111(\"finishRows\",tileRows,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 851,
+          "new_line": 862,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",10,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 862,
+          "new_line": 874,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",7,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 866,
+          "new_line": 879,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",8,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 878,
+          "new_line": 892,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",9,0,0); // resident timing19111\n\n"
+        },
+        {
+          "old_line": 906,
+          "new_line": 922,
+          "old": "",
+          "new": "                        residentTiming19111(\"geometryBand\",0,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 919,
+          "new_line": 936,
+          "old": "",
+          "new": "                residentTiming19111(\"phase\",10,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 927,
+          "new_line": 945,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",11,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 932,
+          "new_line": 951,
+          "old": "",
+          "new": "            residentTiming19111(\"phase\",12,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 935,
+          "new_line": 955,
+          "old": "        } finally {if(imageLease!=null)imageLease.close();session.close();if(!done&&result!=null)result.recycle();}\n",
+          "new": "        } finally {\n            residentTiming19111(\"phase\",13,0,0); // resident timing19111\n            if(imageLease!=null)imageLease.close();session.close();if(!done&&result!=null)result.recycle();}\n"
+        },
+        {
+          "old_line": 971,
+          "new_line": 993,
+          "old": "",
+          "new": "                residentTiming19111(\"finishBand\",0,0,0); // resident timing19111\n"
+        },
+        {
+          "old_line": 1048,
+          "new_line": 1071,
+          "old": "",
+          "new": "                        residentTiming19111(\"finishBand\",0,0,0); // resident timing19111\n"
+        }
+      ]
+    },
+    "GpuStrong1960.java": {
+      "original_sha256": "eec980d27305a7167bb907d1d1a73b31d178a80a62c2d965946bfdd935845fb6",
+      "changes": [
+        {
+          "old_line": 388,
+          "new_line": 388,
+          "old": "",
+          "new": "                // resident timing19111 BEGIN: workers have joined; report only\n                // the completed benchmark stage's existing selection counters.\n                if(stage.benchmark1976&&!stage.cpuOracle1976)try{\n                    Class.forName(\"com.hiro.ulike.ResidentTiming19111\").getMethod(\"dispatch\",String.class,long[].class)\n                        .invoke(null,\"strongCounts\",new long[]{stage.gpuStrips,stage.cpuStrips});\n                }catch(Throwable optional){}\n                // resident timing19111 END\n"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "status": "PASS",
+  "scenarios": 9,
+  "assertions": 87,
+  "results": [
+    "PASS none 13 assertions; corpus/write/schedule=0",
+    "PASS exact 13 assertions; corpus/write/schedule=0",
+    "PASS full 13 assertions; corpus/write/schedule=0",
+    "PASS rejected 13 assertions; corpus/write/schedule=0",
+    "PASS optimized-none 7 assertions; corpus/write/schedule=0",
+    "PASS optimized-exact 7 assertions; corpus/write/schedule=0",
+    "PASS optimized-full 7 assertions; corpus/write/schedule=0",
+    "PASS optimized-rejected 7 assertions; corpus/write/schedule=0",
+    "PASS optimized-mismatch 7 assertions; corpus/write/schedule=0"
+  ],
+  "negative_controls": [
+    {
+      "mutation": "GpuStrongOptimized19119",
+      "scenario": "optimized-full",
+      "detected": true
+    },
+    {
+      "mutation": "GpuModelDefault1990",
+      "scenario": "exact",
+      "detected": true
+    }
+  ],
+  "physical_android_tested": false,
+  "source_sha256": {
+    "GpuStrongDefault1990.java": "7e658b3f953af4a97d140ed2a04128db11681e28e5c1ce9a2eef0bcdd696db54",
+    "GpuStrongOptimized19119.java": "ea27fcb02318a4b031ceced1fd425a1711485c9e199c4bacd6fcdd9b0126137f",
+    "GpuModelDefault1990.java": "89f786f77f063061b23c58e6b0e6ff19ea4a06307ff2fb015753bc607d6eccf0",
+    "GpuFinishDefault1990.java": "0fa3b885a6532b5e6f3379a54394e85d5aee34d28dc29f46520f4aa4140d0ccf",
+    "tests19120/cached-fixtures/com/hiro/ulike/GpuCertificates1990.java": "b65c7399b86cd5de2e26169ac4924a24e0d2ebbd63c1c89ef9b6c29ef4d82f96",
+    "tests19120/cached-fixtures/com/hiro/ulike/GpuNoise1960.java": "46b4b5e11d3431bd057fdc04f5a5c82684b8904a0090b950d0fcf342acae3eae",
+    "tests19120/cached-fixtures/com/hiro/ulike/GpuNoiseOptimized19119.java": "10bb3e8657c3abd06b3661264d3290d29ded6e7a287f1e65b5068d7a54704b6d",
+    "tests19120/cached-fixtures/com/hiro/ulike/GpuQualification1961.java": "a86517f133d5783dba4ae46c70e46398b62022ce3e9859aebecf139ecb2dd948",
+    "tests19120/CachedRestore19120Test.java": "db078ff493793013e9fa1ad3ca4c8f58965b99f3f2bea9607e2948c14d557008",
+    "host_cached_restore19120.py": "94445d30f603addfd40055fb34ef70bcedb6648e042744e256dd6766f7565258"
+  },
+  "scope": "actual restore classes; saved proof admission and preparation; no device performance claim"
+}

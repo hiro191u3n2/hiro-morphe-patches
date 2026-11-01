@@ -1,0 +1,128 @@
+import java.nio.file.*;
+import java.util.*;
+import com.android.tools.smali.dexlib2.*;
+import com.android.tools.smali.dexlib2.iface.*;
+import com.android.tools.smali.dexlib2.iface.instruction.*;
+import com.android.tools.smali.dexlib2.iface.reference.*;
+import com.android.tools.smali.dexlib2.immutable.*;
+import com.android.tools.smali.dexlib2.immutable.reference.*;
+import com.android.tools.smali.dexlib2.builder.*;
+import com.android.tools.smali.dexlib2.builder.instruction.*;
+
+/** Check compiler/shipped helper equality, caller links, native contracts and exact installer metadata updates. */
+public final class Verify1944 {
+ static int assertions;
+ static void req(boolean b,String m){assertions++;if(!b)throw new IllegalStateException(m);}
+ static String id(Method m){return MergePayloads.id(m);}
+ static void loader(Path baseline,Path emitted)throws Exception{
+  var old=MergePayloads.classes(baseline.toString());var next=MergePayloads.classes(emitted.toString());
+  req(old.keySet().equals(next.keySet()),"Loader inventory changed");int descriptions=0,hashes=0,lengths=0;
+  for(var e:old.entrySet()){
+   ClassDef n=next.get(e.getKey());
+   if(!e.getKey().equals(Transform1944.LOADER)&&!e.getKey().equals(Transform1944.INSTALLER)){req(MergePayloads.classHash(e.getValue()).equals(MergePayloads.classHash(n)),"Other app loader changed");continue;}
+   var om=MergePayloads.methods(List.of(e.getValue()));var nm=MergePayloads.methods(List.of(n));
+   req(om.keySet().equals(nm.keySet()),"Loader methods changed");var restored=new ArrayList<Method>();
+   for(Method m:n.getMethods()){
+    Method before=om.get(id(m));if(MergePayloads.hash(before).equals(MergePayloads.hash(m))){restored.add(m);continue;}
+    var replacements=new HashMap<String,String>();
+    for(Instruction x:before.getImplementation().getInstructions())if(x instanceof ReferenceInstruction r&&r.getReference() instanceof StringReference s){
+     String value=s.getString();
+     if(e.getKey().equals(Transform1944.LOADER)&&value.startsWith(Transform1944.OLD_DESCRIPTION))replacements.put(Transform1944.DESCRIPTION,value);
+     if(e.getKey().equals(Transform1944.INSTALLER)&&value.equals(Transform1944.OLD_NATIVE_SHA))replacements.put(Transform1944.nativeSha(),value);
+     if(e.getKey().equals(Transform1944.INSTALLER)&&value.equals(Transform1944.OLD_NATIVE_BYTES))replacements.put(Transform1944.nativeBytes(),value);
+    }
+    req(!replacements.isEmpty(),"Only reviewed loader text and native installer pins may change");
+    var b=new MutableMethodImplementation(m.getImplementation());var found=new HashSet<String>();
+    for(int i=0;i<b.getInstructions().size();i++){
+     Instruction x=b.getInstructions().get(i);
+     if(x instanceof ReferenceInstruction r&&r.getReference() instanceof StringReference s&&replacements.containsKey(s.getString())){
+      req(x.getOpcode()==Opcode.CONST_STRING,"Installer/description opcode changed");req(found.add(s.getString()),"Unique replacement string");
+      String previous=replacements.get(s.getString());
+      b.replaceInstruction(i,new BuilderInstruction21c(Opcode.CONST_STRING,((OneRegisterInstruction)x).getRegisterA(),new ImmutableStringReference(previous)));
+      if(s.getString().equals(Transform1944.DESCRIPTION))descriptions++;else if(s.getString().equals(Transform1944.nativeSha()))hashes++;else lengths++;
+     }
+    }
+    req(found.equals(replacements.keySet()),"All reviewed loader replacements found");
+    Method undo=Transform1944.replace(m,b);req(MergePayloads.hash(before).equals(MergePayloads.hash(undo)),"Loader changed beyond reviewed strings");restored.add(undo);
+   }
+   req(MergePayloads.classHash(e.getValue()).equals(MergePayloads.classHash(Transform1944.members(n,restored))),"Loader class shell changed");
+  }
+  req(descriptions==1&&hashes==1&&lengths==1,"Exactly one description and one native hash/length per loader");
+ }
+ static boolean references(Map<String,ClassDef> classes,String target){
+  for(ClassDef c:classes.values())for(Method m:c.getMethods())if(m.getImplementation()!=null)
+   for(Instruction x:m.getImplementation().getInstructions())if(Transform1944.ref(x).contains(target))return true;
+  return false;
+ }
+ static void retainedIncomingLinks(Map<String,ClassDef> old,Map<String,ClassDef> next,Map<String,Method> nativeMethods){
+  var targets=MergePayloads.methods(next.values());var fields=new TreeSet<String>();for(ClassDef c:next.values())for(Field f:c.getFields())fields.add(f.toString());
+  var retained=MergePayloads.methods(old.values());retained.putAll(nativeMethods);
+  for(Method m:retained.values()){
+   if(Transform1944.owned(m.getDefiningClass())||Hooks1944.NATIVE.contains(id(m))||m.getImplementation()==null)continue;
+   for(Instruction op:m.getImplementation().getInstructions())if(op instanceof ReferenceInstruction r){
+    if(r.getReference() instanceof MethodReference mr && Transform1944.owned(mr.getDefiningClass()))req(targets.containsKey(mr.toString()),"Retained caller's replaced-family method still resolves: "+mr);
+    if(r.getReference() instanceof FieldReference fr && Transform1944.owned(fr.getDefiningClass()))req(fields.contains(fr.toString()),"Retained caller's replaced-family field still resolves: "+fr);
+   }
+  }
+ }
+ static int calls(Method m,String ref){req(m!=null&&m.getImplementation()!=null,"Save-pipeline method present");int hits=0;for(Instruction op:m.getImplementation().getInstructions())if(Transform1944.ref(op).equals(ref))hits++;return hits;}
+ static void finalSaveAudit(Map<String,ClassDef> runtime){
+  var ms=MergePayloads.methods(runtime.values());String p=Transform1944.P,b="Landroid/graphics/Bitmap;",settings=p+"PhotoDetail$Settings;";
+  String normalize=p+"QualityPipeline1932;->normalize("+b+"IZ)"+b;
+  req(calls(ms.get(p+"SaveFd186;->saveStage("+b+"Ljava/io/File;I)Z"),normalize)==1,"HEIF/fd final-save normalize reaches reviewed pipeline exactly once");
+  req(calls(ms.get(p+"SaveQuality2;->saveFinal("+b+"Ljava/io/File;Landroid/graphics/Bitmap$CompressFormat;I)Z"),normalize)==1,"Bitmap final-save normalize reaches reviewed pipeline exactly once");
+  req(calls(ms.get(p+"PhotoDetail;->applyDetail("+b+b+")"+b),p+"QualityPipeline1932;->applyDetail("+b+b+settings+")"+b)==1,"Final detail stage reaches identity-bound deduplication guard");
+  req(calls(ms.get(p+"ChromaPipeline186$Worker;->run()V"),p+"QualityPipeline1932;->run("+p+"ChromaPipeline186$State;"+p+"ChromaPipeline186$Buffer;)V")==1,"Existing strip worker reaches reviewed noise path");
+ }
+ static void tryRanges(Map<String,ClassDef> classes,String payload){
+  for(ClassDef c:classes.values())for(Method m:c.getMethods())if(m.getImplementation()!=null){
+   int units=0;var boundaries=new TreeSet<Integer>();boundaries.add(0);for(Instruction op:m.getImplementation().getInstructions()){units+=op.getCodeUnits();boundaries.add(units);}
+   for(TryBlock<? extends ExceptionHandler> block:m.getImplementation().getTryBlocks()){
+    long end=(long)block.getStartCodeAddress()+block.getCodeUnitCount();
+    req(block.getStartCodeAddress()>=0&&block.getCodeUnitCount()>0&&block.getCodeUnitCount()<=65535&&end<=units&&boundaries.contains(block.getStartCodeAddress())&&boundaries.contains((int)end),"Invalid/empty or non-boundary DEX try range "+payload+" "+id(m));
+    for(ExceptionHandler handler:block.getExceptionHandlers())req(handler.getHandlerCodeAddress()>=0&&handler.getHandlerCodeAddress()<units&&boundaries.contains(handler.getHandlerCodeAddress()),"Invalid/non-boundary DEX exception target "+payload+" "+id(m));
+   }
+  }
+ }
+ public static void main(String[] args)throws Exception{
+  req(args.length==2||args.length==3,"BASE EMITTED [STOCK_APK]");Path base=Path.of(args[0]),out=Path.of(args[1]);
+  if(Hooks1944.NATIVE.isEmpty())req(Files.mismatch(base.resolve("ulike/methods.dex"),out.resolve("methods.dex"))==-1 && Files.mismatch(base.resolve("ulike/methods.tsv"),out.resolve("methods.tsv"))==-1,"No native hook means byte-identical native payload/contracts");
+  var oldNative=MergePayloads.methods(MergePayloads.classes(base.resolve("ulike/methods.dex").toString()).values());
+  var nextNative=MergePayloads.methods(MergePayloads.classes(out.resolve("methods.dex").toString()).values());
+  Path seedPath=out.getParent().resolve("baseline-stock-seed.dex");var seed=Files.isRegularFile(seedPath)?MergePayloads.methods(MergePayloads.classes(seedPath.toString()).values()):new TreeMap<String,Method>();
+  var oldRows=MergePayloads.contracts(base.resolve("ulike/methods.tsv").toString());var rows=MergePayloads.contracts(out.resolve("methods.tsv").toString());
+  req(rows.keySet().equals(nextNative.keySet()),"Emitted native contracts");req(nextNative.keySet().containsAll(oldNative.keySet()),"Native method removed");
+  var actualNative=new TreeSet<String>();
+  for(var e:nextNative.entrySet()){
+   String key=e.getKey();req(MergePayloads.hash(e.getValue()).equals(rows.get(key)[2]),"Output contract mismatch");Method before=oldNative.get(key);
+   if(before!=null){
+    req(rows.get(key)[1].equals(oldRows.get(key)[1]),"Original native pin changed");
+    if(!MergePayloads.hash(before).equals(MergePayloads.hash(e.getValue()))){req(Hooks1944.NATIVE.contains(key),"Unreviewed native changed");Hooks1944.verify(before,e.getValue());actualNative.add(key);}
+   }else{req(Hooks1944.NATIVE.contains(key)&&seed.containsKey(key),"Unreviewed native added or seed absent");req(MergePayloads.hash(seed.get(key)).equals(rows.get(key)[1]),"New hook original pin differs from exact seed");Hooks1944.verify(seed.get(key),e.getValue());actualNative.add(key);}
+  }req(actualNative.equals(Hooks1944.NATIVE),"Exact native hook set differs");
+  if(args.length==3){var stock=MergePayloads.methods(MergePayloads.classes(args[2]).values());for(var e:rows.entrySet())req(stock.containsKey(e.getKey())&&MergePayloads.hash(stock.get(e.getKey())).equals(e.getValue()[1]),"Original APK native pin mismatch "+e.getKey());}
+  var old=MergePayloads.classes(base.resolve("ulike/runtime.dex").toString());var next=MergePayloads.classes(out.resolve("runtime.dex").toString());
+  var compiler=MergePayloads.classes(out.getParent().resolve("helper-dex/classes.dex").toString());
+  req(!compiler.isEmpty(),"No compiled production helpers");
+  var roots=new TreeSet<String>();for(String k:compiler.keySet())if(!k.contains("$"))roots.add(k.substring(Transform1944.P.length(),k.length()-1));
+  req(roots.equals(Transform1944.FAMILIES),"Exact production family inventory");
+  for(var e:compiler.entrySet())req(Transform1944.owned(e.getKey())&&next.containsKey(e.getKey())&&MergePayloads.classHash(e.getValue()).equals(MergePayloads.classHash(next.get(e.getKey()))),"Compiler output differs from shipped helper "+e.getKey());
+  for(var e:old.entrySet())if(!Transform1944.owned(e.getKey())){
+   boolean hook=false;for(Method m:e.getValue().getMethods())hook|=Hooks1944.RUNTIME.contains(id(m));
+   req(next.containsKey(e.getKey()),"Unrelated class missing");
+   if(!hook)req(MergePayloads.classHash(e.getValue()).equals(MergePayloads.classHash(next.get(e.getKey()))),"Unrelated class changed "+e.getKey());
+   else{var before=MergePayloads.methods(List.of(e.getValue()));var after=MergePayloads.methods(List.of(next.get(e.getKey())));req(before.keySet().equals(after.keySet()),"Hook class inventory changed");for(var m:before.entrySet())if(Hooks1944.RUNTIME.contains(m.getKey()))Hooks1944.verify(m.getValue(),after.get(m.getKey()));else req(MergePayloads.hash(m.getValue()).equals(MergePayloads.hash(after.get(m.getKey()))),"Unrelated hook class method changed");req(MergePayloads.classHash(ImmutableClassDef.of(e.getValue())).equals(MergePayloads.classHash(ImmutableClassDef.of(Transform1944.members(next.get(e.getKey()),before.values())))),"Hook class fields/annotations/access changed "+e.getKey());}
+  }
+  for(String type:next.keySet())if(!old.containsKey(type))req(compiler.containsKey(type)&&Transform1944.owned(type),"Unexpected new runtime class");
+  for(String name:Transform1944.PROTECTED){String k=Transform1944.P+name+";";req(MergePayloads.classHash(old.get(k)).equals(MergePayloads.classHash(next.get(k))),"Protected startup/recovery changed");}
+  for(String family:List.of("FusionPixels1933","BurstCapture1933","FastResize1933","SpatialNoise1934","LongMoire1934","FaceRegions1934","YuvPlanes1934","NativeSpeed1944","NoiseCache1944","Scheduling1944","AsyncSave1935","SaveQueue1935"))
+   req(next.containsKey(Transform1944.P+family+";")&&references(next,Transform1944.P+family+";->"),"Requested helper is absent or unreferenced: "+family);
+  req(references(MergePayloads.classes(out.resolve("methods.dex").toString()),"Lcom/hiro/ulike/ShutterFeedback1941;->"),"Accepted shutter feedback reachable from native display callback");
+  req(references(next,"Lcom/hiro/ulike/QualityPipeline1932;->"),"Retained .42 quality pipeline reachable from retained final-save hooks");
+  retainedIncomingLinks(old,next,nextNative);
+  finalSaveAudit(next);
+  loader(base.resolve("classes.dex"),out.resolve("loader.dex"));loader(base.resolve("bundle.dex"),out.resolve("bundle-loader.dex"));
+  tryRanges(next,"runtime");tryRanges(MergePayloads.classes(out.resolve("methods.dex").toString()),"native-methods");tryRanges(MergePayloads.classes(out.resolve("loader.dex").toString()),"single-loader");tryRanges(MergePayloads.classes(out.resolve("bundle-loader.dex").toString()),"bundle-loader");
+  System.out.println("PASS1944 assertions="+assertions+"; compiled production bytecode equals shipped; native hook contracts checked; save encoders, shutter feedback, capture first-image policies and unrelated resources retained; only reviewed speed helper families and installer pins replaced; actual original APK contracts checked="+(args.length==3)+"; device untested");
+ }
+}

@@ -1,0 +1,181 @@
+package com.hiro.ulike;
+import java.util.Arrays;
+import java.util.Random;
+import java.lang.reflect.Method;
+import java.lang.reflect.Field;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.atomic.AtomicReference;
+
+public final class FusionEquivalence1948 {
+    static int assertions,cases,fusedCases,samplingAssertions;
+    static final Random random=new Random(19481947L);
+    static void check(boolean value,String label){assertions++;if(!value)throw new AssertionError(label);}
+    static int clip(int x){return Math.max(0,Math.min(255,x));}
+    static byte[][] scene(int w,int h,int count,int mode){
+        byte[][] frames=new byte[count][w*h*3/2];
+        for(int k=0;k<count;k++){
+            int shift=mode==2&&k>0?1:mode==3&&k>0?12:0;
+            for(int y=0;y<h;y++)for(int x=0;x<w;x++){
+                int sx=x-shift;double signal=100+32*Math.sin(sx*.035)+26*Math.cos(y*.041)+18*Math.sin((sx+y)*.081);
+                if(mode==1)signal=45+12*Math.sin(sx*.12)+17*Math.cos(y*.15);
+                if(mode==4&&k>0&&x>w/3&&x<2*w/3&&y>h/3&&y<2*h/3)signal=230-signal;
+                int noise=mode==5?random.nextInt(71)-35:(int)Math.round(random.nextGaussian()*(mode==1?9:3));
+                frames[k][y*w+x]=(byte)clip((int)Math.round(signal)+noise);
+            }
+            for(int y=0;y<h/2;y++)for(int x=0;x<w;x++){
+                int signal=(x&1)==0?136:121;
+                if(mode==6&&k>0)signal+=22;
+                frames[k][w*h+y*w+x]=(byte)clip(signal+random.nextInt(7)-3);
+            }
+        }
+        return frames;
+    }
+    static void result(BaselineFusion1933.Result a,FusionPixels1933.Result b,String label){
+        check(Arrays.equals(a.nv21,b.nv21),label+" exact Y/VU output");
+        check(a.referenceIndex==b.referenceIndex,label+" reference");
+        check(a.referenceTimestamp==b.referenceTimestamp,label+" timestamp");
+        check(a.acceptedCount==b.acceptedCount,label+" accepted");
+        check(a.fusedPixels==b.fusedPixels,label+" fused pixels");
+        check(a.actualFusion==b.actualFusion,label+" actual fusion");
+        check(a.cancelled==b.cancelled,label+" cancellation");
+        check(Float.floatToIntBits(a.motionScore)==Float.floatToIntBits(b.motionScore),label+" motion bits");
+        check(Float.floatToIntBits(a.movingFraction)==Float.floatToIntBits(b.movingFraction),label+" moving bits");
+        if(a.actualFusion)fusedCases++;
+    }
+    static void motion(BaselineFusion1933.Motion a,FusionPixels1933.Motion b,String label){
+        check(Float.floatToIntBits(a.score)==Float.floatToIntBits(b.score),label+" score");
+        check(Float.floatToIntBits(a.globalShiftPixels)==Float.floatToIntBits(b.globalShiftPixels),label+" shift");
+        check(Float.floatToIntBits(a.movingFraction)==Float.floatToIntBits(b.movingFraction),label+" moving");
+        check(Float.floatToIntBits(a.confidence)==Float.floatToIntBits(b.confidence),label+" confidence");
+        check(Float.floatToIntBits(a.darkness)==Float.floatToIntBits(b.darkness),label+" darkness");
+        check(Float.floatToIntBits(a.noiseSigma)==Float.floatToIntBits(b.noiseSigma),label+" noise");
+        check(a.reliable==b.reliable&&a.duplicate==b.duplicate,label+" reliability");
+    }
+    static void compare(int w,int h,int count,int mode,int mutation,int level,boolean night,int workers){
+        cases++;String label="case"+cases+":"+w+"x"+h+":"+mode+":"+mutation;
+        byte[][] f=scene(w,h,count,mode);long[] t=new long[count],e=new long[count];int[] iso=new int[count];
+        for(int i=0;i<count;i++){t[i]=1000000000L+i*80000000L;e[i]=20000000L;iso[i]=640;}
+        if(count>1)switch(mutation){
+            case 1:f[1]=f[0];break;case 2:f[1]=f[0].clone();break;case 3:t[1]=t[0];break;
+            case 4:t[1]=t[0]+7000000000L;break;case 5:e[1]=e[0]*2;break;
+            case 6:iso[1]=iso[0]*2;break;case 7:t[1]=0;break;
+            case 8:f[1]=null;break;case 9:f[1]=new byte[4];break;
+        }
+        byte[][] before=new byte[count][];for(int i=0;i<count;i++)before[i]=f[i]==null?null:f[i].clone();
+        BaselineFusion1933.Result expected=BaselineFusion1933.fuse(f,w,h,t,e,iso,level,night,workers);
+        result(expected,FusionPixels1933.fuse(f,w,h,t,e,iso,level,night,workers),label+" uncached");
+        FusionPixels1933.Analysis cached=new FusionPixels1933.Analysis();
+        BaselineFusion1933.Analysis old=new BaselineFusion1933.Analysis();
+        for(int i=0;i<count;i++)if(f[i]!=null&&f[i].length==f[0].length)cached.prepareFrame(f[i],w,h,iso[i],t[i],e[i]);
+        if(count>1&&f[1]!=null&&f[1].length==f[0].length){
+            motion(BaselineFusion1933.probeMotion(f[0],f[1],w,h,iso[0],e[0],old,t[0],t[1],iso[1],e[1]),
+                FusionPixels1933.probeMotion(f[0],f[1],w,h,iso[0],e[0],cached,t[0],t[1],iso[1],e[1]),label+" probe");
+        }
+        for(int i=1;i<count;i++)if(f[i]!=null&&f[i].length==f[0].length&&w>=16&&h>=16)
+            cached.preparePair(f[0],f[i],w,h,iso[0],iso[i],t[0],t[i],e[0],e[i]);
+        result(BaselineFusion1933.fuse(f,w,h,t,e,iso,level,night,workers,old),
+            FusionPixels1933.fuse(f,w,h,t,e,iso,level,night,workers,cached),label+" cache");
+        check(!cached.pending()&&cached.preparedCount()==0,label+" one shot consumed");
+        for(int i=0;i<count;i++)check(Arrays.equals(before[i],f[i]),label+" immutable input"+i);
+        check(SpeedWorkers1935.cpuIdle1944(),label+" joined all shared workers");
+    }
+    static void samplerTests()throws Exception{
+        Method oldY=BaselineFusion1933.class.getDeclaredMethod("sampleY",byte[].class,int.class,float.class,float.class);
+        Method oldUV=BaselineFusion1933.class.getDeclaredMethod("sampleUV",byte[].class,int.class,int.class,float.class,float.class,int.class);
+        Method cellY=FusionPixels1933.class.getDeclaredMethod("sampleCellY",byte[].class,int.class,float.class,float.class,int[].class);
+        Method cellUV=FusionPixels1933.class.getDeclaredMethod("sampleCellUV",byte[].class,int.class,int.class,float.class,float.class,int[].class);
+        oldY.setAccessible(true);oldUV.setAccessible(true);cellY.setAccessible(true);cellUV.setAccessible(true);
+        int w=4100,h=130;byte[] data=new byte[w*h*3/2];random.nextBytes(data);int[] values=new int[6];
+        for(int n=0;n<12000;n++){
+            float x=n<300?new float[]{255.99998f,256.00003f,511.99997f,512.00006f,1023.99994f,1024.0001f,2047.9999f,2048.0002f,4095.9998f}[n%9]:random.nextFloat()*(w-3);
+            float y=random.nextFloat()*(h-3);
+            cellY.invoke(null,data,w,x,y,values);
+            float[] xx={x,x+1,x,x+1},yy={y,y,y+1,y+1};
+            for(int k=0;k<4;k++){check(values[k]==(Integer)oldY.invoke(null,data,w,xx[k],yy[k]),"Y sample "+n+":"+k);samplingAssertions++;}
+            x=random.nextFloat()*(w/2+10)-5;y=random.nextFloat()*(h/2+10)-5;
+            cellUV.invoke(null,data,w,h,x,y,values);
+            for(int k=0;k<2;k++){check(values[4+k]==(Integer)oldUV.invoke(null,data,w,h,x,y,k),"VU sample "+n+":"+k);samplingAssertions++;}
+        }
+    }
+    static void cancellationTests()throws Exception{
+        int w=514,h=258;byte[][] f=scene(w,h,4,1);long[] t={1000000000L,1080000000L,1160000000L,1240000000L};
+        long[] e={20000000L,20000000L,20000000L,20000000L};int[] iso={640,640,640,640};
+        FusionPixels1933.Analysis a=new FusionPixels1933.Analysis();a.prepareFrame(f[0],w,h,640,t[0],e[0]);
+        Thread.currentThread().interrupt();FusionPixels1933.Result stop=FusionPixels1933.fuse(f,w,h,t,e,iso,4,true,4,a);
+        check(stop.cancelled&&stop.nv21==f[0],"preinterrupted exact fallback alias");
+        check(Thread.currentThread().isInterrupted(),"caller interrupt preserved");Thread.interrupted();
+        check(a.preparedCount()==0&&!a.pending(),"cancel consumes cache");
+        final FusionPixels1933.Analysis racing=new FusionPixels1933.Analysis();
+        final CountDownLatch ready=new CountDownLatch(1);final AtomicReference<Throwable> error=new AtomicReference<Throwable>();
+        Thread prep=new Thread(new Runnable(){public void run(){try{ready.countDown();racing.preparePair(f[0],f[1],w,h,640,640,t[0],t[1],e[0],e[1]);}catch(Throwable ex){error.set(ex);}}});
+        prep.start();ready.await();racing.close();prep.join();
+        check(error.get()==null,"close race does not throw");check(racing.preparedCount()==0&&!racing.pending(),"closed shot cannot repopulate");
+        racing.prepareFrame(f[0],w,h,640,t[0],e[0]);check(racing.preparedCount()==0,"closed shot permanent");
+        final AtomicReference<FusionPixels1933.Result> output=new AtomicReference<FusionPixels1933.Result>();
+        Thread fuse=new Thread(new Runnable(){public void run(){output.set(FusionPixels1933.fuse(f,w,h,t,e,iso,4,true,4));}});
+        fuse.start();fuse.interrupt();fuse.join();check(output.get()!=null&&output.get().cancelled&&output.get().nv21==f[0],"running caller cancel joins and falls back");
+        check(SpeedWorkers1935.cpuIdle1944(),"cancel joins all worker groups");
+        a=new FusionPixels1933.Analysis();a.prepareFrame(f[0],w,h,640,t[0],e[0]);a.clear();check(a.preparedCount()==0,"clear release arrays");
+        a.prepareFrame(f[0],w,h,640,t[0],e[0]);check(a.preparedCount()==1,"clear reusable");a.close();
+    }
+    static void activeCancellation()throws Exception{
+        int w=514,h=258;final byte[][] f=scene(w,h,4,1);
+        final long[] t={1000000000L,1080000000L,1160000000L,1240000000L},e={20000000L,20000000L,20000000L,20000000L};
+        final int[] iso={640,640,640,640};
+        final CountDownLatch held=new CountDownLatch(SpeedWorkers1935.maxWorkers()),release=new CountDownLatch(1);
+        Thread[] holders=new Thread[SpeedWorkers1935.maxWorkers()];
+        for(int i=0;i<holders.length;i++){holders[i]=new Thread(new Runnable(){public void run(){boolean lease=SpeedWorkers1935.enterLegacy();try{held.countDown();release.await();}catch(InterruptedException stop){Thread.currentThread().interrupt();}finally{SpeedWorkers1935.leaveLegacy(lease);}}});holders[i].start();}
+        held.await();final AtomicReference<FusionPixels1933.Result> result=new AtomicReference<FusionPixels1933.Result>();
+        final AtomicReference<Throwable> error=new AtomicReference<Throwable>();
+        Thread owner=new Thread(new Runnable(){public void run(){try{result.set(FusionPixels1933.fuse(f,w,h,t,e,iso,4,true,4));}catch(Throwable problem){error.set(problem);}}});
+        try{
+            long epoch=SpeedWorkers1935.competitionEpoch1944();owner.start();long until=System.nanoTime()+5000000000L;
+            while(owner.isAlive()&&SpeedWorkers1935.competitionEpoch1944()==epoch&&System.nanoTime()<until)Thread.yield();
+            // All permits are held: an observed shared-group competition proves
+            // registration was submitted, so this cancels active/queued tasks.
+            check(owner.isAlive()&&SpeedWorkers1935.competitionEpoch1944()>epoch,"blocked registration reached before cancel");owner.interrupt();owner.join(5000);
+            check(!owner.isAlive()&&error.get()==null,"pool acquisition cancellation joined without error");
+            check(result.get()!=null&&result.get().cancelled&&result.get().nv21==f[0],"active cancel preserves reference alias");
+        }finally{release.countDown();for(Thread holder:holders)holder.join();}
+        check(SpeedWorkers1935.cpuIdle1944(),"cancel releases worker group and permits");
+        // Interrupt a producer while the shared reference mesh monitor is held.
+        // An incomplete table must never become reusable by the final fuse.
+        final FusionPixels1933.Analysis cache=new FusionPixels1933.Analysis();
+        cache.prepareFrame(f[0],w,h,640,t[0],e[0]);cache.prepareFrame(f[1],w,h,640,t[1],e[1]);
+        Field ff=cache.getClass().getDeclaredField("frames");ff.setAccessible(true);Object prepared=((Object[])ff.get(cache))[0];
+        Field rf=prepared.getClass().getDeclaredField("reference");rf.setAccessible(true);Object reference=rf.get(prepared);
+        final AtomicReference<Throwable> cancelled=new AtomicReference<Throwable>();
+        Thread producer=new Thread(new Runnable(){public void run(){try{cache.preparePair(f[0],f[1],w,h,640,640,t[0],t[1],e[0],e[1]);}catch(Throwable stop){cancelled.set(stop);}}});
+        synchronized(reference){producer.start();long until=System.nanoTime()+5000000000L;
+            while(producer.getState()!=Thread.State.BLOCKED&&producer.isAlive()&&System.nanoTime()<until)Thread.yield();
+            check(producer.getState()==Thread.State.BLOCKED,"producer reached shared mesh table");producer.interrupt();}
+        producer.join();check(cancelled.get() instanceof RuntimeException,"producer observes interruption");
+        Field mf=reference.getClass().getDeclaredField("meshMeans");mf.setAccessible(true);check(mf.get(reference)==null,"partial mesh not published");
+        result(BaselineFusion1933.fuse(f,w,h,t,e,iso,4,true,4),FusionPixels1933.fuse(f,w,h,t,e,iso,4,true,4,cache),"cancelled preparation recompute");
+        check(cache.preparedCount()==0,"cancelled preparation cache consumed");
+    }
+    static void cacheMismatch()throws Exception{
+        int w=130,h=98;byte[][] f=scene(w,h,3,0);long[] t={1000000000L,1080000000L,1160000000L},e={20000000L,20000000L,20000000L};int[] iso={640,640,640};
+        for(int mutation=0;mutation<6;mutation++){
+            FusionPixels1933.Analysis cache=new FusionPixels1933.Analysis();cache.preparePair(f[0],f[1],w,h,640,640,t[0],t[1],e[0],e[1]);
+            byte[][] changed=f.clone();long[] ct=t.clone(),ce=e.clone();int[] ci=iso.clone();
+            switch(mutation){case 0:changed[1]=f[1].clone();break;case 1:changed[0]=f[0].clone();break;case 2:ct[1]++;break;case 3:ce[1]++;break;case 4:ci[1]++;break;case 5:changed[1]=f[2];changed[2]=f[1];break;}
+            result(BaselineFusion1933.fuse(changed,w,h,ct,ce,ci,3,false,4),FusionPixels1933.fuse(changed,w,h,ct,ce,ci,3,false,4,cache),"metadata mismatch"+mutation);
+            check(cache.preparedCount()==0,"mismatch consumes cache");
+        }
+    }
+    public static void main(String[]args)throws Exception{
+        samplerTests();
+        int[][] dimensions={{2,2},{8,8},{16,16},{32,48},{64,64},{130,98},{256,192},{514,258}};
+        for(int n=0;n<128;n++){
+            int[] size=dimensions[n%dimensions.length];
+            compare(size[0],size[1],1+n%4,n%7,n%10,n%5,(n&1)==0,1+n%4);
+        }
+        for(int mode=0;mode<7;mode++)for(int workers=1;workers<=4;workers++)compare(256,192,4,mode,0,4,true,workers);
+        for(int n=0;n<48;n++)compare(16+random.nextInt(250)*2,16+random.nextInt(180)*2,2+random.nextInt(3),n%7,0,1+n%4,(n&1)==0,1+n%4);
+        compare(1030,514,4,1,0,4,true,4);
+        compare(4080,3060,2,1,0,4,true,4);
+        cancellationTests();activeCancellation();cacheMismatch();check(fusedCases>=15,"suite exercises real fusion");
+        System.out.println("{\"status\":\"passed\",\"assertions\":"+assertions+",\"cases\":"+cases+",\"actual_fusion_results\":"+fusedCases+",\"sampling_assertions\":"+samplingAssertions+",\"exact_pixel_match\":true,\"device_tested\":false}");
+    }
+}

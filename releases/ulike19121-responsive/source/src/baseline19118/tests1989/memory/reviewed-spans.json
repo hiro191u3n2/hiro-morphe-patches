@@ -1,0 +1,27 @@
+{
+  "GpuNoise1960.java": {
+    "current_sha256": "8805f10efbd28995f20c3acfe6803d29d3529953407daab8aeba1f96571a7500",
+    "hunks": [
+      {
+        "new_first": 76,
+        "new_last": 106,
+        "old": "",
+        "new": "    }\n    /** Observation immediately after a Finish refusal/recheck. This is not an\n     * OS free-RAM reading or the authoritative earlier admission snapshot.\n     * No GPU lease mutation or policy decision uses these values. Native owner\n     * queries keep their existing accounting/idle-expiry contract. */\n    static boolean snapshotMemory1989(long[] values,int offset) {\n        if(values==null||offset<0||offset>values.length-12)return false;\n        try {\n            Runtime r=Runtime.getRuntime();long maximum=r.maxMemory(),used=r.totalMemory()-r.freeMemory();\n            long headroom=maximum-used,gpu=observedBytes1989(retained),whole=observedBytes1989(WholeRoute1953.retainedBytes());\n            long finish=observedBytes1989(GpuFinish1953.retainedBytes()),reserved=observedBytes1989(reserved1971);\n            long nativeBytes=SpeedWorkers1935.nativeRetainedBytes1989(values,offset+7);\n            long available=observedRemainder1989(headroom,gpu);\n            available=observedRemainder1989(available,whole);\n            available=observedRemainder1989(available,finish);\n            available=observedRemainder1989(available,nativeBytes);\n            available=observedRemainder1989(available,64L*1024*1024);\n            available=observedRemainder1989(available,reserved);\n            values[offset]=maximum;values[offset+1]=used;values[offset+2]=headroom;\n            values[offset+3]=gpu;values[offset+4]=whole;values[offset+5]=finish;\n            boolean complete=maximum>=0&&used>=0&&headroom>=0&&gpu>=0&&whole>=0&&finish>=0&&nativeBytes>=0&&reserved>=0;\n            values[offset+6]=nativeBytes;values[offset+10]=reserved;values[offset+11]=complete?available:-1;\n            return complete;\n        }catch(Throwable optional){return false;}\n    }\n    private static long observedBytes1989(long bytes) {\n        return bytes<0||bytes==Long.MAX_VALUE?-1:bytes;\n    }\n    private static long observedRemainder1989(long available,long bytes) {\n        return bytes<0||bytes>available?0:available-bytes;\n"
+      }
+    ]
+  },
+  "SpeedWorkers1935.java": {
+    "current_sha256": "3b8bd7b6969456279e75cdfab2948e2d0355e3d568c608ca233d483942171bcd",
+    "hunks": [
+      {
+        "new_first": 52,
+        "new_last": 82,
+        "old": "",
+        "new": "    }\n    /** Optional scalar observation only; never supplies an admission decision. */\n    static long nativeRetainedBytes1989(long[] values,int offset) {\n        long legacy=scratchBytes(SCRATCH),smooth=scratchBytes(SMOOTH_SCRATCH);\n        long single=scratchBytes(SINGLE_SCRATCH1978);\n        // The original admission API deliberately saturates unknown/failing\n        // owners. A diagnostic must not present that sentinel as real bytes.\n        if(legacy==Long.MAX_VALUE)legacy= -1;\n        if(smooth==Long.MAX_VALUE)smooth= -1;\n        if(single==Long.MAX_VALUE)single= -1;\n        if(values!=null&&offset>=0&&offset<=values.length-3) {\n            values[offset]=legacy;values[offset+1]=smooth;values[offset+2]=single;\n        }\n        if(legacy<0||smooth<0||single<0||legacy>Long.MAX_VALUE-smooth)return -1;\n        long sum=legacy+smooth;\n        return sum>=Long.MAX_VALUE-single?-1:sum+single;\n    }\n    /** Finish background relief only. No Java pool or active Single lease is\n     * revoked. Native owners free idle capacity and defer any raced busy trim\n     * until that owner's original release barrier. 0=busy, 1=requested,\n     * 2=at least one optional owner failed; none means memory was guaranteed. */\n    static int trimNativeIdle1989() {\n        if(Thread.currentThread().isInterrupted()||!cpuIdle1944())return 0;\n        boolean legacy=trimNativeOwner1989(SCRATCH);\n        boolean smooth=trimNativeOwner1989(SMOOTH_SCRATCH);\n        return legacy&&smooth?1:2;\n    }\n    private static boolean trimNativeOwner1989(ScratchMemory owner) {\n        if(owner==null)return true;\n        try{owner.trim();return true;}catch(Throwable optional){return false;}\n"
+      }
+    ]
+  },
+  "FinishMemory1989.java": {
+    "current_sha256": "f20a987f5b3cc60003b868d83231cc72ac53e2669ed3ce8353a09bb1591c8b86"
+  }
+}

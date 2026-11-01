@@ -1,0 +1,24 @@
+{
+  "original_release": "1.9.108",
+  "original_sha256": "8bd4269eb0222f86388c71af034bca0657e8fffc0b563c77a0d1f5832d781ac4",
+  "changes": [
+    {
+      "old_line": 269,
+      "new_line": 269,
+      "old": "                        // Only the chain's private, typed budget refusal is a\n                        // retryable memory result; every other exception retains\n                        // the queue's normal exception/cancellation handling.\n                        if(!memoryRefusal19108(failure))throw failure;\n",
+      "new": "                        // A typed Strong admission refusal is not a pixel or\n                        // measured-speed failure. The classifier accepts only\n                        // the private producer sentinel, never its message or\n                        // a wrapped cause. Unknown exceptions retain the queue's\n                        // normal exception/cancellation handling.\n                        String refusal19110=admissionRefusal19110(failure);\n                        if(refusal19110==null)throw failure;\n"
+    },
+    {
+      "old_line": 275,
+      "new_line": 278,
+      "old": "                        GpuQualification1961.rejectNonSpeed1988(scheduledKey,\"memory_budget\");\n                        outcome1984(\"memory_budget\");\n",
+      "new": "                        GpuQualification1961.rejectNonSpeed1988(scheduledKey,refusal19110);\n                        outcome1984(refusal19110);\n"
+    },
+    {
+      "old_line": 336,
+      "new_line": 339,
+      "old": "",
+      "new": "    /** Optional producer ABI bridge. Older/narrow runtime peers cannot invent\n     * a typed Strong failure, and an unavailable bridge never relaxes a gate. */\n    private static String admissionRefusal19110(RuntimeException failure){\n        if(failure instanceof java.util.concurrent.CancellationException)return null;\n        if(memoryRefusal19108(failure))return \"memory_budget\";\n        Object reason;\n        try {reason=Class.forName(\"com.hiro.ulike.GpuStrong1960\")\n                .getDeclaredMethod(\"residentAdmissionReason19110\",RuntimeException.class).invoke(null,failure);}\n        catch(Throwable unavailable){return null;}\n        if(\"memory_budget\".equals(reason))return \"memory_budget\";\n        if(\"storage_limit\".equals(reason)||\"native_limit\".equals(reason))return \"unsupported\";\n        if(\"session_unavailable\".equals(reason)||\"input_invalid\".equals(reason)||\n                \"capacity_unavailable\".equals(reason)||\"lease_limit\".equals(reason)||\n                \"upload_failed\".equals(reason)||\"allocation_failed\".equals(reason)||\n                \"stage_unavailable\".equals(reason)||\"forecast_unavailable\".equals(reason))return \"execution_unavailable\";\n        return null;\n    }\n"
+    }
+  ]
+}

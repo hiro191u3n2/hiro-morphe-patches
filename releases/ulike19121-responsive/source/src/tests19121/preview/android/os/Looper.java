@@ -1,0 +1,1 @@
+package android.os; public class Looper {public static final Looper MAIN=new Looper();public static boolean ui;public static Looper getMainLooper(){return MAIN;}public static Looper myLooper(){return ui?MAIN:null;}public static void check(){if(!ui)throw new AssertionError("UI read off main");}}

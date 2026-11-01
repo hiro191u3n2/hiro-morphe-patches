@@ -1,0 +1,140 @@
+ULike v1.9.121 再構築・検査手順
+================================
+
+対象: 公開済み v1.9.120 を基に、撮影・保存中のCPU処理優先度、GPU完了確認の待機、
+HD撮影の条件付き描画停止解除、診断画面の更新を調整する Java overlay。
+画質演算・14個の native 資産・インストーラ・元アプリ向け画素hookは維持し、NDKは不要。
+
+展開したアーカイブの最上位から実行する。Linux x86_64、Python 3.10以降、curl、tar、
+GPUホストJNI fixture用のCコンパイラ（gcc）が必要。Pythonは標準ライブラリのみ使用。
+
+配置
+----
+src/                       現行runtime・ビルド・試験と過去の再利用ソース
+baseline120/               固定した公開v1.9.120 MPP
+responsive-families19121.json  更新を認める11 Java family
+evidence/                  v1.9.121 のビルド・実行試験・元APKS適用・ABI証拠
+inherited120/              旧v1.9.120資料。今回の合格証拠としては使用しない
+manifest.json              manifest自身以外の同梱全ファイルのbytes/SHA-256
+
+過去 src/host_* や build_* は当時の認定方針・版番号に固定された履歴と再利用依存である。
+全履歴の一括実行ではなく、以下の現行6 suiteとbuild19121.pyを実行する。
+toolchain/・work/・dist/・private/ は利用者側で作る作業領域で、同梱しない。
+
+固定入力
+--------
+baseline120/ULike_HQ_Texture_Online_v1.9.120.mpp
+bytes: 1612654
+SHA-256: f779c09136554c9b02c81971eeee8caa334fd6d0263ddda2c974beab70f67851
+URL: https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.120/ULike_HQ_Texture_Online_v1.9.120.mpp
+
+元APKS: ULike 5.6.2 (740)、所有している利用者のローカル入力のみ。
+SHA-256: 73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293
+例: private/ULike_v5.6.2_740.apks。公開ダウンロード先を示すものではない。
+
+固定ツール
+------------
+Eclipse Temurin JDK 21.0.8+9-LTS / Linux x86_64
+  URL: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz
+  archive SHA-256: f2dc5418092c43003db8f9005c4a286e1c0104fea96ccdd49e8ebd037cac9219
+  展開後: toolchain/jdk-21.0.8+9/
+
+Morphe Desktop 1.16.0 all.jar
+  URL: https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+  配置: toolchain/morphe.jar
+  SHA-256: 82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c
+
+Android platform 35 r02
+  URL: https://dl.google.com/android/repository/platform-35_r02.zip
+  archive SHA-256: 0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0
+  ZIP 内: android-35/android.jar
+  配置: toolchain/android.jar
+  extracted SHA-256: 4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b
+
+Android build-tools r35 Linux
+  URL: https://dl.google.com/android/repository/build-tools_r35_linux.zip
+  archive SHA-256: bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88
+  ZIP 内: android-15/lib/d8.jar
+  配置: toolchain/d8.jar
+  extracted SHA-256: 305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5
+
+取得・展開コマンド
+--------------------
+mkdir -p toolchain work dist
+curl -fL --retry 2 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz' -o toolchain/jdk21.tar.gz
+curl -fL --retry 2 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o toolchain/morphe.jar
+curl -fL --retry 2 'https://dl.google.com/android/repository/platform-35_r02.zip' -o toolchain/platform35.zip
+curl -fL --retry 2 'https://dl.google.com/android/repository/build-tools_r35_linux.zip' -o toolchain/buildtools35.zip
+
+python3 - <<'PY'
+from pathlib import Path
+import hashlib
+import zipfile
+
+pins = {
+    'jdk21.tar.gz': 'f2dc5418092c43003db8f9005c4a286e1c0104fea96ccdd49e8ebd037cac9219',
+    'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+    'platform35.zip': '0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0',
+    'buildtools35.zip': 'bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88',
+}
+for name, digest in pins.items():
+    assert hashlib.sha256((Path('toolchain') / name).read_bytes()).hexdigest() == digest, name
+for archive, entry, output in (
+    ('platform35.zip', 'android-35/android.jar', 'android.jar'),
+    ('buildtools35.zip', 'android-15/lib/d8.jar', 'd8.jar'),
+):
+    with zipfile.ZipFile(Path('toolchain') / archive) as z:
+        (Path('toolchain') / output).write_bytes(z.read(entry))
+PY
+tar -xzf toolchain/jdk21.tar.gz -C toolchain
+
+MPP 再構築
+------------
+python3 src/build19121.py --baseline baseline120/ULike_HQ_Texture_Online_v1.9.120.mpp --tools toolchain --jdk toolchain/jdk-21.0.8+9 --families responsive-families19121.json --work work/build --output dist
+
+work/build は新規ディレクトリを指定する。出力MPPとbuild19121.jsonについて、固定入力、
+JDK identity、全ツールSHA、146 compile inputs、family範囲、匿名class、既存ABI、native、
+2回のDEX生成・MPP再現、Morphe loader読込みを検査する。
+最終MPP: 1618461 bytes
+SHA-256: cfa0963fb2ec3e5207cff34b3a0d953a300ad5f69a64413e6e3b16d7e6b31fca
+
+ホスト動作試験（合計808 assertions / 24 reported controls）
+------------------------------------------------------
+python3 src/host_background19121.py --source src --work work/host-background --jdk toolchain/jdk-21.0.8+9
+python3 src/host_diagnostic_refresh19121.py --source src --work work/host-diagnostic --jdk toolchain/jdk-21.0.8+9
+python3 src/tests19121/gpu/host_gpu_wait19121.py --source src --work work/host-gpu --jdk toolchain/jdk-21.0.8+9
+python3 src/host_preview19121.py --source src --work work/host-preview --jdk toolchain/jdk-21.0.8+9
+python3 src/host_quiet_runtime19120.py --source src --work work/host-quiet --jdk toolchain/jdk-21.0.8+9
+python3 src/host_cached_restore19120.py --classes work/build/helper-classes --android toolchain/android.jar --work work/host-cached --javac toolchain/jdk-21.0.8+9/bin/javac --java toolchain/jdk-21.0.8+9/bin/java
+
+内訳: background90、diagnostic39、GPU122、preview365、quiet105、cached87。
+preview365には helper245、実AsyncSave統合96、既存入力対応/画素保持24を含む。
+24 controlsは故障条件14と意図的mutation10の合計。実機性能の測定ではない。
+
+元APKSへの適用検査（元APKSを所有している場合のみ）
+-------------------------------------------------
+python3 src/apply_original19121.py --input private/ULike_v5.6.2_740.apks --mpp dist/ULike_HQ_Texture_Online_v1.9.121.mpp --work work/apply --jdk toolchain/jdk-21.0.8+9 --tools toolchain --stage final
+
+原本APKS・patched-private.apk・生ログは非公開のローカル作業物。
+同梱証拠application19121.jsonにはハッシュ/件数/検査結果のみを記録する。
+今回: split結合、全DEX/リソース再構築、6543 runtime/payload contracts、38756 helper members。
+7 inherited external membersはAndroid runtimeへの解決に委ねる既存外部参照。
+
+プレビュー反射ABIの実適用APK検査
+-------------------------------
+mkdir -p work/preview-abi
+toolchain/jdk-21.0.8+9/bin/javac -encoding UTF-8 -cp toolchain/morphe.jar -d work/preview-abi src/VerifyPreviewAbi19121.java
+toolchain/jdk-21.0.8+9/bin/java -cp toolchain/morphe.jar:work/preview-abi VerifyPreviewAbi19121 work/apply/patched-private.apk
+
+この検査のassertionsは808 host assertionsに加算しない。描画停止解除の呼出し先・反射
+chainとguardは確認するが、実フレーム復帰・プレビューFPS・操作応答時間は確認しない。
+
+同梱範囲・未計測事項
+--------------------
+manifestは同梱全ファイル（manifest自身を除く）を網羅する。__pycache__/pycは除外。
+元APKS、生成APK、署名鍵、端末固有の認定データは含まない。
+build19121.jsonのhost/apply pendingはビルド時点の状態。完了状態はQAの参照する各報告で示す。
+統合MPPの他アプリ保持・適用証拠は公開処理の別QAで管理する。
+実機ART・インストール・画質の見た目・FPS・発熱・保存完了時間は未測定。
+保存CPU優先度の変更で保存時間が延びる場合があり、GPU優先度を変更するものではない。
+自動追加検証の停止、認定済み経路、CPU代替、画質設定、画像寸法、HEIFを維持する。
