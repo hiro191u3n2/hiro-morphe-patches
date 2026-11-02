@@ -1,0 +1,62 @@
+[
+  {
+    "old": "    public static final String VERSION = \"1.9.88\";",
+    "new": "    public static final String VERSION = \"1.9.89\";"
+  },
+  {
+    "old": "PIPELINE_PHASES1988=11, PIPELINE_REASONS1988=12, PIPELINE_COPIES1988=11;",
+    "new": "PIPELINE_PHASES1988=11, PIPELINE_REASONS1988=20, PIPELINE_COPIES1988=11;"
+  },
+  {
+    "old": "        \"別の検証画像を保持中\",\"専用処理または既存の省略経路\"};",
+    "new": "        \"別の検証画像を保持中\",\"専用処理または既存の省略経路\",\"候補画質不一致の記録\",\n        \"CPU比較経路がGPUを見送り\",\"経路枠が使用中\",\"共用GPU枠を取得できず\",\n        \"GPU環境識別なし\",\"処理幅のGPU認定なし\",\"入力条件対象外\",\"処理中断を観測\"};"
+  },
+  {
+    "old": "        boolean pipelineObserved1988;\n",
+    "new": "        boolean pipelineObserved1988;\n        // .89 reason handoffs and copy quantities are independent of output adoption.\n        final long[] pipelinePriorReasons1989=new long[PIPELINE_PHASES1988*PIPELINE_REASONS1988];\n        // Detailed copy tuple: events, requested closure bytes, acquired pixel bytes, flags.\n        final long[] pipelineCopyQuantities1989=new long[PIPELINE_PHASES1988*PIPELINE_COPIES1988*4];\n        final long[] pipelineQueueCounts1989=new long[PIPELINE_PHASES1988*22];\n        // Last actual decision per phase: count, reason, retry ns, retries, queued, running,\n        // retained bytes, requested bytes, acquired pixel bytes, outcome. No live provider.\n        final long[] pipelineQueueLast1989=new long[PIPELINE_PHASES1988*10];\n"
+  },
+  {
+    "old": "    /** Main noise-stage wall durations, separately from summed GPU worker work.\n",
+    "new": "    public static void pipelinePriorReason1989(Trace trace,int phase,int reason,int units) {\n        if(trace==null||phase<0||phase>=PIPELINE_PHASES1988||reason<=0||reason>=PIPELINE_REASONS1988||units<=0)return;\n        try{synchronized(trace){\n            if(trace.state!=0)return;\n            int index=phase*PIPELINE_REASONS1988+reason;\n            trace.pipelinePriorReasons1989[index]=addWork1973(trace.pipelinePriorReasons1989[index],units);\n            trace.pipelineObserved1988=true;\n        }}catch(Throwable optional){}\n    }\n    /** New quantity fields supplement the existing copy event once; this sink\n     * never increments the old event or output counters and retains only scalars. */\n    public static void pipelineCopyState1989(Trace trace,int phase,int outcome,long requestedBytes,\n            long acquiredPixelBytes,long nanos,int queueReason,long retryRemainingNanos,int retries,\n            int queuedJobs,int runningJobs,long retainedBytes) {\n        if(trace==null||phase<0||phase>=PIPELINE_PHASES1988||outcome<1||outcome>=PIPELINE_COPIES1988||\n                requestedBytes< -1||acquiredPixelBytes< -1||nanos< -1||queueReason< -1||queueReason>=22||\n                retryRemainingNanos< -1||retries< -1||queuedJobs< -1||runningJobs< -1||retainedBytes< -1)return;\n        try{synchronized(trace){\n            if(trace.state!=0)return;\n            int index=(phase*PIPELINE_COPIES1988+outcome)*4;\n            long[] quantities=trace.pipelineCopyQuantities1989;\n            quantities[index]=addWork1973(quantities[index],1);\n            if(requestedBytes>=0){quantities[index+1]=addWork1973(quantities[index+1],requestedBytes);quantities[index+3]|=1;}\n            else quantities[index+3]|=2;\n            if(acquiredPixelBytes>=0){quantities[index+2]=addWork1973(quantities[index+2],acquiredPixelBytes);quantities[index+3]|=4;}\n            else quantities[index+3]|=8;\n            if(queueReason>=0){\n                int reasonIndex=phase*22+queueReason;\n                trace.pipelineQueueCounts1989[reasonIndex]=addWork1973(trace.pipelineQueueCounts1989[reasonIndex],1);\n                int last=phase*10;long[] decision=trace.pipelineQueueLast1989;\n                decision[last]=addWork1973(decision[last],1);decision[last+1]=queueReason;\n                decision[last+2]=retryRemainingNanos;decision[last+3]=retries;decision[last+4]=queuedJobs;\n                decision[last+5]=runningJobs;decision[last+6]=retainedBytes;decision[last+7]=requestedBytes;\n                decision[last+8]=acquiredPixelBytes;decision[last+9]=outcome;\n            }\n            trace.pipelineObserved1988=true;\n        }}catch(Throwable optional){}\n    }\n    /** Main noise-stage wall durations, separately from summed GPU worker work.\n"
+  },
+  {
+    "old": "            boolean work=false,copied=false;",
+    "new": "            boolean work=false,copied=false,prior=false;"
+  },
+  {
+    "old": "            if(!work&&!copied)continue;",
+    "new": "            for(int reason=1;reason<PIPELINE_REASONS1988;reason++)if(trace.pipelinePriorReasons1989[phase*PIPELINE_REASONS1988+reason]>0)prior=true;\n            if(!work&&!copied&&!prior&&trace.pipelineQueueLast1989[phase*10]==0)continue;"
+  },
+  {
+    "old": "            if(copied) {\n                text.append(\"\\n  検証入力・補助準備: \");boolean separator=false;",
+    "new": "            if(prior){\n                text.append(\"\\n  GPU候補の切替理由: \");boolean separator=false;\n                for(int reason=1;reason<PIPELINE_REASONS1988;reason++){\n                    long count=trace.pipelinePriorReasons1989[phase*PIPELINE_REASONS1988+reason];if(count==0)continue;\n                    if(separator)text.append(\"、\");separator=true;\n                    text.append(PIPELINE_REASON_LABELS1988[reason]).append(' ').append(count).append(\"回\");\n                }\n            }\n            if(copied) {\n                text.append(\"\\n  検証入力・補助準備: \");boolean separator=false;"
+  },
+  {
+    "old": "                    long flags=trace.pipelineCopies1988[index+3];\n                    if((flags&4)!=0){text.append(\"、記録量 \");appendMiB1983(text,trace.pipelineCopies1988[index+2]);\n                        if((flags&8)!=0)text.append(\"・一部未観測\");}\n                    else text.append(\"、容量未観測\");",
+    "new": "                    long flags=trace.pipelineCopies1988[index+3];\n                    long detailed=trace.pipelineCopyQuantities1989[index];\n                    if(detailed==count){\n                        appendPipelineQuantity1989(text,\"予約要求量\",trace.pipelineCopyQuantities1989[index+1],trace.pipelineCopyQuantities1989[index+3],1,2);\n                        appendPipelineQuantity1989(text,\"取得済み画素量\",trace.pipelineCopyQuantities1989[index+2],trace.pipelineCopyQuantities1989[index+3],4,8);\n                    }else{\n                        if((flags&4)!=0){text.append(\"、記録量 \");appendMiB1983(text,trace.pipelineCopies1988[index+2]);\n                            if((flags&8)!=0)text.append(\"・一部未観測\");}\n                        else text.append(\"、容量未観測\");\n                        if(detailed>0){\n                            text.append(\"、内訳観測 \").append(detailed).append(\"回\");\n                            appendPipelineQuantity1989(text,\"予約要求量\",trace.pipelineCopyQuantities1989[index+1],trace.pipelineCopyQuantities1989[index+3],1,2);\n                            appendPipelineQuantity1989(text,\"取得済み画素量\",trace.pipelineCopyQuantities1989[index+2],trace.pipelineCopyQuantities1989[index+3],4,8);\n                        }\n                    }"
+  },
+  {
+    "old": "        }\n        text.append(\"\\n上の工程時間は実経過、ここは作業累計です。並行処理や補助準備の時間が重複するため各行は加算できません。\");",
+    "new": "            appendPipelineQueue1989(text,trace,phase);\n        }\n        text.append(\"\\n上の工程時間は実経過、ここは作業累計です。並行処理や補助準備の時間が重複するため各行は加算できません。\");"
+  },
+  {
+    "old": "    private static void appendPipelineTime1988(StringBuilder text,long nanos,long flags) {\n",
+    "new": "    private static void appendPipelineQuantity1989(StringBuilder text,String label,long bytes,long flags,int observed,int unknown) {\n        text.append('、').append(label).append(' ');\n        if((flags&observed)==0)text.append(\"未観測\");\n        else {appendMiB1983(text,bytes);if((flags&unknown)!=0)text.append(\"・一部未観測\");}\n    }\n    private static void appendPipelineQueue1989(StringBuilder text,Trace trace,int phase) {\n        int at=phase*10;long[] last=trace.pipelineQueueLast1989;if(last[at]==0)return;\n        text.append(\"\\n  検証予約の判断: \");boolean separator=false;\n        for(int reason=0;reason<22;reason++){\n            long count=trace.pipelineQueueCounts1989[phase*22+reason];if(count==0)continue;\n            if(separator)text.append(\"、\");separator=true;\n            text.append(QUEUE_LABELS_1983[reason]).append(' ').append(count).append(\"回\");\n        }\n        text.append(\" / 最後に記録した判断: \").append(PIPELINE_COPY_LABELS1988[(int)last[at+9]])\n            .append(\"・\").append(QUEUE_LABELS_1983[(int)last[at+1]]);\n        if(last[at+2]>=0)text.append(\" / 再試行まで \").append(milliseconds(last[at+2])).append(\" ms\");\n        if(last[at+3]>=0)text.append(\" / 再試行数 \").append(last[at+3]);\n        if(last[at+4]>=0)text.append(\" / 予約 \").append(last[at+4]).append(\"件\");\n        if(last[at+5]>=0)text.append(\" / 実行中 \").append(last[at+5]).append(\"件\");\n        if(last[at+6]>=0){text.append(\" / 判断時保持量 \");appendMiB1983(text,last[at+6]);}\n        if(last[at+7]>=0){text.append(\" / 予約要求量 \");appendMiB1983(text,last[at+7]);}\n        if(last[at+8]>=0){text.append(\" / 取得済み画素量 \");appendMiB1983(text,last[at+8]);}\n    }\n    private static void appendPipelineTime1988(StringBuilder text,long nanos,long flags) {\n"
+  },
+  {
+    "old": "    private static volatile long captureEpoch1953;",
+    "new": "    private static volatile long captureEpoch1953;\n    private static volatile CaptureIdentity1989 captureIdentity1989;\n    private static final class CaptureIdentity1989 {\n        final long epoch,traceId;\n        CaptureIdentity1989(long epoch,long traceId){this.epoch=epoch;this.traceId=traceId;}\n    }"
+  },
+  {
+    "old": "                latest=trace;displayedId=trace.id;\n",
+    "new": "                latest=trace;displayedId=trace.id;\n                captureIdentity1989=null;\n"
+  },
+  {
+    "old": "                if(trace.shotId!=shotId){GpuQualification1961.captureChanged();captureEpoch1953++;}",
+    "new": "                if(trace.shotId!=shotId){GpuQualification1961.captureChanged();captureEpoch1953++;noteCapture1989(captureEpoch1953,trace.id);}"
+  },
+  {
+    "old": "    public static long captureEpoch1953() {return captureEpoch1953;}",
+    "new": "    public static long captureEpoch1953() {return captureEpoch1953;}\n    /** The displayed Trace.id is bound to the exact associated epoch. Read it\n     * without the timing monitor: qualification may already own its monitor.\n     * There is no latest-photo fallback or ShotContext-ID substitution. */\n    static long captureId1989(long expectedEpoch) {\n        CaptureIdentity1989 identity=captureIdentity1989;\n        return identity!=null&&identity.epoch==expectedEpoch&&expectedEpoch==captureEpoch1953?identity.traceId:0;\n    }\n    private static void noteCapture1989(long epoch,long traceId) {\n        try{captureIdentity1989=new CaptureIdentity1989(epoch,traceId);}\n        catch(Throwable optional){captureIdentity1989=null;}\n    }"
+  }
+]

@@ -1,0 +1,96 @@
+#version 310 es
+precision highp int;
+layout(local_size_x=8,local_size_y=8,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint values[]; } source;
+layout(std430,binding=1) readonly buffer Packed { uint values[]; } intermediates;
+layout(std430,binding=2) readonly buffer Metadata { uint values[]; } metadata;
+layout(std430,binding=3) buffer Summary { uint values[]; } summary;
+layout(std430,binding=4) readonly buffer Range { int values[]; } ranges;
+uniform int width;
+uniform int begin;
+uniform int end;
+uniform int lo;
+uniform int hi;
+uniform int radius;
+uniform int inputOrigin;
+uniform int inputRows;
+shared uint rgbTile[256];
+shared uint packedTile[256];
+const int offsets[7]=int[7](-4,-2,-1,0,1,2,4);
+const int spatial[7]=int[7](1,2,3,4,3,2,1);
+const int wide[7]=int[7](1,3,5,6,5,3,1);
+int periodicTexture(int center,int col,int row,int threshold) {
+    if(radius<3 || col<radius || col>=width-radius || row<lo+radius || row>=hi-radius)return 0;
+    int best=0,length=radius*2+1,samples[9];
+    for(int direction=0;direction<4;direction++) {
+        int dx=direction==0?1:direction==1?0:direction==2?1:-1;
+        int dy=direction==0?0:1;
+        bool opaque=true;int mn=255,mx=0,adjacent=0;
+        for(int i=0;i<length;i++) {
+            uint p=packedTile[center+(i-radius)*(dy*16+dx)];
+            if((p&(1u<<26u))==0u){opaque=false;break;}
+            int value=int(p&255u);samples[i]=value;mn=min(mn,value);mx=max(mx,value);
+            if(i>0)adjacent+=abs(value-samples[i-1]);
+        }
+        if(!opaque || mx-mn<threshold*2 || adjacent<(length-1)*threshold)continue;
+        int average=(adjacent+(length-2)/2)/(length-1);
+        for(int period=2;period<=min(4,length-4);period++) {
+            int error=0,count=length-period;
+            for(int i=0;i<count;i++)error+=abs(samples[i]-samples[i+period]);
+            error=(error+count/2)/count;
+            int confidence=clamp((average*4-error*9)*256/max(1,average*4),0,256);
+            confidence=confidence*confidence>>8;best=max(best,confidence);
+        }
+    }
+    return best;
+}
+void main() {
+    int lx=int(gl_LocalInvocationID.x),ly=int(gl_LocalInvocationID.y);
+    int gx=int(gl_WorkGroupID.x)*8,gy=begin+int(gl_WorkGroupID.y)*8;
+    /* Every invocation, including tails and inactive metadata, loads and enters
+       the barrier. Integer border replication is the CPU lo/hi clamp. */
+    for(int at=ly*8+lx;at<256;at+=64) {
+        int sx=clamp(gx+(at&15)-4,0,width-1);
+        int sy=clamp(gy+(at>>4)-4,lo,hi-1);
+        sy=clamp(sy,inputOrigin,inputOrigin+inputRows-1);
+        int sourceAt=(sy-inputOrigin)*width+sx;
+        rgbTile[at]=source.values[sourceAt];packedTile[at]=intermediates.values[sourceAt];
+    }
+    barrier();
+    int col=gx+lx,row=gy+ly;if(col>=width || row>=end)return;
+    int at=(row-begin)*width+col,oi=at*3,center=(ly+4)*16+lx+4;
+    summary.values[oi+2]=0u;
+    uint m=metadata.values[at],cp=packedTile[center];
+    if((m>>31u)==0u || (cp&(1u<<26u))==0u)return;
+    int yc=int(cp&255u),sigma=int(m&63u),threshold=int((m>>6u)&63u);
+    int weight=0,rr=0,gg=0,bb=0,nw=0,nr=0,ng=0,nb=0;
+    int left=0,right=0,up=0,down=0,lc=0,rc=0,uc=0,dc=0,minY=yc,maxY=yc;
+    int llimit=min(56,8+sigma*3),climit=min(48,8+sigma*2),taps=radius==4?7:radius*2+1;
+    for(int yi=0;yi<taps;yi++) {
+        int dy=radius==4?offsets[yi]:yi-radius;
+        for(int xi=0;xi<taps;xi++) {
+            int dx=radius==4?offsets[xi]:xi-radius;
+            uint p=packedTile[center+dy*16+dx];if((p&(1u<<26u))==0u)continue;
+            int yy=int(p&255u);
+            if(dx<0){left+=yy;lc++;}else if(dx>0){right+=yy;rc++;}
+            if(dy<0){up+=yy;uc++;}else if(dy>0){down+=yy;dc++;}
+            minY=min(minY,yy);maxY=max(maxY,yy);
+            int ld=abs(yy-yc),cd=max(abs(int((p>>8u)&511u)-int((cp>>8u)&511u)),
+                abs(int((p>>17u)&511u)-int((cp>>17u)&511u)));
+            if(ld>llimit || cd>climit)continue;
+            int w=(radius==4?wide[xi]*wide[yi]:spatial[dx+3]*spatial[dy+3])*ranges.values[sigma*256+ld];
+            if(cd>8)w=w*8/cd;if(w==0)continue;
+            uint p0=rgbTile[center+dy*16+dx];int r=int((p0>>16u)&255u),g=int((p0>>8u)&255u),b=int(p0&255u);
+            weight+=w;rr+=w*r;gg+=w*g;bb+=w*b;
+            if(abs(dx)<=1 && abs(dy)<=1){nw+=w;nr+=w*r;ng+=w*g;nb+=w*b;}
+        }
+    }
+    if(weight==0 || nw==0)return;
+    int edge=max(lc==0||rc==0?0:abs(left/lc-right/rc),uc==0||dc==0?0:abs(up/uc-down/dc));
+    int periodic=periodicTexture(center,col,row,threshold);
+    int r1=(nr+nw/2)/nw,g1=(ng+nw/2)/nw,b1=(nb+nw/2)/nw;
+    int r2=(rr+weight/2)/weight,g2=(gg+weight/2)/weight,b2=(bb+weight/2)/weight;
+    summary.values[oi]=uint((r1<<16)|(g1<<8)|b1);
+    summary.values[oi+1]=uint((r2<<16)|(g2<<8)|b2);
+    summary.values[oi+2]=0x80000000u|(uint(periodic)<<16u)|(uint(edge)<<8u)|uint(maxY-minY);
+}

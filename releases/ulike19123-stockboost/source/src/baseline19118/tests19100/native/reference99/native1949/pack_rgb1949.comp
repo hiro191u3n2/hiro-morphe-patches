@@ -1,0 +1,12 @@
+#version 310 es
+precision highp int;
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source { uint values[]; } source;
+layout(std430,binding=1) writeonly buffer Packed { uint values[]; } intermediates;
+uniform int count;
+void main() {
+    int at=int(gl_GlobalInvocationID.x);if(at>=count)return;
+    uint p=source.values[at];int r=int((p>>16u)&255u),g=int((p>>8u)&255u),b=int(p&255u);
+    intermediates.values[at]=uint((77*r+150*g+29*b+128)>>8)|
+        (uint(r-g+255)<<8u)|(uint(b-g+255)<<17u)|uint((p>>24u)==255u)<<26u;
+}

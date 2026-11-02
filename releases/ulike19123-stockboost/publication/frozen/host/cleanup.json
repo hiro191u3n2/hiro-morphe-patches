@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "assertions": 136,
+  "tests": [
+    {
+      "status": "passed",
+      "assertions": 43,
+      "host_processor_count": 1
+    },
+    {
+      "status": "passed",
+      "assertions": 43,
+      "host_processor_count": 3
+    },
+    {
+      "status": "passed",
+      "assertions": 43,
+      "host_processor_count": 4
+    },
+    {
+      "status": "passed",
+      "assertions": 7,
+      "test": "actual_save_queue"
+    }
+  ],
+  "source_sha256": {
+    "SpeedWorkers1935.java": "a6fafe55dee98fe686b8495c76c47db0ba45129174f2745e45cbea4387269d21",
+    "PostSaveCleanup19122.java": "b6a91aaae128108ab0243e08b96b44a153d06f16a8a64c4cef115cdc2af277b4",
+    "SaveQueue1935.java": "84deb4c6397e7f009b8f8e6fb8d33c9a5027adc533a7bbcf1eadc7318f9a17af",
+    "host_cleanup19122.py": "159de98b6e54280cae539d0dadd761cb6b9ed30ae06feef9f7776c995a678746",
+    "tests19122/cleanup/com/hiro/ulike/CapturePolicy19122.java": "7a756d12c22f236ec69eff8694fd5be37fd81d90a7b6563279cc2095cd21f64b",
+    "tests19122/cleanup/com/hiro/ulike/Cleanup19122Test.java": "de5d16c8ce312eccc504e80e73163d0f1363550480f6c0d7217ca1bc1bdc73cb",
+    "tests19122/cleanup/com/hiro/ulike/GpuNoise1960.java": "18ebe73f099e32c18475b1763efdb0bf69d0095b49fbe48d32f8ca735c0f306e",
+    "tests19122/cleanup/com/hiro/ulike/Responsiveness19122.java": "06aab8cffcd2004335b8b9214323a883108590cef38dc5ce6e86464c15c7053b",
+    "tests19122/cleanup/com/hiro/ulike/SaveQueue1935.java": "d48ddcd68cde4a8202c4ce46a38a2f2c03ed4a97d850c167d6523845a53574d2",
+    "tests19122/cleanup/com/hiro/ulike/ShotContext1932.java": "94ce456e99ecf0fd36a0f53c1c9b70f16c689056eddda2533e1035cb98b7f024",
+    "tests19122/queue/com/hiro/ulike/GpuFinish1953.java": "63b900bdcefedfdea57fc8bfc40ac799d76a56c95276fdccbffdbf4270a11d71",
+    "tests19122/queue/com/hiro/ulike/PhotoAnalysis1981.java": "ced356e63cbf30e6a153212f6aebc162f04a1c8dfc0a28a91882fcbeeaa848ae",
+    "tests19122/queue/com/hiro/ulike/QueueCleanup19122Test.java": "5d32d08b54758ab25ad167184b2ff95eebe9acf668df8900fb65b122b83e5c7c",
+    "tests19122/queue/com/hiro/ulike/SaveMemory1981.java": "a0ee151cecc08d7d146bd2d3bac2a8e812098c6c2e9586e83773956e94998281",
+    "tests19122/queue/com/hiro/ulike/WholeRoute1953.java": "8e308d25bae9f9de88e8c01e500514a3c2e696692c908ec26f0e236e216dcebe"
+  },
+  "negative_controls": {
+    "worker_cap_not_enforced": true,
+    "cleanup_revokes_cpu_lease": true,
+    "skip_comparison_not_frozen": true,
+    "single_workspace_revoked": true,
+    "failed_preparation_idle_event_missing": true
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false,
+  "fixture_scope": "Real SpeedWorkers scheduler/array pool and PostSaveCleanup coordinator. Queue/shot status, GPU owner and native scratch capacities use deterministic fixtures; GPU owner is separately tested. Actual SaveQueue reserve/release/drain/finishStages exercises both terminal-before-release and terminal-after-release ordering. Java reference drops are not physical memory-reclamation measurements."
+}

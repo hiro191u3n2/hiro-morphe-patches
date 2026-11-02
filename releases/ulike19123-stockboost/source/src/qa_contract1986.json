@@ -1,0 +1,487 @@
+{
+  "pending_review1984": [],
+  "pending_review1985": [],
+  "pending_review1986": [],
+  "requirements": {
+    "audit_camera": [
+      "native_restart_limits_preserved",
+      "original_input_deadline_preserved",
+      "frame_only_wait_skips_native_polling"
+    ],
+    "audit_gpu": [
+      "gpu_transport_failure_retry_verified",
+      "real_pixel_mismatch_persistence_preserved",
+      "gpu_busy_and_cancellation_preserve_proofs",
+      "gpu_failure_cooldown_and_three_retries_verified",
+      "gpu_failed_outputs_never_committed",
+      "strong_dead_route_removal_output_exact",
+      "published79_null_failure_permanent_rejection_reproduced",
+      "gpu_unknown_capability_retry_verified",
+      "gpu_true_unsupported_cache_preserved",
+      "single_residual_capability_retry_verified",
+      "gpu_diagnostic_closure_adapter1982_verified"
+    ],
+    "camera": [
+      "latest_camera_layout_regressions_passed",
+      "fresh_camera_host_execution_in_this_release"
+    ],
+    "capture_routes": [
+      "codec_close_event_resumes_deferred_prep",
+      "storage_before_codec_fence",
+      "storage_cancel_joins_cleanup",
+      "memory_domains_and_stage_budget",
+      "analysis_same_photo_and_failure_distinction",
+      "analysis_read_lease_drained",
+      "constructor_metadata_without_initialization",
+      "encoder_tail_pristine_and_proof_lease",
+      "capture_error_regressions_preserved",
+      "published79_linkage_reservation_leaks_reproduced",
+      "candidate_error_paths_release_owned_bitmap_and_reservation",
+      "fatal_errors_rethrown_after_cleanup",
+      "next_capture_after_failure_succeeds",
+      "submitted_job_not_released_twice",
+      "diagnostic_linkage_failure_does_not_block_terminal_cleanup"
+    ],
+    "certificate": [
+      "qualification_certificate_regressions_passed",
+      "gpu_safety_gates_preserved"
+    ],
+    "gpu76": [
+      "exact_tiled1976_actual_jni",
+      "legacy_program_pixels_preserved",
+      "full_argb_confidence_exact",
+      "cropped_halo_and_two_banks",
+      "resident_copy_range1976_actual_jni",
+      "virtual_slot24_budget_verified"
+    ],
+    "gpu76.memory": [
+      "resident_slot_memory_admission1976_verified",
+      "native_memory_admission_regressions_passed",
+      "native_failure_diagnostics_regressions_passed",
+      "gpu_safety_gates_preserved",
+      "materialized_java_readback_counted_once",
+      "remaining_java_allocation_stays_reserved",
+      "reusable_multi_output_readback_verified",
+      "private_partial_output_never_committed",
+      "overlap_scratch_admission_serial_fallback_verified",
+      "multi_output_cancel_and_quarantine_verified"
+    ],
+    "gpu_forecast": [
+      "expired_bank_recheck1983_verified",
+      "late_release_gpu_adoption1983_verified",
+      "forecast_cross_capture1983_verified",
+      "forecast_scope_expiry_cooling1983_verified",
+      "routing_quality_speed_cancellation1983_verified",
+      "routing_output_preserved1983_verified",
+      "resident_deadline_preserved1983_verified",
+      "single_waiter_bound1983_verified",
+      "forecast_history_survives_cooling1986_verified",
+      "forecast_real_capture_gaps1986_verified",
+      "forecast_expiry_bounded_recovery1986_verified",
+      "forecast_no_single_capture_or_optimistic_reuse1986_verified",
+      "forecast_diagnostics_scalar_optional1986_verified",
+      "forecast_baseline85_loss_reproduced1986",
+      "forecast_legacy_guards_retained1986_verified",
+      "strong_nonforecast_source1986_preserved"
+    ],
+    "gpu_routes": [
+      "upload_budget_fixture_adapter1983_verified",
+      "certificate_handoff_adapter1985_verified",
+      "gpu_routes_forecast_fixture_adapter1986_verified"
+    ],
+    "gpu_routes.native": [
+      "cold_idle_persist_hot1981_actual_jni",
+      "wait_transfer_inclusive1981_verified",
+      "resident_forecast_actual_capacity1981_verified",
+      "hot_failure_cancel_private1981_verified",
+      "complete_argb_confidence_exact"
+    ],
+    "gpu_routes.plan": [
+      "route_policy_single_pass1981_verified",
+      "resident_preflight1981_verified",
+      "complete_policy_argb_confidence_baseline80_exact"
+    ],
+    "gpu_routes.queue": [
+      "twentyfour_candidate_tuning1978_verified",
+      "idle_two_full_argb_confidence_policy1978_verified",
+      "idle_snapshot_cancel_and_memory1978_verified",
+      "idle_upload_reuse1978_verified",
+      "new_gpu_balanced_five_percent_gate1978_verified",
+      "legacy_exact_rejections1978_preserved",
+      "worker_bound_speed_retry1978_verified",
+      "legacy_gpu_failure_direct_recovery1978_verified",
+      "idle_first_legacy_exact2_progress1979_verified",
+      "later_policy_rejection1979_preserved",
+      "snapshot_round_robin1981_verified",
+      "large_snapshot_progress1981_verified",
+      "denied_family_progress1981_verified",
+      "queue_cancel_fresh_retry1981_verified",
+      "strong_companion_cooldown_isolation1984_verified",
+      "strong_profile_checkpoint1984_verified",
+      "strong_certified_resume1984_verified",
+      "strong_exact_and_speed_gates1984_preserved",
+      "strong_shared_snapshot_admission1984_verified",
+      "declared_historical_expectation_adapter1984_verified",
+      "strong_optional_diagnostics1984_verified",
+      "historical_tuning_sources_unchanged1984_verified",
+      "strong_late_baseline_recovery1985_verified",
+      "strong_terminal_selection_revalidation1985_verified",
+      "strong_worker_variant_handoff1985_verified",
+      "strong_handoff_exact_speed_and_cancellation1985_preserved",
+      "strong_handoff_optional_diagnostics1985_verified",
+      "strong_production_parallel_comparator1985_executed",
+      "historical_tuning_sources_unchanged1985_verified",
+      "strong_private_method_signatures1985_preserved"
+    ],
+    "helper_references": [
+      "helper_missing_members_rejected",
+      "external_interface_false_pass_reproduced",
+      "only_exact_platform_member_descriptors_deferred",
+      "external_member_actual_superclass_verified",
+      "included_inherited_members_preserved"
+    ],
+    "idle": [
+      "whole_route_idle_recheck1979_verified",
+      "idle_downstream_qualification1979_verified",
+      "idle_cancel_ownership1979_verified",
+      "idle_save_and_exact_gates1979_verified"
+    ],
+    "pipeline_diagnostics": [
+      "resident_all_terminal_reasons1982",
+      "pipeline_accepted_backend_counts1982",
+      "pipeline_failure_not_gpu_accepted1982",
+      "pipeline_background_trace_excluded1982",
+      "pipeline_default_route_explicit1982",
+      "pipeline_math_and_gates_preserved1982",
+      "pipeline_retained_backend_suite1983",
+      "pipeline_resident_fixture_adapter1983",
+      "pipeline_reviewed_capacity_inverse1983",
+      "pipeline_resident_ticket_fixture_adapter1984",
+      "pipeline_resident_ticket_contract1984",
+      "pipeline_published83_unreserved_copy_negative1984",
+      "pipeline_reviewed_resident_diagnostic_inverse1984",
+      "pipeline_resident_snapshot_peer_adapter1985",
+      "pipeline_resident_epoch_handoff1985",
+      "pipeline_resident_begin_gate1985",
+      "pipeline_resident_copy_diagnostics1985",
+      "pipeline_retained_full_backend_suite1985",
+      "pipeline_reviewed_finish_inverse1986",
+      "pipeline_retained_full_backend_suite1986"
+    ],
+    "pipeline_routes": [
+      "pipeline81_caller_workspace_cpu_fallback_exact",
+      "pipeline81_baseline_cold_gpu_workspace_loss_reproduced",
+      "pipeline81_identity_all_argb_exact",
+      "pipeline81_original_halos_and_rounding_preserved",
+      "pipeline81_single_stage_ownership_verified",
+      "pipeline81_residual_reuse_rawbits_exact",
+      "pipeline81_exact2_speed_gate_preserved",
+      "pipeline81_original_gpu_certificates_preserved",
+      "pipeline81_actual_gpu_stage_all_argb_exact",
+      "pipeline81_independent_cold_stage_admission_verified",
+      "pipeline81_cpu_profile_transitions_verified",
+      "pipeline81_cpu_mismatch_is_exact_rejection_verified",
+      "pipeline81_cpu_oracle_native_capacity_verified",
+      "pipeline_diagnostic_closure_adapter1982_verified",
+      "pipeline_retained_route_suite1986",
+      "pipeline_finish_baseline_suite1986"
+    ],
+    "pipeline_routes.finish_baseline": [
+      "finish_published85_missing_legacy_negative1986",
+      "finish_cpu_fallback_two_complete_proofs1986",
+      "finish_actual_output_timing_boundaries1986",
+      "finish_existing_legacy_gate1986_preserved",
+      "finish_independent_candidate_failures1986",
+      "finish_cpu_reference_stability1986",
+      "finish_cancellation_and_ownership1986",
+      "finish_exact_history1986_preserved",
+      "finish_optional_diagnostics1986_noninterference",
+      "finish_resident_baseline_handoff1986",
+      "finish_pixel_render_methods1986_preserved",
+      "finish_reviewed_source_inverse1986"
+    ],
+    "qualification_progress": [
+      "qualification_ticket_budget1984",
+      "qualification_shared_model_ownership1984",
+      "qualification_priority_fairness1984",
+      "qualification_terminal_progress1984",
+      "qualification_legacy_gates_preserved1984",
+      "qualification_atomic_reasons1983",
+      "qualification_queue_ownership1983",
+      "qualification_scalar_snapshots1983",
+      "qualification_terminal_selection1985",
+      "qualification_progress_write_distinction1985",
+      "qualification_comparison_scope1985",
+      "qualification_prebegin_revocation1985",
+      "qualification_materialized_owner_lifetime1985",
+      "qualification_diagnostic_noninterference1985",
+      "qualification_rolling_payload_bound1985",
+      "qualification_published84_ambiguity_reproduced1985",
+      "qualification_same_scenario_corrected1985",
+      "qualification_published85_finish_ambiguity_reproduced1986",
+      "qualification_same_finish_reason_corrected1986",
+      "qualification_finish_subreasons1986",
+      "qualification_finish_parent_phase_preserved1986",
+      "qualification_finish_reference_and_trials1986",
+      "qualification_finish_proof_write_separation1986",
+      "qualification_finish_diagnostic_noninterference1986",
+      "qualification_finish_cancelled_snapshot1986",
+      "qualification_finish_scalar_payload_bound1986"
+    ],
+    "recovery": [
+      "qualification_epoch_recovery_passed",
+      "old_positive_certificates_invalidated",
+      "old_preferred_certificates_invalidated",
+      "legacy_blanket_not_treated_as_exact_evidence",
+      "signed_legacy_individual_failures_preserved",
+      "exact_journal_655_survives_process_restart",
+      "unknown_1000_lookups_do_not_persist",
+      "unknown_keys_require_fresh_proof",
+      "rejection_families_and_environments_isolated",
+      "speed_failures_distinct_from_exact",
+      "hot_failure_cache_bounded_64",
+      "original_1976_regression_negative_controls_passed",
+      "new_exact_journal_signature_integrity_passed",
+      "diagnostic_recovery_label_adapter1982_verified"
+    ],
+    "resident_decisions": [
+      "resident_terminal_decisions1983",
+      "resident_no_diagnostic_readmission1983",
+      "resident_snapshot_ownership1983",
+      "resident_reservation_before_copy1984",
+      "resident_ticket_cleanup1984",
+      "resident_commit_races1984",
+      "resident_attempt_diagnostics_noninterference1984",
+      "resident_retained_proof_gates1984",
+      "published83_unreserved_copy_reproduced1984",
+      "resident_retained_fixture_adapters1984",
+      "snapshot_unstarted_stale_owner1985",
+      "snapshot_started_owner_exclusion1985",
+      "snapshot_copy_caps1985_preserved",
+      "snapshot_whole_family_fairness1985",
+      "snapshot_exact_refusal_diagnostics1985",
+      "snapshot_decision_immutability1985",
+      "resident_snapshot_epoch_handoff1985",
+      "resident_snapshot_begin_gate1985",
+      "resident_snapshot_diagnostics_noninterference1985",
+      "published84_stale_unstarted_copy_reproduced1985",
+      "published84_resident_stale_copy_reproduced1985",
+      "resident_all_legacy_gates1985_preserved"
+    ],
+    "resident_memory": [
+      "published82_logged_dimensions_rejected_verified",
+      "generated_output_transfer_budget1983_verified",
+      "forecast_and_runtime_lease_agree1983_verified",
+      "real_upload_staging_and_temporary_preserved1983_verified",
+      "undeclared_upload_before_jni_rejected1983_verified",
+      "readback_consume_exception_cancel_ownership1983_verified",
+      "physical_memory_and_512mib_limit1983_preserved",
+      "legacy_api_memory_contract1983_preserved",
+      "actual_production_java_and_jni_executed"
+    ],
+    "route": [
+      "h22_actual_dispatch_selection_engine_executed",
+      "h22_all_mode_full_pixel_proofs",
+      "h22_transfer_inclusive_mode_selection",
+      "h22_unknown_dispatch_history_requires_fresh_proof",
+      "h22_private_candidate_released_between_trials",
+      "h22_mode_selection_cancellation_checked"
+    ],
+    "save_hooks": [
+      "storage_codec_fence_inverse_verified",
+      "encoder_tail_release_positions_verified",
+      "face_success_completion_positions_verified"
+    ],
+    "strong_diagnostics": [
+      "route_reason_combinations",
+      "certified_speed_not_quality_wait",
+      "bank_refusal_classification",
+      "bank_wait_and_monitor_separate",
+      "route_and_output_unchanged",
+      "qualification_queue_cache_separate",
+      "qualification_retry_categories",
+      "status_observation_no_state_changes",
+      "strong_forecast_fixture_adapter1986_verified",
+      "strong_diagnostic_history_leak_reproduced1986_verified",
+      "strong_diagnostic_case_isolation1986_verified",
+      "strong_diagnostic_within_case_forecast1986_preserved"
+    ],
+    "timing": [
+      "stage_details1976_regressions_passed",
+      "backend_diagnostics_regressions_passed",
+      "backend_visibility_regressions_passed",
+      "strong_preference_telemetry_regressions_passed",
+      "strong_failure_diagnostics_regressions_passed",
+      "strong_work_latency_regressions_passed",
+      "strong_full_mismatch_regressions_passed",
+      "exact_speed_diagnostics1978_verified",
+      "live_qualification_status1979_verified",
+      "diagnostic_snapshot_immutable",
+      "early_capture_probe_cancel1979_verified",
+      "timing_diagnostics1982_verified",
+      "selected_backend_timing1982_verified",
+      "resident_exit_display1982_verified",
+      "separate_bank_lock_timing1982_verified",
+      "diagnostic_updates_no_hot_ui_refresh1982_verified",
+      "all_227_inherited_timing_assertions_preserved",
+      "resident_queue_labels1983",
+      "resident_saved_decision_immutable1983",
+      "resident_diagnostics_read_only1983",
+      "live_attempt_results_isolated1984",
+      "live_attempt_failure_noninterference1984",
+      "reserved_slot_refusal_explicit1984",
+      "timing_terminal_ledger_isolation1985",
+      "timing_copy_decision_snapshot1985",
+      "timing_copy_fields_scalar_only1985",
+      "timing_new_provider_failure_noninterference1985",
+      "timing_copy_begin_reason1985",
+      "retained_queue_reason_upper_bound_adapter1985_verified",
+      "timing_forecast_same_lookup_scalars1986",
+      "timing_forecast_scope_and_expiry1986",
+      "timing_forecast_saved_owner_immutable1986",
+      "timing_finish_live_detail_isolation1986",
+      "timing_new_provider_failure_noninterference1986",
+      "timing_forecast_scalar_only1986",
+      "timing_forecast_hot_observer_no_allocations_or_callbacks1986"
+    ]
+  },
+  "review_complete": true,
+  "route_policy1981": {
+    "existing_gpu_exact_and_negative_identities_preserved1981": true,
+    "gpu_foreground_first_complete_strip_limit_bytes1981": 100663296,
+    "gpu_foreground_strip_copy_fair_families1981": [
+      "strong",
+      "single_stage",
+      "residual_stage"
+    ],
+    "gpu_foreground_strip_snapshot_budget_bytes1981": 33554432,
+    "gpu_foreground_strong_strip_snapshot_budget_bytes1981": 33554432,
+    "gpu_foreground_whole_snapshots_per_photo1981": 1,
+    "gpu_qualification_family_fair1981": true,
+    "gpu_qualification_max_pending_jobs1981": 8,
+    "gpu_qualification_total_retained_limit_bytes1981": 100663296,
+    "r6_partial_stage_resume_enabled1981": false,
+    "strong_cold_candidate_budget": 0,
+    "strong_foreground_quality_comparisons1981": 0,
+    "strong_gpu_bank_wait_limit_ms": 50,
+    "strong_gpu_bank_wait_policy1981": "measured_remaining_completion_budget",
+    "strong_gpu_forecast_capture_samples1983": 3,
+    "strong_gpu_forecast_entry_limit1983": 64,
+    "strong_gpu_forecast_min_distinct_captures1983": 2,
+    "strong_gpu_forecast_slow_cooling_ns1983": 1500000000,
+    "strong_gpu_forecast_ttl_ns1983": 12000000000,
+    "strong_gpu_overdue_recheck_ns1983": 12000000,
+    "strong_gpu_preference_mode": 3,
+    "strong_gpu_quality_trials": 2,
+    "strong_gpu_recheck_slice_ns1983": 2000000,
+    "strong_gpu_resident_wait_hard_ceiling_ms1981": 15000,
+    "strong_gpu_speed_gate_required": true,
+    "strong_gpu_worker_limit": 4,
+    "strong_idle_quality_comparisons1981": 2,
+    "strong_same_key_proof_singleflight": true
+  },
+  "runners": [
+    [
+      "certificate",
+      "host_certificate1982"
+    ],
+    [
+      "gpu76",
+      "host_gpu1976"
+    ],
+    [
+      "timing",
+      "host_timing1986"
+    ],
+    [
+      "camera",
+      "host_camera1973"
+    ],
+    [
+      "idle",
+      "host_idle_liveness1981"
+    ],
+    [
+      "recovery",
+      "host_recovery1982"
+    ],
+    [
+      "audit_camera",
+      "host_audit_camera1980"
+    ],
+    [
+      "capture_routes",
+      "host_capture_routes1981"
+    ],
+    [
+      "audit_gpu",
+      "host_audit_gpu1982"
+    ],
+    [
+      "route",
+      "host_route1953"
+    ],
+    [
+      "helper_references",
+      "host_helper_references1981"
+    ],
+    [
+      "save_hooks",
+      "host_save_hooks1981"
+    ],
+    [
+      "gpu_routes",
+      "host_routes_gpu1986"
+    ],
+    [
+      "pipeline_routes",
+      "host_pipeline_routes1986"
+    ],
+    [
+      "strong_diagnostics",
+      "host_strong_diagnostics1986"
+    ],
+    [
+      "pipeline_diagnostics",
+      "host_pipeline_diagnostics1986"
+    ],
+    [
+      "resident_memory",
+      "host_memory1983"
+    ],
+    [
+      "gpu_forecast",
+      "host_routing1986"
+    ],
+    [
+      "resident_decisions",
+      "host_resident_diagnostics1985"
+    ],
+    [
+      "qualification_progress",
+      "host_qualification1986"
+    ]
+  ],
+  "schema": "ulike1986-host-contract-v1",
+  "strong_diagnostic_fixture_isolation1986": {
+    "ci_observation_limit": "The failing CI did not log its individual bank timings. The reproduced isolation defect explains timing sensitivity; no specific CI delay value is asserted.",
+    "evidence": "The new current-production regression seeds deterministic two-capture nonslow history and reproduces the unchanged case-15 assertion failure without isolation. Clearing prior-case history restores the expected ranking; within-case cross-capture history and complete pixel/confidence output remain verified.",
+    "historical_source_and_runner_changed": false,
+    "production_changed": false,
+    "scope": "The retained .82 Strong diagnostic matrix defines independent no-history scenarios. A source-pinned .86 adapter clears Forecast1983.RECENT only at the existing reset boundary; it preserves all historical route/output expectations and assertions.",
+    "timing_thresholds_relaxed": false,
+    "within_case_forecast_history_retained": true
+  },
+  "superseded_expectations": {
+    "audit80": "The .80 camera, save cleanup and GPU failure-classification regressions remain current executed gates, with added .81 dependency declarations and only explicitly superseded queue/speed expectations adapted.",
+    "cpu_speed": ".81 preliminary NR uses the caller workspace and independent detached comparison workspaces. Transport/speed failures use a separate speed identity while existing GPU exact certificates and mismatches are retained.",
+    "diagnostics82": "Only diagnostics and display are instrumented in .82. The .81 numerical, route, queue, ownership, cancellation and certificate contracts remain required; old source and fixtures are preserved.",
+    "forecast_finish1986": "The approved .86 repair separates bounded cross-capture observation retention from transient cooling and allows an exactly repeated finish candidate to use a real CPU baseline only when no usable legacy GPU reference exists. Existing complete comparisons, 5% speed gates, native/pixel math, exact rejection history, memory/ownership/camera/save contracts remain required. Deliberately revised historical expiry or baseline-dependency expectations are isolated in source-pinned .86 wrappers.",
+    "foreground": ".80 bounded foreground Strong exact2 bootstrap is replaced by CPU completion plus bounded fresh idle proof snapshots. Actual .81 tests require cold-to-idle-to-persisted-to-hot progress, two complete comparisons and a completion-cost speed gate.",
+    "gpu_budget_and_forecast1983": "The approved .83 repair changes resident transfer accounting and finite nonresident bank forecasts. Retained .82 differential cases still require equal routes and output for their original fixture scenarios; the new .83 cases explicitly exercise the repaired admission and forecast decisions. Pixel math, saved exact proofs, real upload budget, cancellation and native bytes remain required.",
+    "proof_handoff1985": "The approved .85 repair resolves stale legacy references, validates the final usable candidate after optional comparisons, and handles obsolete unstarted snapshot owners. Existing numerical behavior, independently repeated complete comparisons, real speed gates, original exact refusals, saved certificate identity, memory caps and started-copy ownership remain required. Any deliberately updated diagnostic expectation is isolated in a reviewed current-version wrapper; historical sources remain frozen.",
+    "qualification_progress1984": "The approved .84 repair changes qualification snapshot ownership, independent transient/speed retry progression and bounded tuning continuation. All .83 safety, numerical, exact-certificate, memory-cap, cancellation and negative controls remain required. Any deliberately changed old scheduling expectation needs a minimal reviewed .84 wrapper with explicit positive and negative evidence; historical files remain frozen.",
+    "queue": ".80 all-legacy-first FIFO order is replaced by alternating legacy/other families with FIFO within each family; certificate descriptors and negative journals remain unchanged.",
+    "unchanged_numerics": ".78 numerical assertion counts are inherited provenance only; fresh .81 full-image and raw-coefficient comparisons are counted only when actually run. All twelve shipped native payloads remain identical to .80."
+  }
+}
