@@ -1,0 +1,186 @@
+{
+  "schema": "berry-repair334-apk-application-v1",
+  "result": "PASS",
+  "physical_device_tested": false,
+  "berry_3_84_12_tested": false,
+  "combined_sha256": "8acaabaeb9237d98658310779b1bf380d15cd8f6e0810f8117385b2468b3c474",
+  "standalone_sha256": "db29d4152563fcda630b91774a66a90decf7063aa2bd28dfa3b877b5fac57cbc",
+  "actual_original_apk_application_passed": true,
+  "synthetic_renamed_apk_application_passed": true,
+  "input_provenance": {
+    "original": "Previously user-provided original3.83.74 base APK",
+    "renamed": "Private synthetic transform of original3.83.74: all root classes and selected app members renamed; versionName9.99.99. Not a real released Berry version."
+  },
+  "hook_audit_verifier_sha256": "d44ea146502cc5b97cf85257452631ce07444d1d6187a927d6d5233c9923b55c",
+  "transformer_sha256": "b6721ac145614b9753f27639da08241d71b2b487666aff15f16e28300e2c4eb3",
+  "runs": [
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.334.mpp",
+      "artifact_sha256": "8acaabaeb9237d98658310779b1bf380d15cd8f6e0810f8117385b2468b3c474",
+      "input_apk_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+      "input_kind": "original",
+      "input_version_name": "3.83.74",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "バックフォワードキャッシュの復帰処理を補正"
+      ],
+      "exit_code": 0,
+      "success": true,
+      "applied_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ],
+      "failed_patches": [],
+      "all_build_steps_success": true,
+      "output_apk_sha256": "fbc3571c517fb37b4db5751ae25b42af75e1e55a53d94eeb8027cdbb5f019ad0",
+      "physical_device_tested": false,
+      "native_body_baseline_332_apk_sha256": "7faa5563c93986940c1b1661ace65d337d4dfb4be39aee57663b57d1c9a22c95",
+      "hook_audit": {
+        "result": "PASS_ACTUAL_HOOKS",
+        "expected_hook_kinds": 27,
+        "application_methods_with_hooks": 23,
+        "resolved_method_and_field_references": 957,
+        "register_bounds_invoke_words_and_branches_valid": true,
+        "queue_provider_and_manifest_present": true,
+        "native_start_body_preserved_from_332": true,
+        "guarded_loading_and_tail_hooks_valid": true,
+        "tail_webview_url_parameters_preserved": true,
+        "completion_boolean_and_native_metadata_valid": true,
+        "native_installer_registers_valid": true,
+        "diagnostic_ui_absent": true
+      }
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.334.mpp",
+      "artifact_sha256": "8acaabaeb9237d98658310779b1bf380d15cd8f6e0810f8117385b2468b3c474",
+      "input_apk_sha256": "ca7be3bfe05decdc0a2074632aa255010a83bba3167c373db2cf991f709d6581",
+      "input_kind": "renamed",
+      "input_version_name": "9.99.99",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "バックフォワードキャッシュの復帰処理を補正"
+      ],
+      "exit_code": 0,
+      "success": true,
+      "applied_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ],
+      "failed_patches": [],
+      "all_build_steps_success": true,
+      "output_apk_sha256": "26f9ea017a9688d1e6ceb69ad3e788e4bb6f1cb1dadf6e89cb251520719f3f1d",
+      "physical_device_tested": false,
+      "native_body_baseline_332_apk_sha256": "9e1f0f261452a405bad8dfea5d16472dcf0ce6b40668779f26f380eeed852fdf",
+      "hook_audit": {
+        "result": "PASS_ACTUAL_HOOKS",
+        "expected_hook_kinds": 27,
+        "application_methods_with_hooks": 23,
+        "resolved_method_and_field_references": 957,
+        "register_bounds_invoke_words_and_branches_valid": true,
+        "queue_provider_and_manifest_present": true,
+        "native_start_body_preserved_from_332": true,
+        "guarded_loading_and_tail_hooks_valid": true,
+        "tail_webview_url_parameters_preserved": true,
+        "completion_boolean_and_native_metadata_valid": true,
+        "native_installer_registers_valid": true,
+        "diagnostic_ui_absent": true
+      }
+    },
+    {
+      "artifact": "Berry_Browser_v1.4.2.mpp",
+      "artifact_sha256": "db29d4152563fcda630b91774a66a90decf7063aa2bd28dfa3b877b5fac57cbc",
+      "input_apk_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+      "input_kind": "original",
+      "input_version_name": "3.83.74",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "バックフォワードキャッシュの復帰処理を補正"
+      ],
+      "exit_code": 0,
+      "success": true,
+      "applied_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ],
+      "failed_patches": [],
+      "all_build_steps_success": true,
+      "output_apk_sha256": "7820d918f0fe93791a07bca2b613441c9f9a0d2a87037d9b8944e256b7d23ed1",
+      "physical_device_tested": false,
+      "native_body_baseline_332_apk_sha256": "630d085fa27fc5a3de830193de034f91a9a431acea140eb5f41eb40283774bb6",
+      "hook_audit": {
+        "result": "PASS_ACTUAL_HOOKS",
+        "expected_hook_kinds": 27,
+        "application_methods_with_hooks": 23,
+        "resolved_method_and_field_references": 957,
+        "register_bounds_invoke_words_and_branches_valid": true,
+        "queue_provider_and_manifest_present": true,
+        "native_start_body_preserved_from_332": true,
+        "guarded_loading_and_tail_hooks_valid": true,
+        "tail_webview_url_parameters_preserved": true,
+        "completion_boolean_and_native_metadata_valid": true,
+        "native_installer_registers_valid": true,
+        "diagnostic_ui_absent": true
+      }
+    },
+    {
+      "artifact": "Berry_Browser_v1.4.2.mpp",
+      "artifact_sha256": "db29d4152563fcda630b91774a66a90decf7063aa2bd28dfa3b877b5fac57cbc",
+      "input_apk_sha256": "ca7be3bfe05decdc0a2074632aa255010a83bba3167c373db2cf991f709d6581",
+      "input_kind": "renamed",
+      "input_version_name": "9.99.99",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "バックフォワードキャッシュの復帰処理を補正"
+      ],
+      "exit_code": 0,
+      "success": true,
+      "applied_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替"
+      ],
+      "failed_patches": [],
+      "all_build_steps_success": true,
+      "output_apk_sha256": "ec5640acd70de3b49c73c5a8be9afb2f0cfe78508dafe2b716c4f310b01a9805",
+      "physical_device_tested": false,
+      "native_body_baseline_332_apk_sha256": "c89e770612272ed9991deb818dac96354fcc27f95b412aa24187456b3d79eeae",
+      "hook_audit": {
+        "result": "PASS_ACTUAL_HOOKS",
+        "expected_hook_kinds": 27,
+        "application_methods_with_hooks": 23,
+        "resolved_method_and_field_references": 957,
+        "register_bounds_invoke_words_and_branches_valid": true,
+        "queue_provider_and_manifest_present": true,
+        "native_start_body_preserved_from_332": true,
+        "guarded_loading_and_tail_hooks_valid": true,
+        "tail_webview_url_parameters_preserved": true,
+        "completion_boolean_and_native_metadata_valid": true,
+        "native_installer_registers_valid": true,
+        "diagnostic_ui_absent": true
+      }
+    }
+  ]
+}
