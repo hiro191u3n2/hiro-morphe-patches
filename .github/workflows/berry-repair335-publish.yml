@@ -1,0 +1,62 @@
+name: Publish Berry BFCache bounded presentation recovery 1.4.3 and combined 1.0.335
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/berry-repair335/build/**'
+      - 'releases/berry-repair335/src/**'
+      - 'releases/berry-repair335/runtime/**'
+      - 'releases/berry-repair335/qa/**'
+      - 'releases/berry-repair335/audits/**'
+      - 'releases/berry-repair335/publication/**'
+      - 'releases/berry-repair335/payload/**'
+      - 'releases/berry-repair335/README.md'
+      - '.github/workflows/berry-repair335-publish.yml'
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.13+9'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test and rebuild runtime and providers twice
+        run: python3 releases/berry-repair335/publication/ci.py --repo . --work .ci-berry-repair335 --java "$JAVA_HOME/bin/java" --stage build
+      - name: Verify frozen artifact inventory and preservation proof
+        run: python3 releases/berry-repair335/publication/ci.py --repo . --work .ci-berry-repair335 --java "$JAVA_HOME/bin/java" --stage verify
+      - name: Publish verified release and update both Manager feeds atomically
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 releases/berry-repair335/publication/ci.py --repo . --work .ci-berry-repair335 --java "$JAVA_HOME/bin/java" --stage publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: berry-repair335-publication-evidence
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            .ci-berry-repair335/dist/
+            .ci-berry-repair335/build-a/*.json
+            .ci-berry-repair335/build-a/work/*.json
+            .ci-berry-repair335/build-a/work/*.log
+            .ci-berry-repair335/build-b/*.json
+            .ci-berry-repair335/build-b/work/*.json
+            .ci-berry-repair335/build-b/work/*.log
+            .ci-berry-repair335/runtime-a/RUNTIME_BUILD_QA.json
+            .ci-berry-repair335/runtime-b/RUNTIME_BUILD_QA.json
+          include-hidden-files: true

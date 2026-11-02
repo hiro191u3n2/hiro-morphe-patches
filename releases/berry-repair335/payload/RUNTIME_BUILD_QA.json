@@ -1,0 +1,96 @@
+{
+  "result": "PASS",
+  "extension": "extensions/berry_bfcache_restore.mpe",
+  "extension_bytes": 50592,
+  "extension_sha256": "ca97fb4ad2579e9adc1e5d07eae309772bf2cbda17b7a4dbe1d07b8d502c637c",
+  "runtime_classes": [
+    "hiro/berrybfcache/CompletionTarget.class",
+    "hiro/berrybfcache/NativeCompletion.class",
+    "hiro/berrybfcache/NativeRestoreTracker$1.class",
+    "hiro/berrybfcache/NativeRestoreTracker$2.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Boundary.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Listener.class",
+    "hiro/berrybfcache/NativeRestoreTracker$PageRecord.class",
+    "hiro/berrybfcache/NativeRestoreTracker$State.class",
+    "hiro/berrybfcache/NativeRestoreTracker.class",
+    "hiro/berrybfcache/PresentationRecovery$1.class",
+    "hiro/berrybfcache/PresentationRecovery$2.class",
+    "hiro/berrybfcache/PresentationRecovery$3.class",
+    "hiro/berrybfcache/PresentationRecovery$4.class",
+    "hiro/berrybfcache/PresentationRecovery$Lease.class",
+    "hiro/berrybfcache/PresentationRecovery$Proof.class",
+    "hiro/berrybfcache/PresentationRecovery$State$1.class",
+    "hiro/berrybfcache/PresentationRecovery$State.class",
+    "hiro/berrybfcache/PresentationRecovery.class",
+    "hiro/berrybfcache/RenderDiagnostics$1.class",
+    "hiro/berrybfcache/RenderDiagnostics$2.class",
+    "hiro/berrybfcache/RenderDiagnostics$3.class",
+    "hiro/berrybfcache/RenderDiagnostics$Badge.class",
+    "hiro/berrybfcache/RenderDiagnostics$Timeline.class",
+    "hiro/berrybfcache/RenderDiagnostics.class",
+    "hiro/berrybfcache/RestoreCoordinator$1.class",
+    "hiro/berrybfcache/RestoreCoordinator$10.class",
+    "hiro/berrybfcache/RestoreCoordinator$2.class",
+    "hiro/berrybfcache/RestoreCoordinator$3.class",
+    "hiro/berrybfcache/RestoreCoordinator$4.class",
+    "hiro/berrybfcache/RestoreCoordinator$5.class",
+    "hiro/berrybfcache/RestoreCoordinator$6.class",
+    "hiro/berrybfcache/RestoreCoordinator$7.class",
+    "hiro/berrybfcache/RestoreCoordinator$8.class",
+    "hiro/berrybfcache/RestoreCoordinator$9.class",
+    "hiro/berrybfcache/RestoreCoordinator$Listener.class",
+    "hiro/berrybfcache/RestoreCoordinator$Marker.class",
+    "hiro/berrybfcache/RestoreCoordinator$Probe.class",
+    "hiro/berrybfcache/RestoreCoordinator$State.class",
+    "hiro/berrybfcache/RestoreCoordinator.class"
+  ],
+  "compile_only_android_stubs_packaged": false,
+  "source_sha256": {
+    "runtime_src/hiro/berrybfcache/CompletionTarget.java": "e15b9d7639f0584d66cbbdb662ade67c1368a129e7d2a1e9ad97bc256fa3c44f",
+    "runtime_src/hiro/berrybfcache/NativeCompletion.java": "6e46eb190cece94d4429ee3c402eaa05ada3934af4346f614aec4bb571481db6",
+    "runtime_src/hiro/berrybfcache/NativeRestoreTracker.java": "00fc3c864f939c7e1e12a901cdf0580a6de39ba4bb47b8665af164aaf3127a24",
+    "runtime_src/hiro/berrybfcache/PresentationRecovery.java": "0dacaac56f6e3938c0b666684c7b85fb40c773aa32561d02ce4f8250d9bd1efa",
+    "runtime_src/hiro/berrybfcache/RenderDiagnostics.java": "0e5301500ddd2541dd8faa3c613fd7f921c4c930b991b8df6019ed2e5a259f99",
+    "runtime_src/hiro/berrybfcache/RestoreCoordinator.java": "2e451b9bdee341ad0df4989b510c36ab5b9429a1598685ad46b100c46e1e3755"
+  },
+  "jvm_test": {
+    "result": "PASS",
+    "scenarios": 45,
+    "assertions": 88,
+    "scope": "JVM lifecycle and callback-loss simulation; no Android renderer or device execution"
+  },
+  "javascript_test": {
+    "result": "PASS",
+    "assertions": 19,
+    "scope": "Node event harness for the bundled document-start script; no browser or Android rendering test"
+  },
+  "native_test": {
+    "result": "PASS",
+    "scenarios": 5,
+    "assertions": 40
+  },
+  "native_integration_test": {
+    "result": "PASS",
+    "scenarios": 15,
+    "assertions": 34,
+    "scope": "JVM native listener/coordinator integration; no Android WebView or device execution"
+  },
+  "presentation_test": {
+    "result": "PASS",
+    "scenarios": 24,
+    "assertions": 154,
+    "device_tested": false
+  },
+  "diagnostic_test": {
+    "result": "PASS",
+    "scenarios": 11,
+    "assertions": 62,
+    "bounded_events_per_tab": 64,
+    "bounded_tabs": 4,
+    "clipboard_requires_user_action": true,
+    "page_content_collected": false,
+    "android_device_tested": false
+  },
+  "android_device_tested": false,
+  "renderer_behavior_tested": false
+}
