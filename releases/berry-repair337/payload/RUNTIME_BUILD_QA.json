@@ -1,0 +1,117 @@
+{
+  "result": "PASS",
+  "extension": "extensions/berry_bfcache_restore.mpe",
+  "extension_bytes": 64656,
+  "extension_sha256": "be25832a7f7ab766b8a6c93ed0816562d05fba8dd4b5bd078a96922b17c64023",
+  "runtime_classes": [
+    "hiro/berrybfcache/CompletionTarget.class",
+    "hiro/berrybfcache/NativeCompletion.class",
+    "hiro/berrybfcache/NativeRestoreTracker$1.class",
+    "hiro/berrybfcache/NativeRestoreTracker$2.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Boundary.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Listener.class",
+    "hiro/berrybfcache/NativeRestoreTracker$PageRecord.class",
+    "hiro/berrybfcache/NativeRestoreTracker$State.class",
+    "hiro/berrybfcache/NativeRestoreTracker.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$1.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$2.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$Lease.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$State$1.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$State$2.class",
+    "hiro/berrybfcache/PostScrollDiagnostics$State.class",
+    "hiro/berrybfcache/PostScrollDiagnostics.class",
+    "hiro/berrybfcache/PresentationRecovery$1.class",
+    "hiro/berrybfcache/PresentationRecovery$2.class",
+    "hiro/berrybfcache/PresentationRecovery$3.class",
+    "hiro/berrybfcache/PresentationRecovery$4.class",
+    "hiro/berrybfcache/PresentationRecovery$Lease.class",
+    "hiro/berrybfcache/PresentationRecovery$Proof.class",
+    "hiro/berrybfcache/PresentationRecovery$State$1.class",
+    "hiro/berrybfcache/PresentationRecovery$State.class",
+    "hiro/berrybfcache/PresentationRecovery.class",
+    "hiro/berrybfcache/RenderDiagnostics$1.class",
+    "hiro/berrybfcache/RenderDiagnostics$2.class",
+    "hiro/berrybfcache/RenderDiagnostics$3.class",
+    "hiro/berrybfcache/RenderDiagnostics$4.class",
+    "hiro/berrybfcache/RenderDiagnostics$Badge.class",
+    "hiro/berrybfcache/RenderDiagnostics$Timeline.class",
+    "hiro/berrybfcache/RenderDiagnostics.class",
+    "hiro/berrybfcache/RestoreCoordinator$1.class",
+    "hiro/berrybfcache/RestoreCoordinator$10.class",
+    "hiro/berrybfcache/RestoreCoordinator$2.class",
+    "hiro/berrybfcache/RestoreCoordinator$3.class",
+    "hiro/berrybfcache/RestoreCoordinator$4.class",
+    "hiro/berrybfcache/RestoreCoordinator$5.class",
+    "hiro/berrybfcache/RestoreCoordinator$6.class",
+    "hiro/berrybfcache/RestoreCoordinator$7.class",
+    "hiro/berrybfcache/RestoreCoordinator$8.class",
+    "hiro/berrybfcache/RestoreCoordinator$9.class",
+    "hiro/berrybfcache/RestoreCoordinator$Listener.class",
+    "hiro/berrybfcache/RestoreCoordinator$Marker.class",
+    "hiro/berrybfcache/RestoreCoordinator$Probe.class",
+    "hiro/berrybfcache/RestoreCoordinator$State.class",
+    "hiro/berrybfcache/RestoreCoordinator.class"
+  ],
+  "compile_only_android_stubs_packaged": false,
+  "source_sha256": {
+    "runtime_src/hiro/berrybfcache/CompletionTarget.java": "e15b9d7639f0584d66cbbdb662ade67c1368a129e7d2a1e9ad97bc256fa3c44f",
+    "runtime_src/hiro/berrybfcache/NativeCompletion.java": "6e46eb190cece94d4429ee3c402eaa05ada3934af4346f614aec4bb571481db6",
+    "runtime_src/hiro/berrybfcache/NativeRestoreTracker.java": "00fc3c864f939c7e1e12a901cdf0580a6de39ba4bb47b8665af164aaf3127a24",
+    "runtime_src/hiro/berrybfcache/PostScrollDiagnostics.java": "1ce41a490babb271bf9fcb999c40734da14bc792af1b1cde25120924081c1b6d",
+    "runtime_src/hiro/berrybfcache/PresentationRecovery.java": "0dacaac56f6e3938c0b666684c7b85fb40c773aa32561d02ce4f8250d9bd1efa",
+    "runtime_src/hiro/berrybfcache/RenderDiagnostics.java": "f069498b450851ea6076ed3eeb0332693837638055b634360e87da64d25f810f",
+    "runtime_src/hiro/berrybfcache/RestoreCoordinator.java": "f9b0b0e0a379be7b16f1170d43b3a50178b95547e7481c9bbaf16ec45e688ffa"
+  },
+  "jvm_test": {
+    "result": "PASS",
+    "scenarios": 45,
+    "assertions": 90,
+    "scope": "JVM lifecycle and callback-loss simulation; no Android renderer or device execution"
+  },
+  "javascript_test": {
+    "result": "PASS",
+    "assertions": 19,
+    "scope": "Node event harness for the bundled document-start script; no browser or Android rendering test"
+  },
+  "native_test": {
+    "result": "PASS",
+    "scenarios": 5,
+    "assertions": 40
+  },
+  "native_integration_test": {
+    "result": "PASS",
+    "scenarios": 15,
+    "assertions": 34,
+    "scope": "JVM native listener/coordinator integration; no Android WebView or device execution"
+  },
+  "presentation_test": {
+    "result": "PASS",
+    "scenarios": 24,
+    "assertions": 154,
+    "device_tested": false
+  },
+  "diagnostic_test": {
+    "result": "PASS",
+    "scenarios": 11,
+    "assertions": 63,
+    "bounded_events_per_tab": 64,
+    "bounded_tabs": 4,
+    "clipboard_requires_user_action": true,
+    "page_content_collected": false,
+    "android_device_tested": false
+  },
+  "post_scroll_test": {
+    "result": "PASS",
+    "scenarios": 17,
+    "assertions": 85,
+    "android_device_tested": false,
+    "renderer_behavior_tested": false
+  },
+  "post_scroll_javascript_test": {
+    "result": "PASS",
+    "assertions": 20,
+    "scope": "Read-only numeric DOM probe in Node VM; bounded mock DOM, no browser rendering test"
+  },
+  "android_device_tested": false,
+  "renderer_behavior_tested": false
+}
