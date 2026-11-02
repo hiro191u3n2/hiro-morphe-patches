@@ -1,0 +1,51 @@
+{
+  "schema": "ulike124-input-resource-reproduction-v1",
+  "status": "expected_failure_reproduced",
+  "input": {
+    "input_sha256": "73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293",
+    "base_apk_assets": {
+      "assets/81001.zip": {
+        "bytes": 97282,
+        "sha256": "f2517f8556bdf241caaa6bc3d9838cc3d306ad842b1b094ba93e9e33843eb125"
+      },
+      "assets/81002.zip": {
+        "bytes": 300344,
+        "sha256": "36ef3c1ab23406ca69e65a3ad1c39e377f2506ca0f64d86ac68d576a9cdb1fc9"
+      }
+    }
+  },
+  "old_desktop": {
+    "version": "1.16.0",
+    "embedded_patcher": "1.14.0",
+    "bytes": 44512111,
+    "sha256": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c"
+  },
+  "new_desktop": {
+    "version": "2.0.0-dev.4",
+    "embedded_patcher": "2.2.0-dev.2",
+    "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v2.0.0-dev.4/morphe-desktop-2.0.0-dev.4-all.jar",
+    "bytes": 46264836,
+    "sha256": "ed8184451a88b373ab38e575884523a709706195a7232e971fcf8cd61fc5a22c"
+  },
+  "standalone": {
+    "version": "1.9.123",
+    "target_patcher": "1.8.0",
+    "patch_result": "success",
+    "decode_mode": "legacy_all_resources",
+    "bytes": 1635847,
+    "sha256": "c1cdab6d613ba594d8fe817799e5e208e25e847d2d55f72525f13f19e3b1b408"
+  },
+  "combined": {
+    "version": "1.0.333",
+    "target_patcher": "2.2.0-dev.2",
+    "patch_result": "failed",
+    "decode_mode": "on_request",
+    "reported_decodable_files": 4088,
+    "failure": "対象素材がありません: assets/81001.zip",
+    "site": "UlikeHqMaxPatch.applyAssets:79",
+    "bytes": 48189409,
+    "sha256": "8305a6cdfd3d4bec658cc6c41e0e595e4b906a2e276631677a5a7a39ea414db2"
+  },
+  "finding": "Original input contains the target asset. Bundle Patcher-Version changes resource decoding behavior; absent extraction request causes false missing-asset error. Old engine validation did not cover current on-request mode.",
+  "physical_android_tested": false
+}

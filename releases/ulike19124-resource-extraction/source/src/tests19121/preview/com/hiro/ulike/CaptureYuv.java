@@ -1,0 +1,1 @@
+package com.hiro.ulike;import java.util.*;import java.lang.ref.WeakReference;public class CaptureYuv {public static WeakReference<Object> active;public static final Map<Object,Object> states=new HashMap<Object,Object>();public static class Owner {public Object e0=new Object();}public static class State {public boolean ready=true,closed;public Object original,yuv=new Object();}}

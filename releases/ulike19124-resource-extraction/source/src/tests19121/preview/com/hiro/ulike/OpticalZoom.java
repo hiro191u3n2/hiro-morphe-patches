@@ -1,0 +1,1 @@
+package com.hiro.ulike;import java.lang.ref.WeakReference;public class OpticalZoom {public static final Object LOCK=new Object();public static Object active=new Object();public static WeakReference<Object> capture;public static long epoch=9;public static boolean foreground=true,recording,switching;}

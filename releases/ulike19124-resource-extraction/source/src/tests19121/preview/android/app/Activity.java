@@ -1,0 +1,1 @@
+package android.app;public class Activity {public boolean finishing,destroyed,focus=true;public boolean isFinishing(){android.os.Looper.check();return finishing;}public boolean isDestroyed(){android.os.Looper.check();return destroyed;}public boolean hasWindowFocus(){android.os.Looper.check();return focus;}}

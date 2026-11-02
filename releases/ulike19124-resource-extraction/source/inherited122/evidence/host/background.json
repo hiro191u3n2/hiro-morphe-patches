@@ -1,0 +1,85 @@
+{
+  "status": "passed",
+  "assertions": 90,
+  "tests": [
+    {
+      "status": "passed",
+      "assertions": 2,
+      "android_free_worker_abi": true,
+      "test": "BackgroundNoAndroid19121Test",
+      "host_processor_count": 4
+    },
+    {
+      "status": "passed",
+      "assertions": 18,
+      "worker_limit": 2,
+      "delegate_exception_preserved": true,
+      "producer_priority_untouched": true,
+      "test": "BackgroundWorker19121Test",
+      "host_processor_count": 4
+    },
+    {
+      "status": "passed",
+      "assertions": 18,
+      "worker_limit": 1,
+      "delegate_exception_preserved": true,
+      "producer_priority_untouched": true,
+      "test": "BackgroundWorker19121Test",
+      "host_processor_count": 1
+    },
+    {
+      "status": "passed",
+      "assertions": 18,
+      "worker_limit": 2,
+      "delegate_exception_preserved": true,
+      "producer_priority_untouched": true,
+      "test": "BackgroundWorker19121Test",
+      "host_processor_count": 8
+    },
+    {
+      "status": "passed",
+      "assertions": 7,
+      "adpf_service_requests": 0,
+      "adpf_session_attempts": 0,
+      "test": "PhotoHintsDisabled19121Test",
+      "host_processor_count": 4
+    },
+    {
+      "status": "passed",
+      "assertions": 27,
+      "worker_budget_preserved": true,
+      "nested_work_not_double_reported": true,
+      "worker_lifecycle_closes": true,
+      "optional_hint_failure_preserves_work": true,
+      "cancellation_drains_before_return": true,
+      "test": "SpeedWorkersHints1952Test",
+      "host_processor_count": 4
+    }
+  ],
+  "source_sha256": {
+    "tests19122/cleanup/com/hiro/ulike/CapturePolicy19122.java": "7a756d12c22f236ec69eff8694fd5be37fd81d90a7b6563279cc2095cd21f64b",
+    "SpeedWorkers1935.java": "a6fafe55dee98fe686b8495c76c47db0ba45129174f2745e45cbea4387269d21",
+    "PerformanceHints1952.java": "36343e3a71713a0d7b80cad974fb5a1a7f51166e7afef1923e073eee92471df5",
+    "host_background19121.py": "f16daf97b39ff93d5baff8f994277a333ca300c2a670b44f2571190ebd0b5d70",
+    "tests/SpeedWorkersHints1952Test.java": "18aa9c39e72824fcaa195c66d639fbe8f554aaebc1130a923f4be315f1190a0c",
+    "tests/h15/android/content/Context.java": "38a43c452238d7c23f56ee56e36a6a3787317a8205e9608112c99dedc34f0c17",
+    "tests/h15/android/os/Build.java": "52f99e2ef8d88eae190a19d0c9bba81abfff502c5f5f5b88ffa0e484b0e645b4",
+    "tests/h15/android/os/PerformanceHintManager.java": "bfd4b6ed567367d0f062311fd2ce9835eeed532f3fcb79b212e3acb1fbd3e89d",
+    "tests/h15/android/os/SystemClock.java": "5ae129af16b699b88dc96aba7ce27d370a1eea92dda42a6968705b1c1b179432",
+    "tests19121/background/android/os/Process.java": "ff3127eb9496c2b2179f0fc08a7730de1c2ef83f5605437b85ae270ebb0831a6",
+    "tests19121/background/com/hiro/ulike/BackgroundNoAndroid19121Test.java": "3b857a597db15ab318809ce667b9cf300d501602416f92716e055cb1fae413ad",
+    "tests19121/background/com/hiro/ulike/BackgroundWorker19121Test.java": "86982a661cdf7b0a75e7e686b53396f5cd0621c8f5917ecf67219849938d4ee1",
+    "tests19121/background/com/hiro/ulike/PhotoHintsDisabled19121Test.java": "76f61fdff1874cc2a4f99f42278a7250189c76ea223f7ee0dffe0acc874b72e4"
+  },
+  "negative_controls": {
+    "android_api_absent": true,
+    "priority_api_denied": true,
+    "delegate_exception": true,
+    "producer_interruption": true,
+    "optional_hint_failure": true,
+    "cached_adpf_api_disabled": true
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false,
+  "fixture_scope": "Public Android API calls use deterministic host fixtures; real production pool owns permits, cancellation, delegate failure and shutdown. No frame rate or OS scheduling effect measured."
+}

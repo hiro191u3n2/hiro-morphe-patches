@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "assertions": 245,
+  "one_shot_policy_executed": true,
+  "normal_quality_guard": {
+    "normal_path_source_identical_after_removing_guard": true,
+    "baseline_sha256": "232b27ad67ad77c91a6fbb166a55d0a1bff20a1e35adb150f334ae819d6a2283",
+    "diagnostic_branch_only": true,
+    "encoded_output_equivalence_measured": false,
+    "assertions": 8
+  },
+  "negative_controls": [
+    {
+      "name": "normal-bypass",
+      "status": "rejected"
+    },
+    {
+      "name": "persistent-comparison",
+      "status": "rejected"
+    },
+    {
+      "name": "live-policy-mutation",
+      "status": "rejected"
+    }
+  ],
+  "source_sha256": {
+    "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+    "QualityPipeline1932.java": "0e24bfe7b4602c6adf27d33700583aad8ae1e5e742239944483a173308090b55",
+    "tests19122/policy/QualityPipeline1932.reference121.java": "232b27ad67ad77c91a6fbb166a55d0a1bff20a1e35adb150f334ae819d6a2283",
+    "tests19122/policy/CapturePolicy19122Test.java": "d82fbc7a90e61f00260dd259d9da69506e4df8b0523eaa77c15af388648f3290",
+    "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5"
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false
+}
