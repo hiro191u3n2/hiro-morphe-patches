@@ -1,0 +1,35 @@
+iget-object v0, p0, Lqa/renamed/Type00684;->renamedField0028:Lqa/renamed/Type06156;
+iget-object v1, v0, Lqa/renamed/Type06156;->renamedField0083:Lqa/renamed/Type07166;
+instance-of v0, v1, Lqa/renamed/Type00658;
+if-eqz v0, :done
+check-cast v1, Lqa/renamed/Type00658;
+iget-object v2, v1, Lqa/renamed/Type00658;->renamedField0014:Lqa/renamed/Type00915;
+if-ne v2, p1, :done
+iget-object v0, p0, Lqa/renamed/Type00684;->renamedField0028:Lqa/renamed/Type06156;
+const/4 v2, 0x1
+invoke-virtual {v0, v2}, Lqa/renamed/Type06156;->renamedMethod0099(I)V
+iget-object v3, v0, Lqa/renamed/Type06156;->renamedField0090:Lqa/renamed/Type07282;
+iput-boolean v2, v3, Lqa/renamed/Type07282;->a:Z
+const/4 v2, 0x0
+iput v2, v3, Lqa/renamed/Type07282;->b:I
+const/16 v2, 0x64
+iput v2, v0, Lqa/renamed/Type06156;->renamedField0068:I
+invoke-virtual {v1}, Lqa/renamed/Type00658;->E()V
+invoke-static {p1, p2}, Lhiro/berry/TabPriority;->finished(Landroid/webkit/WebView;Ljava/lang/String;)V
+iget-boolean v2, v0, Lqa/renamed/Type06156;->renamedField0095:Z
+if-eqz v2, :done
+iget-object v1, p0, Lqa/renamed/Type00684;->renamedField0029:Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;
+invoke-virtual {v1}, Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;->n0()Lqa/renamed/Type00051;
+move-result-object v2
+invoke-virtual {v2}, Lqa/renamed/Type00051;->e()Lqa/renamed/Type00754;
+move-result-object v2
+invoke-virtual {v2, v0}, Lqa/renamed/Type00754;->d(Lqa/renamed/Type06156;)V
+invoke-virtual {v1}, Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;->n0()Lqa/renamed/Type00051;
+move-result-object v2
+invoke-virtual {v2}, Lqa/renamed/Type00051;->c()Lqa/renamed/Type03858;
+move-result-object v2
+const/4 v3, 0x1
+invoke-virtual {v2, v3}, Lqa/renamed/Type03858;->d(Z)V
+:done
+return-void
+PASS /workspace/scratch/fc81f0480f96/work331/qa/Berry_synthetic_renamed_unsigned.apk

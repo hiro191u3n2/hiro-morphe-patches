@@ -1,0 +1,35 @@
+iget-object v0, p0, Lt70;->a:Lxw5;
+iget-object v1, v0, Lxw5;->o:Lp51;
+instance-of v0, v1, Lu51;
+if-eqz v0, :done
+check-cast v1, Lu51;
+iget-object v2, v1, Lu51;->r:Lpx;
+if-ne v2, p1, :done
+iget-object v0, p0, Lt70;->a:Lxw5;
+const/4 v2, 0x1
+invoke-virtual {v0, v2}, Lxw5;->S0(I)V
+iget-object v3, v0, Lxw5;->t:Lxf;
+iput-boolean v2, v3, Lxf;->a:Z
+const/4 v2, 0x0
+iput v2, v3, Lxf;->b:I
+const/16 v2, 0x64
+iput v2, v0, Lxw5;->a0:I
+invoke-virtual {v1}, Lu51;->F()V
+invoke-static {p1, p2}, Lhiro/berry/TabPriority;->finished(Landroid/webkit/WebView;Ljava/lang/String;)V
+iget-boolean v2, v0, Lxw5;->y:Z
+if-eqz v2, :done
+iget-object v1, p0, Lt70;->b:Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;
+invoke-virtual {v1}, Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;->n0()Lf86;
+move-result-object v2
+invoke-virtual {v2}, Lf86;->e()Lhh6;
+move-result-object v2
+invoke-virtual {v2, v0}, Lhh6;->d(Lxw5;)V
+invoke-virtual {v1}, Ljp/ejimax/berrybrowser/browser_impl/BrowserActivity;->n0()Lf86;
+move-result-object v2
+invoke-virtual {v2}, Lf86;->c()Ljh4;
+move-result-object v2
+const/4 v3, 0x1
+invoke-virtual {v2, v3}, Ljh4;->d(Z)V
+:done
+return-void
+PASS /workspace/scratch/fc81f0480f96/work331/inputs/Berry_Browser-v3.83.93.1-Hiro_Morphe_Patches-v1.0.328.apk
