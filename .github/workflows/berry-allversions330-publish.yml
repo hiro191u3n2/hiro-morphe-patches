@@ -1,0 +1,54 @@
+name: Publish Berry all-versions display 1.0.4 and combined 1.0.330
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/berry-allversions330/build/**'
+      - 'releases/berry-allversions330/publication/**'
+      - 'releases/berry-allversions330/payload/**'
+      - 'releases/berry-allversions330/README.md'
+      - '.github/workflows/berry-allversions330-publish.yml'
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.13+9'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild metadata twice and verify reviewed payloads
+        run: python3 releases/berry-allversions330/publication/ci.py --repo . --work .ci-berry-allversions330 --java "$JAVA_HOME/bin/java" --stage build
+      - name: Verify frozen artifact inventory and preservation proof
+        run: python3 releases/berry-allversions330/publication/ci.py --repo . --work .ci-berry-allversions330 --java "$JAVA_HOME/bin/java" --stage verify
+      - name: Publish verified release and update both Manager feeds atomically
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 releases/berry-allversions330/publication/ci.py --repo . --work .ci-berry-allversions330 --java "$JAVA_HOME/bin/java" --stage publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: berry-allversions330-publication-evidence
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            .ci-berry-allversions330/dist/
+            .ci-berry-allversions330/build-a/*.json
+            .ci-berry-allversions330/build-a/*.log
+            .ci-berry-allversions330/build-b/*.json
+            .ci-berry-allversions330/build-b/*.log
+          include-hidden-files: true

@@ -1,0 +1,148 @@
+{
+  "schema": "berry-allversions330-qa-v1",
+  "result": "PASS",
+  "device_tested": false,
+  "outputs": {
+    "combined": {
+      "file": "Hiro_Morphe_Patches_v1.0.330.mpp",
+      "version": "1.0.330",
+      "baseline_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+      "sha256": "9b7d3ced528abd117ddc2e05abd4d7554f87ee9b7c9a4b2352cf6f9f54f8e662",
+      "bytes": 48131622,
+      "entries_changed": [
+        "META-INF/MANIFEST.MF",
+        "classes.dex",
+        "app/hiro/berrybfcache/patches/BfCacheRepairPatch.class"
+      ],
+      "entries_added": [],
+      "entries_removed": [],
+      "jvm_edits": [
+        {
+          "offset": 16586,
+          "purpose": "one null-version target",
+          "before": "1248",
+          "after": "0100"
+        },
+        {
+          "offset": 16576,
+          "purpose": "target array length one",
+          "before": "05",
+          "after": "04"
+        },
+        {
+          "offset": 16594,
+          "purpose": "remove second target construction and array store",
+          "before": "5904bb004659124e0301b7004a53",
+          "after": "0000000000000000000000000000"
+        }
+      ],
+      "dex_edits": [
+        {
+          "offset": 373284,
+          "purpose": "one null-version target",
+          "before": "1a03bb02",
+          "after": "13030000"
+        },
+        {
+          "offset": 373274,
+          "purpose": "target array length one",
+          "before": "1220",
+          "after": "1210"
+        },
+        {
+          "offset": 373302,
+          "purpose": "remove second target and preserve shared default flag",
+          "before": "2202f8001a03ba027040f304325412194d020009",
+          "after": "0000000000000000000000000000121900000000"
+        }
+      ],
+      "all_other_jvm_bytes_unchanged": true,
+      "all_other_dex_bytes_unchanged_except_checksum": true,
+      "all_runtime_extensions_unchanged": true,
+      "all_other_archive_entries_unchanged": true,
+      "all_profile_and_structural_guards_unchanged": true,
+      "dex_rebuilt": false,
+      "loaded_metadata": {
+        "berry_patch_count": 5,
+        "all_versions_null": true,
+        "all_package_names_unchanged": true,
+        "manager_versions_projection": null
+      }
+    },
+    "standalone": {
+      "file": "Berry_BFCache_Repair_v1.0.4.mpp",
+      "version": "1.0.4",
+      "baseline_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+      "sha256": "d24ee2732b1b7ed715d92c81cca2857bec7ef85509e73898f9e24271ba4768e8",
+      "bytes": 125456,
+      "entries_changed": [
+        "META-INF/MANIFEST.MF",
+        "app/hiro/berrybfcache/patches/BfCacheRepairPatch.class",
+        "classes.dex"
+      ],
+      "entries_added": [],
+      "entries_removed": [],
+      "jvm_edits": [
+        {
+          "offset": 16586,
+          "purpose": "one null-version target",
+          "before": "1248",
+          "after": "0100"
+        },
+        {
+          "offset": 16576,
+          "purpose": "target array length one",
+          "before": "05",
+          "after": "04"
+        },
+        {
+          "offset": 16594,
+          "purpose": "remove second target construction and array store",
+          "before": "5904bb004659124e0301b7004a53",
+          "after": "0000000000000000000000000000"
+        }
+      ],
+      "dex_edits": [
+        {
+          "offset": 22720,
+          "purpose": "one null-version target",
+          "before": "1a034300",
+          "after": "13030000"
+        },
+        {
+          "offset": 22710,
+          "purpose": "target array length one",
+          "before": "1220",
+          "after": "1210"
+        },
+        {
+          "offset": 22738,
+          "purpose": "remove second target and preserve shared default flag",
+          "before": "220236001a0342007040c700325412194d020009",
+          "after": "0000000000000000000000000000121900000000"
+        }
+      ],
+      "all_other_jvm_bytes_unchanged": true,
+      "all_other_dex_bytes_unchanged_except_checksum": true,
+      "all_runtime_extensions_unchanged": true,
+      "all_other_archive_entries_unchanged": true,
+      "all_profile_and_structural_guards_unchanged": true,
+      "dex_rebuilt": false,
+      "loaded_metadata": {
+        "berry_patch_count": 5,
+        "all_versions_null": true,
+        "all_package_names_unchanged": true,
+        "manager_versions_projection": null
+      }
+    }
+  },
+  "physical_device_tested": false,
+  "combined_sha256": "9b7d3ced528abd117ddc2e05abd4d7554f87ee9b7c9a4b2352cf6f9f54f8e662",
+  "standalone_sha256": "d24ee2732b1b7ed715d92c81cca2857bec7ef85509e73898f9e24271ba4768e8",
+  "baseline_combined_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+  "baseline_standalone_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+  "all_five_berry_versions_null": true,
+  "runtime_guards_preserved": true,
+  "extensions_unchanged": true,
+  "unrelated_providers_preserved": true
+}
