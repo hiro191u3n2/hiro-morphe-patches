@@ -1,0 +1,1 @@
+package com.hiro.ulike;public class AsyncSave1935 {static long serial=7;static boolean captureOpen;static int held=1;public static boolean previewEligible19121(long id){return id==serial&&!captureOpen&&held>0;}}

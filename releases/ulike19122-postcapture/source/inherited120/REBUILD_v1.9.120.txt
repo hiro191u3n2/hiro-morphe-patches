@@ -1,0 +1,163 @@
+ULike v1.9.120 再構築・検査手順
+================================
+
+対象: 公開済み ULike v1.9.119 を基にした、自動検証の停止・認定済み経路の復元制御。
+Java の制御変更だけを適用する。既存14個の native 資産、インストーラ、元アプリ向け
+methods.dex / methods.tsv は v1.9.119 のバイト列を継承するため、NDK は不要。
+
+この文書のコマンドは、展開したアーカイブの最上位ディレクトリを現在位置として実行する。
+Linux x86_64、Python 3、curl、tar を使用する。Python は標準ライブラリのみ使用する。
+
+アーカイブの想定配置
+----------------------
+src/                           ビルド・ランタイム・試験・既存依存ソース
+quiet-families19120.json        更新を認める13個の Java family
+baseline119/
+  ULike_HQ_Texture_Online_v1.9.119.mpp
+evidence/                      今回作成したビルド・試験・適用検査の証拠
+REBUILD_v1.9.120.txt            この文書
+
+以下は利用者の環境で作成する。アーカイブには含めない。
+toolchain/                     固定した JDK、Morphe、Android stub、D8
+work/                          再構築・試験の一時出力
+dist/                          再構築した MPP と build19120.json
+private/                       利用者自身の元APKSと適用検査用データ
+
+旧 src/build19101.py などと過去の host_* 試験は、当時の版・認定実行方針に固定した
+履歴・再利用依存である。過去の全試験を v1.9.120 の合格条件として一括実行しない。
+v1.9.120 の入口は、この文書に記載する build19120.py と専用 host_*19120.py。
+
+固定入力
+----------
+ULike_HQ_Texture_Online_v1.9.119.mpp
+  bytes: 1611436
+  SHA-256: d02e6315eb24bb711cf6d86f77929f076c92adeff9d6332bc4634ee5798864f4
+  URL: https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/ulike-v1.9.119/ULike_HQ_Texture_Online_v1.9.119.mpp
+
+元APKS（適用検査だけに必要、アーカイブへ含めない）
+  ULike 5.6.2 (740)
+  SHA-256: 73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293
+  例の配置名: private/ULike_v5.6.2_740.apks
+  この名前はローカル配置例であり、公開ダウンロード先を表さない。
+
+固定ツール
+------------
+Eclipse Temurin JDK 21.0.8+9-LTS / Linux x86_64
+  URL: https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz
+  archive SHA-256: f2dc5418092c43003db8f9005c4a286e1c0104fea96ccdd49e8ebd037cac9219
+  展開後: toolchain/jdk-21.0.8+9/
+
+Morphe Desktop 1.16.0 all.jar
+  URL: https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar
+  配置: toolchain/morphe.jar
+  SHA-256: 82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c
+
+Android platform 35 r02
+  URL: https://dl.google.com/android/repository/platform-35_r02.zip
+  archive SHA-256: 0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0
+  ZIP 内: android-35/android.jar
+  配置: toolchain/android.jar
+  extracted SHA-256: 4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b
+
+Android build-tools r35 Linux
+  URL: https://dl.google.com/android/repository/build-tools_r35_linux.zip
+  archive SHA-256: bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88
+  ZIP 内: android-15/lib/d8.jar
+  配置: toolchain/d8.jar
+  extracted SHA-256: 305622ad00535684534eb8f742cbf5e628a9abc09d8ea4d39d1babb95bf0cee5
+
+取得・展開コマンド
+--------------------
+mkdir -p toolchain work dist
+curl -fL --retry 2 'https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.8%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.8_9.tar.gz' -o toolchain/jdk21.tar.gz
+curl -fL --retry 2 'https://github.com/MorpheApp/morphe-desktop/releases/download/v1.16.0/morphe-desktop-1.16.0-all.jar' -o toolchain/morphe.jar
+curl -fL --retry 2 'https://dl.google.com/android/repository/platform-35_r02.zip' -o toolchain/platform35.zip
+curl -fL --retry 2 'https://dl.google.com/android/repository/build-tools_r35_linux.zip' -o toolchain/buildtools35.zip
+
+python3 - <<'PY'
+from pathlib import Path
+import hashlib
+import zipfile
+
+pins = {
+    'jdk21.tar.gz': 'f2dc5418092c43003db8f9005c4a286e1c0104fea96ccdd49e8ebd037cac9219',
+    'morphe.jar': '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c',
+    'platform35.zip': '0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0',
+    'buildtools35.zip': 'bd3a4966912eb8b30ed0d00b0cda6b6543b949d5ffe00bea54c04c81e1561d88',
+}
+for name, digest in pins.items():
+    assert hashlib.sha256((Path('toolchain') / name).read_bytes()).hexdigest() == digest, name
+for archive, entry, output in (
+    ('platform35.zip', 'android-35/android.jar', 'android.jar'),
+    ('buildtools35.zip', 'android-15/lib/d8.jar', 'd8.jar'),
+):
+    with zipfile.ZipFile(Path('toolchain') / archive) as z:
+        (Path('toolchain') / output).write_bytes(z.read(entry))
+PY
+tar -xzf toolchain/jdk21.tar.gz -C toolchain
+
+MPP 再構築
+------------
+python3 src/build19120.py \
+  --baseline baseline119/ULike_HQ_Texture_Online_v1.9.119.mpp \
+  --tools toolchain \
+  --jdk toolchain/jdk-21.0.8+9 \
+  --families quiet-families19120.json \
+  --work work/build \
+  --output dist
+
+work/build は新規ディレクトリである必要がある。再実行時は新しい work 名を使う。
+出力は dist/ULike_HQ_Texture_Online_v1.9.120.mpp と dist/build19120.json。
+今回の最終MPPは 1612654 bytes、SHA-256 は
+f779c09136554c9b02c81971eeee8caa334fd6d0263ddda2c974beab70f67851。
+同梱 evidence のビルド証拠と配布時のSHA一覧も照合する。
+途中版のSHAを最終版の証拠として使わない。
+
+ビルド処理は、入力の固定SHA、JDKの版・vendor、ツールSHA、明示family一覧、
+変更対象外の runtime class、既存method ABI、匿名classの形、native宣言、
+インストーラ、元methods、全helper参照、診断版番号を検査する。
+同一入力からの二重DEX変換とMPPのバイト一致、およびMorpheのパッチ読み込みも検査する。
+
+ホスト動作試験
+----------------
+python3 src/host_quiet_runtime19120.py \
+  --source src \
+  --work work/host-quiet \
+  --jdk toolchain/jdk-21.0.8+9
+
+python3 src/host_cached_restore19120.py \
+  --classes work/build/helper-classes \
+  --android toolchain/android.jar \
+  --work work/host-cached \
+  --javac toolchain/jdk-21.0.8+9/bin/javac \
+  --java toolchain/jdk-21.0.8+9/bin/java
+
+専用試験は、通常使用時の予約拒否・解放、検証用コピー抑止、既存認定の維持、
+認定のない候補を採用しないことを確認する。GPU/Android依存部分はスタブ化する。
+負の対照では意図的に旧動作を戻したものを試験が検出することを確認する。
+詳細は各result.json / cached-restore19120.jsonに記録される。
+
+元APKSへの適用検査（元APKSを所有している場合のみ）
+-------------------------------------------------
+python3 src/apply_original19120.py \
+  --input private/ULike_v5.6.2_740.apks \
+  --mpp dist/ULike_HQ_Texture_Online_v1.9.120.mpp \
+  --work work/apply \
+  --jdk toolchain/jdk-21.0.8+9 \
+  --tools toolchain \
+  --stage final
+
+work/apply は新規ディレクトリを指定する。適用結果・元APKS・生成APK・生ログは
+ローカル検査用。公開する検査結果は application-report.json の匿名化された
+ハッシュ・件数・構造情報であり、元APKSや生成APKはこのソースアーカイブに含めない。
+この検査はMorphe Desktopでのsplit結合、FULL DEX再構築、resource再構築、
+native/DEX検査であり、スマートフォンへのインストールやAndroid ART実行ではない。
+
+範囲と未計測事項
+------------------
+保存済みの有効な認定だけを再利用し、未認定候補の重い自動認定を行わない。
+認定が存在しない環境では、既存の安全な代替経路を使用する。端末固有の認定は
+アーカイブに含まれず、他端末の認定を移植・無条件付与しない。
+画質計算・native資産の保持はバイト/構造照合による。Galaxy実機での発熱、
+プレビューのフレームレート、保存時間、画質の見た目はこのホスト検査では未計測。
+本資料だけを根拠に、実機で重さが完全に解消したとは判断しない。

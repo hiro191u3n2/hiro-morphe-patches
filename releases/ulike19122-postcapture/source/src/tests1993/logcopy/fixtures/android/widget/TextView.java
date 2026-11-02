@@ -1,0 +1,1 @@
+package android.widget;public class TextView extends android.view.View { public boolean selectable;public void setTextIsSelectable(boolean value){selectable=value;} }

@@ -1,0 +1,71 @@
+{
+  "files": {
+    "GpuQualification1961.java": {
+      "changes": [
+        {
+          "current": "     * speed route/trial. The active final guard checks their Strong plans for\n     * comparability; completion here never decides speed or quality. */\n",
+          "previous": "     * speed route/trial. Completion here is a call observation, never a speed\n     * or quality decision. Cancellation and failed calls retain their status. */\n"
+        },
+        {
+          "current": "    /** The four completed whole-image speed calls must use the same Strong\n     * worker count, strip height and actual GPU/CPU output selection. A\n     * fastest-baseline/worst-candidate gate cannot attribute a difference to\n     * GPU chaining when Strong did different work. Missing or failed\n     * observations never certify a photo. Retained memory budgets are\n     * observations, not work schedules. */\n    static boolean comparableResidentPlans19116(long[] trials){\n        if(trials==null||trials.length!=116)return false;\n        long workers=-1,rows=-1,gpu=-1,cpu=-1;\n        for(int sample=0;sample<4;sample++){\n            int at=sample*29;\n            if(trials[at]!=1||trials[at+1]!=1||trials[at+2]<=0||\n                    trials[at+21]<1||trials[at+21]>4||trials[at+22]<1||trials[at+22]>256||\n                    trials[at+24]<0||trials[at+25]<0||trials[at+24]+trials[at+25]<=0)return false;\n            if(workers<0){workers=trials[at+21];rows=trials[at+22];gpu=trials[at+24];cpu=trials[at+25];}\n            else if(workers!=trials[at+21]||rows!=trials[at+22]||\n                    gpu!=trials[at+24]||cpu!=trials[at+25])return false;\n        }\n        return true;\n    }\n    static boolean comparableResidentPlans19116(){\n        Job job=CURRENT.get();if(job==null)return false;\n        synchronized(LOCK){\n            Attempt1984 value=job.attempt1984;\n            return activeJob==job&&value!=null&&!value.finished&&value.family==2&&\n                value.residentStage1999==9&&comparableResidentPlans19116(value.residentTiming19111);\n        }\n    }\n",
+          "previous": ""
+        }
+      ],
+      "current_sha256": "279333ec5b29c8e73762a3647a3a6976569a69393d45be5239a0896604f837d6",
+      "previous_sha256": "e2c861bd53c69dc401507dc377fcb0cfe5289dc44058ac54b3bca286519564ae"
+    },
+    "GpuResident1976.java": {
+      "changes": [
+        {
+          "current": "                        // This proof compares fastest existing route with the\n                        // slowest connected route. A different Strong worker\n                        // plan changes most of that measured call. Keep the\n                        // exact-pixel result, but retry speed on comparable\n                        // executions instead of recording a speed rejection.\n                        if(!GpuQualification1961.comparableResidentPlans19116()){\n                            GpuQualification1961.rejectNonSpeed1988(resultKey,\"reference_unstable\");\n                            outcome1984(\"reference_unstable\");return;\n                        }\n",
+          "previous": ""
+        }
+      ],
+      "current_sha256": "6e40c4344df6808a0b72d5dde8d9768506765fd75c64c29df2895bd3c7f5a74a",
+      "previous_sha256": "b56d42087425c2f0454cab0448096f0eed640afca4aee451a714cfbebc49fdeb"
+    },
+    "ProcessingTiming1947.java": {
+      "changes": [
+        {
+          "current": "    public static final String VERSION = \"1.9.116\";\n",
+          "previous": "    public static final String VERSION = \"1.9.115\";\n"
+        }
+      ],
+      "current_sha256": "989de9ebe2633a692ca76f2af7b7eda1aff090f8e4c8a196597d6ea9e0000495",
+      "previous_sha256": "ea93078bf837721326629656abbaa8e7b203e67e88f93a3cc8365d9880ab44d9"
+    },
+    "ResidentTiming19111.java": {
+      "changes": [
+        {
+          "current": "/** Whole-call time and Strong plan feed the active resident speed guard.\n * No image, model, session, result, certificate, or decision is retained here. */\n",
+          "previous": "/** Bounded observations of the private resident speed trials. No image, model,\n * session, result, certificate, or admission decision is retained here. */\n"
+        }
+      ],
+      "current_sha256": "b28376e0daa9a4d63997af0bf31b47d4d1d4b9e9ccf3d75e9b2dc81f367a333e",
+      "previous_sha256": "adb0513dd61544d6b80cbbd77c3bd472393a5d61ca14b852160131eed6e2bab1"
+    },
+    "VerificationJournal19101.java": {
+      "changes": [
+        {
+          "current": "    /** Active guard uses whole-call time and Strong plan; stored history cannot grant admission. */\n",
+          "previous": "    /** Diagnostic call timing only. Scalar validation is not an admission gate. */\n"
+        },
+        {
+          "current": "            if(!observed){text.append(\" / 保存後の連結速度工程（全体実経過は速度判定・Strong計画は比較条件・工程内訳は診断値）:\");observed=true;}\n",
+          "previous": "            if(!observed){text.append(\" / 保存後の連結速度工程（診断値・認定には不使用）:\");observed=true;}\n"
+        }
+      ],
+      "current_sha256": "213dfca5a1b4fcf11cbae1ea471109f29481503b9684ec50484dedc09d45c395",
+      "previous_sha256": "c10cfceeab10879210e5b5ff3b7f9ef65c1a0a82777c8a71fb3a1f98a5c28976"
+    }
+  },
+  "previous_release": "ulike-v1.9.115",
+  "reviewed_files": [
+    "GpuQualification1961.java",
+    "GpuResident1976.java",
+    "ProcessingTiming1947.java",
+    "ResidentTiming19111.java",
+    "VerificationJournal19101.java"
+  ],
+  "schema": "ulike19116-reviewed-overlay-to-115-v1"
+}

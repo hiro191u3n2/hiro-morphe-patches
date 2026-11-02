@@ -1,0 +1,1 @@
+package android.content;public class ClipboardManager {public ClipData clip;public int writes;public boolean fail; public void setPrimaryClip(ClipData value){if(fail)throw new IllegalStateException("scripted clipboard failure");clip=value;writes++;}}

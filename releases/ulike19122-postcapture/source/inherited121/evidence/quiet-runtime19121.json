@@ -1,0 +1,78 @@
+{
+  "status": "passed",
+  "assertions": 105,
+  "negative_controls": 3,
+  "tests": {
+    "queue-current": {
+      "status": "passed",
+      "assertions": 21,
+      "suite": "quiet_queue"
+    },
+    "queue-automatic-enabled-control": {
+      "status": "expected_failure",
+      "regression": "quiet startup must not admit"
+    },
+    "whole-current": {
+      "status": "passed",
+      "assertions": 27,
+      "suite": "quiet_whole_route"
+    },
+    "whole-automatic-enabled-control": {
+      "status": "expected_failure",
+      "regression": "unqualified photo must not be copied"
+    },
+    "startup-current-cold": {
+      "status": "passed",
+      "assertions": 9,
+      "scenario": "cold"
+    },
+    "startup-current-cached": {
+      "status": "passed",
+      "assertions": 9,
+      "scenario": "cached"
+    },
+    "startup-current-cached_adaptive": {
+      "status": "passed",
+      "assertions": 9,
+      "scenario": "cached_adaptive"
+    },
+    "startup-current-rejected": {
+      "status": "passed",
+      "assertions": 10,
+      "scenario": "rejected"
+    },
+    "startup-current-unavailable": {
+      "status": "passed",
+      "assertions": 9,
+      "scenario": "unavailable"
+    },
+    "startup-current-ui": {
+      "status": "passed",
+      "assertions": 11,
+      "scenario": "ui"
+    },
+    "startup-automatic-enabled-control": {
+      "status": "expected_failure",
+      "regression": "startup performs zero corpus comparisons"
+    }
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false,
+  "actual_qualification_engine": true,
+  "actual_whole_route_engine": true,
+  "actual_startup_engine": true,
+  "source_sha256": {
+    "GpuQualification1961.java": "c4ab15b208ea542edc05f523672ef595f5a3e68f483c7329d32e830ce3b7f50c",
+    "WholeRoute1952.java": "8a2b197238d9e2421720030f7a428f4b001fb7cfad3725b1bfdd696408e78458",
+    "WholeRoute1953.java": "284ac1f189d07ed8e3df636317ea22b952114f8d28384004f2ae843c49223a26",
+    "host_qualification1981.py": "3f3393dc7ef5e5c126a7fc2e8c73b71a46e40f26f5327171da0df114275d2ed2",
+    "tests19120/QuietQueue19120Test.java": "9a078401268d51f3abfad5267267a0bce1adcc66e923c80a4283a60c5e0aa066",
+    "tests19120/QuietWhole19120Test.java": "8e22529aa36c6e5d014574568f1ec07952b87861356a27cf2310ef5cf8001daf",
+    "GpuStartup1990.java": "d3129592e281c772e25c2f24c6a2aa5dbf311193d48f2772839e44b17540def6",
+    "GpuCertificates1990.java": "16fdd5184ff926bbd41fae37a9f3bd1cb369eb046dd0f35615db7f56a9558ab1",
+    "CameraSession1965.java": "a72e8a2046512b1e9e1b268b1ab07cf59a6616662ad8cfcffc27fea637fd9fc0",
+    "host_startup1990.py": "10e731cad4311ed5ce7906d84109df07ca87f3a2b15ca9cee0d946691dc544c6",
+    "tests19120/QuietStartup19120Test.java": "dad24efe1222e8d5af7ed91d4d954146abf03099c3b9c17748c8914be483ac92",
+    "host_quiet_runtime19120.py": "1630326ae4c3cc0804907cac2fe3b4851618bf2d67efb15a82112d3789334954"
+  }
+}

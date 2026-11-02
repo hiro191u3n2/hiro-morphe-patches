@@ -1,0 +1,1 @@
+package com.hiro.ulike;public class ProcessingTiming1947 {public static class Trace {public String result;public long elapsed;public int reports;}public static void capturePreview19121(Trace t,String r,long e){t.result=r;t.elapsed=e;t.reports++;}}

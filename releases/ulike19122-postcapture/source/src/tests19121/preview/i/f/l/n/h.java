@@ -1,0 +1,1 @@
+package i.f.l.n;public class h {public Object b;public g h=new g();public int calls;public boolean fail;public void M(boolean held){android.os.Looper.check();if(held)throw new AssertionError("must unfreeze only");calls++;if(fail)throw new IllegalStateException("fixture failure");}public static class g {public Object a;}}

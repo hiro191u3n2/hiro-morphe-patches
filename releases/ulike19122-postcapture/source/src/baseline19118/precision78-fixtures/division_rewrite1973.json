@@ -1,0 +1,236 @@
+[
+  {
+    "line": 244,
+    "divisions": 1,
+    "original": "    precise float x=clamp((mean-16.0)/32.0,0.0,7.0);",
+    "exact": "    precise float x=clamp(ieeeDiv1973((mean-16.0),32.0),0.0,7.0);"
+  },
+  {
+    "line": 259,
+    "divisions": 1,
+    "original": "    precise float result=(abs(right-left)+abs(down-up))/float(n);return result;",
+    "exact": "    precise float result=ieeeDiv1973((abs(right-left)+abs(down-up)),float(n));return result;"
+  },
+  {
+    "line": 278,
+    "divisions": 3,
+    "original": "    precise float curveY=max(abs(ly+ry-centerY*4.0/3.0),abs(uy+dy-centerY*4.0/3.0))/6.0;",
+    "exact": "    precise float curveY=ieeeDiv1973(max(abs(ly+ry-ieeeDiv1973(centerY*4.0,3.0)),abs(uy+dy-ieeeDiv1973(centerY*4.0,3.0))),6.0);"
+  },
+  {
+    "line": 279,
+    "divisions": 5,
+    "original": "    precise float curveC=max(abs(lr+rr-centerR*4.0/3.0)+abs(lb+rb-centerB*4.0/3.0),abs(ur+dr-centerR*4.0/3.0)+abs(ub+db-centerB*4.0/3.0))/6.0;",
+    "exact": "    precise float curveC=ieeeDiv1973(max(abs(lr+rr-ieeeDiv1973(centerR*4.0,3.0))+abs(lb+rb-ieeeDiv1973(centerB*4.0,3.0)),abs(ur+dr-ieeeDiv1973(centerR*4.0,3.0))+abs(ub+db-ieeeDiv1973(centerB*4.0,3.0))),6.0);"
+  },
+  {
+    "line": 280,
+    "divisions": 1,
+    "original": "    precise float edgeY=max(abs(ry-ly),abs(dy-uy))/6.0;",
+    "exact": "    precise float edgeY=ieeeDiv1973(max(abs(ry-ly),abs(dy-uy)),6.0);"
+  },
+  {
+    "line": 281,
+    "divisions": 1,
+    "original": "    precise float edgeC=max(abs(rr-lr)+abs(rb-lb),abs(dr-ur)+abs(db-ub))/6.0;",
+    "exact": "    precise float edgeC=ieeeDiv1973(max(abs(rr-lr)+abs(rb-lb),abs(dr-ur)+abs(db-ub)),6.0);"
+  },
+  {
+    "line": 283,
+    "divisions": 3,
+    "original": "    precise float outY=1.0/(1.0+square(edgeY/(sy*1.7+2.0))+square(max(0.0,curveY-sy*1.4)/(sy*.85+1.0)));",
+    "exact": "    precise float outY=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(edgeY,(sy*1.7+2.0)))+square(ieeeDiv1973(max(0.0,curveY-sy*1.4),(sy*.85+1.0)))));"
+  },
+  {
+    "line": 284,
+    "divisions": 3,
+    "original": "    precise float outC=1.0/(1.0+square(edgeC/(sc*1.0+1.5))+square(max(0.0,curveC-sc*2.5)/(sc*1.5+2.0)));",
+    "exact": "    precise float outC=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(edgeC,(sc*1.0+1.5)))+square(ieeeDiv1973(max(0.0,curveC-sc*2.5),(sc*1.5+2.0)))));"
+  },
+  {
+    "line": 289,
+    "divisions": 1,
+    "original": "    precise float fx=clamp((float(x)+.5)/64.0-.5,0.0,float(rw-1));",
+    "exact": "    precise float fx=clamp(ieeeDiv1973((float(x)+.5),64.0)-.5,0.0,float(rw-1));"
+  },
+  {
+    "line": 290,
+    "divisions": 1,
+    "original": "    precise float fy=clamp((float(y)+.5)/64.0-.5,0.0,float(rh-1));",
+    "exact": "    precise float fy=clamp(ieeeDiv1973((float(y)+.5),64.0)-.5,0.0,float(rh-1));"
+  },
+  {
+    "line": 304,
+    "divisions": 1,
+    "original": "    precise float adjusted=max(0.0,distance/samples-2.0*variance);",
+    "exact": "    precise float adjusted=max(0.0,ieeeDiv1973(distance,samples)-2.0*variance);"
+  },
+  {
+    "line": 305,
+    "divisions": 1,
+    "original": "    precise float z=adjusted/h2;",
+    "exact": "    precise float z=ieeeDiv1973(adjusted,h2);"
+  },
+  {
+    "line": 329,
+    "divisions": 2,
+    "original": "        distance=max(0.0,distance/5.0-2.0*variance);precise float z=distance/h2;",
+    "exact": "        distance=max(0.0,ieeeDiv1973(distance,5.0)-2.0*variance);precise float z=ieeeDiv1973(distance,h2);"
+  },
+  {
+    "line": 331,
+    "divisions": 2,
+    "original": "        precise float weight=1.0/(1.0+z+z*z*.5+z*z*z/6.0);",
+    "exact": "        precise float weight=ieeeDiv1973(1.0,(1.0+z+z*z*.5+ieeeDiv1973(z*z*z,6.0)));"
+  },
+  {
+    "line": 332,
+    "divisions": 3,
+    "original": "        sumY+=weight*(patchY/5.0);sumR+=weight*(patchR/5.0);sumB+=weight*(patchB/5.0);total+=weight;",
+    "exact": "        sumY+=weight*(ieeeDiv1973(patchY,5.0));sumR+=weight*(ieeeDiv1973(patchR,5.0));sumB+=weight*(ieeeDiv1973(patchB,5.0));total+=weight;"
+  },
+  {
+    "line": 334,
+    "divisions": 3,
+    "original": "    precise vec3 result=vec3(sumY/total,sumR/total,sumB/total);return result;",
+    "exact": "    precise vec3 result=vec3(ieeeDiv1973(sumY,total),ieeeDiv1973(sumR,total),ieeeDiv1973(sumB,total));return result;"
+  },
+  {
+    "line": 357,
+    "divisions": 2,
+    "original": "        distance=max(0.0,distance/9.0-2.0*variance);precise float z=distance/h2;",
+    "exact": "        distance=max(0.0,ieeeDiv1973(distance,9.0)-2.0*variance);precise float z=ieeeDiv1973(distance,h2);"
+  },
+  {
+    "line": 359,
+    "divisions": 2,
+    "original": "        precise float weight=1.0/(1.0+z+z*z*.5+z*z*z/6.0);",
+    "exact": "        precise float weight=ieeeDiv1973(1.0,(1.0+z+z*z*.5+ieeeDiv1973(z*z*z,6.0)));"
+  },
+  {
+    "line": 363,
+    "divisions": 3,
+    "original": "    precise vec3 result=vec3(sumY/total,sumR/total,sumB/total);return result;",
+    "exact": "    precise vec3 result=vec3(ieeeDiv1973(sumY,total),ieeeDiv1973(sumR,total),ieeeDiv1973(sumB,total));return result;"
+  },
+  {
+    "line": 377,
+    "divisions": 2,
+    "original": "        precise float wy=base/(1.0+square((cq.x-cp.x)/thresholdY));",
+    "exact": "        precise float wy=ieeeDiv1973(base,(1.0+square(ieeeDiv1973((cq.x-cp.x),thresholdY))));"
+  },
+  {
+    "line": 378,
+    "divisions": 4,
+    "original": "        precise float wc=base/(1.0+.12*square((cq.x-cp.x)/thresholdY)+square((cq.y-cp.y)/thresholdC)+square((cq.z-cp.z)/thresholdC));",
+    "exact": "        precise float wc=ieeeDiv1973(base,(1.0+.12*square(ieeeDiv1973((cq.x-cp.x),thresholdY))+square(ieeeDiv1973((cq.y-cp.y),thresholdC))+square(ieeeDiv1973((cq.z-cp.z),thresholdC))));"
+  },
+  {
+    "line": 390,
+    "divisions": 2,
+    "original": "    precise float legacyFlat=1.0/(1.0+square(structure(x,y,0,u[1])/(sy*3.0+3.0)));",
+    "exact": "    precise float legacyFlat=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973(structure(x,y,0,u[1]),(sy*3.0+3.0)))));"
+  },
+  {
+    "line": 393,
+    "divisions": 1,
+    "original": "    precise float dark=clamp((144.0-cp.x)/112.0,0.0,1.0);",
+    "exact": "    precise float dark=clamp(ieeeDiv1973((144.0-cp.x),112.0),0.0,1.0);"
+  },
+  {
+    "line": 395,
+    "divisions": 1,
+    "original": "    precise float localVar=weights.z/max(.001,weights.x);",
+    "exact": "    precise float localVar=ieeeDiv1973(weights.z,max(.001,weights.x));"
+  },
+  {
+    "line": 396,
+    "divisions": 1,
+    "original": "    precise float ly=sy>=.40?min(.98,strength)*legacyFlat*clamp(sy*sy/max(sy*sy,localVar*.55),.12,1.0):0.0;",
+    "exact": "    precise float ly=sy>=.40?min(.98,strength)*legacyFlat*clamp(ieeeDiv1973(sy*sy,max(sy*sy,localVar*.55)),.12,1.0):0.0;"
+  },
+  {
+    "line": 398,
+    "divisions": 3,
+    "original": "    precise float targetY=sums.x/max(.001,weights.x),targetR=sums.y/max(.001,weights.y),targetB=sums.z/max(.001,weights.y);",
+    "exact": "    precise float targetY=ieeeDiv1973(sums.x,max(.001,weights.x)),targetR=ieeeDiv1973(sums.y,max(.001,weights.y)),targetB=ieeeDiv1973(sums.z,max(.001,weights.y));"
+  },
+  {
+    "line": 408,
+    "divisions": 1,
+    "original": "    precise float red=dy+dr,green=dy-(.299*dr+.114*db)/.587,blue=dy+db;",
+    "exact": "    precise float red=dy+dr,green=dy-ieeeDiv1973((.299*dr+.114*db),.587),blue=dy+db;"
+  },
+  {
+    "line": 419,
+    "divisions": 1,
+    "original": "    precise float fx=clamp((float(x)+.5)/float(scale)-.5,0.0,float(width-1));",
+    "exact": "    precise float fx=clamp(ieeeDiv1973((float(x)+.5),float(scale))-.5,0.0,float(width-1));"
+  },
+  {
+    "line": 420,
+    "divisions": 1,
+    "original": "    precise float fy=clamp((float(y)+.5)/float(scale)-.5,0.0,float(height-1));",
+    "exact": "    precise float fy=clamp(ieeeDiv1973((float(y)+.5),float(scale))-.5,0.0,float(height-1));"
+  },
+  {
+    "line": 440,
+    "divisions": 2,
+    "original": "    precise float confidenceValue=256.0*clamp((flatness.x-.65)/.30,0.0,1.0)*clamp((max(sy,sc)-.60)/1.8,0.0,1.0)*(1.0-regionalSigma(x,row+u[6],2));",
+    "exact": "    precise float confidenceValue=256.0*clamp(ieeeDiv1973((flatness.x-.65),.30),0.0,1.0)*clamp(ieeeDiv1973((max(sy,sc)-.60),1.8),0.0,1.0)*(1.0-regionalSigma(x,row+u[6],2));"
+  },
+  {
+    "line": 442,
+    "divisions": 1,
+    "original": "    precise float dark=clamp((144.0-cp.x)/112.0,0.0,1.0);",
+    "exact": "    precise float dark=clamp(ieeeDiv1973((144.0-cp.x),112.0),0.0,1.0);"
+  },
+  {
+    "line": 445,
+    "divisions": 1,
+    "original": "    precise float strength=(.56+.09*float(u[8])+(u[9]!=0?.12*dark:0.0))*((160.0+float(budget)*.375)/256.0);",
+    "exact": "    precise float strength=(.56+.09*float(u[8])+(u[9]!=0?.12*dark:0.0))*(ieeeDiv1973((160.0+float(budget)*.375),256.0));"
+  },
+  {
+    "line": 446,
+    "divisions": 1,
+    "original": "    precise float texture=(1.0-.55*float(detail)/256.0)*(1.0-.85*regionalSigma(x,row+u[6],2));",
+    "exact": "    precise float texture=(1.0-ieeeDiv1973(.55*float(detail),256.0))*(1.0-.85*regionalSigma(x,row+u[6],2));"
+  },
+  {
+    "line": 447,
+    "divisions": 2,
+    "original": "    precise float confidence=clamp((flatness.x-.62)/.34,0.0,1.0),residual=clamp((max(sy,sc)-.60)/3.0,0.0,1.0);",
+    "exact": "    precise float confidence=clamp(ieeeDiv1973((flatness.x-.62),.34),0.0,1.0),residual=clamp(ieeeDiv1973((max(sy,sc)-.60),3.0),0.0,1.0);"
+  },
+  {
+    "line": 448,
+    "divisions": 2,
+    "original": "    precise float ly=sy>=.40?min(.98,strength*(.70+.30*confidence*residual))*flatness.x*texture*clamp(sy*sy/max(sy*sy,weights.z/max(.001,weights.x)*.55),.16,1.0):0.0;",
+    "exact": "    precise float ly=sy>=.40?min(.98,strength*(.70+.30*confidence*residual))*flatness.x*texture*clamp(ieeeDiv1973(sy*sy,max(sy*sy,ieeeDiv1973(weights.z,max(.001,weights.x))*.55)),.16,1.0):0.0;"
+  },
+  {
+    "line": 450,
+    "divisions": 3,
+    "original": "    precise float targetY=sums.x/max(.001,weights.x),targetR=sums.y/max(.001,weights.y),targetB=sums.z/max(.001,weights.y);",
+    "exact": "    precise float targetY=ieeeDiv1973(sums.x,max(.001,weights.x)),targetR=ieeeDiv1973(sums.y,max(.001,weights.y)),targetB=ieeeDiv1973(sums.z,max(.001,weights.y));"
+  },
+  {
+    "line": 458,
+    "divisions": 1,
+    "original": "    precise float dR=dy+dr,dG=dy-(.299*dr+.114*db)/.587,dB=dy+db;",
+    "exact": "    precise float dR=dy+dr,dG=dy-ieeeDiv1973((.299*dr+.114*db),.587),dB=dy+db;"
+  },
+  {
+    "line": 461,
+    "divisions": 2,
+    "original": "        precise float gate=1.0/(1.0+square((coarse.w-cp.x)/(sy*5.0+16.0)));",
+    "exact": "        precise float gate=ieeeDiv1973(1.0,(1.0+square(ieeeDiv1973((coarse.w-cp.x),(sy*5.0+16.0)))));"
+  },
+  {
+    "line": 465,
+    "divisions": 1,
+    "original": "        dR+=cy*by+cr*bc;dG+=cy*by-(.299*cr+.114*cb)/.587*bc;dB+=cy*by+cb*bc;",
+    "exact": "        dR+=cy*by+cr*bc;dG+=cy*by-ieeeDiv1973((.299*cr+.114*cb),.587)*bc;dB+=cy*by+cb*bc;"
+  }
+]

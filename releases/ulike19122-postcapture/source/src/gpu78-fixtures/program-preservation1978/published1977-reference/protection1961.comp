@@ -1,0 +1,81 @@
+#version 310 es
+#extension GL_EXT_gpu_shader5 : require
+precision highp float;
+precision highp int;
+layout(local_size_x=64,local_size_y=1,local_size_z=1) in;
+layout(std430,binding=0) readonly buffer Source {uint pixels[];} source;
+layout(std430,binding=1) writeonly buffer Destination {int values[];} destination;
+layout(std430,binding=2) readonly buffer Policy {int values[];} policy;
+layout(std430,binding=3) readonly buffer Geometry {int values[];} geometry;
+layout(std430,binding=4) readonly buffer Grid {float values[];} grid;
+layout(std430,binding=5) readonly buffer Masks {int values[];} masks;
+uniform highp int u[32];
+uniform highp float f[32];
+int luma(uint p){return (77*int((p>>16u)&255u)+150*int((p>>8u)&255u)+29*int(p&255u)+128)>>8;}
+int javaRound(float value) {
+    int bits=floatBitsToInt(value),exponent=(bits>>23)&255,shift=149-exponent;
+    if((shift&~31)==0){int mantissa=(bits&0x7fffff)|0x800000;if(bits<0)mantissa=-mantissa;return ((mantissa>>shift)+1)>>1;}
+    return int(value);
+}
+void main() {
+    int id=u[31]+int(gl_GlobalInvocationID.x);
+    if(u[0]==0) {
+        if(id>=u[4])return;
+        bool visited=false;
+        for(int face=0;face<u[3];face++)visited=visited||((geometry.values[face*u[4]+id]&65536)!=0);
+        if(!visited){destination.values[id*2]=0;destination.values[id*2+1]=0;return;}
+        int x=id%u[1],y=id/u[1],lo=255,hi=0;
+        for(int yy=max(0,y-1);yy<=min(u[2]-1,y+1);yy++)for(int xx=max(0,x-1);xx<=min(u[1]-1,x+1);xx++) {
+            int value=luma(source.pixels[yy*u[1]+xx]);lo=min(lo,value);hi=max(hi,value);
+        }
+        uint p=source.pixels[id];int r=int((p>>16u)&255u),g=int((p>>8u)&255u),b=int(p&255u);
+        bool skin=luma(p)>=28 && r>=g-10 && r>b+2 && max(r,max(g,b))-min(r,min(g,b))>6;
+        int admitted=0,protectedValue=0;
+        for(int face=0;face<u[3];face++) {
+            int packedMask=geometry.values[face*u[4]+id];if((packedMask&65536)==0)continue;
+            int eligibility=packedMask&255,protect=(packedMask>>8)&255;
+            eligibility=skin?eligibility*max(0,48-(hi-lo))/48:0;
+            eligibility=eligibility*(255-protect)/255;
+            admitted=max(admitted,eligibility);protectedValue=max(protectedValue,protect);
+        }
+        destination.values[id*2]=admitted;destination.values[id*2+1]=protectedValue;
+    } else if(u[0]==1) {
+        if(id>=u[8])return;
+        int x=(id%u[7])*4,row=u[3]+(id/u[7])*4,y=row+u[5],minimum=256;
+        for(int dy=0;dy<4&&y+dy<u[6];dy++)for(int dx=0;dx<4&&x+dx<u[1];dx++) {
+            int rr=row+dy,c=x+dx;
+            if(rr>=u[2] || (source.pixels[rr*u[1]+c]>>24u)!=255u){minimum=0;continue;}
+            int at=((rr-u[3])*u[1]+c)*2;
+            int budget=(policy.values[at]*(256-policy.values[at+1]))>>8;
+            minimum=min(minimum,budget);
+        }
+        destination.values[id]=min(255,(geometry.values[id]*minimum)>>8);
+    } else if(u[0]==2) {
+        if(id>=u[1]*u[2])return;
+        int x=id%u[1],y=id/u[1]+u[3];precise float sigma=f[0];
+        if(u[6]!=0) {
+            precise float gx=u[4]==1?0.0:clamp((float(x)-f[2])/f[4],0.0,float(u[4]-1));
+            precise float gy=u[5]==1?0.0:clamp((float(y)-f[3])/f[5],0.0,float(u[5]-1));
+            int ix=min(u[4]-1,int(gx)),iy=min(u[5]-1,int(gy));
+            int nx=min(u[4]-1,ix+1),ny=min(u[5]-1,iy+1);
+            precise float fx=gx-float(ix),fy=gy-float(iy);
+            precise float a0=grid.values[iy*u[4]+ix]*(1.0-fx),a1=grid.values[iy*u[4]+nx]*fx;
+            precise float b0=grid.values[ny*u[4]+ix]*(1.0-fx),b1=grid.values[ny*u[4]+nx]*fx;
+            precise float a=a0+a1,b=b0+b1;
+            precise float ay=a*(1.0-fy),by=b*fy;sigma=ay+by;
+        }
+        sigma=sigma*f[1];int confidence=masks.values[id*2+1];
+        precise float toleranceProduct=sigma*.65;int tolerance=3+javaRound(toleranceProduct);
+        precise float floorProduct=sigma*1.8;precise float floorBase=1.0+floorProduct;precise float floorScaled=floorBase*256.0;
+        int noiseFloor=max(u[7],javaRound(floorScaled));
+        if(confidence!=0) {
+            tolerance=tolerance+((u[8]*confidence)>>8);
+            int admittedFloor=max(noiseFloor,u[9]);noiseFloor=noiseFloor+(((admittedFloor-noiseFloor)*confidence)>>8);
+        }
+        precise float darkProduct=sigma*.75;
+        destination.values[id*4]=tolerance;
+        destination.values[id*4+1]=max(3,javaRound(darkProduct));
+        destination.values[id*4+2]=noiseFloor;
+        destination.values[id*4+3]=256-(int(uint(masks.values[id*2])*uint(u[10]))>>8);
+    }
+}
