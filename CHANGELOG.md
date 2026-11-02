@@ -1,3 +1,16 @@
+# [1.0.330](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/berry-allversions-v1.0.4) (2026-11-02)
+
+* **Berry Browser:** 5パッチの対応バージョン表示を「全バージョン」に統一。
+* **Berry Browser:** 表示用メタデータのみ変更。BFCache補正と既存機能・実行時の対象構造確認を維持。
+
+【Hiro Morphe Patches v1.0.330：Berry Browserを全バージョン表示に変更】
+
+BFCache復帰補正の対応バージョン指定を外し、Berry Browserの5パッチすべてを、Morphe Manager上で「全バージョン」対応と表示するよう変更しました。単独MPPはBerry BFCache復帰補正v1.0.4です。
+
+表示用の対応バージョン情報のみを変更しています。BFCache復帰補正、既存機能、実行時の対象コード確認、他アプリのパッチは維持します。将来のすべてのBerryバージョンで適用・動作を保証するものではありません。
+
+パッチ一覧の読み込みと、対象以外のコード・拡張機能が維持されていることを検証しています。実機でのManager画面表示は未確認です。
+
 # [1.0.329](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/berry-bfcache-v1.0.3) (2026-11-02)
 
 * **Berry Browser:** BFCache復帰補正v1.0.3：キャッシュ復帰時の完了状態と描画同期を補正。元の４改造を維持。
