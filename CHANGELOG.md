@@ -1,3 +1,20 @@
+# [1.0.331](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/berry-auto-v1.4.0) (2026-11-02)
+
+* **Berry Browser:** 固定クラス名への依存を減らし、APKの構造から適用先を自動検出。
+* **Berry Browser:** 元APKと名称を変更した検証入力で適用を確認。3.84.12と実機動作は未検証。
+
+【Hiro Morphe Patches v1.0.331：Berry Browserの適用先を自動検出】
+
+Berry Browser用MPPはv1.4.0です。固定されたクラス名で「未検証のWebView構造」と停止していた処理を見直し、実際のAPKの構造から適用先を探す方式を追加しました。版番号ごとの専用定義には依存しません。
+
+片手ズーム・表示中タブ優先・共有先切替・BFCache復帰補正の適用先と、必要なレジスタを構造から確認します。全バージョン表示、MessageQueueの実装、既存の拡張ファイル、他アプリのパッチは維持しています。
+
+BFCacheの完了判定では、表示用の親Viewではなく対応するWebView本体を照合するように修正しました。
+
+未改造3.83.74と、クラス・メンバー名を変更した検証入力への適用を確認しています。実際の3.84.12のAPKとAndroid実機の動作は未検証です。適用先を一意に確定できない構造はエラーにし、処理を追加できていないのに成功とは表示しません。
+
+Morphe ManagerのHiro Morphe Patchesを1.0.331へ更新し、未改造の元APKへ必要なBerryパッチを選んで再適用してください。単独のBerry_Browser_v1.4.0.mppを使う場合は、統合版のBerryパッチと重ねて選択しないでください。
+
 # [1.0.330](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/berry-allversions-v1.0.4) (2026-11-02)
 
 * **Berry Browser:** 5パッチの対応バージョン表示を「全バージョン」に統一。
