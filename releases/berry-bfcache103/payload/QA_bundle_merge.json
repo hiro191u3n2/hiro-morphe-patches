@@ -1,0 +1,50 @@
+{
+  "result": "PASS_ENTRY_PRESERVATION",
+  "bundle_version": "1.0.329",
+  "berry_repair_version": "1.0.3",
+  "baseline_sha256": "c2c5ae2773c4855aca14bbe6f232718326c2045a923d453f49c8eb2a97348f4e",
+  "addition_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+  "output_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+  "output_bytes": 48131630,
+  "baseline_entries": 283,
+  "output_entries": 287,
+  "existing_entries_changed": [
+    "META-INF/MANIFEST.MF",
+    "classes.dex"
+  ],
+  "entries_added": [
+    "app/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile.class",
+    "app/hiro/berrybfcache/patches/BfCacheRepairPatch.class",
+    "app/hiro/berrybfcache/patches/ExactBody.class",
+    "extensions/berry_bfcache_restore.mpe"
+  ],
+  "entries_removed": [],
+  "all_original_berry_providers_and_extensions_identical": true,
+  "all_unrelated_entries_identical": true,
+  "provider_class_count": 186,
+  "dex_merge_strategy": "Keep every baseline DEX class definition and add only the new provider namespace",
+  "dex_definition_preservation_verified": true,
+  "dex_definition_verification": {
+    "result": "PASS_DEX_DEFINITION_PRESERVATION",
+    "preserved_classes": 307,
+    "added_classes": 6,
+    "all_class_definitions_match_after_reference_index_normalization": true
+  },
+  "d8_sha256": "38a9ffaaebbd17d1514e3ecbff5a85b989bb13c551b9e224c7409514eea84ff5",
+  "ecj_sha256": "74c93172475fee0cd4e6eefb44233516dd40525642da35d009146d97ea598229",
+  "compile_classpath_sha256": "fe4bc92815bb14976150e4ec83e4985932b46d1d47edec75d37604481572e864",
+  "manifest": {
+    "Manifest-Version": "1.0",
+    "Name": "Hiro Morphe Patches",
+    "Description": "Berry BFCache restore repair v1.0.3: complete native load state and synchronize redraw after a verified cached restore. Existing four Berry patches and all other app patches are retained. Physical device rendering remains unverified.",
+    "Version": "1.0.329",
+    "Timestamp": "2026-11-02T00:00:00",
+    "Source": "remote",
+    "Author": "ひろ",
+    "Contact": "na",
+    "Website": "na",
+    "License": "GPLv3",
+    "Patcher-Version": "2.2.0-dev.2"
+  },
+  "device_tested": false
+}

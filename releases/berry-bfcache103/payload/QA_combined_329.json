@@ -1,0 +1,224 @@
+{
+  "result": "PASS",
+  "combined_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+  "combined_bytes": 48131630,
+  "baseline_sha256": "c2c5ae2773c4855aca14bbe6f232718326c2045a923d453f49c8eb2a97348f4e",
+  "standalone_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+  "entry_preservation": {
+    "result": "PASS_ENTRY_PRESERVATION",
+    "bundle_version": "1.0.329",
+    "berry_repair_version": "1.0.3",
+    "baseline_sha256": "c2c5ae2773c4855aca14bbe6f232718326c2045a923d453f49c8eb2a97348f4e",
+    "addition_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+    "output_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+    "output_bytes": 48131630,
+    "baseline_entries": 283,
+    "output_entries": 287,
+    "existing_entries_changed": [
+      "META-INF/MANIFEST.MF",
+      "classes.dex"
+    ],
+    "entries_added": [
+      "app/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile.class",
+      "app/hiro/berrybfcache/patches/BfCacheRepairPatch.class",
+      "app/hiro/berrybfcache/patches/ExactBody.class",
+      "extensions/berry_bfcache_restore.mpe"
+    ],
+    "entries_removed": [],
+    "all_original_berry_providers_and_extensions_identical": true,
+    "all_unrelated_entries_identical": true,
+    "provider_class_count": 186,
+    "dex_merge_strategy": "Keep every baseline DEX class definition and add only the new provider namespace",
+    "dex_definition_preservation_verified": true,
+    "dex_definition_verification": {
+      "result": "PASS_DEX_DEFINITION_PRESERVATION",
+      "preserved_classes": 307,
+      "added_classes": 6,
+      "all_class_definitions_match_after_reference_index_normalization": true
+    },
+    "d8_sha256": "38a9ffaaebbd17d1514e3ecbff5a85b989bb13c551b9e224c7409514eea84ff5",
+    "ecj_sha256": "74c93172475fee0cd4e6eefb44233516dd40525642da35d009146d97ea598229",
+    "compile_classpath_sha256": "fe4bc92815bb14976150e4ec83e4985932b46d1d47edec75d37604481572e864",
+    "manifest": {
+      "Manifest-Version": "1.0",
+      "Name": "Hiro Morphe Patches",
+      "Description": "Berry BFCache restore repair v1.0.3: complete native load state and synchronize redraw after a verified cached restore. Existing four Berry patches and all other app patches are retained. Physical device rendering remains unverified.",
+      "Version": "1.0.329",
+      "Timestamp": "2026-11-02T00:00:00",
+      "Source": "remote",
+      "Author": "ひろ",
+      "Contact": "na",
+      "Website": "na",
+      "License": "GPLv3",
+      "Patcher-Version": "2.2.0-dev.2"
+    },
+    "device_tested": false
+  },
+  "independent_dex_audit": {
+    "result": "PASS_DEX_SEMANTIC_PRESERVATION",
+    "baseline_class_count": 307,
+    "baseline_method_count": 1660,
+    "differences": {
+      "class": {
+        "added": [
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$0;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$1;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$2;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;"
+        ],
+        "removed": [],
+        "changed": []
+      },
+      "field": {
+        "added": [
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->adapter:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->adapterField:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->adapterInterface:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->client:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->completeSetter:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->documentMethod:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->factory:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->feature:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->hashes:[Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->listenerMethod:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->provider:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->scriptHandler:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->setupName:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->setupOwner:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->tab:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->webField:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;->webSubclass:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->BOUNDARY:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->COMPAT:Lapp/morphe/patcher/patch/Compatibility;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->COMPLETE:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->COMPLETION:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->EXTENSION:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->HELPER:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->I:Lapp/morphe/patcher/extensions/InstructionExtensions;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->INSTALL:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->INSTALLED:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->NAME:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->PATCH:Lapp/morphe/patcher/patch/BytecodePatch;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->STR:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->TARGET:Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->WEB:Ljava/lang/String;"
+        ],
+        "removed": [],
+        "changed": []
+      },
+      "method": {
+        "added": [
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$0;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$0;->get()Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$1;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$2;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$2;->invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;-><init>(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;-><clinit>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->absentField(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->absentMethod(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->addMethod(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String; Ljava/util/List; I I Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->applyRepair(Lapp/morphe/patcher/patch/BytecodePatchContext;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->exact(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String; Ljava/lang/String;)Lapp/morphe/patcher/util/proxy/mutableTypes/MutableMethod;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->fail(Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->field(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->installCode(Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;)Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$0(Lapp/morphe/patcher/patch/BytecodePatchBuilder;)Lkotlin/Unit;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$1()Ljava/io/InputStream;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$2(Lapp/morphe/patcher/patch/BytecodePatchContext;)Lkotlin/Unit;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->method(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String;)Lapp/morphe/patcher/util/proxy/mutableTypes/MutableMethod;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->profile(Ljava/lang/String;)Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;->canonical(Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;->sha256(Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/String;"
+        ],
+        "removed": [],
+        "changed": []
+      },
+      "method_body": {
+        "added": [
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$0;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$0;->get()Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$1;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$1;->invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$2;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$2;->invoke(Ljava/lang/Object;)Ljava/lang/Object;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;-><init>(Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String; [Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;-><clinit>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->absentField(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->absentMethod(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->addMethod(Lapp/morphe/patcher/util/proxy/mutableTypes/MutableClass; Ljava/lang/String; Ljava/util/List; I I Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->applyRepair(Lapp/morphe/patcher/patch/BytecodePatchContext;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->exact(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String; Ljava/lang/String;)Lapp/morphe/patcher/util/proxy/mutableTypes/MutableMethod;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->fail(Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->field(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String; Ljava/lang/String; Ljava/lang/String;)V",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->installCode(Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;)Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$0(Lapp/morphe/patcher/patch/BytecodePatchBuilder;)Lkotlin/Unit;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$1()Ljava/io/InputStream;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->lambda$2(Lapp/morphe/patcher/patch/BytecodePatchContext;)Lkotlin/Unit;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->method(Lapp/morphe/patcher/patch/BytecodePatchContext; Ljava/lang/String;)Lapp/morphe/patcher/util/proxy/mutableTypes/MutableMethod;",
+          "Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch;->profile(Ljava/lang/String;)Lapp/hiro/berrybfcache/patches/BfCacheRepairPatch$Profile;",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;-><init>()V",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;->canonical(Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/String;",
+          "Lapp/hiro/berrybfcache/patches/ExactBody;->sha256(Lcom/android/tools/smali/dexlib2/iface/Method;)Ljava/lang/String;"
+        ],
+        "removed": [],
+        "changed": []
+      }
+    },
+    "checks": {
+      "all_existing_class_metadata_fields_method_declarations_and_bodies_unchanged": true,
+      "all_additions_confined_to_new_berry_provider_namespace": true
+    },
+    "limits": [
+      "DEX reference indices and debug line metadata are excluded",
+      "No device ART execution test"
+    ]
+  },
+  "combined_host_apply_original383740": {
+    "label": "combined329_preserved_dex_original383740",
+    "success": true,
+    "exit_code": 0,
+    "finished": [
+      {
+        "type": "finished",
+        "failure": null
+      }
+    ],
+    "applied": [
+      "ダブルタップから指を離さず片手ズーム",
+      "バックフォワードキャッシュの復帰処理を補正",
+      "プレビュー作成を後回しにして表示中タブを優先",
+      "ロックフリーMessageQueueを有効化",
+      "共有先ブラウザの表示を個別に切替"
+    ],
+    "input_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+    "bundle_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+    "output_sha256": "a830f1c04a2b096187013d57c06f2b83fa85a347fe58ed9077cc9c88369aa8e8",
+    "manager_version": "2.4.0-dev.4",
+    "patcher_version": "2.2.0-dev.2",
+    "host_sha256": "75f0215d2cf461e1edfc1d9a8ae74c36f537a990a7fc7049c10507d99c320e85",
+    "android_device_tested": false,
+    "signed_or_installed": false
+  },
+  "combined_vs_standalone_patched_apk": {
+    "result": "PASS_ALL_APK_ENTRY_CONTENTS_IDENTICAL",
+    "entries": 2194,
+    "standalone_output_sha256": "1daf6d74d63f4d10853addbda3d47300093a35b1130d74128af5903b6a350985",
+    "combined_output_sha256": "a830f1c04a2b096187013d57c06f2b83fa85a347fe58ed9077cc9c88369aa8e8",
+    "zip_layout_and_unsigned_container_hash_not_required_equal": true
+  },
+  "second_clean_build_sha256": "37401913eddad841bd9981e0374804b858ff36ae39fe9ff197aa6815e22e053b",
+  "reproducible_build": true,
+  "runtime_after_install_physically_tested": false,
+  "full_original383931_apply_tested": false,
+  "limits": [
+    "Original 3.83.93.1 input unavailable; existing standalone repair tests cover supplied modified 3.83.93.1 with the same implementation.",
+    "No Android ART execution, installation or physical rendering confirmation."
+  ]
+}

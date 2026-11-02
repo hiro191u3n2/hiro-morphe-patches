@@ -1,0 +1,59 @@
+{
+  "status": "VALIDATED_REPAIR_CANDIDATE_DEVICE_CONFIRMATION_REQUIRED",
+  "source_name": "Berry Browser BFCache復帰補正",
+  "source_version": "1.0.3",
+  "bundle_sha256": "ec31d178533b026302ff348c4e119b4242a3527c1f20c35f15ae8fbae82eae2c",
+  "normal_input": "unmodified jp.ejimax.berrybrowser 3.83.93.1",
+  "patches_selected": 5,
+  "original_four_providers_and_extensions": "byte-identical to production v1.3.1",
+  "full_bundle_host_apply_actual_original_3_83_74": "PASS",
+  "same_repair_host_apply_actual_modified_3_83_93_1": "PASS via QA-only wrapper",
+  "full_bundle_host_apply_actual_original_3_83_93_1": "NOT_TESTED_INPUT_UNAVAILABLE",
+  "jvm_state_tests": {
+    "result": "PASS",
+    "scenarios": 17,
+    "assertions": 29,
+    "scope": "JVM callback-order simulation; no Android renderer or device execution"
+  },
+  "embedded_script_tests": {
+    "result": "PASS",
+    "assertions": 12,
+    "scope": "Node event harness for the bundled document-start script; no browser or Android rendering test"
+  },
+  "modified_body_and_reapply_rejection": "PASS, no APK output",
+  "independent_apk_diff": {
+    "3.83.74": {
+      "only_two_existing_method_bodies_change": true,
+      "existing_method_tails_registers_and_exception_handlers_unchanged": true,
+      "all_existing_method_declarations_unchanged": true,
+      "client_interface_only_metadata_change": true,
+      "one_native_boolean_field_and_three_native_methods_added": true,
+      "runtime_additions_confined_to_namespace": true,
+      "all_original_four_helper_method_bodies_unchanged": true,
+      "original_helper_method_count": 122,
+      "manifest_and_other_resources_byte_identical": true,
+      "arsc_content_equivalent": true,
+      "arsc_byte_identical": false,
+      "all_outs_sizes_cover_invoke_register_counts": true
+    },
+    "3.83.93.1": {
+      "only_two_existing_method_bodies_change": true,
+      "existing_method_tails_registers_and_exception_handlers_unchanged": true,
+      "all_existing_method_declarations_unchanged": true,
+      "client_interface_only_metadata_change": true,
+      "one_native_boolean_field_and_three_native_methods_added": true,
+      "runtime_additions_confined_to_namespace": true,
+      "all_original_four_helper_method_bodies_unchanged": true,
+      "original_helper_method_count": 122,
+      "manifest_and_other_resources_byte_identical": true,
+      "arsc_content_equivalent": true,
+      "arsc_byte_identical": true,
+      "all_outs_sizes_cover_invoke_register_counts": true
+    }
+  },
+  "confirmed_defect": "Native loading state is not completed on BFCache restore; normal onPageFinished is absent",
+  "partial_rendering_root_cause_proven": false,
+  "physical_device_tested": false,
+  "rendering_symptom_fixed_on_device": "UNCONFIRMED",
+  "published": false
+}
