@@ -1,22 +1,22 @@
 {
-  "ulike_version": "1.9.124",
-  "bundle_version": "1.0.336",
-  "source_filename": "ULike_HQ_Texture_Online_v1.9.124.mpp",
-  "source_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
-  "source_release": "ulike-v1.9.124",
-  "active_release": "ulike-v1.9.124",
-  "base_ulike_version": "1.9.123",
+  "ulike_version": "1.9.125",
+  "bundle_version": "1.0.338",
+  "source_filename": "ULike_HQ_Texture_Online_v1.9.125.mpp",
+  "source_sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c",
+  "source_release": "ulike-v1.9.125",
+  "active_release": "ulike-v1.9.125",
+  "base_ulike_version": "1.9.124",
   "approved_lineage_version": "1.8.8",
-  "base_source_sha256": "c1cdab6d613ba594d8fe817799e5e208e25e847d2d55f72525f13f19e3b1b408",
+  "base_source_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
   "withdrawn_versions": [
     "1.9.17",
     "1.9.66"
   ],
-  "reason": ".124 requests extraction at three existing-resource read/collision-check sites for patcher 2.2.0-dev.2 on-request decoding. Original asset hashes, runtime conflict guards, fourteen native payloads, stock methods, image algorithms and .123 boost suppression remain. Bundle .336 replaces only ULike in active .335.",
-  "future_ulike_base": "Use .124 source and exact standalone hash, but choose the then-current combined baseline from patches-bundle.json. Preserve explicit extraction before reads, all original integrity/collision guards, disabled automatic qualification, exact/fast admission, CPU fallback, fourteen native assets, capture/save contracts and other applications. Test actual modern combined-bundle on-request decoding, not only the standalone legacy path.",
+  "reason": ".125 enables the existing guarded HD preview release after the save owns its protected input and records release request timing separately from camera-input resumption. Numerical image helpers, resolution, formats, stock capture protection, CPU/GPU scheduling, resource extraction and all fourteen native payloads remain. Device responsiveness is unverified. Bundle .338 replaces only ULike in active .337.",
+  "future_ulike_base": "Use .125 source and exact standalone hash, but choose the then-current combined baseline. Preserve guarded preview ownership/lifecycle checks, explicit resource extraction, integrity/collision guards, disabled automatic qualification, exact/fast admission, CPU fallback, fourteen native assets, capture/save contracts and other applications. Test actual modern combined-bundle on-request decoding and original APK application.",
   "android_device_tested": false,
   "original_apk_apply_tested": true,
-  "release_status": "resource124_onrequest_single_combined_apks_verified_device_unverified",
+  "release_status": "preview125_single_combined_apks_verified_device_unverified",
   "ci_rebuild_matches_local_tested_artifacts": true,
   "black_preview_cause_confirmed": false,
   "black_preview_fixed_on_device": false,
@@ -45,7 +45,7 @@
   "remember_last_camera": true,
   "front_restart_device_tested": false,
   "null_teardown_does_not_reset_facing": true,
-  "base_bundle_version": "1.0.335",
+  "base_bundle_version": "1.0.337",
   "rear_lens_ui_predraw_guard": true,
   "rear_lens_ui_selection_guard": true,
   "swiftkey183_preserved": true,
@@ -62,9 +62,9 @@
   "q11_scope": "Exact YUV plane layout/sample preservation; no guessed RGB matrix/range or new bit-depth claim.",
   "q13_scope": "Direct pixel permutation for eligible quarter-turn/integer-crop cases; keep existing one-pass resampling and native beauty mesh.",
   "current_fix_scope": [
-    "request_original_resource_extraction",
-    "preserve_existing_file_collision_guards",
-    "test_modern_on_request_decoding"
+    "enable_guarded_hd_preview_release_after_save_input_protection",
+    "separate_preview_release_request_and_input_resumption",
+    "preserve_pixel_arithmetic_and_capture_ownership"
   ],
   "front_async_acceptance_waits_for_frame": true,
   "front_no_frame_preview_stop_max": 1,
@@ -1185,60 +1185,25 @@
     }
   },
   "current_validation": {
-    "schema": "ulike19124-source-and-qa-v1",
+    "schema": "ulike19125-source-and-qa-v1",
     "status": "passed",
-    "version": "1.9.124",
+    "version": "1.9.125",
     "artifact": {
-      "name": "ULike_HQ_Texture_Online_v1.9.124.mpp",
-      "bytes": 1635909,
-      "sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f"
+      "name": "ULike_HQ_Texture_Online_v1.9.125.mpp",
+      "bytes": 1637265,
+      "sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c"
     },
     "baseline": {
-      "bytes": 1635847,
-      "sha256": "c1cdab6d613ba594d8fe817799e5e208e25e847d2d55f72525f13f19e3b1b408",
-      "version": "1.9.123"
+      "bytes": 1635909,
+      "sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+      "version": "1.9.124"
     },
     "fix_scope": [
-      "request_original_resource_extraction",
-      "preserve_existing_file_collision_guards",
-      "test_modern_on_request_decoding"
+      "enable_guarded_hd_preview_release_after_save_input_protection",
+      "separate_preview_release_request_and_input_resumption",
+      "preserve_pixel_arithmetic_and_capture_ownership"
     ],
-    "resource_extraction": {
-      "dex_inverse_verified": true,
-      "exact_inverse_verified": true,
-      "guard_instructions_preserved": true,
-      "instruction_offsets_preserved": true,
-      "jvm_classes": [
-        {
-          "class": "app/hiro/ulike/patches/UlikeHqMaxPatch",
-          "exact_inverse_verified": true,
-          "guard_instructions_preserved": true,
-          "jvm_inverse_verified": true,
-          "manifest_parent_lookup_preserved": true,
-          "read_requests_enabled": 2,
-          "schema": "ulike19124-resource-read-jvm-v1",
-          "status": "passed"
-        },
-        {
-          "class": "app/hiro/ulike/patches/IntegrationPayload186",
-          "exact_inverse_verified": true,
-          "guard_instructions_preserved": true,
-          "jvm_inverse_verified": true,
-          "manifest_parent_lookup_preserved": true,
-          "read_requests_enabled": 1,
-          "schema": "ulike19124-resource-read-jvm-v1",
-          "status": "passed"
-        }
-      ],
-      "jvm_inverse_verified": true,
-      "manifest_parent_lookup_preserved": true,
-      "no_parameter_register_renumbering": true,
-      "old_asset_method_sha256": "b72ee5c7f7297d09ccbaa9ac24c44dd78b5bfbc72eec79ae2c0c20f8c2081f3f",
-      "old_resolver_method_sha256": "92cbe0fd06d8ca84b643329ebb926fbb7b98d3794b8208e9945950144e1fbcf6",
-      "read_requests_enabled": 3,
-      "schema": "ulike19124-resource-read-dex-v1",
-      "status": "passed"
-    },
+    "resource_extraction_fix_inherited": true,
     "resource_extraction_applied": {
       "asset_inventory_preserved": true,
       "decode_mode": "on_request",
@@ -1319,7 +1284,7 @@
     },
     "stock_boost_applied": {
       "actual_shutter_inverse_matches_122": true,
-      "apk_sha256": "6a769171480569ecd4734296ace7577644398bcb021f5438c58547130b11204a",
+      "apk_sha256": "516465e9b19b20ccb1093e55e5016ef770964f8501ce819640582940d8ce5f5d",
       "device_cause_confirmed": false,
       "one_callsite_suppressed": true,
       "original_input_contract_preserved": true,
@@ -1337,15 +1302,15 @@
     "automatic_qualification_enabled": false,
     "unqualified_gpu_admission_enabled": false,
     "normal_pixel_algorithms_changed": false,
+    "default_guarded_hd_preview_release_enabled": true,
     "diagnostic_quality_pipeline_bypass_available": true,
     "diagnostic_bypass_requires_explicit_one_shot_selection": true,
-    "pixel_preservation_scope": "All fourteen native payloads, image-processing helpers, stock methods and asset contracts are preserved from v1.9.123. Only three resource extraction-request booleans and diagnostic version metadata change. This is source/asset preservation evidence, not device visual-quality comparison.",
-    "preview_scope": "Early HD release is disabled by default and opt-in for one comparison. Host ownership/lifecycle gates and the standalone-applied original-APK reflection chain are checked. Main callback acceptance and camera input notices are not frame presentation or display FPS.",
+    "pixel_preservation_scope": "All fourteen native payloads, numerical image-processing helpers, stock methods and asset contracts are preserved from v1.9.124. Seven reviewed preview/diagnostic families and display/version metadata change. This is source/asset preservation evidence, not device visual-quality comparison.",
+    "preview_scope": "Existing guarded early HD release is enabled by default after save input protection. Capture ownership remains held until normal finish. Release request timing and subsequent camera input notices are separate observations, neither proving displayed frame completion. Host lifecycle/ownership gates and actual applied reflection chain are checked.",
     "observation_scope": "Bounded capture/post-save callback intervals, first notification delay, terminal-main callback waiting/work, returned cache capacities and available thermal state. A missing observation is not a zero delay. The runtime measurement was host-tested; no physical-device measurement is included.",
     "native_assets_byte_identical": true,
     "native_payloads_preserved": 14,
-    "installer_byte_identical": false,
-    "installer_extraction_request_only_changed": true,
+    "installer_byte_identical": true,
     "deterministic_archive_verified": true,
     "deterministic_dex_verified": true,
     "compiled_input_count": 150,
@@ -1355,8 +1320,8 @@
       "CameraSession1965.java": "38c366ec001083476e3b5f8270bd1e5d7b436713d8e136888cb43e48ac719577",
       "CameraTrace1965.java": "beb1d5bb49c2f55f5b44ed030d544251f6922fb64ab3d86d19172408c0bd0b3e",
       "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
-      "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
-      "CapturePreview19121.java": "db5ce3e89fae751dd3665844a9bdc74db25bbf1a9aa410f6c8907d67e48203d2",
+      "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
+      "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
       "CodecDrain1945.java": "93691ac3d5be48f3497014025be8de346471fe1fe1e5eb05932c3784988cd021",
       "CodecPreparation1981.java": "fcf024efd660fe6a9bf6ba8c0b8683709175c56c0b71aa00d0fa1b063c3af207",
       "ColourCache1976.java": "dad103b12225e67b8171edc37e291b9c7425b1ec9cc5f5d8a1b1f5d250271e70",
@@ -1420,7 +1385,7 @@
       "PostSaveCleanup19122.java": "b6a91aaae128108ab0243e08b96b44a153d06f16a8a64c4cef115cdc2af277b4",
       "PreviewLayout1922.java": "f835b5aa88818a147ebca85896a78e6fd37bb4965293a85b96fd59bca223aa12",
       "PreviewOutput1965.java": "b3a108c29667f0357b430821d28f16ce8d8700509a7e4c2f0f26e1ace06c37bb",
-      "ProcessingTiming1947.java": "65d6887565aa324521443198349033022b6558dcdcc22b616538de3f092446d7",
+      "ProcessingTiming1947.java": "807f84cb01613205b7c9702a1c7e3ac80585650a53ec26380db89c918d513bba",
       "QualityPipeline1932.java": "0e24bfe7b4602c6adf27d33700583aad8ae1e5e742239944483a173308090b55",
       "QualityPixels1932.java": "a09d2b7c35b101d2ed47cc664401725daecfc9250c66af950b735b302a4f220b",
       "QualityShadow1932.java": "34705981b4743fbbfe3d3ae97aff1c0be1effb1c86815d9d91732aa002b43de6",
@@ -1430,7 +1395,7 @@
       "ResidentStages19104.java": "cd8f0b3e112f2ca7eb7e098f139cd1128df02ccd862c4907fd1530c57c1478cb",
       "ResidentTiming19111.java": "b28376e0daa9a4d63997af0bf31b47d4d1d4b9e9ccf3d75e9b2dc81f367a333e",
       "ResidualOverlap1962.java": "dbdd3b9b79b04788d05038417f122abad94a91e52070f183c64e00e1ca80cdbe",
-      "Responsiveness19122.java": "01911e0448689a173ee6a0e6d6dd527a3d68b43f98decb5d0ed06b61181b6fde",
+      "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
       "SaveMemory1981.java": "af9df5647549025d2f44489a500c9c7d32af1060d4f83a9538826be6925e1057",
       "SaveQueue1935.java": "84deb4c6397e7f009b8f8e6fb8d33c9a5027adc533a7bbcf1eadc7318f9a17af",
       "Scheduling1944.java": "4a5cee4f94ac2235984132aad570492befa5f27b3d440df31d4f5f637a30517b",
@@ -1602,7 +1567,7 @@
       },
       "diagnostic": {
         "status": "passed",
-        "assertions": 39,
+        "assertions": 42,
         "negative_controls": 8,
         "negative_control_evidence": {
           "hidden": true,
@@ -1615,7 +1580,7 @@
           "collected_weak_references": true
         },
         "source_sha256": {
-          "ProcessingTiming1947.java": "65d6887565aa324521443198349033022b6558dcdcc22b616538de3f092446d7",
+          "ProcessingTiming1947.java": "807f84cb01613205b7c9702a1c7e3ac80585650a53ec26380db89c918d513bba",
           "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
           "host_diagnostic_refresh19121.py": "cdf04bdb669b42281a8b1a4a7bf94c54f5b8272f73a42f9c1b04aecbab4b71ae",
           "host_timing1982.py": "2e8653812cfefd2c64cf0954c9b728bd772101d131b7727aa730f14872c963d8",
@@ -1627,7 +1592,7 @@
           "tests19121/diagnostic/android/preference/Preference.java": "df1b850d4dd04db0514c02ef1b8266c24de93ee8087a360bab6d7e7186f97517",
           "tests19121/diagnostic/android/preference/PreferenceActivity.java": "6d3bb98e8d7e86f0fecc4aa48623354b578a00463eaa8269c0eab5ca63716a2e",
           "tests19121/diagnostic/android/preference/PreferenceGroup.java": "289f01d47a9c0554e44fe63927f9bef3a198e37c618e18e8a57ec92f25f30601",
-          "tests19121/diagnostic/com/hiro/ulike/DiagnosticRefresh19121Test.java": "03201f6e85f37ff17d8058de391e1cbcbd7b1eec8b968e04ba9760c9ee7a0e16"
+          "tests19121/diagnostic/com/hiro/ulike/DiagnosticRefresh19121Test.java": "342afc82fd6ded4ee0a34fead3adbe9b1c0d346f13812ca3bfb8078440978dce"
         },
         "evidence": "evidence/host/diagnostic.json",
         "mutation_controls": 0,
@@ -1789,7 +1754,7 @@
           "GpuQualification1961.java": "c4ab15b208ea542edc05f523672ef595f5a3e68f483c7329d32e830ce3b7f50c",
           "SingleNoise1955.java": "ca12e47041417b7538a2588d93bd2c7f7ab26d1862c30f09b14f9e44f25f861e",
           "ShutterFeedback1941.java": "f50c36a470d4cfcf0a0788c1a81acdce4e54c284d5e2209e6422d9813fdabde6",
-          "ProcessingTiming1947.java": "65d6887565aa324521443198349033022b6558dcdcc22b616538de3f092446d7",
+          "ProcessingTiming1947.java": "807f84cb01613205b7c9702a1c7e3ac80585650a53ec26380db89c918d513bba",
           "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
           "GpuAnalysis1961.java": "06e0a647760c214129f8801747fbbf5b7b886ed81781be59757a5588142fd245",
           "GpuResidual1961.java": "bf896a217019e5aef2867e1922181bbb2fa8275cc28fdd5e3fffe75d0606fcc3",
@@ -1803,10 +1768,10 @@
           "ShutterTiming1994.java": "a46f99fa3bb025a41bd6efbc4b5b230e7e851c241f7b03227ef7d0c1ac36eab4",
           "ResidentTiming19111.java": "b28376e0daa9a4d63997af0bf31b47d4d1d4b9e9ccf3d75e9b2dc81f367a333e",
           "GpuChain1961.java": "5129652f2492ac4143623ff612e72f41504d62b7d18249eb7072ac0d2346eabc",
-          "CapturePreview19121.java": "db5ce3e89fae751dd3665844a9bdc74db25bbf1a9aa410f6c8907d67e48203d2",
+          "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
           "LayoutGeometry1937.java": "b76c6fc70bfcc25b2989de36a77c4c84a8d0e2333956af054398e1a7cb663079",
-          "Responsiveness19122.java": "01911e0448689a173ee6a0e6d6dd527a3d68b43f98decb5d0ed06b61181b6fde",
-          "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+          "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
+          "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
           "tests19122/gpu/CapturePolicy19122.java": "ee83c441f4345e7d28c44eef162548a6f5190d5be03da8dabcd10c012a545562",
           "tests19122/gpu/GpuIdleTrim19122Test.java": "045cccc68ebba73e39e5d0d2b3cd60e717a55024150d68474d7e9a5cbddbfd79",
           "tests19122/gpu/GpuSubmission19122Test.java": "09603db022ffbbfab9a46c32ce7ea05f4d8cbc8dab83ded975e554f899a577d3",
@@ -1821,7 +1786,7 @@
       },
       "policy": {
         "status": "passed",
-        "assertions": 245,
+        "assertions": 246,
         "negative_controls": 3,
         "negative_control_evidence": [
           {
@@ -1838,10 +1803,10 @@
           }
         ],
         "source_sha256": {
-          "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+          "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
           "QualityPipeline1932.java": "0e24bfe7b4602c6adf27d33700583aad8ae1e5e742239944483a173308090b55",
           "tests19122/policy/QualityPipeline1932.reference121.java": "232b27ad67ad77c91a6fbb166a55d0a1bff20a1e35adb150f334ae819d6a2283",
-          "tests19122/policy/CapturePolicy19122Test.java": "d82fbc7a90e61f00260dd259d9da69506e4df8b0523eaa77c15af388648f3290",
+          "tests19122/policy/CapturePolicy19122Test.java": "e67a24520ed6c5ae1f78d3e0662295a37c657ec6e5f03ce06bbe108305741f28",
           "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5"
         },
         "evidence": "evidence/host/policy.json",
@@ -1850,7 +1815,7 @@
       },
       "preview": {
         "status": "passed",
-        "assertions": 894,
+        "assertions": 1042,
         "negative_controls": 7,
         "negative_control_evidence": [
           {
@@ -1883,7 +1848,7 @@
           }
         ],
         "source_sha256": {
-          "CapturePreview19121.java": "db5ce3e89fae751dd3665844a9bdc74db25bbf1a9aa410f6c8907d67e48203d2",
+          "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
           "AsyncSave1935.java": "a4c4cea993183fc6adf39d0763ee1d3f5ac6ec73d43beb661dcd3368d3a1d0db",
           "ReflectionCache1945.java": "ee7c2f83c1199d1a215c7fe546422c5c2205347821638a745975b9dd7a0bc1d3",
           "host_preview19121.py": "db006c914733992ecacab81b7fd79e805c224c4cf3f849b8db9ffc067e9df782",
@@ -1894,15 +1859,16 @@
           "tests19121/preview/android/os/Looper.java": "ebb45109006653a77a25ae4cb50b0754eaf3af97bd8fcb82d3155a3a5070d7a5",
           "tests19121/preview/com/bytedance/corecamera/camera/basic/PureCameraFragment.java": "7445e5ebea40531de340866bc987d53151873ca745b18957138d6d67f8fc73b2",
           "tests19121/preview/com/hiro/ulike/AsyncSave1935.java": "d111b68d1b076d86abcf3863bf5378d61bf394bda2573c6089b1d323d30b85f3",
-          "tests19121/preview/com/hiro/ulike/CapturePreview19121Test.java": "b9d13055c1c4868ea25cc81bdc874c81f44453b10f64901bd283991b71786a97",
+          "tests19121/preview/com/hiro/ulike/CapturePreview19121Test.java": "e227a78de889fdfc1a7510d9cfa71ebbc309c6e5fa51ca5a588c4c1352f85a63",
           "tests19121/preview/com/hiro/ulike/CaptureYuv.java": "db8d943858397904d21c17e7647c08e83064f9168d74a7f487f36e2294e54746",
           "tests19121/preview/com/hiro/ulike/OpticalZoom.java": "61802935ee150447f1413bfd109ec7ed9573eb1970326775950568b1762f0277",
           "tests19121/preview/com/hiro/ulike/PreviewFixtures19121.java": "92b7d91fd09db8abc32ddc06574066ec5fd5407e3c21c485814bd0958dd92e2f",
           "tests19121/preview/com/hiro/ulike/ProcessingTiming1947.java": "aa6368b018d258690910698ab38476914d63da73c02e63ce03fab2a9201b5f01",
+          "tests19121/preview/com/hiro/ulike/Responsiveness19122.java": "e5a266e9e687a2a8f075f1f12bbabd66bf36eaf0881d350497b079d6d60aabd9",
           "tests19121/preview/i/f/l/n/h.java": "d321acbae76a2a325f51e969b648803fc73502a5419e8d89106d2176ce990d2d",
           "tests19121/preview/i/f/l/n/s/a.java": "a9ee5616b3f238f85b7e05d8bb95a13615c1d041583d99a6e154ca2b5ac3b57e",
           "tests19121/preview/i/o/a/b1/a/b/c.java": "f3dd1084599ffe85071f8e2a8bf88a5988e62e9d213f74ad7f60ba77b3f6ff01",
-          "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+          "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
           "SaveQueue1935.java": "84deb4c6397e7f009b8f8e6fb8d33c9a5027adc533a7bbcf1eadc7318f9a17af",
           "SpeedWorkers1935.java": "a6fafe55dee98fe686b8495c76c47db0ba45129174f2745e45cbea4387269d21",
           "CodecPreparation1981.java": "fcf024efd660fe6a9bf6ba8c0b8683709175c56c0b71aa00d0fa1b063c3af207",
@@ -1910,9 +1876,9 @@
           "FaceResult1981.java": "6a6c55191ebbc9e6e4fb34e00b5a968166b158ba842e9d55228a30693c3c1eae",
           "PhotoAnalysis1981.java": "b7bf98961727a6a97619811144ef3a00df21898b78e7ad5a66f06fadc0994420",
           "EncoderTail1981.java": "8f23ea576ebd9ec7137e2edfdc247739bbb5eb1377a0a7f481d72e2b8462dea6",
-          "host_preview19122.py": "7b3e483327ade4c0c946e6bd9bbb7e4879a013fa94047e36e069cc6bd7d9362e",
+          "host_preview19122.py": "c9f516f8653e9663ac3701230f80fdbdad96923c9ddfa1305f4053b62350c1d4",
           "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5",
-          "tests19122/preview/AsyncPolicy19122Test.java": "d4a0ccfbfd64fac537d1656ce7d5962788d0623795d51f0983fdf001faa7b723",
+          "tests19122/preview/AsyncPolicy19122Test.java": "9e0c0792e8030e2912d145bd5f99a7c0898b365f1cd15a28c306a3d5f795a205",
           "host_capture_routes1981.py": "39cc5cffb9ee55c43f26c31cf2422c7c2b75973562f5bd763f87ee8cb9aaa577",
           "host_capture_save1947.py": "0c47832c87c2578e3a259b133054b589829a6cae7f2e90996d14dd90ca537085",
           "host_save_baseline1935.py": "bd120e80c20c037eba2d59a974c7989df352339930082ffa9640a8470c99a832",
@@ -2037,9 +2003,9 @@
           "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
           "ResourceClass19124.java": "4b6745f078736349206a8b19aacaf7603a68e0ba016323a669715fe796f8681a",
           "ResourceReadHooks19124.java": "a06c58397ec95318c8421a1e5418c091888ce182440b414e72e04baeb54f7f56",
-          "host_resource_extraction19124.py": "d983ead179e401a7dbad3f9df53b70261bdb963a7856cbf7f14e28e7a795120a",
+          "host_resource_extraction19125.py": "e069828cb96ae4232c705f6b8427a9c31f1fbf2b90b88bda9c82af415c2eef4d",
           "tests19124/ResourceBehavior19124.java": "73375faf87a6d1c113c0bb222f6266cbccda220031f23b6f8dee7e7983277652",
-          "tests19124/ResourceStructure19124.java": "cfa5bf77c29044a7b650f19993e1da4d2ef4a3acf9f7cb5c506307c649cd3939"
+          "tests19125/ResourceStructure19125.java": "49f625669421ecf1bb01d4ca3324b9d23930112afee147804c083b826207072c"
         },
         "evidence": "evidence/host/resource-extraction.json",
         "mutation_controls": 10,
@@ -2047,8 +2013,8 @@
       },
       "responsiveness": {
         "status": "passed",
-        "assertions": 78,
-        "negative_controls": 9,
+        "assertions": 106,
+        "negative_controls": 14,
         "negative_control_evidence": {
           "stale_generation": true,
           "hidden_activity": true,
@@ -2058,15 +2024,20 @@
           "post_deadline": true,
           "histogram_overflow": true,
           "superseded_memory_sample": true,
-          "initial_notification_delay_mutation": true
+          "initial_notification_delay_mutation": true,
+          "overwrite-first-preview-notice": true,
+          "accept-provider-switch": true,
+          "ignore-ring-history-loss": true,
+          "omit-interposed-input-history": true,
+          "ignore-late-owner-since": true
         },
         "source_sha256": {
-          "Responsiveness19122.java": "01911e0448689a173ee6a0e6d6dd527a3d68b43f98decb5d0ed06b61181b6fde",
-          "tests19122/response/Responsiveness19122Test.java": "c3e50d7ef7a3faec76d2c130e3ef58cab7988fcea8f9f0968793676c30703213",
-          "host_responsiveness19122.py": "6693c83dce078f4f72f16c4af3672995bf48e16968407b7dbb515f60ec144169"
+          "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
+          "tests19122/response/Responsiveness19122Test.java": "5d374cf175aff5eaeb92283fd6e184d7fa222e49710f38a55f26c6b8e676951e",
+          "host_responsiveness19122.py": "4c1baff5d02ad2c1e8fbadc0110ca9cc674f62ec63f750a55ba1cfc403743a70"
         },
         "evidence": "evidence/host/responsiveness.json",
-        "mutation_controls": 1,
+        "mutation_controls": 6,
         "failed_condition_controls": 8
       },
       "stock-boost": {
@@ -2123,26 +2094,26 @@
         "failed_condition_controls": 0
       }
     },
-    "host_assertions": 1914,
-    "host_negative_controls": 72,
-    "stock_boost_structural_checks": 7380,
+    "host_assertions": 2094,
+    "host_negative_controls": 77,
+    "stock_boost_structural_checks": 7386,
     "stock_boost_structural_checks_scope": "Static structural checks from the stock-boost suite; reported separately and not added to the functional host assertion total.",
-    "host_mutation_controls": 44,
+    "host_mutation_controls": 49,
     "host_failed_condition_controls": 28,
     "host_count_scope": "Twelve host suites. Assertions are checks, not test cases. Standalone-applied APK reflection assertions are separate and are not added to host_assertions.",
     "negative_control_scope": "Mutation controls deliberately alter implementation and must be rejected. Failed-condition controls exercise unavailable APIs, hidden/stale objects or other expected failures. Counts are derived from the named reviewed suites and are not all mutations.",
     "original_apks_apply_tested": true,
     "full_dex_compilation_tested": true,
-    "exact_applied_runtime_contracts": 6723,
-    "all_apk_helper_member_linkage_count": 39843,
+    "exact_applied_runtime_contracts": 6729,
+    "all_apk_helper_member_linkage_count": 39941,
     "all_apk_helper_references_verified": true,
     "all_apk_helper_types_verified": true,
     "preview_original_apk_abi": {
-      "apk_sha256": "6a769171480569ecd4734296ace7577644398bcb021f5438c58547130b11204a",
-      "assertions": 189,
+      "apk_sha256": "516465e9b19b20ccb1093e55e5016ef770964f8501ce819640582940d8ce5f5d",
+      "assertions": 200,
       "display_only_endpoint_verified": true,
       "exact_reflection_chain_verified": true,
-      "mpp_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+      "mpp_sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c",
       "physical_android_tested": false,
       "source_sha256": {
         "VerifyPreviewAbi19121.java": "fd8c399f0a0f3f28481f0068a987de96a905c234ea644806eb598b8bccfd0c7f"
@@ -2157,16 +2128,16 @@
     "original_or_patched_apk_included": false,
     "build_evidence_scope": "The immutable build-stage report precedes host/application runs. Completed reports listed here supersede its pending host/application flags.",
     "source_provenance": {
-      "public_baseline_version": "1.9.123",
-      "public_baseline_sha256": "c1cdab6d613ba594d8fe817799e5e208e25e847d2d55f72525f13f19e3b1b408",
-      "public_baseline_source_commit": "979fd32f5af4434482421aef20462eba2e664097",
-      "prior_metadata_directory": "inherited123"
+      "public_baseline_version": "1.9.124",
+      "public_baseline_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+      "public_baseline_release": "ulike-v1.9.124",
+      "prior_metadata_directory": "inherited124"
     },
     "evidence": {
-      "build": "evidence/build19124.json",
-      "single_application": "evidence/application19124.json",
-      "single_applied_preview_abi": "evidence/native-abi19124.json",
-      "reproduction": "evidence/reproduction19124.json"
+      "build": "evidence/build19125.json",
+      "single_application": "evidence/application19125.json",
+      "single_applied_preview_abi": "evidence/native-abi19125.json",
+      "historical_resource_reproduction": "evidence/reproduction19124.json"
     },
     "limitations": [
       "No physical Android execution or observed responsiveness improvement.",
@@ -2179,37 +2150,37 @@
       "One-shot diagnostic processing bypass intentionally changes image quality."
     ],
     "publication": {
-      "schema": "ulike19124-published-bundle-qa-v1",
-      "ulike_version": "1.9.124",
-      "bundle_version": "1.0.336",
-      "baseline_bundle_version": "1.0.335",
-      "baseline_bundle_sha256": "b401da3969be429b57080322bc716b799c4909d6a8961f3010e472a8ffa0f26f",
+      "schema": "ulike19125-published-bundle-qa-v1",
+      "ulike_version": "1.9.125",
+      "bundle_version": "1.0.338",
+      "baseline_bundle_version": "1.0.337",
+      "baseline_bundle_sha256": "61fc5a2b733948e20a7d5d3aa17c6477459f2eaee65632f60aacdd1bfa052c90",
       "artifacts": {
-        "ULike_HQ_Texture_Online_v1.9.124.mpp": {
-          "bytes": 1635909,
-          "sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f"
+        "ULike_HQ_Texture_Online_v1.9.125.mpp": {
+          "bytes": 1637265,
+          "sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c"
         },
-        "Hiro_Morphe_Patches_v1.0.336.mpp": {
-          "bytes": 48218773,
-          "sha256": "380190ca426bec9295666913cfaba6ce241c0be1380c72ef0e74540e266cbd91"
+        "Hiro_Morphe_Patches_v1.0.338.mpp": {
+          "bytes": 48226807,
+          "sha256": "a9d8713f9ce7fb1df98438c2f15782ec5b3b307309b0f7c315c28fb2837ca1e8"
         }
       },
       "bundle_report": {
-        "baseline_bytes": 47764626,
-        "baseline_sha256": "b401da3969be429b57080322bc716b799c4909d6a8961f3010e472a8ffa0f26f",
-        "builder_sha256": "d372abecafd6350783cb2fe4df9676d68081b91fb3431a27db70140d79b346d7",
-        "bundle_version": "1.0.336",
-        "combined_bytes": 48218773,
-        "combined_filename": "Hiro_Morphe_Patches_v1.0.336.mpp",
+        "baseline_bytes": 47771384,
+        "baseline_sha256": "61fc5a2b733948e20a7d5d3aa17c6477459f2eaee65632f60aacdd1bfa052c90",
+        "builder_sha256": "b3def18be449fb0f7b4222863f2444370da9873d24acc91f988d1b4c95441599",
+        "bundle_version": "1.0.338",
+        "combined_bytes": 48226807,
+        "combined_filename": "Hiro_Morphe_Patches_v1.0.338.mpp",
         "combined_original_apks_apply_tested": false,
-        "combined_sha256": "380190ca426bec9295666913cfaba6ce241c0be1380c72ef0e74540e266cbd91",
+        "combined_sha256": "a9d8713f9ce7fb1df98438c2f15782ec5b3b307309b0f7c315c28fb2837ca1e8",
         "deterministic_archive_verified": true,
         "deterministic_dex_verified": true,
         "exact_standalone_ulike_payloads": true,
+        "executable_loader_metadata_inverse_verified": true,
         "java_source_sha256": {
-          "BundleLoaders19124.java": "0a60ce045b5b9334f3f08fcb01f78296502fce19257cd7b40bd64757b6757c7b",
-          "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
-          "ResourceReadHooks19124.java": "a06c58397ec95318c8421a1e5418c091888ce182440b414e72e04baeb54f7f56"
+          "BundleLoaders19125.java": "916ad29d3018ec8e45dd9d52e3b77e7646bce2c71c4540f6eb57d648cad205a4",
+          "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094"
         },
         "jdk_identity": {
           "javac_version": "21.0.8",
@@ -2561,8 +2532,8 @@
         },
         "loader_proof_sha256": "fefdc979fdd85346a93baa40609e23515a0c95f22b89d95ad8bf2bd399fe2318",
         "morphe_loader_verified": true,
-        "native_installer_byte_identical": false,
-        "native_installer_extraction_request_only_changed": true,
+        "native_installer_byte_identical": true,
+        "native_installer_semantics_identical": true,
         "native_payload_count": 14,
         "native_payload_sha256": {
           "ulike186/runtime/0000.bin": "0ac181fac2afbd9260b8c59d922843deead72d3184e78ce97346d57a76b169cb",
@@ -2583,27 +2554,13 @@
         "physical_android_tested": false,
         "resource_delta": [
           "META-INF/MANIFEST.MF",
-          "app/hiro/ulike/patches/IntegrationPayload186.class",
           "app/hiro/ulike/patches/UlikeHqMaxPatch.class",
           "classes.dex",
           "ulike/runtime.dex"
         ],
-        "resource_extraction": {
-          "dex_inverse_verified": true,
-          "exact_inverse_verified": true,
-          "guard_instructions_preserved": true,
-          "instruction_offsets_preserved": true,
-          "manifest_parent_lookup_preserved": true,
-          "no_parameter_register_renumbering": true,
-          "old_asset_method_sha256": "b72ee5c7f7297d09ccbaa9ac24c44dd78b5bfbc72eec79ae2c0c20f8c2081f3f",
-          "old_resolver_method_sha256": "92cbe0fd06d8ca84b643329ebb926fbb7b98d3794b8208e9945950144e1fbcf6",
-          "read_requests_enabled": 3,
-          "schema": "ulike19124-resource-read-dex-v1",
-          "status": "passed"
-        },
-        "resource_extraction_sha256": "42c5ee135e17c494e86189376476db94ddd515fb914a1dcd192012cc27e72620",
-        "schema": "ulike19124-bundle-v1",
-        "standalone_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+        "resource_extraction_fix_inherited": true,
+        "schema": "ulike19125-bundle-v1",
+        "standalone_sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c",
         "status": "passed",
         "stock_boost_suppression_preserved": true,
         "stock_method_original_contracts_preserved": true,
@@ -2611,7 +2568,7 @@
         "tool_sha256": {
           "morphe.jar": "82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c"
         },
-        "ulike_version": "1.9.124",
+        "ulike_version": "1.9.125",
         "unrelated_entries_preserved": true,
         "unrelated_entry_count": 241,
         "unrelated_entry_sha256": {
@@ -2792,7 +2749,7 @@
           "brightnessclick/replacement.dex": "dedb6457e5e1c4768a75892c83843588b2439210c119d6ee4d9200d843118215",
           "desktop-preserved/SharedExtensionPatchKt.class.bin": "f538a94e25d3594cb9b2506d36a066e2a3f3297edcc7ecbf0670ab0c590b0bfe",
           "extensions/aurora_favourites.mpe": "ae8e6d62859e934ba1f654feaaa2abdaa1b7fc8aed8b4f615802e95b87a0105c",
-          "extensions/berry_bfcache_restore.mpe": "ca97fb4ad2579e9adc1e5d07eae309772bf2cbda17b7a4dbe1d07b8d502c637c",
+          "extensions/berry_bfcache_restore.mpe": "be25832a7f7ab766b8a6c93ed0816562d05fba8dd4b5bd078a96922b17c64023",
           "extensions/berry_browser_visibility.mpe": "4a958c89ddc7b8f174ec1064415f175814384b6693d99dbb2566f7605f287786",
           "extensions/berry_foreground_tabs.mpe": "9af184ec2d3f70b7646f17b008edc02c29d83fd5525332afda6dfc65758f5a01",
           "extensions/berry_messagequeue.mpe": "17a47dbb706bc63668e97d82b96fa3ddaf91f39c5bed31e34e87e20fd8c72c37",
@@ -2861,29 +2818,29 @@
       },
       "combined_application": {
         "actual_split_merge_tested": true,
-        "all_apk_helper_member_references": "PASS helper references in all 218657 methods: 39843 included members resolved; 7 inherited external members deferred to Android runtime.",
+        "all_apk_helper_member_references": "PASS helper references in all 218663 methods: 39941 included members resolved; 7 inherited external members deferred to Android runtime.",
         "all_apk_helper_types": {
           "apk_classes": 34047,
-          "apk_methods": 218657,
-          "helper_reflection_class_strings_checked": 113,
-          "helper_type_references_checked": 54083,
+          "apk_methods": 218663,
+          "helper_reflection_class_strings_checked": 114,
+          "helper_type_references_checked": 54208,
           "missing_helper_types": 0,
           "optional_absent_helper_reflections": 5,
           "optional_reflection_negative_controls": 8,
           "physical_android_tested": false,
           "status": "passed"
         },
-        "all_apk_linkage_count": 39843,
+        "all_apk_linkage_count": 39941,
         "all_patching_steps_succeeded": true,
         "apk_alignment_tested": true,
-        "application_script_sha256": "9c1738debbc1218d82643b1593ba60e6a0999a63ac35bc267678ee76d35061eb",
+        "application_script_sha256": "6219dc7c6b9dc1d7897214a0423cd335d996af86dc27fa2a2ad1c13145980eb2",
         "applied_patch_names": [
           "高画質撮影・質感美肌・素材通信を復旧"
         ],
         "arm64_only_verified": true,
         "artifact_stage": "final",
         "ci_android_apply_tested": false,
-        "combined_bundle_version": "1.0.336",
+        "combined_bundle_version": "1.0.338",
         "combined_ulike_assets_equal_standalone": true,
         "cpu_timing_dex_negative_controls": 11,
         "device_tested": false,
@@ -2909,8 +2866,8 @@
             "sha256": "ab9608af0bdd973a9708e6406cab1408b25ce4d057b96e57918aa99253518b2a"
           },
           "classes6.dex": {
-            "bytes": 2173788,
-            "sha256": "7ce9e2112d5855c16b4e3fa040796a55c0b38830d7db18b561d55d514d375259"
+            "bytes": 2176340,
+            "sha256": "81c0cd50a0a9ce5016d42dd59a82b981fdf74b60002b0a002d493d4a3b1d2467"
           }
         },
         "distributed_regional_dex": {
@@ -2923,8 +2880,8 @@
           "standard_selection_apis_preserved": true,
           "status": "passed"
         },
-        "exact_method_contracts": "PASS final APK: 34047 unique classes / 218657 methods. 6723 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
-        "expected_runtime_contracts": 6723,
+        "exact_method_contracts": "PASS final APK: 34047 unique classes / 218663 methods. 6729 runtime/payload contracts exactly retained, including all correction hooks and helper methods.",
+        "expected_runtime_contracts": 6729,
         "fair_plan_dex_negative_controls": 6,
         "fixed_strong_diagnostic_guard_verified": true,
         "full_dex_compilation_tested": true,
@@ -3012,9 +2969,9 @@
           "sha256": "ed8184451a88b373ab38e575884523a709706195a7232e971fcf8cd61fc5a22c"
         },
         "mpp": {
-          "bytes": 48218773,
-          "filename": "Hiro_Morphe_Patches_v1.0.336.mpp",
-          "sha256": "380190ca426bec9295666913cfaba6ce241c0be1380c72ef0e74540e266cbd91"
+          "bytes": 48226807,
+          "filename": "Hiro_Morphe_Patches_v1.0.338.mpp",
+          "sha256": "a9d8713f9ce7fb1df98438c2f15782ec5b3b307309b0f7c315c28fb2837ca1e8"
         },
         "original_apk_apply_tested": true,
         "original_input": {
@@ -3024,10 +2981,10 @@
         "original_native_libraries_byte_identical": 57,
         "original_native_library_count": 58,
         "original_split_merge_tested": true,
-        "original_verifier_sha256": "fd7f1db12fecb293fd70abfb8b33243d0c0b731bc34e5ad86cd9875e9c57e5b2",
+        "original_verifier_sha256": "29e1766879b2e2e3153bc37b4db1fc42ca0f49d6ab2209267422e64bfb9752b7",
         "output_apk": {
-          "bytes": 151822344,
-          "sha256": "0a054072f20a89c91b67f75afcd3096e056ea089f1c85a61189f81bff0d3a0be"
+          "bytes": 151823800,
+          "sha256": "c12aba59aed6dcea6e461ecad5d99ddaaa07b429ee8aeac7f75cc8c5d41da995"
         },
         "output_publicly_distributed": false,
         "output_unsigned": true,
@@ -3035,16 +2992,16 @@
         "package_version": "5.6.2",
         "physical_android_tested": false,
         "private_log_sha256": {
-          "all-apk-helper-references.log": "cf5da9be5b6e6e890570d41048021c76ce3b776851f466060541c881244363a2",
-          "all-apk-helper-types.log": "a63d907ce959f12a85c45bb6cb6044306fe30257417d71f5a1747cd815292632",
-          "exact-method-contracts.log": "6788473621349493e218b00ca14368ef334bbdbb392dec976cd5d0644b23dd7c",
-          "patch-result.json": "d6a7489b62b00111a74c8267d907c581d9233bf46e59cd94d441757f64cdf6bc",
-          "real-patch.log": "426db87427f5025491a7dc258c1095c0453582c5e72652920ddf346bb9312c81",
+          "all-apk-helper-references.log": "fdb0a76716ba67022fb751bf4ee2741f2fe6ea4f98a6c93e3ee9f4efc300b562",
+          "all-apk-helper-types.log": "620a329a11896d2568d8bc1815cb2a58c1ab320cb42f9387861ef875929cde5c",
+          "exact-method-contracts.log": "6f22ec50125e3b63631526d64bce188398108abe09f3ef06e9555cd087dec75c",
+          "patch-result.json": "46fb9a3ff171c10d13f977aad6180d1476690ac3800abd01e9def2a5ce186dcb",
+          "real-patch.log": "3fd5c77adf6707342b3e52be18e3152ed3cda7a09e4e93c56974cfbee8e21c51",
           "regional-disabled-dex.json": "5e42ffae1281bd398adf40af470a28414fec674d513a353e0d290f83fb61f4c2",
-          "runtime-version.log": "49e18dae2760654526737a6bea3d96db966c09776c42ace7861169e1b3780a51",
+          "runtime-version.log": "ecf719ab625db6c3a0b49e926b449e8e43c09a661c2b23a544e28a9fe03a7713",
           "single-capture.log": "a4b7108787831b8f6b7a039b1bc9365f2f974156b189a09162e49eca30b014fc",
-          "stock-boost-applied.log": "604114a0ce6db9d776707ab7ea0f997a22fc11084d50b50b82c7f1a7a320f754",
-          "stock-boost-applied19123.json": "604114a0ce6db9d776707ab7ea0f997a22fc11084d50b50b82c7f1a7a320f754",
+          "stock-boost-applied.log": "e65b721ccfe30d86cd1e669222d7b4c945d7edc1d61ac1e2305cab032b094bfc",
+          "stock-boost-applied19123.json": "e65b721ccfe30d86cd1e669222d7b4c945d7edc1d61ac1e2305cab032b094bfc",
           "stock-shutter.log": "43af9698826a0d39f8b10efea18d6f2799eb16845494d924eed2bfbdf8659d4d",
           "strong-diagnostic.log": "03498fa077d32275156ae207233daa9d898ceb749bdcb262b0568ecc747585b6",
           "strong-trace.log": "cf7b50eb435ff70afd001854c41856e2a54f2a5858dde2587eeddfb4d0b7ecc5"
@@ -3077,15 +3034,15 @@
           "target_patcher_version": "2.2.0-dev.2",
           "unchanged_original_asset_count": 214
         },
-        "runtime_version": "1.9.124",
-        "schema": "ulike19124-combined-apks-application-v1",
+        "runtime_version": "1.9.125",
+        "schema": "ulike19125-combined-apks-application-v1",
         "signing_or_installation_tested": false,
         "single_capture_timing_only_false_verified": true,
-        "standalone_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+        "standalone_sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c",
         "status": "passed",
         "stock_boost_applied": {
           "actual_shutter_inverse_matches_122": true,
-          "apk_sha256": "0a054072f20a89c91b67f75afcd3096e056ea089f1c85a61189f81bff0d3a0be",
+          "apk_sha256": "c12aba59aed6dcea6e461ecad5d99ddaaa07b429ee8aeac7f75cc8c5d41da995",
           "device_cause_confirmed": false,
           "one_callsite_suppressed": true,
           "original_input_contract_preserved": true,
@@ -3141,11 +3098,11 @@
         "verification_resumed_from_pinned_checkpoint": false
       },
       "apk_reflection_abi": {
-        "apk_sha256": "6a769171480569ecd4734296ace7577644398bcb021f5438c58547130b11204a",
-        "assertions": 189,
+        "apk_sha256": "516465e9b19b20ccb1093e55e5016ef770964f8501ce819640582940d8ce5f5d",
+        "assertions": 200,
         "display_only_endpoint_verified": true,
         "exact_reflection_chain_verified": true,
-        "mpp_sha256": "816b8d5c7c94b501c18a626f2c66d71804e7254adf66ccb0eddabb90c414a20f",
+        "mpp_sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c",
         "physical_android_tested": false,
         "source_sha256": {
           "VerifyPreviewAbi19121.java": "fd8c399f0a0f3f28481f0068a987de96a905c234ea644806eb598b8bccfd0c7f"
@@ -3241,7 +3198,7 @@
         },
         "diagnostic": {
           "status": "passed",
-          "assertions": 39,
+          "assertions": 42,
           "negative_controls": 8,
           "negative_control_evidence": {
             "hidden": true,
@@ -3254,7 +3211,7 @@
             "collected_weak_references": true
           },
           "source_sha256": {
-            "ProcessingTiming1947.java": "65d6887565aa324521443198349033022b6558dcdcc22b616538de3f092446d7",
+            "ProcessingTiming1947.java": "807f84cb01613205b7c9702a1c7e3ac80585650a53ec26380db89c918d513bba",
             "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
             "host_diagnostic_refresh19121.py": "cdf04bdb669b42281a8b1a4a7bf94c54f5b8272f73a42f9c1b04aecbab4b71ae",
             "host_timing1982.py": "2e8653812cfefd2c64cf0954c9b728bd772101d131b7727aa730f14872c963d8",
@@ -3266,7 +3223,7 @@
             "tests19121/diagnostic/android/preference/Preference.java": "df1b850d4dd04db0514c02ef1b8266c24de93ee8087a360bab6d7e7186f97517",
             "tests19121/diagnostic/android/preference/PreferenceActivity.java": "6d3bb98e8d7e86f0fecc4aa48623354b578a00463eaa8269c0eab5ca63716a2e",
             "tests19121/diagnostic/android/preference/PreferenceGroup.java": "289f01d47a9c0554e44fe63927f9bef3a198e37c618e18e8a57ec92f25f30601",
-            "tests19121/diagnostic/com/hiro/ulike/DiagnosticRefresh19121Test.java": "03201f6e85f37ff17d8058de391e1cbcbd7b1eec8b968e04ba9760c9ee7a0e16"
+            "tests19121/diagnostic/com/hiro/ulike/DiagnosticRefresh19121Test.java": "342afc82fd6ded4ee0a34fead3adbe9b1c0d346f13812ca3bfb8078440978dce"
           }
         },
         "gpu": {
@@ -3422,7 +3379,7 @@
             "GpuQualification1961.java": "c4ab15b208ea542edc05f523672ef595f5a3e68f483c7329d32e830ce3b7f50c",
             "SingleNoise1955.java": "ca12e47041417b7538a2588d93bd2c7f7ab26d1862c30f09b14f9e44f25f861e",
             "ShutterFeedback1941.java": "f50c36a470d4cfcf0a0788c1a81acdce4e54c284d5e2209e6422d9813fdabde6",
-            "ProcessingTiming1947.java": "65d6887565aa324521443198349033022b6558dcdcc22b616538de3f092446d7",
+            "ProcessingTiming1947.java": "807f84cb01613205b7c9702a1c7e3ac80585650a53ec26380db89c918d513bba",
             "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
             "GpuAnalysis1961.java": "06e0a647760c214129f8801747fbbf5b7b886ed81781be59757a5588142fd245",
             "GpuResidual1961.java": "bf896a217019e5aef2867e1922181bbb2fa8275cc28fdd5e3fffe75d0606fcc3",
@@ -3436,10 +3393,10 @@
             "ShutterTiming1994.java": "a46f99fa3bb025a41bd6efbc4b5b230e7e851c241f7b03227ef7d0c1ac36eab4",
             "ResidentTiming19111.java": "b28376e0daa9a4d63997af0bf31b47d4d1d4b9e9ccf3d75e9b2dc81f367a333e",
             "GpuChain1961.java": "5129652f2492ac4143623ff612e72f41504d62b7d18249eb7072ac0d2346eabc",
-            "CapturePreview19121.java": "db5ce3e89fae751dd3665844a9bdc74db25bbf1a9aa410f6c8907d67e48203d2",
+            "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
             "LayoutGeometry1937.java": "b76c6fc70bfcc25b2989de36a77c4c84a8d0e2333956af054398e1a7cb663079",
-            "Responsiveness19122.java": "01911e0448689a173ee6a0e6d6dd527a3d68b43f98decb5d0ed06b61181b6fde",
-            "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+            "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
+            "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
             "tests19122/gpu/CapturePolicy19122.java": "ee83c441f4345e7d28c44eef162548a6f5190d5be03da8dabcd10c012a545562",
             "tests19122/gpu/GpuIdleTrim19122Test.java": "045cccc68ebba73e39e5d0d2b3cd60e717a55024150d68474d7e9a5cbddbfd79",
             "tests19122/gpu/GpuSubmission19122Test.java": "09603db022ffbbfab9a46c32ce7ea05f4d8cbc8dab83ded975e554f899a577d3",
@@ -3451,7 +3408,7 @@
         },
         "policy": {
           "status": "passed",
-          "assertions": 245,
+          "assertions": 246,
           "negative_controls": 3,
           "negative_control_evidence": [
             {
@@ -3468,16 +3425,16 @@
             }
           ],
           "source_sha256": {
-            "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+            "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
             "QualityPipeline1932.java": "0e24bfe7b4602c6adf27d33700583aad8ae1e5e742239944483a173308090b55",
             "tests19122/policy/QualityPipeline1932.reference121.java": "232b27ad67ad77c91a6fbb166a55d0a1bff20a1e35adb150f334ae819d6a2283",
-            "tests19122/policy/CapturePolicy19122Test.java": "d82fbc7a90e61f00260dd259d9da69506e4df8b0523eaa77c15af388648f3290",
+            "tests19122/policy/CapturePolicy19122Test.java": "e67a24520ed6c5ae1f78d3e0662295a37c657ec6e5f03ce06bbe108305741f28",
             "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5"
           }
         },
         "preview": {
           "status": "passed",
-          "assertions": 894,
+          "assertions": 1042,
           "negative_controls": 7,
           "negative_control_evidence": [
             {
@@ -3510,7 +3467,7 @@
             }
           ],
           "source_sha256": {
-            "CapturePreview19121.java": "db5ce3e89fae751dd3665844a9bdc74db25bbf1a9aa410f6c8907d67e48203d2",
+            "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
             "AsyncSave1935.java": "a4c4cea993183fc6adf39d0763ee1d3f5ac6ec73d43beb661dcd3368d3a1d0db",
             "ReflectionCache1945.java": "ee7c2f83c1199d1a215c7fe546422c5c2205347821638a745975b9dd7a0bc1d3",
             "host_preview19121.py": "db006c914733992ecacab81b7fd79e805c224c4cf3f849b8db9ffc067e9df782",
@@ -3521,15 +3478,16 @@
             "tests19121/preview/android/os/Looper.java": "ebb45109006653a77a25ae4cb50b0754eaf3af97bd8fcb82d3155a3a5070d7a5",
             "tests19121/preview/com/bytedance/corecamera/camera/basic/PureCameraFragment.java": "7445e5ebea40531de340866bc987d53151873ca745b18957138d6d67f8fc73b2",
             "tests19121/preview/com/hiro/ulike/AsyncSave1935.java": "d111b68d1b076d86abcf3863bf5378d61bf394bda2573c6089b1d323d30b85f3",
-            "tests19121/preview/com/hiro/ulike/CapturePreview19121Test.java": "b9d13055c1c4868ea25cc81bdc874c81f44453b10f64901bd283991b71786a97",
+            "tests19121/preview/com/hiro/ulike/CapturePreview19121Test.java": "e227a78de889fdfc1a7510d9cfa71ebbc309c6e5fa51ca5a588c4c1352f85a63",
             "tests19121/preview/com/hiro/ulike/CaptureYuv.java": "db8d943858397904d21c17e7647c08e83064f9168d74a7f487f36e2294e54746",
             "tests19121/preview/com/hiro/ulike/OpticalZoom.java": "61802935ee150447f1413bfd109ec7ed9573eb1970326775950568b1762f0277",
             "tests19121/preview/com/hiro/ulike/PreviewFixtures19121.java": "92b7d91fd09db8abc32ddc06574066ec5fd5407e3c21c485814bd0958dd92e2f",
             "tests19121/preview/com/hiro/ulike/ProcessingTiming1947.java": "aa6368b018d258690910698ab38476914d63da73c02e63ce03fab2a9201b5f01",
+            "tests19121/preview/com/hiro/ulike/Responsiveness19122.java": "e5a266e9e687a2a8f075f1f12bbabd66bf36eaf0881d350497b079d6d60aabd9",
             "tests19121/preview/i/f/l/n/h.java": "d321acbae76a2a325f51e969b648803fc73502a5419e8d89106d2176ce990d2d",
             "tests19121/preview/i/f/l/n/s/a.java": "a9ee5616b3f238f85b7e05d8bb95a13615c1d041583d99a6e154ca2b5ac3b57e",
             "tests19121/preview/i/o/a/b1/a/b/c.java": "f3dd1084599ffe85071f8e2a8bf88a5988e62e9d213f74ad7f60ba77b3f6ff01",
-            "CapturePolicy19122.java": "7062959ebd78efdc33edac437354ffa77a63cc384ba886ef00f4e875a49efff1",
+            "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
             "SaveQueue1935.java": "84deb4c6397e7f009b8f8e6fb8d33c9a5027adc533a7bbcf1eadc7318f9a17af",
             "SpeedWorkers1935.java": "a6fafe55dee98fe686b8495c76c47db0ba45129174f2745e45cbea4387269d21",
             "CodecPreparation1981.java": "fcf024efd660fe6a9bf6ba8c0b8683709175c56c0b71aa00d0fa1b063c3af207",
@@ -3537,9 +3495,9 @@
             "FaceResult1981.java": "6a6c55191ebbc9e6e4fb34e00b5a968166b158ba842e9d55228a30693c3c1eae",
             "PhotoAnalysis1981.java": "b7bf98961727a6a97619811144ef3a00df21898b78e7ad5a66f06fadc0994420",
             "EncoderTail1981.java": "8f23ea576ebd9ec7137e2edfdc247739bbb5eb1377a0a7f481d72e2b8462dea6",
-            "host_preview19122.py": "7b3e483327ade4c0c946e6bd9bbb7e4879a013fa94047e36e069cc6bd7d9362e",
+            "host_preview19122.py": "c9f516f8653e9663ac3701230f80fdbdad96923c9ddfa1305f4053b62350c1d4",
             "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5",
-            "tests19122/preview/AsyncPolicy19122Test.java": "d4a0ccfbfd64fac537d1656ce7d5962788d0623795d51f0983fdf001faa7b723",
+            "tests19122/preview/AsyncPolicy19122Test.java": "9e0c0792e8030e2912d145bd5f99a7c0898b365f1cd15a28c306a3d5f795a205",
             "host_capture_routes1981.py": "39cc5cffb9ee55c43f26c31cf2422c7c2b75973562f5bd763f87ee8cb9aaa577",
             "host_capture_save1947.py": "0c47832c87c2578e3a259b133054b589829a6cae7f2e90996d14dd90ca537085",
             "host_save_baseline1935.py": "bd120e80c20c037eba2d59a974c7989df352339930082ffa9640a8470c99a832",
@@ -3658,15 +3616,15 @@
             "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
             "ResourceClass19124.java": "4b6745f078736349206a8b19aacaf7603a68e0ba016323a669715fe796f8681a",
             "ResourceReadHooks19124.java": "a06c58397ec95318c8421a1e5418c091888ce182440b414e72e04baeb54f7f56",
-            "host_resource_extraction19124.py": "d983ead179e401a7dbad3f9df53b70261bdb963a7856cbf7f14e28e7a795120a",
+            "host_resource_extraction19125.py": "e069828cb96ae4232c705f6b8427a9c31f1fbf2b90b88bda9c82af415c2eef4d",
             "tests19124/ResourceBehavior19124.java": "73375faf87a6d1c113c0bb222f6266cbccda220031f23b6f8dee7e7983277652",
-            "tests19124/ResourceStructure19124.java": "cfa5bf77c29044a7b650f19993e1da4d2ef4a3acf9f7cb5c506307c649cd3939"
+            "tests19125/ResourceStructure19125.java": "49f625669421ecf1bb01d4ca3324b9d23930112afee147804c083b826207072c"
           }
         },
         "responsiveness": {
           "status": "passed",
-          "assertions": 78,
-          "negative_controls": 9,
+          "assertions": 106,
+          "negative_controls": 14,
           "negative_control_evidence": {
             "stale_generation": true,
             "hidden_activity": true,
@@ -3676,12 +3634,17 @@
             "post_deadline": true,
             "histogram_overflow": true,
             "superseded_memory_sample": true,
-            "initial_notification_delay_mutation": true
+            "initial_notification_delay_mutation": true,
+            "overwrite-first-preview-notice": true,
+            "accept-provider-switch": true,
+            "ignore-ring-history-loss": true,
+            "omit-interposed-input-history": true,
+            "ignore-late-owner-since": true
           },
           "source_sha256": {
-            "Responsiveness19122.java": "01911e0448689a173ee6a0e6d6dd527a3d68b43f98decb5d0ed06b61181b6fde",
-            "tests19122/response/Responsiveness19122Test.java": "c3e50d7ef7a3faec76d2c130e3ef58cab7988fcea8f9f0968793676c30703213",
-            "host_responsiveness19122.py": "6693c83dce078f4f72f16c4af3672995bf48e16968407b7dbb515f60ec144169"
+            "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
+            "tests19122/response/Responsiveness19122Test.java": "5d374cf175aff5eaeb92283fd6e184d7fa222e49710f38a55f26c6b8e676951e",
+            "host_responsiveness19122.py": "4c1baff5d02ad2c1e8fbadc0110ca9cc674f62ec63f750a55ba1cfc403743a70"
           }
         },
         "stock-boost": {
@@ -4187,9 +4150,9 @@
   },
   "device_quality_verified": false,
   "historical_policy_reference": {
-    "commit": "4b59762e1617fe4e8579a718f6116f121128491f",
+    "commit": "bf4034ed665d766a19f58e0d3ea2c3d889f1c321",
     "path": "releases/ULike_ACTIVE.json",
-    "sha256": "43c2ab4681e1e20d6a43544e9c598d0fa23811d45235c9961168be22de696067"
+    "sha256": "4781713218c9444962ab1395d6ca42f30b7d789a98a710543b6aa1ac06906ba2"
   },
   "automatic_additional_qualification_enabled": false,
   "unqualified_gpu_admission_enabled": false,
