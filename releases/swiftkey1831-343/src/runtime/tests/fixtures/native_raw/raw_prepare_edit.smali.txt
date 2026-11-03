@@ -1,0 +1,45 @@
+.method public final r()V
+    .locals 4
+
+    iget v0, p0, Lec0/y;->k:I
+
+    const/4 v1, 0x1
+
+    const/4 v2, 0x2
+
+    if-ne v0, v1, :cond_0
+
+    iput v2, p0, Lec0/y;->k:I
+
+    return-void
+
+    :cond_0
+    const/4 v1, 0x5
+
+    const/4 v3, 0x6
+
+    if-ne v0, v1, :cond_3
+
+    invoke-virtual {p0}, Lec0/y;->p()Z
+
+    move-result v0
+
+    if-nez v0, :cond_1
+
+    iget-boolean v0, p0, Lec0/y;->e:Z
+
+    if-eqz v0, :cond_2
+
+    :cond_1
+    iget-object v0, p0, Lec0/y;->i:Lec0/a;
+
+    iget-object v0, v0, Lec0/a;->a:Lm40/b;
+
+    invoke-interface {v0}, Lm40/b;->getCorrectionSpanReplacementText()Ljava/lang/String;
+
+    move-result-object v0
+
+    invoke-virtual {p0, v0}, Lec0/y;->h(Ljava/lang/String;)V
+
+    :cond_2
+    iput v3, p0, Lec0/y;->k:I
