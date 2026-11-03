@@ -1,0 +1,62 @@
+name: Publish Berry diagnostic removal 1.4.5 and combined 1.0.339
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/berry-repair339/build/**'
+      - 'releases/berry-repair339/src/**'
+      - 'releases/berry-repair339/runtime/**'
+      - 'releases/berry-repair339/qa/**'
+      - 'releases/berry-repair339/audits/**'
+      - 'releases/berry-repair339/publication/**'
+      - 'releases/berry-repair339/payload/**'
+      - 'releases/berry-repair339/README.md'
+      - '.github/workflows/berry-repair339-publish.yml'
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+permissions:
+  contents: write
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.13+9'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test and rebuild runtime and providers twice
+        run: python3 releases/berry-repair339/publication/ci.py --repo . --work .ci-berry-repair339 --java "$JAVA_HOME/bin/java" --stage build
+      - name: Verify frozen artifact inventory and preservation proof
+        run: python3 releases/berry-repair339/publication/ci.py --repo . --work .ci-berry-repair339 --java "$JAVA_HOME/bin/java" --stage verify
+      - name: Publish verified release and update both Manager feeds atomically
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 releases/berry-repair339/publication/ci.py --repo . --work .ci-berry-repair339 --java "$JAVA_HOME/bin/java" --stage publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: berry-repair339-publication-evidence
+          retention-days: 14
+          if-no-files-found: ignore
+          path: |
+            .ci-berry-repair339/dist/
+            .ci-berry-repair339/build-a/*.json
+            .ci-berry-repair339/build-a/work/*.json
+            .ci-berry-repair339/build-a/work/*.log
+            .ci-berry-repair339/build-b/*.json
+            .ci-berry-repair339/build-b/work/*.json
+            .ci-berry-repair339/build-b/work/*.log
+            .ci-berry-repair339/runtime-a/RUNTIME_BUILD_QA.json
+            .ci-berry-repair339/runtime-b/RUNTIME_BUILD_QA.json
+          include-hidden-files: true

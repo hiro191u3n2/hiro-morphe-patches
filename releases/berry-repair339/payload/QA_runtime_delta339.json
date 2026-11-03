@@ -1,0 +1,56 @@
+{
+  "schema": "berry-repair339-diagnostic-removal-runtime-delta-v1",
+  "result": "PASS",
+  "baseline_sha256": "a9d8713f9ce7fb1df98438c2f15782ec5b3b307309b0f7c315c28fb2837ca1e8",
+  "combined_sha256": "b78dc7c43b4ba165f12ae4bc01980a41a2d481f8c77bf80f28be3c7cf208cc7e",
+  "standalone_sha256": "c1d8f2b449b7ad89668ce6e6148b0068a3ecec62a3cff09869b246100b025d52",
+  "baseline_runtime_sha256": "be25832a7f7ab766b8a6c93ed0816562d05fba8dd4b5bd078a96922b17c64023",
+  "candidate_runtime_sha256": "50fa3b5879ebf02c463f80cfba84adfe77080192c28ae8e29752486f2c7b82a4",
+  "verifier_sha256": "2662237c674de8dcd59b9dab2925482446b319d7f237599977f8ff7c4014efe7",
+  "delta": {
+    "result": "PASS_DIAGNOSTIC_REMOVAL_DEX_DELTA",
+    "runtime_diagnostics_absent": true,
+    "completion_terminal_prefix_and_shared_proof_valid": true,
+    "debug_positions_excluded": true,
+    "preserved_classes": 25,
+    "changed_instrumented_classes": 10,
+    "removed_diagnostic_classes": 15,
+    "added_classes": 0,
+    "core_loading_and_presentation_preserved": true,
+    "core_source_tokens_preserved_after_explicit_diagnostic_deletions": true
+  },
+  "source_preservation": {
+    "result": "PASS_EXPLICIT_DIAGNOSTIC_DELETION_SOURCE_TOKENS",
+    "reference_commit": "7cca97f00f1fbfbf96c3360793d1b0127921a42a",
+    "source_files": {
+      "CompletionTarget.java": {
+        "published337_sha256": "e15b9d7639f0584d66cbbdb662ade67c1368a129e7d2a1e9ad97bc256fa3c44f",
+        "candidate_sha256": "e15b9d7639f0584d66cbbdb662ade67c1368a129e7d2a1e9ad97bc256fa3c44f",
+        "tokens_equal_after_explicit_diagnostic_deletions": true
+      },
+      "NativeCompletion.java": {
+        "published337_sha256": "6e46eb190cece94d4429ee3c402eaa05ada3934af4346f614aec4bb571481db6",
+        "candidate_sha256": "6e46eb190cece94d4429ee3c402eaa05ada3934af4346f614aec4bb571481db6",
+        "tokens_equal_after_explicit_diagnostic_deletions": true
+      },
+      "NativeRestoreTracker.java": {
+        "published337_sha256": "00fc3c864f939c7e1e12a901cdf0580a6de39ba4bb47b8665af164aaf3127a24",
+        "candidate_sha256": "84532bed77c8ce408c6d8b625f26556bb6e9a45a481c0cfa6cdb6d69c723b8f6",
+        "tokens_equal_after_explicit_diagnostic_deletions": true
+      },
+      "PresentationRecovery.java": {
+        "published337_sha256": "0dacaac56f6e3938c0b666684c7b85fb40c773aa32561d02ce4f8250d9bd1efa",
+        "candidate_sha256": "09c51582b13ffd2d2008f1cfbbc371cff4680676b037d1c403933654d2c43055",
+        "tokens_equal_after_explicit_diagnostic_deletions": true
+      },
+      "RestoreCoordinator.java": {
+        "published337_sha256": "f9b0b0e0a379be7b16f1170d43b3a50178b95547e7481c9bbaf16ec45e688ffa",
+        "candidate_sha256": "9f649b91bbd79c0822a2f1bfac617f6da2a5afc0562559fdeb2d0c9a7b254167",
+        "tokens_equal_after_explicit_diagnostic_deletions": true
+      }
+    },
+    "runtime_build_report_sha256": "ecfbb7f971c8517a02727b8c4fd26ab5796a5c76a172bae43f76520c6f5ccad8"
+  },
+  "runner_sha256": "2870f666a1bf4920ab07e15c32f50a8ad8fa136b6eccad306e23c47ac207045c",
+  "physical_device_tested": false
+}

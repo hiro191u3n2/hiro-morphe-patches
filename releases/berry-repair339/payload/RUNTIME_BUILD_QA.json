@@ -1,0 +1,79 @@
+{
+  "result": "PASS",
+  "extension": "extensions/berry_bfcache_restore.mpe",
+  "extension_bytes": 35748,
+  "extension_sha256": "50fa3b5879ebf02c463f80cfba84adfe77080192c28ae8e29752486f2c7b82a4",
+  "runtime_classes": [
+    "hiro/berrybfcache/CompletionTarget.class",
+    "hiro/berrybfcache/NativeCompletion.class",
+    "hiro/berrybfcache/NativeRestoreTracker$1.class",
+    "hiro/berrybfcache/NativeRestoreTracker$2.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Boundary.class",
+    "hiro/berrybfcache/NativeRestoreTracker$Listener.class",
+    "hiro/berrybfcache/NativeRestoreTracker$PageRecord.class",
+    "hiro/berrybfcache/NativeRestoreTracker$State.class",
+    "hiro/berrybfcache/NativeRestoreTracker.class",
+    "hiro/berrybfcache/PresentationRecovery$1.class",
+    "hiro/berrybfcache/PresentationRecovery$2.class",
+    "hiro/berrybfcache/PresentationRecovery$3.class",
+    "hiro/berrybfcache/PresentationRecovery$4.class",
+    "hiro/berrybfcache/PresentationRecovery$Lease.class",
+    "hiro/berrybfcache/PresentationRecovery$Proof.class",
+    "hiro/berrybfcache/PresentationRecovery$State$1.class",
+    "hiro/berrybfcache/PresentationRecovery$State.class",
+    "hiro/berrybfcache/PresentationRecovery.class",
+    "hiro/berrybfcache/RestoreCoordinator$1.class",
+    "hiro/berrybfcache/RestoreCoordinator$10.class",
+    "hiro/berrybfcache/RestoreCoordinator$2.class",
+    "hiro/berrybfcache/RestoreCoordinator$3.class",
+    "hiro/berrybfcache/RestoreCoordinator$4.class",
+    "hiro/berrybfcache/RestoreCoordinator$5.class",
+    "hiro/berrybfcache/RestoreCoordinator$6.class",
+    "hiro/berrybfcache/RestoreCoordinator$7.class",
+    "hiro/berrybfcache/RestoreCoordinator$8.class",
+    "hiro/berrybfcache/RestoreCoordinator$9.class",
+    "hiro/berrybfcache/RestoreCoordinator$Listener.class",
+    "hiro/berrybfcache/RestoreCoordinator$Marker.class",
+    "hiro/berrybfcache/RestoreCoordinator$Probe.class",
+    "hiro/berrybfcache/RestoreCoordinator$State.class",
+    "hiro/berrybfcache/RestoreCoordinator.class"
+  ],
+  "compile_only_android_stubs_packaged": false,
+  "source_sha256": {
+    "runtime_src/hiro/berrybfcache/CompletionTarget.java": "e15b9d7639f0584d66cbbdb662ade67c1368a129e7d2a1e9ad97bc256fa3c44f",
+    "runtime_src/hiro/berrybfcache/NativeCompletion.java": "6e46eb190cece94d4429ee3c402eaa05ada3934af4346f614aec4bb571481db6",
+    "runtime_src/hiro/berrybfcache/NativeRestoreTracker.java": "84532bed77c8ce408c6d8b625f26556bb6e9a45a481c0cfa6cdb6d69c723b8f6",
+    "runtime_src/hiro/berrybfcache/PresentationRecovery.java": "09c51582b13ffd2d2008f1cfbbc371cff4680676b037d1c403933654d2c43055",
+    "runtime_src/hiro/berrybfcache/RestoreCoordinator.java": "9f649b91bbd79c0822a2f1bfac617f6da2a5afc0562559fdeb2d0c9a7b254167"
+  },
+  "jvm_test": {
+    "result": "PASS",
+    "scenarios": 45,
+    "assertions": 88,
+    "scope": "JVM lifecycle and callback-loss simulation; no Android renderer or device execution"
+  },
+  "javascript_test": {
+    "result": "PASS",
+    "assertions": 19,
+    "scope": "Node event harness for the bundled document-start script; no browser or Android rendering test"
+  },
+  "native_test": {
+    "result": "PASS",
+    "scenarios": 5,
+    "assertions": 40
+  },
+  "native_integration_test": {
+    "result": "PASS",
+    "scenarios": 15,
+    "assertions": 34,
+    "scope": "JVM native listener/coordinator integration; no Android WebView or device execution"
+  },
+  "presentation_test": {
+    "result": "PASS",
+    "scenarios": 24,
+    "assertions": 153,
+    "device_tested": false
+  },
+  "android_device_tested": false,
+  "renderer_behavior_tested": false
+}
