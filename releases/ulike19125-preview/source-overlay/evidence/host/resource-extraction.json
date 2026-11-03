@@ -1,0 +1,142 @@
+{
+  "actual_modern_resource_context": true,
+  "all_three_existing_file_reads_checked": true,
+  "artifact": {
+    "bytes": 1637265,
+    "filename": "ULike_HQ_Texture_Online_v1.9.125.mpp",
+    "sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c"
+  },
+  "assertions": 68,
+  "baseline": {
+    "bytes": 1635847,
+    "sha256": "c1cdab6d613ba594d8fe817799e5e208e25e847d2d55f72525f13f19e3b1b408"
+  },
+  "baseline_missing_asset_reproduced": true,
+  "behavior": {
+    "assertions": 68,
+    "behavior_mutations_rejected": 4,
+    "on_request_full_resource_mode": true,
+    "private_apk_used": false,
+    "real_patcher_version": "2.2.0-dev.2",
+    "real_resource_context": true,
+    "status": "passed"
+  },
+  "behavior_mutation_count_note": "The four live JVM behavior mutations overlap the five JVM inverse mutations; counted once within ten JVM/DEX mutation variants.",
+  "behavior_mutation_detections": 4,
+  "current_125_loader_tested_directly": true,
+  "display_metadata_only_normalized_for_historical_inverse": true,
+  "failed_condition_controls": 6,
+  "full_on_request_resources": true,
+  "limitations": "Synthetic APK fixtures run real modern ResourcePatchContext and actual emitted JVM classes. Synthetic original native bytes intentionally fail the unchanged native hash guard. The actual .125 candidate is tested. Only its one display description is normalized for the historical full-code inverse; every resource instruction and guard remains subject to the exact inverse. Full original APKS application and DEX inspection are separate evidence; Android execution and device responsiveness remain unmeasured.",
+  "modern_morphe": {
+    "bytes": 46264836,
+    "desktop_version": "2.0.0-dev.4",
+    "patcher_version": "2.2.0-dev.2",
+    "sha256": "ed8184451a88b373ab38e575884523a709706195a7232e971fcf8cd61fc5a22c"
+  },
+  "mutation_controls": 10,
+  "native_collision_guards_checked": true,
+  "negative_controls": [
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "jvm:asset-read"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "jvm:original-native-read"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "jvm:native-resolver"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "jvm:manifest-parent"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "jvm:remove-required-input-guard"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "dex:asset-read"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "dex:original-native-read"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "dex:native-resolver"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "dex:manifest-parent"
+    },
+    {
+      "detected": true,
+      "kind": "mutation",
+      "name": "dex:remove-required-input-guard"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "genuinely-missing"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "wrong-original-hash"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "wrong-replacement-hash"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "incompatible-original-native"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "wrong-native-length"
+    },
+    {
+      "detected": true,
+      "kind": "controlled_failure",
+      "name": "wrong-native-hash"
+    }
+  ],
+  "new_native_creation_and_identical_existing_checked": true,
+  "physical_android_tested": false,
+  "private_apk_used": false,
+  "required_asset_hash_guards_checked": true,
+  "schema": "ulike19125-resource-extraction-host-v1",
+  "source_sha256": {
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "ResourceClass19124.java": "4b6745f078736349206a8b19aacaf7603a68e0ba016323a669715fe796f8681a",
+    "ResourceReadHooks19124.java": "a06c58397ec95318c8421a1e5418c091888ce182440b414e72e04baeb54f7f56",
+    "host_resource_extraction19125.py": "e069828cb96ae4232c705f6b8427a9c31f1fbf2b90b88bda9c82af415c2eef4d",
+    "tests19124/ResourceBehavior19124.java": "73375faf87a6d1c113c0bb222f6266cbccda220031f23b6f8dee7e7983277652",
+    "tests19125/ResourceStructure19125.java": "49f625669421ecf1bb01d4ca3324b9d23930112afee147804c083b826207072c"
+  },
+  "status": "passed",
+  "structural_checks": 8,
+  "structure": {
+    "healthy_structural_checks": 8,
+    "mutation_checks": 24,
+    "status": "passed",
+    "structural_mutations_rejected": 10
+  }
+}

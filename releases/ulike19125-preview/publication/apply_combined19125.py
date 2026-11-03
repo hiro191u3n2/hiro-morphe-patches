@@ -1,0 +1,348 @@
+#!/usr/bin/env python3
+"""Apply the actual combined338 MPP to private ULike APKS and inspect its ULike output.
+
+The original and unsigned result remain in the explicitly chosen work directory.
+Only application-report.json is suitable for release QA: it contains hashes,
+counts and verified contracts, never source APK bytes, local paths or raw logs.
+This check is a desktop application/rebuild check, not Android execution.
+"""
+import argparse
+import hashlib
+import io
+import json
+import os
+from pathlib import Path, PurePosixPath
+import re
+import struct
+import subprocess
+import sys
+import zipfile
+import zlib
+
+SOURCE = None  # Required immutable validator-source directory from --source.
+COMBINED_SHA256 = None  # Required explicit reviewed CLI pin.
+STANDALONE_SHA256 = None  # Required explicit reviewed CLI pin.
+ORIGINAL_VERIFIER_SHA256 = None  # Required explicit reviewed CLI pin.
+INPUT_SHA256 = '73c6d3a3008b9975645f63238f07dc9c1960ad982c70f141ee4b5dfe60f7a293'
+VALIDATOR_MORPHE_SHA256 = '82a0df2ff881d83d5ca8b4f9a6ce196bd4ac3b87ff147fe37845c296b436806c'
+MORPHE_SHA256 = 'ed8184451a88b373ab38e575884523a709706195a7232e971fcf8cd61fc5a22c'
+PATCH_NAME = '高画質撮影・質感美肌・素材通信を復旧'
+NATIVE_CHANGE = {
+    'name': 'lib/arm64-v8a/libttvesdk.so',
+    'before_sha256': '67f1b97b92859630ae200cafad41f7e3db3d8d2fbcac3ffd5c7bab0683471095',
+    'after_sha256': 'eac57bcaa613860c7ca03ea516c4370520f9775cdfe700688d74e223bd59c2bb',
+    'offset': 4241508, 'before_hex': '26008052', 'after_hex': 'a6e34039',
+    'contract': 'app.hiro.ulike.patches.NativeNv21EffectFlag',
+}
+EXPECTED_NATIVE_COUNT = 14
+EXPECTED_STOCK_NATIVE_COUNT = 58
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def require(value, message):
+    if not value:
+        raise AssertionError(message)
+
+
+def run(command, log, timeout=900):
+    result = subprocess.run(list(map(str, command)), text=True, stdout=subprocess.PIPE,
+                            stderr=subprocess.STDOUT, timeout=timeout)
+    log.write_text(result.stdout)
+    if result.returncode:
+        raise RuntimeError('Command failed; private log: ' + str(log) + '\n' + result.stdout[-6000:])
+    return result.stdout
+
+
+def write_entries(archive, root, prefix):
+    for name in archive.namelist():
+        if not name.startswith(prefix) or not name.endswith('.class'):
+            continue
+        # Read only trusted in-archive class entries; never extract arbitrary paths.
+        part = PurePosixPath(name)
+        require(not part.is_absolute() and '..' not in part.parts, 'Unsafe class path')
+        target = root.joinpath(*part.parts)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(archive.read(name))
+
+
+
+def ulike_owned(name):
+    return name.startswith('app/hiro/ulike/patches/') or re.match(r'^ulike(?:\d+)?/', name) is not None
+
+
+def validate_combined_scope(mpp, standalone):
+    require(sha(mpp.read_bytes()) == COMBINED_SHA256, 'Reviewed combined338 pin differs')
+    require(sha(standalone.read_bytes()) == STANDALONE_SHA256, 'Reviewed standalone125 pin differs')
+    with zipfile.ZipFile(mpp) as combined, zipfile.ZipFile(standalone) as single:
+        require(len(combined.namelist()) == len(set(combined.namelist())), 'Duplicate combined entries')
+        require(len(single.namelist()) == len(set(single.namelist())), 'Duplicate standalone entries')
+        a = {name: combined.read(name) for name in combined.namelist() if ulike_owned(name)}
+        b = {name: single.read(name) for name in single.namelist() if ulike_owned(name)}
+        require(a == b and a, 'Combined ULike-owned resources differ from reviewed standalone')
+
+
+def main(input, mpp, work, jdk, tools, standalone, validator_tools, stage='final', patch_only=False, resume=False):
+    input, mpp, work, jdk, tools = [Path(p).resolve() for p in (input, mpp, work, jdk, tools)]
+    validate_combined_scope(mpp, Path(standalone).resolve())
+    require(SOURCE is not None and SOURCE.is_dir(), 'Immutable source directory required')
+    require(sha((SOURCE / 'apply_original19125.py').read_bytes()) == ORIGINAL_VERIFIER_SHA256, 'Original verifier source changed')
+    require(not (patch_only and resume), 'Patch-only and resume are exclusive')
+    require(work.is_dir() if resume else not work.exists(), 'Use a fresh work directory or a pinned patch-only checkpoint')
+    require(input.is_file() and mpp.is_file(), 'Original APKS and candidate MPP are required')
+    require(sha(input.read_bytes()) == INPUT_SHA256, 'Pinned original ULike v5.6.2(740) APKS changed')
+    java, javac, morphe = jdk / 'bin/java', jdk / 'bin/javac', tools / 'morphe.jar'
+    require(java.is_file() and javac.is_file() and morphe.is_file(), 'Pinned JDK and Morphe toolchain required')
+    require(sha(morphe.read_bytes()) == MORPHE_SHA256, 'Pinned Morphe binary changed')
+    validator_morphe = Path(validator_tools).resolve() / 'morphe.jar'
+    require(validator_morphe.is_file() and sha(validator_morphe.read_bytes()) == VALIDATOR_MORPHE_SHA256,
+            'Pinned historical DEX validator parser changed')
+    if not resume:
+        work.mkdir(parents=True)
+    settings = run([java, '-XshowSettings:properties', '-version'], work / 'java-identity.log', 30)
+    properties = dict(re.findall(r'^\s*(java\.(?:runtime\.version|vendor|version)) = (.+)$', settings, re.MULTILINE))
+    require(properties.get('java.runtime.version') == '21.0.8+9-LTS'
+            and properties.get('java.vendor') == 'Eclipse Adoptium'
+            and properties.get('java.version') == '21.0.8', 'Pinned Java runtime changed')
+    compiler = run([javac, '-version'], work / 'javac-identity.log', 30)
+    require(compiler.strip() == 'javac 21.0.8', 'Pinned Java compiler changed')
+    expected = zipfile.ZipFile(mpp)
+    bundle_patcher_version = re.search(r'(?m)^Patcher-Version: (.+)$', expected.read('META-INF/MANIFEST.MF').decode()).group(1).strip()
+    require(bundle_patcher_version == '2.2.0-dev.2', 'Combined bundle must retain current on-request API target')
+    with zipfile.ZipFile(morphe) as tool:
+        require(tool.read('app/morphe/patcher/version.properties').decode().strip() == 'version=2.2.0-dev.2', 'Embedded patcher version differs')
+    require(expected.testzip() is None, 'Candidate MPP CRC failure')
+    with zipfile.ZipFile(input) as original:
+        require(original.testzip() is None, 'Original APKS CRC failure')
+        split = zipfile.ZipFile(io.BytesIO(original.read('split_config.arm64_v8a.apk')))
+        original_native = {name: split.read(name) for name in split.namelist()
+                           if name.startswith('lib/arm64-v8a/') and name.endswith('.so')}
+        require(len(original_native) == EXPECTED_STOCK_NATIVE_COUNT, 'Original split native count changed')
+        base = zipfile.ZipFile(io.BytesIO(original.read('base.apk')))
+        original_assets = {name: base.read(name) for name in base.namelist() if name.startswith('assets/') and not name.endswith('/')}
+        require(len(original_assets) == 217, 'Pinned original asset inventory changed')
+
+    output, patch_result = work / 'patched-private.apk', work / 'patch-result.json'
+    if resume:
+        checkpoint = json.loads((work / 'patch-checkpoint.json').read_text())
+        require(checkpoint['mpp_sha256'] == sha(mpp.read_bytes()) and checkpoint['input_sha256'] == INPUT_SHA256,
+                'Resumed MPP/original differs from applied checkpoint')
+        for name, digest in checkpoint['files'].items():
+            require(name in ('patched-private.apk', 'patch-result.json', 'real-patch.log', 'patch-list.log'), 'Unknown checkpoint artifact')
+            require(sha((work / name).read_bytes()) == digest, 'Private patch checkpoint changed: ' + name)
+        actual_log = (work / 'real-patch.log').read_text()
+    else:
+        listing = run([java, '-jar', morphe, 'list-patches', '--patches', mpp], work / 'patch-list.log', 60)
+        indices = re.findall(r'Index: (\d+)\s+Name: ' + re.escape(PATCH_NAME) + r'(?:\r?\n)', listing)
+        require(len(indices) == 1, 'Exactly one ULike patch must resolve')
+        command = [java, '-Xmx3g', '-jar', morphe, 'patch', input, '--exclusive', '-p', mpp,
+                   '--ei', indices[0], '--unsigned', '--bytecode-mode', 'FULL', '--striplibs',
+                   'arm64-v8a', '-o', output, '-t', work / 'tmp', '-r', patch_result]
+        actual_log = run(command, work / 'real-patch.log')
+    markers = ('Merging split APK bundle', 'Merging: base', 'Merging: split_config.arm64_v8a',
+               'Compiling patched dex files (mode: FULL)', 'Compiling modified resources', 'Aligning APK',
+               'Decoding resources on request')
+    require(all(marker in actual_log for marker in markers) and 'Decoding all resources' not in actual_log, 'Actual on-request split merge/FULL rebuild evidence incomplete')
+    patch = json.loads(patch_result.read_text())
+    require(patch.get('packageName') == 'com.gorgeous.liteinternational' and patch.get('packageVersion') == '5.6.2',
+            'Rebuilt package/version changed')
+    require(patch.get('success') is True and not patch.get('failedPatches') and all(step['success'] for step in patch['stepResults']),
+            'Actual Morphe patch/rebuild step failed')
+    require(patch['appliedPatches'] == [PATCH_NAME], 'Wrong patch set applied')
+    if not resume:
+        checkpoint = {'mpp_sha256': sha(mpp.read_bytes()), 'input_sha256': INPUT_SHA256,
+                      'files': {name: sha((work / name).read_bytes()) for name in
+                                ('patched-private.apk', 'patch-result.json', 'real-patch.log', 'patch-list.log')}}
+        (work / 'patch-checkpoint.json').write_text(json.dumps(checkpoint, indent=2) + '\n')
+    if patch_only:
+        print(json.dumps({'status': 'patch_completed_verification_pending', 'mpp_sha256': checkpoint['mpp_sha256'],
+                          'work': str(work), 'final_report_created': False}, indent=2))
+        return None
+    archive = zipfile.ZipFile(output)
+    patched_assets = {}
+    for row in expected.read('ulike/assets.tsv').decode().splitlines():
+        if not row:
+            continue
+        name, before_hash, after_hash, asset = row.split('\t')
+        require(name in original_assets and sha(original_assets[name]) == before_hash,
+                'Original asset does not match the preserved input contract: ' + name)
+        payload_bytes = expected.read(asset)
+        require(sha(payload_bytes) == after_hash and archive.read(name) == payload_bytes,
+                'Patched asset was not installed exactly: ' + name)
+        require(name not in patched_assets, 'Duplicate patched asset contract')
+        patched_assets[name] = {'before_sha256': before_hash, 'after_sha256': after_hash,
+                                'bytes': len(payload_bytes)}
+    require(set(patched_assets) == {'assets/81001.zip', 'assets/81002.zip', 'assets/90000.zip'},
+            'Changed asset contract inventory differs')
+    installed_asset_names = {name for name in archive.namelist()
+                             if name.startswith('assets/') and not name.endswith('/')}
+    require(installed_asset_names == set(original_assets), 'Original asset removed or unexpected asset added')
+    for name, data in original_assets.items():
+        if name not in patched_assets:
+            require(archive.read(name) == data, 'Unrelated original asset changed: ' + name)
+    resource_extraction = {
+        'status': 'passed', 'decode_mode': 'on_request',
+        'target_patcher_version': bundle_patcher_version, 'embedded_patcher_version': '2.2.0-dev.2',
+        'original_asset_count': len(original_assets),
+        'unchanged_original_asset_count': len(original_assets) - len(patched_assets),
+        'patched_assets': patched_assets, 'asset_inventory_preserved': True,
+        'original_asset_hash_guards_preserved': True,
+    }
+    require(archive.testzip() is None, 'Final APK CRC failure')
+    dex = {n: archive.read(n) for n in archive.namelist() if re.fullmatch(r'classes(?:[2-9][0-9]*|1[0-9]+)?\.dex', n)}
+    require(dex, 'Rebuilt DEX absent')
+    for name, data in dex.items():
+        require(len(data) > 112 and data[:4] == b'dex\n' and struct.unpack_from('<I', data, 32)[0] == len(data), 'DEX header failure: ' + name)
+        require(data[12:32] == hashlib.sha1(data[32:]).digest(), 'DEX SHA-1 failure: ' + name)
+        require(struct.unpack_from('<I', data, 8)[0] == zlib.adler32(data[12:]) & 0xffffffff, 'DEX Adler failure: ' + name)
+    installed_native = {name: archive.read(name) for name in archive.namelist() if name.startswith('lib/') and name.endswith('.so')}
+    require(sorted({n.split('/')[1] for n in installed_native}) == ['arm64-v8a'], 'Unexpected native ABI')
+    for name, before in original_native.items():
+        require(name in installed_native, 'Original native library lost: ' + name)
+        after = installed_native[name]
+        if name == NATIVE_CHANGE['name']:
+            p = NATIVE_CHANGE
+            offset = p['offset']
+            require(sha(before) == p['before_sha256'] and sha(after) == p['after_sha256'], 'Inherited NV21 native contract changed')
+            require(before[offset:offset+4].hex() == p['before_hex'] and after[offset:offset+4].hex() == p['after_hex']
+                    and before[:offset] == after[:offset] and before[offset+4:] == after[offset+4:],
+                    'Unexpected original native change outside the inherited instruction')
+        else:
+            require(after == before, 'Original native bytes changed: ' + name)
+
+    native = {}
+    def payload(installed, data, descriptor=None):
+        require(installed in installed_native and installed_native[installed] == data,
+                'MPP native payload not installed exactly: ' + installed)
+        record = {'bytes': len(data), 'sha256': sha(data)}
+        require(installed not in native or native[installed] == record, 'Contradictory MPP native descriptors')
+        native[installed] = record
+    for name in expected.namelist():
+        if not ulike_owned(name):
+            continue
+        if name.endswith('.so'):
+            payload('lib/arm64-v8a/' + PurePosixPath(name).name, expected.read(name))
+        elif name.endswith('resourceitems.tsv'):
+            for line in expected.read(name).decode().splitlines():
+                if not line or line.startswith('#'):
+                    continue
+                installed, digest, size, asset = line.split('\t')
+                if installed.startswith('lib/') and installed.endswith('.so'):
+                    require(ulike_owned(asset), 'ULike native descriptor references an unrelated asset')
+                    data = expected.read(asset)
+                    require(sha(data) == digest and len(data) == int(size), 'MPP native resource descriptor mismatch')
+                    payload(installed, data)
+    require(len(native) == EXPECTED_NATIVE_COUNT, 'Expected fourteen ULike native assets')
+    require(set(installed_native) == set(original_native) | set(native), 'Unexpected additional installed native libraries')
+    require('lib/arm64-v8a/libulike_gpu1960.so' in native, 'Current GPU backend absent')
+    require(not any(marker in name for name in archive.namelist()
+                    for marker in ('quality-host', 'quality-stubs', '/tests1981/', '/tests1982/', 'pipeline80-fixtures')), 'Test fixtures leaked into APK')
+
+    runtime = work / 'expected'
+    runtime.mkdir()
+    for source_name, target_name in (('ulike/runtime.dex', 'runtime.dex'), ('ulike/methods.tsv', 'methods.tsv'), ('ulike/methods.dex', 'methods.dex')):
+        (runtime / target_name).write_bytes(expected.read(source_name))
+    patch_classes, validators = work / 'patch-classes', work / 'validator-classes'
+    patch_classes.mkdir(); validators.mkdir()
+    write_entries(expected, patch_classes, 'app/hiro/ulike/patches/')
+    cp = os.pathsep.join(map(str, (validator_morphe, patch_classes, validators)))
+    validator_sources = [SOURCE / name for name in ('MergePayloads.java', 'StockBoostHooks19123.java', 'VerifyAppliedBoost19123.java', 'VerifyApplied1920.java',
+        'VerifyAllHelperReferences1980.java', 'tests1981/VerifyAppliedTypes1981.java', 'VerifyRuntimeVersion19101.java', 'VerifyCaptureInvariant19104.java', 'VerifyStrongDiagnostic19105.java', 'VerifyStrongTrace19106.java', 'VerifyRegionalDisabled19115.java', 'ShutterStock1994.java')]
+    run([javac, '-encoding', 'UTF-8', '-cp', cp, '-d', validators, *validator_sources], work / 'validators-compile.log', 60)
+    contracts = run([java, '-Xmx2g', '-cp', cp, 'VerifyApplied1920', runtime / 'runtime.dex', runtime / 'methods.tsv', output],
+                    work / 'exact-method-contracts.log', 120).strip()
+    require(contracts.startswith('PASS final APK:'), 'Exact applied DEX contracts absent')
+    references = run([java, '-Xmx2g', '-cp', cp, 'VerifyAllHelperReferences1980', runtime / 'methods.dex', runtime / 'runtime.dex',
+                      runtime / 'methods.dex', output], work / 'all-apk-helper-references.log', 120).strip()
+    require(references.startswith('PASS helper references'), 'All APK helper member reference proof absent')
+    types = json.loads(run([java, '-Xmx2g', '-cp', cp, 'VerifyAppliedTypes1981', output], work / 'all-apk-helper-types.log', 120))
+    require(types['status'] == 'passed' and types['missing_helper_types'] == 0, 'All APK helper type proof failed')
+    import regional_distribution19115
+    regional_disabled = regional_distribution19115.verify(json.loads(run([java, '-Xmx2g', '-cp', cp, 'VerifyRegionalDisabled19115', output], work / 'regional-disabled-dex.json', 120)))
+    runtime_version = run([java, '-Xmx2g', '-cp', cp, 'VerifyRuntimeVersion19101', output, '1.9.125'], work / 'runtime-version.log', 120).strip()
+    require(runtime_version == 'PASS runtime release version: 1.9.125', 'Applied runtime version differs')
+    single_capture = run([java, '-Xmx2g', '-cp', cp, 'VerifyCaptureInvariant19104', output], work / 'single-capture.log', 120).strip()
+    require(single_capture == 'PASS single capture: timing-only entry, false return, legacy admission unreachable', 'Applied single-shot bypass differs')
+    strong_diagnostic = run([java, '-Xmx2g', '-cp', cp, 'VerifyStrongDiagnostic19105', output], work / 'strong-diagnostic.log', 120).strip()
+    require(strong_diagnostic == 'PASS emitted-strong-diagnostic foreground_cpu_guard replay_strong_guard target_null_guard strict_gate_unchanged qualification_writes_absent resident_timing_guard negative_controls=23 cpu_timing_negative_controls=11 fair_plan_negative_controls=6', 'Applied Strong diagnostic scope differs')
+    strong_trace = run([java, '-Xmx2g', '-cp', cp, 'VerifyStrongTrace19106', output], work / 'strong-trace.log', 120).strip()
+    require(strong_trace == 'PASS emitted-strong-trace post_save_guard fixed_reproducer_guard strict_gate_unchanged qualification_writes_absent eligibility_cases=958 negative_controls=7', 'Applied Strong intermediate trace scope differs')
+    stock_shutter = json.loads(run([java, '-Xmx2g', '-cp', cp, 'ShutterStock1994', 'verify-applied', SOURCE / 'stock-seed1994.dex', output], work / 'stock-shutter.log', 120))
+    require(stock_shutter.get('target') == 'Lcom/light/beauty/mc/preview/shutter/module/ShutterButton;->onTouchEvent(Landroid/view/MotionEvent;)Z' and stock_shutter.get('original_sha256') == 'ba56099d88ea1dbdab32dab9302393ddc9f2aae0e5f9900574b2551f973b69c1', 'Applied shutter proof identity differs')
+    boost_path = work / 'stock-boost-applied19123.json'
+    run([java, '-Xmx2g', '-cp', cp, 'VerifyAppliedBoost19123', input, output, boost_path], work / 'stock-boost-applied.log', 120)
+    boost_applied = json.loads(boost_path.read_text())
+    require(boost_applied.get('status') == 'passed' and boost_applied.get('one_callsite_suppressed') is True
+            and boost_applied.get('vendor_boost_manager_preserved') is True
+            and boost_applied.get('apk_sha256') == sha(output.read_bytes()), 'Applied stock boost callsite verification failed')
+    logs = ('stock-boost-applied19123.json', 'stock-boost-applied.log', 'regional-disabled-dex.json', 'strong-trace.log', 'strong-diagnostic.log', 'single-capture.log', 'stock-shutter.log', 'runtime-version.log', 'real-patch.log', 'patch-result.json', 'exact-method-contracts.log', 'all-apk-helper-references.log', 'all-apk-helper-types.log')
+    contract_count = re.search(r'\. (\d+) runtime/payload contracts', contracts)
+    reference_count = re.search(r': (\d+) included members resolved; (\d+) inherited external members', references)
+    require(contract_count is not None and reference_count is not None, 'Machine-readable full APK contract counts absent')
+    report = {
+        'schema': 'ulike19125-combined-apks-application-v1', 'status': 'passed', 'artifact_stage': stage,
+        'original_input': {'bytes': input.stat().st_size, 'sha256': INPUT_SHA256},
+        'mpp': {'filename': mpp.name, 'bytes': mpp.stat().st_size, 'sha256': sha(mpp.read_bytes())},
+        'output_apk': {'bytes': output.stat().st_size, 'sha256': sha(output.read_bytes())},
+        'runtime_version': '1.9.125', 'timing_version_matches_release': True,
+        'combined_bundle_version': '1.0.338', 'standalone_sha256': STANDALONE_SHA256,
+        'ulike_only_expected_resources': True, 'combined_ulike_assets_equal_standalone': True,
+        'original_verifier_sha256': ORIGINAL_VERIFIER_SHA256,
+        'single_capture_timing_only_false_verified': True, 'legacy_capture_admission_unreachable': True,
+        'fixed_strong_diagnostic_guard_verified': True, 'strong_trace_guard_verified': True, 'strong_trace_eligibility_cases': 958, 'strong_trace_negative_controls': 7, 'strict_photo_admission_preserved': True, 'strong_diagnostic_negative_controls': 23, 'fair_plan_dex_negative_controls': 6, 'cpu_timing_dex_negative_controls': 11,
+        'distributed_regional_dex': regional_disabled, 'stock_shutter_hook': stock_shutter,
+        'stock_boost_applied': boost_applied,
+        'package_name': patch['packageName'], 'package_version': patch['packageVersion'],
+        'original_apk_apply_tested': True, 'original_split_merge_tested': True, 'device_tested': False,
+        'signing_or_installation_tested': False, 'ci_android_apply_tested': False,
+        'output_unsigned': True, 'output_publicly_distributed': False,
+        'expected_runtime_contracts': int(contract_count.group(1)),
+        'all_apk_linkage_count': int(reference_count.group(1)),
+        'inherited_external_linkage_count': int(reference_count.group(2)),
+        'actual_split_merge_tested': True, 'full_dex_compilation_tested': True, 'resource_compilation_tested': True,
+        'apk_alignment_tested': True, 'arm64_only_verified': True, 'physical_android_tested': False,
+        'applied_patch_names': patch['appliedPatches'], 'all_patching_steps_succeeded': True,
+        'original_native_library_count': len(original_native), 'original_native_libraries_byte_identical': len(original_native) - 1,
+        'inherited_native_changes': [NATIVE_CHANGE], 'installed_patch_native_assets': native,
+        'dex_entries': {n: {'bytes': len(data), 'sha256': sha(data)} for n, data in dex.items()},
+        'exact_method_contracts': contracts, 'all_apk_helper_member_references': references, 'all_apk_helper_types': types,
+        'morphe_jar': {'bytes': morphe.stat().st_size, 'sha256': sha(morphe.read_bytes()), 'desktop_version': '2.0.0-dev.4', 'embedded_patcher_version': '2.2.0-dev.2'},
+        'resource_extraction': resource_extraction,
+        'validator_morphe_jar': {'bytes': validator_morphe.stat().st_size, 'sha256': sha(validator_morphe.read_bytes()),
+            'desktop_version': '1.16.0', 'embedded_patcher_version': '1.14.0',
+            'purpose': 'historical DEX parser/serializer only; not used for patch application'},
+        'verification_resumed_from_pinned_checkpoint': resume,
+        'java_toolchain': {'runtime_version': properties['java.runtime.version'], 'vendor': properties['java.vendor'], 'compiler_version': '21.0.8'},
+        'validator_sources': {p.relative_to(SOURCE).as_posix(): sha(p.read_bytes()) for p in [*validator_sources, SOURCE / 'stock-seed1994.dex']},
+        'application_script_sha256': sha(Path(__file__).read_bytes()),
+        'private_log_sha256': {name: sha((work / name).read_bytes()) for name in logs},
+        'limitations': 'Desktop Morphe split merge, FULL rebuild and exact DEX/native inspection. Android ART, Galaxy camera transitions, saved image appearance and device speed were not executed.',
+    }
+    path = work / 'application-report.json'
+    path.write_text(json.dumps(report, ensure_ascii=False, sort_keys=True, indent=2) + '\n')
+    print(json.dumps({'status': 'passed', 'report': str(path), 'mpp_sha256': report['mpp']['sha256'],
+        'exact_method_contracts': contracts, 'native_assets': len(native), 'original_native_libraries': len(original_native),
+        'physical_android_tested': False}, ensure_ascii=False, indent=2))
+    return report
+
+
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description=__doc__)
+    for name in ('input', 'mpp', 'work', 'jdk', 'tools', 'standalone', 'source', 'validator-tools'):
+        parser.add_argument('--' + name, type=Path, required=True)
+    parser.add_argument('--stage', choices=('provisional', 'final'), default='final')
+    parser.add_argument('--patch-only', action='store_true', help='Create a pinned private rebuild checkpoint without a success report')
+    parser.add_argument('--resume', action='store_true', help='Verify an unchanged private checkpoint with the finalized current validators')
+    for name in ('combined-sha256', 'standalone-sha256', 'original-verifier-sha256'):
+        parser.add_argument('--' + name, required=True)
+    args = parser.parse_args()
+    for name in ('combined_sha256', 'standalone_sha256', 'original_verifier_sha256'):
+        digest = getattr(args, name)
+        require(re.fullmatch(r'[a-f0-9]{64}', digest), 'Explicit reviewed SHA-256 required: ' + name)
+        globals()[name.upper()] = digest
+    SOURCE = args.source.resolve()
+    if (SOURCE / 'src').is_dir(): SOURCE = SOURCE / 'src'
+    sys.path.insert(0, str(SOURCE))
+    main(args.input, args.mpp, args.work, args.jdk, args.tools, args.standalone, args.validator_tools, args.stage, args.patch_only, args.resume)

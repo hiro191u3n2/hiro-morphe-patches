@@ -1,0 +1,178 @@
+{
+  "background": {
+    "command": [
+      "python3",
+      "{source}/src/host_background19121.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-background",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-background/result.json"
+  },
+  "cached": {
+    "command": [
+      "python3",
+      "{source}/src/host_cached_restore19120.py",
+      "--classes",
+      "{work}/build/helper-classes",
+      "--android",
+      "{tools}/android.jar",
+      "--work",
+      "{work}/host-cached",
+      "--java",
+      "{jdk}/bin/java",
+      "--javac",
+      "{jdk}/bin/javac"
+    ],
+    "report": "{work}/host-cached/cached-restore19120.json"
+  },
+  "cleanup": {
+    "command": [
+      "python3",
+      "{source}/src/host_cleanup19122.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-cleanup",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-cleanup/result.json"
+  },
+  "diagnostic": {
+    "command": [
+      "python3",
+      "{source}/src/host_diagnostic_refresh19121.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-diagnostic",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-diagnostic/result.json"
+  },
+  "gpu": {
+    "command": [
+      "python3",
+      "{source}/src/tests19121/gpu/host_gpu_wait19121.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-gpu",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-gpu/result.json"
+  },
+  "gpu-submission": {
+    "command": [
+      "python3",
+      "{source}/src/host_gpu_submission19122.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-gpu-submission",
+      "--jdk",
+      "{jdk}",
+      "--android-jar",
+      "{tools}/android.jar"
+    ],
+    "report": "{work}/host-gpu-submission/result.json"
+  },
+  "policy": {
+    "command": [
+      "python3",
+      "{source}/src/host_policy19122.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-policy",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-policy/result.json"
+  },
+  "preview": {
+    "command": [
+      "python3",
+      "{source}/src/host_preview19122.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-preview",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-preview/result.json"
+  },
+  "quiet": {
+    "command": [
+      "python3",
+      "{source}/src/host_quiet_runtime19120.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-quiet",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-quiet/result.json"
+  },
+  "responsiveness": {
+    "command": [
+      "python3",
+      "{source}/src/host_responsiveness19122.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-responsiveness",
+      "--jdk",
+      "{jdk}"
+    ],
+    "report": "{work}/host-responsiveness/result.json"
+  },
+  "stock-boost": {
+    "command": [
+      "python3",
+      "{source}/src/host_stock_boost19123.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-stock-boost",
+      "--jdk",
+      "{jdk}",
+      "--tools",
+      "{tools}",
+      "--baseline",
+      "{source}/baseline122/ULike_HQ_Texture_Online_v1.9.122.mpp",
+      "--candidate",
+      "{dist}/ULike_HQ_Texture_Online_v1.9.125.mpp"
+    ],
+    "report": "{work}/host-stock-boost/result.json"
+  },
+  "resource-extraction": {
+    "command": [
+      "python3",
+      "{source}/src/host_resource_extraction19125.py",
+      "--source",
+      "{source}/src",
+      "--work",
+      "{work}/host-resource-extraction",
+      "--jdk",
+      "{jdk}",
+      "--tools",
+      "{tools}",
+      "--modern-morphe",
+      "{tools}/morphe-modern.jar",
+      "--baseline",
+      "{source}/baseline123/ULike_HQ_Texture_Online_v1.9.123.mpp",
+      "--candidate",
+      "{dist}/ULike_HQ_Texture_Online_v1.9.125.mpp"
+    ],
+    "report": "{work}/host-resource-extraction/result.json"
+  }
+}

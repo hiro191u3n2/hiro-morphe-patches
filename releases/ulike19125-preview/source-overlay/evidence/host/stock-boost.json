@@ -1,0 +1,84 @@
+{
+  "artifact": {
+    "bytes": 1637265,
+    "filename": "ULike_HQ_Texture_Online_v1.9.125.mpp",
+    "sha256": "94a32517098a221f0e9f275ee7f48c08b0447c88beb094b12e69ee37c3f4582c"
+  },
+  "assertions": 5,
+  "baseline": {
+    "bytes": 1635446,
+    "sha256": "674bddd1058f5b1ad72bda7f3798aae8b6f54c862a5dd19d3017bd0c9ce43c2a"
+  },
+  "device_cause_confirmed": false,
+  "device_speedup_verified": false,
+  "functional_scope": "actual Java counter, ignored receiver, concurrent calls, saturation and primitive-only state",
+  "negative_controls": [
+    {
+      "kind": "dex_mutation",
+      "name": "suppression-removed",
+      "status": "rejected"
+    },
+    {
+      "kind": "dex_mutation",
+      "name": "next-capture-guard-lost",
+      "status": "rejected"
+    },
+    {
+      "kind": "dex_mutation",
+      "name": "rejection-return-changed",
+      "status": "rejected"
+    },
+    {
+      "kind": "dex_mutation",
+      "name": "wrong-receiver",
+      "status": "rejected"
+    },
+    {
+      "kind": "java_mutation",
+      "name": "counter-does-not-observe-request",
+      "status": "rejected"
+    },
+    {
+      "kind": "java_mutation",
+      "name": "counter-wraps-instead-of-saturating",
+      "status": "rejected"
+    },
+    {
+      "kind": "java_mutation",
+      "name": "receiver-retained-in-static-field",
+      "status": "rejected"
+    }
+  ],
+  "physical_android_tested": false,
+  "previous_vendor_activation_measured": false,
+  "schema": "ulike19123-stock-boost-host-v1",
+  "source_sha256": {
+    "CaptureBoost19123.java": "9f0ad67c8b084ff5f73c754218da766aa93c74e8a17e083477b565d808528076",
+    "MergePayloads.java": "e92d8a964fa50f319cb201787405b255dd54f23f7589566b34a2b57a98346094",
+    "StockBoostHooks19123.java": "3fae88f149f77776676014b2d39716f8a8b32412c732522b8075f502f4d7aa9c",
+    "host_stock_boost19123.py": "bcea82807a7c0e36e4c396629476c560a17be656bec66347b3b6dc62b1373763",
+    "tests19123/IndependentCallsiteReview.java": "3fe1f85f2fa9f20d30cd13d9bad918567d747c65e799e986eda4905fb37c3043",
+    "tests19123/IndependentCounterReview.java": "5c71bdb65db9f66ca881071975a680d7215bc4705cf955c5fe0e03934e3e7e42"
+  },
+  "status": "passed",
+  "stock_boost_patch": {
+    "baseline_patched_sha256": "7915f1efa39a0ef7f69dc54751732002276c53fa6b72699ca5fde655755d2dc8",
+    "camera_readiness_capture_callbacks_preserved": true,
+    "changed_method_count": 1,
+    "device_cause_confirmed": false,
+    "device_performance_measured": false,
+    "original_input_contracts_preserved": true,
+    "original_stock_sha256": "593a400906e70cefffc72bc383dc371afab34763795f33fc0b58e352d3dc2c98",
+    "patched_sha256": "bfbeb3ba3558ae20838fd057494a786bc18bace8b6fe2273c078713eaba42aa7",
+    "preserved_method_count": 229,
+    "receiver_initialization_preserved": true,
+    "requested_hint_duration_is_not_a_sleep": true,
+    "schema": "ulike19123-stock-boost-callsite-v1",
+    "single_callsite_inverse_verified": true,
+    "status": "passed",
+    "target": "Li/o/a/b1/a/g/y;->X(IZ)Z",
+    "vendor_boost_manager_edited": false
+  },
+  "structural_checks": 7386,
+  "structural_scope": "actual emitted DEX single-callsite full inverse and all other payload methods/contracts"
+}

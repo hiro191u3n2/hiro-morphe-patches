@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "assertions": 106,
+  "negative_controls": {
+    "stale_generation": true,
+    "hidden_activity": true,
+    "wrong_provider_epoch": true,
+    "foreign_provider": true,
+    "unavailable_native_thermal_api": true,
+    "post_deadline": true,
+    "histogram_overflow": true,
+    "superseded_memory_sample": true,
+    "initial_notification_delay_mutation": true,
+    "overwrite-first-preview-notice": true,
+    "accept-provider-switch": true,
+    "ignore-ring-history-loss": true,
+    "omit-interposed-input-history": true,
+    "ignore-late-owner-since": true
+  },
+  "mutation_control_names": [
+    "initial_notification_delay_mutation",
+    "overwrite-first-preview-notice",
+    "accept-provider-switch",
+    "ignore-ring-history-loss",
+    "omit-interposed-input-history",
+    "ignore-late-owner-since"
+  ],
+  "source_sha256": {
+    "Responsiveness19122.java": "e8eec0021eb909f2c32e0fb1f336f1581fd0f8a20cb275a65049caf7a7b412f2",
+    "tests19122/response/Responsiveness19122Test.java": "5d374cf175aff5eaeb92283fd6e184d7fa222e49710f38a55f26c6b8e676951e",
+    "host_responsiveness19122.py": "4c1baff5d02ad2c1e8fbadc0110ca9cc674f62ec63f750a55ba1cfc403743a70"
+  },
+  "generated_fixture_sha256": {
+    "fixtures/android/content/Context.java": "aa208920328932dad7b52a6c1c5d00f48b0fd8ae8de238be6cf6ba7b83b07c91",
+    "fixtures/android/content/ContextWrapper.java": "96eb7f913eed8a8c895dbdd3db3fedf47ace054dc2c71c64e465ad0385936c34",
+    "fixtures/android/app/Application.java": "d9b5d62e16f355a4d820d5c30c8b8199c1951e78169fde78259e0f747650cc80",
+    "fixtures/android/app/Activity.java": "59fbefdfbecf776c434f0d69baedec738ea162a1ca4604d5a9e5b67e26fc05d5",
+    "fixtures/android/os/Bundle.java": "38e705a18c331c15cfaed50208623b55be484c54c8b66cd5a2bde635511e6721",
+    "fixtures/android/os/Looper.java": "7484489df377a3655dbbce6e7a5c5707f02cd85f87f3fe1448b5e2cc748afc76",
+    "fixtures/android/os/Process.java": "0a2ebdbea514c522a44df5f94a01030a352f2f2abe5ab84c600d0000f3b2033f",
+    "fixtures/android/os/Debug.java": "78a8b2e85afa102ac78416d8f6b01e761cc1def3b9cd385f0a18d74578f357b3",
+    "fixtures/android/os/PowerManager.java": "4961fa5ce21f551de257e4f4ffdd02652f4ca6b20b6d4b6ccf40ceff8fb4fdd6",
+    "fixtures/android/os/Handler.java": "252d05a9e5465c016286b0d0f916069b6c2573d9159674b3f732eea6fe367f44",
+    "fixtures/android/view/Choreographer.java": "d8f377e9c5db3d81d1ffa6d813d782d0e22e458522379933b0748198c0aac72b",
+    "fixtures/com/hiro/ulike/ProcessingTiming1947.java": "ad650db225a68690dbf1f28a1ff50e21b2ecb0332d7021193d133c3e66461ea2",
+    "fixtures/com/hiro/ulike/CapturePolicy19122.java": "256da813347b72668e389eb0885320109be03de2fc04f9ee80b2f787c1207798"
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false,
+  "fixture_scope": "Actual bounded recorder, callback expiry, generation, main/provider separation, owner lookup rate limit, histogram overflow and optional thermal/native API failure execute with public Android host fixtures; not displayed FPS or device recovery."
+}

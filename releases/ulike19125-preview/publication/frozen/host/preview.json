@@ -1,0 +1,93 @@
+{
+  "status": "passed",
+  "assertions": 1042,
+  "cases": 40,
+  "helper_assertions": 333,
+  "actual_async_integration": {
+    "status": "passed",
+    "assertions": 685,
+    "actual_async_adapter": true,
+    "single_shot_comparison_owned_and_borrowed": true,
+    "terminal_failure_cleanup": true,
+    "normal_quality_source_copies_exact": true,
+    "baseline_source_reuse": {
+      "status": "passed",
+      "assertions": 24,
+      "completed_bitmap_trace_isolated": true,
+      "save_input_pixels_unchanged": true,
+      "save_bitmap_dimensions_observed": true
+    }
+  },
+  "negative_controls": [
+    {
+      "name": "ignore-epoch",
+      "status": "rejected"
+    },
+    {
+      "name": "ignore-source-identity",
+      "status": "rejected"
+    },
+    {
+      "name": "release-sdk-callback",
+      "status": "rejected"
+    },
+    {
+      "name": "release-owned-diagnostic-shutter",
+      "status": "rejected"
+    },
+    {
+      "name": "omit-cleanup-terminal",
+      "status": "rejected"
+    },
+    {
+      "name": "bypass-still-prepares-analysis",
+      "status": "rejected"
+    },
+    {
+      "name": "queue-empty-before-terminal-policy",
+      "status": "rejected"
+    }
+  ],
+  "source_sha256": {
+    "CapturePreview19121.java": "ade991e5e35e09daf243a5bdd7d320367a98fe74b638a23aa15f218081170c05",
+    "AsyncSave1935.java": "a4c4cea993183fc6adf39d0763ee1d3f5ac6ec73d43beb661dcd3368d3a1d0db",
+    "ReflectionCache1945.java": "ee7c2f83c1199d1a215c7fe546422c5c2205347821638a745975b9dd7a0bc1d3",
+    "host_preview19121.py": "db006c914733992ecacab81b7fd79e805c224c4cf3f849b8db9ffc067e9df782",
+    "tests19121/preview_integration/AsyncPreview19121Test.java": "920a5bf92c6d6b10282a5c1d805bf80d287404cb8136a704b2a1afdc5b0dfc6e",
+    "tests19121/preview/android/app/Activity.java": "f90d972afe81f90f51edf887901fd403efbb4f5299512b587a9aa2ab0a07e2a3",
+    "tests19121/preview/android/graphics/Bitmap.java": "e537d261c96a592a673936c153a4a50e072527c684079feb7686acd6cfcc4355",
+    "tests19121/preview/android/os/Handler.java": "143c379f0512779190a8364adb657c53b32399e0e7e7e96808bd34bf0057f246",
+    "tests19121/preview/android/os/Looper.java": "ebb45109006653a77a25ae4cb50b0754eaf3af97bd8fcb82d3155a3a5070d7a5",
+    "tests19121/preview/com/bytedance/corecamera/camera/basic/PureCameraFragment.java": "7445e5ebea40531de340866bc987d53151873ca745b18957138d6d67f8fc73b2",
+    "tests19121/preview/com/hiro/ulike/AsyncSave1935.java": "d111b68d1b076d86abcf3863bf5378d61bf394bda2573c6089b1d323d30b85f3",
+    "tests19121/preview/com/hiro/ulike/CapturePreview19121Test.java": "e227a78de889fdfc1a7510d9cfa71ebbc309c6e5fa51ca5a588c4c1352f85a63",
+    "tests19121/preview/com/hiro/ulike/CaptureYuv.java": "db8d943858397904d21c17e7647c08e83064f9168d74a7f487f36e2294e54746",
+    "tests19121/preview/com/hiro/ulike/OpticalZoom.java": "61802935ee150447f1413bfd109ec7ed9573eb1970326775950568b1762f0277",
+    "tests19121/preview/com/hiro/ulike/PreviewFixtures19121.java": "92b7d91fd09db8abc32ddc06574066ec5fd5407e3c21c485814bd0958dd92e2f",
+    "tests19121/preview/com/hiro/ulike/ProcessingTiming1947.java": "aa6368b018d258690910698ab38476914d63da73c02e63ce03fab2a9201b5f01",
+    "tests19121/preview/com/hiro/ulike/Responsiveness19122.java": "e5a266e9e687a2a8f075f1f12bbabd66bf36eaf0881d350497b079d6d60aabd9",
+    "tests19121/preview/i/f/l/n/h.java": "d321acbae76a2a325f51e969b648803fc73502a5419e8d89106d2176ce990d2d",
+    "tests19121/preview/i/f/l/n/s/a.java": "a9ee5616b3f238f85b7e05d8bb95a13615c1d041583d99a6e154ca2b5ac3b57e",
+    "tests19121/preview/i/o/a/b1/a/b/c.java": "f3dd1084599ffe85071f8e2a8bf88a5988e62e9d213f74ad7f60ba77b3f6ff01",
+    "CapturePolicy19122.java": "5c57df54d47731551f8000ecf01d660d2a41a927b1d1a48b22696aaa9e34b992",
+    "SaveQueue1935.java": "84deb4c6397e7f009b8f8e6fb8d33c9a5027adc533a7bbcf1eadc7318f9a17af",
+    "SpeedWorkers1935.java": "a6fafe55dee98fe686b8495c76c47db0ba45129174f2745e45cbea4387269d21",
+    "CodecPreparation1981.java": "fcf024efd660fe6a9bf6ba8c0b8683709175c56c0b71aa00d0fa1b063c3af207",
+    "SaveMemory1981.java": "af9df5647549025d2f44489a500c9c7d32af1060d4f83a9538826be6925e1057",
+    "FaceResult1981.java": "6a6c55191ebbc9e6e4fb34e00b5a968166b158ba842e9d55228a30693c3c1eae",
+    "PhotoAnalysis1981.java": "b7bf98961727a6a97619811144ef3a00df21898b78e7ad5a66f06fadc0994420",
+    "EncoderTail1981.java": "8f23ea576ebd9ec7137e2edfdc247739bbb5eb1377a0a7f481d72e2b8462dea6",
+    "host_preview19122.py": "c9f516f8653e9663ac3701230f80fdbdad96923c9ddfa1305f4053b62350c1d4",
+    "host_policy19122.py": "1cdfe98788342d00f76542044d9cd5c2a0dcd96523c0a2ad2937034de25913a5",
+    "tests19122/preview/AsyncPolicy19122Test.java": "9e0c0792e8030e2912d145bd5f99a7c0898b365f1cd15a28c306a3d5f795a205",
+    "host_capture_routes1981.py": "39cc5cffb9ee55c43f26c31cf2422c7c2b75973562f5bd763f87ee8cb9aaa577",
+    "host_capture_save1947.py": "0c47832c87c2578e3a259b133054b589829a6cae7f2e90996d14dd90ca537085",
+    "host_save_baseline1935.py": "bd120e80c20c037eba2d59a974c7989df352339930082ffa9640a8470c99a832",
+    "pipeline80-fixtures/SaveHarness1935.java": "f759916536d75eec0c3ffb1434e69881bfdfc7bb1f42c5182d42dca745d6ff1e",
+    "tests1999/capture/SaveInput1999Test.java": "8aadaee103b8d56ee1681da87ab14690f6a4ffaa57d76fa7ca3907ce1ceb4adc",
+    "StrongNoise1958.java": "93d305e3516820a90cfc9269ed06218729dcdfff67bd170e829cc3ae1fc03749"
+  },
+  "physical_android_tested": false,
+  "device_speedup_verified": false,
+  "fixture_scope": "Actual capture policy/save adapter/queue/CPU admission and retained preview helper; scripted Android/SDK/encoder. Diagnostic single-shot ownership and normal pixel copies, terminal post failure and lifecycle probes executed. Pixel pipeline/GPU and actual presentation not measured."
+}
