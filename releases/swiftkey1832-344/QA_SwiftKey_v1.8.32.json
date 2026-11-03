@@ -1,0 +1,3582 @@
+{
+  "all_dictionary_resources_preserved": true,
+  "all_loaders_byte_identical": false,
+  "baseline_bundle_version": "1.0.343",
+  "baseline_swiftkey_version": "1.8.31",
+  "bundle": {
+    "added_entries": [],
+    "all_other_entries_byte_identical": true,
+    "bytes": 48221101,
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/SpaceConversionPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+    "loader_dex_sha256": "98d2092221d6f6acf251fb51aded7ddc22a35c55476e2edfe1e02329696fa75b",
+    "sha256": "6853b42cb05394db077140f4664b65feb35ca3b80cb3e75fa815613db152cdcb",
+    "space_helper_jvm_sha256": "9671c47cb81d9610d71cea08703bb5439aa8c6e1e9fef1fb41a8039d87be2aa6",
+    "unchanged_entries": 269
+  },
+  "bundle_version": "1.0.344",
+  "device_tested": false,
+  "final_resource_reports": [
+    {
+      "all_eight_resource_hashes_verified": true,
+      "device_tested": false,
+      "exact_192mib_accepted": true,
+      "kind": "single",
+      "mpp_sha256": "03fca4b37efe73c24529d1db7422fbf68d9867603be2aff1228af728be03cc67",
+      "over_192mib_rejected": true,
+      "real_loader_resource_open_read_hash_verified": true,
+      "sdk": "morphe.jar",
+      "status": "PASSED"
+    },
+    {
+      "all_eight_resource_hashes_verified": true,
+      "device_tested": false,
+      "exact_192mib_accepted": true,
+      "kind": "single",
+      "mpp_sha256": "03fca4b37efe73c24529d1db7422fbf68d9867603be2aff1228af728be03cc67",
+      "over_192mib_rejected": true,
+      "real_loader_resource_open_read_hash_verified": true,
+      "sdk": "morphe-current.jar",
+      "status": "PASSED"
+    },
+    {
+      "all_eight_resource_hashes_verified": true,
+      "device_tested": false,
+      "exact_192mib_accepted": true,
+      "kind": "bundle",
+      "mpp_sha256": "6853b42cb05394db077140f4664b65feb35ca3b80cb3e75fa815613db152cdcb",
+      "over_192mib_rejected": true,
+      "real_loader_resource_open_read_hash_verified": true,
+      "sdk": "morphe.jar",
+      "status": "PASSED"
+    },
+    {
+      "all_eight_resource_hashes_verified": true,
+      "device_tested": false,
+      "exact_192mib_accepted": true,
+      "kind": "bundle",
+      "mpp_sha256": "6853b42cb05394db077140f4664b65feb35ca3b80cb3e75fa815613db152cdcb",
+      "over_192mib_rejected": true,
+      "real_loader_resource_open_read_hash_verified": true,
+      "sdk": "morphe-current.jar",
+      "status": "PASSED"
+    }
+  ],
+  "host_report": {
+    "runtime": {
+      "added_classes": [],
+      "all_other_classes_preserved": true,
+      "baseline_java_matches_published_dex": true,
+      "baseline_runtime_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+      "changed_classes": [
+        "Lhiro/swiftkey/SpaceConversion;"
+      ],
+      "device_tested": false,
+      "host_report": {
+        "assertions": 354,
+        "baseline_regressions": {
+          "assertions": 18,
+          "baseline_failures_reproduced": 6,
+          "device_trace_reproduced": false,
+          "failure_scope": "immutable_native_prediction_separator",
+          "status": "PASSED"
+        },
+        "cache_delivery_preservation": {
+          "baseline": {
+            "actual_production_space_handler": true,
+            "actual_production_word_supplement": true,
+            "cache_hit_visible_candidate_case_verified": true,
+            "checks": 13,
+            "device_tested": false,
+            "mode": "baseline",
+            "native_cache_branch_translated": true,
+            "status": "PASSED",
+            "visible_kanji": "愛"
+          },
+          "dictionary_row_sha256": "d3f53de2165130bc5e533d73f77a315aeadc220e3e71430d37748ad738e07b9e",
+          "fixed": {
+            "actual_production_space_handler": true,
+            "actual_production_word_supplement": true,
+            "cache_hit_visible_candidate_case_verified": true,
+            "checks": 13,
+            "device_tested": false,
+            "mode": "fixed",
+            "native_cache_branch_translated": true,
+            "status": "PASSED",
+            "visible_kanji": "愛"
+          },
+          "native_branch_translated_not_android_execution": true,
+          "native_fixture_sha256": "62b9518ae9a14472198f1fcf708bdbab8e72c717781f6865c6ce3d3d9f9bc7b5"
+        },
+        "candidate_mutation_removed": true,
+        "device_tested": false,
+        "identity_scoped_separator_reads": true,
+        "immutable_native_cases": 8,
+        "native_dispatch_only": true,
+        "native_raw_evidence": {
+          "android_code_executed": false,
+          "assertions": 53,
+          "device_tested": false,
+          "fragment_count": 11,
+          "fragment_sha256": {
+            "native_romaji_input.smali.txt": "692d11c23af22ee4dc966c26d87f93b86d67a4a56d069d33f8c7b2191a56c38d",
+            "raw_append_helper.smali.txt": "3f17afbbb6c21ace8e0ade8bf4cf2bd0c31c7431279be18eb472c53cff26f1fc",
+            "raw_append_key.smali.txt": "f5ef79a254c77a0204bbd23d993a4c4ab469a2084651a44614da772ae06f6301",
+            "raw_append_text.smali.txt": "719af669c58e70b8f3b24c97bfc3d71edf185868f44dd89638782ced8e266a3f",
+            "raw_correction_bridge.smali.txt": "96097b37710610518703de8811f548a9ee6708726e12bcf37176336e2d4d995d",
+            "raw_getter.smali.txt": "81934fafc8db6582c3426a9ca193b37746f7f88b0a43ef1377c3f9dcb74c0e78",
+            "raw_prepare_edit.smali.txt": "0c8fefcfc5f294f35810a907f02cab166ed7bfc457e876100c6d2142e7148f1c",
+            "raw_prepare_provisional_edit.smali.txt": "2476ce4e6549058766b2e154ba5400b7426b57482771a3a69c16c745011223fb",
+            "raw_reset.smali.txt": "6ce793ef934f6f607d39d4f8a66a981a1fd9ebd6b67e49a7e7a727880cceac52",
+            "request_raw_argument.smali.txt": "7407d427d8e089b8cefadc611a21c05976ecc97e21f7aa2ff8c5698ce5376f69",
+            "request_raw_field.smali.txt": "84e466a5cc4f4b51b140fcc3815179098def2d9329d12e4653592bd806f0f7e0"
+          },
+          "illustrative_translated_append_copy_cases": [
+            {
+              "exact_match": true,
+              "key": "i",
+              "prefix": "あ",
+              "request_raw": "あi",
+              "state_raw": "あi"
+            },
+            {
+              "exact_match": true,
+              "key": "i",
+              "prefix": "愛",
+              "request_raw": "愛i",
+              "state_raw": "愛i"
+            },
+            {
+              "exact_match": true,
+              "key": "Ｉ",
+              "prefix": "Ａ",
+              "request_raw": "ＡＩ",
+              "state_raw": "ＡＩ"
+            }
+          ],
+          "manifest_sha256": "38e3602f44537866b10fbb7691fba203f2515c79213a96c9b3581358a373990b",
+          "native_correction_text_can_be_reused_for_editing": true,
+          "native_raw_append_has_no_script_filter": true,
+          "native_romaji_call_has_no_all_latin_precondition": true,
+          "native_source_lines_rechecked": false,
+          "native_state_and_request_share_marker_raw": true,
+          "reference_apk_bytes_rechecked": false,
+          "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+          "scope": "Pinned source excerpts and translated append/copy examples; not native engine execution or a device reproduction.",
+          "status": "PASSED",
+          "user_video_raw_input_observed": false
+        },
+        "native_separator_evidence": {
+          "android_code_executed": false,
+          "assertions": 121,
+          "commit_separator_methods": 6,
+          "commit_separator_sites": 7,
+          "device_tested": false,
+          "email_wrapper_has_public_accessor": true,
+          "fragment_count": 29,
+          "fragment_sha256": {
+            "complex_extends_immutable.smali.txt": "60656ee62e6d7c8cd774297b2ddcde10659fef7b64c5db95788a243a09192a3e",
+            "context_getter.smali.txt": "ec0ed5bf9f6926607cb702b9960da659d039b859ebd221677c6062d1c8b1574b",
+            "context_guard.smali.txt": "41915ffc4966ef7e916910c9973c1e3455dfc658f97e606094236b048443ae8e",
+            "email_get_wrapped.smali.txt": "9b13435f3bbdfa95c6aada2f93e051f5e00d61a26a0b07ea349758ff56de8884",
+            "email_visitor_unwrap.smali.txt": "1eeb08a8d13b91de1d32597bfa2ee3e294285c0cf48aabe90e1365e609cb8e46",
+            "engine_to_factory.smali.txt": "b6d31dc6ea0c30e6861b8284362786840ac033c35ee154570520a1fe1ff69331",
+            "flow_immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+            "immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+            "native_event_factory.smali.txt": "de76e806941b6dd3f69cec17191686a40939014a0005c2b718819d4ffa2cba39",
+            "prediction_factory.smali.txt": "1f0145f9ee670760bea885a31194d77bd3dfc02e5bcb08d3bbb6e379b7e94ad5",
+            "request_context_field.smali.txt": "70af70d6c176356891254a7eba2019b2249a62b245b153094fc5b6e04e753737",
+            "site_input_connection.smali.txt": "1551c8630f7e6997a043da8c09f82e88f44a73fb639d32c7170e41395291d527",
+            "site_marker_commit.smali.txt": "7eb95e734fdb652a388a7d0cf138dec3c19b561f51c4b6331d0f23dded34b111",
+            "site_native_visitor_marker.smali.txt": "d114ddc6ce5094b1cc56d61f590d8a0ae67dad86de5550ae76b9cb045772d061",
+            "site_native_visitor_suffix.smali.txt": "a67981f7dac219d4ce636d7f422b202c49414c2c36b6e76a91b0900fb85ef34d",
+            "site_postcommit_suffix.smali.txt": "4fe6aa7673ccaed7e2c4e2b82dcbab337d34a4e056f03a97c7f4b366f058e41b",
+            "site_precommit_default.smali.txt": "b257c3485215e4e9d7bb017a2aca17032fee7972abbd833d0196d6ca4ccf995f",
+            "site_wrapper_visitor.smali.txt": "30fff467716be3df0bd6f674f50417af213ed6c53f83d8f1fd888d61a6062d77",
+            "transparent_visitor.smali.txt": "2d8ddc51b940e11ce0fd7079c7a9502faa3c9e7a714bc8ba0d239bbea7b84c5a",
+            "visitor_handoff.smali.txt": "fbf383aea171585e08c98c7ec4c5b1500556b5fa3e1b95a63269f213a1ae389d",
+            "wrapper_field_a0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+            "wrapper_field_b0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+            "wrapper_field_g0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+            "wrapper_field_i0.smali.txt": "60a0bdeb8aaf061ea55359283be6ee0b018178e4c4033ab4668722df4363f2a3",
+            "wrapper_field_j0.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+            "wrapper_field_k0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+            "wrapper_field_v.smali.txt": "2cb1c888e4781ce0f01618cfb4956afea1e4359377bb4438a4c10ea70d7f8366",
+            "wrapper_field_x.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+            "wrapper_field_y.smali.txt": "698da2c8465007b86971e68e2d8a904c02d7ce1c093c770f5bd05736eebdf965"
+          },
+          "manifest_sha256": "651a86c4f75b2b2d716941b9f9a09bb87ab68b7d3bb039d68a5bb4cb580dde30",
+          "native_context_guard_checks_K_against_request_i": true,
+          "native_fluency_candidate_setter_always_throws": true,
+          "native_precommit_null_separator_calls_setter": true,
+          "native_prediction_factory_produces_immutable_candidates": true,
+          "native_source_lines_rechecked": false,
+          "native_visitor_unwraps_candidates": true,
+          "reference_apk_bytes_rechecked": false,
+          "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+          "scope": "Pinned native source and call-site evidence; no native engine execution or handset reproduction.",
+          "status": "PASSED",
+          "user_device_candidate_type_observed": false,
+          "wrapper_chain_public_field_count": 9
+        },
+        "prediction_wait_limit_ms": 750,
+        "status": "PASSED"
+      },
+      "host_tests_passed": true,
+      "merge": {
+        "added_classes": [],
+        "baseline_classes": 92,
+        "baseline_extension_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+        "changed_existing_classes": [
+          "Lhiro/swiftkey/SpaceConversion;"
+        ],
+        "compiled_helper_classes_preserved": true,
+        "device_tested": false,
+        "existing_class_paths_preserved": true,
+        "existing_entrypoints_preserved": true,
+        "existing_external_references_resolve": true,
+        "existing_runtime_references_resolved": true,
+        "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+        "old_public_api_preserved": true,
+        "original_apk_apply_tested": false,
+        "overlay_sha256": "115aa3c527d095698a5ec0dbef52e946834a2ee00d5a918e89cde519a0cc8810",
+        "previous_family_classes": [
+          "Lhiro/swiftkey/SpaceConversion;"
+        ],
+        "replacement_family_classes": [
+          "Lhiro/swiftkey/SpaceConversion;"
+        ],
+        "runtime_after_classes": 92,
+        "runtime_before_classes": 92,
+        "scope": "SpaceConversion-only replacement; canonical DEX preservation and unchanged runtime consumer ABI",
+        "status": "PASSED",
+        "unchanged_existing_class_paths": [
+          "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+          "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+          "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+          "Lhiro/swiftkey/CandidateScroll$Viewport;",
+          "Lhiro/swiftkey/CandidateScroll;",
+          "Lhiro/swiftkey/CandidateToolbar$1;",
+          "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+          "Lhiro/swiftkey/CandidateToolbar;",
+          "Lhiro/swiftkey/CursorLatinBoundary;",
+          "Lhiro/swiftkey/DeleteLatinBoundary;",
+          "Lhiro/swiftkey/EmojiCandidates$1;",
+          "Lhiro/swiftkey/EmojiCandidates;",
+          "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+          "Lhiro/swiftkey/EmojiFooter$Row;",
+          "Lhiro/swiftkey/EmojiFooter;",
+          "Lhiro/swiftkey/EmojiPanelUi$1;",
+          "Lhiro/swiftkey/EmojiPanelUi$2$1;",
+          "Lhiro/swiftkey/EmojiPanelUi$2;",
+          "Lhiro/swiftkey/EmojiPanelUi$3;",
+          "Lhiro/swiftkey/EmojiPanelUi$OptionChange;",
+          "Lhiro/swiftkey/EmojiPanelUi$Watcher;",
+          "Lhiro/swiftkey/EmojiPanelUi;",
+          "Lhiro/swiftkey/EmojiRecentsBridge$1;",
+          "Lhiro/swiftkey/EmojiRecentsBridge$Snapshot;",
+          "Lhiro/swiftkey/EmojiRecentsBridge;",
+          "Lhiro/swiftkey/EmojiRecentsSlide$Drain;",
+          "Lhiro/swiftkey/EmojiRecentsSlide$Picker;",
+          "Lhiro/swiftkey/EmojiRecentsSlide$Stroke;",
+          "Lhiro/swiftkey/EmojiRecentsSlide;",
+          "Lhiro/swiftkey/EmojiToolbar$1;",
+          "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+          "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+          "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+          "Lhiro/swiftkey/EmojiToolbar$Tap;",
+          "Lhiro/swiftkey/EmojiToolbar;",
+          "Lhiro/swiftkey/FlickSymbols$1;",
+          "Lhiro/swiftkey/FlickSymbols$2;",
+          "Lhiro/swiftkey/FlickSymbols$3;",
+          "Lhiro/swiftkey/FlickSymbols$Stroke;",
+          "Lhiro/swiftkey/FlickSymbols;",
+          "Lhiro/swiftkey/FrequencyLearning$1;",
+          "Lhiro/swiftkey/FrequencyLearning$Entry;",
+          "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+          "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+          "Lhiro/swiftkey/FrequencyLearning$Store;",
+          "Lhiro/swiftkey/FrequencyLearning;",
+          "Lhiro/swiftkey/JapaneseGlide$1$1;",
+          "Lhiro/swiftkey/JapaneseGlide$1;",
+          "Lhiro/swiftkey/JapaneseGlide$2$1;",
+          "Lhiro/swiftkey/JapaneseGlide$2;",
+          "Lhiro/swiftkey/JapaneseGlide$3;",
+          "Lhiro/swiftkey/JapaneseGlide$Snapshot;",
+          "Lhiro/swiftkey/JapaneseGlide$Stroke;",
+          "Lhiro/swiftkey/JapaneseGlide;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates$1;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates$2;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates$3;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates$Choice;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates$Listener;",
+          "Lhiro/swiftkey/JapaneseGlideCandidates;",
+          "Lhiro/swiftkey/JapaneseGlideDecoder$1;",
+          "Lhiro/swiftkey/JapaneseGlideDecoder$Index;",
+          "Lhiro/swiftkey/JapaneseGlideDecoder$Result;",
+          "Lhiro/swiftkey/JapaneseGlideDecoder$Scored;",
+          "Lhiro/swiftkey/JapaneseGlideDecoder;",
+          "Lhiro/swiftkey/JapaneseStart$1;",
+          "Lhiro/swiftkey/JapaneseStart$Session;",
+          "Lhiro/swiftkey/JapaneseStart;",
+          "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+          "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+          "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+          "Lhiro/swiftkey/KatakanaGlossCleanup$Holder;",
+          "Lhiro/swiftkey/KatakanaGlossCleanup;",
+          "Lhiro/swiftkey/KeySwap$ChangeListener;",
+          "Lhiro/swiftkey/KeySwap$Wrapped;",
+          "Lhiro/swiftkey/KeySwap;",
+          "Lhiro/swiftkey/KeySwapBinary;",
+          "Lhiro/swiftkey/LatinBoundary;",
+          "Lhiro/swiftkey/LineEnter$Session;",
+          "Lhiro/swiftkey/LineEnter;",
+          "Lhiro/swiftkey/LineEnterGesture$Callbacks;",
+          "Lhiro/swiftkey/LineEnterGesture;",
+          "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+          "Lhiro/swiftkey/PunctuationKeys$Edit;",
+          "Lhiro/swiftkey/PunctuationKeys;",
+          "Lhiro/swiftkey/UnicodeLatinToken;",
+          "Lhiro/swiftkey/UsageBridge$Session;",
+          "Lhiro/swiftkey/UsageBridge;",
+          "Lhiro/swiftkey/WordCandidates$1;",
+          "Lhiro/swiftkey/WordCandidates$Index;",
+          "Lhiro/swiftkey/WordCandidates;"
+        ],
+        "unchanged_existing_classes": 91,
+        "unchanged_non_space_classes": 91,
+        "unrelated_existing_classes": 91,
+        "unrelated_existing_classes_byte_identical": true,
+        "verified_existing_runtime_references": [],
+        "verified_public_api": [
+          "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+        ]
+      },
+      "native_abi_report": {
+        "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+        "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+        "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+        "audited_classes": [
+          "Lhiro/swiftkey/SpaceConversion;"
+        ],
+        "device_tested": false,
+        "each_caller_access_checked": true,
+        "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+        "inaccessible": [],
+        "incompatible_opcodes": [],
+        "interface_callback_implementations": [],
+        "interface_callbacks_checked": true,
+        "native_and_extension_references": [
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Landroid/os/Looper;",
+            "opcode": "invoke-static",
+            "reference": "Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Landroid/os/Looper;",
+            "opcode": "invoke-static",
+            "reference": "Landroid/os/Looper;->myLooper()Landroid/os/Looper;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lc5/m;",
+            "opcode": "invoke-virtual",
+            "reference": "Lc5/m;->g(Llh0/a;Lm40/b;Lwb0/j;I)Lyb0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lcom/microsoft/fluency/Japanese;",
+            "opcode": "invoke-static",
+            "reference": "Lcom/microsoft/fluency/Japanese;->romajiToHiragana(Ljava/lang/String;)Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+            "opcode": "sget-object",
+            "reference": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;->JAPANESE:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+            "opcode": "invoke-virtual",
+            "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;->getWrapped()Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ldc0/a;",
+            "opcode": "invoke-interface",
+            "reference": "Ldc0/a;->G()Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ldc0/a;",
+            "opcode": "invoke-interface",
+            "reference": "Ldc0/a;->K()Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ldc0/a;",
+            "opcode": "invoke-interface",
+            "reference": "Ldc0/a;->S()I",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ldc0/a;",
+            "opcode": "invoke-interface",
+            "reference": "Ldc0/a;->k()I",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ldc0/a;",
+            "opcode": "invoke-interface",
+            "reference": "Ldc0/a;->s()Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;"
+            ],
+            "defined_owner": "Lec0/f;",
+            "opcode": "invoke-virtual",
+            "reference": "Lec0/f;->a0()Lec0/y;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;",
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lec0/y;",
+            "opcode": "iget",
+            "reference": "Lec0/y;->k:I",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "sget-object",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->SPACE_SELECTION:Ljava/lang/ThreadLocal;",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;-><clinit>()V"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "sput-object",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->SPACE_SELECTION:Ljava/lang/ThreadLocal;",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "private static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/SpaceConversion;->same(Ljava/lang/String;Ljava/lang/String;)Z",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+            "opcode": "invoke-static",
+            "reference": "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+            "resolution_source": "extension",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lib0/a;",
+            "opcode": "iget-object",
+            "reference": "Lib0/a;->a:Ljava/util/List;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lib0/a;",
+            "opcode": "iget-object",
+            "reference": "Lib0/a;->c:Ll40/c;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lib0/p;",
+            "opcode": "iget-object",
+            "reference": "Lib0/p;->h:Lvj0/c;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/Character;",
+            "opcode": "invoke-static",
+            "reference": "Ljava/lang/Character;->charCount(I)I",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;-><init>()V"
+            ],
+            "defined_owner": "Ljava/lang/Object;",
+            "opcode": "invoke-direct",
+            "reference": "Ljava/lang/Object;-><init>()V",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Ljava/lang/String;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/String;->charAt(I)C",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/String;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/String;->codePointAt(I)I",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->same(Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/String;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/String;->equals(Ljava/lang/Object;)Z",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Ljava/lang/String;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/String;->isEmpty()Z",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Ljava/lang/String;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/String;->length()I",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/Thread;",
+            "opcode": "invoke-static",
+            "reference": "Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/Thread;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/Thread;->interrupt()V",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;-><clinit>()V"
+            ],
+            "defined_owner": "Ljava/lang/ThreadLocal;",
+            "opcode": "invoke-direct",
+            "reference": "Ljava/lang/ThreadLocal;-><init>()V",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Ljava/lang/ThreadLocal;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/ThreadLocal;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/ThreadLocal;->remove()V",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/lang/ThreadLocal;",
+            "opcode": "invoke-virtual",
+            "reference": "Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/util/List;",
+            "opcode": "invoke-interface",
+            "reference": "Ljava/util/List;->get(I)Ljava/lang/Object;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+            ],
+            "defined_owner": "Ljava/util/List;",
+            "opcode": "invoke-interface",
+            "reference": "Ljava/util/List;->size()I",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/util/concurrent/Future;",
+            "opcode": "invoke-interface",
+            "reference": "Ljava/util/concurrent/Future;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/util/concurrent/Future;",
+            "opcode": "invoke-interface",
+            "reference": "Ljava/util/concurrent/Future;->isCancelled()Z",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ljava/util/concurrent/TimeUnit;",
+            "opcode": "sget-object",
+            "reference": "Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ll40/c;",
+            "opcode": "iget-object",
+            "reference": "Ll40/c;->d:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ll40/c;",
+            "opcode": "iget-object",
+            "reference": "Ll40/c;->i:Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Ll40/c;",
+            "opcode": "iget-object",
+            "reference": "Ll40/c;->k:Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Llb0/a;",
+            "opcode": "iget-object",
+            "reference": "Llb0/a;->e:Lib0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/a0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/a0;->a:Lm40/c0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/b0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/b0;->a:Lm40/c0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/b;",
+            "opcode": "invoke-interface",
+            "reference": "Lm40/b;->getTrailingSeparator()Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+            ],
+            "defined_owner": "Lm40/b;",
+            "opcode": "invoke-interface",
+            "reference": "Lm40/b;->getUserFacingText()Ljava/lang/String;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public abstract",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lm40/b;",
+            "opcode": "invoke-interface",
+            "reference": "Lm40/b;->subrequest()Ll40/c;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/g0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/g0;->a:Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/i0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/i0;->a:Lm40/h0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/j0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/j0;->b:Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/k0;",
+            "opcode": "iget-object",
+            "reference": "Lm40/k0;->a:Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/v;",
+            "opcode": "iget-object",
+            "reference": "Lm40/v;->b:Lm40/c0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/x;",
+            "opcode": "iget-object",
+            "reference": "Lm40/x;->b:Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+            ],
+            "defined_owner": "Lm40/y;",
+            "opcode": "iget-object",
+            "reference": "Lm40/y;->c:Lm40/h0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/h1;->a:Lib0/p;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "invoke-virtual",
+            "reference": "Lwb0/h1;->b(Llh0/a;ZLib0/m;Lec0/j;)V",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/h1;->b:Lwb0/m;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-boolean",
+            "reference": "Lwb0/h1;->f:Z",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iput-boolean",
+            "reference": "Lwb0/h1;->f:Z",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/h1;->h:Lib0/m;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/h1;->i:Lec0/j;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/h1;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/h1;->j:Llh0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public static",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/j;",
+            "opcode": "sget-object",
+            "reference": "Lwb0/j;->a:Lwb0/j;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/m;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/m;->g:Llb0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/m;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/m;->l:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/n0;",
+            "opcode": "invoke-virtual",
+            "reference": "Lwb0/n0;->C()Ldc0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/x;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/x;->b:Lc5/m;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/x;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/x;->c:Lwb0/n0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/x;",
+            "opcode": "iget-object",
+            "reference": "Lwb0/x;->g:Lwb0/h1;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "access": "public",
+            "android_inherited": false,
+            "callers": [
+              "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+            ],
+            "defined_owner": "Lwb0/x;",
+            "opcode": "invoke-virtual",
+            "reference": "Lwb0/x;->i0(Lyb0/a;)V",
+            "resolution_source": "native_apk",
+            "resolved": true
+          }
+        ],
+        "original_apk_apply_tested": false,
+        "platform_inherited_members_resolved": true,
+        "platform_members_checked": true,
+        "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+        "status": "PASSED",
+        "type_references": [
+          {
+            "opcode": "check-cast",
+            "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Ldc0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lec0/f;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lec0/f;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "return-declaration",
+            "reference": "Lec0/y;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "catch",
+            "reference": "Ljava/lang/Exception;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "catch",
+            "reference": "Ljava/lang/InterruptedException;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "catch",
+            "reference": "Ljava/lang/LinkageError;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "extends",
+            "reference": "Ljava/lang/Object;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Ljava/lang/String;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "return-declaration",
+            "reference": "Ljava/lang/String;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "field-declaration",
+            "reference": "Ljava/lang/ThreadLocal;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "new-instance",
+            "reference": "Ljava/lang/ThreadLocal;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Ljava/util/List;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Ljava/util/List;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Ljava/util/List;",
+            "resolution_source": "android_api35",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Ll40/c;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Llh0/a;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/a0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/a0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/b0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/b0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Lm40/b;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/g0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/g0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/i0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/i0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/j0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/j0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/k0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/k0;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/v;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/v;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/x;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/x;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "check-cast",
+            "reference": "Lm40/y;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "instance-of",
+            "reference": "Lm40/y;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          },
+          {
+            "opcode": "parameter-declaration",
+            "reference": "Lwb0/x;",
+            "resolution_source": "native_apk",
+            "resolved": true
+          }
+        ],
+        "unresolved": [],
+        "verifier_source_sha256": "a62653f1e59df518fc576404681d714ea1441cf1e0a1626aad8160cc7ae6c69a"
+      },
+      "native_abi_report_sha256": "647936d76207a42c1daeaac61a75acb49243a545a37fc05b0101fdb1e20b4a8c",
+      "native_abi_verified": true,
+      "original_apk_apply_tested": false,
+      "runtime_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+      "status": "PASSED"
+    },
+    "runtime_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+    "status": "PASSED"
+  },
+  "host_tests_passed": true,
+  "inputs": {
+    "Hiro_Morphe_Patches_v1.0.343.mpp": {
+      "sha256": "217c4d2b7b68a00cff4fea5ad5efcc86a9117e96448e122051c4c7e8b48841ca",
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/bc057500507fd8877adff8bc5f85694b6d9cb5a5/downloads/Hiro_Morphe_Patches_v1.0.343.mpp"
+    },
+    "SwiftKeyBeta_v2_SamsungEmoji_v1.8.31.mpp": {
+      "sha256": "642bc5e1338021d472e064919b6459d87b97e9595635190d315d8e22e06fd719",
+      "url": "https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/bc057500507fd8877adff8bc5f85694b6d9cb5a5/downloads/SwiftKeyBeta_v2_SamsungEmoji_v1.8.31.mpp"
+    },
+    "android.jar": {
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "url": "https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar"
+    },
+    "apktool.jar": {
+      "sha256": "dbf930b076c6b9be08d57c449cacefc3bdd6b71ebd59b3066fc0e1f5b14f9423",
+      "url": "https://github.com/iBotPeaches/Apktool/releases/download/v3.0.3/apktool_3.0.3.jar"
+    },
+    "morphe-current.jar": {
+      "sha256": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573",
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar"
+    },
+    "morphe.jar": {
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+      "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar"
+    },
+    "r8.jar": {
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+      "url": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar"
+    }
+  },
+  "loader_build_report": {
+    "android_main_and_bridges_canonical_preserved": true,
+    "android_serialization_canonical_preservation": true,
+    "bundle_android_sha256": "98d2092221d6f6acf251fb51aded7ddc22a35c55476e2edfe1e02329696fa75b",
+    "changed_android_classes": [
+      "Lapp/hiro/swiftkey/patches/SpaceConversionPatch;"
+    ],
+    "device_tested": false,
+    "helper_jvm_sha256": "9671c47cb81d9610d71cea08703bb5439aa8c6e1e9fef1fb41a8039d87be2aa6",
+    "input_pins": {
+      "bundle": {
+        "android_sha256": "77a626fec73cc808ed29011cdc3b54736b03ac73e6d6174a2d9542c8bb688c0d",
+        "helper_jvm_sha256": "2126c4f32be0f73e1aab41a9150468680a45364c1b988a84b2b4398af858eaee",
+        "jvm_sha256": "35584d5052ad59b6b7951eeda8e1aa3201e10b43b259f2fcc028534f11bfda39",
+        "mpp_sha256": "217c4d2b7b68a00cff4fea5ad5efcc86a9117e96448e122051c4c7e8b48841ca"
+      },
+      "single": {
+        "android_sha256": "64696b80f270d7e1ee41dc717cb85a74fc23cd79ba15d4f9cfe6e69c4398eed9",
+        "helper_jvm_sha256": "2126c4f32be0f73e1aab41a9150468680a45364c1b988a84b2b4398af858eaee",
+        "jvm_sha256": "35584d5052ad59b6b7951eeda8e1aa3201e10b43b259f2fcc028534f11bfda39",
+        "mpp_sha256": "642bc5e1338021d472e064919b6459d87b97e9595635190d315d8e22e06fd719"
+      }
+    },
+    "jvm_main_and_bridges_byte_exact": true,
+    "jvm_output_changes_only_helper": true,
+    "jvm_sha256": "35584d5052ad59b6b7951eeda8e1aa3201e10b43b259f2fcc028534f11bfda39",
+    "loader_classes_added": 0,
+    "loader_classes_replaced": 1,
+    "native_report": {
+      "all_target_drift_rejected_before_mutation": true,
+      "android_runtime_executed": false,
+      "assertions": 170,
+      "candidate_getter_bodies_unchanged": true,
+      "device_tested": false,
+      "fixture_provenance": "Exact selected native methods from the preserved modified SwiftKey Beta 9.13.16.4 reference APK; not an untouched APK or a device run.",
+      "fixtures_sha256": {
+        "ac0/b.smali": "87ad60a4bcd228b89053dcdce3b719f09b0e8ea75112a84a6d9da2935f04c0ba",
+        "ec0/w.smali": "d35a6a82b5be177a446050e1615448223ce00697eeb5c9922a5b3c818ca71377",
+        "ec0/x.smali": "416411dcb09356bdf63a5c7ec4e53d8723a24a7c240da06ea68def729ac5a895",
+        "ma0/o.smali": "b7b2e8a6792b37789731e80a26ccb43127d280934dee75350218c4082c6de4f0",
+        "wb0/e.smali": "fe95b3e035b13968f24c5b5e45361889e1e3913de3edfce60a91c750ba4835cc",
+        "wb0/x.smali": "905b7ca55ca31a9d8bdb812606d6111a65566be54e49eb3922dda77f0eade790"
+      },
+      "inverse_native_method_restoration": true,
+      "morphe_runtime_sha256": {
+        "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573",
+        "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+      },
+      "morphe_runtime_tests": {
+        "morphe-current.jar": {
+          "all_target_drift_rejected_before_mutation": true,
+          "android_runtime_executed": false,
+          "assertions": 170,
+          "candidate_getter_bodies_unchanged": true,
+          "device_tested": false,
+          "inverse_native_method_restoration": true,
+          "native_fixture_dex_serialized": true,
+          "native_instructions_added": 4,
+          "native_methods_changed": 7,
+          "old_and_new_sdk_apply_executed": true,
+          "old_loader_separator_getters_rewritten": 0,
+          "original_apk_apply_tested": false,
+          "original_fallback_preserved": true,
+          "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+          "separator_getters_rewritten": 7,
+          "separator_methods_changed": 6,
+          "status": "PASSED"
+        },
+        "morphe.jar": {
+          "all_target_drift_rejected_before_mutation": true,
+          "android_runtime_executed": false,
+          "assertions": 170,
+          "candidate_getter_bodies_unchanged": true,
+          "device_tested": false,
+          "inverse_native_method_restoration": true,
+          "native_fixture_dex_serialized": true,
+          "native_instructions_added": 4,
+          "native_methods_changed": 7,
+          "old_and_new_sdk_apply_executed": true,
+          "old_loader_separator_getters_rewritten": 0,
+          "original_apk_apply_tested": false,
+          "original_fallback_preserved": true,
+          "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+          "separator_getters_rewritten": 7,
+          "separator_methods_changed": 6,
+          "status": "PASSED"
+        }
+      },
+      "native_fixture_dex_serialized": true,
+      "native_instructions_added": 4,
+      "native_methods_changed": 7,
+      "old_and_new_sdk_apply_executed": true,
+      "old_loader_separator_getters_rewritten": 0,
+      "original_apk_apply_tested": false,
+      "original_fallback_preserved": true,
+      "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+      "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+      "separator_getters_rewritten": 7,
+      "separator_methods_changed": 6,
+      "status": "PASSED"
+    },
+    "original_apk_apply_tested": false,
+    "replaced_loader_helper": "app/hiro/swiftkey/patches/SpaceConversionPatch.class",
+    "single_android_sha256": "4f1cc9ff87249074d9fa0bbea0213cee520f94bf2908d9cc1111b57db53d6e23",
+    "status": "PASSED",
+    "tool_pins": {
+      "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573",
+      "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+      "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    },
+    "unrelated_android_classes_preserved": true,
+    "unrelated_jvm_classes_preserved": true
+  },
+  "loader_reports": [
+    {
+      "baseline_extension_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+      "baseline_loaded_named_patches": 23,
+      "baseline_selected_swiftkey": 1,
+      "baseline_updated_dependency_graph_equal": true,
+      "clean_apk_apply_tested": false,
+      "dependency_types": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "RawResourcePatch"
+      ],
+      "device_tested": false,
+      "loader_selected_extension_matches_packaged_runtime": true,
+      "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+      "previous_patch_metadata_unchanged": 23,
+      "requested_swiftkey_keys": 1,
+      "restored_loaded_named_patches": 23,
+      "restored_selected_swiftkey": 1,
+      "selected_extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+      "selected_extension_stream_verified": true,
+      "standalone_combined_dependency_graph_equal": true,
+      "standalone_selected_swiftkey": 1,
+      "status": "PASSED",
+      "swiftkey_dependency_graph": {
+        "compatibility": {
+          "com.touchtype.swiftkey.beta": [
+            "9.13.16.4"
+          ]
+        },
+        "default": true,
+        "dependencies": [
+          {
+            "compatibility": {
+              "com.touchtype.swiftkey.beta": [
+                "9.13.16.4"
+              ]
+            },
+            "default": false,
+            "dependencies": [
+              {
+                "compatibility": {
+                  "com.touchtype.swiftkey.beta": [
+                    "9.13.16.4"
+                  ]
+                },
+                "default": false,
+                "dependencies": [],
+                "description": null,
+                "name": null,
+                "option_keys": [],
+                "type": "app.morphe.patcher.patch.BytecodePatch"
+              }
+            ],
+            "description": null,
+            "name": null,
+            "option_keys": [],
+            "type": "app.morphe.patcher.patch.RawResourcePatch"
+          }
+        ],
+        "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+        "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+        "option_keys": [],
+        "type": "app.morphe.patcher.patch.BytecodePatch"
+      }
+    },
+    {
+      "baseline_extension_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+      "baseline_loaded_named_patches": 23,
+      "baseline_selected_swiftkey": 1,
+      "baseline_updated_dependency_graph_equal": true,
+      "clean_apk_apply_tested": false,
+      "dependency_types": [
+        "BytecodePatch",
+        "BytecodePatch",
+        "RawResourcePatch"
+      ],
+      "device_tested": false,
+      "loader_selected_extension_matches_packaged_runtime": true,
+      "manager_selection_logic": "Real loadPatchesFromJar; package compatibility and unique selected-name filter used by Manager keyedFor/selectedPatches",
+      "previous_patch_metadata_unchanged": 23,
+      "requested_swiftkey_keys": 1,
+      "restored_loaded_named_patches": 23,
+      "restored_selected_swiftkey": 1,
+      "selected_extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+      "selected_extension_stream_verified": true,
+      "standalone_combined_dependency_graph_equal": true,
+      "standalone_selected_swiftkey": 1,
+      "status": "PASSED",
+      "swiftkey_dependency_graph": {
+        "compatibility": {
+          "com.touchtype.swiftkey.beta": [
+            "9.13.16.4"
+          ]
+        },
+        "default": true,
+        "dependencies": [
+          {
+            "compatibility": {
+              "com.touchtype.swiftkey.beta": [
+                "9.13.16.4"
+              ]
+            },
+            "default": false,
+            "dependencies": [
+              {
+                "compatibility": {
+                  "com.touchtype.swiftkey.beta": [
+                    "9.13.16.4"
+                  ]
+                },
+                "default": false,
+                "dependencies": [],
+                "description": null,
+                "name": null,
+                "option_keys": [],
+                "type": "app.morphe.patcher.patch.BytecodePatch"
+              }
+            ],
+            "description": null,
+            "name": null,
+            "option_keys": [],
+            "type": "app.morphe.patcher.patch.RawResourcePatch"
+          }
+        ],
+        "description": "英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。",
+        "name": "日本語入力・予測変換を改善しSamsung絵文字に統一",
+        "option_keys": [],
+        "type": "app.morphe.patcher.patch.BytecodePatch"
+      }
+    }
+  ],
+  "native_route_report": {
+    "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "baseline_failure_reproduced_by_this_test": false,
+    "device_tested": false,
+    "existing_hook_is_on_space_route": true,
+    "explicit_thread_hop_found_in_route_methods": false,
+    "full_apk_runtime_execution": false,
+    "native_call_edges_checked": 19,
+    "native_method_fixtures_checked": 31,
+    "ordinary_touch_route_has_direct_view_callback_entry": true,
+    "space_arguments": [
+      "U+0020",
+      "U+0020"
+    ],
+    "status": "PASSED"
+  },
+  "native_space_report": {
+    "all_target_drift_rejected_before_mutation": true,
+    "android_runtime_executed": false,
+    "assertions": 170,
+    "candidate_getter_bodies_unchanged": true,
+    "device_tested": false,
+    "fixture_provenance": "Exact selected native methods from the preserved modified SwiftKey Beta 9.13.16.4 reference APK; not an untouched APK or a device run.",
+    "fixtures_sha256": {
+      "ac0/b.smali": "87ad60a4bcd228b89053dcdce3b719f09b0e8ea75112a84a6d9da2935f04c0ba",
+      "ec0/w.smali": "d35a6a82b5be177a446050e1615448223ce00697eeb5c9922a5b3c818ca71377",
+      "ec0/x.smali": "416411dcb09356bdf63a5c7ec4e53d8723a24a7c240da06ea68def729ac5a895",
+      "ma0/o.smali": "b7b2e8a6792b37789731e80a26ccb43127d280934dee75350218c4082c6de4f0",
+      "wb0/e.smali": "fe95b3e035b13968f24c5b5e45361889e1e3913de3edfce60a91c750ba4835cc",
+      "wb0/x.smali": "905b7ca55ca31a9d8bdb812606d6111a65566be54e49eb3922dda77f0eade790"
+    },
+    "inverse_native_method_restoration": true,
+    "morphe_runtime_sha256": {
+      "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573",
+      "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe_runtime_tests": {
+      "morphe-current.jar": {
+        "all_target_drift_rejected_before_mutation": true,
+        "android_runtime_executed": false,
+        "assertions": 170,
+        "candidate_getter_bodies_unchanged": true,
+        "device_tested": false,
+        "inverse_native_method_restoration": true,
+        "native_fixture_dex_serialized": true,
+        "native_instructions_added": 4,
+        "native_methods_changed": 7,
+        "old_and_new_sdk_apply_executed": true,
+        "old_loader_separator_getters_rewritten": 0,
+        "original_apk_apply_tested": false,
+        "original_fallback_preserved": true,
+        "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+        "separator_getters_rewritten": 7,
+        "separator_methods_changed": 6,
+        "status": "PASSED"
+      },
+      "morphe.jar": {
+        "all_target_drift_rejected_before_mutation": true,
+        "android_runtime_executed": false,
+        "assertions": 170,
+        "candidate_getter_bodies_unchanged": true,
+        "device_tested": false,
+        "inverse_native_method_restoration": true,
+        "native_fixture_dex_serialized": true,
+        "native_instructions_added": 4,
+        "native_methods_changed": 7,
+        "old_and_new_sdk_apply_executed": true,
+        "old_loader_separator_getters_rewritten": 0,
+        "original_apk_apply_tested": false,
+        "original_fallback_preserved": true,
+        "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+        "separator_getters_rewritten": 7,
+        "separator_methods_changed": 6,
+        "status": "PASSED"
+      }
+    },
+    "native_fixture_dex_serialized": true,
+    "native_instructions_added": 4,
+    "native_methods_changed": 7,
+    "old_and_new_sdk_apply_executed": true,
+    "old_loader_separator_getters_rewritten": 0,
+    "original_apk_apply_tested": false,
+    "original_fallback_preserved": true,
+    "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+    "scope": "Real old/new JVM helper apply in SDK BytecodePatchContext over exact native method fixtures, then DEX serialization; not ART or handset execution. Runtime regression is separate.",
+    "separator_getters_rewritten": 7,
+    "separator_methods_changed": 6,
+    "status": "PASSED"
+  },
+  "original_apk_apply_tested": false,
+  "other_apps_byte_identical": true,
+  "ranking_runtime_preserved": true,
+  "runtime_byte_identical": false,
+  "runtime_report": {
+    "added_classes": [],
+    "all_other_classes_preserved": true,
+    "baseline_java_matches_published_dex": true,
+    "baseline_runtime_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+    "changed_classes": [
+      "Lhiro/swiftkey/SpaceConversion;"
+    ],
+    "device_tested": false,
+    "host_report": {
+      "assertions": 354,
+      "baseline_regressions": {
+        "assertions": 18,
+        "baseline_failures_reproduced": 6,
+        "device_trace_reproduced": false,
+        "failure_scope": "immutable_native_prediction_separator",
+        "status": "PASSED"
+      },
+      "cache_delivery_preservation": {
+        "baseline": {
+          "actual_production_space_handler": true,
+          "actual_production_word_supplement": true,
+          "cache_hit_visible_candidate_case_verified": true,
+          "checks": 13,
+          "device_tested": false,
+          "mode": "baseline",
+          "native_cache_branch_translated": true,
+          "status": "PASSED",
+          "visible_kanji": "愛"
+        },
+        "dictionary_row_sha256": "d3f53de2165130bc5e533d73f77a315aeadc220e3e71430d37748ad738e07b9e",
+        "fixed": {
+          "actual_production_space_handler": true,
+          "actual_production_word_supplement": true,
+          "cache_hit_visible_candidate_case_verified": true,
+          "checks": 13,
+          "device_tested": false,
+          "mode": "fixed",
+          "native_cache_branch_translated": true,
+          "status": "PASSED",
+          "visible_kanji": "愛"
+        },
+        "native_branch_translated_not_android_execution": true,
+        "native_fixture_sha256": "62b9518ae9a14472198f1fcf708bdbab8e72c717781f6865c6ce3d3d9f9bc7b5"
+      },
+      "candidate_mutation_removed": true,
+      "device_tested": false,
+      "identity_scoped_separator_reads": true,
+      "immutable_native_cases": 8,
+      "native_dispatch_only": true,
+      "native_raw_evidence": {
+        "android_code_executed": false,
+        "assertions": 53,
+        "device_tested": false,
+        "fragment_count": 11,
+        "fragment_sha256": {
+          "native_romaji_input.smali.txt": "692d11c23af22ee4dc966c26d87f93b86d67a4a56d069d33f8c7b2191a56c38d",
+          "raw_append_helper.smali.txt": "3f17afbbb6c21ace8e0ade8bf4cf2bd0c31c7431279be18eb472c53cff26f1fc",
+          "raw_append_key.smali.txt": "f5ef79a254c77a0204bbd23d993a4c4ab469a2084651a44614da772ae06f6301",
+          "raw_append_text.smali.txt": "719af669c58e70b8f3b24c97bfc3d71edf185868f44dd89638782ced8e266a3f",
+          "raw_correction_bridge.smali.txt": "96097b37710610518703de8811f548a9ee6708726e12bcf37176336e2d4d995d",
+          "raw_getter.smali.txt": "81934fafc8db6582c3426a9ca193b37746f7f88b0a43ef1377c3f9dcb74c0e78",
+          "raw_prepare_edit.smali.txt": "0c8fefcfc5f294f35810a907f02cab166ed7bfc457e876100c6d2142e7148f1c",
+          "raw_prepare_provisional_edit.smali.txt": "2476ce4e6549058766b2e154ba5400b7426b57482771a3a69c16c745011223fb",
+          "raw_reset.smali.txt": "6ce793ef934f6f607d39d4f8a66a981a1fd9ebd6b67e49a7e7a727880cceac52",
+          "request_raw_argument.smali.txt": "7407d427d8e089b8cefadc611a21c05976ecc97e21f7aa2ff8c5698ce5376f69",
+          "request_raw_field.smali.txt": "84e466a5cc4f4b51b140fcc3815179098def2d9329d12e4653592bd806f0f7e0"
+        },
+        "illustrative_translated_append_copy_cases": [
+          {
+            "exact_match": true,
+            "key": "i",
+            "prefix": "あ",
+            "request_raw": "あi",
+            "state_raw": "あi"
+          },
+          {
+            "exact_match": true,
+            "key": "i",
+            "prefix": "愛",
+            "request_raw": "愛i",
+            "state_raw": "愛i"
+          },
+          {
+            "exact_match": true,
+            "key": "Ｉ",
+            "prefix": "Ａ",
+            "request_raw": "ＡＩ",
+            "state_raw": "ＡＩ"
+          }
+        ],
+        "manifest_sha256": "38e3602f44537866b10fbb7691fba203f2515c79213a96c9b3581358a373990b",
+        "native_correction_text_can_be_reused_for_editing": true,
+        "native_raw_append_has_no_script_filter": true,
+        "native_romaji_call_has_no_all_latin_precondition": true,
+        "native_source_lines_rechecked": false,
+        "native_state_and_request_share_marker_raw": true,
+        "reference_apk_bytes_rechecked": false,
+        "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+        "scope": "Pinned source excerpts and translated append/copy examples; not native engine execution or a device reproduction.",
+        "status": "PASSED",
+        "user_video_raw_input_observed": false
+      },
+      "native_separator_evidence": {
+        "android_code_executed": false,
+        "assertions": 121,
+        "commit_separator_methods": 6,
+        "commit_separator_sites": 7,
+        "device_tested": false,
+        "email_wrapper_has_public_accessor": true,
+        "fragment_count": 29,
+        "fragment_sha256": {
+          "complex_extends_immutable.smali.txt": "60656ee62e6d7c8cd774297b2ddcde10659fef7b64c5db95788a243a09192a3e",
+          "context_getter.smali.txt": "ec0ed5bf9f6926607cb702b9960da659d039b859ebd221677c6062d1c8b1574b",
+          "context_guard.smali.txt": "41915ffc4966ef7e916910c9973c1e3455dfc658f97e606094236b048443ae8e",
+          "email_get_wrapped.smali.txt": "9b13435f3bbdfa95c6aada2f93e051f5e00d61a26a0b07ea349758ff56de8884",
+          "email_visitor_unwrap.smali.txt": "1eeb08a8d13b91de1d32597bfa2ee3e294285c0cf48aabe90e1365e609cb8e46",
+          "engine_to_factory.smali.txt": "b6d31dc6ea0c30e6861b8284362786840ac033c35ee154570520a1fe1ff69331",
+          "flow_immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+          "immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+          "native_event_factory.smali.txt": "de76e806941b6dd3f69cec17191686a40939014a0005c2b718819d4ffa2cba39",
+          "prediction_factory.smali.txt": "1f0145f9ee670760bea885a31194d77bd3dfc02e5bcb08d3bbb6e379b7e94ad5",
+          "request_context_field.smali.txt": "70af70d6c176356891254a7eba2019b2249a62b245b153094fc5b6e04e753737",
+          "site_input_connection.smali.txt": "1551c8630f7e6997a043da8c09f82e88f44a73fb639d32c7170e41395291d527",
+          "site_marker_commit.smali.txt": "7eb95e734fdb652a388a7d0cf138dec3c19b561f51c4b6331d0f23dded34b111",
+          "site_native_visitor_marker.smali.txt": "d114ddc6ce5094b1cc56d61f590d8a0ae67dad86de5550ae76b9cb045772d061",
+          "site_native_visitor_suffix.smali.txt": "a67981f7dac219d4ce636d7f422b202c49414c2c36b6e76a91b0900fb85ef34d",
+          "site_postcommit_suffix.smali.txt": "4fe6aa7673ccaed7e2c4e2b82dcbab337d34a4e056f03a97c7f4b366f058e41b",
+          "site_precommit_default.smali.txt": "b257c3485215e4e9d7bb017a2aca17032fee7972abbd833d0196d6ca4ccf995f",
+          "site_wrapper_visitor.smali.txt": "30fff467716be3df0bd6f674f50417af213ed6c53f83d8f1fd888d61a6062d77",
+          "transparent_visitor.smali.txt": "2d8ddc51b940e11ce0fd7079c7a9502faa3c9e7a714bc8ba0d239bbea7b84c5a",
+          "visitor_handoff.smali.txt": "fbf383aea171585e08c98c7ec4c5b1500556b5fa3e1b95a63269f213a1ae389d",
+          "wrapper_field_a0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+          "wrapper_field_b0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+          "wrapper_field_g0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+          "wrapper_field_i0.smali.txt": "60a0bdeb8aaf061ea55359283be6ee0b018178e4c4033ab4668722df4363f2a3",
+          "wrapper_field_j0.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+          "wrapper_field_k0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+          "wrapper_field_v.smali.txt": "2cb1c888e4781ce0f01618cfb4956afea1e4359377bb4438a4c10ea70d7f8366",
+          "wrapper_field_x.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+          "wrapper_field_y.smali.txt": "698da2c8465007b86971e68e2d8a904c02d7ce1c093c770f5bd05736eebdf965"
+        },
+        "manifest_sha256": "651a86c4f75b2b2d716941b9f9a09bb87ab68b7d3bb039d68a5bb4cb580dde30",
+        "native_context_guard_checks_K_against_request_i": true,
+        "native_fluency_candidate_setter_always_throws": true,
+        "native_precommit_null_separator_calls_setter": true,
+        "native_prediction_factory_produces_immutable_candidates": true,
+        "native_source_lines_rechecked": false,
+        "native_visitor_unwraps_candidates": true,
+        "reference_apk_bytes_rechecked": false,
+        "reference_apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+        "scope": "Pinned native source and call-site evidence; no native engine execution or handset reproduction.",
+        "status": "PASSED",
+        "user_device_candidate_type_observed": false,
+        "wrapper_chain_public_field_count": 9
+      },
+      "prediction_wait_limit_ms": 750,
+      "status": "PASSED"
+    },
+    "host_tests_passed": true,
+    "merge": {
+      "added_classes": [],
+      "baseline_classes": 92,
+      "baseline_extension_sha256": "dd8f89119077a06fc0969ad2032830440b208e3378d164be6370875617e2420c",
+      "changed_existing_classes": [
+        "Lhiro/swiftkey/SpaceConversion;"
+      ],
+      "compiled_helper_classes_preserved": true,
+      "device_tested": false,
+      "existing_class_paths_preserved": true,
+      "existing_entrypoints_preserved": true,
+      "existing_external_references_resolve": true,
+      "existing_runtime_references_resolved": true,
+      "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+      "old_public_api_preserved": true,
+      "original_apk_apply_tested": false,
+      "overlay_sha256": "115aa3c527d095698a5ec0dbef52e946834a2ee00d5a918e89cde519a0cc8810",
+      "previous_family_classes": [
+        "Lhiro/swiftkey/SpaceConversion;"
+      ],
+      "replacement_family_classes": [
+        "Lhiro/swiftkey/SpaceConversion;"
+      ],
+      "runtime_after_classes": 92,
+      "runtime_before_classes": 92,
+      "scope": "SpaceConversion-only replacement; canonical DEX preservation and unchanged runtime consumer ABI",
+      "status": "PASSED",
+      "unchanged_existing_class_paths": [
+        "Lhiro/swiftkey/CandidateScroll$CandidateKey;",
+        "Lhiro/swiftkey/CandidateScroll$Snapshot;",
+        "Lhiro/swiftkey/CandidateScroll$UpdatePlan;",
+        "Lhiro/swiftkey/CandidateScroll$Viewport;",
+        "Lhiro/swiftkey/CandidateScroll;",
+        "Lhiro/swiftkey/CandidateToolbar$1;",
+        "Lhiro/swiftkey/CandidateToolbar$Hidden;",
+        "Lhiro/swiftkey/CandidateToolbar;",
+        "Lhiro/swiftkey/CursorLatinBoundary;",
+        "Lhiro/swiftkey/DeleteLatinBoundary;",
+        "Lhiro/swiftkey/EmojiCandidates$1;",
+        "Lhiro/swiftkey/EmojiCandidates;",
+        "Lhiro/swiftkey/EmojiFooter$EnterKey;",
+        "Lhiro/swiftkey/EmojiFooter$Row;",
+        "Lhiro/swiftkey/EmojiFooter;",
+        "Lhiro/swiftkey/EmojiPanelUi$1;",
+        "Lhiro/swiftkey/EmojiPanelUi$2$1;",
+        "Lhiro/swiftkey/EmojiPanelUi$2;",
+        "Lhiro/swiftkey/EmojiPanelUi$3;",
+        "Lhiro/swiftkey/EmojiPanelUi$OptionChange;",
+        "Lhiro/swiftkey/EmojiPanelUi$Watcher;",
+        "Lhiro/swiftkey/EmojiPanelUi;",
+        "Lhiro/swiftkey/EmojiRecentsBridge$1;",
+        "Lhiro/swiftkey/EmojiRecentsBridge$Snapshot;",
+        "Lhiro/swiftkey/EmojiRecentsBridge;",
+        "Lhiro/swiftkey/EmojiRecentsSlide$Drain;",
+        "Lhiro/swiftkey/EmojiRecentsSlide$Picker;",
+        "Lhiro/swiftkey/EmojiRecentsSlide$Stroke;",
+        "Lhiro/swiftkey/EmojiRecentsSlide;",
+        "Lhiro/swiftkey/EmojiToolbar$1;",
+        "Lhiro/swiftkey/EmojiToolbar$LongPress;",
+        "Lhiro/swiftkey/EmojiToolbar$LongRelease;",
+        "Lhiro/swiftkey/EmojiToolbar$Prepared;",
+        "Lhiro/swiftkey/EmojiToolbar$Tap;",
+        "Lhiro/swiftkey/EmojiToolbar;",
+        "Lhiro/swiftkey/FlickSymbols$1;",
+        "Lhiro/swiftkey/FlickSymbols$2;",
+        "Lhiro/swiftkey/FlickSymbols$3;",
+        "Lhiro/swiftkey/FlickSymbols$Stroke;",
+        "Lhiro/swiftkey/FlickSymbols;",
+        "Lhiro/swiftkey/FrequencyLearning$1;",
+        "Lhiro/swiftkey/FrequencyLearning$Entry;",
+        "Lhiro/swiftkey/FrequencyLearning$Store$1;",
+        "Lhiro/swiftkey/FrequencyLearning$Store$2;",
+        "Lhiro/swiftkey/FrequencyLearning$Store;",
+        "Lhiro/swiftkey/FrequencyLearning;",
+        "Lhiro/swiftkey/JapaneseGlide$1$1;",
+        "Lhiro/swiftkey/JapaneseGlide$1;",
+        "Lhiro/swiftkey/JapaneseGlide$2$1;",
+        "Lhiro/swiftkey/JapaneseGlide$2;",
+        "Lhiro/swiftkey/JapaneseGlide$3;",
+        "Lhiro/swiftkey/JapaneseGlide$Snapshot;",
+        "Lhiro/swiftkey/JapaneseGlide$Stroke;",
+        "Lhiro/swiftkey/JapaneseGlide;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates$1;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates$2;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates$3;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates$Choice;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates$Listener;",
+        "Lhiro/swiftkey/JapaneseGlideCandidates;",
+        "Lhiro/swiftkey/JapaneseGlideDecoder$1;",
+        "Lhiro/swiftkey/JapaneseGlideDecoder$Index;",
+        "Lhiro/swiftkey/JapaneseGlideDecoder$Result;",
+        "Lhiro/swiftkey/JapaneseGlideDecoder$Scored;",
+        "Lhiro/swiftkey/JapaneseGlideDecoder;",
+        "Lhiro/swiftkey/JapaneseStart$1;",
+        "Lhiro/swiftkey/JapaneseStart$Session;",
+        "Lhiro/swiftkey/JapaneseStart;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$1;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates$Index;",
+        "Lhiro/swiftkey/KatakanaEnglishCandidates;",
+        "Lhiro/swiftkey/KatakanaGlossCleanup$Holder;",
+        "Lhiro/swiftkey/KatakanaGlossCleanup;",
+        "Lhiro/swiftkey/KeySwap$ChangeListener;",
+        "Lhiro/swiftkey/KeySwap$Wrapped;",
+        "Lhiro/swiftkey/KeySwap;",
+        "Lhiro/swiftkey/KeySwapBinary;",
+        "Lhiro/swiftkey/LatinBoundary;",
+        "Lhiro/swiftkey/LineEnter$Session;",
+        "Lhiro/swiftkey/LineEnter;",
+        "Lhiro/swiftkey/LineEnterGesture$Callbacks;",
+        "Lhiro/swiftkey/LineEnterGesture;",
+        "Lhiro/swiftkey/PunctuationKeys$Cursor;",
+        "Lhiro/swiftkey/PunctuationKeys$Edit;",
+        "Lhiro/swiftkey/PunctuationKeys;",
+        "Lhiro/swiftkey/UnicodeLatinToken;",
+        "Lhiro/swiftkey/UsageBridge$Session;",
+        "Lhiro/swiftkey/UsageBridge;",
+        "Lhiro/swiftkey/WordCandidates$1;",
+        "Lhiro/swiftkey/WordCandidates$Index;",
+        "Lhiro/swiftkey/WordCandidates;"
+      ],
+      "unchanged_existing_classes": 91,
+      "unchanged_non_space_classes": 91,
+      "unrelated_existing_classes": 91,
+      "unrelated_existing_classes_byte_identical": true,
+      "verified_existing_runtime_references": [],
+      "verified_public_api": [
+        "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+      ]
+    },
+    "native_abi_report": {
+      "android_jar_sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "apk_provenance": "Previously modified archived SwiftKey Beta 9.13.16.4 v2 APK; not a clean application test",
+      "apk_sha256": "e9f400945e7012148eda86b6039c905566312fb1a0cf39d0360f0ccccb0124f7",
+      "audited_classes": [
+        "Lhiro/swiftkey/SpaceConversion;"
+      ],
+      "device_tested": false,
+      "each_caller_access_checked": true,
+      "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+      "inaccessible": [],
+      "incompatible_opcodes": [],
+      "interface_callback_implementations": [],
+      "interface_callbacks_checked": true,
+      "native_and_extension_references": [
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Landroid/os/Looper;",
+          "opcode": "invoke-static",
+          "reference": "Landroid/os/Looper;->getMainLooper()Landroid/os/Looper;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Landroid/os/Looper;",
+          "opcode": "invoke-static",
+          "reference": "Landroid/os/Looper;->myLooper()Landroid/os/Looper;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lc5/m;",
+          "opcode": "invoke-virtual",
+          "reference": "Lc5/m;->g(Llh0/a;Lm40/b;Lwb0/j;I)Lyb0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lcom/microsoft/fluency/Japanese;",
+          "opcode": "invoke-static",
+          "reference": "Lcom/microsoft/fluency/Japanese;->romajiToHiragana(Ljava/lang/String;)Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+          "opcode": "sget-object",
+          "reference": "Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;->JAPANESE:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+          "opcode": "invoke-virtual",
+          "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;->getWrapped()Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ldc0/a;",
+          "opcode": "invoke-interface",
+          "reference": "Ldc0/a;->G()Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ldc0/a;",
+          "opcode": "invoke-interface",
+          "reference": "Ldc0/a;->K()Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ldc0/a;",
+          "opcode": "invoke-interface",
+          "reference": "Ldc0/a;->S()I",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ldc0/a;",
+          "opcode": "invoke-interface",
+          "reference": "Ldc0/a;->k()I",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ldc0/a;",
+          "opcode": "invoke-interface",
+          "reference": "Ldc0/a;->s()Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;"
+          ],
+          "defined_owner": "Lec0/f;",
+          "opcode": "invoke-virtual",
+          "reference": "Lec0/f;->a0()Lec0/y;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;",
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lec0/y;",
+          "opcode": "iget",
+          "reference": "Lec0/y;->k:I",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "sget-object",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->SPACE_SELECTION:Ljava/lang/ThreadLocal;",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;-><clinit>()V"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "sput-object",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->SPACE_SELECTION:Ljava/lang/ThreadLocal;",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->activeMarker(Ldc0/a;)Lec0/y;",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "private static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lhiro/swiftkey/SpaceConversion;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/SpaceConversion;->same(Ljava/lang/String;Ljava/lang/String;)Z",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lhiro/swiftkey/WordCandidates;",
+          "opcode": "invoke-static",
+          "reference": "Lhiro/swiftkey/WordCandidates;->normalize(Ljava/lang/String;)Ljava/lang/String;",
+          "resolution_source": "extension",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lib0/a;",
+          "opcode": "iget-object",
+          "reference": "Lib0/a;->a:Ljava/util/List;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lib0/a;",
+          "opcode": "iget-object",
+          "reference": "Lib0/a;->c:Ll40/c;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lib0/p;",
+          "opcode": "iget-object",
+          "reference": "Lib0/p;->h:Lvj0/c;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/Character;",
+          "opcode": "invoke-static",
+          "reference": "Ljava/lang/Character;->charCount(I)I",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;-><init>()V"
+          ],
+          "defined_owner": "Ljava/lang/Object;",
+          "opcode": "invoke-direct",
+          "reference": "Ljava/lang/Object;-><init>()V",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Ljava/lang/String;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/String;->charAt(I)C",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/String;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/String;->codePointAt(I)I",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->same(Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/String;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/String;->equals(Ljava/lang/Object;)Z",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Ljava/lang/String;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/String;->isEmpty()Z",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->hasKanji(Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->reading(Ljava/lang/String;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Ljava/lang/String;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/String;->length()I",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/Thread;",
+          "opcode": "invoke-static",
+          "reference": "Ljava/lang/Thread;->currentThread()Ljava/lang/Thread;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/Thread;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/Thread;->interrupt()V",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;-><clinit>()V"
+          ],
+          "defined_owner": "Ljava/lang/ThreadLocal;",
+          "opcode": "invoke-direct",
+          "reference": "Ljava/lang/ThreadLocal;-><init>()V",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z",
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Ljava/lang/ThreadLocal;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/ThreadLocal;->get()Ljava/lang/Object;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/ThreadLocal;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/ThreadLocal;->remove()V",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/lang/ThreadLocal;",
+          "opcode": "invoke-virtual",
+          "reference": "Ljava/lang/ThreadLocal;->set(Ljava/lang/Object;)V",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/util/List;",
+          "opcode": "invoke-interface",
+          "reference": "Ljava/util/List;->get(I)Ljava/lang/Object;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+          ],
+          "defined_owner": "Ljava/util/List;",
+          "opcode": "invoke-interface",
+          "reference": "Ljava/util/List;->size()I",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/util/concurrent/Future;",
+          "opcode": "invoke-interface",
+          "reference": "Ljava/util/concurrent/Future;->get(JLjava/util/concurrent/TimeUnit;)Ljava/lang/Object;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/util/concurrent/Future;",
+          "opcode": "invoke-interface",
+          "reference": "Ljava/util/concurrent/Future;->isCancelled()Z",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ljava/util/concurrent/TimeUnit;",
+          "opcode": "sget-object",
+          "reference": "Ljava/util/concurrent/TimeUnit;->MILLISECONDS:Ljava/util/concurrent/TimeUnit;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ll40/c;",
+          "opcode": "iget-object",
+          "reference": "Ll40/c;->d:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ll40/c;",
+          "opcode": "iget-object",
+          "reference": "Ll40/c;->i:Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->matches(Ll40/c;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Ll40/c;",
+          "opcode": "iget-object",
+          "reference": "Ll40/c;->k:Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Llb0/a;",
+          "opcode": "iget-object",
+          "reference": "Llb0/a;->e:Lib0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/a0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/a0;->a:Lm40/c0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/b0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/b0;->a:Lm40/c0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/b;",
+          "opcode": "invoke-interface",
+          "reference": "Lm40/b;->getTrailingSeparator()Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I"
+          ],
+          "defined_owner": "Lm40/b;",
+          "opcode": "invoke-interface",
+          "reference": "Lm40/b;->getUserFacingText()Ljava/lang/String;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public abstract",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->firstKanji(Ljava/util/List;Ljava/lang/String;)I",
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lm40/b;",
+          "opcode": "invoke-interface",
+          "reference": "Lm40/b;->subrequest()Ll40/c;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/g0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/g0;->a:Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/i0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/i0;->a:Lm40/h0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/j0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/j0;->b:Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/k0;",
+          "opcode": "iget-object",
+          "reference": "Lm40/k0;->a:Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/v;",
+          "opcode": "iget-object",
+          "reference": "Lm40/v;->b:Lm40/c0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/x;",
+          "opcode": "iget-object",
+          "reference": "Lm40/x;->b:Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->separator(Lm40/b;)Ljava/lang/String;"
+          ],
+          "defined_owner": "Lm40/y;",
+          "opcode": "iget-object",
+          "reference": "Lm40/y;->c:Lm40/h0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/h1;->a:Lib0/p;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "invoke-virtual",
+          "reference": "Lwb0/h1;->b(Llh0/a;ZLib0/m;Lec0/j;)V",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/h1;->b:Lwb0/m;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-boolean",
+          "reference": "Lwb0/h1;->f:Z",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iput-boolean",
+          "reference": "Lwb0/h1;->f:Z",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/h1;->h:Lib0/m;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/h1;->i:Lec0/j;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/h1;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/h1;->j:Llh0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public static",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/j;",
+          "opcode": "sget-object",
+          "reference": "Lwb0/j;->a:Lwb0/j;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/m;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/m;->g:Llb0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/m;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/m;->l:Lcom/microsoft/fluency/ResultsFilter$PredictionSearchType;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/n0;",
+          "opcode": "invoke-virtual",
+          "reference": "Lwb0/n0;->C()Ldc0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/x;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/x;->b:Lc5/m;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/x;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/x;->c:Lwb0/n0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/x;",
+          "opcode": "iget-object",
+          "reference": "Lwb0/x;->g:Lwb0/h1;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "access": "public",
+          "android_inherited": false,
+          "callers": [
+            "Lhiro/swiftkey/SpaceConversion;->handle(Lwb0/x;Llh0/a;Ljava/lang/String;Ljava/lang/String;)Z"
+          ],
+          "defined_owner": "Lwb0/x;",
+          "opcode": "invoke-virtual",
+          "reference": "Lwb0/x;->i0(Lyb0/a;)V",
+          "resolution_source": "native_apk",
+          "resolved": true
+        }
+      ],
+      "original_apk_apply_tested": false,
+      "platform_inherited_members_resolved": true,
+      "platform_members_checked": true,
+      "scope": "Independent symbolic native/member ABI verification, including inherited Android API35 members; not Android execution",
+      "status": "PASSED",
+      "type_references": [
+        {
+          "opcode": "check-cast",
+          "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lcom/swiftkey/typeface/candidates/candidates/EmailAddressCandidate;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Ldc0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lec0/f;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lec0/f;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "return-declaration",
+          "reference": "Lec0/y;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "catch",
+          "reference": "Ljava/lang/Exception;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "catch",
+          "reference": "Ljava/lang/InterruptedException;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "catch",
+          "reference": "Ljava/lang/LinkageError;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "extends",
+          "reference": "Ljava/lang/Object;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Ljava/lang/String;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "return-declaration",
+          "reference": "Ljava/lang/String;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "field-declaration",
+          "reference": "Ljava/lang/ThreadLocal;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "new-instance",
+          "reference": "Ljava/lang/ThreadLocal;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Ljava/util/List;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Ljava/util/List;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Ljava/util/List;",
+          "resolution_source": "android_api35",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Ll40/c;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Llh0/a;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/a0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/a0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/b0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/b0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Lm40/b;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/g0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/g0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/i0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/i0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/j0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/j0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/k0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/k0;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/v;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/v;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/x;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/x;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "check-cast",
+          "reference": "Lm40/y;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "instance-of",
+          "reference": "Lm40/y;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        },
+        {
+          "opcode": "parameter-declaration",
+          "reference": "Lwb0/x;",
+          "resolution_source": "native_apk",
+          "resolved": true
+        }
+      ],
+      "unresolved": [],
+      "verifier_source_sha256": "a62653f1e59df518fc576404681d714ea1441cf1e0a1626aad8160cc7ae6c69a"
+    },
+    "native_abi_report_sha256": "647936d76207a42c1daeaac61a75acb49243a545a37fc05b0101fdb1e20b4a8c",
+    "native_abi_verified": true,
+    "original_apk_apply_tested": false,
+    "runtime_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+    "status": "PASSED"
+  },
+  "runtime_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+  "shift_helper_byte_identical": true,
+  "single": {
+    "added_entries": [],
+    "all_other_entries_byte_identical": true,
+    "bytes": 44728699,
+    "changed_entries": [
+      "META-INF/MANIFEST.MF",
+      "app/hiro/swiftkey/patches/SpaceConversionPatch.class",
+      "classes.dex",
+      "extensions/swiftkey_japanese.mpe"
+    ],
+    "extension_sha256": "377de86d964dea1f66515dae59b098dbdeda0cb0e5b469cd215e7c2e6aad0834",
+    "loader_dex_sha256": "4f1cc9ff87249074d9fa0bbea0213cee520f94bf2908d9cc1111b57db53d6e23",
+    "sha256": "03fca4b37efe73c24529d1db7422fbf68d9867603be2aff1228af728be03cc67",
+    "space_helper_jvm_sha256": "9671c47cb81d9610d71cea08703bb5439aa8c6e1e9fef1fb41a8039d87be2aa6",
+    "unchanged_entries": 22
+  },
+  "source_sha256": {
+    "README.txt": "2672dab8e7ad5884b7aa9aba242abd4fb3323258ab16601136104d7bc46d6bdf",
+    "RELEASE_NOTES.txt": "eb555aaac5d3a211964c3e18a8807020200aee207905478278229babdf7ba753",
+    "build1832.py": "9efe93e272ba30feebda9cb97f87ea057ef1c3db782ab7dbadffcaef19e65cd0",
+    "create_manifest.py": "7d047b7a830504960fa1cc34fd42d826c143042085e426c70cb48d708a3b32f4",
+    "loader/LoaderResourceProbe.java": "60dd28e2fb816cdb079f3fe5d4d8180a44a9cc3bf13144657e6267c823507485",
+    "loader/UpdateSpaceLoader.java": "1c2abf2f0f33871274f99fb2f9825b1264052bf5e0067e91725eae3eeed12dca",
+    "loader/app/hiro/swiftkey/patches/NativeSpaceProbe.java": "f39f9550fc8393a78112aca787f45437dee526d994f507d2599254cd18af1ab3",
+    "loader/app/hiro/swiftkey/patches/SpaceConversionPatch.java": "71898de4f681e39107239d8424a692e7873884e89e034147ea12a2f6eca95d50",
+    "loader/build_loaders.py": "aac9aab2e6456383343b025bdfb6f46074aca9150656c9c20306263c3423fe3b",
+    "loader/tests/fixture-provenance.json": "cfd42e6bdf94c7b057c541629631e3c22b3a7e9debde8987dd9ad8f62c3c661b",
+    "loader/tests/fixtures/ac0/b.smali": "87ad60a4bcd228b89053dcdce3b719f09b0e8ea75112a84a6d9da2935f04c0ba",
+    "loader/tests/fixtures/ec0/w.smali": "d35a6a82b5be177a446050e1615448223ce00697eeb5c9922a5b3c818ca71377",
+    "loader/tests/fixtures/ec0/x.smali": "416411dcb09356bdf63a5c7ec4e53d8723a24a7c240da06ea68def729ac5a895",
+    "loader/tests/fixtures/ma0/o.smali": "b7b2e8a6792b37789731e80a26ccb43127d280934dee75350218c4082c6de4f0",
+    "loader/tests/fixtures/wb0/e.smali": "fe95b3e035b13968f24c5b5e45361889e1e3913de3edfce60a91c750ba4835cc",
+    "loader/tests/fixtures/wb0/x.smali": "905b7ca55ca31a9d8bdb812606d6111a65566be54e49eb3922dda77f0eade790",
+    "publish1832.py": "5a7cc216d4f4da9a8a7f10be3a490b1620364acdd3dfebba27bc06faaf3435cb",
+    "publisher_tests.py": "f8715c0c9164364c66deae3662c3205235a558c5bf70bb7d2200f66b59c9c260",
+    "runtime/baseline/hiro/swiftkey/SpaceConversion.java": "e5682c11809c163adfc84d53ea5e6a6c3412602de9348caedf9f2a029722840b",
+    "runtime/build_runtime.py": "1c08d2c32870265e06833681b4ab4a89f32961eed17367ea337b370ac33783f7",
+    "runtime/src/hiro/swiftkey/SpaceConversion.java": "7ca7bcd878afb8d47009ee6b389c0bdb15e4212ee09d197223f62e41719274b2",
+    "runtime/src/hiro/swiftkey/WordCandidates.java": "8b4fc313cd4957562618e2e32027f642ce007c73ff7e3917a7f8960dc03241dd",
+    "runtime/stubs/c5/m.java": "796ee8b56c7e6ac202b1c4426591b6972a6a9dd89c2210fbf3141be2739b9317",
+    "runtime/stubs/com/microsoft/fluency/Japanese.java": "8952f2bee4a822c3efcc26dee2a0f4c7e16f38a8d21ae2176ae47e0c86ca542c",
+    "runtime/stubs/com/microsoft/fluency/ResultsFilter.java": "3069468f884669c8b15a8a6c70ed729f9cfc12b32bea4f8ab4a36365214242dc",
+    "runtime/stubs/com/swiftkey/typeface/candidates/candidates/EmailAddressCandidate.java": "aeccbb9bf6da2a3d5c0a6c7507fc89c8282c9c376eab70f012bccabd2a0ab683",
+    "runtime/stubs/dc0/a.java": "eaccddc333a03ffaf779eedee3d945c095bfbd78babc397400cf00e6f835e819",
+    "runtime/stubs/ec0/f.java": "2a9e41f5be0ba4d706bd32285805cc47e8f8cc06a41d091c6cf0861f4d0a9308",
+    "runtime/stubs/ec0/j.java": "a6531954335c97403bef2bb30085a50bb2ef9a0308b18bdf01ccaaedd5734ef3",
+    "runtime/stubs/ec0/y.java": "774700f057d095e65d32a235a72da18727d980d70e1ff3e93e40a54f93ff6732",
+    "runtime/stubs/ib0/a.java": "9653d73f3c2719283643be0c8e0964acec525b51eb8be926ed43e82774eafc5e",
+    "runtime/stubs/ib0/m.java": "b4b559019f45ba077105057b86d26afa57bca7f7aeb96c0621ede1ac42373994",
+    "runtime/stubs/ib0/p.java": "acbc71c8e5f98125c8ac3cc0f844af9eac48aed3dcc332b1caf7ce357d0be86e",
+    "runtime/stubs/l40/c.java": "42dd7481670e677343612453f7843354f3011ab2ff1a73d7fe6e799f252fd199",
+    "runtime/stubs/lb0/a.java": "95fceba15d2ff36ab3f79f4467e10d80e67d59b8f4b7491860f2272a12173bb6",
+    "runtime/stubs/lh0/a.java": "8ec413e42f72a3e7cdbf5bcc4de860d52b8b810c96c700602fb919ab793b30f8",
+    "runtime/stubs/m40/a0.java": "d611822e010bc99842fc332b861d54c760e4ac80b82c46fd5b7ae4c8d42b361e",
+    "runtime/stubs/m40/b.java": "9169561f65194f0301f80029e3ceceea3c6adf4d339af441dc935843040592e9",
+    "runtime/stubs/m40/b0.java": "b45a83a8d593d42d95816eab46f9b1b4affcef8020ca3bd038412677ce32eada",
+    "runtime/stubs/m40/c0.java": "5f541169060c4adef2c5c863073bec9f8962bf2c2849c0f552d26f4857a5c18b",
+    "runtime/stubs/m40/g0.java": "32ced4e8c43f8f36fd4db4657bf1140aed8f74f88626fd94acc51f7da3f2645d",
+    "runtime/stubs/m40/h0.java": "65ecc0a82208c193839740de8dbde246561639a094988f7f09f23e3195dd4740",
+    "runtime/stubs/m40/i0.java": "7af212a5c945a6331bb130203d98c213e7350b357a6ceb0aaacd7818a72b78dc",
+    "runtime/stubs/m40/j0.java": "695c899a1692a75ba85999a6b31c3c2f6b22446481ee213402304108f9320a35",
+    "runtime/stubs/m40/k0.java": "1d18ff5072c7d4a5741de23112f6e895dd223e778062a34065d65516c1cab62e",
+    "runtime/stubs/m40/v.java": "d6f5b4762506cb946c48430c7169aff35047906141f73f8a5e8344291ec34bf3",
+    "runtime/stubs/m40/x.java": "117b2dc32003800ec0150469ac4480f6651f76a1251d311f7d9e55d0effa4e3f",
+    "runtime/stubs/m40/y.java": "f3f109464911c39fed6eddc079e83bc083cc8bc32cf106f5b539f3de174fe53b",
+    "runtime/stubs/vj0/c.java": "04ce1f7ec521fff6895bcaa7ff1155bd7acd9d816475c8dc9198ad7f83e20fb4",
+    "runtime/stubs/wb0/h1.java": "4a1cfc7b275714aeb8e80c2a171508b9267855822679160d908499ba9ca3df26",
+    "runtime/stubs/wb0/j.java": "d042f0bde18d99ae2b01858c520c4da33f9b6710fd6334bf3fcbed085a249346",
+    "runtime/stubs/wb0/m.java": "ba31e6fa2e218bfa1fa9d44a339b432c29df99f9c81a34e3dd3154d8f8284956",
+    "runtime/stubs/wb0/n0.java": "344ca92ce718ba63b03bc8782aa3ab5dd58c4882f940ff06921bbea61a6006d7",
+    "runtime/stubs/wb0/x.java": "d9708a712f731bca1bd86f9bd167c28450f9eace60eb6615ec65c24a9c52c0ad",
+    "runtime/stubs/yb0/a.java": "82774bb181220e5b1bad31db992d6bcbab7fc1e2ed5f0b1bf6f42fcf88aec9ca",
+    "runtime/tests/SpaceConversionTest.java": "5373aa361de016c1168df47087afe31f66f7de1be057040b3e97be8ca5502455",
+    "runtime/tests/StateCacheRegression.java": "d06b3da7c4ea6bcfd71db2fecf2ba3197490f6101171bd0c68045d33b1f7c2a2",
+    "runtime/tests/check_native_raw.py": "8bd9944f14dae8104e7f5d1718f77533d248239ff80f9787af99b52d1b0fbbba",
+    "runtime/tests/check_native_separator.py": "b923029d34a85fd529fb572cee15e8ae2404d79d7613637f6420a5d3ba1a12ce",
+    "runtime/tests/fixtures/ai-dictionary-row.tsv": "d3f53de2165130bc5e533d73f77a315aeadc220e3e71430d37748ad738e07b9e",
+    "runtime/tests/fixtures/ib0_r_g.smali": "62b9518ae9a14472198f1fcf708bdbab8e72c717781f6865c6ce3d3d9f9bc7b5",
+    "runtime/tests/fixtures/native_raw/manifest.json": "38e3602f44537866b10fbb7691fba203f2515c79213a96c9b3581358a373990b",
+    "runtime/tests/fixtures/native_raw/native_romaji_input.smali.txt": "692d11c23af22ee4dc966c26d87f93b86d67a4a56d069d33f8c7b2191a56c38d",
+    "runtime/tests/fixtures/native_raw/raw_append_helper.smali.txt": "3f17afbbb6c21ace8e0ade8bf4cf2bd0c31c7431279be18eb472c53cff26f1fc",
+    "runtime/tests/fixtures/native_raw/raw_append_key.smali.txt": "f5ef79a254c77a0204bbd23d993a4c4ab469a2084651a44614da772ae06f6301",
+    "runtime/tests/fixtures/native_raw/raw_append_text.smali.txt": "719af669c58e70b8f3b24c97bfc3d71edf185868f44dd89638782ced8e266a3f",
+    "runtime/tests/fixtures/native_raw/raw_correction_bridge.smali.txt": "96097b37710610518703de8811f548a9ee6708726e12bcf37176336e2d4d995d",
+    "runtime/tests/fixtures/native_raw/raw_getter.smali.txt": "81934fafc8db6582c3426a9ca193b37746f7f88b0a43ef1377c3f9dcb74c0e78",
+    "runtime/tests/fixtures/native_raw/raw_prepare_edit.smali.txt": "0c8fefcfc5f294f35810a907f02cab166ed7bfc457e876100c6d2142e7148f1c",
+    "runtime/tests/fixtures/native_raw/raw_prepare_provisional_edit.smali.txt": "2476ce4e6549058766b2e154ba5400b7426b57482771a3a69c16c745011223fb",
+    "runtime/tests/fixtures/native_raw/raw_reset.smali.txt": "6ce793ef934f6f607d39d4f8a66a981a1fd9ebd6b67e49a7e7a727880cceac52",
+    "runtime/tests/fixtures/native_raw/request_raw_argument.smali.txt": "7407d427d8e089b8cefadc611a21c05976ecc97e21f7aa2ff8c5698ce5376f69",
+    "runtime/tests/fixtures/native_raw/request_raw_field.smali.txt": "84e466a5cc4f4b51b140fcc3815179098def2d9329d12e4653592bd806f0f7e0",
+    "runtime/tests/fixtures/native_separator/complex_extends_immutable.smali.txt": "60656ee62e6d7c8cd774297b2ddcde10659fef7b64c5db95788a243a09192a3e",
+    "runtime/tests/fixtures/native_separator/context_getter.smali.txt": "ec0ed5bf9f6926607cb702b9960da659d039b859ebd221677c6062d1c8b1574b",
+    "runtime/tests/fixtures/native_separator/context_guard.smali.txt": "41915ffc4966ef7e916910c9973c1e3455dfc658f97e606094236b048443ae8e",
+    "runtime/tests/fixtures/native_separator/email_get_wrapped.smali.txt": "9b13435f3bbdfa95c6aada2f93e051f5e00d61a26a0b07ea349758ff56de8884",
+    "runtime/tests/fixtures/native_separator/email_visitor_unwrap.smali.txt": "1eeb08a8d13b91de1d32597bfa2ee3e294285c0cf48aabe90e1365e609cb8e46",
+    "runtime/tests/fixtures/native_separator/engine_to_factory.smali.txt": "b6d31dc6ea0c30e6861b8284362786840ac033c35ee154570520a1fe1ff69331",
+    "runtime/tests/fixtures/native_separator/flow_immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+    "runtime/tests/fixtures/native_separator/immutable_setter.smali.txt": "732f0de4bf3b4c592f18cf1c7d531bec507f5a20362c62e123918f08a70f7749",
+    "runtime/tests/fixtures/native_separator/manifest.json": "651a86c4f75b2b2d716941b9f9a09bb87ab68b7d3bb039d68a5bb4cb580dde30",
+    "runtime/tests/fixtures/native_separator/native_event_factory.smali.txt": "de76e806941b6dd3f69cec17191686a40939014a0005c2b718819d4ffa2cba39",
+    "runtime/tests/fixtures/native_separator/prediction_factory.smali.txt": "1f0145f9ee670760bea885a31194d77bd3dfc02e5bcb08d3bbb6e379b7e94ad5",
+    "runtime/tests/fixtures/native_separator/request_context_field.smali.txt": "70af70d6c176356891254a7eba2019b2249a62b245b153094fc5b6e04e753737",
+    "runtime/tests/fixtures/native_separator/site_input_connection.smali.txt": "1551c8630f7e6997a043da8c09f82e88f44a73fb639d32c7170e41395291d527",
+    "runtime/tests/fixtures/native_separator/site_marker_commit.smali.txt": "7eb95e734fdb652a388a7d0cf138dec3c19b561f51c4b6331d0f23dded34b111",
+    "runtime/tests/fixtures/native_separator/site_native_visitor_marker.smali.txt": "d114ddc6ce5094b1cc56d61f590d8a0ae67dad86de5550ae76b9cb045772d061",
+    "runtime/tests/fixtures/native_separator/site_native_visitor_suffix.smali.txt": "a67981f7dac219d4ce636d7f422b202c49414c2c36b6e76a91b0900fb85ef34d",
+    "runtime/tests/fixtures/native_separator/site_postcommit_suffix.smali.txt": "4fe6aa7673ccaed7e2c4e2b82dcbab337d34a4e056f03a97c7f4b366f058e41b",
+    "runtime/tests/fixtures/native_separator/site_precommit_default.smali.txt": "b257c3485215e4e9d7bb017a2aca17032fee7972abbd833d0196d6ca4ccf995f",
+    "runtime/tests/fixtures/native_separator/site_wrapper_visitor.smali.txt": "30fff467716be3df0bd6f674f50417af213ed6c53f83d8f1fd888d61a6062d77",
+    "runtime/tests/fixtures/native_separator/transparent_visitor.smali.txt": "2d8ddc51b940e11ce0fd7079c7a9502faa3c9e7a714bc8ba0d239bbea7b84c5a",
+    "runtime/tests/fixtures/native_separator/visitor_handoff.smali.txt": "fbf383aea171585e08c98c7ec4c5b1500556b5fa3e1b95a63269f213a1ae389d",
+    "runtime/tests/fixtures/native_separator/wrapper_field_a0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+    "runtime/tests/fixtures/native_separator/wrapper_field_b0.smali.txt": "be4440ae93a9ee45b9e045aa53911841628e77f910f3a2d6cea0349cf85fe0f4",
+    "runtime/tests/fixtures/native_separator/wrapper_field_g0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+    "runtime/tests/fixtures/native_separator/wrapper_field_i0.smali.txt": "60a0bdeb8aaf061ea55359283be6ee0b018178e4c4033ab4668722df4363f2a3",
+    "runtime/tests/fixtures/native_separator/wrapper_field_j0.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+    "runtime/tests/fixtures/native_separator/wrapper_field_k0.smali.txt": "cff7e2ebc7e923c0613093911e4f1af5a760205748dbdbfb1b6609c92f03022b",
+    "runtime/tests/fixtures/native_separator/wrapper_field_v.smali.txt": "2cb1c888e4781ce0f01618cfb4956afea1e4359377bb4438a4c10ea70d7f8366",
+    "runtime/tests/fixtures/native_separator/wrapper_field_x.smali.txt": "709cfc49dd148a5de2f3d5b5f888884a3cacd0990b91ae464da49ad0ff44c4d4",
+    "runtime/tests/fixtures/native_separator/wrapper_field_y.smali.txt": "698da2c8465007b86971e68e2d8a904c02d7ce1c093c770f5bd05736eebdf965",
+    "runtime/tests/native-abi.json": "647936d76207a42c1daeaac61a75acb49243a545a37fc05b0101fdb1e20b4a8c",
+    "runtime/tests/ranking_stubs/android/content/Context.java": "5c79cd5fe6ce1e46dcb17bee39725183eff5d1df9ce805df28424a99a4f5f389",
+    "runtime/tests/ranking_stubs/android/content/res/AssetManager.java": "58ddf9e10943f76b9758f257554120753a1d97c584dfc5473cf1cbebed68f3df",
+    "runtime/tests/ranking_stubs/com/microsoft/fluency/Japanese.java": "8952f2bee4a822c3efcc26dee2a0f4c7e16f38a8d21ae2176ae47e0c86ca542c",
+    "runtime/tests/ranking_stubs/com/microsoft/fluency/ResultsFilter.java": "3069468f884669c8b15a8a6c70ed729f9cfc12b32bea4f8ab4a36365214242dc",
+    "runtime/tests/ranking_stubs/l40/c.java": "d9a257b23bdf7cb92390a9d7079439bc25433a091848058c639b94e97380cf80",
+    "runtime/tests/ranking_stubs/m40/b.java": "7e0ebfd5ad6a919a3f3e14943ee50782445a8a475e0f6536c7a8461d47655366",
+    "runtime/tests/ranking_stubs/m40/h0.java": "68c52f583209aa4bf9557bfffcc3f90b1b84c7aaeff3cac3bb7aac439625758a",
+    "runtime/tests/run_space_tests.py": "e4d8e3f09a9b909dbc7e5c90592f1dca0dcfbcba06de9f334b2ae9eb07aab863",
+    "runtime/tests/space_stubs/android/os/Looper.java": "5781a3143f4dd684eae8abcf0214ecd05ab2cb375a5d15a9d4d7523a7cc5bf22",
+    "runtime/tools_java/AuditRuntime1832.java": "a62653f1e59df518fc576404681d714ea1441cf1e0a1626aad8160cc7ae6c69a",
+    "runtime/tools_java/Dump1814.java": "ebd4652798ef59eebd563a21baf05cfbed9dec6923f27e3971f0b5c304d0b48f",
+    "runtime/tools_java/Merge1832.java": "880258c66e3759a803c4af36c1e78302c339ae3323adfe258874c3fdacaa18c1",
+    "tests/LoaderParityProbe.java": "61bcec30698ffd52f1667fe7d47f25ad1625ebedfde78edcaffc4d5c991a9058",
+    "tests/check_native_space_route.py": "b58e2c0b2b91136bd946cc7ffa7eaad24ac01746e5ad6c020aade143816b8617",
+    "tests/native_space_route/README.txt": "3e28ea89b86180da9c72c5812128f88883235f880ab7acbb4fa48a3f0fcf2f16",
+    "tests/native_space_route/ef0_d__l.smali": "46c7c0cd708f44c7048c1192943af4fd1769a424ebef5a153f8eb7050b0c870d",
+    "tests/native_space_route/fc0_d1__b.smali": "b00435b90c4023ed2c2e2a296a5e620f26e9713ba67e632e0e25d3a811dadce6",
+    "tests/native_space_route/fc0_k1__e.smali": "f3c191e0135a540c041f3dcf8ba9486723370911e888e32771d381827939f6b8",
+    "tests/native_space_route/fc0_k1__i.smali": "79c7cfbd7f791ff252d82e9068afb60805efd53d5ee621099412e9a268306b74",
+    "tests/native_space_route/fc0_k1__n.smali": "6a808fbac29e4563aee31d879d33b207ae53aab87ffbd0749521c85191aaddfc",
+    "tests/native_space_route/fc0_n2__c.smali": "77eae18ed61155801e83684daad3fe88cff52a1ba9c5690a0ee8bdb5e99852cf",
+    "tests/native_space_route/fc0_n2__d.smali": "634887e69485bcad0c51b50fc7d5f13425f132ee7bf02779e8acd71a21aba5a6",
+    "tests/native_space_route/fc0_q0__b.smali": "c68534652f9c7aeaeda5da57d15a0d76ff1c63f04138707a0cb5da2cff5aefa8",
+    "tests/native_space_route/fc0_s1__n.smali": "c7babfa9db768543eaceb3c5173aff5b574826fe133d9cc65bf1ad243baa716d",
+    "tests/native_space_route/gf0_a__c.smali": "3b55f455a1fd5c9165147a6c195de64c6ed877f8457950b50f78551331427e70",
+    "tests/native_space_route/gf0_a__f.smali": "e2d5d323e5f960f64de62ace1a8a01a9e1827097fc82555a02721ee100d50fe1",
+    "tests/native_space_route/hc0_a__c.smali": "c86f972e1187ffdf6952e5798f0b7207e7cf117ced560f8732f2cd30e601a0e3",
+    "tests/native_space_route/hc0_a__d.smali": "1bebf53838ef17d9573325e1f5acdd02321ba0e13408a791f5f98efa36d2d42f",
+    "tests/native_space_route/hc0_a__f.smali": "301a8e5245e670c54caaee64bf7fbc680be6d8f01b656be1ee64ffcf5941ef02",
+    "tests/native_space_route/hc0_a__j.smali": "ad045ee42b12af4ca59d4eddeaae5cee5e06e2002d3e9cb05f84f8ae6ff87a0a",
+    "tests/native_space_route/hc0_a__l.smali": "0f4a917b7f961bdc4adba5460fb41c34914c8910e51eef722b2a72363ca3d48d",
+    "tests/native_space_route/hc0_b__i.smali": "b79acfdc4902229848b069c57ebcd8e8e27ca24b5eb7dbfdc1bf8b4f8a4ed097",
+    "tests/native_space_route/ic0_e__a.smali": "189d17e7eec93f6e0d6e3cdbae15d6e79c6fa4cd3a5725517cf2a015a7ff1b46",
+    "tests/native_space_route/ic0_t__b.smali": "8f30b00c0d8c91168299073c5046f14671d73d5f95a4dafdacf143623420d959",
+    "tests/native_space_route/manifest.json": "1f02a2520b48d34f06c30390bfe376001e5153af03b8b37c75f9cdb8232af6b8",
+    "tests/native_space_route/oc0_b__c.smali": "c3dee113e8a1c15f2284e1949d80eba4908d3e851adfa2d61be609d13f697e29",
+    "tests/native_space_route/oc0_b__d.smali": "a72c7958b86db1260a670afbebb849305446283955c4932685ced735182cc2dd",
+    "tests/native_space_route/oc0_m__c.smali": "5b7805a68516f28456f389b9ccace1ea0021942c3bbae864bcc8ad6616452a00",
+    "tests/native_space_route/oc0_m__d.smali": "8dc80f81c78db0d5a1f4f97f602cf7cbb566a831d6762014eef41e1779ac9d3b",
+    "tests/native_space_route/oc0_m__init.smali": "39ad23738e10be34e71ba8f73b7d8c759632d881784062fb5c574f9c80262763",
+    "tests/native_space_route/s40_d__b.smali": "f11e2587d601f6fbf3d1310728ee09b34e2842dbbbbbca3d28af7bff5300f8cd",
+    "tests/native_space_route/tj0_e__F.smali": "0c942cf331e40fe19bcfeacc5e14a7e975bd76940851158cecea70da16baf4ca",
+    "tests/native_space_route/tj0_e__G.smali": "3361f5fdb1aa92938e9abc852caa2198643249a548e22e0aaaf7c1f003443a1e",
+    "tests/native_space_route/tj0_e__Z.smali": "f66509c3ffeee1c9a7b53c1d52dce1f6349436e44bebbf1e4a34b732aa99e800",
+    "tests/native_space_route/wb0_x__P.smali": "b5284fddd913e0276f687b287da4b3069ee85aecba97e0bdb91bb8da987ce8cc",
+    "tests/native_space_route/xd0_d1__onTouchEvent.smali": "dcca42693e2be66c18c81e9dfc59404cb1c2c3a7fae116ce1ddb3c6903111f44",
+    "tests/native_space_route/xd0_f0__f.smali": "fac89f5ea1bf2d13554cfaa2c90f882b8dac59d3915b1b67d132495bc2a9ff9b",
+    "workflow.yml": "6cc523ef20d42477c3acad6e901c6e18252f1cb9a57cfb2e3597f164de84ae2e"
+  },
+  "standalone_and_bundle_runtime_equal": true,
+  "status": "SPACE_NATIVE_SEPARATOR_HOST_VERIFIED_DEVICE_UNVERIFIED",
+  "swiftkey_version": "1.8.32",
+  "target_package": "com.touchtype.swiftkey.beta",
+  "target_version": "9.13.16.4",
+  "target_version_code": 1236271168,
+  "two_loader_sdks_agree": true,
+  "unrelated_loader_entries_byte_identical": true
+}

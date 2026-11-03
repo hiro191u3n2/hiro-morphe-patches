@@ -1,0 +1,31 @@
+    iget-boolean v1, v2, Lwb0/z0;->L:Z
+
+    if-eqz v1, :cond_e
+
+    iget-boolean v1, v2, Lwb0/z0;->g:Z
+
+    if-nez v1, :cond_e
+
+    invoke-interface {p1}, Lyb0/c0;->k()Z
+
+    move-result v1
+
+    if-nez v1, :cond_e
+
+    invoke-interface {v8}, Ldc0/a;->G()Ljava/lang/String;
+
+    move-result-object v1
+
+    new-instance v2, Ljava/lang/StringBuilder;
+
+    invoke-direct {v2}, Ljava/lang/StringBuilder;-><init>()V
+
+    invoke-virtual {v2, v1}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2, p2}, Ljava/lang/StringBuilder;->append(Ljava/lang/String;)Ljava/lang/StringBuilder;
+
+    invoke-virtual {v2}, Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+
+    move-result-object v1
+
+    invoke-static {v1}, Lcom/microsoft/fluency/Japanese;->romajiToHiragana(Ljava/lang/String;)Ljava/lang/String;

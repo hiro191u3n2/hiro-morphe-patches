@@ -1,0 +1,19 @@
+    invoke-static {p1, v0}, Lkotlin/jvm/internal/m;->f(Ljava/lang/Object;Ljava/lang/String;)V
+
+    invoke-interface {p1}, Lm40/b;->getTrailingSeparator()Ljava/lang/String;
+
+    move-result-object v0
+
+    if-nez v0, :cond_0
+
+    iget-object v0, p0, Lac0/b;->b:Lz90/c;
+
+    invoke-virtual {v0, p2}, Lz90/c;->a(Lec0/n;)Ljava/lang/String;
+
+    move-result-object p2
+
+    invoke-interface {p1, p2}, Lm40/b;->setTrailingSeparator(Ljava/lang/String;)V
+
+    :cond_0
+    return-void
+.end method

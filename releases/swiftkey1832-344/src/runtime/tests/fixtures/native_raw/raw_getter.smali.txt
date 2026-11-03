@@ -1,0 +1,26 @@
+.method public final G()Ljava/lang/String;
+    .locals 1
+
+    invoke-virtual {p0}, Lec0/f;->a0()Lec0/y;
+
+    move-result-object v0
+
+    if-eqz v0, :cond_0
+
+    invoke-virtual {p0}, Lec0/f;->a0()Lec0/y;
+
+    move-result-object v0
+
+    iget-object v0, v0, Lec0/y;->l:Ljava/lang/String;
+
+    return-object v0
+
+    :cond_0
+    iget-object v0, p0, Lec0/f;->i:Lde0/g;
+
+    iget-object v0, v0, Lde0/g;->c:Ljava/lang/Object;
+
+    check-cast v0, Ljava/lang/String;
+
+    return-object v0
+.end method

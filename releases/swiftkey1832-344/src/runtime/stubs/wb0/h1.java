@@ -1,0 +1,1 @@
+package wb0; public class h1 { public boolean f; public ib0.p a; public m b; public ib0.m h; public ec0.j i; public lh0.a j; public void b(lh0.a token, boolean immediate, ib0.m reason, ec0.j snapshot) {} }
