@@ -1,3 +1,8 @@
+# [1.0.347](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/maps-category-v1.0.1) (2026-11-05)
+
+* **Google Maps:** 通常版アプリの選択画面にパッチが出ない問題を修正。通常版とmicroG版の両パッケージを登録。
+* **Google Maps:** 表示を消す処理と適用時の構造検査を保持。添付microG版APKへの適用を検証。通常版APK全体への適用・実機表示は未確認。
+
 # [1.0.346](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/maps-category-v1.0.0) (2026-11-05)
 
 * **Google Maps:** 検索欄下のカテゴリ行（自宅・レストラン・コーヒー等）を非表示にするパッチを追加。
