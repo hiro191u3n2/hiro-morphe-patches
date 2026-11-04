@@ -1,0 +1,72 @@
+{
+  "schema": "amazon-review101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.349",
+  "baseline_version": "1.0.348",
+  "baseline_sha256": "6cc5e4a4eb399fab46528963721c9f8bc52680d63377a586ef26bc14102ae85d",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "runtime_extension": "extensions/amazon_review_sort.mpe",
+  "apk_bytecode_mode": "STRIP_FAST",
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "sources": {
+    "build.py": "0aa1380a492796d5060e1a87813eb1c212ffc2af9c43e414ced5e3e05a551e89",
+    "patch/AmazonReviewPatch.java": "c380db882588d6fb18e83b177f199d239b0493291c70a3180c3eab3c2f493786",
+    "runtime/ReviewCountRuntime.java": "79f561b1fca7e54b454d97bddc9c1b0faf6aab0181d6fb35ce5ca6f89ae0549c",
+    "runtime/generate_script.py": "85d56c320221ba3b6f04e425805e725aed42331d19c835b72818bd6d74d9b4cb",
+    "runtime/review-sort.js": "c6cf2b66ba693502f02ab2d15eb7ff7423179c872ff98d7df1c4d05c2f1a34fa",
+    "runtime-tests/java/android/webkit/ValueCallback.java": "081c5c7916daad11c029f392fb9b9093bb2cff5244c7da0bb4df1d573e21c9ad",
+    "runtime-tests/java/android/webkit/WebView.java": "1187f878d3e4e85c088bc2a582e2ba16898e076d22e928b3b190644c82cf90eb",
+    "runtime-tests/java/app/hiro/amazonreviews/ReviewCountRuntimeTest.java": "a8266d15391122b513a5069aed061a0f203ec4ddfd6b064438a97f79601a13f7",
+    "runtime-tests/package-lock.json": "a85918b428b0dde99d0be37415c4498eedb01e83f6fc487fa5af538450674f1e",
+    "runtime-tests/package.json": "be596e2393c3a1a61e2f9e1fc2019c53d50e52c3be9c0a751fbae3dec5ecad1e",
+    "runtime-tests/test_sort.js": "f22626d3ff4d86107d3db2502b7758758ad37e3af8f6d45d62d50a1bf505c6c9",
+    "test/AmazonReviewAudit.java": "2f652cbf4ffd1ea0b37e064325f9b7b685a922dfba9ce69871a33ea68a757f4d"
+  },
+  "artifacts": {
+    "Amazon_Review_Count_v1.0.1.mpp": {
+      "bytes": 23448,
+      "sha256": "917096eb0a92432d330dd457fb05ca9f75e8f954e9fd921cf2f4bdff333a321c"
+    },
+    "Hiro_Morphe_Patches_v1.0.349.mpp": {
+      "bytes": 48247461,
+      "sha256": "1cce2777e60ec8eb2a72f897a40e8c1f1e0e644f55f322578f0a1843e2465268"
+    }
+  },
+  "loader_preservation": "PASS unrelated loader classes preserved=351; replaced=4; new review classes=4; assertions=1080",
+  "preserved_unrelated_entries": 273,
+  "host_tests": "PASS runtime URL and WebView lifecycle assertions=46\nPASS {\"status\":\"passed\",\"assertions\":149,\"dom\":\"linkedom 0.18.12\",\"physical_device_tested\":false}",
+  "guard_tests": "PASS package/version/body guards and duplicate application rejection; assertions=74143",
+  "apk_application": [
+    {
+      "bundle": "Amazon_Review_Count_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74124 (byte-identical DEX classes=68471); methods hooked=6; inserted instructions=8; runtime classes=3; assertions=153927; physical device not tested",
+      "preserved_original_resources": 5611
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.349.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74124 (byte-identical DEX classes=68471); methods hooked=6; inserted instructions=8; runtime classes=3; assertions=153927; physical device not tested",
+      "preserved_original_resources": 5611
+    }
+  ],
+  "supplied_apk_sha256": "8c3bbe749856dce395508091a74841133bf044934d32cf8dd2ed47f11a217059",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
