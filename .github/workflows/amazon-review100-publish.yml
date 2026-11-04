@@ -1,0 +1,124 @@
+name: Verify and publish Amazon review count bundle348
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/amazon-review100-publish.yml'
+      - 'releases/amazon-review100/src/**'
+      - 'releases/amazon-review100/publication/**'
+      - 'releases/amazon-review100/verification/**'
+      - 'releases/amazon-review100/README.md'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-ulike-release-publication
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21.0.13+9'
+      - name: Verify reviewed source and current baseline
+        run: |
+          python3 - <<'PY'
+          import importlib.util,json,pathlib,subprocess
+          path=pathlib.Path('releases/amazon-review100/publication/publish.py')
+          spec=importlib.util.spec_from_file_location('publisher',path);p=importlib.util.module_from_spec(spec);spec.loader.exec_module(p)
+          cfg=json.loads((path.parent/'manifest.json').read_text())
+          p.require(cfg['ready'] is True,'Locally verified outputs are not frozen')
+          p.require(cfg['source_sha256']=={n:p.sha(v) for n,v in p.source_files(pathlib.Path('.')).items()},'Source changed after local verification')
+          feed=json.loads(pathlib.Path('patches-bundle.json').read_text())
+          p.require(feed['version']==p.PREVIOUS and feed['download_url']==p.BASE_URL,'Active baseline advanced')
+          p.require(subprocess.check_output(['javac','-version'],text=True).strip()=='javac 21.0.13','JDK differs from local build')
+          PY
+      - name: Download exact pinned public tools and frozen baseline
+        run: |
+          python3 - <<'PY'
+          import hashlib,pathlib,urllib.request
+          out=pathlib.Path('.ci-amazon-review100');(out/'tools').mkdir(parents=True)
+          rows={
+            'morphe-2.2.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v2.0.0/morphe-desktop-2.0.0-all.jar','855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7'),
+            'morphe.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar','b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58'),
+            'morphe-current.jar':('https://github.com/MorpheApp/morphe-desktop/releases/download/v1.19.1/morphe-desktop-1.19.1-all.jar','a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573'),
+            'r8.jar':('https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar','badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa'),
+            'android.jar':('https://raw.githubusercontent.com/Sable/android-platforms/master/android-35/android.jar','4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b')}
+          for name,(url,pin) in rows.items():
+              with urllib.request.urlopen(url,timeout=180) as response:raw=response.read()
+              assert hashlib.sha256(raw).hexdigest()==pin,'Tool differs: '+name
+              (out/'tools'/name).write_bytes(raw)
+          import json
+          baseline=json.loads(pathlib.Path('releases/amazon-review100/publication/baseline.json').read_text())
+          with urllib.request.urlopen(baseline['url'],timeout=180) as response:raw=response.read()
+          assert hashlib.sha256(raw).hexdigest()==baseline['sha256'],'Baseline differs'
+          (out/'baseline.mpp').write_bytes(raw)
+          PY
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22.16.0'
+      - name: Install pinned host-only DOM test dependency
+        run: npm ci --ignore-scripts --no-audit --no-fund --prefix releases/amazon-review100/src/runtime-tests
+      - name: First clean build and regression checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/amazon-review100/src/build.py --base .ci-amazon-review100/baseline.mpp --tools .ci-amazon-review100/tools --work .ci-amazon-review100/build-a --dist .ci-amazon-review100/dist-a 2>&1 | tee .ci-amazon-review100/build-a.log
+      - name: Second clean build and regression checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/amazon-review100/src/build.py --base .ci-amazon-review100/baseline.mpp --tools .ci-amazon-review100/tools --work .ci-amazon-review100/build-b --dist .ci-amazon-review100/dist-b 2>&1 | tee .ci-amazon-review100/build-b.log
+      - name: Verify actual Patcher 2.2 discovers both sources
+        shell: bash
+        run: |
+          set -euo pipefail
+          for name in Amazon_Review_Count_v1.0.0.mpp Hiro_Morphe_Patches_v1.0.348.mpp; do
+            java -jar .ci-amazon-review100/tools/morphe-2.2.jar list-patches --patches ".ci-amazon-review100/dist-a/$name" -f com.amazon.mShop.android.shopping -p -v > ".ci-amazon-review100/$name.patcher22.txt"
+          done
+          python3 - <<'PY'
+          from pathlib import Path
+          for p in Path('.ci-amazon-review100').glob('*.patcher22.txt'):
+              assert p.read_text().count('Name: 商品検索を評価件数の多い順に表示\n') == 1, 'Patcher 2.2 discovery differs: '+str(p)
+          PY
+      - name: Match both CI builds to local APK-verified artifacts
+        run: >-
+          python3 releases/amazon-review100/publication/publish.py
+          --repo . --dist .ci-amazon-review100/dist-a --second-dist .ci-amazon-review100/dist-b
+          --baseline .ci-amazon-review100/baseline.mpp --local-only
+      - name: Require current branch heads and unused version
+        run: >-
+          python3 releases/amazon-review100/publication/publish.py
+          --repo . --dist .ci-amazon-review100/dist-a --second-dist .ci-amazon-review100/dist-b
+          --baseline .ci-amazon-review100/baseline.mpp --preflight-only
+      - name: Publish verified MPPs and atomically update both Manager feeds
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 releases/amazon-review100/publication/publish.py --repo . --dist .ci-amazon-review100/dist-a --second-dist .ci-amazon-review100/dist-b --baseline .ci-amazon-review100/baseline.mpp 2>&1 | tee .ci-amazon-review100/publication.log
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: amazon-review100-bundle348-verification
+          path: |
+            .ci-amazon-review100/dist-a/
+            .ci-amazon-review100/dist-b/
+            .ci-amazon-review100/*.log
+            .ci-amazon-review100/*.txt
+            .ci-amazon-review100/build-a/*.log
+            .ci-amazon-review100/build-a/*.txt
+            .ci-amazon-review100/build-a/*.json
+            .ci-amazon-review100/build-b/*.log
+            .ci-amazon-review100/build-b/*.txt
+            .ci-amazon-review100/build-b/*.json
+          include-hidden-files: true
+          retention-days: 14
+          compression-level: 1

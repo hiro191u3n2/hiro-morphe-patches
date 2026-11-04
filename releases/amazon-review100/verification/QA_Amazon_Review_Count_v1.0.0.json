@@ -1,0 +1,80 @@
+{
+  "schema": "amazon-review100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.348",
+  "baseline_version": "1.0.347",
+  "baseline_sha256": "dc9193e2b4951bc47f0d58a7433163b1d00f7089738903a15f33cf732241ebd5",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "runtime_extension": "extensions/amazon_review_sort.mpe",
+  "apk_bytecode_mode": "STRIP_FAST",
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "sources": {
+    "build.py": "070d25d91b03d9b1fe02d84e5ee77fd0b8f707e217b9a21d3cb1813110c272f3",
+    "patch/AmazonReviewPatch.java": "79c0a97871ad34425b647719005eb91f0de654619a0224c4ed58a4530b2b1ac9",
+    "runtime/ReviewCountRuntime.java": "183ff116973ab66c6fc1e5d2ba7fa26ab20edbc24cf832afdc0b29b44b694187",
+    "runtime/generate_script.py": "85d56c320221ba3b6f04e425805e725aed42331d19c835b72818bd6d74d9b4cb",
+    "runtime/review-sort.js": "d4ec832d832bdfd4984e4645970d4b871e5bd1d9bf53b627a4a68937559ce468",
+    "runtime-tests/java/android/webkit/ValueCallback.java": "081c5c7916daad11c029f392fb9b9093bb2cff5244c7da0bb4df1d573e21c9ad",
+    "runtime-tests/java/android/webkit/WebView.java": "1187f878d3e4e85c088bc2a582e2ba16898e076d22e928b3b190644c82cf90eb",
+    "runtime-tests/java/app/hiro/amazonreviews/ReviewCountRuntimeTest.java": "4d778b150a7d344719e3d2d092528e155a5da12d224e6063a7402613a1f1e00a",
+    "runtime-tests/package-lock.json": "a85918b428b0dde99d0be37415c4498eedb01e83f6fc487fa5af538450674f1e",
+    "runtime-tests/package.json": "be596e2393c3a1a61e2f9e1fc2019c53d50e52c3be9c0a751fbae3dec5ecad1e",
+    "runtime-tests/test_sort.js": "40ccdf1c3401a38113237733b1816969301b36e9fd35cfb2b849498f68ae15a8",
+    "test/AmazonReviewAudit.java": "b451940bd9136dc9cefde565a2914945685620af222017959e0a2a9163b8fd86"
+  },
+  "artifacts": {
+    "Amazon_Review_Count_v1.0.0.mpp": {
+      "bytes": 20141,
+      "sha256": "e49cd5e27323803c2160242c73ee89301cd2f636e675057739d97806b42de9c1"
+    },
+    "Hiro_Morphe_Patches_v1.0.348.mpp": {
+      "bytes": 48244935,
+      "sha256": "6cc5e4a4eb399fab46528963721c9f8bc52680d63377a586ef26bc14102ae85d"
+    }
+  },
+  "loader_preservation": "PASS existing loader classes preserved=351; added=4; assertions=1075",
+  "preserved_unrelated_entries": 273,
+  "host_tests": "PASS runtime URL and WebView lifecycle assertions=31\nPASS {\"status\":\"passed\",\"assertions\":72,\"dom\":\"linkedom 0.18.12\",\"physical_device_tested\":false}",
+  "guard_tests": "PASS package/version/body guards and duplicate application rejection; assertions=3\nPASS package/version/body guards and duplicate application rejection; assertions=3\nPASS package/version/body guards and duplicate application rejection; assertions=74139",
+  "apk_application": [
+    {
+      "bundle": "Amazon_Review_Count_v1.0.0.mpp",
+      "sdk_version": "2.2.0",
+      "desktop_version": "2.0.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74125 (byte-identical DEX classes=68471); methods hooked=4; inserted instructions=6; runtime classes=3; assertions=153927; physical device not tested",
+      "sdk": "morphe-2.2.jar"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.348.mpp",
+      "sdk_version": "2.2.0",
+      "desktop_version": "2.0.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74125 (byte-identical DEX classes=68471); methods hooked=4; inserted instructions=6; runtime classes=3; assertions=153927; physical device not tested",
+      "sdk": "morphe-2.2.jar"
+    }
+  ],
+  "supplied_apk_sha256": "8c3bbe749856dce395508091a74841133bf044934d32cf8dd2ed47f11a217059",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true,
+  "verification_provenance": {
+    "build": "Clean final-source build with pinned toolchain; standalone/bundle bytes equal independent clean build.",
+    "actual_apk_tests": "Two completed applications using official Patcher 2.2.0 / Desktop 2.0.0 with STRIP_FAST.",
+    "application_evidence_sha256": "e171429c325a08b3d012ccc24297f36becfefeeea8f1e8a8f725740d82a2e057",
+    "application_tool_sha256": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "older_sdk_apk_claims": "No incomplete older-SDK application jobs are counted in this QA.",
+    "desktop_full_mode": "Older desktop FULL rebuilding retained a stale tail DEX; that output was rejected and is not distributed."
+  }
+}

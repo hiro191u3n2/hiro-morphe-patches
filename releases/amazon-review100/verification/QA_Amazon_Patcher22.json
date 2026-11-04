@@ -1,0 +1,42 @@
+{
+  "schema": "amazon-review100-patcher22-v1",
+  "artifacts": {
+    "Amazon_Review_Count_v1.0.0.mpp": {
+      "bytes": 20141,
+      "sha256": "e49cd5e27323803c2160242c73ee89301cd2f636e675057739d97806b42de9c1"
+    },
+    "Hiro_Morphe_Patches_v1.0.348.mpp": {
+      "bytes": 48244935,
+      "sha256": "6cc5e4a4eb399fab46528963721c9f8bc52680d63377a586ef26bc14102ae85d"
+    }
+  },
+  "supplied_apk_sha256": "8c3bbe749856dce395508091a74841133bf044934d32cf8dd2ed47f11a217059",
+  "physical_android_tested": false,
+  "tool_sha256": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+  "applications": [
+    {
+      "bundle": "Amazon_Review_Count_v1.0.0.mpp",
+      "sdk_version": "2.2.0",
+      "desktop_version": "2.0.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74125 (byte-identical DEX classes=68471); methods hooked=4; inserted instructions=6; runtime classes=3; assertions=153927; physical device not tested"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.348.mpp",
+      "sdk_version": "2.2.0",
+      "desktop_version": "2.0.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74125 (byte-identical DEX classes=68471); methods hooked=4; inserted instructions=6; runtime classes=3; assertions=153927; physical device not tested"
+    }
+  ],
+  "guard_tests": "PASS package/version/body guards and duplicate application rejection; assertions=74139",
+  "bytecode_mode": "STRIP_FAST",
+  "single_bundle_apk_entry_contents_equal": true,
+  "supplied_apk_non_dex_resources_unchanged": true
+}
