@@ -1,0 +1,40 @@
+    invoke-interface {v1}, Ldc0/a;->K()Ljava/lang/String;
+
+    move-result-object v2
+
+    invoke-interface {v4}, Lm40/b;->subrequest()Ll40/c;
+
+    move-result-object v6
+
+    iget-object v6, v6, Ll40/c;->i:Ljava/lang/String;
+
+    invoke-static {v2, v6}, Lkotlin/jvm/internal/m;->b(Ljava/lang/Object;Ljava/lang/Object;)Z
+
+    move-result v2
+
+    if-nez v2, :cond_1
+
+    const-string p1, "Prediction no longer relevant. Ignoring..."
+
+    invoke-static {v5, p1, v3}, Lb20/d;->k(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+
+    goto :goto_0
+
+    :cond_1
+    iget-object v8, p2, Lyb0/e0;->a:Llh0/a;
+
+    iget-object v2, p0, Lma0/o;->d:Ljava/lang/Object;
+
+    check-cast v2, Lac0/b;
+
+    iget-object v6, p2, Lyb0/e0;->c:Lwb0/j;
+
+    iget v7, p2, Lyb0/e0;->d:I
+
+    move-object v5, v1
+
+    check-cast v5, Lec0/n;
+
+    move-object v3, p1
+
+    invoke-virtual/range {v2 .. v7}, Lac0/b;->c(Lwb0/n0;Lm40/b;Lec0/n;Lwb0/j;I)V

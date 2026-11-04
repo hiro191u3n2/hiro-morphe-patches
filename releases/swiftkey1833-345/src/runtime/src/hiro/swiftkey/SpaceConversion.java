@@ -1,0 +1,246 @@
+package hiro.swiftkey;
+
+import android.os.Looper;
+import com.microsoft.fluency.ResultsFilter.PredictionSearchType;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+/** A space press follows native contextual conversions through the native commit path. */
+public final class SpaceConversion {
+    private SpaceConversion() {}
+
+    static final long PREDICTION_WAIT_MS = 750;
+    private static final ThreadLocal<m40.b> SPACE_SELECTION = new ThreadLocal<m40.b>();
+
+    /** Called only at the seven native commit separator-read sites. */
+    public static String separator(m40.b candidate) {
+        m40.b selected = SPACE_SELECTION.get();
+        // Visitors unwrap native candidate decorators. Follow those exact object
+        // links, never just equal text or a shared prediction request. Another
+        // candidate from the same request must keep its original separator.
+        for (int depth = 0; selected != null && depth < 16; depth++) {
+            if (selected == candidate) return "";
+            m40.b next;
+            if (selected instanceof m40.g0) next = ((m40.g0) selected).a;
+            else if (selected instanceof m40.x) next = ((m40.x) selected).b;
+            else if (selected instanceof m40.j0) next = ((m40.j0) selected).b;
+            else if (selected instanceof m40.k0) next = ((m40.k0) selected).a;
+            else if (selected instanceof m40.v) next = ((m40.v) selected).b;
+            else if (selected instanceof m40.a0) next = ((m40.a0) selected).a;
+            else if (selected instanceof m40.b0) next = ((m40.b0) selected).a;
+            else if (selected instanceof m40.i0) next = ((m40.i0) selected).a;
+            else if (selected instanceof m40.y) next = ((m40.y) selected).c;
+            else if (selected instanceof com.swiftkey.typeface.candidates.candidates.EmailAddressCandidate)
+                next = ((com.swiftkey.typeface.candidates.candidates.EmailAddressCandidate) selected).getWrapped();
+            else break;
+            if (next == selected) break;
+            selected = next;
+        }
+        return candidate.getTrailingSeparator();
+    }
+
+    private static ec0.y activeMarker(dc0.a state) {
+        if (!(state instanceof ec0.f)) return null;
+        ec0.y marker = ((ec0.f) state).a0();
+        if (marker == null) return null;
+        // Native states: 1=existing field text, 5=committed.
+        int kind = marker.k;
+        return kind == 2 || kind == 3 || kind == 4 || kind == 6 || kind == 7 ? marker : null;
+    }
+
+    public static boolean handle(wb0.x model, lh0.a breadcrumb, String text, String punctuation) {
+        if ((!" ".equals(text) && !"\u3000".equals(text)) || breadcrumb == null
+                || Looper.myLooper() != Looper.getMainLooper()) return false;
+        boolean dispatched = false;
+        m40.b chosen = null;
+        m40.b previousSelection = null;
+        boolean selectionScoped = false;
+        try {
+            if (model == null || model.c == null || model.b == null || model.g == null
+                    || model.g.b == null || model.g.b.l != PredictionSearchType.JAPANESE) return false;
+            dc0.a state = model.c.C();
+            if (state == null || state.k() != state.S()) return false;
+            final ec0.y marker = activeMarker(state);
+            if (marker == null) return false;
+            final int markerKind = marker.k;
+            final int cursor = state.k();
+            final String composition = state.s(), raw = state.G();
+            // Native request.k is copied from the same marker.l returned by G().
+            // Compare those original values first. A valid Japanese editing state
+            // can contain kana/kanji plus newly typed romaji, not just pure kana.
+            // s() is displayed correction text and must not replace this identity.
+            if (raw == null || raw.isEmpty()) return false;
+            // The candidate bar retains the enriched list. A cache-hit Future can
+            // instead return native-only candidates and omit a visible dictionary word.
+            final lb0.a candidateModel = model.g.b.g;
+            final ib0.a displayed = candidateModel == null ? null : candidateModel.e;
+            final l40.c displayedRequest = displayed == null ? null : displayed.c;
+            List<?> candidates = matches(displayedRequest, raw) ? displayed.a : null;
+            int position = firstConversion(candidates, raw);
+            final boolean fromDisplay = position >= 0;
+            Future<?> pending = null;
+            if (!fromDisplay) {
+                if (model.g.a == null) return false;
+                // The bar has no usable candidate for the current input yet.
+                // Keep the native buffered-request and bounded prediction fallback.
+                if (model.g.f) {
+                    if (model.g.j == null || model.g.h == null || model.g.i == null) return false;
+                    model.g.b(model.g.j, true, model.g.h, model.g.i);
+                    model.g.f = false;
+                }
+                if (model.g.f) return false;
+                pending = model.g.a.h;
+                if (pending == null || pending.isCancelled()) return false;
+                Object result = pending.get(PREDICTION_WAIT_MS, TimeUnit.MILLISECONDS);
+                if (!(result instanceof List)) return false;
+                candidates = (List<?>) result;
+                position = firstConversion(candidates, raw);
+                if (position < 0) return false;
+            }
+            chosen = (m40.b) candidates.get(position);
+            dc0.a latest = model.c.C();
+            if (latest == null || activeMarker(latest) != marker || marker.k != markerKind
+                    || latest.k() != cursor || latest.S() != cursor
+                    || !same(composition, latest.s()) || !same(raw, latest.G())
+                    || !same(latest.K(), chosen.subrequest().i)
+                    || model.g.b.l != PredictionSearchType.JAPANESE)
+                return false;
+            if (fromDisplay) {
+                if (model.g.b.g != candidateModel || candidateModel.e != displayed
+                        || displayed.a != candidates || displayed.c != displayedRequest
+                        || !matches(displayedRequest, raw)) return false;
+            } else if (model.g.f || model.g.a.h != pending) return false;
+            yb0.a event = model.b.g(breadcrumb, chosen, wb0.j.a, position);
+            if (event == null) return false;
+            // Native Fluency candidates reject setTrailingSeparator, even when
+            // assigning their existing value. Keep the candidate immutable and
+            // alter only commit-time reads, including native visitor unwrapping.
+            previousSelection = SPACE_SELECTION.get();
+            SPACE_SELECTION.set(chosen);
+            selectionScoped = true;
+            // Once native dispatch begins, never fall through to a second space write.
+            dispatched = true;
+            model.i0(event);
+            return true;
+        } catch (InterruptedException interrupted) {
+            Thread.currentThread().interrupt();
+            return dispatched;
+        } catch (Exception unavailable) {
+            return dispatched;
+        } catch (LinkageError unavailable) {
+            return dispatched;
+        } finally {
+            if (selectionScoped) {
+                if (previousSelection == null) SPACE_SELECTION.remove();
+                else SPACE_SELECTION.set(previousSelection);
+            }
+        }
+    }
+
+    private static boolean matches(l40.c request, String raw) {
+        if (request == null || request.d != PredictionSearchType.JAPANESE
+                || raw == null || raw.isEmpty() || request.k == null || request.k.isEmpty()) return false;
+        if (raw.equals(request.k)) return true;
+        // Preserve kana/romaji-equivalent requests, but an unrecognized value is
+        // never a wildcard. Only two independently valid readings can match.
+        String currentReading = reading(raw);
+        return currentReading != null && currentReading.equals(reading(request.k));
+    }
+
+    private static int firstConversion(List<?> candidates, String raw) {
+        if (candidates == null) return -1;
+        for (int i = 0; i < candidates.size(); i++) {
+            Object value = candidates.get(i);
+            if (!(value instanceof m40.b)) continue;
+            m40.b candidate = (m40.b) value;
+            if (!matches(candidate.subrequest(), raw)) continue;
+            String output = candidate.getUserFacingText();
+            if (output != null && (hasKanji(output) || contextualKana(candidate, output))) return i;
+        }
+        return -1;
+    }
+
+    /** Broaden kana selection only for a full, non-verbatim native prediction.
+     * Native h0 candidates have default metadata (Q=false), including raw input,
+     * so a false flag alone is not evidence of a contextual prediction.
+     */
+    private static boolean contextualKana(m40.b candidate, String output) {
+        if (!kanaText(output)) return false;
+        try {
+            for (int depth = 0; candidate != null && depth < 16; depth++) {
+                // k0 is the native IS_TRUE_VERBATIM wrapper, regardless of the
+                // prediction it wraps. Never automatically select it as kana.
+                if (candidate instanceof m40.k0) return false;
+                if (candidate instanceof m40.c0) {
+                    n40.a metadata = ((m40.c0) candidate).sourceMetadata();
+                    // Q = !isPrefix && isVerbatim; D = isPrefix.
+                    return metadata != null && !metadata.D() && !metadata.Q();
+                }
+                m40.b next;
+                if (candidate instanceof m40.g0) next = ((m40.g0) candidate).a;
+                else if (candidate instanceof m40.x) next = ((m40.x) candidate).b;
+                else if (candidate instanceof m40.j0) next = ((m40.j0) candidate).b;
+                else if (candidate instanceof m40.v) next = ((m40.v) candidate).b;
+                else if (candidate instanceof m40.a0) next = ((m40.a0) candidate).a;
+                else if (candidate instanceof m40.b0) next = ((m40.b0) candidate).a;
+                else if (candidate instanceof com.swiftkey.typeface.candidates.candidates.EmailAddressCandidate)
+                    next = ((com.swiftkey.typeface.candidates.candidates.EmailAddressCandidate) candidate).getWrapped();
+                else return false;
+                if (next == candidate) return false;
+                candidate = next;
+            }
+        } catch (Exception unavailable) {
+            // Optional metadata must not disable the established kanji fallback.
+        } catch (LinkageError unavailable) {
+            // Unsupported native APIs keep the existing conversion behavior.
+        }
+        return false;
+    }
+
+    private static boolean kanaText(String output) {
+        String value = WordCandidates.normalize(output);
+        boolean letter = false;
+        for (int i = 0; i < value.length(); i++) {
+            char c = value.charAt(i);
+            if (c >= '\u3041' && c <= '\u3096') letter = true;
+            else if (c != '\u30fc' && c != '\u30fb' && c != '\u309d' && c != '\u309e') return false;
+        }
+        return letter;
+    }
+
+    private static boolean same(String a, String b) { return a == null ? b == null : a.equals(b); }
+
+    static String reading(String input) {
+        if (input == null || input.isEmpty()) return null;
+        boolean latin = true;
+        for (int i = 0; i < input.length(); i++) {
+            char c = input.charAt(i);
+            if (!((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z') || c == '\'' || c == '-' || c == '\u30fc')) {
+                latin = false; break;
+            }
+        }
+        String kana = latin ? com.microsoft.fluency.Japanese.romajiToHiragana(input) : input;
+        if (kana == null) return null;
+        String normalized = WordCandidates.normalize(kana);
+        if (normalized.isEmpty()) return null;
+        boolean kanaSeen = false;
+        for (int i = 0; i < normalized.length(); i++) {
+            char c = normalized.charAt(i);
+            if (c >= '\u3041' && c <= '\u3096') kanaSeen = true;
+            else if (c != '\u30fc') return null;
+        }
+        return kanaSeen ? normalized : null;
+    }
+
+    static boolean hasKanji(String value) {
+        for (int offset = 0; offset < value.length();) {
+            int point = value.codePointAt(offset);
+            if ((point >= 0x3400 && point <= 0x4dbf) || (point >= 0x4e00 && point <= 0x9fff)
+                    || (point >= 0xf900 && point <= 0xfaff) || (point >= 0x20000 && point <= 0x2fa1f)
+                    || (point >= 0x30000 && point <= 0x323af)) return true;
+            offset += Character.charCount(point);
+        }
+        return false;
+    }
+}

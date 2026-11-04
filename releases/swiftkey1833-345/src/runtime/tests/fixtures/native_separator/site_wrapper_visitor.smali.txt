@@ -1,0 +1,13 @@
+    iget-object p1, p1, Lm40/x;->b:Lm40/b;
+
+    invoke-interface {p1}, Lm40/b;->getTokens()Ljava/util/List;
+
+    move-result-object v8
+
+    invoke-interface {p1}, Lm40/b;->getTrailingSeparator()Ljava/lang/String;
+
+    move-result-object p1
+
+    invoke-virtual {v1}, Lec0/f;->r0()V
+
+    invoke-virtual {v1, v0}, Lec0/f;->j0(Ljava/lang/String;)V

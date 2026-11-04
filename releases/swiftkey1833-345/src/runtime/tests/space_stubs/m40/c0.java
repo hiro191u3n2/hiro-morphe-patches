@@ -1,0 +1,1 @@
+package m40; public abstract class c0 implements b { public n40.a testMetadata; public final n40.a sourceMetadata() { return testMetadata; } public final void setTrailingSeparator(String value) { throw new UnsupportedOperationException(); } }

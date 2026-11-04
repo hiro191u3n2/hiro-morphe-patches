@@ -1,0 +1,19 @@
+    if-ne v5, v6, :cond_2
+
+    new-instance v5, Lm40/w;
+
+    invoke-direct {v5, v3, v4, p1}, Lm40/c0;-><init>(Lcom/microsoft/fluency/Prediction;Lm40/f0;Ll40/c;)V
+
+    const/4 v3, -0x1
+
+    iput v3, v5, Lm40/w;->k:I
+
+    goto :goto_2
+
+    :cond_2
+    new-instance v5, Lm40/c0;
+
+    invoke-direct {v5, v3, v4, p1}, Lm40/c0;-><init>(Lcom/microsoft/fluency/Prediction;Lm40/f0;Ll40/c;)V
+
+    :goto_2
+    invoke-virtual {p2, v5}, Lm40/c;->invoke(Ljava/lang/Object;)Ljava/lang/Object;
