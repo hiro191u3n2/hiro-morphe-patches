@@ -1,3 +1,9 @@
+# [1.0.348](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.0) (2026-11-05)
+
+* **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.0を追加。読み込み済みの商品が対象です。
+* **Amazon Shopping:** com.amazon.mShop.android.shopping 32.19.0.100対応。全検索結果の件数順は保証しません。添付APKへの適用と既存処理保持を検証。実機表示は未確認。
+* **Amazon:** 添付APKでは新しい評価件数順パッチだけを選択し、他のAmazon用パッチは外してください。
+
 # [1.0.347](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/maps-category-v1.0.1) (2026-11-05)
 
 * **Google Maps:** 通常版アプリの選択画面にパッチが出ない問題を修正。通常版とmicroG版の両パッケージを登録。
