@@ -1,0 +1,134 @@
+{
+  "schema": "maps-category101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.347",
+  "baseline_version": "1.0.346",
+  "baseline_sha256": "503b427c111655b37411c161b940a44b55c1e2a816ab074e9cb0b34382c101fe",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "original_stock_apk_tested": false,
+  "ui_transform_unchanged_from_previous": true,
+  "previous_patched_apk_sha256": "291f984f4688aba3d3caaa8839775a73d1430431ded700fb8021b21196a3bf6e",
+  "selection_tests": "PASS old bundle hides Maps patch for original package; new single/bundle each expose exactly one patch for stock and microG in both SDKs",
+  "selection_results": [
+    {
+      "artifact": "Maps_Hide_Category_Row_v1.0.1.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Category_Row_v1.0.1.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Category_Row_v1.0.1.mpp",
+      "loader": "morphe-current.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Category_Row_v1.0.1.mpp",
+      "loader": "morphe-current.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.347.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.347.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.347.mpp",
+      "loader": "morphe-current.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.347.mpp",
+      "loader": "morphe-current.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "baseline346",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 0
+    },
+    {
+      "artifact": "baseline346",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "baseline346",
+      "loader": "morphe-current.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 0
+    },
+    {
+      "artifact": "baseline346",
+      "loader": "morphe-current.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    }
+  ],
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+    "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+  },
+  "sources": {
+    "build.py": "3020ef3f06b5ec65aa84730b6a4ccfe0b5e8164f4ccb5d01db717e84211a211d",
+    "patch/MapsCategoryRowPatch.java": "d642ac3fb4d37e0e4048e133d9a5786764ee8782ba545960e915afd98f5d5946",
+    "test/MapsAudit.java": "7732c80484855962d0ae9ee889986686bc59eb1db5d566578eecc6a4847d2e78",
+    "test/MapsSelectionRegression.java": "cf2cdbef165750498f13b29945949952bc64de70d2fd8d63ca2d167c7266c85e"
+  },
+  "artifacts": {
+    "Maps_Hide_Category_Row_v1.0.1.mpp": {
+      "bytes": 11088,
+      "sha256": "a7bb582bba96af573ec53417e3f6a13c081ffc82078be7ba823cb8d289132879"
+    },
+    "Hiro_Morphe_Patches_v1.0.347.mpp": {
+      "bytes": 48228562,
+      "sha256": "dc9193e2b4951bc47f0d58a7433163b1d00f7089738903a15f33cf732241ebd5"
+    }
+  },
+  "loader_preservation": "PASS loader merge: unrelated existing classes preserved=349; Maps provider classes replaced=2; assertions=1064",
+  "preserved_unrelated_entries": 271,
+  "host_tests": "Not applicable: no runtime extension; one original method receives a null-return instruction.",
+  "guard_tests": "PASS guards: stock+microG package metadata; foreign package/version/code/body and repeated-application checks; assertions=74006\nPASS guards: stock+microG package metadata; foreign package/version/code/body and repeated-application checks; assertions=74006",
+  "apk_application": [
+    {
+      "bundle": "Maps_Hide_Category_Row_v1.0.1.mpp",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=73961; modified getters=1; added instructions=1; unchanged resources=9330; null-safe consumers=5 plus forwarding wrapper; assertions=251322; physical Android UI not tested.",
+      "preserved_original_resources": 9330
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.347.mpp",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=73961; modified getters=1; added instructions=1; unchanged resources=9330; null-safe consumers=5 plus forwarding wrapper; assertions=251322; physical Android UI not tested.",
+      "preserved_original_resources": 9330
+    }
+  ],
+  "supplied_apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
