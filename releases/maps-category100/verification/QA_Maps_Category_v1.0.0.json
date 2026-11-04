@@ -1,0 +1,55 @@
+{
+  "schema": "maps-category100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.346",
+  "baseline_version": "1.0.345",
+  "baseline_sha256": "35993d492f845d143ae70d61dee9d839f5151649e5615de52c3ba90c087fc954",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+    "morphe-current.jar": "a51472252cd63b2eac635dbb5a154ff918bfc15268da89679feb3d760230c573"
+  },
+  "sources": {
+    "build.py": "885bae05dc356934ecbaa2efe3c94ec9ef13228891ef2a3e0a380b954cf69c59",
+    "patch/MapsCategoryRowPatch.java": "440fd345d373444f046141ff1c5071b67057b0abf49a1adeec532b4fcb164b45",
+    "test/MapsAudit.java": "83e4e46958d679c25c9df2278de595aff20fa76df32b32230b4cab4b61690876"
+  },
+  "artifacts": {
+    "Maps_Hide_Category_Row_v1.0.0.mpp": {
+      "bytes": 10423,
+      "sha256": "a8f0133821e01396a2df069c651c62a035662b8f4fc5f02c916b3b2de3de8392"
+    },
+    "Hiro_Morphe_Patches_v1.0.346.mpp": {
+      "bytes": 48227983,
+      "sha256": "503b427c111655b37411c161b940a44b55c1e2a816ab074e9cb0b34382c101fe"
+    }
+  },
+  "loader_preservation": "PASS loader merge: existing classes preserved=349; new Maps provider classes=2; assertions=1408",
+  "preserved_unrelated_entries": 271,
+  "host_tests": "Not applicable: no runtime extension; one original method receives a null-return instruction.",
+  "guard_tests": "PASS guards: package/version/code/body and repeated-application checks; assertions=73996\nPASS guards: package/version/code/body and repeated-application checks; assertions=73996",
+  "apk_application": [
+    {
+      "bundle": "Maps_Hide_Category_Row_v1.0.0.mpp",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=73961; modified getters=1; added instructions=1; unchanged resources=9330; null-safe consumers=5 plus forwarding wrapper; assertions=251322; physical Android UI not tested.",
+      "preserved_original_resources": 9330
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.346.mpp",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=73961; modified getters=1; added instructions=1; unchanged resources=9330; null-safe consumers=5 plus forwarding wrapper; assertions=251322; physical Android UI not tested.",
+      "preserved_original_resources": 9330
+    }
+  ],
+  "supplied_apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}
