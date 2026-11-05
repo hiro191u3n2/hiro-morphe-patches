@@ -1,0 +1,84 @@
+{
+  "schema": "amazon-review107-qa-v1",
+  "patch_version": "1.0.7",
+  "bundle_version": "1.0.355",
+  "baseline_version": "1.0.354",
+  "baseline_sha256": "2d2a657dc80a051a6fe39573f7768278b2ea19208d0e3924051eee3aab7bd5b4",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "runtime_extension": "extensions/amazon_review_sort.mpe",
+  "apk_bytecode_mode": "STRIP_FAST",
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "json.jar": "3cf6cd6892e32e2b4c1c39e0f52f5248a2f5b37646fdfbb79a66b46b618414ed",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "sources": {
+    "build.py": "8883b9f1885b4b1b9883e2c0a34231a961c7dd13548700e22242fab568d852af",
+    "patch/AmazonReviewPatch.java": "8157e2c51bb72ea55153e6b2f44414c5ba386ae73fed79e70a6c9e79998334c4",
+    "runtime/ReviewCountRuntime.java": "283b1458cb49de3d9e17f3e14880ab81f6adc4ef54583f86160886cc4f1133f9",
+    "runtime/generate_script.py": "a0ded265b6081db3fb1d8292422c0c2d8da6f0f7ffc6144999d995e808ed588f",
+    "runtime/review-sort.js": "301ac752708e272bd6543b081da15572456772d0a864639e2d9042a00df664b2",
+    "runtime-tests/bridge_vm.js": "56c72f407b2d7a47a246f5426ac57500e7d738bca55b0fe647c3d76e8c4ded33",
+    "runtime-tests/java/android/content/Context.java": "4373444fe4ec6f6388c6669b99ca9729cc8dbca10cf33cfc2c4b41089276ff38",
+    "runtime-tests/java/android/os/Handler.java": "bb35b982d06a3b5b28a085be7bae7e55ab69c3602020c6726efab6980e294f0f",
+    "runtime-tests/java/android/os/Looper.java": "437c903e9d19e79911f8a186174d62e8aa55f2fdc9b57193a0a54aa84aaa5b37",
+    "runtime-tests/java/android/os/SystemClock.java": "6642c3a4ba2d38bb6019b6020c9528a555a522d4903259496eef3c73b74ecd77",
+    "runtime-tests/java/android/webkit/ValueCallback.java": "081c5c7916daad11c029f392fb9b9093bb2cff5244c7da0bb4df1d573e21c9ad",
+    "runtime-tests/java/android/webkit/WebView.java": "70c1d3a12dd48b97369ecc6b8e1a8f5c680717bd4091ad8c4ec83883280f6e7b",
+    "runtime-tests/java/android/widget/Toast.java": "2886d337b62ee706b7cd75dc8d9ff0517f3a4a39389984630c8930946a7314d8",
+    "runtime-tests/java/app/hiro/amazonreviews/BridgeRoundTripTest.java": "545b287752236766a819182370399ae33993cd2f25adeaf19225eaa1dd92e202",
+    "runtime-tests/java/app/hiro/amazonreviews/ReviewCountRuntimeTest.java": "a1f00b792eb6d34cc3fedb6e216e975854c8564194577305768640654e3e2f09",
+    "runtime-tests/package-lock.json": "a85918b428b0dde99d0be37415c4498eedb01e83f6fc487fa5af538450674f1e",
+    "runtime-tests/package.json": "be596e2393c3a1a61e2f9e1fc2019c53d50e52c3be9c0a751fbae3dec5ecad1e",
+    "runtime-tests/test_extractors.js": "0a9aaf2fa1e81dda9e227b8fa2f4bb397fe59bcb63c1954f5181c1ac3ee0f9bd",
+    "runtime-tests/test_sort.js": "954d62cfa7790adb2f0d7f66c520d1f4b9e7fd1a0726bb214a3c28d470dba616",
+    "test/AmazonReviewAudit.java": "07d0d83e083af71effeeaaa37983f30a2544c06d6502bd2b05e5cdda4a190044",
+    "test/test_script_generator.py": "79600bf1b007a704dddfd122e242fac952c78c14c75abbac9850bb2085dd3291"
+  },
+  "artifacts": {
+    "Amazon_Review_Count_v1.0.7.mpp": {
+      "bytes": 49828,
+      "sha256": "48db07c4b707fcb6ad080fc6aaf12e13aff12ba73030d1087cde43d49ffdb974"
+    },
+    "Hiro_Morphe_Patches_v1.0.355.mpp": {
+      "bytes": 48273733,
+      "sha256": "fe808754c745da41757ee68d9c33cb39504f86c254d294239ebcf1ae1bb8fa59"
+    }
+  },
+  "loader_preservation": "PASS unrelated loader classes preserved=351; replaced=4; new review classes=4; assertions=1080",
+  "preserved_unrelated_entries": 273,
+  "host_tests": "PASS runtime URL, opaque search identity, bounded native receipt and lifecycle assertions=295\nPASS {\"status\":\"passed\",\"assertions\":753,\"dom\":\"linkedom 0.18.12\",\"synthetic_geometry_tested\":true,\"real_browser_layout_tested\":false,\"physical_device_tested\":false}\nPASS {\"status\":\"passed\",\"assertions\":196,\"suite\":\"pure_extractors\",\"dom\":\"linkedom 0.18.12\",\"runtime_installed\":false,\"real_browser_layout_tested\":false}",
+  "bridge_roundtrip_tests": "PASS Java-JS-Java bridge assertions=92 cases=6 persistent_window=true physical_webview=false",
+  "script_generation_tests": "PASS Java script generation beyond 65535 bytes; bounded literals, Unicode, escapes and chunk boundaries preserved",
+  "guard_tests": "PASS package/version/body guards and duplicate application rejection; assertions=74147",
+  "apk_application": [
+    {
+      "bundle": "Amazon_Review_Count_v1.0.7.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74123 (byte-identical DEX classes=65138); methods hooked=8; inserted instructions=14; runtime classes=12; assertions=157296; physical device not tested",
+      "preserved_original_resources": 5611
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.355.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.amazon.mShop.android.shopping",
+      "version": "32.19.0.100",
+      "result": "PASS",
+      "audit_summary": "PASS APK exact class audit: unchanged=74123 (byte-identical DEX classes=65138); methods hooked=8; inserted instructions=14; runtime classes=12; assertions=157296; physical device not tested",
+      "preserved_original_resources": 5611
+    }
+  ],
+  "supplied_apk_sha256": "8c3bbe749856dce395508091a74841133bf044934d32cf8dd2ed47f11a217059",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}

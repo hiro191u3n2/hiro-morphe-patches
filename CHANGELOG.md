@@ -1,3 +1,9 @@
+# [1.0.355](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-05)
+
+* **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.7。検索内容更新の実通知を受け取り、URLが変わらない画面内検索でも開始・切替します。
+* **Amazon Shopping:** 商品リンクと評価表示の繰り返しからモバイル一覧を識別する経路を追加。既存の広告非表示・価格履歴と他アプリのパッチは保持します。
+* **Amazon:** com.amazon.mShop.android.shopping 32.19.0.100が対象。元APKへ再適用してください。取得・件数判定できた商品が対象で、全検索結果の全件順位ではありません。Android実機の表示と改善は未確認です。
+
 # [1.0.354](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.6) (2026-11-05)
 
 * **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.6へ更新。Java側の起動を検索・ホームのパス名で制限する処理を外し、信頼するAmazon HTTPSページで注入を試みます。並べ替えは確認できた検索画面に限定します。
