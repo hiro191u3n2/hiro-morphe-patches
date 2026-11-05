@@ -1,3 +1,9 @@
+# [1.0.352](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.4) (2026-11-05)
+
+* **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.4へ更新。通常一覧の分断と古い件数の優先取得を修正し、件数を判定できた商品だけを一括で並べて固定します。
+* **Amazon Shopping:** 未判定・追加・件数変更の商品と主一覧の対象外区画は、待機数を表示して一時的に隠します。「追加分を含めて並べ直す」で取得済みの待機商品を含めて再整理。固定後の自動先頭移動は行いません。
+* **Amazon:** com.amazon.mShop.android.shopping 32.19.0.100が対象。約100件は目安で、未取得・待機中を含む全検索結果の順位は保証しません。実ブラウザー・Android実機は未確認。
+
 # [1.0.351](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.3) (2026-11-05)
 
 * **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.3へ更新。通常商品を重複を除いて約100件先読みし、同じ表示形式の範囲ごとに1回並べて閲覧順を固定する方式に変更。
