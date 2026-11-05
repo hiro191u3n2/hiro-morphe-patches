@@ -1,3 +1,9 @@
+# [1.0.351](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.3) (2026-11-05)
+
+* **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.3へ更新。通常商品を重複を除いて約100件先読みし、同じ表示形式の範囲ごとに1回並べて閲覧順を固定する方式に変更。
+* **Amazon Shopping:** 先読みは検索結果の自動スクロールで実行し、最大20秒・30回。操作で中断できます。取得できた範囲を並べ、後から現れた商品は同じ表示領域の固定対象群の下へ回します。
+* **Amazon:** com.amazon.mShop.android.shopping 32.19.0.100が対象。100件や全検索結果の取得は保証しません。実ブラウザー・Android実機での先読みと表示は未確認。
+
 # [1.0.350](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.2) (2026-11-05)
 
 * **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.2へ更新。スクロール中の移動を延期し、停止後に表示位置を補正しながら並べ替えます。
