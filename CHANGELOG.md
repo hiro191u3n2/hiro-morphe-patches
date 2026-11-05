@@ -1,3 +1,9 @@
+# [1.0.354](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.6) (2026-11-05)
+
+* **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.6へ更新。Java側の起動を検索・ホームのパス名で制限する処理を外し、信頼するAmazon HTTPSページで注入を試みます。並べ替えは確認できた検索画面に限定します。
+* **Amazon Shopping:** Java到達の版番号付き通知、WebView受領結果、上限付きの端末内診断を追加。アプリの検索通知がある場合は #search のない標準的な検索結果枠にも対応します。診断情報の外部送信は行いません。
+* **Amazon:** com.amazon.mShop.android.shopping 32.19.0.100が対象。配布物と適用後APKの一致は再確認しましたが、実機での起動経路と原因は未確定。全検索結果の順位や実機での改善を保証するものではありません。
+
 # [1.0.353](https://github.com/hiro191u3n2/hiro-morphe-patches/releases/tag/amazon-review-count-v1.0.5) (2026-11-05)
 
 * **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.5へ更新。表示中の検索一覧の認識、商品枠の取りこぼし、開始処理と件数取得失敗後の復帰経路を修正します。
