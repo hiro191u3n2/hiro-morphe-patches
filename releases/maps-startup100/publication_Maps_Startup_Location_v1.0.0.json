@@ -1,0 +1,89 @@
+{
+  "schema": "maps-startup100-publication-v1",
+  "status": "PUBLISHED_AND_CHANNELS_VERIFIED",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.360",
+  "release_timestamp": "2026-11-06T16:10:35",
+  "release_timezone": "Asia/Tokyo",
+  "site": {
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "source_commit": "4b10796f35f237700cd1907bd3963141708d9d81",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_4c48e3082ae88191bb249035349188b0",
+    "version_number": 110,
+    "deployment_id": "appgdep_6aed80a5ab948191bbf169e44bcde14d",
+    "status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "published_at": "2026-11-06T07:25:37.656202+00:00"
+  },
+  "source_repository": "hiro191u3n2/hiro-morphe-patches",
+  "source_and_changelog_commit": "e8081492b3573d8b7261ec954b958efac34c6c41",
+  "feed_commit": "81bebc570cdfaa5aa1f31c1e32e6d9c5b743d1b7",
+  "manager_channels": {
+    "main": "1.0.360",
+    "dev": "1.0.360",
+    "raw_descriptor_bytes_match": true,
+    "raw_changelog_bytes_match": true,
+    "descriptor_sha256": "0c9836f2821485add5bdee626c6fd85ba8157f47086218af5651653f92dc85e9",
+    "changelog_sha256": "5c28f625d2a4eae65be4eceaf075a0271e63f5a48c705edd09bf21df2dcb8d78",
+    "physical_update_mark_observed": false
+  },
+  "download_verification": [
+    {
+      "file": "Maps_Startup_Location_v1.0.0.mpp",
+      "bytes": 27664,
+      "sha256": "ec9da2abf42a49347f5dfc1d5a2c2db2c3ca45806336e424ddf8c7e1252c4052",
+      "status": "PASS"
+    },
+    {
+      "file": "Hiro_Morphe_Patches_v1.0.360.mpp",
+      "bytes": 48310920,
+      "sha256": "e343802fd04b41d872a4fab7f495e2e51303d730be9c07eefa16ac0dbf60ad2b",
+      "status": "PASS"
+    },
+    {
+      "file": "patches-bundle.json",
+      "bytes": 799244,
+      "sha256": "0c9836f2821485add5bdee626c6fd85ba8157f47086218af5651653f92dc85e9",
+      "status": "PASS"
+    },
+    {
+      "file": "source",
+      "bytes": 799244,
+      "sha256": "0c9836f2821485add5bdee626c6fd85ba8157f47086218af5651653f92dc85e9",
+      "status": "PASS"
+    },
+    {
+      "file": "Maps_Startup_Location_v1.0.0_sources.zip",
+      "bytes": 36515,
+      "sha256": "5f4394df3e52311e335a9c8b5a87dbd52db2d3ecf1a2bf3759e81f8b47712753",
+      "status": "PASS"
+    }
+  ],
+  "target": {
+    "package": "org.ungoogled.android.apps.maps.microg",
+    "version": "26.36.04.973607363",
+    "version_code": "1068763346",
+    "supplied_mod_version": "グーグルマップ v2.8.5",
+    "apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063"
+  },
+  "checks": {
+    "host_scenarios": 53,
+    "host_assertions": 323,
+    "actual_apk_application_standalone": true,
+    "actual_apk_application_integrated": true,
+    "category_patch_coselection": true,
+    "unchanged_original_resources": 9330,
+    "standalone_integrated_output_equal": true,
+    "existing_bundle_provider_classes_preserved": 359,
+    "existing_bundle_entries_preserved": 282,
+    "production_worker_delivery_tests_passed": 40
+  },
+  "limitations": {
+    "android_runtime_tested": false,
+    "physical_device_tested": false,
+    "stock_google_maps_apk_tested": false,
+    "reason": "Official isolated Android emulator failed ADB/discovery before APK installation; native location UI execution remains unverified."
+  },
+  "patch_name": "起動時に現在地を表示",
+  "behaviour": "One native current-location request per ordinary launcher/foreground opening, after native fix readiness; maximum60-second wait; touch cancels pending action; external destinations and route/navigation modes remain prioritized; native tracking/compass operation is idempotent."
+}
