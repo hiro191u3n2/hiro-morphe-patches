@@ -1,0 +1,80 @@
+{
+  "schema": "maps-startup-runtime-attempt-v1",
+  "recorded_utc": "2026-11-06T07:03:41.587128+00:00",
+  "subject": "microG Maps startup current-location patch runtime validation",
+  "status": "BLOCKED_TEST_INFRASTRUCTURE",
+  "environment": {
+    "emulator": "Official Android Emulator 37.1.7, build 16783918",
+    "system_image": "Official Google APIs Android 17 / API 37 x86_64",
+    "native_bridge_supported_by_image": "libndk_translation.so; image declares x86_64,arm64-v8a",
+    "native_bridge_runtime_verified": false,
+    "acceleration": "TCG software CPU emulation; no KVM device",
+    "avd": "MapsApi37",
+    "isolated_avd": true,
+    "memory_mb": 4096,
+    "cpu_cores": 4,
+    "console_port": 5584,
+    "adb_transport_port": 5585,
+    "adb_server_port": 5047,
+    "guest_ordinary_ip_egress_disabled": true,
+    "proxy_forwarded": false,
+    "existing_sdk_modified": false,
+    "existing_avd_modified": false,
+    "permissions_escalated": false,
+    "host_mounts_or_namespaces_modified": false,
+    "discovery_metadata_manually_modified": false
+  },
+  "attempts": [
+    {
+      "configuration": "Isolated AVD, documented -port 5584, private ADB server",
+      "progress": [
+        "Linux/Android init started",
+        "userdata mounted",
+        "zygote started",
+        "Android adbd started at guest time 86.5 seconds"
+      ],
+      "host_adb": "Direct localhost connection remained offline, including after adbd startup and at >=113 seconds wall elapsed",
+      "console": "KO: No matching emulator found",
+      "stopped": true
+    },
+    {
+      "configuration": "Same isolated AVD, documented XDG_RUNTIME_DIR under task runtime directory, explicit -ports 5584,5585 and -grpc 8584",
+      "discovery_file": "xdg-runtime/avd/running/pid_26.ini",
+      "console": "KO: No matching emulator found",
+      "emulator_error": "Failed to build gRPC client: NOT_FOUND: No matching emulator found",
+      "source_location": "external/goldfish+/emulator/libs/discovery/emulator_advertisement.cc:272",
+      "stopped": true,
+      "failure_observed_after_seconds": 6
+    }
+  ],
+  "observed_pid_namespace_difference": {
+    "child_getpid": 613,
+    "child_proc_self": 37743,
+    "nspid_values": [
+      37743,
+      613
+    ],
+    "interpretation": "The emulator advertises its namespace PID while /proc exposes host-level entries. This is associated with failed emulator discovery; no kernel/proc changes or bypass was attempted."
+  },
+  "input_apk": {
+    "name": "microG_Maps-v26.36.04.973607363-グーグルマップ-v2.8.5.apk",
+    "bytes": 172832834,
+    "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+    "package": "org.ungoogled.android.apps.maps.microg",
+    "version": "26.36.04.973607363",
+    "native_abi": "arm64-v8a",
+    "installed": false,
+    "launched": false
+  },
+  "patch_candidate_tested": false,
+  "location_recenter_observed": false,
+  "android_boot_completed_verified": false,
+  "physical_galaxy_device_tested": false,
+  "runtime_success_claimed": false,
+  "limitation": "Infrastructure failed before APK installation. Actual app launch, GPS current-location recenter, permission interaction, warm relaunch and deep-link behavior remain unverified on Android. Host lifecycle tests and APK structure/application checks must be reported separately.",
+  "followup_v1_0_1": {
+    "new_emulator_attempt": false,
+    "android_ui_tested": false,
+    "note": "Previous infrastructure failure is retained. Follow-up uses actual APK and emitted-DEX instruction regression tests, not Android UI execution."
+  }
+}

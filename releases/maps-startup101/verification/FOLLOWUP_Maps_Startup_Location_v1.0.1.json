@@ -1,0 +1,61 @@
+{
+  "schema": "maps-startup101-followup-v1",
+  "prior_bundle": "1.0.360",
+  "prior_patch": "1.0.0",
+  "new_bundle": "1.0.361",
+  "new_patch": "1.0.1",
+  "user_report": "パッチあてたけど起動時にげんざいの位置にならないよ",
+  "reported_apk": {
+    "filename": "microG_Maps-v26.36.04.973607363-Hiro_Morphe_Patches-v1.0.360+グーグルマップ-v2.8.7.apk",
+    "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+    "bytes": 172849277,
+    "startup_runtime_present": true,
+    "lifecycle_and_touch_hooks_present": 8,
+    "native_bridge_present": true,
+    "native_contracts_match_original_after_strict_legacy_removal": true
+  },
+  "identified_code_defects": [
+    {
+      "kind": "premature_cancellation",
+      "evidence": "Legacy bridge returned -1 for native map mode NONE, which the native controller uses before initialization.",
+      "fix": "Null and NONE wait. Only confirmed route/navigation modes cancel."
+    },
+    {
+      "kind": "false_completion",
+      "evidence": "Legacy bridge returned 1 immediately after Lamcr.f(); f() can be a no-op when already tracking, or only dispatch asynchronous permission/camera callbacks.",
+      "fix": "Issue the direct, guarded native camera operation. Return 2 means issued; return 1 requires active LOCATION_ONLY or COMPASS tracking, the native camera target less than 50 m from a copied valid fix, and zoom >= 13."
+    },
+    {
+      "kind": "unnecessary_view_dependency",
+      "evidence": "Legacy runtime required a shown, enabled, attached current-location button even though native controller readiness can be validated directly. This was an unnecessary gate; button absence on the user device was not observed.",
+      "fix": "Use window focus, controller lifecycle, map mode, renderer readiness, and a valid location fix."
+    }
+  ],
+  "behavior": {
+    "startup_settle_ms": 1000,
+    "poll_ms": 250,
+    "wait_limit_ms": 60000,
+    "confirmation_polls": 2,
+    "minimum_zoom": 13,
+    "wide_view_recenter_zoom": 15,
+    "camera_distance_tolerance_m": 50,
+    "maximum_direct_requests_per_opening": 2,
+    "recovery_wait_ms": 1500,
+    "touch_cancels": true,
+    "external_intents_preserved": true,
+    "permissions_or_gps_settings_changed": false,
+    "native_toggle_callback_used": false,
+    "coordinates_logged_or_transmitted_by_patch": false,
+    "acknowledgement_requires_native_following": true,
+    "native_distance_comparison": "less_than"
+  },
+  "verification_scope": {
+    "host_lifecycle": "See generated QA record",
+    "actual_emitted_dex_instruction_execution": "See generated QA record; host interpreter with controlled native object responses.",
+    "actual_apk_patch_application": "See generated QA record for original v2.8.5 and strictly normalized reported v2.8.7.",
+    "android_ui_executed": false,
+    "physical_device_improvement_confirmed": false,
+    "specific_branch_observed_on_user_device": false
+  },
+  "important_distinction": "Code defects and reproducible host regressions are established. No on-device trace proves which branch caused the reported failure, and Android UI improvement is not claimed."
+}
