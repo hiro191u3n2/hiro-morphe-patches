@@ -1,3 +1,7 @@
+# [1.0.358](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-06)
+
+* **MX Player Pro:** `フォルダ画面のタグ一覧を非表示` v1.0.0を追加。フォルダ画面上部のMusic／Privacy／MXShare／Video Playlistなどの横並びタグ行を、上下の余白ごと非表示にします。対象はcom.mxtech.videoplayer.pro 1.93.4（2001002584）。 元のAPK／APKSへ適用してください。添付APKへの適用・再構築と、行の挿入処理以外のコード・リソース保持を検証。実機での表示・操作は未確認です。
+
 # [1.0.357](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-06)
 
 * **Amazon ショッピング:** `商品検索を評価件数の多い順に表示` v1.0.9。商品位置を測れない場合や通常商品の認識が不完全な場合に「確認済み」とする誤判定を修正。画面サイズ変更、画像・フォント読込後にも再確認します。

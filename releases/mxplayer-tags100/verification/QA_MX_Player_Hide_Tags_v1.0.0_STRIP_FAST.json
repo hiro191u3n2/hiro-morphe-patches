@@ -1,0 +1,61 @@
+{
+  "schema": "mxplayer-tags100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.358",
+  "baseline_version": "1.0.357",
+  "baseline_sha256": "604432d011fe7cfe021c1306b0f292055eed76f2258bb08acb9d82f12c235ed3",
+  "production_android_sdk_compile": true,
+  "apk_bytecode_mode": "STRIP_FAST",
+  "patcher_version": "2.2.0",
+  "physical_android_tested": false,
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7"
+  },
+  "sources": {
+    "build.py": "58b9007cb7b9a554814c31417da049dfca93ac4f28f2a36281ca74f2163bc3bf",
+    "patch/MXPlayerTagsPatch.java": "c76989cdbdf6909be792d9f7c38e3a3329959325906a77c7cb515a77b6ad67d9",
+    "test/MXPlayerAudit.java": "1083dc5df0ebde7976922bea1c0bfca4244fedf6e452af79f4bc156aa385b2db"
+  },
+  "artifacts": {
+    "MX_Player_Hide_Tags_v1.0.0.mpp": {
+      "bytes": 9666,
+      "sha256": "25cee03909d7f24badd85919e3b73400f12fed96bc91543694ee900939cb42b4"
+    },
+    "Hiro_Morphe_Patches_v1.0.358.mpp": {
+      "bytes": 48282247,
+      "sha256": "8b2fd0a48d30d2c9d5d19a94e2365ef0977f0d840b254a75abc8790330d56ad5"
+    }
+  },
+  "loader_preservation": "PASS loader merge: existing classes preserved=355; new MX Player provider classes=2; assertions=1432",
+  "preserved_unrelated_entries": 278,
+  "host_tests": "Not applicable: no runtime extension; one row-only list hook receives an immediate return-void.",
+  "guard_tests": "PASS guards: package/version/code/body, sole shortcut producer, refresh paths, repeated-application checks; assertions=15365\nPASS guards: package/version/code/body, sole shortcut producer, refresh paths, repeated-application checks; assertions=15365",
+  "apk_application": [
+    {
+      "bundle": "MX_Player_Hide_Tags_v1.0.0.mpp",
+      "sdk": "morphe-2.2.jar",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.mxtech.videoplayer.pro",
+      "version": "1.93.4",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=15326; modified hooks=1; added instructions=1; unchanged resources=3086; shortcut producers=1; refresh paths=2; assertions=55451; physical Android UI not tested.",
+      "preserved_original_resources": 3086
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.358.mpp",
+      "sdk": "morphe-2.2.jar",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "com.mxtech.videoplayer.pro",
+      "version": "1.93.4",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged classes=15326; modified hooks=1; added instructions=1; unchanged resources=3086; shortcut producers=1; refresh paths=2; assertions=55451; physical Android UI not tested.",
+      "preserved_original_resources": 3086
+    }
+  ],
+  "supplied_apk_sha256": "77fb05d4a703a4c3af4c1175ac02f8fee455d1e084f04ad8f3ee7de24415a2eb",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}

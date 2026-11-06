@@ -1,0 +1,40 @@
+{
+  "app": {
+    "package": "com.mxtech.videoplayer.pro",
+    "version_name": "1.93.4",
+    "version_code": 2001002584,
+    "base_apk_sha256": "77fb05d4a703a4c3af4c1175ac02f8fee455d1e084f04ad8f3ee7de24415a2eb"
+  },
+  "target": {
+    "class": "Lpf0;",
+    "source": "ProMediaListFragment.kt",
+    "method": "W1(Ljava/util/List;)V",
+    "opcode_count": 52,
+    "normalized_opcode_sha256": "12e9dac70aad08ba29fb1670f1ee7f96073086dae57807b94e8cba58c0b224a7",
+    "replacement": "return-void",
+    "reason": "Only inserts TitleEntry type 20 at list index 0. Removing insertion removes full row and its margins."
+  },
+  "display": {
+    "class": "Lhx0;",
+    "source": "TitleEntry.kt",
+    "method": "z(Landroid/view/View;)V",
+    "labels": [
+      "Music",
+      "Privacy",
+      "MXShare",
+      "Video Playlist"
+    ],
+    "row_type": 20,
+    "layout": "res/layout/layout_local_tiles.xml",
+    "child_id": "tiles_list",
+    "top_margin": "@dimen/dp10",
+    "bottom_margin": "@dimen/dp8"
+  },
+  "callers": [
+    "Lhn;->doInBackground([Ljava/lang/Object;)Ljava/lang/Object;",
+    "Lcom/mxtech/videoplayer/list/MediaListFragment;->l2(Z)V"
+  ],
+  "validation_limits": [
+    "Static APK analysis only; no Android runtime validation performed by analysis agent."
+  ]
+}
