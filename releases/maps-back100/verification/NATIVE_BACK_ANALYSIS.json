@@ -1,0 +1,104 @@
+{
+  "schema": "maps-back100-native-route-analysis-v1",
+  "purpose": "Preserve native nested Back navigation, then finish the Maps activity and remove its own root task from Recents at app exit.",
+  "patch_name": "戻るで終了して履歴から削除",
+  "target": {
+    "package": "org.ungoogled.android.apps.maps.microg",
+    "version_name": "26.36.04.973607363",
+    "version_code": "1068763346",
+    "inputs": [
+      {
+        "upstream_version": "2.8.5",
+        "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063"
+      },
+      {
+        "upstream_version": "2.8.7",
+        "existing_hiro_bundle": "1.0.360",
+        "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71"
+      }
+    ],
+    "native_contract_count": 23,
+    "native_contract_fingerprints_equal_across_inputs": true,
+    "allowlist_source": "src/patch/MapsBackExitPatch.java CONTRACTS and HASHES; derived from the saved inputs before publication, not learned at patch application time",
+    "fingerprint_serializers": [
+      "legacy Morphe SDK",
+      "Morphe Patcher 2.2 SDK"
+    ],
+    "fingerprint_note": "All 23 raw and Mutable method digests were measured under both SDKs and both saved inputs. Serializer-dependent variants are explicitly allowlisted; no previously unseen digest is accepted."
+  },
+  "native_routes": {
+    "legacy_back": [
+      "Lnce;->onBackPressed()V",
+      "Lpw;->nQ()Lamet;",
+      "Lamet;->av()V",
+      "Lamet;->as()Lql;",
+      "Likc;->b()V"
+    ],
+    "factory": "Lps;->a()Ljava/lang/Object; builds Lamet with Lav(activity,13) fallback runnable.",
+    "legacy_platform_fallback": "Lav.run -> Lpw.x(Lpw;) -> Lcw.onBackPressed(). This shared platform fallback is unchanged.",
+    "api33_plus": {
+      "initialization": "Lpw.B -> Lqm.a on native ON_CREATE -> Lamet.aw(Activity.getOnBackInvokedDispatcher()).",
+      "registration": "Lamet.aw installs native Likh adapters. Likh.c(Z) delegates to e(Z), which registers/unregisters the system OnBackInvokedCallback according to enabled native handlers.",
+      "root_problem": "When native handlers are absent or disabled, the system may handle root Back directly. Changing only Lpw.x or Lnce.onBackPressed would not cover that route.",
+      "solution": "Register one always-enabled native handler before all feature handlers. The existing dispatcher remains active at the map root, including API33+ Back dispatch. No separate system listener or manifest opt-out is introduced."
+    }
+  },
+  "transformation": {
+    "native_method_modified": "Lps;->a()Ljava/lang/Object;",
+    "unique_anchor": "invoke-direct {v0,v3}, Lamet;-><init>(Ljava/lang/Runnable;)V",
+    "insertion_instruction_index": 238,
+    "insertion": "invoke-static {v12,v0}, Lapp/hiro/mapsback/NativeBackFallback;->install(Ljava/lang/Object;Lamet;)V; nop",
+    "inserted_instruction_count": 2,
+    "inserted_code_units": 4,
+    "original_register_count_preserved": 13,
+    "register_meaning_at_anchor": {
+      "v12": "Activity object from the native factory capture",
+      "v0": "new native Lamet back dispatcher"
+    },
+    "payload_alignment": "Four inserted code units preserve even alignment of existing switch and array payloads. DEX builder relocates branches and payload references; output audit must restore the two inserted instructions and compare the original method.",
+    "added_class": "Lapp/hiro/mapsback/NativeBackFallback;",
+    "added_class_superclass": "Lqi;",
+    "added_class_field": "private final activity:Landroid/app/Activity;",
+    "install_scope": "instanceof com.google.android.maps.MapsActivity; non-Maps objects, other activity types, and null do not register anything.",
+    "constructor": "Passes true to the existing Lqi(Z) constructor, then stores the Activity.",
+    "back_action": "Activity.finishAndRemoveTask() through the stored Activity. Shared tasks retain the public Android API behavior; no enumeration, global task removal, or process kill.",
+    "extension_delivery": "One generated DEX class through BytecodePatch extension Supplier; no externally fetched runtime asset.",
+    "reapplication": "Explicit guard rejection if the generated callback already exists; target method fingerprints also reject modified or previously patched native code.",
+    "native_method_sha256_by_serializer": {
+      "legacy": "fe90c0dff4b13c2c7c465f95443816459fd61aad6e16204cde0fe13354a56172",
+      "morphe_2_2": "6b92de26322e2458578c5703e6673c24ce95a94298534c84f59f5e4eeeb67132"
+    }
+  },
+  "priority_proof": {
+    "registration_chain": [
+      "Lamet.at(Lqi;)",
+      "Lqi.g(Lgdz;) constructs native Lqh wrapper",
+      "Lamee.h(Lijz;)",
+      "Likd.c deque.addFirst(handler)"
+    ],
+    "selection": "Likd.a(I) returns the first enabled handler. Later native feature handlers are added ahead of the first-installed fallback.",
+    "invariant": "The added fallback runs only when no later native handler consumes Back; it is not a blanket replacement of Back."
+  },
+  "native_behavior_preserved": {
+    "main_layout_panel": "Lnxz, registered from MainLayout through Lamet.au, delegates to native panel Back and disables itself afterward.",
+    "api35_fragment_navigation": "Lndz, obtained through Lnce.bg/Lnea and registered during native onCreate, pops the existing fragment stack.",
+    "startup_handoff": "Lnce.ap(Z) contains a finish() used from startup/resume-related branches, not ordinary Back. It remains unchanged.",
+    "input_method": "No KeyEvent, pre-IME, keyboard, window, or overlay-priority handler is added or replaced.",
+    "existing_maps_patches": "No edit to Lnce lifecycle/touch methods used by startup location, or Lafhc category-row suppression.",
+    "other_activities": "The shared factory executes one small guard, but only MapsActivity receives the additional callback; no other activity has its back behavior altered."
+  },
+  "validation_at_implementation_handoff": {
+    "java_compile": "PASS --release 8 using Java17 compiler against legacy Morphe SDK",
+    "native_guard_and_transformation": "PASS on both saved input APKs",
+    "generated_extension_serialization": "PASS; one generated class, 880 bytes, DexBackedDexFile readback",
+    "full_apk_and_emitted_instruction_tests": "Owned by the build/audit workflow; see final QA record rather than this implementation-handoff note.",
+    "android_ui_executed": false,
+    "physical_device_tested": false,
+    "limitation": "Code-path analysis and host/DEX checks are not observation of Android system Back, IME behavior, Maps screen navigation, or the Recents UI."
+  },
+  "platform_references": [
+    "https://developer.android.com/about/versions/12/behavior-changes-all#back-press",
+    "https://developer.android.com/reference/android/app/Activity#onBackPressed()",
+    "https://developer.android.com/reference/android/app/Activity#finishAndRemoveTask()"
+  ]
+}

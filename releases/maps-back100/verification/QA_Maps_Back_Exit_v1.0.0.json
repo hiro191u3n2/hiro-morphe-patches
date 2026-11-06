@@ -1,0 +1,145 @@
+{
+  "schema": "maps-back100-qa-v1",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.363",
+  "patch_name": "戻るで終了して履歴から削除",
+  "release_timestamp": "2026-11-06T23:56:54",
+  "release_timezone": "Asia/Tokyo",
+  "baseline_version": "1.0.362",
+  "baseline_sha256": "d2a5637a670c17ac6a1ccbc346c0ad9c882737d1f661c2ad8de127720c7e56fd",
+  "physical_android_tested": false,
+  "android_emulator_tested": false,
+  "runtime_android_tested": false,
+  "runtime_limitation": "No usable Android emulator/ADB or connected device is available. APK application, emitted instruction host tests, native dispatcher structure and preservation were checked; Android UI behavior is unverified.",
+  "compiler": "javac 17.0.20",
+  "java_runtime": "openjdk version \"21.0.13\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-21.0.13+9 (build 21.0.13+9-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.13+9 (build 21.0.13+9-LTS, mixed mode, sharing)",
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "apk_bytecode_mode": "STRIP_FAST",
+  "apk_patcher_version": "2.2.0",
+  "source_sha256": {
+    "build.py": "552ef6a47ecf25900d1f2d59233b2f9ebcd1ab42e9ecd4048f815c7c27a4d4e7",
+    "patch/MapsBackExitPatch.java": "bfcd2a24b0185f08c99df8ea1d7eb4b1a333c5ccf14d641ddc67d140f45ab7b4",
+    "test/MapsBackAudit.java": "6dba9cd3603a8ad4be11802c5110c95df111c7ea36bc004c3e3c4b4a5128c814"
+  },
+  "selection_results": [
+    {
+      "artifact": "Maps_Back_Exit_v1.0.0.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Back_Exit_v1.0.0.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Back_Exit_v1.0.0.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Back_Exit_v1.0.0.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.363.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.363.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.363.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.363.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    }
+  ],
+  "guard_and_emitted_instruction_tests": [
+    {
+      "loader": "morphe.jar",
+      "input": "original-v285",
+      "result": "PASS emitted/native DEX VM: scenarios=9; methods exercised=20; Maps/non-Maps and API28/33/37 factory paths, native addFirst/first-enabled priority, nested callbacks, root task-removal call and platform-registration gates verified; host boundaries explicit; Android UI not executed\nPASS guards: package/version/code and 23 native contracts verified; mismatch/duplicate rejection and factory atomicity verified; assertions=76680"
+    },
+    {
+      "loader": "morphe.jar",
+      "input": "reported-v287",
+      "result": "PASS emitted/native DEX VM: scenarios=9; methods exercised=20; Maps/non-Maps and API28/33/37 factory paths, native addFirst/first-enabled priority, nested callbacks, root task-removal call and platform-registration gates verified; host boundaries explicit; Android UI not executed\nPASS guards: package/version/code and 23 native contracts verified; mismatch/duplicate rejection and factory atomicity verified; assertions=76693"
+    },
+    {
+      "loader": "morphe-2.2.jar",
+      "input": "original-v285",
+      "result": "PASS emitted/native DEX VM: scenarios=9; methods exercised=20; Maps/non-Maps and API28/33/37 factory paths, native addFirst/first-enabled priority, nested callbacks, root task-removal call and platform-registration gates verified; host boundaries explicit; Android UI not executed\nPASS guards: package/version/code and 23 native contracts verified; mismatch/duplicate rejection and factory atomicity verified; assertions=76680"
+    },
+    {
+      "loader": "morphe-2.2.jar",
+      "input": "reported-v287",
+      "result": "PASS emitted/native DEX VM: scenarios=9; methods exercised=20; Maps/non-Maps and API28/33/37 factory paths, native addFirst/first-enabled priority, nested callbacks, root task-removal call and platform-registration gates verified; host boundaries explicit; Android UI not executed\nPASS guards: package/version/code and 23 native contracts verified; mismatch/duplicate rejection and factory atomicity verified; assertions=76693"
+    }
+  ],
+  "loader_preservation": "PASS additive loader merge: original classes preserved=374; new provider classes=6; assertions=1155",
+  "preserved_bundle_entries": 298,
+  "apk_applications": [
+    {
+      "artifact": "Maps_Back_Exit_v1.0.0.mpp",
+      "label": "standalone-original",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "result": "PASS",
+      "audit": "PASS APK scope: native classes preserved=73961; byte-identical DEX classes=69773; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180538; signature verification and Android UI execution not claimed",
+      "preserved_resource_entries": 9330
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.363.mpp",
+      "label": "integrated-reported",
+      "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "result": "PASS",
+      "audit": "PASS APK scope: native classes preserved=73974; byte-identical DEX classes=69787; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180565; signature verification and Android UI execution not claimed",
+      "preserved_resource_entries": 9330
+    }
+  ],
+  "three_patch_coexistence": {
+    "patches": [
+      "検索欄の下のカテゴリ行を非表示",
+      "起動時に現在地を表示",
+      "戻るで終了して履歴から削除"
+    ],
+    "result": "PASS",
+    "audit": "PASS APK scope: native classes preserved=73964; byte-identical DEX classes=69772; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180551; signature verification and Android UI execution not claimed",
+    "preserved_resource_entries": 9330
+  },
+  "input_sha256": {
+    "original_v285": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+    "reported_v287": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71"
+  },
+  "artifacts": {
+    "Maps_Back_Exit_v1.0.0.mpp": {
+      "bytes": 24725,
+      "sha256": "68d306f8136eb3734ea820ccf9caf9940ec0b3dfbc6c70de2bbd996a9ada8a6d"
+    },
+    "Hiro_Morphe_Patches_v1.0.363.mpp": {
+      "bytes": 48353452,
+      "sha256": "32e85c8cb24df41cf66a1dc96418a8cbd3a21f9f9789062ed9ba181b07ddaee1"
+    }
+  }
+}
