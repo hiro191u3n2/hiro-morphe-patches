@@ -1,0 +1,392 @@
+{
+  "schema": "swiftkey-privacy100-qa-v1",
+  "baseline_version": "1.0.361",
+  "baseline_sha256": "94657960f0d8628c8294d67a793dfbcab94659f9554c5ecd93b34173f8fed2d8",
+  "patch_version": "1.0.0",
+  "bundle_version": "1.0.362",
+  "patch_name": "テレメトリ・解析・エラー報告を停止",
+  "release_timestamp": "2026-11-06T18:14:00",
+  "default": false,
+  "preserved_bundle_entries": 289,
+  "loader_preservation": "PASS loader merge: preserved=365; added=9; assertions=1510",
+  "selection": [
+    {
+      "artifact": "SwiftKeyBeta_Privacy_v1.0.0.mpp",
+      "loader": "morphe.jar",
+      "result": "PASS selection: kind=standalone; name=テレメトリ・解析・エラー報告を停止; default=false; dependencies=2; existingSwiftKey=0; visible=1; baselineCompared=false; assertions=24"
+    },
+    {
+      "artifact": "SwiftKeyBeta_Privacy_v1.0.0.mpp",
+      "loader": "morphe-2.2.jar",
+      "result": "PASS selection: kind=standalone; name=テレメトリ・解析・エラー報告を停止; default=false; dependencies=2; existingSwiftKey=0; visible=1; baselineCompared=false; assertions=24"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.362.mpp",
+      "loader": "morphe.jar",
+      "result": "PASS selection: kind=integrated; name=テレメトリ・解析・エラー報告を停止; default=false; dependencies=2; existingSwiftKey=1; visible=28; baselineCompared=true; assertions=169"
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.362.mpp",
+      "loader": "morphe-2.2.jar",
+      "result": "PASS selection: kind=integrated; name=テレメトリ・解析・エラー報告を停止; default=false; dependencies=2; existingSwiftKey=1; visible=28; baselineCompared=true; assertions=169"
+    }
+  ],
+  "preserved_swiftkey_runtime_sha256": "42f7990e731fcbd95a90e716b3adccfda394ca1877f279916a007a48359f4738",
+  "artifacts": {
+    "SwiftKeyBeta_Privacy_v1.0.0.mpp": {
+      "bytes": 26279,
+      "sha256": "c399f8d84fcba9ae4d21101b86c8979a44f6e6f8a2a5d509cbcc17b3e11f270e"
+    },
+    "Hiro_Morphe_Patches_v1.0.362.mpp": {
+      "bytes": 48335884,
+      "sha256": "d2a5637a670c17ac6a1ccbc346c0ad9c882737d1f661c2ad8de127720c7e56fd"
+    }
+  },
+  "source_sha256": {
+    "audit_resources.py": "1de446a931603dc54c1c4d04d4ce2d4fa3c4236f5e4d62d417ead1e197faa804",
+    "build.py": "a99cd3549e86dc2c8bd9527d2c18bbe37140fe603dcc6089cac7bb2f38e6ac3a",
+    "patch/SwiftKeyPrivacyPatch.java": "5316d0849434c29783032e3902fbf5137f806fa9ec052e4da0304025cb8f7c99",
+    "test/PrivacyAudit.java": "2be90c06e9d33b91484c24909333c1e4f33a3ae5ac0b976880d17f30a80a7d47",
+    "test/PrivacyGuardTest.java": "f5a195703f697fc5ec22e4fedbdbb554d9b50e5d6d1e5d1bfbb4d22f3841a93a",
+    "verification/MergeInput.java": "4213cb41054d68b2f7868765458b91ace54c72f0b61c14cbc9ad2e70965293d0",
+    "verify.py": "1f650db42fba856b568948d6a5cc77346d450034ee2978e78a796edcfcbfcf2e"
+  },
+  "physical_android_tested": false,
+  "network_capture_tested": false,
+  "release_timezone": "Asia/Tokyo",
+  "original_stock_apk_tested": false,
+  "android_emulator_tested": false,
+  "runtime_android_tested": false,
+  "stock_input_patch_coapplication_tested": false,
+  "reference_input": {
+    "kind": "previously_modified_v2_apks",
+    "sha256": "8f3dbdcd975bad0e63355702dc371761953fd845add6f11277f5c0a2412bdd24",
+    "splits": [
+      "base.apk",
+      "split_config.arm64_v8a.apk",
+      "split_config.ja.apk",
+      "split_config.xxhdpi.apk"
+    ],
+    "merged_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+    "base_merged_dex_equal": true,
+    "dex_entries": 3,
+    "preserved_split_assets_and_native_entries": 1503
+  },
+  "guard_tests": [
+    {
+      "loader": "morphe.jar",
+      "result": "PASS privacy guards: real APK native contracts, package/version/code rejection, all six boundary drift cases rejected before editing, repeat application rejected without partial changes, missing/ambiguous resource rejection; assertions=32"
+    },
+    {
+      "loader": "morphe-2.2.jar",
+      "result": "PASS privacy guards: real APK native contracts, package/version/code rejection, all six boundary drift cases rejected before editing, repeat application rejected without partial changes, missing/ambiguous resource rejection; assertions=32"
+    }
+  ],
+  "apk_applications": [
+    {
+      "artifact": "SwiftKeyBeta_Privacy_v1.0.0.mpp",
+      "result": "PASS",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "applied_patches": [
+        "テレメトリ・解析・エラー報告を停止"
+      ],
+      "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34",
+      "dex_audit": "PASS APK DEX preservation: classes=21575; whollyPreservedClasses=21570; preservedMethods=99405; permittedChangedBodies=6; exactBodyContracts=6; debugMetadataIgnored=true; assertions=64849",
+      "resource_audit": {
+        "audit": "swiftkey_beta_privacy_resource_preservation",
+        "checks": {
+          "assets": {
+            "file_count": 1496,
+            "inventory_sha256": "7d7849eaaf1ccb49c7560d1bac33622d3ae70bc842f2111dd30c9c2ce69fea25",
+            "passed": true
+          },
+          "input_reference": {
+            "original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+            "passed": true,
+            "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34"
+          },
+          "manifest": {
+            "all_other_components_permissions_and_attributes_preserved": true,
+            "allowed_changes": [
+              {
+                "after": "false",
+                "before": null,
+                "kind": "manifest_flag",
+                "name": "firebase_crashlytics_collection_enabled"
+              },
+              {
+                "after": "false",
+                "before": null,
+                "kind": "manifest_flag",
+                "name": "firebase_sessions_enabled"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsReceiver",
+                "tag": "receiver"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsService",
+                "tag": "service"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsJobService",
+                "tag": "service"
+              },
+              {
+                "after": "false",
+                "before": null,
+                "kind": "component_enabled",
+                "name": "com.adjust.sdk.SystemLifecycleContentProvider",
+                "tag": "provider"
+              }
+            ],
+            "passed": true,
+            "remaining_manifest_semantics_sha256": "d800e618f05ff6362e3a4d4691f1976f0b745b480591e2151ad53859887381dc"
+          },
+          "native_libraries": {
+            "file_count": 7,
+            "inventory_sha256": "56a11fd80aca4d8499bb40e7c08e0b07bd2a949d17e64d2991c11a35a4554f25",
+            "passed": true
+          },
+          "original_decoded_provenance": {
+            "assets_and_native_entries_match_apk": true,
+            "binary_manifest_matches_apk": true,
+            "dex_entries_match_apk": 3,
+            "passed": true
+          },
+          "original_zip_inventory": {
+            "file_count": 4443,
+            "inventory_sha256": "1c650f885bcb955ebe66bf19086f71574b4f4fc2b906dd3ffc7b4c036eae5b5a",
+            "passed": true
+          },
+          "other_apk_payloads": {
+            "file_count": 188,
+            "inventory_sha256": "36971b0f3deb54ab3f4f5f39b81c2a7e24c83c5acd4d7a4b485b60d45ccf05ff",
+            "passed": true
+          },
+          "patched_decoded_provenance": {
+            "assets_and_native_entries_match_apk": true,
+            "binary_manifest_matches_apk": true,
+            "dex_entries_match_apk": 4,
+            "passed": true
+          },
+          "patched_zip_inventory": {
+            "file_count": 4444,
+            "inventory_sha256": "ace3390fb3015c475206981b1919a7bc460d2a7d3096c0c2d403c80dff3b6003",
+            "passed": true
+          },
+          "resources": {
+            "binary_files_compared": 1007,
+            "exception_report_flag": {
+              "after": "false",
+              "before": "true",
+              "name": "exceptions_report_enabled"
+            },
+            "files_compared": 2821,
+            "normalized_resource_inventory_sha256": "32e8abbe982a219b75449fa041e9bef3463241b742eabe3c86c8a1202c7dd0f6",
+            "passed": true,
+            "public_resource_ids": {
+              "mapping_sha256": "3ebab646c6e03eb9871fe355ba5e9cab0069eef4d39160a7ff8ffd2057e0cc48",
+              "passed": true,
+              "symbol_count": 13112
+            },
+            "xml_files_compared": 1814
+          }
+        },
+        "errors": [],
+        "limitations": [
+          "The reference merges an already modified v2 base and its arm64-v8a, Japanese, and xxhdpi splits; this is not a clean-APK application test.",
+          "Fresh apktool -s decode outputs are required; decoder fidelity is assumed.",
+          "DEX behavior is audited separately; signatures and ZIP encoding are excluded.",
+          "All native entries in the merged APKs are compared; the source APKS and split-to-merged provenance are verified separately.",
+          "This audit does not execute the keyboard on a device or test network traffic."
+        ],
+        "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34",
+        "reference": {
+          "actual_original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+          "expected_original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+          "kind": "previously_modified_swiftkey_beta_v2_merged_arm64_ja_xxhdpi",
+          "merged_splits": [
+            "base",
+            "arm64-v8a",
+            "ja",
+            "xxhdpi"
+          ],
+          "package": "com.touchtype.swiftkey.beta",
+          "source_apks_sha256_for_separate_merge_audit": "8f3dbdcd975bad0e63355702dc371761953fd845add6f11277f5c0a2412bdd24",
+          "version": "9.13.16.4",
+          "version_code": 1236271168
+        },
+        "schema_version": 1,
+        "status": "PASS",
+        "result": "PASS"
+      }
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.362.mpp",
+      "result": "PASS",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "applied_patches": [
+        "テレメトリ・解析・エラー報告を停止"
+      ],
+      "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34",
+      "dex_audit": "PASS APK DEX preservation: classes=21575; whollyPreservedClasses=21570; preservedMethods=99405; permittedChangedBodies=6; exactBodyContracts=6; debugMetadataIgnored=true; assertions=64849",
+      "resource_audit": {
+        "audit": "swiftkey_beta_privacy_resource_preservation",
+        "checks": {
+          "assets": {
+            "file_count": 1496,
+            "inventory_sha256": "7d7849eaaf1ccb49c7560d1bac33622d3ae70bc842f2111dd30c9c2ce69fea25",
+            "passed": true
+          },
+          "input_reference": {
+            "original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+            "passed": true,
+            "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34"
+          },
+          "manifest": {
+            "all_other_components_permissions_and_attributes_preserved": true,
+            "allowed_changes": [
+              {
+                "after": "false",
+                "before": null,
+                "kind": "manifest_flag",
+                "name": "firebase_crashlytics_collection_enabled"
+              },
+              {
+                "after": "false",
+                "before": null,
+                "kind": "manifest_flag",
+                "name": "firebase_sessions_enabled"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsReceiver",
+                "tag": "receiver"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsService",
+                "tag": "service"
+              },
+              {
+                "after": "false",
+                "before": "true",
+                "kind": "component_enabled",
+                "name": "com.google.android.gms.analytics.AnalyticsJobService",
+                "tag": "service"
+              },
+              {
+                "after": "false",
+                "before": null,
+                "kind": "component_enabled",
+                "name": "com.adjust.sdk.SystemLifecycleContentProvider",
+                "tag": "provider"
+              }
+            ],
+            "passed": true,
+            "remaining_manifest_semantics_sha256": "d800e618f05ff6362e3a4d4691f1976f0b745b480591e2151ad53859887381dc"
+          },
+          "native_libraries": {
+            "file_count": 7,
+            "inventory_sha256": "56a11fd80aca4d8499bb40e7c08e0b07bd2a949d17e64d2991c11a35a4554f25",
+            "passed": true
+          },
+          "original_decoded_provenance": {
+            "assets_and_native_entries_match_apk": true,
+            "binary_manifest_matches_apk": true,
+            "dex_entries_match_apk": 3,
+            "passed": true
+          },
+          "original_zip_inventory": {
+            "file_count": 4443,
+            "inventory_sha256": "1c650f885bcb955ebe66bf19086f71574b4f4fc2b906dd3ffc7b4c036eae5b5a",
+            "passed": true
+          },
+          "other_apk_payloads": {
+            "file_count": 188,
+            "inventory_sha256": "36971b0f3deb54ab3f4f5f39b81c2a7e24c83c5acd4d7a4b485b60d45ccf05ff",
+            "passed": true
+          },
+          "patched_decoded_provenance": {
+            "assets_and_native_entries_match_apk": true,
+            "binary_manifest_matches_apk": true,
+            "dex_entries_match_apk": 4,
+            "passed": true
+          },
+          "patched_zip_inventory": {
+            "file_count": 4444,
+            "inventory_sha256": "ace3390fb3015c475206981b1919a7bc460d2a7d3096c0c2d403c80dff3b6003",
+            "passed": true
+          },
+          "resources": {
+            "binary_files_compared": 1007,
+            "exception_report_flag": {
+              "after": "false",
+              "before": "true",
+              "name": "exceptions_report_enabled"
+            },
+            "files_compared": 2821,
+            "normalized_resource_inventory_sha256": "32e8abbe982a219b75449fa041e9bef3463241b742eabe3c86c8a1202c7dd0f6",
+            "passed": true,
+            "public_resource_ids": {
+              "mapping_sha256": "3ebab646c6e03eb9871fe355ba5e9cab0069eef4d39160a7ff8ffd2057e0cc48",
+              "passed": true,
+              "symbol_count": 13112
+            },
+            "xml_files_compared": 1814
+          }
+        },
+        "errors": [],
+        "limitations": [
+          "The reference merges an already modified v2 base and its arm64-v8a, Japanese, and xxhdpi splits; this is not a clean-APK application test.",
+          "Fresh apktool -s decode outputs are required; decoder fidelity is assumed.",
+          "DEX behavior is audited separately; signatures and ZIP encoding are excluded.",
+          "All native entries in the merged APKs are compared; the source APKS and split-to-merged provenance are verified separately.",
+          "This audit does not execute the keyboard on a device or test network traffic."
+        ],
+        "patched_apk_sha256": "4a235aef23d30dc14d5d9c0de4a73e8a92664153862229f7ae4193bc5891cb34",
+        "reference": {
+          "actual_original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+          "expected_original_apk_sha256": "173f204cbdabf6144cc78793184e15eeff51ab8d7f62ff3f405ca07cb816ed8f",
+          "kind": "previously_modified_swiftkey_beta_v2_merged_arm64_ja_xxhdpi",
+          "merged_splits": [
+            "base",
+            "arm64-v8a",
+            "ja",
+            "xxhdpi"
+          ],
+          "package": "com.touchtype.swiftkey.beta",
+          "source_apks_sha256_for_separate_merge_audit": "8f3dbdcd975bad0e63355702dc371761953fd845add6f11277f5c0a2412bdd24",
+          "version": "9.13.16.4",
+          "version_code": 1236271168
+        },
+        "schema_version": 1,
+        "status": "PASS",
+        "result": "PASS"
+      }
+    }
+  ],
+  "single_bundle_apk_entry_contents_equal": true,
+  "limitations": [
+    "No device/emulator or traffic-capture execution.",
+    "The input is previously modified v2, not an unmodified stock APK.",
+    "Crashlytics local crash records may remain; automatic collection/reporting is disabled.",
+    "This option does not prohibit all app networking or erase stored logs."
+  ]
+}
