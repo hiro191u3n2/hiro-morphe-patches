@@ -1,0 +1,33 @@
+{
+  "file": "lib/arm64-v8a/libmx-bh.so",
+  "size": 432304,
+  "originalSha256": "9ac4c0ffc83236b21edc16a4a37265b1d8ae28673701173cabd338eaa6d960a8",
+  "adaptedSha256": "5b12f6cc13edca44045e6636fbcabf65051170d8dd4c23c99d21797cb375becf",
+  "edits": [
+    {
+      "offset": "0x31eb8",
+      "target": "0x3201c",
+      "beforeHex": "210b0054",
+      "afterHex": "59000014",
+      "before": "b.ne 0x3201c",
+      "after": "b 0x3201c"
+    },
+    {
+      "offset": "0x34cdc",
+      "target": "0x34e40",
+      "beforeHex": "210b0054",
+      "afterHex": "59000014",
+      "before": "b.ne 0x34e40",
+      "after": "b 0x34e40"
+    },
+    {
+      "offset": "0x34e48",
+      "target": "0x34fac",
+      "beforeHex": "210b0054",
+      "afterHex": "59000014",
+      "before": "b.ne 0x34fac",
+      "after": "b 0x34fac"
+    }
+  ],
+  "scope": "MX Player Pro 1.93.4 arm64 only. Each edit changes conditional branch over process-destruction block into unconditional branch to same continuation. Checks and guard telemetry are preserved. No signature value rewritten; no license/account/payment modification."
+}

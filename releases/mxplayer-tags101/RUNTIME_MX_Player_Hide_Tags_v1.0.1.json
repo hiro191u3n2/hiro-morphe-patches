@@ -1,0 +1,139 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-11-06T06:52:04.244535+00:00",
+  "subject": "MX Player Hide Tags v1.0.1 / Hiro Morphe Patches v1.0.359",
+  "runtime": {
+    "status": "BLOCKED_TEST_INFRASTRUCTURE",
+    "attempted": true,
+    "android_boot_completed_verified": false,
+    "adb_device_usable": false,
+    "variants": {
+      "original_v1.93.4_split_apks": {
+        "installed": false,
+        "launched": false,
+        "playback_tested": false
+      },
+      "exact_uploaded_v1.0.358_apk": {
+        "installed": false,
+        "launched": false,
+        "playback_tested": false
+      },
+      "signed_v1.0.359_candidate_apk": {
+        "installed": false,
+        "launched": false,
+        "playback_tested": false
+      }
+    },
+    "runtime_success_claimed": false,
+    "app_crash_reproduced": false,
+    "environment": {
+      "emulator": "Official Android Emulator 37.1.7 build 16783918",
+      "system_image": "Official Google APIs Android 17 / API 37 x86_64",
+      "acceleration": "TCG software CPU emulation (no KVM)",
+      "arm64_translation": "Included in this official image; not runtime-verified in this attempted session",
+      "memory_mb": 4096,
+      "cpu_cores": 4,
+      "network": "Guest ordinary IP egress disabled; no proxy, account login or forwarded application traffic",
+      "fresh_dedicated_avd": true
+    },
+    "observed_milestones": [
+      "Linux kernel and Android init started",
+      "Dedicated encrypted userdata mounted",
+      "zygote started",
+      "system_server started and progressed to system services",
+      "Primary attempt remained without usable adb after at least 455 seconds",
+      "Controlled restart with explicit AVD identity and the previously proven default port did not restore emulator discovery"
+    ],
+    "block": {
+      "observed_host_pid_proc_mismatch": true,
+      "description": "Inside the tool process namespace, getpid() and /proc/self identify different PID levels; /proc/<getpid()> does not exist.",
+      "process_listing_error": "fatal library error, lookup self",
+      "emulator_discovery_error": "Failed to build gRPC client: NOT_FOUND: No matching emulator found",
+      "adb_console_error": "KO: No matching emulator found",
+      "private_namespace_probe": "unshare --user --map-root-user --pid --fork --mount-proc",
+      "private_namespace_probe_result": "unshare: write failed /proc/self/uid_map: Operation not permitted",
+      "interpretation": "Host namespace/proc inconsistency is a concrete environment limitation associated with failed emulator discovery; no MX behavior was observable.",
+      "host_wide_mounts_changed": false,
+      "permissions_escalated": false
+    },
+    "controller_stopped": true,
+    "limitation": "No installation, launch, playback or Galaxy-device success is established by this test attempt."
+  },
+  "candidate": {
+    "file": "MX_Player_Pro_1.93.4_v359_test_signed.apk",
+    "bytes": 40355542,
+    "sha256": "220b713fc2380ca00c9323264421e59d1ec934dcc87b6dedbab6ffbf17025012",
+    "signer_verification": {
+      "engine": "Android apksig ApkVerifier",
+      "source": "Release task signing and verification result",
+      "verified": true,
+      "v2": true,
+      "v3": true,
+      "errors": [],
+      "certificate_purpose": "Separate throwaway local-test certificate; not the original publisher certificate",
+      "repeated_by_runtime_agent": false
+    },
+    "native_library": "lib/arm64-v8a/libmx-bh.so",
+    "native_sha256": "5b12f6cc13edca44045e6636fbcabf65051170d8dd4c23c99d21797cb375becf",
+    "native_hash_independently_verified": true
+  },
+  "static_validation": {
+    "status": "PASS",
+    "android_execution_required_for_this_result": false,
+    "original_native_sha256": "9ac4c0ffc83236b21edc16a4a37265b1d8ae28673701173cabd338eaa6d960a8",
+    "adapted_native_sha256": "5b12f6cc13edca44045e6636fbcabf65051170d8dd4c23c99d21797cb375becf",
+    "independently_checked_edits": [
+      {
+        "offset": "0x31eb8",
+        "before": "210b0054",
+        "after": "59000014",
+        "target": "0x3201c"
+      },
+      {
+        "offset": "0x34cdc",
+        "before": "210b0054",
+        "after": "59000014",
+        "target": "0x34e40"
+      },
+      {
+        "offset": "0x34e48",
+        "before": "210b0054",
+        "after": "59000014",
+        "target": "0x34fac"
+      }
+    ],
+    "instruction_effect": "Each b.ne +356 becomes b +356 to the same normal continuation; only these three instruction words differ.",
+    "comparison_and_telemetry_stores_retained": true,
+    "normal_worker_completion_store_at_0x34fbc_retained": true,
+    "full_candidate_native_matches_reviewed_spec": true,
+    "scope": "Static native verification; distinct from unperformed app launch/playback."
+  },
+  "official_test_infrastructure_archives": [
+    {
+      "url": "https://dl.google.com/android/repository/emulator_linux_x64-16783918.zip",
+      "bytes": 489048301,
+      "sha1": "a9a04ad194851cdbe17796212101d499820e50a1",
+      "sha256": "9b7990ce25bdc78e58fe02965b06dab90fa13d6534e67110141b293b035ae643",
+      "download_http_status": 200,
+      "checksum_verified": true
+    },
+    {
+      "url": "https://dl.google.com/android/repository/sys-img/google_apis/x86_64-37.0_r08.zip",
+      "bytes": 2143899425,
+      "sha1": "a266cfbcf4d6c769b166c0af4d68eff0e4f4a5e3",
+      "sha256": "75ed072b88f9bb7edde0e3d22427deddbdad8be168b058a79269b55de40f6f25",
+      "download_http_status": 200,
+      "checksum_verified": true,
+      "revision_note": "Official archive revision 8; extracted source.properties revision 7."
+    },
+    {
+      "url": "https://dl.google.com/android/repository/platform-tools_r37.0.1-linux.zip",
+      "bytes": 9054187,
+      "sha1": "477254aa5f903c15cf51001717bdf347fb6b53e0",
+      "sha256": "d230f13842f60f782a8645f9c813f8f845bf36089ea7289f28c48f17979313f1",
+      "download_http_status": 200,
+      "checksum_verified": true
+    }
+  ],
+  "raw_diagnostics": "Full boot logs remain local test artifacts and are not included in this public-safe record."
+}

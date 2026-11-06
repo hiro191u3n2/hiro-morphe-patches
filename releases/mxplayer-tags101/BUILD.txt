@@ -1,0 +1,62 @@
+MX Player Pro startup repair — reproducible build notes
+Release: standalone 1.0.1 / integrated 1.0.359
+Timestamp: 2026-11-06T15:34:44 (existing JST / no-offset descriptor schema)
+
+Source layout
+src/build.py
+src/patch/MXPlayerTagsPatch.java
+src/patch/MXPlayerNativeRepair.java
+src/test/MXPlayerAudit.java
+
+Build prerequisites
+JDK 21.0.13 (javac 21.0.13), Python 3, pinned Morphe API/patcher jars,
+Android API compile jar, and R8. SHA-256 values are recorded in the build script
+and QA files. The build verifies those values before compiling.
+Baseline: Hiro_Morphe_Patches_v1.0.358.mpp, SHA-256
+8b2fd0a48d30d2c9d5d19a94e2365ef0977f0d840b254a75abc8790330d56ad5
+
+Example command (substitute the local prerequisite/input paths):
+python3 src/build.py --base /path/to/Hiro_Morphe_Patches_v1.0.358.mpp \
+  --tools /path/to/build-tools --java-home /path/to/jdk-21.0.13+9 \
+  --work /path/to/new-work --dist /path/to/empty-output \
+  --apk /path/to/verified-test-input.apk --bytecode-mode FULL
+
+Repeat with a fresh work/output directory and --bytecode-mode STRIP_FAST for
+the exact user-provided already-tagged APK. Without --apk, build and host guard
+checks are available but real input APK checks are not implied.
+
+Inputs and output APKs are privately supplied test fixtures, not redistributed.
+FULL input is the original DEX code in the user's correctly merged resource /
+native APK container; it is an unsigned structural fixture, not an original
+vendor-signed standalone APK. The original split APK set is separate.
+
+Native implementation
+Package/version/versionCode, ELF machine, ARM64 native payload, file length and
+full SHA-256 are checked. Three known AArch64 fatal-path conditional branches
+are changed to unconditional branches to their existing normal continuations.
+All checking code/results, BH initialization, AG JNI registration and worker
+completion remain intact. Java account/payment/license paths are unchanged.
+Only the original known hash or the known repaired hash is accepted.
+
+Validation
+FULL: pristine tag body receives one return-void instruction.
+STRIP_FAST: already-tagged body receives zero additional tag instructions.
+Both standalone and integrated outputs match entry-by-entry within each mode.
+15,326 unrelated classes and 4,337 non-target resources are unchanged.
+Native scope is three 4-byte instruction words (nine actual byte differences).
+Other integrated patch providers and resources are retained from v1.0.358.
+
+Final artifact manifest wording was clarified after the initial full builds.
+METADATA_ONLY_REBUILD_PROOF.json records all non-manifest entries as identical
+to those tested. The committed build source emits the final manifest wording.
+FULL and STRIP_FAST final MPP files are byte-identical.
+
+Android execution results are separate in RUNTIME_MX_Player_Hide_Tags_v1.0.1.json.
+APK signing verification alone is not an Android launch test. No physical
+device execution or real-device Manager badge observation is implied.
+
+Release handling
+Immutable v1.0.359 MPP is reconstructed from the existing v1.0.355 chunks and
+its verified new delta payload. The Site is published before GitHub main's
+changelog and then descriptor are updated. dev follows with a non-forced
+fast-forward. Public channel validation compares exact raw URL bytes.

@@ -1,0 +1,69 @@
+{
+  "recommendation": "Use only the three exact fatal-gate conditional-branch adaptations in native_repair_spec.json; preserve Java startup and all other native bytes.",
+  "scope": {
+    "package": "com.mxtech.videoplayer.pro",
+    "versionName": "1.93.4",
+    "versionCode": 2001002584,
+    "abi": "arm64-v8a"
+  },
+  "rejectedAlternatives": [
+    {
+      "change": "Return from App.g or skip BH.b",
+      "reason": "BH.n initializes global checker 0x710d8 and ready flag 0x710e0, and dynamically registers AG JNI methods. Playback BH.n1 and bh_nn_5/6 intentionally fail if the ready flag is 0."
+    },
+    {
+      "change": "Return from guard worker 0x31750 or 0x319b0",
+      "reason": "Worker completion flag 0x7135c is set only at normal completion tail 0x34fbc; 0x35610 spins until completion and is used by functional request signing."
+    },
+    {
+      "change": "Pass a plaintext actual-signer hash as the BH.n override",
+      "reason": "The override is a hex-encoded RSA/AES container verified using the vendor public key, containing a versioned binary payload. It is not a plain integer."
+    },
+    {
+      "change": "Adapt only the first signer comparison",
+      "reason": "The later independent signer comparison at 0x35c50 and signed hbde.db metadata for original DEX/native CRC values can independently trigger process destruction."
+    }
+  ],
+  "preservedInvariants": [
+    "BH.n initialization and AG JNI registration",
+    "BH.w URL allowlist",
+    "Actual OS signer and APK integrity check results and telemetry",
+    "Worker completion flag and waiting contract",
+    "Java App/BH/AG and Google licensing/account/payment implementations",
+    "All 18 other native libraries",
+    "All other bytes of libmx-bh.so"
+  ],
+  "effects": [
+    {
+      "instructionOffset": "0x31eb8",
+      "reason": "First original-certificate hash mismatch",
+      "target": "0x3201c",
+      "valueOtherThan2": "Exactly the same continuation as the original",
+      "value2": "Retain the computed failure status but skip process destruction; continue the ordinary worker path",
+      "registerEffects": "Unconditional B does not alter registers or NZCV"
+    },
+    {
+      "instructionOffset": "0x34cdc",
+      "reason": "Later Android-versus-original/APK v1 signer mismatch",
+      "target": "0x34e40",
+      "valueOtherThan2": "Exactly the same continuation as the original",
+      "value2": "Retain the computed failure status but skip process destruction; continue the ordinary worker path",
+      "registerEffects": "Unconditional B does not alter registers or NZCV"
+    },
+    {
+      "instructionOffset": "0x34e48",
+      "reason": "Original DEX/native entry size/CRC integrity mismatch",
+      "target": "0x34fac",
+      "valueOtherThan2": "Exactly the same continuation as the original",
+      "value2": "Retain the computed failure status but skip process destruction; continue the ordinary worker path",
+      "registerEffects": "Unconditional B does not alter registers or NZCV"
+    }
+  ],
+  "independentCodeReview": "MXPlayerNativeRepair.java reviewed: package/version/code, ABI, size, ELF, source SHA guards; exact per-word and output SHA guards; idempotence only for the known repaired SHA.",
+  "candidateArtifact": "/workspace/scratch/883b33755ac5/mx-fix-build-full/applications/MX_Player_Hide_Tags_v1.0.1.mpp/patched.apk",
+  "candidateOutputSha256": "5b12f6cc13edca44045e6636fbcabf65051170d8dd4c23c99d21797cb375becf",
+  "candidateDifferingByteValues": 9,
+  "candidateChangedInstructionWords": 3,
+  "separateMediaLibraryFollowup": "See libmxvp_signature_followup.json. No additional active ordinary launch/playback certificate rejection was identified. The private Apps.is([B)Z comparator remains untouched.",
+  "runtimeLimitations": "All verification by this agent is static. Parent/runtime agent is performing Android runtime checks; no Android execution result is claimed here."
+}

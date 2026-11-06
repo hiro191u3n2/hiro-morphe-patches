@@ -1,0 +1,194 @@
+{
+  "scope": "Independent static validation only; no device execution at this stage",
+  "original_sha256": "9ac4c0ffc83236b21edc16a4a37265b1d8ae28673701173cabd338eaa6d960a8",
+  "adapted_sha256": "5b12f6cc13edca44045e6636fbcabf65051170d8dd4c23c99d21797cb375becf",
+  "edits": [
+    {
+      "offset": "0x31eb8",
+      "target": "0x3201c",
+      "old": "b.ne\t#356",
+      "new": "b\t#356",
+      "same_target": true
+    },
+    {
+      "offset": "0x34cdc",
+      "target": "0x34e40",
+      "old": "b.ne\t#356",
+      "new": "b\t#356",
+      "same_target": true
+    },
+    {
+      "offset": "0x34e48",
+      "target": "0x34fac",
+      "old": "b.ne\t#356",
+      "new": "b\t#356",
+      "same_target": true
+    }
+  ],
+  "changed_byte_offsets": [
+    "0x31eb8",
+    "0x31eb9",
+    "0x31ebb",
+    "0x34cdc",
+    "0x34cdd",
+    "0x34cdf",
+    "0x34e48",
+    "0x34e49",
+    "0x34e4b"
+  ],
+  "normal_tail_unchanged": true,
+  "completion_write": {
+    "offset": "0x34fbc",
+    "instruction": "stlr\tw8, [x9]"
+  },
+  "normal_continuation_windows": {
+    "0x31ea4": [
+      {
+        "offset": "0x31ea4",
+        "instruction": "ldr\tw1, [x20, #32]"
+      },
+      {
+        "offset": "0x31ea8",
+        "instruction": "ldr\tx0, [sp, #24]"
+      },
+      {
+        "offset": "0x31eac",
+        "instruction": "mov\tw2, wzr"
+      },
+      {
+        "offset": "0x31eb0",
+        "instruction": "bl\t#13844"
+      },
+      {
+        "offset": "0x31eb4",
+        "instruction": "cmp\tw0, #2"
+      },
+      {
+        "offset": "0x31eb8",
+        "instruction": "b.ne\t#356"
+      },
+      {
+        "offset": "0x31ebc",
+        "instruction": "mov\tx0, x20"
+      },
+      {
+        "offset": "0x31ec0",
+        "instruction": "bl\t#-1900"
+      },
+      {
+        "offset": "0x31ec4",
+        "instruction": "mov\tx0, x20"
+      }
+    ],
+    "0x34cb0": [
+      {
+        "offset": "0x34cb0",
+        "instruction": "bl\t#3208"
+      },
+      {
+        "offset": "0x34cb4",
+        "instruction": "stlr\tw0, [x20]"
+      },
+      {
+        "offset": "0x34cb8",
+        "instruction": "ldr\tx0, [sp, #24]"
+      },
+      {
+        "offset": "0x34cbc",
+        "instruction": "ldr\tx1, [x19, #16]"
+      },
+      {
+        "offset": "0x34cc0",
+        "instruction": "ldr\tx8, [x0]"
+      },
+      {
+        "offset": "0x34cc4",
+        "instruction": "ldr\tx8, [x8, #176]"
+      },
+      {
+        "offset": "0x34cc8",
+        "instruction": "blr\tx8"
+      },
+      {
+        "offset": "0x34ccc",
+        "instruction": "ldr\tw8, [sp, #80]"
+      },
+      {
+        "offset": "0x34cd0",
+        "instruction": "cbz\tw8, #368"
+      },
+      {
+        "offset": "0x34cd4",
+        "instruction": "ldr\tw8, [sp, #52]"
+      },
+      {
+        "offset": "0x34cd8",
+        "instruction": "cmp\tw8, #2"
+      },
+      {
+        "offset": "0x34cdc",
+        "instruction": "b.ne\t#356"
+      },
+      {
+        "offset": "0x34ce0",
+        "instruction": "mov\tx0, x19"
+      },
+      {
+        "offset": "0x34ce4",
+        "instruction": "bl\t#-13712"
+      }
+    ],
+    "0x34e3c": [
+      {
+        "offset": "0x34e3c",
+        "instruction": "cbnz\tw0, #1568"
+      },
+      {
+        "offset": "0x34e40",
+        "instruction": "ldr\tw8, [sp, #4]"
+      },
+      {
+        "offset": "0x34e44",
+        "instruction": "cmp\tw8, #2"
+      },
+      {
+        "offset": "0x34e48",
+        "instruction": "b.ne\t#356"
+      },
+      {
+        "offset": "0x34e4c",
+        "instruction": "mov\tx0, x19"
+      },
+      {
+        "offset": "0x34e50",
+        "instruction": "bl\t#-14076"
+      }
+    ],
+    "0x34fac": [
+      {
+        "offset": "0x34fac",
+        "instruction": "mov\tw8, #1"
+      },
+      {
+        "offset": "0x34fb0",
+        "instruction": "nop"
+      },
+      {
+        "offset": "0x34fb4",
+        "instruction": "adr\tx9, #246696"
+      },
+      {
+        "offset": "0x34fb8",
+        "instruction": "add\tx0, sp, #56"
+      },
+      {
+        "offset": "0x34fbc",
+        "instruction": "stlr\tw8, [x9]"
+      },
+      {
+        "offset": "0x34fc0",
+        "instruction": "bl\t#-20920"
+      }
+    ]
+  }
+}

@@ -1,3 +1,7 @@
+# [1.0.359](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-06)
+
+* **MX Player Pro:** `フォルダ画面のタグ一覧を非表示` v1.0.1へ更新。パッチ後の起動不能に対応。起動・再生・通信の初期化を維持し、再署名・再構築時の異常終了処理を修正します。 Music／Privacy／MXShare／Video Playlistなどのタグ行と上下余白の非表示を継続。元の1.93.4（2001002584）ARM64 APK／APKSと、今回確認したv1.0.358適用済みAPKを対象とします。 単独MPP・統合MPPから同じ項目を再適用して出力APKをインストールしてください。ソース更新だけでは反映されません。検証範囲は配布先のREADME・QA記録を参照してください。
+
 # [1.0.358](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-06)
 
 * **MX Player Pro:** `フォルダ画面のタグ一覧を非表示` v1.0.0を追加。フォルダ画面上部のMusic／Privacy／MXShare／Video Playlistなどの横並びタグ行を、上下の余白ごと非表示にします。対象はcom.mxtech.videoplayer.pro 1.93.4（2001002584）。 元のAPK／APKSへ適用してください。添付APKへの適用・再構築と、行の挿入処理以外のコード・リソース保持を検証。実機での表示・操作は未確認です。

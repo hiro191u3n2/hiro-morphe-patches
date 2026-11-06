@@ -1,0 +1,154 @@
+{
+  "schema": "mxplayer-tags101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.359",
+  "release_timestamp": "2026-11-06T15:34:44",
+  "release_timezone": "Asia/Tokyo",
+  "baseline_version": "1.0.358",
+  "baseline_sha256": "8b2fd0a48d30d2c9d5d19a94e2365ef0977f0d840b254a75abc8790330d56ad5",
+  "production_android_sdk_compile": true,
+  "apk_bytecode_mode": "FULL",
+  "patcher_version": "2.2.0",
+  "physical_android_tested": false,
+  "android_emulator_tested": false,
+  "native_initialization_and_java_license_account_code_preserved": true,
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7"
+  },
+  "sources": {
+    "build.py": "2f5c8937c8d6bced288e93b950fefc595291bde854dda72c40d44c369ceaf65b",
+    "patch/MXPlayerNativeRepair.java": "6d551c1ef21f21e7f3bc52d0a961f2a3994d605ef7aa89fb930d5260ef86a16a",
+    "patch/MXPlayerTagsPatch.java": "26f4766732ad967189165217b4c96b51a52a3f773b59702ec1af93cfe46e3f40",
+    "test/MXPlayerAudit.java": "8d8b8d0a824cd23181e7dec17b41f882efc18a2402a99164b5dcdea0c2cc944a"
+  },
+  "artifacts": {
+    "MX_Player_Hide_Tags_v1.0.1.mpp": {
+      "bytes": 16445,
+      "sha256": "b921dd3faf027a8f75b159d243bb2b6280a87bf18e94ca0fdf5463f774657a08"
+    },
+    "Hiro_Morphe_Patches_v1.0.359.mpp": {
+      "bytes": 48288445,
+      "sha256": "3a7a5bd31fb02c504659e5b8401fdd87825ea9e7b2c53ff6f92b980ca9c79f08"
+    }
+  },
+  "loader_preservation": "PASS loader merge: unrelated classes preserved=355; old MX Player provider classes replaced=2; new MX Player provider classes=4; assertions=1090",
+  "preserved_unrelated_entries": 278,
+  "host_tests": "Real APK guards cover original/already-tagged inputs and native instruction/hash/idempotence. No injected runtime extension. Android execution is not implied.",
+  "guard_tests": "PASS guards: package/version/code/body, original/already-tagged inputs, native SHA/instruction/idempotence/corruption gates, shortcut producer and refresh paths; assertions=15391\nPASS guards: package/version/code/body, original/already-tagged inputs, native SHA/instruction/idempotence/corruption gates, shortcut producer and refresh paths; assertions=15391",
+  "apk_application": [
+    {
+      "bundle": "MX_Player_Hide_Tags_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "bytecode_mode": "FULL",
+      "package": "com.mxtech.videoplayer.pro",
+      "version": "1.93.4",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged unrelated classes=15326; tag instructions added=1; unchanged non-target resources=4337; three native signature/integrity fatal decisions repaired; Java startup/account/license paths unchanged; shortcut producers=1; refresh paths=2; assertions=59561; Android launch/playback not tested.",
+      "preserved_non_target_resources": 4337,
+      "native_repair_path": "lib/arm64-v8a/libmx-bh.so"
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.359.mpp",
+      "sdk": "morphe-2.2.jar",
+      "bytecode_mode": "FULL",
+      "package": "com.mxtech.videoplayer.pro",
+      "version": "1.93.4",
+      "result": "PASS",
+      "audit_summary": "PASS APK audit: unchanged unrelated classes=15326; tag instructions added=1; unchanged non-target resources=4337; three native signature/integrity fatal decisions repaired; Java startup/account/license paths unchanged; shortcut producers=1; refresh paths=2; assertions=59561; Android launch/playback not tested.",
+      "preserved_non_target_resources": 4337,
+      "native_repair_path": "lib/arm64-v8a/libmx-bh.so"
+    }
+  ],
+  "supplied_apk_sha256": "73a71e955f770e75f13f05757631512b9d56ed283c625c27c92e47340b63bc15",
+  "input_provenance": "Merged original-code fixture: original base classes plus the uploaded merged manifest/resources/native splits; unsigned test input.",
+  "supplied_apk_non_target_resources_unchanged": true,
+  "changed_native_path": "lib/arm64-v8a/libmx-bh.so",
+  "single_bundle_apk_entry_contents_equal": true,
+  "tested_artifacts_before_metadata_revision": {
+    "MX_Player_Hide_Tags_v1.0.1.mpp": {
+      "bytes": 16428,
+      "sha256": "853ed88c2d2a043e4c4242c60d8e17461dd8c68e42d57c8213dd4c9efb0b8f41"
+    },
+    "Hiro_Morphe_Patches_v1.0.359.mpp": {
+      "bytes": 48288429,
+      "sha256": "590822077e0de456b4059a3f63ae8e425c162951638b00d93c0e5de911d263a5"
+    }
+  },
+  "metadata_only_revision": {
+    "source_change": "build.py Description literal only",
+    "prior_build_py_sha256": "6a078664ff53e664f16271cf38d005ec2aeeeb0c9ef3136d0415c7411b438b00",
+    "final_build_py_sha256": "2f5c8937c8d6bced288e93b950fefc595291bde854dda72c40d44c369ceaf65b",
+    "all_java_sources_unchanged": true,
+    "all_mpp_executable_payloads_identical_to_tested_artifacts": true,
+    "application_retests_needed": false,
+    "manifest_proof": {
+      "MX_Player_Hide_Tags_v1.0.1.mpp": {
+        "before_manifest_fields": {
+          "Manifest-Version": "1.0",
+          "Name": "MX Player Hide Tags",
+          "Description": "MX Player Pro: retain folder-tag hiding and repair re-signed/repacked APK fatal signature and original-content decisions while preserving native initialization and license/account code. Android launch/playback not tested.",
+          "Version": "1.0.1",
+          "Timestamp": "2026-11-06T15:34:44",
+          "Source": "remote",
+          "Author": "ひろ",
+          "Contact": "na",
+          "Website": "na",
+          "License": "GPLv3",
+          "Patcher-Version": "2.2.0-dev.2"
+        },
+        "after_manifest_fields": {
+          "Manifest-Version": "1.0",
+          "Name": "MX Player Hide Tags",
+          "Description": "MX Player Pro: retain folder-tag hiding and repair re-signed/repacked APK fatal signature and original-content decisions while preserving native initialization and license/account code. Physical device untested; runtime validation is recorded separately.",
+          "Version": "1.0.1",
+          "Timestamp": "2026-11-06T15:34:44",
+          "Source": "remote",
+          "Author": "ひろ",
+          "Contact": "na",
+          "Website": "na",
+          "License": "GPLv3",
+          "Patcher-Version": "2.2.0-dev.2"
+        },
+        "only_changed_entry": "META-INF/MANIFEST.MF",
+        "only_changed_field": "Description",
+        "byte_identical_non_manifest_entries": 5,
+        "classes_dex_sha256_unchanged": "2eab33553255f2fdfa96a882e3696a83a7ecb64a42c734789a554e0ea55d9800"
+      },
+      "Hiro_Morphe_Patches_v1.0.359.mpp": {
+        "before_manifest_fields": {
+          "Manifest-Version": "1.0",
+          "Name": "Hiro Morphe Patches",
+          "Description": "MX Player Pro: retain folder-tag hiding and repair re-signed/repacked APK fatal signature and original-content decisions while preserving native initialization and license/account code. Android launch/playback not tested.",
+          "Version": "1.0.359",
+          "Timestamp": "2026-11-06T15:34:44",
+          "Source": "remote",
+          "Author": "ひろ",
+          "Contact": "na",
+          "Website": "na",
+          "License": "GPLv3",
+          "Patcher-Version": "2.2.0-dev.2"
+        },
+        "after_manifest_fields": {
+          "Manifest-Version": "1.0",
+          "Name": "Hiro Morphe Patches",
+          "Description": "MX Player Pro: retain folder-tag hiding and repair re-signed/repacked APK fatal signature and original-content decisions while preserving native initialization and license/account code. Physical device untested; runtime validation is recorded separately.",
+          "Version": "1.0.359",
+          "Timestamp": "2026-11-06T15:34:44",
+          "Source": "remote",
+          "Author": "ひろ",
+          "Contact": "na",
+          "Website": "na",
+          "License": "GPLv3",
+          "Patcher-Version": "2.2.0-dev.2"
+        },
+        "only_changed_entry": "META-INF/MANIFEST.MF",
+        "only_changed_field": "Description",
+        "byte_identical_non_manifest_entries": 283,
+        "classes_dex_sha256_unchanged": "063bb4f856a4a84ae2c2d2188170ba4833fae628a5ebabd9f6a61fdbe4806448"
+      }
+    }
+  }
+}
