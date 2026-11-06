@@ -1,0 +1,139 @@
+{
+  "schema": "maps-startup101-publication-v1",
+  "status": "PUBLISHED_AND_CHANNELS_VERIFIED",
+  "recorded_utc": "2026-11-06 08:30:36 UTC",
+  "patch_name": "起動時に現在地を表示",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.361",
+  "release_timestamp": "2026-11-06T17:08:16",
+  "release_timezone": "Asia/Tokyo",
+  "prior_user_report": "v1.0.360適用後も起動時に現在地へ移動しない",
+  "diagnosis_record": "verification/FOLLOWUP_Maps_Startup_Location_v1.0.1.json",
+  "site": {
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "source_commit": "f2c47aac257cf50fa842e20c4e7db5f1a6025648",
+    "saved_version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_5b0c7fc2bd7881919b1befea3afeca5b",
+    "saved_version_number": 111,
+    "deployment_id": "appgdep_6aed8eb9a21881919cb4607da812a177",
+    "status": "succeeded",
+    "published_at": "2026-11-06T08:25:36.505907+00:00",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "archive_sha256": "sha256:87a8eef38d64883367356cb310861c9d5aaf7502d4777ce849f8b2121f4a8289",
+    "archive_unpacked_bytes": 260147200
+  },
+  "github": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "source_and_changelog_commit": "71c57fe3de937de1a9def4ea11ec257e8f77b9fc",
+    "feed_commit": "fa695d09dfe37f379ab2b9d1d19ab2ab92f411c4",
+    "feed_blob": "2e92322f79339e920e9248e866ba2e882eab0782",
+    "main_dev_verified_at_commit": "fa695d09dfe37f379ab2b9d1d19ab2ab92f411c4",
+    "main_dev_feed_sha256": "7241d4f97fb4e052591c17a3165692ddb5061df15320fba8eb8b392984a29f3c",
+    "main_dev_changelog_sha256": "6629eb5c2a3fbaefade12f1aaa6d4c928c429e39f8dc9bded47f52e31fe356ef",
+    "ordinary_and_development_channels": "PASS",
+    "on_device_update_badge_observed": false
+  },
+  "published_downloads": [
+    {
+      "name": "Maps_Startup_Location_v1.0.1.mpp",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Startup_Location_v1.0.1.mpp",
+      "bytes": 31592,
+      "sha256": "b035f9a25a3e2aa8bafa8f39fa371fd70ef669f3dac8a8f5a08a16a49872cb60",
+      "http_status": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "Hiro_Morphe_Patches_v1.0.361.mpp",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.361.mpp",
+      "bytes": 48314754,
+      "sha256": "94657960f0d8628c8294d67a793dfbcab94659f9554c5ecd93b34173f8fed2d8",
+      "http_status": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "patches-bundle.json",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json",
+      "bytes": 800725,
+      "sha256": "7241d4f97fb4e052591c17a3165692ddb5061df15320fba8eb8b392984a29f3c",
+      "http_status": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "source",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/source",
+      "bytes": 800725,
+      "sha256": "7241d4f97fb4e052591c17a3165692ddb5061df15320fba8eb8b392984a29f3c",
+      "http_status": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "Maps_Startup_Location_v1.0.1_sources.zip",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Startup_Location_v1.0.1_sources.zip",
+      "bytes": 52623,
+      "sha256": "aae9ac0e687fcac6bebb94aaa0f766eb3137818ef0dbe2677809bdf726159b44",
+      "http_status": 200,
+      "result": "PASS"
+    },
+    {
+      "name": "QA_Maps_Startup_Location_v1.0.1.json",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/QA_Maps_Startup_Location_v1.0.1.json",
+      "bytes": 8902,
+      "sha256": "ae61a214cae26f048a4cb4ed3f0f9c14015033e051c3fdcf82db1a8e88fbd9d0",
+      "http_status": 200,
+      "result": "PASS"
+    }
+  ],
+  "verification": {
+    "host_lifecycle": "PASS StartupLocation host lifecycle: scenarios=58 assertions=416; dispatch/acknowledgement separated, bounded recovery verified; Android UI execution not performed.",
+    "emitted_dex_execution": [
+      "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed.",
+      "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed."
+    ],
+    "original_apk_application": [
+      {
+        "bundle": "Maps_Startup_Location_v1.0.1.mpp",
+        "sdk": "morphe-2.2.jar",
+        "sdk_version": "2.2.0",
+        "bytecode_mode": "STRIP_FAST",
+        "package": "org.ungoogled.android.apps.maps.microg",
+        "version": "26.36.04.973607363",
+        "result": "PASS",
+        "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+        "preserved_original_resources": 9330
+      },
+      {
+        "bundle": "Hiro_Morphe_Patches_v1.0.361.mpp",
+        "sdk": "morphe-2.2.jar",
+        "sdk_version": "2.2.0",
+        "bytecode_mode": "STRIP_FAST",
+        "package": "org.ungoogled.android.apps.maps.microg",
+        "version": "26.36.04.973607363",
+        "result": "PASS",
+        "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+        "preserved_original_resources": 9330
+      }
+    ],
+    "reported_v287_regression": {
+      "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "upstream_patch_version": "2.8.7",
+      "input_contains_legacy_startup_patch": true,
+      "normalization": "PASS private legacy normalization: exact published v1.0.0 runtime/bridge and eight hook pairs removed; restored native contracts verified; unrelated classes preserved=73971; resources preserved=9330; signatures stripped; assertions=167012",
+      "guard_tests": "PASS guards: both packages, version/code/body mismatch, eight hook contracts, native mode/copied-fix/direct-camera/acknowledgement contracts, preflight atomicity and duplicate rejection; assertions=74074",
+      "new_patch_application": "PASS",
+      "audit_summary": "PASS APK scope audit: native classes unchanged=73971; byte-identical DEX classes=73622; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157700; physical Android UI not tested",
+      "physical_android_ui_tested": false
+    },
+    "category_coexistence": "PASS APK scope audit: native classes unchanged=73960; byte-identical DEX classes=69424; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=true; resources unchanged=9330; runtime classes=3; assertions=161871; physical Android UI not tested",
+    "loader_preservation": "PASS loader replacement: unrelated provider classes unchanged=359; pinned v1.0.360 startup classes replaced=6; new startup provider classes=6; assertions=1477",
+    "preserved_unrelated_entries": 282,
+    "site_production_worker_tests": {
+      "passed": 41,
+      "failed": 0
+    },
+    "site_descriptor_validator": "PASS",
+    "physical_android_tested": false,
+    "android_ui_tested": false,
+    "actual_user_device_improvement_confirmed": false,
+    "runtime_limitation": "Isolated Android Emulator failed ADB/discovery before APK installation. See RUNTIME_Maps_Startup.json."
+  },
+  "installation": "Hiro Morphe Patches v1.0.361へ更新し、旧版の起動時現在地パッチを入れる前の元APKへ同名の項目を再適用して、出力APKをインストールする。"
+}
