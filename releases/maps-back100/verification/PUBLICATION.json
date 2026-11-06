@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "release": "Maps_Back_Exit_v1.0.0",
+  "bundle_version": "1.0.363",
+  "verified_at_utc": "2026-11-06 15:14:37 UTC",
+  "requested_behavior": "Preserve ordinary nested Back navigation; when Back exits the Maps root, call finishAndRemoveTask so this task is removed from Recents.",
+  "patch_name": "戻るで終了して履歴から削除",
+  "site": {
+    "id": "appgdep_6aedee22206c8191808924a0a162dac9",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "title": "ひろ Morphe パッチソース",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_511f3d1fc6848191a7220cbee768ab55",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6a7d274188d0819185634a62fa2fc8a0",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-06T15:12:15.453913+00:00",
+    "source_commit": "b1d5e837c9308e98d00af014ec5309a5652e8aeb",
+    "saved_version_number": 113
+  },
+  "github": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "baseline_commit": "5078533402cc05c414c01ab2dbd7b8c6c4e8438e",
+    "changelog_published_before_descriptor_commit": "23cfacc489faa0cbfcd8debd575abf7040f58d46",
+    "release_metadata_commit": "3668f5ff8297dc6eeca3cf107c4a2592aa39b8c4",
+    "main_dev_fast_forwarded_without_force": true,
+    "descriptor_blob_sha1": "d029ead89c624704f1033546ab1cbe3d85a7b505",
+    "changelog_blob_sha1": "22ed538030c4aa262e4cb99b86c26590dbea9ae6"
+  },
+  "verification": {
+    "fast_mpp": {
+      "exit_code": 0,
+      "output": "Validated MapsBack100 / bundle1.0.363: both APKs/loaders, emitted-instruction guards, APK bytecode/resource audits, three Maps options together, unchanged bundle362 entries, additive Android loader, standalone parity and archived source/QA identity; Android UI is unverified.\n"
+    },
+    "update_channels": {
+      "exit_code": 0,
+      "output": "OK main/patches-bundle.json: 5e8911bca7d724af4cd6ffc3726875477ba22b6b618802a07f47e95e8c487129\nOK dev/patches-bundle.json: 5e8911bca7d724af4cd6ffc3726875477ba22b6b618802a07f47e95e8c487129\nOK main/CHANGELOG.md: d7b6ea443e715149750722d21e517f294c16e579ca35602fca36d4dd78f0ed4d\nOK dev/CHANGELOG.md: d7b6ea443e715149750722d21e517f294c16e579ca35602fca36d4dd78f0ed4d\nOK both Manager channels point to v1.0.363; MPP SHA-256 32e85c8cb24df41cf66a1dc96418a8cbd3a21f9f9789062ed9ba181b07ddaee1\n"
+    },
+    "production_worker_tests": {
+      "passed": 44,
+      "failed": 0
+    },
+    "live_site": {
+      "site_url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+      "site_native_success": true,
+      "public_page_verified": true,
+      "checks": [
+        {
+          "path": "QA_Maps_Back_Exit_v1.0.0.json",
+          "status": 200,
+          "bytes": 7656,
+          "sha256": "341fbd7a8c91e100df466949111a8982a522cd19fa91a1fc71a0861eb9bd5af6",
+          "matches_local": true
+        },
+        {
+          "path": "Maps_Back_Exit_v1.0.0.mpp",
+          "status": 200,
+          "bytes": 24725,
+          "sha256": "68d306f8136eb3734ea820ccf9caf9940ec0b3dfbc6c70de2bbd996a9ada8a6d",
+          "matches_local": true
+        },
+        {
+          "path": "Maps_Back_Exit_v1.0.0_README.txt",
+          "status": 200,
+          "bytes": 3297,
+          "sha256": "73f3f3aa7209892ee9970d9811caab9fb8ce841856087e4ced1721a888b795a9",
+          "matches_local": true
+        },
+        {
+          "path": "Maps_Back_Exit_v1.0.0_sources.zip",
+          "status": 200,
+          "bytes": 31935,
+          "sha256": "db6276fb286d5b89b18a6a36f193f84f0480e2b314301ecc0685b44447f52d87",
+          "matches_local": true
+        },
+        {
+          "path": "patches-bundle.json",
+          "status": 200,
+          "bytes": 803394,
+          "sha256": "5e8911bca7d724af4cd6ffc3726875477ba22b6b618802a07f47e95e8c487129",
+          "matches_local": true
+        },
+        {
+          "path": "CHANGELOG.md",
+          "status": 200,
+          "bytes": 874692,
+          "sha256": "d7b6ea443e715149750722d21e517f294c16e579ca35602fca36d4dd78f0ed4d",
+          "matches_local": true
+        },
+        {
+          "path": "Hiro_Morphe_Patches_v1.0.363.mpp",
+          "status": 200,
+          "bytes": 48353452,
+          "sha256": "32e85c8cb24df41cf66a1dc96418a8cbd3a21f9f9789062ed9ba181b07ddaee1",
+          "matches_local": true
+        },
+        {
+          "path": "source",
+          "status": 200,
+          "bytes": 803394,
+          "sha256": "5e8911bca7d724af4cd6ffc3726875477ba22b6b618802a07f47e95e8c487129",
+          "matches_local": true
+        },
+        {
+          "method": "HEAD",
+          "request_headers": {},
+          "status": 200,
+          "bytes": 0,
+          "range_verified": true
+        },
+        {
+          "method": "GET",
+          "request_headers": {
+            "Range": "bytes=0-63"
+          },
+          "status": 206,
+          "bytes": 64,
+          "range_verified": true
+        },
+        {
+          "method": "GET",
+          "request_headers": {
+            "Range": "bytes=16777180-16777260"
+          },
+          "status": 206,
+          "bytes": 81,
+          "range_verified": true
+        }
+      ],
+      "android_device_ui_tested": false
+    }
+  },
+  "limitations": {
+    "android_device_or_emulator_ui_tested": false,
+    "device_recents_card_removal_observed": false,
+    "device_manager_update_badge_observed": false,
+    "apk_signing_or_installation_tested": false
+  },
+  "install_instructions": {
+    "already_patched_maps": "Select only 戻るで終了して履歴から削除. Do not reapply the existing startup/category patches.",
+    "original_supported_maps": "The current-location startup, category-row hiding, and new Back exit options may be selected together."
+  }
+}
