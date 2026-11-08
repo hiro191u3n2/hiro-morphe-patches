@@ -1,0 +1,96 @@
+{
+  "schema": "maps-startup104-root-cause-v1",
+  "report": "初回機動で現在位置取得しなくなったよ",
+  "affected_implementation": {
+    "patch": "1.0.3",
+    "bundle": "1.0.365"
+  },
+  "fixed_implementation": {
+    "patch": "1.0.4",
+    "bundle": "1.0.366"
+  },
+  "finding": "The pinned Maps Lnce.onCreate(null) normally replays its launch Intent through an invoke-virtual ancestor reference. Dynamic dispatch reaches the hooked Lnce.onNewIntent before the first onResume. The v1.0.3 cancel-only handler therefore cancelled the original startup attempt during creation.",
+  "evidence": {
+    "target_version": "26.36.04.973607363",
+    "supplied_apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+    "reported_v287_apk_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+    "native_owner": "Lnce;",
+    "activity": "Lcom/google/android/maps/MapsActivity;",
+    "original_saved_state": "null",
+    "effective_saved_state": "v4 remains null on ordinary cold-create completion",
+    "code_unit_offsets": {
+      "bundle_selection": [
+        "0x2B9",
+        "0x2BF",
+        "0x2C1"
+      ],
+      "super_create": "0x644",
+      "restored_state_guard": "0xA4C",
+      "get_intent": "0xA4E",
+      "virtual_intent_replay": "0xA52"
+    },
+    "replay_reference": "Lpw;->onNewIntent(Landroid/content/Intent;)V",
+    "resolved_override": "Lnce;->onNewIntent(Landroid/content/Intent;)V",
+    "subclass_oncreate_override_present": false,
+    "source_apk_structure_bound_by_full_native_fingerprints": true,
+    "android_device_trace_available": false
+  },
+  "regression": {
+    "previous_test_gap": "The earlier host creation helper omitted the app's internal onNewIntent replay and modelled only onCreate -> onStart -> onResume.",
+    "current_test_order": "onCreate -> initial same-Intent onNewIntent replay -> onStart -> onResume",
+    "prior_runtime": {
+      "prior_version": "1.0.3",
+      "prior_source_sha256": "72186fe264b31cb5403489312516674a4bede23e79b28682e2c73e6ea3ca456f",
+      "failure_marker": "native cold-launch",
+      "prior_reproduced": true,
+      "prior_failure": "Exception in thread \"main\" java.lang.AssertionError: Host scenario failed: native cold-launch replay settles one second and dispatch requires two acknowledgements\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:43)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.main(StartupLocationHostTest.java:77)\nCaused by: java.lang.AssertionError: One command after settle: expected 1, got 0\n\tat app.hiro.mapsstartup.StartupLocationHostTest.check(StartupLocationHostTest.java:26)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.equal(StartupLocationHostTest.java:29)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.lambda$main$0(StartupLocationHostTest.java:80)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:34)\n\t... 1 more\n",
+      "fixed_host_suite_passed": true
+    },
+    "fixed_host_suite": "PASS StartupLocation host lifecycle: scenarios=100 assertions=937; native cold-launch callback replay, retained-task preservation, early-touch persistence and bounded recovery verified; Android UI execution not performed.",
+    "apk_structure_matrix": [
+      {
+        "sdk": "morphe.jar",
+        "input": "supplied-v285",
+        "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+        "result": "PASS",
+        "audit": "PASS native cold-launch structure: exact native onCreate/onNewIntent fingerprints; null Bundle stays null at 0xA4C; 0xA52 invoke-virtual Lpw.onNewIntent resolves to Lnce; both current entry hooks forward original Activity/argument; inspected existing entry pairs=0; assertions=296; structural inspection plus separate host replay only; Android/onCreate execution not performed.",
+        "android_runtime_executed": false
+      },
+      {
+        "sdk": "morphe.jar",
+        "input": "reported-v287",
+        "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+        "result": "PASS",
+        "audit": "PASS native cold-launch structure: exact native onCreate/onNewIntent fingerprints; null Bundle stays null at 0xA4C; 0xA52 invoke-virtual Lpw.onNewIntent resolves to Lnce; both current entry hooks forward original Activity/argument; inspected existing entry pairs=2; assertions=302; structural inspection plus separate host replay only; Android/onCreate execution not performed.",
+        "android_runtime_executed": false
+      },
+      {
+        "sdk": "morphe-2.2.jar",
+        "input": "supplied-v285",
+        "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+        "result": "PASS",
+        "audit": "PASS native cold-launch structure: exact native onCreate/onNewIntent fingerprints; null Bundle stays null at 0xA4C; 0xA52 invoke-virtual Lpw.onNewIntent resolves to Lnce; both current entry hooks forward original Activity/argument; inspected existing entry pairs=0; assertions=296; structural inspection plus separate host replay only; Android/onCreate execution not performed.",
+        "android_runtime_executed": false
+      },
+      {
+        "sdk": "morphe-2.2.jar",
+        "input": "reported-v287",
+        "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+        "result": "PASS",
+        "audit": "PASS native cold-launch structure: exact native onCreate/onNewIntent fingerprints; null Bundle stays null at 0xA4C; 0xA52 invoke-virtual Lpw.onNewIntent resolves to Lnce; both current entry hooks forward original Activity/argument; inspected existing entry pairs=2; assertions=302; structural inspection plus separate host replay only; Android/onCreate execution not performed.",
+        "android_runtime_executed": false
+      }
+    ]
+  },
+  "correction": {
+    "preserve_only": "normal launch Intent, original launcher session, pending, awaitFirstResume and not resumed",
+    "rearm_or_reschedule_on_initial_replay": false,
+    "deadline_or_request_budget_reset": false,
+    "stop_cancellation_unchanged": true,
+    "existing_task_rearming_prohibited": true,
+    "saved_state_and_history_exclusions_unchanged": true,
+    "prior_early_tap_fix_unchanged": true,
+    "malformed_or_destination_intent_cancels": true
+  },
+  "limits": "Native instruction/dataflow inspection and production-runtime host replay establish this code regression. Full Android onCreate execution and device-screen improvement were not tested."
+}

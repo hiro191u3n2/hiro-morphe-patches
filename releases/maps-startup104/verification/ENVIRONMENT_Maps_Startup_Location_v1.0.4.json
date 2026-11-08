@@ -1,0 +1,50 @@
+{
+  "schema": "maps-startup104-environment-inventory-v1",
+  "checked_at_utc": "2026-11-08T11:33:03+00:00",
+  "scope": "Current exposed tools and readable local filesystem; not previous or inaccessible environments.",
+  "android_device_connector_exposed": false,
+  "android_tools_on_path": {
+    "adb": false,
+    "emulator": false,
+    "sdkmanager": false,
+    "avdmanager": false,
+    "qemu-system-x86_64": false,
+    "qemu-system-aarch64": false
+  },
+  "accessible_file_search": {
+    "scopes": [
+      "workspace",
+      "optional software",
+      "local software",
+      "temporary storage",
+      "current user storage"
+    ],
+    "android_tool_executable_found": false,
+    "avd_or_system_image_found": false,
+    "android_sdk_or_emulator_archive_found": false,
+    "robolectric_framework_jars_found": false,
+    "inaccessible_other_user_storage_not_inspected": true
+  },
+  "device_interfaces": {
+    "kvm_present": false,
+    "usb_device_bus_present": false
+  },
+  "android_process_names": [],
+  "common_adb_emulator_tcp_listeners": {
+    "5037": false,
+    "5554": false,
+    "5555": false
+  },
+  "existing_build_tools": {
+    "android.jar": true,
+    "r8.jar": true,
+    "morphe.jar": true,
+    "morphe-2.2.jar": true,
+    "bin/java": true,
+    "bin/javac": true
+  },
+  "device_or_emulator_started": false,
+  "adb_device_query_run": false,
+  "dependencies_downloaded": false,
+  "conclusion": "No usable Android device/emulator execution surface was found in the currently exposed environment. Existing host/DEX/APK build tools are available; they do not demonstrate Android UI execution."
+}
