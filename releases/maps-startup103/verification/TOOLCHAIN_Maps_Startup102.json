@@ -1,0 +1,64 @@
+{
+  "schema": "maps-startup102-toolchain-v1",
+  "purpose": "Recover exact pinned public build dependencies; no APK or user input uploaded.",
+  "compiler": "javac 17.0.20",
+  "compiler_command": "/usr/bin/java com.sun.tools.javac.Main",
+  "java_runtime": "openjdk version \"21.0.13.0.3\" 2026-10-24 LTS\nOpenJDK Runtime Environment Zulu21.54+109-CA (build 21.0.13.0.3+1-LTS)\nOpenJDK 64-Bit Server VM Zulu21.54+109-CA (build 21.0.13.0.3+1-LTS, mixed mode, sharing)",
+  "java_distribution": {
+    "vendor": "Azul Zulu",
+    "official_metadata_url": "https://api.azul.com/metadata/v1/zulu/packages/9a4992bb-7652-4303-8ce6-26e6849b1ead",
+    "official_archive_url": "https://cdn.azul.com/zulu/bin/zulu21.54.109-ca-jre21.0.13.0.3-linux_x64.tar.gz",
+    "sha256": "250b9d7cdce91f88455fc3528aae4f46b4a516ed74676bbf51448eacc591e601",
+    "archive_hash_verified": true
+  },
+  "morphe_cli_version": "INFO: Morphe data root: /workspace/scratch/f43c1c554e5c/maps-tools/morphe-data (JAR-adjacent)\nMorphe Desktop v2.0.0",
+  "files": {
+    "morphe.jar": {
+      "bytes": 46589795,
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58"
+    },
+    "morphe-2.2.jar": {
+      "bytes": 46648333,
+      "sha256": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7"
+    },
+    "android.jar": {
+      "bytes": 27092450,
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b"
+    },
+    "r8.jar": {
+      "bytes": 51023743,
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+    }
+  },
+  "morphe_retrieval": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "isolated_branch": "maps-startup102-tools-20261108",
+    "source_base_commit": "b1eac5ccec59b3d727f370cac976e513552f29b7",
+    "workflow_path": ".github/workflows/maps-startup102-tools.yml",
+    "commit": "103c105e7d0fc0c79917a59f493aa67ad1ae5ee9",
+    "run_id": 42471248361,
+    "run_url": "https://github.com/hiro191u3n2/hiro-morphe-patches/actions/runs/42471248361",
+    "conclusion": "success",
+    "permissions": {
+      "contents": "read"
+    },
+    "artifact_id": 13613406967,
+    "artifact_name": "maps-startup102-build-tools",
+    "artifact_sha256": "92ed8cb7ef0738f467c48579af9e93b0f341e14a26adeae69ba5db59427590a3",
+    "artifact_bytes": 93238382,
+    "artifact_retention_days": 1,
+    "contents": [
+      "morphe.jar",
+      "morphe-2.2.jar"
+    ],
+    "asset_endpoints": {
+      "morphe.jar": "https://api.github.com/repos/MorpheApp/morphe-desktop/releases/assets/576913929",
+      "morphe-2.2.jar": "https://api.github.com/repos/MorpheApp/morphe-desktop/releases/assets/708796009"
+    },
+    "artifact_and_both_tools_reverified_locally": true,
+    "retrieval_note": "Direct public release URL returned HTTP 504; unauthenticated API returned rate-limit 403. Existing workflow artifacts containing tools were expired. GitHub Actions read-only token retrieved the same official pinned assets through gh api. Downloaded through native workflow artifact connector.",
+    "initial_failed_run_id": 42471106132,
+    "main_dev_modified": false,
+    "branch_retained_for_audit": true
+  }
+}
