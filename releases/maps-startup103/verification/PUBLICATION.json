@@ -1,0 +1,251 @@
+{
+  "schema": "maps-startup103-publication-v1",
+  "request": "ホーム等へ移動してタスクに残っているmicroG Mapsへ戻ったとき、起動時の現在地確認・自動移動を再開しない。",
+  "versions": {
+    "patch": "1.0.3",
+    "bundle": "1.0.365",
+    "baseline_patch": "1.0.2",
+    "baseline_bundle": "1.0.364"
+  },
+  "release_timestamp": "2026-11-08T20:01:57",
+  "release_timezone": "Asia/Tokyo",
+  "target": {
+    "package": "org.ungoogled.android.apps.maps.microg",
+    "version": "26.36.04.973607363",
+    "version_code": "1068763346",
+    "native_code_fingerprint_required": true
+  },
+  "behavior": {
+    "fresh_launcher_create_only": true,
+    "skip_saved_state_restoration": true,
+    "skip_launched_from_history": true,
+    "on_start_never_rearms": true,
+    "on_new_intent_cancels_without_rearming": true,
+    "on_stop_cancels_pending_attempt_permanently": true,
+    "pause_without_stop_keeps_initial_pending_attempt": true,
+    "fresh_activity_after_real_exit_can_recenter": true,
+    "previous_early_tap_fix_preserved": true,
+    "native_location_button_and_navigation_preserved": true,
+    "independent_location_service_or_permission_request_added": false
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.365.mpp": {
+      "bytes": 48353624,
+      "sha256": "335e2da04909308848defcba74d438c576dc3db9087c55cf6bd410468c62e1e1"
+    },
+    "Maps_Startup_Location_v1.0.3.mpp": {
+      "bytes": 31757,
+      "sha256": "861b7458c73e0cfc0695564a676ad651f0642e46c29889241a4bf7250af213a1"
+    },
+    "Maps_Startup_Location_v1.0.3_README.txt": {
+      "bytes": 5264,
+      "sha256": "c68c04a0c82d06538d5990e8ed10197e95fe11919ee07ef19091ab5409254243"
+    },
+    "Maps_Startup_Location_v1.0.3_sources.zip": {
+      "bytes": 71522,
+      "sha256": "89a1f454d7481277df0d99e7b6b3a8ca92d64407d3e00259949e44e54b5c4ada"
+    },
+    "QA_Maps_Startup_Location_v1.0.3.json": {
+      "bytes": 11532,
+      "sha256": "5b44aae16cd066aebd501eeef325a2afb1b73670a9c6cd7808b0d43e9d7276bc"
+    }
+  },
+  "validation": {
+    "host": "PASS StartupLocation host lifecycle: scenarios=89 assertions=848; retained-task preservation, fresh-create startup, early-touch persistence and bounded recovery verified; Android UI execution not performed.",
+    "prior_runtime": {
+      "prior_version": "1.0.2",
+      "prior_source_sha256": "d2f3967569109b2f16f522f30452eda2ee46d0da8c24d95cb45618877db59008",
+      "failure_marker": "retained task",
+      "prior_reproduced": true,
+      "prior_failure": "Exception in thread \"main\" java.lang.AssertionError: Host scenario failed: retained task from Recents preserves the user map after Home\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:43)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.main(StartupLocationHostTest.java:300)\nCaused by: java.lang.AssertionError: Retained task must not request current location again: expected 1, got 2\n\tat app.hiro.mapsstartup.StartupLocationHostTest.check(StartupLocationHostTest.java:26)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.equal(StartupLocationHostTest.java:29)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.lambda$main$25(StartupLocationHostTest.java:306)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:34)\n\t... 1 more\n",
+      "fixed_host_suite_passed": true
+    },
+    "native_bridge": [
+      "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed.",
+      "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed."
+    ],
+    "unrelated_bundle_entries_preserved": 297,
+    "loader_preservation": "PASS loader replacement: unrelated provider classes unchanged=374; pinned v1.0.364 startup classes replaced=6; new startup provider classes=6; assertions=1537",
+    "real_apk_application": [
+      {
+        "bundle": "Maps_Startup_Location_v1.0.3.mpp",
+        "sdk": "morphe-2.2.jar",
+        "sdk_version": "2.2.0",
+        "bytecode_mode": "STRIP_FAST",
+        "package": "org.ungoogled.android.apps.maps.microg",
+        "version": "26.36.04.973607363",
+        "result": "PASS",
+        "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+        "preserved_original_resources": 9330
+      },
+      {
+        "bundle": "Hiro_Morphe_Patches_v1.0.365.mpp",
+        "sdk": "morphe-2.2.jar",
+        "sdk_version": "2.2.0",
+        "bytecode_mode": "STRIP_FAST",
+        "package": "org.ungoogled.android.apps.maps.microg",
+        "version": "26.36.04.973607363",
+        "result": "PASS",
+        "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+        "preserved_original_resources": 9330
+      }
+    ],
+    "three_maps_options": {
+      "patches": [
+        "起動時に現在地を表示",
+        "検索欄の下のカテゴリ行を非表示",
+        "戻るで終了して履歴から削除"
+      ],
+      "result": "PASS",
+      "audit": "PASS APK scope: native classes preserved=73964; byte-identical DEX classes=69772; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180551; signature verification and Android UI execution not claimed"
+    },
+    "source_files_verified_in_github_tree": 24,
+    "site_built_worker_tests": {
+      "tests": 48,
+      "passed": 48,
+      "failed": 0
+    },
+    "site_html_delivery_tests": {
+      "tests": 13,
+      "passed": 13,
+      "failed": 0
+    },
+    "final_expanded_site_bytes": 262269090,
+    "final_max_static_asset_bytes": 16777216,
+    "postpublication_commands": [
+      {
+        "command": [
+          "python3",
+          "scripts/validate_fast_mpp.py",
+          "public/patches-bundle.json"
+        ],
+        "exit_code": 0,
+        "output": "Validated MapsStartup103 / bundle1.0.365: APK-bound artifacts, emitted native bridge execution, reported v2.8.7 APK regression, retained-task and early-tap tests, baseline364 preservation, three Maps options, Android DEX, standalone parity, source hashes and archived verification records; Android UI remains untested.\n"
+      },
+      {
+        "command": [
+          "python3",
+          "scripts/validate_update_channels.py"
+        ],
+        "exit_code": 0,
+        "output": "OK dev/patches-bundle.json: 637c6fbfb8ad818eb10db5dcf4860653b4ddc2cb43d12665e73070fca3e2efab\nOK main/patches-bundle.json: 637c6fbfb8ad818eb10db5dcf4860653b4ddc2cb43d12665e73070fca3e2efab\nOK dev/CHANGELOG.md: c6d4e112a9b124d7a2c8b0ef54a4e88aac5db2eb3972fd8ae194500f9fa41729\nOK main/CHANGELOG.md: c6d4e112a9b124d7a2c8b0ef54a4e88aac5db2eb3972fd8ae194500f9fa41729\nOK both Manager channels point to v1.0.365; MPP SHA-256 335e2da04909308848defcba74d438c576dc3db9087c55cf6bd410468c62e1e1\n"
+      }
+    ]
+  },
+  "publication": {
+    "site_source": "73a891189f4f33262aee5095b7c94e17bc66b8a7",
+    "site_version": 115,
+    "site_version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_570d56e17aec8191987759bf37e8dea8",
+    "site_archive": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_0000000023d482068932dceae6015d53",
+      "content_hash": "sha256:1e0b63d7b2a7f3db4b72e96466d4ed23b5b46926ad85dedd3b665e4362db941f",
+      "size_bytes": 262553600,
+      "file_count": 345
+    },
+    "deployment": {
+      "id": "appgdep_6af058e372c88191b33a331a45aa764c",
+      "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+      "title": "ひろ Morphe パッチソース",
+      "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_570d56e17aec8191987759bf37e8dea8",
+      "type": "publish",
+      "status": "succeeded",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+      "has_mcp": false,
+      "screenshot_asset_pointer": null,
+      "provider_deployment_id": "site---6a7d274188d0819185634a62fa2fc8a0",
+      "failure_message": null,
+      "env_set_revision": 0,
+      "updated_at": "2026-11-08T11:11:51.198701+00:00"
+    },
+    "access_mode": "public",
+    "access_mode_changed": false,
+    "github_repository": "hiro191u3n2/hiro-morphe-patches",
+    "source_and_changelog_commit": "81f9beecfd319d6a68731f6a361267968d412467",
+    "manager_descriptor_commit": "6edd4239f21a01bfd3865e48f1abfd3ad934cc0e",
+    "order": "Site native success -> main source and CHANGELOG -> main descriptor -> dev fast-forward -> raw main/dev validation -> publication record",
+    "force_push_used": false,
+    "descriptor_sha256": "637c6fbfb8ad818eb10db5dcf4860653b4ddc2cb43d12665e73070fca3e2efab",
+    "changelog_sha256": "c6d4e112a9b124d7a2c8b0ef54a4e88aac5db2eb3972fd8ae194500f9fa41729",
+    "exact_manager_raw_urls_verified": true,
+    "historical_description_and_changelog_preserved": true
+  },
+  "external_http": {
+    "schema": "maps-startup103-live-http-v1",
+    "checked_at_utc": "2026-11-08T11:13:27.412059+00:00",
+    "native_deployment_reported_by_parent": {
+      "result": "success",
+      "site_version": 115,
+      "source_commit": "73a891189f4f33262aee5095b7c94e17bc66b8a7",
+      "deployment_id": "appgdep_6af058e372c88191b33a331a45aa764c",
+      "url": "https://hiro-morphe-patches.otoha10.chatgpt.site"
+    },
+    "main_dev_commit_reported_by_parent": "6edd4239f21a01bfd3865e48f1abfd3ad934cc0e",
+    "expected": {
+      "bundle_version": "1.0.365",
+      "patch_version": "1.0.3",
+      "bundle_bytes": 48353624,
+      "bundle_sha256": "335e2da04909308848defcba74d438c576dc3db9087c55cf6bd410468c62e1e1",
+      "standalone_bytes": 31757,
+      "standalone_sha256": "861b7458c73e0cfc0695564a676ad651f0642e46c29889241a4bf7250af213a1"
+    },
+    "method": "Ordinary unauthenticated Python urllib; default user agent; no cookies, browser, auth or access changes.",
+    "checks": [
+      {
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/",
+        "method": "GET",
+        "status": 403,
+        "reason": "Forbidden",
+        "body_prefix": "error code: 1010\n",
+        "headers": {
+          "content-type": "text/plain; charset=UTF-8",
+          "content-length": "17",
+          "date": "Sun, 08 Nov 2026 11:13:34 GMT",
+          "cf-ray": "a5742631ac33fbf8-LAX"
+        },
+        "elapsed_seconds": 7.595
+      },
+      {
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.365.mpp",
+        "method": "HEAD",
+        "status": 403,
+        "reason": "Forbidden",
+        "body_prefix": "",
+        "headers": {
+          "content-type": "text/plain; charset=UTF-8",
+          "content-length": "17",
+          "date": "Sun, 08 Nov 2026 11:13:35 GMT",
+          "cf-ray": "a5742631ac3afbf8-LAX"
+        },
+        "elapsed_seconds": 7.594
+      }
+    ],
+    "overall": "blocked",
+    "remaining_verification": "Not attempted after initial HTTP 403; homepage content and artifact bytes are unverified externally.",
+    "completed_at_utc": "2026-11-08T11:13:35.007631+00:00"
+  },
+  "limitations": {
+    "physical_android_tested": false,
+    "android_emulator_tested": false,
+    "android_screen_behavior_verified": false,
+    "installed_app_updated_by_source_refresh_alone": false,
+    "device_manager_update_badge_verified": false,
+    "live_site_content_and_download_bytes_verified": false,
+    "notes": "Native publication succeeded; ordinary unauthenticated external homepage GET and integrated MPP HEAD returned HTTP 403 (error code 1010). No alternate auth/access mechanism was used. Exact local artifacts and compiled production Worker delivery passed. Direct MPP files are provided in the completion response."
+  },
+  "installation": {
+    "selection": "起動時に現在地を表示",
+    "input": "以前の起動時現在地パッチを入れる前の対象APK",
+    "old_startup_patch_reapplication_supported": false,
+    "optional_existing_maps_options": [
+      "検索欄の下のカテゴリ行を非表示",
+      "戻るで終了して履歴から削除"
+    ],
+    "next_step": "新版MPPでパッチを当て直し、生成したAPKをインストールする。"
+  },
+  "lifecycle_documentation": [
+    "https://developer.android.com/guide/components/activities/tasks-and-back-stack",
+    "https://developer.android.com/guide/components/activities/activity-lifecycle",
+    "https://developer.android.com/reference/android/content/Intent#FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY"
+  ]
+}
