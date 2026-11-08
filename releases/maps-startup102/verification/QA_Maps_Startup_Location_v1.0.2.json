@@ -1,0 +1,169 @@
+{
+  "schema": "maps-startup102-qa-v1",
+  "patch_version": "1.0.2",
+  "bundle_version": "1.0.364",
+  "release_timestamp": "2026-11-08T19:24:45",
+  "release_timezone": "Asia/Tokyo",
+  "baseline_version": "1.0.363",
+  "baseline_sha256": "32e85c8cb24df41cf66a1dc96418a8cbd3a21f9f9789062ed9ba181b07ddaee1",
+  "production_android_sdk_compile": true,
+  "physical_android_tested": false,
+  "runtime_android_tested": false,
+  "android_emulator_tested": false,
+  "runtime_limitation": "No connected Android device or usable emulator was available in this session. Production lifecycle coordinator host tests, native bridge instruction tests and actual APK patch application are verified separately from Android UI behavior.",
+  "original_stock_apk_tested": false,
+  "runtime_extension": "extensions/maps_startup_location.mpe",
+  "apk_bytecode_mode": "STRIP_FAST",
+  "compiler": "javac 17.0.20",
+  "java_runtime": "openjdk version \"21.0.13.0.3\" 2026-10-24 LTS\nOpenJDK Runtime Environment Zulu21.54+109-CA (build 21.0.13.0.3+1-LTS)\nOpenJDK 64-Bit Server VM Zulu21.54+109-CA (build 21.0.13.0.3+1-LTS, mixed mode, sharing)",
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "sources": {
+    "build.py": "53fa0408279a764c44daa95f0a0be71252cae75ede9fd398ebc320cce7ee0e90",
+    "patch/MapsStartupLocationPatch.java": "5b74fadd30183fe83740453c0e91673cc05b7ef74dbd2b6df95430b32db29c45",
+    "runtime/LocationHost.java": "3150752bf71eb9a4d99c32f904aa13c76b2080b3dc404e3137b42c8b864f1f30",
+    "runtime/StartupLocation.java": "d2f3967569109b2f16f522f30452eda2ee46d0da8c24d95cb45618877db59008",
+    "test/MapsStartupAudit.java": "10782daae0c8819f341437b7394ee8756bdf96df5259ac648af67306dd42485c",
+    "test-coexist/MapsBackAudit.java": "6dba9cd3603a8ad4be11802c5110c95df111c7ea36bc004c3e3c4b4a5128c814",
+    "test-host/app/hiro/mapsstartup/StartupLocationHostTest.java": "ba76f6f043cdc369ae347cbd960ed984c33e8f77f00542bd5a4c9c250dd4faaf",
+    "test-native/MapsStartupBridgeVmTest.java": "42129784128b90e9e1dbab2830ceeff8c2f6c233721cd630d67dfad31cf85806",
+    "test-prior/StartupLocation.java": "67ce781f34b24d7b71b992db5c0af11472441f7a20503bb6469988eec4bdd4dc",
+    "test-stubs/android/app/Activity.java": "ee355ab973cf021c3821d00823e8637ed154ac5243cbbed26e13f8052d1abd16",
+    "test-stubs/android/content/ComponentName.java": "905ead0e67f6376936764bb7cb4cada4a06d02f5ccb22619685f57781916e824",
+    "test-stubs/android/content/Intent.java": "c2beeed843eb70cbdebdca945118f40feb5360ba882c9e9ab521cf1b339cc772",
+    "test-stubs/android/net/Uri.java": "45eecc7ac138576303016b4bb9eeec365e5f05d57a089af9606ba9c2ed4b21c8",
+    "test-stubs/android/os/Bundle.java": "fa82c1f81154317a7983be8bf1689bcd23b94c817da5b10e47df24c7d83ce35c",
+    "test-stubs/android/os/Handler.java": "24b8cd6c3b652c08ef98ba8bf9b2575b342633e41e3a8a67cec7840f90781a79",
+    "test-stubs/android/os/Looper.java": "0e3a5e6567d5c8ccd75dbeb66e85c184a4cf3a1a6dee3f68ade90e64956c8bf0",
+    "test-stubs/android/os/SystemClock.java": "993f2ba581247daeb8c6bff585244eaf62ccc51c730996a4ab65638055590bea",
+    "test-stubs/android/view/MotionEvent.java": "a09bcf50eb346565eabeda87594cad22813189643c99663e3bff08dd7f0c25fd",
+    "test-stubs/android/view/View.java": "5311e37a021620ab9f45d7de201e2919959c23a0e892f7d26382ced7d17748a8",
+    "test-stubs/com/google/android/maps/MapsActivity.java": "5c30804630add202bb00a8e32945c014dea3b726bfa6b2dade10b93a90397fc6"
+  },
+  "tap_cancellation_regression": {
+    "prior_version": "1.0.1",
+    "prior_reproduced": true,
+    "prior_failure": "Exception in thread \"main\" java.lang.AssertionError: Host scenario failed: immediate and repeated startup taps preserve the original first request\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:43)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.main(StartupLocationHostTest.java:80)\nCaused by: java.lang.AssertionError: Startup taps must not cancel or defer the first request: expected 1, got 0\n\tat app.hiro.mapsstartup.StartupLocationHostTest.check(StartupLocationHostTest.java:26)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.equal(StartupLocationHostTest.java:29)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.lambda$main$1(StartupLocationHostTest.java:88)\n\tat app.hiro.mapsstartup.StartupLocationHostTest.scenario(StartupLocationHostTest.java:34)\n\t... 1 more\n",
+    "fixed_host_suite_passed": true
+  },
+  "artifacts": {
+    "Maps_Startup_Location_v1.0.2.mpp": {
+      "bytes": 31632,
+      "sha256": "085dc6ca2be3532889742e8b6ae4fdf6f98fc4e73ae7e06da506acb01164e1d8"
+    },
+    "Hiro_Morphe_Patches_v1.0.364.mpp": {
+      "bytes": 48353555,
+      "sha256": "f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd"
+    }
+  },
+  "loader_preservation": "PASS loader replacement: unrelated provider classes unchanged=374; pinned v1.0.363 startup classes replaced=6; new startup provider classes=6; assertions=1537",
+  "preserved_unrelated_entries": 297,
+  "host_tests": "PASS StartupLocation host lifecycle: scenarios=71 assertions=658; early-touch persistence, read-only arrival handoff and bounded recovery verified; Android UI execution not performed.",
+  "guard_tests": "PASS guards: both packages, version/code/body mismatch, eight hook contracts, native mode/copied-fix/direct-camera/acknowledgement contracts, preflight atomicity and duplicate rejection; assertions=74064\nPASS guards: both packages, version/code/body mismatch, eight hook contracts, native mode/copied-fix/direct-camera/acknowledgement contracts, preflight atomicity and duplicate rejection; assertions=74064",
+  "selection_results": [
+    {
+      "artifact": "Maps_Startup_Location_v1.0.2.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Startup_Location_v1.0.2.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Startup_Location_v1.0.2.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Startup_Location_v1.0.2.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.364.mpp",
+      "loader": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.364.mpp",
+      "loader": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.364.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.364.mpp",
+      "loader": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    }
+  ],
+  "native_bridge_execution_tests": [
+    "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed.",
+    "PASS emitted DEX bridge VM: scenarios=50 assertions=848; actual legacy failure reproduced, native dispatch/acknowledgement separated; Android UI execution not performed."
+  ],
+  "reported_apk_regression": {
+    "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+    "upstream_patch_version": "2.8.7",
+    "input_contains_legacy_startup_patch": true,
+    "normalization": "PASS private legacy normalization: exact published v1.0.0 runtime/bridge and eight hook pairs removed; restored native contracts verified; unrelated classes preserved=73971; resources preserved=9330; signatures stripped; assertions=167012",
+    "guard_tests": "PASS guards: both packages, version/code/body mismatch, eight hook contracts, native mode/copied-fix/direct-camera/acknowledgement contracts, preflight atomicity and duplicate rejection; assertions=74074",
+    "new_patch_application": "PASS",
+    "audit_summary": "PASS APK scope audit: native classes unchanged=73971; byte-identical DEX classes=73622; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157700; physical Android UI not tested",
+    "physical_android_ui_tested": false
+  },
+  "apk_application": [
+    {
+      "bundle": "Maps_Startup_Location_v1.0.2.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+      "preserved_original_resources": 9330
+    },
+    {
+      "bundle": "Hiro_Morphe_Patches_v1.0.364.mpp",
+      "sdk": "morphe-2.2.jar",
+      "sdk_version": "2.2.0",
+      "bytecode_mode": "STRIP_FAST",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "version": "26.36.04.973607363",
+      "result": "PASS",
+      "audit_summary": "PASS APK scope audit: native classes unchanged=73961; byte-identical DEX classes=73613; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=false; resources unchanged=9330; runtime classes=3; assertions=157679; physical Android UI not tested",
+      "preserved_original_resources": 9330
+    }
+  ],
+  "category_coexistence_audit": "PASS APK scope audit: native classes unchanged=73960; byte-identical DEX classes=69424; lifecycle/touch hooks=8; native bridge=1; preserved category suppression=true; resources unchanged=9330; runtime classes=3; assertions=161871; physical Android UI not tested",
+  "back_exit_coexistence_audit": "PASS APK scope: native classes preserved=73964; byte-identical DEX classes=69772; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180551; signature verification and Android UI execution not claimed",
+  "three_patch_coexistence": {
+    "patches": [
+      "起動時に現在地を表示",
+      "検索欄の下のカテゴリ行を非表示",
+      "戻るで終了して履歴から削除"
+    ],
+    "result": "PASS",
+    "audit": "PASS APK scope: native classes preserved=73964; byte-identical DEX classes=69772; native owner changed=Lps; factory instructions added=2; generated callback classes=1; non-DEX/non-signature resources preserved=9330; assertions=180551; signature verification and Android UI execution not claimed"
+  },
+  "supplied_apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+  "supplied_apk_non_dex_resources_unchanged": true,
+  "single_bundle_apk_entry_contents_equal": true
+}

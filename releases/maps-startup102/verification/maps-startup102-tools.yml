@@ -1,0 +1,31 @@
+name: Maps startup 1.0.2 pinned build tools
+on:
+  push:
+    branches: [maps-startup102-tools-20261108]
+    paths: ['.github/workflows/maps-startup102-tools.yml']
+permissions:
+  contents: read
+jobs:
+  collect:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Download and verify the two public Morphe tools
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p maps-tools
+          gh api /repos/MorpheApp/morphe-desktop/releases/assets/576913929 -H 'Accept: application/octet-stream' > maps-tools/morphe.jar
+          gh api /repos/MorpheApp/morphe-desktop/releases/assets/708796009 -H 'Accept: application/octet-stream' > maps-tools/morphe-2.2.jar
+          printf '%s\n' 'b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58  maps-tools/morphe.jar' '855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7  maps-tools/morphe-2.2.jar' | sha256sum -c -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maps-startup102-build-tools
+          path: |
+            maps-tools/morphe.jar
+            maps-tools/morphe-2.2.jar
+          retention-days: 1
+          if-no-files-found: error
+          compression-level: 0
