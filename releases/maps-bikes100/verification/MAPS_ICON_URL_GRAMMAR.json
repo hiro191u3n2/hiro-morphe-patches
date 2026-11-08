@@ -1,0 +1,145 @@
+{
+  "verified_at_utc": "2026-11-08T15:30:33.852678+00:00",
+  "scope": "Read-only DexQuery string-reference scan of all DEX entries in Maps v2.8.5 and v2.8.7; exact literal evidence does not prove every URL variant reaches every renderer.",
+  "apk_v285_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+  "apk_v287_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+  "matching_string_references_identical_across_apks": true,
+  "observed_absolute_roots": [
+    "https://www.google.com/maps/vt/",
+    "https://mts0.google.com/vt/",
+    "https://mt0.google.com/vt/",
+    "http://mt0.google.com/vt/"
+  ],
+  "observed_icon_grammars": [
+    "icon/name=<comma-separated asset paths>&highlight=...&scale=4",
+    "/icon/name=<asset paths>&... (native literal)",
+    "https://www.google.com/maps/vt/icon?name=<asset path>&scale=4"
+  ],
+  "loader_scheme_handling": {
+    "method": "Lbken;->j(Lcom/google/common/collect/ImmutableList;Lbkje;)Lbkje;",
+    "explicitly_accepted_prefixes": [
+      "http://",
+      "https://",
+      "//",
+      "data:"
+    ],
+    "offsets_hex": [
+      "0x72",
+      "0x7a",
+      "0x82",
+      "0x8a"
+    ],
+    "otherwise": "At 0x93 and 0x95 wraps the provided asset name as icon/name=<asset>&scale=4."
+  },
+  "normalization_review": [
+    "Accept only a known Google tile root or recognized relative icon request form, followed by an exact approved asset name.",
+    "Handle both icon/name= and icon?name= before looking for the end of the name value. A generic trim-at-first-question-mark drops the query-form name.",
+    "Asset lists are comma separated. Color, scale and other parameters begin at ampersand; compare whole asset names rather than arbitrary URL substrings.",
+    "Scheme-relative // is explicitly supported by the existing icon loader; normalization can recognize it only for allowlisted Google hosts.",
+    "No percent-escaped bicycle filename or percent-escaped separator was observed in these literals. No broad URL decoding is required by this evidence.",
+    "data: is supported by the app loader but is outside exact-path icon filtering. Preserve it without attempting asset-name matching."
+  ],
+  "string_references": [
+    {
+      "method": "Laoup;->f(Lazge;)Z",
+      "dex_code_unit_offset": "0x0009f",
+      "literal": "https://mts0.google.com/vt/icon/name=assets/icons/poi/quantum/container_background-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/parking-2-medium.png&highlight=ffffff,ffffff,4285f4&scale=4"
+    },
+    {
+      "method": "Laoup;->f(Lazge;)Z",
+      "dex_code_unit_offset": "0x000a2",
+      "literal": "https://mts0.google.com/vt/icon/name=assets/icons/poi/quantum/container_background-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/search-experiment/parking_es-2-medium.png&highlight=ffffff,ffffff,4285f4&scale=4"
+    },
+    {
+      "method": "Lauaa;->ep(Lbzpg;)Ljava/lang/String;",
+      "dex_code_unit_offset": "0x00010",
+      "literal": "https://mt0.google.com/vt/icon/name=icons/spotlight/stickers/%s_M_4x.png&scale=4"
+    },
+    {
+      "method": "Lauaa;->fQ(Laqhe;I)Ljava/lang/String;",
+      "dex_code_unit_offset": "0x00008",
+      "literal": "https://mt0.google.com/vt/icon/name=icons/spotlight/stickers/"
+    },
+    {
+      "method": "Laydg;->c(Ljava/lang/Object;IILkkb;)Ljava/lang/String;",
+      "dex_code_unit_offset": "0x00018",
+      "literal": "https://www.google.com/maps/vt"
+    },
+    {
+      "method": "Laysd;->a()Ljava/net/URL;",
+      "dex_code_unit_offset": "0x00000",
+      "literal": "https://www.google.com/maps/vt"
+    },
+    {
+      "method": "Lbjzc;->Q(Lbjin;)V",
+      "dex_code_unit_offset": "0x00198",
+      "literal": "http://mt0.google.com/vt/icon/name=icons/spotlight/measle_ad_spotlight_L.png&scale=4"
+    },
+    {
+      "method": "Lbjzc;->Q(Lbjin;)V",
+      "dex_code_unit_offset": "0x0019d",
+      "literal": "http://mt0.google.com/vt/icon/name=icons/spotlight/measle_spotlight_L.png&scale=4"
+    },
+    {
+      "method": "Lbjzc;->Q(Lbjin;)V",
+      "dex_code_unit_offset": "0x001a0",
+      "literal": "http://mt0.google.com/vt/icon/name=icons/spotlight/measle_ad_monroe_spotlight_L.png&scale=4"
+    },
+    {
+      "method": "Lbken;->j(Lcom/google/common/collect/ImmutableList;Lbkje;)Lbkje;",
+      "dex_code_unit_offset": "0x00093",
+      "literal": "icon/name="
+    },
+    {
+      "method": "Lbxyo;->c(ILjava/lang/String;Z)Ljava/lang/String;",
+      "dex_code_unit_offset": "0x00016",
+      "literal": "icon/name=assets/icons/search-experiment/container_background-2-medium.png,assets/icons/search-experiment/container-2-medium.png,assets/icons/search-experiment/%s-2-medium.png&highlight=%s&scale=4"
+    },
+    {
+      "method": "Lbxyo;->h(ILbwyf;Lchwg;Lchwg;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;)V",
+      "dex_code_unit_offset": "0x0004b",
+      "literal": "icon/name=assets/icons/search-experiment/container_background-2-medium.png,assets/icons/search-experiment/container-2-medium.png,assets/icons/search-experiment/%s-2-medium.png&highlight=%s&scale=4"
+    },
+    {
+      "method": "Lcqjg;-><init>()V",
+      "dex_code_unit_offset": "0x00019",
+      "literal": "https://www.google.com/maps/vt/"
+    },
+    {
+      "method": "Lmiq;->a(Laqgw;Laqix;Landroid/content/Context;)Lcbdi;",
+      "dex_code_unit_offset": "0x000d3",
+      "literal": "https://www.google.com/maps/vt/icon?name=assets/icons/poi/tactile/iamhere/work.png&scale=4"
+    },
+    {
+      "method": "Lmiq;->a(Laqgw;Laqix;Landroid/content/Context;)Lcbdi;",
+      "dex_code_unit_offset": "0x000d6",
+      "literal": "https://www.google.com/maps/vt/icon?name=assets/icons/poi/tactile/iamhere/home.png&scale=4"
+    },
+    {
+      "method": "Lomh;->e(Loku;)Landroid/graphics/Bitmap;",
+      "dex_code_unit_offset": "0x00045",
+      "literal": "{0}icon/name=assets/icons/poi/quantum/container_background-2-medium.png,assets/icons/poi/quantum/container-2-medium.png,assets/icons/poi/quantum/{1}-2-medium.png&highlight=ffffff,db4437,ffffff&scale=4"
+    },
+    {
+      "method": "Lanrg;->a(Lbmpd;Z)Lbjis;",
+      "dex_code_unit_offset": "0x00010",
+      "literal": "https://mts0.google.com/vt/icon/name=icons/spotlight/measle_8px.png&scale=4"
+    },
+    {
+      "method": "Lanrg;->a(Lbmpd;Z)Lbjis;",
+      "dex_code_unit_offset": "0x00013",
+      "literal": "https://mts0.google.com/vt/icon/name=icons/spotlight/measle_night_8px.png&scale=4"
+    },
+    {
+      "method": "Layvm;->bL(Lawcl;Lawcl;Z)Z",
+      "dex_code_unit_offset": "0x00125",
+      "literal": "https://www.google.com/maps/vt/"
+    },
+    {
+      "method": "Layvm;->bL(Lawcl;Lawcl;Z)Z",
+      "dex_code_unit_offset": "0x00133",
+      "literal": "https://www.google.com/maps/vt/"
+    }
+  ],
+  "runtime_or_device_verification": false
+}
