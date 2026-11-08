@@ -1,0 +1,1181 @@
+{
+  "contract_version": 1,
+  "runtime_revision": "1.0.1",
+  "target_maps_version": "26.36.04.973607363",
+  "status": "verified",
+  "scope": "Fixed native pin ID schema and supporting Java identity evidence; read-only DEX inspection. Runtime/native paint behavior was not executed.",
+  "canonicalization": "api_sha256 and code_sha256 use the exact classApi/classBody canonicalization from production RuntimeContracts; VerifyNativeSchema is the shared implementation. Existing cbkh/cqdn/ccfl hash pairs match RuntimeContracts100 verbatim. all_method_bodies_sha256 is an alias of code_sha256.",
+  "sha256_policy": "Reject unknown input APK SHA-256 before inspecting or accepting schema; only the two audited original base APKs are accepted by this verifier.",
+  "allowed_input_sha256": [
+    "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+    "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063"
+  ],
+  "required_class_count_per_apk": 11,
+  "required_field_count_per_apk": 14,
+  "supporting_field_count_per_apk": 4,
+  "reflection_rule": "Resolve exact class name, declaring field name, field type and access flags using the application class loader. setAccessible(true) is required for cbkh.i, cbkh.j, cbke.c and cbkg.c.",
+  "identity_contract": {
+    "legacy_place_id_path": "cqdn.h:ckiu -> ckiu.c:ccff -> ccff.c:String",
+    "modern_place_id_path": "ccfl.c:ccff -> ccff.c:String",
+    "native_pin_id_path": "cbki.c:ccpa -> ccpa.d:long",
+    "comparison": "Use the parsed low 64-bit CID consistently with bjap.q, which compares only bjap.c. High 64-bit ccpa.c is preserved, not rewritten.",
+    "parse_evidence": "bjap.e(String) supports decimal numeric feature IDs and 0x...:0x... pairs; its complete method fingerprint is recorded."
+  },
+  "native_known_pin_paths": [
+    "cbkh.e:cnak<cbki>",
+    "cbkh.d:cbkj -> cbkj.c:cbki",
+    "cbkh.i:cbke -> cbke.c:cbki",
+    "cbkh.j:cbkg -> cbkg.c:cbki"
+  ],
+  "preservation_contract": [
+    "Clone the original root message/builders; never rebuild a partial layer from a few fields.",
+    "Retain each kept cbki object and all its metadata, including ccpa.c high ID bits, cbki.d:ccpb coordinates, cbki.e:String and cbki.f:cnak.",
+    "Preserve query/layer descriptors, ordering and unaffected presence bits; apply only the separately approved slot-filtering edits.",
+    "Missing or unparseable identity is a support decision for the runtime, not evidence that a pin is unrelated."
+  ],
+  "unknown_payload_limit": "This contract enumerates and fingerprints declared fields. It does not prove that protobuf unknownFields, nested opaque byte payloads, native/server tokens, or future response fields cannot carry additional pins. Fixed APK hashes do not eliminate response-side unknown fields. Runtime support gating must retain that distinction.",
+  "relevant_class_shape_and_code_identical_between_apks": true,
+  "apks": [
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-グーグルマップ-v2.8.5.apk",
+      "size_bytes": 172832834,
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "sha256_allowlisted": true,
+      "classes": [
+        {
+          "name": "cbkh",
+          "descriptor": "Lcbkh;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkh;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "c69172968c64e97e10618fc56dedfee832111a9f86dec0d2945b6e8f1027427e",
+          "all_method_bodies_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15",
+          "passed": true,
+          "code_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15"
+        },
+        {
+          "name": "cbki",
+          "descriptor": "Lcbki;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbki;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "eca52c734767bc9e55fae97df52a2e84512a5e88af7479ae56257388754d3100",
+          "all_method_bodies_sha256": "dccfbefab27f9bc68611cf7e04935b98a19f8baf4b79c1b6774a7de4afffc279",
+          "passed": true,
+          "code_sha256": "dccfbefab27f9bc68611cf7e04935b98a19f8baf4b79c1b6774a7de4afffc279"
+        },
+        {
+          "name": "ccpa",
+          "descriptor": "Lccpa;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccpa;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "08ba20e013ea35e3738fe58eb454ab33cd1a89450b4ba49d7680dfab3f74f588",
+          "all_method_bodies_sha256": "1ef7d5942bf1043e6a57bae714bcb8df79aa5dee3e1ae3f12e5cb1805bb0de36",
+          "passed": true,
+          "code_sha256": "1ef7d5942bf1043e6a57bae714bcb8df79aa5dee3e1ae3f12e5cb1805bb0de36"
+        },
+        {
+          "name": "ckiu",
+          "descriptor": "Lckiu;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lckiu;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "1f569d6d1b9b85be3d119087e05fdf7a4cf3cef6e5312ee37a6c55fc9c394a48",
+          "all_method_bodies_sha256": "8ec393dd900e1f58986461da29543a80619eaa078fdf4e4587e6ae6c39e561ac",
+          "passed": true,
+          "code_sha256": "8ec393dd900e1f58986461da29543a80619eaa078fdf4e4587e6ae6c39e561ac"
+        },
+        {
+          "name": "ccff",
+          "descriptor": "Lccff;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccff;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "5d73b26b1b2435a475b47d441ddd85acf0a8c55c45bb012a5f0a60606a3a9450",
+          "all_method_bodies_sha256": "5ddfb1ca47609c78832b86160e3a2bb8af856a997b50b2b200baf27fc3d1a253",
+          "passed": true,
+          "code_sha256": "5ddfb1ca47609c78832b86160e3a2bb8af856a997b50b2b200baf27fc3d1a253"
+        },
+        {
+          "name": "cbkj",
+          "descriptor": "Lcbkj;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkj;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "c3b8497eb53e1896ede3e96454b4475c8b35e8ed52e5197ad7b1d949bb836105",
+          "all_method_bodies_sha256": "15172ebe010f489bab298f773112915fe54bbd0c9476080eb6ebab0a6b492848",
+          "passed": true,
+          "code_sha256": "15172ebe010f489bab298f773112915fe54bbd0c9476080eb6ebab0a6b492848"
+        },
+        {
+          "name": "cbke",
+          "descriptor": "Lcbke;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbke;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "284a951cec9d1ea8a76ace08587422885c9529e31e3504ba6d4ad5a487460815",
+          "all_method_bodies_sha256": "dc3e3ba52ef063a8e0a73c20ff3cf3d69d0f4b378c05ffa4265212be6184175b",
+          "passed": true,
+          "code_sha256": "dc3e3ba52ef063a8e0a73c20ff3cf3d69d0f4b378c05ffa4265212be6184175b"
+        },
+        {
+          "name": "cbkg",
+          "descriptor": "Lcbkg;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkg;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "fbaef36a46f2f7368541e834489cb5c34936092931d9a99970dff654dfe637e2",
+          "all_method_bodies_sha256": "4bbbfd39c8761b8a57c9ba6793c317a7af8b9afca60925245979c6ad9a363939",
+          "passed": true,
+          "code_sha256": "4bbbfd39c8761b8a57c9ba6793c317a7af8b9afca60925245979c6ad9a363939"
+        },
+        {
+          "name": "cqdn",
+          "descriptor": "Lcqdn;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcqdn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "8f50a321d72b085b5e95562277bba7eba9a6c46b5c5073f5d6677adfd89e3a00",
+          "all_method_bodies_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8",
+          "passed": true,
+          "code_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8"
+        },
+        {
+          "name": "ccfl",
+          "descriptor": "Lccfl;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccfl;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "f2b8d3c567f4c41207c4eb6cccb6c5fdaa63959efec6062c03fa55fb5a6f6e82",
+          "all_method_bodies_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612",
+          "passed": true,
+          "code_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612"
+        },
+        {
+          "name": "ccpb",
+          "descriptor": "Lccpb;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccpb;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "d8667ce0df6a1d93d07bcdefade1fe84cdd57195a95255035e9f10b9b32c1bb7",
+          "all_method_bodies_sha256": "4cd418ecfbcd93512af7bba1f0c8727e8b148e2c9e9c68847170d6c4094df457",
+          "passed": true,
+          "code_sha256": "4cd418ecfbcd93512af7bba1f0c8727e8b148e2c9e9c68847170d6c4094df457"
+        }
+      ],
+      "required_fields": [
+        {
+          "owner": "cbkh",
+          "name": "c",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "e",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "d",
+          "expected_type": "Lcbkj;",
+          "actual_type": "Lcbkj;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "i",
+          "expected_type": "Lcbke;",
+          "actual_type": "Lcbke;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "j",
+          "expected_type": "Lcbkg;",
+          "actual_type": "Lcbkg;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "c",
+          "expected_type": "Lccpa;",
+          "actual_type": "Lccpa;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccpa",
+          "name": "d",
+          "expected_type": "J",
+          "actual_type": "J",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqdn",
+          "name": "h",
+          "expected_type": "Lckiu;",
+          "actual_type": "Lckiu;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ckiu",
+          "name": "c",
+          "expected_type": "Lccff;",
+          "actual_type": "Lccff;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccff",
+          "name": "c",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccfl",
+          "name": "c",
+          "expected_type": "Lccff;",
+          "actual_type": "Lccff;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkj",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbke",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbkg",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        }
+      ],
+      "supporting_preserved_metadata_fields": [
+        {
+          "owner": "ccpa",
+          "name": "c",
+          "expected_type": "J",
+          "actual_type": "J",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "d",
+          "expected_type": "Lccpb;",
+          "actual_type": "Lccpb;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "e",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "f",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        }
+      ],
+      "supporting_id_methods": [
+        {
+          "descriptor": "Lbjap;->q(Lbjap;)Z",
+          "access_flags": 17,
+          "register_count": 4,
+          "body_sha256": "26a1ef4a48bd2535bc5de14e8d67fef586f15cc8ce39f07c1e8148e5fcfe50e8",
+          "field_references": [
+            "Lbjap;->c:J",
+            "Lbjap;->c:J"
+          ]
+        },
+        {
+          "descriptor": "Lbjap;->c(Lccpa;)Lbjap;",
+          "access_flags": 9,
+          "register_count": 6,
+          "body_sha256": "53f6b909686cd47399cb9840d959a61ec7d7e0ebf8d7ee11bf6a1e172e1a84f6",
+          "field_references": [
+            "Lccpa;->c:J",
+            "Lccpa;->d:J"
+          ]
+        },
+        {
+          "descriptor": "Lbjap;->e(Ljava/lang/String;)Lbjap;",
+          "access_flags": 9,
+          "register_count": 8,
+          "body_sha256": "e98cbdf12229d3e80474ccad1aa788c54634921fdb84a4b3bec67d0129f48557",
+          "field_references": []
+        }
+      ],
+      "bjap_q_compares_low64_only": true,
+      "ccpa_d_maps_to_bjap_c": true,
+      "cbkh_e_dynamic_generic_schema": {
+        "method": "Lcbkh;->dynamicMethod(Lcmzr;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+        "repeated_field": "e",
+        "element_type": "Lcbki;",
+        "object_array_field_name_offset": "0x0002f",
+        "object_array_element_type_offset": "0x00034",
+        "field_name_then_element_class_verified": true,
+        "message_info_char_codes": [
+          1,
+          8,
+          0,
+          1,
+          1,
+          19,
+          8,
+          0,
+          1,
+          4,
+          1,
+          4105,
+          4,
+          5,
+          1051,
+          6,
+          6156,
+          2,
+          7,
+          5129,
+          5,
+          9,
+          4105,
+          3,
+          14,
+          5129,
+          1,
+          15,
+          5129,
+          12,
+          19,
+          4105,
+          16
+        ],
+        "schema_object_array_evidence": [
+          {
+            "offset": "0x0000b",
+            "kind": "type",
+            "value": "Lcbkh;"
+          },
+          {
+            "offset": "0x00015",
+            "kind": "type",
+            "value": "Lcmzk;"
+          },
+          {
+            "offset": "0x0001d",
+            "kind": "type",
+            "value": "Lcbkh;"
+          },
+          {
+            "offset": "0x00025",
+            "kind": "type",
+            "value": "[Ljava/lang/Object;"
+          },
+          {
+            "offset": "0x00027",
+            "kind": "field_name",
+            "value": "c"
+          },
+          {
+            "offset": "0x0002b",
+            "kind": "field_name",
+            "value": "g"
+          },
+          {
+            "offset": "0x0002f",
+            "kind": "field_name",
+            "value": "e"
+          },
+          {
+            "offset": "0x00034",
+            "kind": "type",
+            "value": "Lcbki;"
+          },
+          {
+            "offset": "0x00039",
+            "kind": "field_name",
+            "value": "f"
+          },
+          {
+            "offset": "0x00043",
+            "kind": "field_name",
+            "value": "i"
+          },
+          {
+            "offset": "0x00048",
+            "kind": "field_name",
+            "value": "h"
+          },
+          {
+            "offset": "0x0004d",
+            "kind": "field_name",
+            "value": "d"
+          },
+          {
+            "offset": "0x00053",
+            "kind": "field_name",
+            "value": "j"
+          },
+          {
+            "offset": "0x00059",
+            "kind": "field_name",
+            "value": "k"
+          }
+        ],
+        "body_sha256": "c9a8994c74a13a69ec2146da2b01e06da96bbee5ef23f64d716a52e749e52d7b"
+      }
+    },
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-Hiro_Morphe_Patches-v1.0.360+グーグルマップ-v2.8.7.apk",
+      "size_bytes": 172849277,
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "sha256_allowlisted": true,
+      "classes": [
+        {
+          "name": "cbkh",
+          "descriptor": "Lcbkh;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkh;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "c69172968c64e97e10618fc56dedfee832111a9f86dec0d2945b6e8f1027427e",
+          "all_method_bodies_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15",
+          "passed": true,
+          "code_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15"
+        },
+        {
+          "name": "cbki",
+          "descriptor": "Lcbki;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbki;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "eca52c734767bc9e55fae97df52a2e84512a5e88af7479ae56257388754d3100",
+          "all_method_bodies_sha256": "dccfbefab27f9bc68611cf7e04935b98a19f8baf4b79c1b6774a7de4afffc279",
+          "passed": true,
+          "code_sha256": "dccfbefab27f9bc68611cf7e04935b98a19f8baf4b79c1b6774a7de4afffc279"
+        },
+        {
+          "name": "ccpa",
+          "descriptor": "Lccpa;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccpa;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "08ba20e013ea35e3738fe58eb454ab33cd1a89450b4ba49d7680dfab3f74f588",
+          "all_method_bodies_sha256": "1ef7d5942bf1043e6a57bae714bcb8df79aa5dee3e1ae3f12e5cb1805bb0de36",
+          "passed": true,
+          "code_sha256": "1ef7d5942bf1043e6a57bae714bcb8df79aa5dee3e1ae3f12e5cb1805bb0de36"
+        },
+        {
+          "name": "ckiu",
+          "descriptor": "Lckiu;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lckiu;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "1f569d6d1b9b85be3d119087e05fdf7a4cf3cef6e5312ee37a6c55fc9c394a48",
+          "all_method_bodies_sha256": "8ec393dd900e1f58986461da29543a80619eaa078fdf4e4587e6ae6c39e561ac",
+          "passed": true,
+          "code_sha256": "8ec393dd900e1f58986461da29543a80619eaa078fdf4e4587e6ae6c39e561ac"
+        },
+        {
+          "name": "ccff",
+          "descriptor": "Lccff;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccff;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "5d73b26b1b2435a475b47d441ddd85acf0a8c55c45bb012a5f0a60606a3a9450",
+          "all_method_bodies_sha256": "5ddfb1ca47609c78832b86160e3a2bb8af856a997b50b2b200baf27fc3d1a253",
+          "passed": true,
+          "code_sha256": "5ddfb1ca47609c78832b86160e3a2bb8af856a997b50b2b200baf27fc3d1a253"
+        },
+        {
+          "name": "cbkj",
+          "descriptor": "Lcbkj;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkj;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "c3b8497eb53e1896ede3e96454b4475c8b35e8ed52e5197ad7b1d949bb836105",
+          "all_method_bodies_sha256": "15172ebe010f489bab298f773112915fe54bbd0c9476080eb6ebab0a6b492848",
+          "passed": true,
+          "code_sha256": "15172ebe010f489bab298f773112915fe54bbd0c9476080eb6ebab0a6b492848"
+        },
+        {
+          "name": "cbke",
+          "descriptor": "Lcbke;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbke;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "284a951cec9d1ea8a76ace08587422885c9529e31e3504ba6d4ad5a487460815",
+          "all_method_bodies_sha256": "dc3e3ba52ef063a8e0a73c20ff3cf3d69d0f4b378c05ffa4265212be6184175b",
+          "passed": true,
+          "code_sha256": "dc3e3ba52ef063a8e0a73c20ff3cf3d69d0f4b378c05ffa4265212be6184175b"
+        },
+        {
+          "name": "cbkg",
+          "descriptor": "Lcbkg;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkg;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "fbaef36a46f2f7368541e834489cb5c34936092931d9a99970dff654dfe637e2",
+          "all_method_bodies_sha256": "4bbbfd39c8761b8a57c9ba6793c317a7af8b9afca60925245979c6ad9a363939",
+          "passed": true,
+          "code_sha256": "4bbbfd39c8761b8a57c9ba6793c317a7af8b9afca60925245979c6ad9a363939"
+        },
+        {
+          "name": "cqdn",
+          "descriptor": "Lcqdn;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcqdn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "8f50a321d72b085b5e95562277bba7eba9a6c46b5c5073f5d6677adfd89e3a00",
+          "all_method_bodies_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8",
+          "passed": true,
+          "code_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8"
+        },
+        {
+          "name": "ccfl",
+          "descriptor": "Lccfl;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccfl;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "f2b8d3c567f4c41207c4eb6cccb6c5fdaa63959efec6062c03fa55fb5a6f6e82",
+          "all_method_bodies_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612",
+          "passed": true,
+          "code_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612"
+        },
+        {
+          "name": "ccpb",
+          "descriptor": "Lccpb;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccpb;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "api_sha256": "d8667ce0df6a1d93d07bcdefade1fe84cdd57195a95255035e9f10b9b32c1bb7",
+          "all_method_bodies_sha256": "4cd418ecfbcd93512af7bba1f0c8727e8b148e2c9e9c68847170d6c4094df457",
+          "passed": true,
+          "code_sha256": "4cd418ecfbcd93512af7bba1f0c8727e8b148e2c9e9c68847170d6c4094df457"
+        }
+      ],
+      "required_fields": [
+        {
+          "owner": "cbkh",
+          "name": "c",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "e",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "d",
+          "expected_type": "Lcbkj;",
+          "actual_type": "Lcbkj;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "i",
+          "expected_type": "Lcbke;",
+          "actual_type": "Lcbke;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbkh",
+          "name": "j",
+          "expected_type": "Lcbkg;",
+          "actual_type": "Lcbkg;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "c",
+          "expected_type": "Lccpa;",
+          "actual_type": "Lccpa;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccpa",
+          "name": "d",
+          "expected_type": "J",
+          "actual_type": "J",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqdn",
+          "name": "h",
+          "expected_type": "Lckiu;",
+          "actual_type": "Lckiu;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ckiu",
+          "name": "c",
+          "expected_type": "Lccff;",
+          "actual_type": "Lccff;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccff",
+          "name": "c",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccfl",
+          "name": "c",
+          "expected_type": "Lccff;",
+          "actual_type": "Lccff;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbkj",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbke",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "cbkg",
+          "name": "c",
+          "expected_type": "Lcbki;",
+          "actual_type": "Lcbki;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        }
+      ],
+      "supporting_preserved_metadata_fields": [
+        {
+          "owner": "ccpa",
+          "name": "c",
+          "expected_type": "J",
+          "actual_type": "J",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "d",
+          "expected_type": "Lccpb;",
+          "actual_type": "Lccpb;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "e",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cbki",
+          "name": "f",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        }
+      ],
+      "supporting_id_methods": [
+        {
+          "descriptor": "Lbjap;->q(Lbjap;)Z",
+          "access_flags": 17,
+          "register_count": 4,
+          "body_sha256": "26a1ef4a48bd2535bc5de14e8d67fef586f15cc8ce39f07c1e8148e5fcfe50e8",
+          "field_references": [
+            "Lbjap;->c:J",
+            "Lbjap;->c:J"
+          ]
+        },
+        {
+          "descriptor": "Lbjap;->c(Lccpa;)Lbjap;",
+          "access_flags": 9,
+          "register_count": 6,
+          "body_sha256": "53f6b909686cd47399cb9840d959a61ec7d7e0ebf8d7ee11bf6a1e172e1a84f6",
+          "field_references": [
+            "Lccpa;->c:J",
+            "Lccpa;->d:J"
+          ]
+        },
+        {
+          "descriptor": "Lbjap;->e(Ljava/lang/String;)Lbjap;",
+          "access_flags": 9,
+          "register_count": 8,
+          "body_sha256": "e98cbdf12229d3e80474ccad1aa788c54634921fdb84a4b3bec67d0129f48557",
+          "field_references": []
+        }
+      ],
+      "bjap_q_compares_low64_only": true,
+      "ccpa_d_maps_to_bjap_c": true,
+      "cbkh_e_dynamic_generic_schema": {
+        "method": "Lcbkh;->dynamicMethod(Lcmzr;Ljava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;",
+        "repeated_field": "e",
+        "element_type": "Lcbki;",
+        "object_array_field_name_offset": "0x0002f",
+        "object_array_element_type_offset": "0x00034",
+        "field_name_then_element_class_verified": true,
+        "message_info_char_codes": [
+          1,
+          8,
+          0,
+          1,
+          1,
+          19,
+          8,
+          0,
+          1,
+          4,
+          1,
+          4105,
+          4,
+          5,
+          1051,
+          6,
+          6156,
+          2,
+          7,
+          5129,
+          5,
+          9,
+          4105,
+          3,
+          14,
+          5129,
+          1,
+          15,
+          5129,
+          12,
+          19,
+          4105,
+          16
+        ],
+        "schema_object_array_evidence": [
+          {
+            "offset": "0x0000b",
+            "kind": "type",
+            "value": "Lcbkh;"
+          },
+          {
+            "offset": "0x00015",
+            "kind": "type",
+            "value": "Lcmzk;"
+          },
+          {
+            "offset": "0x0001d",
+            "kind": "type",
+            "value": "Lcbkh;"
+          },
+          {
+            "offset": "0x00025",
+            "kind": "type",
+            "value": "[Ljava/lang/Object;"
+          },
+          {
+            "offset": "0x00027",
+            "kind": "field_name",
+            "value": "c"
+          },
+          {
+            "offset": "0x0002b",
+            "kind": "field_name",
+            "value": "g"
+          },
+          {
+            "offset": "0x0002f",
+            "kind": "field_name",
+            "value": "e"
+          },
+          {
+            "offset": "0x00034",
+            "kind": "type",
+            "value": "Lcbki;"
+          },
+          {
+            "offset": "0x00039",
+            "kind": "field_name",
+            "value": "f"
+          },
+          {
+            "offset": "0x00043",
+            "kind": "field_name",
+            "value": "i"
+          },
+          {
+            "offset": "0x00048",
+            "kind": "field_name",
+            "value": "h"
+          },
+          {
+            "offset": "0x0004d",
+            "kind": "field_name",
+            "value": "d"
+          },
+          {
+            "offset": "0x00053",
+            "kind": "field_name",
+            "value": "j"
+          },
+          {
+            "offset": "0x00059",
+            "kind": "field_name",
+            "value": "k"
+          }
+        ],
+        "body_sha256": "c9a8994c74a13a69ec2146da2b01e06da96bbee5ef23f64d716a52e749e52d7b"
+      }
+    }
+  ],
+  "errors": []
+}

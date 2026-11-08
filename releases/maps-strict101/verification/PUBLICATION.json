@@ -1,0 +1,116 @@
+{
+  "schema": "maps-strict101-publication-v1",
+  "bundle_version": "1.0.368",
+  "patch_version": "1.0.1",
+  "release_timestamp": "2026-11-08T22:20:40",
+  "release_timezone": "Asia/Tokyo",
+  "user_report": "Search lists narrow correctly for RANDA and SNIDEL after v1.0.0, but map search pins disappear.",
+  "change": "Retain native search layer and filter known native pin roots by the accepted places' low 64-bit CID. Preserve native merged pin metadata. Keep the name matcher unchanged. Support guarded replacement of verified published v1.0.0 runtimes.",
+  "baseline": {
+    "version": "1.0.367",
+    "sha256": "abd81b88ef43aeb7f8bed0fab9c39b0ab3a06eb8f1f3b5f634e7263ce60a41b3"
+  },
+  "artifacts": {
+    "Maps_Strict_Search_v1.0.1.mpp": {
+      "bytes": 87678,
+      "sha256": "e27bd40bca47a4d40780f118b2c11a2350b5c25d05a44b0dce55b140a199c384"
+    },
+    "Hiro_Morphe_Patches_v1.0.368.mpp": {
+      "bytes": 48435180,
+      "sha256": "b14644953b807eae4ed8b026aa6445b3806e9acab766e0d623f47e72af66de27"
+    }
+  },
+  "site": {
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_e9ae24e4ba4881919411135c4f44c8b2",
+    "version_number": 118,
+    "source_commit": "b10b5465bc93c3142b8150f6989bd804ae46e7c4",
+    "deployment_id": "appgdep_6af079d56cb8819199578995b4ca6069",
+    "deployment_status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "published_at": "2026-11-08T13:32:28.300359+00:00",
+    "archive_storage": {
+      "archive_format": "tar",
+      "sediment_file_id": "file_00000000c5dc81faa183f753dccd64c8",
+      "content_hash": "sha256:5340f25a6359b53c2501518d54ca2256b46cffb778e7b74a7734a56363fbd4cc",
+      "size_bytes": 264632320,
+      "file_count": 383
+    }
+  },
+  "github": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "previous_head": "8a02418e2e22a30c842d56a78a2d311648cbba97",
+    "changelog_commit": "5ad600b57b2a796fa268e366c5a120a5d8a77fe9",
+    "descriptor_commit": "128f14dbaee59ecb477217c3b117ba037ea4cc86",
+    "dev_fast_forwarded": true,
+    "metadata": {
+      "patches-bundle.json": {
+        "sha256": "c787f4991e3cf8eafed1bb0dfb44418f4bdc3fc920cdf02208e002306db3bb3c",
+        "git_blob_sha": "a36c84d78dca37b76464eb59b65575a58d14cff0",
+        "bytes": 812923
+      },
+      "CHANGELOG.md": {
+        "sha256": "6ea1055f9830c5c3ca69175a7244a838b4644230460a0f3bd3b856a2f08a01e8",
+        "git_blob_sha": "46401fad096f5fdc703ae8f876a9df3430f8b097",
+        "bytes": 881800
+      }
+    },
+    "exact_raw_channel_verification": "OK main/CHANGELOG.md: 6ea1055f9830c5c3ca69175a7244a838b4644230460a0f3bd3b856a2f08a01e8\nOK main/patches-bundle.json: c787f4991e3cf8eafed1bb0dfb44418f4bdc3fc920cdf02208e002306db3bb3c\nOK dev/CHANGELOG.md: 6ea1055f9830c5c3ca69175a7244a838b4644230460a0f3bd3b856a2f08a01e8\nOK dev/patches-bundle.json: c787f4991e3cf8eafed1bb0dfb44418f4bdc3fc920cdf02208e002306db3bb3c\nOK both Manager channels point to v1.0.368; MPP SHA-256 b14644953b807eae4ed8b026aa6445b3806e9acab766e0d623f47e72af66de27\n"
+  },
+  "verification": {
+    "host_tests": "PASS production matcher and request-scoped response filter\nPASS StrictNameMatcherTest: 231 behavioral assertions\nRuntimeFilterTest PASS: 144 assertions",
+    "actual_apk_applications": [
+      {
+        "label": "standalone",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73962; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "integrated",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73962; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "reported-v287",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73975; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "latest104-additive",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73966; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "all-four-maps",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73966; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "upgrade-strict100",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73971; verified v1.0.0 upgrade; existing native hooks unchanged; verified old runtime replaced; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      },
+      {
+        "label": "upgrade-strict100-all-four",
+        "result": "PASS",
+        "audit": "PASS APK scope: original classes=73975; verified v1.0.0 upgrade; existing native hooks unchanged; verified old runtime replaced; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed"
+      }
+    ],
+    "guard_cases": 10,
+    "manager_discovery_cases": 8,
+    "unrelated_mpp_entries_preserved": 304,
+    "worker_route_tests": 54,
+    "rendered_page_tests": 13,
+    "validate_fast_mpp": "PASS",
+    "validate_update_channels": "PASS",
+    "physical_android_tested": false,
+    "android_emulator_tested": false
+  },
+  "limits": [
+    "Live Android map rendering and installation were not executed.",
+    "Unknown or mismatching place IDs conservatively preserve native pin data, so unrelated pins may remain.",
+    "Opaque native metadata and server/native paint interpretation were not exhaustively verifiable.",
+    "Historical rows from earlier fail-open responses are not retroactively refiltered."
+  ],
+  "source_record_path": "releases/maps-strict101"
+}

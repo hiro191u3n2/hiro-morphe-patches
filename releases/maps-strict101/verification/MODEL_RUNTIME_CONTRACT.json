@@ -1,0 +1,412 @@
+{
+  "contract_version": 1,
+  "target_maps_version": "26.36.04.973607363",
+  "status": "verified",
+  "verification_kind": "Read-only DEX schema and instruction verification; does not execute target APK code.",
+  "supplements": "NATIVE_RUNTIME_CONTRACT.json",
+  "reflection_rule": "Use the response/model application class loader. Resolve exact declaring owner/name/type, verify signatures, and setAccessible(true) for avdv.ag and avdv.S.",
+  "required_native_fields": [
+    {
+      "owner": "avdv",
+      "name": "ag",
+      "descriptor": "Lawfr;",
+      "access_flags": 2,
+      "access": "private",
+      "purpose": "Search map layer model cache; clear only on the protected receiver model when strict state applies."
+    },
+    {
+      "owner": "avdv",
+      "name": "S",
+      "descriptor": "Lcqgm;",
+      "access_flags": 130,
+      "access": "private transient",
+      "purpose": "Search response snapshot used for response-identity association."
+    }
+  ],
+  "required_patch_added_fields": [
+    {
+      "owner": "avdv",
+      "name": "hiroStrictSearchResponse",
+      "descriptor": "Ljava/lang/Object;",
+      "access_flags": 4226,
+      "hex_access_flags": "0x1082",
+      "access": "private transient synthetic",
+      "expected_in_original_apks": false,
+      "expected_after_patch": true,
+      "absence_in_originals_is_failure": false,
+      "purpose": "Per-model filtered-response identity marker; must not be static or serialized."
+    }
+  ],
+  "required_native_methods": [
+    "Lonf;->e()Lone; flags=17 public final",
+    "Lone;->close()V flags=1025 public abstract"
+  ],
+  "locking_rules": [
+    "filterResponse model-marker reset/commit: obtain the receiver token by Lonf.e(), edit only inside the write-lock scope, and close the token in finally.",
+    "Do not hold the model lock during expensive response filtering or reflection-schema discovery.",
+    "reconcileModel is injected only in the accepted merge branch of avdv.O; it executes with receiver write lock and incoming read lock already held by native code.",
+    "reconcileModel must not reacquire or upgrade the incoming model's read lock to a write lock.",
+    "Leave existing native lock token close/error cleanup intact."
+  ],
+  "merge_lock_context": {
+    "method": "Lavdv;->O(Lavdv;Landroid/app/Application;ZZ)V",
+    "register_count": 14,
+    "receiver_p0_register": 9,
+    "incoming_p1_register": 10,
+    "receiver_write_lock_call_offset": "0x00000",
+    "incoming_read_lock_call_offset": "0x00004",
+    "native_accepted_branch_offset": "0x00056",
+    "accepted_branch_first_native_instruction": "iget-boolean v2, v10, Lavdv;->K:Z",
+    "note": "Offsets describe both original APKs. Patch insertion shifts later offsets; anchor by fingerprint and control-flow target rather than a stale byte offset."
+  },
+  "relevant_model_schema_and_code_identical_between_apks": true,
+  "apks": [
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-グーグルマップ-v2.8.5.apk",
+      "size_bytes": 172832834,
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "classes": [
+        {
+          "name": "avdv",
+          "descriptor": "Lavdv;",
+          "access_flags": 1,
+          "access": "public",
+          "superclass": "Lonf;",
+          "hierarchy": [
+            "Lavdv;",
+            "Lonf;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [],
+          "api_sha256": "9a6fffbb47abd899e453d01984b1a18b8e07a98badd2b632cbcae5d623f37176",
+          "code_sha256": "8e7c1ece0926e2a0e277f387b666947e5b1882208bfce688eeadaf5a16eb1dd3"
+        },
+        {
+          "name": "onf",
+          "descriptor": "Lonf;",
+          "access_flags": 1025,
+          "access": "public abstract",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lonf;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/io/Serializable;"
+          ],
+          "api_sha256": "cc6d83674f3d10b706d551c42a243aeb0eaa22426c2ec9e8fdde3020558adcbc",
+          "code_sha256": "30d4490b5ecbbb1caec1d66d47e4aa2d081d2ed1965a982ce32dc443cec44607"
+        },
+        {
+          "name": "one",
+          "descriptor": "Lone;",
+          "access_flags": 1537,
+          "access": "public interface abstract",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lone;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/lang/AutoCloseable;"
+          ],
+          "api_sha256": "c4fb033dc8f6da21528951ba600c793bbdf41a781460967e1005667f49a8d3a6",
+          "code_sha256": "dd9854456b8f855a72681313eb2e4118dd71ef067d8c96a4f75b2a3af09d8440"
+        }
+      ],
+      "native_fields": [
+        {
+          "owner": "avdv",
+          "name": "ag",
+          "expected_type": "Lawfr;",
+          "actual_type": "Lawfr;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "avdv",
+          "name": "S",
+          "expected_type": "Lcqgm;",
+          "actual_type": "Lcqgm;",
+          "expected_access_flags": 130,
+          "actual_access_flags": 130,
+          "access": "private transient",
+          "passed": true
+        }
+      ],
+      "native_methods": [
+        {
+          "descriptor": "Lonf;->e()Lone;",
+          "role": "required",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 2,
+          "body_sha256": "6941a56653408cfe7fbc7c54709c9766a55b59f731c43c66fc288304266adc91",
+          "passed": true
+        },
+        {
+          "descriptor": "Lone;->close()V",
+          "role": "required",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "register_count": null,
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        },
+        {
+          "descriptor": "Lonf;->d()Lone;",
+          "role": "supporting_read_lock_evidence",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 2,
+          "body_sha256": "60d9125d9bc572e8032730ee29ce7941362fd396b452e1d372625e8582b09a5a",
+          "passed": true
+        },
+        {
+          "descriptor": "Lavdv;->O(Lavdv;Landroid/app/Application;ZZ)V",
+          "role": "supporting_merge_lock_context",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 14,
+          "body_sha256": "646e96e961c716fe55f4d680b4d6585525261a58d63104164637e1aab374578a",
+          "passed": true
+        }
+      ],
+      "avdv_directly_extends_onf": true,
+      "one_extends_AutoCloseable": true,
+      "write_lock_reference_sequence_verified": true,
+      "write_lock_references": [
+        {
+          "code_unit_offset": 0,
+          "opcode": "INVOKE_DIRECT",
+          "reference": "Lonf;->r()Loyi;"
+        },
+        {
+          "code_unit_offset": 4,
+          "opcode": "IGET_OBJECT",
+          "reference": "Loyi;->b:Ljava/lang/Object;"
+        },
+        {
+          "code_unit_offset": 6,
+          "opcode": "CHECK_CAST",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock;"
+        },
+        {
+          "code_unit_offset": 8,
+          "opcode": "INVOKE_VIRTUAL",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock;->writeLock()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;"
+        },
+        {
+          "code_unit_offset": 12,
+          "opcode": "INVOKE_VIRTUAL",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;->lock()V"
+        },
+        {
+          "code_unit_offset": 15,
+          "opcode": "IGET_OBJECT",
+          "reference": "Loyi;->c:Ljava/lang/Object;"
+        }
+      ],
+      "read_lock_reference_sequence_verified": true,
+      "merge_acquires_receiver_write_before_incoming_read": true,
+      "patch_added_marker_absent_as_expected": true
+    },
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-Hiro_Morphe_Patches-v1.0.360+グーグルマップ-v2.8.7.apk",
+      "size_bytes": 172849277,
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "classes": [
+        {
+          "name": "avdv",
+          "descriptor": "Lavdv;",
+          "access_flags": 1,
+          "access": "public",
+          "superclass": "Lonf;",
+          "hierarchy": [
+            "Lavdv;",
+            "Lonf;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [],
+          "api_sha256": "9a6fffbb47abd899e453d01984b1a18b8e07a98badd2b632cbcae5d623f37176",
+          "code_sha256": "8e7c1ece0926e2a0e277f387b666947e5b1882208bfce688eeadaf5a16eb1dd3"
+        },
+        {
+          "name": "onf",
+          "descriptor": "Lonf;",
+          "access_flags": 1025,
+          "access": "public abstract",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lonf;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/io/Serializable;"
+          ],
+          "api_sha256": "cc6d83674f3d10b706d551c42a243aeb0eaa22426c2ec9e8fdde3020558adcbc",
+          "code_sha256": "30d4490b5ecbbb1caec1d66d47e4aa2d081d2ed1965a982ce32dc443cec44607"
+        },
+        {
+          "name": "one",
+          "descriptor": "Lone;",
+          "access_flags": 1537,
+          "access": "public interface abstract",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lone;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/lang/AutoCloseable;"
+          ],
+          "api_sha256": "c4fb033dc8f6da21528951ba600c793bbdf41a781460967e1005667f49a8d3a6",
+          "code_sha256": "dd9854456b8f855a72681313eb2e4118dd71ef067d8c96a4f75b2a3af09d8440"
+        }
+      ],
+      "native_fields": [
+        {
+          "owner": "avdv",
+          "name": "ag",
+          "expected_type": "Lawfr;",
+          "actual_type": "Lawfr;",
+          "expected_access_flags": 2,
+          "actual_access_flags": 2,
+          "access": "private",
+          "passed": true
+        },
+        {
+          "owner": "avdv",
+          "name": "S",
+          "expected_type": "Lcqgm;",
+          "actual_type": "Lcqgm;",
+          "expected_access_flags": 130,
+          "actual_access_flags": 130,
+          "access": "private transient",
+          "passed": true
+        }
+      ],
+      "native_methods": [
+        {
+          "descriptor": "Lonf;->e()Lone;",
+          "role": "required",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 2,
+          "body_sha256": "6941a56653408cfe7fbc7c54709c9766a55b59f731c43c66fc288304266adc91",
+          "passed": true
+        },
+        {
+          "descriptor": "Lone;->close()V",
+          "role": "required",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "register_count": null,
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        },
+        {
+          "descriptor": "Lonf;->d()Lone;",
+          "role": "supporting_read_lock_evidence",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 2,
+          "body_sha256": "60d9125d9bc572e8032730ee29ce7941362fd396b452e1d372625e8582b09a5a",
+          "passed": true
+        },
+        {
+          "descriptor": "Lavdv;->O(Lavdv;Landroid/app/Application;ZZ)V",
+          "role": "supporting_merge_lock_context",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "register_count": 14,
+          "body_sha256": "646e96e961c716fe55f4d680b4d6585525261a58d63104164637e1aab374578a",
+          "passed": true
+        }
+      ],
+      "avdv_directly_extends_onf": true,
+      "one_extends_AutoCloseable": true,
+      "write_lock_reference_sequence_verified": true,
+      "write_lock_references": [
+        {
+          "code_unit_offset": 0,
+          "opcode": "INVOKE_DIRECT",
+          "reference": "Lonf;->r()Loyi;"
+        },
+        {
+          "code_unit_offset": 4,
+          "opcode": "IGET_OBJECT",
+          "reference": "Loyi;->b:Ljava/lang/Object;"
+        },
+        {
+          "code_unit_offset": 6,
+          "opcode": "CHECK_CAST",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock;"
+        },
+        {
+          "code_unit_offset": 8,
+          "opcode": "INVOKE_VIRTUAL",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock;->writeLock()Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;"
+        },
+        {
+          "code_unit_offset": 12,
+          "opcode": "INVOKE_VIRTUAL",
+          "reference": "Ljava/util/concurrent/locks/ReentrantReadWriteLock$WriteLock;->lock()V"
+        },
+        {
+          "code_unit_offset": 15,
+          "opcode": "IGET_OBJECT",
+          "reference": "Loyi;->c:Ljava/lang/Object;"
+        }
+      ],
+      "read_lock_reference_sequence_verified": true,
+      "merge_acquires_receiver_write_before_incoming_read": true,
+      "patch_added_marker_absent_as_expected": true
+    }
+  ],
+  "errors": [],
+  "runtime_api_revision": 2,
+  "runtime_entrypoints": [
+    {
+      "class": "app.hiro.mapsstrict.SearchFilter",
+      "method": "filterResponse",
+      "access": "public static",
+      "return_type": "java.lang.Object",
+      "parameters": [
+        "java.lang.Object response",
+        "java.lang.String actualQuery",
+        "java.lang.Object model"
+      ],
+      "signature": "filterResponse(Ljava/lang/Object;Ljava/lang/String;Ljava/lang/Object;)Ljava/lang/Object;"
+    },
+    {
+      "class": "app.hiro.mapsstrict.SearchFilter",
+      "method": "reconcileModel",
+      "access": "public static",
+      "return_type": "void",
+      "parameters": [
+        "java.lang.Object receiver",
+        "java.lang.Object incoming"
+      ],
+      "signature": "reconcileModel(Ljava/lang/Object;Ljava/lang/Object;)V"
+    }
+  ],
+  "supersedes_runtime_api_entrypoint_in_native_contract": true,
+  "model_marker_semantics": [
+    "filterResponse resets the model marker to null under Lonf.e()/Lone.close protection before attempting filtering; category/disabled and failed attempts leave it null.",
+    "After successful strict filtering, filterResponse commits the returned response object itself as model.hiroStrictSearchResponse under the same model-write-lock protocol. Identity, not query text or equality, ties the marker to its response.",
+    "reconcileModel does not acquire locks: it runs only in avdv.O's accepted merge branch, under the existing receiver write and incoming read locks.",
+    "When incoming.S == incoming.hiroStrictSearchResponse and the marker is non-null, reconcileModel clears receiver.ag and assigns receiver.hiroStrictSearchResponse = receiver.S.",
+    "No marker is static or serialized; each model tracks its own accepted response snapshot."
+  ]
+}

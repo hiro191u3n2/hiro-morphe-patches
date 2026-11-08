@@ -1,0 +1,319 @@
+{
+  "schema": "maps-strict101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.368",
+  "baseline_version": "1.0.367",
+  "baseline_sha256": "abd81b88ef43aeb7f8bed0fab9c39b0ab3a06eb8f1f3b5f634e7263ce60a41b3",
+  "runtime_extension": "extensions/maps_strict_search.mpe",
+  "release_timestamp": "2026-11-08T22:20:40",
+  "release_timezone": "Asia/Tokyo",
+  "production_android_sdk_compile": true,
+  "runtime_android_tested": false,
+  "physical_android_tested": false,
+  "android_emulator_tested": false,
+  "runtime_limitation": "Actual APK transformations, Java runtime tests and native contracts verified. No Android UI execution was available.",
+  "source_sha256": {
+    "build.py": "be8610d9df51d0d82af6748b256734903f220d42fd50206e9ad1e898f82cff19",
+    "patch/MapsStrictSearchPatch.java": "9dc296577ed290b804c16a64665e59f50a4d4a7ad60b17ad9f2654469c8a6884",
+    "patch/NativeContracts.java": "2ceaa9dd9c15301180d7a482cd462b22509ed64b770b8cb122d994dc908d6ede",
+    "patch/RuntimeContracts.java": "d44f7ae7e29d24281e5a0509ea65e63c7f172d4596b1f71a114789b5181c9f64",
+    "patch/UpgradeContracts.java": "9f03c2d61b85fa6383b61a50fb25719a5256d9aeb8a3ccd6f3809c1ff2abb5fe",
+    "runtime/SearchFilter.java": "264d7cf7d2679cbcac05967ba39e8385846b838ad4f86f6ef9c716799145b54a",
+    "runtime/StrictNameMatcher.java": "724a65500e829ba9d8bdb32e8ccf708570339be708b5a7b82b01d811f889f396",
+    "test/MapsStrictAudit.java": "c794a53c42202751fe99f25950bf51dfaaf5a61f5b7ec9ed27fabc368d61aacb",
+    "test-host/RuntimeFilterTest.java": "d30f6cd49bfa7406fbd5b393e5ddd37f3317d3f8ff98ba9b1918dc826f2dd992",
+    "test-host/android/util/Log.java": "3c2c29486080877fdc2353471d902315839fc12a07c7925bb64c1f73a6c0c208",
+    "test-host/app/hiro/mapsstrict/StrictNameMatcherTest.java": "41b43c90e82dccd09ebd5fc655468644a6eb66161edeb0d99ff4cf3bf27b00e4"
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "host_tests": "PASS production matcher and request-scoped response filter\nPASS StrictNameMatcherTest: 231 behavioral assertions\nRuntimeFilterTest PASS: 144 assertions",
+  "native_scope": {
+    "owners": [
+      "Lavds;",
+      "Lavdv;"
+    ],
+    "added_instructions": 6,
+    "marker": "private transient synthetic Object hiroStrictSearchResponse",
+    "merge_preserves_filtered_native_layer": true
+  },
+  "guard_results": [
+    {
+      "sdk": "morphe.jar",
+      "input": "v285",
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73985"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "v287",
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73998"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "latest104",
+      "sha256": "6ae94033789888e26f3018baf03544a6adfb39d5f9f27a2c834b7af8a5b597dc",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73989"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "strict100",
+      "sha256": "59bd3d63abd3f44061ff8f92a22acf6869b04fd9ca8485994759589aff3da449",
+      "result": "PASS verified v1.0.0 upgrade: original native bodies recovered from scoped hook copies; exact runtime required; unknown and partial installations rejected"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "strict100-all-four",
+      "sha256": "653650751fe78cd940c294fb81b9db7e98dfc2fe878c9bb287a0fafa828bb838",
+      "result": "PASS verified v1.0.0 upgrade: original native bodies recovered from scoped hook copies; exact runtime required; unknown and partial installations rejected"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "v285",
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73985"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "v287",
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73998"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "latest104",
+      "sha256": "6ae94033789888e26f3018baf03544a6adfb39d5f9f27a2c834b7af8a5b597dc",
+      "result": "PASS native contracts: actual request-response model, unsupported version/package/code, unknown body and duplicate patch rejection; assertions=73989"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "strict100",
+      "sha256": "59bd3d63abd3f44061ff8f92a22acf6869b04fd9ca8485994759589aff3da449",
+      "result": "PASS verified v1.0.0 upgrade: original native bodies recovered from scoped hook copies; exact runtime required; unknown and partial installations rejected"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "strict100-all-four",
+      "sha256": "653650751fe78cd940c294fb81b9db7e98dfc2fe878c9bb287a0fafa828bb838",
+      "result": "PASS verified v1.0.0 upgrade: original native bodies recovered from scoped hook copies; exact runtime required; unknown and partial installations rejected"
+    }
+  ],
+  "selection_results": [
+    {
+      "artifact": "Maps_Strict_Search_v1.0.1.mpp",
+      "sdk": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Strict_Search_v1.0.1.mpp",
+      "sdk": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Strict_Search_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Strict_Search_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "sdk": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "sdk": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    }
+  ],
+  "apk_application": [
+    {
+      "label": "standalone",
+      "artifact": "Maps_Strict_Search_v1.0.1.mpp",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73962; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "integrated",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73962; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "reported-v287",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73975; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "latest104-additive",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "6ae94033789888e26f3018baf03544a6adfb39d5f9f27a2c834b7af8a5b597dc",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73966; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "all-four-maps",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "patches": [
+        "起動時に現在地を表示",
+        "検索欄の下のカテゴリ行を非表示",
+        "戻るで終了して履歴から削除",
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73966; modified native owners=Lavds,Lavdv; hook instructions=5+1; private transient success marker=1; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "upgrade-strict100",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "59bd3d63abd3f44061ff8f92a22acf6869b04fd9ca8485994759589aff3da449",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73971; verified v1.0.0 upgrade; existing native hooks unchanged; verified old runtime replaced; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    },
+    {
+      "label": "upgrade-strict100-all-four",
+      "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+      "input_sha256": "653650751fe78cd940c294fb81b9db7e98dfc2fe878c9bb287a0fafa828bb838",
+      "patches": [
+        "店名検索を厳密にする"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73975; verified v1.0.0 upgrade; existing native hooks unchanged; verified old runtime replaced; unchanged non-DEX resources=9330; runtime classes=13; Android UI not executed",
+      "result": "PASS"
+    }
+  ],
+  "loader_preservation": "PASS scoped loader replacement: unrelated provider classes preserved=380; old strict classes replaced=9; current strict classes=13",
+  "preserved_unrelated_entries": 304,
+  "verified_previous_runtime_resource": {
+    "path": "contracts/maps_strict_search_v1.0.0.dex",
+    "sha256": "3a673a5a8311e30a23a3b38031e2472b3faf0a82f102dd84ec2682b892dd4077"
+  },
+  "user_report": "v1.0.0 successfully narrows RANDA/SNIDEL lists but map search pins are missing; native layer filtering replaces layer removal.",
+  "single_bundle_apk_contents_equal": true,
+  "artifacts": {
+    "Maps_Strict_Search_v1.0.1.mpp": {
+      "bytes": 87678,
+      "sha256": "e27bd40bca47a4d40780f118b2c11a2350b5c25d05a44b0dce55b140a199c384"
+    },
+    "Hiro_Morphe_Patches_v1.0.368.mpp": {
+      "bytes": 48435180,
+      "sha256": "b14644953b807eae4ed8b026aa6445b3806e9acab766e0d623f47e72af66de27"
+    }
+  }
+}

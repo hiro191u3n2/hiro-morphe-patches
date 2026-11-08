@@ -1,0 +1,188 @@
+{
+  "schema": "maps-native-renderer-contract-v1",
+  "target_version": "26.36.04.973607363",
+  "target_version_code": "1068763346",
+  "scope": "Static Java/DEX renderer and request boundary; no Android UI or native C++ execution.",
+  "capture_policy": "Only the two pinned APK SHA-256 inputs are accepted by the capture tool. Never derive allowlists from a future patch target.",
+  "fixtures": {
+    "morphe.jar:v285": {
+      "apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "original_equals_mutable": true
+    },
+    "morphe.jar:v287": {
+      "apk_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "original_equals_mutable": true
+    },
+    "morphe-2.2.jar:v285": {
+      "apk_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "original_equals_mutable": true
+    },
+    "morphe-2.2.jar:v287": {
+      "apk_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "original_equals_mutable": true
+    }
+  },
+  "fingerprint_algorithm": "MapsStrictSearchPatch.fingerprint: debug-normalized method, ImmutableClassDef wrapper, API29 DexPool bytes, SHA-256.",
+  "methods": [
+    {
+      "descriptor": "Lavdv;->an(Lcqgm;Landroid/app/Application;Ljava/lang/String;)Lavdt;",
+      "access_flags": 10,
+      "registers": 13,
+      "instructions": 163,
+      "code_units": 331,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "0f48bc9aa0ec3af3abad1fb96176bf4b5da16cd7413e6ab83169d70cb7deca57",
+        "morphe-2.2.jar": "1d73d569d4b682d66d90f7b7600539c9e4ae2e0166161d53f49410fdb96b6cd8"
+      }
+    },
+    {
+      "descriptor": "Lavdv;->j()Ljava/util/List;",
+      "access_flags": 17,
+      "registers": 6,
+      "instructions": 28,
+      "code_units": 54,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "19a53043273fffe5f968795fffc54fdfd14378f8e8909949c2641084faa811a3",
+        "morphe-2.2.jar": "19a53043273fffe5f968795fffc54fdfd14378f8e8909949c2641084faa811a3"
+      }
+    },
+    {
+      "descriptor": "Laveg;->c(Lauwz;)V",
+      "access_flags": 17,
+      "registers": 9,
+      "instructions": 203,
+      "code_units": 420,
+      "recommended_patch_time_guard": true,
+      "fingerprints": {
+        "morphe.jar": "cfb651c16b57a95aaa92a33458ede09365e9644918b410bcc219adc434fb0b88",
+        "morphe-2.2.jar": "68c7a07e2e2f138c28c9d9114b4bc8ccf02888177221d1eec674907a4803091e"
+      }
+    },
+    {
+      "descriptor": "Laveg;->d(Lavdv;)V",
+      "access_flags": 17,
+      "registers": 4,
+      "instructions": 19,
+      "code_units": 40,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "583e2e22d8247d90df5378eb218a7afa5f6d24670fae9b63dc46e7446aac79ee",
+        "morphe-2.2.jar": "dee26d6d7545fb3362b3333bd2367842f060cf82fb34655b745da0586e10202d"
+      }
+    },
+    {
+      "descriptor": "Laveh;->c(Lcbkh;)V",
+      "access_flags": 17,
+      "registers": 9,
+      "instructions": 192,
+      "code_units": 381,
+      "recommended_patch_time_guard": true,
+      "fingerprints": {
+        "morphe.jar": "964944c98a5ebed12cfb1f4e7ab57382a5b035b6bcabca8edf4b2191f2643140",
+        "morphe-2.2.jar": "e6855629d4d5f21ee39720fcb616b40c49c040fbab17cbdb2a447e43a5c2d1f3"
+      }
+    },
+    {
+      "descriptor": "Layxa;->V(Ljava/util/List;)V",
+      "access_flags": 131089,
+      "registers": 8,
+      "instructions": 82,
+      "code_units": 157,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "872bcb003b87c72cbe7d6b5b8cd4764e523560c6a11c0477cf7b12e24eeeb1e8",
+        "morphe-2.2.jar": "02abb235e65d29833ffaeedaef81760cffe9f33a8578e5dd09b7cee972f092d7"
+      }
+    },
+    {
+      "descriptor": "Layxa;->aM()V",
+      "access_flags": 131090,
+      "registers": 19,
+      "instructions": 594,
+      "code_units": 1190,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "de635b8dfafc5d8bd1f5a6f7d1c84b4d5ada39dcb5a3dd53c75158c346182f3d",
+        "morphe-2.2.jar": "cb404289d5530e45de2b9d6f56664f850de88891d6fd583905758f3479a52472"
+      }
+    },
+    {
+      "descriptor": "Lbafd;->n(Ljava/util/List;)V",
+      "access_flags": 17,
+      "registers": 5,
+      "instructions": 25,
+      "code_units": 53,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "154449453a337ecdd327547323cabba34f316e68d9c8be786163789d9ac39549",
+        "morphe-2.2.jar": "06481c27d2b00792fc9ca691cfac08048974ba04e29fbd34d75be3ea778213d5"
+      }
+    },
+    {
+      "descriptor": "Lbehy;->v(Lciad;Lcbkh;)Lbjbt;",
+      "access_flags": 17,
+      "registers": 3,
+      "instructions": 7,
+      "code_units": 13,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "81cb35ff48b188f6b7a5dac876441c11c1bff403859fe15816869b52b140024e",
+        "morphe-2.2.jar": "1cbca2a503ca07a11514cafe2bf9fdb399585d705d940b0ebf08d369f62eeba0"
+      }
+    },
+    {
+      "descriptor": "Lokx;->E(Lcjme;)V",
+      "access_flags": 17,
+      "registers": 2,
+      "instructions": 11,
+      "code_units": 20,
+      "recommended_patch_time_guard": false,
+      "fingerprints": {
+        "morphe.jar": "8cb3eeb888e14a695610e2a960d378f4e3b59bbb5e329b0338e6c24ce5214c5c",
+        "morphe-2.2.jar": "8cb3eeb888e14a695610e2a960d378f4e3b59bbb5e329b0338e6c24ce5214c5c"
+      }
+    }
+  ],
+  "verified_facts": [
+    "Lavdv.an builds distinct UI and legacy-map lists; with cfxa.H enabled and chaq.b bit0 set, an ordinary place is present in UI list A but omitted from legacy map list B.",
+    "Lavdv.j exposes ae-derived places only; Laveg.d uses that list for fallback, not the complete response/UI result list.",
+    "Laveg.c selects fallback when native cbkh is null and clears native SEARCH_RESULTS_LAYER before invoking Layxa.V or clearing the legacy renderer.",
+    "Layxa.V deduplicates by low64 CID and aM skips deduplicated sizes <=1. Items with null legacy coordinates are skipped.",
+    "Laveh.c uses cbkh.e size to select normal empty/nonempty layer type and passes the same cbkh object to the layer backend.",
+    "Lbehy.v derives a layer identity string from cbkh.hashCode and does not create or fetch result features.",
+    "Inspected old-backend config/caching/request writer paths pass the supplied cbkh to chsl extension 299174093 without retrieving an independent unfiltered SearchResult list."
+  ],
+  "known_point_roots": [
+    {
+      "field": "Lcbkh;->e:Lcnak;",
+      "payload": "List<Lcbki;>",
+      "presence_mask": null,
+      "role": "normal native results"
+    },
+    {
+      "field": "Lcbkh;->d:Lcbkj;",
+      "payload": "Lcbkj;->c:Lcbki;",
+      "presence_mask": 2,
+      "role": "selected feature/root layer mode"
+    },
+    {
+      "field": "Lcbkh;->i:Lcbke;",
+      "payload": "Lcbke;->c:Lcbki;",
+      "presence_mask": 32,
+      "role": "alternate selected feature/root layer mode"
+    },
+    {
+      "field": "Lcbkh;->j:Lcbkg;",
+      "payload": "Lcbkg;->c:Lcbki;",
+      "presence_mask": 4096,
+      "role": "alternate selected feature/root layer mode"
+    }
+  ],
+  "limits": [
+    "The exact response flags and IDs in the user screenshots were not captured. The bytecode proves that multiple UI entries do not guarantee any legacy map candidates; it does not identify which gate each live response took.",
+    "Java-declared empty message types are not proof of empty native payload. Protobuf unknownFields may survive copying and reach native code; this inspection does not certify native behavior for unknown fields.",
+    "Pinned Java schema fields and inspected call graphs expose no second independent candidate list at the native dispatch boundary. Native C++ internals and live map presentation remain unexecuted."
+  ]
+}

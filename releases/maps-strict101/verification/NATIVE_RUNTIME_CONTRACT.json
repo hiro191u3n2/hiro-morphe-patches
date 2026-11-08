@@ -1,0 +1,1249 @@
+{
+  "contract_version": 1,
+  "target_maps_version": "26.36.04.973607363",
+  "status": "verified",
+  "verification_kind": "Read-only dexlib2 metadata and instruction inspection; target APK code was not executed.",
+  "api_entrypoint": "app.hiro.mapsstrict.SearchFilter.filterResponse(java.lang.Object, java.lang.String, java.lang.Object): java.lang.Object",
+  "class_loader_rule": "Class.forName(name, false, response.getClass().getClassLoader()); require response.getClass().getName().equals(\"cqgm\").",
+  "reflection_rule": "Resolve each declaring class, name, complete parameter list, and exact return/field type. Call setAccessible(true); cmzs.isMutable() has package visibility. Do not select bridge overloads by name alone.",
+  "immutable_input_rule": "Original parsed messages must be immutable: cmzs.isMutable() == false; repeated lists use cnak.c() == false. Never edit source messages, children, or lists.",
+  "message_clone_steps": [
+    "builder = original.cmzs.toBuilder()",
+    "builder.cmzk.copyOnWrite()",
+    "copy = builder.cmzk.instance; require copy != original",
+    "Set changed fields only on copy",
+    "result = builder.cmzk.build()"
+  ],
+  "list_clone_steps": [
+    "copy = original.cnak.e(original.size()); require copy != original",
+    "Require copy instanceof cnak and copy.c() == true",
+    "Clear the new list, then add retained items in original order",
+    "Assign the new list only to a copied message and build that message"
+  ],
+  "modern_payload_types": {
+    "2": "cqdn; name field l",
+    "5": "cfhm; items l -> cffs.c -> cqdn.l",
+    "6": "cfmi; place b -> cqdn.l",
+    "7": "cfgz; place b -> cqdn.l",
+    "8": "ccfl; name field d"
+  },
+  "main_results": [
+    "cqgm.d: cnak<cqdn>",
+    "cqgm.L: cnak<chaq>; the parser falls back to d if L is empty, so filter both"
+  ],
+  "supplemental_results": [
+    "cqgm.i.d.b: cnak<cfgz>; cfgz.b is cqdn",
+    "cqgm.i.c.b: cnak<cfhm>; cfhm.l is cnak<cffs>; cffs.c is cqdn",
+    "cqgm.i.g.b: cnak<cfmi>; cfmi.b is cqdn"
+  ],
+  "native_layer_rule": "For every enabled strict query, copy cqgm.o (cjme), set copied cjme.c = null, and clear copied cjme.b bit 0. This selects Maps' existing filtered-placemark renderer instead of the unfiltered native SEARCH_RESULTS_LAYER. Preserve all other fields.",
+  "must_preserve": [
+    "query and pagination tokens",
+    "relative order of retained wrappers/items",
+    "IDs and wrapper flags",
+    "all original message/list identities and content",
+    "unknown or empty names unless independently supported by a concrete name predicate"
+  ],
+  "failure_rule": "On unsupported class/field/method/payload schema or reflection failure, return the original response and emit only a bounded query-free diagnostic.",
+  "relevant_schema_and_code_identical_between_apks": true,
+  "verified_class_count_per_apk": 17,
+  "verified_field_count_per_apk": 21,
+  "verified_method_count_per_apk": 6,
+  "apks": [
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-グーグルマップ-v2.8.5.apk",
+      "size_bytes": 172832834,
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "classes": [
+        {
+          "name": "cmzs",
+          "descriptor": "Lcmzs;",
+          "superclass": "Lcmxx;",
+          "hierarchy": [
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [],
+          "access_flags": 1025,
+          "access": "public abstract",
+          "api_sha256": "226b5641b2d2eec3df02a5a2f00f5bdcfcf077b23383cc0388ad06cdfc1301a2",
+          "code_sha256": "c9b3a84e2566ec47c49ec3309514906f04a017d1f39827e7238dea5af3e291bd"
+        },
+        {
+          "name": "cmzk",
+          "descriptor": "Lcmzk;",
+          "superclass": "Lcmxw;",
+          "hierarchy": [
+            "Lcmzk;",
+            "Lcmxw;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;",
+            "Lbeyv;",
+            "Lceur;",
+            "Lcfuz;",
+            "Lcghg;",
+            "Lcceg;",
+            "Lccnc;",
+            "Lccyr;",
+            "Lcjbq;",
+            "Lcjbf;",
+            "Lcklj;",
+            "Lcmte;",
+            "Lcodl;",
+            "Lcqfk;"
+          ],
+          "access_flags": 1,
+          "access": "public",
+          "api_sha256": "c76ebb205c08f5592dd0c5568ea7fbc88afb5c609f94255a333fe88f1a50348a",
+          "code_sha256": "d69037fc8bfd2c109a5212560b3b03c7eaf554cdbfc087ea34176451bf3ed215"
+        },
+        {
+          "name": "cnak",
+          "descriptor": "Lcnak;",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lcnak;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/util/List;",
+            "Ljava/util/RandomAccess;"
+          ],
+          "access_flags": 1537,
+          "access": "public interface abstract",
+          "api_sha256": "33ec1f6fe39a20173c68689442f029eca61a7904350535e43aff780be81c76b2",
+          "code_sha256": "b298843a3e5604fde6ac1d7d0acee323bc5cc55532e5129f8d3b4006e0e6a8fd"
+        },
+        {
+          "name": "cqgm",
+          "descriptor": "Lcqgm;",
+          "superclass": "Lcmzn;",
+          "hierarchy": [
+            "Lcqgm;",
+            "Lcmzn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcmzo;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "88b5b3ca1f657200651b841fb782800c084cbf7db35db51d227d2a9310205942",
+          "code_sha256": "0eab6532c96d51c5a7bad2bc967940ac3fcd375f2481abde2e6cf861d07c2420"
+        },
+        {
+          "name": "cqdn",
+          "descriptor": "Lcqdn;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcqdn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "8f50a321d72b085b5e95562277bba7eba9a6c46b5c5073f5d6677adfd89e3a00",
+          "code_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8"
+        },
+        {
+          "name": "chaq",
+          "descriptor": "Lchaq;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lchaq;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "9053121e1b2f11293fd335bb4692e98a729d4e69c8d8bbd3565e3d402d170ee8",
+          "code_sha256": "1ae1ef3b87915c80caba075151ddc1a6a5cb57b97f050da8ec58624680b52a3c"
+        },
+        {
+          "name": "ccfl",
+          "descriptor": "Lccfl;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccfl;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "f2b8d3c567f4c41207c4eb6cccb6c5fdaa63959efec6062c03fa55fb5a6f6e82",
+          "code_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612"
+        },
+        {
+          "name": "cjme",
+          "descriptor": "Lcjme;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcjme;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "9f16eb0cb9b6530223a90fc24c869f593c6745c09c66e0a583450b103b749a79",
+          "code_sha256": "748ac3e51e13b30d6917b62bf2e6f25c03d4c6148554fe1768dcfff56927f438"
+        },
+        {
+          "name": "cbkh",
+          "descriptor": "Lcbkh;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkh;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "c69172968c64e97e10618fc56dedfee832111a9f86dec0d2945b6e8f1027427e",
+          "code_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15"
+        },
+        {
+          "name": "cffu",
+          "descriptor": "Lcffu;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcffu;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "699fa11884593025b93baaf6e4764c1e2c2ee62b66bf91e5847ea140d25d0672",
+          "code_sha256": "a0bad6bdbec5caf78c803fc72fc7d7ed0f1e742c9cd64d6e47a77041ffc0e811"
+        },
+        {
+          "name": "cfha",
+          "descriptor": "Lcfha;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfha;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "54d652db374391b998fc83987b7368948dde43da565675cd1db000bb06ca1440",
+          "code_sha256": "ab6c9c56bf9efefbbd55d633fd71edf98ceb7314758919163454e1150e0e1191"
+        },
+        {
+          "name": "cfgz",
+          "descriptor": "Lcfgz;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfgz;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "c47cb5a9a78fc6853613cfe136a9673d78ad939b79feb821b17eeac0bb98d95e",
+          "code_sha256": "043e801c0d1cd55262ac26d833e74528bb42f6f15fcae7c4c91b0595b3983717"
+        },
+        {
+          "name": "cfhn",
+          "descriptor": "Lcfhn;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfhn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "5513b2ceb0663557fbd7a71d9a893d15f41d3cb3a0d84c89ae5475d58edd4877",
+          "code_sha256": "6fcadc2f291d7a21eef6bba0ee74a11e6c571576985e4b9967fe73bb2379b509"
+        },
+        {
+          "name": "cfhm",
+          "descriptor": "Lcfhm;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfhm;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "fed64344dda73d0fdb6df6761a60e82d0d568a1e64aa9e568d3d5a4523b69e33",
+          "code_sha256": "44cfbed6b3216becc9fdd0c257e33f96f88ad1d74fd6613a89778f56df0559aa"
+        },
+        {
+          "name": "cffs",
+          "descriptor": "Lcffs;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcffs;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "bb22fa5003db33b33c21dc5d25c220edac76e689623743da8eb832186517bd4a",
+          "code_sha256": "24dfcbeb5e7e4ab3506bac3b81d0a35ebc5814cde9c49e73e0889d1abb95ef84"
+        },
+        {
+          "name": "cfmj",
+          "descriptor": "Lcfmj;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfmj;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "5f1ded2d91299cfb8ad2c939e5d17714e53c96a4bfe41856dc0a6f01b758a16f",
+          "code_sha256": "4bcbbfe233c62a8d5661ec635bc5561cd1e66fdf8ee8601b73514d171b6dfe68"
+        },
+        {
+          "name": "cfmi",
+          "descriptor": "Lcfmi;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfmi;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "7c0d7b22641c21a7478e2d1a36e172c3887895fdf9de37b362607e7a3a9826d3",
+          "code_sha256": "8bb20a4599a22b982204f6ae00d20af57ae47c604efe82058e71a99288dc9ef5"
+        }
+      ],
+      "fields": [
+        {
+          "owner": "cmzk",
+          "name": "instance",
+          "expected_type": "Lcmzs;",
+          "actual_type": "Lcmzs;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "d",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "L",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "i",
+          "expected_type": "Lcffu;",
+          "actual_type": "Lcffu;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "o",
+          "expected_type": "Lcjme;",
+          "actual_type": "Lcjme;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqdn",
+          "name": "l",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "chaq",
+          "name": "c",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "chaq",
+          "name": "d",
+          "expected_type": "Ljava/lang/Object;",
+          "actual_type": "Ljava/lang/Object;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccfl",
+          "name": "d",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cjme",
+          "name": "b",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cjme",
+          "name": "c",
+          "expected_type": "Lcbkh;",
+          "actual_type": "Lcbkh;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "c",
+          "expected_type": "Lcfhn;",
+          "actual_type": "Lcfhn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "d",
+          "expected_type": "Lcfha;",
+          "actual_type": "Lcfha;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "g",
+          "expected_type": "Lcfmj;",
+          "actual_type": "Lcfmj;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfha",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfgz",
+          "name": "b",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfhn",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfhm",
+          "name": "l",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffs",
+          "name": "c",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfmj",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfmi",
+          "name": "b",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        }
+      ],
+      "methods": [
+        {
+          "owner": "cmzs",
+          "name": "toBuilder",
+          "descriptor": "Lcmzs;->toBuilder()Lcmzk;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "45d7a4e3e594f6ed22733f775b9c8f4eaee94a1c3d90112bb83b044939c57096",
+          "passed": true
+        },
+        {
+          "owner": "cmzs",
+          "name": "isMutable",
+          "descriptor": "Lcmzs;->isMutable()Z",
+          "expected_access_flags": 16,
+          "actual_access_flags": 16,
+          "access": "final",
+          "body_sha256": "8ca25912679df59db287701c029c433e0a67e78be7cd4ab82c50ecdaf40f7dfd",
+          "passed": true
+        },
+        {
+          "owner": "cmzk",
+          "name": "copyOnWrite",
+          "descriptor": "Lcmzk;->copyOnWrite()V",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "dde41a955aaa142ae97e27eeefdcc74f724158dad9adfcf1ff285963787238ad",
+          "passed": true
+        },
+        {
+          "owner": "cmzk",
+          "name": "build",
+          "descriptor": "Lcmzk;->build()Lcmzs;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "63bb4f3e5ea9ef83bf62783262cf3607e2795becd1555728e5a895236543e985",
+          "passed": true
+        },
+        {
+          "owner": "cnak",
+          "name": "e",
+          "descriptor": "Lcnak;->e(I)Lcnak;",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        },
+        {
+          "owner": "cnak",
+          "name": "c",
+          "descriptor": "Lcnak;->c()Z",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "apk": "/workspace/scratch/f43c1c554e5c/maps-inputs/microG_Maps-v26.36.04.973607363-Hiro_Morphe_Patches-v1.0.360+グーグルマップ-v2.8.7.apk",
+      "size_bytes": 172849277,
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "classes": [
+        {
+          "name": "cmzs",
+          "descriptor": "Lcmzs;",
+          "superclass": "Lcmxx;",
+          "hierarchy": [
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [],
+          "access_flags": 1025,
+          "access": "public abstract",
+          "api_sha256": "226b5641b2d2eec3df02a5a2f00f5bdcfcf077b23383cc0388ad06cdfc1301a2",
+          "code_sha256": "c9b3a84e2566ec47c49ec3309514906f04a017d1f39827e7238dea5af3e291bd"
+        },
+        {
+          "name": "cmzk",
+          "descriptor": "Lcmzk;",
+          "superclass": "Lcmxw;",
+          "hierarchy": [
+            "Lcmzk;",
+            "Lcmxw;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;",
+            "Lbeyv;",
+            "Lceur;",
+            "Lcfuz;",
+            "Lcghg;",
+            "Lcceg;",
+            "Lccnc;",
+            "Lccyr;",
+            "Lcjbq;",
+            "Lcjbf;",
+            "Lcklj;",
+            "Lcmte;",
+            "Lcodl;",
+            "Lcqfk;"
+          ],
+          "access_flags": 1,
+          "access": "public",
+          "api_sha256": "c76ebb205c08f5592dd0c5568ea7fbc88afb5c609f94255a333fe88f1a50348a",
+          "code_sha256": "d69037fc8bfd2c109a5212560b3b03c7eaf554cdbfc087ea34176451bf3ed215"
+        },
+        {
+          "name": "cnak",
+          "descriptor": "Lcnak;",
+          "superclass": "Ljava/lang/Object;",
+          "hierarchy": [
+            "Lcnak;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Ljava/util/List;",
+            "Ljava/util/RandomAccess;"
+          ],
+          "access_flags": 1537,
+          "access": "public interface abstract",
+          "api_sha256": "33ec1f6fe39a20173c68689442f029eca61a7904350535e43aff780be81c76b2",
+          "code_sha256": "b298843a3e5604fde6ac1d7d0acee323bc5cc55532e5129f8d3b4006e0e6a8fd"
+        },
+        {
+          "name": "cqgm",
+          "descriptor": "Lcqgm;",
+          "superclass": "Lcmzn;",
+          "hierarchy": [
+            "Lcqgm;",
+            "Lcmzn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcmzo;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "88b5b3ca1f657200651b841fb782800c084cbf7db35db51d227d2a9310205942",
+          "code_sha256": "0eab6532c96d51c5a7bad2bc967940ac3fcd375f2481abde2e6cf861d07c2420"
+        },
+        {
+          "name": "cqdn",
+          "descriptor": "Lcqdn;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcqdn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "8f50a321d72b085b5e95562277bba7eba9a6c46b5c5073f5d6677adfd89e3a00",
+          "code_sha256": "220a2d19431e69cf13e0c6b3a69257c014513442d7531573da086afeda44f7d8"
+        },
+        {
+          "name": "chaq",
+          "descriptor": "Lchaq;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lchaq;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "9053121e1b2f11293fd335bb4692e98a729d4e69c8d8bbd3565e3d402d170ee8",
+          "code_sha256": "1ae1ef3b87915c80caba075151ddc1a6a5cb57b97f050da8ec58624680b52a3c"
+        },
+        {
+          "name": "ccfl",
+          "descriptor": "Lccfl;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lccfl;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "f2b8d3c567f4c41207c4eb6cccb6c5fdaa63959efec6062c03fa55fb5a6f6e82",
+          "code_sha256": "e76f4a31de80fb0f961f3cdb863b6e334cbc23c3efd8cab007c1d0f7a07a0612"
+        },
+        {
+          "name": "cjme",
+          "descriptor": "Lcjme;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcjme;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "9f16eb0cb9b6530223a90fc24c869f593c6745c09c66e0a583450b103b749a79",
+          "code_sha256": "748ac3e51e13b30d6917b62bf2e6f25c03d4c6148554fe1768dcfff56927f438"
+        },
+        {
+          "name": "cbkh",
+          "descriptor": "Lcbkh;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcbkh;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "c69172968c64e97e10618fc56dedfee832111a9f86dec0d2945b6e8f1027427e",
+          "code_sha256": "2fa20016813fada679886caf49031cccbcb6f10159926548278e75e5eee41c15"
+        },
+        {
+          "name": "cffu",
+          "descriptor": "Lcffu;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcffu;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "699fa11884593025b93baaf6e4764c1e2c2ee62b66bf91e5847ea140d25d0672",
+          "code_sha256": "a0bad6bdbec5caf78c803fc72fc7d7ed0f1e742c9cd64d6e47a77041ffc0e811"
+        },
+        {
+          "name": "cfha",
+          "descriptor": "Lcfha;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfha;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "54d652db374391b998fc83987b7368948dde43da565675cd1db000bb06ca1440",
+          "code_sha256": "ab6c9c56bf9efefbbd55d633fd71edf98ceb7314758919163454e1150e0e1191"
+        },
+        {
+          "name": "cfgz",
+          "descriptor": "Lcfgz;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfgz;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "c47cb5a9a78fc6853613cfe136a9673d78ad939b79feb821b17eeac0bb98d95e",
+          "code_sha256": "043e801c0d1cd55262ac26d833e74528bb42f6f15fcae7c4c91b0595b3983717"
+        },
+        {
+          "name": "cfhn",
+          "descriptor": "Lcfhn;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfhn;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "5513b2ceb0663557fbd7a71d9a893d15f41d3cb3a0d84c89ae5475d58edd4877",
+          "code_sha256": "6fcadc2f291d7a21eef6bba0ee74a11e6c571576985e4b9967fe73bb2379b509"
+        },
+        {
+          "name": "cfhm",
+          "descriptor": "Lcfhm;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfhm;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "fed64344dda73d0fdb6df6761a60e82d0d568a1e64aa9e568d3d5a4523b69e33",
+          "code_sha256": "44cfbed6b3216becc9fdd0c257e33f96f88ad1d74fd6613a89778f56df0559aa"
+        },
+        {
+          "name": "cffs",
+          "descriptor": "Lcffs;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcffs;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "bb22fa5003db33b33c21dc5d25c220edac76e689623743da8eb832186517bd4a",
+          "code_sha256": "24dfcbeb5e7e4ab3506bac3b81d0a35ebc5814cde9c49e73e0889d1abb95ef84"
+        },
+        {
+          "name": "cfmj",
+          "descriptor": "Lcfmj;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfmj;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "5f1ded2d91299cfb8ad2c939e5d17714e53c96a4bfe41856dc0a6f01b758a16f",
+          "code_sha256": "4bcbbfe233c62a8d5661ec635bc5561cd1e66fdf8ee8601b73514d171b6dfe68"
+        },
+        {
+          "name": "cfmi",
+          "descriptor": "Lcfmi;",
+          "superclass": "Lcmzs;",
+          "hierarchy": [
+            "Lcfmi;",
+            "Lcmzs;",
+            "Lcmxx;",
+            "Ljava/lang/Object;"
+          ],
+          "interfaces": [
+            "Lcnaz;"
+          ],
+          "access_flags": 17,
+          "access": "public final",
+          "api_sha256": "7c0d7b22641c21a7478e2d1a36e172c3887895fdf9de37b362607e7a3a9826d3",
+          "code_sha256": "8bb20a4599a22b982204f6ae00d20af57ae47c604efe82058e71a99288dc9ef5"
+        }
+      ],
+      "fields": [
+        {
+          "owner": "cmzk",
+          "name": "instance",
+          "expected_type": "Lcmzs;",
+          "actual_type": "Lcmzs;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "d",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "L",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "i",
+          "expected_type": "Lcffu;",
+          "actual_type": "Lcffu;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqgm",
+          "name": "o",
+          "expected_type": "Lcjme;",
+          "actual_type": "Lcjme;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cqdn",
+          "name": "l",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "chaq",
+          "name": "c",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "chaq",
+          "name": "d",
+          "expected_type": "Ljava/lang/Object;",
+          "actual_type": "Ljava/lang/Object;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "ccfl",
+          "name": "d",
+          "expected_type": "Ljava/lang/String;",
+          "actual_type": "Ljava/lang/String;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cjme",
+          "name": "b",
+          "expected_type": "I",
+          "actual_type": "I",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cjme",
+          "name": "c",
+          "expected_type": "Lcbkh;",
+          "actual_type": "Lcbkh;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "c",
+          "expected_type": "Lcfhn;",
+          "actual_type": "Lcfhn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "d",
+          "expected_type": "Lcfha;",
+          "actual_type": "Lcfha;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffu",
+          "name": "g",
+          "expected_type": "Lcfmj;",
+          "actual_type": "Lcfmj;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfha",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfgz",
+          "name": "b",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfhn",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfhm",
+          "name": "l",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cffs",
+          "name": "c",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfmj",
+          "name": "b",
+          "expected_type": "Lcnak;",
+          "actual_type": "Lcnak;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        },
+        {
+          "owner": "cfmi",
+          "name": "b",
+          "expected_type": "Lcqdn;",
+          "actual_type": "Lcqdn;",
+          "expected_access_flags": 1,
+          "actual_access_flags": 1,
+          "access": "public",
+          "passed": true
+        }
+      ],
+      "methods": [
+        {
+          "owner": "cmzs",
+          "name": "toBuilder",
+          "descriptor": "Lcmzs;->toBuilder()Lcmzk;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "45d7a4e3e594f6ed22733f775b9c8f4eaee94a1c3d90112bb83b044939c57096",
+          "passed": true
+        },
+        {
+          "owner": "cmzs",
+          "name": "isMutable",
+          "descriptor": "Lcmzs;->isMutable()Z",
+          "expected_access_flags": 16,
+          "actual_access_flags": 16,
+          "access": "final",
+          "body_sha256": "8ca25912679df59db287701c029c433e0a67e78be7cd4ab82c50ecdaf40f7dfd",
+          "passed": true
+        },
+        {
+          "owner": "cmzk",
+          "name": "copyOnWrite",
+          "descriptor": "Lcmzk;->copyOnWrite()V",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "dde41a955aaa142ae97e27eeefdcc74f724158dad9adfcf1ff285963787238ad",
+          "passed": true
+        },
+        {
+          "owner": "cmzk",
+          "name": "build",
+          "descriptor": "Lcmzk;->build()Lcmzs;",
+          "expected_access_flags": 17,
+          "actual_access_flags": 17,
+          "access": "public final",
+          "body_sha256": "63bb4f3e5ea9ef83bf62783262cf3607e2795becd1555728e5a895236543e985",
+          "passed": true
+        },
+        {
+          "owner": "cnak",
+          "name": "e",
+          "descriptor": "Lcnak;->e(I)Lcnak;",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        },
+        {
+          "owner": "cnak",
+          "name": "c",
+          "descriptor": "Lcnak;->c()Z",
+          "expected_access_flags": 1025,
+          "actual_access_flags": 1025,
+          "access": "public abstract",
+          "body_sha256": "c59ddd3f7ba697a4b82003cd37637cd7fc3aac92cb9c6e4b308809dd9409e65c",
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "model_contract": "MODEL_RUNTIME_CONTRACT.json",
+  "merge_entrypoint": "app.hiro.mapsstrict.SearchFilter.reconcileModel(java.lang.Object, java.lang.Object): void"
+}

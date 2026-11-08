@@ -1,0 +1,51 @@
+{
+  "version": "1.0.1",
+  "test": "RuntimeFilterTest",
+  "status": "PASS",
+  "assertions": 144,
+  "apk_execution": false,
+  "android_device_rendering_verified": false,
+  "production_compile": {
+    "status": "PASS",
+    "java_release": 8,
+    "classpath": "android.jar",
+    "api_23_compatible_cid_parser": "java.math.BigInteger; no Long.parseUnsignedLong"
+  },
+  "matcher_unchanged": true,
+  "api": {
+    "filter": "app.hiro.mapsstrict.SearchFilter.filterResponse(java.lang.Object,java.lang.String,java.lang.Object):java.lang.Object",
+    "merge": "app.hiro.mapsstrict.SearchFilter.reconcileModel(java.lang.Object,java.lang.Object):void"
+  },
+  "native_pin_outcomes": {
+    "complete": "Known Java-visible native feature roots filtered by retained result CIDs. Opaque native semantics are not claimed.",
+    "incomplete_ids": "Remove known rejected CIDs, retain unclassified native points. List filtering stays effective.",
+    "no_native_intersection": "When accepted rows exist but all native points would be removed, preserve original native metadata; keep filtered lists.",
+    "confirmed_empty": "No accepted candidate rows: retain an explicit empty native result list and remove rejected selected roots.",
+    "unsupported_native_shape": "Keep original native metadata, keep filtered lists.",
+    "diagnostics": "Complete filter failure and partial native filtering have distinct bounded query-free diagnostics."
+  },
+  "model_marker": {
+    "name": "hiroStrictSearchResponse",
+    "type": "java.lang.Object",
+    "dex_access_flags": 4226,
+    "filter_commit": "clear stale model ag before host parser installs filtered native layer",
+    "merge_commit": "marker only; never clear already merged native layer"
+  },
+  "files": {
+    "SearchFilter.java": "264d7cf7d2679cbcac05967ba39e8385846b838ad4f86f6ef9c716799145b54a",
+    "StrictNameMatcher.java": "724a65500e829ba9d8bdb32e8ccf708570339be708b5a7b82b01d811f889f396",
+    "RuntimeFilterTest.java": "d30f6cd49bfa7406fbd5b393e5ddd37f3317d3f8ff98ba9b1918dc826f2dd992",
+    "README_PIN_FIX.md": "099a4469063653694bcb60a9a41fe867f49655abde105dbaa61f2a869d84dd8c",
+    "NATIVE_PIN_CONTRACT.json": "15a9143476d47a01bbf41e8007a0ad50b1ba43e435ceffee50fee864614b5c40"
+  },
+  "native_schema_contract": {
+    "status": "PASS",
+    "original_apks": 2,
+    "classes": 11,
+    "required_fields": 14,
+    "metadata_supporting_fields": 4,
+    "low_64_cid_identity_verified": true,
+    "native_api_and_code_identical": true,
+    "live_native_semantics_verified": false
+  }
+}
