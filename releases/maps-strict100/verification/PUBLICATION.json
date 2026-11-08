@@ -1,0 +1,90 @@
+{
+  "schema": "hiro-maps-strict100-publication-v1",
+  "user_request": "店名検索の工夫を採り入れて改造し、完了後に自動公開する。",
+  "version": "1.0.367",
+  "patch_version": "1.0.0",
+  "patch_name": "店名検索を厳密にする",
+  "created_at": "2026-11-08T21:35:30",
+  "release_timezone": "Asia/Tokyo",
+  "site": {
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_0441868b840881918cf4cb2f908d53c2",
+    "version_number": 117,
+    "deployment_id": "appgdep_6af06f4d5a0881919c8fb8acb3d437f1",
+    "status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "published_at": "2026-11-08T12:47:30.912814+00:00",
+    "source_commit": "7793b5b38691af69a421d659a162dc69533a04b4"
+  },
+  "artifacts": {
+    "Maps_Strict_Search_v1.0.0.mpp": {
+      "bytes": 53165,
+      "sha256": "0a49648efbd1a476ae40193042cbf4c734608922ac9d60f2fef8e45b47bfdb6a"
+    },
+    "Hiro_Morphe_Patches_v1.0.367.mpp": {
+      "bytes": 48401040,
+      "sha256": "abd81b88ef43aeb7f8bed0fab9c39b0ab3a06eb8f1f3b5f634e7263ce60a41b3"
+    }
+  },
+  "download_urls": {
+    "bundle": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.367.mpp",
+    "standalone": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Strict_Search_v1.0.0.mpp",
+    "readme": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Strict_Search_v1.0.0_README.txt",
+    "qa": "https://hiro-morphe-patches.otoha10.chatgpt.site/QA_Maps_Strict_Search_v1.0.0.json",
+    "sources": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Strict_Search_v1.0.0_sources.zip"
+  },
+  "target": {
+    "package": "org.ungoogled.android.apps.maps.microg",
+    "version": "26.36.04.973607363",
+    "version_code": "1068763346",
+    "verified_apk_sha256": [
+      "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71"
+    ]
+  },
+  "validation": {
+    "matcher_assertions": 231,
+    "runtime_assertions": 85,
+    "native_contract_matrix": 6,
+    "manager_discovery_matrix": 8,
+    "actual_apk_application_cases": 5,
+    "maps_options_applied_together": 4,
+    "production_worker_checks": 52,
+    "rendered_page_and_http_checks": 13,
+    "physical_android_tested": false,
+    "android_emulator_tested": false,
+    "manager_device_badge_observed": false
+  },
+  "manager_channels": {
+    "main_version": "1.0.367",
+    "dev_version": "1.0.367",
+    "metadata_commit": "f5c46c6c545ace2cf31ad4f4caf449c452592a4e",
+    "changelog_commit": "6595e06f742853b22fbf21673234db3a00bacc61",
+    "dev_fast_forward_from": "79094f967fe6840c62332304a0fea55076f66ef0",
+    "force_used": false,
+    "checked_at_utc": "2026-11-08T12:48:48Z",
+    "metadata": {
+      "patches-bundle.json": {
+        "bytes": 811467,
+        "sha256": "2015cbaa40c947ae7a1203d4b72eb1dc7e10b183976b0eb6a2c4ac5de7903dc5",
+        "git_blob_sha": "20421c4c68d64f022f583d5ea6bab60418b559e1"
+      },
+      "CHANGELOG.md": {
+        "bytes": 880653,
+        "sha256": "59b8513535509e818abf6d526d3450b8b5796c2056be68d4b9a42558df48c189",
+        "git_blob_sha": "6bebd9631948c14f208ba8f65d98ba9fc7873252"
+      }
+    },
+    "verification_command": "python3 scripts/validate_update_channels.py",
+    "verification_output": "OK dev/patches-bundle.json: 2015cbaa40c947ae7a1203d4b72eb1dc7e10b183976b0eb6a2c4ac5de7903dc5\nOK dev/CHANGELOG.md: 59b8513535509e818abf6d526d3450b8b5796c2056be68d4b9a42558df48c189\nOK main/CHANGELOG.md: 59b8513535509e818abf6d526d3450b8b5796c2056be68d4b9a42558df48c189\nOK main/patches-bundle.json: 2015cbaa40c947ae7a1203d4b72eb1dc7e10b183976b0eb6a2c4ac5de7903dc5\nOK both Manager channels point to v1.0.367; MPP SHA-256 abd81b88ef43aeb7f8bed0fab9c39b0ab3a06eb8f1f3b5f634e7263ce60a41b3",
+    "note": "Metadata verified on both branches before this source/record-only commit. This commit does not change Manager metadata."
+  },
+  "install": "Morphe Managerのソースを更新し、対応APKで「店名検索を厳密にする」を選択して作成したAPKをインストールする。既存改造APKへの追加は新項目のみを選ぶ。",
+  "preserved": "起動時現在地v1.0.4、カテゴリ行非表示、戻る終了、他アプリの既存パッチ、元APKの無関係な実行コードと非DEXリソースを保持。",
+  "limitations": [
+    "Android実機・エミュレーターでの地図表示は未確認。",
+    "登録済みの英日別名のみ。未登録名は文字で判定する。未知のカテゴリや特殊な地域語の判定には限界がある。",
+    "名称不明・未対応の補助項目は保持。地図の通常施設名や地名は対象外。",
+    "過去にエラーで未加工のまま保持された行を、後続mergeですべて遡って再フィルタする保証はない。"
+  ]
+}
