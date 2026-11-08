@@ -1,0 +1,185 @@
+CLASS Laynj; flags=16 super=Lorg/chromium/net/UrlRequest$Callback; interfaces=[] dex=classes2.dex
+FIELD Laynj;->a:Laynk; flags=4112 value=null
+FIELD Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture; flags=18 value=null
+FIELD Laynj;->c:Ljava/io/ByteArrayOutputStream; flags=18 value=null
+FIELD Laynj;->d:I flags=2 value=null
+METHOD Laynj;-><init>(Laynk;Lcom/google/common/util/concurrent/SettableFuture;)V flags=65537
+registers=4
+00000 IPUT_OBJECT regs=2,1 ref=Laynj;->a:Laynk;
+00002 INVOKE_DIRECT regs=1, ref=Lorg/chromium/net/UrlRequest$Callback;-><init>()V
+00005 IPUT_OBJECT regs=3,1 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00007 NEW_INSTANCE reg=3 ref=Ljava/io/ByteArrayOutputStream;
+00009 CONST_16 reg=0 lit=8192
+0000b INVOKE_DIRECT regs=3,0, ref=Ljava/io/ByteArrayOutputStream;-><init>(I)V
+0000e IPUT_OBJECT regs=3,1 ref=Laynj;->c:Ljava/io/ByteArrayOutputStream;
+00010 IGET_OBJECT regs=2,2 ref=Laynk;->b:Laypd;
+00012 IGET_OBJECT regs=2,2 ref=Laypd;->f:Lbmvb;
+00014 IGET regs=2,2 ref=Lbmvb;->e:I
+00016 IPUT regs=2,1 ref=Laynj;->d:I
+00018 RETURN_VOID
+METHOD Laynj;->onFailed(Lorg/chromium/net/UrlRequest;Lorg/chromium/net/UrlResponseInfo;Lorg/chromium/net/CronetException;)V flags=17
+registers=4
+00000 IGET_OBJECT regs=0,0 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00002 INVOKE_STATIC regs=3, ref=Laygy;->e(Lorg/chromium/net/CronetException;)Laypo;
+00005 MOVE_RESULT_OBJECT reg=1
+00006 INVOKE_VIRTUAL regs=0,1, ref=Lcom/google/common/util/concurrent/SettableFuture;->n(Ljava/lang/Throwable;)Z
+00009 RETURN_VOID
+METHOD Laynj;->onReadCompleted(Lorg/chromium/net/UrlRequest;Lorg/chromium/net/UrlResponseInfo;Ljava/nio/ByteBuffer;)V flags=17
+registers=6
+00000 INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->flip()Ljava/nio/Buffer;
+00003 INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->array()[B
+00006 MOVE_RESULT_OBJECT reg=4
+00007 INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->position()I
+0000a MOVE_RESULT reg=0
+0000b INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->arrayOffset()I
+0000e MOVE_RESULT reg=1
+0000f ADD_INT_2ADDR regs=0,1
+00010 INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->limit()I
+00013 MOVE_RESULT reg=1
+00014 IGET_OBJECT regs=2,2 ref=Laynj;->c:Ljava/io/ByteArrayOutputStream;
+00016 INVOKE_VIRTUAL regs=2,4,0,1, ref=Ljava/io/ByteArrayOutputStream;->write([BII)V
+00019 INVOKE_VIRTUAL regs=5, ref=Ljava/nio/ByteBuffer;->clear()Ljava/nio/Buffer;
+0001c INVOKE_VIRTUAL regs=3,5, ref=Lorg/chromium/net/UrlRequest;->read(Ljava/nio/ByteBuffer;)V
+0001f RETURN_VOID
+METHOD Laynj;->onRedirectReceived(Lorg/chromium/net/UrlRequest;Lorg/chromium/net/UrlResponseInfo;Ljava/lang/String;)V flags=17
+registers=6
+00000 IGET regs=4,2 ref=Laynj;->d:I
+00002 IF_GTZ reg=4 target=0002e
+00004 INVOKE_VIRTUAL regs=3, ref=Lorg/chromium/net/UrlRequest;->cancel()V
+00007 IGET_OBJECT regs=3,2 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00009 IGET_OBJECT regs=2,2 ref=Laynj;->a:Laynk;
+0000b NEW_INSTANCE reg=4 ref=Laypo;
+0000d SGET_OBJECT reg=5 ref=Laypn;->h:Laypn;
+0000f IGET_OBJECT regs=2,2 ref=Laynk;->b:Laypd;
+00011 IGET_OBJECT regs=2,2 ref=Laypd;->f:Lbmvb;
+00013 IGET regs=2,2 ref=Lbmvb;->e:I
+00015 NEW_INSTANCE reg=0 ref=Ljava/lang/StringBuilder;
+00017 CONST_STRING reg=1 ref=More redirects than allowed: 
+00019 INVOKE_DIRECT regs=0,1, ref=Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+0001c INVOKE_VIRTUAL regs=0,2, ref=Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+0001f INVOKE_VIRTUAL regs=0, ref=Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+00022 MOVE_RESULT_OBJECT reg=2
+00023 INVOKE_VIRTUAL regs=5,2, ref=Laypn;->f(Ljava/lang/String;)Laypn;
+00026 MOVE_RESULT_OBJECT reg=2
+00027 INVOKE_DIRECT regs=4,2, ref=Laypo;-><init>(Laypn;)V
+0002a INVOKE_VIRTUAL regs=3,4, ref=Lcom/google/common/util/concurrent/SettableFuture;->n(Ljava/lang/Throwable;)Z
+0002d RETURN_VOID
+0002e IGET_OBJECT regs=4,2 ref=Laynj;->a:Laynk;
+00030 IGET_OBJECT regs=4,4 ref=Laynk;->b:Laypd;
+00032 IGET_OBJECT regs=4,4 ref=Laypd;->c:Lbmvc;
+00034 IGET_BOOLEAN regs=4,4 ref=Lbmvc;->c:Z
+00036 IF_EQZ reg=4 target=00054
+00038 INVOKE_STATIC regs=5, ref=Laynk;->b(Ljava/lang/String;)Z
+0003b MOVE_RESULT reg=4
+0003c IF_NEZ reg=4 target=00054
+0003e INVOKE_VIRTUAL regs=3, ref=Lorg/chromium/net/UrlRequest;->cancel()V
+00041 IGET_OBJECT regs=2,2 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00043 NEW_INSTANCE reg=3 ref=Laypo;
+00045 SGET_OBJECT reg=4 ref=Laypn;->h:Laypn;
+00047 CONST_STRING reg=5 ref=Don't send authentication credentials to non-Google redirects.
+00049 INVOKE_VIRTUAL regs=4,5, ref=Laypn;->f(Ljava/lang/String;)Laypn;
+0004c MOVE_RESULT_OBJECT reg=4
+0004d INVOKE_DIRECT regs=3,4, ref=Laypo;-><init>(Laypn;)V
+00050 INVOKE_VIRTUAL regs=2,3, ref=Lcom/google/common/util/concurrent/SettableFuture;->n(Ljava/lang/Throwable;)Z
+00053 RETURN_VOID
+00054 IGET regs=4,2 ref=Laynj;->d:I
+00056 ADD_INT_LIT8 regs=4,4 lit=-1
+00058 IPUT regs=4,2 ref=Laynj;->d:I
+0005a INVOKE_VIRTUAL regs=3, ref=Lorg/chromium/net/UrlRequest;->followRedirect()V
+0005d RETURN_VOID
+METHOD Laynj;->onResponseStarted(Lorg/chromium/net/UrlRequest;Lorg/chromium/net/UrlResponseInfo;)V flags=17
+registers=6
+00000 SGET_OBJECT reg=0 ref=Laynk;->a:Lbwzj;
+00002 INVOKE_VIRTUAL regs=5, ref=Lorg/chromium/net/UrlResponseInfo;->getHttpStatusCode()I
+00005 MOVE_RESULT reg=1
+00006 INVOKE_STATIC regs=1, ref=Ljava/lang/Integer;->valueOf(I)Ljava/lang/Integer;
+00009 MOVE_RESULT_OBJECT reg=1
+0000a INVOKE_VIRTUAL regs=0,1, ref=Lbwzj;->contains(Ljava/lang/Object;)Z
+0000d MOVE_RESULT reg=0
+0000e IF_NEZ reg=0 target=00036
+00010 INVOKE_VIRTUAL regs=4, ref=Lorg/chromium/net/UrlRequest;->cancel()V
+00013 IGET_OBJECT regs=3,3 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00015 NEW_INSTANCE reg=4 ref=Laypo;
+00017 SGET_OBJECT reg=0 ref=Laypn;->h:Laypn;
+00019 INVOKE_VIRTUAL regs=5, ref=Lorg/chromium/net/UrlResponseInfo;->getHttpStatusCode()I
+0001c MOVE_RESULT reg=5
+0001d NEW_INSTANCE reg=1 ref=Ljava/lang/StringBuilder;
+0001f CONST_STRING reg=2 ref=Expected HTTP status code 200, but got 
+00021 INVOKE_DIRECT regs=1,2, ref=Ljava/lang/StringBuilder;-><init>(Ljava/lang/String;)V
+00024 INVOKE_VIRTUAL regs=1,5, ref=Ljava/lang/StringBuilder;->append(I)Ljava/lang/StringBuilder;
+00027 INVOKE_VIRTUAL regs=1, ref=Ljava/lang/StringBuilder;->toString()Ljava/lang/String;
+0002a MOVE_RESULT_OBJECT reg=5
+0002b INVOKE_VIRTUAL regs=0,5, ref=Laypn;->f(Ljava/lang/String;)Laypn;
+0002e MOVE_RESULT_OBJECT reg=5
+0002f INVOKE_DIRECT regs=4,5, ref=Laypo;-><init>(Laypn;)V
+00032 INVOKE_VIRTUAL regs=3,4, ref=Lcom/google/common/util/concurrent/SettableFuture;->n(Ljava/lang/Throwable;)Z
+00035 RETURN_VOID
+00036 CONST_16 reg=3 lit=8192
+00038 INVOKE_STATIC regs=3, ref=Ljava/nio/ByteBuffer;->allocateDirect(I)Ljava/nio/ByteBuffer;
+0003b MOVE_RESULT_OBJECT reg=3
+0003c INVOKE_VIRTUAL regs=4,3, ref=Lorg/chromium/net/UrlRequest;->read(Ljava/nio/ByteBuffer;)V
+0003f RETURN_VOID
+METHOD Laynj;->onSucceeded(Lorg/chromium/net/UrlRequest;Lorg/chromium/net/UrlResponseInfo;)V flags=17
+registers=7
+00000 CONST_STRING reg=5 ref=content-type
+00002 SGET_OBJECT reg=0 ref=Layno;->a:Layno;
+00004 INVOKE_VIRTUAL regs=0, ref=Lcmzs;->createBuilder()Lcmzk;
+00007 MOVE_RESULT_OBJECT reg=0
+00008 IGET_OBJECT regs=1,4 ref=Laynj;->c:Ljava/io/ByteArrayOutputStream;
+0000a INVOKE_VIRTUAL regs=1, ref=Ljava/io/ByteArrayOutputStream;->toByteArray()[B
+0000d MOVE_RESULT_OBJECT reg=1
+0000e INVOKE_STATIC regs=1, ref=Lcmyn;->y([B)Lcmyn;
+00011 MOVE_RESULT_OBJECT reg=1
+00012 INVOKE_VIRTUAL regs=0, ref=Lcmzk;->copyOnWrite()V
+00015 IGET_OBJECT regs=2,0 ref=Lcmzk;->instance:Lcmzs;
+00017 CHECK_CAST reg=2 ref=Layno;
+00019 INVOKE_VIRTUAL regs=1, ref=Ljava/lang/Object;->getClass()Ljava/lang/Class;
+0001c IGET regs=3,2 ref=Layno;->b:I
+0001e OR_INT_LIT8 regs=3,3 lit=1
+00020 IPUT regs=3,2 ref=Layno;->b:I
+00022 IPUT_OBJECT regs=1,2 ref=Layno;->c:Lcmyn;
+00024 INVOKE_VIRTUAL regs=6, ref=Lorg/chromium/net/UrlResponseInfo;->getAllHeaders()Ljava/util/Map;
+00027 MOVE_RESULT_OBJECT reg=1
+00028 INVOKE_INTERFACE regs=1,5, ref=Ljava/util/Map;->containsKey(Ljava/lang/Object;)Z
+0002b MOVE_RESULT reg=1
+0002c IF_EQZ reg=1 target=00061
+0002e INVOKE_VIRTUAL regs=6, ref=Lorg/chromium/net/UrlResponseInfo;->getAllHeaders()Ljava/util/Map;
+00031 MOVE_RESULT_OBJECT reg=1
+00032 INVOKE_INTERFACE regs=1,5, ref=Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00035 MOVE_RESULT_OBJECT reg=1
+00036 CHECK_CAST reg=1 ref=Ljava/util/List;
+00038 INVOKE_INTERFACE regs=1, ref=Ljava/util/List;->isEmpty()Z
+0003b MOVE_RESULT reg=1
+0003c IF_NEZ reg=1 target=00061
+0003e INVOKE_VIRTUAL regs=6, ref=Lorg/chromium/net/UrlResponseInfo;->getAllHeaders()Ljava/util/Map;
+00041 MOVE_RESULT_OBJECT reg=6
+00042 INVOKE_INTERFACE regs=6,5, ref=Ljava/util/Map;->get(Ljava/lang/Object;)Ljava/lang/Object;
+00045 MOVE_RESULT_OBJECT reg=5
+00046 CHECK_CAST reg=5 ref=Ljava/util/List;
+00048 CONST_4 reg=6 lit=0
+00049 INVOKE_INTERFACE regs=5,6, ref=Ljava/util/List;->get(I)Ljava/lang/Object;
+0004c MOVE_RESULT_OBJECT reg=5
+0004d CHECK_CAST reg=5 ref=Ljava/lang/String;
+0004f INVOKE_VIRTUAL regs=0, ref=Lcmzk;->copyOnWrite()V
+00052 IGET_OBJECT regs=6,0 ref=Lcmzk;->instance:Lcmzs;
+00054 CHECK_CAST reg=6 ref=Layno;
+00056 INVOKE_VIRTUAL regs=5, ref=Ljava/lang/Object;->getClass()Ljava/lang/Class;
+00059 IGET regs=1,6 ref=Layno;->b:I
+0005b OR_INT_LIT8 regs=1,1 lit=2
+0005d IPUT regs=1,6 ref=Layno;->b:I
+0005f IPUT_OBJECT regs=5,6 ref=Layno;->d:Ljava/lang/String;
+00061 INVOKE_VIRTUAL regs=0, ref=Lcmzk;->build()Lcmzs;
+00064 MOVE_RESULT_OBJECT reg=5
+00065 IGET_OBJECT regs=6,4 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+00067 INVOKE_VIRTUAL regs=6,5, ref=Lcom/google/common/util/concurrent/SettableFuture;->m(Ljava/lang/Object;)Z
+0006a RETURN_VOID
+0006b IGET_OBJECT regs=4,4 ref=Laynj;->b:Lcom/google/common/util/concurrent/SettableFuture;
+0006d NEW_INSTANCE reg=5 ref=Laypo;
+0006f SGET_OBJECT reg=6 ref=Laypn;->l:Laypn;
+00071 CONST_STRING reg=0 ref=Expected type HttpResponse
+00073 INVOKE_VIRTUAL regs=6,0, ref=Laypn;->f(Ljava/lang/String;)Laypn;
+00076 MOVE_RESULT_OBJECT reg=6
+00077 INVOKE_DIRECT regs=5,6, ref=Laypo;-><init>(Laypn;)V
+0007a INVOKE_VIRTUAL regs=4,5, ref=Lcom/google/common/util/concurrent/SettableFuture;->n(Ljava/lang/Throwable;)Z
+0007d RETURN_VOID
+try 2 104 Ljava/lang/ClassCastException;:107

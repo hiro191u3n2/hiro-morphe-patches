@@ -1,0 +1,121 @@
+{
+  "schema": "maps-bikes101-publication-v1",
+  "recorded_at_utc": "2026-11-08 16:32:39 UTC",
+  "release": {
+    "bundle_version": "1.0.370",
+    "patch_version": "1.0.1",
+    "created_at": "2026-11-09T01:16:20",
+    "timezone": "Asia/Tokyo",
+    "artifacts": {
+      "Maps_Hide_Bicycle_Marks_v1.0.1.mpp": {
+        "bytes": 58479,
+        "sha256": "47d8ebf649294f44eff1a4decdef1b4cda0c3e87a35b0a5cca721ffefe067368"
+      },
+      "Hiro_Morphe_Patches_v1.0.370.mpp": {
+        "bytes": 48485796,
+        "sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894"
+      }
+    }
+  },
+  "user_regression": {
+    "reported": "Bicycle icons still visible after v1.0.0",
+    "screenshot": "1000011992.png",
+    "details": "verification/USER_REGRESSION_AND_SCOPE.json",
+    "status": "repair_published; awaiting actual Android screen feedback"
+  },
+  "changes": [
+    "Recognize exact bare bicycle asset identifiers as well as URL forms",
+    "Hide the complete legacy bicycle marker, including the circular background",
+    "Filter only verified bicycle-referencing LabelStyle records before online/offline native resource callbacks",
+    "Use a new online cache namespace once, preserving the old cache and secure/offline paths",
+    "Upgrade only the exact published v1.0.0 runtime and hooks; preserve unrelated modifications"
+  ],
+  "site": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_0ad90de2b0648191a52f05f278074be0",
+    "version_number": 120,
+    "source_commit": "39f2f338cd23db363ae120d559a6f62799f11f69",
+    "deployment_id": "appgdep_6af0a35f46fc819199f499365b31e63a",
+    "status": "succeeded",
+    "published_at": "2026-11-08T16:29:36.883257+00:00",
+    "archive": {
+      "compressed_bytes": 254870603,
+      "expanded_tar_bytes": 266024960,
+      "sha256": "57fba3db5cb5d596094bbf0b9bc085c544c08363a1b6eef7bf46c00cf07497e9",
+      "source_commit": "39f2f338cd23db363ae120d559a6f62799f11f69",
+      "source_clean": true
+    }
+  },
+  "github": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "changelog_commit": "8d3e386494af3e0fba8659519e1048d3b1cd19fa",
+    "descriptor_commit": "698d01e15419871d79f638e35e2c9046bc62f71e",
+    "metadata_heads_at_verification": {
+      "main": "698d01e15419871d79f638e35e2c9046bc62f71e",
+      "dev": "698d01e15419871d79f638e35e2c9046bc62f71e"
+    },
+    "changelog_blob": "e1517b22f75b7dc98ef5f249a1c9208c1f4afbbd",
+    "descriptor_blob": "fee92aa3573e8dc23526e35fb70661686e39db36",
+    "dev_force": false,
+    "order": [
+      "Site succeeded",
+      "main CHANGELOG.md",
+      "main patches-bundle.json",
+      "dev fast-forward"
+    ],
+    "raw_channel_verification": "OK dev/patches-bundle.json: 1e626a8a99f1f9969f97f1866489bfc76fbae3e09191d1fafb795324446d0c72\nOK dev/CHANGELOG.md: 944b24644dd58192e1db386fc0326c2c77a37ca836a5096773b3a93588733ee6\nOK main/patches-bundle.json: 1e626a8a99f1f9969f97f1866489bfc76fbae3e09191d1fafb795324446d0c72\nOK main/CHANGELOG.md: 944b24644dd58192e1db386fc0326c2c77a37ca836a5096773b3a93588733ee6\nOK both Manager channels point to v1.0.370; MPP SHA-256 e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894\n"
+  },
+  "verification": {
+    "qa_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/QA_Maps_Hide_Bicycle_Marks_v1.0.1.json",
+    "source_archive_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Hide_Bicycle_Marks_v1.0.1_sources.zip",
+    "marker_host_assertions": 352,
+    "legend_fixture_assertions": 246,
+    "real_legend_changed_styles": 45,
+    "other_root_records_byte_identical": true,
+    "actual_apk_application_cases": 7,
+    "existing_maps_options_preserved": 4,
+    "unrelated_patch_providers_preserved": 30,
+    "production_worker_tests_passed": 58,
+    "rendered_html_tests_passed": 13,
+    "live_delivery": {
+      "results": [
+        {
+          "name": "patches-bundle.json",
+          "status": 200,
+          "bytes_checked": 815327,
+          "sha256": "1e626a8a99f1f9969f97f1866489bfc76fbae3e09191d1fafb795324446d0c72",
+          "complete_file": true
+        },
+        {
+          "name": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+          "status": 200,
+          "bytes_checked": 58479,
+          "sha256": "47d8ebf649294f44eff1a4decdef1b4cda0c3e87a35b0a5cca721ffefe067368",
+          "complete_file": true
+        },
+        {
+          "name": "QA_Maps_Hide_Bicycle_Marks_v1.0.1.json",
+          "status": 200,
+          "bytes_checked": 22047,
+          "sha256": "dd0794d261ecc2669b5a64e746ceaf410332c386062f2c472a6fd9650c6e1ba8",
+          "complete_file": true
+        },
+        {
+          "name": "Hiro_Morphe_Patches_v1.0.370.mpp",
+          "status": 206,
+          "bytes_checked": 65536,
+          "sha256": "00ae069f88bb2bfddff3da73dc8d5a91c774d8a4d44590d39d8d93b26897d228",
+          "complete_file": false
+        }
+      ],
+      "all_passed": true
+    },
+    "physical_android_tested": false,
+    "android_emulator_tested": false,
+    "all_rendering_backends_verified": false,
+    "limitation": "Actual APK transformations, host regression tests, new native ingress guards and old-installation upgrades verified. No Android UI execution was available; on-device rendering and performance remain unverified."
+  },
+  "update_instructions": "Update the registered source to bundle1.0.370, choose only 地図上の自転車マークを非表示 for an already modified supported APK, then install the generated APK. From the original APK, select any required existing four Maps options too. Updating the source alone does not modify the installed app.",
+  "follow_up": "If still visible, compare the actual applied source/version and APK with the verified hashes and inspect the actual rendering/resource path; do not infer device success from host tests or repeat an app-data reset."
+}

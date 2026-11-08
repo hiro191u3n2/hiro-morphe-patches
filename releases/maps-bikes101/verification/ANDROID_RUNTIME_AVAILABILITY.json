@@ -1,0 +1,58 @@
+{
+  "observed_at_utc": "2026-11-08T15:59:20.544615+00:00",
+  "android_runtime_started": false,
+  "android_ui_tested": false,
+  "local_environment": {
+    "dev_kvm": false,
+    "tools": {
+      "adb": null,
+      "emulator": null,
+      "qemu-system-x86_64": null,
+      "qemu-system-aarch64": null
+    },
+    "old_runtime_root": "/workspace/scratch/e069c52f6279/emulator-test",
+    "old_runtime_exists": false,
+    "old_emulator_exists": false,
+    "old_api37_system_image_exists": false
+  },
+  "supplied_apk_abis": {
+    "microG_Maps-v26.36.04.973607363-Hiro_Morphe_Patches-v1.0.360+グーグルマップ-v2.8.7.apk": [
+      "arm64-v8a"
+    ],
+    "microG_Maps-v26.36.04.973607363-グーグルマップ-v2.8.5.apk": [
+      "arm64-v8a"
+    ]
+  },
+  "scoped_workspace_asset_search": {
+    "patterns": [
+      "emulator",
+      "adb",
+      "qemu-system-*",
+      "system.img",
+      "ramdisk.img",
+      "*libndk_translation*",
+      "*.qcow2",
+      "kernel-ranchu*",
+      "*emulator*.zip",
+      "*api37*.zip"
+    ],
+    "matched_files": 0,
+    "excluded_directories": [
+      "node_modules",
+      ".git"
+    ]
+  },
+  "historical_runtime": {
+    "evidence": "scripts/amazon-review108/followup/emulator/nextgen/RUNTIME_VERIFICATION.json",
+    "api": 37,
+    "abis": [
+      "x86_64",
+      "arm64-v8a"
+    ],
+    "native_bridge": "libndk_translation.so",
+    "software_tcg": true,
+    "current_availability": false,
+    "ended": "Owned controller stopped exit0 on historical session; not live in this turn"
+  },
+  "conclusion": "No existing local executable/image assets available for Android UI validation. Historical proof of ARM64 translation is not current device execution."
+}

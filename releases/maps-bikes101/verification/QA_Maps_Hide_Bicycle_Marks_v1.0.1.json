@@ -1,0 +1,405 @@
+{
+  "schema": "maps-bikes101-qa-v1",
+  "patch_version": "1.0.1",
+  "bundle_version": "1.0.370",
+  "baseline_version": "1.0.369",
+  "baseline_sha256": "6914c6dd5878e4c3dfffeb6bc284ec73f0e1f9915310ef9b1da19eab4f1d01ad",
+  "runtime_extension": "extensions/maps_hide_bicycle_marks.mpe",
+  "release_timestamp": "2026-11-09T01:16:20",
+  "release_timezone": "Asia/Tokyo",
+  "production_android_sdk_compile": true,
+  "runtime_android_tested": false,
+  "physical_android_tested": false,
+  "android_emulator_tested": false,
+  "renderer_scope": "SharedLabeler and legacy point labels; selective legend filtering for native rendering",
+  "all_rendering_backends_verified": false,
+  "runtime_limitation": "Actual APK transformations, host regression tests, new native ingress guards and old-installation upgrades verified. No Android UI execution was available; on-device rendering and performance remain unverified.",
+  "source_sha256": {
+    "build.py": "76f98d0e8612aaefcc68ebdc53dd0bbb3a0c701e3478ddfb33ab3addbed85bc1",
+    "patch/MapsHideBicycleMarksPatch.java": "6df9892d8fb3d6cc9a212bcdb5690f8af0f4536c1c792308f8bd405f69d84ec2",
+    "patch/NativeContracts.java": "6ef932a229a6a9e20b39cff4bde4e3ca8f50c6bc5f150dbb686e157c429ba61f",
+    "patch/RendererContracts.java": "68d3f35e101a261b1cc5c4f495219b914250331b2345644c6842b56b404305ad",
+    "patch/RuntimeContracts.java": "4162c706754bfcf9c682b6eab62d4ef04ea89dc2f8c6e6af74aac6a3015b3383",
+    "patch/UpgradeContracts.java": "768c33b81a756a255209673ca16221009721a8ebf825d0c92b88e1559000856c",
+    "runtime/BicycleLegendFilter.java": "6eb1fe08e56267e3315e6cb6cbe5996ffd0d57c513a2756aed48a6bd5ad887f8",
+    "runtime/BicycleMarkerFilter.java": "7a196197edab2144ccc832a6a6a3abaeaf7318f56fc0ad5310a2f4fc255c2140",
+    "test/BundleAudit.java": "de9e8cd443d1fdb05e8abcd065210a2ce492245bf86f021a1bd9e8c81950d42c",
+    "test/MapsBikesAudit.java": "86a0c6e68d617c4c4a6fbfedd48a3d5ab566a11c370dac10b567360cfe7e13fd",
+    "test-host/app/hiro/mapsbikes/BicycleLegendFilterTest.java": "63b75a1100a60c5c2e4d31810f133e84d9cbdc526f7ea2f67bb43d6570e851d1",
+    "test-host/app/hiro/mapsbikes/BicycleMarkerFilterTest.java": "6a5faa59f6ad4b9b516d209cc69aa28eae9dd99be876496534197a2c08d62c2f",
+    "test-host/bken.java": "7442659602f621ef65a9d189ef49274b369fe237aa039227a4fe182e5cfa6096",
+    "test-host/bkjc.java": "31c9fba96e325a6fb1cfaa4adc14dd833db13f3fb5dcd02caa17d8a5f3a719de",
+    "test-host/bkje.java": "567f26d9e234cbb1b6e75a2cc8aaa2cf4e1bdfc9a1fd96b543ad0c0644825bf3",
+    "test-host/bkjj.java": "8ef2e1a68d9dd993d30ee34d51afaf52b4667ac23a0bddd37f846f74c47253e7",
+    "test-host/chue.java": "db034ab0b8997c390380dec5f0161c889869214f6bcab4b707a06905f804094b",
+    "test-host/cier.java": "eb8ab749d682e4407d5a471a70957f4200b73acc99560a5df6c6b619a1effab9",
+    "test-host/cifq.java": "5050f8e7a22af454ac1863c140522d98d40811b52be04cb2b509742c508ccc19",
+    "test-host/cifr.java": "f0b76e455afd763d2930b8c9f74bcd6de754e18afa36fa15a657c3ef747e41f3",
+    "test-host/cifs.java": "277b38fc43ffc8af42c40a1e8f2f200269b8bc29aef5aacbbcceb50b8a439b13",
+    "test-host/cift.java": "7bd47518d0616911865993fbf483d5b261d6493a9744b09e40fd16272058c42a",
+    "test-host/com/google/common/collect/ImmutableList.java": "a5881fea3ba406d8ae9e593d8913e5172a7a3f9bb19316639fd41301ae5db1ef"
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "host_tests": "PASS bicycle glyph/shared+legacy label regression fixtures: assertions=352; bare native assets, per-feature overrides, route-mode artwork, store pins, point oneofs, malformed data and immutable inputs covered; Android UI not executed",
+  "legend_tests": "PASS CompactLegend selective/malformed/override fixtures: assertions=246\nPASS real Roadmap legend: sourceBytes=2115516, resultBytes=2115606, rootRecords=92576, iconRecords=8799, labelStyles=13700, bicycleDescriptors=15, bicycleStyles=60, changedStyles=45, alreadyHiddenStyles=15, nonTargetRecordsByteIdentical=true, inputUnchanged=true, idempotent=true, transformMs=47, resultSha256=cfeeaa10c623a16b9df085db1358f11f186c3edcb9ed6540c2066e1a116474ab; Android UI not executed",
+  "legend_sha256": "c63aaba03ff7c812c6644ad489f75812c62465e87c63a36d09cccd7d839dfe2d",
+  "guard_results": [
+    {
+      "sdk": "morphe.jar",
+      "input": "v285",
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74075"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "v285",
+      "sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74075"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "v287",
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74088"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "v287",
+      "sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74088"
+    },
+    {
+      "sdk": "morphe.jar",
+      "input": "current368-existing-four",
+      "sha256": "2f34164360779e4a075a10e309c32d570d1944e81c326e420011b8e3cb0f1240",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74092"
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "input": "current368-existing-four",
+      "sha256": "2f34164360779e4a075a10e309c32d570d1944e81c326e420011b8e3cb0f1240",
+      "result": "PASS native guards: verified factory/callers/icon decoder/proto schemas; package/version/code mismatch, all declared native owners transformed; unknown native body, missing owners, and duplicate application rejected without mutation; assertions=74092"
+    }
+  ],
+  "upgrade_guard_results": [
+    {
+      "input": "old-single",
+      "sha256": "83f6d9e7d04887dced6f28c7536646db50b65db84f84b1a9098c133f81eaa5f9",
+      "result": "PASS exact old-runtime upgrade guards: published v1.0.0 accepted; canonical runtime and shared hook verified; changed/partial runtime, changed/partial native hook and orphan hook rejected without mutation; existing shared hook retained once; new native owners transformed; assertions=74075"
+    },
+    {
+      "input": "old-all-five",
+      "sha256": "accb87a4b02fe48248580cff50ac1b73e7f00016e0b9848ed1ea94eb09928aed",
+      "result": "PASS exact old-runtime upgrade guards: published v1.0.0 accepted; canonical runtime and shared hook verified; changed/partial runtime, changed/partial native hook and orphan hook rejected without mutation; existing shared hook retained once; new native owners transformed; assertions=74092"
+    }
+  ],
+  "upgrade_equivalence": [
+    {
+      "case": "single",
+      "result": "PASS Maps fresh/additive/upgrade equivalence: classes=73968; resources=9330; all class implementations/metadata and non-DEX resources identical; assertions=175929"
+    },
+    {
+      "case": "all-five",
+      "result": "PASS Maps fresh/additive/upgrade equivalence: classes=73985; resources=9330; all class implementations/metadata and non-DEX resources identical; assertions=176050"
+    }
+  ],
+  "reapply_rejection": "PASS already-current bicycle patch reapplication rejected without mutation; assertions=73986",
+  "verified_previous_runtime_resource": {
+    "path": "contracts/maps_hide_bicycle_marks_v1.0.0.dex",
+    "sha256": "73d1bab89799158d9d2908a5373be2bf25630c8f2e2497b50fcdf26fe4aa0a9c"
+  },
+  "selection_results": [
+    {
+      "artifact": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "sdk": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "sdk": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "sdk": "morphe.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "sdk": "morphe.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "org.ungoogled.android.apps.maps.microg",
+      "matches": 1
+    },
+    {
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "sdk": "morphe-2.2.jar",
+      "package": "com.google.android.apps.maps",
+      "matches": 1
+    }
+  ],
+  "provider_preservation": [
+    {
+      "sdk": "morphe.jar",
+      "existing_providers_preserved": 30,
+      "replaced_providers": 1
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "existing_providers_preserved": 30,
+      "replaced_providers": 1
+    }
+  ],
+  "apk_application": [
+    {
+      "label": "standalone-v285",
+      "artifact": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "artifact_sha256": "47d8ebf649294f44eff1a4decdef1b4cda0c3e87a35b0a5cca721ffefe067368",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "output_sha256": "b1a81de71c6bae05181b16b2a15b2982ea2509868c5bc10aa3fd76ace17047a5",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73962; upgrade=false; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223019",
+      "result": "PASS"
+    },
+    {
+      "label": "integrated-v285",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "output_sha256": "b1a81de71c6bae05181b16b2a15b2982ea2509868c5bc10aa3fd76ace17047a5",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73962; upgrade=false; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223019",
+      "result": "PASS"
+    },
+    {
+      "label": "reported-v287",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "238b2ed13f530e223f090625c30753d2c01bcb24cbfb9986059f23e14f290d71",
+      "output_sha256": "bc0ac9b3745394cb539d75e17ba1b408a8b03f6c2d3dfc5dfdca4fbde5126049",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73975; upgrade=false; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223045",
+      "result": "PASS"
+    },
+    {
+      "label": "additive-to-existing-four",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "2f34164360779e4a075a10e309c32d570d1944e81c326e420011b8e3cb0f1240",
+      "output_sha256": "91fcee618dd914c46a8ce801705d9837306075984f303a538df538de7cda802d",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73979; upgrade=false; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223053",
+      "result": "PASS"
+    },
+    {
+      "label": "all-five-maps",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+      "output_sha256": "8e4add1a4b9d7ffb587bf7b556b2eee393702a6fcb495e8388af8300336f12fa",
+      "patches": [
+        "起動時に現在地を表示",
+        "検索欄の下のカテゴリ行を非表示",
+        "戻るで終了して履歴から削除",
+        "店名検索を厳密にする",
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73979; upgrade=false; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223107",
+      "result": "PASS"
+    },
+    {
+      "label": "upgrade-old-single",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "83f6d9e7d04887dced6f28c7536646db50b65db84f84b1a9098c133f81eaa5f9",
+      "output_sha256": "ff9f6d64563591437553acd1cb34139387098474bb77fc3059913e7d04c028a7",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73964; upgrade=true; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223021",
+      "result": "PASS"
+    },
+    {
+      "label": "upgrade-old-all-five",
+      "artifact": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "artifact_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+      "input_sha256": "accb87a4b02fe48248580cff50ac1b73e7f00016e0b9848ed1ea94eb09928aed",
+      "output_sha256": "29de735651043adaaf63d0cfa3ad13dc0b76da9657f8b8761076f8307bf3a64e",
+      "patches": [
+        "地図上の自転車マークを非表示"
+      ],
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "audit": "PASS APK scope: original classes=73981; upgrade=true; modified native owners=[Lbkbv;, Lbkex;, Lbkup;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;, Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;]; exact fresh/upgrade transformations and production runtime replacement verified; all unrelated native/runtime classes preserved; unchanged non-DEX resources=9330; bicycle runtime classes=6; Android UI not executed; assertions=223121",
+      "result": "PASS"
+    }
+  ],
+  "baseline_application": {
+    "schema": "maps-bikes100-baseline-cache-v1",
+    "created_at_utc": "2026-11-08T15:18:15.108242+00:00",
+    "label": "reference368-existing-four",
+    "artifact": "Hiro_Morphe_Patches_v1.0.368.mpp",
+    "artifact_sha256": "b14644953b807eae4ed8b026aa6445b3806e9acab766e0d623f47e72af66de27",
+    "input_sha256": "7de0b555219eca65d40f751e64381e55cbd817a0c393fbd363a5d89feb17c063",
+    "output_sha256": "2f34164360779e4a075a10e309c32d570d1944e81c326e420011b8e3cb0f1240",
+    "report_sha256": "aa1aaaf8e45082f13bc9aa4412110e82df9c0fa7b3b4f444e42ecc99bcf046f6",
+    "patches": [
+      "起動時に現在地を表示",
+      "検索欄の下のカテゴリ行を非表示",
+      "戻るで終了して履歴から削除",
+      "店名検索を厳密にする"
+    ],
+    "steps": [
+      {
+        "step": "PATCHING",
+        "success": true
+      },
+      {
+        "step": "REBUILDING",
+        "success": true
+      }
+    ],
+    "audit": null,
+    "result": "PASS"
+  },
+  "baseline_reference_reused": true,
+  "loader_preservation": "PASS bicycle-only loader replacement: unrelated baseline provider classes preserved=393; replaced old bicycle provider classes=7; new bicycle provider classes=13; assertions=1257",
+  "native_scope": {
+    "owners": [
+      "Lbkbv;",
+      "Lbkex;",
+      "Lbkup;",
+      "Lcom/google/android/libraries/geo/mapcore/geoxp/jni/NativeMapFactory;",
+      "Lcom/google/android/libraries/geo/mapcore/geoxp/jni/providers/MapCoreConfigProvider;"
+    ],
+    "shared_label_method": "Lbkbv;->b(Lcift;Lbkeo;ILjava/util/List;Ljava/util/List;Lbkdc;Lbjiv;)Lbkba;",
+    "shared_label_added_instructions": 5,
+    "shared_label_register_count": 35,
+    "runtime_filter": "Lapp/hiro/mapsbikes/BicycleMarkerFilter;->shouldHide(Ljava/lang/Object;)Z",
+    "original_instructions_preserved_except_cache_namespace": true,
+    "original_try_blocks_preserved": true,
+    "legacy_filter": "Lapp/hiro/mapsbikes/BicycleMarkerFilter;->shouldHideLegacy(Ljava/lang/Object;Ljava/lang/Object;)Z",
+    "legend_filter": "Lapp/hiro/mapsbikes/BicycleLegendFilter;->filter([B)[B",
+    "cache_directory": "geoxp_cache_hiro_bikes101",
+    "old_online_cache_and_secure_offline_paths_preserved": true,
+    "unrelated_native_classes_and_resources_preserved": true
+  },
+  "preserved_unrelated_entries": 318,
+  "unrelated_mpp_payloads_byte_identical": true,
+  "single_bundle_apk_contents_equal": true,
+  "all_five_additive_apk_contents_equal": true,
+  "all_five_additive_zip_entries_identical": false,
+  "additive_all_five_equivalence": "PASS Maps fresh/additive/upgrade equivalence: classes=73985; resources=9330; all class implementations/metadata and non-DEX resources identical; assertions=176050",
+  "user_report": "Bicycle icons still visible after v1.0.0, confirmed by screenshot 1000011992.png; repair missed rendering and asset-name paths.",
+  "artifacts": {
+    "Maps_Hide_Bicycle_Marks_v1.0.1.mpp": {
+      "bytes": 58479,
+      "sha256": "47d8ebf649294f44eff1a4decdef1b4cda0c3e87a35b0a5cca721ffefe067368"
+    },
+    "Hiro_Morphe_Patches_v1.0.370.mpp": {
+      "bytes": 48485796,
+      "sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894"
+    }
+  }
+}

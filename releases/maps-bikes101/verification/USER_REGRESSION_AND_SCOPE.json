@@ -1,0 +1,26 @@
+{
+  "schema": "maps-bikes101-user-regression-v1",
+  "user_report": "自転車アイコンまだ消えてないよ",
+  "screenshot_sha256": "c24430228927ca8c67bd1e543f87348ac5fc6675bdf7fe1972a21a8f91a84a78",
+  "previous_release": {
+    "bundle": "1.0.369",
+    "patch": "1.0.0"
+  },
+  "observed": "User screenshot still contains numerous dark-gray circular bicycle POI glyphs. This is failure evidence for v1.0.0, not a local Android execution.",
+  "identified_implementation_gaps": [
+    "v1.0.0 hook only covered the SharedLabeler placed-label factory; legacy and full-native render paths did not pass through that factory.",
+    "The native icon loader accepts bare asset paths; the v1.0.0 glyph matcher accepted URL forms only.",
+    "Blacking out a shared glyph image would leave composed circle/background layers or affect unrelated markers; whole-label/style selection is required.",
+    "Persistent GeoXP online cache can retain style data, so the repaired processing path must receive fresh online style data."
+  ],
+  "preservation_scope": [
+    "Only bicycle marker option changed; previous four Maps options and unrelated providers retained.",
+    "Native renderer selection and location/search data are not rewritten.",
+    "Old online cache preserved separately; secure/offline cache destinations unchanged."
+  ],
+  "not_established": [
+    "Which renderer backend the user device selected at the exact screenshot time.",
+    "Disappearance of the markers on an Android device or emulator.",
+    "Future server formats or compressed nonstandard resource envelopes."
+  ]
+}
