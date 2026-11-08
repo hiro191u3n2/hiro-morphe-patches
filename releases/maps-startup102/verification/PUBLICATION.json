@@ -1,0 +1,260 @@
+{
+  "schema": "maps-startup102-publication-v1",
+  "bundle_version": "1.0.364",
+  "patch_version": "1.0.2",
+  "verified_at_utc": "2026-11-08 10:44:21 UTC",
+  "user_report": "Starting microG Maps and immediately tapping prevented the automatic move to current location.",
+  "resolution": "Keep initial recentering pending across early touches. Use a read-only native arrival query to hand control to the user after arrival without resetting the deadline or request budget.",
+  "site": {
+    "id": "appgdep_6af051abaff08191a950cb475848a619",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "title": "ひろ Morphe パッチソース",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_8583b912bf788191a2816635373b438c",
+    "type": "publish",
+    "status": "succeeded",
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "has_mcp": false,
+    "screenshot_asset_pointer": null,
+    "provider_deployment_id": "site---6a7d274188d0819185634a62fa2fc8a0",
+    "failure_message": null,
+    "env_set_revision": 0,
+    "updated_at": "2026-11-08T10:41:03.255016+00:00",
+    "source_commit": "675a5b15d54e911d0a6f0a504f180a42a2d19e4f",
+    "saved_version_number": 114,
+    "archive_sha256": "sha256:09eb8613b88a9613e70e8af321b533e80a2745519c1a3b33be0b0ad2a5686b0c"
+  },
+  "github": {
+    "repository": "hiro191u3n2/hiro-morphe-patches",
+    "baseline_commit": "b1eac5ccec59b3d727f370cac976e513552f29b7",
+    "changelog_published_before_descriptor_commit": "a148cdef03d65d3ce6a113cd50d163f5b295690d",
+    "release_metadata_commit": "acba618261f8b4122b41819f10cba0b1f1669343",
+    "main_dev_fast_forwarded_without_force": true
+  },
+  "verification": {
+    "host": {
+      "scenarios": 71,
+      "assertions": 658,
+      "result": "PASS",
+      "prior_1_0_1_early_touch_failure_reproduced": true
+    },
+    "native_bridge": {
+      "scenarios": 50,
+      "assertions": 848,
+      "loaders": [
+        "morphe.jar",
+        "morphe-2.2.jar"
+      ],
+      "result": "PASS"
+    },
+    "actual_apks": "PASS original v2.8.5 and strictly normalized v2.8.7 regression input; standalone/integrated parity; startup/category/back-exit co-selection and unrelated code/resources preserved.",
+    "production_worker_tests": {
+      "passed": 46,
+      "failed": 0
+    },
+    "html_delivery_tests": {
+      "passed": 13,
+      "failed": 0,
+      "stale_expectations_repaired": "Pre-existing ULike 1.1.0 / 12 apps / stable v1.0.74 and old v1.0.72 history boundary were replaced with verified existing content and exact current release scopes; application/Worker artifacts remained unchanged."
+    },
+    "required_post_publication_checks": {
+      "chunk_id": "3fbb40",
+      "wall_time_seconds": 0.000019169,
+      "exit_code": 0,
+      "original_token_count": 197,
+      "output": "Validated MapsStartup102 / bundle1.0.364: APK-bound artifacts, emitted native bridge execution, reported v2.8.7 APK regression, touch/lifecycle tests, baseline363 preservation, three Maps options, Android DEX, standalone parity, source hashes and archived verification records; Android UI remains untested.\nOK main/patches-bundle.json: 1cfd53e847fe1f2f711f635b0a97ce118ca5804203d8b5a0bf74b475508940fe\nOK dev/patches-bundle.json: 1cfd53e847fe1f2f711f635b0a97ce118ca5804203d8b5a0bf74b475508940fe\nOK dev/CHANGELOG.md: 2f4e825458ca41d1752c138cffd9ce1682846ac27d21cd8d7e9d78712e9e66ef\nOK main/CHANGELOG.md: 2f4e825458ca41d1752c138cffd9ce1682846ac27d21cd8d7e9d78712e9e66ef\nOK both Manager channels point to v1.0.364; MPP SHA-256 f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd\n"
+    },
+    "live_http": {
+      "schema": "maps-startup102-live-http-v1",
+      "checked_at_utc": "2026-11-08T10:42:43.203760+00:00",
+      "deployment_reported_by_parent": {
+        "native_result": "success",
+        "site_version": 114,
+        "source_commit": "675a5b15d54e911d0a6f0a504f180a42a2d19e4f",
+        "deployment_id": "appgdep_6af051abaff08191a950cb475848a619",
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site"
+      },
+      "http_client": "Python urllib.request; unauthenticated; default user agent; no cookies or browser session; standard Range header only",
+      "homepage": {
+        "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/",
+        "method": "GET",
+        "status": 403,
+        "reason": "Forbidden",
+        "body_prefix": "error code: 1010\n",
+        "response_date": "Sun, 08 Nov 2026 10:41:43 GMT",
+        "cf_ray": "a573f783f8dafbf8-LAX",
+        "checks": {
+          "bundle_v1_0_364": "not verifiable",
+          "startup_v1_0_2": "not verifiable",
+          "tap_fix_phrase": "not verifiable"
+        }
+      },
+      "checks": [
+        {
+          "name": "Maps_Startup_Location_v1.0.2.mpp",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Maps_Startup_Location_v1.0.2.mpp",
+          "method": "GET",
+          "expected": {
+            "size": 31632,
+            "sha256": "085dc6ca2be3532889742e8b6ae4fdf6f98fc4e73ae7e06da506acb01164e1d8"
+          },
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:49 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f9263db7fbf8-LAX"
+          },
+          "body_prefix": "error code: 1010\n",
+          "verification": "blocked",
+          "elapsed_seconds": 6.759
+        },
+        {
+          "name": "QA_Maps_Startup_Location_v1.0.2.json",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/QA_Maps_Startup_Location_v1.0.2.json",
+          "method": "GET",
+          "expected": {
+            "size": 11388,
+            "sha256": "e23fc86dabc067fb87efbd1f8c9760bba5f3a4e60bcb011716f1290f664d7ee0"
+          },
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:49 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f9263dbcfbf8-LAX"
+          },
+          "body_prefix": "error code: 1010\n",
+          "verification": "blocked",
+          "elapsed_seconds": 6.77
+        },
+        {
+          "name": "patches-bundle.json",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/patches-bundle.json",
+          "method": "GET",
+          "expected": {
+            "size": 805223,
+            "sha256": "1cfd53e847fe1f2f711f635b0a97ce118ca5804203d8b5a0bf74b475508940fe"
+          },
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:49 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f9263dbdfbf8-LAX"
+          },
+          "body_prefix": "error code: 1010\n",
+          "verification": "blocked",
+          "elapsed_seconds": 6.767
+        },
+        {
+          "name": "CHANGELOG.md",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/CHANGELOG.md",
+          "method": "GET",
+          "expected": {
+            "size": 876143,
+            "sha256": "2f4e825458ca41d1752c138cffd9ce1682846ac27d21cd8d7e9d78712e9e66ef"
+          },
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:49 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f9266e03fbf8-LAX"
+          },
+          "body_prefix": "error code: 1010\n",
+          "verification": "blocked",
+          "elapsed_seconds": 6.8
+        },
+        {
+          "name": "Hiro_Morphe_Patches_v1.0.364.mpp",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.364.mpp",
+          "method": "HEAD",
+          "expected": {
+            "size": 48353555,
+            "sha256": "f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd"
+          },
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:55 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f94ae9b7fbf8-LAX"
+          },
+          "body_prefix": "",
+          "verification": "blocked",
+          "elapsed_seconds": 5.834
+        },
+        {
+          "name": "Hiro_Morphe_Patches_v1.0.364.mpp",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.364.mpp",
+          "method": "GET",
+          "expected": {
+            "size": 48353555,
+            "sha256": "f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd"
+          },
+          "request_range": "bytes=0-31",
+          "status": 403,
+          "reason": "Forbidden",
+          "headers": {
+            "content-type": "text/plain; charset=UTF-8",
+            "content-length": "17",
+            "date": "Sun, 08 Nov 2026 10:42:55 GMT",
+            "cache-control": "private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0",
+            "server": "envoy",
+            "cf-ray": "a573f94ae9b8fbf8-LAX"
+          },
+          "body_prefix": "error code: 1010\n",
+          "verification": "blocked",
+          "elapsed_seconds": 5.805
+        },
+        {
+          "name": "Hiro_Morphe_Patches_v1.0.364.mpp",
+          "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.364.mpp",
+          "method": "GET",
+          "expected": {
+            "size": 48353555,
+            "sha256": "f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd"
+          },
+          "verification": "not attempted after both normal HEAD and prefix Range were blocked"
+        }
+      ],
+      "overall": "blocked",
+      "completed_at_utc": "2026-11-08T10:42:55.892610+00:00",
+      "note": "Native deployment success is recorded separately from public HTTP verification. HTTP errors were not bypassed and no Site or GitHub changes were made."
+    }
+  },
+  "artifacts": {
+    "Maps_Startup_Location_v1.0.2.mpp": {
+      "bytes": 31632,
+      "sha256": "085dc6ca2be3532889742e8b6ae4fdf6f98fc4e73ae7e06da506acb01164e1d8"
+    },
+    "Hiro_Morphe_Patches_v1.0.364.mpp": {
+      "bytes": 48353555,
+      "sha256": "f9dabbc50e9aa7d363639f73d216c05fdf12d28054c2888adf1294d2337545dd"
+    }
+  },
+  "limitations": {
+    "physical_android_ui_tested": false,
+    "android_emulator_ui_tested": false,
+    "apk_signing_or_installation_tested": false,
+    "device_manager_update_badge_observed": false,
+    "live_http_bytes_verified": false,
+    "live_http_reason": "Unauthenticated verification requests returned HTTP 403 (error code: 1010). Native publication succeeded and raw GitHub main/dev Manager channels were verified. Verified MPP files are also supplied directly in chat."
+  },
+  "install": "Use the supported APK from before the earlier startup-location patch. Select 起動時に現在地を表示, optionally also 検索欄の下のカテゴリ行を非表示 and 戻るで終了して履歴から削除, then install the generated APK. Old startup patch reapplication remains rejected."
+}
