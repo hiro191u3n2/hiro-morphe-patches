@@ -1,0 +1,325 @@
+{
+  "schema": "quicksearch371-live-delivery-v1",
+  "origin": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+  "site_version": 121,
+  "expected_source_commit": "dde625f2dd67d3f562c7fee46ec8785cddb336a6",
+  "recorded_at_utc": "2026-11-09T05:04:17Z",
+  "artifact_checks": [
+    {
+      "name": "QuickSearch_NoRecents_v1.0.2.mpp",
+      "bytes": 36171,
+      "expected_sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef",
+      "checks": [
+        {
+          "case": "full",
+          "method": "GET",
+          "status": 200,
+          "headers": {
+            "Content-Length": "36171",
+            "Content-Type": "application/octet-stream",
+            "Content-Range": null,
+            "Content-Encoding": null,
+            "Transfer-Encoding": null,
+            "Accept-Ranges": "bytes",
+            "ETag": "\"06e2d1578122224963b96d505952ef30\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 36171,
+          "sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef",
+          "body_byte_identical": true,
+          "expected_content_length": 36171,
+          "content_length_present": true,
+          "content_length_matches": true,
+          "body_status_range_passed": true,
+          "strict_all_passed": true
+        },
+        {
+          "case": "head",
+          "method": "HEAD",
+          "status": 200,
+          "headers": {
+            "Content-Length": null,
+            "Content-Type": "application/octet-stream",
+            "Content-Range": null,
+            "Content-Encoding": null,
+            "Transfer-Encoding": "chunked",
+            "Accept-Ranges": "bytes",
+            "ETag": "\"06e2d1578122224963b96d505952ef30\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "body_byte_identical": true,
+          "expected_content_length": 36171,
+          "content_length_present": false,
+          "content_length_matches": false,
+          "body_status_range_passed": true,
+          "strict_all_passed": false
+        },
+        {
+          "case": "manager-prefix",
+          "method": "GET",
+          "request_range": "bytes=0-65535",
+          "status": 206,
+          "headers": {
+            "Content-Length": "36171",
+            "Content-Type": "application/octet-stream",
+            "Content-Range": "bytes 0-36170/36171",
+            "Content-Encoding": null,
+            "Transfer-Encoding": null,
+            "Accept-Ranges": "bytes",
+            "ETag": "\"06e2d1578122224963b96d505952ef30\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 36171,
+          "sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef",
+          "expected_content_range": "bytes 0-36170/36171",
+          "content_range_matches": true,
+          "body_byte_identical": true,
+          "expected_content_length": 36171,
+          "content_length_present": true,
+          "content_length_matches": true,
+          "body_status_range_passed": true,
+          "strict_all_passed": true
+        },
+        {
+          "case": "resumed-range",
+          "method": "GET",
+          "request_range": "bytes=18085-36170",
+          "status": 206,
+          "headers": {
+            "Content-Length": "18086",
+            "Content-Type": "application/octet-stream",
+            "Content-Range": "bytes 18085-36170/36171",
+            "Content-Encoding": null,
+            "Transfer-Encoding": null,
+            "Accept-Ranges": "bytes",
+            "ETag": "\"06e2d1578122224963b96d505952ef30\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 18086,
+          "sha256": "2a692784877a9ba01281c4b1fbd002a10af03a5311104d891175c9599e7def78",
+          "expected_content_range": "bytes 18085-36170/36171",
+          "content_range_matches": true,
+          "body_byte_identical": true,
+          "expected_content_length": 18086,
+          "content_length_present": true,
+          "content_length_matches": true,
+          "body_status_range_passed": true,
+          "strict_all_passed": true
+        }
+      ],
+      "body_status_range_passed": true,
+      "strict_all_passed": false
+    },
+    {
+      "name": "Hiro_Morphe_Patches_v1.0.371.mpp",
+      "bytes": 48487595,
+      "expected_sha256": "996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d",
+      "checks": [
+        {
+          "case": "full",
+          "method": "GET",
+          "status": 200,
+          "headers": {
+            "Content-Length": null,
+            "Content-Type": "application/octet-stream",
+            "Content-Range": null,
+            "Content-Encoding": null,
+            "Transfer-Encoding": "chunked",
+            "Accept-Ranges": "bytes",
+            "ETag": "\"sha256-996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 48487595,
+          "sha256": "996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d",
+          "body_byte_identical": true,
+          "expected_content_length": 48487595,
+          "content_length_present": false,
+          "content_length_matches": false,
+          "body_status_range_passed": true,
+          "strict_all_passed": false
+        },
+        {
+          "case": "head",
+          "method": "HEAD",
+          "status": 200,
+          "headers": {
+            "Content-Length": "48487595",
+            "Content-Type": "application/octet-stream",
+            "Content-Range": null,
+            "Content-Encoding": null,
+            "Transfer-Encoding": null,
+            "Accept-Ranges": "bytes",
+            "ETag": "\"sha256-996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "body_byte_identical": true,
+          "expected_content_length": 48487595,
+          "content_length_present": true,
+          "content_length_matches": true,
+          "body_status_range_passed": true,
+          "strict_all_passed": true
+        },
+        {
+          "case": "manager-prefix",
+          "method": "GET",
+          "request_range": "bytes=0-65535",
+          "status": 206,
+          "headers": {
+            "Content-Length": null,
+            "Content-Type": "application/octet-stream",
+            "Content-Range": "bytes 0-65535/48487595",
+            "Content-Encoding": null,
+            "Transfer-Encoding": "chunked",
+            "Accept-Ranges": "bytes",
+            "ETag": "\"sha256-996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 65536,
+          "sha256": "5f6c0cad3006ecd949099b7898ea7b0c6e795950edd1c9984d86384bd142ba7d",
+          "expected_content_range": "bytes 0-65535/48487595",
+          "content_range_matches": true,
+          "body_byte_identical": true,
+          "expected_content_length": 65536,
+          "content_length_present": false,
+          "content_length_matches": false,
+          "body_status_range_passed": true,
+          "strict_all_passed": false
+        },
+        {
+          "case": "resumed-range",
+          "method": "GET",
+          "request_range": "bytes=11534336-11599871",
+          "status": 206,
+          "headers": {
+            "Content-Length": null,
+            "Content-Type": "application/octet-stream",
+            "Content-Range": "bytes 11534336-11599871/48487595",
+            "Content-Encoding": null,
+            "Transfer-Encoding": "chunked",
+            "Accept-Ranges": "bytes",
+            "ETag": "\"sha256-996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d\"",
+            "Cache-Control": "public, max-age=31536000, immutable",
+            "Server": "envoy",
+            "Connection": "close",
+            "Via": null
+          },
+          "bytes_received": 65536,
+          "sha256": "6b27d221f894608f0afd3d132a2416e3dbe3878434f8d227d4d5e700adc00112",
+          "expected_content_range": "bytes 11534336-11599871/48487595",
+          "content_range_matches": true,
+          "body_byte_identical": true,
+          "expected_content_length": 65536,
+          "content_length_present": false,
+          "content_length_matches": false,
+          "body_status_range_passed": true,
+          "strict_all_passed": false
+        }
+      ],
+      "body_status_range_passed": true,
+      "strict_all_passed": false
+    }
+  ],
+  "metadata_checks": [
+    {
+      "path": "/patches-bundle.json",
+      "status": 200,
+      "bytes": 816588,
+      "sha256": "852908495302def516870e7b5575f93cef87cd066e7e7b3e64f3bcc3c60d465c",
+      "version": "1.0.371",
+      "download_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.371.mpp",
+      "byte_identical": true,
+      "passed": true
+    },
+    {
+      "path": "/source",
+      "status": 200,
+      "bytes": 816588,
+      "sha256": "852908495302def516870e7b5575f93cef87cd066e7e7b3e64f3bcc3c60d465c",
+      "version": "1.0.371",
+      "download_url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.371.mpp",
+      "byte_identical": true,
+      "passed": true
+    },
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 130843,
+      "sha256": "70d323768241ed517b962bb3265e3b8b372790f8b366d1b2374a44f13f2e35ac",
+      "new_standalone_link": true,
+      "new_bundle_link": true,
+      "quicksearch_outside_touch_text": true,
+      "passed": true
+    }
+  ],
+  "all_passed": false,
+  "initial_strict_header_check": {
+    "artifact_checks": [
+      {
+        "name": "QuickSearch_NoRecents_v1.0.2.mpp",
+        "passed": false,
+        "error": "HEAD Content-Length differs",
+        "error_type": "AssertionError"
+      },
+      {
+        "name": "Hiro_Morphe_Patches_v1.0.371.mpp",
+        "passed": false,
+        "error": "full GET Content-Length differs",
+        "error_type": "AssertionError"
+      }
+    ],
+    "all_passed": false
+  },
+  "metadata_bytes_passed": true,
+  "artifact_bytes_status_ranges_passed": true,
+  "all_content_length_checks_passed": false,
+  "header_observation_note": "Strict Content-Length checks are reported separately from complete-file byte/hash, status and range checks. No cause for missing/changed headers is inferred.",
+  "historical_header_comparison": [
+    {
+      "name": "Hiro_Morphe_Patches_v1.0.370.mpp",
+      "method": "GET",
+      "expected_total_bytes": 48485796,
+      "status": 206,
+      "content_length": null,
+      "content_range": "bytes 0-65535/48485796",
+      "transfer_encoding": "chunked",
+      "bytes_received": 65536,
+      "request_range": "bytes=0-65535",
+      "byte_identical": true
+    },
+    {
+      "name": "Maps_Hide_Bicycle_Marks_v1.0.1.mpp",
+      "method": "HEAD",
+      "expected_total_bytes": 58479,
+      "status": 200,
+      "content_length": null,
+      "content_range": null,
+      "transfer_encoding": "chunked",
+      "bytes_received": 0
+    }
+  ]
+}
