@@ -1,0 +1,164 @@
+{
+  "schema": "quicksearch102-qa-v1",
+  "bundle_version": "1.0.371",
+  "patch_version": "1.0.2",
+  "baseline_version": "1.0.370",
+  "baseline_sha256": "e15c1b809ea88ba917ec7d18880bbf5dbaf603e2402694cd2cf0a0685fc77894",
+  "target_package": "jp.ddo.sugihiro.quicksearch",
+  "target_version": "0.4.5",
+  "target_version_code": 36,
+  "original_apk_sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46",
+  "release_timestamp": "2026-11-09T13:45:03",
+  "release_timezone": "Asia/Tokyo",
+  "runtime_change": "bindMain: dialog.setCanceledOnTouchOutside(false)",
+  "host_test_result": "PASS SearchTask host assertions=184; main outside-touch protection, auxiliary dialog cancellation, task ownership/stack/duplicates, Window callbacks, old key boundaries, external flags, X dimensions. Android device behavior NOT tested.",
+  "original_apk_guards": [
+    {
+      "sdk": "morphe.jar",
+      "result": "PASS static QA: original classes=6366; operations=31; assertions=7726; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested."
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "result": "PASS static QA: original classes=6366; operations=31; assertions=7726; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested."
+    }
+  ],
+  "loader_preservation": "PASS bundle replacement merge: baseline non-QuickSearch classes preserved=403; old QuickSearch classes=3; new=3",
+  "unrelated_zip_entries_byte_identical": 329,
+  "patch_listing": [
+    {
+      "sdk": "morphe.jar",
+      "unrelated_providers_preserved": 30,
+      "quicksearch_matches": 1
+    },
+    {
+      "sdk": "morphe-2.2.jar",
+      "unrelated_providers_preserved": 30,
+      "quicksearch_matches": 1
+    }
+  ],
+  "apk_application": [
+    {
+      "label": "single-modern",
+      "artifact": "QuickSearch_NoRecents_v1.0.2.mpp",
+      "sdk": "morphe-2.2.jar",
+      "artifact_sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef",
+      "input_sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46",
+      "output_sha256": "0b4c48773ed1c60626531bd1b74a92f88bd8a5ff64fe44db1a3ce3e11df9930f",
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "original_non_dex_resources_preserved": 294,
+      "result": "PASS",
+      "audit": "PASS final APK: all 6353 non-target classes unchanged; 13 reviewed classes match; runtime classes=10; runtime hooks=28\nPASS static QA: original classes=6366; operations=31; assertions=39765; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested."
+    },
+    {
+      "label": "bundle-modern",
+      "artifact": "Hiro_Morphe_Patches_v1.0.371.mpp",
+      "sdk": "morphe-2.2.jar",
+      "artifact_sha256": "996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d",
+      "input_sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46",
+      "output_sha256": "0b4c48773ed1c60626531bd1b74a92f88bd8a5ff64fe44db1a3ce3e11df9930f",
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "original_non_dex_resources_preserved": 294,
+      "result": "PASS",
+      "audit": "PASS final APK: all 6353 non-target classes unchanged; 13 reviewed classes match; runtime classes=10; runtime hooks=28\nPASS static QA: original classes=6366; operations=31; assertions=39765; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested."
+    },
+    {
+      "label": "single-legacy",
+      "artifact": "QuickSearch_NoRecents_v1.0.2.mpp",
+      "sdk": "morphe.jar",
+      "artifact_sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef",
+      "input_sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46",
+      "output_sha256": "e2bb8cb55e9e089d259c34a0a376c2a4536cc9b86c1767c62d9f4a0b2cafb3eb",
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "original_non_dex_resources_preserved": 294,
+      "result": "PASS",
+      "audit": "PASS final APK: all 6353 non-target classes unchanged; 13 reviewed classes match; runtime classes=10; runtime hooks=28\nPASS static QA: original classes=6366; operations=31; assertions=39765; full original-method restoration, new Back/destroy/cleanup bridges, atomic rejection. Android device behavior NOT tested."
+    }
+  ],
+  "standalone_and_integrated_apk_entries_identical": true,
+  "source_sha256": {
+    "build.py": "12096c2c3db8a8495ae5ad29230c7f48fbc2e50eb7ff8e9cb8ec3e92af3f2ab1",
+    "patch/QuickSearchRecentsPatch.java": "26fd922bc99fb04fa2a6fdf1d40bed0cbe181d8410870230b89426c87f0f7d64",
+    "runtime/SearchTask.java": "ed3f7c222daadcf6d5a54477ae1c4b5714b55367ba0086b1dffce5557966f59c",
+    "test/DexAudit.java": "f7117298042e44d8f4a5e9fcd88b8d83abf685645e9bc49a2b37f33c4fa5a5a6",
+    "test/SearchTaskTest.java": "347d88a2e8a652cbeccea293368000078f615441b4160072ce1a370c9dfff46d",
+    "test-stubs/android/app/Activity.java": "c62cdb3859e7acf8b97ed1a5613ccf176a1734cacc9b7368cca5bf9188bcb06f",
+    "test-stubs/android/app/ActivityManager.java": "7640bbd39602cd98578c53a448eab07f3abfa9822b1ef2e7f096077587896490",
+    "test-stubs/android/app/AlertDialog.java": "1bfc8c19503fc21bc3ad11f5467a6bf4ad4ab8444e7baa1d7d6ecb810856389e",
+    "test-stubs/android/app/Dialog.java": "22f8da2170297ced4ae2aadd46d6a5026c682bb48e4978dbf9558e4aa7352210",
+    "test-stubs/android/app/TaskInfo.java": "08c3bfa9a3874147a076967e50fe3259bb989b469b28cfa6c4159d57a9b5f159",
+    "test-stubs/android/content/ComponentName.java": "1f1ad07fa9042f7ac8a53533c61d47c9f5363233a82c84040050a6c3e3eaaa3c",
+    "test-stubs/android/content/Context.java": "765570a2d9b87a458eca91fcb1f5977b523958785d57203c5c7e8c87a316f9eb",
+    "test-stubs/android/content/ContextWrapper.java": "8dd6fad6812a611a82f63d2b6ef0f9fc9e6c34613c0ab28e8ce5331a16a5cf9b",
+    "test-stubs/android/content/DialogInterface.java": "9edf38ed4d9c11bc090f5ecf3570f73d0c1dc97314afc345add1f21a617553ea",
+    "test-stubs/android/content/Intent.java": "cfa755a36086799db638d0ad48fb019e7ba561c865e7bdc545e7ebebb95a121f",
+    "test-stubs/android/content/SharedPreferences.java": "6909e7289e71d878256f4e9bce86f23863f1f06e8c5a93a7999c6f9e52fce54c",
+    "test-stubs/android/content/res/Resources.java": "bdf15ddb895508b33707e325c42630bf4d6b4d47f28061c6e220b670afb905be",
+    "test-stubs/android/os/Build.java": "b14eec5e35cfd7cdbc8832fd366cfba746d72508a60afdba8b2f577f3c253180",
+    "test-stubs/android/os/Bundle.java": "3a864d5242184975a32d35207efd02e467a41ecd5b61fbadc40ff9bf86c0f0e2",
+    "test-stubs/android/os/Handler.java": "40932fbf7ac0ba872ac70540a8cc7639abbce2abe7830dbb4d2f47fb4988c006",
+    "test-stubs/android/util/DisplayMetrics.java": "309aa01d97fa91f60af170ef505efc739f7d728a11fd0df4775223b291a57433",
+    "test-stubs/android/view/KeyEvent.java": "cae2664d078f1bd6fb89c1a43ed12a519597a8a5e03d96f95f4daddd7857360b",
+    "test-stubs/android/view/View.java": "0bf0a906076ac6ecff8c3b702c96ce33a5bf02c1db33a959be0b0c00297c84b5",
+    "test-stubs/android/view/ViewGroup.java": "935249fc5dd9ccbf9e3b87eef05683fa7ff2eb20ca5cb645a747914cd5c47b3b",
+    "test-stubs/android/view/ViewParent.java": "a987441f46095fb930e5da014f9b0d8cf0e7e44e4a573431c1add940749fb70f",
+    "test-stubs/android/view/Window.java": "59e7761850f47f6f4a37ba505b4fd4a45df9752771152a8834deebbf105f2a08",
+    "test-stubs/android/widget/ImageButton.java": "3b7718254f134156465f0ed46aef7f784a37490bcebec56130244a9f421f621c",
+    "test-stubs/android/widget/LinearLayout.java": "a671f540bbdbf3aaba0d2dd4548684de7f5d651154f3e2f9f2727519d86785d9",
+    "test-stubs/android/window/OnBackInvokedCallback.java": "e4907fdb3e7873b798bb4d94d8417584acaaea92f298bacc543de91aa7709bf7",
+    "test-stubs/android/window/OnBackInvokedDispatcher.java": "6de7a05f5d36f5144e632c97514206cd6b1f96adc8dd0bd9e8b9cbf774f12368",
+    "test-stubs/android/window/TestBackDispatcher.java": "cee5ec5545a56830b0897a4f733438f8d3a8144ca5d8e215abc1755a658cf2ef",
+    "test-stubs/jp/ddo/sugihiro/quicksearch/activity/ConfigActivity.java": "1975ee6955b9f4afebfd2a0269b0b18eb909d2eb4e11a3f18eae66e9b7dfc5d7",
+    "test-stubs/jp/ddo/sugihiro/quicksearch/activity/MainActivity.java": "a244250250e575d112b4d674ff121e55857d16c0d7efe9701dd6c18f4a48a00c",
+    "test-stubs/jp/ddo/sugihiro/quicksearch/activity/WebActivity.java": "cab48f296a603621a4a6e4b83a1eb4377ad97bbd1b1f29a70b2fa8cd489ab7cc"
+  },
+  "toolchain_sha256": {
+    "morphe.jar": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+    "morphe-2.2.jar": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+    "android.jar": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+    "r8.jar": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa"
+  },
+  "artifacts": {
+    "QuickSearch_NoRecents_v1.0.2.mpp": {
+      "bytes": 36171,
+      "sha256": "a35e3a1af73ad55ee1b3dbd5b393a55e9d8beb01a786dad71a8f87682a91cdef"
+    },
+    "Hiro_Morphe_Patches_v1.0.371.mpp": {
+      "bytes": 48487595,
+      "sha256": "996206eb4ea224a254dd49cbda83ed6b3566a0f0b322de60f05bb4aa15b1744d"
+    }
+  },
+  "physical_android_tested": false,
+  "android_emulator_tested": false,
+  "original_app_binary_distributed": false,
+  "limitations": [
+    "Host fakes and actual APK/DEX audits do not emulate Android WindowManager or Samsung IME.",
+    "Outside taps and Recents UI have not been tested on a physical Android device or emulator."
+  ]
+}

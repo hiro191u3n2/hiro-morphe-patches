@@ -1,0 +1,24 @@
+{
+  "conclusion": "No blocking issue found in the narrow main-dialog outside-touch fix.",
+  "original_apk_sha256": "234168150a529a256cadae7666f7ec86f795c276714682ad6f11a346084c8f46",
+  "app_class_count": 89,
+  "findings": [
+    "MainActivity creates a platform android.app.AlertDialog through Builder.show and stores that shown instance in alertDialog.",
+    "MainActivity.onCreate has one terminal RETURN_VOID; bindMain injection is immediately before it and follows dialog show, gravity/y Window attribute changes, soft input mode, actionInit, keyword initialization and clipboard-timer initialization.",
+    "MainActivity.onResume only updates custom menu names, invokes its superclass and initializes the search keyword; onWindowFocusChanged only calls super.",
+    "Original jp.ddo.sugihiro classes have no setCanceledOnTouchOutside, setCancelable, setFinishOnTouchOutside, setOnTouchListener, addFlags, clearFlags, setFlags calls and no direct WindowManager.LayoutParams.flags accesses.",
+    "Original MainActivity$10.onCancel explicitly dismisses alertDialog then finishes MainActivity; this is consistent with the recording.",
+    "Window attribute changes in MainActivity.onCreate modify gravity and y only; no nonmodal/not-focusable flag is installed by app code.",
+    "Runtime outside-touch change occurs only in bindMain, not bindDialog/showPlatform/showDialog; auxiliary dialogs keep their existing policy.",
+    "setCanceledOnTouchOutside(false) changes Window close-on-outside state, not cancelability, focus, or modal touch routing; existing explicit close and Back handlers remain.",
+    "No additional app-owned touch-triggered exit or focus-loss exit path was found."
+  ],
+  "platform_sources": [
+    "https://developer.android.com/reference/android/app/Dialog#setCanceledOnTouchOutside(boolean)",
+    "https://developer.android.com/reference/android/view/WindowManager.LayoutParams#FLAG_NOT_TOUCH_MODAL",
+    "https://android.googlesource.com/platform/frameworks/base/+/refs/heads/main/core/java/android/app/Dialog.java",
+    "https://raw.githubusercontent.com/aosp-mirror/platform_frameworks_base/main/core/java/android/view/Window.java"
+  ],
+  "android_ui_verified": false,
+  "limits": "Static original-APK and source review plus official framework/API confirmation only. Samsung Android17 touch dispatch and keyboard persistence not exercised on an Android runtime."
+}

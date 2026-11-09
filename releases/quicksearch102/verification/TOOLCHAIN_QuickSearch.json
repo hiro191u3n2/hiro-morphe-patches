@@ -1,0 +1,113 @@
+{
+  "retrieved_at_utc": "2026-11-09T04:40:45.541580+00:00",
+  "toolchain_directory": "/workspace/scratch/07d7b5e295ad/toolchain",
+  "java_home": "/workspace/scratch/07d7b5e295ad/toolchain/jdk-21.0.13+9",
+  "path_prepend": "/workspace/scratch/07d7b5e295ad/toolchain/bin",
+  "retrieval": "Official public HTTPS distributions via ordinary curl; no proxy, permission or access-policy changes.",
+  "files": {
+    "morphe.jar": {
+      "bytes": 46589795,
+      "sha256": "b98ca01f1eaac8ea66a8c44a0555a08a9d200e8847dcc200723e5574b8d67c58",
+      "source": "https://github.com/MorpheApp/morphe-desktop/releases/download/v1.17.0-dev.6/morphe-desktop-1.17.0-dev.6-all.jar"
+    },
+    "morphe-2.2.jar": {
+      "bytes": 46648333,
+      "sha256": "855dd2d6fa5ed997a5884a44f8807c9b5bc95e69b5ebd58dfd7e8b897c86e2d7",
+      "source": "https://github.com/MorpheApp/morphe-desktop/releases/download/v2.0.0/morphe-desktop-2.0.0-all.jar"
+    },
+    "android.jar": {
+      "bytes": 27092450,
+      "sha256": "4566663c3876e022b4fa4ced8c8697c4ab1688267f090114fd92d027b32e619b",
+      "source": "https://dl.google.com/android/repository/platform-35_r02.zip",
+      "archive_member": "android-35/android.jar"
+    },
+    "r8.jar": {
+      "bytes": 51023743,
+      "sha256": "badba8e0fd96dc9f41f53a0686f20fc08f1172a9816461fec13b6635b7c883fa",
+      "source": "https://storage.googleapis.com/r8-releases/raw/8.7.18/r8.jar"
+    },
+    "platform-35_r02.zip": {
+      "bytes": 64273788,
+      "sha256": "0988cacad01b38a18a47bac14a0695f246bc76c1b06c0eeb8eb0dc825ab0c8e0",
+      "source": "https://dl.google.com/android/repository/platform-35_r02.zip",
+      "sha1": "0bb560a90a7a2cbd0dd8348224d518b638fe7949"
+    },
+    "temurin21-jdk.tar.gz": {
+      "bytes": 207858352,
+      "sha256": "d7f5d5cf865a2902b70ff549b97586a7d3f234e016f041ab447ea740c7d66d1c",
+      "source": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13_9.tar.gz",
+      "verification_source": "https://github.com/adoptium/temurin21-binaries/releases/download/jdk-21.0.13%2B9/OpenJDK21U-jdk_x64_linux_hotspot_21.0.13_9.tar.gz.sha256.txt"
+    }
+  },
+  "checks": {
+    "java": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/java",
+        "-version"
+      ],
+      "returncode": 0,
+      "output": "openjdk version \"21.0.13\" 2026-10-20 LTS\nOpenJDK Runtime Environment Temurin-21.0.13+9 (build 21.0.13+9-LTS)\nOpenJDK 64-Bit Server VM Temurin-21.0.13+9 (build 21.0.13+9-LTS, mixed mode, sharing)"
+    },
+    "javac": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/javac",
+        "-version"
+      ],
+      "returncode": 0,
+      "output": "javac 21.0.13"
+    },
+    "javap": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/javap",
+        "-version"
+      ],
+      "returncode": 0,
+      "output": "21.0.13"
+    },
+    "jar": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/jar",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "jar 21.0.13"
+    },
+    "morphe": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/java",
+        "-jar",
+        "/workspace/scratch/07d7b5e295ad/toolchain/morphe.jar",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "Morphe Desktop v1.17.0-dev.6"
+    },
+    "morphe2": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/java",
+        "-jar",
+        "/workspace/scratch/07d7b5e295ad/toolchain/morphe-2.2.jar",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "INFO: Morphe data root: /workspace/scratch/07d7b5e295ad/toolchain/morphe-data (JAR-adjacent)\nMorphe Desktop v2.0.0"
+    },
+    "d8": {
+      "command": [
+        "/workspace/scratch/07d7b5e295ad/toolchain/bin/java",
+        "-cp",
+        "/workspace/scratch/07d7b5e295ad/toolchain/r8.jar",
+        "com.android.tools.r8.D8",
+        "--version"
+      ],
+      "returncode": 0,
+      "output": "D8 8.7.18 (build 84ea5eee063248e40efa5800a15412e89f45aa20 from go/r8bot (luci-r8-custom-ci-archive-0-5zeq))"
+    }
+  },
+  "notes": [
+    "All four build JAR SHA-256 hashes match the existing repository pins.",
+    "Android platform archive SHA-1 matches official Google repository XML.",
+    "JDK SHA-256 matches official Temurin release checksum.",
+    "Wrappers disable HotSpot performance data shared temporary files to avoid same-visible-PID collision."
+  ]
+}
