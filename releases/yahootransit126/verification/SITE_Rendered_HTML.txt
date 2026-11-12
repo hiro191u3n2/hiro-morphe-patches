@@ -1,0 +1,21 @@
+✔ preserves historical compressed MPP bytes, HEAD, validators and decoded ranges (463.10199ms)
+✔ renders Berry visibility and retains earlier app instructions (82.401774ms)
+✔ ships a Morphe-compatible scoped changelog for the current release (18.350945ms)
+✔ serves both patch descriptors as revalidated JSON assets (19.484605ms)
+✔ streams full MPP downloads without eagerly buffering the asset (21.26142ms)
+✔ answers matching MPP ETags without consuming the asset body (18.945437ms)
+✔ preserves range responses for immutable versioned MPP assets (21.404935ms)
+✔ preserves native Range responses for HTTP-date If-Range values (22.013888ms)
+✔ ignores Range when If-Range contains a weak ETag (22.172295ms)
+✔ falls back to local slicing when the asset backend ignores Range (25.340682ms)
+✔ refetches the full stream when a native Range response has a stale If-Range (23.952725ms)
+✔ answers MPP HEAD probes with size and byte-range support (22.831724ms)
+✔ rejects invalid MPP ranges without returning the full file (22.071083ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 943.009055
