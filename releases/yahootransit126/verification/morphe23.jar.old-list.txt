@@ -1,0 +1,291 @@
+INFO: Morphe data root: /workspace/scratch/4db52438a45c/tooling/morphe-data (JAR-adjacent)
+INFO: Index: 0
+Name: 商品検索を評価件数の多い順に表示
+Description: Amazon 32.19.0.100 添付改造版用。表示位置・通常商品の確認範囲を検査し、位置変化や操作中の更新で確認済みが残る誤判定を修正します。取得・判定できた主一覧の商品を評価件数の多い順に並べます。星のみの評価を含み、未取得の全検索結果の順位は保証しません。v1.0.0〜v1.0.8適用済みAPKへの重ね掛け不可。元の添付APKから適用してください。実商品での並び順は未検証です。
+Enabled: true
+Compatible packages:
+	Package name: com.amazon.mShop.android.shopping
+	Compatible versions:
+		32.19.0.100
+
+Index: 1
+Name: 毎回お気に入りアプリから起動
+Description: Aurora Store 4.8.4 (76): 通常起動・開き直しでお気に入りアプリを表示。お気に入りで戻ると通常ホームへ移動。初回案内・ログイン・アプリロック・明示リンクを維持。Android実機未検証。
+Enabled: true
+Compatible packages:
+	Package name: com.aurora.store
+	Compatible versions:
+		4.8.4
+
+Index: 2
+Name: プレビュー作成を後回しにして表示中タブを優先
+Description: 読み込み直後のタブプレビュー作成を750ms以降・操作停止後へ延期します。表示中タブの読み込み・操作中は新しい裏タブの初回HTTP(S)読込を短時間保留し、順番に開始します。選択したタブは即時開始。停止・破棄・復元を考慮し、既存の動画・音声・タイマー処理は変更しません。速度差はサイト・端末に依存します。
+Enabled: true
+Compatible packages:
+	Package name: jp.ejimax.berrybrowser
+
+Index: 3
+Name: バックフォワードキャッシュの復帰処理を補正
+Description: 未改造のBerry Browserに元の4パッチと一緒に適用してください。同文書内のURL変更に追従し、対応WebViewではネイティブのページ識別情報でBFCache復帰を判定します。復帰時の読み込み状態の初期化を抑え、完了状態とURL・タイトルを同期します。描画の準備を独立して待ち、寸法不整合時の再配置と回数制限付き再描画を行います。描画記録ボタン・自動採取・診断ログは削除済みです。BFCache・オートページャーの設定は維持します。実機での症状改善は確認が必要です。
+Enabled: true
+Compatible packages:
+	Package name: jp.ejimax.berrybrowser
+
+Index: 4
+Name: ロックフリーMessageQueueを有効化
+Description: Android 17以降でOS標準のロックフリーMessageQueueを使用する対象SDK37以上へ設定。既に37以上なら維持。起動ログで実装を確認し、LAN権限を初回のみ要求。Android16以前への移植ではありません。実機での採用・高速化は未確認。
+Enabled: true
+Compatible packages:
+	Package name: jp.ejimax.berrybrowser
+
+Index: 5
+Name: 共有先ブラウザの表示を個別に切替
+Description: 「他のブラウザで開く」の一覧に「表示するブラウザ」を追加します。ブラウザごとに表示をオン・オフでき、設定は再起動後も保持します。すべて非表示にしても設定ボタンから戻せます。
+Enabled: true
+Compatible packages:
+	Package name: jp.ejimax.berrybrowser
+
+Index: 6
+Name: ダブルタップから指を離さず片手ズーム
+Description: ダブルタップの2回目で指を離さず、下へ動かすと拡大、上へ動かすと縮小します。設定→アクション→片手ズームでオン・オフ可能（初期オン）。通常のタップ・スクロール・2本指ピンチを維持。ページ側の拡大制限に従います。
+Enabled: true
+Compatible packages:
+	Package name: jp.ejimax.berrybrowser
+
+Index: 7
+Name: 月表示とウィジェットの土曜を青・祝日を赤
+Description: カレンダー 1.12.1 (24) のアプリ内1か月表示とホームウィジェットで土曜日の曜日・日付を青、祝日の日付を赤にします。アプリ内の日曜日の曜日・日付は赤で統一。今日の丸印の文字はアプリ内では白、ウィジェットでは黒。祝日を優先し、前後月の薄さ・通常予定・印刷表示を維持。実機表示は未検証。
+Enabled: true
+Compatible packages:
+	Package name: org.fossify.calendar
+	Compatible versions:
+		1.12.1
+
+Index: 8
+Name: 戻る終了時に履歴を削除
+Description: Fossify Gallery 1.14.0 (29): 戻る操作でアプリを終了するときだけ、最近使ったアプリから削除。写真・フォルダー内の戻る操作、検索の閉じる操作、画像選択元のアプリを維持。実機未検証。
+Enabled: true
+Compatible packages:
+	Package name: org.fossify.gallery
+	Compatible versions:
+		1.14.0
+
+Index: 9
+Name: 検索欄の下のカテゴリ行を非表示
+Description: Google マップおよび添付版 microG Maps 26.36.04.973607363 対応。検索欄の下に並ぶ「自宅の住所を設定・レストラン・コーヒー・コンビニ」などのカテゴリ行を表示前に取り除きます。バージョンコードと対象処理の完全一致を確認して適用します。添付 microG APKで適用検証済み。通常版APK全体と実機表示は未検証。
+Enabled: true
+Compatible packages:
+	Package name: org.ungoogled.android.apps.maps.microg
+	Compatible versions:
+		26.36.04.973607363
+	Package name: com.google.android.apps.maps
+	Compatible versions:
+		26.36.04.973607363
+
+Index: 10
+Name: 戻るで終了して履歴から削除
+Description: microG Maps 26.36.04.973607363用。検索結果・場所の詳細・キーボードなどは通常どおり戻り、地図画面から戻るで終了するときに最近使ったアプリの履歴から削除します。Androidの戻るボタンとジェスチャーに対応する既存の処理を使用します。起動時現在地・カテゴリ行非表示と併用できます。端末上の動作は未検証です。同じパッチの重ね掛けには対応しません。
+Enabled: true
+Compatible packages:
+	Package name: org.ungoogled.android.apps.maps.microg
+	Compatible versions:
+		26.36.04.973607363
+	Package name: com.google.android.apps.maps
+	Compatible versions:
+		26.36.04.973607363
+
+Index: 11
+Name: 地図上の自転車マークを非表示
+Description: microG Maps 26.36.04.973607363用。共有・従来・ネイティブ描画の自転車アイコンを確認して、背景ごと非表示にします。旧v1.0.0から更新可能。初回はオンライン地図キャッシュを別領域に再作成します。確認済みの描画コードが一致するAPK専用です。Android画面での動作は未検証です。
+Enabled: true
+Compatible packages:
+	Package name: org.ungoogled.android.apps.maps.microg
+	Compatible versions:
+		26.36.04.973607363
+	Package name: com.google.android.apps.maps
+	Compatible versions:
+		26.36.04.973607363
+
+Index: 12
+Name: 起動時に現在地を表示
+Description: 添付版 microG Maps 26.36.04.973607363（対象処理が一致する版）用。Google マップの選択画面にも表示しますが、対象処理が一致しないAPKには適用しません。初回起動で現在地表示が中止される不具合を修正。新規起動時だけ現在地へ移動し、起動直後にタップしても準備待ちを続けます。ホームや別アプリへ移った後のタスク復帰、履歴からの復元では再移動せず、起動時の未完了処理も停止します。到達後の操作、住所リンクや経路案内を優先します。位置情報権限が必要です。旧パッチ適用済みAPKへの重ね掛けはできません。元のAPKに適用してください。Android端末での画面動作は未検証です。
+Enabled: true
+Compatible packages:
+	Package name: org.ungoogled.android.apps.maps.microg
+	Compatible versions:
+		26.36.04.973607363
+	Package name: com.google.android.apps.maps
+	Compatible versions:
+		26.36.04.973607363
+
+Index: 13
+Name: 店名検索を厳密にする
+Description: microG Maps 26.36.04.973607363用。店名検索v1.0.1: ランダ／RANDAなどの店名に合う一覧と地図上のピンを残します。ピン専用データを店舗IDで絞り、v1.0.0でピンが消える問題に対応。表記違い・支店名・カテゴリ検索の扱いは維持。確認済みv1.0.0適用済みAPKから更新可能。起動時現在地・カテゴリ行非表示・戻る終了も保持します。対象コードが一致するAPK専用。Android画面での動作は未検証です。
+Enabled: true
+Compatible packages:
+	Package name: org.ungoogled.android.apps.maps.microg
+	Compatible versions:
+		26.36.04.973607363
+	Package name: com.google.android.apps.maps
+	Compatible versions:
+		26.36.04.973607363
+
+Index: 14
+Name: フォルダ画面のタグ一覧を非表示
+Description: MX Player Pro 1.93.4 arm64-v8a専用。フォルダ画面上部のタグ行を余白ごと非表示にし、再署名による起動直後の異常終了を補正します。既存のタグ非表示APKにも適用できます。実機起動・再生は未検証。
+Enabled: true
+Compatible packages:
+	Package name: com.mxtech.videoplayer.pro
+	Compatible versions:
+		1.93.4
+
+Index: 15
+Name: 戻る1回で終了・履歴削除
+Description: Instagram 452.1.0.53.64はブラウザのプロフィールリンクで開いた画面から戻るとリールへ移動し、リールでもう一度戻ると終了・履歴削除。プロフィールから開いた動画では先に元のプロフィールへ戻る。ホーム・リールタブで戻ると終了し、最近使ったアプリから削除。コメント欄などが開いている時はその画面だけ閉じる。TikTok 47.4.3はアプリ本来の戻る処理でコメント欄などを閉じ、ホームで戻る1回で終了・履歴削除。プロフィール・メッセージからはホームへ戻り、その操作では終了しない。46.2.3の従来経路も保持。Xは各タブから終了時に履歴を削除し、次の通常起動はホームへ。Trip.comの動作を保持。
+Enabled: true
+Compatible packages:
+	Package name: com.ss.android.ugc.trill
+	Compatible versions:
+		46.2.3
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		46.2.3
+		47.4.3
+	Package name: com.instagram.android
+	Package name: com.twitter.android
+	Package name: ctrip.english
+
+Index: 16
+Name: 検索後の終了時に履歴へ残さない
+Description: 簡単検索くん 0.4.5 (36): 検索ウィンドウ外の余白タッチで閉じないようにします。❌・戻るで終了して履歴から削除する動作、検索後自動終了設定、外部ブラウザーの別タスク起動は維持。実機未検証。
+Enabled: true
+Compatible packages:
+	Package name: jp.ddo.sugihiro.quicksearch
+	Compatible versions:
+		0.4.5
+
+Index: 17
+Name: 日本語入力・予測変換を改善しSamsung絵文字に統一
+Description: 英語から日本語モードへの切替時に英単語を確定し、日本語の追加単語辞書（Mozc・SudachiDict 20260723）と絵文字の関連語候補を加えます。使った日本語候補を使用回数順、同数なら最近使った順に優先し、カーソル移動後の既存の英語を日本語の変換対象から外します。GoogleIME用カタカナ語辞書45,686件と英語貼り付け保護、既存のキー入替・改行幅調整を維持します。日本語の記号切替・削除、矢印の上下・左右を個別に入れ替える設定と、日本語QWERTYなぞり入力（試験機能・初期OFF）を追加します。なぞり入力は端末内の辞書で判定し、通常の日本語未確定変換へ渡します。通常の入力欄で日本語なぞり入力を開始できない問題を修正します。英語QWERTYの123・改行とShift・削除は個別設定で入れ替え、矢印は左右ペアを上下ペアより先に配置します。英語QWERTYの123・改行を大きい方の幅に揃え、増加分だけスペースを縮めます。絵文字を端末標準のフォントに固定します（Galaxy では Samsung）。Google フォントへの切替は無効になります。SwiftKey の変換エンジン本体は変更しません。9.13.16.4 (1236271168) の未改造 APK 専用です。
+Enabled: true
+Compatible packages:
+	Package name: com.touchtype.swiftkey.beta
+	Compatible versions:
+		9.13.16.4
+
+Index: 18
+Name: テレメトリ・解析・エラー報告を停止
+Description: SwiftKey Beta 9.13.16.4用の独立選択パッチ。Microsoft向けテレメトリの記録・送信、Adjust、Firebase Sessions、従来のGoogle Analytics、アプリ例外報告とCrashlyticsの自動送信を停止します。入力・変換・学習・辞書同期の処理は維持します。Crashlyticsの端末内記録は残ります。
+Enabled: false
+Compatible packages:
+	Package name: com.touchtype.swiftkey.beta
+	Compatible versions:
+		9.13.16.4
+
+Index: 19
+Name: TikTok 怪しい通信だけ遮断（TikTok 47.4.3）
+Description: 47.4.3の広告・追跡・解析・クラッシュ計測用の権限とSDK部品を除去し、DEXと実際のネイティブライブラリ内の既知の通信先を遮断。通常の動画・ログイン・DM・通知・LIVE用の通信先と起動用ホストを保持します。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 20
+Name: フィード左下の文字・再投稿欄を非表示（TikTok 47.4.3）
+Description: 投稿者名・投稿日・説明・翻訳・楽曲・サブスク案内・再投稿を含む左下情報欄を非表示。各対応版の実際の左側コンテナを対象にし、再表示にも対応します。右側ボタン・上部タブ・下部ナビは対象外です。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 21
+Name: フィード下部のCapCut・エフェクト誘導枠を完全遮断（TikTok 47.4.3）
+Description: 場所・施設・予約・CapCut・エフェクト等のアンカー枠、下部誘導ボタン、再投稿欄を非表示。各対応版の旧形式と新しいアンカー生成経路の両方を抑止します。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 22
+Name: 動画のシークバーを常時表示（TikTok 47.4.3）
+Description: 通常動画のシークバーを表示。各対応版の表示判定・ドラッグ制限・非表示実験・表示更新の早期終了を修正します。LIVE・画像投稿等の元の除外条件は保持します。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 23
+Name: シーク中の動画プレビューサムネイルを表示（TikTok 47.4.3）
+Description: シーク中のプレビューにかかる実験・シーン制限を解除します。TikTokから実際のプレビュー画像が提供された動画だけが対象です。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 24
+Name: フォロー中のストーリーズ件数を非表示（TikTok 47.4.3）
+Description: フォロー中の上部ストーリーズ件数を枠ごと非表示。各対応版の実際のシーン判定と表示・アニメーション開始前を制御し、他のシーンを保持します。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 25
+Name: TikTok設定を日本語化
+Description: TikTok 47.4.3のMetraの設定・説明・ダイアログ等2,181項目を日本語化。icysymmetra版TikTokパッチ v0.9.0-dev.1のSettingsと一緒に選択してください。端末／アプリの言語が日本語の場合に表示します。変更履歴・ライセンス原文・国名などの固有名は対象外。
+Enabled: false
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 26
+Name: 共有リンクの小窓を省略して動画を直接再生（TikTok 47.4.3）
+Description: 共有URLの小窓とおすすめ画面の先行表示を省略し、対象の動画画面へ直接進みます。通常の共有リンクでは表示時の横移動アニメーションを省略。リンクから開いた動画画面の戻る1回でTikTokのアプリ履歴を削除して終了します。コメント欄などが戻る操作を受け取った場合はその処理を優先。通信・動画読込時間は残ります。
+Enabled: true
+Compatible packages:
+	Package name: com.zhiliaoapp.musically
+	Compatible versions:
+		47.4.3
+
+Index: 27
+Name: ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）
+Description: v1.10.14 ホームおすすめ欄とAI旅行計画欄の非表示を維持し、マイプランの旅行準備欄をネイティブのMY_TRIPS応答で抑止します。展開済み・サーバー更新のJavaScriptでも予約・情報収集・パッキング欄を生成させません。前版の発着時刻・所要時間の表示幅修正を維持します。
+Enabled: true
+Compatible packages:
+	Package name: ctrip.english
+	Compatible versions:
+		8.54.2
+	Version codes:
+		8.54.2: ARM64_V8A=85402000, ARMEABI_V7A=85402000, X86_64=85402000, X86=85402000
+
+Index: 28
+Name: ポストの日時を絶対時間・24時間表記にする
+Description: X 12.19.1: タイムライン・引用・詳細の投稿日時を yyyy/MM/dd HH:mm に変更。端末のタイムゾーンを使用し、12時間設定でも24時間表記。DMと動画の時間は維持。実機未検証。
+Enabled: true
+Compatible packages:
+	Package name: com.twitter.android
+	Compatible versions:
+		12.19.1-release.0
+
+Index: 29
+Name: 高画質撮影・質感美肌・素材通信を復旧
+Description: v1.9.125（v1.9.124基準）保存入力の保護後に既存ガード付きHDプレビュー早期解除を通常化。解除要求の時刻とカメラ入力再開を区別して記録。画質計算・解像度・保存形式・撮影保護・CPU/GPU負荷制御・必要時素材展開を維持。実機の操作改善は未確認。
+Enabled: true
+Compatible packages:
+	Package name: com.gorgeous.liteinternational
+	Compatible versions:
+		5.6.2
+
+Index: 30
+Name: 広告・不要欄を非表示
+Description: 広告、タクシー案内、検索結果下部のご指摘欄、および不要な案内・操作欄を余白ごと非表示にします。8.4.1ではNearMeのPR広告も見出し・枠・余白ごと非表示にします。
+Enabled: true
+Compatible packages:
+	Package name: jp.co.yahoo.android.apps.transit
