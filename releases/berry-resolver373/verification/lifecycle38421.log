@@ -1,0 +1,27 @@
+PASS controller fixture remains unique
+PASS owned WebView controller discovered
+MATCH Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V => Ld71;->k(Ljava/lang/String;)V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V
+MATCH Landroid/webkit/WebView;->onResume()V => Lh26;->O()V via Lh26;->p:Ld71;
+PASS unique owned receiver for Landroid/webkit/WebView;->onResume()V
+MATCH Landroid/webkit/WebView;->onPause()V => Lh26;->N()V via Lh26;->p:Ld71;
+PASS unique owned receiver for Landroid/webkit/WebView;->onPause()V
+MATCH Landroid/webkit/WebView;->stopLoading()V => Lh26;->n0()V via Lh26;->p:Ld71;
+PASS unique owned receiver for Landroid/webkit/WebView;->stopLoading()V
+MATCH Landroid/webkit/WebView;->destroy()V => Ld71;->f()V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->destroy()V
+MATCH Landroid/webkit/WebView;->saveState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList; => Lh26;->Y(Landroid/os/Bundle;)V via Lh26;->p:Ld71;
+PASS unique owned receiver for Landroid/webkit/WebView;->saveState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList;
+MATCH Landroid/webkit/WebView;->restoreState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList; => Lh26;->W(Landroid/os/Bundle;)Z via Lh26;->p:Ld71;
+PASS unique owned receiver for Landroid/webkit/WebView;->restoreState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList;
+PASS expected moved lifecycle count 5
+PASS exactly one mutation for Lh26;->p:Ld71;
+PASS rejected foreign receiver for owner-to-controller load
+PASS exactly one mutation for Ld71;->s:Lty;
+PASS rejected foreign receiver for controller-to-WebView load
+PASS exactly one mutation for Landroid/webkit/WebView;->restoreState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList;
+PASS rejected foreign Android-call receiver
+PASS branch join preserves owned receiver on both paths
+PASS rejected branch join rejects receiver replaced on one path
+PASS rejected duplicate Android anchor
+PASS lifecycle ownership checks=19

@@ -1,0 +1,18 @@
+PASS controller fixture remains unique
+PASS owned WebView controller discovered
+MATCH Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V => Lr61;->R(Ljava/lang/String;)V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->loadUrl(Ljava/lang/String;)V
+MATCH Landroid/webkit/WebView;->onResume()V => Lr61;->U()V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->onResume()V
+MATCH Landroid/webkit/WebView;->onPause()V => Lr61;->r0()V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->onPause()V
+MATCH Landroid/webkit/WebView;->stopLoading()V => Lr61;->m()V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->stopLoading()V
+MATCH Landroid/webkit/WebView;->destroy()V => Lr61;->destroy()V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->destroy()V
+MATCH Landroid/webkit/WebView;->saveState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList; => Lr61;->r(Landroid/os/Bundle;)V via null
+PASS unique owned receiver for Landroid/webkit/WebView;->saveState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList;
+MATCH Landroid/webkit/WebView;->restoreState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList; => Lr61;->h(Landroid/os/Bundle;)Z via null
+PASS unique owned receiver for Landroid/webkit/WebView;->restoreState(Landroid/os/Bundle;)Landroid/webkit/WebBackForwardList;
+PASS expected moved lifecycle count 0
+PASS lifecycle ownership checks=10

@@ -1,0 +1,32 @@
+{
+  "result": "PASS",
+  "comparison": [
+    {
+      "input": "original38421",
+      "aapt_exit": 0,
+      "aapt_bad_end_ns": false,
+      "aapt2_exit": 0,
+      "aapt2_bad_end_ns": false,
+      "aapt2_stderr": ""
+    },
+    {
+      "input": "baseline372-on38412",
+      "aapt_exit": 0,
+      "aapt_bad_end_ns": true,
+      "aapt2_exit": 0,
+      "aapt2_bad_end_ns": false,
+      "aapt2_stderr": ""
+    },
+    {
+      "input": "candidate373-on38421",
+      "aapt_exit": 0,
+      "aapt_bad_end_ns": true,
+      "aapt2_exit": 0,
+      "aapt2_bad_end_ns": false,
+      "aapt2_stderr": ""
+    }
+  ],
+  "arsclib_new": "PASS ARSCLib binary XML parse; existing preference tree and namespaces preserved; exactly one enabled zoom switch",
+  "arsclib_old": "PASS ARSCLib binary XML parse; existing preference tree and namespaces preserved; exactly one enabled zoom switch",
+  "note": "aapt1 warning also exists with unchanged public 1.0.372 on 3.84.12; aapt2 and Morphe ARSCLib parse both outputs successfully. No new preference XML regression."
+}
