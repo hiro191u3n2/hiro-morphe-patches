@@ -1,0 +1,36 @@
+Google Maps 26.36 互換ソース（公式MPP v2.9.9固定）
+
+原因
+「グーグルマップ 2.9.10」は対象を26.44.06.1006895251へ変更しています。
+26.36.04.973607363ではCustomization screenの設定行構築メソッドが
+(Bundle,String)ではなく(Bundle)で、Lavrz;: its rows' builder not foundになります。
+他に広告除去・位置取得切替・サインイン案内でも構造が合わないことを実APKで確認しました。
+設定行だけ直しても全体は直らないため、26.36に正式対応する2.9.9を固定します。
+これは2.9.10のプログラムを修正した版ではありません。版番号やMPP内容は改変していません。
+
+導入
+1. 下記URLからpatches-2.9.9.mppをダウンロードします。
+2. Morphe Managerのパッチソースを選ぶ画面でローカルのMPPとして追加します。
+   Managerの表示名はbearinmind patches等になる場合があります。版が2.9.9か確認してください。
+3. 今回のMapsをパッチするときはグーグルマップ2.9.10を選択から外し、2.9.9を使います。
+   Hiro Morphe Patches1.0.373は維持し、既存の5項目を併用できます。
+4. 元の未改造26.36.04.973607363のAPKM一式へ再適用します。
+   base.apkだけを抜き出さず、必要な分割APKを含む元ファイルを指定してください。
+5. Googleログインを使う場合はAdd microG-RE supportを従来どおり選択します。
+6. Managerで作成したAPKをインストールします。ソースの追加だけでは反映されません。
+
+MPP
+https://github.com/bearinmindcat/morphe-patches/releases/download/v2.9.9/patches-2.9.9.mpp
+固定ソースJSON（URL形式のソースを利用できる環境用）
+https://hiro-morphe-patches.otoha10.chatgpt.site/maps-26.36-source.json
+
+公式ソース
+https://github.com/bearinmindcat/morphe-patches/tree/v2.9.9
+ソースコミット: 35b8c85df8a734c465e5d4852af04349a396ee92
+作者: bearinmindcat / License: GPLv3
+MPP SHA-256: 74715d08631ce0bcc45be3764497badcc3512e3af44b2804d71341dc46ba322c
+
+注意点
+互換ソースを2.9.10へ自動更新しないでください。Maps本体26.44への更新はHiro既存パッチの対応範囲外です。
+既存Hiro統合MPP・通常更新ソース・他アプリの配布内容は変更しません。
+Android実機の起動、Googleログイン、カメラ情報の表示・経路回避、端末の更新マークは未確認です。
