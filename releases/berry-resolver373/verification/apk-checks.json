@@ -1,0 +1,52 @@
+{
+  "status": "unreleased-candidate",
+  "input_version": "3.84.12",
+  "input_sha256": "19602700d687462e1cd967c33460095c86e14bcfabb4843765368265de1cab19",
+  "patcher_version": "2.4.0-dev.7",
+  "host_sha256": "7e2025ce8d326af883f6de8a25865da1f7ddbb72c0035c06e6765dc76c1c85c0",
+  "actual_3_84_21_verified": false,
+  "android_runtime_tested": false,
+  "runs": [
+    {
+      "case": "combined-four",
+      "result": "PASS",
+      "bundle_sha256": "f7355cbcae7b9b83e11f4a1322b11c236b879497f541ea5a45a205defb537ad4",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "共有先ブラウザの表示を個別に切替",
+        "ロックフリーMessageQueueを有効化"
+      ],
+      "output_sha256": "d538a6786773c00724ce219a2a447dc561e5fe0cdbd6471726dbb59fe5eef2d6",
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ]
+    },
+    {
+      "case": "standalone-zoom",
+      "result": "PASS",
+      "bundle_sha256": "8d7c73b12043cb5342dc5a566e916c39e8a0d23e0206a2b1ad6bc08231d38f74",
+      "selected_patches": [
+        "ダブルタップから指を離さず片手ズーム"
+      ],
+      "output_sha256": "78f01916395bb6d378a2b79e34182176e6a9057c8b52349ed5889674dbf00a19",
+      "steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ]
+    }
+  ]
+}
