@@ -1,0 +1,184 @@
+{
+  "schema": "maps2644-build-v1",
+  "bundle_version": "1.0.374",
+  "maps_set_version": "1.1.0",
+  "base_sha256": "8a39f41e965d6a3ecd18957e6ada62c05f2f3d7aeef064ae87b2d3865c7db551",
+  "parts": {
+    "category": {
+      "candidate_sha256": "408dd8a2e0839258b9cfe46a39cd841825b29181ac626e8e41285b6845cbd782",
+      "classes": 2,
+      "resources": []
+    },
+    "back": {
+      "candidate_sha256": "e530931bcd9bbfd380ce56273ab784955d2e9ed921dceceffa7712426feff5b1",
+      "classes": 9,
+      "resources": []
+    },
+    "bikes": {
+      "candidate_sha256": "c37c2134906610074210c9ae1063fc1c11617398ef1b73f1011f9015102507fd",
+      "classes": 20,
+      "resources": [
+        "extensions/maps_hide_bicycle_marks_2644.mpe"
+      ]
+    },
+    "startup": {
+      "candidate_sha256": "415af72510f832eb8fc51c8eab6de6117bf8d3fb0610b7a86a80ec8b25084376",
+      "classes": 9,
+      "resources": []
+    },
+    "strict": {
+      "candidate_sha256": "615dd55ec997a6ebeafca36463b76ef51c3cb9bcb9b7574e35d1abfa542e74fd",
+      "classes": 16,
+      "resources": [
+        "extensions/maps_strict_search2644.mpe"
+      ]
+    }
+  },
+  "tool_sha256": {
+    "classpath.jar": "fe4bc92815bb14976150e4ec83e4985932b46d1d47edec75d37604481572e864",
+    "ecj.jar": "74c93172475fee0cd4e6eefb44233516dd40525642da35d009146d97ea598229",
+    "d8.jar": "38a9ffaaebbd17d1514e3ecbff5a85b989bb13c551b9e224c7409514eea84ff5"
+  },
+  "dex_audit": {
+    "result": "PASS",
+    "baseline_classes": 409,
+    "old_changed_provider_classes": 39,
+    "new_changed_provider_classes": 58,
+    "preserved_classes": 370,
+    "standalone_classes": 59,
+    "all_unrelated_definitions_identical": true,
+    "all_serialized_definitions_identical": true
+  },
+  "unchanged_archive_entries": 296,
+  "unchanged_compressed_records": 300,
+  "compile_stubs_excluded": true,
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.374.mpp": {
+      "size": 48611522,
+      "sha256": "20b758f4ff9c8de8900137035ebadf7aae0642ccb0afadc70c5c24c16b12c714"
+    },
+    "Maps_Hiro_Addons_v1.1.0.mpp": {
+      "size": 301228,
+      "sha256": "cd7fb97bc91a0ff8b94be324a053e4f1752bfade8d4a9c89c392832875422148"
+    }
+  },
+  "source_archive": "Maps_Hiro_Addons_v1.1.0_sources_and_QA.zip",
+  "source_sha256": {
+    "MergeMaps.java": "501dcfbb537222e7e836426c4f8afe4134a48a66b1b013f29cf9bf0612c403df",
+    "assemble.py": "c40626efee40cc9ad124c12ed16f946f92721b6f7d779058cda2edb336afd5aa",
+    "build_modules.py": "160c5fcf8ce419724d26870aecf28b4a3fdb52b4f46e62a85e39c7f86cf8668d",
+    "compile_api.py": "8163ca0bc9b6341b8c070e251156704503dc16c1ec66179ef2d92d1b7e676419",
+    "modules/back/src/patch/MapsBackExit2644.java": "1d4a4cc43ffabfdfc54eb1f42bd61014c05996e1910e18053d3c48512baabaa5",
+    "modules/back/src/patch/MapsBackExitPatch.java": "d552b0b3bdb158e3bd56aad9ad701bed16767833f92724c647517244e7ffccde",
+    "modules/back/src/test/MapsBack2644Audit.java": "2dd97946c8ba45ae3226805ae27ff498a49962ce2efe0cd2d29b51e995bb1ee3",
+    "modules/back/src/test/MapsBackAudit.java": "93e387f0d244867a6664a4994ed6e1405faa1f47cadb8440b592979167627ed8",
+    "modules/bikes/src/patch/MapsHideBicycleMarksPatch.java": "a9eb652a4d6e05ab274f30047d49b9bbe1488076fa80483d9b73b4661b6fa45b",
+    "modules/bikes/src/patch/NativeContracts.java": "6ef932a229a6a9e20b39cff4bde4e3ca8f50c6bc5f150dbb686e157c429ba61f",
+    "modules/bikes/src/patch/RendererContracts.java": "68d3f35e101a261b1cc5c4f495219b914250331b2345644c6842b56b404305ad",
+    "modules/bikes/src/patch/RuntimeContracts.java": "4162c706754bfcf9c682b6eab62d4ef04ea89dc2f8c6e6af74aac6a3015b3383",
+    "modules/bikes/src/patch/UpgradeContracts.java": "768c33b81a756a255209673ca16221009721a8ebf825d0c92b88e1559000856c",
+    "modules/bikes/src/patch/v2644/MapsHideBicycleMarksPatch.java": "7a915e026383f3c8d59da1c15819b711f0dbdc08b7b5f77f7b031f3c093229f2",
+    "modules/bikes/src/patch/v2644/NativeContracts.java": "ff72d11ab6e10218f64e9108caddfb35048f3a6314bbf6da38e87a2c0789525a",
+    "modules/bikes/src/patch/v2644/RendererContracts.java": "4ee9d5bd20becff0e9ff88c8bb370c2f3c1341b6cd8267eb4f1bacda226e5005",
+    "modules/bikes/src/runtime/BicycleLegendFilter.java": "6eb1fe08e56267e3315e6cb6cbe5996ffd0d57c513a2756aed48a6bd5ad887f8",
+    "modules/bikes/src/runtime/BicycleMarkerFilter.java": "7a196197edab2144ccc832a6a6a3abaeaf7318f56fc0ad5310a2f4fc255c2140",
+    "modules/bikes/src/runtime2644/BicycleLegendFilter.java": "6eb1fe08e56267e3315e6cb6cbe5996ffd0d57c513a2756aed48a6bd5ad887f8",
+    "modules/bikes/src/runtime2644/BicycleMarkerFilter.java": "7eccc9f98b0d60edd9884e23bb934f194964b1656c9bfdb3f767fe50d9b300b1",
+    "modules/bikes/src/test/BundleAudit.java": "de9e8cd443d1fdb05e8abcd065210a2ce492245bf86f021a1bd9e8c81950d42c",
+    "modules/bikes/src/test/MapsBikesAudit.java": "86a0c6e68d617c4c4a6fbfedd48a3d5ab566a11c370dac10b567360cfe7e13fd",
+    "modules/bikes/src/test/MapsBikesAudit2644.java": "ff6f3b93e24c355cc94754775dfef55ae63d6e4d2f072181dc02f78b03b1579b",
+    "modules/bikes/src/test/SchemaAudit.java": "9934f8524291b0f4a3af9c16e24b13666fa3451e772a3e42d6351532c1edd254",
+    "modules/bikes/src/test-host/app/hiro/mapsbikes/BicycleLegendFilterTest.java": "63b75a1100a60c5c2e4d31810f133e84d9cbdc526f7ea2f67bb43d6570e851d1",
+    "modules/bikes/src/test-host/app/hiro/mapsbikes/BicycleMarkerFilterTest.java": "6a5faa59f6ad4b9b516d209cc69aa28eae9dd99be876496534197a2c08d62c2f",
+    "modules/bikes/src/test-host/bken.java": "7442659602f621ef65a9d189ef49274b369fe237aa039227a4fe182e5cfa6096",
+    "modules/bikes/src/test-host/bkjc.java": "31c9fba96e325a6fb1cfaa4adc14dd833db13f3fb5dcd02caa17d8a5f3a719de",
+    "modules/bikes/src/test-host/bkje.java": "567f26d9e234cbb1b6e75a2cc8aaa2cf4e1bdfc9a1fd96b543ad0c0644825bf3",
+    "modules/bikes/src/test-host/bkjj.java": "8ef2e1a68d9dd993d30ee34d51afaf52b4667ac23a0bddd37f846f74c47253e7",
+    "modules/bikes/src/test-host/chue.java": "db034ab0b8997c390380dec5f0161c889869214f6bcab4b707a06905f804094b",
+    "modules/bikes/src/test-host/cier.java": "eb8ab749d682e4407d5a471a70957f4200b73acc99560a5df6c6b619a1effab9",
+    "modules/bikes/src/test-host/cifq.java": "5050f8e7a22af454ac1863c140522d98d40811b52be04cb2b509742c508ccc19",
+    "modules/bikes/src/test-host/cifr.java": "f0b76e455afd763d2930b8c9f74bcd6de754e18afa36fa15a657c3ef747e41f3",
+    "modules/bikes/src/test-host/cifs.java": "277b38fc43ffc8af42c40a1e8f2f200269b8bc29aef5aacbbcceb50b8a439b13",
+    "modules/bikes/src/test-host/cift.java": "7bd47518d0616911865993fbf483d5b261d6493a9744b09e40fd16272058c42a",
+    "modules/bikes/src/test-host/com/google/common/collect/ImmutableList.java": "a5881fea3ba406d8ae9e593d8913e5172a7a3f9bb19316639fd41301ae5db1ef",
+    "modules/bikes/src/test-host2644/app/hiro/mapsbikes/BicycleLegendFilterTest.java": "63b75a1100a60c5c2e4d31810f133e84d9cbdc526f7ea2f67bb43d6570e851d1",
+    "modules/bikes/src/test-host2644/app/hiro/mapsbikes/BicycleMarkerFilterTest.java": "9a9ab88ec89ab25c6b380154d87c504ee46726a4f83af3389d1f35d5891315ae",
+    "modules/bikes/src/test-host2644/bksd.java": "757e9d57cbb12fdff8f244362c55c5f6a853f6b5f0843ee043bf8d9de704200f",
+    "modules/bikes/src/test-host2644/bkwu.java": "d622eefc31f9728a8750ac16a18b82d9cdc1f595e0ac5d98380aed85b3c6451f",
+    "modules/bikes/src/test-host2644/bkww.java": "f400a00596f0fbe6c70090a2492313328589a9159d92e9539c1670ed62488ec5",
+    "modules/bikes/src/test-host2644/bkxb.java": "8fd7d8a85e9a9e3f614242e95376af0c844e027cbd82406ef10a82e1fbc54a96",
+    "modules/bikes/src/test-host2644/chuj.java": "977c0486ae0aa076437ea7cc8dc508a16369c3549db8ff0d4549ab3c78ff5fb7",
+    "modules/bikes/src/test-host2644/cifb.java": "78889c33274d28defbb39a8deca848c9f15fcb7988ce0b158c80ed085c93afed",
+    "modules/bikes/src/test-host2644/cigb.java": "9d13685b536a9fa3f69880693077514c97ee750af1fd377bb02a99a2ad5bcbad",
+    "modules/bikes/src/test-host2644/cigc.java": "b07f6d32b268decd7eb323b2a37e9ebb9b74f3e69e2ed389e6143ab49f3dd98c",
+    "modules/bikes/src/test-host2644/cigd.java": "793e0f45aa168213803cb8709980696a68015875c0e2cc62cc27763008e9f276",
+    "modules/bikes/src/test-host2644/cige.java": "328f9f3548e16a506fbaad82d144d7a2d1725f586c710fa7249796d69434abc9",
+    "modules/bikes/src/test-host2644/com/google/common/collect/ImmutableList.java": "a5881fea3ba406d8ae9e593d8913e5172a7a3f9bb19316639fd41301ae5db1ef",
+    "modules/category/src/compile-stubs/BytecodePatch.java": "fef2e9538dcf854f03c6c89d509f1a1d5f892ee9e68121aab3f30c1ff18bad12",
+    "modules/category/src/patch/MapsCategoryRowPatch.java": "6c3cd5832e2bba7b071ef8c58a29ddc8743d68f02a907e15586702c185f009b5",
+    "modules/category/src/test/AuditNew.java": "633f2926514c777b677ddefa4557c107e434076d4bd479505c8fd3d8604938c2",
+    "modules/category/src/test/MapsCategoryAudit.java": "e2042858e4800a76454e22a4c6f9f4486cac0a9fe4b467817cf1d79cf8e8b6f4",
+    "modules/startup/src/patch/MapsStartupLocationPatch.java": "d63d6772b137f0cb39353ecdb7b7ae0f39a2d3d7ce08bfeb62a560ad4643d416",
+    "modules/startup/src/patch/Native2644.java": "9aa3f3e1affe87b8d45811fca550e76947b45d496df19ab79373ccbf50015ecf",
+    "modules/startup/src/runtime/LocationHost.java": "3150752bf71eb9a4d99c32f904aa13c76b2080b3dc404e3137b42c8b864f1f30",
+    "modules/startup/src/runtime/StartupLocation.java": "a7bcbb2ac69e76f804a56ab83e8ef027ef990b3b682a1f1b313b2a02f6bc7b73",
+    "modules/startup/src/test/MapsStartup2644Audit.java": "bd495d1bf4dcddd3e74cd518151774148a6f8450f1b2b5c27c98d14730e910cb",
+    "modules/startup/src/test/MapsStartup2644ColdLaunchAudit.java": "4a02ee20833eff6b371ab182371a5c30f3cd9d3d0ac4db365df7bbbdcff9073e",
+    "modules/startup/src/test/MapsStartupAudit.java": "e0f5ef2af8b67c3e31c40af61a95c299474c86ba4097fc3b23bea93b5036de9b",
+    "modules/startup/src/test/MapsStartupColdLaunchAudit.java": "7bcef4227fabdef209d6446fe0a9db50784cc76fc103da67597c83dc49da78bb",
+    "modules/startup/src/test-coexist/MapsBackAudit.java": "6dba9cd3603a8ad4be11802c5110c95df111c7ea36bc004c3e3c4b4a5128c814",
+    "modules/startup/src/test-host/app/hiro/mapsstartup/StartupLocationHostTest.java": "807757babf2b16837f3c3d853f460ec2fdbc3865bb41b4a526a8b6ddd1aafed8",
+    "modules/startup/src/test-native/MapsStartup2644BridgeVmTest.java": "6488687de8695264418cb5d84e49f3aa8fa9d17ccbc24c01f400757a623457e3",
+    "modules/startup/src/test-native/MapsStartupBridgeVmTest.java": "42129784128b90e9e1dbab2830ceeff8c2f6c233721cd630d67dfad31cf85806",
+    "modules/startup/src/test-prior/StartupLocation.java": "72186fe264b31cb5403489312516674a4bede23e79b28682e2c73e6ea3ca456f",
+    "modules/startup/src/test-stubs/android/app/Activity.java": "ee355ab973cf021c3821d00823e8637ed154ac5243cbbed26e13f8052d1abd16",
+    "modules/startup/src/test-stubs/android/content/ComponentName.java": "905ead0e67f6376936764bb7cb4cada4a06d02f5ccb22619685f57781916e824",
+    "modules/startup/src/test-stubs/android/content/Intent.java": "88f19b1898dc6bc1bc6ddc28af0fc4c2d40c4d06a0827d388dc75eeb8f1a2e46",
+    "modules/startup/src/test-stubs/android/net/Uri.java": "45eecc7ac138576303016b4bb9eeec365e5f05d57a089af9606ba9c2ed4b21c8",
+    "modules/startup/src/test-stubs/android/os/Bundle.java": "fa82c1f81154317a7983be8bf1689bcd23b94c817da5b10e47df24c7d83ce35c",
+    "modules/startup/src/test-stubs/android/os/Handler.java": "24b8cd6c3b652c08ef98ba8bf9b2575b342633e41e3a8a67cec7840f90781a79",
+    "modules/startup/src/test-stubs/android/os/Looper.java": "0e3a5e6567d5c8ccd75dbeb66e85c184a4cf3a1a6dee3f68ade90e64956c8bf0",
+    "modules/startup/src/test-stubs/android/os/SystemClock.java": "993f2ba581247daeb8c6bff585244eaf62ccc51c730996a4ab65638055590bea",
+    "modules/startup/src/test-stubs/android/view/MotionEvent.java": "a09bcf50eb346565eabeda87594cad22813189643c99663e3bff08dd7f0c25fd",
+    "modules/startup/src/test-stubs/android/view/View.java": "5311e37a021620ab9f45d7de201e2919959c23a0e892f7d26382ced7d17748a8",
+    "modules/startup/src/test-stubs/com/google/android/maps/MapsActivity.java": "5c30804630add202bb00a8e32945c014dea3b726bfa6b2dade10b93a90397fc6",
+    "modules/strict/src/patch/MapsStrictSearchPatch.java": "fb9bc615f2e5a4215c866ce155418d0ed6a9de3fac56c8c0a9b003a33d76735e",
+    "modules/strict/src/patch/NativeContracts.java": "2ceaa9dd9c15301180d7a482cd462b22509ed64b770b8cb122d994dc908d6ede",
+    "modules/strict/src/patch/RuntimeContracts.java": "d44f7ae7e29d24281e5a0509ea65e63c7f172d4596b1f71a114789b5181c9f64",
+    "modules/strict/src/patch/UpgradeContracts.java": "9f03c2d61b85fa6383b61a50fb25719a5256d9aeb8a3ccd6f3809c1ff2abb5fe",
+    "modules/strict/src/patch2644/MapsStrictSearchPatch.java": "4985b1c2d99792ab4373014dcc54e2bd3821787e5297375e14bc1ff5b8d6b586",
+    "modules/strict/src/patch2644/NativeContracts.java": "147266d53afad2a518b068babfd97d1e6f13f0a45c66ecec5120a8f4866b1ebe",
+    "modules/strict/src/patch2644/RuntimeContracts.java": "e7e114c50305e2845c81496df9b900b90f5bd9f2869d9897f35e1838db848884",
+    "modules/strict/src/runtime/SearchFilter.java": "264d7cf7d2679cbcac05967ba39e8385846b838ad4f86f6ef9c716799145b54a",
+    "modules/strict/src/runtime/StrictNameMatcher.java": "724a65500e829ba9d8bdb32e8ccf708570339be708b5a7b82b01d811f889f396",
+    "modules/strict/src/runtime2644/SearchFilter.java": "4c9d3cb01a6c3a63774411a54b0048a5055ffb532d7561b3096eee94393004dd",
+    "modules/strict/src/runtime2644/StrictNameMatcher.java": "a0c2970931426508ad3ad53c8a0e4dea2eb5702f84c5e0a3b2745b3f8bdba144",
+    "modules/strict/src/test/MapsStrictAudit.java": "467915cb6c79fa328681d2714b5e8536774397a892811c6850de774f5c873785",
+    "modules/strict/src/test-host/RuntimeFilterTest.java": "d30f6cd49bfa7406fbd5b393e5ddd37f3317d3f8ff98ba9b1918dc826f2dd992",
+    "modules/strict/src/test-host/android/util/Log.java": "3c2c29486080877fdc2353471d902315839fc12a07c7925bb64c1f73a6c0c208",
+    "modules/strict/src/test-host/app/hiro/mapsstrict/StrictNameMatcherTest.java": "41b43c90e82dccd09ebd5fc655468644a6eb66161edeb0d99ff4cf3bf27b00e4",
+    "modules/strict/src/test-host2644/RuntimeFilterTest.java": "afafe4fd3babedf976348311a91207a7760978a5f2d9a8dc122546b3fad3771b",
+    "modules/strict/src/test-host2644/android/util/Log.java": "3c2c29486080877fdc2353471d902315839fc12a07c7925bb64c1f73a6c0c208",
+    "modules/strict/src/test-host2644/app/hiro/mapsstrict/StrictNameMatcherTest.java": "ce6f94708ad6139d6126588e68d5fb1fba5e5d33f6e1c94f12b24670abb97d14",
+    "modules/strict/src/test2644/MapsStrict2644Audit.java": "e21abaf8e13a3c5ff00a25ce27b7f4bf3d1130874be5aec73267de1561adeac8",
+    "modules/strict/src/test2644/SchemaAudit.java": "f470e3bfe297dfcc0ef780c630779b8704eabd3f8eafa4a60657ed1703940278",
+    "test_modules.py": "937b2a0bddef40a9fbb0d644332266ff949540a495559b7f7ee1d9169383ffcf",
+    "verification/independent/CombinedAudit.java": "f7bf5b833b298ca83c0e8a710f6ef196329160d99ceb8aabb769a0cb40c42266",
+    "zip_helpers.py": "f2ac88b1a3d05096c658d405ab428ca0e4bb34e66db61142b33c9641022987eb"
+  },
+  "reproducibility": {
+    "result": "PASS",
+    "manifest_timestamp": "2026-11-15T16:09:11",
+    "final_artifacts_byte_identical": true,
+    "record": "verification/reproducibility.json"
+  },
+  "portable_test_suite": {
+    "result": "PASS",
+    "record": "verification/portable-tests/results.json",
+    "android_ui_executed": false
+  },
+  "independent_review": {
+    "result": "PASS",
+    "record": "verification/independent/independent-review.json"
+  }
+}
