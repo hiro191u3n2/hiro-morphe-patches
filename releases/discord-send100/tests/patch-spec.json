@@ -1,0 +1,152 @@
+{
+  "schema": "hiro.discord.send-button-static/v1",
+  "inputBundleSha256": "1d9e14c841737e987a44a876bec064ce1a029ae142835bdebd6a7e706c69f47b",
+  "inputBundleSize": 73802804,
+  "hermesVersion": 98,
+  "functionCount": 160594,
+  "module": {
+    "id": 12908,
+    "path": "modules/chat_input/native/accessories/ChatInputSendButton.tsx",
+    "factoryFunctionId": 12909
+  },
+  "patches": [
+    {
+      "functionId": 62650,
+      "functionName": "ChatInputSendButton",
+      "offset": 36284573,
+      "size": 1464,
+      "bodySha256": "8bcf62d229de6bd86e7bc6b7b974e4248cd878ac314a823a67fab8d8f8844a85",
+      "patchedBodySha256": "36f00d62414cabe36eeb27b7353b2c37bcb833e7463c690d40e23db7544bf928",
+      "functionHeader": {
+        "id": 62650,
+        "offset": 36284573,
+        "size": 1464,
+        "name": 139120,
+        "frame": 42,
+        "read": 31,
+        "write": 0,
+        "flags": 22,
+        "header": 53861528,
+        "expanded": true,
+        "num": 2,
+        "nonptr": 2,
+        "small": 751928
+      },
+      "expandedHeaderHex": "9da829020200000000000000b8050000701f020002000000020000002a0000001f00000016000000",
+      "expandedHeaderSha256": "904efbf05b111f41c2cab5c046324864282c0a008d8d4dc87a66d6ca127fc9b1",
+      "relativeOffset": 772,
+      "absoluteOffset": 36285345,
+      "oldHex": "b1e500000008",
+      "newHex": "afe500000000",
+      "oldInstruction": [
+        772,
+        "JmpTrueLong",
+        [
+          229,
+          8
+        ]
+      ],
+      "newInstruction": [
+        772,
+        "JmpLong",
+        [
+          229
+        ]
+      ],
+      "padding": {
+        "relativeOffset": 777,
+        "opcode": 0,
+        "instruction": "Unreachable",
+        "reason": "Never executed after unconditional forward jump; preserves byte lengths and subsequent instruction addresses."
+      },
+      "targetRelativeOffset": 1001,
+      "targetInstruction": [
+        1001,
+        "Mul",
+        [
+          0,
+          0,
+          7
+        ]
+      ],
+      "overlappingOtherFunctionIds": [],
+      "incomingBranchesToInstructionInterior": []
+    },
+    {
+      "functionId": 62651,
+      "functionName": "ChatInputSendButton",
+      "offset": 36286037,
+      "size": 842,
+      "bodySha256": "2e42e88fd2a8bd61b7ed49ac2f33066c06a164d1b4179f56dc31302a1d98fecb",
+      "patchedBodySha256": "102d42f6fd1272794116ce7ef551c4bab3687b5d7aa12cf374c2f86d32ac245a",
+      "functionHeader": {
+        "id": 62651,
+        "offset": 36286037,
+        "size": 842,
+        "name": 139120,
+        "frame": 38,
+        "read": 29,
+        "write": 0,
+        "flags": 22,
+        "header": 53861572,
+        "expanded": true,
+        "num": 1,
+        "nonptr": 2,
+        "small": 751940
+      },
+      "expandedHeaderHex": "55ae290202000000000000004a030000701f02000100000002000000260000001d00000016000000",
+      "expandedHeaderSha256": "9edc5ecf69c638b66973c8719154a246fdd15d456cd5c4512ed2fdaab5d594fc",
+      "relativeOffset": 502,
+      "absoluteOffset": 36286539,
+      "oldHex": "b06010",
+      "newHex": "ae6000",
+      "oldInstruction": [
+        502,
+        "JmpTrue",
+        [
+          96,
+          16
+        ]
+      ],
+      "newInstruction": [
+        502,
+        "Jmp",
+        [
+          96
+        ]
+      ],
+      "padding": {
+        "relativeOffset": 504,
+        "opcode": 0,
+        "instruction": "Unreachable",
+        "reason": "Never executed after unconditional forward jump; preserves byte lengths and subsequent instruction addresses."
+      },
+      "targetRelativeOffset": 598,
+      "targetInstruction": [
+        598,
+        "LoadFromEnvironment",
+        [
+          4,
+          4,
+          5
+        ]
+      ],
+      "overlappingOtherFunctionIds": [],
+      "incomingBranchesToInstructionInterior": []
+    }
+  ],
+  "footer": {
+    "kind": "SHA-1",
+    "length": 20,
+    "range": "all bytes before the final 20 bytes",
+    "originalValid": true
+  },
+  "outputBundleSha256": "d13cddd00337b433bd90dd0a63abd2f4e7acaffc5e86fbed96a353ba978ee5b5",
+  "outputBundleSize": 73802804,
+  "changedBodyByteOffsets": [
+    36285345,
+    36285350,
+    36286539,
+    36286541
+  ]
+}

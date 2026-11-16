@@ -1,0 +1,25 @@
+Venus 送信ボタン表示対策 v1.0.0 / Hiro Morphe Patches v1.0.375
+
+対象：今回提供されたVenus v1.21.1、351.11 - Stable (351011)、com.discord.venus。
+送信ボタンだけをDiscordが元から持つアニメーションなしの表示へ切り替えます。
+送信可否・文字と添付の判定・編集・クールダウン・音声切替・送信操作と、既存のVenus設定を保持します。
+
+使い方
+1. Morphe ManagerでHiro Morphe Patchesをv1.0.375へ更新。
+2. 今回添付した修正前のVenus-v351.11_-_stable-discord-v1.21.1.apkを選択。
+3. 「送信ボタンの表示消失を修正」だけを追加適用し、生成APKをインストール。
+総合版と単独版はどちらか一方を使用します。元のDiscord APKへ直接当てるパッチではありません。
+異なるbundleや適用済みAPKは処理を中止します。ソース更新だけではインストール済みアプリは変わりません。
+
+検証
+単独版・総合版で実APKへの適用・再構築成功、生成結果一致。
+対象bundle内の表示分岐4バイトとSHA-1末尾20バイトだけを変更。
+他10,841ファイルは内容一致。Manifest、DEX、ネイティブライブラリ、Venusの他資産を保持。
+256条件のHBCホスト実行検証、14項目の拒否・整合性検証、2回の再ビルド一致。
+既存総合版428クラス・354資産エントリーの保持を確認。
+Android実機・エミュレーターでの表示改善は未確認です。画像の現象の根本原因を特定したものではなく、送信ボタンのアニメーションへの依存を避ける対策版です。
+
+更新ソース
+https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/patches-bundle.json
+配布先
+https://hiro-morphe-patches.otoha10.chatgpt.site/

@@ -1,3 +1,9 @@
+# [1.0.375](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-16)
+
+### Bug Fixes
+
+* **Venus:** 新項目「送信ボタンの表示消失を修正」v1.0.0。Venus v1.21.1 / Discord 351.11 - Stable（351011・com.discord.venus）の送信ボタンだけを既存のアニメーションなし表示に切り替え、表示が消える問題を回避します。送信可否・送信中の制御・送信操作・音声ボタン、入力欄拡張と既存Venus機能、他アプリのパッチを保持。確認済みのVenus APKへ今回の項目だけ追加適用し、生成APKをインストールしてください。提供APKへの単独版・統合版の適用と再構築、コード・資源保持を検証。Android実機の表示・操作は未確認です。
+
 # [1.0.374](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-15)
 
 ### Bug Fixes
