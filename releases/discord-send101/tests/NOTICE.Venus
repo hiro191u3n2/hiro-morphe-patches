@@ -1,0 +1,17 @@
+External test dependency attribution
+
+Venus-Patches
+https://github.com/VenusIsJaded/Venus-Patches
+Source revision: 987b7a22d96d41a0ba80c060b485291e1c7bcc4b (v1.21.1)
+Inspection files imported at test time: scripts/hbc/hbc.py and scripts/hbc/ops.txt
+
+The Venus-Patches project is distributed under the GNU General Public License,
+version 3.0 (GPL-3.0). Its license text and original notices are available at:
+https://github.com/VenusIsJaded/Venus-Patches/blob/987b7a22d96d41a0ba80c060b485291e1c7bcc4b/LICENSE
+
+Those inspection files are not vendored or redistributed in this test package.
+Acquire the pinned upstream source, retain its license and notices, and pass
+its scripts/hbc directory with --hbc-dir.
+
+The semantic test imports the upstream parser and opcode definitions. It does
+not include the Discord APK, a full disassembly, or a cached bundle index.

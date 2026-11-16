@@ -1,3 +1,10 @@
+# [1.0.376](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-16)
+
+### Bug Fixes
+
+* **Discord:** 「送信ボタンの表示消失を修正」v1.0.1。元のDiscord（com.discord）のパッチ一覧に表示し、351.11 - Stable（351011）の未改造APKMへVenus v1.21.1の通常項目と同時適用できるよう修正。送信ボタンを既存のアニメーションなし表示へ切り替える対策、送信可否・送信操作、Venusの既存機能、他アプリのパッチを保持します。
+* **Venus:** v1.0.375の「改造済みVenus APKへ追加適用する」という案内を撤回。Morphe Managerの再パッチ・改造済みAPK判定に対応し、元の未改造Discord APKMから作り直す手順へ訂正しました。Hiroをv1.0.376へ更新し、元のDiscord 351.11 - Stable（351011）にVenus v1.21.1の通常項目とHiroの送信ボタン修正を一緒に選んで適用し、生成APKをインストールしてください。ソース更新だけでは既存アプリへ反映されません。Android実機・エミュレーターでの表示・操作は未確認です。
+
 # [1.0.375](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-16)
 
 ### Bug Fixes

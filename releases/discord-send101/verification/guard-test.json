@@ -1,0 +1,44 @@
+{
+  "schema": "discord-send101-final-artifact-guards-v1",
+  "result": "PASS",
+  "exit_code": 0,
+  "provider_path": "/workspace/scratch/b297ea92cfbd/discord376-build-a/Discord_Send_Button_v1.0.1.mpp",
+  "provider_sha256": "8a8f38b2a42a6d540f84d62bd9d742dac56ba64dca1455fc857205259835312a",
+  "sdk_sha256": "8044782202eee6bc5f9c426730b99030fb8eb8f44f8e25894682c84d8da69f60",
+  "compiled_test_sources": [
+    "/workspace/scratch/b297ea92cfbd/hiro-morphe-patches/releases/discord-send101/tests/GuardTest.java",
+    "/workspace/scratch/b297ea92cfbd/hiro-morphe-patches/releases/discord-send101/tests/LoaderFixtureProbe.java"
+  ],
+  "provider_source_excluded_from_test_compilation": true,
+  "provider_loaded_from_final_mpp": true,
+  "compile_command": [
+    "java",
+    "-jar",
+    "/workspace/scratch/80dcfb9aa48e/tools/ecj.jar",
+    "-8",
+    "-nowarn",
+    "-encoding",
+    "UTF-8",
+    "-cp",
+    "/workspace/scratch/b297ea92cfbd/discord376-build-a/Discord_Send_Button_v1.0.1.mpp:/workspace/scratch/193242214db5/tools/morphe-dev19.jar",
+    "-d",
+    "/workspace/scratch/b297ea92cfbd/analysis/send101-final-artifact-tests/classes",
+    "/workspace/scratch/b297ea92cfbd/hiro-morphe-patches/releases/discord-send101/tests/GuardTest.java",
+    "/workspace/scratch/b297ea92cfbd/hiro-morphe-patches/releases/discord-send101/tests/LoaderFixtureProbe.java"
+  ],
+  "run_command": [
+    "java",
+    "-Xmx2g",
+    "-Dexpected.provider=/workspace/scratch/b297ea92cfbd/discord376-build-a/Discord_Send_Button_v1.0.1.mpp",
+    "-cp",
+    "/workspace/scratch/b297ea92cfbd/analysis/send101-final-artifact-tests/classes:/workspace/scratch/b297ea92cfbd/discord376-build-a/Discord_Send_Button_v1.0.1.mpp:/workspace/scratch/193242214db5/tools/morphe-dev19.jar",
+    "GuardTest",
+    "/workspace/scratch/b297ea92cfbd/analysis/index.android.bundle",
+    "/workspace/scratch/b297ea92cfbd/apk-input/discord-stock351/index.android.bundle",
+    "/workspace/scratch/b297ea92cfbd/apk-input/discord-stock351/base.apk",
+    "/workspace/scratch/b297ea92cfbd/apk-input/Venus-v351.11_-_stable-discord-v1.21.1.apk",
+    "/workspace/scratch/b297ea92cfbd/analysis/send101-final-artifact-tests/work"
+  ],
+  "stdout": "Provider: /workspace/scratch/b297ea92cfbd/discord376-build-a/Discord_Send_Button_v1.0.1.mpp\nPASS: 126 real-bundle, runtime and atomic-failure assertions\n",
+  "stderr": ""
+}

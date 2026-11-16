@@ -1,0 +1,39 @@
+Discord / Venus 送信ボタン表示対策 v1.0.1
+Hiro Morphe Patches 総合版 v1.0.376
+
+対象
+元の未改造Discord 351.11 - Stable（versionCode 351011、com.discord）のAPKM一式。
+Venus v1.21.1の通常の改造項目と同時に適用します。
+
+変更内容
+元のDiscordのパッチ一覧へ「送信ボタンの表示消失を修正」を表示し、Venusと同時に適用する方式へ変更しました。
+送信ボタンだけをDiscordが元から持つアニメーションなし表示へ切り替えます。
+送信可否・入力文字と添付の判定・編集・クールダウン・音声切替・送信操作、Venusの入力欄拡張と他の設定を保持します。
+
+前版の案内の訂正
+総合版v1.0.375／単独版v1.0.0で案内した「改造済みVenus APKへ、この項目だけ追加適用する」という手順は撤回します。
+今回確認したMorphe Manager 2.6.0-dev.6では、Venusの再パッチは元のDiscordを対象に開始され、改造済みAPKをファイル選択しても拒否されます。以前の案内ではManager上から適用できませんでした。
+この版では、元の未改造Discord APKMからVenusとHiroの項目を一緒に選んで作り直してください。
+
+使い方
+1. Morphe ManagerでHiro Morphe Patchesをv1.0.376へ更新します。
+2. Discordのパッチ画面で、元の未改造Discord 351.11 - Stable（351011）のAPKM一式を選びます。分割ファイルのbase.apkだけにしないでください。
+3. 普段使うVenus v1.21.1の項目に加え、Hiro Morphe Patchesの「送信ボタンの表示消失を修正」を同じ画面で選びます。
+4. パッチを実行し、生成したAPKをインストールします。
+総合版とDiscord単独版はどちらか一方を使用してください。
+ソース更新だけでは、インストール済みアプリへ反映されません。
+
+確認した検証
+Patcher 2.4.0-dev.8で、原版APKMへVenus全79項目＋Hiroの80項目（単独MPP／総合MPP）と、Venusの入力欄拡張・Custom branding＋Hiroの3項目を適用し、APK再構築を確認。Patcher 2.3.0でも80項目を確認しました。
+各Venus単独出力との比較で、12,641ファイルは完全一致。変更は対象bundleの表示分岐4バイトとチェックサムのみです。単独版と総合版の出力APKは同一です。
+最終MPPのガード126項目、原版・Venus各256条件のホスト検証、2回の再現ビルドと既存アプリのパッチ保持を確認しました。最低Patcher版は2.3.0です。
+
+検証の限界
+Android実機・エミュレーターでの送信ボタンの表示改善と操作は未確認です。
+画像で発生した現象そのものの根本原因を断定する修正ではなく、送信ボタンのアニメーションへの依存を避ける対策です。
+ビルド、元APKMへの適用・再構築、Venusとの併用、コードと既存機能の保持に関する実施結果は、同梱のQA_Discord_Send_Button_v1.0.1.jsonを参照してください。
+
+更新ソース
+https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/patches-bundle.json
+配布先
+https://hiro-morphe-patches.otoha10.chatgpt.site/

@@ -1,0 +1,35 @@
+{
+  "test": "exact_hbc_function_host_interpreter",
+  "casesCompared": 256,
+  "compilerVariants": [
+    62650,
+    62651
+  ],
+  "stateDimensions": [
+    "canSendVoiceMessage",
+    "hasText",
+    "hasPendingAttachments",
+    "hasPendingEdit",
+    "requireTextContent",
+    "cooldown"
+  ],
+  "patchedReducedMotionSettings": [
+    false,
+    true
+  ],
+  "assertions": [
+    "Output equals original ReducedMotion=true",
+    "send callback identity retained",
+    "render never sends",
+    "disabled and cooldown state preserved",
+    "voice button branch preserved",
+    "explicit dimensions preserved",
+    "imperative input setter preserved",
+    "animation path skipped"
+  ],
+  "result": "PASS",
+  "limitations": "Mocks React/RN imports; not Hermes VM, Android runtime, or device/UI reproduction.",
+  "inputBundleSha256": "13f83cc34d48bf2002e0754cf2cea486b4e1be6b2d09b545584bd8cf0177fc73",
+  "inputCase": "Discord 351.11 stock",
+  "dependencyCommit": "987b7a22d96d41a0ba80c060b485291e1c7bcc4b"
+}
