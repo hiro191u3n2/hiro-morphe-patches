@@ -1,0 +1,89 @@
+{
+  "result": "PUBLISHED",
+  "version": "1.0.381",
+  "component_version": "1.1.1",
+  "published_at": "2026-11-17T09:37:57.742267+00:00",
+  "site": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_f18627ca12948191a6d717fce9d691d2",
+    "version_number": 132,
+    "source_commit": "537df6a0bf6fb7fac03a0c192c2e6bfcce009dab",
+    "deployment_id": "appgdep_6afc2062da24819197c5121d8cfa9f7a",
+    "status": "succeeded",
+    "archive_sha256": "sha256:a24d8940b318f616c793c75c1ded57c88263ff4e1a17629000a43bf489a15d81",
+    "archive_bytes": 256829440
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.381.mpp": {
+      "bytes": 48325768,
+      "sha256": "8266fbf1274b8f9651bb67b0a55264564036b8b90499995591f267b3277341c7"
+    },
+    "NewX_UI_Options_v1.1.1.mpp": {
+      "bytes": 50236,
+      "sha256": "078bee06a01a3289a654fbba5eedd952619467e5a7ff2a7fe7da9ca297061161"
+    }
+  },
+  "github": {
+    "source_commit": "fa63f431760bf56c9b3b7dad052653237f370002",
+    "changelog_commit": "b03d52f7a3d928c0141341be59fbd9599242ba43",
+    "feed_commit": "a8863c4f6c32aa614dcae813766987f80825af19",
+    "update_order": [
+      "site",
+      "main/CHANGELOG.md",
+      "main/patches-bundle.json",
+      "dev fast-forward"
+    ],
+    "channels": {
+      "result": "PASS",
+      "validation_output": "OK dev/patches-bundle.json: b2e79cfdbab6993d696e926f8854e482de5436fd92eafda78e5ff510815d3518\nOK main/patches-bundle.json: b2e79cfdbab6993d696e926f8854e482de5436fd92eafda78e5ff510815d3518\nOK dev/CHANGELOG.md: d80c02314b79e9b7ceabd5edd3694c325e1d44ad415089e333339fd31cb43042\nOK main/CHANGELOG.md: d80c02314b79e9b7ceabd5edd3694c325e1d44ad415089e333339fd31cb43042\nOK both Manager channels point to v1.0.381; MPP SHA-256 8266fbf1274b8f9651bb67b0a55264564036b8b90499995591f267b3277341c7"
+    }
+  },
+  "user_report": "Sluggish X timeline scrolling with user-provided recording; recording alone did not isolate root cause.",
+  "changes": {
+    "patch": "NewX: 表示設定を追加（おすすめ・上下固定・120Hz・表示回数）",
+    "raw_count_shortcut": "Enabled valid ViewCount skips native abbreviated String construction; OFF/invalid/other count labels retain native path.",
+    "formatter": "One current-locale NumberFormat per thread, replaced on locale change. No unbounded locale or string cache.",
+    "preserved": [
+      "All four in-app controls and persisted keys",
+      "Chat recommendations hook",
+      "Pinned bars and native scrolling/gesture behavior",
+      "120Hz helper",
+      "Other app providers and extensions"
+    ]
+  },
+  "validation": {
+    "application_cases": {
+      "dev1": 51,
+      "dev2": 51,
+      "dev2-clone": 52,
+      "standalone": 2
+    },
+    "dex_and_resource_preservation": "PASS; only native count bridge and ViewCountFormat changed, FormatterState added; resources.arsc and5847other non-DEX payloads identical",
+    "host_hook_cases": 126,
+    "formatter_assertions": 36,
+    "formatter_reuse_calls": 1000,
+    "formatter_concurrent_calls": 4000,
+    "fast_mpp": "PASS",
+    "compiled_download_routes": "PASS",
+    "rendered_html_tests": 13,
+    "missing_piko": "rejected",
+    "host_formatter_benchmark": {
+      "environment": "Java21 host JVM, en-US,50,000calls per round,5rounds",
+      "baseline_median_allocated_bytes": 59598480,
+      "optimized_median_allocated_bytes": 5998480,
+      "baseline_median_ns": 73098193,
+      "optimized_median_ns": 32795364,
+      "includes_native_compact_formatter": false
+    }
+  },
+  "limitations": {
+    "physical_device_tested": false,
+    "emulator_tested": false,
+    "android_runtime_verified": false,
+    "device_scroll_improvement_measured": false,
+    "device_root_cause_established": false,
+    "actual_120hz_verified": false,
+    "manager_device_badge_observed": false
+  }
+}
