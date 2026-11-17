@@ -1,0 +1,43 @@
+{
+  "environment": "host JVM",
+  "java_version": "21.0.13",
+  "locale": "en-US",
+  "calls_per_round": 50000,
+  "rounds": 5,
+  "warmup_calls_per_variant": 60000,
+  "baseline_ns": [
+    73098193,
+    272222174,
+    165155945,
+    54804132,
+    52859755
+  ],
+  "optimized_ns": [
+    32338838,
+    34093454,
+    32719059,
+    32795364,
+    35828740
+  ],
+  "baseline_allocated_bytes": [
+    59598640,
+    59598480,
+    59598480,
+    59598480,
+    59598480
+  ],
+  "optimized_allocated_bytes": [
+    5998480,
+    5998480,
+    5998480,
+    5998480,
+    5998480
+  ],
+  "baseline_median_ns": 73098193,
+  "optimized_median_ns": 32795364,
+  "baseline_median_allocated_bytes": 59598480,
+  "optimized_median_allocated_bytes": 5998480,
+  "thread_allocation_measurement_supported": true,
+  "native_bridge_work_measured": false,
+  "physical_device_tested": false
+}

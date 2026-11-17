@@ -1,0 +1,25 @@
+{
+  "result": "PASS",
+  "ui_options_sha256": "c74f74a7d1795430ed64b80b72d34934d0c4038c220d0b43543f32840aa818b1",
+  "formatter_sha256": "2ebe26ecefafde206fcdbac626e72d82b2772637dc272b2072a625e0bb3e6788",
+  "host_test": "PASS: 36 formatter assertions, 1000 reuse calls and 4000 concurrent calls across 4 threads",
+  "raw_integer_precision": 64,
+  "no_float_or_double_conversion": true,
+  "locale_cases": [
+    "en-US",
+    "ja-JP",
+    "de-DE",
+    "fr-FR",
+    "ar-EG"
+  ],
+  "off_null_negative_return_null_for_native_fallback": true,
+  "one_current_locale_formatter_per_thread": true,
+  "deterministic_reuse_tested": true,
+  "locale_invalidation_tested": true,
+  "physical_device_tested": false,
+  "native_hook_scope_tested_here": false,
+  "api": "formatOrNull(Ljava/lang/Long;)Ljava/lang/String;",
+  "additional_runtime_class": "Lapp/hiro/newxui/ViewCountFormat$FormatterState;",
+  "bounded_cache": "one formatter and one locale per active thread; no string cache or locale map",
+  "host_benchmark_report": "benchmark.json"
+}

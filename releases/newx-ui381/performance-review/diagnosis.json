@@ -1,0 +1,26 @@
+{
+  "result": "REVIEWED",
+  "reported_issue": "Sluggish timeline scrolling after adding UI options",
+  "recording_observation": "Fixed navigation works; selected motion intervals show over60 distinct positions per second. Short holds overlap newtouch gestures, so video does not isolate app jank or prove a60fpscap.",
+  "concrete_overhead_found": [
+    "Enabled ViewCount was formatted by both the original abbreviation path and the full-count formatter; native string was discarded.",
+    "A new NumberFormat instance was created for each full-count label rebuild."
+  ],
+  "repair_scope": [
+    "Skip original abbreviation construction only when a valid enabled ViewCount full label is available.",
+    "Reuse a thread-confined locale-specific NumberFormat."
+  ],
+  "preserved": [
+    "Native rendering cadence and gesture friction",
+    "Original numeric formatting when OFF or for other action types",
+    "Bar hooks, cached preference reads and120Hz behavior"
+  ],
+  "not_established": [
+    "Device root cause of perceived sluggishness",
+    "Measured device frame-time or touch-latency improvement"
+  ],
+  "physical_device_tested": false,
+  "references": [
+    "https://developer.android.com/develop/ui/views/animations/adaptive-refresh-rate"
+  ]
+}

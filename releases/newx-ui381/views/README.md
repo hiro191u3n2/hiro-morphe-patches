@@ -1,0 +1,19 @@
+# Full timeline view counts
+
+`ViewCountHook` targets X `12.43.0-prod.01`, `com.x.inlineactionbar.w.c`. The method's exact native fingerprint is checked before mutation. It is identical in the original DEX and all four tested v379 configurations (Piko dev.1, dev.2, dev.2 clone, and standalone dev.2).
+
+The inline action model carries an action enum, a nullable `Long` count, and an enabled flag. The native data mappers parse the server's decimal count string in radix 10 into `Long`; the count is not reconstructed from the abbreviated label. Null stays null. The hook neither invents extra precision nor alters any action's visibility.
+
+Only the eight instructions that produce an inline action's nullable label are replaced. A private static synthetic bridge receives the still-live model and native `Resources`, performs the same null check, and passes the raw boxed `Long` to `ViewCountFormat.formatOrNull` only when the enum is `ViewCount`. A nonnull full label returns immediately. A null result (option OFF or invalid count) falls through to exactly one original native formatting call. Likes, reposts, replies, bookmarks and every other action call the native formatter directly and never call the custom runtime. The separate money-like count formatting loop is unchanged.
+
+The original result register remains v7. The other original scratch register v8 is unconditionally overwritten by `Iterator.hasNext()` before either the next element or loop exit. The native method retains its 61 registers, every unrelated instruction, all external control-flow targets, Compose groups, and layout logic. The bridge has six registers. On the native path, the long result replaces both temporary registers before the native formatter call, and its final String replaces the low register before return. The shortcut path returns the runtime String in that same register. The unused high register is never read at the merged return. The new method accesses existing native fields and formatter from the same class as the original caller.
+
+Compared with v380, an enabled valid ViewCount no longer creates and discards the original compact label before formatting the full label. The custom formatter also reuses one locale-keyed NumberFormat per thread (see `views-runtime`). Native labels are already remembered by Compose using the resources and action list: these costs occur when a row's labels are rebuilt, not necessarily on every animation frame. No claim about measured device FPS is made.
+
+The settings lookup was inspected in the actual packaged Piko DEX. After its registry is frozen, `findSetting` is an in-memory map lookup and `BooleanSetting.get` returns its cached value. This path does not read preferences from disk, allocate a new setting, or enter the registry monitor. The existing live lookup is retained rather than adding a second stale-value cache.
+
+Piko remembers formatted labels in Compose state, so the setting is marked as requiring an X restart. Formatting changes no dimensions or overflow behavior; exceptionally long counts remain subject to the native layout. Physical-device layout testing has not been performed.
+
+Run `python views/test.py ORIGINAL_CLASSES6.dex [BASELINE.apk ...]` from a source tree containing the documented build tools. The host audit exercises actual Patcher 2.4 mutable DEX APIs, verifies every preserved native instruction and relocated branch target, serializes and reloads the changed DEX, rejects duplicate application, and interprets the emitted bridge for 126 combinations of action type, nullable/zero/negative/64-bit counts, and enabled state. Every case asserts exact native/custom call counts: zero native calls on the successful shortcut, exactly one on a nonnull fallback, and no custom calls for unrelated actions. Runtime locale formatting is tested separately in `views-runtime`.
+
+This directory contains no redistributed application DEX or source dumps.
