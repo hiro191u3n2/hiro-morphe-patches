@@ -1,0 +1,80 @@
+{
+  "result": "PUBLISHED",
+  "version": "1.0.382",
+  "component_version": "1.1.2",
+  "restored_behavior_version": "1.0.380",
+  "withdrawn_behavior_version": "1.0.381",
+  "published_at": "2026-11-17T10:11:55.540367+00:00",
+  "user_report": "User reported scrolling became worse after v381 and requested one-version rollback.",
+  "site": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_ea565c7021488191b9a9ee6d1e0ebcf5",
+    "version_number": 133,
+    "source_commit": "f8ebcf1b58122815143a846f8431cb2926356864",
+    "deployment_id": "appgdep_6afc28334c8481919dcf9087054f1337",
+    "status": "succeeded",
+    "archive_sha256": "sha256:3ff566f70193e732f4338b21aa74d0d588aba3c38fc4a4d18db9b47f94b318c8",
+    "archive_bytes": 257546240
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.382.mpp": {
+      "bytes": 48325466,
+      "sha256": "85ed82ced41d546bd1b6a77a0e84fe12812e798fda674138257ba5791ff0887c"
+    },
+    "NewX_UI_Options_v1.1.2.mpp": {
+      "bytes": 49947,
+      "sha256": "8aa87497670bebbc4d31f589a935a1335361c6f6be8ce1a5e0732f574bd5ada8"
+    }
+  },
+  "restoration": {
+    "combined_payload_entries_identical_to380": 395,
+    "standalone_payload_entries_identical_to110": 10,
+    "only_changed_archive_entry": "META-INF/MANIFEST.MF",
+    "purpose_of_new_version": "Monotonic Manager update version; no new behavior changes",
+    "all_four_ui_controls_and_preferences_retained": true,
+    "v381_formatter_shortcut_withdrawn": true,
+    "v381_threadlocal_state_absent": true
+  },
+  "validation": {
+    "fresh_case": "Piko3.12.0-dev.2 with51selectedpatches",
+    "fresh_apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337",
+    "fresh_apk_entirely_identical_to380": true,
+    "exact_identical_classes": 146782,
+    "changed_classes": 0,
+    "added_classes": 0,
+    "removed_classes": 0,
+    "resources_and_other_payloads_exact": true,
+    "historical380_cases": [
+      "dev1",
+      "dev2",
+      "dev2-clone",
+      "standalone"
+    ],
+    "all_four_retested_for382": false,
+    "fast_mpp": "PASS",
+    "compiled_delivery_tests": "PASS",
+    "rendered_html_tests": 13
+  },
+  "github": {
+    "source_commit": "daf9c6cee0fd1b19193254bd3b09ee885842de12",
+    "changelog_commit": "7e33aca2739cc341fc9bbab986caf81b571fc8a3",
+    "feed_commit": "9ae8eb7a0273363df963f01b35410940df2f418f",
+    "update_order": [
+      "site",
+      "main/CHANGELOG.md",
+      "main/patches-bundle.json",
+      "dev fast-forward"
+    ],
+    "channels": {
+      "result": "PASS",
+      "validation_output": "OK dev/CHANGELOG.md: a35ea5feb372d96f05c1f73b753f322184c09667840b8f150da80781f06b0ead\nOK main/CHANGELOG.md: a35ea5feb372d96f05c1f73b753f322184c09667840b8f150da80781f06b0ead\nOK main/patches-bundle.json: a5e6511c2212d15dba5783370b6742f513570a90d993bedbfdde23f69de8cf3f\nOK dev/patches-bundle.json: a5e6511c2212d15dba5783370b6742f513570a90d993bedbfdde23f69de8cf3f\nOK both Manager channels point to v1.0.382; MPP SHA-256 85ed82ced41d546bd1b6a77a0e84fe12812e798fda674138257ba5791ff0887c"
+    }
+  },
+  "limitations": {
+    "physical_device_tested": false,
+    "emulator_tested": false,
+    "scroll_improvement_measured_on_device": false,
+    "manager_device_badge_observed": false
+  }
+}
