@@ -16,7 +16,10 @@ X `com.twitter.android` `12.43.0-prod.01` (`312430001`, arm64) 用の3項目で�
 - Pikoを併用するときも `NewX:` の項目を使用する。確認済みはPiko `3.12.0-dev.1`。
 - Morphe Patcher `2.4.0` 以上を要求する。適用後に生成されたAPKをインストールする。
 
-この変更の成果物は手動取り込み用。既存の自動更新フィード・本番サイトには変更を加えていない。
+総合版v1.0.377として通常の配布先・自動更新ソースに公開。Morphe ManagerでHiro Morphe Patchesのソースを更新し、元の未改造APKMへ適用して生成APKをインストールする。ソース更新だけではインストール済みXは変更されない。
+
+配布ページ: https://hiro-morphe-patches.otoha10.chatgpt.site
+更新ソース: https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches/main/patches-bundle.json
 
 ## 検証
 

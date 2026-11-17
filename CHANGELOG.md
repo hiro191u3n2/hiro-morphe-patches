@@ -1,3 +1,9 @@
+# [1.0.377](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-17)
+
+### Features
+
+* **X:** X 12.43.0-prod.01（312430001）向けに「NewX:」付きのHiro 3項目を追加。カテゴリ設定の再起動後の保持、投稿日時のyyyy/MM/dd HH:mm・24時間表記、ホーム・検索・通知・DMの最上位から戻る1回で終了・履歴削除に対応。旧Hiroの3項目は選択解除し、NewXの3項目を選択してください。Piko併用時もNewX用の項目を使用します。Morphe Patcher 2.4.0で実APKMへのHiro単独3項目、Piko NewX既定46＋Hiro 3（計49）、Clone追加（計50）の適用・APK再構築と参照監査に成功。Android実機・エミュレーターでの表示・操作は未確認です。総合版と単独版はどちらか一方を使用し、生成APKをインストールしてください。既存パッチを保持します。
+
 # [1.0.376](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-16)
 
 ### Bug Fixes
