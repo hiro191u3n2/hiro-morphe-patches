@@ -134,6 +134,10 @@ def main():
     writes[site/'worker/index.ts']=index.encode()
     tests=(site/'tests/delta378-mpp.test.mjs').read_text().replace('378','379').replace('Piko_NewX_Japanese_v1.0.0.mpp',SINGLE)
     tests=tests.replace('48282321',str(len(artifacts[COMBINED]))).replace(BASE_SHA,sha(artifacts[COMBINED]))
+    tests=replace_once(tests,'Piko Japanese standalone preserves tested bytes and resumed downloads','NewX UI standalone preserves tested bytes and resumed downloads')
+    tests=replace_once(tests,'assert.equal(target.length, 73676);',f'assert.equal(target.length, {len(artifacts[SINGLE])});')
+    tests=replace_once(tests,"assert.equal(hash(target), '704ddd95d576af03019fac14469bd2ad9e6c89b7df6eff10e160fe37faa18f97');",f"assert.equal(hash(target), '{sha(artifacts[SINGLE])}');")
+    tests=replace_once(tests,"['bytes=65536-', 65536, target.length - 1]","[`bytes=${Math.floor(target.length / 2)}-`, Math.floor(target.length / 2), target.length - 1]")
     location="  if (name.startsWith('Hiro_Morphe_Patches_v1.0.377.mpp.literal')) return path.join(site, 'scripts/mpp-release-data/377', name);"
     tests=replace_once(tests,location,location+"\n  if (name.startsWith('Hiro_Morphe_Patches_v1.0.378.mpp.literal')) return path.join(site, 'scripts/mpp-release-data/378', name);")
     writes[site/'tests/delta379-mpp.test.mjs']=tests.encode()
