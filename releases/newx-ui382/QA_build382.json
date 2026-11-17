@@ -1,0 +1,47 @@
+{
+  "result": "PASS",
+  "version": "1.0.382",
+  "timestamp": "2026-11-17T10:00:26",
+  "restored_version": "1.0.380",
+  "rollback_payloads_match380": true,
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.382.mpp": {
+      "bytes": 48325466,
+      "sha256": "85ed82ced41d546bd1b6a77a0e84fe12812e798fda674138257ba5791ff0887c"
+    },
+    "NewX_UI_Options_v1.1.2.mpp": {
+      "bytes": 49947,
+      "sha256": "8aa87497670bebbc4d31f589a935a1335361c6f6be8ce1a5e0732f574bd5ada8"
+    }
+  },
+  "payload_proof": {
+    "Hiro_Morphe_Patches_v1.0.382.mpp": {
+      "source": "Hiro_Morphe_Patches_v1.0.380.mpp",
+      "source_sha256": "3672fa208fc53f791e8e5c34b1f401709fdb1f19a701e9c2018d6ce0b01a201a",
+      "exact_payload_entries": 395,
+      "exact_compressed_records": 395,
+      "only_changed_entry": "META-INF/MANIFEST.MF",
+      "classes_dex_identical": true,
+      "all_extensions_identical": true,
+      "all_resources_identical": true
+    },
+    "NewX_UI_Options_v1.1.2.mpp": {
+      "source": "NewX_UI_Options_v1.1.0.mpp",
+      "source_sha256": "17ca92ef30c3c582b665ac8118c0521b0db834c02519dcfd68317c265678b194",
+      "exact_payload_entries": 10,
+      "exact_compressed_records": 10,
+      "only_changed_entry": "META-INF/MANIFEST.MF",
+      "classes_dex_identical": true,
+      "all_extensions_identical": true,
+      "all_resources_identical": true
+    }
+  },
+  "all_non_ui_extensions_identical": true,
+  "dex_preservation": {
+    "result": "PASS",
+    "existing_non_ui_provider_classes_preserved": true,
+    "entire_provider_dex_identical_to380": true,
+    "all_runtime_dex_identical_to380": true
+  },
+  "user_regression_report": "User reported worse scrolling after381 and requested the previous patch. The381 formatter shortcut and ThreadLocal state have been withdrawn."
+}

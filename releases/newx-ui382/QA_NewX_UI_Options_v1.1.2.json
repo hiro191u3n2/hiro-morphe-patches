@@ -1,0 +1,273 @@
+{
+  "schema": "hiro-newx-ui-rollback-v1",
+  "result": "PASS",
+  "version": "1.0.382",
+  "restored_version": "1.0.380",
+  "target": "com.twitter.android 12.43.0-prod.01",
+  "patch": "NewX: 表示設定を追加（おすすめ・上下固定・120Hz・表示回数）",
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.382.mpp": {
+      "bytes": 48325466,
+      "sha256": "85ed82ced41d546bd1b6a77a0e84fe12812e798fda674138257ba5791ff0887c"
+    },
+    "NewX_UI_Options_v1.1.2.mpp": {
+      "bytes": 49947,
+      "sha256": "8aa87497670bebbc4d31f589a935a1335361c6f6be8ce1a5e0732f574bd5ada8"
+    }
+  },
+  "application_tests": {
+    "dev2": {
+      "result": "PASS",
+      "validation_scope": "fresh382 patch application, APK rebuild and exact380 code/resource comparison",
+      "applied_patch_count": 51,
+      "apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337",
+      "dex": {
+        "result": "PASS",
+        "comparison": "v380 to v382 exact rollback",
+        "baseline_apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337",
+        "apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337",
+        "baseline_classes": 146782,
+        "completed_classes": 146782,
+        "exact_identical_classes": 146782,
+        "jumbo_normalized_identical_classes": 0,
+        "changed_classes": [],
+        "added_classes": [],
+        "removed_classes": [],
+        "raw_dex_payloads_exact_identical": true,
+        "no_v381_formatter_state": true,
+        "exact_expected_hooks_verified": true,
+        "earlier_hooks_preserved": true,
+        "dex_inventory_cache_hits": 30,
+        "dex_inventory_cache_misses": 0,
+        "physical_device_tested": false,
+        "failures": []
+      },
+      "resources": {
+        "result": "PASS",
+        "comparison": "v380 to v382 exact rollback",
+        "apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337",
+        "resource_table_exact_identical": true,
+        "resource_table_sha256": "0f01793eca5fd62e4ac4ff5d6ea996401b2e1b540eee6d711209fb900863b001",
+        "resource_parse_cache_hit": true,
+        "existing_string_configs_identical": 399144,
+        "existing_string_value_configs_identical": 399144,
+        "name_lookup_ids_reassigned": {},
+        "ui_string_checks": [
+          {
+            "name": "hiro_newx_ui_title",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134293"
+          },
+          {
+            "name": "hiro_newx_ui_summary",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134294"
+          },
+          {
+            "name": "hiro_newx_ui_chat_title",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134295"
+          },
+          {
+            "name": "hiro_newx_ui_chat_summary",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134296"
+          },
+          {
+            "name": "hiro_newx_ui_bars_title",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134297"
+          },
+          {
+            "name": "hiro_newx_ui_bars_summary",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134298"
+          },
+          {
+            "name": "hiro_newx_ui_refresh_title",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f134299"
+          },
+          {
+            "name": "hiro_newx_ui_refresh_summary",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f13429a"
+          },
+          {
+            "name": "hiro_newx_ui_views_title",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f13429b"
+          },
+          {
+            "name": "hiro_newx_ui_views_summary",
+            "config": "",
+            "passed": true,
+            "resource_id": "0x7f13429c"
+          },
+          {
+            "name": "hiro_newx_ui_title",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134293"
+          },
+          {
+            "name": "hiro_newx_ui_summary",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134294"
+          },
+          {
+            "name": "hiro_newx_ui_chat_title",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134295"
+          },
+          {
+            "name": "hiro_newx_ui_chat_summary",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134296"
+          },
+          {
+            "name": "hiro_newx_ui_bars_title",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134297"
+          },
+          {
+            "name": "hiro_newx_ui_bars_summary",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134298"
+          },
+          {
+            "name": "hiro_newx_ui_refresh_title",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f134299"
+          },
+          {
+            "name": "hiro_newx_ui_refresh_summary",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f13429a"
+          },
+          {
+            "name": "hiro_newx_ui_views_title",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f13429b"
+          },
+          {
+            "name": "hiro_newx_ui_views_summary",
+            "config": "ja",
+            "passed": true,
+            "resource_id": "0x7f13429c"
+          }
+        ],
+        "added_string_checks": [],
+        "updated_existing_string_checks": [],
+        "existing_non_dex_payloads_identical": 5847,
+        "changed_payloads": [],
+        "missing_payloads": [],
+        "added_payloads": [],
+        "failures": [],
+        "physical_device_tested": false
+      }
+    }
+  },
+  "baseline380_validation": {
+    "result": "PASS",
+    "source": "verification/baseline380-validation.json",
+    "historical_cases": [
+      "dev1",
+      "dev2",
+      "dev2-clone",
+      "standalone"
+    ],
+    "retested_all_four_for382": false,
+    "reuse_basis": "All executable and resource payloads are byte-identical to published380; package manifest metadata only differs."
+  },
+  "preservation": {
+    "result": "PASS",
+    "version": "1.0.382",
+    "timestamp": "2026-11-17T10:00:26",
+    "restored_version": "1.0.380",
+    "rollback_payloads_match380": true,
+    "artifacts": {
+      "Hiro_Morphe_Patches_v1.0.382.mpp": {
+        "bytes": 48325466,
+        "sha256": "85ed82ced41d546bd1b6a77a0e84fe12812e798fda674138257ba5791ff0887c"
+      },
+      "NewX_UI_Options_v1.1.2.mpp": {
+        "bytes": 49947,
+        "sha256": "8aa87497670bebbc4d31f589a935a1335361c6f6be8ce1a5e0732f574bd5ada8"
+      }
+    },
+    "payload_proof": {
+      "Hiro_Morphe_Patches_v1.0.382.mpp": {
+        "source": "Hiro_Morphe_Patches_v1.0.380.mpp",
+        "source_sha256": "3672fa208fc53f791e8e5c34b1f401709fdb1f19a701e9c2018d6ce0b01a201a",
+        "exact_payload_entries": 395,
+        "exact_compressed_records": 395,
+        "only_changed_entry": "META-INF/MANIFEST.MF",
+        "classes_dex_identical": true,
+        "all_extensions_identical": true,
+        "all_resources_identical": true
+      },
+      "NewX_UI_Options_v1.1.2.mpp": {
+        "source": "NewX_UI_Options_v1.1.0.mpp",
+        "source_sha256": "17ca92ef30c3c582b665ac8118c0521b0db834c02519dcfd68317c265678b194",
+        "exact_payload_entries": 10,
+        "exact_compressed_records": 10,
+        "only_changed_entry": "META-INF/MANIFEST.MF",
+        "classes_dex_identical": true,
+        "all_extensions_identical": true,
+        "all_resources_identical": true
+      }
+    },
+    "all_non_ui_extensions_identical": true,
+    "dex_preservation": {
+      "result": "PASS",
+      "existing_non_ui_provider_classes_preserved": true,
+      "entire_provider_dex_identical_to380": true,
+      "all_runtime_dex_identical_to380": true
+    },
+    "user_regression_report": "User reported worse scrolling after381 and requested the previous patch. The381 formatter shortcut and ThreadLocal state have been withdrawn."
+  },
+  "settings": {
+    "path": "Piko設定 → Hiroの表示設定",
+    "default_enabled": [
+      true,
+      true,
+      true,
+      true
+    ],
+    "restart_required": [
+      "hide_chat_recommendations",
+      "pin_bars",
+      "full_view_counts"
+    ],
+    "refresh_applied_on_activity_resume": true,
+    "count_example": "3001 -> 3,001",
+    "view_count_only": true,
+    "raw_integer_precision": 64
+  },
+  "limitations": {
+    "physical_device_tested": false,
+    "emulator_tested": false,
+    "android_runtime_verified": false,
+    "scroll_smoothness_improvement_measured_on_device": false,
+    "manager_device_badge_observed": false
+  },
+  "regression_report": "v381 worsened scrolling according to user; its optimization is reverted without further behavior changes."
+}

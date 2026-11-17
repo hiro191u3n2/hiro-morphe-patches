@@ -1,0 +1,48 @@
+{
+  "target": "com.twitter.android 12.43.0-prod.01",
+  "review": "read-only native count data-flow audit",
+  "raw_count_available": true,
+  "raw_precision": "nullable signed 64-bit integer",
+  "raw_source": "server Views.count / View_count.count decimal strings",
+  "native_mapper_paths": [
+    {
+      "mapper": "Lcom/x/mappers/a;->a(Lcom/x/android/postdetail/fragment/e5;Z)Lcom/x/models/v0;",
+      "source": "e5.d -> d5.a String (Views.count)",
+      "conversion": "kotlin/text/j.O(radix=10, String) -> Long",
+      "destination": "new n4(x5.ViewCount, Long, false, 4)"
+    },
+    {
+      "mapper": "Lcom/x/mappers/b;->e(Lcom/x/android/postdetail/fragment/vb;)Lcom/x/models/s1;",
+      "source": "rb.k -> ub.a String (View_count.count)",
+      "conversion": "kotlin/text/j.O(radix=10, String) -> Long",
+      "destination": "new n4(x5.ViewCount, Long, false, 4)"
+    }
+  ],
+  "native_parse_behavior": {
+    "uses_floating_point": false,
+    "rounds_digits": false,
+    "malformed_or_overflow": "null",
+    "missing_count": "null"
+  },
+  "display_pipeline": {
+    "model": "Lcom/x/models/n4; field a = action type, b = nullable Long count",
+    "formatter_call": "Lcom/x/inlineactionbar/w;->c(...) loops over models, reads b Long and calls landing/f.x0(J,Resources)",
+    "native_compaction_threshold": 1000,
+    "below_threshold": "NumberFormat.format(long)",
+    "above_threshold": "landing/f.R compact formatter",
+    "null_branch": "does not call formatter and preserves null label",
+    "type_and_raw_count_reach_renderer": "m.invoke -> w.d -> k.q -> ui/common/o1.a with action type, Long and label separately"
+  },
+  "constraints": [
+    "Only replace labels whose action type is x5.ViewCount.",
+    "Do not modify the shared compact formatter globally: it also renders reply/like/repost/bookmark counts.",
+    "Keep missing/null counts null, retaining native Countless/IconOnly behavior.",
+    "Keep already hidden Piko ViewCount actions absent; string formatting must not re-add entries.",
+    "Format the Long directly, never parse 3K or convert through float/double.",
+    "Full digits reveal the count supplied by X, not a separate live measurement."
+  ],
+  "existing_hide_behavior": "Piko InlineActionFilter removes ViewCount from the action list before rendering; formatter-only hook does not restore it.",
+  "review_status": "PASS: raw full-precision count is present and can be formatted without approximation",
+  "physical_device_tested": false,
+  "emulator_tested": false
+}

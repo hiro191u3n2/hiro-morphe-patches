@@ -1,0 +1,58 @@
+{
+  "ecj.jar": {
+    "url": "https://repo.maven.apache.org/maven2/org/eclipse/jdt/ecj/3.46.100/ecj-3.46.100.jar",
+    "sha256": "74c93172475fee0cd4e6eefb44233516dd40525642da35d009146d97ea598229"
+  },
+  "d8.jar": {
+    "url": "https://dl.google.com/dl/android/maven2/com/android/tools/r8/9.5.28/r8-9.5.28.jar",
+    "sha256": "38a9ffaaebbd17d1514e3ecbff5a85b989bb13c551b9e224c7409514eea84ff5"
+  },
+  "morphe.jar": {
+    "url": "https://github.com/MorpheApp/morphe-desktop/releases/download/v2.2.0/morphe-desktop-2.2.0-all.jar",
+    "sha256": "5ca0320ee05481df1ae3afd2f003bba3ff994d11d1f66ae48811ced71355e4fe",
+    "patcher_version": "2.4.0",
+    "desktop_version": "2.2.0"
+  },
+  "piko-3.12.0-dev.1.mpp": {
+    "release_url": "https://github.com/crimera/piko/releases/tag/v3.12.0-dev.1",
+    "bytes": 12086920,
+    "sha256": "d7f5bcf71da6931e3d9f2a5212d2a72cf5b68078866e7e5068b5778449ed244d"
+  },
+  "piko-3.12.0-dev.2.mpp": {
+    "release_url": "https://github.com/crimera/piko/releases/tag/v3.12.0-dev.2",
+    "bytes": 12095174,
+    "sha256": "1ac9731c6cfae164ecfb7e5e4d283c2ff734f4e33460abd8a9b69a3bfc01da2d"
+  },
+  "X_12.43.0-prod.01.apkm": {
+    "provenance": "User-supplied original APKM; not redistributed",
+    "package": "com.twitter.android",
+    "version": "12.43.0-prod.01",
+    "bytes": 100870803,
+    "sha256": "a36b1a4d6cb13e1471dc4ae07b49a478d4db2b93161299e4e4794af0ea2bbab9"
+  },
+  "runtime": {
+    "java": "OpenJDK 21.0.13",
+    "python": "3.12.14",
+    "source_target": "Java 8 provider / Java 11 loader merger",
+    "d8_min_api": 26,
+    "physical_device_tested": false,
+    "emulator_tested": false
+  },
+  "build_instructions": {
+    "tools": "Original380 source build tools retained for source reference; rollback build only needs Python3.",
+    "inputs": "Published380 combined MPP and UI1.1.0 under inputs/ are required and SHA-pinned. APK/Piko needed for fresh apply test.",
+    "commands": [
+      "python3 rollback.py",
+      "python3 verify_packages.py --case dev2"
+    ],
+    "restored_source_reference": "build.py compiles the unchanged380source component1.1.0 for reference. Release382 is built directly by rollback.py from verified380bytes, changing only package manifest metadata."
+  },
+  "Hiro_Morphe_Patches_v1.0.380.mpp": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.380.mpp",
+    "sha256": "3672fa208fc53f791e8e5c34b1f401709fdb1f19a701e9c2018d6ce0b01a201a"
+  },
+  "NewX_UI_Options_v1.1.0.mpp": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site/NewX_UI_Options_v1.1.0.mpp",
+    "sha256": "17ca92ef30c3c582b665ac8118c0521b0db834c02519dcfd68317c265678b194"
+  }
+}
