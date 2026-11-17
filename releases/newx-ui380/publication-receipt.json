@@ -1,0 +1,75 @@
+{
+  "result": "PUBLISHED",
+  "version": "1.0.380",
+  "component_version": "1.1.0",
+  "published_at": "2026-11-17T06:49:15.817015+00:00",
+  "site": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_496091bb7bf8819185f8d6294673d4de",
+    "version_number": 131,
+    "source_commit": "d6c8ac7b76da1deb447e0de8ca080af38e80e03b",
+    "deployment_id": "appgdep_6afbf8b939ec8191a7c7e25a9f9ec28c",
+    "status": "succeeded",
+    "archive_sha256": "sha256:8b09560a9afdf265f88ee44795bb929e06ded7363dd7da6047d9ee3b44558a39",
+    "archive_bytes": 256081920
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.380.mpp": {
+      "bytes": 48325446,
+      "sha256": "3672fa208fc53f791e8e5c34b1f401709fdb1f19a701e9c2018d6ce0b01a201a"
+    },
+    "NewX_UI_Options_v1.1.0.mpp": {
+      "bytes": 49945,
+      "sha256": "17ca92ef30c3c582b665ac8118c0521b0db834c02519dcfd68317c265678b194"
+    }
+  },
+  "github": {
+    "source_commit": "e99e62e22465267cbe650505e21d3ccaf115bcbc",
+    "changelog_commit": "cbc7a75ced59dedc0ef8afa334dc3883e9fd30ba",
+    "feed_commit": "dfb39b0a97b3d676d894202a169bd17d77a79d8d",
+    "update_order": [
+      "site",
+      "main/CHANGELOG.md",
+      "main/patches-bundle.json",
+      "dev fast-forward"
+    ],
+    "channels": {
+      "result": "PASS",
+      "validation_output": "OK main/patches-bundle.json: 67721122074535381b96d85ef0effc299f8b1bc48c5e1558855d91d6336029e1\nOK main/CHANGELOG.md: a045cf9d9a31908e3cc2c6f198375fd036b9c37a85bd21fab818eb38ddd5fdf9\nOK dev/CHANGELOG.md: a045cf9d9a31908e3cc2c6f198375fd036b9c37a85bd21fab818eb38ddd5fdf9\nOK dev/patches-bundle.json: 67721122074535381b96d85ef0effc299f8b1bc48c5e1558855d91d6336029e1\nOK both Manager channels point to v1.0.380; MPP SHA-256 3672fa208fc53f791e8e5c34b1f401709fdb1f19a701e9c2018d6ce0b01a201a"
+    }
+  },
+  "changes": {
+    "patch": "NewX: 表示設定を追加（おすすめ・上下固定・120Hz・表示回数）",
+    "settings_path": "Piko設定 → Hiroの表示設定",
+    "setting_key": "newx.hiro_ui.full_view_counts",
+    "title": "表示回数を省略せず表示",
+    "default_enabled": true,
+    "restart_required": true,
+    "raw_source": "nullable 64-bit Long from ViewCount model; not inferred from abbreviated text",
+    "format": "locale integer grouping without rounding; 3001 -> 3,001",
+    "unchanged": "like/reply/repost formatting; previous chat/bars/120Hz hooks and stored settings"
+  },
+  "validation": {
+    "four_apk_cases": {
+      "dev1": 51,
+      "dev2": 51,
+      "dev2-clone": 52,
+      "standalone": 2
+    },
+    "dex_and_resource_preservation": "PASS",
+    "host_tests": "PASS; view-count hook, formatter, all16 setting combinations plus earlier chat/bars/refresh tests",
+    "fast_mpp": "PASS",
+    "compiled_download_routes": "PASS; complete bytes, HEAD, validators, invalid/resumed/span-boundary ranges, immutable old assets",
+    "rendered_html_tests": 13,
+    "missing_piko": "rejected"
+  },
+  "limitations": {
+    "physical_device_tested": false,
+    "emulator_tested": false,
+    "android_runtime_verified": false,
+    "actual_120hz_verified": false,
+    "manager_device_badge_observed": false,
+    "refresh_rate_subject_to_os_policy": true
+  }
+}
