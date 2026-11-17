@@ -1,0 +1,1 @@
+import com.android.tools.smali.dexlib2.writer.io.MemoryDataStore; public class MemoryStoreProbe {public static void main(String[]a)throws Exception {for(java.lang.reflect.Constructor<?> c:MemoryDataStore.class.getConstructors())System.out.println(c);MemoryDataStore m=new MemoryDataStore();System.out.println(m.getBuffer().length);}}

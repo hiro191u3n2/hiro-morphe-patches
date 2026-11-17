@@ -1,0 +1,975 @@
+[
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/RetryReceiver;",
+    "method": "onReceive",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Landroid/content/Intent;"
+    ],
+    "returnType": "V",
+    "source": "Downloads",
+    "ja": "ダウンロード",
+    "resource": "hiro_piko_newx_ui_downloads_ec2f012d",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: retry flow NotificationListener channel display name; download action identifiers unchanged"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/DownloadNotifications;",
+    "method": "createNotificationChannel",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Downloads",
+    "ja": "ダウンロード",
+    "resource": "hiro_piko_newx_ui_downloads_ec2f012d",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: default NotificationChannel visible name; channel identifier unchanged"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/DownloadNotifications;",
+    "method": "speedText",
+    "parameterTypes": [
+      "J"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Calculating speed…",
+    "ja": "速度を計算中…",
+    "resource": "hiro_piko_newx_ui_calculating_speed_b28069d8",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: negative-rate progress text returned to notification; numeric MB/s, KB/s, B/s left unchanged"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "cancelAction",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Cancel",
+    "ja": "キャンセル",
+    "resource": "hiro_piko_newx_ui_cancel_96efd6ad",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "deleteAction",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Delete",
+    "ja": "削除",
+    "resource": "hiro_piko_newx_ui_delete_91863893",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "downloadCompleted",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Download Completed",
+    "ja": "ダウンロード完了",
+    "resource": "hiro_piko_newx_ui_download_completed_b4aa92c8",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "downloadFailed",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Download failed",
+    "ja": "ダウンロードに失敗しました",
+    "resource": "hiro_piko_newx_ui_download_failed_433cb722",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "folderLost",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Download folder is no longer available",
+    "ja": "保存先フォルダーを利用できません",
+    "resource": "hiro_piko_newx_ui_download_folder_is_no_longer_available_5f3e3460",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "noConnection",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "No connection — tap Retry when online",
+    "ja": "接続されていません。オンラインになったら「再試行」を押してください",
+    "resource": "hiro_piko_newx_ui_no_connection_tap_retry_when_online_f2593850",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "retryAction",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Retry",
+    "ja": "再試行",
+    "resource": "hiro_piko_newx_ui_retry_4177094b",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "shareAction",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Share",
+    "ja": "共有",
+    "resource": "hiro_piko_newx_ui_share_a35d3cd5",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "shareChooserTitle",
+    "parameterTypes": [
+      "Ljava/lang/String;"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Share",
+    "ja": "共有",
+    "resource": "hiro_piko_newx_ui_share_a35d3cd5",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "shareChooserTitle",
+    "parameterTypes": [
+      "Ljava/lang/String;"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Share ",
+    "ja": "共有: ",
+    "resource": "hiro_piko_newx_ui_share_c26b5026",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;",
+    "method": "waitingForConnection",
+    "parameterTypes": [],
+    "returnType": "Ljava/lang/String;",
+    "source": "Waiting for connection",
+    "ja": "接続待ち",
+    "resource": "hiro_piko_newx_ui_waiting_for_connection_64c3e372",
+    "expectedCount": 1,
+    "evidence": "shared.mpe piko-extension-library 0.10.1-dev.5 DEX: NotificationTexts method returns literal; consumed by DownloadNotifications notification/action/chooser UI"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": " already downloaded",
+    "ja": "件はダウンロード済みです",
+    "resource": "hiro_piko_newx_ui_already_downloaded_d8ff5762",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": " downloads started",
+    "ja": "件のダウンロードを開始しました",
+    "resource": "hiro_piko_newx_ui_downloads_started_3cd58200",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": " failed",
+    "ja": "件失敗しました",
+    "resource": "hiro_piko_newx_ui_failed_7f5425ca",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": " media already downloaded",
+    "ja": "件のメディアはダウンロード済みです",
+    "resource": "hiro_piko_newx_ui_media_already_downloaded_1115855e",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": " need a new folder",
+    "ja": "件は保存先の再選択が必要です",
+    "resource": "hiro_piko_newx_ui_need_a_new_folder_34be3188",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "1 already downloaded",
+    "ja": "1件はダウンロード済みです",
+    "resource": "hiro_piko_newx_ui_1_already_downloaded_267eddef",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "1 download started",
+    "ja": "1件のダウンロードを開始しました",
+    "resource": "hiro_piko_newx_ui_1_download_started_57c45216",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "1 failed",
+    "ja": "1件失敗しました",
+    "resource": "hiro_piko_newx_ui_1_failed_bde7f6b2",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "1 needs a new folder",
+    "ja": "1件は保存先の再選択が必要です",
+    "resource": "hiro_piko_newx_ui_1_needs_a_new_folder_5b72331e",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Already downloaded",
+    "ja": "ダウンロード済みです",
+    "resource": "hiro_piko_newx_ui_already_downloaded_e598573e",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Could not start download",
+    "ja": "ダウンロードを開始できませんでした",
+    "resource": "hiro_piko_newx_ui_could_not_start_download_a30da5f1",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Download folder is no longer available — tap download again to choose a new one",
+    "ja": "保存先フォルダーを利用できません。もう一度ダウンロードを押して選び直してください",
+    "resource": "hiro_piko_newx_ui_download_folder_is_no_longer_available_tap_down_483c8eed",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;",
+    "method": "get",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/messages/DownloadText;",
+      "I"
+    ],
+    "returnType": "Ljava/lang/String;",
+    "source": "Download started",
+    "ja": "ダウンロードを開始しました",
+    "resource": "hiro_piko_newx_ui_download_started_4f10404b",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: DownloadText switch return text; InlineDownloadButton.java passes provider into DownloadMessages.summary then user notification; Unknown text id diagnostic excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/settings/PikoSettingsActivity;",
+    "method": "configureToolbar",
+    "parameterTypes": [],
+    "returnType": "V",
+    "source": "Back",
+    "ja": "戻る",
+    "resource": "hiro_piko_newx_ui_back_b72cd401",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: ImageButton.setContentDescription accessibility label"
+  },
+  {
+    "class": "Lapp/morphe/extension/crimera/ui/TrayView;",
+    "method": "<init>",
+    "parameterTypes": [
+      "Landroid/content/Context;"
+    ],
+    "returnType": "V",
+    "source": "Close",
+    "ja": "閉じる",
+    "resource": "hiro_piko_newx_ui_close_cd719d6e",
+    "expectedCount": 1,
+    "evidence": "shared.mpe DEX: close button content description"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "$r8$lambda$kKD2Uth4JLiRYP2mD7lXvndZYbk",
+    "parameterTypes": [
+      "Ljava/lang/String;",
+      "Ljava/util/Map;",
+      "Landroid/view/View;"
+    ],
+    "returnType": "V",
+    "source": " is already whitelisted",
+    "ja": " はすでに許可リストに登録されています",
+    "resource": "hiro_piko_newx_ui_is_already_whitelisted_89800175",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "$r8$lambda$kKD2Uth4JLiRYP2mD7lXvndZYbk",
+    "parameterTypes": [
+      "Ljava/lang/String;",
+      "Ljava/util/Map;",
+      "Landroid/view/View;"
+    ],
+    "returnType": "V",
+    "source": " to whitelist",
+    "ja": " を許可リストに追加しました",
+    "resource": "hiro_piko_newx_ui_to_whitelist_0336a941",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "$r8$lambda$kKD2Uth4JLiRYP2mD7lXvndZYbk",
+    "parameterTypes": [
+      "Ljava/lang/String;",
+      "Ljava/util/Map;",
+      "Landroid/view/View;"
+    ],
+    "returnType": "V",
+    "source": "Added @",
+    "ja": "@",
+    "resource": "hiro_piko_newx_ui_added_05b2c628",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "$r8$lambda$kKD2Uth4JLiRYP2mD7lXvndZYbk",
+    "parameterTypes": [
+      "Ljava/lang/String;",
+      "Ljava/util/Map;",
+      "Landroid/view/View;"
+    ],
+    "returnType": "V",
+    "source": "Failed to whitelist: ",
+    "ja": "許可リストに追加できませんでした: ",
+    "resource": "hiro_piko_newx_ui_failed_to_whitelist_dddcccf1",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "$r8$lambda$s-1hig0UPuJqczzXAacB9_v3hgc",
+    "parameterTypes": [
+      "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesStore$FilteredReply;",
+      "Landroid/view/View;"
+    ],
+    "returnType": "Z",
+    "source": "Copied reply text",
+    "ja": "返信のテキストをコピーしました",
+    "resource": "hiro_piko_newx_ui_copied_reply_text_00010a58",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "createReplyRow",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesStore$FilteredReply;",
+      "Ljava/util/Set;",
+      "Ljava/util/Map;"
+    ],
+    "returnType": "Landroid/view/View;",
+    "source": "(No text content)",
+    "ja": "（テキストなし）",
+    "resource": "hiro_piko_newx_ui_no_text_content_3ffcbfe5",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "setAvailableState",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;",
+      "Ljava/lang/String;",
+      "Ljava/util/Map;"
+    ],
+    "returnType": "V",
+    "source": "+ Whitelist",
+    "ja": "＋ 許可リストに追加",
+    "resource": "hiro_piko_newx_ui_whitelist_eab53dd6",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "setWhitelistedState",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;"
+    ],
+    "returnType": "V",
+    "source": "Whitelisted ✓",
+    "ja": "許可リストに追加済み ✓",
+    "resource": "hiro_piko_newx_ui_whitelisted_6b82e209",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": " replies hidden by verified accounts filter",
+    "ja": "件の返信を認証済みアカウントフィルターで非表示にしました",
+    "resource": "hiro_piko_newx_ui_replies_hidden_by_verified_accounts_filter_94842e5a",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "1 reply hidden by verified accounts filter",
+    "ja": "認証済みアカウントフィルターで1件の返信を非表示にしました",
+    "resource": "hiro_piko_newx_ui_1_reply_hidden_by_verified_accounts_filter_d0fdf06e",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Filtered replies",
+    "ja": "非表示の返信",
+    "resource": "hiro_piko_newx_ui_filtered_replies_ce137a9b",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "No filtered replies for this post",
+    "ja": "このポストにフィルターで非表示にした返信はありません",
+    "resource": "hiro_piko_newx_ui_no_filtered_replies_for_this_post_a2954eef",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../filteredreplies/FilteredRepliesDialog.java: sheet title/subtitle, button, reply body placeholder, Toast"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "downloadAndMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": " images...",
+    "ja": "枚）…",
+    "resource": "hiro_piko_newx_ui_images_438cd251",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: NewXInAppNotification.showForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "downloadAndMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "At least 2 images are required to merge",
+    "ja": "結合には2枚以上の画像が必要です",
+    "resource": "hiro_piko_newx_ui_at_least_2_images_are_required_to_merge_798e6b8f",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: NewXInAppNotification.showForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "downloadAndMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Downloading and merging ",
+    "ja": "画像のダウンロード・結合中（",
+    "resource": "hiro_piko_newx_ui_downloading_and_merging_83d3f7d2",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: NewXInAppNotification.showForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Download folder is no longer available — tap download again to choose a new one",
+    "ja": "保存先フォルダーを利用できません。もう一度ダウンロードを押して選び直してください",
+    "resource": "hiro_piko_newx_ui_download_folder_is_no_longer_available_tap_down_483c8eed",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Failed to decode image slice ",
+    "ja": "分割画像を読み込めませんでした: ",
+    "resource": "hiro_piko_newx_ui_failed_to_decode_image_slice_8c1c052c",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Failed to download image slice ",
+    "ja": "分割画像をダウンロードできませんでした: ",
+    "resource": "hiro_piko_newx_ui_failed_to_download_image_slice_d481a7bc",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Failed to merge images",
+    "ja": "画像を結合できませんでした",
+    "resource": "hiro_piko_newx_ui_failed_to_merge_images_445ffe6e",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Failed to read dimensions of slice ",
+    "ja": "分割画像のサイズを読み取れませんでした: ",
+    "resource": "hiro_piko_newx_ui_failed_to_read_dimensions_of_slice_975b2647",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Failed to save merged image: ",
+    "ja": "結合画像を保存できませんでした: ",
+    "resource": "hiro_piko_newx_ui_failed_to_save_merged_image_b8ac2a7b",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Merged image already exists: ",
+    "ja": "結合画像は保存済みです: ",
+    "resource": "hiro_piko_newx_ui_merged_image_already_exists_1d1b6da3",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Merged image saved: ",
+    "ja": "結合画像を保存しました: ",
+    "resource": "hiro_piko_newx_ui_merged_image_saved_376fc3c6",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/MediaMerger;",
+    "method": "performMerge",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Ljava/util/List;",
+      "Ljava/lang/String;",
+      "Lapp/morphe/extension/newx/misc/DownloadFileName$PostContext;"
+    ],
+    "returnType": "V",
+    "source": "Out of memory while stitching images",
+    "ja": "画像の結合中にメモリが不足しました",
+    "resource": "hiro_piko_newx_ui_out_of_memory_while_stitching_images_8c188754",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/MediaMerger.java: notification/reportDownloadStatus; diagnostics-only lambdas excluded"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;",
+    "method": "enqueue",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Lapp/morphe/extension/newx/misc/NewXDownloadFolders$MediaKind;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Already downloaded",
+    "ja": "ダウンロード済みです",
+    "resource": "hiro_piko_newx_ui_already_downloaded_e598573e",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NativeDownloadRouter.java: postStatus -> NewXInAppNotification.tryShowForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;",
+    "method": "enqueue",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Lapp/morphe/extension/newx/misc/NewXDownloadFolders$MediaKind;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Could not start download",
+    "ja": "ダウンロードを開始できませんでした",
+    "resource": "hiro_piko_newx_ui_could_not_start_download_a30da5f1",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NativeDownloadRouter.java: postStatus -> NewXInAppNotification.tryShowForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;",
+    "method": "enqueue",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Lapp/morphe/extension/newx/misc/NewXDownloadFolders$MediaKind;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Download folder is no longer available — tap download again to choose a new one",
+    "ja": "保存先フォルダーを利用できません。もう一度ダウンロードを押して選び直してください",
+    "resource": "hiro_piko_newx_ui_download_folder_is_no_longer_available_tap_down_483c8eed",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NativeDownloadRouter.java: postStatus -> NewXInAppNotification.tryShowForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;",
+    "method": "enqueue",
+    "parameterTypes": [
+      "Landroid/content/Context;",
+      "Lapp/morphe/extension/newx/misc/NewXDownloadFolders$MediaKind;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;",
+      "Ljava/lang/String;"
+    ],
+    "returnType": "V",
+    "source": "Download started",
+    "ja": "ダウンロードを開始しました",
+    "resource": "hiro_piko_newx_ui_download_started_4f10404b",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NativeDownloadRouter.java: postStatus -> NewXInAppNotification.tryShowForUser"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;",
+    "method": "onCancelled",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/events/DownloadEvent$Cancelled;"
+    ],
+    "returnType": "V",
+    "source": "Download cancelled",
+    "ja": "ダウンロードをキャンセルしました",
+    "resource": "hiro_piko_newx_ui_download_cancelled_24b3f471",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NewXDownloader.java: StatusListener notification/reportDownloadStatus"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;",
+    "method": "onCompleted",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/events/DownloadEvent$Completed;"
+    ],
+    "returnType": "V",
+    "source": "Saved ",
+    "ja": "保存しました: ",
+    "resource": "hiro_piko_newx_ui_saved_4ef62d11",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NewXDownloader.java: StatusListener notification/reportDownloadStatus"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;",
+    "method": "onFailed",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/events/DownloadEvent$Failed;"
+    ],
+    "returnType": "V",
+    "source": "Could not save ",
+    "ja": "保存できませんでした: ",
+    "resource": "hiro_piko_newx_ui_could_not_save_9ccb4453",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NewXDownloader.java: StatusListener notification/reportDownloadStatus"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;",
+    "method": "onFailed",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/events/DownloadEvent$Failed;"
+    ],
+    "returnType": "V",
+    "source": "Download folder is no longer available — tap download again to choose a new one",
+    "ja": "保存先フォルダーを利用できません。もう一度ダウンロードを押して選び直してください",
+    "resource": "hiro_piko_newx_ui_download_folder_is_no_longer_available_tap_down_483c8eed",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NewXDownloader.java: StatusListener notification/reportDownloadStatus"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;",
+    "method": "onFailed",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/downloader/events/DownloadEvent$Failed;"
+    ],
+    "returnType": "V",
+    "source": "No connection — tap Retry when online",
+    "ja": "接続されていません。オンラインになったら「再試行」を押してください",
+    "resource": "hiro_piko_newx_ui_no_connection_tap_retry_when_online_f2593850",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../misc/NewXDownloader.java: StatusListener notification/reportDownloadStatus"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/misc/NewXDownloader;",
+    "method": "install",
+    "parameterTypes": [
+      "Landroid/content/Context;"
+    ],
+    "returnType": "V",
+    "source": "Downloads",
+    "ja": "ダウンロード",
+    "resource": "hiro_piko_newx_ui_downloads_ec2f012d",
+    "expectedCount": 1,
+    "evidence": "upstream NewXDownloader.java: NotificationListener channel name; InlineDownloadButtonPatch startup hook executes after sharedExtensionPatch finalizer inserts Utils.setContext at index zero"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Lapp/morphe/extension/newx/timeline/ForYouTopicFilter$RefreshTarget;"
+    ],
+    "returnType": "Z",
+    "source": "For You topics",
+    "ja": "おすすめのトピック",
+    "resource": "hiro_piko_newx_ui_for_you_topics_6290a55c",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "show",
+    "parameterTypes": [
+      "Landroid/app/Activity;",
+      "Lapp/morphe/extension/newx/timeline/ForYouTopicFilter$RefreshTarget;"
+    ],
+    "returnType": "Z",
+    "source": "Select topics to show in your For You timeline",
+    "ja": "「おすすめ」タイムラインに表示するトピックを選択",
+    "resource": "hiro_piko_newx_ui_select_topics_to_show_in_your_for_you_timeline_d6f25c16",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "updateActionButton",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;",
+      "I"
+    ],
+    "returnType": "V",
+    "source": " topics",
+    "ja": "個のトピックのみ表示",
+    "resource": "hiro_piko_newx_ui_topics_85376763",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "updateActionButton",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;",
+      "I"
+    ],
+    "returnType": "V",
+    "source": "Reset",
+    "ja": "リセット",
+    "resource": "hiro_piko_newx_ui_reset_1dd88a51",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "updateActionButton",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;",
+      "I"
+    ],
+    "returnType": "V",
+    "source": "Show only ",
+    "ja": "選択した",
+    "resource": "hiro_piko_newx_ui_show_only_0b11eba7",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  },
+  {
+    "class": "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;",
+    "method": "updateActionButton",
+    "parameterTypes": [
+      "Lapp/morphe/extension/crimera/ui/ButtonView;",
+      "I"
+    ],
+    "returnType": "V",
+    "source": "Show only 1 topic",
+    "ja": "選択した1個のトピックのみ表示",
+    "resource": "hiro_piko_newx_ui_show_only_1_topic_10f0d0ff",
+    "expectedCount": 1,
+    "evidence": "upstream extensions/newx/.../timeline/ForYouTopicFilterSheet.java: sheet title/subtitle and updateActionButton TextView text"
+  }
+]

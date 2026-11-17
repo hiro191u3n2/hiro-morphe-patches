@@ -1,0 +1,37 @@
+{
+  "result": "PASS",
+  "component_sha256": "704ddd95d576af03019fac14469bd2ad9e6c89b7df6eff10e160fe37faa18f97",
+  "target": "12.43.0-prod.01",
+  "default": false,
+  "newx_japanese_strings": 485,
+  "helper_strings": 176,
+  "literal_targets": 224,
+  "literal_replacements": 224,
+  "runtime_extension_added": false,
+  "host_audit": "PASS NewXJapanesePatchAudit: 224 mappings, 224 localized literals, 93 scoped methods; 550 other methods byte-identical; resource lookup ABI/registers and DEX roundtrip; no-Piko/Hiro-only/missing-extension/repeated-apply rejection",
+  "device_tested": false,
+  "resource_sha256": {
+    "res/values-ja/hiro_piko_ja.xml": "ecc522773d76b598f45376f04b92a9b1ba30d54894d5a71eeb50e6587b10a3c4",
+    "res/values/hiro_piko_ui.xml": "449c3c2e6e5a7ee2073b04b92b702c00ced7e98e7444481ce0a49144ceb4364e",
+    "res/values-ja/hiro_piko_ui.xml": "2d91b23ea9683572a1294768900e5e2b3c512f33e345b952f32157bb5e7deacd"
+  },
+  "input_sha256": {
+    "verification/hiro-piko.apk": "e7c8de45acaef0c99994baa49bfbf56f37a4f57a05ebe0f48daaccf517fd5006",
+    "inputs/piko-3.12.0-dev.2.mpp": "1ac9731c6cfae164ecfb7e5e4d283c2ff734f4e33460abd8a9b69a3bfc01da2d",
+    "tools/morphe.jar": "5ca0320ee05481df1ae3afd2f003bba3ff994d11d1f66ae48811ced71355e4fe"
+  },
+  "source_sha256": {
+    "NewXJapanesePatch.java": "d6d08f3319eb7f465033e819d0dc47fef0429cbbe17d786bd12e851434fda6e8",
+    "NewXJapanesePatchAudit.java": "cc5e972d9b34b4f0d12195036177c55a43dbf4c49b9f24f6b41fe1961638a9d0",
+    "build.py": "3d334e5b3495004e2bea2a6ae076ad3d18bc513709cff6a033b083655f1f2f31",
+    "NewXJapaneseData.java": "1226c4adf6ecd7b077ca63b9afb3c888ef307d4a353acebecb854651c90741ff",
+    "hardcoded-ja.json": "028de7a5ba55466c0bcf53bf91a556cf1521d572e4362b96ff71858c46553c41",
+    "newx-ja.xml": "ecc522773d76b598f45376f04b92a9b1ba30d54894d5a71eeb50e6587b10a3c4"
+  },
+  "piko_dependency_graphs_tested": [
+    "3.12.0-dev.1",
+    "3.12.0-dev.2"
+  ],
+  "dev1_host_audit": "PASS NewXJapanesePatchAudit: 224 mappings, 224 localized literals, 93 scoped methods; 550 other methods byte-identical; resource lookup ABI/registers and DEX roundtrip; standard strings.xml merge preserves original bytes/quoted spaces; no-Piko/Hiro-only/missing-extension/repeated-apply rejection",
+  "resource_destination": "Merged into res/values/strings.xml and res/values-ja/strings.xml; original XML preserved; Piko finalizer appends its names"
+}

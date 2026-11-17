@@ -1,3 +1,9 @@
+# [1.0.378](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-17)
+
+### Features
+
+* **X:** 「NewX: Pikoの設定・メニューを日本語化」を追加。X 12.43.0-prod.01とPiko 3.12.0-dev.1／dev.2の設定485文言・追加176文言（コード224箇所）を日本語化。初期状態は未選択のため、元の未改造APKMへPiko NewXの項目と一緒に選択・適用し、生成APKをインストールしてください。Xのアプリ言語または端末言語を日本語に設定します。ManagerのPikoパッチ一覧の名称・説明は対象外。Patcher 2.4.0でdev.1併用50項目、dev.2併用50項目、Clone追加51項目、単独版＋NewX広告除去2項目の適用・再構築を確認。各完成APKの1,322文字列値と224箇所のリソース参照を監査し、既存パッチ・実行拡張を保持。Android実機・エミュレーターでの表示・操作は未確認です。
+
 # [1.0.377](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-17)
 
 ### Features

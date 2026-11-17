@@ -1,0 +1,58 @@
+{
+  "result": "PASS",
+  "apk": "/workspace/scratch/aae17de0ebaa/piko-ja-port/verification/standalone.apk",
+  "classes_scanned": 146773,
+  "exact_target_rows": 224,
+  "expected_lookup_sites": 224,
+  "actual_lookup_sites": 224,
+  "target_classes": 30,
+  "class_lookup_counts": {
+    "Lapp/morphe/extension/crimera/ObjectBrowser;": 22,
+    "Lapp/morphe/extension/crimera/downloader/RetryReceiver;": 1,
+    "Lapp/morphe/extension/crimera/downloader/engine/DownloadNotifications;": 2,
+    "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;": 11,
+    "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;": 13,
+    "Lapp/morphe/extension/crimera/settings/PikoSettingsActivity;": 1,
+    "Lapp/morphe/extension/crimera/ui/TrayView;": 1,
+    "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;": 12,
+    "Lapp/morphe/extension/newx/misc/FilteredRepliesPostOptionHandler;": 5,
+    "Lapp/morphe/extension/newx/misc/InlineDownloadButton;": 15,
+    "Lapp/morphe/extension/newx/misc/MediaMerger;": 12,
+    "Lapp/morphe/extension/newx/misc/MediaPickerDialog;": 15,
+    "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;": 4,
+    "Lapp/morphe/extension/newx/misc/NewXCrashCopyReceiver;": 5,
+    "Lapp/morphe/extension/newx/misc/NewXCrashHandler;": 9,
+    "Lapp/morphe/extension/newx/misc/NewXCrashPostOptionHandler;": 2,
+    "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;": 5,
+    "Lapp/morphe/extension/newx/misc/NewXDownloader;": 1,
+    "Lapp/morphe/extension/newx/misc/NewXObjectBrowserHandler;": 3,
+    "Lapp/morphe/extension/newx/misc/ResolutionChooserDialog;": 3,
+    "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;": 6,
+    "Lapp/morphe/extension/newx/translation/DeepLProvider;": 3,
+    "Lapp/morphe/extension/newx/translation/LibreTranslateProvider;": 5,
+    "Lapp/morphe/extension/newx/translation/OpenAiCompatibleProvider;": 5,
+    "Lapp/morphe/extension/newx/translation/PostTranslator;": 13,
+    "Lapp/morphe/extension/newx/translation/TranslationHttp;": 2,
+    "Lapp/morphe/extension/newx/translation/TranslatorConfig$CustomType;": 1,
+    "Lapp/morphe/extension/newx/translation/TranslatorConfig;": 26,
+    "Lapp/morphe/extension/newx/translation/TranslatorFragment$ProviderForm;": 7,
+    "Lapp/morphe/extension/newx/translation/TranslatorFragment;": 14
+  },
+  "context_initialization": [
+    {
+      "method": "Lcom/x/android/XApplication;->onCreate()V",
+      "set_context_instruction": 0,
+      "extension_calls": [
+        "0: Lapp/morphe/extension/shared/Utils;->setContext(Landroid/content/Context;)V",
+        "1: Lapp/morphe/extension/newx/settings/NewXSettingsHost;->install()V",
+        "2: Lapp/morphe/extension/crimera/settings/SettingsRegistry;->load()V"
+      ],
+      "newx_hook_before_context": false
+    }
+  ],
+  "failures": [],
+  "limitations": [
+    "Static final DEX instruction and initialization-order checks; no device UI execution."
+  ],
+  "apk_sha256": "ddf9b76972820c96e43a93469e429526f73e155094b19930d7af858b01825ceb"
+}

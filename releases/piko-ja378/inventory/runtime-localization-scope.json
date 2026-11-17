@@ -1,0 +1,126 @@
+{
+  "target": "com.twitter.android 12.43.0-prod.01 with Piko NewX dev.1 or dev.2",
+  "source": {
+    "repository": "https://github.com/crimera/piko",
+    "tag": "v3.12.0-dev.2",
+    "commit": "7acb08ae14de946e3b6b5a9837a860a7b2667caf",
+    "library": "app.crimera:piko-extension-library:0.10.1-dev.5",
+    "license": "GPLv3 with upstream NOTICE attribution requirement"
+  },
+  "xml": {
+    "default_entries": 486,
+    "translatable_entries": 485,
+    "upstream_japanese_entries": 0,
+    "nontranslatable_unchanged": [
+      "piko_newx_patch_version"
+    ],
+    "placeholder_entries": 22
+  },
+  "hardcoded": {
+    "exact_method_literal_entries": 224,
+    "exact_matching_const_instructions": 224,
+    "resource_entries": 176,
+    "classes": 30,
+    "per_class": {
+      "Lapp/morphe/extension/crimera/ObjectBrowser;": 22,
+      "Lapp/morphe/extension/crimera/downloader/RetryReceiver;": 1,
+      "Lapp/morphe/extension/crimera/downloader/engine/DownloadNotifications;": 2,
+      "Lapp/morphe/extension/crimera/downloader/engine/EnglishNotificationTexts;": 11,
+      "Lapp/morphe/extension/crimera/downloader/messages/EnglishDownloadTexts;": 13,
+      "Lapp/morphe/extension/crimera/settings/PikoSettingsActivity;": 1,
+      "Lapp/morphe/extension/crimera/ui/TrayView;": 1,
+      "Lapp/morphe/extension/newx/filteredreplies/FilteredRepliesDialog;": 12,
+      "Lapp/morphe/extension/newx/misc/FilteredRepliesPostOptionHandler;": 5,
+      "Lapp/morphe/extension/newx/misc/InlineDownloadButton;": 15,
+      "Lapp/morphe/extension/newx/misc/MediaMerger;": 12,
+      "Lapp/morphe/extension/newx/misc/MediaPickerDialog;": 15,
+      "Lapp/morphe/extension/newx/misc/NativeDownloadRouter;": 4,
+      "Lapp/morphe/extension/newx/misc/NewXCrashCopyReceiver;": 5,
+      "Lapp/morphe/extension/newx/misc/NewXCrashHandler;": 9,
+      "Lapp/morphe/extension/newx/misc/NewXCrashPostOptionHandler;": 2,
+      "Lapp/morphe/extension/newx/misc/NewXDownloader$StatusListener;": 5,
+      "Lapp/morphe/extension/newx/misc/NewXDownloader;": 1,
+      "Lapp/morphe/extension/newx/misc/NewXObjectBrowserHandler;": 3,
+      "Lapp/morphe/extension/newx/misc/ResolutionChooserDialog;": 3,
+      "Lapp/morphe/extension/newx/timeline/ForYouTopicFilterSheet;": 6,
+      "Lapp/morphe/extension/newx/translation/DeepLProvider;": 3,
+      "Lapp/morphe/extension/newx/translation/LibreTranslateProvider;": 5,
+      "Lapp/morphe/extension/newx/translation/OpenAiCompatibleProvider;": 5,
+      "Lapp/morphe/extension/newx/translation/PostTranslator;": 13,
+      "Lapp/morphe/extension/newx/translation/TranslationHttp;": 2,
+      "Lapp/morphe/extension/newx/translation/TranslatorConfig$CustomType;": 1,
+      "Lapp/morphe/extension/newx/translation/TranslatorConfig;": 26,
+      "Lapp/morphe/extension/newx/translation/TranslatorFragment$ProviderForm;": 7,
+      "Lapp/morphe/extension/newx/translation/TranslatorFragment;": 14
+    },
+    "lookup": "Lapp/morphe/extension/shared/ResourceUtils;->getStringOrThrow(Ljava/lang/String;)Ljava/lang/String;",
+    "lookup_access_flags": 9,
+    "default_language_preserved": true
+  },
+  "known_english_preserved": [
+    {
+      "text": [
+        "Image",
+        "Video"
+      ],
+      "reason": "DownloadItem.label is shared by visible labels and media-type detection. MediaPickerDialog.resolveIconType tests video/gif; isImage tests image. Keep data unchanged. Two display-only call sites are documented in misc-hardcoded-ja-notes.md."
+    },
+    {
+      "text": [
+        "GIF",
+        "API",
+        "URL",
+        "HTTP",
+        "MB/s",
+        "KB/s",
+        "B/s",
+        "KiB",
+        "MiB",
+        "OpenAI",
+        "DeepL",
+        "LibreTranslate",
+        "Google",
+        "FxTwitter"
+      ],
+      "reason": "Technical units, protocol names or proper names; preserve where present."
+    },
+    {
+      "text": [
+        "package:",
+        "extends:",
+        "implements:",
+        "param",
+        "List<",
+        "null",
+        "<access denied>"
+      ],
+      "reason": "Object browser presents Java syntax/diagnostic sentinels; reflected class, field, method and user data unchanged."
+    },
+    {
+      "text": [
+        "--- Device Info ---",
+        "--- Stack Trace ---"
+      ],
+      "reason": "Generated crash-report technical content, diagnostic logs and server response bodies remain unmodified."
+    },
+    {
+      "scope": "Manager patch names/descriptions",
+      "reason": "Piko separate MPP metadata cannot be changed by a Hiro APK translation patch."
+    }
+  ],
+  "context_ordering": {
+    "static_label_entries": 23,
+    "evidence": [
+      "SettingsPatch.kt:155–162 states sharedExtensionPatch finalizer inserts Utils.setContext at Application.onCreate index 0.",
+      "NewXSettingsHost.install and BuiltInSettings registration do not load TranslatorConfig; first references are user translator UI, translation action or backup callback.",
+      "NewXDownloader.install is inserted by InlineDownloadButtonPatch.kt into the same startup hook after shared context initialization."
+    ],
+    "remaining_verification": "Confirm Utils.setContext precedes startup hooks in final patched Application.onCreate.",
+    "locale_switch": "Static language/provider label arrays refresh after process restart."
+  },
+  "ui_source_candidates": {
+    "initial_regex_lines": 102,
+    "status": "Reviewed; glyph handles and resource-key calls were excluded, additional dynamic branches, notifications and user-displayed translation errors added from source and DEX."
+  },
+  "hardcoded_map_sha256": "7a4ceb590f20c8e3308dda9d5998024f17a5971d42bc0dee173b896f99b4f685"
+}
