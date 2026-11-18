@@ -1,0 +1,190 @@
+{
+  "result": "PASS",
+  "version": "1.0.384",
+  "component_version": "1.4.7",
+  "application_cases": {
+    "candidate-five": {
+      "result": "PASS",
+      "bundle": "Hiro_Morphe_Patches_v1.0.384.mpp",
+      "sha256": "12d01d30b4cd602e6b4f071661aad0613ef558245ba4084284464ca31e1bd498",
+      "host_sha256": "07992da468446028f54cfd7854fee1e63d883dd5babb2b208979e13ba253bf10",
+      "input_sha256": "a0c36e67334cccb492e81420da5b11751a32e6dcf1fbcb306b1d8120e2044239",
+      "input": "Berry 3.84.21 split archive",
+      "selected": [
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "ダブルタップから指を離さず片手ズーム"
+      ],
+      "output_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "output_dex": {
+        "classes.dex": "b9aacc4a7154516c50bdd4a8582634fbf3b832ce582489379018ee6d5077fd8b",
+        "classes2.dex": "93170a67f99f178bbd7b718a98cfe6808d83b755d83592a86b34978eab1a1daa",
+        "classes3.dex": "7a2ff57acfbe6e1805f156880c67f04d482f064b52e0e529e031aaafd553363f",
+        "classes4.dex": "afe7c3ecfdef66e2bcd91ebb1436fc982149221424c93f2387b5ca13e465b22b"
+      }
+    },
+    "candidate-standalone": {
+      "result": "PASS",
+      "bundle": "Berry_Browser_v1.4.7.mpp",
+      "sha256": "d4b255d538bc3bf744700132c50f81ab883657ba0073cbb5cb1110ca9923ac83",
+      "host_sha256": "07992da468446028f54cfd7854fee1e63d883dd5babb2b208979e13ba253bf10",
+      "input_sha256": "a0c36e67334cccb492e81420da5b11751a32e6dcf1fbcb306b1d8120e2044239",
+      "input": "Berry 3.84.21 split archive",
+      "selected": [
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "ダブルタップから指を離さず片手ズーム"
+      ],
+      "output_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "output_dex": {
+        "classes.dex": "b9aacc4a7154516c50bdd4a8582634fbf3b832ce582489379018ee6d5077fd8b",
+        "classes2.dex": "93170a67f99f178bbd7b718a98cfe6808d83b755d83592a86b34978eab1a1daa",
+        "classes3.dex": "7a2ff57acfbe6e1805f156880c67f04d482f064b52e0e529e031aaafd553363f",
+        "classes4.dex": "afe7c3ecfdef66e2bcd91ebb1436fc982149221424c93f2387b5ca13e465b22b"
+      }
+    },
+    "previous-3.83.74": {
+      "result": "PASS",
+      "bundle": "Berry_Browser_v1.4.7.mpp",
+      "input_sha256": "71e52ebe4ab0ad493e5c058cbf7bc361f9300652223c9abe44a7b3ae7e19b1b9",
+      "apk_sha256": "27be7219bd564149d514c9dc195700ddbbb8a52a23a2cc64a513677b0654e44d",
+      "version": "3.83.74",
+      "selected_count": 5
+    }
+  },
+  "android_physical_device_tested": false,
+  "reported_visual_symptom_confirmed_resolved": false,
+  "applied-apk-dex": {
+    "result": "PASS",
+    "app_version": "3.84.21",
+    "class_count": 9203,
+    "method_count": 44156,
+    "resource_count": 2180,
+    "replaced_instructions": 1,
+    "new_methods": 1,
+    "guard_inputs_tested": 257,
+    "only_changed_method": "La90;->onPageFinished(Landroid/webkit/WebView;Ljava/lang/String;)V",
+    "guarded_invocation": "Landroid/view/View;->post(Ljava/lang/Runnable;)Z",
+    "thumbnail_dirty_marker_retained": true,
+    "tab_detach_and_manual_capture_retained": true,
+    "selector_1_thumbnail_retained": true,
+    "second_delayed_task_is_connected_notification": true
+  },
+  "previous-preview-race": {
+    "result": "REPRODUCED",
+    "runtime_sha256": "9af184ec2d3f70b7646f17b008edc02c29d83fd5525332afda6dfc65758f5a01",
+    "outcomes": [
+      {
+        "start_observed": true,
+        "runtime_result": "pending article preview ran against current restored list, 9 ms after back: [https://news.yahoo.co.jp/categories/entertainment@1750]; optional TabPriority.started=true"
+      },
+      {
+        "start_observed": false,
+        "runtime_result": "pending article preview ran against current restored list, 9 ms after back: [https://news.yahoo.co.jp/categories/entertainment@1750]; optional TabPriority.started=false"
+      }
+    ],
+    "clock": "deterministic host JVM",
+    "android_renderer_exercised": false
+  },
+  "tested_output_dex_identical_across_bundles": true,
+  "previous_versions": {
+    "result": "PASS",
+    "mode": "full rebuild against unmodified split archives",
+    "dex_output_identical_across_providers_for_each_version": true,
+    "runs": [
+      {
+        "result": "PASS",
+        "scope": "APK application, transformed DEX and archive inspection; no device execution",
+        "app_version": "3.83.74",
+        "archive_sha256": "71e52ebe4ab0ad493e5c058cbf7bc361f9300652223c9abe44a7b3ae7e19b1b9",
+        "base_apk_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "provider": "Hiro_Morphe_Patches_v1.0.384.mpp",
+        "provider_sha256": "12d01d30b4cd602e6b4f071661aad0613ef558245ba4084284464ca31e1bd498",
+        "output_apk_sha256": "27be7219bd564149d514c9dc195700ddbbb8a52a23a2cc64a513677b0654e44d",
+        "patches_applied": [
+          "プレビュー作成を後回しにして表示中タブを優先",
+          "バックフォワードキャッシュの復帰処理を補正",
+          "ロックフリーMessageQueueを有効化",
+          "共有先ブラウザの表示を個別に切替",
+          "ダブルタップから指を離さず片手ズーム"
+        ],
+        "checks": {
+          "onPageFinished_bridge_instead_of_direct_view_post": true,
+          "delayed_ui_post_remains": true,
+          "bridge_contains_conditional_mode_0_and_1_drop_and_preserved_fallback_post": true
+        }
+      },
+      {
+        "result": "PASS",
+        "scope": "APK application, transformed DEX and archive inspection; no device execution",
+        "app_version": "3.83.74",
+        "archive_sha256": "71e52ebe4ab0ad493e5c058cbf7bc361f9300652223c9abe44a7b3ae7e19b1b9",
+        "base_apk_sha256": "4a4da9029d1d71edf376b2d1edf3636e3fba946b49d1fafa5787d20252c8ad5b",
+        "provider": "Berry_Browser_v1.4.7.mpp",
+        "provider_sha256": "d4b255d538bc3bf744700132c50f81ab883657ba0073cbb5cb1110ca9923ac83",
+        "output_apk_sha256": "27be7219bd564149d514c9dc195700ddbbb8a52a23a2cc64a513677b0654e44d",
+        "patches_applied": [
+          "プレビュー作成を後回しにして表示中タブを優先",
+          "バックフォワードキャッシュの復帰処理を補正",
+          "ロックフリーMessageQueueを有効化",
+          "共有先ブラウザの表示を個別に切替",
+          "ダブルタップから指を離さず片手ズーム"
+        ],
+        "checks": {
+          "onPageFinished_bridge_instead_of_direct_view_post": true,
+          "delayed_ui_post_remains": true,
+          "bridge_contains_conditional_mode_0_and_1_drop_and_preserved_fallback_post": true
+        }
+      },
+      {
+        "result": "PASS",
+        "scope": "APK application, transformed DEX and archive inspection; no device execution",
+        "app_version": "3.84.12",
+        "archive_sha256": "7cbe1c17774d2f752e64b9b597ddafe53dfa4835a2b9dbfe1391623d87f7432b",
+        "base_apk_sha256": "19602700d687462e1cd967c33460095c86e14bcfabb4843765368265de1cab19",
+        "provider": "Hiro_Morphe_Patches_v1.0.384.mpp",
+        "provider_sha256": "12d01d30b4cd602e6b4f071661aad0613ef558245ba4084284464ca31e1bd498",
+        "output_apk_sha256": "2c39df26a257cce23e22ac35ff2435f4b374deb2d116e96233d31c26995b91f5",
+        "patches_applied": [
+          "プレビュー作成を後回しにして表示中タブを優先",
+          "バックフォワードキャッシュの復帰処理を補正",
+          "ロックフリーMessageQueueを有効化",
+          "共有先ブラウザの表示を個別に切替",
+          "ダブルタップから指を離さず片手ズーム"
+        ],
+        "checks": {
+          "onPageFinished_bridge_instead_of_direct_view_post": true,
+          "delayed_ui_post_remains": true,
+          "bridge_contains_conditional_mode_0_and_1_drop_and_preserved_fallback_post": true
+        }
+      },
+      {
+        "result": "PASS",
+        "scope": "APK application, transformed DEX and archive inspection; no device execution",
+        "app_version": "3.84.12",
+        "archive_sha256": "7cbe1c17774d2f752e64b9b597ddafe53dfa4835a2b9dbfe1391623d87f7432b",
+        "base_apk_sha256": "19602700d687462e1cd967c33460095c86e14bcfabb4843765368265de1cab19",
+        "provider": "Berry_Browser_v1.4.7.mpp",
+        "provider_sha256": "d4b255d538bc3bf744700132c50f81ab883657ba0073cbb5cb1110ca9923ac83",
+        "output_apk_sha256": "2c39df26a257cce23e22ac35ff2435f4b374deb2d116e96233d31c26995b91f5",
+        "patches_applied": [
+          "プレビュー作成を後回しにして表示中タブを優先",
+          "バックフォワードキャッシュの復帰処理を補正",
+          "ロックフリーMessageQueueを有効化",
+          "共有先ブラウザの表示を個別に切替",
+          "ダブルタップから指を離さず片手ズーム"
+        ],
+        "checks": {
+          "onPageFinished_bridge_instead_of_direct_view_post": true,
+          "delayed_ui_post_remains": true,
+          "bridge_contains_conditional_mode_0_and_1_drop_and_preserved_fallback_post": true
+        }
+      }
+    ]
+  },
+  "evidence_scope": "The legacy stale capture is reproducible in the host race fixture. Visual causality and resolution on the reporting Galaxy and WebView build remain unverified."
+}

@@ -1,0 +1,35 @@
+{
+  "device": "Android 17 API 37 x86_64 emulator",
+  "webview": "158.0.8127.2",
+  "berry": "3.84.21",
+  "site": "https://news.yahoo.co.jp/",
+  "scripts": "clean app profile, no user scripts installed",
+  "symptom_under_test": "persistent white text and image regions on the Yahoo News category after returning from an article",
+  "normal_navigation": [
+    {
+      "applied": "only the changed foreground preview item",
+      "input_apk_sha256": "7142ab7efeaf7aff06c60b93d58e2f0f108a0af566acb5468c5fe2d849118364",
+      "bfcache": "enabled and confirmed via the app's setting",
+      "main_articles": 6,
+      "entertainment_articles": 5,
+      "article_and_eventual_list_pixels_verified": 11,
+      "first_after_frame_showed_list": 9,
+      "list_verified_before_following_tap": 2,
+      "persistent_missing_headlines": 0,
+      "includes_reported_vivant_article": true
+    },
+    {
+      "applied": "all five Berry items",
+      "input_apk_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "bfcache": "not confirmed in this run",
+      "main_articles": 6,
+      "entertainment_articles": 5,
+      "article_pixels_verified": 11,
+      "same_category_return_pixels_verified": 10,
+      "remaining_observation": "Next category rendered after the last main-news article. No separate frame verified return to the main-news category for this cycle.",
+      "includes_reported_vivant_article": true
+    }
+  ],
+  "excluded_trials": "The first fixed-delay rapid driver could issue Back before detail rasterization. It then mistook the Android launcher wallpaper for Yahoo's blue category strip. Those trials are excluded.",
+  "inference_limit": "The old deferred capture crossing navigation is reproduced separately. This does not establish that the capture is the sole cause of the persistent visual loss on the reported Galaxy. No physical Galaxy was tested."
+}
