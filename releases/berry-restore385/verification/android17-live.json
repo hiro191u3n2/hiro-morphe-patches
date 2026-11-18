@@ -1,0 +1,49 @@
+{
+  "device": "Android 17 API 37 x86_64 emulator",
+  "browser": "Berry Browser 3.84.21",
+  "webview": "158.0.8127.2",
+  "bfcache_setting": {
+    "before": "false",
+    "after": "true"
+  },
+  "user_scripts": "none installed",
+  "origin": "https://news.yahoo.co.jp",
+  "network": "live public Yahoo News, no archived fallback",
+  "candidate_apk_sha256": "b13c9406a5a2648ddef4dde3fa33f3c07e4b8c081340b574488a5acfa11ce358",
+  "observations": {
+    "previous_1_0_383": "All five items. The seventh rapid return lost the hero image and one headline; after scrolling, further headlines were missing. The row layout, thumbnails and some metadata remained. Fourteen of fifteen returns were unaffected.",
+    "preview_fix_1_0_384": "All five items. The eighth normal return lost the hero image and two headlines. One more real article was opened, then the list URL returned but almost all page text remained white for the full 20-second wait.",
+    "fresh_document_fix_1_0_385": {
+      "normal_main_returns": 6,
+      "normal_entertainment_returns": 2,
+      "rapid_entertainment_returns": 7,
+      "rendered_article_and_returned_list_verified": 15,
+      "persistent_white_returns": 0,
+      "rapid_article_dwell_ms": [
+        839,
+        872,
+        808,
+        1023,
+        767,
+        811,
+        879
+      ],
+      "includes_vivant": true,
+      "review": "The article itself and the correct Yahoo category were confirmed from pixels, including thumbnails, category labels and headlines. The hero-image color fraction relative to the pre-navigation reference ranged from 0.984 to 1.0."
+    },
+    "previous_1_0_383_bfcache_off_control": {
+      "same_webview": true,
+      "same_5_items": true,
+      "app_setting": {
+        "before": "false",
+        "after": "false"
+      },
+      "normal_returns": 8,
+      "fast_returns": 7,
+      "verified_correct_category_pixels": 15,
+      "persistent_white_returns": 0
+    }
+  },
+  "scroll_position": "Browser fixture tested separately. The first Android position capture showed the article with the restored list URL and was excluded; matching one headline by OCR is insufficient to identify a returned list. This observation is excluded from the 15 verified returns.",
+  "limitations": "One Android emulator configuration with a software graphics stack. No physical Galaxy was tested. The evidence supports the rendering symptom and the scoped fresh-document mitigation; it does not identify a particular faulty line inside Chromium."
+}
