@@ -1,0 +1,100 @@
+{
+  "result": "PUBLISHED",
+  "version": "1.0.383",
+  "japanese_component_version": "1.0.1",
+  "ui_component_version": "1.1.3",
+  "published_at": "2026-11-18T03:46:58.820629+00:00",
+  "site": {
+    "url": "https://hiro-morphe-patches.otoha10.chatgpt.site",
+    "project_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0",
+    "version_id": "appgprj_6a7d274188d0819185634a62fa2fc8a0~appgver_31811a555e58819183540d023aea52f7",
+    "version_number": 134,
+    "source_commit": "33bc2495a889e06a421b4266c552f038fc513f94",
+    "deployment_id": "appgdep_6afd1f8290c881918a12d182f0457fbd",
+    "status": "succeeded",
+    "archive_sha256": "sha256:489d6cb1f076c9b9b19b7006591d14f9d6e4179394412567ca9616161170c64e",
+    "archive_bytes": 258529280
+  },
+  "github": {
+    "source_commit": "46b680da0e5ad2131fce4ff5fbb795a39bcd83bd",
+    "changelog_commit": "5ff4ad3f01687a29040911ccc5203ddd1b6b102c",
+    "feed_commit": "34950b6833e24d7e26de473a0a079981c75c8f85",
+    "order": [
+      "site",
+      "source",
+      "main/CHANGELOG.md",
+      "main/patches-bundle.json",
+      "dev fast-forward"
+    ],
+    "channels": {
+      "result": "PASS",
+      "output": "OK dev/patches-bundle.json: e6bdf166ecca9040ab7a9f52c50da62f28ec4a61e291f6a165c2d81321f1a79f\nOK main/patches-bundle.json: e6bdf166ecca9040ab7a9f52c50da62f28ec4a61e291f6a165c2d81321f1a79f\nOK dev/CHANGELOG.md: 38354b0195ce9e11e518b2a4bc7f98ff787e077405f0de22546cb8a81da1cc31\nOK main/CHANGELOG.md: 38354b0195ce9e11e518b2a4bc7f98ff787e077405f0de22546cb8a81da1cc31\nOK both Manager channels point to v1.0.383; MPP SHA-256 59f4d5c8b2769d681eeb1177d6713f01465113405a2422003ff22c4cf75dfa25\n"
+    }
+  },
+  "artifacts": {
+    "Hiro_Morphe_Patches_v1.0.383.mpp": {
+      "bytes": 48325804,
+      "sha256": "59f4d5c8b2769d681eeb1177d6713f01465113405a2422003ff22c4cf75dfa25"
+    },
+    "Piko_NewX_Japanese_v1.0.1.mpp": {
+      "bytes": 73925,
+      "sha256": "fabdd37f9e4662699108491ba0361ce385b135fe8459502f13842f3f317dbb7e"
+    },
+    "NewX_UI_Options_v1.1.3.mpp": {
+      "bytes": 50294,
+      "sha256": "d172e67d5a32e2219b586cc7f3d555983ff526df366f15aa4d19da764392a231"
+    }
+  },
+  "validation": {
+    "application_tests": {
+      "dev3": {
+        "result": "PASS",
+        "selected_patch_count": 51,
+        "apk_sha256": "7363e744288776f893ca11caf33544d1ff665b6565571259747a5083cce8d8de"
+      },
+      "dev3-clone": {
+        "result": "PASS",
+        "selected_patch_count": 52,
+        "apk_sha256": "8fba6371242154c9d21256d55364982fa94f7ad5f7a6f36ca4e7b35c91b4529b"
+      },
+      "dev2": {
+        "result": "PASS",
+        "selected_patch_count": 51,
+        "apk_sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337"
+      },
+      "standalone": {
+        "result": "PASS",
+        "selected_patch_count": 3,
+        "apk_sha256": "4eddaf3a78b8e6a7dd8f80ab3fb62a96be2b1f6bbf00b22944de64be75e1fc46"
+      }
+    },
+    "dev2_regression": {
+      "result": "PASS",
+      "baseline_version": "1.0.382",
+      "entire_apk_byte_identical": true,
+      "sha256": "8aca1cd6ae4caf3adce5e3c9594009b89139d6d8721fb712922e12bbd61c3337"
+    },
+    "compiled_worker_and_html_tests": 20,
+    "compiled_worker_and_html_pass": 20,
+    "new_delivery_cases": 7,
+    "live_delivery": {
+      "result": "PASS",
+      "http_status": 200,
+      "prefix_bytes": 1024,
+      "suffix_bytes": 1024,
+      "public_samples_match_tested_bundle": true,
+      "etag_sha256": "59f4d5c8b2769d681eeb1177d6713f01465113405a2422003ff22c4cf75dfa25",
+      "live_full_file_hash_checked": false,
+      "note": "Public curl200 and exact prefix/suffix confirmed; full request exceeded20s limit. Native Site deployment and local compiled Worker full file hash verification passed."
+    },
+    "existing_runtime_extensions_identical": 32,
+    "existing_unrelated_provider_classes_identical": 466
+  },
+  "limitations": {
+    "physical_device_tested": false,
+    "emulator_tested": false,
+    "exact_user_patcher_2_5_0_dev2_tested": false,
+    "tested_patcher": "2.5.0-dev.1",
+    "manager_device_badge_observed": false
+  }
+}
