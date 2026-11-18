@@ -1,0 +1,92 @@
+{
+  "result": "PASS",
+  "app": "jp.ejimax.berrybrowser",
+  "app_version": "3.84.21",
+  "source": "original user-supplied split APK",
+  "input_sha256": "a0c36e67334cccb492e81420da5b11751a32e6dcf1fbcb306b1d8120e2044239",
+  "host_sha256": "07992da468446028f54cfd7854fee1e63d883dd5babb2b208979e13ba253bf10",
+  "test": "Apply all five patches independently from each rollback MPP then rebuild unsigned. Compare the full APK and every uncompressed ZIP entry against identically patched v384/v1.4.7 outputs.",
+  "full_apk_identical_to_prior_for_both": true,
+  "artifacts": [
+    {
+      "result": "PASS",
+      "mode": "combined",
+      "bundle": "Hiro_Morphe_Patches_v1.0.386.mpp",
+      "sha256": "5f910ad5d66a50f11aec6d3f9952e1034892a7a748ebd9aff97f1cdd201aa845",
+      "baseline_bundle": "Hiro_Morphe_Patches_v1.0.384.mpp",
+      "baseline_bundle_sha256": "12d01d30b4cd602e6b4f071661aad0613ef558245ba4084284464ca31e1bd498",
+      "baseline_apk_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "output_apk_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "identical_apk_bytes": true,
+      "apk_entries_compared": 2189,
+      "dex_files": {
+        "classes.dex": "b9aacc4a7154516c50bdd4a8582634fbf3b832ce582489379018ee6d5077fd8b",
+        "classes2.dex": "93170a67f99f178bbd7b718a98cfe6808d83b755d83592a86b34978eab1a1daa",
+        "classes3.dex": "7a2ff57acfbe6e1805f156880c67f04d482f064b52e0e529e031aaafd553363f",
+        "classes4.dex": "afe7c3ecfdef66e2bcd91ebb1436fc982149221424c93f2387b5ca13e465b22b"
+      },
+      "non_dex_entries_compared": 2185,
+      "differing_zip_entries": [],
+      "all_five_applied": true,
+      "applied_patches": [
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "ダブルタップから指を離さず片手ズーム"
+      ],
+      "rebuild_steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "v384_preview_guard_present": true,
+      "v385_yahoo_reload_absent": true
+    },
+    {
+      "result": "PASS",
+      "mode": "standalone",
+      "bundle": "Berry_Browser_v1.4.9.mpp",
+      "sha256": "90300ae399c84fd28438d76e09041ead4cf061891261f90fe21acd9b4bb9ac6f",
+      "baseline_bundle": "Berry_Browser_v1.4.7.mpp",
+      "baseline_bundle_sha256": "d4b255d538bc3bf744700132c50f81ab883657ba0073cbb5cb1110ca9923ac83",
+      "baseline_apk_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "output_apk_sha256": "01638a135f30339b537dc1fbe444d682100b5b9fade1f838ac70f27100924259",
+      "identical_apk_bytes": true,
+      "apk_entries_compared": 2189,
+      "dex_files": {
+        "classes.dex": "b9aacc4a7154516c50bdd4a8582634fbf3b832ce582489379018ee6d5077fd8b",
+        "classes2.dex": "93170a67f99f178bbd7b718a98cfe6808d83b755d83592a86b34978eab1a1daa",
+        "classes3.dex": "7a2ff57acfbe6e1805f156880c67f04d482f064b52e0e529e031aaafd553363f",
+        "classes4.dex": "afe7c3ecfdef66e2bcd91ebb1436fc982149221424c93f2387b5ca13e465b22b"
+      },
+      "non_dex_entries_compared": 2185,
+      "differing_zip_entries": [],
+      "all_five_applied": true,
+      "applied_patches": [
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "ダブルタップから指を離さず片手ズーム"
+      ],
+      "rebuild_steps": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ],
+      "v384_preview_guard_present": true,
+      "v385_yahoo_reload_absent": true
+    }
+  ]
+}
