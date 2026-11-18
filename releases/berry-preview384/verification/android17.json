@@ -31,5 +31,24 @@
     }
   ],
   "excluded_trials": "The first fixed-delay rapid driver could issue Back before detail rasterization. It then mistook the Android launcher wallpaper for Yahoo's blue category strip. Those trials are excluded.",
-  "inference_limit": "The old deferred capture crossing navigation is reproduced separately. This does not establish that the capture is the sole cause of the persistent visual loss on the reported Galaxy. No physical Galaxy was tested."
+  "inference_limit": "The old deferred capture crossing navigation is reproduced separately. This does not establish that the capture is the sole cause of the persistent visual loss on the reported Galaxy. No physical Galaxy was tested.",
+  "screen_confirmed_comparison": {
+    "app": "all five Berry items, Android 17 API 37, WebView 158.0.8127.2; both trials confirmed BFCache enabled via the app settings; no user scripts installed",
+    "driver": "Confirmed the Berry foreground activity, rendered article and category identity. On rapid cycles issued Back after waiting 740 ms from actual article visibility. Compared category pixels and scrolled the returned page.",
+    "previous_1_0_383": {
+      "normal_returns_verified": 8,
+      "fast_returns_verified": 7,
+      "unaffected_returns": 14,
+      "visually_broken_returns": 1,
+      "evidence": "The seventh rapid return lost the hero photo and one headline while the row and metadata remained. After scrolling, several headlines and category labels were missing."
+    },
+    "preview_only_fix_1_0_384_in_full_configuration": {
+      "normal_returns_observed": 8,
+      "unaffected_normal_returns": 7,
+      "visually_broken_normal_returns": 1,
+      "next_rapid_return": "URL returned to the entertainment category but only blue navbar background and partial elements painted; persisted for the full 20-second wait",
+      "evidence": "During the eighth normal return the hero image and two lower headlines were missing. The bad raster persisted into the next cycle, which opened a real article."
+    },
+    "result": "The preview race fix alone does not resolve the reported rendering failure. The old version and the 1.0.384 build both reproduced it on the emulator."
+  }
 }
