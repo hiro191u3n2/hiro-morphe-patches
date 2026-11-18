@@ -44,6 +44,20 @@
       "persistent_white_returns": 0
     }
   },
-  "scroll_position": "Browser fixture tested separately. The first Android position capture showed the article with the restored list URL and was excluded; matching one headline by OCR is insufficient to identify a returned list. This observation is excluded from the 15 verified returns.",
-  "limitations": "One Android emulator configuration with a software graphics stack. No physical Galaxy was tested. The evidence supports the rendering symptom and the scoped fresh-document mitigation; it does not identify a particular faulty line inside Chromium."
+  "scroll_position": {
+    "first_capture_excluded": "The first helper saw a matching article title at the restored list URL while the previous article raster was still visible. That capture and its 30-pixel delta are not counted.",
+    "independent_fresh_session": "The same release APK and Google WebView version, BFCache confirmed enabled, on live Yahoo News. The scrolled list, the opened article, and the returned entertainment list were reviewed visually.",
+    "screen_width_normalized_px": 330,
+    "tracked_headline_y_before_scrolling": 355,
+    "tracked_headline_y_after_scrolling": 178,
+    "tracked_headline_y_on_return": 179,
+    "visible_list_rows": 6,
+    "other_headlines_same_position": 5,
+    "text_edge_best_vertical_offset_px": 0,
+    "selected_category_on_return": "entertainment",
+    "return_verified": true,
+    "separate_from_15_core_returns": true
+  },
+  "limitations": "One Android emulator configuration with a software graphics stack. No physical Galaxy was tested. The evidence supports the rendering symptom and the scoped fresh-document mitigation; it does not identify a particular faulty line inside Chromium.",
+  "total_verified_candidate_returns_across_two_fresh_sessions": 16
 }
