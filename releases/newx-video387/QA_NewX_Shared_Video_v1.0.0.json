@@ -1,0 +1,44 @@
+{
+  "artifacts": {
+    "NewX_Shared_Video_v1.0.0.mpp": {
+      "bytes": 9605,
+      "sha256": "ca914d2614bf5045af66084765e94cdea0ff588f05a0f5a53792abde91e1c699"
+    },
+    "Hiro_Morphe_Patches_v1.0.387.mpp": {
+      "bytes": 48334101,
+      "sha256": "23ec31e610661f3fc05a5abf1f968ae1ca5aef3f3d0aaf0cfdb823b025b1262f"
+    }
+  },
+  "baseline": "5f910ad5d66a50f11aec6d3f9952e1034892a7a748ebd9aff97f1cdd201aa845",
+  "existing_zip_entries_verified": 394,
+  "apkm_tests": {
+    "single": {
+      "applied_patches": 1,
+      "apk_sha256": "f95ae0169c30ac29eaf44fdf06d1cb327e24a7180a159e04cc677a8b6b8230c4",
+      "route_audit": "PASS"
+    },
+    "combined": {
+      "applied_patches": 52,
+      "apk_sha256": "70377ed5bff0d234eb5cea2641ef767b50e4e977ddd45d8cd9efdd0550451841",
+      "route_audit": "PASS"
+    },
+    "clone": {
+      "applied_patches": 53,
+      "apk_sha256": "0f9ca3aead39eb5c03131583b68761a41b0a7d20b706156db4bbf0cff1e276a7",
+      "route_audit": "PASS"
+    }
+  },
+  "target": "com.twitter.android 12.43.0-prod.01 (312430001)",
+  "piko": "3.12.0-dev.3",
+  "patcher": "2.5.0-dev.1",
+  "android_ui_tested": false,
+  "online_playback_tested": false,
+  "android_17_art": {
+    "result": "PASS",
+    "api_level": 37,
+    "cases": 14,
+    "scope": "Extracts the two compiled postId lookup and navigation blocks and the X FromId constructor from the rebuilt APK. Runs them on Android ART with test input maps and Kotlin helper substitutes. No X login, UI, network or playback.",
+    "private_lab_run": 44515664292,
+    "job_id": 135530899940
+  }
+}

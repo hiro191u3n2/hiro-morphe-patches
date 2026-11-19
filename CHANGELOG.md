@@ -1,3 +1,7 @@
+# [1.0.387](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-19)
+
+* **X:** LINEなどからXの /video/1 リンクを開いた際に別の動画が表示される問題に対応しました。リンクの投稿IDを使って元の投稿を直接開き、投稿内の動画をタップして再生できます。X 12.43.0-prod.01 の元APKMに「NewX: 動画リンクで元の投稿を開く」を適用してください。
+
 # [1.0.386](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-18)
 
 * **Berry Browser:** Berry Browserの動作を統合版1.0.384／Berry単独版1.4.7に戻しました。1.4.8で追加したYahoo!ニュース一覧の履歴復帰時の再読み込みを取り消し、1.4.7のタブプレビュー修正を引き継ぎます。Managerで統合版1.0.386または単独版1.4.9へ更新し、元のBerry Browserに再適用してください。
