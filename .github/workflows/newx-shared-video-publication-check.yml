@@ -31,7 +31,8 @@ jobs:
               url, wanted = item
               for attempt in range(20):
                   try:
-                      with urllib.request.urlopen(url, timeout=70) as r:
+                      request = urllib.request.Request(url, headers={'User-Agent': 'Hiro-Morphe-Release-QA', 'Accept': '*/*'})
+                      with urllib.request.urlopen(request, timeout=70) as r:
                           assert r.status == 200, r.status
                           digest = hashlib.sha256()
                           while block := r.read(1048576):
