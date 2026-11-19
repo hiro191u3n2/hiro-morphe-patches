@@ -1,0 +1,48 @@
+name: Verify X shared video patch distribution
+on:
+  push:
+    branches: [fix/newx-shared-video-1243]
+    paths: ['.github/workflows/newx-shared-video-publication-check.yml']
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 9
+    steps:
+      - name: Read back public artifacts, legacy source and both Manager channels
+        shell: python
+        run: |
+          import concurrent.futures, hashlib, time, urllib.request
+          site = 'https://hiro-morphe-patches.otoha10.chatgpt.site'
+          raw = 'https://raw.githubusercontent.com/hiro191u3n2/hiro-morphe-patches'
+          feed = 'd7f2a01c831581f09f6f9906c19a04b0b25b7d29dbd7f52fa1c543337b6d9867'
+          history = '0ad7a92918982c300362b2b45455c33550349785c22e299f6fc8beb00b1fb44b'
+          expected = {
+              site + '/Hiro_Morphe_Patches_v1.0.387.mpp': '23ec31e610661f3fc05a5abf1f968ae1ca5aef3f3d0aaf0cfdb823b025b1262f',
+              site + '/NewX_Shared_Video_v1.0.0.mpp': 'ca914d2614bf5045af66084765e94cdea0ff588f05a0f5a53792abde91e1c699',
+              site + '/patches-bundle.json': feed,
+              site + '/source': feed,
+          }
+          for branch in ['main', 'dev']:
+              expected[f'{raw}/{branch}/patches-bundle.json'] = feed
+              expected[f'{raw}/{branch}/CHANGELOG.md'] = history
+          def verify(item):
+              url, wanted = item
+              for attempt in range(20):
+                  try:
+                      with urllib.request.urlopen(url, timeout=70) as r:
+                          assert r.status == 200, r.status
+                          digest = hashlib.sha256()
+                          while block := r.read(1048576):
+                              digest.update(block)
+                      if digest.hexdigest() == wanted:
+                          print('PASS', url, wanted, flush=True)
+                          return
+                      print('Waiting for current bytes:', url, flush=True)
+                  except Exception as error:
+                      print(url, error, flush=True)
+                  time.sleep(12)
+              raise ValueError(url)
+          with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+              list(pool.map(verify, expected.items()))
