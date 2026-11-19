@@ -1,0 +1,29 @@
+name: NewX shared video patch build tools
+on:
+  push:
+    branches: [fix/newx-shared-video-1243]
+    paths: ['.github/workflows/newx-shared-video-tools.yml']
+permissions:
+  contents: read
+jobs:
+  tools:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Fetch pinned Morphe toolchain
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p build-tools
+          gh api /repos/MorpheApp/morphe-desktop/releases/assets/756194519 -H 'Accept: application/octet-stream' > build-tools/morphe.jar
+          curl -fsSL --retry 3 https://dl.google.com/dl/android/maven2/com/android/tools/r8/9.5.28/r8-9.5.28.jar -o build-tools/d8.jar
+          cd build-tools
+          echo '07992da468446028f54cfd7854fee1e63d883dd5babb2b208979e13ba253bf10  morphe.jar' | sha256sum -c -
+          echo '38a9ffaaebbd17d1514e3ecbff5a85b989bb13c551b9e224c7409514eea84ff5  d8.jar' | sha256sum -c -
+      - uses: actions/upload-artifact@v4
+        with:
+          name: newx-1243-build-tools
+          path: build-tools/
+          retention-days: 1
+          compression-level: 0
