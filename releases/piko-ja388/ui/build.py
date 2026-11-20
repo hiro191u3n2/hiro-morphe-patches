@@ -70,7 +70,8 @@ def main():
     updated = dict(base, **changed)
     updated['classes.dex'] = (work / 'dex/classes.dex').read_bytes()
     updated[MF] = base[MF].replace(b'Version: 1.1.2\r\n', b'Version: 1.1.4\r\n').replace(
-        b'Timestamp: 2026-11-17T00:00:00\r\n', b'Timestamp: 2026-11-20T00:00:00\r\n')
+        b'Timestamp: 2026-11-17T10:00:26\r\n', b'Timestamp: 2026-11-20T00:00:00\r\n')
+    assert b'\r\nTimestamp: 2026-11-20T00:00:00\r\n' in updated[MF]
     output = ROOT / 'component.mpp'
     archive(output, updated)
     replaced = sorted(name for name in base if base[name] != updated[name])
