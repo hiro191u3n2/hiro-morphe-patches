@@ -1,0 +1,36 @@
+name: Publish Hiro 1.0.389 binary
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hiro389-binary.yml'
+      - 'releases/instagram389/changed-entries.zip'
+      - 'releases/instagram389/restore.py'
+permissions:
+  contents: write
+concurrency: hiro-binary-1-0-389
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 1
+      - name: Restore exact MPP and publish its verified bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=hiro-v1.0.389
+          name=Hiro_Morphe_Patches_v1.0.389.mpp
+          digest=ed49643607f33fbd9eac07bc327471e016ca65d4bc7e3067e50296a010939d43
+          curl --fail --location --retry 3 --output "$RUNNER_TEMP/base.mpp" https://hiro-morphe-patches.otoha10.chatgpt.site/Hiro_Morphe_Patches_v1.0.388.mpp
+          python3 releases/instagram389/restore.py "$RUNNER_TEMP/base.mpp" releases/instagram389/changed-entries.zip "$RUNNER_TEMP/$name"
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" "$RUNNER_TEMP/$name" --target "$GITHUB_SHA" --latest=false --title 'Hiro Morphe Patches 1.0.389' --notes 'Instagram 456.0.0.53.78 の「戻る1回で終了・履歴削除」に対応。'
+          fi
+          mkdir -p "$RUNNER_TEMP/verification"
+          gh release download "$tag" --pattern "$name" --dir "$RUNNER_TEMP/verification"
+          echo "$digest  $RUNNER_TEMP/verification/$name" | sha256sum --check
