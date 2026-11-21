@@ -1,3 +1,7 @@
+# [1.0.391](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-21)
+
+* **TikTok:** LINEなどから共有パラメーターのないTikTokの動画URLを開いたとき、対象の投稿を動画詳細画面で開くように修正しました。対象はTikTok 47.4.3です。
+
 # [1.0.390](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-21)
 
 * **X:** X 12.43.0-prod.01 と Piko 3.12.0-dev.5 の組み合わせで、日本語化がメディア選択画面のメソッドを見つけられず停止する問題を修正しました。グリッド表示の設定名と説明も日本語化しました。

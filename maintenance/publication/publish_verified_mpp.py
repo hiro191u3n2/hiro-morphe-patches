@@ -51,4 +51,14 @@ with tempfile.TemporaryDirectory() as work:
     require(checksum(downloaded)==candidate["sha256"],"Published release asset differs")
     if feed["version"]==version:
         require(feed["download_url"].endswith("/"+name),"Manager URL does not name the verified MPP")
+        affected_apps = candidate["affected_apps"]
+        require(isinstance(affected_apps, list) and affected_apps and
+                all(isinstance(app, str) and app.strip() == app and app for app in affected_apps),
+                "Declare the Manager display name of every changed app")
+        changelog = Path("CHANGELOG.md").read_text()
+        header = re.match(r"^# \[([^\]]+)\]\([^)]+\)[^\n]*\n", changelog)
+        require(header and header[1] == version, "Manager changelog must begin with the published version")
+        entry = re.split(r"^# ", changelog[header.end():], maxsplit=1, flags=re.M)[0]
+        scopes = set(re.findall(r"^\* \*\*([^:*]+):\*\* [^\s].*$", entry, re.M))
+        require(scopes == set(affected_apps), "Manager changelog scopes differ from the changed apps")
         gh("release","edit",tag,"--repo",repo,"--latest")
