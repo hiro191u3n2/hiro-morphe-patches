@@ -1,0 +1,29 @@
+name: Publish verified Hiro patch
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'releases/hiro-release.json'
+      - 'patches-bundle.json'
+permissions:
+  contents: write
+concurrency:
+  group: hiro-bundle-release
+  cancel-in-progress: false
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            maintenance/publication
+            releases/hiro-bundles
+      - name: Read candidate at this commit
+        run: git show HEAD:releases/hiro-release.json > releases/hiro-release.json
+      - name: Verify, publish and update Latest when the Manager feed is ready
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 maintenance/publication/publish_verified_mpp.py
