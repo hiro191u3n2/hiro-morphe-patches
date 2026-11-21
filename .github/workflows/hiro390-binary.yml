@@ -1,0 +1,36 @@
+name: Publish Hiro 1.0.390 binary
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/hiro390-binary.yml'
+      - 'releases/piko-ja390/hiro390.zst'
+permissions:
+  contents: write
+concurrency: hiro-binary-1-0-390
+jobs:
+  publish:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: releases/piko-ja390
+      - name: Restore and publish the tested MPP
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          tag=hiro-v1.0.390
+          name=Hiro_Morphe_Patches_v1.0.390.mpp
+          digest=d143418e55b9d6f9ada4eb927306a37ab8f7e116348c801a29623225ad2da0a5
+          gh release download hiro-v1.0.389 -p Hiro_Morphe_Patches_v1.0.389.mpp --output "$RUNNER_TEMP/base.mpp"
+          echo "ed49643607f33fbd9eac07bc327471e016ca65d4bc7e3067e50296a010939d43  $RUNNER_TEMP/base.mpp" | sha256sum -c -
+          zstd -d --long=26 --patch-from="$RUNNER_TEMP/base.mpp" releases/piko-ja390/hiro390.zst -o "$RUNNER_TEMP/$name"
+          echo "$digest  $RUNNER_TEMP/$name" | sha256sum -c -
+          if ! gh release view "$tag" >/dev/null 2>&1; then
+            gh release create "$tag" "$RUNNER_TEMP/$name" --target "$GITHUB_SHA" --latest=false --title 'Hiro Morphe Patches 1.0.390' --notes 'X 12.43.0-prod.01 と Piko 3.12.0-dev.5 のメディア選択画面の日本語化を修正しました。'
+          fi
+          gh release download "$tag" -p "$name" --output "$RUNNER_TEMP/verified.mpp"
+          echo "$digest  $RUNNER_TEMP/verified.mpp" | sha256sum -c -
