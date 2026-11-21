@@ -8,7 +8,7 @@ from zipfile import ZipFile
 from bundle_badges import CATALOG, check
 
 HERE = Path(__file__).resolve().parent
-MANAGER = "c783f7683580d9c61b3f6de4411794a162ecb476"
+MANAGER = "66428e5cb214b9c7490720c65953331ff40b8e7f"
 SOURCE = f"https://raw.githubusercontent.com/MorpheApp/morphe-manager/{MANAGER}/app/src/main/java/app/morphe/manager/util/"
 DESKTOP = "https://github.com/MorpheApp/morphe-desktop/releases/download/v2.3.0-dev.3/morphe-desktop-2.3.0-dev.3-all.jar"
 
@@ -42,3 +42,9 @@ def verify(mpp, previous, version, markdown):
         notes = tmp/"CHANGELOG.md"
         notes.write_text(markdown)
         subprocess.run(["java", "-jar", out, catalog, notes, previous, version], check=True)
+        # Older bundles can include Android providers with no matching JVM class.
+        android_catalog = Path("releases/hiro-bundles") / version / "manager-android-catalog.tsv"
+        if android_catalog.is_file():
+            if not set(catalog.read_text().splitlines()) <= set(android_catalog.read_text().splitlines()):
+                raise ValueError("Android catalog is missing a JVM-selectable patch")
+            subprocess.run(["java", "-jar", out, android_catalog, notes, previous, version], check=True)
