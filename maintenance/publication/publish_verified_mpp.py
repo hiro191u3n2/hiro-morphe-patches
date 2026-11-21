@@ -7,6 +7,7 @@ import re
 import subprocess
 import tempfile
 from zipfile import ZipFile
+from verify_manager import verify
 
 repo = os.environ["GITHUB_REPOSITORY"]
 def gh(*arguments, capture=False):
@@ -41,6 +42,14 @@ with tempfile.TemporaryDirectory() as work:
     with ZipFile(final) as archive:
         manifest = archive.read("META-INF/MANIFEST.MF").decode().splitlines()
         require("Version: "+version in manifest,"Wrong MPP manifest version")
+    entry_path = Path("releases/hiro-bundles") / version / "manager-entry.md"
+    entry = entry_path.read_text().strip()
+    if feed["version"] == version:
+        live_notes = Path("CHANGELOG.md").read_text()
+        require(live_notes.startswith(entry + "\n"), "Promoted changelog differs from the reviewed entry")
+    else:
+        live_notes = entry + "\n\n" + Path("CHANGELOG.md").read_text()
+    verify(final, base, version, live_notes)
     present=subprocess.run(["gh","release","view",tag,"--repo",repo],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL)
     if present.returncode:
         require(feed["version"]==base,"Unexpected version on the update channel")
@@ -51,14 +60,4 @@ with tempfile.TemporaryDirectory() as work:
     require(checksum(downloaded)==candidate["sha256"],"Published release asset differs")
     if feed["version"]==version:
         require(feed["download_url"].endswith("/"+name),"Manager URL does not name the verified MPP")
-        affected_apps = candidate["affected_apps"]
-        require(isinstance(affected_apps, list) and affected_apps and
-                all(isinstance(app, str) and app.strip() == app and app for app in affected_apps),
-                "Declare the Manager display name of every changed app")
-        changelog = Path("CHANGELOG.md").read_text()
-        header = re.match(r"^# \[([^\]]+)\]\([^)]+\)[^\n]*\n", changelog)
-        require(header and header[1] == version, "Manager changelog must begin with the published version")
-        entry = re.split(r"^# ", changelog[header.end():], maxsplit=1, flags=re.M)[0]
-        scopes = set(re.findall(r"^\* \*\*([^:*]+):\*\* [^\s].*$", entry, re.M))
-        require(scopes == set(affected_apps), "Manager changelog scopes differ from the changed apps")
         gh("release","edit",tag,"--repo",repo,"--latest")
