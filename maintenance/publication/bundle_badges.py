@@ -2,7 +2,6 @@
 import argparse
 import re
 from pathlib import Path
-from zipfile import ZipFile
 
 CATALOG = "META-INF/hiro-publication/manager-catalog.tsv"
 # Some packages have localized system labels or another name in a co-selected source.
@@ -28,35 +27,51 @@ def catalog(data):
         raise ValueError("Invalid catalog. Generate it from the actual MPP with BundleCatalog.")
     return rows
 
-def badge_lines(data):
-    rows = catalog(data)
-    names = {name for pkg, name, _ in rows if name and pkg != "*"}
-    for pkg, name, _ in rows:
-        names.update(ALIASES.get(pkg, ()))
-        if pkg != "*" and not name and pkg not in ALIASES and not any(p == pkg and n for p,n,_ in rows):
-            raise ValueError("Add at least one known Manager label for "+pkg)
-    scoped = [f"* **{name}:** Hiro総合の配布版を更新しました。" for name in sorted(names)]
-    # Manager also matches an unscoped bullet quoting any patch in the saved selection.
-    # This covers translated labels, clone names and packages targeted by universal patches.
-    selected = [f"* `{patch}` を含むHiro総合の新版を配布しました。" for patch in sorted({r[2] for r in rows})]
-    return scoped + selected
+def read_changes(path):
+    """TSV columns: added/updated/removed, original package, exact Manager patch name."""
+    changes = []
+    for number, line in enumerate(path.read_text().splitlines(), 1):
+        if not line or line.startswith("#"):
+            continue
+        fields = line.split("\t")
+        if (len(fields) != 3 or fields[0] not in {"added", "updated", "removed"}
+                or not all(fields) or "`" in fields[2]):
+            raise ValueError(f"Invalid change at {path}:{number}")
+        changes.append(tuple(fields))
+    return changes
 
-def check(bundle, version, changelog):
-    with ZipFile(bundle) as archive:
-        data = archive.read(CATALOG).decode()
-    first, *remaining = changelog.splitlines()
-    if not first.startswith(f"# [{version}]("):
+
+def badge_lines(rows, changes):
+    lines = set()
+    pairs = {(pkg, patch) for pkg, _, patch in rows}
+    for kind, pkg, patch in changes:
+        if kind != "removed" and (pkg, patch) not in pairs:
+            raise ValueError(f"Unknown package/patch: {pkg} / {patch}")
+        if kind == "added":
+            # No saved selection can contain a patch that did not exist yet.
+            labels = {label for package, label, _ in rows if pkg == package and label}
+            labels.update(ALIASES.get(pkg, ()))
+            if not labels:
+                raise ValueError(f"Missing app label for added patch: {pkg}")
+            lines.update(f"* **{name}:** 「{patch}」を追加しました。" for name in labels)
+        else:
+            action = "更新" if kind == "updated" else "削除"
+            lines.add(f"* `{patch}` を{action}しました。")
+    return sorted(lines)
+
+
+def check(rows, changes, version, changelog):
+    sections = re.split(r"(?=^#{1,3} .*\(\d{4}-\d{2}-\d{2}\))", changelog, flags=re.M)
+    if len(sections) < 2 or sections[0].strip() or not sections[1].startswith(f"# [{version}]("):
         raise ValueError("Unexpected latest changelog heading")
-    section = []
-    for line in remaining:
-        if re.match(r"^#{1,3} .*\(\d{4}-\d{2}-\d{2}\)", line):
-            break
-        section.append(line)
-    missing = set(badge_lines(data)) - set(section)
-    if missing:
-        raise ValueError(f"{len(missing)} Manager badge entries missing: {min(missing)}")
+    actual = [line.strip() for line in sections[1].splitlines() if re.match(r"^[*+-]\s", line.strip())]
+    if sorted(actual) != badge_lines(rows, changes):
+        raise ValueError(f"{version}: changelog bullets must match the declared patch changes")
+
 
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("catalog", type=Path)
-    print("\n".join(badge_lines(cli.parse_args().catalog.read_text())))
+    cli.add_argument("changes", type=Path)
+    args = cli.parse_args()
+    print("\n".join(badge_lines(catalog(args.catalog.read_text()), read_changes(args.changes))))

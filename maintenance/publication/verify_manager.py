@@ -1,11 +1,12 @@
 """Check the real MPP catalog and Manager release's badge rules on the release runner."""
 import hashlib
+import re
 import subprocess
 import tempfile
 from pathlib import Path
 from zipfile import ZipFile
 
-from bundle_badges import CATALOG, check
+from bundle_badges import ALIASES, CATALOG, catalog as parse_catalog, check, read_changes
 
 HERE = Path(__file__).resolve().parent
 MANAGER = "66428e5cb214b9c7490720c65953331ff40b8e7f"
@@ -19,7 +20,6 @@ def fetch(url, expected, to):
             raise ValueError("Unexpected upstream bytes for " + to.name)
 
 def verify(mpp, previous, version, markdown):
-    check(mpp, version, markdown)
     with tempfile.TemporaryDirectory() as work:
         tmp = Path(work)
         jar = tmp / "desktop.jar"
@@ -41,10 +41,44 @@ def verify(mpp, previous, version, markdown):
                         HERE/"HostConfig.kt", HERE/"BuildConfig.kt", "-include-runtime", "-d", out], check=True)
         notes = tmp/"CHANGELOG.md"
         notes.write_text(markdown)
-        subprocess.run(["java", "-jar", out, catalog, notes, previous, version], check=True)
-        # Older bundles can include Android providers with no matching JVM class.
-        android_catalog = Path("releases/hiro-bundles") / version / "manager-android-catalog.tsv"
+        release_dir = Path("releases/hiro-bundles")
+        android_catalog = release_dir / version / "manager-android-catalog.tsv"
+        rows = parse_catalog(catalog.read_text())
         if android_catalog.is_file():
-            if not set(catalog.read_text().splitlines()) <= set(android_catalog.read_text().splitlines()):
+            android = parse_catalog(android_catalog.read_text())
+            if not set(map(tuple, rows)) <= set(map(tuple, android)):
                 raise ValueError("Android catalog is missing a JVM-selectable patch")
-            subprocess.run(["java", "-jar", out, android_catalog, notes, previous, version], check=True)
+            rows = android
+
+        changes = read_changes(release_dir / version / "manager-changes.tsv")
+        check(rows, changes, version, markdown)
+        # Keep every release since the over-broad notifications began in the regression matrix.
+        baseline = "1.0.391"
+        def version_key(tag):
+            return tuple(map(int, tag.split(".")))
+
+        sections = {section.split("]", 1)[0][3:]: section.strip() for section in
+                    re.split(r"(?=^# \[)", markdown, flags=re.M) if section.startswith("# [")}
+        change_rows = []
+        for release in sorted(release_dir.iterdir()):
+            if not re.fullmatch(r"\d+\.\d+\.\d+", release.name):
+                continue
+            tag = release.name
+            if not version_key(baseline) < version_key(tag) <= version_key(version):
+                continue
+            if sections.get(tag) != (release / "manager-entry.md").read_text().strip():
+                raise ValueError(f"Manager history differs from reviewed entry for {tag}")
+            for kind, pkg, patch in read_changes(release / "manager-changes.tsv"):
+                change_rows.append((tag, kind, pkg, patch))
+        if previous not in sections:
+            raise ValueError(f"Missing previous release {previous}")
+        history = tmp / "changes.tsv"
+        history.write_text("".join("\t".join(change) + "\n" for change in change_rows))
+        # Include labels from other sources and legacy patch names still saved in old selections.
+        labels = {(pkg, name, patch) for pkg, name, patch in rows}
+        for _, _, pkg, patch in change_rows:
+            labels.add((pkg, "", patch))
+        for pkg, _, patch in list(labels):
+            labels.update((pkg, alias, patch) for alias in ALIASES.get(pkg, ()))
+        catalog.write_text("".join("\t".join(row) + "\n" for row in sorted(labels)))
+        subprocess.run(["java", "-jar", out, catalog, notes, history, baseline, version], check=True)
