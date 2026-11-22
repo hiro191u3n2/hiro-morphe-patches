@@ -1,0 +1,48 @@
+{
+  "version": "1.0.397",
+  "base_version": "1.0.396",
+  "bundle_sha256": "69d20664a894712222654c1372ecb66e30fbcc7e4318379d6fca23e5ac91dc87",
+  "berry_version": "3.84.21",
+  "instagram_version": "456.0.0.53.78",
+  "android_api": 37,
+  "applied_patches": [
+    "ダブルタップから指を離さず片手ズーム",
+    "バックフォワードキャッシュの復帰処理を補正",
+    "プレビュー作成を後回しにして表示中タブを優先",
+    "ロックフリーMessageQueueを有効化",
+    "共有先ブラウザの表示を個別に切替",
+    "Instagramの投稿リンクをアプリで開く"
+  ],
+  "unsigned_berry_sha256": "7786bdaadf741bae23394c05d8d2b3ecf9821e4034c3aae5d624c25cbd2e56ff",
+  "redirect_sequence": [
+    "HTTPS share.google (302)",
+    "HTTPS www.google.com/share.google (301)",
+    "HTTPS www.instagram.com post"
+  ],
+  "baseline": "Published 1.0.396 opened the generic Instagram launcher with an instagram://media URI. It finished and returned to Berry.",
+  "cases": {
+    "redirect_state": 36,
+    "direct_and_search_urls": 29
+  },
+  "replay-tap": "Physical tap in Berry. Local TLS fixture replayed the two HTTP redirect responses captured from the reported URL.",
+  "live-real": "Opened the reported share URL in Berry with an external Android VIEW intent using live Google redirects.",
+  "results": {
+    "replay-tap": {
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+      "activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity",
+        "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      ]
+    },
+    "live-real": {
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+      "activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity",
+        "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      ]
+    }
+  },
+  "instagram_signed_in": false
+}
