@@ -1,3 +1,9 @@
+# [1.0.396](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-22)
+
+Berry Browser 3.84.21で、InstagramのプロフィールURLも投稿・リールと同じようにアプリで開けるようにしました。Googleの転送リンクにも対応します。Morphe ManagerでBerryの「Instagramの投稿リンクをアプリで開く」を選び、元のBerry APKに再適用してください。
+
+* `Instagramの投稿リンクをアプリで開く` を更新しました。
+
 # [1.0.395](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-22)
 
 Trip.com 8.54.2で「ホームおすすめ欄・AI旅行計画欄を非表示（クラッシュ修正版）」が t0.xml の読み込みで停止する問題を修正しました。Morphe Patcher 2.5.0で元の分割APKに7件すべてを適用し、再構築したAPKの対象4レイアウトとAI旅行計画用データを確認しました。
