@@ -1,0 +1,45 @@
+{
+  "version": "1.0.396",
+  "base_version": "1.0.395",
+  "bundle_sha256": "6aaefdf0e085c195170eff554e249400568025c0f87154ba8d5a1021859ab8b2",
+  "berry_unsigned_apk_sha256": "fa3ffec7e0387efaf95ea7d70b2f2f505f28ef232cdd70a8244286a49af7d06c",
+  "device": "Android 17 emulator (API 37)",
+  "berry_version": "3.84.21",
+  "instagram_version": "456.0.0.53.78",
+  "patches_applied": [
+    "ダブルタップから指を離さず片手ズーム",
+    "バックフォワードキャッシュの復帰処理を補正",
+    "プレビュー作成を後回しにして表示中タブを優先",
+    "ロックフリーMessageQueueを有効化",
+    "共有先ブラウザの表示を個別に切替",
+    "Instagramの投稿リンクをアプリで開く"
+  ],
+  "url_cases_on_android": 29,
+  "baseline_profile": "Unmodified v1.0.395 URL matcher executed on Android rejected direct and Google-wrapped profile, and accepted a post.",
+  "tap_results": {
+    "profile": {
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+      "route_activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity"
+      ]
+    },
+    "wrap": {
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+      "route_activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity"
+      ]
+    },
+    "post": {
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+      "route_activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity",
+        "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      ]
+    }
+  },
+  "search_result_origin": "Public Google SERP was unavailable from the test network. Replayed the confirmed profile href on a local page, plus a Google redirect wrapping it.",
+  "signed_in": false
+}
