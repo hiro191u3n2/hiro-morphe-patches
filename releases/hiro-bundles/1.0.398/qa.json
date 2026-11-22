@@ -1,0 +1,50 @@
+{
+  "version": "1.0.398",
+  "base_version": "1.0.397",
+  "bundle_sha256": "b31b16dbc19a9c36898c4e25e111883a4537b6be759914528527c80c5f98c9ec",
+  "android_api": 37,
+  "berry_version": "3.84.21",
+  "instagram_version": "456.0.0.53.78",
+  "signed_in": false,
+  "baseline": "Verified the installed 1.0.397 APK. Replayed the redirect responses from the reported short link. The Google Images viewer was requested and Berry remained in the foreground without an Instagram activity.",
+  "redirects": [
+    "share.google",
+    "www.google.com/share.google",
+    "www.google.com/imgres with imgurl and imgrefurl"
+  ],
+  "live_intent": "Android activity records showed an explicit VIEW intent to the installed Instagram app. Its data URI exactly matched the image result’s source-post URI.",
+  "cases": {
+    "share_and_image_routes": 62,
+    "post_and_profile_regression": 29
+  },
+  "patched_apk_sha256": "ab9deccd3b81a012a2a0c2cfb096ca1769c38e9d80314d53140a4420f7044daa",
+  "tested_signed_apk_sha256": "62a2daef600bb8f1d92624cd425148a4c7e7c65a83849a5c3cc572fe2c022c89",
+  "patches": [
+    "ダブルタップから指を離さず片手ズーム",
+    "バックフォワードキャッシュの復帰処理を補正",
+    "プレビュー作成を後回しにして表示中タブを優先",
+    "ロックフリーMessageQueueを有効化",
+    "共有先ブラウザの表示を個別に切替",
+    "Instagramの投稿リンクをアプリで開く"
+  ],
+  "ui_tests": {
+    "fixed-live": {
+      "action": "Tapped the reported Google short URL inside Berry using live Google redirects.",
+      "instagram_activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity",
+        "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      ],
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity"
+    },
+    "fixed-button": {
+      "action": "Tapped the source link extracted from the Google image result with its captured HTTP 302 redirect replayed on the emulator.",
+      "instagram_activities": [
+        "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "com.instagram.url.UrlHandlerActivity",
+        "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      ],
+      "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity"
+    }
+  }
+}
