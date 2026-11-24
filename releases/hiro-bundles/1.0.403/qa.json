@@ -65,8 +65,25 @@
   "android_17": {
     "runtime": "The share-redirect and URL test suites ran on Android ART, loading the runtime classes from the actual six-patch 3.84.22 output first.",
     "share_redirect_checks": 62,
-    "profile_and_post_url_checks": 29
+    "profile_and_post_url_checks": 29,
+    "full_app_tap_test": {
+      "verified": false,
+      "environment": "API 37 x86_64 emulator using software CPU emulation",
+      "result": "Installed the rebuilt six-patch APK and Instagram 456.0.0.53.78. When the genuine arm64 Berry APK was launched under x86 translation, the process exited with SIGILL before the WebView link could be tapped."
+    },
+    "emulator_post_handoff": {
+      "verified": true,
+      "receiver_version": "456.0.0.53.78",
+      "source": "Emulator-only Berry APK with the same five DEX files and resources as the release build, with two test x86_64 native libraries added for the x86 emulator.",
+      "preconditions": "Enabled the installed Instagram link activities on the disposable emulator and selected instagram.com and www.instagram.com as supported domains. On a fresh install the two Instagram link activities were disabled and a tap remained in Berry.",
+      "test": "Physically tapped the post anchor in the Berry WebView on a local test page. ActivityTaskManager reported ACTION_VIEW with HTTPS data, originating from Berry and targeting com.instagram.android/com.instagram.url.UrlHandlerActivity, result code 0. Post content over the internet was not tested."
+    }
   },
   "manager": "Verified 22 packages, 13 installed versions, 2730 badge checks",
-  "physical_device_tested": false
+  "physical_device_tested": false,
+  "later_bundle_verification": {
+    "version": "1.0.404",
+    "mpp_sha256": "1898ab811767d86f5b45766108e0f7a2be8ad640425a54458790d004600cf3f2",
+    "result": "The public download matched the verified bundle. All six selected patches applied on the supplied Berry 3.84.22 split APK set. All five DEX files in the rebuilt output were identical to the 1.0.403 rebuild."
+  }
 }
