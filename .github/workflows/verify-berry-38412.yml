@@ -60,9 +60,19 @@ jobs:
           unzip -oq system.zip -d "$ANDROID_HOME/system-images/android-37/google_apis"
           printf 'path=%s/.android/avd/BerryQA.avd\ntarget=android-37\n' "$HOME" > "$HOME/.android/avd/BerryQA.ini"
           printf 'AvdId=BerryQA\nabi.type=x86_64\nhw.cpu.arch=x86_64\nhw.cpu.ncore=2\nhw.ramSize=2304\nhw.lcd.width=480\nhw.lcd.height=800\nhw.lcd.density=160\nhw.keyboard=yes\ndisk.dataPartition.size=4G\nimage.sysdir.1=system-images/android-37/google_apis/x86_64/\ntag.id=google_apis\n' > "$HOME/.android/avd/BerryQA.avd/config.ini"
+          rm system.zip
+          export ANDROID_AVD_HOME="$HOME/.android/avd"
+          export ANDROID_USER_HOME="$HOME/.android"
+          df -h "$HOME"
+          ls -lah "$ANDROID_HOME/system-images/android-37/google_apis"
+          emulator -version
+          emulator -list-avds
           adb start-server
-          emulator -avd BerryQA -accel on -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot -no-metrics > emulator.log 2>&1 &
-          trap 'adb emu kill || true' EXIT
+          emulator -avd BerryQA -accel on -no-window -no-audio -no-boot-anim -gpu swiftshader -no-snapshot -no-metrics > emulator.log 2>&1 &
+          emupid=$!
+          trap 'tail -100 emulator.log; adb emu kill || true' EXIT
+          sleep 4
+          kill -0 "$emupid"
           timeout 360 adb wait-for-device
           timeout 360 adb shell 'while [ "$(getprop sys.boot_completed)" != 1 ]; do sleep 2; done'
           adb install-multiple -g signed/*.apk
