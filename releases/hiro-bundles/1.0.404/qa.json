@@ -1,0 +1,34 @@
+{
+  "version": "1.0.404",
+  "base": "1.0.403",
+  "component": "1.8.36",
+  "package": "com.touchtype.swiftkey.beta",
+  "app_version": "9.13.16.4",
+  "stock_apk_sha256": "7cdeb70875c6b0a12516bd6995fbda83ff639d297a4ec08a3a4a9b77b2d0afd5",
+  "mpp_sha256": "1898ab811767d86f5b45766108e0f7a2be8ad640425a54458790d004600cf3f2",
+  "steps": [
+    {
+      "step": "PATCHING",
+      "success": true
+    },
+    {
+      "step": "REBUILDING",
+      "success": true
+    }
+  ],
+  "clock_gesture_verification": {
+    "platform": "Android 17 ART on x86_64 emulator",
+    "path": "Native SwiftKey oc0.m key gesture dispatcher, real Android MotionEvent and preferences on disk, fixture for RecyclerView holder binding and scheduled long-press timer. A counting callback records short taps.",
+    "checks": [
+      "PASS native short tap, cancel, long hold with release, recycle guard, variants in other tab, positions 43 and 96, in-memory and disk list",
+      "PASS fresh process, 94 entries, deleted items absent, native list in order"
+    ],
+    "rebased_apk_dex_identical": [
+      "classes.dex",
+      "classes2.dex",
+      "classes3.dex",
+      "classes4.dex"
+    ]
+  },
+  "manager": "Verified 22 packages, 14 installed versions, 2940 badge checks"
+}
