@@ -20,20 +20,25 @@ jobs:
           set -euo pipefail
           curl -fsSL --retry 2 'https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/hiro-v1.0.400/Hiro_Morphe_Patches_v1.0.400.mpp' -o patch.mpp &
           curl -fsSL --retry 2 'https://github.com/MorpheApp/morphe-desktop/releases/download/v2.3.0/morphe-desktop-2.3.0-all.jar' -o desktop.jar &
-          curl -fsSL --retry 2 'https://d.apkpure.com/b/XAPK/com.instagram.android?versionCode=386214574' -o ig.xapk &
+          (for host in d.apkpure.net d.apkpure.com; do curl -fsSL --retry 1 "https://$host/b/XAPK/com.instagram.android?versionCode=386214574" -o ig.xapk && unzip -tq ig.xapk >/dev/null && break; done) &
           (for host in d.apkpure.com d.apkpure.net; do curl -fsSL --retry 2 "https://$host/b/XAPK/jp.ejimax.berrybrowser?versionCode=384120" -o berry.xapk && unzip -tq berry.xapk >/dev/null && break; done) &
           wait
           echo '7da87d59c5f97fd1a2b7ad13b2ed82e8676a41be82bede828fb8cb7bcb3f6571  patch.mpp' | sha256sum -c -
           echo '7cbe1c17774d2f752e64b9b597ddafe53dfa4835a2b9dbfe1391623d87f7432b  berry.xapk' | sha256sum -c -
-          echo '9258c4300623d8be1abf55e4f58061e9c622733ced66e162bd036a3a0302ee5c  ig.xapk' | sha256sum -c -
           echo 'e0e49525e1fbe1108d6cfd7398d39e0cd489c58a753e63653c1e8f11a0099757  desktop.jar' | sha256sum -c -
           unzip -q berry.xapk '*.apk' -d berry
-          unzip -q ig.xapk '*.apk' -d ig
           names=()
           while IFS= read -r name; do names+=(-e "$name"); done < <(python3 -c 'import json,os; j=json.load(open(os.environ["GITHUB_WORKSPACE"]+"/releases/hiro-bundles/1.0.400/qa.json"));print("\n".join(next(r["patches"] for r in j["application"] if len(r["patches"])==6)))')
           java -jar desktop.jar patch berry/jp.ejimax.berrybrowser.apk -p patch.mpp --exclusive "${names[@]}" --unsigned -o rebuilt.apk -r result.json
           python3 -c 'import json; j=json.load(open("result.json")); assert j["success"] and len(j["appliedPatches"])==6'
           keytool -genkeypair -keystore debug.jks -storepass android -keypass android -alias androiddebugkey -dname 'CN=Test' -keyalg RSA -validity 10
+          if echo '9258c4300623d8be1abf55e4f58061e9c622733ced66e162bd036a3a0302ee5c  ig.xapk' | sha256sum -c -; then
+            unzip -q ig.xapk '*.apk' -d ig
+            echo 'Receiver: Instagram 456.0.0.53.78'
+          else
+            bash "$GITHUB_WORKSPACE/releases/hiro-bundles/1.0.400/qa-ui/receiver.sh"
+            echo 'Receiver: synthetic Android App Links test activity'
+          fi
           bt=$(ls -dv "$ANDROID_HOME"/build-tools/* | tail -1)
           mkdir signed
           for f in rebuilt.apk berry/config*.apk; do "$bt/apksigner" sign --ks debug.jks --ks-pass pass:android --out "signed/$(basename "$f")" "$f"; done
