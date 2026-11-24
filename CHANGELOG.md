@@ -1,3 +1,9 @@
+# [1.0.400](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-24)
+
+Berry Browser 3.84.12で「Instagramの投稿リンクをアプリで開く」の適用が途中で止まる問題を修正しました。3.84.12と3.84.21それぞれのURL読み込み・外部アプリ起動処理に対応しました。
+
+* `Instagramの投稿リンクをアプリで開く` を更新しました。
+
 # [1.0.399](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-22)
 
 Instagram 456.0.0.53.78に「外部アプリから投稿・リールを開く」を追加しました。Android 15以降で、Googleの「かこって検索」などから開いたInstagramの投稿・リールのHTTPSリンクを、アプリの投稿用画面で受け取ります。
