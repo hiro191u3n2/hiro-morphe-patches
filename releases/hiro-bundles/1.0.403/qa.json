@@ -1,0 +1,72 @@
+{
+  "version": "1.0.403",
+  "base": "1.0.402",
+  "bundle_sha256": "24a25b8af0f292514c5e71181bd25fbf208e00dee36b654b640a8bd87106b902",
+  "split_base_384220_sha256": "254035e5c6d13fb31ed25115f26e6beaf8ea5fa6bc3108986c79c772de15fc66",
+  "selected_patcher": "2.5.0",
+  "regression": "Reproduced the 1.0.401 version gate on the original 3.84.22 APK. The dev.1 trial also rejected the renamed URL callback.",
+  "application": [
+    {
+      "berry": "3.84.22",
+      "patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuilt_sha256": "3aed158a1e13cb7f367b1f562086ac7a63f45db775cdccc2a0f65c1ba8b81d0f",
+      "input": "merged original APKS"
+    },
+    {
+      "berry": "3.84.22",
+      "patches": [
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuilt_sha256": "6c0c41237358ae92c8e5b77a826adf0ea324cdaeba36496e558e0a80ea06c8d3",
+      "input": "base APK"
+    },
+    {
+      "berry": "3.84.21",
+      "patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuilt_sha256": "ab9deccd3b81a012a2a0c2cfb096ca1769c38e9d80314d53140a4420f7044daa",
+      "input": "base APK"
+    },
+    {
+      "berry": "3.84.12",
+      "patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuilt_sha256": "6eaba6f9d78a7e693ecae8706844ca0b9a4661421ff698f40912199d5a86ded1",
+      "input": "base APK"
+    }
+  ],
+  "bytecode": "Verified the branch destinations, saved request, page-finished hook, WebView loader, and Android startActivity dispatch of all four rebuilt APKs. Unchanged bundle definitions checked by canonical DEX comparison.",
+  "changed_records": [
+    "META-INF/MANIFEST.MF",
+    "classes.dex",
+    "META-INF/hiro-berry-instagram/source/InstagramPostLinkPatch.java",
+    "app/hiro/berry/links/patches/InstagramPostLinkPatch$Layout.class",
+    "app/hiro/berry/links/patches/InstagramPostLinkPatch.class"
+  ],
+  "android_17": {
+    "runtime": "The share-redirect and URL test suites ran on Android ART, loading the runtime classes from the actual six-patch 3.84.22 output first.",
+    "share_redirect_checks": 62,
+    "profile_and_post_url_checks": 29
+  },
+  "manager": "Verified 22 packages, 13 installed versions, 2730 badge checks",
+  "physical_device_tested": false
+}
