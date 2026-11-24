@@ -57,7 +57,9 @@ jobs:
           echo 'cbc7c3cfb83220b8a0f9c513fdab557712e74d339ec19ddffa43f23350ae9bdd  emulator.zip' | sha256sum -c -
           unzip -oq emulator.zip -d "$ANDROID_HOME"
           rm emulator.zip
-          yes | sdkmanager --licenses >/dev/null || true
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libpulse0 libglu1-mesa libgl1 libx11-6 libxcb1 libnss3 libxcomposite1 libxcursor1 libxi6 libxrandr2 libxrender1 libxtst6 libxkbcommon0 libasound2t64
+          ldd "$ANDROID_HOME/emulator/qemu/linux-x86_64/qemu-system-x86_64" | grep 'not found' || true
           curl -fsSL --retry 2 'https://dl.google.com/android/repository/sys-img/google_apis/x86_64-37.0_r08.zip' -o system.zip
           echo 'a266cfbcf4d6c769b166c0af4d68eff0e4f4a5e3  system.zip' | sha1sum -c -
           mkdir -p "$ANDROID_HOME/system-images/android-37/google_apis" "$HOME/.android/avd/BerryQA.avd"
