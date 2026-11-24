@@ -53,6 +53,10 @@ jobs:
           set -euo pipefail
           export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
           sudo chmod 666 /dev/kvm
+          curl -fsSL --retry 2 'https://dl.google.com/android/repository/emulator-linux_x64-16740729.zip' -o emulator.zip
+          echo 'cbc7c3cfb83220b8a0f9c513fdab557712e74d339ec19ddffa43f23350ae9bdd  emulator.zip' | sha256sum -c -
+          unzip -oq emulator.zip -d "$ANDROID_HOME"
+          rm emulator.zip
           yes | sdkmanager --licenses >/dev/null || true
           curl -fsSL --retry 2 'https://dl.google.com/android/repository/sys-img/google_apis/x86_64-37.0_r08.zip' -o system.zip
           echo 'a266cfbcf4d6c769b166c0af4d68eff0e4f4a5e3  system.zip' | sha1sum -c -
@@ -67,6 +71,7 @@ jobs:
           ls -lah "$ANDROID_HOME/system-images/android-37/google_apis"
           emulator -version
           emulator -list-avds
+          "$ANDROID_HOME/emulator/emulator-check" accel || true
           adb start-server
           emulator -avd BerryQA -accel on -no-window -no-audio -no-boot-anim -gpu swiftshader -no-snapshot -no-metrics > emulator.log 2>&1 &
           emupid=$!
