@@ -1,3 +1,9 @@
+# [1.0.404](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-25)
+
+SwiftKey Beta 9.13.16.4の絵文字パネルで、時計タブの絵文字を長押しして指を離すと、その1件を履歴から削除できます。短くタップすると絵文字を入力します。
+
+* `日本語入力・予測変換を改善しSamsung絵文字に統一` を更新しました。
+
 # [1.0.403](https://hiro-morphe-patches.otoha10.chatgpt.site) (2026-11-25)
 
 Berry Browser 3.84.22で「Instagramの投稿リンクをアプリで開く」が適用時に停止する問題を修正しました。3.84.22の元の分割APKにBerry用パッチ6件をまとめて適用し、再構築を確認しました。
