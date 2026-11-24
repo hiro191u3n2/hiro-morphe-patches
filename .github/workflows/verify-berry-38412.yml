@@ -1,0 +1,64 @@
+name: Verify Berry 3.84.12 link taps
+on:
+  push:
+    branches: [qa/berry-38412-handoff-400]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 22
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: releases/hiro-bundles/1.0.400
+      - name: Acquire and verify the public APKs and the released MPP
+        working-directory: ${{ runner.temp }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -fsSL --retry 2 'https://github.com/hiro191u3n2/hiro-morphe-patches/releases/download/hiro-v1.0.400/Hiro_Morphe_Patches_v1.0.400.mpp' -o patch.mpp &
+          curl -fsSL --retry 2 'https://github.com/MorpheApp/morphe-desktop/releases/download/v2.3.0/morphe-desktop-2.3.0-all.jar' -o desktop.jar &
+          curl -fsSL --retry 2 'https://d.apkpure.com/b/XAPK/com.instagram.android?versionCode=386214574' -o ig.xapk &
+          (for host in d.apkpure.com d.apkpure.net; do curl -fsSL --retry 2 "https://$host/b/XAPK/jp.ejimax.berrybrowser?versionCode=384120" -o berry.xapk && unzip -tq berry.xapk >/dev/null && break; done) &
+          wait
+          echo '7da87d59c5f97fd1a2b7ad13b2ed82e8676a41be82bede828fb8cb7bcb3f6571  patch.mpp' | sha256sum -c -
+          echo '7cbe1c17774d2f752e64b9b597ddafe53dfa4835a2b9dbfe1391623d87f7432b  berry.xapk' | sha256sum -c -
+          echo '9258c4300623d8be1abf55e4f58061e9c622733ced66e162bd036a3a0302ee5c  ig.xapk' | sha256sum -c -
+          echo 'e0e49525e1fbe1108d6cfd7398d39e0cd489c58a753e63653c1e8f11a0099757  desktop.jar' | sha256sum -c -
+          unzip -q berry.xapk '*.apk' -d berry
+          unzip -q ig.xapk '*.apk' -d ig
+          names=()
+          while IFS= read -r name; do names+=(-e "$name"); done < <(python3 -c 'import json,os; j=json.load(open(os.environ["GITHUB_WORKSPACE"]+"/releases/hiro-bundles/1.0.400/qa.json"));print("\n".join(next(r["patches"] for r in j["application"] if len(r["patches"])==6)))')
+          java -jar desktop.jar patch berry/jp.ejimax.berrybrowser.apk -p patch.mpp --exclusive "${names[@]}" --unsigned -o rebuilt.apk -r result.json
+          python3 -c 'import json; j=json.load(open("result.json")); assert j["success"] and len(j["appliedPatches"])==6'
+          keytool -genkeypair -keystore debug.jks -storepass android -keypass android -alias androiddebugkey -dname 'CN=Test' -keyalg RSA -validity 10
+          bt=$(ls -dv "$ANDROID_HOME"/build-tools/* | tail -1)
+          mkdir signed
+          for f in rebuilt.apk berry/config*.apk; do "$bt/apksigner" sign --ks debug.jks --ks-pass pass:android --out "signed/$(basename "$f")" "$f"; done
+      - name: Start Android 17 and tap real Berry links
+        working-directory: ${{ runner.temp }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH"
+          sudo chmod 666 /dev/kvm
+          yes | sdkmanager --licenses >/dev/null || true
+          curl -fsSL --retry 2 'https://dl.google.com/android/repository/sys-img/google_apis/x86_64-37.0_r08.zip' -o system.zip
+          echo 'a266cfbcf4d6c769b166c0af4d68eff0e4f4a5e3  system.zip' | sha1sum -c -
+          mkdir -p "$ANDROID_HOME/system-images/android-37/google_apis" "$HOME/.android/avd/BerryQA.avd"
+          unzip -oq system.zip -d "$ANDROID_HOME/system-images/android-37/google_apis"
+          printf 'path=%s/.android/avd/BerryQA.avd\ntarget=android-37\n' "$HOME" > "$HOME/.android/avd/BerryQA.ini"
+          printf 'AvdId=BerryQA\nabi.type=x86_64\nhw.cpu.arch=x86_64\nhw.cpu.ncore=2\nhw.ramSize=2304\nhw.lcd.width=480\nhw.lcd.height=800\nhw.lcd.density=160\nhw.keyboard=yes\ndisk.dataPartition.size=4G\nimage.sysdir.1=system-images/android-37/google_apis/x86_64/\ntag.id=google_apis\n' > "$HOME/.android/avd/BerryQA.avd/config.ini"
+          adb start-server
+          emulator -avd BerryQA -accel on -no-window -no-audio -no-boot-anim -gpu swiftshader_indirect -no-snapshot -no-metrics > emulator.log 2>&1 &
+          trap 'adb emu kill || true' EXIT
+          timeout 360 adb wait-for-device
+          timeout 360 adb shell 'while [ "$(getprop sys.boot_completed)" != 1 ]; do sleep 2; done'
+          adb install-multiple -g signed/*.apk
+          adb install-multiple -g ig/*.apk
+          folder="$GITHUB_WORKSPACE/releases/hiro-bundles/1.0.400"
+          python3 -m http.server 8787 -d "$folder/qa-ui" >/dev/null 2>&1 &
+          bash "$folder/qa-ui/verify.sh"
+          python3 "$folder/qa-ui/taps.py"
