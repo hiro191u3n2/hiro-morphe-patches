@@ -51,5 +51,27 @@
     "post_profile_url_cases": 29
   },
   "manager": "2.7.1; 2100 update-badge checks across 22 original packages, 10 installed versions and both channels",
-  "physical_device_tested": false
+  "physical_device_tested": false,
+  "android_17_ui_test": {
+    "berry": "3.84.12",
+    "patches_applied": 6,
+    "instagram": "456.0.0.53.78",
+    "signed_in": false,
+    "environment": "Android 17 emulator, API 37",
+    "setup": "Selected www.instagram.com in Android's supported links and opened the installed Instagram app normally once.",
+    "results": [
+      {
+        "tap": "Instagram post",
+        "action": "ACTION_VIEW from jp.ejimax.berrybrowser to com.instagram.url.UrlHandlerActivity",
+        "foreground": "com.instagram.nux.activity.BloksSignedOutFragmentActivity",
+        "observed_post_route": "com.instagram.urlhandlers.media.MediaExternalUrlHandlerActivity"
+      },
+      {
+        "tap": "Instagram profile",
+        "action": "ACTION_VIEW from jp.ejimax.berrybrowser to com.instagram.url.UrlHandlerActivity",
+        "foreground": "com.instagram.url.UrlHandlerActivity"
+      }
+    ],
+    "run": "https://github.com/hiro191u3n2/hiro-morphe-patches/actions/runs/45420611763"
+  }
 }
