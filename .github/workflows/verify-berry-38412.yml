@@ -13,6 +13,10 @@ jobs:
         with:
           persist-credentials: false
           sparse-checkout: releases/hiro-bundles/1.0.400
+      - name: Select the JDK required by Morphe Desktop
+        run: |
+          echo "JAVA_HOME=$JAVA_HOME_21_X64" >> "$GITHUB_ENV"
+          echo "$JAVA_HOME_21_X64/bin" >> "$GITHUB_PATH"
       - name: Acquire and verify the public APKs and the released MPP
         working-directory: ${{ runner.temp }}
         shell: bash
