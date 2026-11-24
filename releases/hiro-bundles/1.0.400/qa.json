@@ -1,0 +1,55 @@
+{
+  "version": "1.0.400",
+  "base": "1.0.399",
+  "bundle_sha256": "7da87d59c5f97fd1a2b7ad13b2ed82e8676a41be82bede828fb8cb7bcb3f6571",
+  "base_apk_sha256": {
+    "3.84.12": "19602700d687462e1cd967c33460095c86e14bcfabb4843765368265de1cab19",
+    "3.84.21": "8241a1665794686b6df0f51f16b020cd994bf47e33ac4fe505e972667e2ef21a"
+  },
+  "patcher": "2.5.0",
+  "baseline_error_reproduced": "Ld71;->k(Ljava/lang/String;)V",
+  "application": [
+    {
+      "berry": "3.84.12",
+      "patches": [
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuild": true,
+      "apk_sha256": "e5558ef005b30bd6c32c2628e1946e4585fb3e1581570fd9bf56876c90f32dd8"
+    },
+    {
+      "berry": "3.84.12",
+      "patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuild": true,
+      "apk_sha256": "9898769b1c492918667f27cf1891fd78ae1bb26478f4b9d77e640b69396e6d3d"
+    },
+    {
+      "berry": "3.84.21",
+      "patches": [
+        "ダブルタップから指を離さず片手ズーム",
+        "バックフォワードキャッシュの復帰処理を補正",
+        "プレビュー作成を後回しにして表示中タブを優先",
+        "ロックフリーMessageQueueを有効化",
+        "共有先ブラウザの表示を個別に切替",
+        "Instagramの投稿リンクをアプリで開く"
+      ],
+      "rebuild": true,
+      "apk_sha256": "ab9deccd3b81a012a2a0c2cfb096ca1769c38e9d80314d53140a4420f7044daa"
+    }
+  ],
+  "rebuilt_dex": "Verified request capture, native branch targets, URL loader, page-finished callback and dispatch before startActivity on both six-patch APKs.",
+  "runtime_extension": "Byte-identical to v1.0.399",
+  "android_17_url_tests": {
+    "share_redirect_cases": 62,
+    "post_profile_url_cases": 29
+  },
+  "manager": "2.7.1; 2100 update-badge checks across 22 original packages, 10 installed versions and both channels",
+  "physical_device_tested": false
+}
