@@ -11,7 +11,7 @@ import java.util.*;
 
 /** Independent native counters which bypass the shared X count formatter. */
 final class SecondaryCountHooks {
-    private static final String RUNTIME = "Lapp/hiro/newxui/ViewCountFormat;";
+    private static final String RUNTIME = "Lapp/hiro/newxui/FullCounts;";
     private enum Site {
         CREATOR("Lcom/x/creator/subscriptions/i1;", "c", "2609612d309d5ea5358c7a08c4daddd435cc07d70d754307f803935eb5475503",0,4,0,"J"),
         PROMOTION_REACH("Lcom/x/quickpromote/c0;","o","9b91c51bf9e40461eba96510f87dbe25fad3cfe86708d90ca4a73a45906496c1",0,6,0,"I"),
@@ -42,7 +42,7 @@ final class SecondaryCountHooks {
                 // Use the native unscaled double branch, retaining the currency, sign and decimals.
                 Label unscaled=body.newLabelForIndex(30);
                 body.addInstruction(pos++,new BuilderInstruction35c(Opcode.INVOKE_STATIC,0,0,0,0,0,0,
-                        new ImmutableMethodReference(UiOptionsPatch.OPTIONS,"fullViewCounts",Collections.emptyList(),"Z")));
+                        new ImmutableMethodReference(FullCountsPatch.OPTIONS,"enabled",Collections.emptyList(),"Z")));
                 body.addInstruction(pos++,new BuilderInstruction11x(Opcode.MOVE_RESULT,temp));
                 body.addInstruction(pos,new BuilderInstruction21t(Opcode.IF_NEZ,temp,unscaled));
                 return;

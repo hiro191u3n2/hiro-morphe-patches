@@ -50,8 +50,8 @@ public final class FullCountHook {
         Label grouped = body.newLabelForIndex(GROUPED_INTEGER);
         // Keep v0 (units) and v1 (null) intact for both native branches. v2 is dead here.
         body.addInstruction(AFTER_INITIAL_LOCALS, new BuilderInstruction35c(Opcode.INVOKE_STATIC,
-                0, 0, 0, 0, 0, 0, new ImmutableMethodReference(UiOptionsPatch.OPTIONS,
-                "fullViewCounts", Collections.emptyList(), "Z")));
+                0, 0, 0, 0, 0, 0, new ImmutableMethodReference(FullCountsPatch.OPTIONS,
+                "enabled", Collections.emptyList(), "Z")));
         body.addInstruction(AFTER_INITIAL_LOCALS + 1, new BuilderInstruction11x(Opcode.MOVE_RESULT, 2));
         body.addInstruction(AFTER_INITIAL_LOCALS + 2, new BuilderInstruction21t(Opcode.IF_NEZ, 2, grouped));
     }

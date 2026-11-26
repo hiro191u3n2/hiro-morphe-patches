@@ -1,32 +1,68 @@
 {
-  "success": true,
-  "packageName": "com.twitter.android",
-  "packageVersion": "12.43.0-prod.01",
-  "isMount": false,
-  "appliedPatches": [
-    "NewX: Customize inline actions",
-    "NewX: Customize profile tabs",
-    "NewX: Inline download button",
-    "NewX: ポストの日時を絶対時間・24時間表記にする",
-    "NewX: 表示設定を追加（おすすめ・上下固定・120Hz・表示回数）",
-    "NewX: Pikoの設定・メニューを日本語化"
-  ],
-  "failedPatches": [],
-  "stepResults": [
-    {
-      "step": "PATCHING",
-      "success": true
-    },
-    {
-      "step": "REBUILDING",
-      "success": true
-    }
-  ],
-  "component": "NewX display options",
-  "piko": "3.12.0-dev.5",
+  "version": "1.0.405",
+  "base": "1.0.404",
+  "package": "com.twitter.android",
+  "app_version": "12.43.0-prod.01",
+  "piko_combined": "3.12.0-dev.5",
   "original_apkm_sha256": "a36b1a4d6cb13e1471dc4ae07b49a478d4db2b93161299e4e4794af0ea2bbab9",
-  "mpp_sha256": "9b01b8d053f0811fa24273f559875ef141e032c9913bca2f9f374db5019fe26e",
-  "formatting_test": "Rebuilt APK: extracted DEX methods executed on JVM for Japanese, US, and German locales at 999, 1000, 1647, 4782, 163773, 1 million, 1 billion, 2^53+1 and Long.MAX_VALUE. Native compact option, missing subscriber count and signed stock-card output checked.",
-  "android_providers_verified": 482,
+  "mpp_sha256": "c2ac22d8d692f560b15da27e7725eef86ba37b94e74a182362af537e48ab819b",
+  "configurations": {
+    "single": {
+      "packageName": "com.twitter.android",
+      "packageVersion": "12.43.0-prod.01",
+      "isMount": false,
+      "appliedPatches": [
+        "件数を省略せず全桁表示"
+      ],
+      "stepResults": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ]
+    },
+    "combined": {
+      "packageName": "com.twitter.android",
+      "packageVersion": "12.43.0-prod.01",
+      "isMount": false,
+      "appliedPatches": [
+        "NewX: Customize inline actions",
+        "NewX: Customize profile tabs",
+        "NewX: Inline download button",
+        "NewX: ポストの日時を絶対時間・24時間表記にする",
+        "件数を省略せず全桁表示",
+        "NewX: 表示設定を追加（おすすめ・上下固定・120Hz・表示回数）",
+        "NewX: Pikoの設定・メニューを日本語化"
+      ],
+      "stepResults": [
+        {
+          "step": "PATCHING",
+          "success": true
+        },
+        {
+          "step": "REBUILDING",
+          "success": true
+        }
+      ]
+    }
+  },
+  "changed_existing_zip_entries": [
+    "META-INF/MANIFEST.MF",
+    "META-INF/hiro-publication/manager-catalog.tsv",
+    "classes.dex"
+  ],
+  "new_zip_entries": [
+    "app/hiro/newxui/patches/FullCountHook.class",
+    "app/hiro/newxui/patches/FullCountsPatch.class",
+    "app/hiro/newxui/patches/SecondaryCountHooks$Site.class",
+    "app/hiro/newxui/patches/SecondaryCountHooks.class",
+    "extensions/newx_full_counts.mpe"
+  ],
+  "android_provider_definitions_verified": 487,
+  "formatting_test": "Extracted methods from both rebuilt APKs and executed them on a JVM with Android resource and saved preference fixtures. Three locales, small and absent counts, 1000/1647/4782/163773, million/billion and integers above 2^53 through Long.MAX_VALUE. Combined configuration restores 163K with the preference disabled. Signed stock card with cents also verified.",
   "ui_device_tested": false
 }

@@ -4,11 +4,13 @@ import java.text.NumberFormat;
 import java.util.Locale;
 
 /** Formats raw counts for secondary renderers that implement their own abbreviation. */
-public final class ViewCountFormat {
-    private ViewCountFormat() {}
+public final class FullCounts {
+    private FullCounts() {}
+
+    public static boolean enabled() { return true; }
 
     public static String groupIfEnabled(long count) {
-        if (count < 1000 || !UiOptions.fullViewCounts()) return null;
+        if (count < 1000 || !enabled()) return null;
         return NumberFormat.getIntegerInstance(Locale.getDefault()).format(count);
     }
 
