@@ -1,0 +1,29 @@
+{
+  "bundle": "1.0.406",
+  "yahoo_patch": "1.2.7",
+  "previous_bundle": "1.0.405",
+  "sha256": "4ecce27d99689805cd67a3cf7523697c132241d3fc0388f61325454ccb2c461f",
+  "size": 48919365,
+  "changed_zip_entries": [
+    "META-INF/MANIFEST.MF",
+    "classes.dex",
+    "app/hiro/yahootransit/patches/NearMeLayout.class"
+  ],
+  "patch": "広告・不要欄を非表示",
+  "source_apks": {
+    "8.5.9": "84b7abec9db2910e80fb7dffa9f14301978059d9e4c3e2445efebd9f530bff4b",
+    "8.5.11": "979d0e53457c199a1b5b1ba2567d69937f95b1df02ce733871ff2810a251cadb"
+  },
+  "cause": "After-final results with first-route arrival hour >= 4 move NearMe and Taxi from result_list_root to the slots after the header. The old hidden wrapper retained ownership of NearMe, so addView threw IllegalStateException.",
+  "resource_checks": "201 passing assertions on each real APK, including idempotence, binding identities, other search controls, hidden ads, and binary resource roundtrip.",
+  "full_build": "32 assertions on each source version and five byte-identical original DEX files. An additional full Morphe Desktop 2.4.0 run merged all four 8.5.11 base/x86/density/locale APKs and rebuilt with the selected patch. All five DEX and nine x86 libraries preserved byte-for-byte.",
+  "android_regression": {
+    "api": 30,
+    "abi": "x86_64",
+    "method": "Use actual APK binary layout topology, Android ViewGroups and the exact remove/index/add sequence from both versions of SearchResultListFragment. Leaf custom controls use framework stand-ins in this test.",
+    "previous": "8.5.11 with 1.0.405 throws IllegalStateException: The specified child already has a parent.",
+    "fixed": "Three consecutive reorders succeeded on each of 8.5.9 and 8.5.11 with 1.0.406."
+  },
+  "physical_device_tested": false,
+  "live_route_search_verified": false
+}
